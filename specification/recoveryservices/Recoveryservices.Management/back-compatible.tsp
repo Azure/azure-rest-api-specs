@@ -1,5 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
@@ -36,17 +38,27 @@ using Microsoft.RecoveryServices;
 // These ensure consistent operationId generation in the output
 
 // PrivateLinkResourceOperationGroup operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get, "PrivateLinkResources");
+@@clientLocation(PrivateLinkResourceOperationGroup.get,
+  "PrivateLinkResources",
+  "!csharp"
+);
 @@clientLocation(PrivateLinkResourceOperationGroup.list,
-  "PrivateLinkResources"
+  "PrivateLinkResources",
+  "!csharp"
 );
 
 // RecoveryServicesOperationGroup operations
 @@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
-  "RecoveryServices"
+  "RecoveryServices",
+  "!csharp"
 );
 @@clientLocation(RecoveryServicesOperationGroup.capabilities,
-  "RecoveryServices"
+  "RecoveryServices",
+  "!csharp"
+);
+@@alternateType(RecoveryServicesOperationGroup.capabilities::parameters.location,
+  azureLocation,
+  "csharp"
 );
 
 // Vaults operations
@@ -60,8 +72,142 @@ using Microsoft.RecoveryServices;
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
 // VaultExtendedInfoResources operations
-@@clientLocation(VaultExtendedInfoResources.get, "VaultExtendedInfo");
-@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
-  "VaultExtendedInfo"
+@@clientLocation(VaultExtendedInfoResources.get,
+  "VaultExtendedInfo",
+  "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.update, "VaultExtendedInfo");
+@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
+  "VaultExtendedInfo",
+  "!csharp"
+);
+@@clientLocation(VaultExtendedInfoResources.update,
+  "VaultExtendedInfo",
+  "!csharp"
+);
+
+//SDK Validation
+@@clientName(PrivateLinkResource,
+  "RecoveryServicesPrivateLinkResource",
+  "csharp"
+);
+@@clientName(VaultExtendedInfoResource,
+  "RecoveryServicesVaultExtendedInfo",
+  "csharp"
+);
+@@clientName(Vault, "RecoveryServicesVault", "csharp");
+@@clientName(UsagesUnit, "VaultUsageUnit", "csharp");
+@@clientName(NameInfo, "VaultUsageNameInfo", "csharp");
+@@clientName(VaultPropertiesMoveDetails.completionTimeUtc,
+  "CompletedOn",
+  "csharp"
+);
+@@clientName(VaultPropertiesMoveDetails.startTimeUtc, "StartOn", "csharp");
+@@alternateType(VaultPropertiesMoveDetails.sourceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(VaultPropertiesMoveDetails.targetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(CmkKeyVaultProperties.keyUri, url, "csharp");
+@@usage(VaultPropertiesRedundancySettings, Usage.output, "csharp");
+@@clientName(ResourceCertificateDetails.validFrom, "ValidStartOn", "csharp");
+@@clientName(ResourceCertificateDetails.validTo, "ValidEndOn", "csharp");
+@@alternateType(ResourceCertificateAndAadDetails.aadTenantId, uuid, "csharp");
+@@alternateType(ResourceCertificateAndAadDetails.serviceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ResourceCertificateDetails.thumbprint, unknown, "csharp");
+@@alternateType(ResourceCapabilitiesBase.type, armResourceType, "csharp");
+@@clientName(ResourceCapabilitiesBase.type,
+  "ResourceCapabilitiesBaseType",
+  "csharp"
+);
+@@clientName(JobsSummary, "ReplicationJobSummary", "csharp");
+@@clientName(MonitoringSummary, "VaultMonitoringSummary ", "csharp");
+@@clientName(VaultProperties, "RecoveryServicesVaultProperties", "csharp");
+@@alternateType(Vault.etag, eTag, "csharp");
+@@clientName(PrivateEndpointConnectionStatus,
+  "RecoveryServicesPrivateEndpointConnectionStatus",
+  "csharp"
+);
+@@clientName(ProvisioningState,
+  "RecoveryServicesPrivateEndpointConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(DNSZoneResponse, "DnsZoneResult", "csharp");
+@@alternateType(CmkKekIdentity.userAssignedIdentity,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(CapabilitiesResponse, "CapabilitiesResult", "csharp");
+@@alternateType(VaultExtendedInfoResource.etag, eTag, "csharp");
+@@clientName(MonitoringSettings, "VaultMonitoringSettings", "csharp");
+@@clientName(PrivateEndpointConnectionVaultProperties,
+  "RecoveryServicesPrivateEndpointConnectionVaultProperties",
+  "csharp"
+);
+@@alternateType(PrivateEndpointConnectionVaultProperties.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(PublicNetworkAccess, "VaultPublicNetworkAccess", "csharp");
+@@clientName(SecuritySettings, "RecoveryServicesSecuritySettings", "csharp");
+@@clientName(UpgradeDetails, "VaultUpgradeDetails ", "csharp");
+@@clientName(UpgradeDetails.endTimeUtc, "EndOn", "csharp");
+@@clientName(UpgradeDetails.startTimeUtc, "StartOn", "csharp");
+@@alternateType(UpgradeDetails.previousResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpgradeDetails.upgradedResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(UpgradeDetails.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
+@@clientName(VaultCertificateResponse, "VaultCertificateResult", "csharp");
+@@clientName(TriggerType, "VaultUpgradeTriggerType", "csharp");
+@@clientName(SoftDeleteSettings,
+  "RecoveryServicesSoftDeleteSettings",
+  "csharp"
+);
+@@clientName(AuthType, "RecoveryServicesAuthType", "csharp");
+@@clientName(SoftDeleteState, "RecoveryServicesSoftDeleteState", "csharp");
+@@clientName(PatchVault, "RecoveryServicesVaultPatch", "csharp");
+@@alternateType(PatchVault.etag, eTag, "csharp");
+@@clientName(CheckNameAvailabilityResult,
+  "RecoveryServicesNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityResult.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(CertificateRequest,
+  "RecoveryServicesCertificateContent",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityParameters,
+  "RecoveryServicesNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(AlertsState, "RecoveryServicesAlertsState", "csharp");
+@@alternateType(CheckNameAvailabilityParameters.type,
+  armResourceType,
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
+@@clientName(Vaults.registeredIdentitiesDelete,
+  "DeleteRegisteredIdentity",
+  "csharp"
+);
+@@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
+  "CheckRecoveryServicesNameAvailability",
+  "csharp"
+);
+@@clientName(RecoveryServicesOperationGroup.capabilities,
+  "GetRecoveryServiceCapabilities",
+  "csharp"
+);

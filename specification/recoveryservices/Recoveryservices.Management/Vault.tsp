@@ -88,7 +88,7 @@ interface VaultOpsWithCloudError
       ErrorType = CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultCreateOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -105,7 +105,7 @@ interface VaultCreateOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultCreateOpsWithCloudError
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -123,7 +123,7 @@ interface VaultCreateOpsWithCloudError
       ErrorType = CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -149,7 +149,7 @@ interface VaultOperationOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultStatusOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -174,7 +174,7 @@ interface VaultStatusOps
       ErrorType = CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VaultDeleteOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -199,7 +199,7 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface Vaults {
   /**
    * Get the Vault details.

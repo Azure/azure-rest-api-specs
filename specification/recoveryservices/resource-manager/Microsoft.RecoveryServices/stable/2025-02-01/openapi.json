@@ -1141,20 +1141,6 @@
         ]
       }
     },
-    "AssociatedIdentity": {
-      "type": "object",
-      "description": "Identity details to be used for an operation",
-      "properties": {
-        "operationIdentityType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "Identity type that should be used for an operation."
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "description": "User assigned identity to be used for an operation if operationIdentityType is UserAssigned."
-        }
-      }
-    },
     "AuthType": {
       "type": "string",
       "description": "Specifies the authentication type.",
@@ -1174,11 +1160,11 @@
             "value": "Invalid"
           },
           {
-            "name": "ACS",
+            "name": "Acs",
             "value": "ACS"
           },
           {
-            "name": "AAD",
+            "name": "Aad",
             "value": "AAD"
           },
           {
@@ -1205,38 +1191,6 @@
         "alertsForAllFailoverIssues": {
           "$ref": "#/definitions/AlertsState"
         }
-      }
-    },
-    "BCDRSecurityLevel": {
-      "type": "string",
-      "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
-      "enum": [
-        "Poor",
-        "Fair",
-        "Good",
-        "Excellent"
-      ],
-      "x-ms-enum": {
-        "name": "BCDRSecurityLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Poor",
-            "value": "Poor"
-          },
-          {
-            "name": "Fair",
-            "value": "Fair"
-          },
-          {
-            "name": "Good",
-            "value": "Good"
-          },
-          {
-            "name": "Excellent",
-            "value": "Excellent"
-          }
-        ]
       }
     },
     "BackupStorageVersion": {
@@ -1680,28 +1634,6 @@
       "required": [
         "type"
       ]
-    },
-    "IdentityType": {
-      "type": "string",
-      "description": "Identity type that should be used for an operation.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned"
-          }
-        ]
-      }
     },
     "ImmutabilitySettings": {
       "type": "object",
@@ -2565,10 +2497,6 @@
           "$ref": "#/definitions/MultiUserAuthorization",
           "description": "MUA Settings of a vault",
           "readOnly": true
-        },
-        "sourceScanConfiguration": {
-          "$ref": "#/definitions/SourceScanConfiguration",
-          "description": "Source scan configuration of vault"
         }
       }
     },
@@ -2671,24 +2599,10 @@
         ]
       }
     },
-    "SourceScanConfiguration": {
-      "type": "object",
-      "description": "Source scan configuration of vault",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/State"
-        },
-        "sourceScanIdentity": {
-          "$ref": "#/definitions/AssociatedIdentity",
-          "description": "Identity details to be used for an operation"
-        }
-      }
-    },
     "StandardTierStorageRedundancy": {
       "type": "string",
       "description": "The storage redundancy setting of a vault",
       "enum": [
-        "Invalid",
         "LocallyRedundant",
         "GeoRedundant",
         "ZoneRedundant"
@@ -2697,10 +2611,6 @@
         "name": "StandardTierStorageRedundancy",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid"
-          },
           {
             "name": "LocallyRedundant",
             "value": "LocallyRedundant"
@@ -2712,32 +2622,6 @@
           {
             "name": "ZoneRedundant",
             "value": "ZoneRedundant"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "enum": [
-        "Invalid",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid"
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled"
           }
         ]
       }
@@ -3086,18 +2970,6 @@
           "$ref": "#/definitions/SecureScoreLevel",
           "description": "Secure Score of Recovery Services Vault",
           "readOnly": true
-        },
-        "bcdrSecurityLevel": {
-          "$ref": "#/definitions/BCDRSecurityLevel",
-          "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
-          "readOnly": true
-        },
-        "resourceGuardOperationRequests": {
-          "type": "array",
-          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },

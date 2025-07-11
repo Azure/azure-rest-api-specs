@@ -19,9 +19,9 @@ union AuthType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Invalid: "Invalid",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ACS: "ACS",
+  Acs: "ACS",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  AAD: "AAD",
+  Aad: "AAD",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AccessControlService: "AccessControlService",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -212,7 +212,6 @@ union CrossSubscriptionRestoreState {
 union StandardTierStorageRedundancy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Invalid: "Invalid",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   LocallyRedundant: "LocallyRedundant",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -890,17 +889,6 @@ model VaultProperties {
    */
   @visibility(Lifecycle.Read)
   secureScore?: SecureScoreLevel;
-
-  /**
-   * Security levels of Recovery Services Vault for business continuity and disaster recovery
-   */
-  @visibility(Lifecycle.Read)
-  bcdrSecurityLevel?: BCDRSecurityLevel;
-
-  /**
-   * ResourceGuardOperationRequests on which LAC check will be performed
-   */
-  resourceGuardOperationRequests?: string[];
 }
 
 /**
@@ -1233,11 +1221,6 @@ model SecuritySettings {
    */
   @visibility(Lifecycle.Read)
   multiUserAuthorization?: MultiUserAuthorization;
-
-  /**
-   * Source scan configuration of vault
-   */
-  sourceScanConfiguration?: SourceScanConfiguration;
 }
 
 /**
