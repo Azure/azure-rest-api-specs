@@ -18,7 +18,7 @@ namespace Azure.AI.Projects;
 model ModelVersion {
   @doc("System related metadata")
   @visibility(Lifecycle.Read)
-  SystemData?: SystemData;
+  systemData?: SystemData;
 
   @doc("Catalog information for the model")
   catalogInfo: ModelCatalogInformation;
