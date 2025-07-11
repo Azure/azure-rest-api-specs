@@ -98,7 +98,6 @@ export function mappingJSONTemplate(files) {
  * @param {{repoName: string, prNumber: string}} key
  * @returns {string}
  */
-// TODO: Use aka.ms link for Teams channel
 export function indexMd(buildId, { repoName, prNumber }) {
   return `# Documentation Preview for swagger pipeline build #${buildId}
 
@@ -108,7 +107,7 @@ created via the swagger pipeline.
 Your documentation may be viewed in the menu on the left hand side.
 
 If you have issues around documentation generation, please feel free to contact 
-us in the [Docs Support Teams Channel](https://teams.microsoft.com/l/channel/19%3A7506cc3e220f430ab89d992c7db5284f%40thread.skype/API%20Reference%20and%20Samples?groupId=de9ddba4-2574-4830-87ed-41668c07a1ca&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47)`;
+us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
 }
 
 /**
