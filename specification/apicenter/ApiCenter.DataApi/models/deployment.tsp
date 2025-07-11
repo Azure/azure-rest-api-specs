@@ -6,9 +6,9 @@ using TypeSpec.Rest;
 @resource("deployments")
 @parentResource(Api)
 model ApiDeployment {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: misused @visibility to get around this warning"
   @doc("Deployment identifier.")
   @key("deploymentName")
-  @visibility
   @maxLength(50)
   name: string;
 

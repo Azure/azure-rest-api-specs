@@ -967,6 +967,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getKeyVaultStatusResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -984,7 +990,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Accounts_GetChangeKeyVaultInformation": {
@@ -6472,6 +6478,7 @@
         },
         "keyVaultUri": {
           "type": "string",
+          "format": "uri",
           "description": "The Uri of KeyVault."
         },
         "keyName": {
@@ -10573,6 +10580,62 @@
       "properties": {
         "keyVaultUri": {
           "title": "keyVaultUri",
+          "format": "uri",
+          "description": "The URI of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "https://my-key-vault.managedhsm.azure.net"
+        },
+        "keyName": {
+          "title": "keyName",
+          "description": "The name of the key that should be used for encryption.",
+          "type": "string",
+          "example": "rsaKeyName"
+        },
+        "keyVaultResourceId": {
+          "title": "keyVaultResourceId",
+          "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "keyVaultPrivateEndpoints": {
+          "title": "keyVaultPrivateEndpoints",
+          "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyVaultPrivateEndpoint"
+          },
+          "x-ms-identifiers": [
+            "virtualNetworkId"
+          ]
+        }
+      }
+    },
+    "getKeyVaultStatusResponse": {
+      "description": "Result of getKeyVaultStatus with information about how volumes under NetApp account are encrypted.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Represents the properties of the getKeyVaultStatus.",
+          "$ref": "#/definitions/getKeyVaultStatusResponseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "getKeyVaultStatusResponseProperties": {
+      "description": "Properties which represents Change key vault status.",
+      "type": "object",
+      "properties": {
+        "keyVaultUri": {
+          "title": "keyVaultUri",
+          "format": "uri",
           "description": "The URI of the key vault/managed HSM that should be used for encryption.",
           "type": "string",
           "example": "https://my-key-vault.managedhsm.azure.net"

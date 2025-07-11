@@ -13,29 +13,24 @@ options:
     flavor: azure
     package-dir: "Azure.ResourceManager.Contoso"
     clear-output-folder: true
-    model-namespace: false
+    model-namespace: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-contoso"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.contoso"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-contoso"
     namespace: "com.azure.resourcemanager.contoso"
-    service-name: "contoso"
+    service-name: "Contoso" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-contoso"
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    flavor: "azure"
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    packageDetails:
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
       name: "@azure/arm-contoso"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/contoso"
@@ -43,7 +38,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

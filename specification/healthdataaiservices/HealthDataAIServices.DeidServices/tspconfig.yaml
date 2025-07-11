@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/healthdataaiservices"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,23 +13,25 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-health-deidentification"
-    package-name: "{package-dir}"
+    namespace: "azure.health.deidentification"
     package-mode: dataplane
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Health.Deidentification"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Health.Deidentification
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "azure-health-deidentification"
     title: DeidentificationClient
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
+    generate-metadata: true
+    package-details:
       name: "@azure-rest/health-deidentification"
       description: "Health Deidentification Service"
     flavor: azure
@@ -38,8 +39,10 @@ options:
     package-dir: "azure-health-deidentification"
     namespace: "com.azure.health.deidentification"
     service-name: Deidentification
-    customization-class: "customization/src/main/java/ListJobsCustomization.java"
     flavor: azure
+    partial-update: true
+    generate-samples: false
+    generate-tests: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

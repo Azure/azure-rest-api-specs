@@ -100,7 +100,7 @@ model ScheduleTestsTrigger extends Trigger {
   @doc("Start date time of the trigger in UTC timezone. (RFC 3339 literal format)")
   startDateTime?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recurrenceStatus?: RecurrenceStatus;
 
   @doc("Recurrence details of the trigger. Null if schedule is not recurring.")
@@ -127,7 +127,7 @@ model Trigger {
   @minLength(2)
   @pattern("^[a-z0-9_-]*$")
   @doc("The unique identifier of the trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   triggerId: string;
 
   @maxLength(50)
@@ -146,7 +146,7 @@ model Trigger {
   state?: TriggerState;
 
   @doc("Details of current state of the trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stateDetails?: StateDetails;
 
   ...SystemMetaData;

@@ -114,7 +114,7 @@ interface LoadTestAdministration {
   @summary("Add an app component to a test.")
   @doc("Add an app component to a test by providing the resource Id, name and type.")
   @route("/tests/{testId}/app-components")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -162,7 +162,7 @@ interface LoadTestAdministration {
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -181,9 +181,9 @@ interface LoadTestAdministration {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestServerMetricConfig;
+      body: TestServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -203,7 +203,7 @@ interface LoadTestAdministration {
       @pattern("^[a-z0-9_-]*$")
       testId: string;
     },
-    TestServerMetricConfig
+    TestServerMetricsConfiguration
   >;
 }
 
@@ -348,7 +348,7 @@ interface LoadTestRun {
   @summary("Add an app component to a test run.")
   @doc("Add an app component to a test run by providing the resource Id, name and type.")
   @route("/test-runs/{testRunId}/app-components")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -402,7 +402,7 @@ interface LoadTestRun {
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -421,9 +421,9 @@ interface LoadTestRun {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestRunServerMetricConfig;
+      body: TestRunServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestRunServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -443,7 +443,7 @@ interface LoadTestRun {
       @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
-    TestRunServerMetricConfig
+    TestRunServerMetricsConfiguration
   >;
 }
 

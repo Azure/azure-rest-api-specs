@@ -7,9 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
 @armCommonTypesVersion("v3")
-@service({
-  title: "TrafficController",
-})
+@service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
 
@@ -24,6 +22,10 @@ enum Versions {
 
   /** 2025-01-01 stable version */
   v2025_05_01: "2025-01-01",
+
+  /** 2025-03-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_03_01_preview: "2025-03-01-preview",
 }
 
 using TypeSpec.Http;
@@ -38,7 +40,7 @@ using Azure.ResourceManager;
 model Frontend is TrackedResource<FrontendProperties> {
   /** Frontends */
   @key("frontendName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("frontends")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -48,11 +50,15 @@ model Frontend is TrackedResource<FrontendProperties> {
 /** Frontend Properties. */
 model FrontendProperties {
   /** The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fqdn?: string;
 
+  /** Frontend Security Policy Configuration */
+  @added(Versions.v2025_03_01_preview)
+  securityPolicyConfigurations?: SecurityPolicyConfigurations;
+
   /** Provisioning State of Traffic Controller Frontend Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -62,7 +68,7 @@ model FrontendProperties {
 model Association is TrackedResource<AssociationProperties> {
   /** Name of Association */
   @key("associationName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("associations")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -92,7 +98,7 @@ model AssociationUpdateProperties {
 /** Association Subnet. */
 model AssociationSubnetUpdate {
   /** Association ID. */
-  id: string;
+  id?: string;
 }
 
 /** Association Properties. */
@@ -104,7 +110,7 @@ model AssociationProperties {
   subnet?: AssociationSubnet;
 
   /** Provisioning State of Traffic Controller Association Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -127,7 +133,7 @@ model AssociationSubnet {
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
   /** SecurityPolicy */
   @key("securityPolicyName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("securityPolicies")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -137,14 +143,18 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 /** SecurityPolicy Properties. */
 model SecurityPolicyProperties {
   /** Type of the Traffic Controller Security Policy */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   policyType?: PolicyType;
 
-  /** Web Application Firewall Policy of the Traffic Controller Security Policy */
+  /** Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
   wafPolicy?: WafPolicy;
 
+  /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
+  @added(Versions.v2025_03_01_preview)
+  ipAccessRulesPolicy?: IpAccessRulesPolicy;
+
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -154,6 +164,10 @@ union PolicyType {
 
   /** Policy of Type WAF */
   WAF: "waf",
+
+  /** Policy of Type IpAccessRules */
+  @added(Versions.v2025_03_01_preview)
+  IpAccessRules: "ipAccessRules",
 }
 
 /** Web Application Firewall Policy */
@@ -162,16 +176,64 @@ model WafPolicy {
   id: string;
 }
 
+/** Ip Access Policy */
+@added(Versions.v2025_03_01_preview)
+model IpAccessRulesPolicy {
+  /** Ip Access Policy Rules List */
+  @identifiers(#[])
+  @maxItems(100)
+  rules?: IpAccessRule[];
+}
+/** Ip Access Policy Rules */
+@added(Versions.v2025_03_01_preview)
+model IpAccessRule {
+  /** Name of the Ip Access Rule */
+  name: string;
+
+  /** The priority of the rule. The value can be between 1 and 500. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule. */
+  @minValue(1)
+  @maxValue(500)
+  priority: int32;
+
+  /** Source Address Prefixed Applied by the Rule. Asterisk '*' can also be used to match all source IPs. */
+  @maxItems(50)
+  sourceAddressPrefixes: string[];
+
+  /** Action of the Rule */
+  action: IpAccessRuleAction;
+}
+/** Action of Ip Access Rule */
+@added(Versions.v2025_03_01_preview)
+union IpAccessRuleAction {
+  string,
+
+  /** Allow Source Ip Prefixes */
+  Allow: "allow",
+
+  /** Deny Source Ip Prefixes */
+  Deny: "deny",
+}
+
 /** SecurityPolicyConfigurations Subresource of Traffic Controller. */
-@parentResource(TrafficController)
 model SecurityPolicyConfigurations {
-  /** Contains reference to a WAF-type security policy that is applied at the Traffic Controller level. */
+  /** Contains reference to a WAF-type security policy. */
   wafSecurityPolicy?: WafSecurityPolicy;
+
+  /** Contains reference to a IpAccessRules-type security policy. */
+  @added(Versions.v2025_03_01_preview)
+  ipAccessRulesSecurityPolicy?: IpAccessRulesSecurityPolicy;
 }
 
 /** Web Application Firewall Security Policy */
 model WafSecurityPolicy {
   /** Resource ID of the Waf Security Policy */
+  id: string;
+}
+
+/** IpAccessRules Security Policy */
+@added(Versions.v2025_03_01_preview)
+model IpAccessRulesSecurityPolicy {
+  /** Resource ID of the Ip Access Rules Security Policy */
   id: string;
 }
 
@@ -189,29 +251,28 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
 /** Traffic Controller Properties. */
 model TrafficControllerProperties {
   /** Configuration Endpoints. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationEndpoints?: string[];
 
   /** Frontends References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   frontends?: ResourceId[];
 
   /** Associations References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   associations?: ResourceId[];
 
   /** Security Policies References List */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_05_01_preview)
   securityPolicies?: ResourceId[];
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
