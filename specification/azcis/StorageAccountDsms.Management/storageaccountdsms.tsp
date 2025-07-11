@@ -84,7 +84,7 @@ model StorageAccountDsmsResourceProperties {
   @doc("Resiliencies progression controls how Storage Account is migrated by VRS.")
   resilienciesProgressionId?: ResilienciesProgressionId;
 
-  @doc("Additional locations to support resiliency, e.g. 'primary'.")
+  @doc("Additional locations to support resiliency, e.g. 'primary', separated by ',' or ';'.")
   additionalLocations?: string;
 
   @doc("Dual Stack Endpoint Preference.")
