@@ -353,7 +353,19 @@ describe("command-helpers", () => {
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
 
-      expect(result).toEqual(mockResult);
+      // Expected result should have renames added to additions and deletions, and no renames property
+      const expectedResult = {
+        additions: [...mockResult.additions, ...mockResult.renames.map((rename) => rename.to)],
+        modifications: mockResult.modifications,
+        deletions: [...mockResult.deletions, ...mockResult.renames.map((rename) => rename.from)],
+        total:
+          mockResult.additions.length +
+          mockResult.modifications.length +
+          mockResult.deletions.length +
+          mockResult.renames.length * 2,
+      };
+
+      expect(result).toEqual(expectedResult);
       expect(mockGetChangedFilesStatuses).toHaveBeenCalledWith({
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
@@ -363,20 +375,13 @@ describe("command-helpers", () => {
 
     it("should return empty result on error", async () => {
       mockGetChangedFilesStatuses.mockRejectedValue(new Error("Git error"));
-
       const result = await getSwaggerDiffs();
-
       expect(result).toEqual({
         additions: [],
         modifications: [],
         deletions: [],
-        renames: [],
         total: 0,
       });
-      expect(console.error).toHaveBeenCalledWith(
-        "Error getting categorized changed files:",
-        expect.any(Error),
-      );
     });
 
     it("should filter out non-Swagger files", async () => {
@@ -413,18 +418,19 @@ describe("command-helpers", () => {
 
       const result = await getSwaggerDiffs();
 
-      // Only Swagger files should be returned
+      // Only Swagger files should be returned, with renames added to additions and deletions
       expect(result).toEqual({
-        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
-        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
-        renames: [
-          {
-            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
-            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
-          },
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from valid rename
         ],
-        total: 5,
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from valid rename
+        ],
+        total: 6, // 3 additions + 1 modification + 2 deletions (including rename files)
       });
     });
 
@@ -445,6 +451,45 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+      });
+    });
+
+    it("should handle renames by adding them to additions and deletions", async () => {
+      const mockResultWithRenames = {
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        renames: [
+          {
+            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
+            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
+          },
+          {
+            from: "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json",
+            to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
+          },
+        ],
+        total: 6,
+      };
+
+      mockGetChangedFilesStatuses.mockResolvedValue(mockResultWithRenames);
+
+      const result = await getSwaggerDiffs();
+
+      // Renames should be added to additions and deletions, not returned as renames
+      expect(result).toEqual({
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename.to
+          "specification/newapi/data-plane/stable/2023-01-01/newapi.json", // from rename.to
+        ],
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename.from
+          "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json", // from rename.from
+        ],
+        total: 7, // 3 additions + 1 modification + 3 deletions (including from renames)
       });
     });
   });

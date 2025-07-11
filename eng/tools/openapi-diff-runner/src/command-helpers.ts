@@ -11,7 +11,7 @@ import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { LogLevel, logMessage, setOutput } from "./log.js";
+import { logError, LogLevel, logMessage, setOutput } from "./log.js";
 
 /**
  * Interface for parsed CLI arguments
@@ -125,7 +125,6 @@ export async function getSwaggerDiffs(
   additions: string[];
   modifications: string[];
   deletions: string[];
-  renames: { from: string; to: string }[];
   total: number;
 }> {
   try {
@@ -144,25 +143,23 @@ export async function getSwaggerDiffs(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
+    // Add renamed files to the additions array and deletions array
+    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
+    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
+
     return {
       additions: filteredAdditions,
       modifications: filteredModifications,
       deletions: filteredDeletions,
-      renames: filteredRenames,
-      total:
-        filteredAdditions.length +
-        filteredModifications.length +
-        filteredDeletions.length +
-        filteredRenames.length,
+      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
     };
   } catch (error) {
-    console.error("Error getting categorized changed files:", error);
+    logError(`Error getting categorized changed files: ${error}`);
     // Return empty result on error
     return {
       additions: [],
       modifications: [],
       deletions: [],
-      renames: [],
       total: 0,
     };
   }
