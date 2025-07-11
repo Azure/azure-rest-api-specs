@@ -162,7 +162,7 @@ union AccountReplicationType {
   @doc("Provisioned IO Locally Redundant Storage.")
   Premium_LRS: "Premium_LRS",
 
-  string
+  string,
 }
 
 @doc("Whitelist element defines the whitelist for a secret.")
@@ -204,7 +204,7 @@ union ResourceProvider {
   @doc("Used to create a dummy account in dSMS.")
   Invalid: "Invalid",
 
-  string
+  string,
 }
 
 @doc("AccountSasInfo element contains Sas Key Information.")
@@ -242,7 +242,7 @@ union ResilienciesProgressionId {
   @doc("Zonal resiliencies progression: Standard_LRS, Standard_GRS, Standard_ZRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS.")
   Zonal: "Zonal",
 
-  string
+  string,
 }
 
 @doc("Lifecycle Management Policy Rule for Storage Account.")
