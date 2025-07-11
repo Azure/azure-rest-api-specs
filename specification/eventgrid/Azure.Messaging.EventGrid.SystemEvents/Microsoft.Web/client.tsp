@@ -2,9 +2,13 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.AppEventTypeDetail, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AppEventTypeDetail,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AppEventTypeDetail, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData,
   Access.public
 );
@@ -97,9 +101,13 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AppAction, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.StampKind, Usage.output | Usage.json);
 @@access(Microsoft.EventGrid.SystemEvents.StampKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AppServicePlanAction, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AppServicePlanAction,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AppServicePlanAction, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AsyncStatus, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AsyncStatus,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AsyncStatus, Access.public);
 
 //useSystemTextJsonConverter decorators

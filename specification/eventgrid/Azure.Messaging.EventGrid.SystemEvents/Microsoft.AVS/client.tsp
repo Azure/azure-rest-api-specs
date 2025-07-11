@@ -80,7 +80,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AvsPrivateCloudEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AvsClusterEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AvsClusterEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AvsScriptExecutionEventData,
   Usage.output | Usage.json

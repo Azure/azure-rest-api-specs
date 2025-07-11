@@ -21,7 +21,9 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.DataBoxStageName,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Access.public);
 
 //useSystemTextJsonConverter decorators

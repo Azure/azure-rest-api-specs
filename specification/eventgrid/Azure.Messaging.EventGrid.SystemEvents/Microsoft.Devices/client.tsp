@@ -8,11 +8,17 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.DeviceLifeCycleEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinInfo, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.DeviceTwinInfo,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.DeviceTwinInfo, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.DeviceConnectionStateEventProperties,
   Usage.output | Usage.json

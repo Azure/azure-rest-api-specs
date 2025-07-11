@@ -32,11 +32,15 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Usage.output | Usage.json
@@ -44,11 +48,15 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByProperties,
   Usage.output | Usage.json
@@ -182,7 +190,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData,
   Access.public
 );
@@ -330,7 +340,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData,
   Usage.output | Usage.json
@@ -338,7 +350,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration,
   Usage.output | Usage.json
@@ -346,7 +360,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError,
   Usage.output | Usage.json
@@ -354,7 +370,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector,
   Access.public
 );
@@ -484,13 +502,19 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageContext, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageContext,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageContext, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent,
   Access.public
 );
@@ -512,7 +536,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageEventData, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageEventData,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageEventData, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsMessageChannelEventError,
   Usage.output | Usage.json
@@ -521,15 +547,25 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.recordingContentType, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.recordingContentType,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.recordingContentType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.recordingChannelType, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.recordingChannelType,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.recordingChannelType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.recordingFormatType, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.recordingFormatType,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.recordingFormatType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator,
   Access.public
 );
@@ -545,7 +581,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsUserEngagement,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserEngagement, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModelKind,
   Usage.output | Usage.json
@@ -553,11 +591,15 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModelKind,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatus,
   Usage.output | Usage.json
@@ -571,9 +613,13 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind, Usage.output | Usage.json);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
   Access.public
 );
