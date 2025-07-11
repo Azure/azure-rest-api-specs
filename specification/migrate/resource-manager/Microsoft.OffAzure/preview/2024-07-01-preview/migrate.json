@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Discovery Service",
-    "version": "2024-05-01-preview",
+    "version": "2024-07-01-preview",
     "description": "Azure OffAzure Resource Provider management API."
   },
   "schemes": [
@@ -18210,6 +18210,18 @@
           "type": "string",
           "description": "Gets the service endpoint.",
           "readOnly": true
+        },
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
