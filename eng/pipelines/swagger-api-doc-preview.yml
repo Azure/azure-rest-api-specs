@@ -76,12 +76,13 @@ jobs:
           scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
-            $buildStart = az pipelines build queue `
+            $buildStartRaw = az pipelines build queue `
               --organization "https://dev.azure.com/apidrop/" `
               --project "Content CI" `
               --definition-id "8120" `
               --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
-            $buildStart | Set-Content buildstart.json
+            $buildStartRaw | Set-Content buildstart.json
+            $buildStart = $buildStartRaw | ConvertFrom-Json
             Write-Host "Build started at https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
 
       - task: AzureCLI@2
