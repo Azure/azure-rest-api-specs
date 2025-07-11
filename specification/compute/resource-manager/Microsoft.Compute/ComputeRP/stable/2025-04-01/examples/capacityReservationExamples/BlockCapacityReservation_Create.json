@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "capacityReservationGroupName": "blockReservationGroup",
+    "capacityReservationName": "blockCapacityReservation",
+    "api-version": "2025-04-01",
+    "parameters": {
+      "location": "East US",
+      "sku": {
+        "name": "Standard_E4s_v3",
+        "capacity": 10
+      },
+      "zones": ["1"],
+      "properties": {
+        "scheduleProfile": {
+          "start": "2025-08-01",
+          "end": "2025-08-02"
+        }
+      },
+      "tags": {
+        "environment": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockReservationGroup/capacityReservations/blockCapacityReservation",
+        "type": "Microsoft.Compute/capacityReservations",
+        "location": "eastus",
+        "name": "blockCapacityReservation",
+        "sku": {
+          "name": "Standard_E4s_v3",
+          "capacity": 10
+        },
+        "zones": ["1"],
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "reservationId": "11111111-1111-1111-1111-111111111111",
+          "scheduleProfile": {
+            "start": "2025-08-01T12:00:00Z",
+            "end": "2025-08-02T11:30:00Z"
+          },
+          "provisioningState": "Succeeded",
+          "timeCreated": "2025-07-11T15:45:30.9876543Z",
+          "platformFaultDomainCount": 2,
+          "virtualMachinesAssociated": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockReservationGroup/capacityReservations/blockCapacityReservation",
+        "type": "Microsoft.Compute/capacityReservations",
+        "location": "eastus",
+        "name": "blockCapacityReservation",
+        "sku": {
+          "name": "Standard_E4s_v3",
+          "capacity": 10
+        },
+        "zones": ["1"],
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "reservationId": "11111111-1111-1111-1111-111111111111",
+          "scheduleProfile": {
+            "start": "2025-08-01T12:00:00Z",
+            "end": "2025-08-02T11:30:00Z"
+          },
+          "provisioningState": "Creating",
+          "timeCreated": "2025-07-11T15:45:30.9876543Z",
+          "platformFaultDomainCount": 2,
+          "virtualMachinesAssociated": []
+        }
+      }
+    }
+  }
+}
