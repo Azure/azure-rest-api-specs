@@ -115,3 +115,23 @@ model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
 }
+
+@doc("System metadata for an asset")
+model SystemData {
+  @doc("The creator of the asset")
+  createdBy?: string;
+
+  @doc("The datetime of when the asset was created")
+  createdAt?: utcDateTime;
+
+  @doc("The datetime of when the asset was last modified")
+  lastModifiedAt?: utcDateTime;
+}
+
+alias CatalogInformation = {
+  @doc("The id of the publisher of the asset")
+  publisherId: string;
+
+  @doc("The license the asset is under")
+  license: string;
+};

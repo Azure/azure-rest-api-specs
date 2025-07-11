@@ -2378,6 +2378,19 @@
         ]
       }
     },
+    "DerivedModelInformation": {
+      "type": "object",
+      "description": "Derived model information",
+      "properties": {
+        "baseModel": {
+          "type": "string",
+          "description": "Base model"
+        }
+      },
+      "required": [
+        "baseModel"
+      ]
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -2705,6 +2718,24 @@
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "ModelCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the model",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
     },
     "ModelDeployment": {
       "type": "object",
@@ -3180,6 +3211,26 @@
         "size",
         "tier"
       ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified"
+        }
+      }
     },
     "TargetConfig": {
       "type": "object",
