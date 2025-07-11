@@ -99,8 +99,6 @@ jobs:
 
             Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
             
-            # TODO: Remove timeout test
-            $testTimeoutStart = Get-Date
             while($true) { 
               $runStatusRaw = az pipelines runs show `
                 --organization "https://dev.azure.com/apidrop/" `
@@ -112,12 +110,6 @@ jobs:
                 Write-Host "Exit code: $LASTEXITCODE"
                 Write-Host "Output: $runStatusRaw"
                 exit 1 
-              }
-
-              if (((Get-Date) - $testTimeoutStart).TotalMinutes -gt 3) {
-                Write-Host "Timeout reached while waiting for build to finish"
-                Write-Host "Exiting with failure"
-                exit 1
               }
 
               $runStatus = $runStatusRaw | ConvertFrom-Json
