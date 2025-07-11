@@ -56,7 +56,7 @@ model StorageAccountDsmsResourceProperties {
   @doc("Key renewal period in days. Optional, 365 by default.")
   keyRenewalPeriodInDays?: int32;
 
-  @doc("Set to True if you need ACL the Storage Account to Autopilot or PilotFish environments.")
+  @doc("Set to True to grant Access Control List (ACL) permissions to access this Storage Account to Autopilot or PilotFish environments.")
   releaseKeyToAgent?: boolean;
 
   @doc("Set to True to force global sync of dSMS secret or False to skip it. Optional, False by default.")
