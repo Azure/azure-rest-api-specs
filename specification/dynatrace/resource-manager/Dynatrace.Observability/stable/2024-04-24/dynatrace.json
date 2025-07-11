@@ -488,10 +488,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/updateAgentStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/manageAgentInstallation": {
       "post": {
-        "operationId": "Monitors_UpdateAgentStatus",
-        "summary": "Create/Update the list of all resources that have Dynatrace agent installed through the Azure Dynatrace resource.",
+        "operationId": "Monitors_ManageAgentInstallation",
+        "summary": "Performs Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of resources.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -506,7 +506,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "$ref": "#/parameters/AgentStatusParameter"
+            "$ref": "#/parameters/ManageAgentInstallationParameter"
           }
         ],
         "responses": {
@@ -524,11 +524,11 @@
           "Monitors"
         ],
         "x-ms-examples": {
-          "Monitors_UpdateAgentStatus_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_UpdateAgentStatus_MaximumSet_Gen.json"
+           "Monitors_ManageAgentInstallation_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageAgentInstallation_MaximumSet_Gen.json"
           },
-          "Monitors_UpdateAgentStatus_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_UpdateAgentStatus_MinimumSet_Gen.json"
+           "Monitors_ManageAgentInstallation_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ManageAgentInstallation_MinimumSet_Gen.json"
           }
         }
       }
@@ -2007,24 +2007,12 @@
       },
       "description": "Details of resource being monitored by Dynatrace monitor resource"
     },
-    "AgentStatus": {
+    "ManageAgentList": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM id of the resource."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The type of Azure resource."
-        },
-        "dynatraceResourceId": {
-          "type": "string",
-          "description": "Resource Id of the associated Dynatrace monitor resource."
-        },
-        "dynatraceEnvironmentId": {
-          "type": "string",
-          "description": "Environment Id of the associated Dynatrace monitor resource."
+          "description": "The ARM id of the resource to install/uninstall agent."
         }
       },
       "description": "Details of resource that has Dynatrace agent installed through the Azure Dynatrace resource."
@@ -2941,14 +2929,14 @@
         "marketplaceSubscriptionId"
       ]
     },
-    "AgentStatusRequest": {
-      "description": "Request for updating resources given in list according to action.",
+    "ManageAgentInstallationRequest": {
+      "description": "Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.",
       "type": "object",
       "properties": {
-        "agentStatusList": {
+        "manageAgentInstallationList": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentStatus"
+            "$ref": "#/definitions/ManageAgentList"
           },
           "description": "The list of resources."
         },
@@ -2958,7 +2946,7 @@
         }
       },
       "required": [
-        "agentStatusList",
+        "manageAgentInstallationList",
         "action"
       ]
     }
@@ -3001,14 +2989,14 @@
         "$ref": "#/definitions/MarketplaceSubscriptionIdRequest"
       }
     },
-    "AgentStatusParameter": {
+    "ManageAgentInstallationParameter": {
       "x-ms-parameter-location": "method",
       "name": "request",
       "in": "body",
       "required": true,
       "description": "List of resources and action",
       "schema": {
-        "$ref": "#/definitions/AgentStatusRequest"
+        "$ref": "#/definitions/ManageAgentInstallationRequest"
       }
     },
     "DynatraceEnvironmentId": {
