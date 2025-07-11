@@ -5,7 +5,7 @@
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
     "parameters": {
-      "location": "westus",
+      "location": "eastus",
       "sku": {
         "tier": "GeneralPurpose",
         "name": "Standard_D4ds_v5"
@@ -30,11 +30,12 @@
           "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.private.postgres.database"
         },
         "highAvailability": {
-          "mode": "ZoneRedundant"
+          "mode": "SameZone"
         }
       },
       "tags": {
-        "VNetServer": "1"
+        "InCustomerVnet": "true",
+        "InMicrosoftVnet": "false"
       }
     }
   },
@@ -84,9 +85,9 @@
             "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
+            "mode": "SameZone",
             "state": "Healthy",
-            "standbyAvailabilityZone": "2"
+            "standbyAvailabilityZone": "1"
           },
           "maintenanceWindow": {
             "customWindow": "Disabled",
@@ -97,9 +98,10 @@
           "replicationRole": "Primary",
           "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "eastus",
         "tags": {
-          "VnetServer": "1"
+          "InCustomerVnet": "true",
+          "InMicrosoftVnet": "false"
         },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
         "name": "exampleserver",
@@ -151,9 +153,9 @@
             "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
+            "mode": "SameZone",
             "state": "Healthy",
-            "standbyAvailabilityZone": "2"
+            "standbyAvailabilityZone": "1"
           },
           "maintenanceWindow": {
             "customWindow": "Disabled",
@@ -164,9 +166,10 @@
           "replicationRole": "Primary",
           "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "eastus",
         "tags": {
-          "VnetServer": "1"
+          "InCustomerVnet": "true",
+          "InMicrosoftVnet": "false"
         },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
         "name": "exampleserver",

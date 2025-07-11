@@ -10,24 +10,19 @@
         "tier": "GeneralPurpose",
         "name": "Standard_D4ds_v5"
       },
-      "identity": {
-        "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {}
-        },
-        "type": "UserAssigned"
-      },
       "properties": {
         "administratorLogin": "administratorlogin",
         "administratorLoginPassword": "examplepassword",
         "version": "17",
         "availabilityZone": "1",
         "createMode": "Create",
+        "authConfig": {
+          "activeDirectoryAuth": "Enabled",
+          "passwordAuth": "Enabled",
+          "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
+        },
         "dataEncryption": {
-          "type": "AzureKeyVault",
-          "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
-          "geoBackupKeyURI": "",
-          "geoBackupUserAssignedIdentityId": ""
+          "type": "SystemManaged"
         },
         "storage": {
           "storageSizeGB": 512,
@@ -43,7 +38,7 @@
           "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
         },
         "highAvailability": {
-          "mode": "ZoneRedundant"
+          "mode": "Disabled"
         }
       }
     }
@@ -55,20 +50,11 @@
           "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {
-              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
-              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
-            }
-          },
-          "type": "UserAssigned",
-          "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
-        },
-        "systemData": {
-          "createdAt": "2025-03-03T17:44:30.7095047Z"
-        },
         "properties": {
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
           "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "17",
           "minorVersion": "4",
@@ -77,13 +63,11 @@
           "availabilityZone": "1",
           "authConfig": {
             "activeDirectoryAuth": "Enabled",
-            "passwordAuth": "Enabled"
+            "passwordAuth": "Enabled",
+            "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
           },
           "dataEncryption": {
-            "type": "AzureKeyVault",
-            "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
-            "primaryEncryptionKeyStatus": "Valid"
+            "type": "SystemManaged"
           },
           "storage": {
             "type": "",
@@ -95,7 +79,7 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2025-02-26T01:08:06.7197478+00:00"
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
@@ -103,9 +87,8 @@
             "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "2"
+            "mode": "Disabled",
+            "state": "NotEnabled"
           },
           "maintenanceWindow": {
             "customWindow": "Disabled",
@@ -128,17 +111,11 @@
           "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {
-              "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
-              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
-            }
-          },
-          "type": "UserAssigned",
-          "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
-        },
         "properties": {
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
           "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "17",
           "minorVersion": "4",
@@ -147,16 +124,10 @@
           "availabilityZone": "1",
           "authConfig": {
             "activeDirectoryAuth": "Enabled",
-            "passwordAuth": "Enabled"
-          },
-          "dataEncryption": {
-            "type": "AzureKeyVault",
-            "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
-            "primaryEncryptionKeyStatus": "Valid"
+            "passwordAuth": "Enabled",
+            "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
           },
           "storage": {
-            "type": "",
             "storageSizeGB": 512,
             "autoGrow": "Disabled",
             "tier": "P20",
@@ -165,7 +136,7 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2025-02-26T01:08:06.7197478+00:00"
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Disabled",
@@ -173,18 +144,15 @@
             "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "2"
+            "mode": "Disabled",
+            "state": "NotEnabled"
           },
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
-          },
-          "replicationRole": "Primary",
-          "replicaCapacity": 5
+          }
         },
         "location": "eastus",
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",

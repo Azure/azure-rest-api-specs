@@ -5,7 +5,7 @@
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
     "parameters": {
-      "location": "westus",
+      "location": "eastus",
       "sku": {
         "tier": "GeneralPurpose",
         "name": "Standard_D4ds_v5"
@@ -16,14 +16,6 @@
         "version": "17",
         "availabilityZone": "1",
         "createMode": "Create",
-        "authConfig": {
-          "activeDirectoryAuth": "Enabled",
-          "passwordAuth": "Enabled",
-          "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
-        },
-        "dataEncryption": {
-          "type": "SystemManaged"
-        },
         "storage": {
           "storageSizeGB": 512,
           "autoGrow": "Disabled",
@@ -31,15 +23,18 @@
         },
         "backup": {
           "backupRetentionDays": 7,
-          "geoRedundantBackup": "Disabled"
+          "geoRedundantBackup": "Enabled"
         },
         "network": {
-          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
+          "publicNetworkAccess": "Enabled"
         },
         "highAvailability": {
           "mode": "ZoneRedundant"
         }
+      },
+      "tags": {
+        "InCustomerVnet": "false",
+        "InMicrosoftVnet": "true"
       }
     }
   },
@@ -50,41 +45,43 @@
           "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
+        "systemData": {
+          "createdAt": "2025-06-01T18:30:22.123456Z"
+        },
         "properties": {
           "replica": {
             "role": "Primary",
             "capacity": 5
           },
-          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
+          "storage": {
+            "type": "",
+            "iops": 2300,
+            "tier": "P20",
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.private.postgres.database.azure.com"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
           "version": "17",
           "minorVersion": "4",
           "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
-          "authConfig": {
-            "activeDirectoryAuth": "Enabled",
-            "passwordAuth": "Enabled",
-            "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
-          },
-          "dataEncryption": {
-            "type": "SystemManaged"
-          },
-          "storage": {
-            "type": "",
-            "storageSizeGB": 512,
-            "autoGrow": "Disabled",
-            "tier": "P20",
-            "iops": 2300
-          },
           "backup": {
             "backupRetentionDays": 7,
-            "geoRedundantBackup": "Disabled",
+            "geoRedundantBackup": "Enabled",
             "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
-          },
-          "network": {
-            "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -100,7 +97,11 @@
           "replicationRole": "Primary",
           "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "eastus",
+        "tags": {
+          "InCustomerVnet": "false",
+          "InMicrosoftVnet": "true"
+        },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
         "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
@@ -112,37 +113,43 @@
           "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
+        "systemData": {
+          "createdAt": "2025-06-01T18:30:22.123456Z"
+        },
         "properties": {
           "replica": {
             "role": "Primary",
             "capacity": 5
           },
-          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
+          "storage": {
+            "type": "",
+            "iops": 2300,
+            "tier": "P20",
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.private.postgres.database.azure.com"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
           "version": "17",
           "minorVersion": "4",
           "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
-          "authConfig": {
-            "activeDirectoryAuth": "Enabled",
-            "passwordAuth": "Enabled",
-            "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
-          },
-          "storage": {
-            "storageSizeGB": 512,
-            "autoGrow": "Disabled",
-            "tier": "P20",
-            "iops": 2300
-          },
           "backup": {
             "backupRetentionDays": 7,
-            "geoRedundantBackup": "Disabled",
+            "geoRedundantBackup": "Enabled",
             "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
-          },
-          "network": {
-            "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -154,9 +161,15 @@
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
-          }
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
         },
-        "location": "westus",
+        "location": "eastus",
+        "tags": {
+          "InCustomerVnet": "false",
+          "InMicrosoftVnet": "true"
+        },
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
         "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
