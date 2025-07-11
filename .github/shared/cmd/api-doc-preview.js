@@ -5,11 +5,7 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import {
-  swagger,
-  getChangedFiles,
-  pathExists,
-} from "../src/changed-files.js";
+import { swagger, getChangedFiles, pathExists } from "../src/changed-files.js";
 import { filterAsync } from "../src/array.js";
 
 import {
@@ -68,13 +64,11 @@ export async function main() {
   let validArgs = true;
 
   if (!outputDir) {
-    console.log(
-      `Missing required parameter --output. Value given: ${outputDir || "<empty>"}`,
-    );
+    console.log(`Missing required parameter --output. Value given: ${outputDir || "<empty>"}`);
     validArgs = false;
   }
 
-  if (!specRepoName) { 
+  if (!specRepoName) {
     console.log(
       `Missing required parameter --spec-repo-name. Value given: ${specRepoName || "<empty>"}`,
     );
@@ -89,9 +83,7 @@ export async function main() {
   }
 
   if (!specRepoRoot || !(await pathExists(resolve(specRepoRoot)))) {
-    console.log(
-      `Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`,
-    );
+    console.log(`Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`);
     validArgs = false;
   }
 
@@ -114,14 +106,11 @@ export async function main() {
   );
 
   if (existingSwaggerFiles.length === 0) {
-    console.log(
-      "No eligible swagger files found. No documentation artifacts will be written.",
-    );
+    console.log("No eligible swagger files found. No documentation artifacts will be written.");
     return;
   }
 
-  const { selectedVersion, swaggersToProcess } =
-    getSwaggersToProcess(existingSwaggerFiles);
+  const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(existingSwaggerFiles);
 
   const key = {
     repoName: specRepoName,
@@ -129,10 +118,7 @@ export async function main() {
   };
 
   await mkdir(outputDir, { recursive: true });
-  await writeFile(
-    join(outputDir, "repo.json"),
-    JSON.stringify(repoJSONTemplate(key), null, 2),
-  );
+  await writeFile(join(outputDir, "repo.json"), JSON.stringify(repoJSONTemplate(key), null, 2));
   await writeFile(
     join(outputDir, "mapping.json"),
     JSON.stringify(mappingJSONTemplate(swaggersToProcess), null, 2),

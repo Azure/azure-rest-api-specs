@@ -19,22 +19,11 @@ const SPEC_FILE_REGEX =
 export function parseSwaggerFilePath(specPath) {
   const m = specPath.match(SPEC_FILE_REGEX);
   if (!m) {
-    console.log(
-      `Path "${specPath}" does not match expected swagger file pattern.`,
-    );
+    console.log(`Path "${specPath}" does not match expected swagger file pattern.`);
     return null;
   }
-  const [
-    path,
-    ,
-    serviceName,
-    serviceType,
-    resourceProvider,
-    releaseState,
-    apiVersion,
-    ,
-    fileName,
-  ] = m;
+  const [path, , serviceName, serviceType, resourceProvider, releaseState, apiVersion, , fileName] =
+    m;
   return {
     path,
     serviceName,
@@ -119,9 +108,7 @@ export function getSwaggersToProcess(swaggerFiles) {
   // swaggerFileObjs never has any `null` elements, otherwise, returns the
   // output type of `parseSwaggerFilePath`.
   /** @type {Exclude<ReturnType<typeof parseSwaggerFilePath>, null>[]} */
-  const swaggerFileObjs = swaggerFiles
-    .map(parseSwaggerFilePath)
-    .filter((obj) => obj !== null);
+  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath).filter((obj) => obj !== null);
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   const uniqueVersions = [...new Set(versions)];
