@@ -2173,6 +2173,23 @@
         "permissions"
       ]
     },
+    "ActionsRequired": {
+      "type": "string",
+      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+      "enum": [
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ActionsRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
     "ActivationStatus": {
       "type": "string",
       "description": "Activation Status",
@@ -2367,7 +2384,7 @@
           "readOnly": true
         },
         "reason": {
-          "$ref": "#/definitions/ManagedHsmNameUnavailableReason",
+          "$ref": "#/definitions/Reason",
           "description": "The reason that a managed hsm name could not be used. The reason element is only returned if NameAvailable is false.",
           "readOnly": true
         },
@@ -2388,7 +2405,7 @@
           "readOnly": true
         },
         "reason": {
-          "$ref": "#/definitions/KeyVaultNameUnavailableReason",
+          "$ref": "#/definitions/Reason",
           "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
           "readOnly": true
         },
@@ -2421,6 +2438,18 @@
           "type": "string",
           "description": "User friendly error message. The message is typically localized and may vary with service version."
         }
+      }
+    },
+    "CreateMode": {
+      "type": "string",
+      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
+      "enum": [
+        "recover",
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "CreateMode",
+        "modelAsString": false
       }
     },
     "DeletedManagedHsm": {
@@ -2791,103 +2820,6 @@
         ]
       }
     },
-    "KeyVaultActionsRequiredMessage": {
-      "type": "string",
-      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
-      "enum": [
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultActionsRequiredMessage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
-    "KeyVaultCreateMode": {
-      "type": "string",
-      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
-      "enum": [
-        "recover",
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultCreateMode",
-        "modelAsString": false
-      }
-    },
-    "KeyVaultNameUnavailableReason": {
-      "type": "string",
-      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
-      "enum": [
-        "AccountNameInvalid",
-        "AlreadyExists"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultNameUnavailableReason",
-        "modelAsString": false
-      }
-    },
-    "KeyVaultNetworkRuleAction": {
-      "type": "string",
-      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultNetworkRuleAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny"
-          }
-        ]
-      }
-    },
-    "KeyVaultNetworkRuleBypassOption": {
-      "type": "string",
-      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
-      "enum": [
-        "AzureServices",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultNetworkRuleBypassOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureServices",
-            "value": "AzureServices"
-          },
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
-    "KeyVaultPatchMode": {
-      "type": "string",
-      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
-      "enum": [
-        "recover",
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "KeyVaultPatchMode",
-        "modelAsString": false
-      }
-    },
     "LogSpecification": {
       "type": "object",
       "description": "Log specification of operation.",
@@ -2943,11 +2875,11 @@
       "description": "A set of rules governing the network accessibility of a managed hsm pool.",
       "properties": {
         "bypass": {
-          "$ref": "#/definitions/ManagedHsmNetworkRuleBypassOption",
+          "$ref": "#/definitions/NetworkRuleBypassOptions",
           "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
         },
         "defaultAction": {
-          "$ref": "#/definitions/ManagedHsmNetworkRuleAction",
+          "$ref": "#/definitions/NetworkRuleAction",
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
         },
         "ipRules": {
@@ -3055,7 +2987,7 @@
           "description": "Approval state of the private link connection."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ManagedHsmPrivateEndpointConnectionProvisioningState",
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
           "description": "Provisioning state of the private endpoint connection.",
           "readOnly": true
         }
@@ -3142,7 +3074,7 @@
       "description": "An object that represents the approval state of the private link connection.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/ManagedHsmPrivateEndpointServiceConnectionStatus",
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
           "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
         },
         "description": {
@@ -3150,7 +3082,7 @@
           "description": "The reason for approval or rejection."
         },
         "actionsRequired": {
-          "$ref": "#/definitions/ManagedHsmActionsRequiredMessage",
+          "$ref": "#/definitions/ActionsRequired",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
@@ -3164,7 +3096,10 @@
           "description": "The MhsmGeoReplicatedRegion items on this page",
           "items": {
             "$ref": "#/definitions/MHSMGeoReplicatedRegion"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3243,47 +3178,6 @@
         }
       ]
     },
-    "ManagedHsmActionsRequiredMessage": {
-      "type": "string",
-      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
-      "enum": [
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmActionsRequiredMessage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
-    "ManagedHsmCreateMode": {
-      "type": "string",
-      "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
-      "enum": [
-        "recover",
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmCreateMode",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "recover",
-            "value": "recover",
-            "description": "Recover the managed HSM pool from a soft-deleted resource."
-          },
-          {
-            "name": "default",
-            "value": "default",
-            "description": "Create a new managed HSM pool. This is the default option."
-          }
-        ]
-      }
-    },
     "ManagedHsmError": {
       "type": "object",
       "description": "The error exception.",
@@ -3315,137 +3209,6 @@
       "required": [
         "value"
       ]
-    },
-    "ManagedHsmNameUnavailableReason": {
-      "type": "string",
-      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
-      "enum": [
-        "AccountNameInvalid",
-        "AlreadyExists"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmNameUnavailableReason",
-        "modelAsString": false
-      }
-    },
-    "ManagedHsmNetworkRuleAction": {
-      "type": "string",
-      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmNetworkRuleAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny"
-          }
-        ]
-      }
-    },
-    "ManagedHsmNetworkRuleBypassOption": {
-      "type": "string",
-      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
-      "enum": [
-        "AzureServices",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmNetworkRuleBypassOption",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureServices",
-            "value": "AzureServices"
-          },
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
-    "ManagedHsmPrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Failed",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmPrivateEndpointConnectionProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          },
-          {
-            "name": "Disconnected",
-            "value": "Disconnected"
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "ManagedHsmPrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedHsmPrivateEndpointServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          },
-          {
-            "name": "Disconnected",
-            "value": "Disconnected"
-          }
-        ]
-      }
     },
     "ManagedHsmProperties": {
       "type": "object",
@@ -3484,7 +3247,7 @@
           "default": true
         },
         "createMode": {
-          "$ref": "#/definitions/ManagedHsmCreateMode",
+          "$ref": "#/definitions/CreateMode",
           "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
           "x-ms-mutability": [
             "update",
@@ -3787,16 +3550,60 @@
         }
       }
     },
+    "NetworkRuleAction": {
+      "type": "string",
+      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny"
+          }
+        ]
+      }
+    },
+    "NetworkRuleBypassOptions": {
+      "type": "string",
+      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+      "enum": [
+        "AzureServices",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkRuleBypassOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureServices",
+            "value": "AzureServices"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
     "NetworkRuleSet": {
       "type": "object",
       "description": "A set of rules governing the network accessibility of a vault.",
       "properties": {
         "bypass": {
-          "$ref": "#/definitions/KeyVaultNetworkRuleBypassOption",
+          "$ref": "#/definitions/NetworkRuleBypassOptions",
           "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
         },
         "defaultAction": {
-          "$ref": "#/definitions/KeyVaultNetworkRuleAction",
+          "$ref": "#/definitions/NetworkRuleAction",
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
         },
         "ipRules": {
@@ -4172,7 +3979,7 @@
           "description": "The reason for approval or rejection."
         },
         "actionsRequired": {
-          "$ref": "#/definitions/KeyVaultActionsRequiredMessage",
+          "$ref": "#/definitions/ActionsRequired",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
@@ -4237,6 +4044,28 @@
         ]
       },
       "readOnly": true
+    },
+    "Reason": {
+      "type": "string",
+      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
+      "enum": [
+        "AccountNameInvalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "Reason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccountNameInvalid",
+            "value": "AccountNameInvalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists"
+          }
+        ]
+      }
     },
     "Resource": {
       "type": "object",
@@ -4870,7 +4699,7 @@
           "description": "softDelete data retention days. It accepts >=7 and <=90."
         },
         "createMode": {
-          "$ref": "#/definitions/KeyVaultPatchMode",
+          "$ref": "#/definitions/CreateMode",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not."
         },
         "enablePurgeProtection": {
@@ -4952,7 +4781,7 @@
           "default": false
         },
         "createMode": {
-          "$ref": "#/definitions/KeyVaultCreateMode",
+          "$ref": "#/definitions/CreateMode",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
           "x-ms-mutability": [
             "update",

@@ -167,27 +167,32 @@ union StoragePermissions {
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
-union KeyVaultNetworkRuleBypassOption {
+union NetworkRuleBypassOptions {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureServices: "AzureServices",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
+
+/**
+ * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
+ */
+union KeyVaultNetworkRuleBypassOption {
+  NetworkRuleBypassOptions,
+}
+
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
 union ManagedHsmNetworkRuleBypassOption {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  AzureServices: "AzureServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  None: "None",
+  NetworkRuleBypassOptions,
 }
+
 /**
  * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
  */
-union KeyVaultNetworkRuleAction {
+union NetworkRuleAction {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Allow: "Allow",
@@ -198,12 +203,15 @@ union KeyVaultNetworkRuleAction {
 /**
  * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
  */
+union KeyVaultNetworkRuleAction {
+  NetworkRuleAction,
+}
+
+/**
+ * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
+ */
 union ManagedHsmNetworkRuleAction {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Deny: "Deny",
+  NetworkRuleAction,
 }
 /**
  * Provisioning state of the vault.
@@ -250,7 +258,7 @@ union ManagedHsmPrivateEndpointServiceConnectionStatus {
 /**
  * A message indicating if changes on the service provider require any updates on the consumer.
  */
-union KeyVaultActionsRequiredMessage {
+union ActionsRequired {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
@@ -259,10 +267,15 @@ union KeyVaultActionsRequiredMessage {
 /**
  * A message indicating if changes on the service provider require any updates on the consumer.
  */
+union KeyVaultActionsRequiredMessage {
+  ActionsRequired,
+}
+
+/**
+ * A message indicating if changes on the service provider require any updates on the consumer.
+ */
 union ManagedHsmActionsRequiredMessage {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  None: "None",
+  ActionsRequired,
 }
 
 /**
@@ -289,19 +302,7 @@ union PrivateEndpointConnectionProvisioningState {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedHsmPrivateEndpointConnectionProvisioningState {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Disconnected: "Disconnected",
+  PrivateEndpointConnectionProvisioningState,
 }
 /**
  * The type of identity.
@@ -463,6 +464,15 @@ enum SkuName {
  * The vault's create mode to indicate whether the vault need to be recovered or not.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum CreateMode {
+  recover,
+  default,
+}
+
+/**
+ * The vault's create mode to indicate whether the vault need to be recovered or not.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultCreateMode {
   recover,
   default,
@@ -498,9 +508,20 @@ enum AccessPolicyUpdateKind {
  * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ManagedHsmNameUnavailableReason {
-  AccountNameInvalid,
-  AlreadyExists,
+union Reason {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AccountNameInvalid: "AccountNameInvalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AlreadyExists: "AlreadyExists",
+}
+
+/**
+ * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union ManagedHsmNameUnavailableReason {
+  Reason,
 }
 
 /**
@@ -617,7 +638,7 @@ model VaultProperties {
    * The vault's create mode to indicate whether the vault need to be recovered or not.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  createMode?: KeyVaultCreateMode;
+  createMode?: CreateMode;
 
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
@@ -719,12 +740,12 @@ model NetworkRuleSet {
   /**
    * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
    */
-  bypass?: KeyVaultNetworkRuleBypassOption;
+  bypass?: NetworkRuleBypassOptions;
 
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
    */
-  defaultAction?: KeyVaultNetworkRuleAction;
+  defaultAction?: NetworkRuleAction;
 
   /**
    * The list of IP address rules.
@@ -834,7 +855,7 @@ model PrivateLinkServiceConnectionState {
   /**
    * A message indicating if changes on the service provider require any updates on the consumer.
    */
-  actionsRequired?: KeyVaultActionsRequiredMessage;
+  actionsRequired?: ActionsRequired;
 }
 
 /**
@@ -935,7 +956,7 @@ model VaultPatchProperties {
   /**
    * The vault's create mode to indicate whether the vault need to be recovered or not.
    */
-  createMode?: KeyVaultPatchMode;
+  createMode?: CreateMode;
 
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
@@ -1119,7 +1140,7 @@ model CheckNameAvailabilityResult {
    * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
    */
   @visibility(Lifecycle.Read)
-  reason?: KeyVaultNameUnavailableReason;
+  reason?: Reason;
 
   /**
    * An error message explaining the Reason value in more detail.
@@ -1211,7 +1232,7 @@ model ManagedHsmProperties {
    * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  createMode?: ManagedHsmCreateMode;
+  createMode?: CreateMode;
 
   /**
    * Resource Status Message.
@@ -1268,12 +1289,12 @@ model MhsmNetworkRuleSet {
   /**
    * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
    */
-  bypass?: ManagedHsmNetworkRuleBypassOption;
+  bypass?: NetworkRuleBypassOptions;
 
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
    */
-  defaultAction?: ManagedHsmNetworkRuleAction;
+  defaultAction?: NetworkRuleAction;
 
   /**
    * The list of IP address rules.
@@ -1367,7 +1388,7 @@ model MhsmPrivateEndpointConnectionProperties {
    * Provisioning state of the private endpoint connection.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ManagedHsmPrivateEndpointConnectionProvisioningState;
+  provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
 /**
@@ -1388,7 +1409,7 @@ model MhsmPrivateLinkServiceConnectionState {
   /**
    * Indicates whether the connection has been approved, rejected or removed by the key vault owner.
    */
-  status?: ManagedHsmPrivateEndpointServiceConnectionStatus;
+  status?: PrivateEndpointServiceConnectionStatus;
 
   /**
    * The reason for approval or rejection.
@@ -1398,7 +1419,7 @@ model MhsmPrivateLinkServiceConnectionState {
   /**
    * A message indicating if changes on the service provider require any updates on the consumer.
    */
-  actionsRequired?: ManagedHsmActionsRequiredMessage;
+  actionsRequired?: ActionsRequired;
 }
 
 /**
@@ -1667,7 +1688,7 @@ model CheckMhsmNameAvailabilityResult {
    * The reason that a managed hsm name could not be used. The reason element is only returned if NameAvailable is false.
    */
   @visibility(Lifecycle.Read)
-  reason?: ManagedHsmNameUnavailableReason;
+  reason?: Reason;
 
   /**
    * An error message explaining the Reason value in more detail.
@@ -2040,10 +2061,3 @@ model OperationListResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MHSMPrivateEndpointConnectionsListResult
   is Azure.Core.Page<MhsmPrivateEndpointConnection>;
-
-@@doc(ManagedHsmCreateMode.default,
-  "Create a new managed HSM pool. This is the default option."
-);
-@@doc(ManagedHsmCreateMode.recover,
-  "Recover the managed HSM pool from a soft-deleted resource."
-);

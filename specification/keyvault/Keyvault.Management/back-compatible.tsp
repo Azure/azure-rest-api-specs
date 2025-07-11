@@ -72,3 +72,5 @@ using Azure.Core;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "OperationProperties");
+
+@@OpenAPI.extension(MhsmRegionsListResult.value, "x-ms-identifiers", #["name"]);

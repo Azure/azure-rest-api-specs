@@ -139,3 +139,49 @@ using Azure.Core;
 @@alternateType(VaultAccessPolicyParameters.location, azureLocation, "csharp");
 @@alternateType(PrivateEndpointConnectionItem.etag, eTag, "csharp");
 @@alternateType(Secret.location, azureLocation, "csharp");
+@@alternateType(MhsmNetworkRuleSet.bypass,
+  ManagedHsmNetworkRuleBypassOption,
+  "csharp"
+);
+@@alternateType(NetworkRuleSet.bypass,
+  KeyVaultNetworkRuleBypassOption,
+  "csharp"
+);
+@@alternateType(MhsmNetworkRuleSet.defaultAction,
+  ManagedHsmNetworkRuleAction,
+  "csharp"
+);
+@@alternateType(NetworkRuleSet.defaultAction,
+  KeyVaultNetworkRuleAction,
+  "csharp"
+);
+@@alternateType(MhsmPrivateEndpointConnectionProperties.provisioningState,
+  ManagedHsmPrivateEndpointConnectionProvisioningState,
+  "csharp"
+);
+@@alternateType(MhsmPrivateLinkServiceConnectionState.status,
+  ManagedHsmPrivateEndpointServiceConnectionStatus,
+  "csharp"
+);
+@@alternateType(MhsmPrivateLinkServiceConnectionState.actionsRequired,
+  ManagedHsmActionsRequiredMessage,
+  "csharp"
+);
+@@alternateType(PrivateLinkServiceConnectionState.actionsRequired,
+  KeyVaultActionsRequiredMessage,
+  "csharp"
+);
+@@alternateType(VaultProperties.createMode, KeyVaultCreateMode, "csharp");
+@@alternateType(ManagedHsmProperties.createMode,
+  ManagedHsmCreateMode,
+  "csharp"
+);
+@@alternateType(VaultPatchProperties.createMode, KeyVaultPatchMode, "csharp");
+@@alternateType(CheckMhsmNameAvailabilityResult.reason,
+  ManagedHsmNameUnavailableReason,
+  "csharp"
+);
+@@alternateType(CheckNameAvailabilityResult.reason,
+  KeyVaultNameUnavailableReason,
+  "csharp"
+);
