@@ -5449,6 +5449,10 @@
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
           "description": "Specifies the sku profile for the virtual machine scale set."
+        },
+        "highSpeedInterconnectPlacement": {
+          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
+          "description": "Specifies the high-speed interconnect placement for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -6532,6 +6536,18 @@
       ],
       "x-ms-enum": {
         "name": "ZonalPlatformFaultDomainAlignMode",
+        "modelAsString": true
+      }
+    },
+    "HighSpeedInterconnectPlacement": {
+      "type": "string",
+      "description": "Specifies the high-speed interconnect placement for the virtual machine scale set.",
+      "enum": [
+        "None",
+        "Trunk"
+      ],
+      "x-ms-enum": {
+        "name": "HighSpeedInterconnectPlacement",
         "modelAsString": true
       }
     }
