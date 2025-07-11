@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-06-01-preview
+tag: package-preview-2024-03
 ```
 
 ## Suppression
@@ -157,29 +157,6 @@ suppressions:
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
-```
-
-### Tag: package-preview-2025-06-01-preview
-
-These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-06-01-preview'
-input-file:
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/edgeDeviceJobs.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/hciCommon.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/offers.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/skus.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/updates.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2025-06-01-preview/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2024-03
