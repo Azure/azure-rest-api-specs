@@ -37,6 +37,28 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 ``` yaml $(tag) == 'package-2018-09'
 input-file:
 - Microsoft.DevTestLab/stable/2018-09-15/DTL.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: DeleteResponseCodes
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: ParametersInPointGet
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: PostResponseCodes
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: AvoidAdditionalProperties
+    where:
+      - $.definitions.ParametersValueFileInfo.properties.parametersValueInfo
+      - $.definitions.ArmTemplateInfo.properties.template
+      - $.definitions.ArmTemplateInfo.properties.parameters
+      - $.definitions.ArmTemplateProperties.properties.contents
+      - $.definitions.ArtifactProperties.properties.parameters
+    from: DTL.json
+    reason: This is already released to customers with type object as a parameter, hence suppressing the rule for compatibility
 ```
 
 ### Tag: package-2016-05
