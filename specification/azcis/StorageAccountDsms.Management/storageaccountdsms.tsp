@@ -129,17 +129,17 @@ model StorageAccountDsmsResourceProperties {
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   storageAccountXstoreCreationTime?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name in the original Resource Template code contains an underscore."
   @doc("DsmsAccountTemplate provision start time; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   provisionStartTime_dsmsAccountTemplate?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name in the original Resource Template code contains an underscore."
   @doc("StorageAccountTemplate provision start time; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   provisionStartTime_storageAccountTemplate?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name in the original Resource Template code contains an underscore."
   @doc("StorageAccountSyncTemplate provision start time; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   provisionStartTime_storageAccountSyncTemplate?: string;
@@ -337,7 +337,7 @@ model StorageAccountDsmsResource
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Delete operation is currently not supported by FRP."
 @armResourceOperations
 interface StorageAccountDsms {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
