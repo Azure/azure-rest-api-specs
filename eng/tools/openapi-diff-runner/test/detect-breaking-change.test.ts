@@ -55,6 +55,16 @@ vi.mock("../src/utils/common-utils.js", () => ({
 vi.mock("../src/log.js", () => ({
   logMessage: vi.fn(),
   logError: vi.fn(),
+  LogLevel: {
+    Error: "error",
+    Warn: "warn",
+    Info: "info",
+    Debug: "debug",
+    Notice: "notice",
+    Group: "group",
+    EndGroup: "endgroup",
+  },
+  LOG_PREFIX: "Runner-",
 }));
 
 vi.mock("../src/run-oad.js", () => ({

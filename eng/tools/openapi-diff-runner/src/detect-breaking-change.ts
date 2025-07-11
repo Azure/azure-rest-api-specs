@@ -39,7 +39,7 @@ import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
 import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
 import { getExistedVersionOperations, getPrecedingSwaggers } from "./utils/spec.js";
-import { logError, logMessage } from "./log.js";
+import { logError, LogLevel, logMessage } from "./log.js";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
@@ -116,6 +116,7 @@ export async function checkBreakingChangeOnSameVersion(
   let aggregateErrorCnt = 0;
 
   for (const swaggerPath of detectionContext.existingVersionSwaggers) {
+    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
       path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
@@ -127,6 +128,7 @@ export async function checkBreakingChangeOnSameVersion(
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;
+    logMessage("Processing completed", LogLevel.EndGroup);
   }
 
   logMessage(
@@ -165,6 +167,7 @@ export async function checkCrossVersionBreakingChange(
   for (const swaggerPath of detectionContext.newVersionSwaggers
     .concat(detectionContext.newVersionChangedSwaggers)
     .concat(detectionContext.existingVersionSwaggers.filter(isInDevFolder))) {
+    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
     // use the detectionContext.context.localSpecRepoPath to resolve the absolute path as it's the merge commit working directory
     const absoluteSwaggerPath = path.resolve(
       detectionContext.context.localSpecRepoPath,
@@ -224,6 +227,7 @@ export async function checkCrossVersionBreakingChange(
     if (!previousStableSwaggerPath && !previousPreviewSwaggerPath) {
       await checkAPIsBeingMovedToANewSpec(detectionContext.context, swaggerPath, availableSwaggers);
     }
+    logMessage("Processing completed", LogLevel.EndGroup);
   }
   logMessage(
     `RETURN definition checkCrossVersionBreakingChange. ` +
