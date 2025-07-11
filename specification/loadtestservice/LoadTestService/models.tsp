@@ -928,6 +928,36 @@ model TestRun {
   ...SystemMetaData;
 }
 
+@doc("Represents insights for the test run.")
+@added(APIVersions.v2025_03_01_preview)
+model TestRunInsights {
+  @doc("The columns of the insights.")
+  @visibility(Lifecycle.Read)
+  columns?: Record<TestRunInsightColumn>;
+
+  @doc("The rows of the insights.")
+  @visibility(Lifecycle.Read)
+  rows?: Record<string>[];
+
+  @doc("The version of the insights.")
+  @visibility(Lifecycle.Read)
+  version?: int64;
+
+  @doc("The status of the insights.")
+  @visibility(Lifecycle.Read)
+  status?: Foundations.OperationState;
+}
+
+@doc("Represents a column of the test run insight")
+@added(APIVersions.v2025_03_01_preview)
+model TestRunInsightColumn {
+  @doc("Name of the column.")
+  name: string;
+
+  @doc("The data type of the column.")
+  dataType: string;
+}
+
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
   @doc("Error details in case test run was not successfully run.")

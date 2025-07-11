@@ -257,6 +257,53 @@ interface LoadTestRun {
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Get the latest insights for the test run.")
+  @doc("Get the latest insights for the test run.")
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @get
+  getLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
+      @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
+      testRunId: string;
+    },
+    TestRunInsights
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Generate insights for the test run.")
+  @doc("Generate insights for the test run.")
+  @pollingOperation(LoadTestRun.getLatestInsights)
+  @added(APIVersions.v2025_03_01_preview)
+  @route("/test-runs/{testRunId}/insights:generate")
+  @post
+  generateInsights is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
+      @path
+      @maxLength(50)
+      @minLength(2)
+      @pattern("^[a-z0-9_-]*$")
+      testRunId: string;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("Operation-Location") operationLocation: url;
+      @bodyRoot @added(APIVersions.v2025_03_01_preview) body: OperationStatus;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
