@@ -15,7 +15,7 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("AgentBlueprint resource Definition")
 @Rest.resource("agentblueprints")
-@added(Versions.v1)
+@added(Versions.v2025_05_15_preview)
 model AgentBlueprint {
   ...AssetBase;
 

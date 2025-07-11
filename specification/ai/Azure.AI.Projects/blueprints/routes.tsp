@@ -19,7 +19,7 @@ alias ListAgentBlueprintVersionsParameters = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
-@added(Versions.v1)
+@added(Versions.v2025_05_15_preview)
 interface AgentBlueprints
   extends VersionedOperations<
       AgentBlueprint,
