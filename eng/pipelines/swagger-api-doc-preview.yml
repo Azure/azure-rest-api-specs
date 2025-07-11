@@ -114,7 +114,7 @@ jobs:
                 exit 1 
               }
 
-              if ((Get-Date) - $testTimeoutStart).TotalMinutes -gt 3) {
+              if (((Get-Date) - $testTimeoutStart).TotalMinutes -gt 3) {
                 Write-Host "Timeout reached while waiting for build to finish"
                 Write-Host "Exiting with failure"
                 exit 1
