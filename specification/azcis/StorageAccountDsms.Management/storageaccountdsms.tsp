@@ -53,7 +53,7 @@ model StorageAccountDsmsResourceProperties {
   @doc("Set to True to block auto key rollover. Optional, False by default.")
   blockAutoRollover?: boolean;
 
-  @doc("Override default key renewal period.")
+  @doc("Key renewal period in days. Optional, 365 by default.")
   keyRenewalPeriodInDays?: int32;
 
   @doc("Set to True if you need ACL the Storage Account to Autopilot or PilotFish environments.")
