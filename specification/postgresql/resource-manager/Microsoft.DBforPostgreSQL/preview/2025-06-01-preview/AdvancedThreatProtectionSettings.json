@@ -70,7 +70,7 @@
           }
         },
         "x-ms-examples": {
-          "List state of advanced threat protection settings for a flexible server.": {
+          "List state of advanced threat protection settings for a server.": {
             "$ref": "./examples/AdvancedThreatProtectionSettingsListByServer.json"
           }
         },
@@ -118,7 +118,7 @@
           }
         },
         "x-ms-examples": {
-          "Get state of advanced threat protection settings for a flexible server.": {
+          "Get state of advanced threat protection settings for a server.": {
             "$ref": "./examples/AdvancedThreatProtectionSettingsGet.json"
           }
         }
@@ -148,7 +148,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The Advanced Threat Protection state for the flexible server.",
+            "description": "The Advanced Threat Protection state for the server.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AdvancedThreatProtectionSettings"
@@ -185,14 +185,14 @@
   },
   "definitions": {
     "AdvancedThreatProtectionSettingsProperties": {
-      "description": "Properties of advanced threat protection state for a flexible server.",
+      "description": "Properties of advanced threat protection state for a server.",
       "required": [
         "state"
       ],
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the flexible server.",
+          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the server.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -212,7 +212,7 @@
       }
     },
     "AdvancedThreatProtectionSettings": {
-      "description": "Advanced threat protection settings of the flexible server.",
+      "description": "Advanced threat protection settings of the server.",
       "type": "object",
       "allOf": [
         {
@@ -228,7 +228,7 @@
       }
     },
     "AdvancedThreatProtectionSettingsList": {
-      "description": "List of advanced threat protection settings for a flexible server.",
+      "description": "List of advanced threat protection settings for a server.",
       "type": "object",
       "properties": {
         "value": {
