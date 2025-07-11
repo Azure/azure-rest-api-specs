@@ -98,7 +98,7 @@ describe("generate-report", () => {
     headCommit: "HEAD",
     runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
     checkName: TEST_CONSTANTS.CHECK_NAMES.SWAGGER,
-    repo: TEST_CONSTANTS.REPO,
+    targetRepo: TEST_CONSTANTS.REPO,
     sourceRepo: TEST_CONSTANTS.REPO,
     prNumber: TEST_CONSTANTS.PR_NUMBER,
     prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,

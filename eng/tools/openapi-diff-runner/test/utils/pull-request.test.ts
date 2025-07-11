@@ -51,7 +51,7 @@ function createMockContext(overrides: Partial<Context> = {}): Context {
     headCommit: TEST_CONSTANTS.REPO.COMMIT,
     runType: "SameVersion",
     checkName: "BreakingChange",
-    repo: TEST_CONSTANTS.REPO.NAME,
+    targetRepo: TEST_CONSTANTS.REPO.NAME,
     sourceRepo: TEST_CONSTANTS.REPO.NAME,
     prNumber: TEST_CONSTANTS.REPO.PR_NUMBER,
     prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,

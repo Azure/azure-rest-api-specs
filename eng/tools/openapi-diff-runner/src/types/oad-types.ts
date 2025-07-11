@@ -113,7 +113,7 @@ export const generateOadMarkdown = (traceData: OadTraceData): string => {
     const newCommitLink = `[${shortCommit}](${sourceBranchHref(traceData.context.sourceRepo, traceData.context.headCommit, value.new)})`;
 
     const oldVersion = getVersionFromInputFile(value.old, true);
-    const oldCommitLink = `[${traceData.baseBranch}](${specificBranchHref(traceData.context.repo, value.old, traceData.baseBranch)})`;
+    const oldCommitLink = `[${traceData.baseBranch}](${specificBranchHref(traceData.context.targetRepo, value.old, traceData.baseBranch)})`;
 
     // Add a row to the markdown table with proper spacing
     content += `| ${newFileName} | ${newVersion} (${newCommitLink}) | ${oldVersion} (${oldCommitLink}) |

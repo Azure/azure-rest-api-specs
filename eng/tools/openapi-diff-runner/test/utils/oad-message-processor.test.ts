@@ -89,7 +89,7 @@ function createMockContext(): Context {
   return {
     sourceRepo: TEST_CONSTANTS.REPO,
     headCommit: TEST_CONSTANTS.COMMIT,
-    repo: TEST_CONSTANTS.REPO,
+    targetRepo: TEST_CONSTANTS.REPO,
     localSpecRepoPath: TEST_CONSTANTS.PATHS.REPO,
     workingFolder: TEST_CONSTANTS.PATHS.WORKING,
     logFileFolder: TEST_CONSTANTS.PATHS.LOGS,

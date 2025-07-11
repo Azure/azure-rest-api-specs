@@ -213,7 +213,7 @@ export function convertRawErrorToUnifiedMsg(
   const extra: { [index: string]: string } = {};
   extra.details = errorMsg;
   if (location) {
-    extra.location = targetBranchHref(context.repo, context.prTargetBranch, location);
+    extra.location = targetBranchHref(context.targetRepo, context.prTargetBranch, location);
   }
   const result = {
     type: "Raw",

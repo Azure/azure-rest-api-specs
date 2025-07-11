@@ -86,7 +86,7 @@ describe("common-utils", () => {
     headCommit: "abc123",
     runType: "SameVersion" as any,
     checkName: "test",
-    repo: "owner/repo",
+    targetRepo: "owner/repo",
     sourceRepo: "owner/repo",
     prNumber: "123",
     prSourceBranch: "feature",

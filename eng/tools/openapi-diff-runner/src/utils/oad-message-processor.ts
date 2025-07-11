@@ -4,7 +4,7 @@ import { OadMessage } from "../types/oad-types.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
 import { logFileName } from "../types/breaking-change.js";
-import { logMessage } from "../log.js";
+import { logMessage, logMessageSafe } from "../log.js";
 import { Context } from "../types/breaking-change.js";
 
 /**
@@ -42,7 +42,7 @@ export function convertOadMessagesToResultMessageRecords(
     if (oadMessage.old.location) {
       paths.push({
         tag: "Old",
-        path: specificBranchHref(context.repo, oadMessage.old.location || "", baseBranchName),
+        path: specificBranchHref(context.targetRepo, oadMessage.old.location || "", baseBranchName),
         jsonPath: oadMessage.old?.path,
       });
     }
@@ -112,7 +112,7 @@ export function createMessageKey(message: OadMessage): string {
 export function appendToLogFile(logFilePath: string, msg: string): void {
   fs.appendFileSync(logFilePath, msg);
   fs.appendFileSync(logFilePath, "\n");
-  logMessage("oad-message-processor.appendMsg: " + msg);
+  logMessageSafe("oad-message-processor.appendMsg: " + msg);
 }
 
 /**

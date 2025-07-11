@@ -1,6 +1,5 @@
 import path from "node:path";
 import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import {
   BreakingChangesCheckType,
   Context,
@@ -8,59 +7,53 @@ import {
   VersioningReviewRequiredLabel,
 } from "./types/breaking-change.js";
 import { ResultMessageRecord } from "./types/message.js";
-import { getArgumentValue } from "./utils/common-utils.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { logMessage, setOutput } from "./log.js";
+import { LogLevel, logMessage, setOutput } from "./log.js";
 
 /**
- * Parse the arguments.
- * @returns The runner command input.
+ * Interface for parsed CLI arguments
  */
-export function initContext(): Context {
-  const __filename: string = fileURLToPath(import.meta.url);
-  const __dirname: string = path.dirname(__filename);
+export interface ParsedCliArguments {
+  localSpecRepoPath: string;
+  targetRepo: string;
+  sourceRepo: string;
+  prNumber: string;
+  runType: BreakingChangesCheckType;
+  baseBranch: string;
+  headCommit: string;
+  prSourceBranch: string;
+  prTargetBranch: string;
+}
 
-  // Get the arguments passed to the script
-  const args: string[] = process.argv.slice(2);
-  const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--srp", path.join(__dirname, "..")),
-  );
+/**
+ * Create context from parsed CLI arguments
+ */
+export function createContextFromParsedArgs(
+  parsedArgs: ParsedCliArguments,
+  workingFolder: string,
+  logFileFolder: string,
+): Context {
   const swaggerDirs: string[] = ["specification", "dev"];
-  const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
-  const sourceRepo: string = getArgumentValue(args, "--sr", "azure/azure-rest-api-specs");
-  const prNumber: string = getArgumentValue(args, "--number", "");
-  const runType = getArgumentValue(
-    args,
-    "--rt",
-    BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-  ) as BreakingChangesCheckType;
-  const workingFolder: string = path.join(localSpecRepoPath, "..");
-  const logFileFolder: string = path.join(workingFolder, "out/logs");
-
-  // Create the log file folder if it does not exist
-  if (!existsSync(logFileFolder)) {
-    mkdirSync(logFileFolder, { recursive: true });
-  }
-
-  const prUrl = `https://github.com/${repo}/pull/${prNumber}`;
+  const prUrl = `https://github.com/${parsedArgs.targetRepo}/pull/${parsedArgs.prNumber}`;
   const oadMessageProcessorContext = createOadMessageProcessor(logFileFolder, prUrl);
+
   return {
-    localSpecRepoPath,
+    localSpecRepoPath: parsedArgs.localSpecRepoPath,
     workingFolder,
     swaggerDirs,
     logFileFolder,
-    baseBranch: getArgumentValue(args, "--bb", "main"),
-    runType,
-    checkName: getBreakingChangeCheckName(runType),
-    headCommit: getArgumentValue(args, "--hc", "HEAD"),
-    repo,
-    sourceRepo,
-    prNumber,
-    prSourceBranch: getArgumentValue(args, "--sb", ""),
-    prTargetBranch: getArgumentValue(args, "--tb", ""),
+    baseBranch: parsedArgs.baseBranch,
+    runType: parsedArgs.runType,
+    checkName: getBreakingChangeCheckName(parsedArgs.runType),
+    headCommit: parsedArgs.headCommit,
+    targetRepo: parsedArgs.targetRepo,
+    sourceRepo: parsedArgs.sourceRepo,
+    prNumber: parsedArgs.prNumber,
+    prSourceBranch: parsedArgs.prSourceBranch,
+    prTargetBranch: parsedArgs.prTargetBranch,
     oadMessageProcessorContext,
     prUrl,
   };
@@ -219,7 +212,7 @@ export function changeBaseBranch(context: Context): void {
  * Log the full list of OAD messages to console
  */
 export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
-  logMessage("---- Full list of messages ----");
+  logMessage("---- Full list of messages ----", LogLevel.Group);
   logMessage("[");
   // Printing the messages one by one because the console.log appears to elide the messages with "... X more items"
   // after approximately 292 messages.
@@ -227,7 +220,7 @@ export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
     logMessage(JSON.stringify(msg, null, 4) + ",");
   }
   logMessage("]");
-  logMessage("---- End of full list of messages ----");
+  logMessage("---- End of full list of messages ----", LogLevel.EndGroup);
 }
 
 /**

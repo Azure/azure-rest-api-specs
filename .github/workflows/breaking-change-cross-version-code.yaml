@@ -28,14 +28,14 @@ jobs:
         id: breaking-change-cross-version-analyze-code
         run: |
           npm exec --no -- openapi-diff-runner \
-            --rt "CrossVersion" \
-            --srp "${{ github.workspace }}" \
-            --number "${{ github.event.pull_request.number }}" \
-            --sb "${{ github.event.pull_request.head.ref }}" \
-            --tb "${{ github.event.pull_request.base.ref }}" \
-            --hc "${{ github.event.pull_request.head.sha }}" \
-            --sr "${{ github.event.pull_request.head.repo.full_name }}" \
-            --repo "${{ github.repository }}"
+            -t "CrossVersion" \
+            -p "${{ github.workspace }}" \
+            -n "${{ github.event.pull_request.number }}" \
+            -c "${{ github.event.pull_request.head.sha }}" \
+            --pr-source-branch "${{ github.event.pull_request.head.ref }}" \
+            --pr-target-branch "${{ github.event.pull_request.base.ref }}" \
+            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --target-repo "${{ github.repository }}"
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |

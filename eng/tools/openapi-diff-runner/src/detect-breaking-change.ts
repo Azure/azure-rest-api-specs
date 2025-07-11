@@ -322,7 +322,7 @@ export async function doBreakingChangeDetection(
           getRelativeSwaggerPathToRepo(newSpec),
         ),
         old: branchHref(
-          detectionContext.context.repo,
+          detectionContext.context.targetRepo,
           getRelativeSwaggerPathToRepo(oldSpec),
           detectionContext.context.baseBranch,
         ),

@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  initContext,
+  createContextFromParsedArgs,
   BreakingChangeLabelsToBeAdded,
   getSwaggerDiffs,
   buildPrInfo,
@@ -14,6 +14,7 @@ import {
   isSameVersionBreakingType,
   getCreatedDummySwaggerCount,
   outputBreakingChangeLabelVariables,
+  type ParsedCliArguments,
 } from "../src/command-helpers.js";
 import {
   Context,
@@ -111,7 +112,7 @@ function createMockContext(overrides = {}): Context {
     headCommit: TEST_CONSTANTS.COMMITS.HEAD,
     runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
     checkName: "test",
-    repo: TEST_CONSTANTS.REPO.NAME,
+    targetRepo: TEST_CONSTANTS.REPO.NAME,
     sourceRepo: TEST_CONSTANTS.REPO.SOURCE,
     prNumber: TEST_CONSTANTS.PR.NUMBER,
     prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
@@ -150,19 +151,6 @@ function createMockSwaggerResult(overrides = {}) {
       },
     ],
     total: 5,
-    ...overrides,
-  };
-}
-
-function createMockArgMap(overrides = {}): Record<string, string> {
-  return {
-    "--repo": TEST_CONSTANTS.REPO.NAME,
-    "--number": TEST_CONSTANTS.PR.NUMBER,
-    "--rt": BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-    "--bb": TEST_CONSTANTS.BRANCHES.MAIN,
-    "--hc": TEST_CONSTANTS.COMMITS.HEAD,
-    "--sb": "",
-    "--tb": "",
     ...overrides,
   };
 }
@@ -245,77 +233,70 @@ describe("command-helpers", () => {
     vi.resetAllMocks();
   });
 
-  describe("initContext", () => {
-    beforeEach(() => {
-      // Mock process.argv
-      vi.stubGlobal("process", {
-        ...process,
-        argv: [
-          "node",
-          "script.js",
-          `--repo=${TEST_CONSTANTS.REPO.NAME}`,
-          `--number=${TEST_CONSTANTS.PR.NUMBER}`,
-        ],
-      });
+  describe("createContextFromParsedArgs", () => {
+    const createTestParsedArgs = (
+      overrides: Partial<ParsedCliArguments> = {},
+    ): ParsedCliArguments => ({
+      localSpecRepoPath: TEST_CONSTANTS.PATHS.SPEC_REPO,
+      targetRepo: TEST_CONSTANTS.REPO.NAME,
+      sourceRepo: TEST_CONSTANTS.REPO.SOURCE,
+      prNumber: TEST_CONSTANTS.PR.NUMBER,
+      runType: "SameVersion" as const,
+      baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+      headCommit: TEST_CONSTANTS.COMMITS.HEAD,
+      prSourceBranch: "",
+      prTargetBranch: "",
+      ...overrides,
     });
 
-    afterEach(() => {
-      vi.unstubAllGlobals();
-    });
-
-    it("should initialize context with default values", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
+    it("should create context with default values", async () => {
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
-
-      const mockArgMap = createMockArgMap();
-      vi.mocked(getArgumentValue).mockImplementation(
-        (_args, key, defaultValue) => mockArgMap[key] || defaultValue || "",
-      );
-
-      mockExistsSync.mockReturnValue(false);
       const { mockOadMessageProcessor } = setupCommonMocks();
       vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
-      const context = initContext();
+      const parsedArgs = createTestParsedArgs();
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
 
-      expect(context.repo).toBe(TEST_CONSTANTS.REPO.NAME);
+      expect(context.targetRepo).toBe(TEST_CONSTANTS.REPO.NAME);
       expect(context.prNumber).toBe(TEST_CONSTANTS.PR.NUMBER);
       expect(context.runType).toBe("SameVersion");
       expect(context.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
       expect(context.headCommit).toBe(TEST_CONSTANTS.COMMITS.HEAD);
       expect(context.checkName).toBe("Swagger BreakingChange");
       expect(context.prUrl).toBe(TEST_CONSTANTS.PR.URL);
-      expect(mockMkdirSync).toHaveBeenCalledWith(expect.any(String), { recursive: true });
+      expect(context.workingFolder).toBe(TEST_CONSTANTS.PATHS.WORKING_FOLDER);
+      expect(context.logFileFolder).toBe(TEST_CONSTANTS.PATHS.LOG_FOLDER);
     });
 
     it("should use custom values when provided", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
-
-      const customArgMap = createMockArgMap({
-        "--repo": TEST_CONSTANTS.REPO.CUSTOM,
-        "--number": TEST_CONSTANTS.PR.CUSTOM_NUMBER,
-        "--rt": "CrossVersion",
-        "--bb": TEST_CONSTANTS.BRANCHES.DEVELOP,
-        "--hc": TEST_CONSTANTS.COMMITS.ABC123,
-        "--sb": TEST_CONSTANTS.BRANCHES.FEATURE,
-        "--tb": TEST_CONSTANTS.BRANCHES.MAIN,
-      });
-
-      vi.mocked(getArgumentValue).mockImplementation(
-        (_args, key, defaultValue) => customArgMap[key] || defaultValue || "",
-      );
-
-      mockExistsSync.mockReturnValue(true);
       vi.mocked(createOadMessageProcessor).mockReturnValue({
         logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
         prUrl: TEST_CONSTANTS.PR.CUSTOM_URL,
         messageCache: [],
       });
 
-      const context = initContext();
+      const parsedArgs = createTestParsedArgs({
+        targetRepo: TEST_CONSTANTS.REPO.CUSTOM,
+        prNumber: TEST_CONSTANTS.PR.CUSTOM_NUMBER,
+        runType: "CrossVersion",
+        baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+        headCommit: TEST_CONSTANTS.COMMITS.ABC123,
+        prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+      });
 
-      expect(context.repo).toBe(TEST_CONSTANTS.REPO.CUSTOM);
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
+
+      expect(context.targetRepo).toBe(TEST_CONSTANTS.REPO.CUSTOM);
       expect(context.prNumber).toBe(TEST_CONSTANTS.PR.CUSTOM_NUMBER);
       expect(context.runType).toBe("CrossVersion");
       expect(context.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.DEVELOP);
@@ -323,21 +304,26 @@ describe("command-helpers", () => {
       expect(context.prSourceBranch).toBe(TEST_CONSTANTS.BRANCHES.FEATURE);
       expect(context.prTargetBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
       expect(context.checkName).toBe("BreakingChange(Cross-Version)");
-      expect(mockMkdirSync).not.toHaveBeenCalled();
     });
 
-    it("should create log file folder if it doesn't exist", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
+    it("should create proper URL and context structure", async () => {
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
-
-      vi.mocked(getArgumentValue).mockReturnValue("");
-      mockExistsSync.mockReturnValue(false);
       const { mockOadMessageProcessor } = setupCommonMocks();
       vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
-      initContext();
+      const parsedArgs = createTestParsedArgs();
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
 
-      expect(mockMkdirSync).toHaveBeenCalledWith(expect.any(String), { recursive: true });
+      expect(context.swaggerDirs).toEqual(["specification", "dev"]);
+      expect(context.oadMessageProcessorContext).toBe(mockOadMessageProcessor);
+      expect(createOadMessageProcessor).toHaveBeenCalledWith(
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+        TEST_CONSTANTS.PR.URL,
+      );
     });
   });
 
