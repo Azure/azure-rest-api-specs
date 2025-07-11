@@ -65,12 +65,32 @@ export async function main() {
     allowPositionals: false,
   });
 
-  // TODO: Better validation
   let validArgs = true;
 
   if (!outputDir) {
     console.log(
       `Missing required parameter --output. Value given: ${outputDir || "<empty>"}`,
+    );
+    validArgs = false;
+  }
+
+  if (!specRepoName) { 
+    console.log(
+      `Missing required parameter --spec-repo-name. Value given: ${specRepoName || "<empty>"}`,
+    );
+    validArgs = false;
+  }
+
+  if (!specRepoPrNumber) {
+    console.log(
+      `Missing required parameter --spec-repo-pr-number. Value given: ${specRepoPrNumber || "<empty>"}`,
+    );
+    validArgs = false;
+  }
+
+  if (!specRepoRoot || !(await pathExists(resolve(specRepoRoot)))) {
+    console.log(
+      `Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`,
     );
     validArgs = false;
   }
