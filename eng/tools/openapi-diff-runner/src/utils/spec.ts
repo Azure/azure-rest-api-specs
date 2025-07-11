@@ -21,48 +21,36 @@ export interface Swagger {
  */
 async function getPrecedingSwaggerByType(
   targetSwaggerPath: string,
-  availableSwaggers: Swagger[] | null | undefined,
+  availableSwaggers: Swagger[],
   versionKind: ApiVersionLifecycleStage,
 ): Promise<string | undefined> {
-  if (!availableSwaggers || !Array.isArray(availableSwaggers)) {
+  if (availableSwaggers.length === 0) {
     return undefined;
   }
 
-  const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
-  if (!targetSwagger) {
-    return undefined;
-  }
+  const currentVersion = getVersionFromInputFile(targetSwaggerPath);
+  const fileName = getBaseNameForSwagger(targetSwaggerPath, currentVersion);
 
-  const currentVersion = getVersionFromInputFile(targetSwagger.path);
-  const fileName = getBaseNameForSwagger(targetSwagger.path, currentVersion);
+  // Load version info for all swaggers to enable filtering
+  const swaggersWithVersions = availableSwaggers.map((swagger) => ({
+    swagger,
+    version: getVersionFromInputFile(swagger.path),
+    fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
+    versionKind: swagger.versionKind,
+  }));
 
-  try {
-    // Load version info for all swaggers to enable filtering
-    const swaggersWithVersions = await Promise.all(
-      availableSwaggers.map(async (swagger) => ({
-        swagger,
-        version: getVersionFromInputFile(swagger.path),
-        fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
-        versionKind: swagger.versionKind,
-      })),
+  const versionsOfType = swaggersWithVersions.filter(
+    (item) =>
+      item.fileName === fileName &&
+      item.versionKind === versionKind &&
+      item.version <= currentVersion,
+  );
+
+  if (versionsOfType.length > 0) {
+    const mostRecent = versionsOfType.reduce((previous, current) =>
+      previous.version > current.version ? previous : current,
     );
-
-    const versionsOfType = swaggersWithVersions.filter(
-      (item) =>
-        item.fileName === fileName &&
-        item.versionKind === versionKind &&
-        item.version <= currentVersion &&
-        item.swagger.path !== targetSwaggerPath,
-    );
-
-    if (versionsOfType.length > 0) {
-      const mostRecent = versionsOfType.reduce((previous, current) =>
-        previous.version > current.version ? previous : current,
-      );
-      return mostRecent.swagger.path;
-    }
-  } catch {
-    // Version not found or error occurred
+    return mostRecent.swagger.path;
   }
 
   return undefined;
@@ -73,39 +61,24 @@ async function getPrecedingSwaggerByType(
  */
 export async function getExistedVersionOperations(
   targetSwaggerPath: string,
-  availableSwaggers: Swagger[] | null | undefined,
+  availableSwaggers: Swagger[],
+  targetOperations: Operation[],
 ): Promise<Map<string, Operation[]>> {
   const result = new Map<string, Operation[]>();
 
-  if (!availableSwaggers || !Array.isArray(availableSwaggers)) {
+  if (availableSwaggers.length === 0 || targetOperations.length === 0) {
     return result;
   }
 
-  const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
-  if (!targetSwagger) {
-    return result;
-  }
-
-  const currentVersion = getVersionFromInputFile(targetSwagger.path);
-  const fileName = getBaseNameForSwagger(targetSwagger.path, currentVersion);
-
-  // Check if getOperations method exists
-  if (!targetSwagger.getOperations) {
-    return result;
-  }
-
-  // Get operations from current swagger file
-  const currentOperationsMap = await targetSwagger.getOperations();
-  const currentOperations = [...currentOperationsMap.values()];
+  const currentVersion = getVersionFromInputFile(targetSwaggerPath);
+  const fileName = getBaseNameForSwagger(targetSwaggerPath, currentVersion);
 
   // Load version info for all swaggers to enable filtering
-  const swaggersWithVersions = await Promise.all(
-    availableSwaggers.map(async (swagger) => ({
-      swagger,
-      version: getVersionFromInputFile(swagger.path),
-      fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
-    })),
-  );
+  const swaggersWithVersions = availableSwaggers.map((swagger) => ({
+    swagger,
+    version: getVersionFromInputFile(swagger.path),
+    fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
+  }));
 
   // Get all current and previous versions of the swaggers with different fileNames
   const previousVersionSwaggers = swaggersWithVersions
@@ -126,7 +99,7 @@ export async function getExistedVersionOperations(
 
       // Find operations that exist in both this previous version AND current version
       const matchingOperations = previousOperations.filter((operation) => {
-        return currentOperations.some(
+        return targetOperations.some(
           (currentOp) =>
             currentOp.path === operation.path &&
             currentOp.id === operation.id &&
@@ -150,7 +123,7 @@ export async function getExistedVersionOperations(
  */
 export async function getPrecedingSwaggers(
   targetSwaggerPath: string,
-  availableSwaggers: Swagger[] | null | undefined,
+  availableSwaggers: Swagger[],
 ): Promise<{ preview?: string; stable?: string }> {
   return {
     preview: await getPrecedingSwaggerByType(

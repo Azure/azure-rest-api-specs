@@ -171,12 +171,15 @@ export async function checkCrossVersionBreakingChange(
       swaggerPath,
     );
     logMessage(`checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
-    const specModel = await getSpecModel(absoluteSwaggerPath);
+    const specModel = await getSpecModel(
+      detectionContext.context.prInfo!.tempRepoFolder,
+      swaggerPath,
+    );
     const availableSwaggers = await specModel.getSwaggers();
     logMessage(
       `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
     );
-    const previousVersions = await getPrecedingSwaggers(absoluteSwaggerPath, availableSwaggers);
+    const previousVersions = await getPrecedingSwaggers(swaggerPath, availableSwaggers);
     logMessage(
       `checkCrossVersionBreakingChange: previousVersions: ${JSON.stringify(previousVersions)}`,
     );
@@ -219,11 +222,7 @@ export async function checkCrossVersionBreakingChange(
       aggregateOadViolationsCnt += oadViolationsCnt;
     }
     if (!previousStableSwaggerPath && !previousPreviewSwaggerPath) {
-      await checkAPIsBeingMovedToANewSpec(
-        detectionContext.context,
-        absoluteSwaggerPath,
-        availableSwaggers,
-      );
+      await checkAPIsBeingMovedToANewSpec(detectionContext.context, swaggerPath, availableSwaggers);
     }
   }
   logMessage(
@@ -382,26 +381,28 @@ export function getReadmeFolder(swaggerFile: string) {
 /**
  * Get or create a SpecModel for the given swagger path.
  * Uses caching to avoid redundant SpecModel initialization for the same folder.
+ * @param specRepoFolder - The root folder of the spec repository
  * @param swaggerPath - Path to the swagger file
  * @returns SpecModel instance for the folder containing the swagger file
  */
-export function getSpecModel(swaggerPath: string): SpecModel {
+export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecModel {
   const folder = getReadmeFolder(swaggerPath);
 
   if (!folder) {
     throw new Error(`Could not determine readme folder for swagger path: ${swaggerPath}`);
   }
 
-  logMessage(`getSpecModel: folder: ${folder}, swaggerPath: ${swaggerPath}`);
+  const fullFolderPath = path.join(specRepoFolder, folder);
+  logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
 
   // Check if we already have a SpecModel for this folder
-  if (specModelCache.has(folder)) {
-    return specModelCache.get(folder)!;
+  if (specModelCache.has(fullFolderPath)) {
+    return specModelCache.get(fullFolderPath)!;
   }
 
   // Create new SpecModel and cache it
-  const specModel = new SpecModel(folder);
-  specModelCache.set(folder, specModel);
+  const specModel = new SpecModel(fullFolderPath);
+  specModelCache.set(fullFolderPath, specModel);
 
   return specModel;
 }
@@ -411,7 +412,21 @@ export async function checkAPIsBeingMovedToANewSpec(
   swaggerPath: string,
   availableSwaggers: any[],
 ) {
-  const movedApis = await getExistedVersionOperations(swaggerPath, availableSwaggers);
+  const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
+  logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+  const specModel = getSpecModel(context.localSpecRepoPath, swaggerPath);
+  const swaggersFromOriginalClonedRepo = await specModel.getSwaggers();
+  const targetSwagger = swaggersFromOriginalClonedRepo.find((s) => s.path === absoluteSwaggerPath);
+  if (!targetSwagger) {
+    logError(
+      `checkAPIsBeingMovedToANewSpec: targetSwagger not found for swaggerPath: ${swaggerPath}`,
+    );
+    return;
+  }
+  const targetOperations = await targetSwagger.getOperations();
+  const movedApis = await getExistedVersionOperations(swaggerPath, availableSwaggers, [
+    ...targetOperations.values(),
+  ]);
   logMessage(
     `checkAPIsBeingMovedToANewSpec: swaggerPath: ${swaggerPath}, movedApis.size: ${movedApis.size}`,
   );
