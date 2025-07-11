@@ -24,6 +24,7 @@ import {
 import { ResultMessageRecord } from "../src/types/message.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { LogLevel } from "../src/log.js";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -567,12 +568,15 @@ describe("command-helpers", () => {
 
       logFullOadMessagesList(msgs);
 
-      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
       expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith("]");
-      expect(logMessage).toHaveBeenCalledWith("---- End of full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith(
+        "---- End of full list of messages ----",
+        LogLevel.EndGroup,
+      );
     });
 
     it("should handle empty message list", async () => {
@@ -580,10 +584,13 @@ describe("command-helpers", () => {
 
       logFullOadMessagesList([]);
 
-      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
       expect(logMessage).toHaveBeenCalledWith("]");
-      expect(logMessage).toHaveBeenCalledWith("---- End of full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith(
+        "---- End of full list of messages ----",
+        LogLevel.EndGroup,
+      );
     });
   });
 

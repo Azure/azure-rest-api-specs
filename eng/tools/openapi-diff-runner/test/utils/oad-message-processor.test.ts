@@ -14,7 +14,7 @@ import {
 } from "../../src/utils/oad-message-processor.js";
 import { OadMessage } from "../../src/types/oad-types.js";
 import { MessageLevel } from "../../src/types/message.js";
-import { logMessage } from "../../src/log.js";
+import { logMessage, logMessageSafe } from "../../src/log.js";
 import { ApiVersionLifecycleStage, Context } from "../../src/types/breaking-change.js";
 
 // Test constants
@@ -144,6 +144,7 @@ vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
 describe("oad-message-processor", () => {
   const mockAppendFileSync = vi.mocked(fs.appendFileSync);
   const mockLogMessage = vi.mocked(logMessage);
+  const mockLogMessageSafe = vi.mocked(logMessageSafe);
   const mockContext = createMockContext();
 
   // Helper functions with access to mocks
@@ -153,6 +154,9 @@ describe("oad-message-processor", () => {
 
   function expectLogMessage(message: string) {
     expect(mockLogMessage).toHaveBeenCalledWith(expect.stringContaining(message));
+  }
+  function expectLogMessageSafe(message: string) {
+    expect(mockLogMessageSafe).toHaveBeenCalledWith(expect.stringContaining(message));
   }
 
   beforeEach(() => {
@@ -367,7 +371,7 @@ describe("oad-message-processor", () => {
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       expectAppendFileSync(1, TEST_CONSTANTS.LOG_PATH, message);
       expectAppendFileSync(2, TEST_CONSTANTS.LOG_PATH, "\n");
-      expectLogMessage("oad-message-processor.appendMsg: " + message);
+      expectLogMessageSafe("oad-message-processor.appendMsg: " + message);
     });
   });
 
