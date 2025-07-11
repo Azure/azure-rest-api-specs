@@ -41,37 +41,36 @@ These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdministratorsMicrosoftEntra.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdvancedThreatProtectionSettings.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsAutomaticAndOnDemand.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Configuration.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/CapturedLogs.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Configurations.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/LongTermRetentionOperation.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsLongTermRetention.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/NameAvailability.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateDnsZoneSuffix.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateEndpointConnections.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateLinkResources.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/QuotaUsages.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/ThreatProtection.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Servers.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/TuningOptions.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
 suppressions:
   - code: PutResponseCodes
     from: PrivateEndpointConnections.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
-    from: ThreatProtection.json
+    from: AdvancedThreatProtectionSettings.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: PutResponseCodes
-    from: ThreatProtection.json
+    from: AdvancedThreatProtectionSettings.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualEndpoints.json
@@ -83,10 +82,10 @@ suppressions:
     from: VirtualEndpoints.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: PutResponseCodes
-    from: Backups.json
+    from: BackupsAutomaticAndOnDemand.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
-    from: Backups.json
+    from: BackupsAutomaticAndOnDemand.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
