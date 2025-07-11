@@ -184,7 +184,7 @@ model DbSystemBaseProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   storageVolumePerformanceMode?: StorageVolumePerformanceMode;
 
-  @doc("The time zone of the DB system.")
+  @doc("The time zone of the DB system, e.g., UTC, to set the timeZone as UTC.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(255)

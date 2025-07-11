@@ -4,8 +4,17 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Oracle.Database;
+
+@added(Versions.v20250701_preview)
+scalar DbSystemResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Oracle.Database/dbSystems",
+    }
+  ]>;
 
 //https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/DbVersionSummary/
 @added(Versions.v20250701_preview)
@@ -53,9 +62,7 @@ model DbVersionFilter {
 
   @query
   @doc("The DB system AzureId. If provided, filters the results to the set of database versions which are supported for the DB system.")
-  @minLength(1)
-  @maxLength(255)
-  dbSystemId?: string;
+  dbSystemId?: DbSystemResourceId;
 
   @query
   @doc("The DB system storage management option. Used to list database versions available for that storage manager. Valid values are ASM and LVM.")
