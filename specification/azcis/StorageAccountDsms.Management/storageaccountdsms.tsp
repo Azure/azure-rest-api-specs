@@ -76,10 +76,10 @@ model StorageAccountDsmsResourceProperties {
   residencyBoundary?: "Worldwide" | "National" | string;
 
   @doc("Minimum account replication type, e.g. 'Standard_LRS'. If it's set, it will enable VRS feature for the Storage Account, and the 'AccountReplicationType' property will not be used.")
-  resiliencyMinimum?: string;
+  resiliencyMinimum?: AccountReplicationType;
 
   @doc("Maximum account replication type, e.g. 'Standard_ZRS'.")
-  resiliencyMaximum?: string;
+  resiliencyMaximum?: AccountReplicationType;
 
   @doc("Resiliencies progression id. Acceptable values: 'Default', 'PremiumDefault', 'Zonal'.")
   resilienciesProgressionId?: "Default" | "PremiumDefault" | "Zonal" | string;
