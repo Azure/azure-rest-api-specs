@@ -4156,18 +4156,6 @@
       },
       "description": "Specifies the VM Size."
     },
-    "HighSpeedInterconnectPlacement": {
-      "type": "string",
-      "description": "Specifies the high-speed interconnect placement for the virtual machine scale set.",
-      "enum": [
-        "None",
-        "Trunk"
-      ],
-      "x-ms-enum": {
-        "name": "HighSpeedInterconnectPlacement",
-        "modelAsString": true
-      }
-    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -5428,10 +5416,6 @@
           "$ref": "#/definitions/ScaleInPolicy",
           "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
-        "highSpeedInterconnectPlacement": {
-          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
-          "description": "Specifies the high-speed interconnect placement for the virtual machine scale set."
-        },
         "orchestrationMode": {
           "$ref": "#/definitions/OrchestrationMode",
           "description": "Specifies the orchestration mode for the virtual machine scale set."
@@ -5465,6 +5449,10 @@
         "skuProfile": {
           "$ref": "#/definitions/SkuProfile",
           "description": "Specifies the sku profile for the virtual machine scale set."
+        },
+        "highSpeedInterconnectPlacement": {
+          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
+          "description": "Specifies the high-speed interconnect placement for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -6548,6 +6536,18 @@
       ],
       "x-ms-enum": {
         "name": "ZonalPlatformFaultDomainAlignMode",
+        "modelAsString": true
+      }
+    },
+    "HighSpeedInterconnectPlacement": {
+      "type": "string",
+      "description": "Specifies the high-speed interconnect placement for the virtual machine scale set.",
+      "enum": [
+        "None",
+        "Trunk"
+      ],
+      "x-ms-enum": {
+        "name": "HighSpeedInterconnectPlacement",
         "modelAsString": true
       }
     }
