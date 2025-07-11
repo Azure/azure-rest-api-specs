@@ -303,16 +303,16 @@ model CertificateProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("date-time-rfc1123")
-  created?: string;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  created?: utcDateTime;
 
   /**
    * The certificate's last update date and time.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("date-time-rfc1123")
-  updated?: string;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  updated?: utcDateTime;
 }
 
 /**
