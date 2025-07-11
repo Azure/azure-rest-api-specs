@@ -145,7 +145,6 @@ function getRuleMarkdown(result) {
  * @returns {string}
  */
 function getLocationMarkdown(result) {
-  if (result.paths === undefined) return "";
   return result.paths
     .filter((p) => p.path)
     .map((p) => `${p.tag}: [${getPathSegment(p.path)}](${p.path})`)
@@ -157,9 +156,6 @@ function getLocationMarkdown(result) {
  * @returns {string}
  */
 function getPathSegment(path) {
-  if (!path) {
-    return "";
-  }
   const idx = path.indexOf("path=");
   if (idx !== -1) {
     path = decodeURIComponent(path.substr(idx + 5).split("&")[0]);
