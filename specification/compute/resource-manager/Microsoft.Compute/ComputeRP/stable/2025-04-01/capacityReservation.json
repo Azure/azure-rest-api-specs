@@ -991,7 +991,7 @@
               "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
             }
           },
-            "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. See documentation for details. Minimum API version: 2025-04-01."
+          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. See documentation for details. Minimum API version: 2025-04-01."
         }
       },
       "description": "Properties of the Capacity reservation."
@@ -1004,8 +1004,8 @@
           "$ref": "#/definitions/CapacityReservationProperties"
         },
         "sku": {
-            "$ref": "./computeRPCommon.json#/definitions/Sku",
-            "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
+          "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
         },
         "zones": {
           "type": "array",
@@ -1034,7 +1034,7 @@
         },
         "sku": {
           "$ref": "./computeRPCommon.json#/definitions/Sku",
-            "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
+          "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
         }
       },
       "allOf": [
