@@ -59,12 +59,10 @@ function parseCliArguments(): ParsedCliArguments {
       },
       "pr-source-branch": {
         type: "string",
-        short: undefined,
         default: "",
       },
       "pr-target-branch": {
         type: "string",
-        short: undefined,
         default: "",
       },
       help: {
