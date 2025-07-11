@@ -1059,6 +1059,42 @@
     }
   },
   "definitions": {
+    "AgentBlueprintCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the agent blueprint",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
+    "AgentImplementationDetails": {
+      "type": "object",
+      "description": "An abstract representation of instructions on how to deploy and run the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of agent"
+        },
+        "instructions": {
+          "type": "string",
+          "description": "instructions/prompt for the agent"
+        }
+      },
+      "required": [
+        "type",
+        "instructions"
+      ]
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1187,6 +1223,20 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "BaseAgentDependency": {
+      "type": "object",
+      "description": "An abstract representation of a dependency for the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of dependency"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -1195,6 +1245,49 @@
           "$ref": "#/definitions/CredentialType",
           "description": "The type of credential used by the connection",
           "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "BaseParameterDefinition": {
+      "type": "object",
+      "description": "Base parameter definition for an asset",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of the parameter"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the parameter"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the parameter"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "indicates if the parameter is required"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "displayName",
+        "description",
+        "required"
+      ]
+    },
+    "BaseParameterValue": {
+      "type": "object",
+      "description": "base parameter value for an asset's parameter",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for BaseParameterValue."
         }
       },
       "discriminator": "type",
@@ -1277,6 +1370,44 @@
         "credentials",
         "metadata"
       ]
+    },
+    "ConnectionParameterDefinition": {
+      "type": "object",
+      "description": "connection parameter definition for an asset",
+      "properties": {
+        "connectionType": {
+          "type": "string",
+          "description": "type of the connection"
+        }
+      },
+      "required": [
+        "connectionType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
+    "ConnectionParameterValue": {
+      "type": "object",
+      "description": "connection parameter value",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "connectionName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
     },
     "ConnectionType": {
       "type": "string",
@@ -1813,6 +1944,32 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "ModelDependency": {
+      "type": "object",
+      "description": "Representation of a model dependency for the agent",
+      "properties": {
+        "recommendedModel": {
+          "type": "string",
+          "description": "identifier of the recommended model"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "parameters for the model",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "recommendedModel"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "model"
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2105,6 +2262,34 @@
         "type"
       ]
     },
+    "ScaffoldRequest": {
+      "type": "object",
+      "description": "Represents the request for a blueprint scaffold operation"
+    },
+    "ScaffoldResponse": {
+      "type": "object",
+      "description": "Represents the response for a blueprint scaffold request",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the blueprint",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseParameterValue"
+          }
+        },
+        "_meta": {
+          "type": "object",
+          "description": "comment metadata for each parameter",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parameters",
+        "_meta"
+      ]
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -2138,6 +2323,90 @@
         "size",
         "tier"
       ]
+    },
+    "StringParameterDefinition": {
+      "type": "object",
+      "description": "String parameter definition for an asset",
+      "properties": {
+        "defaultValue": {
+          "type": "string",
+          "description": "default value of the parameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "StringParameterValue": {
+      "type": "object",
+      "description": "string parameter value",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified",
+          "readOnly": true
+        }
+      }
+    },
+    "ToolDependency": {
+      "type": "object",
+      "description": "Representation of a tool dependency for the agent",
+      "properties": {
+        "assetId": {
+          "type": "object",
+          "description": "identifier for the tool",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "optional description of how the blueprint will use the tool"
+        }
+      },
+      "required": [
+        "assetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
     }
   },
   "parameters": {
