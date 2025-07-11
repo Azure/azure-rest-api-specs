@@ -18,7 +18,6 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
-import "./models/akri/discoveryHandler.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -167,14 +166,4 @@ interface AkriConnector {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriConnectorResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AkriConnectorResource>;
   listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
-}
-
-// /instance/akriDiscoveryHandlers resource Operations
-@armResourceOperations
-@added(Versions.`2025-07-01-preview`)
-interface AkriDiscoveryHandler {
-  get is ArmResourceRead<AkriDiscoveryHandlerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
-  listByInstanceResource is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
 }
