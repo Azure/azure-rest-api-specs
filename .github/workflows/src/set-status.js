@@ -1,25 +1,15 @@
 // @ts-check
 
-/**
- * @readonly
- * @enum {"job" | "run"}
- */
-export const FailureTarget = Object.freeze({
-  Job: "job",
-  Run: "run",
-});
-
 import { extractInputs } from "./context.js";
 import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
 // TODO: Add tests
 /* v8 ignore start */
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} monitoredWorkflowName
  * @param {string} requiredStatusName
  * @param {string} overridingLabel
- * @param {FailureTarget} [failureTarget] default: FailureTarget.Job
  * @returns {Promise<void>}
  */
 export default async function setStatus(
@@ -27,7 +17,6 @@ export default async function setStatus(
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
-  failureTarget = FailureTarget.Job,
 ) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
@@ -47,7 +36,6 @@ export default async function setStatus(
     monitoredWorkflowName,
     requiredStatusName,
     overridingLabel,
-    failureTarget,
   });
 }
 /* v8 ignore stop */
@@ -64,7 +52,6 @@ export default async function setStatus(
  * @param {string} params.monitoredWorkflowName
  * @param {string} params.requiredStatusName
  * @param {string} params.overridingLabel
- * @param {FailureTarget} [params.failureTarget] default: FailureTarget.Job
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -78,7 +65,6 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
-  failureTarget = FailureTarget.Job,
 }) {
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
@@ -157,23 +143,45 @@ export async function setStatusImpl({
      */
     target_url = run.html_url;
 
-    if (run.conclusion === CheckConclusion.FAILURE && failureTarget === FailureTarget.Job) {
-      /**
-       * Update target to point directly to the first failed job
-       *
-       * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
-       */
+    if (run.conclusion === CheckConclusion.FAILURE) {
+      const jobSummaryArtifactName = "job-summary";
 
-      const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
-        owner,
-        repo,
-        run_id: run.id,
-        per_page: PER_PAGE_MAX,
-      });
-      const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
-      const failedJob = failedJobs[0];
-      if (failedJob?.html_url) {
-        target_url = `${failedJob.html_url}?pr=${issue_number}`;
+      // Check if run has a custom job summary
+      core.info(
+        `listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryArtifactName})`,
+      );
+      const jobSummaryArtifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner: owner,
+          repo: repo,
+          run_id: run.id,
+          name: jobSummaryArtifactName,
+          per_page: PER_PAGE_MAX,
+        },
+      );
+
+      const hasJobSummary = jobSummaryArtifacts.length > 0;
+      core.info(`hasJobSummary: ${hasJobSummary}`);
+
+      if (!hasJobSummary) {
+        /**
+         * Update target to point directly to the first failed job
+         *
+         * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+         */
+
+        const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+          owner,
+          repo,
+          run_id: run.id,
+          per_page: PER_PAGE_MAX,
+        });
+        const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
+        const failedJob = failedJobs[0];
+        if (failedJob?.html_url) {
+          target_url = `${failedJob.html_url}?pr=${issue_number}`;
+        }
       }
     }
   }

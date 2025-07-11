@@ -1,7 +1,7 @@
 // @ts-check
 
 import { beforeEach, describe, expect, it } from "vitest";
-import { FailureTarget, setStatusImpl } from "../src/set-status.js";
+import { setStatusImpl } from "../src/set-status.js";
 
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
@@ -214,39 +214,40 @@ describe("setStatusImpl", () => {
     });
   });
 
+  // TODO: Add tests for "job-summary" artifact
   it.each([
     [
       CheckStatus.COMPLETED,
       CheckConclusion.SUCCESS,
       CommitStatusState.SUCCESS,
-      FailureTarget.Job,
+      [],
       "https://test.com/workflow_run_html_url",
     ],
     [
       CheckStatus.COMPLETED,
       CheckConclusion.FAILURE,
       CommitStatusState.FAILURE,
-      FailureTarget.Job,
+      [],
       "https://test.com/job_html_url?pr=123",
     ],
     [
       CheckStatus.COMPLETED,
       CheckConclusion.FAILURE,
       CommitStatusState.FAILURE,
-      FailureTarget.Run,
+      ["job-status"],
       "https://test.com/workflow_run_html_url",
     ],
     [
       CheckStatus.IN_PROGRESS,
       null,
       CommitStatusState.PENDING,
-      FailureTarget.Job,
+      [],
       "https://test.com/workflow_run_html_url",
     ],
-    [null, null, CommitStatusState.PENDING, FailureTarget.Job, "https://test.com/set_status_url"],
+    [null, null, CommitStatusState.PENDING, [], "https://test.com/set_status_url"],
   ])(
-    "(%s, %s, %s, %s) => %s",
-    async (checkStatus, checkConclusion, commitStatusState, failureTarget, targetUrl) => {
+    "(%s, %s, %s, %o) => %s",
+    async (checkStatus, checkConclusion, commitStatusState, artifactNames, targetUrl) => {
       if (checkStatus) {
         github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
           data: [
@@ -258,6 +259,12 @@ describe("setStatusImpl", () => {
               html_url: "https://test.com/workflow_run_html_url",
             },
           ],
+        });
+
+        github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+          data: artifactNames.map((n) => ({
+            name: n,
+          })),
         });
 
         if (
@@ -287,7 +294,6 @@ describe("setStatusImpl", () => {
           monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
           requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
           overridingLabel: "Approved-Avocado",
-          failureTarget,
         }),
       ).resolves.toBeUndefined();
 

@@ -19,7 +19,7 @@ import { LabelAction } from "./label.js";
  */
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndAction({ github, context, core }) {
