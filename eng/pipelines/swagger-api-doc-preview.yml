@@ -84,6 +84,13 @@ jobs:
             $buildStart = $buildStartRaw | ConvertFrom-Json
             Write-Host "Build started at https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
 
+      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+        parameters:
+          State: pending
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Waiting for docs build to finish'
+          Context: $(StatusName)
+
       - task: AzureCLI@2
         displayName: Wait for docs build to finish
         # Retry on failure to handle transient issues or builds that run longer
