@@ -23,7 +23,7 @@ import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "../comment.js";
 import { PER_PAGE_MAX } from "../github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
+import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./labelling.js";
 
 import {
   brchTsg,
@@ -53,7 +53,7 @@ import { toASCII } from "punycode";
  */
 
 /**
- * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
+ * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -267,8 +267,8 @@ export async function summarizeChecksImpl(
 
   // /** @type { string | undefined } */
   // const changedLabel = context.payload.label?.name;
-
-  let labelContext = await updateLabels(targetBranch, labelNames)
+  const isDraft = context.payload.pull_request?.draft ?? false;
+  let labelContext = await updateLabels(targetBranch, isDraft, labelNames);
 
   for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
@@ -450,34 +450,39 @@ function containsNone(arr, values) {
 
 /**
  * @param {string} targetBranch
+ * @param {boolean} isDraft
  * @param {string[]} existingLabels
- * @returns {import("./label-rules.js").LabelContext}
+ * @returns {import("./labelling.js").LabelContext}
  */
 export function updateLabels(
   // eventName,
   targetBranch,
+  isDraft,
   existingLabels,
   // changedLabel
 ) {
-  /** @type {import("./label-rules.js").LabelContext} */
+  // logic for this function originally present in:
+  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  //  - public/rest-api-specs-scripts/src/prSummary.ts
+  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
+
+  /** @type {import("./labelling.js").LabelContext} */
   const context = {
     present: new Set(existingLabels),
     toAdd: new Set(),
     toRemove: new Set()
   }
-  console.log(targetBranch); // placeholder for now.
+  console.log(targetBranch);
+  console.log(isDraft);
 
-  // logic for this function originally present in:
-  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  //  - public/rest-api-specs-scripts/src/prSummary.ts
-  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
+  // process wait for arm feedback vs arm feedback requested
   processArmReviewLabels(context, existingLabels);
 
   return context;
 }
 
 /**
- * @param {import("./label-rules.js").LabelContext} context
+ * @param {import("./labelling.js").LabelContext} context
  * @param {string[]} existingLabels
  * @returns {void}
  */
