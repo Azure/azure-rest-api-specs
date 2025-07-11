@@ -412,11 +412,9 @@ suppressions:
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ArmResourcePropertiesBag
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: LRO_RESPONSE_HEADER
+  - code: APIVersionPattern
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: INVALID_REQUEST_PARAMETER
-    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: OBJECT_MISSING_REQUIRED_PROPERTY
+  - code: OperationsAPIImplementation
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
 ```
 
