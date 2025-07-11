@@ -558,6 +558,42 @@
         "regions"
       ]
     },
+    "ResourceProvider": {
+      "type": "string",
+      "description": "Storage Account resource provider.",
+      "enum": [
+        "Classic",
+        "ARM",
+        "Xstore",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Classic",
+            "value": "Classic",
+            "description": "Used to create RDFE Storage Account."
+          },
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "Used to create StorageV2 (General Purpose v2 / GPv2) Storage Account."
+          },
+          {
+            "name": "Xstore",
+            "value": "Xstore",
+            "description": "Used to create Xstore Storage Account."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Used to create a dummy account in dSMS."
+          }
+        ]
+      }
+    },
     "StorageAccountDsmsProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -705,17 +741,8 @@
           "description": "Set to True to force global sync of dSMS secret or False to skip it. Optional, False by default."
         },
         "resourceProvider": {
-          "type": "string",
-          "description": "Storage Account resource provider. Acceptable values: 'Classic' (for RDFE Storage Accounts), 'ARM' (StorageV2 (general purpose v2) on Azure Portal), 'Xstore', 'Invalid' (used to create a dummy account in dSMS).",
-          "enum": [
-            "Classic",
-            "ARM",
-            "Xstore",
-            "Invalid"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ResourceProvider",
+          "description": "Storage Account resource provider."
         },
         "pilotXstoreResourceProvider": {
           "type": "boolean",

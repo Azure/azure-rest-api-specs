@@ -62,8 +62,8 @@ model StorageAccountDsmsResourceProperties {
   @doc("Set to True to force global sync of dSMS secret or False to skip it. Optional, False by default.")
   forceSyncGlobalDsmsSecret?: boolean;
 
-  @doc("Storage Account resource provider. Acceptable values: 'Classic' (for RDFE Storage Accounts), 'ARM' (StorageV2 (general purpose v2) on Azure Portal), 'Xstore', 'Invalid' (used to create a dummy account in dSMS).")
-  resourceProvider: "Classic" | "ARM" | "Xstore" | "Invalid" | string;
+  @doc("Storage Account resource provider.")
+  resourceProvider: ResourceProvider;
 
   @doc("Set to True to pilot XStore resource provider. In new region or new cloud scenario, it can create Storage Account at earlier stage before ARM ready. This is mainly as a replacement for Classic resource provider which will be deprecated with RDFE.")
   pilotXstoreResourceProvider?: boolean;
@@ -188,6 +188,23 @@ model Replicate {
 
   @doc("List of regions the secret will be replicated to, separated by semicolon. Applicable when the replication type is SpecifiedDsmsRegions.")
   regions: string;
+}
+
+@doc("Storage Account resource provider.")
+union ResourceProvider {
+  @doc("Used to create RDFE Storage Account.")
+  Classic: "Classic",
+
+  @doc("Used to create StorageV2 (General Purpose v2 / GPv2) Storage Account.")
+  ARM: "ARM",
+
+  @doc("Used to create Xstore Storage Account.")
+  Xstore: "Xstore",
+
+  @doc("Used to create a dummy account in dSMS.")
+  Invalid: "Invalid",
+
+  string
 }
 
 @doc("AccountSasInfo element contains Sas Key Information.")
