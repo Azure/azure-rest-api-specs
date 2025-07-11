@@ -14,6 +14,37 @@ import {
 } from "./tsgs.js";
 
 /**
+ * The LabelContext is used by the updateLabels() to determine which labels to add or remove to the PR.
+ *
+ * The "present" set represents the set of labels that are currently present on the PR and should be populated
+ * ONCE at the beginning of the summarize-checks action script.
+ *
+ * The "toAdd" set is the set of labels to be added to the PR at the end of invocation of updateLabels().
+ * This is to be done by calling GitHub Octokit API to add the labels.
+ *
+ * The "toRemove" set is analogous to "toAdd" set, but instead it is the set of labels to be removed.
+ *
+ * The general pattern used in the code to populate "toAdd" or "toRemove" sets to be ready for
+ * Octokit invocation is as follows:
+ *
+ * - the summary() function passes the context through its invocation chain.
+ * - given function responsible for given label, like e.g. for label "ARMReview",
+ *   creates a new instance of Label: const armReviewLabel = new Label("ARMReview", labelContext.present)
+ * - the function then processes the label to determine if armReviewLabel.shouldBePresent is to be set to true or false.
+ * - the function at the end of its invocation calls armReviewLabel.applyStateChanges(labelContext.toAdd, labelContext.toRemove)
+ *   to update the sets.
+ * - the function may optionally return { armReviewLabel.shouldBePresent } to allow the caller to pass this value
+ *   further to downstream business logic that depends on it.
+ * - at the end of invocation summary() calls Octokit passing it as input labelContext.toAdd and labelContext.toRemove.
+ */
+/**
+ * @typedef {Object} LabelContext
+ * @property {Set<string>} present - The current set of labels
+ * @property {Set<string>} toAdd - The set of labels to add
+ * @property {Set<string>} toRemove - The set of labels to remove
+ */
+
+/**
  * This file is the single source of truth for the labels used by the SDK generation tooling
  * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
  *

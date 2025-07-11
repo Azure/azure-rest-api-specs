@@ -34,6 +34,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
+import { toASCII } from "punycode";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -267,14 +268,9 @@ export async function summarizeChecksImpl(
   // /** @type { string | undefined } */
   // const changedLabel = context.payload.label?.name;
 
-  const [labelsToAdd, labelsToRemove] = await updateLabels(
-    // event_name,
-    // targetBranch,
-    labelNames,
-    // changedLabel
-  );
+  let labelContext = await updateLabels(targetBranch, labelNames)
 
-  for (const label of labelsToRemove) {
+  for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
     // await github.rest.issues.removeLabel({
     //   owner: owner,
@@ -284,9 +280,9 @@ export async function summarizeChecksImpl(
     // });
   }
 
-  if (labelsToAdd.length > 0) {
+  if (labelContext.toAdd.size > 0) {
     core.info(
-      `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
     );
     // await github.rest.issues.addLabels({
     //   owner: owner,
@@ -297,8 +293,8 @@ export async function summarizeChecksImpl(
   }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
-  labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
-  for (const label of labelsToAdd) {
+  labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
+  for (const label of labelContext.toAdd) {
     if (!labelNames.includes(label)) {
       labelNames.push(label);
     }
@@ -453,35 +449,42 @@ function containsNone(arr, values) {
 // * @param {string | undefined } changedLabel
 
 /**
+ * @param {string} targetBranch
  * @param {string[]} existingLabels
- * @returns {Promise<[string[], string[]]>}
+ * @returns {import("./label-rules.js").LabelContext}
  */
-export async function updateLabels(
+export function updateLabels(
   // eventName,
-  // targetBranch,
+  targetBranch,
   existingLabels,
   // changedLabel
 ) {
+  /** @type {import("./label-rules.js").LabelContext} */
+  const context = {
+    present: new Set(existingLabels),
+    toAdd: new Set(),
+    toRemove: new Set()
+  }
+  console.log(targetBranch); // placeholder for now.
+
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
   // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
-  const [labelsToAdd, labelsToRemove] = processArmReviewLabels(existingLabels);
-  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+  processArmReviewLabels(context, existingLabels);
+
+  return context;
 }
 
 /**
+ * @param {import("./label-rules.js").LabelContext} context
  * @param {string[]} existingLabels
- * @returns {[Set<string>, Set<string>]}
+ * @returns {void}
  */
 export function processArmReviewLabels(
+  context,
   existingLabels
 ) {
-  /** @type {Set<string>} */
-  const labelsToAdd = new Set();
-  /** @type {Set<string>} */
-  const labelsToRemove = new Set();
-
   // the important part about how this will work depends how the users use it
   // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
   // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -490,26 +493,24 @@ export function processArmReviewLabels(
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
   if (containsAll(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("ARMChangesRequested")) {
-      labelsToRemove.add("ARMChangesRequested");
+      context.toAdd.add("ARMChangesRequested");
     }
     if (existingLabels.includes("WaitForARMFeedback")) {
-      labelsToRemove.add("WaitForARMFeedback");
+      context.toRemove.add("WaitForARMFeedback");
     }
   }
   // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
   else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("WaitForARMFeedback")) {
-      labelsToRemove.add("WaitForARMFeedback");
+      context.toRemove.add("WaitForARMFeedback");
     }
   }
   // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
   else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
     if (!existingLabels.includes("WaitForARMFeedback")) {
-      labelsToAdd.add("WaitForARMFeedback");
+      context.toAdd.add("WaitForARMFeedback");
     }
   }
-
-  return [labelsToAdd, labelsToRemove]
 }
 
 
