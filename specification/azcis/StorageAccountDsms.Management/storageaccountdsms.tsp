@@ -81,8 +81,8 @@ model StorageAccountDsmsResourceProperties {
   @doc("Maximum account replication type, e.g. 'Standard_ZRS'.")
   resiliencyMaximum?: AccountReplicationType;
 
-  @doc("Resiliencies progression id. Acceptable values: 'Default', 'PremiumDefault', 'Zonal'.")
-  resilienciesProgressionId?: "Default" | "PremiumDefault" | "Zonal" | string;
+  @doc("Resiliencies progression controls how Storage Account is migrated by VRS.")
+  resilienciesProgressionId?: ResilienciesProgressionId;
 
   @doc("Additional locations to support resiliency, e.g. 'primary'.")
   additionalLocations?: string;
@@ -229,6 +229,20 @@ model AccountSasInfo {
 
   @doc("List of regions where the SAS should be provisioned, separated by semicolon. May include both region names and DsmsDns names.")
   regions: string;
+}
+
+@doc("Resiliencies progression id.")
+union ResilienciesProgressionId {
+  @doc("Default resiliencies progression: Standard_LRS, Standard_ZRS, Standard_GRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS.")
+  Default: "Default",
+
+  @doc("PremiumDefault resiliencies progression: Premium_LRS, Premium_ZRS.")
+  PremiumDefault: "PremiumDefault",
+
+  @doc("Zonal resiliencies progression: Standard_LRS, Standard_GRS, Standard_ZRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS.")
+  Zonal: "Zonal",
+
+  string
 }
 
 @doc("Lifecycle Management Policy Rule for Storage Account.")

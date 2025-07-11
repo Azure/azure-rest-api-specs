@@ -558,6 +558,36 @@
         "regions"
       ]
     },
+    "ResilienciesProgressionId": {
+      "type": "string",
+      "description": "Resiliencies progression id.",
+      "enum": [
+        "Default",
+        "PremiumDefault",
+        "Zonal"
+      ],
+      "x-ms-enum": {
+        "name": "ResilienciesProgressionId",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default resiliencies progression: Standard_LRS, Standard_ZRS, Standard_GRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS."
+          },
+          {
+            "name": "PremiumDefault",
+            "value": "PremiumDefault",
+            "description": "PremiumDefault resiliencies progression: Premium_LRS, Premium_ZRS."
+          },
+          {
+            "name": "Zonal",
+            "value": "Zonal",
+            "description": "Zonal resiliencies progression: Standard_LRS, Standard_GRS, Standard_ZRS, Standard_GZRS, Standard_RAGRS, Standard_RAGZRS."
+          }
+        ]
+      }
+    },
     "ResourceProvider": {
       "type": "string",
       "description": "Storage Account resource provider.",
@@ -776,16 +806,8 @@
           "description": "Maximum account replication type, e.g. 'Standard_ZRS'."
         },
         "resilienciesProgressionId": {
-          "type": "string",
-          "description": "Resiliencies progression id. Acceptable values: 'Default', 'PremiumDefault', 'Zonal'.",
-          "enum": [
-            "Default",
-            "PremiumDefault",
-            "Zonal"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ResilienciesProgressionId",
+          "description": "Resiliencies progression controls how Storage Account is migrated by VRS."
         },
         "additionalLocations": {
           "type": "string",
