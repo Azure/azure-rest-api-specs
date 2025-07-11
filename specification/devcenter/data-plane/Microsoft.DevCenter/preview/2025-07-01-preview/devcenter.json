@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DevCenter",
-    "version": "2025-04-01-preview",
+    "version": "2025-07-01-preview",
     "description": "DevCenter service",
     "x-typespec-generated": [
       {
@@ -4622,6 +4622,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The end time of the active hours."
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "The days of the week.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
         }
       },
       "required": [
@@ -5299,6 +5306,60 @@
         ]
       }
     },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "Days of the week.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday",
+            "description": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday",
+            "description": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday",
+            "description": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday",
+            "description": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday",
+            "description": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday",
+            "description": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday",
+            "description": "Sunday"
+          }
+        ]
+      }
+    },
     "DevBox": {
       "type": "object",
       "description": "A Dev Box.",
@@ -5413,6 +5474,11 @@
         "activeHoursConfiguration": {
           "$ref": "#/definitions/ActiveHoursConfiguration",
           "description": "The active hours configuration for this Dev Box, if enabled.",
+          "readOnly": true
+        },
+        "singleSignOnStatus": {
+          "$ref": "#/definitions/SingleSignOnStatus",
+          "description": "Indicates whether single sign on is enabled/disabled or unknown.",
           "readOnly": true
         }
       },
@@ -7498,6 +7564,10 @@
         "activeHoursConfiguration": {
           "$ref": "#/definitions/PoolActiveHoursConfiguration",
           "description": "The default active hours configuration for Dev Boxes created in this pool."
+        },
+        "singleSignOnStatus": {
+          "$ref": "#/definitions/SingleSignOnStatus",
+          "description": "Indicates whether single sign on is enabled/disabled or unknown."
         }
       },
       "required": [
@@ -7532,6 +7602,18 @@
           "type": "integer",
           "format": "int32",
           "description": "The default end time of the active hours."
+        },
+        "defaultDaysOfWeek": {
+          "type": "array",
+          "description": "The days of the week that active hours features will be enabled.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        },
+        "daysOfWeekLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum amount of days per week that a user can enable active hours related features."
         }
       },
       "required": [
@@ -7559,7 +7641,9 @@
       "type": "string",
       "description": "Possible values for the pool align target.",
       "enum": [
-        "NetworkProperties"
+        "NetworkProperties",
+        "HibernateSupport",
+        "SingleSignOnStatus"
       ],
       "x-ms-enum": {
         "name": "PoolAlignTarget",
@@ -7569,6 +7653,16 @@
             "name": "NetworkProperties",
             "value": "NetworkProperties",
             "description": "Network properties."
+          },
+          {
+            "name": "HibernateSupport",
+            "value": "HibernateSupport",
+            "description": "Hibernate support."
+          },
+          {
+            "name": "SingleSignOnStatus",
+            "value": "SingleSignOnStatus",
+            "description": "Single sign on status."
           }
         ]
       }
@@ -8087,6 +8181,30 @@
         ]
       }
     },
+    "SingleSignOnStatus": {
+      "type": "string",
+      "description": "Indicates whether single sign on is enabled or disabled on the dev box.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SingleSignOnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The dev box is configured for single sign on."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The dev box is not configured for single sign on."
+          }
+        ]
+      }
+    },
     "SkuName": {
       "type": "string",
       "description": "Indicates the Dev Box compute.",
@@ -8366,6 +8484,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The end time of the active hours."
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "The days of the week.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
         }
       }
     }
