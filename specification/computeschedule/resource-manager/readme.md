@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2024-08-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-08-15-preview'
 input-file:
-  - Microsoft.ComputeSchedule/stable/2024-08-15-preview/computeschedule.json
+  - Microsoft.ComputeSchedule/preview/2024-08-15-preview/computeschedule.json
 ```
 
 ---
