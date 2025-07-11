@@ -206,12 +206,26 @@ export function example(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function quickstartTemplate(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/quickstart-templates/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function swagger(file) {
   return (
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
+    !quickstartTemplate(file) &&
     !scenario(file)
   );
 }

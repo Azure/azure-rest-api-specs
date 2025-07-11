@@ -15,6 +15,8 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
+  pathExists,
+  quickstartTemplate,
   readme,
   resourceManager,
   specification,
@@ -53,6 +55,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+    "specification/compute/quickstart-templates/swagger.json",
   ];
 
   it("filter:json", () => {
@@ -63,6 +66,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+      "specification/compute/quickstart-templates/swagger.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -87,6 +91,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+      "specification/compute/quickstart-templates/swagger.json",
     ];
 
     expect(files.filter(specification)).toEqual(expected);
@@ -115,6 +120,12 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(example)).toEqual(expected);
+  });
+
+  it("filter:quickstartTemplate", () => {
+    const expected = ["specification/compute/quickstart-templates/swagger.json"];
+
+    expect(files.filter(quickstartTemplate)).toEqual(expected);
   });
 
   it("filter:scenarios", () => {
@@ -233,6 +244,16 @@ describe("changedFiles", () => {
         "origin/main",
         "feature-branch",
       ]);
+    });
+  });
+
+  describe("pathExists", () => { 
+    it("returns true for existing path", async () => {
+      expect(await pathExists(".")).toBe(true);
+    });
+
+    it("returns false for non-existing path", async () => {
+      expect(await pathExists("non/existing/path")).toBe(false);
     });
   });
 });

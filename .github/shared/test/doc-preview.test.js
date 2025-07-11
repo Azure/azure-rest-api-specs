@@ -5,7 +5,7 @@ import {
   indexMd,
   mappingJSONTemplate,
   repoJSONTemplate,
-} from "../doc-preview.js";
+} from "../src/doc-preview.js";
 
 describe("parseSwaggerFilePath", () => {
   test("returns null for invalid path", () => {

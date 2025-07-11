@@ -87,7 +87,6 @@ export async function main() {
   console.log(`Found ${changedFiles.length} changed files in ${specRepoRoot}`);
   console.log("Changed files:");
   changedFiles.forEach((file) => console.log(`  - ${file}`));
-  // TODO: `swagger` filter doesn't perfectly overlap with existing process. Determine if additional changes are needed to `swagger` check.
   const swaggerPaths = changedFiles.filter(swagger);
   const existingSwaggerFiles = await filterAsync(
     swaggerPaths,
