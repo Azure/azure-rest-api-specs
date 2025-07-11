@@ -19,6 +19,9 @@ interface RadiologyInsightsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+  inferFromCustomModelId is AzureHealthInsights.RadiologyInsights.inferFromCustomModelId;
 }
 
 @@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "java");
@@ -307,4 +310,54 @@ interface RadiologyInsightsClient {
 @@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.FRAX_SCORE,
   "FraxScore",
   "csharp"
+);
+
+// Python API review feedback customizations
+// 1. Rename operation from "begin_infer_from_custom_model_id" to "begin_custom_inference"
+@@clientName(RadiologyInsightsClient.inferFromCustomModelId,
+  "beginCustomInference",
+  "python"
+);
+
+// 2. Rename the id parameter in the custom inference request to "custom_model_ids"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceRequest.id,
+  "customModelIds",
+  "python"
+);
+
+// 3. Rename model from "RadiologyInsightsCustomInferenceResponse" to "RadiologyInsightsCustomInferenceResult"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceResponse,
+  "RadiologyInsightsCustomInferenceResult",
+  "python"
+);
+
+// 4. Rename the id property in RadiologyInsightsCustomInferenceResponse to "custom_inference_ids"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceResponse.id,
+  "customInferenceIds",
+  "python"
+);
+
+// Java API review feedback customizations
+// 1. Rename operation from "beginInferFromCustomModelId" to "beginCustomInference"
+@@clientName(RadiologyInsightsClient.inferFromCustomModelId,
+  "beginCustomInference",
+  "java"
+);
+
+// 2. Rename the id parameter to "modelIds"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceRequest.id,
+  "modelIds",
+  "java"
+);
+
+// 3. Rename model from "RadiologyInsightsCustomInferenceResponse" to "RadiologyInsightsCustomInferenceResult"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceResponse,
+  "RadiologyInsightsCustomInferenceResult",
+  "java"
+);
+
+// 4. Rename the id property in RadiologyInsightsCustomInferenceResponse to "modelIds"
+@@clientName(AzureHealthInsights.RadiologyInsightsCustomInferenceResponse.id,
+  "modelIds",
+  "java"
 );
