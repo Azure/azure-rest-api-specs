@@ -73,7 +73,7 @@ jobs:
         displayName: Start docs build
         inputs:
           azureSubscription: msdocs-apidrop-connection
-          scriptType: pwsh
+          scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
             $buildStart = az pipelines build queue
@@ -91,7 +91,7 @@ jobs:
         retryCountOnTaskFailure: 3
         inputs:
           azureSubscription: msdocs-apidrop-connection
-          scriptType: pwsh
+          scriptType: pscore
           scriptLocation: inlineScript
           inlineScript: |
             $buildStart = Get-Content buildstart.json | ConvertFrom-Json
