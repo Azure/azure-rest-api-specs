@@ -660,7 +660,11 @@
           "Grafana_Update": {
             "$ref": "./examples/Grafana_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Grafana_Delete",
