@@ -1,0 +1,59 @@
+{
+    "title": "Runs_ListRuns",
+    "operationId": "Runs_ListRuns",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "thread_id": "thread_123abcd",
+        "limit": 42,
+        "order": "asc"
+    },
+    "responses": {
+        "200": {
+            "object": "list",
+            "data": [{
+                    "id": "run_123abcd",
+                    "object": "thread.run",
+                    "created_at": 1752262715,
+                    "assistant_id": "asst_123abcd",
+                    "thread_id": "thread_123abcd",
+                    "status": "completed",
+                    "started_at": 1752262716,
+                    "expires_at": null,
+                    "cancelled_at": null,
+                    "failed_at": null,
+                    "completed_at": 1752262719,
+                    "required_action": null,
+                    "last_error": null,
+                    "model": "The model used by run.",
+                    "instructions": "The instructuin, given to assistant.",
+                    "tools": [],
+                    "tool_resources": {},
+                    "metadata": {},
+                    "temperature": 1.0,
+                    "top_p": 1.0,
+                    "max_completion_tokens": null,
+                    "max_prompt_tokens": null,
+                    "truncation_strategy": {
+                        "type": "auto",
+                        "last_messages": null
+                    },
+                    "incomplete_details": null,
+                    "usage": {
+                        "prompt_tokens": 474,
+                        "completion_tokens": 114,
+                        "total_tokens": 588,
+                        "prompt_token_details": {
+                            "cached_tokens": 0
+                        }
+                    },
+                    "response_format": "auto",
+                    "tool_choice": "auto",
+                    "parallel_tool_calls": true
+                }
+            ],
+            "first_id": "run_123abcd",
+            "last_id": "run_123abcd",
+            "has_more": false
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "title": "Messages_CreateMessage_MaximumSet",
+    "operationId": "Messages_CreateMessage",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "thread_id": "thread_123abc",
+        "body": {
+            "attachments": [{
+                    "file_id": "assistant-123abcd",
+                    "tools": [{
+                            "type": "file_search"
+                        }
+                    ]
+                }
+            ],
+            "content": "The content of a message.",
+            "metadata": {
+                "key": "value"
+            },
+            "role": "user"
+        }
+    },
+    "responses": {
+        "200": {
+            "id": "msg_123abcd",
+            "object": "thread.message",
+            "created_at": 1752281936,
+            "assistant_id": null,
+            "thread_id": "thread_123abc",
+            "run_id": null,
+            "role": "user",
+            "content": [{
+                    "type": "text",
+                    "text": {
+                        "value": "The content of a message.",
+                        "annotations": []
+                    }
+                }
+            ],
+            "attachments": [{
+                    "file_id": "assistant-123abcd",
+                    "tools": [{
+                            "type": "file_search"
+                        }
+                    ]
+                }
+            ],
+            "metadata": {
+                "key": "value"
+            }
+        }
+    }
+}

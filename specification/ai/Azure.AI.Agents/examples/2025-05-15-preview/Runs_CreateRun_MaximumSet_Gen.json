@@ -1,0 +1,92 @@
+{
+    "title": "Runs_CreateRun_MaximumSet",
+    "operationId": "Runs_CreateRun",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "thread_id": "thread_123abcd",
+        "include": ["step_details.tool_calls[*].file_search.results[*].content"],
+        "body": {
+            "additional_instructions": "The additional instructions, given to agent.",
+            "additional_messages": [{
+                    "role": "user",
+                    "content": "The additional message."
+                }
+            ],
+            "assistant_id": "asst_123abcd",
+            "instructions": "The instructions, given to agent.",
+            "max_completion_tokens": 17,
+            "max_prompt_tokens": 257,
+            "metadata": {
+                "key": "value"
+            },
+            "model": "The model used by the run.",
+            "parallel_tool_calls": false,
+            "response_format": {
+                "type": "text"
+            },
+            "stream": false,
+            "temperature": 0.5,
+            "tool_choice": "auto",
+            "tool_resources": {
+                "file_search": {
+                    "vector_store_ids": ["vs_123abcd"]
+                }
+            },
+            "tools": [{
+                    "type": "file_search"
+                }
+            ],
+            "top_p": 0.2,
+            "truncation_strategy": {
+                "type": "last_messages",
+                "last_messages": 1
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "id": "run_123abcd",
+            "object": "thread.run",
+            "created_at": 1752278843,
+            "assistant_id": "asst_123abcd",
+            "thread_id": "thread_123abcd",
+            "status": "queued",
+            "started_at": null,
+            "expires_at": 1752280643,
+            "cancelled_at": null,
+            "failed_at": null,
+            "completed_at": null,
+            "required_action": null,
+            "last_error": null,
+            "model": "The model used by the run.",
+            "instructions": "The instructions, given to agent. The additional instructions, given to agent.",
+            "tools": [{
+                    "type": "file_search"
+                }
+            ],
+            "tool_resources": {
+                "file_search": {
+                    "vector_store_ids": ["vs_123abcd"]
+                }
+            },
+            "metadata": {
+                "key": "value"
+            },
+            "temperature": 0.5,
+            "top_p": 0.2,
+            "max_completion_tokens": 17,
+            "max_prompt_tokens": 257,
+            "truncation_strategy": {
+                "type": "last_messages",
+                "last_messages": 1
+            },
+            "incomplete_details": null,
+            "usage": null,
+            "response_format": {
+                "type": "text"
+            },
+            "tool_choice": "auto",
+            "parallel_tool_calls": false
+        }
+    }
+}

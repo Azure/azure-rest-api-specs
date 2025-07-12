@@ -1,0 +1,39 @@
+{
+    "title": "Threads_CreateThread_MaximumSet",
+    "operationId": "Threads_CreateThread",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "body": {
+            "messages": [{
+                    "role": "user",
+                    "content": "The message content."
+                }
+            ],
+            "metadata": {
+                "key": "value"
+            },
+            "tool_resources": {
+                "file_search": {
+                    "vector_store_ids": ["vs_123abcd"]
+                }
+            }
+        },
+        "responses": {
+            "200": {
+                "id": "thread_123abcd",
+                "object": "thread",
+                "created_at": 1752282748,
+                "metadata": {
+                    "key": "value"
+                },
+                "tool_resources": {
+                    "file_search": {
+                        "vector_store_ids": [
+                            "vs_123abcd"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "title": "VectorStoreFiles_CreateVectorStoreFile_MaximumSet",
+    "operationId": "VectorStoreFiles_CreateVectorStoreFile",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "vector_store_id": "vs_123abcd",
+        "body": {
+            "chunking_strategy": {
+                "type": "auto"
+            },
+            "data_source": {
+                "uri": "azureml://path/to/your/file.txt",
+                "type": "uri_asset"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "id": "assistant-123abcd",
+            "object": "vector_store.file",
+            "usage_bytes": 0,
+            "created_at": 1752290603,
+            "vector_store_id": "vs_123abcd",
+            "status": "in_progress",
+            "last_error": null,
+            "chunking_strategy": {
+                "type": "static",
+                "static": {
+                    "max_chunk_size_tokens": 800,
+                    "chunk_overlap_tokens": 400
+                }
+            }
+        }
+    }
+}

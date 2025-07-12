@@ -1,0 +1,73 @@
+{
+    "title": "Runs_ListRuns_MaximimSet",
+    "operationId": "Runs_ListRuns",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "thread_id": "thread_123abcd",
+        "limit": 1,
+        "order": "asc",
+        "before": "run_456efgh"
+    },
+    "responses": {
+        "200": {
+            "object": "list",
+            "data": [{
+                    "id": "run_123abcd",
+                    "object": "thread.run",
+                    "created_at": 1752278843,
+                    "assistant_id": "asst_123abcd",
+                    "thread_id": "thread_123abcd",
+                    "status": "incomplete",
+                    "started_at": 1752278844,
+                    "expires_at": null,
+                    "cancelled_at": null,
+                    "failed_at": null,
+                    "completed_at": 1752278845,
+                    "required_action": null,
+                    "last_error": null,
+                    "model": "The model used by the run.",
+                    "instructions": "The instructions, given to agent. The additional instructions, given to agent.",
+                    "tools": [{
+                            "type": "file_search"
+                        }
+                    ],
+                    "tool_resources": {
+                        "file_search": {
+                            "vector_store_ids": ["vs_123abcd"]
+                        }
+                    },
+                    "metadata": {
+                        "key": "value"
+                    },
+                    "temperature": 0.5,
+                    "top_p": 0.2,
+                    "max_completion_tokens": 17,
+                    "max_prompt_tokens": 257,
+                    "truncation_strategy": {
+                        "type": "last_messages",
+                        "last_messages": 1
+                    },
+                    "incomplete_details": {
+                        "reason": "max_prompt_tokens"
+                    },
+                    "usage": {
+                        "prompt_tokens": 34,
+                        "completion_tokens": 17,
+                        "total_tokens": 51,
+                        "prompt_token_details": {
+                            "cached_tokens": 0
+                        }
+                    },
+                    "response_format": {
+                        "type": "text"
+                    },
+                    "tool_choice": "auto",
+                    "parallel_tool_calls": false
+                }
+            ],
+            "first_id": "run_123abcd",
+            "last_id": "run_123abcd",
+            "has_more": false
+        }
+    }
+}

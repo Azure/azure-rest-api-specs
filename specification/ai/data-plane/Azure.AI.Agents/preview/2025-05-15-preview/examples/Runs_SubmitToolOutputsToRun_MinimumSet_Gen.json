@@ -1,0 +1,90 @@
+{
+    "title": "Runs_SubmitToolOutputsToRun_MinimumSet",
+    "operationId": "Runs_SubmitToolOutputsToRun",
+    "parameters": {
+        "api-version": "2025-05-15-preview",
+        "thread_id": "thread_123abcd",
+        "run_id": "run_123abcd",
+        "body": {
+            "tool_outputs":
+            [{
+                    "tool_call_id": "call_1",
+                    "output": "{\"variable1\": \"value1\"}"
+                }, {
+                    "tool_call_id": "call_2",
+                    "output": "{\"variable1\": \"value1"
+                }
+            ]
+        }
+    },
+    " responses ": {
+        " 200 ": {
+            " id ": " run_123abcd ",
+            " object ": " thread.run ",
+            " created_at ": 1752294436,
+            " assistant_id ": " asst_123abcd ",
+            " thread_id ": " thread_123abcd ",
+            " status ": " queued ",
+            " started_at ": 1752294436,
+            " expires_at ": 1752330436,
+            " cancelled_at ": null,
+            " failed_at ": null,
+            " completed_at ": null,
+            " required_action ": null,
+            " last_error ": null,
+            " model ": "The model used by the run.",
+            " instructions ": " The instructions, given to agent.",
+            " tools ": [{
+                    " type ": " function ",
+                    " function ": {
+                        " name ": " function_1 ",
+                        " description ": " Funcrion 1 description ",
+                        " parameters ": {
+                            " type ": " object ",
+                            " properties ": {
+                                " variable1 ": {
+                                    " type ": " integer ",
+                                    " description ": " Variable 1 "
+                                }
+                            },
+                            " required ": [" variable1 "]
+                        },
+                        " strict ": false
+                    }
+                }, {
+                    " type ": " function ",
+                    " function ": {
+                        " name ": " function_2 ",
+                        " description ": " Funcrion 2 description ",
+                        " parameters ": {
+                            " type ": " object ",
+                            " properties ": {
+                                " variable1 ": {
+                                    " type ": " number ",
+                                    " description ": " Variable 1 "
+                                }
+                            },
+                            " required ": [" variable1 "]
+                        },
+                        " strict ": false
+                    }
+                }
+            ],
+            " tool_resources ": {},
+            " metadata ": {},
+            " temperature ": 1.0,
+            " top_p ": 1.0,
+            " max_completion_tokens ": null,
+            " max_prompt_tokens ": null,
+            " truncation_strategy ": {
+                " type ": " auto ",
+                " last_messages ": null
+            },
+            " incomplete_details ": null,
+            " usage ": null,
+            " response_format ": " auto ",
+            " tool_choice ": " auto ",
+            " parallel_tool_calls ": true
+        }
+    }
+}
