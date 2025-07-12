@@ -1,0 +1,108 @@
+{
+  "title": "Runs_SubmitToolOutputsToRun_MaximumSet",
+  "operationId": "Runs_SubmitToolOutputsToRun",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "threadId": "thread_123abcd",
+    "runId": "run_123abcd",
+    "body": {
+      "stream": false,
+      "tool_outputs": [
+        {
+          "tool_call_id": "call_1",
+          "output": "{\"variable1\": \"value1\"}"
+        },
+        {
+          "tool_call_id": "call_2",
+          "output": "{\"variable1\": \"value1"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_123abcd",
+        "object": "thread.run",
+        "created_at": 1752295487,
+        "assistant_id": "asst_123abcd",
+        "thread_id": "thread_123abcd",
+        "status": "queued",
+        "started_at": 1752295488,
+        "expires_at": 1752331487,
+        "cancelled_at": null,
+        "failed_at": null,
+        "completed_at": null,
+        "required_action": null,
+        "last_error": {
+          "message": "Error message",
+          "code": "some_error"
+        },
+        "model": "The model used by the run.",
+        "instructions": "You are a helpful agent that can use MCP tools to assist users. Use the available MCP tools to answer questions and perform tasks.",
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "function_1",
+              "description": "Funcrion 1 description",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "variable1": {
+                    "type": "integer",
+                    "description": "Variable 1"
+                  }
+                },
+                "required": [
+                  "variable1"
+                ]
+              },
+              "strict": false
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "function_2",
+              "description": "Funcrion 2 description",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "variable1": {
+                    "type": "number",
+                    "description": "Variable 1"
+                  }
+                },
+                "required": [
+                  "variable1"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_resources": {},
+        "metadata": {},
+        "temperature": 1.0,
+        "top_p": 1.0,
+        "max_completion_tokens": null,
+        "max_prompt_tokens": null,
+        "truncation_strategy": {
+          "type": "auto",
+          "last_messages": null
+        },
+        "incomplete_details": {
+          "reason": "max_prompt_tokens"
+        },
+        "usage": {
+          "prompt_tokens": 305,
+          "completion_tokens": 72,
+          "total_tokens": 377
+        },
+        "response_format": "auto",
+        "tool_choice": "auto",
+        "parallel_tool_calls": true
+      }
+    }
+  }
+}
