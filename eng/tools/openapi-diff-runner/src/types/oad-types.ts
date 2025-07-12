@@ -8,15 +8,14 @@
  * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
  *   https://github.com/Azure/azure-sdk-tools/issues/6374
  */
-import { basename } from "path";
+import { basename } from "node:path";
 import { getVersionFromInputFile, specificBranchHref } from "../utils/common-utils.js";
 import { MessageLevel } from "./message.js";
 import { sourceBranchHref } from "../utils/common-utils.js";
 import { ApiVersionLifecycleStage, Context } from "./breaking-change.js";
-import { defaultBreakingChangeBaseBranch } from "../command-helpers.js";
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -55,7 +54,6 @@ export type OadTraceData = {
   readonly traces: readonly {
     readonly old: string;
     readonly new: string;
-    readonly baseBranch: string;
   }[];
   readonly baseBranch: string;
   readonly context: Context;
@@ -66,7 +64,7 @@ export type OadTraceData = {
  */
 export const createOadTrace = (context: Context): OadTraceData => ({
   traces: [],
-  baseBranch: defaultBreakingChangeBaseBranch,
+  baseBranch: context.baseBranch,
   context,
 });
 
@@ -80,10 +78,7 @@ export const addOadTrace = (
 ): OadTraceData =>
   ({
     ...traceData,
-    traces: [
-      ...traceData.traces,
-      { old: oldSwagger, new: newSwagger, baseBranch: traceData.baseBranch },
-    ],
+    traces: [...traceData.traces, { old: oldSwagger, new: newSwagger }],
   }) as OadTraceData;
 
 /**
@@ -115,13 +110,13 @@ export const generateOadMarkdown = (traceData: OadTraceData): string => {
 
     // Truncate commit hash to first 8 characters for better readability
     const shortCommit = traceData.context.headCommit.substring(0, 8);
-    const newCommitLink = `[${shortCommit}](${sourceBranchHref(value.new)})`;
+    const newCommitLink = `[${shortCommit}](${sourceBranchHref(traceData.context.sourceRepo, traceData.context.headCommit, value.new)})`;
 
     const oldVersion = getVersionFromInputFile(value.old, true);
-    const oldCommitLink = `[${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)})`;
+    const oldCommitLink = `[${traceData.baseBranch}](${specificBranchHref(traceData.context.targetRepo, value.old, traceData.baseBranch)})`;
 
     // Add a row to the markdown table with proper spacing
-    content += `| ${newFileName} | ${newVersion} ${newCommitLink} | ${oldVersion} ${oldCommitLink} |
+    content += `| ${newFileName} | ${newVersion} (${newCommitLink}) | ${oldVersion} (${oldCommitLink}) |
 `;
   }
 

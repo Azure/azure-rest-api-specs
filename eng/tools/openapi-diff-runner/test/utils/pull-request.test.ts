@@ -1,9 +1,131 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
 import { createPullRequestProperties } from "../../src/utils/pull-request.js";
 import { Context } from "../../src/types/breaking-change.js";
+
+// Test constants
+const TEST_CONSTANTS = {
+  BRANCHES: {
+    MAIN: "main",
+    DEVELOP: "develop",
+    FEATURE: "feature-branch",
+    SOURCE: "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8",
+  },
+  PATHS: {
+    SPEC_REPO: "/path/to/spec/repo",
+    WORKING_FOLDER: "/path/to/working/folder",
+    LOG_FOLDER: "/path/to/log/folder",
+    LOG_FILE: "/path/to/log/file.log",
+    CURRENT_WORKING_DIR: "/current/working/dir",
+    RESOLVED_WORKING_DIR: "/resolved/working/dir",
+    CUSTOM_PREFIX_PATH: "../custom-prefix-c93b354fd9c14905bb574a8834c4d69b",
+  },
+  REPO: {
+    NAME: "owner/repo",
+    COMMIT: "abc123",
+    PR_NUMBER: "123",
+    PR_URL: "https://github.com/owner/repo/pull/123",
+  },
+  PREFIXES: {
+    TEST: "test-prefix",
+    CUSTOM: "custom-prefix",
+  },
+  SWAGGER_DIRS: ["specification/service/path"] as string[],
+  ERRORS: {
+    GET_REMOTES: "Failed to get remotes",
+    REMOTE_EXISTS: "fatal: remote origin already exists",
+    OTHER_ERROR: "Some other error",
+  },
+} as const;
+
+// Helper functions
+function createMockContext(overrides: Partial<Context> = {}): Context {
+  return {
+    localSpecRepoPath: TEST_CONSTANTS.PATHS.SPEC_REPO,
+    workingFolder: TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+    logFileFolder: TEST_CONSTANTS.PATHS.LOG_FOLDER,
+    swaggerDirs: TEST_CONSTANTS.SWAGGER_DIRS,
+    baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    headCommit: TEST_CONSTANTS.REPO.COMMIT,
+    runType: "SameVersion",
+    checkName: "BreakingChange",
+    targetRepo: TEST_CONSTANTS.REPO.NAME,
+    sourceRepo: TEST_CONSTANTS.REPO.NAME,
+    prNumber: TEST_CONSTANTS.REPO.PR_NUMBER,
+    prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+    prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    oadMessageProcessorContext: {
+      logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
+      prUrl: TEST_CONSTANTS.REPO.PR_URL,
+      messageCache: [],
+    },
+    prUrl: TEST_CONSTANTS.REPO.PR_URL,
+    ...overrides,
+  };
+}
+
+function setupBasicGitMocks(mockGitRepo: any) {
+  mockGitRepo.branch.mockResolvedValue({
+    all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
+  });
+  mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+  mockGitRepo.init.mockResolvedValue(undefined);
+  mockGitRepo.addRemote.mockResolvedValue(undefined);
+  mockGitRepo.pull.mockResolvedValue(undefined);
+  mockGitRepo.fetch.mockResolvedValue(undefined);
+  mockGitRepo.checkout.mockResolvedValue(undefined);
+}
+
+function setupCustomBranchMocks(mockGitRepo: any, branches: string[]) {
+  mockGitRepo.branch.mockResolvedValue({ all: branches });
+  mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+  mockGitRepo.init.mockResolvedValue(undefined);
+  mockGitRepo.addRemote.mockResolvedValue(undefined);
+  mockGitRepo.pull.mockResolvedValue(undefined);
+  mockGitRepo.fetch.mockResolvedValue(undefined);
+  mockGitRepo.checkout.mockResolvedValue(undefined);
+}
+
+function setupGitErrorMocks(mockGitRepo: any, errorType: string) {
+  mockGitRepo.branch.mockResolvedValue({
+    all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
+  });
+  mockGitRepo.getRemotes.mockRejectedValue(new Error(errorType));
+  mockGitRepo.init.mockResolvedValue(undefined);
+  mockGitRepo.pull.mockResolvedValue(undefined);
+  mockGitRepo.fetch.mockResolvedValue(undefined);
+  mockGitRepo.checkout.mockResolvedValue(undefined);
+}
+
+function setupPathMocks(mockPath: any, mockExistsSync: any, exists: boolean = true) {
+  mockExistsSync.mockReturnValue(exists);
+  mockPath.resolve.mockReturnValue(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
+  mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
+}
+
+function expectPullRequestResult(result: any, expectedProps: Partial<any>) {
+  expect(result).toBeDefined();
+  if (expectedProps.baseBranch) expect(result!.baseBranch).toBe(expectedProps.baseBranch);
+  if (expectedProps.targetBranch) expect(result!.targetBranch).toBe(expectedProps.targetBranch);
+  if (expectedProps.sourceBranch) expect(result!.sourceBranch).toBe(expectedProps.sourceBranch);
+  if (expectedProps.tempRepoFolder)
+    expect(result!.tempRepoFolder).toBe(expectedProps.tempRepoFolder);
+  if (expectedProps.currentBranch) expect(result!.currentBranch).toBe(expectedProps.currentBranch);
+  if (expectedProps.hasCheckout) expect(typeof result!.checkout).toBe("function");
+}
+
+function expectGitOperationCalls(mockGitRepo: any, operations: string[]) {
+  operations.forEach((operation) => {
+    expect(mockGitRepo[operation]).toHaveBeenCalled();
+  });
+}
+
+function expectCheckoutResult(result: any, expectedBranch: string) {
+  expect(result).toBeDefined();
+  expect(result!.currentBranch).toBe(expectedBranch);
+}
 
 // Mock dependencies
 vi.mock("node:fs");
@@ -32,8 +154,8 @@ describe("pull-request", () => {
 
     // Setup default mocks
     mockSimpleGit.mockReturnValue(mockGitRepo as any);
-    mockPath.resolve.mockImplementation((...paths) => paths.join("/"));
-    mockPath.join.mockImplementation((...paths) => paths.join("/"));
+    mockPath.resolve.mockImplementation((...paths: string[]) => paths.join("/"));
+    mockPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
 
     // Mock console.log to avoid test output noise
     vi.spyOn(console, "log").mockImplementation(() => {});
@@ -44,140 +166,99 @@ describe("pull-request", () => {
   });
 
   describe("createPullRequestProperties", () => {
-    const createMockContext = (overrides: Partial<Context> = {}): Context => ({
-      localSpecRepoPath: "/path/to/spec/repo",
-      workingFolder: "/path/to/working/folder",
-      logFileFolder: "/path/to/log/folder",
-      swaggerDirs: ["specification/service/path"],
-      baseBranch: "main",
-      headCommit: "abc123",
-      runType: "SameVersion",
-      checkName: "BreakingChange",
-      repo: "owner/repo",
-      prNumber: "123",
-      prSourceBranch: "feature-branch",
-      prTargetBranch: "main",
-      oadMessageProcessorContext: {
-        logFilePath: "/path/to/log/file.log",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [],
-      },
-      prUrl: "https://github.com/owner/repo/pull/123",
-      ...overrides,
-    });
-
     it("should return undefined when baseBranch is undefined", async () => {
       const context = createMockContext({ baseBranch: undefined });
 
-      const result = await createPullRequestProperties(context, "test-prefix");
+      const result = await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(result).toBeUndefined();
     });
 
     it("should create pull request properties successfully", async () => {
       const context = createMockContext();
-      const prefix = "test-prefix";
 
-      // Mock branch listing
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync, false);
+
+      const result = await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
+
+      expectPullRequestResult(result, {
+        baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+        targetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+        sourceBranch: TEST_CONSTANTS.BRANCHES.SOURCE,
+        tempRepoFolder: TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR,
+        currentBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+        hasCheckout: true,
       });
-
-      // Mock directory operations
-      mockExistsSync.mockReturnValue(false);
-      mockPath.resolve.mockReturnValue("/resolved/working/dir");
-
-      // Mock git operations
-      mockGitRepo.getRemotes.mockResolvedValue([]);
-      mockGitRepo.init.mockResolvedValue(undefined);
-      mockGitRepo.addRemote.mockResolvedValue(undefined);
-      mockGitRepo.pull.mockResolvedValue(undefined);
-      mockGitRepo.fetch.mockResolvedValue(undefined);
-      mockGitRepo.checkout.mockResolvedValue(undefined);
-
-      const result = await createPullRequestProperties(context, prefix);
-
-      expect(result).toBeDefined();
-      expect(result!.baseBranch).toBe("main");
-      expect(result!.targetBranch).toBe("main");
-      expect(result!.sourceBranch).toBe("source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8");
-      expect(result!.workingDir).toBe("/resolved/working/dir");
-      expect(result!.currentBranch).toBe("main");
-      expect(typeof result!.checkout).toBe("function");
     });
 
     it("should create source branch if it doesn't exist", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main"], // Source branch doesn't exist
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupCustomBranchMocks(mockGitRepo, [TEST_CONSTANTS.BRANCHES.MAIN]); // Source branch doesn't exist
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
-      expect(mockGitRepo.branch).toHaveBeenCalledWith([
-        "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8",
-      ]);
+      expect(mockGitRepo.branch).toHaveBeenCalledWith([TEST_CONSTANTS.BRANCHES.SOURCE]);
     });
 
     it("should create base branch if it doesn't exist and skipInitializeBase is false", async () => {
-      const context = createMockContext({ baseBranch: "develop" });
+      const context = createMockContext({ baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP });
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"], // Base branch doesn't exist
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupCustomBranchMocks(mockGitRepo, [
+        TEST_CONSTANTS.BRANCHES.MAIN,
+        TEST_CONSTANTS.BRANCHES.SOURCE,
+      ]); // Base branch doesn't exist
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix", false);
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST, false);
 
-      expect(mockGitRepo.branch).toHaveBeenCalledWith(["develop", "remotes/origin/develop"]);
+      expect(mockGitRepo.branch).toHaveBeenCalledWith([
+        TEST_CONSTANTS.BRANCHES.DEVELOP,
+        `remotes/origin/${TEST_CONSTANTS.BRANCHES.DEVELOP}`,
+      ]);
     });
 
     it("should not create base branch if skipInitializeBase is true", async () => {
-      const context = createMockContext({ baseBranch: "develop" });
+      const context = createMockContext({ baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP });
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix", true);
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST, true);
 
-      expect(mockGitRepo.branch).not.toHaveBeenCalledWith(["develop", "remotes/origin/develop"]);
-      expect(mockGitRepo.fetch).not.toHaveBeenCalledWith("origin", "develop");
+      expect(mockGitRepo.branch).not.toHaveBeenCalledWith([
+        TEST_CONSTANTS.BRANCHES.DEVELOP,
+        `remotes/origin/${TEST_CONSTANTS.BRANCHES.DEVELOP}`,
+      ]);
+      expect(mockGitRepo.fetch).not.toHaveBeenCalledWith("origin", TEST_CONSTANTS.BRANCHES.DEVELOP);
     });
 
     it("should create target branch if it doesn't exist", async () => {
-      const context = createMockContext({ prTargetBranch: "feature-branch" });
+      const context = createMockContext({ prTargetBranch: TEST_CONSTANTS.BRANCHES.FEATURE });
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"], // Target branch doesn't exist
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupCustomBranchMocks(mockGitRepo, [
+        TEST_CONSTANTS.BRANCHES.MAIN,
+        TEST_CONSTANTS.BRANCHES.SOURCE,
+      ]); // Target branch doesn't exist
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(mockGitRepo.branch).toHaveBeenCalledWith([
-        "feature-branch",
-        "remotes/origin/feature-branch",
+        TEST_CONSTANTS.BRANCHES.FEATURE,
+        `remotes/origin/${TEST_CONSTANTS.BRANCHES.FEATURE}`,
       ]);
     });
 
     it("should create working directory if it doesn't exist", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(false); // Directory doesn't exist
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync, false); // Directory doesn't exist
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(mockMkdirSync).toHaveBeenCalledWith(expect.any(String));
     });
@@ -186,12 +267,12 @@ describe("pull-request", () => {
       const context = createMockContext();
 
       mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
+        all: [TEST_CONSTANTS.BRANCHES.MAIN, TEST_CONSTANTS.BRANCHES.SOURCE],
       });
-      mockExistsSync.mockReturnValue(true);
       mockGitRepo.getRemotes.mockResolvedValue([]); // No remotes exist
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(mockGitRepo.addRemote).toHaveBeenCalledWith("origin", context.localSpecRepoPath);
     });
@@ -199,13 +280,10 @@ describe("pull-request", () => {
     it("should not add origin remote if it already exists", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]); // Origin exists
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(mockGitRepo.addRemote).not.toHaveBeenCalled();
     });
@@ -213,14 +291,11 @@ describe("pull-request", () => {
     it("should handle getRemotes error and try to add origin anyway", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockRejectedValue(new Error("Failed to get remotes"));
+      setupGitErrorMocks(mockGitRepo, TEST_CONSTANTS.ERRORS.GET_REMOTES);
       mockGitRepo.addRemote.mockResolvedValue(undefined);
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       expect(mockGitRepo.addRemote).toHaveBeenCalledWith("origin", context.localSpecRepoPath);
     });
@@ -228,120 +303,98 @@ describe("pull-request", () => {
     it("should ignore 'remote origin already exists' error when adding remote", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockRejectedValue(new Error("Failed to get remotes"));
-      mockGitRepo.addRemote.mockRejectedValue(new Error("fatal: remote origin already exists"));
+      setupGitErrorMocks(mockGitRepo, TEST_CONSTANTS.ERRORS.GET_REMOTES);
+      mockGitRepo.addRemote.mockRejectedValue(new Error(TEST_CONSTANTS.ERRORS.REMOTE_EXISTS));
+      setupPathMocks(mockPath, mockExistsSync);
 
       // Should not throw an error
-      await expect(createPullRequestProperties(context, "test-prefix")).resolves.toBeDefined();
+      await expect(
+        createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST),
+      ).resolves.toBeDefined();
     });
 
     it("should throw error if addRemote fails with other error", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockRejectedValue(new Error("Failed to get remotes"));
-      mockGitRepo.addRemote.mockRejectedValue(new Error("Some other error"));
+      setupGitErrorMocks(mockGitRepo, TEST_CONSTANTS.ERRORS.GET_REMOTES);
+      mockGitRepo.addRemote.mockRejectedValue(new Error(TEST_CONSTANTS.ERRORS.OTHER_ERROR));
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await expect(createPullRequestProperties(context, "test-prefix")).rejects.toThrow(
-        "Some other error",
-      );
+      await expect(
+        createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST),
+      ).rejects.toThrow(TEST_CONSTANTS.ERRORS.OTHER_ERROR);
     });
 
     it("should perform git operations in correct order", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       // Verify order of operations
-      expect(mockGitRepo.init).toHaveBeenCalled();
-      expect(mockGitRepo.pull).toHaveBeenCalledWith("origin", "main");
-      expect(mockGitRepo.fetch).toHaveBeenCalledWith(
-        "origin",
-        "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8",
-      );
-      expect(mockGitRepo.fetch).toHaveBeenCalledWith("origin", "main");
-      expect(mockGitRepo.checkout).toHaveBeenCalledWith("main");
+      expectGitOperationCalls(mockGitRepo, ["init"]);
+      expect(mockGitRepo.pull).toHaveBeenCalledWith("origin", TEST_CONSTANTS.BRANCHES.MAIN);
+      expect(mockGitRepo.fetch).toHaveBeenCalledWith("origin", TEST_CONSTANTS.BRANCHES.SOURCE);
+      expect(mockGitRepo.fetch).toHaveBeenCalledWith("origin", TEST_CONSTANTS.BRANCHES.MAIN);
+      expect(mockGitRepo.checkout).toHaveBeenCalledWith(TEST_CONSTANTS.BRANCHES.MAIN);
     });
 
     describe("checkout function", () => {
       it("should checkout to different branch", async () => {
         const context = createMockContext();
 
-        mockGitRepo.branch.mockResolvedValue({
-          all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-        });
-        mockExistsSync.mockReturnValue(true);
-        mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+        setupBasicGitMocks(mockGitRepo);
+        setupPathMocks(mockPath, mockExistsSync);
 
-        const result = await createPullRequestProperties(context, "test-prefix");
+        const result = await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
-        expect(result).toBeDefined();
-        expect(result!.currentBranch).toBe("main");
+        expectCheckoutResult(result, TEST_CONSTANTS.BRANCHES.MAIN);
 
         // Test checkout function
-        await result!.checkout("feature-branch");
+        await result!.checkout(TEST_CONSTANTS.BRANCHES.FEATURE);
 
-        expect(mockGitRepo.checkout).toHaveBeenCalledWith(["feature-branch"]);
-        expect(result!.currentBranch).toBe("feature-branch");
+        expect(mockGitRepo.checkout).toHaveBeenCalledWith([TEST_CONSTANTS.BRANCHES.FEATURE]);
+        expect(result!.currentBranch).toBe(TEST_CONSTANTS.BRANCHES.FEATURE);
       });
 
       it("should not checkout if already on the target branch", async () => {
         const context = createMockContext();
 
-        mockGitRepo.branch.mockResolvedValue({
-          all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-        });
-        mockExistsSync.mockReturnValue(true);
-        mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+        setupBasicGitMocks(mockGitRepo);
+        setupPathMocks(mockPath, mockExistsSync);
 
-        const result = await createPullRequestProperties(context, "test-prefix");
+        const result = await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
-        expect(result).toBeDefined();
-        expect(result!.currentBranch).toBe("main");
+        expectCheckoutResult(result, TEST_CONSTANTS.BRANCHES.MAIN);
 
         // Clear previous checkout calls
         mockGitRepo.checkout.mockClear();
 
         // Test checkout to same branch
-        await result!.checkout("main");
+        await result!.checkout(TEST_CONSTANTS.BRANCHES.MAIN);
 
         expect(mockGitRepo.checkout).not.toHaveBeenCalled();
-        expect(result!.currentBranch).toBe("main");
+        expect(result!.currentBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
       });
 
       it("should update currentBranch after successful checkout", async () => {
         const context = createMockContext();
 
-        mockGitRepo.branch.mockResolvedValue({
-          all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-        });
-        mockExistsSync.mockReturnValue(true);
-        mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+        setupBasicGitMocks(mockGitRepo);
+        setupPathMocks(mockPath, mockExistsSync);
 
-        const result = await createPullRequestProperties(context, "test-prefix");
+        const result = await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
-        expect(result).toBeDefined();
-        expect(result!.currentBranch).toBe("main");
+        expectCheckoutResult(result, TEST_CONSTANTS.BRANCHES.MAIN);
 
         // Test multiple checkouts
-        await result!.checkout("feature-branch");
-        expect(result!.currentBranch).toBe("feature-branch");
+        await result!.checkout(TEST_CONSTANTS.BRANCHES.FEATURE);
+        expect(result!.currentBranch).toBe(TEST_CONSTANTS.BRANCHES.FEATURE);
 
-        await result!.checkout("develop");
-        expect(result!.currentBranch).toBe("develop");
+        await result!.checkout(TEST_CONSTANTS.BRANCHES.DEVELOP);
+        expect(result!.currentBranch).toBe(TEST_CONSTANTS.BRANCHES.DEVELOP);
 
         // Verify checkout was called for each different branch
         expect(mockGitRepo.checkout).toHaveBeenCalledTimes(3); // 1 initial + 2 from tests
@@ -350,42 +403,34 @@ describe("pull-request", () => {
 
     it("should use correct working directory path", async () => {
       const context = createMockContext();
-      const prefix = "custom-prefix";
+      const prefix = TEST_CONSTANTS.PREFIXES.CUSTOM;
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync);
 
       // Mock path operations
-      vi.spyOn(process, "cwd").mockReturnValue("/current/working/dir");
-      mockPath.join.mockReturnValue("../custom-prefix-c93b354fd9c14905bb574a8834c4d69b");
-      mockPath.resolve.mockReturnValue("/resolved/working/dir");
+      vi.spyOn(process, "cwd").mockReturnValue(TEST_CONSTANTS.PATHS.CURRENT_WORKING_DIR);
+      mockPath.join.mockReturnValue(TEST_CONSTANTS.PATHS.CUSTOM_PREFIX_PATH);
+      mockPath.resolve.mockReturnValue(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
 
       const result = await createPullRequestProperties(context, prefix);
 
       expect(mockPath.join).toHaveBeenCalledWith(
-        "/current/working/dir",
+        TEST_CONSTANTS.PATHS.CURRENT_WORKING_DIR,
         "..",
         "custom-prefix-c93b354fd9c14905bb574a8834c4d69b",
       );
-      expect(mockPath.resolve).toHaveBeenCalledWith(
-        "../custom-prefix-c93b354fd9c14905bb574a8834c4d69b",
-      );
-      expect(result!.workingDir).toBe("/resolved/working/dir");
+      expect(mockPath.resolve).toHaveBeenCalledWith(TEST_CONSTANTS.PATHS.CUSTOM_PREFIX_PATH);
+      expect(result!.tempRepoFolder).toBe(TEST_CONSTANTS.PATHS.RESOLVED_WORKING_DIR);
     });
 
     it("should use correct git options", async () => {
       const context = createMockContext();
 
-      mockGitRepo.branch.mockResolvedValue({
-        all: ["main", "source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8"],
-      });
-      mockExistsSync.mockReturnValue(true);
-      mockGitRepo.getRemotes.mockResolvedValue([{ name: "origin" }]);
+      setupBasicGitMocks(mockGitRepo);
+      setupPathMocks(mockPath, mockExistsSync);
 
-      await createPullRequestProperties(context, "test-prefix");
+      await createPullRequestProperties(context, TEST_CONSTANTS.PREFIXES.TEST);
 
       // Verify simpleGit was called with correct options
       expect(mockSimpleGit).toHaveBeenCalledWith({

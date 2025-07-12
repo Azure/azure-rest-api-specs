@@ -2,22 +2,64 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { generateBreakingChangeResultSummary } from "../src/generate-report.js";
 import { Context } from "../src/types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "../src/types/message.js";
-import { addToSummary, logMessage, logWarning } from "../src/log.js";
+import { addToSummary, logMessage } from "../src/log.js";
 import {
   BreakingChangeMdReport,
   createBreakingChangeMdReport,
   reportToString,
   sortBreakingChangeMdReports,
 } from "../src/utils/markdown-report.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 // Mock dependencies
 vi.mock("../src/log.js");
 vi.mock("../src/utils/markdown-report.js");
 
 describe("generate-report", () => {
+  // Test constants
+  const TEST_CONSTANTS = {
+    PATHS: {
+      REPO: "/path/to/repo",
+      WORKING: "/working",
+      LOGS: "/logs",
+      LOG_FILE: "/log/path",
+      SUMMARY: "/path/to/summary",
+    },
+    MESSAGES: {
+      SUCCESS_LOG: "Successfully wrote",
+      DETECTED_ERRORS_WARNINGS: "Detected: 1 Errors, 1 Warnings",
+      DETECTED_WARNINGS: "Detected: 2 Warnings",
+      NO_BREAKING_CHANGES: "No breaking changes detected",
+      IMPORTANT_NOTICE: "> [!IMPORTANT]\n> Browse to the job logs to see the details.",
+      STABLE_VERSION_COMPARISON:
+        "The following breaking changes have been detected in comparison to the latest stable version",
+      PREVIEW_VERSION_COMPARISON:
+        "The following breaking changes have been detected in comparison to the latest preview version",
+      MESSAGE_RECORDS_LOG: "messageRecords# raw/result/all: 1/0/1",
+    },
+    TABLE_CONTENT: {
+      SPECS: "| Spec | Status |\n|------|--------|\n| test.json | Modified |",
+      SPECS_HEADER: "| Spec | Status |",
+    },
+    TEXTS: {
+      ADDITIONAL_DETAILS: "\n\nAdditional details...",
+      SUPPRESSION_INFO: "\n\n**Suppression Info:**\nSome details about suppressions.",
+    },
+    CHECK_NAMES: {
+      SWAGGER: "Swagger BreakingChange",
+      CROSS_VERSION: "BreakingChange(Cross-Version)",
+    },
+    REPO: "test/repo",
+    PR_NUMBER: "123",
+    BRANCHES: {
+      MAIN: "main",
+      FEATURE: "feature",
+    },
+    TEST_TIME: new Date("2023-01-01"),
+  };
+
   const mockAddToSummary = vi.mocked(addToSummary);
   const mockLogMessage = vi.mocked(logMessage);
-  const mockLogWarning = vi.mocked(logWarning);
   const mockCreateBreakingChangeMdReport = vi.mocked(createBreakingChangeMdReport);
   const mockReportToString = vi.mocked(reportToString);
   const mockSortBreakingChangeMdReports = vi.mocked(sortBreakingChangeMdReports);
@@ -26,7 +68,7 @@ describe("generate-report", () => {
     vi.clearAllMocks();
 
     // Mock environment variable for GitHub Actions
-    vi.stubEnv("GITHUB_STEP_SUMMARY", "/path/to/summary");
+    vi.stubEnv("GITHUB_STEP_SUMMARY", TEST_CONSTANTS.PATHS.SUMMARY);
 
     // Setup default mock implementations
     mockCreateBreakingChangeMdReport.mockReturnValue({
@@ -46,25 +88,27 @@ describe("generate-report", () => {
     vi.unstubAllEnvs();
   });
 
+  // Factory functions
   const createMockContext = (overrides: Partial<Context> = {}): Context => ({
-    localSpecRepoPath: "/path/to/repo",
-    workingFolder: "/working",
-    logFileFolder: "/logs",
+    localSpecRepoPath: TEST_CONSTANTS.PATHS.REPO,
+    workingFolder: TEST_CONSTANTS.PATHS.WORKING,
+    logFileFolder: TEST_CONSTANTS.PATHS.LOGS,
     swaggerDirs: ["specification"],
-    baseBranch: "main",
+    baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
     headCommit: "HEAD",
-    runType: "SameVersion",
-    checkName: "Swagger BreakingChange",
-    repo: "test/repo",
-    prNumber: "123",
-    prSourceBranch: "feature",
-    prTargetBranch: "main",
+    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+    checkName: TEST_CONSTANTS.CHECK_NAMES.SWAGGER,
+    targetRepo: TEST_CONSTANTS.REPO,
+    sourceRepo: TEST_CONSTANTS.REPO,
+    prNumber: TEST_CONSTANTS.PR_NUMBER,
+    prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+    prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
     oadMessageProcessorContext: {
-      logFilePath: "/log/path",
-      prUrl: "https://github.com/test/repo/pull/123",
+      logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
+      prUrl: `https://github.com/${TEST_CONSTANTS.REPO}/pull/${TEST_CONSTANTS.PR_NUMBER}`,
       messageCache: [],
     },
-    prUrl: "https://github.com/test/repo/pull/123",
+    prUrl: `https://github.com/${TEST_CONSTANTS.REPO}/pull/${TEST_CONSTANTS.PR_NUMBER}`,
     ...overrides,
   });
 
@@ -74,7 +118,7 @@ describe("generate-report", () => {
     type: "Result",
     level: "Error",
     message: "Test error message",
-    time: new Date("2023-01-01"),
+    time: TEST_CONSTANTS.TEST_TIME,
     paths: [],
     groupName: "stable",
     ...overrides,
@@ -84,150 +128,117 @@ describe("generate-report", () => {
     type: "Raw",
     level: "Error",
     message: "Test raw error",
-    time: new Date("2023-01-01"),
+    time: TEST_CONSTANTS.TEST_TIME,
     groupName: "stable",
     extra: {},
     ...overrides,
   });
 
+  // Test parameter factory
+  interface TestParameters {
+    context?: Context;
+    messages?: ResultMessageRecord[];
+    runtimeErrors?: RawMessageRecord[];
+    comparedSpecsTableContent?: string;
+    summaryDataSuppressionAndDetailsText?: string;
+  }
+
+  const createTestParameters = (overrides: TestParameters = {}) => ({
+    context: overrides.context || createMockContext(),
+    messages: overrides.messages || [],
+    runtimeErrors: overrides.runtimeErrors || [],
+    comparedSpecsTableContent: overrides.comparedSpecsTableContent || "",
+    summaryDataSuppressionAndDetailsText: overrides.summaryDataSuppressionAndDetailsText || "",
+  });
+
+  // Helper functions
+  const callGenerateBreakingChangeResultSummary = async (params: TestParameters = {}) => {
+    const testParams = createTestParameters(params);
+    return generateBreakingChangeResultSummary(
+      testParams.context,
+      testParams.messages,
+      testParams.runtimeErrors,
+      testParams.comparedSpecsTableContent,
+      testParams.summaryDataSuppressionAndDetailsText,
+    );
+  };
+
+  const expectSummaryContains = (content: string) => {
+    expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining(content));
+  };
+
+  const expectLogMessage = (content: string) => {
+    expect(mockLogMessage).toHaveBeenCalledWith(expect.stringContaining(content));
+  };
+
   describe("generateBreakingChangeResultSummary", () => {
     it("should generate summary with success status", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent =
-        "| Spec | Status |\n|------|--------|\n| test.json | Modified |";
-      const summaryDataSuppressionAndDetailsText = "\n\nAdditional details...";
+      await callGenerateBreakingChangeResultSummary({
+        comparedSpecsTableContent: TEST_CONSTANTS.TABLE_CONTENT.SPECS,
+        summaryDataSuppressionAndDetailsText: TEST_CONSTANTS.TEXTS.ADDITIONAL_DETAILS,
+      });
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockLogMessage).toHaveBeenCalledWith(expect.stringContaining("Successfully wrote"));
+      expectLogMessage(TEST_CONSTANTS.MESSAGES.SUCCESS_LOG);
     });
 
     it("should generate summary with failure status", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [
+      const messages = [
         createMockResultMessage({ level: "Error" }),
         createMockResultMessage({ level: "Warning" }),
       ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ messages });
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("Detected: 1 Errors, 1 Warnings"),
-      );
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.DETECTED_ERRORS_WARNINGS);
     });
 
     it("should handle messages with only warnings", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [
+      const messages = [
         createMockResultMessage({ level: "Warning" }),
         createMockResultMessage({ level: "Warning" }),
       ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ messages });
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("Detected: 2 Warnings"),
-      );
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.DETECTED_WARNINGS);
     });
 
     it("should include compared specs table content", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent =
-        "| Spec | Status |\n|------|--------|\n| test.json | Modified |";
-      const summaryDataSuppressionAndDetailsText = "";
+      await callGenerateBreakingChangeResultSummary({
+        comparedSpecsTableContent: TEST_CONSTANTS.TABLE_CONTENT.SPECS,
+      });
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("| Spec | Status |"));
+      expectSummaryContains(TEST_CONSTANTS.TABLE_CONTENT.SPECS_HEADER);
     });
 
     it("should handle runtime errors", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [createMockRawMessage({ level: "Error" })];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
+      const runtimeErrors = [createMockRawMessage({ level: "Error" })];
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ runtimeErrors });
 
-      expect(mockLogMessage).toHaveBeenCalledWith(
-        expect.stringContaining("messageRecords# raw/result/all: 1/0/1"),
-      );
+      expectLogMessage(TEST_CONSTANTS.MESSAGES.MESSAGE_RECORDS_LOG);
     });
 
     it("should handle different check names", async () => {
       const context = createMockContext({
-        checkName: "BreakingChange(Cross-Version)",
+        checkName: TEST_CONSTANTS.CHECK_NAMES.CROSS_VERSION,
       });
-      const messages: ResultMessageRecord[] = [
+      const messages = [
         createMockResultMessage({ groupName: "stable" }),
         createMockResultMessage({ groupName: "preview" }),
       ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ context, messages });
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("Detected"));
+      expectSummaryContains("Detected");
     });
 
     it("should handle mixed stable and preview messages", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [
+      const messages = [
         createMockResultMessage({ level: "Error", groupName: "stable" }),
         createMockResultMessage({ level: "Warning", groupName: "preview" }),
         createMockResultMessage({ level: "Error", groupName: "preview" }),
       ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
 
       mockCreateBreakingChangeMdReport.mockReturnValue({
         msgs: [],
@@ -237,163 +248,45 @@ describe("generate-report", () => {
         rawMessage: "Test report with messages",
       } as BreakingChangeMdReport);
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ messages });
 
       expect(mockCreateBreakingChangeMdReport).toHaveBeenCalled();
       expect(mockSortBreakingChangeMdReports).toHaveBeenCalled();
     });
 
     it("should handle empty message lists", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
+      await callGenerateBreakingChangeResultSummary();
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("No breaking changes detected"),
-      );
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.NO_BREAKING_CHANGES);
     });
 
     it("should handle cross-version check with different API versions", async () => {
       const context = createMockContext({
-        checkName: "BreakingChange(Cross-Version)",
+        checkName: TEST_CONSTANTS.CHECK_NAMES.CROSS_VERSION,
       });
-      const messages: ResultMessageRecord[] = [
+      const messages = [
         createMockResultMessage({ groupName: "stable" }),
         createMockResultMessage({ groupName: "preview" }),
       ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
+      await callGenerateBreakingChangeResultSummary({ context, messages });
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining(
-          "The following breaking changes have been detected in comparison to the latest stable version",
-        ),
-      );
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining(
-          "The following breaking changes have been detected in comparison to the latest preview version",
-        ),
-      );
-    });
-
-    it.skip("should handle comment data length exceeding limit", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [createMockResultMessage()];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "x".repeat(60000); // Very long table content
-      const summaryDataSuppressionAndDetailsText = "";
-
-      // Mock a very long report string
-      mockReportToString.mockReturnValue("x".repeat(10000));
-
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockLogWarning).toHaveBeenCalledWith(
-        expect.stringContaining("ASSERTION VIOLATION! commentData.length"),
-      );
-      expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("⚠️ TRUNCATED ⚠️"));
-    });
-
-    it.skip("should iteratively reduce max row count to fit within limits", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [
-        createMockResultMessage(),
-        createMockResultMessage(),
-        createMockResultMessage(),
-      ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
-
-      // First call returns long string, subsequent calls return shorter strings
-      mockReportToString
-        .mockReturnValueOnce("x".repeat(70000)) // Too long
-        .mockReturnValueOnce("x".repeat(60000)) // Still too long
-        .mockReturnValueOnce("x".repeat(50000)); // Finally fits
-
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockLogMessage).toHaveBeenCalledWith(
-        expect.stringContaining("maxRowCount reduced/current/max"),
-      );
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.STABLE_VERSION_COMPARISON);
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.PREVIEW_VERSION_COMPARISON);
     });
 
     it("should include suppression and details text in summary", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText =
-        "\n\n**Suppression Info:**\nSome details about suppressions.";
+      await callGenerateBreakingChangeResultSummary({
+        summaryDataSuppressionAndDetailsText: TEST_CONSTANTS.TEXTS.SUPPRESSION_INFO,
+      });
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("**Suppression Info:**\nSome details about suppressions."),
-      );
+      expectSummaryContains("**Suppression Info:**\nSome details about suppressions.");
     });
 
     it("should include important notice in summary", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
+      await callGenerateBreakingChangeResultSummary();
 
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("> [!IMPORTANT]\n> Browse to the job logs to see the details."),
-      );
+      expectSummaryContains(TEST_CONSTANTS.MESSAGES.IMPORTANT_NOTICE);
     });
   });
 });

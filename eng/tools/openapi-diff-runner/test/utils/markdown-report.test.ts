@@ -21,61 +21,128 @@ vi.mock("../../src/log.js", () => ({
 }));
 
 describe("markdown-report", () => {
+  // Test constants
+  const DATE = new Date("2023-01-01");
+  const IDS = {
+    r001: "R001",
+    r002: "R002",
+  };
+  const MESSAGES = {
+    testError: "Test error message",
+    runtimeWarning: "Runtime warning message",
+    testMessage: "Test message",
+    rawMessage: "Raw message",
+    resultMessage: "Result message",
+    infoMessage: "Info message",
+    errorMessage: "Error message",
+    messageA: "Message A",
+    messageB: "Message B",
+  };
+  const URLS = {
+    docs: "https://docs.example.com",
+    docsWithRules: "https://docs.example.com/rules/R001",
+    github: "https://github.com/owner/repo/blob/main/specification/test.json",
+  };
+  const CODES = {
+    testError: "TestError",
+    testInfo: "TestInfo",
+  };
+  const LEVELS = {
+    error: "Error" as const,
+    warning: "Warning" as const,
+    info: "Info" as const,
+  };
+
+  // Helper functions for creating messages
+  const createResultMessage = (overrides: Partial<ResultMessageRecord> = {}): ResultMessageRecord =>
+    ({
+      type: "Result",
+      id: IDS.r001,
+      level: LEVELS.error,
+      message: MESSAGES.testError,
+      time: DATE,
+      docUrl: URLS.docsWithRules,
+      code: CODES.testError,
+      paths: [
+        {
+          tag: "New",
+          path: URLS.github,
+          jsonPath: "$.paths./test",
+        },
+      ],
+      ...overrides,
+    }) as ResultMessageRecord;
+
+  const createRawMessage = (overrides: Partial<BrChMsgRecord> = {}) =>
+    ({
+      type: "Raw" as const,
+      level: LEVELS.warning,
+      message: MESSAGES.runtimeWarning,
+      time: DATE,
+      groupName: "test-group",
+      extra: { details: "Additional info" },
+      ...overrides,
+    }) as BrChMsgRecord;
+
+  const createReport = (
+    overrides: Partial<BreakingChangeMdReport> = {},
+  ): BreakingChangeMdReport => ({
+    msgs: [createResultMessage()],
+    rows: ["| 1 | Test message |\\n"],
+    type: "Result",
+    level: LEVELS.error,
+    id: IDS.r001,
+    rawMessage: "",
+    ...overrides,
+  });
+
+  const createMultipleResultMessages = (count: number): ResultMessageRecord[] =>
+    Array.from({ length: count }, (_, i) =>
+      createResultMessage({
+        id: `R00${i + 1}`,
+        message: `Test message ${i + 1}`,
+      }),
+    );
+
+  const expectReportStructure = (
+    result: BreakingChangeMdReport,
+    expected: Partial<BreakingChangeMdReport>,
+  ) => {
+    expect(result).toMatchObject(expected);
+    expect(result.rows).toHaveLength(expected.rows?.length || 1);
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   describe("createBreakingChangeMdReport", () => {
     it("should create report from Result messages", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "R001",
-          level: "Error",
-          message: "Test error message",
-          time: new Date("2023-01-01"),
-          docUrl: "https://docs.example.com/rules/R001",
-          code: "TestError",
-          paths: [
-            {
-              tag: "New",
-              path: "https://github.com/owner/repo/blob/main/specification/test.json",
-              jsonPath: "$.paths./test",
-            },
-          ],
-        } as ResultMessageRecord,
-      ];
+      const msgs = [createResultMessage()];
 
       const result = createBreakingChangeMdReport(msgs);
 
-      expect(result.msgs).toBe(msgs);
-      expect(result.type).toBe("Result");
-      expect(result.level).toBe("Error");
-      expect(result.id).toBe("R001");
-      expect(result.rawMessage).toBe("");
-      expect(result.rows).toHaveLength(1);
+      expectReportStructure(result, {
+        msgs,
+        type: "Result",
+        level: LEVELS.error,
+        id: IDS.r001,
+        rawMessage: "",
+      });
     });
 
     it("should create report from Raw messages", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Raw",
-          level: "Warning",
-          message: "Runtime warning message",
-          time: new Date("2023-01-01"),
-          groupName: "test-group",
-          extra: { details: "Additional info" },
-        },
-      ];
+      const msgs = [createRawMessage()];
 
       const result = createBreakingChangeMdReport(msgs);
 
-      expect(result.msgs).toBe(msgs);
-      expect(result.type).toBe("Raw");
-      expect(result.level).toBe("Warning");
-      expect(result.id).toBeUndefined();
-      expect(result.rawMessage).toBe("Runtime warning message");
-      expect(result.rows).toHaveLength(1);
+      expectReportStructure(result, {
+        msgs,
+        type: "Raw",
+        level: LEVELS.warning,
+        id: undefined,
+        rawMessage: MESSAGES.runtimeWarning,
+      });
     });
 
     it("should validate empty message array", () => {
@@ -85,24 +152,9 @@ describe("markdown-report", () => {
     });
 
     it("should warn about mixed message types", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "R001",
-          level: "Error",
-          message: "Test message",
-          time: new Date("2023-01-01"),
-          docUrl: "https://docs.example.com/rules/R001",
-          code: "TestError",
-          paths: [],
-        } as ResultMessageRecord,
-        {
-          type: "Raw",
-          level: "Error",
-          message: "Raw message",
-          time: new Date("2023-01-01"),
-          groupName: "test-group",
-        },
+      const msgs = [
+        createResultMessage({ message: MESSAGES.testMessage, paths: [] }),
+        createRawMessage({ level: LEVELS.error, message: MESSAGES.rawMessage }),
       ];
 
       createBreakingChangeMdReport(msgs);
@@ -115,41 +167,23 @@ describe("markdown-report", () => {
 
   describe("sortBreakingChangeMdReports", () => {
     it("should sort by type (Raw before Result)", () => {
-      const resultReport: BreakingChangeMdReport = {
-        msgs: [
-          {
-            type: "Result",
-            id: "R001",
-            level: "Error",
-            message: "Result message",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
-            paths: [],
-          } as ResultMessageRecord,
-        ],
+      const resultReport = createReport({
+        msgs: [createResultMessage({ message: MESSAGES.resultMessage, paths: [] })],
         rows: ["| 1 | Result message |\\n"],
         type: "Result",
-        level: "Error",
-        id: "R001",
+        level: LEVELS.error,
+        id: IDS.r001,
         rawMessage: "",
-      };
+      });
 
-      const rawReport: BreakingChangeMdReport = {
-        msgs: [
-          {
-            type: "Raw",
-            level: "Error",
-            message: "Raw message",
-            time: new Date("2023-01-01"),
-            groupName: "test-group",
-          },
-        ],
+      const rawReport = createReport({
+        msgs: [createRawMessage({ level: LEVELS.error, message: MESSAGES.rawMessage })],
         rows: ["| 1 | Raw message |\\n"],
         type: "Raw",
-        level: "Error",
-        rawMessage: "Raw message",
-      };
+        level: LEVELS.error,
+        rawMessage: MESSAGES.rawMessage,
+        id: undefined,
+      });
 
       const result = sortBreakingChangeMdReports([resultReport, rawReport]);
       expect(result[0].type).toBe("Raw");
@@ -157,45 +191,38 @@ describe("markdown-report", () => {
     });
 
     it("should sort by level (Error before Warning before Info)", () => {
-      const infoReport: BreakingChangeMdReport = {
+      const infoReport = createReport({
         msgs: [
-          {
-            type: "Result",
-            id: "R001",
-            level: "Info",
-            message: "Info message",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestInfo",
+          createResultMessage({
+            id: IDS.r001,
+            level: LEVELS.info,
+            message: MESSAGES.infoMessage,
+            code: CODES.testInfo,
             paths: [],
-          } as ResultMessageRecord,
+          }),
         ],
         rows: ["| 1 | Info message |\\n"],
         type: "Result",
-        level: "Info",
-        id: "R001",
+        level: LEVELS.info,
+        id: IDS.r001,
         rawMessage: "",
-      };
+      });
 
-      const errorReport: BreakingChangeMdReport = {
+      const errorReport = createReport({
         msgs: [
-          {
-            type: "Result",
-            id: "R002",
-            level: "Error",
-            message: "Error message",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
+          createResultMessage({
+            id: IDS.r002,
+            level: LEVELS.error,
+            message: MESSAGES.errorMessage,
             paths: [],
-          } as ResultMessageRecord,
+          }),
         ],
         rows: ["| 1 | Error message |\\n"],
         type: "Result",
-        level: "Error",
-        id: "R002",
+        level: LEVELS.error,
+        id: IDS.r002,
         rawMessage: "",
-      };
+      });
 
       const result = sortBreakingChangeMdReports([infoReport, errorReport]);
       expect(result[0].level).toBe("Error");
@@ -203,45 +230,35 @@ describe("markdown-report", () => {
     });
 
     it("should sort by ID when type and level are same", () => {
-      const reportB: BreakingChangeMdReport = {
+      const reportB = createReport({
         msgs: [
-          {
-            type: "Result",
-            id: "R002",
-            level: "Error",
-            message: "Message B",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
+          createResultMessage({
+            id: IDS.r002,
+            message: MESSAGES.messageB,
             paths: [],
-          } as ResultMessageRecord,
+          }),
         ],
         rows: ["| 1 | Message B |\\n"],
         type: "Result",
-        level: "Error",
-        id: "R002",
+        level: LEVELS.error,
+        id: IDS.r002,
         rawMessage: "",
-      };
+      });
 
-      const reportA: BreakingChangeMdReport = {
+      const reportA = createReport({
         msgs: [
-          {
-            type: "Result",
-            id: "R001",
-            level: "Error",
-            message: "Message A",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
+          createResultMessage({
+            id: IDS.r001,
+            message: MESSAGES.messageA,
             paths: [],
-          } as ResultMessageRecord,
+          }),
         ],
         rows: ["| 1 | Message A |\\n"],
         type: "Result",
-        level: "Error",
-        id: "R001",
+        level: LEVELS.error,
+        id: IDS.r001,
         rawMessage: "",
-      };
+      });
 
       const result = sortBreakingChangeMdReports([reportB, reportA]);
       expect(result[0].id).toBe("R001");
@@ -251,25 +268,10 @@ describe("markdown-report", () => {
 
   describe("reportToString", () => {
     it("should convert report to markdown string", () => {
-      const report: BreakingChangeMdReport = {
-        msgs: [
-          {
-            type: "Result",
-            id: "R001",
-            level: "Error",
-            message: "Test message",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com/rules/R001",
-            code: "TestError",
-            paths: [],
-          } as ResultMessageRecord,
-        ],
+      const report = createReport({
+        msgs: [createResultMessage({ message: MESSAGES.testMessage, paths: [] })],
         rows: ["| 1 | Test message |\\n"],
-        type: "Result",
-        level: "Error",
-        id: "R001",
-        rawMessage: "",
-      };
+      });
 
       const result = reportToString(report, 10);
 
@@ -281,21 +283,7 @@ describe("markdown-report", () => {
     });
 
     it("should include deficit row when maxRowCount is exceeded", () => {
-      const msgs: BrChMsgRecord[] = Array.from(
-        { length: 5 },
-        (_, i) =>
-          ({
-            type: "Result",
-            id: `R00${i + 1}`,
-            level: "Error",
-            message: `Test message ${i + 1}`,
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
-            paths: [],
-          }) as ResultMessageRecord,
-      );
-
+      const msgs = createMultipleResultMessages(5);
       const report = createBreakingChangeMdReport(msgs);
       const result = reportToString(report, 3);
 
@@ -307,25 +295,10 @@ describe("markdown-report", () => {
 
   describe("getReportLength", () => {
     it("should return correct length of report string", () => {
-      const report: BreakingChangeMdReport = {
-        msgs: [
-          {
-            type: "Result",
-            id: "R001",
-            level: "Error",
-            message: "Test message",
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com/rules/R001",
-            code: "TestError",
-            paths: [],
-          } as ResultMessageRecord,
-        ],
+      const report = createReport({
+        msgs: [createResultMessage({ message: MESSAGES.testMessage, paths: [] })],
         rows: ["| 1 | Test message |\\n"],
-        type: "Result",
-        level: "Error",
-        id: "R001",
-        rawMessage: "",
-      };
+      });
 
       const expectedString = reportToString(report, 10);
       const result = getReportLength(report, 10);
@@ -336,21 +309,7 @@ describe("markdown-report", () => {
 
   describe("getRowCount", () => {
     it("should return correct number of rows", () => {
-      const msgs: BrChMsgRecord[] = Array.from(
-        { length: 3 },
-        (_, i) =>
-          ({
-            type: "Result",
-            id: `R00${i + 1}`,
-            level: "Error",
-            message: `Test message ${i + 1}`,
-            time: new Date("2023-01-01"),
-            docUrl: "https://docs.example.com",
-            code: "TestError",
-            paths: [],
-          }) as ResultMessageRecord,
-      );
-
+      const msgs = createMultipleResultMessages(3);
       const report = createBreakingChangeMdReport(msgs);
       const result = getRowCount(report);
 

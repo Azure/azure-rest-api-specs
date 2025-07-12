@@ -140,10 +140,10 @@ function getReports(
 
   Object.entries(msgsByKey).forEach(([, msgs]) => {
     const stableMsgs = msgs.filter(
-      (msg) => (msg.groupName as ApiVersionLifecycleStage) == "stable",
+      (msg) => (msg.groupName as ApiVersionLifecycleStage) == ApiVersionLifecycleStage.STABLE,
     );
     const previewMsgs = msgs.filter(
-      (msg) => (msg.groupName as ApiVersionLifecycleStage) == "preview",
+      (msg) => (msg.groupName as ApiVersionLifecycleStage) == ApiVersionLifecycleStage.PREVIEW,
     );
 
     if (stableMsgs.length > 0) {
@@ -189,12 +189,12 @@ function getComparedApiVersionsReportsString(
 ): string {
   const stableApiVersionComparisonReportsString: string = getReportsComparedToApiVersionString(
     stableReports,
-    "stable",
+    ApiVersionLifecycleStage.STABLE,
     maxRowCount,
   );
   const previewApiVersionComparisonReportsString: string = getReportsComparedToApiVersionString(
     previewReports,
-    "preview",
+    ApiVersionLifecycleStage.PREVIEW,
     maxRowCount,
   );
   return stableApiVersionComparisonReportsString + previewApiVersionComparisonReportsString;
