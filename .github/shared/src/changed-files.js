@@ -2,6 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { access } from "fs/promises";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -205,12 +206,26 @@ export function example(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function quickstartTemplate(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/quickstart-templates/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function swagger(file) {
   return (
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
+    !quickstartTemplate(file) &&
     !scenario(file)
   );
 }
@@ -223,4 +238,18 @@ export function scenario(file) {
   return (
     typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
   );
+}
+
+/**
+ * Check if a path exists
+ * @param {string} path Path to check for existence
+ * @returns true if the path exists, false otherwise
+ */
+export async function pathExists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
