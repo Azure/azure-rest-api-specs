@@ -174,6 +174,7 @@ import { readFileSync } from "fs";
  *
  * See also: https://aka.ms/SpecPRReviewARMInvariants
  */
+// todo: inject `core` for access to logging
 export class Label {
   /**
    * @param {string} name
@@ -266,8 +267,6 @@ export class Label {
     );
   }
 }
-
-
 
 // #endregion typedefs
 // #region constants
@@ -435,6 +434,156 @@ async function processTypeSpec(ctx, labelContext) {
   typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processTypeSpec")
 }
+export async function processPrChanges(
+  ctx: IValidatorContext,
+  Handlers: ChangeHandler[]
+) {
+  console.log("ENTER definition processPrChanges")
+  const prChange = await getPRChanges(ctx);
+  prChange.forEach((prChange) => {
+    Handlers.forEach((handler) => {
+      if (prChange.fileType in handler) {
+        handler?.[prChange.fileType]?.(prChange);
+      }
+    });
+  });
+  console.log("RETURN definition processPrChanges")
+}
+
+export async function getPRChanges(ctx: IValidatorContext): Promise<PRChange[]> {
+  console.log("ENTER definition getPRChanges")
+  const results: PRChange[] = [];
+
+  function newChange(
+    fileType: FileTypes,
+    changeType: ChangeTypes,
+    filePath?: string,
+    additionalInfo?: any
+  ) {
+    if (filePath) {
+      results.push({
+        filePath,
+        fileType,
+        changeType,
+        additionalInfo,
+      });
+    }
+  }
+
+  function newChanges(
+    fileType: FileTypes,
+    changeType: ChangeTypes,
+    files?: string[]
+  ) {
+    if (files) {
+      files.forEach((filePath) => newChange(fileType, changeType, filePath));
+    }
+  }
+
+  function genChanges(type: FileTypes, diffs: DiffResult<string>) {
+    newChanges(type, "Addition", diffs.additions);
+    newChanges(type, "Deletion", diffs.deletions);
+    newChanges(type, "Update", diffs.changes);
+  }
+
+  function genReadmeChanges(readmeDiffs?: DiffResult<ReadmeTag>) {
+    if (readmeDiffs) {
+      readmeDiffs.additions?.forEach((d) =>
+        newChange("ReadmeFile", "Addition", d.readme, d.tags)
+      );
+      readmeDiffs.changes?.forEach((d) =>
+        newChange("ReadmeFile", "Update", d.readme, d.tags)
+      );
+      readmeDiffs.deletions?.forEach((d) =>
+        newChange("ReadmeFile", "Deletion", d.readme, d.tags)
+      );
+    }
+  }
+
+  genChanges("SwaggerFile", await ctx.getSwaggerDiffs());
+  genChanges("TypeSpecFile", await ctx.getTypeSpecDiffs());
+  genChanges("ExampleFile", await ctx.getExampleDiffs());
+  genReadmeChanges(await ctx.getReadmeDiffs());
+
+  console.log("RETURN definition getPRChanges")
+  return results;
+}
+
+async function processARMReview(
+  context: IValidatorContext,
+  labelContext: LabelContext,
+  resourceManagerLabelShouldBePresent: boolean,
+  versioningReviewRequiredLabelShouldBePresent: boolean,
+  breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+  rpaasExceptionLabelShouldBePresent: boolean,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean,
+  isDraft: boolean,
+): Promise<{ armReviewLabelShouldBePresent: boolean }> {
+  console.log("ENTER definition processARMReview")
+  const [owner, repo, prNumber] = getPRInfo(context)
+
+  const armReviewLabel = new Label("ARMReview", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  armReviewLabel.shouldBePresent = false;
+
+  const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  newApiVersionLabel.shouldBePresent = false;
+
+  const branch = (context.contextConfig() as PRContext).targetBranch
+  const prTitle = await getPrTitle(owner, repo, prNumber)
+  const isReleaseBranchVal: boolean = isReleaseBranch(branch)
+  const isShiftLeftPRWithRPSaaSDevVal: boolean = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
+  const isBranchInScopeOfSpecReview: boolean = isReleaseBranchVal || isShiftLeftPRWithRPSaaSDevVal
+  let isNewApiVersionVal: boolean | "not_computed" = "not_computed"
+  let isMissingBaseCommit: boolean | "not_computed" = "not_computed"
+
+  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
+  // determines which kind of review exactly we need.
+  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview
+  if (specReviewApplies) {
+    isNewApiVersionVal = await isNewApiVersion(context)
+    if (isNewApiVersionVal) {
+      // Note that in case of data-plane PRs, the addition of this label will result
+      // in API stewardship board review being required.
+      // See requiredLabelsRules.ts.
+      newApiVersionLabel.shouldBePresent = true;
+    }
+
+    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent
+    await processARMReviewWorkflowLabels(
+      labelContext,
+      armReviewLabel.shouldBePresent,
+      versioningReviewRequiredLabelShouldBePresent,
+      breakingChangeReviewRequiredLabelShouldBePresent,
+      ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+      rpaasExceptionLabelShouldBePresent,
+      ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
+  }
+
+  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+
+  console.log(`RETURN definition processARMReview. `
+    + `url: ${new PRKey(owner, repo, prNumber).toUrl()}, owner: ${owner}, repo: ${repo}, pr: ${prNumber}, branch: ${branch}, `
+    + `isReleaseBranch: ${isReleaseBranchVal}, `
+    + `isShiftLeftPRWithRPSaaSDev: ${isShiftLeftPRWithRPSaaSDevVal}, `
+    + `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, `
+    + `isNewApiVersion: ${isNewApiVersionVal}, `
+    + `isMissingBaseCommit: ${isMissingBaseCommit}, `
+    + `isDraft: ${isDraft}, `
+    + `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, `
+    + `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`)
+
+  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent }
+}
+
+function isReleaseBranch(branchName: string) {
+  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  return branchRegex.some((b) => b.test(branchName));
+}
+
 
 // #endregion
 // #region LabelRules

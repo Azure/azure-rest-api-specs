@@ -255,12 +255,34 @@ export async function summarizeChecksImpl(
     `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
   );
 
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  // we always want fresh labels
+  // we always need a file list. We are pulling the file list from gh because we won't be in the correct file context
+  // to await getChangedFiles, as we run on pull_request_target and workflow_run events. We _aren't_ in the actual PR context
+  // as far as files go
+
+  // If there is a check that DOES need PR context, we will need to shift that logic onto a solo workflow that runs on pull_request
+  // events, and then we can await getChangedFiles.
+  const [labels, files] = await Promise.all([
+    github.paginate(
+      github.rest.issues.listLabelsOnIssue,
+      {
+        owner,
+        repo,
+        issue_number: issue_number,
+        per_page: PER_PAGE_MAX
+      }
+    ),
+    github.paginate(
+      github.rest.pulls.listFiles,
+      {
+        owner,
+        repo,
+        pull_number: issue_number
+      }
+    )
+  ]);
+
+  core.info(JSON.stringify(files));
 
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
@@ -268,6 +290,9 @@ export async function summarizeChecksImpl(
   // /** @type { string | undefined } */
   // const changedLabel = context.payload.label?.name;
   const isDraft = context.payload.pull_request?.draft ?? false;
+
+  // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
+  // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
   let labelContext = await updateLabels(targetBranch, isDraft, labelNames);
 
   for (const label of labelContext.toRemove) {
@@ -434,20 +459,23 @@ function containsNone(arr, values) {
   return values.every((value) => !arr.includes(value));
 }
 
-// /**
-//  *
-//  * @param {any[]} arr
-//  * @param {any[]} values
-//  * @returns
-//  */
-// function containsAny(arr, values) {
-//   return values.some((value) => arr.includes(value));
-// }
+/**
+ * @param {Set<string>} labelsToAdd
+ * @param {Set<string>} labelsToRemove
+ */
+function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
+  const intersection = Array.from(labelsToAdd).filter(label => labelsToRemove.has(label));
+  if (intersection.length > 0) {
+    console.warn("ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! "
+    + `labelsToAdd: [${[...labelsToAdd].join(", ")}]. `
+    + `labelsToRemove: [${[...labelsToRemove].join(", ")}]. `
+    + `intersection: [${intersection.join(", ")}].`)
+  }
+}
+
 
 // * @param {string} eventName
-// * @param {string} targetBranch
 // * @param {string | undefined } changedLabel
-
 /**
  * @param {string} targetBranch
  * @param {boolean} isDraft
@@ -467,7 +495,7 @@ export function updateLabels(
   // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
 
   /** @type {import("./labelling.js").LabelContext} */
-  const context = {
+  const labelContext = {
     present: new Set(existingLabels),
     toAdd: new Set(),
     toRemove: new Set()
@@ -475,10 +503,63 @@ export function updateLabels(
   console.log(targetBranch);
   console.log(isDraft);
 
-  // process wait for arm feedback vs arm feedback requested
-  processArmReviewLabels(context, existingLabels);
+  processArmReviewLabels(labelContext, existingLabels);
 
-  return context;
+  const { resourceManagerLabelShouldBePresent } = await processPRType(
+    context,
+    labelContext
+  );
+
+  await processSuppression(context, labelContext);
+
+  const {
+    versioningReviewRequiredLabelShouldBePresent,
+    breakingChangeReviewRequiredLabelShouldBePresent,
+  } = await processBreakingChangeLabels(prContext, labelContext);
+
+  const { rpaasLabelShouldBePresent } = await processRPaaS(
+    context,
+    labelContext
+  );
+
+  const { newRPNamespaceLabelShouldBePresent } = await processNewRPNamespace(
+    context,
+    labelContext,
+    resourceManagerLabelShouldBePresent
+  );
+
+  const {
+    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+    rpaasExceptionLabelShouldBePresent
+  } = await processNewRpNamespaceWithoutRpaasLabel(
+    context,
+    labelContext,
+    resourceManagerLabelShouldBePresent,
+    newRPNamespaceLabelShouldBePresent,
+    rpaasLabelShouldBePresent
+  );
+
+  const { ciRpaasRPNotInPrivateRepoLabelShouldBePresent } = await processRpaasRpNotInPrivateRepoLabel(
+    context,
+    labelContext,
+    resourceManagerLabelShouldBePresent,
+    rpaasLabelShouldBePresent
+  );
+
+  const { armReviewLabelShouldBePresent } = await processARMReview(
+    context,
+    labelContext,
+    resourceManagerLabelShouldBePresent,
+    versioningReviewRequiredLabelShouldBePresent,
+    breakingChangeReviewRequiredLabelShouldBePresent,
+    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+    rpaasExceptionLabelShouldBePresent,
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+    isDraft,
+  );
+
+  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove)
+  return labelContext;
 }
 
 /**
