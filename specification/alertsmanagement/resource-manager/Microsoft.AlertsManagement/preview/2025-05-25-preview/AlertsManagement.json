@@ -1416,12 +1416,12 @@
     },
     "BaseDetails": {
       "description": "Base details class.",
-	    "type": "object",
+      "type": "object",
       "discriminator": "type",
       "required": [
         "type"
       ],
-      "properties" :{
+      "properties": {
         "type": {
           "type": "string",
           "description": "Type of modification details",
@@ -1431,21 +1431,22 @@
             "ActionTriggered"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "AlertModificationType",
             "modelAsString": true
           }
         }
-      }
+      },
+      "x-ms-discriminator-value": "BaseDetails"
     },
     "PropertyChangeDetails": {
       "x-ms-discriminator-value": "PropertyChange",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["PropertyChange"],
-          "description": "Discriminator for PropertyChangeDetails"
-        },
         "oldValue": {
           "type": "string",
           "description": "The value before the change"
@@ -1458,20 +1459,17 @@
           "type": "string",
           "description": "Comments for the change"
         }
-      },
-      "required": ["type"]
-
+      }
     },
     "ActionSuppressedDetails": {
       "x-ms-discriminator-value": "ActionSuppressed",
       "type": "object",
-      "required": ["type"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["ActionSuppressed"],
-          "description": "Discriminator for PropertyChangeDetails"
-        },
         "suppressionActionRules": {
           "type": "array",
           "description": "List of suppression action rules",
@@ -1481,7 +1479,7 @@
           }
         },
         "suppressedActionGroups": {
-          "description": "List of list of suppression action rules",
+          "description": "List of suppressed action groups",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TriggeredRule"
@@ -1492,18 +1490,19 @@
     "ActionTriggeredDetails": {
       "x-ms-discriminator-value": "ActionTriggered",
       "type": "object",
-      "required": ["type"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["ActionTriggered"],
-          "description": "Discriminator for PropertyChangeDetails"
-        },
         "actionGroup": {
-          "$ref": "#/definitions/TriggeredRule"
+          "$ref": "#/definitions/TriggeredRule",
+          "description": "The action group that was triggered"
         },
         "notificationResult": {
-          "$ref": "#/definitions/NotificationResult"
+          "$ref": "#/definitions/NotificationResult",
+          "description": "The result of the notification delivery"
         }
       }
     },
