@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-  - Microsoft.OnlineExperimentation/preview/2025-08-01-preview/OnlineExperimentationWorkspace.json
+  - preview/2025-08-01-preview/OnlineExperimentationWorkspace.json
 ```
 
 ### Tag: package-2025-05-31-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2025-05-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-31-preview'
 input-file:
-  - Microsoft.OnlineExperimentation/preview/2025-05-31-preview/OnlineExperimentationWorkspace.json
+  - preview/2025-05-31-preview/OnlineExperimentationWorkspace.json
 ```
 
 ---
