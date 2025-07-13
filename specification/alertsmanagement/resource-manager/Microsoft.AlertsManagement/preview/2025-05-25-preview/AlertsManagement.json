@@ -1513,17 +1513,21 @@
           "type": "string",
           "description": "The action group ID"
         },
-        "RuleId": {
+        "ruleId": {
           "type": "string",
           "description": "The rule ID"
         },
-        "RuleType": {
+        "ruleType": {
           "type": "string",
           "description": "The rule type",
           "enum": [
             "AlertRule",
             "ActionRule"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "RuleType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1545,7 +1549,11 @@
             "Failed",
             "ThrottledByAlertRule",
             "ThrottledBySubscription"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ResultStatus",
+            "modelAsString": true
+          }
         }
       }
     },
