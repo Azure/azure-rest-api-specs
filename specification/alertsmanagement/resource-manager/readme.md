@@ -68,6 +68,8 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
     from: AlertsManagement.json
+  - suppress: MULTIPLE_API_VERSION
+    reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
 
 ``` yaml
