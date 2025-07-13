@@ -30,12 +30,12 @@
         "criteria": {
           "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
           "allOf": [
-              {
-                "name": "Metric1",
-                "criterionType": "Query_StaticThresholdCriterion",
-                "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
-              }
-            ]
+            {
+              "name": "Metric1",
+              "criterionType": "Query_StaticThresholdCriterion",
+              "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+            }
+          ]
         },
         "actions": [
           {
@@ -80,12 +80,12 @@
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
             "allOf": [
-                {
-                  "name": "Metric1",
-                  "criterionType": "StaticThresholdCriterion",
-                  "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
-                }
-              ]
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+              }
+            ]
           },
           "actions": [
             {
@@ -130,12 +130,12 @@
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
             "allOf": [
-                {
-                  "name": "Metric1",
-                  "criterionType": "StaticThresholdCriterion",
-                  "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
-                }
-              ]
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+              }
+            ]
           },
           "actions": [
             {

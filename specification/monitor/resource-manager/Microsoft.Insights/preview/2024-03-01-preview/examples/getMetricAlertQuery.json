@@ -36,12 +36,12 @@
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
             "allOf": [
-                {
-                  "name": "Metric1",
-                  "criterionType": "StaticThresholdCriterion",
-                  "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
-                }
-              ]
+              {
+                "name": "Metric1",
+                "criterionType": "StaticThresholdCriterion",
+                "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
+              }
+            ]
           },
           "resolveConfiguration": {
             "autoResolved": true,
