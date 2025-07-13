@@ -744,6 +744,51 @@
           "final-state-via": "azure-async-operation"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_resourceAssociationName",
+        "description": "Return a NetworkSecurityPerimeterConfigurations resourceAssociationName",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationassociationProxyName": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationAssociationproxy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration associationProxyName",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -880,6 +925,9 @@
             "alternateName": {
               "type": "string",
               "description": "Alternate name specified when alias and namespace names are same."
+            },
+            "platformCapabilities": {
+              "$ref": "#/definitions/platformCapabilities"
             },
             "geoDataReplication": {
               "$ref": "#/definitions/GeoDataReplicationProperties",
@@ -1061,6 +1109,32 @@
           "type": "string",
           "x-ms-client-name": "ClientId",
           "readOnly": true
+        }
+      }
+    },
+    "platformCapabilities":{
+      "x-ms-client-flatten": true,
+      "properties": {
+        "confidentialCompute": {
+        "$ref": "#/definitions/confidentialCompute"
+        }
+      }
+    },
+    "confidentialCompute": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "Mode": {
+          "description" : "Setting to Enable or Disable Confidential Compute",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
         }
       }
     },
