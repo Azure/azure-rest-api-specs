@@ -100,6 +100,11 @@ input-file:
    - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}/history
    - POST /providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate
 
+3. Added event details on alert history modification record:
+   - New object property named "details"
+   - The object contains details relevent to this specific event
+   - Is  null when the event is 'AlertCreated'
+
    These endpoints enable tenant-level alert operations without requiring a specific scope parameter.
    The operations are available through new operationIds: Alerts_GetAllTenant, Alerts_GetByIdTenant, Alerts_GetHistoryTenant, Alerts_ChangeStateTenant.
 
