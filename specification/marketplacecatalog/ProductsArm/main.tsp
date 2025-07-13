@@ -24,4 +24,20 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 }
 
+/** Product resource */
+model ProductListing is ProxyResource<ProductSummary> {
+  ...ResourceNameParameter<ProductListing>;
+}
+
+/** Product resource */
+model ProductSingle is ProxyResource<ProductDetails> {
+  ...ResourceNameParameter<ProductSingle>;
+}
+
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations(ProductListing)
+interface ProductListings {
+  listBySubscription is ArmListBySubscription<ProductListing>;
+  get is ArmResourceRead<ProductSingle>;
+}

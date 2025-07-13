@@ -8,11 +8,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
 
-/** Product resource */
-model Product is TrackedResource<ProductSummary> {
-  ...ResourceNameParameter<Product>;
-}
-
 @doc("Returns a subset of Product attributes")
 model ProductSummary {
   @visibility(Lifecycle.Read)
@@ -98,9 +93,6 @@ model ProductSummary {
 
   @doc("Total number of ratings for the offer")
   ratingCount?: int32;
-
-  @doc("Retail price of the product's cheapest plan")
-  startingPrice?: MarketStartPrice;
 
   @doc("Full set of plan/SKU attributes")
   @OpenAPI.extension("x-ms-identifiers", #[])
@@ -1106,7 +1098,7 @@ model OdataSelectParameter {
 @doc("OData Expand parameter")
 model OdataExpandParameter {
   @query
-  @doc("Expands related entities inline. Example: $expand=startingPrice")
+  @doc("Expands related entities inline")
   $expand?: string;
 }
 
