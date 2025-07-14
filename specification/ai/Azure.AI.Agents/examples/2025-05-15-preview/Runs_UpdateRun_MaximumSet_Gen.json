@@ -23,6 +23,7 @@
         "assistant_id": "asst_abc123",
         "status": "in_progress",
         "required_action": {
+          "type": "submit_tool_outputs",
           "submit_tool_outputs": {
             "tool_calls": [
               {
@@ -31,19 +32,6 @@
                 "function": {
                   "name": "calculate_metrics",
                   "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
-                }
-              }
-            ]
-          },
-          "submit_tool_approval": {
-            "tool_calls": [
-              {
-                "id": "call_abc123",
-                "type": "mcp",
-                "mcp": {
-                  "name": "search_code",
-                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}",
-                  "server_label": "lakjdfklasj"
                 }
               }
             ]
