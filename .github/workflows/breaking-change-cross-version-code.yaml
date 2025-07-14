@@ -28,10 +28,10 @@ jobs:
         id: breaking-change-cross-version-analyze-code
         run: |
           npm exec --no -- openapi-diff-runner \
-            -t "CrossVersion" \
-            -p "${{ github.workspace }}" \
-            -n "${{ github.event.pull_request.number }}" \
-            -c "${{ github.event.pull_request.head.sha }}" \
+            --run-type "CrossVersion" \
+            --spec-repo-path "${{ github.workspace }}" \
+            --pr-number "${{ github.event.pull_request.number }}" \
+            --head-commit "${{ github.event.pull_request.head.sha }}" \
             --pr-source-branch "${{ github.event.pull_request.head.ref }}" \
             --pr-target-branch "${{ github.event.pull_request.base.ref }}" \
             --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
