@@ -72,8 +72,8 @@ These settings apply only when `--tag=package-2025-03-01-only --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2025-03-01-only'
-namespace: azure.mgmt.compute.v2025_03_01
-output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2025_03_01
+namespace: azure.mgmt.compute.v2025_01_02
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2025_01_02
 ```
 
 ### Tag: package-2024-11-04-only
