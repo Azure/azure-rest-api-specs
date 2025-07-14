@@ -132,7 +132,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
-        "operationId": "GuestConfigurationAssignmentsVmss_List",
+        "operationId": "GuestConfigurationAssignmentsVMSS_List",
         "description": "List all guest configuration assignments for VMSS.",
         "parameters": [
           {
@@ -166,6 +166,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all guest configuration assignments for VMSS": {
+            "$ref": "./examples/listVMSSGuestConfigurationAssignments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -173,7 +178,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}": {
       "get": {
-        "operationId": "GuestConfigurationAssignmentsVmss_Get",
+        "operationId": "GuestConfigurationAssignmentsVMSS_Get",
         "description": "Get information about a guest configuration assignment for VMSS",
         "parameters": [
           {
@@ -213,10 +218,15 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a VMSS guest configuration assignment": {
+            "$ref": "./examples/getVMSSGuestConfigurationAssignment.json"
+          }
         }
       },
       "put": {
-        "operationId": "GuestConfigurationAssignmentsVmss_CreateOrUpdate",
+        "operationId": "GuestConfigurationAssignmentsVMSS_CreateOrUpdate",
         "description": "Creates an association between a VMSS and guest configuration",
         "parameters": [
           {
@@ -271,10 +281,15 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/createOrUpdateGuestConfigurationVMSSAssignment.json"
+          }
         }
       },
       "delete": {
-        "operationId": "GuestConfigurationAssignmentsVmss_Delete",
+        "operationId": "GuestConfigurationAssignmentsVMSS_Delete",
         "description": "Delete a guest configuration assignment for VMSS",
         "parameters": [
           {
@@ -317,12 +332,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete an guest configuration assignment for VMSS": {
+            "$ref": "./examples/deleteGuestConfigurationVMSSAssignment.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports": {
       "get": {
-        "operationId": "GuestConfigurationAssignmentReportsVmss_List",
+        "operationId": "GuestConfigurationAssignmentReportsVMSS_List",
         "description": "List all reports for the VMSS guest configuration assignment, latest report first.",
         "parameters": [
           {
@@ -362,12 +382,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all reports for the VMSS guest configuration assignment with latest report first": {
+            "$ref": "./examples/listAllVMSSGuestConfigurationAssignmentReports.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{name}/reports/{id}": {
       "get": {
-        "operationId": "GuestConfigurationAssignmentReportsVmss_Get",
+        "operationId": "GuestConfigurationAssignmentReportsVMSS_Get",
         "description": "Get a report for the VMSS guest configuration assignment, by reportId.",
         "parameters": [
           {
@@ -413,6 +438,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a guest configuration assignment report by Id for a virtual machine scale set": {
+            "$ref": "./examples/getVMSSGuestConfigurationAssignmentReportById.json"
           }
         }
       }
@@ -1139,7 +1169,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
-        "operationId": "GuestConfigurationHcrpAssignments_List",
+        "operationId": "GuestConfigurationHCRPAssignments_List",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1176,6 +1206,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listGuestConfigurationHCRPAssignments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1183,7 +1218,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
       "get": {
-        "operationId": "GuestConfigurationHcrpAssignments_Get",
+        "operationId": "GuestConfigurationHCRPAssignments_Get",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1226,10 +1261,15 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a guest configuration assignment": {
+            "$ref": "./examples/getGuestConfigurationHCRPAssignment.json"
+          }
         }
       },
       "put": {
-        "operationId": "GuestConfigurationHcrpAssignments_CreateOrUpdate",
+        "operationId": "GuestConfigurationHCRPAssignments_CreateOrUpdate",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1287,10 +1327,15 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create or update guest configuration assignment": {
+            "$ref": "./examples/createOrUpdateGuestConfigurationHCRPAssignment.json"
+          }
         }
       },
       "delete": {
-        "operationId": "GuestConfigurationHcrpAssignments_Delete",
+        "operationId": "GuestConfigurationHCRPAssignments_Delete",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1330,12 +1375,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationHCRPAssignment.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
       "get": {
-        "operationId": "GuestConfigurationHcrpAssignmentReports_List",
+        "operationId": "GuestConfigurationHCRPAssignmentReports_List",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1378,12 +1428,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all guest configuration assignments for a virtual machine": {
+            "$ref": "./examples/listAllGuestConfigurationHCRPAssignmentReports.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
       "get": {
-        "operationId": "GuestConfigurationHcrpAssignmentReports_Get",
+        "operationId": "GuestConfigurationHCRPAssignmentReports_Get",
         "tags": [
           "GuestConfigurationHCRPAssignments"
         ],
@@ -1432,6 +1487,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a guest configuration assignment report by Id for a virtual machine": {
+            "$ref": "./examples/getGuestConfigurationHCRPAssignmentReportById.json"
           }
         }
       }
