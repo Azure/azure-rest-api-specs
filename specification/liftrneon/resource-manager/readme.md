@@ -27,7 +27,29 @@ These are the global settings for the neon service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-01
+tag: package-2025-06-23-preview
+```
+
+### Tag: package-2025-06-23-preview
+
+These settings apply only when `--tag=package-2025-06-23-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-23-preview'
+input-file:
+  - Neon.Postgres/preview/2025-06-23-preview/neon.json
+suppressions:
+  - code: NestedResourcesMustHaveListOperation
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonRoles" returns a list of NeonRole. There isn't a point GET for this operation.
+    where:
+      - $.definitions["NeonRole"]
+  - code: NestedResourcesMustHaveListOperation
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/neonDatabase" returns a list of NeonDatabase. There isn't a point GET for this operation.
+    where:
+      - $.definitions["NeonDatabase"]
+  - code: NestedResourcesMustHaveListOperation
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/endpoint" returns a list of endpoints. There isn't a point GET for this operation.
+    where:
+      - $.definitions["Endpoint"]
 ```
 
 ### Tag: package-2025-03-01
