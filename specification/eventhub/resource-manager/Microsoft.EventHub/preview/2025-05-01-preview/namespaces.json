@@ -927,7 +927,7 @@
               "description": "Alternate name specified when alias and namespace names are same."
             },
             "platformCapabilities": {
-              "$ref": "#/definitions/platformCapabilities"
+              "$ref": "#/definitions/PlatformCapabilities"
             },
             "geoDataReplication": {
               "$ref": "#/definitions/GeoDataReplicationProperties",
@@ -1112,15 +1112,16 @@
         }
       }
     },
-    "platformCapabilities": {
+    "PlatformCapabilities": {
       "x-ms-client-flatten": true,
+      "type": "object",
       "properties": {
         "confidentialCompute": {
           "$ref": "#/definitions/confidentialCompute"
         }
       }
     },
-    "confidentialCompute": {
+    "ConfidentialCompute": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
