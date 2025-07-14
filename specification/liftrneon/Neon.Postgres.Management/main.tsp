@@ -6,6 +6,7 @@ import "./Neon.Postgres.Models/databases.tsp";
 import "./Neon.Postgres.Models/connection.tsp";
 import "./Neon.Postgres.Models/roles.tsp";
 import "./Neon.Postgres.Models/endpoints.tsp";
+import "./Neon.Postgres.Models/preflight.tsp";
 import "./LiftrBase.Data/main.tsp";
 
 import "@azure-tools/typespec-autorest";
@@ -43,6 +44,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
   v2025_03_01: "2025-03-01",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Data.Versions.v2_preview)
+  v3_preview: "2025-06-23-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -110,6 +117,19 @@ interface Branches {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Branch>;
   delete is ArmResourceDeleteSync<Branch>;
   list is ArmResourceListByParent<Branch>;
+
+  @added(Neon.Postgres.Versions.v3_preview)
+  @doc("Action to validate preflight checks.")
+  @autoRoute
+  @armResourceAction(PreflightCheckParameters)
+  @post
+  preflight(
+    ...ResourceInstanceParameters<Branch>,
+
+    @doc("Parameters for preflight checks.")
+    @body
+    parameters: PreflightCheckParameters,
+  ): ArmResponse<PreflightCheckResult> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -121,17 +141,32 @@ interface Computes {
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonDatabases {
+  @added(Neon.Postgres.Versions.v2_preview)
   list is ArmResourceListByParent<NeonDatabase>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<NeonDatabase>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonRoles {
+  @added(Neon.Postgres.Versions.v2_preview)
   list is ArmResourceListByParent<NeonRole>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonRole>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<NeonRole>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Endpoints {
+  @added(Neon.Postgres.Versions.v2_preview)
   list is ArmResourceListByParent<Endpoint>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<Endpoint>;
 }
