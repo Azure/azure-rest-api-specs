@@ -35,13 +35,13 @@ using Microsoft.DevTestLab;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Lab.properties);
 
+@@clientName(GlobalSchedules.createOrUpdate::parameters.resource, "schedule");
+@@clientName(GlobalSchedules.update::parameters.properties, "schedule");
+@@clientName(GlobalSchedules.retarget::parameters.body,
+  "retargetScheduleProperties"
+);
 @@clientName(Schedules.createOrUpdate::parameters.resource, "schedule");
 @@clientName(Schedules.update::parameters.properties, "schedule");
-@@clientName(Schedules.retarget::parameters.body, "retargetScheduleProperties");
-@@clientName(ScheduleOperationGroup.createOrUpdate::parameters.resource,
-  "schedule"
-);
-@@clientName(ScheduleOperationGroup.update::parameters.properties, "schedule");
 @@clientName(ServiceFabricSchedules.createOrUpdate::parameters.resource,
   "schedule"
 );
@@ -163,7 +163,5 @@ using Microsoft.DevTestLab;
 
 @@clientName(LabCosts, "Costs", "python");
 @@clientName(DtlEnvironments, "Environments", "python");
-@@clientName(Schedules, "GlobalSchedules", "python");
-@@clientName(ScheduleOperationGroup, "Schedules", "python");
 @@clientName(OperationsOperationGroup, "Operations", "python");
 @@clientName(LabVirtualMachines, "VirtualMachines", "python");

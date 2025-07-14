@@ -47,12 +47,11 @@ interface ScheduleOps
     > {}
 
 @armResourceOperations
-interface Schedules {
+interface GlobalSchedules {
   /**
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_Get")
   get is ScheduleOps.Read<
     Schedule,
     Parameters = {
@@ -68,7 +67,6 @@ interface Schedules {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_CreateOrUpdate")
   createOrUpdate is ScheduleOps.CreateOrUpdateSync<Schedule>;
 
   /**
@@ -77,7 +75,6 @@ interface Schedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  @operationId("GlobalSchedules_Update")
   update is ScheduleOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
@@ -87,14 +84,12 @@ interface Schedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_Delete")
   delete is ScheduleOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_ListByResourceGroup")
   listByResourceGroup is ScheduleOps.List<
     Schedule,
     Parameters = {
@@ -129,7 +124,6 @@ interface Schedules {
    * List schedules in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     Schedule,
     Parameters = {
@@ -164,14 +158,12 @@ interface Schedules {
    * Execute a schedule. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_Execute")
   execute is ScheduleOps.ActionAsync<Schedule, void, OkResponse>;
 
   /**
    * Updates a schedule's target resource Id. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchedules_Retarget")
   retarget is ScheduleOps.ActionAsync<
     Schedule,
     RetargetScheduleProperties,
@@ -199,12 +191,11 @@ interface ScheduleOperationGroupOps
     > {}
 
 @armResourceOperations
-interface ScheduleOperationGroup {
+interface Schedules {
   /**
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_Get")
   get is ScheduleOperationGroupOps.Read<
     Schedule,
     Parameters = {
@@ -220,7 +211,6 @@ interface ScheduleOperationGroup {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_CreateOrUpdate")
   createOrUpdate is ScheduleOperationGroupOps.CreateOrUpdateSync<Schedule>;
 
   /**
@@ -229,7 +219,6 @@ interface ScheduleOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  @operationId("Schedules_Update")
   update is ScheduleOperationGroupOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
@@ -239,14 +228,12 @@ interface ScheduleOperationGroup {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_Delete")
   delete is ScheduleOperationGroupOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_List")
   list is ScheduleOperationGroupOps.List<
     Schedule,
     Parameters = {
@@ -281,14 +268,12 @@ interface ScheduleOperationGroup {
    * Execute a schedule. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_Execute")
   execute is ScheduleOperationGroupOps.ActionAsync<Schedule, void, OkResponse>;
 
   /**
    * Lists all applicable schedules
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Schedules_ListApplicable")
   listApplicable is ScheduleOperationGroupOps.ActionSync<
     Schedule,
     void,
@@ -497,15 +482,13 @@ interface VirtualMachineSchedules {
 @@doc(Schedule.properties, "The properties of the resource.");
 @@doc(Schedule.location, "The location of the resource.");
 @@doc(Schedule.tags, "The tags of the resource.");
-@@doc(Schedules.createOrUpdate::parameters.resource, "A schedule.");
-@@doc(Schedules.update::parameters.properties, "A schedule.");
-@@doc(Schedules.retarget::parameters.body,
+@@doc(GlobalSchedules.createOrUpdate::parameters.resource, "A schedule.");
+@@doc(GlobalSchedules.update::parameters.properties, "A schedule.");
+@@doc(GlobalSchedules.retarget::parameters.body,
   "Properties for retargeting a virtual machine schedule."
 );
-@@doc(ScheduleOperationGroup.createOrUpdate::parameters.resource,
-  "A schedule."
-);
-@@doc(ScheduleOperationGroup.update::parameters.properties, "A schedule.");
+@@doc(Schedules.createOrUpdate::parameters.resource, "A schedule.");
+@@doc(Schedules.update::parameters.properties, "A schedule.");
 @@doc(ServiceFabricSchedules.createOrUpdate::parameters.resource,
   "A schedule."
 );
