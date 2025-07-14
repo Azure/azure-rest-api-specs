@@ -36,7 +36,7 @@
         "operationId": "PreviewAlertRule",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/ResourceUriParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -486,7 +486,7 @@
             }
           },
           "required": [
-            "lookbackPeriod"
+            "timespan"
           ]
         }
       },
@@ -494,6 +494,17 @@
         "location",
         "properties"
       ]
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
