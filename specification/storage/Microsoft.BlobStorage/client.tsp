@@ -31,10 +31,6 @@ model BlobServiceClientParameters {
 );
 @@clientName(Storage.Blob.Container.Blob.BlockBlob, "BlockBlobClient", "rust");
 @@clientName(Storage.Blob.Container.Blob.PageBlob, "PageBlobClient", "rust");
-@@clientName(Storage.Blob.Container.Blob.setHttpHeaders,
-  "SetProperties",
-  "rust"
-);
 
 @@clientInitialization(Storage.Blob.Container,
   {

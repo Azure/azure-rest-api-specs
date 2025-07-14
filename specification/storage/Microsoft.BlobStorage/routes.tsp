@@ -962,7 +962,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
       @route("{blobName}?comp=properties&SetHTTPHeaders")
-      op setHttpHeaders is StorageOperation<
+      op setProperties is StorageOperation<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
