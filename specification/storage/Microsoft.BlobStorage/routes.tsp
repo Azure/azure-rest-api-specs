@@ -1271,7 +1271,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptionalHeader;
+          ...AccessTierHeader;
           ...RehydratePriorityHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
@@ -1322,7 +1322,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptionalHeader;
+          ...AccessTierHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
           ...SourceIfMatchParameter;
@@ -1411,7 +1411,7 @@ namespace Storage.Blob {
 
           /** Indicates the tier to be set on the blob. */
           @header("x-ms-access-tier")
-          tier: AccessTierOptional;
+          tier: AccessTier;
 
           ...RehydratePriorityHeader;
           ...LeaseIdOptionalParameter;
@@ -2097,7 +2097,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
@@ -2156,7 +2156,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
@@ -2299,7 +2299,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
