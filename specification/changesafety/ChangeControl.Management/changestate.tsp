@@ -336,12 +336,6 @@ model VerifyChangeValidityRequest {
   @doc("The stage progression resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageProgressionResourceId?: armResourceIdentifier;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
-  @doc("The context of the verify change validity request.")
-  @added(Versions.v2025_03_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  context?: {};
 }
 
 @added(Versions.v2025_03_01_preview)
