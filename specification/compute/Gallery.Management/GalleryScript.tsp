@@ -13,6 +13,14 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.Compute;
+
+/**
+ * Gallery script name with pattern validation
+ */
+@pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+@doc("The name of the gallery Script Definition in which the Script Version is to be created.")
+scalar GalleryScriptName extends string;
+
 /**
  * Specifies information about the gallery Script Definition that you want to create or update.
  */
@@ -20,12 +28,10 @@ namespace Microsoft.Compute;
 @parentResource(Gallery)
 model GalleryScript
   is Azure.ResourceManager.TrackedResource<GalleryScriptProperties> {
-  ...ResourceNameParameter<
-    Resource = GalleryScript,
-    KeyName = "galleryScriptName",
-    SegmentName = "scripts",
-    NamePattern = ""
-  >;
+  @key("galleryScriptName")
+  @segment("scripts")
+  @path
+  name: GalleryScriptName;
 }
 
 @armResourceOperations

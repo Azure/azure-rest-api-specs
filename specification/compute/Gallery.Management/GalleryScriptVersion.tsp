@@ -14,6 +14,13 @@ using TypeSpec.Http;
 
 namespace Microsoft.Compute {
   /**
+   * Gallery script version name with semantic version pattern validation
+   */
+  @pattern("^[0-9]+\\.[0-9]+\\.[0-9]+$")
+  @doc("The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
+  scalar GalleryScriptVersionName extends string;
+
+  /**
    * The List Gallery Script version operation response.
    */
   @added(Versions.v2025_03_03)
@@ -26,12 +33,10 @@ namespace Microsoft.Compute {
   @parentResource(GalleryScript)
   model GalleryScriptVersion
     is Azure.ResourceManager.TrackedResource<GalleryScriptVersionProperties> {
-    ...ResourceNameParameter<
-      Resource = GalleryScriptVersion,
-      KeyName = "galleryScriptVersionName",
-      SegmentName = "versions",
-      NamePattern = ""
-    >;
+    @key("galleryScriptVersionName")
+    @segment("versions")
+    @path
+    name: GalleryScriptVersionName;
   }
 
   @armResourceOperations
