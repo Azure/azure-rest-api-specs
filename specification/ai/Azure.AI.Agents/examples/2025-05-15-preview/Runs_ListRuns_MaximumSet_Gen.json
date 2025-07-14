@@ -19,6 +19,10 @@
             "thread_id": "thread_abc123",
             "assistant_id": "asst_abc123",
             "status": "completed",
+            "last_error": {
+              "code": "server_error",
+              "message": "jadlgjrkhbhukfc"
+            },
             "model": "gpt-4",
             "instructions": "You are a helpful assistant. Analyze the data carefully and provide insights.",
             "tools": [
@@ -52,8 +56,14 @@
               }
             ],
             "created_at": 1736869300,
+            "expires_at": "VALUE_NEEDED",
             "started_at": 1736869301,
             "completed_at": 1736869420,
+            "cancelled_at": 18,
+            "failed_at": 15,
+            "incomplete_details": {
+              "reason": "content_filter"
+            },
             "usage": {
               "completion_tokens": 512,
               "prompt_tokens": 1024,
@@ -133,16 +143,53 @@
             "thread_id": "thread_abc123",
             "assistant_id": "asst_abc123",
             "status": "failed",
-            "last_error": {
-              "code": "rate_limit_exceeded",
-              "message": "Rate limit exceeded. Please try again later."
+            "required_action": {
+              "type": "submit_tool_outputs",
+              "submit_tool_outputs": {
+                "tool_calls": [
+                  {
+                    "id": "call_abc123",
+                    "type": "function",
+                    "function": {
+                      "name": "calculate_metrics",
+                      "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
+                    }
+                  },
+                  {
+                    "id": "call_def456",
+                    "type": "function",
+                    "function": {
+                      "name": "generate_chart",
+                      "arguments": "{\"data\": [10, 20, 30], \"chart_type\": \"line\"}"
+                    }
+                  }
+                ]
+              }
             },
             "model": "gpt-4",
             "instructions": "You are a helpful assistant.",
             "tools": [],
             "created_at": 1736869200,
+            "expires_at": "VALUE_NEEDED",
             "started_at": 1736869201,
+            "completed_at": 12,
+            "cancelled_at": 18,
             "failed_at": 1736869250,
+            "temperature": 0.7,
+           "top_p": 0.9,
+           "max_prompt_tokens": 4096,
+           "max_completion_tokens": 2048,
+           "truncation_strategy": {
+             "type": "auto"
+           },
+            "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "calculate_metrics"
+          }
+        },
+            "response_format": "VALUE_NEEDED",
+            "tool_resources": "VALUE_NEEDED",
             "parallel_tool_calls": true,
             "metadata": {}
           }

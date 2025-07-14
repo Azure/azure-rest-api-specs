@@ -22,6 +22,37 @@
         "thread_id": "thread_abc123",
         "assistant_id": "asst_abc123",
         "status": "in_progress",
+        "required_action": {
+          "submit_tool_outputs": {
+            "tool_calls": [
+              {
+                "id": "call_abc123",
+                "type": "function",
+                "function": {
+                  "name": "calculate_metrics",
+                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
+                }
+              }
+            ]
+          },
+          "submit_tool_approval": {
+            "tool_calls": [
+              {
+                "id": "call_abc123",
+                "type": "mcp",
+                "mcp": {
+                  "name": "search_code",
+                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}",
+                  "server_label": "lakjdfklasj"
+                }
+              }
+            ]
+          }
+        },
+        "last_error": {
+          "code": "server_error",
+          "message": "jadlgjrkhbhukfc"
+        },
         "model": "gpt-4",
         "instructions": "You are a helpful assistant. Analyze the data carefully and provide insights.",
         "tools": [
@@ -57,6 +88,17 @@
         "created_at": 1736869300,
         "expires_at": 1736872900,
         "started_at": 1736869301,
+        "completed_at": 12,
+        "cancelled_at": 18,
+        "failed_at": 15,
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 2,
+          "total_tokens": 10
+        },
         "temperature": 0.8,
         "top_p": 0.95,
         "max_prompt_tokens": 8192,

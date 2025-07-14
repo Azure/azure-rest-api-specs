@@ -145,10 +145,6 @@
         }
       },
       "stream": false,
-      "temperature": 0.7,
-      "top_p": 0.9,
-      "max_prompt_tokens": 4096,
-      "max_completion_tokens": 2048,
       "truncation_strategy": {
         "type": "auto"
       },
@@ -171,8 +167,12 @@
         "thread_id": "thread_abc123",
         "assistant_id": "asst_abc123",
         "status": "in_progress",
-        "required_action": null,
-        "last_error": null,
+        "required_action": {
+        },
+        "last_error": {
+          "code": "server_error",
+          "message": "jadlgjrkhbhukfc"
+        },
         "model": "gpt-4",
         "instructions": "You are a data analysis expert. Provide detailed insights and recommendations.",
         "tools": [
@@ -204,11 +204,17 @@
         "created_at": 1736869200,
         "expires_at": 1736872800,
         "started_at": 1736869201,
-        "completed_at": null,
-        "cancelled_at": null,
-        "failed_at": null,
-        "incomplete_details": null,
-        "usage": null,
+        "completed_at": 12,
+        "cancelled_at": 18,
+        "failed_at": 15,
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 2,
+          "total_tokens": 10
+        },
         "temperature": 0.7,
         "top_p": 0.9,
         "max_prompt_tokens": 4096,
