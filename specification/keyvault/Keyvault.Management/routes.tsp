@@ -58,6 +58,7 @@ interface VaultsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @apiVersion(false)
     @query("api-version")
+    @OpenAPI.extension("x-ms-api-version", false)
     `api-version`: ResourceManagerApiVersions,
 
     ...SubscriptionIdParameter,
