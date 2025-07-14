@@ -44,6 +44,36 @@ union GallerySharingPermissionTypes {
 }
 
 /**
+ * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
+ */
+union GalleryScriptParameterType {
+  /**
+   * String
+   */
+  String: "String",
+
+  /**
+   * Int
+   */
+  Int: "Int",
+
+  /**
+   * Double
+   */
+  Double: "Double",
+
+  /**
+   * Boolean
+   */
+  Boolean: "Boolean",
+
+  /**
+   * Enum
+   */
+  Enum: "Enum",
+}
+
+/**
  * This property allows you to specify the type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**
  */
 union SharingProfileGroupTypes {
@@ -1955,36 +1985,6 @@ model GenericGalleryParameter {
    * A description to help users understand what this parameter means
    */
   description?: string;
-}
-
-/**
- * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
- */
-enum GalleryScriptParameterType {
-  /**
-   * String
-   */
-  String: "String",
-
-  /**
-   * Int
-   */
-  Int: "Int",
-
-  /**
-   * Double
-   */
-  Double: "Double",
-
-  /**
-   * Boolean
-   */
-  Boolean: "Boolean",
-
-  /**
-   * Enum
-   */
-  Enum: "Enum",
 }
 
 /**
