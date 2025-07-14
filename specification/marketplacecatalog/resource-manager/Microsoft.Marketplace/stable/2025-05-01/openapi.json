@@ -111,7 +111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductListing"
+              "$ref": "#/definitions/ProductsListResult"
             }
           },
           "default": {
@@ -120,10 +120,13 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/providers/Microsoft.Marketplace/products/{productId}/{productId}": {
+    "/providers/Microsoft.Marketplace/products/{productId}": {
       "get": {
         "operationId": "ProductGet_GetByTenant",
         "tags": [
@@ -135,11 +138,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "description": "The name of the product single.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "market",
@@ -193,23 +192,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/{subscriptionId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products": {
       "get": {
         "operationId": "ProductList_ListBySubscription",
         "tags": [
           "ProductList"
         ],
-        "description": "Lists products by subscription.",
+        "description": "Lists products for subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "market",
@@ -230,7 +225,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductListing"
+              "$ref": "#/definitions/ProductsListResult"
             }
           },
           "default": {
@@ -239,10 +234,13 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/{productId}/subscriptions/{subscriptionId}/{productId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/{productId}": {
       "get": {
         "operationId": "ProductGet_GetBySubscription",
         "tags": [
@@ -257,11 +255,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "productId",
-            "in": "path",
-            "description": "The name of the product single.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ProductIdParameter"
           },
           {
             "name": "market",
@@ -1466,21 +1460,6 @@
         }
       ]
     },
-    "ProductListing": {
-      "type": "object",
-      "description": "Product resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProductSummary",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ProductSingle": {
       "type": "object",
       "description": "Product resource",
@@ -1884,6 +1863,47 @@
         }
       }
     },
+    "Products": {
+      "type": "object",
+      "description": "Product resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductSummary",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductsListResult": {
+      "type": "object",
+      "description": "The response of a Products list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Products items on this page",
+          "items": {
+            "$ref": "#/definitions/Products"
+          },
+          "x-ms-identifiers": [
+            "properties/uniqueProductId",
+            "name",
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProrationPolicy": {
       "type": "object",
       "description": "Proration policy",
@@ -2265,5 +2285,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ProductIdParameter": {
+      "name": "productId",
+      "in": "path",
+      "description": "The ID of the product",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -19,14 +19,15 @@ namespace Microsoft.Marketplace;
 
 /** The available API versions. */
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_05_01: "2025-05-01",
 }
 
 /** Product resource */
-model ProductListing is ProxyResource<ProductSummary> {
-  ...ResourceNameParameter<ProductListing>;
+model Products is ProxyResource<ProductSummary> {
+  ...ResourceNameParameter<Products>;
 }
 
 /** Product resource */
@@ -34,14 +35,23 @@ model ProductSingle is ProxyResource<ProductDetails> {
   ...ResourceNameParameter<ProductSingle>;
 }
 
+/** Product id path parameter */
+model ProductIdParameter {
+  /** The ID of the product */
+  @path
+  @segment("providers/Microsoft.Marketplace/products")
+  @minLength(1)
+  productId: string;
+}
+
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@armResourceOperations(ProductListing)
+@armResourceOperations(Products)
 interface ProductList {
   /** Lists products for tenant. */
   @route("/providers/Microsoft.Marketplace/products")
   @get
-  @armResourceRead(ProductListing)
+  @armResourceRead(Products)
   listByTenant(
     ...ApiVersionParameter,
 
@@ -52,41 +62,32 @@ interface ProductList {
     @doc("The language to filter by")
     @query
     language: string,
-  ): ArmResponse<ProductListing> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<Products>> | ErrorResponse;
 
-  /** Lists products by subscription. */
-  @route("subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
-  @get
-  @armResourceRead(ProductListing)
-  listBySubscription(
-    ...ApiVersionParameter,
+  /** Lists products for subscription. */
+  listBySubscription is ArmListBySubscription<
+    Products,
+    Parameters = {
+      @doc("The market in which the product is available.")
+      @query
+      market: string;
 
-    @doc("The subscription ID.")
-    @path
-    subscriptionId: string,
-
-    @doc("The market in which the product is available.")
-    @query
-    market: string,
-
-    @doc("The language to filter by")
-    @query
-    language: string,
-  ): ArmResponse<ProductListing> | ErrorResponse;
+      @doc("The language to filter by")
+      @query
+      language: string;
+    }
+  >;
 }
 
 @armResourceOperations(ProductSingle)
 interface ProductGet {
   /** Gets a product single by tenant. */
-  @route("/providers/Microsoft.Marketplace/products")
+  @autoRoute
   @get
   @armResourceRead(ProductSingle)
   getByTenant(
     ...ApiVersionParameter,
-
-    @doc("The name of the product single.")
-    @path
-    productId: string,
+    ...ProductIdParameter,
 
     @doc("The market in which the product is available.")
     @query
@@ -110,16 +111,13 @@ interface ProductGet {
   ): ArmResponse<ProductSingle> | ErrorResponse;
 
   /** Gets a product single by subscription. */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
+  @autoRoute
   @get
   @armResourceRead(ProductSingle)
   getBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-
-    @doc("The name of the product single.")
-    @path
-    productId: string,
+    ...ProductIdParameter,
 
     @doc("The market in which the product is available.")
     @query
