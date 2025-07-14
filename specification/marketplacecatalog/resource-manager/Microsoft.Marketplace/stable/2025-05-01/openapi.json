@@ -43,7 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "Products"
+      "name": "ProductListings"
+    },
+    {
+      "name": "ProductSingles"
     }
   ],
   "paths": {
@@ -78,26 +81,37 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products": {
+    "/providers/Microsoft.Marketplace/products": {
       "get": {
-        "operationId": "Products_ListBySubscription",
+        "operationId": "ProductListings_ListByTenant",
         "tags": [
-          "Products"
+          "ProductListings"
         ],
-        "description": "List Product resources by subscription ID",
+        "description": "Lists products for tenant.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductListResult"
+              "$ref": "#/definitions/ProductListing"
             }
           },
           "default": {
@@ -106,19 +120,86 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Marketplace/products/{productName}": {
+    "/providers/Microsoft.Marketplace/products/{productId}/{productId}": {
       "get": {
-        "operationId": "Products_Get",
+        "operationId": "ProductSingles_GetByTenant",
         "tags": [
-          "Products"
+          "ProductSingles"
         ],
-        "description": "Get a Product",
+        "description": "Gets a product single by tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The name of the product single.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "Whether to include stop-sold plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeHiddenPlans",
+            "in": "query",
+            "description": "Whether to include hidden plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "includeServiceInstructionTemplates",
+            "in": "query",
+            "description": "Whether to include service instruction templates in the response.",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductSingle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/productSingles/{productId}/subscriptions/{subscriptionId}/{productId}": {
+      "get": {
+        "operationId": "ProductSingles_GetBySubscription",
+        "tags": [
+          "ProductSingles"
+        ],
+        "description": "Gets a product single by subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -127,22 +208,98 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "productId",
+            "in": "path",
+            "description": "The name of the product single.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "productName",
-            "in": "path",
-            "description": "The name of the Product",
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
+          },
+          {
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "Whether to include stop-sold plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeHiddenPlans",
+            "in": "query",
+            "description": "Whether to include hidden plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "includeServiceInstructionTemplates",
+            "in": "query",
+            "description": "Whether to include service instruction templates in the response.",
+            "required": true,
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Product"
+              "$ref": "#/definitions/ProductSingle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/subscriptions/{subscriptionId}": {
+      "get": {
+        "operationId": "ProductListings_GetBySubscription",
+        "tags": [
+          "ProductListings"
+        ],
+        "description": "Lists products by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductListing"
             }
           },
           "default": {
@@ -685,7 +842,7 @@
       "properties": {
         "$expand": {
           "type": "string",
-          "description": "Expands related entities inline. Example: $expand=startingPrice"
+          "description": "Expands related entities inline"
         }
       }
     },
@@ -1149,21 +1306,6 @@
         ]
       }
     },
-    "Product": {
-      "type": "object",
-      "description": "Product resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProductSummary",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "ProductDetails": {
       "type": "object",
       "description": "Summary description of the product",
@@ -1320,30 +1462,34 @@
         }
       ]
     },
-    "ProductListResult": {
+    "ProductListing": {
       "type": "object",
-      "description": "The response of a Product list operation.",
+      "description": "Product resource",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Product items on this page",
-          "items": {
-            "$ref": "#/definitions/Product"
-          },
-          "x-ms-identifiers": [
-            "properties/uniqueProductId",
-            "name",
-            "id"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+        "properties": {
+          "$ref": "#/definitions/ProductSummary",
+          "description": "The resource-specific properties for this resource."
         }
       },
-      "required": [
-        "value"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductSingle": {
+      "type": "object",
+      "description": "Product resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductDetails",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "ProductSummary": {
@@ -1476,10 +1622,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Total number of ratings for the offer"
-        },
-        "startingPrice": {
-          "$ref": "#/definitions/MarketStartPrice",
-          "description": "Retail price of the product's cheapest plan"
         },
         "plans": {
           "type": "array",

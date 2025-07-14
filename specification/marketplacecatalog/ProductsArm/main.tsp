@@ -38,6 +38,104 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations(ProductListing)
 interface ProductListings {
-  listBySubscription is ArmListBySubscription<ProductListing>;
-  get is ArmResourceRead<ProductSingle>;
+  /** Lists products for tenant. */
+  @route("/providers/Microsoft.Marketplace/products")
+  @get
+  @armResourceRead(ProductListing)
+  listByTenant(
+    ...ApiVersionParameter,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+  ): ArmResponse<ProductListing> | ErrorResponse;
+
+  /** Lists products by subscription. */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
+  @get
+  @armResourceRead(ProductListing)
+  getBySubscription(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+  ): ArmResponse<ProductListing> | ErrorResponse;
+}
+
+@armResourceOperations(ProductSingle)
+interface ProductSingles {
+  /** Gets a product single by tenant. */
+  @route("/providers/Microsoft.Marketplace/products/{productId}")
+  @get
+  @armResourceRead(ProductSingle)
+  getByTenant(
+    ...ApiVersionParameter,
+
+    @doc("The name of the product single.")
+    @path
+    productId: string,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("Whether to include stop-sold plans in the response.")
+    @query
+    includeStopSoldPlans: boolean,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+
+    @doc("Whether to include hidden plans in the response.")
+    @query
+    includeHiddenPlans: boolean,
+
+    @doc("Whether to include service instruction templates in the response.")
+    @query
+    includeServiceInstructionTemplates: boolean,
+  ): ArmResponse<ProductSingle> | ErrorResponse;
+
+  /** Gets a product single by subscription. */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/productSingles/{productId}")
+  @get
+  @armResourceRead(ProductSingle)
+  getBySubscription(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("The name of the product single.")
+    @path
+    productId: string,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("Whether to include stop-sold plans in the response.")
+    @query
+    includeStopSoldPlans: boolean,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+
+    @doc("Whether to include hidden plans in the response.")
+    @query
+    includeHiddenPlans: boolean,
+
+    @doc("Whether to include service instruction templates in the response.")
+    @query
+    includeServiceInstructionTemplates: boolean,
+  ): ArmResponse<ProductSingle> | ErrorResponse;
 }
