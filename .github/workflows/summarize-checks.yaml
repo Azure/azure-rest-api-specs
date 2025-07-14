@@ -10,13 +10,14 @@ on:
       - "Swagger LintDiff - Set Status"
       - "SDK Validation Status"
     types:
-      - opened
-      - synchronize
-      - reopened
+      - completed
   pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
     types:
       - labeled
       - unlabeled
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   actions: read # to inspect workflow_run metadata
@@ -52,5 +53,5 @@ jobs:
         with:
           script: |
             const { default: summarizeChecks } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks.js');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
             return await summarizeChecks({ github, context, core });
