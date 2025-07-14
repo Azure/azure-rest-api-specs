@@ -106,6 +106,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-09-01-preview
+
+These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-01-preview'
+input-file:
+  - Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
+```
+
 ### Tag: package-preview-2025-05-04-preview
 
 These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
@@ -602,6 +611,7 @@ input-file:
 - Microsoft.Security/preview/2025-05-04-preview/operations.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+- Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
