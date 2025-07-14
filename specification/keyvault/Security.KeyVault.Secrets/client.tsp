@@ -2,8 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @versioned(KeyVault.Versions)
 namespace Customizations;
@@ -13,6 +13,71 @@ namespace Customizations;
 @@clientName(KeyVault, "Client", "go");
 
 using KeyVault;
+
+// Make optional path parameter required for all languages
+
+/**
+ * The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@summary("Updates the attributes associated with a specified secret in a given key vault.")
+@route("/secrets/{secret-name}/{secret-version}")
+@patch(#{ implicitOptionality: true })
+op updateSecret is KeyVaultOperation<
+  {
+    /**
+     * The name of the secret.
+     */
+    @path("secret-name")
+    @clientName("name", "go")
+    secretName: string;
+
+    /**
+     * The version of the secret.
+     */
+    @path("secret-version")
+    @clientName("version", "go")
+    secretVersion: string;
+
+    /**
+     * The parameters for update secret operation.
+     */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: SecretUpdateParameters;
+  },
+  SecretBundle
+>;
+
+/**
+ * The GET operation is applicable to any secret stored in Azure Key Vault. This operation requires the secrets/get permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@summary("Get a specified secret from a given key vault.")
+@route("/secrets/{secret-name}/{secret-version}")
+@get
+op getSecret is KeyVaultOperation<
+  {
+    /**
+     * The name of the secret.
+     */
+    @path("secret-name")
+    @clientName("name", "go")
+    secretName: string;
+
+    /**
+     * The version of the secret. This URI fragment is optional. If not specified, the latest version of the secret is returned.
+     */
+    @path("secret-version")
+    @clientName("version", "go")
+    secretVersion: string;
+  },
+  SecretBundle
+>;
+
+@@override(KeyVault.updateSecret, updateSecret);
+@@override(KeyVault.getSecret, getSecret);
 
 // go renames
 

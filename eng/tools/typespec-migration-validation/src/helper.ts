@@ -1,7 +1,7 @@
-import { OpenAPI2Document } from '@azure-tools/typespec-autorest';
-import fs from 'fs';
-import path from 'path';
-import { logWarning } from './log.js';
+import { OpenAPI2Document } from "@azure-tools/typespec-autorest";
+import fs from "fs";
+import path from "path";
+import { logWarning } from "./log.js";
 
 /**
  * Reads all files in a directory recursively, excluding paths containing a specified string
@@ -11,7 +11,7 @@ import { logWarning } from './log.js';
  */
 function readFilesFromDirectory(
   directoryPath: string,
-  excludePattern: string = 'example'
+  excludePattern: string = "example",
 ): string[] {
   const results: string[] = [];
 
@@ -28,7 +28,7 @@ function readFilesFromDirectory(
       }
 
       // Skip paths that are not json files
-      if (!filePath.endsWith('.json')) {
+      if (!filePath.endsWith(".json")) {
         continue;
       }
 
@@ -50,12 +50,16 @@ function readFilesFromDirectory(
  * @returns File contents as string
  */
 export function readFileContent(filePath: string): string {
-  return fs.readFileSync(filePath, 'utf8');
+  return fs.readFileSync(filePath, "utf8");
 }
 
 export function mergeFiles(folderPath: string): OpenAPI2Document {
-  const files = readFilesFromDirectory(folderPath, 'example');
-  const mergedContent: OpenAPI2Document = { swagger: '2.0', info: { title: "placeholder", version: "placeholder" }, paths: {} };
+  const files = readFilesFromDirectory(folderPath, "example");
+  const mergedContent: OpenAPI2Document = {
+    swagger: "2.0",
+    info: { title: "placeholder", version: "placeholder" },
+    paths: {},
+  };
 
   for (const file of files) {
     const fileContent = readFileContent(file);
