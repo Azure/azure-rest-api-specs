@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
+              "$ref": "#/definitions/VirtualEndpoint"
             },
             "description": "Parameters required to create or update a pair of virtual endpoints."
           }
@@ -232,7 +232,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
+              "$ref": "#/definitions/VirtualEndpoint"
             }
           },
           "default": {
@@ -274,7 +274,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointsListResult"
+              "$ref": "#/definitions/VirtualEndpointsList"
             }
           },
           "default": {
@@ -325,7 +325,7 @@
       },
       "description": "Properties of a pair of virtual endpoints."
     },
-    "VirtualEndpointResource": {
+    "VirtualEndpoint": {
       "type": "object",
       "allOf": [
         {
@@ -348,13 +348,13 @@
       },
       "description": "Pair of virtual endpoints for a server."
     },
-    "VirtualEndpointsListResult": {
+    "VirtualEndpointsList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualEndpointResource"
+            "$ref": "#/definitions/VirtualEndpoint"
           },
           "description": "List of virtual endpoints."
         },
