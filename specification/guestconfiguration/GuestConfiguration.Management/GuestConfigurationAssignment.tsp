@@ -337,6 +337,7 @@ interface GuestConfigurationAssignmentsVMSS {
   @get
   @action("reports")
   @operationId("GuestConfigurationAssignmentReportsVMSS_List")
+  @list
   guestConfigurationAssignmentReportsVMSSList is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
