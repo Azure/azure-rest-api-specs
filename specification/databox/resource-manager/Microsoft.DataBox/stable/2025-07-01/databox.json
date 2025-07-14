@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-01",
+    "version": "2025-07-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -1684,7 +1684,7 @@
       }
     },
     "DeviceErasureDetails": {
-      "description": "Device erasure details with erasure completion status and erasureordestructionlog sas key",
+      "description": "Device erasure details with erasure completion status, secure erasure sas key and erasureordestructionlog sas key",
       "type": "object",
       "properties": {
         "deviceErasureStatus": {
@@ -1767,6 +1767,11 @@
         },
         "erasureOrDestructionCertificateSasKey": {
           "description": "Shared access key to download cleanup or destruction certificate for device",
+          "type": "string",
+          "readOnly": true
+        },
+        "secureErasureCertificateSasKey": {
+          "description": "Shared access key to download secure erasure certificate for the device",
           "type": "string",
           "readOnly": true
         }
