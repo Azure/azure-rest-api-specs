@@ -106,3 +106,7 @@ using Microsoft.GuestConfiguration;
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "Get"
 );
+@@clientName(GuestConfigurationAssignmentsOperationGroup.rGList,
+  "rg_list",
+  "python"
+);
