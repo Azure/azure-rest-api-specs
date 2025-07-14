@@ -1,6 +1,6 @@
 {
-  "title": "Runs_CreateThreadAndRun_MaximumSet",
-  "operationId": "createThreadAndRun",
+  "title": "CreateThreadAndRun_MaximumSet",
+  "operationId": "CreateThreadAndRun",
   "parameters": {
     "api-version": "2025-05-15-preview",
     "body": {
@@ -168,6 +168,19 @@
         "assistant_id": "asst_abc123",
         "status": "in_progress",
         "required_action": {
+          "type": "submit_tool_outputs",
+          "submit_tool_outputs": {
+            "tool_calls": [
+              {
+                "id": "call_abc123",
+                "type": "function",
+                "function": {
+                  "name": "calculate_metrics",
+                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
+                }
+              }
+            ]
+          }
         },
         "last_error": {
           "code": "server_error",
