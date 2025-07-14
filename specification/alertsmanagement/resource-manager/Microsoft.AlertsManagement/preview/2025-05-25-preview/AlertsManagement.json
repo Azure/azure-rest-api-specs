@@ -1364,16 +1364,16 @@
     },
     "alertModificationProperties": {
       "type": "object",
-      "description": "Properties of the alert modification item.",
+      "description": "Alert modification history properties.",
       "properties": {
         "alertId": {
           "type": "string",
-          "description": "Unique Id of the alert for which the history is being retrieved",
+          "description": "Unique identifier of the alert.",
           "readOnly": true
         },
         "modifications": {
           "type": "array",
-          "description": "Modification details",
+          "description": "Array of alert modification events.",
           "items": {
             "$ref": "#/definitions/alertModificationItem"
           }
@@ -1469,7 +1469,7 @@
         },
         "comment": {
           "type": "string",
-          "description": "Comment one the change"
+          "description": "Comment"
         }
       }
     },
@@ -1548,7 +1548,7 @@
       "properties": {
         "statusURL": {
           "type": "string",
-          "description": "URL address to get the status of the notification, not null if status is 'Accepted'.",
+          "description": "URL endpoint for checking notification delivery status. Only populated when status is 'Accepted'.",
           "x-nullable": true
         },
         "status": {
