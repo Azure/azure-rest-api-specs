@@ -1928,15 +1928,10 @@ model GalleryScriptVersionPublishingProfile
  * The safety profile of the Gallery Script Version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "By design. Properties will be added in future."
 @added(Versions.v2025_03_03)
 model GalleryScriptVersionSafetyProfile
-  extends GalleryArtifactSafetyProfileBase {
-  /**
-   * Indicates whether this script has been reported as violating Microsoft's policies.
-   */
-  @visibility(Lifecycle.Read)
-  reportedForPolicyViolation?: boolean;
-}
+  extends GalleryArtifactSafetyProfileBase {}
 
 /**
  * The source script from which the Script Version is going to be created.
