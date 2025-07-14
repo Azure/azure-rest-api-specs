@@ -72,7 +72,8 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is LabVirtualMachineOps.CreateOrUpdateAsync<
     LabVirtualMachine,
-    LroHeaders = ArmLroLocationHeader<FinalResult = LabVirtualMachine> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = LabVirtualMachine> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
