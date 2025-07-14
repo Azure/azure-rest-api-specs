@@ -436,6 +436,33 @@
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
     },
+    "PlatformCapabilities": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "properties": {
+        "confidentialCompute": {
+          "$ref": "#/definitions/ConfidentialCompute"
+        }
+      }
+    },
+    "ConfidentialCompute": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "mode": {
+          "description": "Setting to Enable or Disable Confidential Compute",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ClusterSku": {
       "type": "object",
       "properties": {
