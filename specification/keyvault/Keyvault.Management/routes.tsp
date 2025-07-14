@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.KeyVault;
 
@@ -39,8 +40,6 @@ interface VaultsOperationGroup {
   @route("/subscriptions/{subscriptionId}/resources")
   @get
   list(
-    ...ApiVersionParameter,
-
     /**
      * The filter to apply on the operation.
      */
@@ -52,6 +51,14 @@ interface VaultsOperationGroup {
      */
     @query("$top")
     $top?: int32,
+
+    /**
+     * Azure Resource Manager Api Version.
+     */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @apiVersion(false)
+    @query("api-version")
+    `api-version`: ResourceManagerApiVersions,
 
     ...SubscriptionIdParameter,
   ): ArmResponse<ResourceListResult<Resource>> | CloudError;

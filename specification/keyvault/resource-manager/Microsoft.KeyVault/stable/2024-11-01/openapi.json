@@ -2092,9 +2092,6 @@
         "description": "The List operation gets information about the vaults associated with the subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
             "description": "The filter to apply on the operation.",
@@ -2115,6 +2112,20 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Azure Resource Manager Api Version.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "2015-11-01"
+            ],
+            "x-ms-enum": {
+              "name": "ResourceManagerApiVersions",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"

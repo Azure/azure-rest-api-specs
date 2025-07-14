@@ -164,6 +164,11 @@ union StoragePermissions {
   deletesas: "deletesas",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ResourceManagerApiVersions {
+  `2015-11-01`,
+}
+
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
