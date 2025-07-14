@@ -5,6 +5,9 @@ vi.mock("fs/promises", () => ({ readFile: vi.fn() }));
 
 import * as fs from "fs/promises";
 
+/** @type {import("vitest").Mock} */
+const readFileMock = fs.readFile;
+
 import generateJobSummary from "../src/avocado-code.js";
 import { MessageLevel, MessageType } from "../src/message.js";
 import { stringify } from "../src/ndjson.js";
@@ -14,12 +17,11 @@ const core = createMockCore();
 const outputFile = "avocado.ndjson";
 
 describe("generateJobSummary", () => {
-  /** @type {import("vitest").Mock} */
-  const readFileMock = fs.readFile;
-
   beforeEach(() => {
     vi.stubEnv("AVOCADO_OUTPUT_FILE", outputFile);
     readFileMock.mockReset();
+    core.summary.addRaw.mockReset();
+    core.summary.write.mockReset();
   });
 
   it("throws if env var not set", async () => {
@@ -114,7 +116,9 @@ describe("generateJobSummary", () => {
       },
     ];
 
-    readFileMock.mockResolvedValueOnce(stringify(messages));
+    const str = stringify(messages);
+
+    readFileMock.mockResolvedValueOnce(str);
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
