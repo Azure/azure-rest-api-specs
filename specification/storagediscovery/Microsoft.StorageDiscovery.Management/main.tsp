@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./versions.tsp";
 import "./workspace.tsp";
+import "./report.tsp";
 import "./models.tsp";
 
 using Azure.ResourceManager;

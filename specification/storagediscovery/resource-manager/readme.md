@@ -47,7 +47,11 @@ suppressions:
   - code: ArmResourcePropertiesBag
     from: storageDiscoveryWorkspace.json
     where: $.definitions["StorageDiscoveryWorkspace"]
-    reason: The sku property name is critical. Present in already approved version. 
+    reason: The sku property name is critical. Present in already approved version.
+  - code: OperationIdNounVerb
+    from: storageDiscoveryWorkspace.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId
+    reason: The Report_GenerateReport operation follows established naming conventions for this service as per ARM review.
 ```
 
 ---
