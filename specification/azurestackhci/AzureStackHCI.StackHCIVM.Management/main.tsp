@@ -16,6 +16,8 @@ import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
+import "./VirtualNetworks.tsp";
+import "./VirtualNetworkSubnets.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -99,4 +101,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_06_01_preview: "2025-06-01-preview",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_09_01_preview: "2025-09-01-preview",
 }

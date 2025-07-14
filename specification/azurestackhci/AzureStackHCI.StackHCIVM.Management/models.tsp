@@ -439,6 +439,33 @@ union IPPoolTypeEnum {
   string,
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("Type of session persistence [Default, SourceIP, SourceIPProtocol]")
+union LoadBalancerRuleSessionPersistenceType {
+  @doc("Default - 5-tuple hashing")
+  Default: "Default",
+
+  @doc("Source IP - 2-tuple hashing looking at src-dst ip")
+  SourceIP: "SourceIP",
+
+  @doc("SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol")
+  SourceIPProtocol: "SourceIPProtocol",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Protocol for health probes")
+union LoadBalancerProbeProtocol {
+  @doc("TCP - TCP port checking")
+  TCP: "TCP",
+
+  @doc("HTTP - HTTP request")
+  HTTP: "HTTP",
+
+  string,
+}
+
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
@@ -455,7 +482,24 @@ model SubnetIpConfigurationReference {
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/publicIPs";
     }
+  ]>;
+}
+
+@doc("The ARM ID for a resource consuming IP on a subnet")
+model VirtualNetworkSubnetIpConfigurationReference {
+  @doc("The ARM ID for a Network Interface.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfiguration";
+    }
+    // (abhpandey): Add NAT Gateway and DNS when needed.
   ]>;
 }
 
@@ -465,6 +509,17 @@ model NetworkSecurityGroupArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkSecurityGroups";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID for a Network Security Group.")
+model NatGatewayArmReference {
+  @doc("The ARM ID for a Network Security Group.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/natGateways";
     }
   ]>;
 }
@@ -487,6 +542,78 @@ model LogicalNetworkArmReference {
     },
     {
       type: "Microsoft.NetworkCloud/trunkedNetworks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+model ManagedNetworkFabricISDArmReference {
+  @doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/l2isolationdomains";
+    },
+    {
+      type: "Microsoft.ManagedNetworkFabric/l3isolationdomain/internalnetworks";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID for a Virutal Network subnet")
+model VirtualNetworkSubnetArmReference {
+  @doc("The ARM ID for a Virutal Network subnet.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID of a Public IP resource")
+model PublicIPArmReference {
+  @doc("The ARM ID of a Public IP resource")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/publicIPs";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID of a FrontendIPConfiguration resource")
+model FrontendIPConfigurationArmReference {
+  @doc("The ARM ID of a FrontendIPConfiguration resource")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID of a BackendAddressPool resource")
+model BackendAddressPoolArmReference {
+  @doc("The ARM ID of a BackendAddressPool resource")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/backendAddressPools";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID of a Probe resource")
+model HealthProbeArmReference {
+  @doc("The ARM ID of a Probe resource")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/probes";
     }
   ]>;
 }
@@ -701,6 +828,10 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Managed network fabric l2/l3 ISD for this lnet. If set empty, the lnet remains entirely local.")
+  fabricNetworkConfiguration?: ManagedNetworkFabricISDArmReference;
+
   @doc("Subnet - list of subnets under the logical network")
   @Azure.ResourceManager.identifiers(#[])
   subnets?: Subnet[];
@@ -728,6 +859,7 @@ model LogicalNetworkPropertiesDhcpOptions {
   dnsServers?: string[];
 }
 
+@removed(Versions.v2025_09_01_preview)
 @doc("Properties of the subnet.")
 model Subnet {
   #suppress "deprecated" "Legacy flattening"
@@ -767,6 +899,11 @@ model SubnetProperties {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
+
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  @doc("Provisioning state of the subnet resource.")
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Route table resource.")
@@ -857,7 +994,7 @@ model NetworkSecurityGroupProperties {
   @extension("x-ms-identifiers", #[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
-  @doc("A collection of references to logical networks that are currently using this NSG")
+  @doc("A collection of references to logical network or virtual network subnets that are currently using this NSG")
   @visibility(Lifecycle.Read)
   subnets?: LogicalNetworkArmReference[];
 
@@ -1020,6 +1157,55 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("Issues exposed by managed network fabric")
+model FabricIssue {
+  @doc("Specific error/warning code.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("issue severity")
+  @visibility(Lifecycle.Read)
+  severity?: string;
+
+  @doc("Description of the issue")
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  @doc("specific property or resource that has the issue")
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  @doc("Timestamp of the issue as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  timestamp?: string;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+model FabricIntegrationStatus {
+  @doc("Current fabric integration state.")
+  @visibility(Lifecycle.Read)
+  state?: string;
+
+  @doc("Health status of the fabric connection.")
+  @visibility(Lifecycle.Read)
+  health?: string;
+
+  @doc("Timestamp of the last fabric health check as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  lastChecked?: string;
+
+  @doc("Type of fabric resource referenced.")
+  @visibility(Lifecycle.Read)
+  resourceType?: string;
+
+  @doc("Issues raised by fabric")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  issues?: FabricIssue[];
+}
+
 #suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
@@ -1031,6 +1217,10 @@ model LogicalNetworkStatus {
 
   @doc("Logical network provisioning status")
   provisioningStatus?: LogicalNetworkStatusProvisioningStatus;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+  fabricIntegration?: FabricIntegrationStatus;
 }
 
 @doc("Describes the status of the provisioning.")
@@ -1071,6 +1261,7 @@ model SubnetUpdate {
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  @removed(Versions.v2025_09_01_preview)
   name?: string;
 }
 
@@ -1079,6 +1270,403 @@ model SubnetUpdate {
 model SubnetUpdateProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Virtual newtork resource properties")
+model VirtualNetworkProperties {
+  @doc("Virtual Network address space. All subnets must be within the defined range.")
+  addressSpace: VirtualNetworkAddressSpace;
+
+  @doc("Virtual Network DHCP options. Inherited by all subnets and VMs.")
+  dhcpOptions: VirtualNetworkDhcpOptions;
+
+  @doc("The provisioning state of the virtual network resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Virtual Network")
+  status?: VirtualNetworkStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Address Space Information")
+model VirtualNetworkAddressSpace {
+  @doc("A list of one or more CIDR blocks that define the address space.")
+  addressPrefixes: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("DHCP options for virtual networks")
+model VirtualNetworkDhcpOptions {
+  @doc("An array of DNS server IP addresses that VMs or wokloads in the vnet can inherit")
+  dnsServers?: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The observed state of the virtual network")
+model VirtualNetworkStatus {
+  @doc("VirtualNetwork provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("virtual network provisioning status")
+  provisioningStatus?: VirtualNetworkStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network operations")
+model VirtualNetworkStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("VirtualNetwork subnet resource")
+model VirtualNetworkSubnetProperties {
+  @doc("Subnet CIDR")
+  addressPrefix: string;
+
+  @doc("Network Security Group attached to the subnet.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("Nat Gateway attached to the subnet for non-vnet traffic.")
+  natGateway?: NatGatewayArmReference;
+
+  @doc("RouteTable defining custom routes for the subnet.")
+  routeTable?: RouteTable;
+
+  @doc("List of ipconfiguration")
+  @visibility(Lifecyle.Read)
+  ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[]
+
+  @doc("The provisioning state of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  status?: VirtualNetworkSubnetStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatus {
+  @doc("VirtualNetworkSubnet provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Public IP provisioning status")
+  provisioningStatus?: VirtualNetworkSubnetStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network subnet")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network subnet [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Public IP Properties resource.")
+model PublicIPProperties {
+  @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
+  publicIPAddressVersion?: string;
+
+  @doc("ipAllocationScope: Arm Reference to the logical network to allocate this from")
+  ipAllocationScope: LogicalNetworkArmReference;
+
+  @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from lnet address space.")
+  ipAddress?: string;
+
+  @doc("Provisioning state of the public IP")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+@added(Versions.v2025_09_01_preview)
+model PublicIPAddressStatus {
+  @doc("PubliC IP provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Public IP provisioning status")
+  provisioningStatus?: PublicIPStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+model PublicIPStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the public IP")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the public IP [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Nat Gateway resource properties")
+model NatGatewayProperties {
+  @doc("List of public ip addresses that the gateway can use for NAT.")
+  publicIPAddresses?: PublicIPArmReference[];
+
+  @visibility(Lifecycle.Read)
+  @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
+  subnets?: VirtualNetworkSubnetArmReference[];
+
+  @doc("Provisioning state of the public IP")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Nat Gateway")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  status?: NatGatewayStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Nat Gateway resource status")
+model NatGatewayStatus {
+  @doc("NatGateway provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("NatGateway provisioning status")
+  provisioningStatus?: NatGatewayStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+model NatGatewayStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the nat gateway")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the nat gateway [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Load Balancer resource properites.")
+model LoadBalancerProperties {
+  @doc("Provisioning state of the Load Balancer")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("FrontendIP Configuration object for a load balancer.")
+model FrontendIpConfigurationProperties {
+  @doc("Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet.")
+  privateIPAddress?: string;
+
+  @doc("privateIPAllocationMethod - set to Static for requesting a specific IP")
+  privateIPAllocationMethod?: IpAllocationMethodEnum;
+
+  @doc("subnet - the subnet from which to allocate the private IP")
+  subnet?: VirtualNetworkSubnetArmReference;
+
+  @doc("Public IP ")
+  publicIPAddress?: PublicIPArmReference;
+
+  @doc("Provisioning state of the FrontendIP configuration.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Backend address pool for the load balancer.")
+model BackendAddressPoolProperties {
+  @doc("List of backend addresses for the backend pool")
+  loadBalancerBackendAddresses: LoadBalancerBackendAddress[];
+
+  @doc("Provisioning state of the backend ip pool configuration.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of backend pool status")
+  status?: BackendAddressPoolStatus;
+}
+
+model LoadBalancerBackendAddress {
+  @doc("admin state - if set to false, the address is removed from the pool")
+  adminState?: boolean;
+
+  @doc("Nic Based backend-ip association")
+  networkInterfaceIPConfiguration?: SubnetIpConfigurationReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Backend address pool resource status")
+model BackendAddressPoolStatus {
+  @doc("Backend address pool provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Backend address pool provisioning status")
+  provisioningStatus?: BackendAddressPoolStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+model BackendAddressPoolStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the backend address pool")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the backend address pool [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("LoadBalancerRuleProperties")
+model LoadBalancerRuleProperties {
+  @doc("arm reference to frontend IP being used by this LB")
+  frontendIPConfiguration: FrontendIPConfigurationArmReference;
+
+  @doc("arm reference to backedn pool being used by ths pool")
+  backendAddressPool: BackendAddressPoolArmReference;
+
+  @doc("Frontedn port to accept connections")
+  frontendPort: int32;
+
+  @doc("backendPort to forward connections")
+  backendPort: int32;
+
+  @doc("Reference for the health probe for this connection")
+  probe?: HealthProbeArmReference;
+
+  @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
+  sessionPersistence?: LoadBalancerRuleSessionPersistenceType;
+
+  @doc("Time for which connections are preserved before being torn down.")
+  idleTimeoutInMinutes?: int32;
+
+  @doc("Provisioning state of the backend ip pool configuration.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of backend pool status")
+  status?: LoadBalancerRuleStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Load Balancer rule resource status")
+model LoadBalancerRuleStatus {
+  @doc("Load Balancer rule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Load Balancer rule provisioning status")
+  provisioningStatus?: LoadBalancerRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+model LoadBalancerRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the load balancer rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the load balancer rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+model ProbeProperties {
+  @doc("Protocol for this probe: Can be Tcp or Http - Diverges from Azure where Https is also an option")
+  protocol: LoadBalancerProbeProtocol;
+
+  @doc("Port on the backend address to probe")
+  port: int32;
+
+  @doc("For http probes, specify the request path e.g. /health")
+  requestPath?: string;
+
+  @doc("Probe interval in seconds (5-300) default 15")
+  intervalInSeconds: int32;
+
+  @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
+  numberOfProbes: int32;
+
+  @doc("Provisioning state of the probe.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Inbound nat rule")
+model InboundNATRuleProperties {
+  @doc("Arm Reference to the frontendIP used for this inbound nat rule")
+  frontendIPConfiguration: FrontendIPConfigurationArmReference;
+
+  @doc("Frontend Port for the inbound rule")
+  frontendPort: int32;
+
+  @doc("IP configuration for the target backend.")
+  backendNicIpConfiguration: SubnetIpConfigurationReference;
+
+  @doc("backend Port for the inbound rule")
+  backendPort: int32;
+
+  @doc("Provisioning state of the inbound nat rule.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("Observed state for the inbound nat rule")
+  @visibility(Lifecycle.Read)
+  status?: InboundNATRuleStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("inbound nat rule resource status")
+model InboundNATRuleStatus {
+  @doc("inbound nat rule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("inbound nat rule provisioning status")
+  provisioningStatus?: InboundNATRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status for inbound nat rule")
+model InboundNATRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the inbound nat rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the inbound nat rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@doc("The virtual network subnet resource patch definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateRequest {
+  @doc("properties to update") 
+  properties?: VirtualNetworkSubnetUpdateProperties;
+}
+
+@doc("The virtual network subnet resource patch properties definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the subnet.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("NatGateway - Nat Gateway attached to the subnet")
+  natGateway?: NatGatewayArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
