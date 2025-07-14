@@ -1,3 +1,6 @@
+parameters:
+   "service-dir":
+      default: "sdk/webpubsub"
 emit:
   - "@azure-tools/typespec-autorest"
   - "@azure-tools/typespec-python"
@@ -9,8 +12,9 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-messaging-webpubsub"
-    package-name: "azure-messaging-webpubsub"
+    package-dir: "azure-messaging-webpubsubservice"
+    package-name: "azure-messaging-webpubsubservice"
+    namespace: "azure.messaging.webpubsubservice"
     package-version: "1.0.0"
     flavor: "azure"
     generate-test: true
