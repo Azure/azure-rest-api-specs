@@ -193,6 +193,8 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationHCRPAssignments_Get")
   get is GuestConfigurationHCRPAssignmentOps.Read<
     GuestConfigurationAssignment,
     ErrorType = ErrorResponse
@@ -201,6 +203,8 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Creates an association between a ARC machine and guest configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationHCRPAssignments_CreateOrUpdate")
   createOrUpdate is GuestConfigurationHCRPAssignmentOps.CreateOrUpdateSync<
     GuestConfigurationAssignment,
     ErrorType = ErrorResponse
@@ -209,7 +213,9 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Delete a guest configuration assignment
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationHCRPAssignments_Delete")
   delete is GuestConfigurationHCRPAssignmentOps.DeleteSync<
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse,
@@ -219,6 +225,8 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all guest configuration assignments for an ARC machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationHCRPAssignments_List")
   list is Extension.ListByTarget<
     HybridCompute,
     GuestConfigurationAssignment,
@@ -230,8 +238,10 @@ interface GuestConfigurationHCRPAssignments {
    * List all reports for the guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
+  @operationId("GuestConfigurationHCRPAssignmentReports_List")
   guestConfigurationHCRPAssignmentReportsList is GuestConfigurationHCRPAssignmentOps.ActionSync<
     GuestConfigurationAssignment,
     void,
@@ -243,7 +253,9 @@ interface GuestConfigurationHCRPAssignments {
    * Get a report for the guest configuration assignment, by reportId.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @operationId("GuestConfigurationHCRPAssignmentReports_Get")
   guestConfigurationHCRPAssignmentReportsGet is GuestConfigurationHCRPAssignmentOps.Read<
     GuestConfigurationAssignment,
     Parameters = {
@@ -272,6 +284,8 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationAssignmentsVMSS_Get")
   get is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -281,6 +295,8 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Creates an association between a VMSS and guest configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationAssignmentsVMSS_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -291,6 +307,8 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Delete a guest configuration assignment for VMSS
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationAssignmentsVMSS_Delete")
   delete is Extension.DeleteSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -302,6 +320,8 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all guest configuration assignments for VMSS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GuestConfigurationAssignmentsVMSS_List")
   list is Extension.ListByTarget<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -313,8 +333,10 @@ interface GuestConfigurationAssignmentsVMSS {
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
+  @operationId("GuestConfigurationAssignmentReportsVMSS_List")
   guestConfigurationAssignmentReportsVMSSList is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -326,7 +348,9 @@ interface GuestConfigurationAssignmentsVMSS {
    * Get a report for the VMSS guest configuration assignment, by reportId.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @operationId("GuestConfigurationAssignmentReportsVMSS_Get")
   guestConfigurationAssignmentReportsVMSSGet is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
