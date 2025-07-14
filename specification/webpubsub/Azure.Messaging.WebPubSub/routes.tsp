@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.Messaging.WebPubSub;
+namespace Azure.Messaging.WebPubSubService;
 
 interface HealthApiOperationGroup {
   /**
