@@ -64,12 +64,12 @@
   "paths": {
     "/geolocation/ip/{format}": {
       "get": {
-        "summary": "Use to get the ISO country code for a given IP address",
-        "description": "\n\nThe `Get IP To Location` API is an HTTP `GET` request that, given an IP address, returns the ISO country code from which that IP address is located. Developers can use this information to block or alter certain content based on geographical locations where the application is being viewed from.",
+        "summary": "Use to get the ISO country/region code for a given IP address.",
+        "description": "\n\nThe `Get IP To Location` API is an HTTP `GET` request that returns the ISO country/region code for a given IP address. Developers can use this information to block or modify content based on the geographical location from which the application is accessed.",
         "operationId": "Geolocation_GetIPToLocation",
         "x-ms-client-name": "GetLocation",
         "x-ms-examples": {
-          "Successfully retrieve country code from IP address": {
+          "Successfully retrieve country/region code from IP address": {
             "$ref": "./examples/SuccessfulGetCountryCodeFromIP.json"
           }
         },
@@ -94,7 +94,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The request succeeded. The resource has been fetched and included in the message body.",
             "schema": {
               "$ref": "#/definitions/IpAddressToLocationResult"
             }
@@ -128,7 +128,7 @@
       "readOnly": true,
       "properties": {
         "isoCode": {
-          "description": "The IP Address's 2-character code [(ISO 3166-1)](https://www.iso.org/iso-3166-country-codes.html) of the country or region. Please note, IP address in ranges reserved for special purpose will return Null for country/region.",
+          "description": "The IP address's 2-character country or region code ([ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html)). Note that IP addresses in ranges reserved for special purposes will return Null for country/region.",
           "type": "string",
           "readOnly": true
         }
