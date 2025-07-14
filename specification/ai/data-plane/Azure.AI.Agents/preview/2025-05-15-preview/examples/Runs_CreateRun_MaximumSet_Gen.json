@@ -38,78 +38,9 @@
       ],
       "tools": [
         {
-          "type": "code_interpreter"
-        },
-        {
-          "type": "file_search"
-        },
-        {
-          "type": "function",
-          "function": {
-            "name": "calculate_metrics",
-            "description": "Calculate statistical metrics",
-            "parameters": {
-              "type": "object",
-              "properties": {
-                "values": {
-                  "type": "array",
-                  "items": {
-                    "type": "number"
-                  }
-                },
-                "metric_type": {
-                  "type": "string",
-                  "enum": ["mean", "median", "std"]
-                }
-              }
-            }
-          }
+          "type": "ToolDefinition"
         }
       ],
-      "tool_resources": {
-        "code_interpreter": {
-          "file_ids": [
-            "file_abc123",
-            "file_def456"
-          ],
-          "data_sources": [
-            {
-              "uri": "https://example.com/dataset.csv",
-              "type": "uri_asset"
-            }
-          ]
-        },
-        "file_search": {
-          "vector_store_ids": [
-            "vs_abc123"
-          ],
-          "vector_stores": [
-            {
-              "name": "knowledge_base",
-              "configuration": {
-                "data_sources": [
-                  {
-                    "uri": "https://example.com/docs.pdf",
-                    "type": "uri_asset"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "azure_ai_search": {
-          "indexes": [
-            {
-              "index_connection_id": "conn_abc123",
-              "index_name": "data_index",
-              "query_type": "semantic",
-              "top_k": 5,
-              "filter": "timestamp gt 2024-01-01",
-              "index_asset_id": "idx_abc123"
-            }
-          ]
-        }
-      },
       "stream": false,
       "temperature": 0.8,
       "top_p": 0.95,
@@ -205,6 +136,8 @@
         "completed_at": 12,
         "cancelled_at": 18,
         "failed_at": 15,
+        "max_prompt_tokens": 4096,
+        "max_completion_tokens": 2048,
         "incomplete_details": {
           "reason": "content_filter"
         },
@@ -214,6 +147,7 @@
           "total_tokens": 10
         },
         "truncation_strategy": {
+          "type": "last_messages",
           "last_messages": 10
         },
         "tool_choice": {
