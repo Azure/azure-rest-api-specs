@@ -456,9 +456,9 @@ model AssignmentReportResource {
   /**
    * Properties of a guest configuration assignment resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  properties?: {};
+  properties?: unknown;
 }
 
 /**
@@ -574,12 +574,11 @@ model GuestConfigurationAssignmentList {
 /**
  * List of guest configuration assignment reports.
  */
-@pagedResult
 model GuestConfigurationAssignmentReportList {
   /**
    * List of reports for the guest configuration. Report contains information such as compliance status, reason and more.
    */
-  @items
+  @pageItems
   value?: GuestConfigurationAssignmentReport[];
 }
 
