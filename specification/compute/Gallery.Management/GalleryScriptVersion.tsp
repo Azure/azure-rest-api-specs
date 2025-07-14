@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./GalleryScript.tsp";
 import "../Common.Management/operations.tsp";
 
 using TypeSpec.Rest;
+using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -14,11 +16,13 @@ namespace Microsoft.Compute {
   /**
    * The List Gallery Script version operation response.
    */
+  @added(Versions.v2025_03_03)
   model GalleryScriptVersionList is Azure.Core.Page<GalleryScriptVersion>;
 
   /**
    * Specifies information about the gallery Script Version that you want to create or update.
    */
+  @added(Versions.v2025_03_03)
   @parentResource(GalleryScript)
   model GalleryScriptVersion
     is Azure.ResourceManager.TrackedResource<GalleryScriptVersionProperties> {
@@ -35,6 +39,7 @@ namespace Microsoft.Compute {
     /**
      * Retrieves information about a gallery Script Version.
      */
+    @added(Versions.v2025_03_03)
     get is ComputeResourceRead<GalleryScriptVersion>;
 
     /**
@@ -42,6 +47,7 @@ namespace Microsoft.Compute {
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
     #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+    @added(Versions.v2025_03_03)
     createOrUpdate is ComputeResourceCreateOrReplaceAsync<
       GalleryScriptVersion,
       Response = ArmResourceUpdatedResponse<GalleryScriptVersion> | ArmResourceCreatedResponse<
@@ -49,6 +55,7 @@ namespace Microsoft.Compute {
         ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
       > | (ArmAcceptedLroResponse & {
         @bodyRoot
+        @added(Versions.v2025_03_03)
         _: GalleryScriptVersion;
       })
     >;
@@ -56,6 +63,7 @@ namespace Microsoft.Compute {
     /**
      * Update a gallery Script Version.
      */
+    @added(Versions.v2025_03_03)
     @patch(#{ implicitOptionality: false })
     update is ComputeCustomPatchAsync<
       GalleryScriptVersion,
@@ -69,6 +77,7 @@ namespace Microsoft.Compute {
      * Delete a gallery Script Version.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+    @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
       Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -78,6 +87,7 @@ namespace Microsoft.Compute {
      * List gallery Script Versions in a gallery Script Definition.
      */
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+    @added(Versions.v2025_03_03)
     listByGalleryScript is ComputeResourceListByParent<
       GalleryScriptVersion,
       Response = ArmResponse<GalleryScriptVersionList>

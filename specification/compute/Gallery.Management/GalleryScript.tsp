@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Gallery.tsp";
 import "../Common.Management/operations.tsp";
 
 using TypeSpec.Rest;
+using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -14,6 +16,7 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery Script Definition that you want to create or update.
  */
+@added(Versions.v2025_03_03)
 @parentResource(Gallery)
 model GalleryScript
   is Azure.ResourceManager.TrackedResource<GalleryScriptProperties> {
@@ -30,6 +33,7 @@ interface GalleryScripts {
   /**
    * Retrieves information about a gallery script definition.
    */
+  @added(Versions.v2025_03_03)
   get is ComputeResourceRead<GalleryScript>;
 
   /**
@@ -37,6 +41,7 @@ interface GalleryScripts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @added(Versions.v2025_03_03)
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryScript,
     Response = ArmResourceUpdatedResponse<GalleryScript> | ArmResourceCreatedResponse<
@@ -44,6 +49,7 @@ interface GalleryScripts {
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
+      @added(Versions.v2025_03_03)
       _: GalleryScript;
     })
   >;
@@ -52,6 +58,7 @@ interface GalleryScripts {
    * Update a gallery Script Definition.
    */
   @patch(#{ implicitOptionality: false })
+  @added(Versions.v2025_03_03)
   update is ComputeCustomPatchAsync<
     GalleryScript,
     PatchModel = GalleryScriptUpdate,
@@ -64,6 +71,7 @@ interface GalleryScripts {
    * Delete a gallery Script Definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @added(Versions.v2025_03_03)
   delete is ComputeResourceDeleteAsync<
     GalleryScript,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -73,6 +81,7 @@ interface GalleryScripts {
    * List gallery Script Definitions in a gallery.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  @added(Versions.v2025_03_03)
   listByGallery is ComputeResourceListByParent<
     GalleryScript,
     Response = ArmResponse<GalleryScriptList>

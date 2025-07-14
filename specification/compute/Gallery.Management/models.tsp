@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -46,7 +48,10 @@ union GallerySharingPermissionTypes {
 /**
  * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
  */
+@added(Versions.v2025_03_03)
 union GalleryScriptParameterType {
+  string,
+
   /**
    * String
    */
@@ -1773,6 +1778,7 @@ model GalleryApplicationList is Azure.Core.Page<GalleryApplication>;
 /**
  * The List Gallery Script operation response.
  */
+@added(Versions.v2025_03_03)
 model GalleryScriptList is Azure.Core.Page<GalleryScript>;
 
 /**
@@ -1824,6 +1830,7 @@ model GallerySoftDeletedResourceProperties {
 /**
  * Describes the properties of a gallery script definition.
  */
+@added(Versions.v2025_03_03)
 model GalleryScriptProperties {
   /**
    * The description of this gallery script definition resource. This property is updatable.
@@ -1866,6 +1873,7 @@ model GalleryScriptProperties {
  * Specifies information about the gallery Script Definition that you want to update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
 model GalleryScriptUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery script definition.
@@ -1878,6 +1886,7 @@ model GalleryScriptUpdate extends UpdateResourceDefinition {
 /**
  * Describes the properties of a gallery script version.
  */
+@added(Versions.v2025_03_03)
 model GalleryScriptVersionProperties {
   /**
    * The publishing profile of a gallery image version.
@@ -1906,6 +1915,7 @@ model GalleryScriptVersionProperties {
  * The publishing profile of a gallery image version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
 model GalleryScriptVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {
   /**
@@ -1918,12 +1928,20 @@ model GalleryScriptVersionPublishingProfile
  * The safety profile of the Gallery Script Version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
 model GalleryScriptVersionSafetyProfile
-  extends GalleryArtifactSafetyProfileBase {}
+  extends GalleryArtifactSafetyProfileBase {
+  /**
+   * Indicates whether this script has been reported as violating Microsoft's policies.
+   */
+  @visibility(Lifecycle.Read)
+  reportedForPolicyViolation?: boolean;
+}
 
 /**
  * The source script from which the Script Version is going to be created.
  */
+@added(Versions.v2025_03_03)
 model ScriptSource {
   /**
    * Required. The link of the source script, it must be a readable storage blob with SAS URI or publicly accessible URI or managed identity enabled.
@@ -1940,6 +1958,7 @@ model ScriptSource {
  * The definition of a parameter that can be passed to a script of a Gallery Script Version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
 model GalleryScriptParameter extends GenericGalleryParameter {
   /**
    * Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum
@@ -1965,6 +1984,7 @@ model GalleryScriptParameter extends GenericGalleryParameter {
 /**
  * The definition of a generic gallery parameter.
  */
+@added(Versions.v2025_03_03)
 model GenericGalleryParameter {
   /**
    * The name of the parameter.
@@ -1991,6 +2011,7 @@ model GenericGalleryParameter {
  * Specifies information about the gallery Script Version that you want to update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_03_03)
 model GalleryScriptVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery script version.
