@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "ProductListings"
+      "name": "ProductList"
     },
     {
-      "name": "ProductSingles"
+      "name": "ProductGet"
     }
   ],
   "paths": {
@@ -83,9 +83,9 @@
     },
     "/providers/Microsoft.Marketplace/products": {
       "get": {
-        "operationId": "ProductListings_ListByTenant",
+        "operationId": "ProductList_ListByTenant",
         "tags": [
-          "ProductListings"
+          "ProductList"
         ],
         "description": "Lists products for tenant.",
         "parameters": [
@@ -125,9 +125,9 @@
     },
     "/providers/Microsoft.Marketplace/products/{productId}/{productId}": {
       "get": {
-        "operationId": "ProductSingles_GetByTenant",
+        "operationId": "ProductGet_GetByTenant",
         "tags": [
-          "ProductSingles"
+          "ProductGet"
         ],
         "description": "Gets a product single by tenant.",
         "parameters": [
@@ -193,11 +193,60 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/productSingles/{productId}/subscriptions/{subscriptionId}/{productId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/{subscriptionId}": {
       "get": {
-        "operationId": "ProductSingles_GetBySubscription",
+        "operationId": "ProductList_ListBySubscription",
         "tags": [
-          "ProductSingles"
+          "ProductList"
+        ],
+        "description": "Lists products by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductListing"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/{productId}/subscriptions/{subscriptionId}/{productId}": {
+      "get": {
+        "operationId": "ProductGet_GetBySubscription",
+        "tags": [
+          "ProductGet"
         ],
         "description": "Gets a product single by subscription.",
         "parameters": [
@@ -255,51 +304,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ProductSingle"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products/subscriptions/{subscriptionId}": {
-      "get": {
-        "operationId": "ProductListings_GetBySubscription",
-        "tags": [
-          "ProductListings"
-        ],
-        "description": "Lists products by subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "market",
-            "in": "query",
-            "description": "The market in which the product is available.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "language",
-            "in": "query",
-            "description": "The language to filter by",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ProductListing"
             }
           },
           "default": {

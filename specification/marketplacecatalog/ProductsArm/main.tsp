@@ -37,7 +37,7 @@ model ProductSingle is ProxyResource<ProductDetails> {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations(ProductListing)
-interface ProductListings {
+interface ProductList {
   /** Lists products for tenant. */
   @route("/providers/Microsoft.Marketplace/products")
   @get
@@ -55,12 +55,15 @@ interface ProductListings {
   ): ArmResponse<ProductListing> | ErrorResponse;
 
   /** Lists products by subscription. */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
+  @route("subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
   @get
   @armResourceRead(ProductListing)
-  getBySubscription(
+  listBySubscription(
     ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+
+    @doc("The subscription ID.")
+    @path
+    subscriptionId: string,
 
     @doc("The market in which the product is available.")
     @query
@@ -73,9 +76,9 @@ interface ProductListings {
 }
 
 @armResourceOperations(ProductSingle)
-interface ProductSingles {
+interface ProductGet {
   /** Gets a product single by tenant. */
-  @route("/providers/Microsoft.Marketplace/products/{productId}")
+  @route("/providers/Microsoft.Marketplace/products")
   @get
   @armResourceRead(ProductSingle)
   getByTenant(
@@ -107,7 +110,7 @@ interface ProductSingles {
   ): ArmResponse<ProductSingle> | ErrorResponse;
 
   /** Gets a product single by subscription. */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/productSingles/{productId}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/products")
   @get
   @armResourceRead(ProductSingle)
   getBySubscription(
