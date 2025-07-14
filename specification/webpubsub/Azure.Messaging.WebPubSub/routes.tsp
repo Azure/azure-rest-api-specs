@@ -20,7 +20,7 @@ interface HealthApiOperationGroup {
   getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 }
 
-interface WebPubSubOperationGroup {
+interface WebPubSubService {
   /**
    * Add filtered connections to multiple groups.
    */
