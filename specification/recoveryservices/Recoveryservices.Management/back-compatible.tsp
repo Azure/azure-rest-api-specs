@@ -211,3 +211,9 @@ using Microsoft.RecoveryServices;
   "GetRecoveryServiceCapabilities",
   "csharp"
 );
+@@usage(CapabilitiesResponse, Usage.input, "csharp");
+@@usage(DNSZoneResponse, Usage.input, "csharp");
+@@clientName(CapabilitiesResponseProperties,
+  "CapabilitiesResultProperties",
+  "csharp"
+);

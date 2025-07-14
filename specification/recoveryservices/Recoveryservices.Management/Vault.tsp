@@ -258,17 +258,18 @@ interface Vaults {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
   create is Azure.ResourceManager.Legacy.UpdateOperation<
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
+      ...Azure.ResourceManager.Legacy.Provider;
 
       /**
        * The name of the recovery services vault.
        */
       @path
+      @segment("vaults")
       vaultName: string;
 
       /**

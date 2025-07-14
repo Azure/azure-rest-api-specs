@@ -145,6 +145,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
       "get": {
         "operationId": "Vaults_ListBySubscriptionId",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Fetches all the resources of the specified type in the subscription.",
         "parameters": [
           {
@@ -275,6 +278,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
       "get": {
         "operationId": "Vaults_Get",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Get the Vault details.",
         "parameters": [
           {
@@ -316,6 +322,9 @@
       },
       "put": {
         "operationId": "Vaults_CreateOrUpdate",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Creates or updates a Recovery Services vault.",
         "parameters": [
           {
@@ -411,6 +420,9 @@
       },
       "patch": {
         "operationId": "Vaults_Update",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Updates the vault.",
         "parameters": [
           {
@@ -506,6 +518,9 @@
       },
       "delete": {
         "operationId": "Vaults_Delete",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Deletes a vault.",
         "parameters": [
           {
@@ -564,6 +579,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}": {
       "put": {
         "operationId": "VaultCertificates_Create",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Uploads a certificate for a resource.",
         "parameters": [
           {
@@ -982,6 +1000,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}": {
       "delete": {
         "operationId": "RegisteredIdentities_Delete",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Unregisters the given container from your Recovery Services vault.",
         "parameters": [
           {
@@ -1029,6 +1050,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationUsages": {
       "get": {
         "operationId": "ReplicationUsages_List",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Fetches the replication usages of the vault.",
         "parameters": [
           {
@@ -1075,6 +1099,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages": {
       "get": {
         "operationId": "Usages_ListByVaults",
+        "tags": [
+          "Vaults"
+        ],
         "description": "Fetches the usages of the vault.",
         "parameters": [
           {
@@ -1141,6 +1168,20 @@
         ]
       }
     },
+    "AssociatedIdentity": {
+      "type": "object",
+      "description": "Identity details to be used for an operation",
+      "properties": {
+        "operationIdentityType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "Identity type that should be used for an operation."
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "User assigned identity to be used for an operation if operationIdentityType is UserAssigned."
+        }
+      }
+    },
     "AuthType": {
       "type": "string",
       "description": "Specifies the authentication type.",
@@ -1191,6 +1232,38 @@
         "alertsForAllFailoverIssues": {
           "$ref": "#/definitions/AlertsState"
         }
+      }
+    },
+    "BCDRSecurityLevel": {
+      "type": "string",
+      "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
+      "enum": [
+        "Poor",
+        "Fair",
+        "Good",
+        "Excellent"
+      ],
+      "x-ms-enum": {
+        "name": "BCDRSecurityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Poor",
+            "value": "Poor"
+          },
+          {
+            "name": "Fair",
+            "value": "Fair"
+          },
+          {
+            "name": "Good",
+            "value": "Good"
+          },
+          {
+            "name": "Excellent",
+            "value": "Excellent"
+          }
+        ]
       }
     },
     "BackupStorageVersion": {
@@ -1634,6 +1707,28 @@
       "required": [
         "type"
       ]
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "Identity type that should be used for an operation.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          }
+        ]
+      }
     },
     "ImmutabilitySettings": {
       "type": "object",
@@ -2497,6 +2592,10 @@
           "$ref": "#/definitions/MultiUserAuthorization",
           "description": "MUA Settings of a vault",
           "readOnly": true
+        },
+        "sourceScanConfiguration": {
+          "$ref": "#/definitions/SourceScanConfiguration",
+          "description": "Source scan configuration of vault"
         }
       }
     },
@@ -2599,10 +2698,24 @@
         ]
       }
     },
+    "SourceScanConfiguration": {
+      "type": "object",
+      "description": "Source scan configuration of vault",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/State"
+        },
+        "sourceScanIdentity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity details to be used for an operation"
+        }
+      }
+    },
     "StandardTierStorageRedundancy": {
       "type": "string",
       "description": "The storage redundancy setting of a vault",
       "enum": [
+        "Invalid",
         "LocallyRedundant",
         "GeoRedundant",
         "ZoneRedundant"
@@ -2611,6 +2724,10 @@
         "name": "StandardTierStorageRedundancy",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid"
+          },
           {
             "name": "LocallyRedundant",
             "value": "LocallyRedundant"
@@ -2622,6 +2739,32 @@
           {
             "name": "ZoneRedundant",
             "value": "ZoneRedundant"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
           }
         ]
       }
@@ -2970,6 +3113,18 @@
           "$ref": "#/definitions/SecureScoreLevel",
           "description": "Secure Score of Recovery Services Vault",
           "readOnly": true
+        },
+        "bcdrSecurityLevel": {
+          "$ref": "#/definitions/BCDRSecurityLevel",
+          "description": "Security levels of Recovery Services Vault for business continuity and disaster recovery",
+          "readOnly": true
+        },
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
