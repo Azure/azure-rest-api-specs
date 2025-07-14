@@ -28,7 +28,7 @@ jobs:
         id: swagger-breaking-change-analyze-code
         run: |
           npm exec --no -- openapi-diff-runner \
-            --spec-repo-path "$GITHUB_WORKSPACE" \            
+            --spec-repo-path "$GITHUB_WORKSPACE" \
             --head-commit "$GITHUB_SHA" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
             --pr-target-branch "$GITHUB_BASE_REF" \
