@@ -70,7 +70,8 @@ interface VirtualNetworks {
    */
   createOrUpdate is VirtualNetworkOps.CreateOrUpdateAsync<
     VirtualNetwork,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualNetwork> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

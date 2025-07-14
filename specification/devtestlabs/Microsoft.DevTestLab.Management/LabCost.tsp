@@ -51,7 +51,7 @@ interface LabCostOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
-interface LabCosts {
+interface Costs {
   /**
    * Get cost.
    */
@@ -78,4 +78,4 @@ interface LabCosts {
 
 @@doc(LabCost.name, "The name of the cost.");
 @@doc(LabCost.properties, "The properties of the resource.");
-@@doc(LabCosts.createOrUpdate::parameters.resource, "A cost item.");
+@@doc(Costs.createOrUpdate::parameters.resource, "A cost item.");

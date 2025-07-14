@@ -69,7 +69,8 @@ interface CustomImages {
    */
   createOrUpdate is CustomImageOps.CreateOrUpdateAsync<
     CustomImage,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CustomImage> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

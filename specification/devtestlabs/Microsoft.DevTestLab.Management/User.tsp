@@ -70,7 +70,8 @@ interface Users {
    */
   createOrUpdate is UserOps.CreateOrUpdateAsync<
     User,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = User> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

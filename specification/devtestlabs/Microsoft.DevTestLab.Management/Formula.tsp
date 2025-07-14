@@ -70,7 +70,8 @@ interface Formulas {
    */
   createOrUpdate is FormulaOps.CreateOrUpdateAsync<
     Formula,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Formula> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

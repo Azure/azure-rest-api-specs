@@ -73,7 +73,8 @@ interface Secrets {
    */
   createOrUpdate is SecretOps.CreateOrUpdateAsync<
     Secret,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Secret> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

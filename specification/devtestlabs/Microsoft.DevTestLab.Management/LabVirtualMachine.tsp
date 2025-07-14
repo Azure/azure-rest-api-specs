@@ -50,12 +50,11 @@ interface LabVirtualMachineOps
     > {}
 
 @armResourceOperations
-interface LabVirtualMachines {
+interface VirtualMachines {
   /**
    * Get virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Get")
   get is LabVirtualMachineOps.Read<
     LabVirtualMachine,
     Parameters = {
@@ -71,10 +70,9 @@ interface LabVirtualMachines {
    * Create or replace an existing virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_CreateOrUpdate")
   createOrUpdate is LabVirtualMachineOps.CreateOrUpdateAsync<
     LabVirtualMachine,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = LabVirtualMachine> & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -83,7 +81,6 @@ interface LabVirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  @operationId("VirtualMachines_Update")
   update is LabVirtualMachineOps.CustomPatchSync<
     LabVirtualMachine,
     PatchModel = LabVirtualMachineFragment
@@ -94,7 +91,6 @@ interface LabVirtualMachines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("VirtualMachines_Delete")
   delete is LabVirtualMachineOps.DeleteWithoutOkAsync<
     LabVirtualMachine,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -104,7 +100,6 @@ interface LabVirtualMachines {
    * List virtual machines in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_List")
   list is LabVirtualMachineOps.List<
     LabVirtualMachine,
     Parameters = {
@@ -139,7 +134,6 @@ interface LabVirtualMachines {
    * Attach a new or existing data disk to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_AddDataDisk")
   addDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DataDiskProperties,
@@ -150,7 +144,6 @@ interface LabVirtualMachines {
    * Apply artifacts to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ApplyArtifacts")
   applyArtifacts is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ApplyArtifactsRequest,
@@ -161,7 +154,6 @@ interface LabVirtualMachines {
    * Take ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Claim")
   claim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -172,7 +164,6 @@ interface LabVirtualMachines {
    * Detach the specified disk from the virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_DetachDataDisk")
   detachDataDisk is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     DetachDataDiskProperties,
@@ -183,7 +174,6 @@ interface LabVirtualMachines {
    * Gets a string that represents the contents of the RDP file for the virtual machine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_GetRdpFileContents")
   getRdpFileContents is LabVirtualMachineOps.ActionSync<
     LabVirtualMachine,
     void,
@@ -194,7 +184,6 @@ interface LabVirtualMachines {
    * Lists the applicable start/stop schedules, if any.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ListApplicableSchedules")
   listApplicableSchedules is LabVirtualMachineOps.ActionSync<
     LabVirtualMachine,
     void,
@@ -205,7 +194,6 @@ interface LabVirtualMachines {
    * Redeploy a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Redeploy")
   redeploy is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -216,7 +204,6 @@ interface LabVirtualMachines {
    * Resize Virtual Machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Resize")
   resize is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     ResizeLabVirtualMachineProperties,
@@ -227,7 +214,6 @@ interface LabVirtualMachines {
    * Restart a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Restart")
   restart is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -238,7 +224,6 @@ interface LabVirtualMachines {
    * Start a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Start")
   start is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -249,14 +234,12 @@ interface LabVirtualMachines {
    * Stop a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_Stop")
   stop is LabVirtualMachineOps.ActionAsync<LabVirtualMachine, void, OkResponse>;
 
   /**
    * Transfers all data disks attached to the virtual machine to be owned by the current user. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_TransferDisks")
   transferDisks is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -267,7 +250,6 @@ interface LabVirtualMachines {
    * Release ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_UnClaim")
   unClaim is LabVirtualMachineOps.ActionAsync<
     LabVirtualMachine,
     void,
@@ -277,19 +259,19 @@ interface LabVirtualMachines {
 
 @@doc(LabVirtualMachine.name, "The name of the virtual machine.");
 @@doc(LabVirtualMachine.properties, "The properties of the resource.");
-@@doc(LabVirtualMachines.createOrUpdate::parameters.resource,
+@@doc(VirtualMachines.createOrUpdate::parameters.resource,
   "A virtual machine."
 );
-@@doc(LabVirtualMachines.update::parameters.properties, "A virtual machine.");
-@@doc(LabVirtualMachines.addDataDisk::parameters.body,
+@@doc(VirtualMachines.update::parameters.properties, "A virtual machine.");
+@@doc(VirtualMachines.addDataDisk::parameters.body,
   "Request body for adding a new or existing data disk to a virtual machine."
 );
-@@doc(LabVirtualMachines.applyArtifacts::parameters.body,
+@@doc(VirtualMachines.applyArtifacts::parameters.body,
   "Request body for applying artifacts to a virtual machine."
 );
-@@doc(LabVirtualMachines.detachDataDisk::parameters.body,
+@@doc(VirtualMachines.detachDataDisk::parameters.body,
   "Request body for detaching data disk from a virtual machine."
 );
-@@doc(LabVirtualMachines.resize::parameters.body,
+@@doc(VirtualMachines.resize::parameters.body,
   "Request body for resizing a virtual machine."
 );

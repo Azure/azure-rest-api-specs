@@ -73,7 +73,8 @@ interface Disks {
    */
   createOrUpdate is DiskOps.CreateOrUpdateAsync<
     Disk,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

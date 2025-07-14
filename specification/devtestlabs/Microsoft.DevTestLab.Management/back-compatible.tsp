@@ -69,7 +69,7 @@ using Microsoft.DevTestLab;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Artifact.properties);
 
-@@clientName(LabCosts.createOrUpdate::parameters.resource, "labCost");
+@@clientName(Costs.createOrUpdate::parameters.resource, "labCost");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(LabCost.properties);
 
@@ -114,10 +114,10 @@ using Microsoft.DevTestLab;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Disk.properties);
 
-@@clientName(DtlEnvironments.createOrUpdate::parameters.resource,
+@@clientName(Environments.createOrUpdate::parameters.resource,
   "dtlEnvironment"
 );
-@@clientName(DtlEnvironments.update::parameters.properties, "dtlEnvironment");
+@@clientName(Environments.update::parameters.properties, "dtlEnvironment");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DtlEnvironment.properties);
 
@@ -133,22 +133,22 @@ using Microsoft.DevTestLab;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ServiceFabric.properties);
 
-@@clientName(LabVirtualMachines.createOrUpdate::parameters.resource,
+@@clientName(VirtualMachines.createOrUpdate::parameters.resource,
   "labVirtualMachine"
 );
-@@clientName(LabVirtualMachines.update::parameters.properties,
+@@clientName(VirtualMachines.update::parameters.properties,
   "labVirtualMachine"
 );
-@@clientName(LabVirtualMachines.addDataDisk::parameters.body,
+@@clientName(VirtualMachines.addDataDisk::parameters.body,
   "dataDiskProperties"
 );
-@@clientName(LabVirtualMachines.applyArtifacts::parameters.body,
+@@clientName(VirtualMachines.applyArtifacts::parameters.body,
   "applyArtifactsRequest"
 );
-@@clientName(LabVirtualMachines.detachDataDisk::parameters.body,
+@@clientName(VirtualMachines.detachDataDisk::parameters.body,
   "detachDataDiskProperties"
 );
-@@clientName(LabVirtualMachines.resize::parameters.body,
+@@clientName(VirtualMachines.resize::parameters.body,
   "resizeLabVirtualMachineProperties"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -161,7 +161,4 @@ using Microsoft.DevTestLab;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualNetwork.properties);
 
-@@clientName(LabCosts, "Costs", "python");
-@@clientName(DtlEnvironments, "Environments", "python");
 @@clientName(OperationsOperationGroup, "Operations", "python");
-@@clientName(LabVirtualMachines, "VirtualMachines", "python");

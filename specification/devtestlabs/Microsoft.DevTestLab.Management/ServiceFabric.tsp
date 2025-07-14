@@ -72,7 +72,8 @@ interface ServiceFabrics {
    */
   createOrUpdate is ServiceFabricOps.CreateOrUpdateAsync<
     ServiceFabric,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = ServiceFabric> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

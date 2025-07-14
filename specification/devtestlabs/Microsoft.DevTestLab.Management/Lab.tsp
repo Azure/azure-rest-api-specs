@@ -50,7 +50,8 @@ interface Labs {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Lab,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Lab> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

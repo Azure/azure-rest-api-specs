@@ -53,12 +53,11 @@ interface EnvironmentOps
     > {}
 
 @armResourceOperations
-interface DtlEnvironments {
+interface Environments {
   /**
    * Get environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Environments_Get")
   get is EnvironmentOps.Read<
     DtlEnvironment,
     Parameters = {
@@ -74,10 +73,10 @@ interface DtlEnvironments {
    * Create or replace an existing environment. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Environments_CreateOrUpdate")
   createOrUpdate is EnvironmentOps.CreateOrUpdateAsync<
     DtlEnvironment,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = DtlEnvironment> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -86,7 +85,6 @@ interface DtlEnvironments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  @operationId("Environments_Update")
   update is EnvironmentOps.CustomPatchSync<
     DtlEnvironment,
     PatchModel = DtlEnvironmentFragment
@@ -97,7 +95,6 @@ interface DtlEnvironments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Environments_Delete")
   delete is EnvironmentOps.DeleteWithoutOkAsync<
     DtlEnvironment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -107,7 +104,6 @@ interface DtlEnvironments {
    * List environments in a given user profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Environments_List")
   list is EnvironmentOps.List<
     DtlEnvironment,
     Parameters = {
@@ -141,9 +137,9 @@ interface DtlEnvironments {
 
 @@doc(DtlEnvironment.name, "The name of the environment.");
 @@doc(DtlEnvironment.properties, "The properties of the environment.");
-@@doc(DtlEnvironments.createOrUpdate::parameters.resource,
+@@doc(Environments.createOrUpdate::parameters.resource,
   "An environment, which is essentially an ARM template deployment."
 );
-@@doc(DtlEnvironments.update::parameters.properties,
+@@doc(Environments.update::parameters.properties,
   "An environment, which is essentially an ARM template deployment."
 );
