@@ -50,7 +50,7 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2025-04
+tag: package-resources-2022-10
 ```
 
 ``` yaml $(package-subscriptions)
@@ -237,6 +237,17 @@ input-file:
 ### Tag: package-resources-2025-04
 
 These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
+
+
+### Tag: package-resources-2022-10
+
+These settings apply only when `--tag=package-resources-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2022-10'
+input-file:
+- Microsoft.Resources/stable/2021-04-01/resources.json
+- Microsoft.Resources/stable/2022-10-01/batch.json
+```
 
 ``` yaml $(tag) == 'package-resources-2025-04'
 input-file:
