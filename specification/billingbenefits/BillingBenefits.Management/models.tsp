@@ -565,12 +565,14 @@ model BillingPlanInformation {
   /**
    * Date when the billing plan has started.
    */
-  startDate?: plainDate;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  startDate?: utcDateTime;
 
   /**
    * For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off.
    */
-  nextPaymentDueDate?: plainDate;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  nextPaymentDueDate?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
@@ -584,12 +586,14 @@ model PaymentDetail {
   /**
    * Date when the payment needs to be done.
    */
-  dueDate?: plainDate;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  dueDate?: utcDateTime;
 
   /**
    * Date when the transaction is completed. Is null when it is scheduled.
    */
-  paymentDate?: plainDate;
+  @encode(DateTimeKnownEncoding.rfc7231)
+  paymentDate?: utcDateTime;
 
   /**
    * Amount in pricing currency. Tax not included.
