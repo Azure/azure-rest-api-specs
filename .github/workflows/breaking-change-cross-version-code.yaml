@@ -29,11 +29,11 @@ jobs:
         run: |
           npm exec --no -- openapi-diff-runner \
             --run-type "CrossVersion" \
-            --spec-repo-path "$GITHUB_WORKSPACE" \
+            --spec-repo-path "$GITHUB_WORKSPACE" \            
+            --head-commit "$GITHUB_SHA" \
+            --pr-source-branch "$GITHUB_HEAD_REF" \
+            --pr-target-branch "$GITHUB_BASE_REF" \
             --pr-number "${{ github.event.pull_request.number }}" \
-            --head-commit "${{ github.event.pull_request.head.sha }}" \
-            --pr-source-branch "${{ github.event.pull_request.head.ref }}" \
-            --pr-target-branch "${{ github.event.pull_request.base.ref }}" \
             --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
             --target-repo "$GITHUB_REPOSITORY"
 
