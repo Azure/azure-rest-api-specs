@@ -1,4 +1,4 @@
-import "../common";
+import "./common";
 import "./models.tsp";
 
 using TypeSpec.Http;

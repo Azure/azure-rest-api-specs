@@ -3,8 +3,9 @@
  * Edits made directly to this file will be lost.
  */
 
-import "../audio";
-import "../common";
+import "./client.tsp";
+import "./audio";
+import "./common";
 import "./custom.tsp";
 
 using TypeSpec.OpenAPI;
