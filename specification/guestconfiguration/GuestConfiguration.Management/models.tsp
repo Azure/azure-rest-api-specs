@@ -542,19 +542,6 @@ model Resource {
   type?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ErrorResponseError {
-  /**
-   * Error code.
-   */
-  code?: string;
-
-  /**
-   * Detail error message indicating why the operation failed.
-   */
-  message?: string;
-}
-
 /**
  * The response of the list guest configuration assignment operation.
  */
