@@ -2074,7 +2074,7 @@
         },
         "previewFeatures": {
           "type": "array",
-          "description": "List of private endpoint connections.",
+          "description": "List of preview features to enable on the mongo cluster.",
           "items": {
             "$ref": "#/definitions/PreviewFeature"
           }
@@ -2253,7 +2253,7 @@
         },
         "previewFeatures": {
           "type": "array",
-          "description": "List of private endpoint connections.",
+          "description": "List of preview features to enable on the mongo cluster.",
           "items": {
             "$ref": "#/definitions/PreviewFeature"
           }
@@ -2266,21 +2266,7 @@
     },
     "PreviewFeature": {
       "type": "string",
-      "description": "Preview features that can be enabled on a mongo cluster.",
-      "enum": [
-        "GeoReplicas"
-      ],
-      "x-ms-enum": {
-        "name": "PreviewFeature",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GeoReplicas",
-            "value": "GeoReplicas",
-            "description": "Enables geo replicas preview feature. The feature must be set at create-time on new cluster to enable linking a geo-replica cluster to it."
-          }
-        ]
-      }
+      "description": "Preview features that can be enabled on a mongo cluster."
     },
     "PrivateEndpointConnectionResource": {
       "type": "object",
