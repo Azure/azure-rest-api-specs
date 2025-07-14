@@ -284,6 +284,12 @@ model WorkloadComponents {
   name: string;
 
   /**
+   * Type of the component.
+   */
+  @doc("Type of the component.")
+  type?: string;
+
+  /**
    * List of checks to be executed for the role.
    */
   @doc("List of checks to be executed for the role.")

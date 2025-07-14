@@ -1,3 +1,6 @@
+/* v8 ignore start */
+// @ts-check
+
 /**
  * Breaking change configuration and constants for Azure REST API specs
  * This file contains the single source of truth for all breaking change and versioning approval labels.
@@ -76,10 +79,4 @@ export const breakingChangesCheckType = {
 export const BREAKING_CHANGES_CHECK_TYPES = {
   SAME_VERSION: "SameVersion",
   CROSS_VERSION: "CrossVersion",
-};
-
-// API version lifecycle stages
-export const API_VERSION_LIFECYCLE_STAGES = {
-  PREVIEW: "preview",
-  STABLE: "stable",
 };
