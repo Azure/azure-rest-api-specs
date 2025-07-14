@@ -68,15 +68,19 @@
         "top_p": 0.9,
         "max_prompt_tokens": 4096,
         "max_completion_tokens": 2048,
-        "truncation_strategy": "auto",
+        "truncation_strategy": {
+             "type": "auto"
+          },
         "tool_choice": {
           "type": "function",
           "function": {
             "name": "calculate_metrics"
           }
         },
-        "response_format": "VALUE_NEEDED",
-        "tool_resources": "VALUE_NEEDED",
+        "response_format": {
+          "type": "text"
+        },
+        "tool_resources": {},
         "parallel_tool_calls": true,
         "metadata": {}
       }

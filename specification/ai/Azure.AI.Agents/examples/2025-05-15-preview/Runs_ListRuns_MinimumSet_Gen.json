@@ -48,7 +48,7 @@
             "instructions": "You are a helpful assistant.",
             "tools": [],
             "created_at": 1736869300,
-            "expires_at": "VALUE_NEEDED",
+            "expires_at": 20,
             "started_at": 1736869301,
             "completed_at": 1736869420,
             "cancelled_at": 18,
@@ -65,13 +65,17 @@
            "top_p": 0.9,
            "max_prompt_tokens": 4096,
            "max_completion_tokens": 2048,
-           "truncation_strategy": "auto",
+           "truncation_strategy": {
+             "type": "auto"
+          },
            "tool_choice": {
             "function": {
               "name": "calculate_metrics"
             }
             },
-            "response_format": "auto",
+            "response_format": {
+              "type": "text"
+            },
             "tool_resources": {},
             "parallel_tool_calls": true,
             "metadata": {}
