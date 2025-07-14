@@ -7,6 +7,7 @@ import {
   MessageRecordSchema,
   MessageType,
 } from "./message.js";
+import { parse } from "./ndjson.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -34,11 +35,7 @@ export default async function generateJobSummary({ core }) {
     return;
   }
 
-  const messages = content
-    .split("\n")
-    .filter((line) => line.trim() !== "")
-    .map((line) => JSON.parse(line))
-    .map((obj) => MessageRecordSchema.parse(obj));
+  const messages = parse(content).map((obj) => MessageRecordSchema.parse(obj));
 
   if (messages.length === 0) {
     // Should never happen, but if it does, just log the error and return.
