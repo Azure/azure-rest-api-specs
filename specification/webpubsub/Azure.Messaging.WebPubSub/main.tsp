@@ -36,7 +36,7 @@ using Azure.Core;
   }
 )
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
-namespace Azure.Messaging.WebPubSub;
+namespace Azure.Messaging.WebPubSubService;
 
 /**
  * The available API versions.
