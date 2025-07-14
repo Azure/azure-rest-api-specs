@@ -48,34 +48,7 @@
         "model": "gpt-4",
         "instructions": "You are a helpful assistant. Analyze the data carefully and provide insights.",
         "tools": [
-          {
-            "type": "code_interpreter"
-          },
-          {
-            "type": "file_search"
-          },
-          {
-            "type": "function",
-            "function": {
-              "name": "calculate_metrics",
-              "description": "Calculate statistical metrics",
-              "parameters": {
-                "type": "object",
-                "properties": {
-                  "values": {
-                    "type": "array",
-                    "items": {
-                      "type": "number"
-                    }
-                  },
-                  "metric_type": {
-                    "type": "string",
-                    "enum": ["mean", "median", "std"]
-                  }
-                }
-              }
-            }
-          }
+          null
         ],
         "created_at": 1736869300,
         "expires_at": 1736872900,
@@ -96,7 +69,6 @@
         "max_prompt_tokens": 8192,
         "max_completion_tokens": 4096,
         "truncation_strategy": {
-          "type": "last_messages",
           "last_messages": 10
         },
         "tool_choice": {

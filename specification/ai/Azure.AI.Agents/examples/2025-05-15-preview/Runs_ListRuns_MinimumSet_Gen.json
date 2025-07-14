@@ -20,7 +20,6 @@
             "tool_calls": [
               {
                 "id": "call_abc123",
-                "type": "function",
                 "function": {
                   "name": "calculate_metrics",
                   "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
@@ -32,7 +31,6 @@
             "tool_calls": [
               {
                 "id": "call_abc123",
-                "type": "mcp",
                 "mcp": {
                   "name": "search_code",
                   "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}",
@@ -67,17 +65,14 @@
            "top_p": 0.9,
            "max_prompt_tokens": 4096,
            "max_completion_tokens": 2048,
-           "truncation_strategy": {
-             "type": "auto"
-           },
-            "tool_choice": {
-          "type": "function",
-          "function": {
-            "name": "calculate_metrics"
-          }
-        },
-            "response_format": "VALUE_NEEDED",
-            "tool_resources": "VALUE_NEEDED",
+           "truncation_strategy": "auto",
+           "tool_choice": {
+            "function": {
+              "name": "calculate_metrics"
+            }
+            },
+            "response_format": "auto",
+            "tool_resources": {},
             "parallel_tool_calls": true,
             "metadata": {}
           }
