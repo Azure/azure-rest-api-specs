@@ -40,6 +40,15 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "GuestConfigurationAssignments"
+    },
+    {
+      "name": "GuestConfigurationHCRPAssignments"
+    },
+    {
+      "name": "GuestConfigurationConnectedVMwarevSphereAssignments"
     }
   ],
   "paths": {
@@ -82,6 +91,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "operationId": "GuestConfigurationAssignments_SubscriptionList",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "List all guest configuration assignments for a subscription.",
         "parameters": [
           {
@@ -408,6 +420,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "operationId": "GuestConfigurationAssignments_List",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "List all guest configuration assignments for a virtual machine.",
         "parameters": [
           {
@@ -422,7 +437,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -455,6 +470,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
       "get": {
         "operationId": "GuestConfigurationAssignments_Get",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "Get information about a guest configuration assignment",
         "parameters": [
           {
@@ -469,7 +487,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -504,6 +522,9 @@
       },
       "put": {
         "operationId": "GuestConfigurationAssignments_CreateOrUpdate",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "Creates an association between a VM and guest configuration",
         "parameters": [
           {
@@ -518,7 +539,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -568,6 +589,9 @@
       },
       "delete": {
         "operationId": "GuestConfigurationAssignments_Delete",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "Delete a guest configuration assignment",
         "parameters": [
           {
@@ -582,7 +606,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -616,6 +640,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
       "get": {
         "operationId": "GuestConfigurationAssignmentReports_List",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "List all reports for the guest configuration assignment, latest report first.",
         "parameters": [
           {
@@ -630,7 +657,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -667,6 +694,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
       "get": {
         "operationId": "GuestConfigurationAssignmentReports_Get",
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
         "description": "Get a report for the guest configuration assignment, by reportId.",
         "parameters": [
           {
@@ -681,7 +711,7 @@
           {
             "name": "vmName",
             "in": "path",
-            "description": "The name of the virtual machine",
+            "description": "The name of the virtual machine.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
@@ -725,6 +755,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_List",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "List all guest configuration assignments for an ARC machine.",
         "parameters": [
           {
@@ -772,6 +805,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
       "get": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_Get",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "Get information about a guest configuration assignment",
         "parameters": [
           {
@@ -822,6 +858,9 @@
       },
       "put": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_CreateOrUpdate",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "Creates an association between a Connected VM Sphere machine and guest configuration",
         "parameters": [
           {
@@ -887,6 +926,9 @@
       },
       "delete": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignments_Delete",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "Delete a guest configuration assignment",
         "parameters": [
           {
@@ -939,6 +981,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
       "get": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_List",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "List all reports for the guest configuration assignment, latest report first.",
         "parameters": [
           {
@@ -991,6 +1036,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
       "get": {
         "operationId": "GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get",
+        "tags": [
+          "GuestConfigurationConnectedVMwarevSphereAssignments"
+        ],
         "description": "Get a report for the guest configuration assignment, by reportId.",
         "parameters": [
           {
@@ -1092,6 +1140,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments": {
       "get": {
         "operationId": "GuestConfigurationHcrpAssignments_List",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "List all guest configuration assignments for an ARC machine.",
         "parameters": [
           {
@@ -1133,6 +1184,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}": {
       "get": {
         "operationId": "GuestConfigurationHcrpAssignments_Get",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "Get information about a guest configuration assignment",
         "parameters": [
           {
@@ -1176,6 +1230,9 @@
       },
       "put": {
         "operationId": "GuestConfigurationHcrpAssignments_CreateOrUpdate",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "Creates an association between a ARC machine and guest configuration",
         "parameters": [
           {
@@ -1234,6 +1291,9 @@
       },
       "delete": {
         "operationId": "GuestConfigurationHcrpAssignments_Delete",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "Delete a guest configuration assignment",
         "parameters": [
           {
@@ -1276,6 +1336,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports": {
       "get": {
         "operationId": "GuestConfigurationHcrpAssignmentReports_List",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "List all reports for the guest configuration assignment, latest report first.",
         "parameters": [
           {
@@ -1321,6 +1384,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}/reports/{reportId}": {
       "get": {
         "operationId": "GuestConfigurationHcrpAssignmentReports_Get",
+        "tags": [
+          "GuestConfigurationHCRPAssignments"
+        ],
         "description": "Get a report for the guest configuration assignment, by reportId.",
         "parameters": [
           {
