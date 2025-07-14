@@ -395,6 +395,8 @@ suppressions:
       - $.definitions.NodeTypeProperties.properties.capacities
       - $.definitions.ServiceTypeHealthPolicyMap
       - $.definitions.UserAssignedIdentityMap
+      - $.definitions.VMSSExtensionProperties.properties.settings
+      - $.definitions.VMSSExtensionProperties.properties.protectedSettings
       
   - code: BodyTopLevelProperties
     reason: Backwards compatability with previously approved specs. Model did not change.
@@ -419,6 +421,9 @@ suppressions:
     where:
       - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration.format
       - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeDomainTimeout.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout.format
