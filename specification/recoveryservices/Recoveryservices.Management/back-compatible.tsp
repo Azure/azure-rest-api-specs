@@ -217,3 +217,5 @@ using Microsoft.RecoveryServices;
   "CapabilitiesResultProperties",
   "csharp"
 );
+@@clientName(AuthType.ACS, "Acs", "csharp");
+@@clientName(AuthType.AAD, "Aad", "csharp");
