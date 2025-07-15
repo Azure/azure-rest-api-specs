@@ -6,19 +6,18 @@ using Language.Conversations;
 
 namespace Language.ConversationsClientCustomizations;
 
-@@clientName(Conversations, "ConversationAnalysis", "csharp");
-@@clientName(analyzeConversations, "AnalyzeConversation", "csharp");
+@@clientName(Conversations, "ConversationAnalysis");
+@@clientName(analyzeConversations, "AnalyzeConversation");
 
-@@clientName(ConversationEntity.confidenceScore, "confidence", "csharp");
-@@clientName(ConversationIntent.confidenceScore, "confidence", "csharp");
-@@clientName(TargetIntentResult.confidenceScore, "confidence", "csharp");
-@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence", "csharp");
-@@clientName(KnowledgeBaseAnswer.id, "qnaId", "csharp");
-@@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer", "csharp");
-@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence", "csharp");
+@@clientName(ConversationEntity.confidenceScore, "confidence");
+@@clientName(ConversationIntent.confidenceScore, "confidence");
+@@clientName(TargetIntentResult.confidenceScore, "confidence");
+@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence");
+@@clientName(KnowledgeBaseAnswer.id, "qnaId");
+@@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer");
+@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence");
 @@clientName(KnowledgeBaseAnswerContext.previousUserQuery,
-  "previousQuestion",
-  "csharp"
+  "previousQuestion"
 );
 
 @@clientName(AnswersOptions.confidenceScoreThreshold,
