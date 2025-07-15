@@ -33,4 +33,7 @@ model AadToken
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15: "2024-11-15",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_12_15: "2024-12-15",
 }

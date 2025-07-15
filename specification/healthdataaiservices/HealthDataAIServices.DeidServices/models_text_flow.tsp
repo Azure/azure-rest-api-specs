@@ -1,6 +1,8 @@
+import "@typespec/versioning";
 import "./models_tagger.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -14,6 +16,10 @@ model DeidentificationContent {
   @doc("Operation to perform on the input documents.")
   @clientName("operationType", "csharp,java,python")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
+  
+  @doc("List of PHI entities with simplified single encoding for SurrogateOnly operation. Cannot be used with Entities.")
+  @added(Versions.v2025_12_15)
+  encodedEntities?: Array<EncodedPhiEntity>;
 
   @doc("Customization parameters to override default service behaviors.")
   customizations?: DeidentificationCustomizationOptions;

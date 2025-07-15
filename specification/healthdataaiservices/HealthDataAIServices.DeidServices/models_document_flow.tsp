@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
