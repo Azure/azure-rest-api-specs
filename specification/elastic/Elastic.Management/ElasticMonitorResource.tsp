@@ -194,15 +194,10 @@ interface ElasticMonitorResources {
   @operationId("ExternalUser_CreateOrUpdate")
   createOrUpdate is ArmResourceActionSync<
     ElasticMonitorResource,
-    {
-      /**
-       * Elastic External User Creation Parameters
-       */
-      @bodyRoot
-      body?: ExternalUserInfo;
-    },
+    ExternalUserInfo,
     ArmResponse<ExternalUserCreationResponse>,
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ResourceProviderDefaultErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -267,15 +262,10 @@ interface ElasticMonitorResources {
   @operationId("VMCollection_Update")
   vMCollectionUpdate is ArmResourceActionSync<
     ElasticMonitorResource,
-    {
-      /**
-       * VM resource Id
-       */
-      @bodyRoot
-      body?: VMCollectionUpdate;
-    },
+    VMCollectionUpdate,
     OkResponse,
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ResourceProviderDefaultErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -298,16 +288,11 @@ interface ElasticMonitorResources {
   @operationId("Monitor_Upgrade")
   upgrade is ArmResourceActionAsyncBase<
     ElasticMonitorResource,
-    {
-      /**
-       * Elastic Monitor Upgrade Parameters
-       */
-      @bodyRoot
-      body?: ElasticMonitorUpgrade;
-    },
+    ElasticMonitorUpgrade,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ElasticMonitorResource>,
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ResourceProviderDefaultErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -485,14 +470,9 @@ interface ElasticMonitorResources {
   @operationId("Organizations_Resubscribe")
   resubscribe is ArmResourceActionAsync<
     ElasticMonitorResource,
-    {
-      /**
-       * Resubscribe Properties
-       */
-      @bodyRoot
-      body?: ResubscribeProperties;
-    },
-    ElasticMonitorResource
+    ResubscribeProperties,
+    ElasticMonitorResource,
+    OptionalRequestBody = true
   >;
 }
 
@@ -503,4 +483,16 @@ interface ElasticMonitorResources {
 );
 @@doc(ElasticMonitorResources.update::parameters.properties,
   "Elastic resource model update parameters."
+);
+@@doc(ElasticMonitorResources.createOrUpdate::parameters.body,
+  "Elastic External User Creation Parameters"
+);
+@@doc(ElasticMonitorResources.vMCollectionUpdate::parameters.body,
+  "VM resource Id"
+);
+@@doc(ElasticMonitorResources.upgrade::parameters.body,
+  "Elastic Monitor Upgrade Parameters"
+);
+@@doc(ElasticMonitorResources.resubscribe::parameters.body,
+  "Resubscribe Properties"
 );
