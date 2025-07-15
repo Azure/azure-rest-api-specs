@@ -656,6 +656,17 @@
             "$ref": "#/definitions/EncodedPhiEntity"
           }
         },
+        "entities": {
+          "type": "array",
+          "description": "List of PHI entities for SurrogateOnly operation. Cannot be used with EncodedEntities.",
+          "items": {
+            "$ref": "#/definitions/PhiEntity"
+          }
+        },
+        "inputLocale": {
+          "type": "string",
+          "description": "Input locale for the text being processed. Used for localization of surrogate values."
+        },
         "customizations": {
           "$ref": "#/definitions/DeidentificationCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
