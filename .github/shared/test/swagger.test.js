@@ -1,14 +1,14 @@
 // @ts-check
 
-import { dirname, resolve, join } from "path";
+import { dirname, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { Swagger } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
-import { Readme } from "../src/readme.js";
-import { Tag } from "../src/tag.js";
-import { SpecModel } from "../src/spec-model.js";
 import { ConsoleLogger } from "../src/logger.js";
+import { Readme } from "../src/readme.js";
+import { SpecModel } from "../src/spec-model.js";
+import { Tag } from "../src/tag.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -31,23 +31,26 @@ describe("Swagger", () => {
 
   // TODO: Test that path is resolved against backpointer
 
-  it("excludes example files", async () => {
+  it("filters example files", async () => {
     const swagger = new Swagger(resolve(__dirname, "fixtures/swagger/ignoreExamples/swagger.json"));
-    const refs = await swagger.getRefs();
 
-    const expectedIncludedPath = resolve(
-      __dirname,
-      "fixtures/swagger/ignoreExamples/included.json",
-    );
+    const expectedSpecs = [
+      resolve(__dirname, "fixtures/swagger/ignoreExamples/included.json"),
+      resolve(__dirname, "fixtures/swagger/ignoreExamples/x-ms-included.json"),
+    ];
+    const expectedExamples = [
+      resolve(__dirname, "fixtures/swagger/ignoreExamples/examples/example.json"),
+      resolve(__dirname, "fixtures/swagger/ignoreExamples/examples/x-ms-example.json"),
+    ];
+
+    const refs = await swagger.getRefs();
     expect(refs).toMatchObject(
-      new Map([
-        [
-          expectedIncludedPath,
-          expect.objectContaining({
-            path: expect.stringContaining(expectedIncludedPath),
-          }),
-        ],
-      ]),
+      new Map(expectedSpecs.map((p) => [p, expect.objectContaining({ path: p })])),
+    );
+
+    const examples = swagger.getExamples();
+    expect(examples).toMatchObject(
+      new Map(expectedExamples.map((p) => [p, expect.objectContaining({ path: p })])),
     );
   });
 
