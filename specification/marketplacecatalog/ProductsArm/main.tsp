@@ -51,7 +51,7 @@ interface ProductList {
   /** Lists products for tenant. */
   @route("/providers/Microsoft.Marketplace/products")
   @get
-  @armResourceRead(Products)
+  @armResourceRead(ProductSummary)
   listByTenant(
     ...ApiVersionParameter,
 
@@ -62,10 +62,10 @@ interface ProductList {
     @doc("The language to filter by")
     @query
     language: string,
-  ): ArmResponse<ResourceListResult<Products>> | ErrorResponse;
+  ): ArmResponse<ResourceListCustomResult<ProductSummary>> | ErrorResponse;
 
   /** Lists products for subscription. */
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
       @doc("The market in which the product is available.")
@@ -75,7 +75,8 @@ interface ProductList {
       @doc("The language to filter by")
       @query
       language: string;
-    }
+    },
+    Response = ResourceListCustomResult<ProductSummary>
   >;
 }
 
@@ -140,3 +141,19 @@ interface ProductGet {
     includeServiceInstructionTemplates: boolean,
   ): ArmResponse<ProductSingle> | ErrorResponse;
 }
+
+/** The operation to list products by subscription. */
+@listsResource(Resource)
+@segmentOf(Resource)
+@armResourceList(Resource)
+@autoRoute
+op ArmListBySubscriptionCustom<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Parameters extends {} = {},
+  Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
+  Error extends {} = ErrorResponse
+> is Azure.ResourceManager.Foundations.ArmReadOperation<
+  Azure.ResourceManager.Foundations.SubscriptionScope<Resource> & Parameters,
+  Response,
+  Error
+>;

@@ -111,7 +111,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProductsListResult"
+              "$ref": "#/definitions/ProductSummaryListResult"
             }
           },
           "default": {
@@ -223,9 +223,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProductsListResult"
+              "$ref": "#/definitions/ProductSummaryListResult"
             }
           },
           "default": {
@@ -1673,6 +1673,29 @@
         "productType"
       ]
     },
+    "ProductSummaryListResult": {
+      "type": "object",
+      "description": "The custom response of a list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on this page",
+          "items": {
+            "$ref": "#/definitions/ProductSummary"
+          },
+          "x-ms-identifiers": [
+            "uniqueProductId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProductType": {
       "type": "string",
       "description": "The delivery method or deployment model",
@@ -1876,32 +1899,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ProductsListResult": {
-      "type": "object",
-      "description": "The response of a Products list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Products items on this page",
-          "items": {
-            "$ref": "#/definitions/Products"
-          },
-          "x-ms-identifiers": [
-            "properties/uniqueProductId",
-            "name",
-            "id"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ProrationPolicy": {
