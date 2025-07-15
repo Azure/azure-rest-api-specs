@@ -27,6 +27,27 @@ model PhiEntity {
   confidenceScore?: float64;
 }
 
+
+@doc("Simplified PHI Entity for use in SurrogateOnly operations with single encoding.")
+@added(Versions.v2024_12_15)
+model EncodedPhiEntity {
+  @doc("PHI Category of the entity.")
+  category: string;
+
+  @doc("Starting index of the location from within the input text using the specified encoding.")
+  offset: int32;
+
+  @doc("Length of the input text using the specified encoding.")
+  length: int32;
+
+  @doc("The encoding used for offset and length values.")
+  encoding: EncodingType;
+
+  @doc("Text of the entity (optional).")
+  text?: string;
+}
+
+
 @doc("String index encoding model.")
 model StringIndex {
   @doc("The offset or length of the substring in UTF-8 encoding")
@@ -140,3 +161,4 @@ union PhiCategory {
 
   string,
 }
+

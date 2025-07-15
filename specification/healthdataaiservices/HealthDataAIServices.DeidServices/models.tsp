@@ -1,6 +1,6 @@
-import "@typespec/versioning";
+import "@azure-tools/typespec-versioning";
 
-using TypeSpec.Versioning;
+using Azure.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -17,7 +17,7 @@ union DeidentificationOperationType {
   Tag: "Tag",
 
   @doc("SurrogateOnly Operation will replace only specified entities of PHI with surrogate values.")
-  @added(Versions.v2025_12_15)
+  @added(Versions.v2024_12_15)
   SurrogateOnly: "SurrogateOnly",
 
   string,
@@ -35,23 +35,4 @@ model SharedCustomizationOptions {
 
   @doc("Locale in which the output surrogates are written.")
   surrogateLocale?: string = "en-US";
-}
-
-@doc("Simplified PHI Entity for use in SurrogateOnly operations with single encoding.")
-@added(Versions.v2025_12_15)
-model EncodedPhiEntity {
-  @doc("PHI Category of the entity.")
-  category: string;
-
-  @doc("Starting index of the location from within the input text using the specified encoding.")
-  offset: int32;
-
-  @doc("Length of the input text using the specified encoding.")
-  length: int32;
-
-  @doc("The encoding used for offset and length values.")
-  encoding: EncodingType;
-
-  @doc("Text of the entity (optional).")
-  text?: string;
 }
