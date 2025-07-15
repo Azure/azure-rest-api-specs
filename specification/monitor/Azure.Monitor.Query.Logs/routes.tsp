@@ -8,6 +8,7 @@ namespace MonitorQueryLogs;
 interface QueryOperationGroup {
   /** Executes an Analytics query for data. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query")
   @route("/workspaces/{workspaceId}/query")
   @get
@@ -42,6 +43,7 @@ interface QueryOperationGroup {
    * is an example for using POST with an Analytics query.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query")
   @route("/workspaces/{workspaceId}/query")
   @post
@@ -74,6 +76,7 @@ interface QueryOperationGroup {
    * is an example for using POST with an Analytics query.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource URI")
   @route("/{resourceId}/query")
   @get
@@ -104,6 +107,7 @@ interface QueryOperationGroup {
    * is an example for using POST with an Analytics query.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource ID")
   @route("/{resourceId}/query")
   @post
@@ -137,6 +141,7 @@ interface QueryOperationGroup {
    * is an example for using POST with an Analytics query.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute a batch of Analytics queries")
   @route("/$batch")
   @post
@@ -157,6 +162,7 @@ interface MetadataOperationGroup {
    * functions, workspace info, categories etc.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Gets metadata information")
   @route("/workspaces/{workspaceId}/metadata")
   @get
@@ -173,6 +179,7 @@ interface MetadataOperationGroup {
    * functions, workspace info, categories etc.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Gets metadata information")
   @route("/workspaces/{workspaceId}/metadata")
   @post
