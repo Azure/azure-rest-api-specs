@@ -27,5 +27,24 @@ using TypeSpec.Versioning;
     $host: string,
   }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@useAuth(
+  OAuth2Auth<[{
+   type: OAuth2FlowType.implicit;
+   authorizationUrl: "https://api.example.com/oauth2/authorize";
+   refreshUrl: "https://api.example.com/oauth2/refresh";
+   scopes: ["https://myservice.azure.com/read", "https://myservice.azure.com/write"];
+ }]>
+ )
+@versioned(Versions)
 namespace PurviewDataCatalog;
+/**
+ * The available API versions.
+ */
+enum Versions {
+  /**
+   * The 2025-06-16-preview API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_16_preview: "2025-06-16-preview";  
+}
+
