@@ -2,7 +2,14 @@ trigger: none
 pr:
   paths:
     include:
+      # Trigger for files that will result in a doc preview build
       - specification/**
+
+      # Smoke test on changed files
+      - eng/pipelilnes/swagger-api-doc-preview.yml
+      - eng/pipelines/templates/steps/set-sha-check.yml
+      - .github/shared/src/doc-preview.js
+      - .github/shared/cmd/api-doc-preview.js
 
 jobs:
   - job: SwaggerApiDocPreview
@@ -26,7 +33,7 @@ jobs:
         value: '[TEST-IGNORE] Swagger ApiDocPreview'
 
     steps:
-      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
@@ -83,7 +90,7 @@ jobs:
             $buildStart = $buildStartRaw | ConvertFrom-Json
             Write-Host "Build started at https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
 
-      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
@@ -183,7 +190,7 @@ jobs:
 
       # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
-      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: $(CheckState)
           TargetUrl: $(CheckUrl)
@@ -192,7 +199,7 @@ jobs:
 
       # In the event of a failure in this job (not the docs build job), set the 
       # PR status to failed and link to the current build.
-      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           # Only run if a previous step in the job failed
           Condition: failed()
