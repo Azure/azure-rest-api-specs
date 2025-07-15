@@ -95,7 +95,7 @@ interface OperationResultsOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationNameParameter,
-    ...OperationIdParameter,
+    ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationStatusExtendedResult> | ErrorResponse;
 }
 
@@ -113,7 +113,7 @@ interface OperationProgressOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationNameParameter,
-    ...OperationIdParameter,
+    ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationProgressResult> | ErrorResponse;
 }
 

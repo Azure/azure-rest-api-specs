@@ -2118,20 +2118,6 @@ model LocationNameParameter {
 }
 
 /**
- * The property of a server's operation id.
- */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
-@OpenAPI.extension("x-ms-parameter-location", "method")
-model OperationIdParameter {
-  /**
-   * The ID of an ongoing async operation.
-   */
-  @minLength(1)
-  @path
-  operationId: string;
-}
-
-/**
  * Response model for listing Advanced Threat Protection settings.
  * Contains a paginated list of Advanced Threat Protection configurations.
  */
