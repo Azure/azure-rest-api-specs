@@ -1100,18 +1100,21 @@ model ApplicationFirewallSettings {
    * Rules to control the client connection count
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(10)
   clientConnectionCountRules?: ClientConnectionCountRule[];
 
   /**
    * Rules to control the client traffic
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(10)
   clientTrafficControlRules?: ClientTrafficControlRule[];
 
   /**
    * Config to control the client connection lifetime in seconds, can be set to 0 to disable the config
    */
   @maxValue(604800)
+  @minValue(0)
   maxClientConnectionLifetimeInSeconds?: int64;
 }
 

@@ -116,7 +116,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -397,7 +397,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2554,6 +2554,7 @@
         "clientConnectionCountRules": {
           "type": "array",
           "description": "Rules to control the client connection count",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientConnectionCountRule"
           },
@@ -2562,6 +2563,7 @@
         "clientTrafficControlRules": {
           "type": "array",
           "description": "Rules to control the client traffic",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientTrafficControlRule"
           },
@@ -2571,6 +2573,7 @@
           "type": "integer",
           "format": "int64",
           "description": "Config to control the client connection lifetime in seconds, can be set to 0 to disable the config",
+          "minimum": 0,
           "maximum": 604800
         }
       }

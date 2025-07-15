@@ -59,7 +59,9 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
   @operationId("SignalR_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SignalRResource,
     Response = ArmResourceUpdatedResponse<SignalRResource> | ArmResourceCreatedResponse<SignalRResource> | ArmAcceptedLroResponse
