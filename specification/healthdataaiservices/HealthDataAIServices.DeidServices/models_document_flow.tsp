@@ -39,7 +39,6 @@ model DeidentificationJob {
 
   @doc("Current status of a job.")
   @visibility(Lifecycle.Read)
-  @pollingOperationParameter
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
