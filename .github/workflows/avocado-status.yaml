@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger Avocado - Set Status"
+name: "Swagger Avocado - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code"]
+    workflows: ["Swagger Avocado - Analyze Code"]
     types: [completed]
 
 permissions:
@@ -28,8 +28,8 @@ permissions:
 jobs:
   avocado-status:
     name: Set Avocado Status
-    uses: ./.github/workflows/_reusable-set-check-status.yml
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger Avocado - Analyze Code"
-      required_check_name: "[TEST-IGNORE] Swagger Avocado"
+      monitored_workflow_name: "Swagger Avocado - Analyze Code"
+      required_check_name: "Swagger Avocado"
       overriding_label: "Approved-Avocado"

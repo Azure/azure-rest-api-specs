@@ -20,7 +20,7 @@ Follow these steps in order to create or manage a release plan for an API specif
 - If no release plan exists, proceed to Step 3
 
 ## Step 3: Gather Release Plan Information
-Collect the following required information from the user. Do not use non GUID valid for product and service tree Id.
+Collect the following required information from the user. Do not use non GUID valid for product and service tree Id. Do not create release plan with temporary values.
 Do not assume or use default for service tree Id and product service tree Id. Always show the values to user and ask them to confirm it's a valid value in service tree.
 If any details are missing, prompt the user accordingly:
 
@@ -41,15 +41,20 @@ If any details are missing, prompt the user accordingly:
 - Provide this resource: [Release Plan Creation Guide](https://eng.ms/docs/products/azure-developer-experience/plan/release-plan-create)
 - Once all information is gathered, use `CreateReleasePlan` to create the release plan
 - Display the newly created release plan details to the user for confirmation
+- Run `/sdk-details-in-release-plan` to identify languages configured in the TypeSpec project and add them to the release plan
 
-## Step 5: Link SDK Pull Requests (if applicable)
+## Step 5: Update SDK Details in Release Plan
+- Run `/sdk-details-in-release-plan.prompt.md` to add languages and package names to the release plan
+- If the TypeSpec project is for a management plane, run `/verify-namespace-approval` if this is first release of SDK.
+
+## Step 6: Link SDK Pull Requests (if applicable)
 - Ask the user if they have already created SDK pull requests locally for any programming language
 - If SDK pull requests exist:
     - Collect the pull request links from the user
     - Use `LinkSdkPullRequestToReleasePlan` to link each SDK pull request to the release plan
     - Confirm successful linking for each SDK pull request
 
-## Step 6: Summary
+## Step 7: Summary
 - Display a summary of the completed actions:
     - Release plan status (created or existing)
     - Linked SDK pull requests (if any)

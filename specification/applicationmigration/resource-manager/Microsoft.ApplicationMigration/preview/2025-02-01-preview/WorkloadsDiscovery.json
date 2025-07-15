@@ -2483,15 +2483,11 @@
           }
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2600,15 +2596,11 @@
           }
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2853,15 +2845,11 @@
           "description": "Indicates whether the super user access is enabled on the instance."
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -3036,15 +3024,11 @@
           "description": "Indicates whether the super user access is enabled on the instance."
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3145,15 +3129,11 @@
       "description": "Object containing tags updates for patch operations.",
       "properties": {
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags.",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "$ref": "#/definitions/PgsqlSiteProperties",
@@ -3281,20 +3261,6 @@
             "description": "Mainstream support status."
           }
         ]
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
       }
     },
     "TagsUpdate": {

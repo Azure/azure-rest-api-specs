@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-02-01-preview
+tag: package-preview-2025-06-01-preview
 ```
 
 ## Suppression
@@ -226,6 +226,30 @@ suppressions:
     reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
+### Tag: package-preview-2025-06-01-preview
+
+These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - preview/2025-06-01-preview/arcSettings.json
+  - preview/2025-06-01-preview/clusters.json
+  - preview/2025-06-01-preview/deploymentSettings.json
+  - preview/2025-06-01-preview/edgeDeviceJobs.json
+  - preview/2025-06-01-preview/edgeDevices.json
+  - preview/2025-06-01-preview/extensions.json
+  - preview/2025-06-01-preview/hciCommon.json
+  - preview/2025-06-01-preview/offers.json
+  - ../operations/preview/2025-06-01-preview/operations.json
+  - preview/2025-06-01-preview/publishers.json
+  - preview/2025-06-01-preview/securitySettings.json
+  - preview/2025-06-01-preview/skus.json
+  - preview/2025-06-01-preview/updateRuns.json
+  - preview/2025-06-01-preview/updates.json
+  - preview/2025-06-01-preview/updateSummaries.json
+  - preview/2025-06-01-preview/validatedSolutionRecipes.json
+```
+
 ### Tag: package-preview-2025-02-01-preview
 
 These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
@@ -416,7 +440,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
+  #- repo: azure-sdk-for-java
   #- repo: azure-sdk-for-go
   #- repo: azure-sdk-for-js
     after_scripts:
