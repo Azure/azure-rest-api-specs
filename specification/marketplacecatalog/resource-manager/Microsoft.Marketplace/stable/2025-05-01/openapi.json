@@ -50,6 +50,123 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/products": {
+      "get": {
+        "operationId": "ProductList_ListByBillingAccount",
+        "tags": [
+          "ProductList"
+        ],
+        "description": "Lists products for billing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/products/{productId}": {
+      "get": {
+        "operationId": "ProductGet_GetByBillingAccount",
+        "tags": [
+          "ProductGet"
+        ],
+        "description": "Gets a product single by billing account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductIdParameter"
+          },
+          {
+            "name": "market",
+            "in": "query",
+            "description": "The market in which the product is available.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeStopSoldPlans",
+            "in": "query",
+            "description": "Whether to include stop-sold plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The language to filter by",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "includeHiddenPlans",
+            "in": "query",
+            "description": "Whether to include hidden plans in the response.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "includeServiceInstructionTemplates",
+            "in": "query",
+            "description": "Whether to include service instruction templates in the response.",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductSingle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -517,6 +634,26 @@
           }
         ]
       }
+    },
+    "BillingBaseParameters": {
+      "type": "object",
+      "description": "The static parameters for a billing based resource",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "The ID of the target billing account.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "billingAccountId"
+      ]
     },
     "BillingComponent": {
       "type": "object",
@@ -2283,6 +2420,15 @@
     }
   },
   "parameters": {
+    "BillingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "The ID of the target billing account.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
     "ProductIdParameter": {
       "name": "productId",
       "in": "path",

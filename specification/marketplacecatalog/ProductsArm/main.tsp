@@ -51,7 +51,7 @@ interface ProductList {
   /** Lists products for tenant. */
   @route("/providers/Microsoft.Marketplace/products")
   @get
-  @armResourceRead(ProductSummary)
+  @armResourceList(ProductSummary)
   listByTenant(
     ...ApiVersionParameter,
 
@@ -66,6 +66,21 @@ interface ProductList {
 
   /** Lists products for subscription. */
   listBySubscription is ArmListBySubscriptionCustom<
+    Products,
+    Parameters = {
+      @doc("The market in which the product is available.")
+      @query
+      market: string;
+
+      @doc("The language to filter by")
+      @query
+      language: string;
+    },
+    Response = ResourceListCustomResult<ProductSummary>
+  >;
+
+  /** Lists products for billing account. */
+  listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
       @doc("The market in which the product is available.")
@@ -140,6 +155,36 @@ interface ProductGet {
     @query
     includeServiceInstructionTemplates: boolean,
   ): ArmResponse<ProductSingle> | ErrorResponse;
+
+  /** Gets a product single by billing account. */
+  @autoRoute
+  @get
+  @armResourceRead(ProductSingle)
+  getByBillingAccount(
+    ...ApiVersionParameter,
+    ...BillingAccountIdParameter,
+    ...ProductIdParameter,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("Whether to include stop-sold plans in the response.")
+    @query
+    includeStopSoldPlans: boolean,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+
+    @doc("Whether to include hidden plans in the response.")
+    @query
+    includeHiddenPlans: boolean,
+
+    @doc("Whether to include service instruction templates in the response.")
+    @query
+    includeServiceInstructionTemplates: boolean,
+  ): ArmResponse<ProductSingle> | ErrorResponse;
 }
 
 /** The operation to list products by subscription. */
@@ -157,3 +202,45 @@ op ArmListBySubscriptionCustom<
   Response,
   Error
 >;
+
+/** The operation to list products by billing account. */
+@listsResource(Resource)
+@segmentOf(Resource)
+@armResourceList(Resource)
+@autoRoute
+op ArmListByBillingAccount<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Parameters extends {} = {},
+  Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
+  Error extends {} = ErrorResponse
+> is Azure.ResourceManager.Foundations.ArmReadOperation<
+  BillingAccountScope<Resource> & Parameters,
+  Response,
+  Error
+>;
+
+/**
+ * Parameter model for listing a resource at the billing scope
+ * @template Resource The type of the resource.
+ */
+model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource>
+  is ResourceParentParameters<Resource, BillingBaseParameters>;
+
+/**
+ * The static parameters for a billing based resource
+ */
+model BillingBaseParameters
+  is Azure.ResourceManager.Foundations.TenantBaseParameters {
+  ...BillingAccountIdParameter;
+}
+
+/**
+ * The default billing account id parameter type.
+ */
+model BillingAccountIdParameter {
+  /** The ID of the target billing account. */
+  @path
+  @segment("providers/Microsoft.Billing/billingAccounts")
+  @minLength(1)
+  billingAccountId: string;
+}
