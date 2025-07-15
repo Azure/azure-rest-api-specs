@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./privateEndpointConnection.tsp";
 import "./experimentExecution.tsp";
+import "./privateAccess.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
@@ -14,3 +15,7 @@ using Microsoft.Chaos;
 @@clientLocation(ExperimentExecutions.getExecution, Experiments);
 @@clientLocation(ExperimentExecutions.listAllExecutions, Experiments);
 @@clientLocation(ExperimentExecutions.getExecutionDetails, Experiments);
+
+@@clientName(Operations.list, "ListAll");
+@@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
+@@clientName(PrivateAccesses.privateLinkResources, "GetPrivateLinkResources");
