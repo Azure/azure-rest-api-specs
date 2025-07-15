@@ -97,6 +97,75 @@ input-file:
   - Microsoft.ApiManagement/preview/2024-06-01-preview/definitions.json
   - Microsoft.ApiManagement/preview/2024-06-01-preview/operationStatuses.json
 ```
+
+### Tag: package-2025-07
+
+These settings apply only when `--tag=package-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07'
+input-file:
+  - Microsoft.ApiManagement/stable/2025-07-01/apigateway.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimallpolicies.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimanagement.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimapis.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimapisByTags.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimapiversionsets.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimauthorizationproviders.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimauthorizationservers.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimbackends.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimcaches.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimcertificates.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimconnectivitycheck.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimcontenttypes.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimdeletedservices.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimdeployment.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimdiagnostics.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimdocumentations.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimemailtemplates.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimgatewayConfigConnections.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimgateways.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimgroups.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimidentityprovider.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimissues.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimloggers.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimnamedvalues.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimnetworkstatus.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimnotifications.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimoutbounddependency.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimpolicies.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimpolicyfragments.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimpolicyrestrictions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimpolicyrestrictionsvalidation.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimportalconfigs.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimportalrevisions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimportalsettings.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimprivatelink.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimproducts.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimproductsByTags.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimquotas.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimregions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimschema.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimsettings.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimskus.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimsubscriptions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimtagresources.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimtags.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimtenant.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimusers.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspacebackends.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspacecertificates.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspacediagnostics.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspacelinks.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/stable/2025-07-01/apimworkspaces.json
+  - Microsoft.ApiManagement/stable/2025-07-01/definitions.json
+  - Microsoft.ApiManagement/stable/2025-07-01/operationStatuses.json
+
+```
+
 ### Tag: package-2024-05
 
 These settings apply only when `--tag=package-2024-05` is specified on the command line.
