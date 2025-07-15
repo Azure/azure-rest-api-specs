@@ -131,11 +131,9 @@ interface DatadogMonitorResources {
    */
   setDefaultKey is ArmResourceActionSync<
     DatadogMonitorResource,
-    {
-      @bodyRoot
-      body?: DatadogApiKey;
-    },
-    OkResponse
+    DatadogApiKey,
+    OkResponse,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -191,3 +189,4 @@ interface DatadogMonitorResources {
 );
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
 @@doc(DatadogMonitorResources.update::parameters.properties, "");
+@@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
