@@ -1445,9 +1445,10 @@ model LoadBalancerProperties {
   provisioningState?: ProvisioningStateEnum;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("FrontendIP Configuration object for a load balancer.")
-model FrontendIpConfigurationProperties {
+model FrontendIPConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet.")
   privateIPAddress?: string;
@@ -1488,7 +1489,7 @@ model LoadBalancerBackendAddress {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Nic Based backend-ip association")
-  networkInterfaceIPConfiguration?: SubnetIpConfigurationReference;
+  networkInterfaceIPConfiguration: SubnetIpConfigurationReference;
 }
 
 @added(Versions.v2025_09_01_preview)
@@ -1582,7 +1583,7 @@ model InboundNATRuleProperties {
   frontendPort: int32;
 
   @doc("IP configuration for the target backend.")
-  backendNicIpConfiguration: SubnetIpConfigurationReference;
+  backendIpConfiguration: SubnetIpConfigurationReference;
 
   @doc("backend Port for the inbound rule")
   backendPort: int32;

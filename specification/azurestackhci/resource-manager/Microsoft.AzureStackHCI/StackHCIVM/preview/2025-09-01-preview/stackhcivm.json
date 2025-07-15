@@ -80,6 +80,30 @@
     },
     {
       "name": "VirtualNetworkSubnets"
+    },
+    {
+      "name": "LoadBalancers"
+    },
+    {
+      "name": "FrontendIPConfigurations"
+    },
+    {
+      "name": "BackendAddressPools"
+    },
+    {
+      "name": "InboundNATRules"
+    },
+    {
+      "name": "LoadBalancerRules"
+    },
+    {
+      "name": "Probes"
+    },
+    {
+      "name": "PublicIPs"
+    },
+    {
+      "name": "NatGateways"
     }
   ],
   "paths": {
@@ -925,6 +949,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/loadBalancers": {
+      "get": {
+        "operationId": "LoadBalancers_ListAll",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of LoadBalancers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/logicalNetworks": {
       "get": {
         "operationId": "LogicalNetworks_ListAll",
@@ -1003,6 +1061,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/natGateways": {
+      "get": {
+        "operationId": "NatGateways_ListAll",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of Nat Gateways.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
         "operationId": "NetworkInterfaces_ListAll",
@@ -1074,6 +1166,40 @@
         "x-ms-examples": {
           "List all network security groups": {
             "$ref": "./examples/NetworkSecurityGroups_ListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/publicIPs": {
+      "get": {
+        "operationId": "PublicIPs_ListAll",
+        "tags": [
+          "PublicIPs"
+        ],
+        "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1486,6 +1612,1457 @@
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/GalleryImages_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers": {
+      "get": {
+        "operationId": "LoadBalancers_ListByResourceGroup",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Lists all of the LoadBalancers in the specified resource group. Use the nextLink property in the response to get the next page of LoadBalancers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}": {
+      "get": {
+        "operationId": "LoadBalancers_Get",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to get a Nat Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "LoadBalancers_CreateOrUpdate",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to create or update a LoadBalancer. Please note some properties can be set only during LoadBalancer creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LoadBalancer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "201": {
+            "description": "Resource 'LoadBalancer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LoadBalancers_UpdateTags",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "Updates a load balancer tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LoadBalancers_Delete",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "description": "The operation to delete a LoadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/backendAddressPools": {
+      "get": {
+        "operationId": "BackendAddressPools_ListByNetworkSecurityGroup",
+        "tags": [
+          "BackendAddressPools"
+        ],
+        "description": "Gets all backendAddressPools in a LoadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}": {
+      "get": {
+        "operationId": "BackendAddressPools_Get",
+        "tags": [
+          "BackendAddressPools"
+        ],
+        "description": "Gets the specified backendAddressPool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "backendAddressPoolName",
+            "in": "path",
+            "description": "Name of the backend address pool.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "BackendAddressPools_CreateOrUpdate",
+        "tags": [
+          "BackendAddressPools"
+        ],
+        "description": "Creates or updates a backendAddressPool in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "backendAddressPoolName",
+            "in": "path",
+            "description": "Name of the backend address pool.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BackendAddressPool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPool"
+            }
+          },
+          "201": {
+            "description": "Resource 'BackendAddressPool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BackendAddressPools_Delete",
+        "tags": [
+          "BackendAddressPools"
+        ],
+        "description": "Deletes the specified backendAddressPool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "backendAddressPoolName",
+            "in": "path",
+            "description": "Name of the backend address pool.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
+      "get": {
+        "operationId": "FrontendIpConfigurations_ListByNetworkSecurityGroup",
+        "tags": [
+          "FrontendIPConfigurations"
+        ],
+        "description": "Gets all frontendIPConfigurations in a LoadBalancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}": {
+      "get": {
+        "operationId": "FrontendIpConfigurations_Get",
+        "tags": [
+          "FrontendIPConfigurations"
+        ],
+        "description": "Gets the specified frontendIPConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "frontendIPConfigurationName",
+            "in": "path",
+            "description": "Name of the frontend ip configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FrontendIpConfigurations_CreateOrUpdate",
+        "tags": [
+          "FrontendIPConfigurations"
+        ],
+        "description": "Creates or updates a frontendIPConfiguration in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "frontendIPConfigurationName",
+            "in": "path",
+            "description": "Name of the frontend ip configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FrontendIPConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'FrontendIPConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FrontendIpConfigurations_Delete",
+        "tags": [
+          "FrontendIPConfigurations"
+        ],
+        "description": "Deletes the specified frontendIPConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "frontendIPConfigurationName",
+            "in": "path",
+            "description": "Name of the frontend ip configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/inboundNATRules": {
+      "get": {
+        "operationId": "InboundNatRules_ListByNetworkSecurityGroup",
+        "tags": [
+          "InboundNATRules"
+        ],
+        "description": "Gets all inbound NAT rules in a Load Balancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InboundNATRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/inboundNATRules/{inboundNATRuleName}": {
+      "get": {
+        "operationId": "InboundNatRules_Get",
+        "tags": [
+          "InboundNATRules"
+        ],
+        "description": "Gets the specified inbound NAT rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "inboundNATRuleName",
+            "in": "path",
+            "description": "Name of the inbound NAT rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InboundNATRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "InboundNatRules_CreateOrUpdate",
+        "tags": [
+          "InboundNATRules"
+        ],
+        "description": "Creates or updates a inbound NAT rule in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "inboundNATRuleName",
+            "in": "path",
+            "description": "Name of the inbound NAT rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InboundNATRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InboundNATRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InboundNATRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'InboundNATRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InboundNATRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InboundNatRules_Delete",
+        "tags": [
+          "InboundNATRules"
+        ],
+        "description": "Deletes the specified inbound NAT rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "inboundNATRuleName",
+            "in": "path",
+            "description": "Name of the inbound NAT rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/loadBalancerRules": {
+      "get": {
+        "operationId": "LoadBalancerRules_ListByNetworkSecurityGroup",
+        "tags": [
+          "LoadBalancerRules"
+        ],
+        "description": "Gets all loadBalancer Rules in a Load Balancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/loadBalancerRules/{loadBalancerRuleName}": {
+      "get": {
+        "operationId": "LoadBalancerRules_Get",
+        "tags": [
+          "LoadBalancerRules"
+        ],
+        "description": "Gets the specified loadBalancer Rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "loadBalancerRuleName",
+            "in": "path",
+            "description": "Name of the loadbalancer rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "LoadBalancerRules_CreateOrUpdate",
+        "tags": [
+          "LoadBalancerRules"
+        ],
+        "description": "Creates or updates a loadBalancer Rule in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "loadBalancerRuleName",
+            "in": "path",
+            "description": "Name of the loadbalancer rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LoadBalancerRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'LoadBalancerRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LoadBalancerRules_Delete",
+        "tags": [
+          "LoadBalancerRules"
+        ],
+        "description": "Deletes the specified loadBalancer Rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "loadBalancerRuleName",
+            "in": "path",
+            "description": "Name of the loadbalancer rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/probes": {
+      "get": {
+        "operationId": "Probes_ListByNetworkSecurityGroup",
+        "tags": [
+          "Probes"
+        ],
+        "description": "Gets all probes in a Load Balancer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProbeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/loadBalancers/{loadBalancerName}/probes/{probeName}": {
+      "get": {
+        "operationId": "Probes_Get",
+        "tags": [
+          "Probes"
+        ],
+        "description": "Gets the specified probe.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "probeName",
+            "in": "path",
+            "description": "Name of the probe.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Probes_CreateOrUpdate",
+        "tags": [
+          "Probes"
+        ],
+        "description": "Creates or updates a probe in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "probeName",
+            "in": "path",
+            "description": "Name of the probe.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Probe' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            }
+          },
+          "201": {
+            "description": "Resource 'Probe' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Probes_Delete",
+        "tags": [
+          "Probes"
+        ],
+        "description": "Deletes the specified probe.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "Name of the load balancer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "probeName",
+            "in": "path",
+            "description": "Name of the probe.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2078,6 +3655,277 @@
         "x-ms-examples": {
           "DeleteMarketplaceGalleryImage": {
             "$ref": "./examples/MarketplaceGalleryImages_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/natGateways": {
+      "get": {
+        "operationId": "NatGateways_ListByResourceGroup",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Lists all of the Nat Gateways in the specified resource group. Use the nextLink property in the response to get the next page of Nat Gateways.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/natGateways/{natGatewayName}": {
+      "get": {
+        "operationId": "NatGateways_Get",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to get a Nat Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NatGateways_CreateOrUpdate",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to create or update a NatGateway. Please note some properties can be set only during NatGateway creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NatGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'NatGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NatGateways_UpdateTags",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "Updates a nat gateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NatGatewayTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NatGateway"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NatGateways_Delete",
+        "tags": [
+          "NatGateways"
+        ],
+        "description": "The operation to delete a Nat Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "natGatewayName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2929,6 +4777,210 @@
         "x-ms-examples": {
           "SecurityRulesDelete": {
             "$ref": "./examples/SecurityRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPs": {
+      "get": {
+        "operationId": "PublicIPs_ListByResourceGroup",
+        "tags": [
+          "PublicIPs"
+        ],
+        "description": "Lists all of the virtual networks in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPs/{publicIPName}": {
+      "get": {
+        "operationId": "PublicIPs_Get",
+        "tags": [
+          "PublicIPs"
+        ],
+        "description": "The operation to get a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIP"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PublicIPs_CreateOrUpdate",
+        "tags": [
+          "PublicIPs"
+        ],
+        "description": "The operation to create or update a virtual network. Please note some properties can be set only during PublicIP creation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicIP"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PublicIP' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicIP"
+            }
+          },
+          "201": {
+            "description": "Resource 'PublicIP' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PublicIP"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PublicIPs_Delete",
+        "tags": [
+          "PublicIPs"
+        ],
+        "description": "The operation to delete a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4584,6 +6636,25 @@
         }
       }
     },
+    "BackendAddressPool": {
+      "type": "object",
+      "description": "BackendAddressPool resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackendAddressPoolProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "BackendAddressPoolArmReference": {
       "type": "object",
       "description": "The ARM ID of a BackendAddressPool resource",
@@ -4601,6 +6672,27 @@
           }
         }
       }
+    },
+    "BackendAddressPoolListResult": {
+      "type": "object",
+      "description": "The response of a BackendAddressPool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BackendAddressPool items on this page",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "BackendAddressPoolProperties": {
       "type": "object",
@@ -4770,6 +6862,25 @@
         }
       }
     },
+    "FrontendIPConfiguration": {
+      "type": "object",
+      "description": "FrontendIPConfiguration resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FrontendIPConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "FrontendIPConfigurationArmReference": {
       "type": "object",
       "description": "The ARM ID of a FrontendIPConfiguration resource",
@@ -4788,7 +6899,28 @@
         }
       }
     },
-    "FrontendIpConfigurationProperties": {
+    "FrontendIPConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a FrontendIPConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FrontendIPConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FrontendIPConfigurationProperties": {
       "type": "object",
       "description": "FrontendIP Configuration object for a load balancer.",
       "properties": {
@@ -5552,6 +7684,46 @@
         }
       }
     },
+    "InboundNATRule": {
+      "type": "object",
+      "description": "InboundNATRule resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InboundNATRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InboundNATRuleListResult": {
+      "type": "object",
+      "description": "The response of a InboundNATRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InboundNATRule items on this page",
+          "items": {
+            "$ref": "#/definitions/InboundNATRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "InboundNATRuleProperties": {
       "type": "object",
       "description": "Inbound nat rule",
@@ -5565,7 +7737,7 @@
           "format": "int32",
           "description": "Frontend Port for the inbound rule"
         },
-        "backendNicIpConfiguration": {
+        "backendIpConfiguration": {
           "$ref": "#/definitions/SubnetIpConfigurationReference",
           "description": "IP configuration for the target backend."
         },
@@ -5583,7 +7755,7 @@
       "required": [
         "frontendIPConfiguration",
         "frontendPort",
-        "backendNicIpConfiguration",
+        "backendIpConfiguration",
         "backendPort"
       ]
     },
@@ -5651,6 +7823,26 @@
         ]
       }
     },
+    "LoadBalancer": {
+      "type": "object",
+      "description": "The LoadBalancer resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
     "LoadBalancerBackendAddress": {
       "type": "object",
       "description": "LoadBalancer Backend Address",
@@ -5663,7 +7855,31 @@
           "$ref": "#/definitions/SubnetIpConfigurationReference",
           "description": "Nic Based backend-ip association"
         }
-      }
+      },
+      "required": [
+        "networkInterfaceIPConfiguration"
+      ]
+    },
+    "LoadBalancerListResult": {
+      "type": "object",
+      "description": "The response of a LoadBalancer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LoadBalancer items on this page",
+          "items": {
+            "$ref": "#/definitions/LoadBalancer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LoadBalancerProbeProtocol": {
       "type": "string",
@@ -5699,6 +7915,46 @@
           "readOnly": true
         }
       }
+    },
+    "LoadBalancerRule": {
+      "type": "object",
+      "description": "LoadBalancerRule resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LoadBalancerRuleListResult": {
+      "type": "object",
+      "description": "The response of a LoadBalancerRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LoadBalancerRule items on this page",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LoadBalancerRuleProperties": {
       "type": "object",
@@ -5811,6 +8067,19 @@
         "status": {
           "$ref": "#/definitions/Status",
           "description": "The status of the operation performed on the load balancer rule [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "LoadBalancerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LoadBalancer resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6224,6 +8493,26 @@
         }
       }
     },
+    "NatGateway": {
+      "type": "object",
+      "description": "The virtual network resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NatGatewayProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
     "NatGatewayArmReference": {
       "type": "object",
       "description": "The ARM ID for a Network Security Group.",
@@ -6241,6 +8530,27 @@
           }
         }
       }
+    },
+    "NatGatewayListResult": {
+      "type": "object",
+      "description": "The response of a NatGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NatGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/NatGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NatGatewayProperties": {
       "type": "object",
@@ -6302,6 +8612,19 @@
         "status": {
           "$ref": "#/definitions/Status",
           "description": "The status of the operation performed on the nat gateway [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "NatGatewayTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NatGateway resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6759,6 +9082,46 @@
         ]
       }
     },
+    "Probe": {
+      "type": "object",
+      "description": "Probe resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProbeProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProbeListResult": {
+      "type": "object",
+      "description": "The response of a Probe list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Probe items on this page",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProbeProperties": {
       "type": "object",
       "description": "properties for LoadBalancer health probes",
@@ -6878,6 +9241,26 @@
       },
       "readOnly": true
     },
+    "PublicIP": {
+      "type": "object",
+      "description": "The publicIP resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicIPProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
     "PublicIPArmReference": {
       "type": "object",
       "description": "The ARM ID of a Public IP resource",
@@ -6895,6 +9278,27 @@
           }
         }
       }
+    },
+    "PublicIPListResult": {
+      "type": "object",
+      "description": "The response of a PublicIP list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicIP items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicIP"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PublicIPProperties": {
       "type": "object",
