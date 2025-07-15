@@ -17,6 +17,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @doc("Stage Specification")
 model StageSpecTemplate {
   @doc("Name of Stage")
@@ -31,6 +32,7 @@ model StageSpecTemplate {
   orchestratorType?: OrchestratorType;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Version Properties")
 model WorkflowTemplateVersionProperties {
   @doc("Config expressions for this workflow version")
@@ -45,6 +47,7 @@ model WorkflowTemplateVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Version Resource")
 @parentResource(WorkflowTemplate)
 @resource("versions")
@@ -57,6 +60,7 @@ model WorkflowTemplateVersion
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface WorkflowTemplateVersions {
   @doc("Get a Workflow Template Version Resource")

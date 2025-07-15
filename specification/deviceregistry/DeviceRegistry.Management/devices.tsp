@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -17,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 @doc("Device Model as ARM resource.")
 model Device is TrackedResource<DeviceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "legacy"
-  @doc("Name of the device.")
+  @doc("The name of the device.")
   @key("deviceName")
   @segment("devices")
   @path
@@ -35,14 +34,14 @@ model Device is TrackedResource<DeviceProperties> {
 @removed(Versions.v2024_10_01_preview)
 @doc("Defines the device properties.")
 model DeviceProperties {
-  @doc("Gets a unique identifier for this resource.")
+  @doc("A unique identifier for the device.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean = true;
 
-  @doc("Gets the device Id provided by customer.")
+  @doc("The Device ID provided by the customer.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   externalDeviceId?: string;
 
@@ -53,19 +52,19 @@ model DeviceProperties {
   @doc("The Microsoft Entra ID group the device is a member of.")
   deviceGroupId?: string;
 
-  @doc("Hardware manufacturer name.")
+  @doc("Device manufacturer.")
   @visibility(Lifecycle.Read)
   manufacturer?: string;
 
-  @doc("Hardware model name.")
+  @doc("Device model.")
   @visibility(Lifecycle.Read)
   `model`?: string;
 
-  @doc("operating system name.")
+  @doc("Device operating system.")
   @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
-  @doc("operating system version.")
+  @doc("Device operating system version.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   operatingSystemVersion?: string;
 
@@ -86,6 +85,7 @@ model DeviceProperties {
 }
 
 @doc("The backing Microsoft Entra ID for the device used for authentication to other services.")
+@removed(Versions.v2025_07_01_preview)
 model DeviceIdentity {
   @doc("Principal id for the device resource.")
   @visibility(Lifecycle.Read)
@@ -97,6 +97,7 @@ model DeviceIdentity {
 }
 
 @doc("Property bag containing the device's unassigned and assigned endpoints.")
+@removed(Versions.v2025_07_01_preview)
 model DeviceEndpoints {
   @doc("Actively used endpoints a device can use to connect to several services.")
   @Azure.ResourceManager.identifiers(#["type", "address"])
@@ -108,12 +109,13 @@ model DeviceEndpoints {
   unassigned?: Endpoint[];
 }
 
-@doc("Connection endpoint url a device can use to connect to a service.")
+@doc("Connection endpoint URL a device can use to connect to a service.")
+@removed(Versions.v2025_07_01_preview)
 model Endpoint {
   @doc("Type of connection endpoint.")
   type?: string;
 
-  @doc("Fully qualified domain name.")
+  @doc("The endpoint address to connect to.")
   address?: string;
 }
 

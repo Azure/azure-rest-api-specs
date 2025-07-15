@@ -98,7 +98,7 @@ interface ResourceUpdateNoProperties<TResource extends Foundations.ArmResource> 
   @autoRoute
   @doc("Update a {name}", TResource)
   @armResourceUpdate(TResource)
-  @patch
+  @patch(#{ implicitOptionality: true })
   update(
     ...ResourceInstanceParameters<TResource>,
 

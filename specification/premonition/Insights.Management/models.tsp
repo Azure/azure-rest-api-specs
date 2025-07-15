@@ -14,6 +14,12 @@ model Library is TrackedResource<LibraryProperties> {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[\\w\\-]{3,24}$")
   name: string;
+
+  // ...ManagedSystemAssignedIdentityProperty cannot be decorated with versioning info
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property identity is not valid in the resource envelope"
+  @doc("The managed service identities assigned to this resource.")
+  @added(Microsoft.Premonition.Versions.v2025_06_01_preview)
+  identity?: CommonTypes.SystemAssignedServiceIdentity;
 }
 
 @doc("The properties of Library")
@@ -22,9 +28,10 @@ model LibraryProperties {
   @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
   storageAccount: string;
 
-  @doc("Container name where all samples/analyses data will be stored")
+  @doc("Default container name where all samples/analyses data will be stored")
   @added(Microsoft.Premonition.Versions.v2025_04_01_preview)
-  containerName: string;
+  @madeOptional(Microsoft.Premonition.Versions.v2025_06_01_preview)
+  containerName?: string;
 
   @doc("The blob container URL where data files are stored")
   @removed(Microsoft.Premonition.Versions.v2025_04_01_preview)
@@ -51,6 +58,10 @@ model Sample is TrackedResource<SampleProperties> {
 model SampleProperties {
   @doc("Description of this sample, such as source, collection method, etc.")
   description?: string;
+
+  @doc("Container name where the files are stored. Falls back to Library.containerName if not provided.")
+  @added(Microsoft.Premonition.Versions.v2025_06_01_preview)
+  containerName?: string;
 
   @doc("Path to the data files in the Library container. Supported formats: fa fasta fq fastq fa.gz fasta.gz fq.gz fastq.gz bam")
   paths: Array<string>;
@@ -89,6 +100,10 @@ model AnalysisProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The settings for the analysis")
   settings: AnalysisSettings;
+
+  @doc("Container name where the result is written to. Falls back to Library.containerName if not provided.")
+  @added(Microsoft.Premonition.Versions.v2025_06_01_preview)
+  containerName?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The time this analysis started")

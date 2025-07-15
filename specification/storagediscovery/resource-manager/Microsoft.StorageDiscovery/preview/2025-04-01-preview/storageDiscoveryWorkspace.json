@@ -3,6 +3,7 @@
   "info": {
     "title": "StorageDiscoveryClient",
     "version": "2025-04-01-preview",
+    "description": "The Azure Storage Discovery Management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -186,7 +187,9 @@
             "description": "The name of the StorageDiscoveryWorkspace",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9]{3,18}$"
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
           }
         ],
         "responses": {
@@ -231,7 +234,9 @@
             "description": "The name of the StorageDiscoveryWorkspace",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9]{3,18}$"
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
           },
           {
             "name": "resource",
@@ -291,7 +296,9 @@
             "description": "The name of the StorageDiscoveryWorkspace",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9]{3,18}$"
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
           },
           {
             "name": "properties",
@@ -345,7 +352,9 @@
             "description": "The name of the StorageDiscoveryWorkspace",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9]{3,18}$"
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
           }
         ],
         "responses": {
@@ -392,7 +401,9 @@
             "description": "The name of the StorageDiscoveryWorkspace",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9]{3,18}$"
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
           },
           {
             "name": "body",
@@ -408,7 +419,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GetReportResponse"
+              "$ref": "#/definitions/GetReportResult"
             }
           },
           "202": {
@@ -447,6 +458,7 @@
   "definitions": {
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -524,7 +536,7 @@
       "properties": {
         "queries": {
           "type": "array",
-          "description": "The list of queries",
+          "description": "The queries to execute against Storage Discovery data.\nFormat: Base64-encoded JSON object with structure:\n{\"queries\":[{\"name\":\"queryName\",\"query\":\"KQL query\"}]}\nFor query syntax and available tables, see: https://aka.ms/storageDiscoveryQuery",
           "items": {
             "type": "string"
           }
@@ -534,7 +546,7 @@
         "queries"
       ]
     },
-    "GetReportResponse": {
+    "GetReportResult": {
       "type": "object",
       "description": "The response of the report operation",
       "properties": {
@@ -542,7 +554,7 @@
           "type": "array",
           "description": "One or more result sets, in the same order as the queries in the request body",
           "items": {
-            "$ref": "#/definitions/ReportResponseResultSet"
+            "$ref": "#/definitions/ReportResultSet"
           },
           "x-ms-identifiers": []
         }
@@ -551,7 +563,7 @@
         "results"
       ]
     },
-    "ReportResponseColumn": {
+    "ReportResultColumn": {
       "type": "object",
       "description": "The column of the response result set",
       "properties": {
@@ -569,7 +581,7 @@
         "type"
       ]
     },
-    "ReportResponseResultSet": {
+    "ReportResultSet": {
       "type": "object",
       "description": "The result set of the report operation",
       "properties": {
@@ -577,7 +589,7 @@
           "type": "array",
           "description": "Array of columns object, present only if the query succeeded",
           "items": {
-            "$ref": "#/definitions/ReportResponseColumn"
+            "$ref": "#/definitions/ReportResultColumn"
           },
           "x-ms-identifiers": []
         },
@@ -636,7 +648,7 @@
     },
     "StorageDiscoveryScope": {
       "type": "object",
-      "description": "Storage Discovery Collection",
+      "description": "Storage Discovery Scope V2",
       "properties": {
         "displayName": {
           "type": "string",
@@ -767,9 +779,9 @@
                 {
                   "type": "Microsoft.Storage/storageAccounts",
                   "scopes": [
-                    "tenant",
-                    "subscription",
-                    "resourceGroup"
+                    "Tenant",
+                    "Subscription",
+                    "ResourceGroup"
                   ]
                 }
               ]
@@ -835,9 +847,9 @@
                 {
                   "type": "Microsoft.Storage/storageAccounts",
                   "scopes": [
-                    "tenant",
-                    "subscription",
-                    "resourceGroup"
+                    "Tenant",
+                    "Subscription",
+                    "ResourceGroup"
                   ]
                 }
               ]

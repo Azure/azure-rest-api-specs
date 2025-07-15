@@ -140,7 +140,7 @@ model ServiceGroupMemberRelationshipProperties
   is BaseRelationshipProperties<[
     {
       type: "Microsoft.Management/serviceGroups";
-      scopes: ["tenant"];
+      scopes: ["Tenant"];
     }
   ]>;
 

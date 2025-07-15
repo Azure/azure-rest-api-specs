@@ -2,8 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -77,7 +78,8 @@ union Role {
 /**
  * Chat request schema. Contains input message from user
  */
-model ChatRequest {
+@renamedFrom(Versions.v2025_06_01_preview, "ChatRequest")
+model ChatRequestContent {
   /**
    * Chat context schema. Contains context information of the chat.
    */

@@ -1278,6 +1278,145 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/resetFailedMachineState": {
+      "post": {
+        "operationId": "EdgeMachines_ResetFailedMachineState",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachine"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_ResetFailedMachineState": {
+            "$ref": "./examples/EdgeMachines_ResetFailedMachineState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/setFailedMachineState": {
+      "post": {
+        "operationId": "EdgeMachines_SetFailedMachineState",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetFailedMachineStateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachine"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_SetFailedMachineState": {
+            "$ref": "./examples/EdgeMachines_SetFailedMachineState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
       "post": {
         "operationId": "EdgeMachines_Validate",
@@ -1683,6 +1822,15 @@
         "managedResourceGroup": {
           "type": "string",
           "description": "Managed resource group name for the pool"
+        },
+        "operationDetails": {
+          "type": "array",
+          "description": "operation status details for device pool.",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1994,7 +2142,7 @@
         "onboardingMachineResourceGroupId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource group where the onboarding arc machine instance created."
+          "description": "Resource group where the onboarding arc machine instance created. Will be deprecated before pub preview"
         },
         "arcMachineResourceGroupId": {
           "type": "string",
@@ -2042,7 +2190,7 @@
         },
         "claimedBy": {
           "type": "string",
-          "description": "Tracks the ID of the consuming resource, marking the machine as in-use.",
+          "description": "Tracks the ID of the consuming resource, Settingthe machine as in-use.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2259,6 +2407,20 @@
           "x-ms-identifiers": [
             "extensionName"
           ]
+        }
+      }
+    },
+    "FailureDetails": {
+      "type": "object",
+      "description": "Failure details to set why edge machine set to Failed state.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Operation name which caused edge machine set to Failed state."
+        },
+        "description": {
+          "type": "string",
+          "description": "description of failure why edge machine set to Failed state."
         }
       }
     },
@@ -2619,6 +2781,14 @@
         "ipAddress": {
           "type": "string",
           "description": "IP address."
+        },
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address."
         },
         "ipAddressRange": {
           "$ref": "#/definitions/IpAddressRange",
@@ -3070,8 +3240,7 @@
       },
       "required": [
         "target",
-        "osProfile",
-        "deviceConfiguration"
+        "osProfile"
       ]
     },
     "ProvisioningState": {
@@ -3439,6 +3608,16 @@
         }
       }
     },
+    "SetFailedMachineStateRequest": {
+      "type": "object",
+      "description": "The Set Failed request for Edge Machine..",
+      "properties": {
+        "failureDetails": {
+          "$ref": "#/definitions/FailureDetails",
+          "description": "Failure details to set why edge machine set to Failed state."
+        }
+      }
+    },
     "SiteDetails": {
       "type": "object",
       "description": "Site Details consists of common configurations.",
@@ -3450,8 +3629,7 @@
         },
         "deviceConfiguration": {
           "$ref": "#/definitions/DeviceConfiguration",
-          "description": "Edge Device configuration received from site common configuration.",
-          "readOnly": true
+          "description": "Edge Device configuration received from site common configuration."
         }
       },
       "required": [
@@ -3601,17 +3779,23 @@
         },
         "secretType": {
           "type": "string",
-          "description": "Type of the secret used for authentication."
+          "description": "Type of the secret used for authentication. Change it to enum in public preview"
         },
         "secretLocation": {
           "type": "string",
           "description": "Location of the secret used for authentication."
+        },
+        "sshPubKey": {
+          "type": "array",
+          "description": "Location of the secret used for authentication.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "userName",
-        "secretType",
-        "secretLocation"
+        "secretType"
       ]
     },
     "WebProxyConfiguration": {

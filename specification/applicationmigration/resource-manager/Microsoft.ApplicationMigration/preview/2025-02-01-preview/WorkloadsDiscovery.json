@@ -1623,21 +1623,27 @@
       "type": "string",
       "description": "Represents an Enum with boolean values.",
       "enum": [
-        "true",
-        "false"
+        "Unknown",
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "BoolValue",
         "modelAsString": true,
         "values": [
           {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Represents an unknown value."
+          },
+          {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "Represents a true boolean value."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "Represents a false boolean value."
           }
         ]
@@ -1735,6 +1741,7 @@
       "type": "string",
       "description": "Represents the supported character sets in PostgreSQL.",
       "enum": [
+        "UNKNOWN",
         "BIG5",
         "EUC_CN",
         "EUC_JP",
@@ -1782,6 +1789,11 @@
         "name": "Encoding",
         "modelAsString": true,
         "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "Unknown Encoding."
+          },
           {
             "name": "BIG5",
             "value": "BIG5",
@@ -2070,21 +2082,27 @@
       "type": "string",
       "description": "Represents the presence of custom data types in a DB.",
       "enum": [
-        "true",
-        "false"
+        "Unknown",
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "HasCustomDataTypes",
         "modelAsString": true,
         "values": [
           {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Custom data types presence in the database is unknown."
+          },
+          {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "The Database has custom data types."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "The Database does not have custom data types."
           }
         ]
@@ -2094,21 +2112,27 @@
       "type": "string",
       "description": "Represents the presence of Oids in Tables under a DB.",
       "enum": [
-        "true",
-        "false"
+        "Unknown",
+        "True",
+        "False"
       ],
       "x-ms-enum": {
         "name": "HasTablesWithOids",
         "modelAsString": true,
         "values": [
           {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Oids presence in the database is unknown."
+          },
+          {
             "name": "True",
-            "value": "true",
+            "value": "True",
             "description": "The Database has tables with Oids."
           },
           {
             "name": "False",
-            "value": "false",
+            "value": "False",
             "description": "The Database does not have tables with Oids."
           }
         ]
@@ -2362,16 +2386,20 @@
           "type": "string",
           "description": "The database name."
         },
-        "pgSqlInstanceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovered PGSQL Instance Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
-              }
-            ]
+        "pgSqlInstanceArmIds": {
+          "type": "array",
+          "description": "discovered PGSQL Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
+                }
+              ]
+            }
           }
         },
         "encoding": {
@@ -2426,6 +2454,22 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
         },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "fileSystemAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the access to the machine's file system is enabled for the database objects."
+        },
         "errorCount": {
           "type": "integer",
           "format": "int64",
@@ -2439,15 +2483,11 @@
           }
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2459,16 +2499,20 @@
           "type": "string",
           "description": "The database name."
         },
-        "pgSqlInstanceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovered PGSQL Instance Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
-              }
-            ]
+        "pgSqlInstanceArmIds": {
+          "type": "array",
+          "description": "discovered PGSQL Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances"
+                }
+              ]
+            }
           }
         },
         "encoding": {
@@ -2523,6 +2567,22 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
         },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "fileSystemAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the access to the machine's file system is enabled for the database objects."
+        },
         "errorCount": {
           "type": "integer",
           "format": "int64",
@@ -2536,15 +2596,11 @@
           }
         },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2617,16 +2673,20 @@
             "type": "string"
           }
         },
-        "machineId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovery Machine Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.OffAzure/serverSites/machines"
-              }
-            ]
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                }
+              ]
+            }
           }
         },
         "hostMachineProperties": {
@@ -2780,16 +2840,16 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether disaster recovery (DR) functionality is enabled."
         },
+        "isSuperUserAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the super user access is enabled on the instance."
+        },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2808,16 +2868,20 @@
             "type": "string"
           }
         },
-        "machineId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "discovery Machine Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.OffAzure/serverSites/machines"
-              }
-            ]
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                }
+              ]
+            }
           }
         },
         "hostMachineProperties": {
@@ -2955,16 +3019,16 @@
           "$ref": "#/definitions/BoolValue",
           "description": "Indicates whether disaster recovery (DR) functionality is enabled."
         },
+        "isSuperUserAccessEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the super user access is enabled on the instance."
+        },
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3065,15 +3129,11 @@
       "description": "Object containing tags updates for patch operations.",
       "properties": {
         "tags": {
-          "type": "array",
+          "type": "object",
           "description": "Resource tags.",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "x-ms-identifiers": [
-            "key",
-            "value"
-          ]
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "$ref": "#/definitions/PgsqlSiteProperties",
@@ -3201,20 +3261,6 @@
             "description": "Mainstream support status."
           }
         ]
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "description": "Definition of Tag",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Property key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Property value"
-        }
       }
     },
     "TagsUpdate": {

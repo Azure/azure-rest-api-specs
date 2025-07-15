@@ -372,3 +372,5 @@ model CancelOperationsResponse {
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
 }
+
+@@identifiers(Azure.Core.Foundations.Error.details, #[]);

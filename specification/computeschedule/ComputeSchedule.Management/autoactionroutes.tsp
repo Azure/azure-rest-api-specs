@@ -17,6 +17,7 @@ using OpenAPI;
 namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @armResourceOperations
 interface AutoActions {
   get is ArmResourceRead<AutoAction>;
@@ -53,16 +54,17 @@ interface AutoActions {
   cancelNextOccurrence is ArmResourceActionSync<
     AutoAction,
     CancelOccurrenceRequest,
-    Occurrence
+    OccurrenceOld
   >;
   triggerManualOccurrence is ArmResourceActionSync<
     AutoAction,
     void,
-    Occurrence
+    OccurrenceOld
   >;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @armResourceOperations
 interface AutoActionsExtension {
   listByVms is ArmResourceListByParent<AutoActionResources>;

@@ -5,28 +5,25 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/provisioningState.tsp";
 import "./common/deviceProperties.tsp";
-import "./common/namespaceDevicePropertiesUpdate.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2024_10_01_preview)
 @parentResource(Namespace)
-@doc("Namespace Devices Azure resource.")
+@doc("Device definition.")
 model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api spec"
-  @doc("Name of the device.")
+  @doc("The name of the device.")
   @key("deviceName")
   @segment("devices")
   @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
   @path
   @minLength(3)
-  @maxLength(64)
+  @maxLength(63)
   name: string;
 
   // etag not included in TrackedResource
@@ -34,26 +31,25 @@ model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
   @doc("Resource Tag.")
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  // Extended location is not included in TrackedResource yet
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("The extended location.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_07_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
-@added(Versions.v2024_10_01_preview)
-@doc("Device messaging endpoint model.")
-model DeviceMessagingEndpoint {
-  @doc("Type of connection used for the messaging endpoint.")
-  type?: string;
-}
+alias NamespaceDevicePropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    NamespaceDeviceProperties,
+    "enabled"
+  >>>;
 
-@added(Versions.v2024_10_01_preview)
-@doc("Device messaging endpoints collections model.")
-model MessagingEndpoints {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Dictionary of actively used messaging endpoints a used to connect to services.")
-  assigned: Record<DeviceMessagingEndpoint>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @doc("Dictionary of most recently removed messaging endpoints.")
-  unassigned?: Record<DeviceMessagingEndpoint>;
-}
+  @added(Versions.v2024_10_01_preview)
+  @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
+  enabled?: boolean;
+};
 
 @added(Versions.v2024_10_01_preview)
 @armResourceOperations
@@ -69,5 +65,6 @@ interface NamespaceDevices {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
+  @removed(Versions.v2025_07_01_preview)
   listBySubscription is ArmListBySubscription<NamespaceDevice>;
 }

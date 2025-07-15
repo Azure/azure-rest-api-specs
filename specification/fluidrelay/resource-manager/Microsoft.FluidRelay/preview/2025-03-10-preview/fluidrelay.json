@@ -1188,6 +1188,32 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "All encryption configuration for a resource."
+        },
+        "sharedKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates the current access status for the server using shared keys.",
+          "title": "SharedKeyAccess",
+          "x-ms-enum": {
+            "name": "SharedKeyAccess",
+            "modelAsString": true
+          }
+        },
+        "privateKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates the current access status for the server using private keys.",
+          "title": "PrivateKeyAccess",
+          "x-ms-enum": {
+            "name": "PrivateKeyAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "The properties that can be provided when updating FluidRelayServer resource"
@@ -1204,6 +1230,32 @@
           "$ref": "#/definitions/FluidRelayEndpoints",
           "description": "The Fluid Relay Service endpoints for this server.",
           "readOnly": true
+        },
+        "sharedKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates the current access status for the server using shared keys.",
+          "title": "SharedKeyAccess",
+          "x-ms-enum": {
+            "name": "SharedKeyAccess",
+            "modelAsString": true
+          }
+        },
+        "privateKeyAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "description": "Indicates the current access status for the server using private keys.",
+          "title": "PrivateKeyAccess",
+          "x-ms-enum": {
+            "name": "PrivateKeyAccess",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "enum": [

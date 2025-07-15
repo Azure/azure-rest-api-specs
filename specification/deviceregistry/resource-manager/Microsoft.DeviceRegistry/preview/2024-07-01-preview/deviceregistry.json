@@ -843,7 +843,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -893,7 +893,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -979,7 +979,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1053,7 +1053,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1159,7 +1159,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1205,7 +1205,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1290,7 +1290,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1366,7 +1366,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1775,7 +1775,7 @@
           {
             "name": "discoveredAssetName",
             "in": "path",
-            "description": "Discovered Asset name parameter.",
+            "description": "The name of the discovered asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1822,7 +1822,7 @@
           {
             "name": "discoveredAssetName",
             "in": "path",
-            "description": "Discovered Asset name parameter.",
+            "description": "The name of the discovered asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1899,7 +1899,7 @@
           {
             "name": "discoveredAssetName",
             "in": "path",
-            "description": "Discovered Asset name parameter.",
+            "description": "The name of the discovered asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1973,7 +1973,7 @@
           {
             "name": "discoveredAssetName",
             "in": "path",
-            "description": "Discovered Asset name parameter.",
+            "description": "The name of the discovered asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2922,7 +2922,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "targetAddress": {
@@ -2940,7 +2940,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         },
         "discoveredAssetEndpointProfileRef": {
           "type": "string",
@@ -2965,29 +2965,6 @@
         "targetAddress",
         "endpointProfileType"
       ]
-    },
-    "AssetEndpointProfilePropertiesUpdate": {
-      "type": "object",
-      "description": "Defines the Asset Endpoint Profile properties.",
-      "properties": {
-        "targetAddress": {
-          "type": "string",
-          "format": "uri",
-          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
-        },
-        "endpointProfileType": {
-          "type": "string",
-          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationUpdate",
-          "description": "Defines the client authentication mechanism to the server."
-        },
-        "additionalConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
-        }
-      }
     },
     "AssetEndpointProfileStatus": {
       "type": "object",
@@ -3023,18 +3000,57 @@
     },
     "AssetEndpointProfileUpdate": {
       "type": "object",
-      "description": "Asset Endpoint Profile definition.",
+      "description": "The type used for update operations of the AssetEndpointProfile.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
+          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "AssetEndpointProfileUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AssetEndpointProfile.",
+      "properties": {
+        "targetAddress": {
+          "type": "string",
+          "format": "uri",
+          "description": "The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration."
+        },
+        "endpointProfileType": {
+          "type": "string",
+          "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Object that describes the default user authentication information for the asset endpoint profile.",
+          "properties": {
+            "method": {
+              "$ref": "#/definitions/AuthenticationMethod",
+              "description": "Defines the method to authenticate the user of the client at the server."
+            },
+            "usernamePasswordCredentials": {
+              "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
+              "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+            },
+            "x509Credentials": {
+              "$ref": "#/definitions/X509CredentialsUpdate",
+              "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+            }
+          }
         }
-      ]
+      }
     },
     "AssetListResult": {
       "type": "object",
@@ -3191,89 +3207,6 @@
         "assetEndpointProfileRef"
       ]
     },
-    "AssetPropertiesUpdate": {
-      "type": "object",
-      "description": "Defines the asset properties.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Enabled/Disabled status of the asset."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Human-readable display name."
-        },
-        "description": {
-          "type": "string",
-          "description": "Human-readable description of the asset."
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "Asset manufacturer name."
-        },
-        "manufacturerUri": {
-          "type": "string",
-          "description": "Asset manufacturer URI."
-        },
-        "model": {
-          "type": "string",
-          "description": "Asset model name."
-        },
-        "productCode": {
-          "type": "string",
-          "description": "Asset product code."
-        },
-        "hardwareRevision": {
-          "type": "string",
-          "description": "Revision number of the hardware."
-        },
-        "softwareRevision": {
-          "type": "string",
-          "description": "Revision number of the software."
-        },
-        "documentationUri": {
-          "type": "string",
-          "description": "Reference to the documentation."
-        },
-        "serialNumber": {
-          "type": "string",
-          "description": "Asset serial number."
-        },
-        "attributes": {
-          "type": "object",
-          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
-          "additionalProperties": {}
-        },
-        "defaultDatasetsConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
-        },
-        "defaultEventsConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
-        },
-        "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
-          "description": "Object that describes the default topic information for the asset."
-        },
-        "datasets": {
-          "type": "array",
-          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
-          "items": {
-            "$ref": "#/definitions/Dataset"
-          },
-          "x-ms-identifiers": []
-        },
-        "events": {
-          "type": "array",
-          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
-          "items": {
-            "$ref": "#/definitions/Event"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "AssetStatus": {
       "type": "object",
       "description": "Defines the asset status properties.",
@@ -3370,18 +3303,113 @@
     },
     "AssetUpdate": {
       "type": "object",
-      "description": "Asset definition.",
+      "description": "The type used for update operations of the Asset.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/AssetPropertiesUpdate",
+          "$ref": "#/definitions/AssetUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "AssetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Asset.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled/Disabled status of the asset."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer name."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model name."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Revision number of the hardware."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Revision number of the software."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Reference to the documentation."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/Event"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultTopic": {
+          "type": "object",
+          "description": "Object that describes the default topic information for the asset.",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "The topic path for messages published to an MQTT broker."
+            },
+            "retain": {
+              "$ref": "#/definitions/TopicRetainType",
+              "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'."
+            }
+          }
         }
-      ]
+      }
     },
     "Authentication": {
       "type": "object",
@@ -3461,51 +3489,6 @@
         ]
       }
     },
-    "AuthenticationUpdate": {
-      "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Defines the method to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication method is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication method is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication method is a username and password."
-              }
-            ]
-          }
-        },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
-        }
-      }
-    },
     "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (either system assigned, or none)",
@@ -3518,6 +3501,7 @@
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -3848,7 +3832,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Gets a unique identifier for this resource.",
+          "description": "A unique identifier for the device.",
           "readOnly": true
         },
         "enabled": {
@@ -3858,7 +3842,7 @@
         },
         "externalDeviceId": {
           "type": "string",
-          "description": "Gets the device Id provided by customer.",
+          "description": "The Device ID provided by the customer.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3878,22 +3862,22 @@
         },
         "manufacturer": {
           "type": "string",
-          "description": "Hardware manufacturer name.",
+          "description": "Device manufacturer.",
           "readOnly": true
         },
         "model": {
           "type": "string",
-          "description": "Hardware model name.",
+          "description": "Device model.",
           "readOnly": true
         },
         "operatingSystem": {
           "type": "string",
-          "description": "operating system name.",
+          "description": "Device operating system.",
           "readOnly": true
         },
         "operatingSystemVersion": {
           "type": "string",
-          "description": "operating system version.",
+          "description": "Device operating system version.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4046,7 +4030,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4092,7 +4076,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4424,7 +4408,7 @@
     },
     "Endpoint": {
       "type": "object",
-      "description": "Connection endpoint url a device can use to connect to a service.",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
       "properties": {
         "type": {
           "type": "string",
@@ -4432,7 +4416,7 @@
         },
         "address": {
           "type": "string",
-          "description": "Fully qualified domain name."
+          "description": "The endpoint address to connect to."
         }
       }
     },
@@ -4675,7 +4659,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "displayName": {
@@ -4766,7 +4750,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "namespace": {
@@ -4899,7 +4883,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "description": {
@@ -4952,7 +4936,7 @@
               {
                 "name": "Keep",
                 "value": "Keep",
-                "description": "Retain the messages."
+                "description": "Retain messages."
               },
               {
                 "name": "Never",
@@ -4981,7 +4965,7 @@
           {
             "name": "Keep",
             "value": "Keep",
-            "description": "Retain the messages."
+            "description": "Retain messages."
           },
           {
             "name": "Never",
@@ -5014,7 +4998,7 @@
               {
                 "name": "Keep",
                 "value": "Keep",
-                "description": "Retain the messages."
+                "description": "Retain messages."
               },
               {
                 "name": "Never",

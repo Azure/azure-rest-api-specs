@@ -52,6 +52,12 @@
       "name": "SolutionVersions"
     },
     {
+      "name": "Jobs"
+    },
+    {
+      "name": "Targets"
+    },
+    {
       "name": "DynamicSchemaVersions"
     },
     {
@@ -59,9 +65,6 @@
     },
     {
       "name": "Solutions"
-    },
-    {
-      "name": "Targets"
     },
     {
       "name": "TargetTemplates"
@@ -119,6 +122,89 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.Edge/jobs": {
+      "get": {
+        "operationId": "Jobs_ListByTarget",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "List Jobs by parent resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_ListByTarget_MaximumSet": {
+            "$ref": "./examples/Jobs_ListByTarget_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Edge/jobs/{jobName}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Get a Job resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Job",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,60}$)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Get_MaximumSet": {
+            "$ref": "./examples/Jobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.Edge/schemaReferences": {
       "get": {
         "operationId": "SchemaReferences_ListByResourceGroup",
@@ -4640,7 +4726,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -4685,7 +4771,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "resource",
@@ -4760,7 +4846,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "properties",
@@ -4814,7 +4900,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -4876,7 +4962,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "body",
@@ -4950,7 +5036,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -5000,7 +5086,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5008,7 +5094,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -5053,7 +5139,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5061,7 +5147,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "resource",
@@ -5136,7 +5222,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5144,7 +5230,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "properties",
@@ -5198,7 +5284,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5206,7 +5292,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -5268,7 +5354,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5276,7 +5362,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -5326,7 +5412,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5334,7 +5420,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5387,7 +5473,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5395,7 +5481,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5478,7 +5564,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5486,7 +5572,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5548,7 +5634,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "dynamicSchemaName",
@@ -5556,7 +5642,7 @@
             "description": "The name of the DynamicSchema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5626,7 +5712,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "body",
@@ -5682,7 +5768,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           }
         ],
         "responses": {
@@ -5732,7 +5818,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5785,7 +5871,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5868,7 +5954,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -5930,7 +6016,7 @@
             "description": "The name of the Schema",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$"
           },
           {
             "name": "schemaVersionName",
@@ -6042,7 +6128,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           }
         ],
         "responses": {
@@ -6087,7 +6175,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           },
           {
             "name": "resource",
@@ -6162,7 +6252,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           },
           {
             "name": "properties",
@@ -6216,7 +6308,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           }
         ],
         "responses": {
@@ -6278,7 +6372,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           },
           {
             "name": "body",
@@ -6352,7 +6448,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           },
           {
             "name": "body",
@@ -6420,7 +6518,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           }
         ],
         "responses": {
@@ -6470,7 +6570,9 @@
             "description": "The name of the SolutionTemplate",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
           },
           {
             "name": "solutionTemplateVersionName",
@@ -6500,6 +6602,162 @@
             "$ref": "./examples/SolutionTemplateVersions_Get_MaximumSet_Gen.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkDeploySolution": {
+      "post": {
+        "operationId": "SolutionTemplateVersions_BulkDeploySolution",
+        "tags": [
+          "SolutionTemplateVersions"
+        ],
+        "description": "Post request for bulk deploy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionTemplateName",
+            "in": "path",
+            "description": "The name of the SolutionTemplate",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionTemplateVersionName",
+            "in": "path",
+            "description": "The name of the SolutionTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkDeploySolutionParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionTemplateVersions_BulkDeploySolution_MaximumSet": {
+            "$ref": "./examples/SolutionTemplateVersions_BulkDeploySolution_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkPublishSolution": {
+      "post": {
+        "operationId": "SolutionTemplateVersions_BulkPublishSolution",
+        "tags": [
+          "SolutionTemplateVersions"
+        ],
+        "description": "Post request for bulk publish",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionTemplateName",
+            "in": "path",
+            "description": "The name of the SolutionTemplate",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 61,
+            "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          },
+          {
+            "name": "solutionTemplateVersionName",
+            "in": "path",
+            "description": "The name of the SolutionTemplateVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BulkPublishSolutionParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionTemplateVersions_BulkPublishSolution_MaximumSet": {
+            "$ref": "./examples/SolutionTemplateVersions_BulkPublishSolution_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetTemplates": {
@@ -9627,6 +9885,7 @@
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -9641,6 +9900,118 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
+      ]
+    },
+    "BulkDeploySolutionParameter": {
+      "type": "object",
+      "description": "Bulk deploy solution parameter",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "Targets to which solution needs to be deployed",
+          "items": {
+            "$ref": "#/definitions/BulkDeployTargetDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "solutionInstanceName": {
+          "type": "string",
+          "description": "Name of the solution instance",
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+        },
+        "solutionDependencies": {
+          "type": "array",
+          "description": "Solution dependencies",
+          "items": {
+            "$ref": "#/definitions/SolutionDependencyParameter"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "targets"
+      ]
+    },
+    "BulkDeployTargetDetails": {
+      "type": "object",
+      "description": "Bulk deploy target details",
+      "properties": {
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ArmId of Target",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/Targets"
+              }
+            ]
+          }
+        },
+        "solutionInstanceName": {
+          "type": "string",
+          "description": "Name of the solution instance",
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+        }
+      },
+      "required": [
+        "targetId"
+      ]
+    },
+    "BulkPublishSolutionParameter": {
+      "type": "object",
+      "description": "Bulk publish solution parameter",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "Targets to which solution needs to be published",
+          "items": {
+            "$ref": "#/definitions/BulkPublishTargetDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "solutionInstanceName": {
+          "type": "string",
+          "description": "Name of the solution instance",
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+        },
+        "solutionDependencies": {
+          "type": "array",
+          "description": "Solution dependencies",
+          "items": {
+            "$ref": "#/definitions/SolutionDependencyParameter"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "targets"
+      ]
+    },
+    "BulkPublishTargetDetails": {
+      "type": "object",
+      "description": "Bulk publish target details",
+      "properties": {
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ArmId of Target",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/Targets"
+              }
+            ]
+          }
+        },
+        "solutionInstanceName": {
+          "type": "string",
+          "description": "Name of the solution instance",
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+        }
+      },
+      "required": [
+        "targetId"
       ]
     },
     "Capability": {
@@ -10170,6 +10541,48 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "DeployJobParameter": {
+      "type": "object",
+      "description": "Parameters for a deployment job.",
+      "properties": {
+        "parameter": {
+          "$ref": "#/definitions/InstallSolutionParameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobParameterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "deploy"
+    },
+    "DeployJobStepStatistics": {
+      "type": "object",
+      "description": "Deploy statistics for a job step, including total, success, and failed counts.",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of items processed in this step"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of successful items in this step"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed items in this step"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobStepStatisticsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "deploy"
     },
     "DeploymentStatus": {
       "type": "object",
@@ -10915,6 +11328,251 @@
         }
       ]
     },
+    "Job": {
+      "type": "object",
+      "description": "Job extension resource for tracking job execution and substatuses.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobListResult": {
+      "type": "object",
+      "description": "The response of a Job list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Job items on this page",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobParameterBase": {
+      "type": "object",
+      "description": "Base Job Parameter",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "description": "Job type discriminator value"
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "JobProperties": {
+      "type": "object",
+      "description": "Properties of a Job resource, including type, status, parameters, steps, and error details.",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "description": "The type of job."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the job (ISO8601)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the job (ISO8601)."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of the job."
+        },
+        "jobParameter": {
+          "$ref": "#/definitions/JobParameterBase",
+          "description": "Parameters for the job."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for tracking."
+        },
+        "steps": {
+          "type": "array",
+          "description": "Steps and substatuses for the job.",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          }
+        },
+        "triggeredBy": {
+          "type": "string",
+          "description": "The OID or identity that triggered the job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error Details if any failure is there",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "jobType",
+        "status"
+      ]
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Status of a job or job step.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The job or step is not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The job or step is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job or step succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job or step failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "JobStep": {
+      "type": "object",
+      "description": "Job Step",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the step"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of the step"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the step (ISO8601)"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the step (ISO8601)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message for the step"
+        },
+        "statistics": {
+          "$ref": "#/definitions/JobStepStatisticsBase",
+          "description": "Statistics for the step"
+        },
+        "steps": {
+          "type": "array",
+          "description": "Nested substeps for this step",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          }
+        },
+        "errorDetails": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error Details if any failure is there",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
+    "JobStepStatistics": {
+      "$ref": "#/definitions/DeployJobStepStatistics",
+      "x-nullable": false
+    },
+    "JobStepStatisticsBase": {
+      "type": "object",
+      "description": "Base Job Step Statistics",
+      "properties": {
+        "statisticsType": {
+          "$ref": "#/definitions/JobType",
+          "description": "Statistics type discriminator value"
+        }
+      },
+      "discriminator": "statisticsType",
+      "required": [
+        "statisticsType"
+      ]
+    },
+    "JobType": {
+      "type": "string",
+      "description": "JobType for the job. Supports extensibility via string values.",
+      "enum": [
+        "deploy",
+        "staging",
+        "externalValidation"
+      ],
+      "x-ms-enum": {
+        "name": "JobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deploy",
+            "value": "deploy",
+            "description": "A deployment job."
+          },
+          {
+            "name": "Staging",
+            "value": "staging",
+            "description": "A staging job."
+          },
+          {
+            "name": "ExternalValidation",
+            "value": "externalValidation",
+            "description": "A validation job."
+          }
+        ]
+      }
+    },
     "OrchestratorType": {
       "type": "string",
       "description": "Available Orchestrator types",
@@ -11486,7 +12144,7 @@
           "type": "string",
           "description": "Solution Instance Name",
           "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
         },
         "solutionTemplateVersionId": {
           "type": "string",
@@ -11531,7 +12189,7 @@
           "type": "string",
           "description": "Solution Instance Name",
           "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
         },
         "targetId": {
           "type": "string",
@@ -11649,8 +12307,7 @@
         "solutionInstanceName": {
           "type": "string",
           "description": "Solution Instance Name",
-          "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
         },
         "solutionDependencies": {
           "type": "array",
@@ -11975,8 +12632,7 @@
         "solutionInstanceName": {
           "type": "string",
           "description": "Solution instance name",
-          "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
           "readOnly": true
         },
         "solutionDependencies": {
@@ -11991,6 +12647,16 @@
         "errorDetails": {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error Details if any failure is there",
+          "readOnly": true
+        },
+        "latestActionTrackingUri": {
+          "type": "string",
+          "description": "The URI for tracking the latest action performed on this solution version.",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/JobType",
+          "description": "The type of the latest action performed on this solution version.",
           "readOnly": true
         },
         "provisioningState": {
@@ -12151,7 +12817,8 @@
         "Failed",
         "Undeployed",
         "PendingExternalValidation",
-        "ExternalValidationFailed"
+        "ExternalValidationFailed",
+        "Staging"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -12206,6 +12873,11 @@
             "name": "ExternalValidationFailed",
             "value": "ExternalValidationFailed",
             "description": "Solution Instance failed external validation"
+          },
+          {
+            "name": "Staging",
+            "value": "Staging",
+            "description": "Solution Instance is staging the images"
           }
         ]
       }

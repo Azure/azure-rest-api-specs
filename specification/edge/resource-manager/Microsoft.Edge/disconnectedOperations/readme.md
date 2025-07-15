@@ -27,16 +27,34 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: disconnectedOperations-package-2024-11-01-preview
+tag: disconnectedOperations-package-2025-06-01-preview
 ```
 
-### Tag: disconnectedOperations-package-2024-11-01-preview
+### Tag: disconnectedOperations-package-2024-12-01-preview
 
 These settings apply only when `--tag=disconnectedOperations-package-2024-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'disconnectedOperations-package-2024-12-01-preview'
 input-file:
   - preview/2024-12-01-preview/disconnectedOperations.json
+```
+
+### Tag: disconnectedOperations-package-2025-05-01-preview
+
+These settings apply only when `--tag=disconnectedOperations-package-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'disconnectedOperations-package-2025-05-01-preview'
+input-file:
+  - preview/2025-05-01-preview/disconnectedOperations.json
+```
+
+### Tag: disconnectedOperations-package-2025-06-01-preview
+
+These settings apply only when `--tag=disconnectedOperations-package-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'disconnectedOperations-package-2025-06-01-preview'
+input-file:
+  - preview/2025-06-01-preview/disconnectedOperations.json
 ```
 
 # Code Generation

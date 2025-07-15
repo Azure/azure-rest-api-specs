@@ -252,8 +252,23 @@
           "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransform.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform exporting to the standard CommonSecurityLog table": {
+            "$ref": "./examples/PipelineGroupCreateStandardCEF.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardSyslogWithTransform.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table": {
+            "$ref": "./examples/PipelineGroupCreateStandardSyslog.json"
+          },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithUdpAndAllowSkipPri.json"
+          },
+          "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateOtlpWithTransform.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -393,6 +408,62 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/executeTransform": {
+      "post": {
+        "operationId": "PipelineGroups_ExecuteTransform",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "This method is used to execute a transform configuration to be used in a pipeline group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransformRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransformResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Response when executing a transform": {
+            "$ref": "./examples/PipelineGroupExecuteTransform.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -440,6 +511,7 @@
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -563,6 +635,48 @@
           "default": 100
         }
       }
+    },
+    "ExecuteTransformRequest": {
+      "type": "object",
+      "description": "Request to execute a transform.",
+      "properties": {
+        "transformStatement": {
+          "type": "string",
+          "description": "Transform statement to execute.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "transformStatement"
+      ]
+    },
+    "ExecuteTransformResponse": {
+      "type": "object",
+      "description": "Response for the execute transform request.",
+      "properties": {
+        "validation": {
+          "$ref": "#/definitions/ExecuteTransformResponseValidation",
+          "description": "Validation information for the execute transform response."
+        }
+      },
+      "required": [
+        "validation"
+      ]
+    },
+    "ExecuteTransformResponseValidation": {
+      "type": "object",
+      "description": "Validation information for the execute transform response.",
+      "properties": {
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "Duration of validation portion of the transform execution in seconds."
+        }
+      },
+      "required": [
+        "duration"
+      ]
     },
     "Exporter": {
       "type": "object",
@@ -1036,6 +1150,10 @@
         "batch": {
           "$ref": "#/definitions/BatchProcessor",
           "description": "Batch processor configurations."
+        },
+        "transformLanguage": {
+          "$ref": "#/definitions/TransformLanguageProcessor",
+          "description": "Transform language processor configurations."
         }
       },
       "required": [
@@ -1047,7 +1165,10 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Batch"
+        "Batch",
+        "TransformLanguage",
+        "MicrosoftSyslog",
+        "MicrosoftCommonSecurityLog"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
@@ -1057,6 +1178,21 @@
             "name": "Batch",
             "value": "Batch",
             "description": "Batch processor."
+          },
+          {
+            "name": "TransformLanguage",
+            "value": "TransformLanguage",
+            "description": "Transform language processor."
+          },
+          {
+            "name": "MicrosoftSyslog",
+            "value": "MicrosoftSyslog",
+            "description": "Microsoft Syslog processor."
+          },
+          {
+            "name": "MicrosoftCommonSecurityLog",
+            "value": "MicrosoftCommonSecurityLog",
+            "description": "Microsoft CEF/Common Security Log processor."
           }
         ]
       }
@@ -1384,6 +1520,21 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "TransformLanguageProcessor": {
+      "type": "object",
+      "description": "Transform language processor.",
+      "properties": {
+        "transformStatement": {
+          "type": "string",
+          "description": "Transform statement to execute over the data passing through the processor.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "transformStatement"
       ]
     },
     "UdpReceiver": {

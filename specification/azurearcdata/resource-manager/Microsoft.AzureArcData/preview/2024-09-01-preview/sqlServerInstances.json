@@ -532,6 +532,20 @@
         "serviceType": {
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
+        },
+        "databaseMirroringEndpoint": {
+          "description": "Database mirroring endpoint related properties.",
+          "$ref": "#/definitions/DBMEndpoint"
+        },
+        "isMicrosoftPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
+        },
+        "isDigiCertPkiCertTrustConfigured": {
+          "type": "boolean",
+          "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
+          "readOnly": true
         }
       }
     },

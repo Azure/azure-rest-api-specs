@@ -617,7 +617,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -667,7 +667,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -750,7 +750,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -824,7 +824,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -930,7 +930,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -976,7 +976,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1061,7 +1061,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1137,7 +1137,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "Name of the device.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1261,7 +1261,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "targetAddress": {
@@ -1279,7 +1279,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1291,9 +1291,26 @@
         "targetAddress"
       ]
     },
-    "AssetEndpointProfilePropertiesUpdate": {
+    "AssetEndpointProfileUpdate": {
       "type": "object",
-      "description": "Defines the Asset Endpoint Profile properties.",
+      "description": "The type used for update operations of the AssetEndpointProfile.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "AssetEndpointProfileUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AssetEndpointProfile.",
       "properties": {
         "targetAddress": {
           "type": "string",
@@ -1310,24 +1327,9 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         }
       }
-    },
-    "AssetEndpointProfileUpdate": {
-      "type": "object",
-      "description": "Asset Endpoint Profile definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssetEndpointProfilePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "AssetListResult": {
       "type": "object",
@@ -1473,9 +1475,64 @@
         "assetEndpointProfileUri"
       ]
     },
-    "AssetPropertiesUpdate": {
+    "AssetStatus": {
       "type": "object",
-      "description": "Defines the asset properties.",
+      "description": "Defines the asset status properties.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array object to transfer and persist errors that originate from the Edge.",
+          "items": {
+            "$ref": "#/definitions/AssetStatusError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetStatusError": {
+      "type": "object",
+      "description": "Defines the asset status error properties.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
+          "readOnly": true
+        }
+      }
+    },
+    "AssetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Asset.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AssetUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "AssetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Asset.",
       "properties": {
         "assetType": {
           "type": "string",
@@ -1556,61 +1613,9 @@
         }
       }
     },
-    "AssetStatus": {
-      "type": "object",
-      "description": "Defines the asset status properties.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Array object to transfer and persist errors that originate from the Edge.",
-          "items": {
-            "$ref": "#/definitions/AssetStatusError"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "A read only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (Edge) state of the Asset. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
-          "readOnly": true
-        }
-      }
-    },
-    "AssetStatusError": {
-      "type": "object",
-      "description": "Defines the asset status error properties.",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code for classification of errors (ex: 400, 404, 500, etc.).",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Human readable helpful error message to provide additional context for error (ex: “capability Id 'foo' does not exist”).",
-          "readOnly": true
-        }
-      }
-    },
-    "AssetUpdate": {
-      "type": "object",
-      "description": "Asset definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AssetPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -1861,7 +1866,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Gets a unique identifier for this resource.",
+          "description": "A unique identifier for the device.",
           "readOnly": true
         },
         "enabled": {
@@ -1871,7 +1876,7 @@
         },
         "externalDeviceId": {
           "type": "string",
-          "description": "Gets the device Id provided by customer.",
+          "description": "The Device ID provided by the customer.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1891,22 +1896,22 @@
         },
         "manufacturer": {
           "type": "string",
-          "description": "Hardware manufacturer name.",
+          "description": "Device manufacturer.",
           "readOnly": true
         },
         "model": {
           "type": "string",
-          "description": "Hardware model name.",
+          "description": "Device model.",
           "readOnly": true
         },
         "operatingSystem": {
           "type": "string",
-          "description": "operating system name.",
+          "description": "Device operating system.",
           "readOnly": true
         },
         "operatingSystemVersion": {
           "type": "string",
-          "description": "operating system version.",
+          "description": "Device operating system version.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1977,7 +1982,7 @@
     },
     "Endpoint": {
       "type": "object",
-      "description": "Connection endpoint url a device can use to connect to a service.",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
       "properties": {
         "type": {
           "type": "string",
@@ -1985,7 +1990,7 @@
         },
         "address": {
           "type": "string",
-          "description": "Fully qualified domain name."
+          "description": "The endpoint address to connect to."
         }
       }
     },

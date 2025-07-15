@@ -28,14 +28,9 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-connectedcache"
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
     flavor: "azure"
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    packageDetails:
+    experimental-extensible-enums: true
+    package-details:
       name: "@azure/arm-connectedcache"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/connectedcache"
@@ -47,6 +42,7 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

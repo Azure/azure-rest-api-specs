@@ -36,12 +36,15 @@ interface SchemaReferences {
   @doc("Get a Schema Reference Resource")
   get is ArmResourceRead<SchemaReference>;
 
+  @removed(Versions.v2025_06_01)
   @doc("Create or update a Schema Reference Resource")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SchemaReference>;
 
+  @removed(Versions.v2025_06_01)
   @doc("update a Schema Reference Resource")
   update is ArmResourcePatchSync<SchemaReference, SchemaReferenceProperties>;
 
+  @removed(Versions.v2025_06_01)
   @doc("Delete a Schema Reference Resource")
   delete is ArmResourceDeleteWithoutOkAsync<SchemaReference>;
 

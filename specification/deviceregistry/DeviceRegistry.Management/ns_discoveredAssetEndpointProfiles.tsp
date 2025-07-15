@@ -19,6 +19,7 @@ namespace Microsoft.DeviceRegistry;
 @doc("Namespace Discovered Asset Endpoint Profile definition.")
 @parentResource(Namespace)
 @added(Versions.v2024_10_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
   @doc("Discovered Asset Endpoint Profile name parameter.")
@@ -39,6 +40,7 @@ model NamespaceDiscoveredAssetEndpointProfile
 
 @armResourceOperations
 @added(Versions.v2024_10_01_preview)
+@removed(Versions.v2025_07_01_preview)
 interface NamespaceDiscoveredAssetEndpointProfiles {
   get is ArmResourceRead<NamespaceDiscoveredAssetEndpointProfile>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredAssetEndpointProfile>;

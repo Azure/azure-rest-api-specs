@@ -1,2 +1,2 @@
-// import "./project.tsp";
+import "./project.tsp";
 import "./workspace.tsp";

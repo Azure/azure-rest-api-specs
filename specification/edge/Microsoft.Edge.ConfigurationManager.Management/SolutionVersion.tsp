@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./ProvisioningState.tsp";
 import "./State.tsp";
+import "./Job.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -58,8 +59,7 @@ model SolutionVersionProperties {
 
   @doc("Solution instance name")
   @visibility(Lifecycle.Read)
-  @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
 
   @doc("Solution Dependency Context")
@@ -70,6 +70,14 @@ model SolutionVersionProperties {
   @doc("Error Details if any failure is there")
   @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The URI for tracking the latest action performed on this solution version.")
+  @visibility(Lifecycle.Read)
+  latestActionTrackingUri?: string;
+
+  @doc("The type of the latest action performed on this solution version.")
+  @visibility(Lifecycle.Read)
+  actionType?: JobType;
 
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
@@ -102,7 +110,7 @@ model SolutionDependency {
 
   @doc("Solution Instance Name")
   @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
 
   @doc("Solution Template Version Id")

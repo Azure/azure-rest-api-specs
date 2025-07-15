@@ -57,6 +57,9 @@ union State {
   @doc("Solution Instance failed external validation")
   ExternalValidationFailed: "ExternalValidationFailed",
 
+  @doc("Solution Instance is staging the images")
+  Staging: "Staging",
+
   string,
 }
 

@@ -7,16 +7,13 @@ import "./extendedLocation.tsp";
 import "./provisioningState.tsp";
 import "./topic.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the discovered asset properties.")
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -76,6 +73,7 @@ model DiscoveredAssetProperties {
 
 @doc("Defines the dataset properties.")
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model DiscoveredDataset {
   @doc("Name of the dataset.")
   name: string;
@@ -93,6 +91,7 @@ model DiscoveredDataset {
 
 @doc("Defines the data point properties.")
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model DiscoveredDataPoint {
   @doc("The name of the data point.")
   name: string;
@@ -109,6 +108,7 @@ model DiscoveredDataPoint {
 
 @doc("Defines the event properties.")
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model DiscoveredEvent {
   @doc("The name of the event.")
   name: string;

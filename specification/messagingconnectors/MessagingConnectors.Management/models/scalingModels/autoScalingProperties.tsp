@@ -4,12 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Versioning;
-using Azure.Core;
-using TypeSpec.OpenAPI;
-
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
+namespace Microsoft.MessagingConnectors.Models.Scaling;
 
 @doc("Properties for Auto scaling.")
 model AutoScalingProperties extends ScalingProperties {
@@ -21,5 +16,5 @@ model AutoScalingProperties extends ScalingProperties {
 
   @doc("Current parallelism count.")
   @visibility(Lifecycle.Read)
-  currentParallelism: int32;
+  currentParallelism?: int32;
 }

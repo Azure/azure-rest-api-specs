@@ -16,6 +16,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @doc("Target Template Properties")
 model TargetTemplateProperties {
   @doc("Description of Target template")
@@ -34,12 +35,14 @@ model TargetTemplateProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Target Template Resource, which is a template for creation of Targets")
 model TargetTemplate is TrackedResource<TargetTemplateProperties> {
   ...ResourceNameParameter<TargetTemplate>;
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface TargetTemplates {
   @doc("Get a Target Template Resource")

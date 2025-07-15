@@ -124,6 +124,7 @@ model DsmsCertificateProperties {
   @doc("Valid days of this certificate (Self-signed certificates only)")
   validDays?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Enable CA signing (Self-signed certificates only)")
   selfSigningMethod?: "CertificateAuthority" | "SelfSigned" | string;
 

@@ -31,6 +31,7 @@ and followed the instructions by checking all the boxes:
   [ARM resource provider contract](https://aka.ms/azurerpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
+- [ ] A [release plan](https://aka.ms/azsdkdocs/release-plans) has been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
 
 ## Additional information
 
@@ -60,3 +61,4 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 - If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
   This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
+- For guidance on SDK breaking change review, refer to https://aka.ms/ci-fix.

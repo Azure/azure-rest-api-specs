@@ -82,6 +82,12 @@ model DayOfWeek {
 @maxLength(255)
 scalar Ocid extends string;
 
+@added(Versions.v20250701_preview)
+@doc("SshPublicKey string")
+@minLength(1)
+@maxLength(1024)
+scalar SshPublicKey extends string;
+
 @doc("LicenseModel enum")
 union LicenseModel {
   @doc("License included")
@@ -278,6 +284,42 @@ union SystemShapes {
 
   @doc("Exadata DB on Exascale Infrastructure shape")
   ExaDbXs: "ExaDbXS",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Allowed values for BaseDb System Shapes")
+union BaseDbSystemShapes {
+  @doc("Vm Standard X86")
+  VMStandardX86: "VM.Standard.x86",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Storage Management type enum.")
+union StorageManagementType {
+  @doc("Logical Volume management")
+  LVM: "LVM",
+
+  string,
+}
+
+@added(Versions.v20250701_preview)
+@doc("Allowed values for shape family.")
+union ShapeFamilyType {
+  @doc("Family value for Exadata Shape")
+  Exadata: "EXADATA",
+
+  @doc("Family value for Exadb XS Shape")
+  ExadbXs: "EXADB_XS",
+
+  @doc("Family value for Single Node Shape")
+  SingleNode: "SINGLENODE",
+
+  @doc("Family value for Virtual Machine Shape")
+  VirtualMachine: "VIRTUALMACHINE",
 
   string,
 }

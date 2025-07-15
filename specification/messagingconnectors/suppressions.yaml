@@ -1,0 +1,12 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - resource-manager/Microsoft.MessagingConnectors/preview/2025-01-01-preview/messagingconnectors.json
+    - resource-manager/Microsoft.MessagingConnectors/preview/2025-02-01-preview/messagingconnectors.json
+    - resource-manager/Microsoft.MessagingConnectors/preview/2025-03-01-preview/messagingconnectors.json
+    - resource-manager/Microsoft.MessagingConnectors/preview/2025-05-01-preview/messagingconnectors.json

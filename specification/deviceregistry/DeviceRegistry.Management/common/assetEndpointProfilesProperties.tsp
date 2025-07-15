@@ -7,17 +7,13 @@ import "./extendedLocation.tsp";
 import "./provisioningState.tsp";
 import "./authenticationMethod.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the Asset Endpoint Profile properties.")
 model AssetEndpointProfileProperties {
-  @doc("Globally unique, immutable, non-reusable id.")
+  @doc("Globally unique, immutable, non-reusable ID.")
   @visibility(Lifecycle.Read)
   uuid?: string;
 
@@ -40,7 +36,7 @@ model AssetEndpointProfileProperties {
   @removed(Versions.v2024_07_01_preview)
   transportAuthentication?: TransportAuthentication;
 
-  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF).")
+  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF).")
   additionalConfiguration?: string;
 
   @doc("Reference to a discovered asset endpoint profile. Populated only if the asset endpoint profile has been created from discovery flow. Discovered asset endpoint profile name must be provided.")

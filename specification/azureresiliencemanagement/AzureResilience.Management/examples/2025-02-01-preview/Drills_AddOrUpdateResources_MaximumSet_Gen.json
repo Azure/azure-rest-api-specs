@@ -1,0 +1,90 @@
+{
+  "title": "Drills_AddOrUpdateResources_MaximumSet",
+  "operationId": "Drills_AddOrUpdateResources",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2025-02-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "body": {
+      "faultDurationInMin": 0,
+      "resourceLists": {
+        "includeResources": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm1",
+            "faultProperties": {
+              "customFault": {
+                "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+                "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
+              }
+            }
+          }
+        ],
+        "excludeResources": [
+          "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm2"
+        ],
+        "updateResources": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm3",
+            "faultProperties": {
+              "customFault": {
+                "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+                "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "failedIncludeResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm1",
+            "tAndcAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            }
+          }
+        ],
+        "failedExcludeResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm2",
+            "tAndcAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            }
+          }
+        ],
+        "failedUpdateResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm3",
+            "tAndcAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

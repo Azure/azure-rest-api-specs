@@ -49,6 +49,50 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products": {
+      "get": {
+        "operationId": "ProductResources_ListByParent",
+        "tags": [
+          "ProductResources"
+        ],
+        "description": "List ProductResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the billing account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductResources_ListByParent": {
+            "$ref": "./examples/ProductResources_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products/{productCode}": {
       "get": {
         "operationId": "ProductResources_Get",
@@ -440,6 +484,7 @@
   "definitions": {
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -469,6 +514,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ProductResourceListResult": {
+      "type": "object",
+      "description": "The response of a ProductResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ProductResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ProductResourceProperties": {

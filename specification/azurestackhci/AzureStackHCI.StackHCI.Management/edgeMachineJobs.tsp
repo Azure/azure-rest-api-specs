@@ -203,7 +203,7 @@ model ProvisioningRequest {
   onboardingConfiguration?: OnboardingConfiguration;
 
   @doc("Device configuration.")
-  deviceConfiguration: DeviceConfiguration;
+  deviceConfiguration?: DeviceConfiguration;
 
   @doc("Base64 encoded custom configuration for CAPI to use")
   customConfiguration?: string;
@@ -488,11 +488,14 @@ model UserDetails {
   @doc("Name of the user.")
   userName: string;
 
-  @doc("Type of the secret used for authentication.")
+  @doc("Type of the secret used for authentication. Change it to enum in public preview")
   secretType: string;
 
   @doc("Location of the secret used for authentication.")
-  secretLocation: string;
+  secretLocation?: string;
+
+  @doc("Location of the secret used for authentication.")
+  sshPubKey?: string[];
 }
 
 @doc("Onboarding resource type.")
@@ -551,6 +554,12 @@ model NetworkAdapter {
 
   @doc("IP address.")
   ipAddress?: string;
+
+  @doc("Adapter Name.")
+  adapterName?: string;
+
+  @doc("MAC address.")
+  macAddress?: string;
 
   @doc("IP address range.")
   ipAddressRange?: IpAddressRange;

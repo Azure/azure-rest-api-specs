@@ -28,4 +28,21 @@ model ConfigurationChecksTemplate
 interface ConfigurationChecksTemplates {
   get is ArmResourceRead<ConfigurationChecksTemplate>;
   listByResourceGroup is ArmResourceListByParent<ConfigurationChecksTemplate>;
+
+  /**
+   * Update configuration checks template resource.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    ConfigurationChecksTemplate,
+    ConfigurationChecksTemplateUpdateRequest
+  >;
 }
+
+@@doc(ConfigurationChecksTemplate.name,
+  "The name of the configuration check template resource."
+);
+
+@@doc(ConfigurationChecksTemplates.update::parameters.properties,
+  "Request body to update the configuration check template resource."
+);

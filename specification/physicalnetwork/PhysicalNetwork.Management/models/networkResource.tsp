@@ -1,14 +1,8 @@
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./common.tsp";
 
 using Azure.Core;
 
 namespace Microsoft.PhysicalNetwork;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Network Device Properties")
 model NetworkDeviceProperties {
@@ -114,39 +108,47 @@ model NetworkDeviceProperties {
   @doc("Additional Device Interface IP address ARM Ids")
   additionalIpsArmId: Array<armResourceIdentifier>;
 
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The Azure Device Type. Distinct from NGS device type in certain cases.")
+  azureDeviceType: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The network function. Ex: Production, Test, etc.")
+  function: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's firmware version.")
+  firmwareProfile: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("Whether the device is managed by PhyNet.")
+  isManagedByNetworkTeam: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("Operating System version number.")
+  osVersion: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The OS Version type. Ex: Golden, Bronze, Silver, etc.")
+  osVersionType: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's network role. Ex. Data, Management, Console, Optical, etc.")
+  role: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's serial number.")
+  serialNumber: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's status. Ex: InProduction, InMaintenance, etc.")
+  status: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device vendor/manufacturer.")
+  vendor: string;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@doc("Provisioning state enum")
-union ProvisioningState {
-  @doc("The resource action is successful.")
-  Succeeded: "Succeeded",
-
-  @doc("The resource action has failed.")
-  Failed: "Failed",
-
-  @doc("The resource action has been cancelled.")
-  Canceled: "Canceled",
-
-  @doc("The resource provisioning has been accepted.")
-  Accepted: "Accepted",
-
-  @doc("The resource is being created.")
-  Creating: "Creating",
-
-  @doc("The resource is being updated.")
-  Updating: "Updating",
-
-  @doc("The resource is being deleted.")
-  Deleting: "Deleting",
-
-  @doc("The resource has been deleted.")
-  Deleted: "Deleted",
-
-  @doc("The resource status is unspecified.")
-  NotSpecified: "NotSpecified",
-
-  string,
 }

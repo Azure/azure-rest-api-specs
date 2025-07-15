@@ -1918,6 +1918,11 @@
           "description": "cache node current tls certificate.",
           "readOnly": true
         },
+        "lastAutoUpdateInfo": {
+          "$ref": "#/definitions/MccCacheNodeAutoUpdateInfo",
+          "description": "cache node last auto update information.",
+          "readOnly": true
+        },
         "aggregatedStatusDetails": {
           "type": "string",
           "description": "Cache node resource aggregated status details.",
@@ -2621,6 +2626,13 @@
           "type": "string",
           "format": "password",
           "description": "Mcc Iot Central temporary device registration key, used once.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "tlsCertificateProvisioningKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Mcc Tls certificate provisioning key.",
           "readOnly": true,
           "x-ms-secret": true
         },

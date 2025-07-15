@@ -10,15 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ApplicationMigration;
 
-@doc("Definition of Tag")
-model Tag {
-  @doc("Property key")
-  key?: string;
-
-  @doc("Property value")
-  value?: string;
-}
-
 @doc("Definition of Server Parameter")
 model ServerParameter {
   @doc("Property key")
@@ -80,11 +71,14 @@ model ProxySiteRefreshBody {
  * Represents the presence of Oids in Tables under a DB.
  */
 union HasTablesWithOids {
+  @doc("Oids presence in the database is unknown.")
+  Unknown: "Unknown",
+
   @doc("The Database has tables with Oids.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have tables with Oids.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -93,11 +87,14 @@ union HasTablesWithOids {
  * Represents the presence of custom data types in a DB.
  */
 union HasCustomDataTypes {
+  @doc("Custom data types presence in the database is unknown.")
+  Unknown: "Unknown",
+
   @doc("The Database has custom data types.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have custom data types.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -106,11 +103,14 @@ union HasCustomDataTypes {
  * Represents an Enum with boolean values.
  */
 union BoolValue {
+  @doc("Represents an unknown value.")
+  Unknown: "Unknown",
+
   @doc("Represents a true boolean value.")
-  True: "true",
+  True: "True",
 
   @doc("Represents a false boolean value.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -191,6 +191,11 @@ union CollationProvider {
  */
 union Encoding {
   string,
+
+  /**
+   * Unknown Encoding.
+   */
+  UNKNOWN: "UNKNOWN",
 
   /**
    * Big Five character set for Traditional Chinese.
@@ -634,8 +639,8 @@ model PgsqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 
   /**
    * The PGSQLSites resource definition.
@@ -663,13 +668,13 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   hostIp?: string[];
 
   /**
-   * discovery Machine Id
+   * discovery Machine Ids
    */
-  machineId?: Azure.Core.armResourceIdentifier<[
+  machineArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/serverSites/machines";
     }
-  ]>;
+  ]>[];
 
   /**
    * The host machine properties.
@@ -822,10 +827,15 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   isDrEnabled?: BoolValue;
 
   /**
+   * Indicates whether the super user access is enabled on the instance.
+   */
+  isSuperUserAccessEnabled?: BoolValue;
+
+  /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -848,13 +858,13 @@ model PgsqlInstanceResourcePatch {
   hostIp?: string[];
 
   /**
-   * discovery Machine Id
+   * discovery Machine Ids
    */
-  machineId?: Azure.Core.armResourceIdentifier<[
+  machineArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OffAzure/serverSites/machines";
     }
-  ]>;
+  ]>[];
 
   /**
    * The host machine properties.
@@ -996,10 +1006,15 @@ model PgsqlInstanceResourcePatch {
   isDrEnabled?: BoolValue;
 
   /**
+   * Indicates whether the super user access is enabled on the instance.
+   */
+  isSuperUserAccessEnabled?: BoolValue;
+
+  /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1085,9 +1100,7 @@ model Collation {
 //   /**
 //    * Resource tags.
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-//   tags?: Tag[];
-// }
+//   tags?: Record<string>;
 
 /**
  * List of Databases.
@@ -1104,13 +1117,13 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   databaseDisplayName?: string;
 
   /**
-   * discovered PGSQL Instance Id
+   * discovered PGSQL Instance Ids
    */
-  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+  pgSqlInstanceArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances";
     }
-  ]>;
+  ]>[];
 
   /**
    * PGSQL database encoding.
@@ -1158,6 +1171,26 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   hasSuperUserCreatedObjects?: BoolValue;
 
   /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Indicates whether the access to the machine's file system is enabled for the database objects.
+   */
+  fileSystemAccessEnabled?: BoolValue;
+
+  /**
    * The number of errors.
    */
   errorCount?: int64;
@@ -1170,8 +1203,8 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1194,13 +1227,13 @@ model PgsqlDatabaseResourcePatch {
   databaseDisplayName?: string;
 
   /**
-   * discovered PGSQL Instance Id
+   * discovered PGSQL Instance Ids
    */
-  pgSqlInstanceId?: Azure.Core.armResourceIdentifier<[
+  pgSqlInstanceArmIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ApplicationMigration/PGSQLSites/PGSQLInstances";
     }
-  ]>;
+  ]>[];
 
   /**
    * PGSQL database encoding.
@@ -1248,6 +1281,26 @@ model PgsqlDatabaseResourcePatch {
   hasSuperUserCreatedObjects?: BoolValue;
 
   /**
+   * Indicates whether the system has custom casts defined.
+   */
+  hasCustomCasts?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) parsers defined.
+   */
+  hasCustomFtsParsers?: BoolValue;
+
+  /**
+   * Indicates whether the system has custom full-text search (FTS) templates defined.
+   */
+  hasCustomFtsTemplates?: BoolValue;
+
+  /**
+   * Indicates whether the access to the machine's file system is enabled for the database objects.
+   */
+  fileSystemAccessEnabled?: BoolValue;
+
+  /**
    * The number of errors.
    */
   errorCount?: int64;
@@ -1260,8 +1313,8 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1286,8 +1339,7 @@ model Extension {
 //   /**
 //    * Resource tags
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-//   tags?: Tag[];
+//    tags?: Record<string>;
 // }
 
 /**

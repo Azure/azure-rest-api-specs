@@ -119,8 +119,8 @@ union ConfigurationCheckConfigurationDeviation {
    * Used when the deviation status cannot be determined due to the configuration checks not being
    * evaluated.
    */
-  @doc("The deviation status is unknown as the configuration checks couldn't be evaluated.")
-  Unknown: "Unknown",
+  @doc("The deviation status is evaluation failed as the configuration checks couldn't be evaluated.")
+  EvaluationFailed: "EvaluationFailed",
 
   @doc("Allows for custom or additional deviation states.")
   string,
@@ -215,6 +215,12 @@ model EvaluationResults {
   name: string;
 
   /**
+   * The description of configuration check being executed.
+   */
+  @doc("The description of the configuration check.")
+  description?: string;
+
+  /**
    * Indicates the layer in the system (e.g., azure resource manager(ARM) or operating system) where
    * the check was executed.
    */
@@ -296,6 +302,12 @@ model EvaluationResults {
    */
   @doc("The impact level of the configuration check.")
   impactLevel: ConfigurationCheckImpactLevel;
+
+  /**
+   * The error details for the check execution failures.
+   */
+  @doc("The error details to provide additional context in case of evaluation failures during the configuration check execution.")
+  errorDetails?: ErrorDetails;
 }
 
 @doc("The configuration validation results error details.")
@@ -343,16 +355,28 @@ model ConfigurationValidationResultsProperties {
   componentName?: string;
 
   /**
+   * The type of the component within the workload instance being validated.
+   */
+  @doc("The type of the component being validated.")
+  componentType?: string;
+
+  /**
    * The name of the role within the workload instance being validated.
    */
   @doc("The name of the role being validated.")
-  roleName: string;
+  roleName?: string;
 
   /**
    * The ARM IDs of resources associated with this validation.
    */
   @doc("The ARM IDs of resources associated with this validation.")
   resourceArmIds: string[];
+
+  /**
+   * The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.
+   */
+  @doc("The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.")
+  workloadType?: string;
 
   /**
    * The template ID of the configuration checks being applied to the workload instance.

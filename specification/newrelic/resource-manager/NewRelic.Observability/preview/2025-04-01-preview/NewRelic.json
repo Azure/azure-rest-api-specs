@@ -280,6 +280,87 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/activateSaaS": {
+      "post": {
+        "tags": [
+          "SaaS"
+        ],
+        "operationId": "SaaS_ActivateResource",
+        "description": "Activate the saas",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ActivateSaaSParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activate SaaS completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSResourceDetailsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ActivateSaaS": {
+            "$ref": "./examples/ValidateActivateSaaS.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/validateAndActivateSaaS": {
+      "get": {
+        "tags": [
+          "SaaS"
+        ],
+        "operationId": "SaaS_List",
+        "description": "Validate and Activate the saas",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List and Activate SaaS completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfoListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ValidateAndActivateSaaS": {
+            "$ref": "./examples/GetSaaSInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors": {
       "get": {
         "tags": [
@@ -1421,42 +1502,6 @@
         }
       }
     },
-    "/providers/NewRelic.Observability/saas/getSaaSInfo": {
-      "get": {
-        "tags": [
-          "GetSaaSInfo"
-        ],
-        "operationId": "GetSaaSInfo",
-        "description": "Get the saas id from the marketplace token",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PublisherIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get SaaSInfo completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SaaSInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetSaaSInfo": {
-            "$ref": "./examples/GetSaaSInfo.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
       "get": {
         "tags": [
@@ -2472,6 +2517,24 @@
       "properties": {},
       "description": "Publisher Id for NewRelic resource"
     },
+    "ActivateSaaSParameterRequest": {
+      "type": "object",
+      "description": "SaaS guid & PublishedId for Activate and Validate SaaS Resource",
+      "properties": {
+        "saasGuid": {
+          "type": "string",
+          "description": "SaaS guid for Activate and Validate SaaS Resource"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for NewRelic resource"
+        }
+      },
+      "required": [
+        "saasGuid",
+        "publisherId"
+      ]
+    },
     "LogRules": {
       "type": "object",
       "properties": {
@@ -3073,6 +3136,44 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "SaaSResourceDetailsResponse": {
+      "type": "object",
+      "properties": {
+        "saasId": {
+          "type": "string",
+          "description": "Id of the Marketplace SaaS Resource"
+        }
+      },
+      "description": "Marketplace SaaS resource details.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SaaSInfoListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SaaSInfo"
+          },
+          "x-cadl-name": "SaaSInfo[]",
+          "description": "The SaaSInfo items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Response of get SaaS info operation.",
+      "required": [
+        "value"
       ]
     },
     "PlanDataResource": {
@@ -3739,8 +3840,18 @@
       "name": "publisherId",
       "in": "query",
       "required": true,
-      "description": "PublisherId for NewRelic resource.",
+      "description": "Publisher Id.",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ActivateSaaSParameter": {
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "The details for ActivateSaaSParameter request.",
+      "schema": {
+        "$ref": "#/definitions/ActivateSaaSParameterRequest"
+      },
       "x-ms-parameter-location": "method"
     },
     "MetricsRequestParameter": {

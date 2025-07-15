@@ -6,21 +6,21 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./common/discoveredAssetsProperties.tsp";
+import "./common/ns_discoveredAssetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@doc("Namespace Discovered Asset definition.")
+@doc("Discovered asset definition.")
 @parentResource(Namespace)
 @added(Versions.v2024_10_01_preview)
-model NamespaceDiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
-  @doc("Discovered Asset name parameter.")
+model NamespaceDiscoveredAsset
+  is TrackedResource<NamespaceDiscoveredAssetProperties> {
+  @doc("The name of the discovered asset.")
   @key("discoveredAssetName")
   @segment("discoveredAssets")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
@@ -36,13 +36,14 @@ model NamespaceDiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-alias DiscoveredAssetPropertiesUpdate = {
+alias NamespaceDiscoveredAssetPropertiesUpdate = {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
-    DiscoveredAssetProperties,
+    NamespaceDiscoveredAssetProperties,
     "defaultTopic"
   >>>;
 
   @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_07_01_preview)
   @doc("Object that describes the default topic information for the discovered asset.")
   defaultTopic?: OptionalProperties<OmitDefaults<Topic>>;
 };
@@ -56,10 +57,11 @@ interface NamespaceDiscoveredAssets {
     NamespaceDiscoveredAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceDiscoveredAsset,
-      DiscoveredAssetPropertiesUpdate
+      NamespaceDiscoveredAssetPropertiesUpdate
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredAsset>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDiscoveredAsset>;
+  @removed(Versions.v2025_07_01_preview)
   listBySubscription is ArmListBySubscription<NamespaceDiscoveredAsset>;
 }

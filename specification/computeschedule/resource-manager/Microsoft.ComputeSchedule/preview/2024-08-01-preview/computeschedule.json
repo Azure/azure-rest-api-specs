@@ -43,13 +43,13 @@
       "name": "Operations"
     },
     {
+      "name": "Occurrences"
+    },
+    {
       "name": "AutoActions"
     },
     {
       "name": "AutoActionsExtension"
-    },
-    {
-      "name": "Occurrences"
     }
   ],
   "paths": {
@@ -991,7 +991,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/OccurrenceOld"
             }
           },
           "default": {
@@ -1223,7 +1223,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "List Occurrence resources by AutoAction",
+        "description": "List OccurrenceOld resources by AutoAction",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1247,7 +1247,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OccurrenceListResult"
+              "$ref": "#/definitions/OccurrenceOldListResult"
             }
           },
           "default": {
@@ -1276,7 +1276,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "Get a Occurrence",
+        "description": "Get a OccurrenceOld",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1308,7 +1308,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/OccurrenceOld"
             }
           },
           "default": {
@@ -1375,7 +1375,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/OccurrenceOld"
             }
           },
           "default": {
@@ -1434,7 +1434,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DelayRequest"
+              "$ref": "#/definitions/DelayRequestOld"
             }
           }
         ],
@@ -1442,7 +1442,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/OccurrenceOld"
             }
           },
           "default": {
@@ -1612,7 +1612,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/OccurrenceOld"
             }
           },
           "default": {
@@ -1636,7 +1636,7 @@
   "definitions": {
     "ActionType": {
       "type": "string",
-      "description": "Specify which action user wants to the auto action to perform on the resources",
+      "description": "Specify which action user wants to be performed on the resources",
       "enum": [
         "Start",
         "Deallocate",
@@ -1649,17 +1649,17 @@
           {
             "name": "Start",
             "value": "Start",
-            "description": "Auto action should perform a start action on the specified resources"
+            "description": "Perform a start action on the specified resources"
           },
           {
             "name": "Deallocate",
             "value": "Deallocate",
-            "description": "Auto action should perform a deallocate action on the specified resources"
+            "description": "Perform a deallocate action on the specified resources"
           },
           {
             "name": "Hibernate",
             "value": "Hibernate",
-            "description": "Auto action should perform hibernate and deallocate on the specified resources"
+            "description": "Perform hibernate and deallocate on the specified resources"
           }
         ]
       }
@@ -2120,6 +2120,7 @@
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -2173,9 +2174,9 @@
       "properties": {
         "resourceIds": {
           "type": "array",
-          "description": "The resources the cancellation should act on. If no resource is passed in the list, Auto Action will cancel the occurrence for all resources.",
+          "description": "The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.",
           "items": {
-            "$ref": "#/definitions/ValidAutoActionResourceId"
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
           }
         }
       },
@@ -2297,7 +2298,7 @@
         "location"
       ]
     },
-    "DelayRequest": {
+    "DelayRequestOld": {
       "type": "object",
       "description": "Request to ask for a delay in an occurrence",
       "properties": {
@@ -2481,7 +2482,7 @@
     },
     "Language": {
       "type": "string",
-      "description": "The support notification languages by auto action",
+      "description": "The notification languages currently supported",
       "enum": [
         "en-us"
       ],
@@ -2499,7 +2500,7 @@
     },
     "Month": {
       "type": "string",
-      "description": "Representation of the months available selection in a gregorian calendar for auto actions",
+      "description": "Representation of the months available selection in a gregorian calendar",
       "enum": [
         "January",
         "February",
@@ -2589,7 +2590,7 @@
     },
     "NotificationProperties": {
       "type": "object",
-      "description": "The information about where notifications should be sent to about auto actions upcoming operations.",
+      "description": "The information about notifications to be send to about upcoming operations.",
       "properties": {
         "destination": {
           "type": "string",
@@ -2617,7 +2618,7 @@
     },
     "NotificationType": {
       "type": "string",
-      "description": "The type of notification we want to send for auto actions operations.",
+      "description": "The type of notification supported",
       "enum": [
         "Email"
       ],
@@ -2633,7 +2634,7 @@
         ]
       }
     },
-    "Occurrence": {
+    "OccurrenceOld": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
@@ -2648,15 +2649,15 @@
         }
       ]
     },
-    "OccurrenceListResult": {
+    "OccurrenceOldListResult": {
       "type": "object",
-      "description": "The response of a Occurrence list operation.",
+      "description": "The response of a OccurrenceOld list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Occurrence items on this page",
+          "description": "The OccurrenceOld items on this page",
           "items": {
-            "$ref": "#/definitions/Occurrence"
+            "$ref": "#/definitions/OccurrenceOld"
           }
         },
         "nextLink": {
@@ -2676,8 +2677,7 @@
         "initialScheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the occurrence was initial scheduled for. Actual scheduled time for resources can change by calling the delay API",
-          "readOnly": true
+          "description": "The time the occurrence is scheduled for. This value can be changed by calling the delay API"
         },
         "resultSummary": {
           "$ref": "#/definitions/OccurrenceResultSummary",
@@ -2697,11 +2697,11 @@
     },
     "OccurrenceResource": {
       "type": "object",
-      "description": "Represents an auto action resource metadata.",
+      "description": "Represents an scheduled action resource metadata.",
       "properties": {
         "resourceId": {
-          "$ref": "#/definitions/ValidAutoActionResourceId",
-          "description": "The ARM Id of the resource."
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
         },
         "notificationSettings": {
           "type": "array",
@@ -3285,7 +3285,7 @@
       "description": "The status of a resource after a resource level operation was performed",
       "properties": {
         "resourceId": {
-          "$ref": "#/definitions/ValidAutoActionResourceId",
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
           "description": "The arm identifier of the resource"
         },
         "status": {
@@ -3304,7 +3304,7 @@
     },
     "ResourceType": {
       "type": "string",
-      "description": "The type of resource the auto action is targeting.",
+      "description": "The type of resource being targeted",
       "enum": [
         "VirtualMachine",
         "VirtualMachineScaleSet"
@@ -3316,12 +3316,12 @@
           {
             "name": "VirtualMachine",
             "value": "VirtualMachine",
-            "description": "Resources defined in the auto action are Virtual Machines"
+            "description": "Resources defined are Virtual Machines"
           },
           {
             "name": "VirtualMachineScaleSet",
             "value": "VirtualMachineScaleSet",
-            "description": "Resources defined in the auto action are Virtual Machines Scale Sets"
+            "description": "Resources defined are Virtual Machines Scale Sets"
           }
         ]
       }
@@ -3545,9 +3545,24 @@
         ]
       }
     },
+    "ValidScheduledActionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "type": "Microsoft.Compute/virtualMachineScaleSets"
+          }
+        ]
+      }
+    },
     "WeekDay": {
       "type": "string",
-      "description": "Representation of the possible selection of days in a week in a gregorian calendar for auto actions",
+      "description": "Representation of the possible selection of days in a week in a gregorian calendar",
       "enum": [
         "Monday",
         "Tuesday",

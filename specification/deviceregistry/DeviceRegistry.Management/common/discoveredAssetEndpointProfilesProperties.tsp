@@ -7,21 +7,18 @@ import "./extendedLocation.tsp";
 import "./provisioningState.tsp";
 import "./authenticationMethod.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the Discovered Asset Endpoint Profile properties.")
 @added(Versions.v2024_07_01_preview)
+@removed(Versions.v2025_07_01_preview)
 model DiscoveredAssetEndpointProfileProperties {
   @doc("The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration.")
   targetAddress: url;
 
-  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF).")
+  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF).")
   additionalConfiguration?: string;
 
   @doc("List of supported authentication methods supported by the target server.")
