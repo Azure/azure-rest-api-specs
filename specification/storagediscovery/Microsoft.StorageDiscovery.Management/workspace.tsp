@@ -57,6 +57,18 @@ union StorageDiscoverySku {
   string,
 }
 
+model StorageDiscoveryWorkspacePropertiesUpdate
+  is UpdateableProperties<OptionalProperties<OmitDefaults<StorageDiscoveryWorkspaceProperties>>>;
+
+model StorageDiscoveryWorkspaceUpdate
+  is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
+    StorageDiscoveryWorkspace,
+    "properties" | "name"
+  >>>> {
+  /** The resource-specific properties for this resource. */
+  properties?: StorageDiscoveryWorkspacePropertiesUpdate;
+}
+
 /**
  * Storage Discovery Scope. This had added validations
  */
@@ -90,9 +102,9 @@ union StorageDiscoveryResourceType {
 interface StorageDiscoveryWorkspaces {
   get is ArmResourceRead<StorageDiscoveryWorkspace>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<StorageDiscoveryWorkspace>;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     StorageDiscoveryWorkspace,
-    StorageDiscoveryWorkspaceProperties
+    StorageDiscoveryWorkspaceUpdate
   >;
   delete is ArmResourceDeleteSync<StorageDiscoveryWorkspace>;
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;

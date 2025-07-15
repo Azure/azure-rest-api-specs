@@ -701,25 +701,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -934,6 +915,36 @@
         "resourceTypes"
       ]
     },
+    "StorageDiscoverySku": {
+      "type": "string",
+      "description": "Storage Discovery Sku",
+      "enum": [
+        "Free",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDiscoverySku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free Sku"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Sku"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Sku"
+          }
+        ]
+      }
+    },
     "StorageDiscoveryWorkspace": {
       "type": "object",
       "description": "A Storage Discovery Workspace resource. This resource configures the collection of storage account metrics.",
@@ -1053,38 +1064,11 @@
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
-      "description": "Storage Discovery Workspace Properties",
+      "description": "The template for adding updateable properties.",
       "properties": {
         "sku": {
-          "type": "string",
-          "description": "The storage discovery sku",
-          "default": "Standard",
-          "enum": [
-            "Free",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StorageDiscoverySku",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Free",
-                "value": "Free",
-                "description": "Free Sku"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard Sku"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium Sku"
-              }
-            ]
-          }
+          "$ref": "#/definitions/StorageDiscoverySku",
+          "description": "The storage discovery sku"
         },
         "description": {
           "type": "string",
@@ -1125,18 +1109,20 @@
     },
     "StorageDiscoveryWorkspaceUpdate": {
       "type": "object",
-      "description": "A Storage Discovery Workspace resource. This resource configures the collection of storage account metrics.",
+      "description": "The template for adding updateable properties.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/StorageDiscoveryWorkspacePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     }
   },
   "parameters": {}
