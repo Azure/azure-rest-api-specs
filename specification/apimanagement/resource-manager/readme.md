@@ -95,7 +95,6 @@ input-file:
   - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspaceloggers.json
   - Microsoft.ApiManagement/preview/2024-06-01-preview/apimworkspaces.json
   - Microsoft.ApiManagement/preview/2024-06-01-preview/definitions.json
-  - Microsoft.ApiManagement/preview/2024-06-01-preview/operationStatuses.json
 ```
 ### Tag: package-2024-05
 
