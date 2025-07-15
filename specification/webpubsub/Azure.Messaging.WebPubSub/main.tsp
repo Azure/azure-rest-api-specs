@@ -35,7 +35,15 @@ using Azure.Core;
     endpoint: url,
   }
 )
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://webpubsub.azure.com/.default"],
+    }
+  ]>
+)
 namespace Azure.Messaging.WebPubSubService;
 
 /**
