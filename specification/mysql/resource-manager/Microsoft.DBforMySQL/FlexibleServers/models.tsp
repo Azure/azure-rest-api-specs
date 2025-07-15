@@ -543,8 +543,6 @@ model BackupSettings {
  */
 model BackupAndExportResponse
   is Azure.ResourceManager.ProxyResource<BackupAndExportResponseProperties> {
-  ...ErrorResponse;
-
   /**
    * The name of the backup and export response.
    */

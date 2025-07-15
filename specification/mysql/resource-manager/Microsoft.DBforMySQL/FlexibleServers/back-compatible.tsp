@@ -98,3 +98,7 @@ using Microsoft.DBforMySQL;
 @@clientName(CheckVirtualNetworkSubnetUsageOperationGroup.execute::parameters.body,
   "parameters"
 );
+
+@@clientName(CheckNameAvailabilityOperationGroup.execute::parameters.body,
+  "nameAvailabilityRequest"
+);
