@@ -482,13 +482,11 @@ model SubnetIpConfigurationReference {
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
-    },
-    {
-      type: "Microsoft.AzureStackHCI/publicIPs";
     }
   ]>;
 }
 
+@added(Versions.v2025_09_01_preview)
 @doc("The ARM ID for a resource consuming IP on a subnet")
 model VirtualNetworkSubnetIpConfigurationReference {
   @doc("The ARM ID for a Network Interface.")
@@ -551,7 +549,7 @@ model LogicalNetworkArmReference {
 
 @added(Versions.v2025_09_01_preview)
 @doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
-model ManagedNetworkFabricISDArmReference {
+model ManagedNetworkFabricArmReference {
   @doc("The ARM ID for a Managed Network Fabric L2ISD or L3ISD internal network")
   id?: armResourceIdentifier<[
     {
@@ -574,6 +572,7 @@ model VirtualNetworkSubnetArmReference {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("The ARM ID of a Public IP resource")
 model PublicIPArmReference {
@@ -585,6 +584,7 @@ model PublicIPArmReference {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("The ARM ID of a FrontendIPConfiguration resource")
 model FrontendIPConfigurationArmReference {
@@ -830,7 +830,7 @@ model LogicalNetworkProperties {
 
   @added(Versions.v2025_09_01_preview)
   @doc("Managed network fabric l2/l3 ISD for this lnet. If set empty, the lnet remains entirely local.")
-  fabricNetworkConfiguration?: ManagedNetworkFabricISDArmReference;
+  fabricNetworkConfiguration?: ManagedNetworkFabricArmReference;
 
   @doc("Subnet - list of subnets under the logical network")
   @Azure.ResourceManager.identifiers(#[])
@@ -859,7 +859,6 @@ model LogicalNetworkPropertiesDhcpOptions {
   dnsServers?: string[];
 }
 
-@removed(Versions.v2025_09_01_preview)
 @doc("Properties of the subnet.")
 model Subnet {
   #suppress "deprecated" "Legacy flattening"
@@ -994,7 +993,7 @@ model NetworkSecurityGroupProperties {
   @extension("x-ms-identifiers", #[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
-  @doc("A collection of references to logical network or virtual network subnets that are currently using this NSG")
+  @doc("A collection of references to logical networks that are currently using this NSG")
   @visibility(Lifecycle.Read)
   subnets?: LogicalNetworkArmReference[];
 
@@ -1342,8 +1341,8 @@ model VirtualNetworkSubnetProperties {
   routeTable?: RouteTable;
 
   @doc("List of ipconfiguration")
-  @visibility(Lifecyle.Read)
-  ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[]
+  @visibility(Lifecycle.Read)
+  ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[];
 
   @doc("The provisioning state of the virtual network subnet resource.")
   @visibility(Lifecycle.Read)
@@ -1380,6 +1379,7 @@ model VirtualNetworkSubnetStatusProvisioningStatus {
 @added(Versions.v2025_09_01_preview)
 @doc("Public IP Properties resource.")
 model PublicIPProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
   publicIPAddressVersion?: string;
 
@@ -1395,29 +1395,9 @@ model PublicIPProperties {
 }
 
 @added(Versions.v2025_09_01_preview)
-model PublicIPAddressStatus {
-  @doc("PubliC IP provisioning error code")
-  errorCode?: string;
-
-  @doc("Descriptive error message")
-  errorMessage?: string;
-
-  @doc("Public IP provisioning status")
-  provisioningStatus?: PublicIPStatusProvisioningStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-model PublicIPStatusProvisioningStatus {
-  @doc("The ID of the operation performed on the public IP")
-  operationId?: string;
-
-  @doc("The status of the operation performed on the public IP [Succeeded, Failed, InProgress]")
-  status?: Status;
-}
-
-@added(Versions.v2025_09_01_preview)
 @doc("Nat Gateway resource properties")
 model NatGatewayProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("List of public ip addresses that the gateway can use for NAT.")
   publicIPAddresses?: PublicIPArmReference[];
 
@@ -1449,6 +1429,7 @@ model NatGatewayStatus {
 }
 
 @added(Versions.v2025_09_01_preview)
+@doc("Provisioning status of Nat Gateway ")
 model NatGatewayStatusProvisioningStatus {
   @doc("The ID of the operation performed on the nat gateway")
   operationId?: string;
@@ -1468,15 +1449,18 @@ model LoadBalancerProperties {
 @added(Versions.v2025_09_01_preview)
 @doc("FrontendIP Configuration object for a load balancer.")
 model FrontendIpConfigurationProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet.")
   privateIPAddress?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("privateIPAllocationMethod - set to Static for requesting a specific IP")
   privateIPAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("subnet - the subnet from which to allocate the private IP")
   subnet?: VirtualNetworkSubnetArmReference;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Public IP ")
   publicIPAddress?: PublicIPArmReference;
 
@@ -1489,50 +1473,30 @@ model FrontendIpConfigurationProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPoolProperties {
   @doc("List of backend addresses for the backend pool")
+  @extension("x-ms-identifiers", #[])
   loadBalancerBackendAddresses: LoadBalancerBackendAddress[];
 
   @doc("Provisioning state of the backend ip pool configuration.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
-
-  @doc("The observed state of backend pool status")
-  status?: BackendAddressPoolStatus;
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
   @doc("admin state - if set to false, the address is removed from the pool")
   adminState?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Nic Based backend-ip association")
   networkInterfaceIPConfiguration?: SubnetIpConfigurationReference;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Backend address pool resource status")
-model BackendAddressPoolStatus {
-  @doc("Backend address pool provisioning error code")
-  errorCode?: string;
-
-  @doc("Descriptive error message")
-  errorMessage?: string;
-
-  @doc("Backend address pool provisioning status")
-  provisioningStatus?: BackendAddressPoolStatusProvisioningStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-model BackendAddressPoolStatusProvisioningStatus {
-  @doc("The ID of the operation performed on the backend address pool")
-  operationId?: string;
-
-  @doc("The status of the operation performed on the backend address pool [Succeeded, Failed, InProgress]")
-  status?: Status;
 }
 
 @added(Versions.v2025_09_01_preview)
 @doc("LoadBalancerRuleProperties")
 model LoadBalancerRuleProperties {
   @doc("arm reference to frontend IP being used by this LB")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   frontendIPConfiguration: FrontendIPConfigurationArmReference;
 
   @doc("arm reference to backedn pool being used by ths pool")
@@ -1575,6 +1539,7 @@ model LoadBalancerRuleStatus {
 }
 
 @added(Versions.v2025_09_01_preview)
+@doc("LoadBalancerRule provisioning status")
 model LoadBalancerRuleStatusProvisioningStatus {
   @doc("The ID of the operation performed on the load balancer rule")
   operationId?: string;
@@ -1584,6 +1549,7 @@ model LoadBalancerRuleStatusProvisioningStatus {
 }
 
 @added(Versions.v2025_09_01_preview)
+@doc("properties for LoadBalancer health probes")
 model ProbeProperties {
   @doc("Protocol for this probe: Can be Tcp or Http - Diverges from Azure where Https is also an option")
   protocol: LoadBalancerProbeProtocol;
@@ -1607,8 +1573,10 @@ model ProbeProperties {
 
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 model InboundNATRuleProperties {
   @doc("Arm Reference to the frontendIP used for this inbound nat rule")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   frontendIPConfiguration: FrontendIPConfigurationArmReference;
 
   @doc("Frontend Port for the inbound rule")
@@ -1623,39 +1591,12 @@ model InboundNATRuleProperties {
   @doc("Provisioning state of the inbound nat rule.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
-
-  @doc("Observed state for the inbound nat rule")
-  @visibility(Lifecycle.Read)
-  status?: InboundNATRuleStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("inbound nat rule resource status")
-model InboundNATRuleStatus {
-  @doc("inbound nat rule provisioning error code")
-  errorCode?: string;
-
-  @doc("Descriptive error message")
-  errorMessage?: string;
-
-  @doc("inbound nat rule provisioning status")
-  provisioningStatus?: InboundNATRuleStatusProvisioningStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Status for inbound nat rule")
-model InboundNATRuleStatusProvisioningStatus {
-  @doc("The ID of the operation performed on the inbound nat rule")
-  operationId?: string;
-
-  @doc("The status of the operation performed on the inbound nat rule [Succeeded, Failed, InProgress]")
-  status?: Status;
 }
 
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
 model VirtualNetworkSubnetUpdateRequest {
-  @doc("properties to update") 
+  @doc("properties to update")
   properties?: VirtualNetworkSubnetUpdateProperties;
 }
 
