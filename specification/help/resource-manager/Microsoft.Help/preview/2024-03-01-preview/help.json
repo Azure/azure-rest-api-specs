@@ -68,12 +68,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "CheckNameAvailabilityRequest",
@@ -87,7 +82,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
@@ -921,7 +916,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpResponse"
             }
@@ -1088,7 +1083,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DiscoveryNlpResponse"
             }
@@ -2887,5 +2882,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "scope",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
