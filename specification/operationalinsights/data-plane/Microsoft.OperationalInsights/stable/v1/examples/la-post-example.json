@@ -1,8 +1,10 @@
 {
   "description": "A simple query that returns query results.",
   "parameters": {
-    "query": "Usage | take 10",
-    "timespan": "PT12H",
+    "body": {
+      "query": "Usage | take 10",
+      "timespan": "PT12H"
+    },
     "workspaceId": "63613592-b6f7-4c3d-a390-22ba13102111"
   },
   "title": "simple-query",
@@ -148,12 +150,8 @@
             ]
           }
         ]
-      },
-      "headers": {
-        "x-ms-correlation-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5",
-        "x-ms-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5"
       }
     }
   },
-  "operationId": "Query_Get"
+  "operationId": "Query_Execute"
 }

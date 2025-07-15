@@ -90,7 +90,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+            "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
             "required": true,
             "type": "string"
           },
@@ -141,7 +141,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+            "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryBody"
@@ -193,6 +193,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "./examples/batch-query-example.json"
+          }
         }
       }
     },
@@ -223,6 +228,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "metadataGet": {
+            "$ref": "./examples/metadata-get.json"
+          }
         }
       },
       "post": {
@@ -251,6 +261,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "./examples/metadata-post.json"
+          }
         }
       }
     },
@@ -270,7 +285,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+            "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
             "required": true,
             "type": "string"
           },
@@ -295,6 +310,14 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "cross-workspace": {
+            "$ref": "./examples/la-get-cross-workspace-example.json"
+          },
+          "simple-query": {
+            "$ref": "./examples/la-get-example.json"
           }
         }
       },
@@ -321,7 +344,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+            "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryBody"
@@ -340,6 +363,14 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "cross-workspace": {
+            "$ref": "./examples/la-post-cross-workspace-example.json"
+          },
+          "simple-query": {
+            "$ref": "./examples/la-post-example.json"
           }
         }
       }

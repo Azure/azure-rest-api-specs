@@ -1,9 +1,14 @@
 {
   "description": "A cross workspace query that the type and count of each row per workspace.",
   "parameters": {
-    "query": "union * | where TimeGenerated > ago(1h) | summarize count() by Type, TenantId",
-    "workspaceId": "63613592-b6f7-4c3d-a390-22ba13102111",
-    "workspaces": "draft-test,draft-test-2"
+    "body": {
+      "query": "union * | where TimeGenerated > ago(1h) | summarize count() by Type, TenantId",
+      "workspaces": [
+        "draft-test",
+        "draft-test-2"
+      ]
+    },
+    "workspaceId": "63613592-b6f7-4c3d-a390-22ba13102111"
   },
   "title": "cross-workspace",
   "responses": {
@@ -63,5 +68,5 @@
       }
     }
   },
-  "operationId": "Query_Get"
+  "operationId": "Query_Execute"
 }
