@@ -13,11 +13,11 @@ namespace ClientCustomizations;
 })
 interface MonitorQueryLogsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  execute is QueryOperationGroup.execute;
+  execute is MonitorQueryLogs.Query.execute;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  executeWithResourceId is QueryOperationGroup.executeWithResourceId;
+  executeWithResourceId is MonitorQueryLogs.Query.executeWithResourceId;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  batch is QueryOperationGroup.batch;
+  batch is MonitorQueryLogs.Query.batch;
 }
