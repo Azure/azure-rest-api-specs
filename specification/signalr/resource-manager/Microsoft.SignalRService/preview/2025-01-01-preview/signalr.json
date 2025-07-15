@@ -3742,19 +3742,27 @@
       "properties": {
         "primaryKey": {
           "type": "string",
-          "description": "The primary access key."
+          "format": "password",
+          "description": "The primary access key.",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
-          "description": "The secondary access key."
+          "format": "password",
+          "description": "The secondary access key.",
+          "x-ms-secret": true
         },
         "primaryConnectionString": {
           "type": "string",
-          "description": "Connection string constructed via the primaryKey"
+          "format": "password",
+          "description": "Connection string constructed via the primaryKey",
+          "x-ms-secret": true
         },
         "secondaryConnectionString": {
           "type": "string",
-          "description": "Connection string constructed via the secondaryKey"
+          "format": "password",
+          "description": "Connection string constructed via the secondaryKey",
+          "x-ms-secret": true
         }
       }
     },
@@ -3783,6 +3791,7 @@
         "ipRules": {
           "type": "array",
           "description": "IP rules for filtering public traffic",
+          "maxItems": 30,
           "items": {
             "$ref": "#/definitions/IPRule"
           },
@@ -4041,7 +4050,8 @@
       "properties": {
         "clientCertEnabled": {
           "type": "boolean",
-          "description": "Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier."
+          "description": "Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.",
+          "default": true
         }
       }
     },
@@ -4205,6 +4215,7 @@
           "format": "int32",
           "description": "Maximum connection count allowed for the same Jwt claim value. Clients with the same Jwt claim will get rejected if the connection count exceeds this value. Default value is 20.",
           "default": 20,
+          "minimum": 0,
           "maximum": 2147483647
         }
       },
@@ -4227,6 +4238,7 @@
           "format": "int32",
           "description": "Maximum connection count allowed for the same JWT signature. Clients with the same JWT signature will get rejected if the connection count exceeds this value. Default value is 20.",
           "default": 20,
+          "minimum": 0,
           "maximum": 2147483647
         }
       },
@@ -4246,6 +4258,7 @@
           "format": "int32",
           "description": "Maximum connection count allowed for the same user ID. Clients with the same user ID will get rejected if the connection count exceeds this value. Default value is 20.",
           "default": 20,
+          "minimum": 0,
           "maximum": 2147483647
         }
       },
@@ -4267,7 +4280,8 @@
         "maxInboundMessageBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT claim will get disconnected if the message bytes exceeds this value. Default value is 1GB."
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT claim will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0
         },
         "aggregationWindowInSeconds": {
           "type": "integer",
@@ -4295,7 +4309,8 @@
         "maxInboundMessageBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT signature will get disconnected if the message bytes exceeds this value. Default value is 1GB."
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT signature will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0
         },
         "aggregationWindowInSeconds": {
           "type": "integer",
@@ -4320,7 +4335,8 @@
         "maxInboundMessageBytes": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum accumulated inbound message bytes allowed for the same user ID within a time window. Clients with the same user ID will get disconnected if the message bytes exceeds this value. Default value is 1GB."
+          "description": "Maximum accumulated inbound message bytes allowed for the same user ID within a time window. Clients with the same user ID will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0
         },
         "aggregationWindowInSeconds": {
           "type": "integer",

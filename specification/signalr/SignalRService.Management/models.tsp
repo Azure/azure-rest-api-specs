@@ -793,7 +793,7 @@ model SignalRTlsSettings {
   /**
    * Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.
    */
-  clientCertEnabled?: boolean;
+  clientCertEnabled?: boolean = true;
 }
 
 /**
@@ -1044,6 +1044,7 @@ model SignalRNetworkACLs {
    * IP rules for filtering public traffic
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(30)
   ipRules?: IPRule[];
 }
 
@@ -1296,21 +1297,25 @@ model SignalRKeys {
   /**
    * The primary access key.
    */
+  @secret
   primaryKey?: string;
 
   /**
    * The secondary access key.
    */
+  @secret
   secondaryKey?: string;
 
   /**
    * Connection string constructed via the primaryKey
    */
+  @secret
   primaryConnectionString?: string;
 
   /**
    * Connection string constructed via the secondaryKey
    */
+  @secret
   secondaryConnectionString?: string;
 }
 
@@ -1538,6 +1543,7 @@ model ThrottleByJwtCustomClaimRule extends ClientConnectionCountRule {
    * Maximum connection count allowed for the same Jwt claim value. Clients with the same Jwt claim will get rejected if the connection count exceeds this value. Default value is 20.
    */
   @maxValue(2147483647)
+  @minValue(0)
   maxCount?: int32 = 20;
 
   type: "ThrottleByJwtCustomClaimRule";
@@ -1551,6 +1557,7 @@ model ThrottleByJwtSignatureRule extends ClientConnectionCountRule {
    * Maximum connection count allowed for the same JWT signature. Clients with the same JWT signature will get rejected if the connection count exceeds this value. Default value is 20.
    */
   @maxValue(2147483647)
+  @minValue(0)
   maxCount?: int32 = 20;
 
   type: "ThrottleByJwtSignatureRule";
@@ -1564,6 +1571,7 @@ model ThrottleByUserIdRule extends ClientConnectionCountRule {
    * Maximum connection count allowed for the same user ID. Clients with the same user ID will get rejected if the connection count exceeds this value. Default value is 20.
    */
   @maxValue(2147483647)
+  @minValue(0)
   maxCount?: int32 = 20;
 
   type: "ThrottleByUserIdRule";
@@ -1581,6 +1589,7 @@ model TrafficThrottleByJwtCustomClaimRule extends ClientTrafficControlRule {
   /**
    * Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT claim will get disconnected if the message bytes exceeds this value. Default value is 1GB.
    */
+  @minValue(0)
   maxInboundMessageBytes?: int64;
 
   /**
@@ -1600,6 +1609,7 @@ model TrafficThrottleByJwtSignatureRule extends ClientTrafficControlRule {
   /**
    * Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT signature will get disconnected if the message bytes exceeds this value. Default value is 1GB.
    */
+  @minValue(0)
   maxInboundMessageBytes?: int64;
 
   /**
@@ -1619,6 +1629,7 @@ model TrafficThrottleByUserIdRule extends ClientTrafficControlRule {
   /**
    * Maximum accumulated inbound message bytes allowed for the same user ID within a time window. Clients with the same user ID will get disconnected if the message bytes exceeds this value. Default value is 1GB.
    */
+  @minValue(0)
   maxInboundMessageBytes?: int64;
 
   /**
