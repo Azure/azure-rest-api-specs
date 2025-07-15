@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster",
+    "pricingName": "Containers"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/demo-containers-rg/providers/Microsoft.ContainerService/managedClusters/demo-aks-cluster/providers/Microsoft.Security/pricings/Containers",
+        "name": "Containers",
+        "type": "Microsoft.Security/pricings",
+        "properties": {
+          "pricingTier": "Standard",
+          "freeTrialRemainingTime": "P26DT17H24M",
+          "enablementTime": "2025-01-13T10:30:45.1234567Z",
+          "inherited": "False",
+          "inheritedFrom": null,
+          "extensions": [
+            {
+              "name": "ContainerRegistriesVulnerabilityAssessments",
+              "isEnabled": "True"
+            },
+            {
+              "name": "AgentlessDiscoveryForKubernetes",
+              "isEnabled": "True"
+            },
+            {
+              "name": "AgentlessVmScanning",
+              "isEnabled": "True",
+              "additionalExtensionProperties": {
+                "ExclusionTags": "[]"
+              }
+            },
+            {
+              "name": "ContainerSensor",
+              "isEnabled": "True"
+            },
+            {
+              "name": "ContainerIntegrityContribution",
+              "isEnabled": "True"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

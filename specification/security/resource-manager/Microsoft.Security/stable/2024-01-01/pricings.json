@@ -43,6 +43,9 @@
           "Get pricings on resource - VirtualMachines plan": {
             "$ref": "./examples/Pricings/GetResourcePricingByNameVirtualMachines_example.json"
           },
+          "Get pricings on resource - Containers plan": {
+            "$ref": "./examples/Pricings/GetResourcePricingByNameContainers_example.json"
+          },
           "Get pricings on subscription - Dns plan": {
             "$ref": "./examples/Pricings/GetPricingByNameDns_example.json"
           },
@@ -98,6 +101,9 @@
           "Update pricing on resource (example for VirtualMachines plan)": {
             "$ref": "./examples/Pricings/PutResourcePricingByNameVirtualMachines_example.json"
           },
+          "Update pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/PutResourcePricingByNameContainers_example.json"
+          },
           "Update pricing on subscription (example for CloudPosture plan) - partial success": {
             "$ref": "./examples/Pricings/PutPricingByNamePartialSuccess_example.json"
           }
@@ -146,12 +152,15 @@
         "x-ms-examples": {
           "Delete a pricing on resource": {
             "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          },
+          "Delete a pricing on resource (example for Containers plan)": {
+            "$ref": "./examples/Pricings/DeleteResourcePricingByNameContainers_example.json"
           }
         },
         "tags": [
           "Pricings"
         ],
-        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS and ARC MachinesS').",
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS, ARC Machines, and Containers').",
         "operationId": "Pricings_Delete",
         "parameters": [
           {
