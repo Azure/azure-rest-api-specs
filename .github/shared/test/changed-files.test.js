@@ -15,7 +15,6 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
-  pathExists,
   quickstartTemplate,
   readme,
   resourceManager,
