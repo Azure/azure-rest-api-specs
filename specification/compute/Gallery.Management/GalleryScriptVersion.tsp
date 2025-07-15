@@ -58,11 +58,7 @@ namespace Microsoft.Compute {
       Response = ArmResourceUpdatedResponse<GalleryScriptVersion> | ArmResourceCreatedResponse<
         GalleryScriptVersion,
         ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      > | (ArmAcceptedLroResponse & {
-        @bodyRoot
-        @added(Versions.v2025_03_03)
-        _: GalleryScriptVersion;
-      })
+      >
     >;
 
     /**
@@ -73,9 +69,7 @@ namespace Microsoft.Compute {
     update is ComputeCustomPatchAsync<
       GalleryScriptVersion,
       PatchModel = GalleryScriptVersionUpdate,
-      Response = ArmResponse<GalleryScriptVersion> &
-        ArmLroLocationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
+      Response = ArmResponse<GalleryScriptVersion> | ArmAcceptedLroResponse
     >;
 
     /**
@@ -85,7 +79,7 @@ namespace Microsoft.Compute {
     @added(Versions.v2025_03_03)
     delete is ComputeResourceDeleteAsync<
       GalleryScriptVersion,
-      Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+      Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
     >;
 
     /**

@@ -53,11 +53,7 @@ interface GalleryScripts {
     Response = ArmResourceUpdatedResponse<GalleryScript> | ArmResourceCreatedResponse<
       GalleryScript,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      @added(Versions.v2025_03_03)
-      _: GalleryScript;
-    })
+    >
   >;
 
   /**
@@ -68,9 +64,7 @@ interface GalleryScripts {
   update is ComputeCustomPatchAsync<
     GalleryScript,
     PatchModel = GalleryScriptUpdate,
-    Response = ArmResponse<GalleryScript> &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResponse<GalleryScript> | ArmAcceptedLroResponse
   >;
 
   /**
@@ -80,7 +74,7 @@ interface GalleryScripts {
   @added(Versions.v2025_03_03)
   delete is ComputeResourceDeleteAsync<
     GalleryScript,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
