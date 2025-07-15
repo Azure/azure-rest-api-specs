@@ -74,6 +74,18 @@
             "$ref": "#/parameters/BackupNameParameter"
           }
         ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
         "default": {
           "description": "Error response describing why the operation failed.",
           "schema": {
