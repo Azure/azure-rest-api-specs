@@ -30,106 +30,101 @@ parameters:
   --spec-repo-root <path>     Root path of the repository containing the swagger files. Defaults to the root of the repository containing this script.`);
 }
 
-export async function main() {
-  const {
-    values: {
-      output: outputDir,
-      "build-id": buildId,
-      "spec-repo-name": specRepoName,
-      "spec-repo-pr-number": specRepoPrNumber,
-      "spec-repo-root": specRepoRoot,
+const {
+  values: {
+    output: outputDir,
+    "build-id": buildId,
+    "spec-repo-name": specRepoName,
+    "spec-repo-pr-number": specRepoPrNumber,
+    "spec-repo-root": specRepoRoot,
+  },
+} = parseArgs({
+  options: {
+    output: { type: "string", default: "" },
+    "build-id": {
+      type: "string",
+      default: process.env.BUILD_BUILDID || "",
     },
-  } = parseArgs({
-    options: {
-      output: { type: "string" },
-      "build-id": {
-        type: "string",
-        default: process.env.BUILD_BUILDID || "",
-      },
-      "spec-repo-name": {
-        type: "string",
-        default: process.env.BUILD_REPOSITORY_NAME || "",
-      },
-      "spec-repo-pr-number": {
-        type: "string",
-        default: process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER || "",
-      },
-      "spec-repo-root": {
-        type: "string",
-        default: resolve(__dirname, "../../../"),
-      },
+    "spec-repo-name": {
+      type: "string",
+      default: process.env.BUILD_REPOSITORY_NAME || "",
     },
-    allowPositionals: false,
-  });
+    "spec-repo-pr-number": {
+      type: "string",
+      default: process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER || "",
+    },
+    "spec-repo-root": {
+      type: "string",
+      default: resolve(__dirname, "../../../"),
+    },
+  },
+  allowPositionals: false,
+});
 
-  let validArgs = true;
+let validArgs = true;
 
-  if (!outputDir) {
-    console.log(`Missing required parameter --output. Value given: ${outputDir || "<empty>"}`);
-    validArgs = false;
-  }
-
-  if (!specRepoName) {
-    console.log(
-      `Missing required parameter --spec-repo-name. Value given: ${specRepoName || "<empty>"}`,
-    );
-    validArgs = false;
-  }
-
-  if (!specRepoPrNumber) {
-    console.log(
-      `Missing required parameter --spec-repo-pr-number. Value given: ${specRepoPrNumber || "<empty>"}`,
-    );
-    validArgs = false;
-  }
-
-  if (!specRepoRoot || !(await pathExists(resolve(specRepoRoot)))) {
-    console.log(`Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`);
-    validArgs = false;
-  }
-
-  if (!validArgs) {
-    usage();
-    process.exitCode = 1;
-    return;
-  }
-
-  // Get selected version and swaggers to process
-
-  const changedFiles = await getChangedFiles({ cwd: specRepoRoot });
-  console.log(`Found ${changedFiles.length} changed files in ${specRepoRoot}`);
-  console.log("Changed files:");
-  changedFiles.forEach((file) => console.log(`  - ${file}`));
-  const swaggerPaths = changedFiles.filter(swagger);
-  const existingSwaggerFiles = await filterAsync(
-    swaggerPaths,
-    async (p) => await pathExists(resolve(specRepoRoot, p)),
-  );
-
-  if (existingSwaggerFiles.length === 0) {
-    console.log("No eligible swagger files found. No documentation artifacts will be written.");
-    return;
-  }
-
-  const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(existingSwaggerFiles);
-
-  const key = {
-    repoName: specRepoName,
-    prNumber: specRepoPrNumber,
-  };
-
-  await mkdir(outputDir, { recursive: true });
-  await writeFile(join(outputDir, "repo.json"), JSON.stringify(repoJSONTemplate(key), null, 2));
-  await writeFile(
-    join(outputDir, "mapping.json"),
-    JSON.stringify(mappingJSONTemplate(swaggersToProcess), null, 2),
-  );
-  await writeFile(join(outputDir, "index.md"), indexMd(buildId, key));
-  console.log(`Documentation preview artifacts written to ${outputDir}`);
-
-  console.log(`Doc preview for API version ${selectedVersion} includes:`);
-  swaggersToProcess.forEach((swagger) => console.log(`  - ${swagger}`));
-  console.log(`Artifacts written to: ${outputDir}`);
+if (!outputDir) {
+  console.log(`Missing required parameter --output. Value given: ${outputDir || "<empty>"}`);
+  validArgs = false;
 }
 
-await main();
+if (!specRepoName) {
+  console.log(
+    `Missing required parameter --spec-repo-name. Value given: ${specRepoName || "<empty>"}`,
+  );
+  validArgs = false;
+}
+
+if (!specRepoPrNumber) {
+  console.log(
+    `Missing required parameter --spec-repo-pr-number. Value given: ${specRepoPrNumber || "<empty>"}`,
+  );
+  validArgs = false;
+}
+
+if (!specRepoRoot || !(await pathExists(resolve(specRepoRoot)))) {
+  console.log(`Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`);
+  validArgs = false;
+}
+
+if (!validArgs) {
+  usage();
+  process.exit(1);
+}
+
+// Get selected version and swaggers to process
+
+const changedFiles = await getChangedFiles({ cwd: specRepoRoot });
+console.log(`Found ${changedFiles.length} changed files in ${specRepoRoot}`);
+console.log("Changed files:");
+changedFiles.forEach((file) => console.log(`  - ${file}`));
+const swaggerPaths = changedFiles.filter(swagger);
+const existingSwaggerFiles = await filterAsync(
+  swaggerPaths,
+  async (p) => await pathExists(resolve(specRepoRoot, p)),
+);
+
+if (existingSwaggerFiles.length === 0) {
+  console.log("No eligible swagger files found. No documentation artifacts will be written.");
+  process.exit(0);
+}
+
+const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(existingSwaggerFiles);
+
+const key = {
+  repoName: specRepoName,
+  prNumber: specRepoPrNumber,
+};
+
+await mkdir(outputDir, { recursive: true });
+await writeFile(join(outputDir, "repo.json"), JSON.stringify(repoJSONTemplate(key), null, 2));
+await writeFile(
+  join(outputDir, "mapping.json"),
+  JSON.stringify(mappingJSONTemplate(swaggersToProcess), null, 2),
+);
+await writeFile(join(outputDir, "index.md"), indexMd(buildId, key));
+console.log(`Documentation preview artifacts written to ${outputDir}`);
+
+console.log(`Doc preview for API version ${selectedVersion} includes:`);
+swaggersToProcess.forEach((swagger) => console.log(`  - ${swagger}`));
+console.log(`Artifacts written to: ${outputDir}`);
