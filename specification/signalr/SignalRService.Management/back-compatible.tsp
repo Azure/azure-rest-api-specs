@@ -44,7 +44,9 @@ using Microsoft.SignalRService;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Replica.properties);
 
-@@clientName(SignalROperationGroup.checkNameAvailability::parameters.body, "parameters");
+@@clientName(SignalROperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);
 
 @@clientLocation(CustomCertificates.get, "SignalRCustomCertificates");
 @@clientLocation(CustomCertificates.createOrUpdate,
