@@ -63,4 +63,4 @@ using Microsoft.Chaos;
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ExperimentExecutionDetails.properties);
 
-@@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript");
+@@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript,python");

@@ -31,6 +31,6 @@ using Microsoft.Chaos;
   "!csharp"
 );
 
-@@clientName(Operations.list, "ListAll", "autorest,python");
+@@clientName(Operations.list, "ListAll", "autorest");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(PrivateAccesses.privateLinkResources, "GetPrivateLinkResources");
