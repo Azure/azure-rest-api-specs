@@ -3449,18 +3449,21 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the server balance weight.\nA higher value means a greater balance of client connections across different app server instances.\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\nThe default value is 255.\nRecommended ```255``` for multiple app servers in same size.",
+          "minimum": 0,
           "maximum": 255
         },
         "connectionBalanceWeight": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the connection balance weight.\nA higher value means a greater balance of client connections across different server connections.\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\nThe default value is 255.\nRecommended ```255``` for all of the cases.",
+          "minimum": 0,
           "maximum": 255
         },
         "latencyWeight": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the weight for latency-based routing.\nA higher value increases the influence of latency-based routing.\nA value of 0 disables latency-based routing entirely, while a value of 255 enables it fully.\nThe default value is 0.\nRecommended ```255``` for replicas or app servers in different regions for disaster recovery.",
+          "minimum": 0,
           "maximum": 255
         }
       }
@@ -3905,11 +3908,13 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "DisableLocalAuth\nEnable or disable local auth with AccessKey\nWhen set as true, connection with AccessKey=xxx won't work."
+          "description": "DisableLocalAuth\nEnable or disable local auth with AccessKey\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "default": false
         },
         "disableAadAuth": {
           "type": "boolean",
-          "description": "DisableLocalAuth\nEnable or disable aad auth\nWhen set as true, connection with AuthType=aad won't work."
+          "description": "DisableLocalAuth\nEnable or disable aad auth\nWhen set as true, connection with AuthType=aad won't work.",
+          "default": false
         },
         "regionEndpointEnabled": {
           "type": "string",

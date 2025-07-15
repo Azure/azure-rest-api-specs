@@ -84,6 +84,7 @@ using Microsoft.SignalRService;
 @@clientLocation(SharedPrivateLinkResources.list,
   "SignalRReplicaSharedPrivateLinkResources"
 );
+@@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR");
 @@clientLocation(SignalRResources.get, "SignalR");
 @@clientLocation(SignalRResources.createOrUpdate, "SignalR");
 @@clientLocation(SignalRResources.update, "SignalR");

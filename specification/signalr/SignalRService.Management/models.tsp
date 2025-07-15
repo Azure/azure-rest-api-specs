@@ -660,14 +660,14 @@ model SignalRProperties {
    * Enable or disable local auth with AccessKey
    * When set as true, connection with AccessKey=xxx won't work.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * DisableLocalAuth
    * Enable or disable aad auth
    * When set as true, connection with AuthType=aad won't work.
    */
-  disableAadAuth?: boolean;
+  disableAadAuth?: boolean = false;
 
   /**
    * Enable or disable the regional endpoint. Default to "Enabled".
@@ -1149,6 +1149,7 @@ model RouteSettings {
    * Recommended ```255``` for multiple app servers in same size.
    */
   @maxValue(255)
+  @minValue(0)
   serverBalanceWeight?: int32;
 
   /**
@@ -1159,6 +1160,7 @@ model RouteSettings {
    * Recommended ```255``` for all of the cases.
    */
   @maxValue(255)
+  @minValue(0)
   connectionBalanceWeight?: int32;
 
   /**
@@ -1169,6 +1171,7 @@ model RouteSettings {
    * Recommended ```255``` for replicas or app servers in different regions for disaster recovery.
    */
   @maxValue(255)
+  @minValue(0)
   latencyWeight?: int32;
 }
 
