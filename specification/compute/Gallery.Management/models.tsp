@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -149,6 +151,7 @@ union ReplicationMode {
 /**
  * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
  */
+@added(Versions.v2025_03_03)
 union StorageAccountStrategy {
   string,
 
@@ -985,6 +988,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
    */
+  @added(Versions.v2025_03_03)
   storageAccountStrategy?: StorageAccountStrategy;
 }
 
