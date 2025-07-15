@@ -4,23 +4,52 @@ const SPEC_FILE_REGEX =
   "(specification/)+(.*)/(resourcemanager|resource-manager|dataplane|data-plane|control-plane)/(.*)/(preview|stable|privatepreview)/(.*?)/(example)?(.*)";
 
 /**
+ * @typedef {Object} SwaggerFileMetadata
+ * @property {string} path
+ * @property {string} serviceName
+ * @property {string} serviceType
+ * @property {string} resourceProvider
+ * @property {string} releaseState
+ * @property {string} apiVersion
+ * @property {string} fileName
+ */
+
+/**
+ * @typedef {Object} RepoJSONTemplate
+ * @property {Object[]} repo
+ * @property {string} repo[].url
+ * @property {string} repo[].prNumber
+ * @property {string} repo[].name
+ */
+
+/**
+ * @typedef {Object} MappingJSONStructure
+ * @property {string} target_api_root_dir
+ * @property {boolean} enable_markdown_fragment
+ * @property {string} markdown_fragment_folder
+ * @property {boolean} use_yaml_toc
+ * @property {boolean} formalize_url
+ * @property {string[]} version_list
+ * @property {Object[]} organizations
+ * @property {string} organizations[].index
+ * @property {string} organizations[].default_toc_title
+ * @property {string} organizations[].version
+ * @property {Object[]} organizations[].services
+ * @property {string} organizations[].services[].toc_title
+ * @property {string} organizations[].services[].url_group
+ * @property {Object[]} organizations[].services[].swagger_files
+ * @property {string} organizations[].services[].swagger_files[].source
+ */
+
+/**
  * Extract swagger file metadata from path.
  * @param {string} specPath
- * @returns {{
- *   path: string,
- *   serviceName: string,
- *   serviceType: string,
- *   resourceProvider: string,
- *   releaseState: string,
- *   apiVersion: string,
- *   fileName: string
- * } | null}
+ * @returns {SwaggerFileMetadata}
  */
 export function parseSwaggerFilePath(specPath) {
   const m = specPath.match(SPEC_FILE_REGEX);
   if (!m) {
-    console.log(`Path "${specPath}" does not match expected swagger file pattern.`);
-    return null;
+    throw new Error(`Path "${specPath}" does not match expected swagger file pattern.`);
   }
   const [path, , serviceName, serviceType, resourceProvider, releaseState, apiVersion, , fileName] =
     m;
@@ -36,10 +65,11 @@ export function parseSwaggerFilePath(specPath) {
 }
 
 /**
- * @param {{repoName: string, prNumber: string}} prKey
+ * @param {string} repoName
+ * @param {string} prNumber
  * @returns {object}
  */
-export function repoJSONTemplate({ repoName, prNumber }) {
+export function repoJSONTemplate(repoName, prNumber) {
   return {
     repo: [
       {
@@ -53,7 +83,7 @@ export function repoJSONTemplate({ repoName, prNumber }) {
 
 /**
  * @param {string[]} files
- * @returns {object}
+ * @returns {MappingJSONStructure}
  */
 export function mappingJSONTemplate(files) {
   return {
@@ -84,10 +114,11 @@ export function mappingJSONTemplate(files) {
 
 /**
  * @param {string} buildId
- * @param {{repoName: string, prNumber: string}} key
+ * @param {string} repoName
+ * @param {string} prNumber
  * @returns {string}
  */
-export function indexMd(buildId, { repoName, prNumber }) {
+export function indexMd(buildId, repoName, prNumber) {
   return `# Documentation Preview for swagger pipeline build #${buildId}
 
 Welcome to documentation preview for ${repoName}/pull/${prNumber} 
@@ -105,29 +136,27 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  // swaggerFileObjs never has any `null` elements, otherwise, returns the
-  // output type of `parseSwaggerFilePath`.
-  /** @type {Exclude<ReturnType<typeof parseSwaggerFilePath>, null>[]} */
-  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath).filter((obj) => obj !== null);
+  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath);
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
-  const uniqueVersions = [...new Set(versions)];
-  if (uniqueVersions.length === 0) {
-    console.log(
-      "No API versions found in eligible swagger files. No documentation artifacts will be written.",
-    );
-    return { selectedVersion: null, swaggersToProcess: [] };
+  if (versions.length === 0) {
+    throw new Error("No new API versions found in eligible swagger files.");
   }
+  const uniqueVersions = Array.from(new Set(versions));
 
-  let selectedVersion = uniqueVersions[0];
-  if (uniqueVersions.length > 1) {
+  let selectedVersion;
+  if (uniqueVersions.length === 1) {
+    selectedVersion = uniqueVersions[0];
+    console.log(`Single API version found: ${selectedVersion}`);
+  } else {
+    // This sorting logic is ported from the original code which sorts only the
+    // strings and doesn't attempt to parse versions for more semantically-aware
+    // sorting.
     const sortedVersions = [...uniqueVersions].sort();
     selectedVersion = sortedVersions[sortedVersions.length - 1];
     console.log(
       `Multiple API versions found: ${JSON.stringify(sortedVersions)}. Selected version: ${selectedVersion}`,
     );
-  } else {
-    console.log(`Single API version found: ${selectedVersion}`);
   }
 
   const swaggersToProcess = swaggerFileObjs

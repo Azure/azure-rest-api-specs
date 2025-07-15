@@ -114,18 +114,19 @@ if (swaggerPaths.length === 0) {
 
 const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(swaggerPaths);
 
-const key = {
-  repoName: specRepoName,
-  prNumber: specRepoPrNumber,
-};
+const repoName = specRepoName;
+const prNumber = specRepoPrNumber;
 
 await mkdir(outputDir, { recursive: true });
-await writeFile(join(outputDir, "repo.json"), JSON.stringify(repoJSONTemplate(key), null, 2));
+await writeFile(
+  join(outputDir, "repo.json"),
+  JSON.stringify(repoJSONTemplate(repoName, prNumber), null, 2),
+);
 await writeFile(
   join(outputDir, "mapping.json"),
   JSON.stringify(mappingJSONTemplate(swaggersToProcess), null, 2),
 );
-await writeFile(join(outputDir, "index.md"), indexMd(buildId, key));
+await writeFile(join(outputDir, "index.md"), indexMd(buildId, repoName, prNumber));
 console.log(`Documentation preview artifacts written to ${outputDir}`);
 
 console.log(`Doc preview for API version ${selectedVersion} includes:`);

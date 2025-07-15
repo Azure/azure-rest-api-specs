@@ -10,9 +10,8 @@ import {
 } from "../src/doc-preview.js";
 
 describe("parseSwaggerFilePath", () => {
-  test("returns null for invalid path", () => {
-    const result = parseSwaggerFilePath("invalid/path/to/swagger.json");
-    expect(result).toBeNull();
+  test("throws null when given invalid path", () => {
+    expect(() => parseSwaggerFilePath("invalid/path/to/swagger.json")).toThrow();
   });
 
   test("parses valid swagger file path", () => {
@@ -33,11 +32,8 @@ describe("parseSwaggerFilePath", () => {
 });
 
 describe("getSwaggersToProcess", () => {
-  test("returns empty array for no files", () => {
-    const { selectedVersion, swaggersToProcess } = getSwaggersToProcess([]);
-
-    expect(selectedVersion).toEqual(null);
-    expect(swaggersToProcess).toEqual([]);
+  test("throws when swagger paths do not properly parse", () => {
+    expect(() => getSwaggersToProcess(["specification/inscrutable/path/swagger.json"])).toThrow();
   });
 
   test("returns swaggers to process for valid files", () => {
@@ -66,10 +62,7 @@ describe("getSwaggersToProcess", () => {
 
 describe("repoJSONTemplate", () => {
   test("matches snapshot", () => {
-    const actual = repoJSONTemplate({
-      repoName: "test-repo",
-      prNumber: "1234",
-    });
+    const actual = repoJSONTemplate("test-repo", "1234");
 
     expect(actual).toMatchInlineSnapshot(`
       {
@@ -128,11 +121,9 @@ describe("mappingJSONTemplate", () => {
 describe("indexMd", () => {
   test("matches snapshot", () => {
     const buildId = "build-123";
-    const key = {
-      repoName: "test-repo",
-      prNumber: "1234",
-    };
-    const actual = indexMd(buildId, key);
+    const repoName = "test-repo";
+    const prNumber = "1234";
+    const actual = indexMd(buildId, repoName, prNumber);
 
     expect(actual).toMatchInlineSnapshot(`
       "# Documentation Preview for swagger pipeline build #build-123
