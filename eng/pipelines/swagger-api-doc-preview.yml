@@ -113,7 +113,9 @@ jobs:
 
             Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
             
-            while($true) { 
+            # Timeout in 10 minutes to avoid infinite waiting
+            $start = Get-Date
+            while ((Get-Date) - $start).TotalMinutes -lt 10) {
               $runStatusRaw = az pipelines runs show `
                 --organization "https://dev.azure.com/apidrop/" `
                 --project "Content CI" `
