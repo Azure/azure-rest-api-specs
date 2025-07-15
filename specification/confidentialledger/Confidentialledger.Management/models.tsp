@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.ConfidentialLedger;
 
@@ -144,6 +145,26 @@ union LanguageRuntime {
   CPP: "CPP",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   JS: "JS",
+}
+
+/**
+ * List containing this Resource Provider's available operations.
+ */
+@pagedResult
+model ResourceProviderOperationList {
+  /**
+   * The list of operations.
+   */
+  @items
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @visibility(Lifecycle.Read)
+  value?: ResourceProviderOperationDefinition[];
+
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -292,6 +313,11 @@ model LedgerProperties {
    * Application type of the Confidential Ledger.
    */
   applicationType?: ApplicationType;
+
+  /**
+   * The SCITT Configuration that needs to be set for the Confidential Ledger.
+   */
+  scittConfiguration?: string;
 }
 
 /**
@@ -442,7 +468,7 @@ model ManagedCCFProperties {
   /**
    * Number of CCF nodes in the Managed CCF.
    */
-  nodeCount?: int32 = 3;
+  nodeCount?: int32;
 
   /**
    * Enclave platform of Managed CCF.

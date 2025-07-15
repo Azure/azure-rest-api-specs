@@ -105,7 +105,7 @@ interface ConfidentialLedgers {
   backup is ArmResourceActionAsync<
     ConfidentialLedger,
     ConfidentialLedgerBackup,
-    ArmResponse<ConfidentialLedgerBackupResponse>
+    ConfidentialLedgerBackupResponse
   >;
 
   /**
@@ -116,7 +116,7 @@ interface ConfidentialLedgers {
   restore is ArmResourceActionAsync<
     ConfidentialLedger,
     ConfidentialLedgerRestore,
-    ArmResponse<ConfidentialLedgerRestoreResponse>
+    ConfidentialLedgerRestoreResponse
   >;
 }
 

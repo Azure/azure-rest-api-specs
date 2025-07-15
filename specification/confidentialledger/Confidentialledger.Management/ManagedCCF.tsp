@@ -107,7 +107,7 @@ interface ManagedCCFS {
   backup is ArmResourceActionAsync<
     ManagedCCF,
     ManagedCCFBackup,
-    ArmResponse<ManagedCCFBackupResponse>
+    ManagedCCFBackupResponse
   >;
 
   /**
@@ -118,7 +118,7 @@ interface ManagedCCFS {
   restore is ArmResourceActionAsync<
     ManagedCCF,
     ManagedCCFRestore,
-    ArmResponse<ManagedCCFRestoreResponse>
+    ManagedCCFRestoreResponse
   >;
 }
 

@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.1
- * Date: 2025-05-26T01:43:46.984Z
+ * Version: 0.11.2
+ * Date: 2025-07-15T06:43:32.456Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -24,7 +24,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API version 2024-09-19-preview.
+ * Microsoft Azure Confidential Compute Ledger Managed CCF Control Plane REST API version 2025-06-10-preview.
  */
 @armProviderNamespace
 @service(#{ title: "ConfidentialLedger" })
@@ -37,11 +37,12 @@ namespace Microsoft.ConfidentialLedger;
  */
 enum Versions {
   /**
-   * The 2024-09-19-preview API version.
+   * The 2025-06-10-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_09_19_preview: "2024-09-19-preview",
+  v2025_06_10_preview: "2025-06-10-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<Response = ArmResponse<ResourceProviderOperationList>> {}
