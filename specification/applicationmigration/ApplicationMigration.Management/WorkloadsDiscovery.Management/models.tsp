@@ -10,15 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ApplicationMigration;
 
-@doc("Definition of Tag")
-model Tag {
-  @doc("Property key")
-  key?: string;
-
-  @doc("Property value")
-  value?: string;
-}
-
 @doc("Definition of Server Parameter")
 model ServerParameter {
   @doc("Property key")
@@ -648,8 +639,8 @@ model PgsqlSitesResourcePatch {
   /**
    * Resource tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 
   /**
    * The PGSQLSites resource definition.
@@ -843,8 +834,8 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1022,8 +1013,8 @@ model PgsqlInstanceResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1109,9 +1100,7 @@ model Collation {
 //   /**
 //    * Resource tags.
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-//   tags?: Tag[];
-// }
+//   tags?: Record<string>;
 
 /**
  * List of Databases.
@@ -1214,8 +1203,8 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1324,8 +1313,8 @@ model PgsqlDatabaseResourcePatch {
   /**
    * Resource tags
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
-  tags?: Tag[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -1350,8 +1339,7 @@ model Extension {
 //   /**
 //    * Resource tags
 //    */
-//   @OpenAPI.extension("x-ms-identifiers", ["key", "value"])
-//   tags?: Tag[];
+//    tags?: Record<string>;
 // }
 
 /**
