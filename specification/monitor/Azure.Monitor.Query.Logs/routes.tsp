@@ -11,8 +11,7 @@ interface QueryOperationGroup {
   @summary("Execute an Analytics query")
   @route("/workspaces/{workspaceId}/query")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
+  get(
       /**
        * Primary Workspace ID of the query. This is the Workspace ID from the Properties
        * blade in the Azure portal.
@@ -34,11 +33,8 @@ interface QueryOperationGroup {
        */
       @query("timespan")
       timespan?: duration;
-    },
-    QueryResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+    ): QueryResults | MonitorQueryLogs.ErrorResponse;
+    
 
   /**
    * Executes an Analytics query for data.
@@ -49,34 +45,28 @@ interface QueryOperationGroup {
   @summary("Execute an Analytics query")
   @route("/workspaces/{workspaceId}/query")
   @post
-  execute is Azure.Core.Foundations.Operation<
-    {
+  execute(
       /**
        * Primary Workspace ID of the query. This is the Workspace ID from the Properties
        * blade in the Azure portal.
        */
       @path
-      workspaceId: string;
+      workspaceId: string,
 
       /** Optional. The prefer header to set server timeout, query statistics and visualization information. */
       @header("Prefer")
-      prefer?: string;
+      prefer?: string,
 
       /** Body Parameter content-type */
       @header("content-type")
-      contentType: "application/json";
+      contentType: "application/json",
 
       /**
        * The Analytics query. Learn more about the [Analytics query
        * syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
        */
       @bodyRoot
-      body: QueryBody;
-    },
-    QueryResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+      body: QueryBody) : QueryResults |MonitorQueryLogs.ErrorResponse;
 
   /**
    * Executes an Analytics query for data in the context of a resource.
@@ -87,18 +77,17 @@ interface QueryOperationGroup {
   @summary("Execute an Analytics query using resource URI")
   @route("/{resourceId}/query")
   @get
-  getWithResourceId is Azure.Core.Foundations.Operation<
-    {
+  getWithResourceId(
       /** The identifier of the resource. */
       @path
-      resourceId: string;
+      resourceId: string,
 
       /**
        * The Analytics query. Learn more about the [Analytics query
        * syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
        */
       @query("query")
-      query: string;
+      query: string,
 
       /**
        * Optional. The timespan over which to query data. This is an ISO8601 time period
@@ -106,12 +95,8 @@ interface QueryOperationGroup {
        * query expression.
        */
       @query("timespan")
-      timespan?: duration;
-    },
-    QueryResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+      timespan?: duration,
+  ): QueryResults | MonitorQueryLogs.ErrorResponse;
 
   /**
    * Executes an Analytics query for data in the context of a resource.
@@ -122,34 +107,29 @@ interface QueryOperationGroup {
   @summary("Execute an Analytics query using resource ID")
   @route("/{resourceId}/query")
   @post
-  executeWithResourceId is Azure.Core.Foundations.Operation<
-    {
+  executeWithResourceId(
       /** The identifier of the resource. */
       @path
-      resourceId: string;
+      resourceId: string,
 
       /**
        * Optional. The prefer header to set server timeout, query statistics and
        * visualization information.
        */
       @header("Prefer")
-      prefer?: string;
+      prefer?: string,
 
       /** Body Parameter content-type */
       @header("content-type")
-      contentType: "application/json";
+      contentType: "application/json",
 
       /**
        * The Analytics query. Learn more about the [Analytics query
        * syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
        */
       @bodyRoot
-      body: QueryBody;
-    },
-    QueryResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+      body: QueryBody) : QueryResults | MonitorQueryLogs.ErrorResponse;
+   
 
   /**
    * Executes a batch of Analytics queries for data.
@@ -160,8 +140,7 @@ interface QueryOperationGroup {
   @summary("Execute a batch of Analytics queries")
   @route("/$batch")
   @post
-  batch is Azure.Core.Foundations.Operation<
-    {
+  batch(
       /** Body Parameter content-type */
       @header("content-type")
       contentType: "application/json";
@@ -169,11 +148,7 @@ interface QueryOperationGroup {
       /** The batch request body */
       @bodyRoot
       body: BatchRequest;
-    },
-    BatchResponse,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+  ) : BatchResponse | MonitorQueryLogs.ErrorResponse;
 }
 
 interface MetadataOperationGroup {
@@ -185,19 +160,13 @@ interface MetadataOperationGroup {
   @summary("Gets metadata information")
   @route("/workspaces/{workspaceId}/metadata")
   @get
-  get is Azure.Core.Foundations.Operation<
-    {
+  get(
       /**
        * Primary Workspace ID of the query. This is the Workspace ID from the Properties
        * blade in the Azure portal.
        */
       @path
-      workspaceId: string;
-    },
-    MetadataResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+      workspaceId: string) : MetadataResults | MonitorQueryLogs.ErrorResponse;
 
   /**
    * Retrieve the metadata information for the workspace, including its schema,
@@ -207,17 +176,12 @@ interface MetadataOperationGroup {
   @summary("Gets metadata information")
   @route("/workspaces/{workspaceId}/metadata")
   @post
-  post is Azure.Core.Foundations.Operation<
-    {
+  post(
       /**
        * Primary Workspace ID of the query. This is the Workspace ID from the Properties
        * blade in the Azure portal.
        */
       @path
       workspaceId: string;
-    },
-    MetadataResults,
-    {},
-    MonitorQueryLogs.ErrorResponse
-  >;
+  ): MetadataResults | MonitorQueryLogs.ErrorResponse;
 }
