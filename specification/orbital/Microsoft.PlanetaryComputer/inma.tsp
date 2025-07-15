@@ -7,7 +7,7 @@ using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
 
-@service(#{ title: "MPCPro Ingestion and Management API" })
+@service(#{ title: "MPCPro Ingestion and Management API 2" })
 namespace Microsoft.PlanetaryComputer;
 
 @route("/inma/collections/{collectionId}/ingestions")
