@@ -6,15 +6,13 @@ import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface OperationsOperationGroup {
+interface Operations {
   /**
    * Get operation.
    */
@@ -22,7 +20,6 @@ interface OperationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Operations_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{locationName}/operations/{name}")
   @get
   get(
