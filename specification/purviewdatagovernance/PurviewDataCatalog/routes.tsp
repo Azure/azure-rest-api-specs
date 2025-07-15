@@ -61,7 +61,8 @@ op attributeName is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     name: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelMetadataAttribute;
   },
@@ -77,13 +78,16 @@ op getAttribute is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -125,11 +129,13 @@ op attributesAttributeIdRelationships is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     attributeId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeMetadataAttributeRelationship;
   },
@@ -145,9 +151,10 @@ op deleteAttribute is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     attributeId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -166,9 +173,10 @@ op getsAttribute is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     attributeId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
   },
   void
@@ -183,7 +191,8 @@ op attributeInstanceInstances is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     instanceId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance;
   },
@@ -199,13 +208,16 @@ op attributeInstance is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -221,7 +233,8 @@ op attributeInstanceInstanceId is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     instanceId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance;
   },
@@ -263,11 +276,13 @@ op attributeInstanceInstanceIdRelationships is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     instanceId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeAttributeInstanceRelationship;
   },
@@ -283,9 +298,10 @@ op deletesAttributeInstance is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     instanceId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -304,9 +320,10 @@ op getsAttributeInstance is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     instanceId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
   },
   void
@@ -424,13 +441,16 @@ op criticalDataColumn is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("assetId")
     assetId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -459,11 +479,13 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataColumnId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: Record<string>;
   },
@@ -479,9 +501,10 @@ op getCriticalDataColumn is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataColumnId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
   },
   void
@@ -496,15 +519,17 @@ op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("criticalDataElementId")
     criticalDataElementId?: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
 
     /** The unique identifier (UUID) of the resource. */
     @query("entityId")
     entityId: string;
-/** to avoid */
+
+    /** to avoid */
     @path
     criticalDataColumnId: string;
   },
@@ -529,16 +554,20 @@ op getCriticalDataElement is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("keyword")
     keyword?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -567,7 +596,8 @@ op putCriticalDataElement is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataElementId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElement;
   },
@@ -596,7 +626,8 @@ op criticalDataElementQuery is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("duplicatecheck")
     duplicatecheck?: int32;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCriticalDataElementCriticalDataElementQueryRequest;
   },
@@ -621,11 +652,13 @@ op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundatio
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataElementId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: Record<string>;
   },
@@ -641,9 +674,10 @@ op getsCriticalDataElement is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataElementId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
   },
   void
@@ -658,9 +692,10 @@ op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     criticalDataElementId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -679,7 +714,8 @@ op customMetadataName is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     name: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelCustomMetadata;
   },
@@ -695,13 +731,16 @@ op getCustomMetadata is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -752,11 +791,13 @@ op postCustomMetadata is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     metadataId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationship;
   },
@@ -772,9 +813,10 @@ op deletesCustomMetadata is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     metadataId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -793,9 +835,10 @@ op customMetadata is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     metadataId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
   },
   void
@@ -810,10 +853,12 @@ op getDataAsset is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("orderBy")
     orderBy?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
   },
@@ -860,7 +905,8 @@ op putDataAsset is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataAssetId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelDataAsset;
   },
@@ -889,9 +935,10 @@ op dataAssetDataAssetIdRelationships is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataAssetId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
   },
   void
@@ -906,11 +953,13 @@ op dataAsset is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataAssetId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body: Record<string>;
   },
@@ -926,9 +975,10 @@ op deletesDataAsset is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataAssetId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -956,7 +1006,8 @@ op dataGovernanceAppAccountAccountId is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     accountId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel;
   },
@@ -972,13 +1023,16 @@ op getDataProduct is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
   },
@@ -1003,10 +1057,12 @@ op dataProductQuery is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("duplicatecheck")
     duplicatecheck?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("dataProductOwner")
     dataProductOwner?: boolean;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProductQueryRequest;
   },
@@ -1044,7 +1100,8 @@ op putDataProduct is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataProductId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelDataProduct;
   },
@@ -1073,9 +1130,10 @@ op dataProductDataProductIdRelationships is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataProductId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
   },
   void
@@ -1090,11 +1148,13 @@ op postsDataProduct is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataProductId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: Record<string>;
   },
@@ -1110,9 +1170,10 @@ op deletesDataProduct is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     dataProductId: string;
-/** to avoid */
-    @query("entityType")
+
+    /** to avoid */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -1131,7 +1192,8 @@ op getDomain is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("$skipToken")
     $skipToken?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("writeOnly")
     writeOnly?: boolean;
   },
@@ -1156,7 +1218,8 @@ op domainDomainId is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     domainId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelDomain;
   },
@@ -1233,16 +1296,20 @@ op getOkr is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("keyword")
     keyword?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("domainId")
     domainId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
   },
@@ -1267,7 +1334,8 @@ op okrQuery is Azure.Core.Foundations.Operation<
     /** to avoid */
     @query("duplicatecheck")
     duplicatecheck?: int32;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveQueryRequest;
   },
@@ -1292,7 +1360,8 @@ op okrObjectiveId is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     objectiveId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalProperties;
   },
@@ -1347,7 +1416,8 @@ op postsOkr is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     objectiveId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelKeyResult;
   },
@@ -1384,7 +1454,8 @@ op putOkr is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     keyResultId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelKeyResult;
   },
@@ -1417,11 +1488,13 @@ op okrObjectiveIdRelationships is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     objectiveId: string;
-/** to avoid */
+
+    /** to avoid */
     @query("entityType")
     entityType?: string;
-/** to avoid */
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+
+    /** to avoid */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
     @bodyRoot
     body?: Record<string>;
   },
@@ -1437,13 +1510,16 @@ op deletes2Okr is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     objectiveId: string;
-/** to avoid */
+
+    /** to avoid */
     @query("entityType")
     entityType?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("entityId")
     entityId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("relationshipType")
     relationshipType?: string;
   },
@@ -1459,7 +1535,8 @@ op getsOkr is Azure.Core.Foundations.Operation<
     /** to avoid */
     @path
     objectiveId: string;
-/** to avoid */
+
+    /** to avoid */
     @query("entityType")
     entityType?: string;
   },
@@ -1510,19 +1587,24 @@ op getsTerm is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @query("parentId")
     parentId?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("keyword")
     keyword?: string;
-/** to avoid */
+
+    /** to avoid */
     @query("skip")
     skip?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("top")
     top?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("depth")
     depth?: int32;
-/** to avoid */
+
+    /** to avoid */
     @query("orderBy")
     orderBy?: string;
   },
@@ -1538,7 +1620,8 @@ op termTermId is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     termId: string;
-/** to avoid */
+
+    /** to avoid */
     @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelTerm;
   },
@@ -1619,11 +1702,13 @@ op termTermIdRelationships is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     termId: string;
-/** entityType */
-    @query("entityType")
+
+    /** entityType */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("entityType")
     entityType?: unknown;
-/** body */
+
+    /** body */
     @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermRelationship;
   },
@@ -1639,13 +1724,15 @@ op deletesTerm is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     termId: string;
- /** entityType */
+
+    /** entityType */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
     @query("entityType")
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
     entityType?: unknown;
- /** relationshipType */
-    @query("relationshipType")
+
+    /** relationshipType */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("relationshipType")
     relationshipType?: unknown;
 
     /** The unique identifier (UUID) of the resource. */
@@ -1664,13 +1751,15 @@ op getTerm is Azure.Core.Foundations.Operation<
     /** The unique identifier (UUID) of the resource. */
     @path
     termId: string;
-    /**entityType */
+
+    /** entityType */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
     @query("entityType")
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
     entityType?: unknown;
-    /**relationshipType */
-    @query("relationshipType")
+
+    /** relationshipType */
     #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @query("relationshipType")
     relationshipType?: unknown;
   },
   void
@@ -1718,8 +1807,8 @@ op workflows is Azure.Core.Foundations.Operation<
 @get
 op getWorkflows is Azure.Core.Foundations.Operation<
   {
+    /** skipToken */
     @query("$skipToken")
-     /** skipToken*/
     $skipToken?: string;
   },
   void
@@ -1748,8 +1837,8 @@ op putWorkflows is Azure.Core.Foundations.Operation<
     @path
     workflowId: string;
 
+    /** body */
     @bodyRoot
-     /** body */
     body?: MicrosoftPurviewDataGovernanceCatalogModelWorkflows;
   },
   void
@@ -1787,7 +1876,7 @@ op workflowsRunWorkflowRunId is Azure.Core.Foundations.Operation<
 @get
 op workflowsRun is Azure.Core.Foundations.Operation<
   {
-     /** skipToken*/
+    /** skipToken */
     @query("$skipToken")
     $skipToken?: string;
   },
@@ -1800,12 +1889,12 @@ op workflowsRun is Azure.Core.Foundations.Operation<
 @post
 op workflowsRunQueryRuns is Azure.Core.Foundations.Operation<
   {
+    /** skipToken */
     @query("$skipToken")
-    /** skipToken*/
     $skipToken?: string;
 
-    @bodyRoot
     /** body */
+    @bodyRoot
     body?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsWorkflowRunQueryRequest;
   },
   void
@@ -1821,14 +1910,14 @@ op workflowsRunWorkflowRunIdApprove is Azure.Core.Foundations.Operation<
     @path
     workflowRunId: string;
 
-    @bodyRoot
     /** body */
+    @bodyRoot
     body?: MicrosoftPurviewDataGovernanceCatalogModelApprovers;
   },
   void
 >;
 
-/** 
+/**
  * Rejects a workflow run with the specified approvers.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
@@ -1837,12 +1926,12 @@ op workflowsRunWorkflowRunIdApprove is Azure.Core.Foundations.Operation<
 @post
 op workflowsRunWorkflowRunIdReject is Azure.Core.Foundations.Operation<
   {
-     /** The unique identifier (UUID) of the resource. */
+    /** The unique identifier (UUID) of the resource. */
     @path
     workflowRunId: string;
 
+    /** body */
     @bodyRoot
-     /** body */
     body?: MicrosoftPurviewDataGovernanceCatalogModelApprovers;
   },
   void

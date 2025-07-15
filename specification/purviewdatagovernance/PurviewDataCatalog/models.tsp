@@ -8,331 +8,450 @@ namespace PurviewDataCatalog;
 /** to avoid */
 union MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType {
   integer,
+
   /** to avoid */
   `0`: 0,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelStatus {
   integer,
+
   /** to avoid */
   `1`: 1,
+
   /** to avoid */
   `2`: 2,
+
   /** to avoid */
   `3`: 3,
+
   /** to avoid */
   `4`: 4,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelMetadataAttributeFieldTypeEnum {
   integer,
+
   /** to avoid */
   `1`: 1,
+
   /** to avoid */
   `2`: 2,
+
   /** to avoid */
   `3`: 3,
+
   /** to avoid */
   `4`: 4,
+
   /** to avoid */
   `5`: 5,
+
   /** to avoid */
   `6`: 6,
+
   /** to avoid */
   `7`: 7,
+
   /** to avoid */
   `8`: 8,
+
   /** to avoid */
   `9`: 9,
+
   /** to avoid */
   `10`: 10,
+
   /** to avoid */
   `11`: 11,
 }
 /** to avoid */
 union MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType {
   integer,
+
   /** to avoid */
   `0`: 0,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelAttributeInstanceFieldTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
-    /** to avoid */
+
+  /** to avoid */
   `6`: 6,
-    /** to avoid */
+
+  /** to avoid */
   `7`: 7,
-    /** to avoid */
+
+  /** to avoid */
   `8`: 8,
-    /** to avoid */
+
+  /** to avoid */
   `9`: 9,
-    /** to avoid */
+
+  /** to avoid */
   `10`: 10,
-    /** to avoid */
+
+  /** to avoid */
   `11`: 11,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElementDataTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
 }
 /** to avoid */
 union MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `0`: 0,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipRelationshipTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelDataProductTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
-    /** to avoid */
+
+  /** to avoid */
   `6`: 6,
-    /** to avoid */
+
+  /** to avoid */
   `7`: 7,
-    /** to avoid */
+
+  /** to avoid */
   `8`: 8,
-    /** to avoid */
+
+  /** to avoid */
   `9`: 9,
-    /** to avoid */
+
+  /** to avoid */
   `10`: 10,
-    /** to avoid */
+
+  /** to avoid */
   `11`: 11,
-    /** to avoid */
+
+  /** to avoid */
   `12`: 12,
-    /** to avoid */
+
+  /** to avoid */
   `13`: 13,
-    /** to avoid */
+
+  /** to avoid */
   `14`: 14,
-    /** to avoid */
+
+  /** to avoid */
   `15`: 15,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelDataProductUpdateFrequencyEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
-    /** to avoid */
+
+  /** to avoid */
   `6`: 6,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelDataProductAudienceEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
-    /** to avoid */
+
+  /** to avoid */
   `6`: 6,
-    /** to avoid */
+
+  /** to avoid */
   `7`: 7,
-    /** to avoid */
+
+  /** to avoid */
   `8`: 8,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelDomainStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelDomainTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectionTypeEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertiesStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalPropertiesOverallStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
 }
 /** to avoid */
 union MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `0`: 0,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelKeyResultStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelConceptType {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
-    /** to avoid */
+
+  /** to avoid */
   `4`: 4,
-    /** to avoid */
+
+  /** to avoid */
   `5`: 5,
-    /** to avoid */
+
+  /** to avoid */
   `6`: 6,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadataStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+  /** to avoid */
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
 }
 /** to avoid */
 union MicrosoftPurviewDataGovernanceCatalogModelWorkflowRunsStatusEnum {
   integer,
-    /** to avoid */
+
+  /** to avoid */
   `1`: 1,
-    /** to avoid */
+
+  /** to avoid */
   `2`: 2,
-    /** to avoid */
+
+  /** to avoid */
   `3`: 3,
 }
 /** EntityCategory */
 union MicrosoftPurviewActiveGlossaryModelsServiceEntityCategory {
   integer,
+
   /** 0 */
   `0`: 0,
+
   /** 1 */
   `1`: 1,
+
   /** 2 */
   `2`: 2,
+
   /** 3 */
   `3`: 3,
+
   /** 4 */
   `4`: 4,
+
   /** 5 */
   `5`: 5,
+
   /** 6 */
   `6`: 6,
+
   /** 7 */
   `7`: 7,
+
   /** 8 */
   `8`: 8,
+
   /** 9 */
   `9`: 9,
+
   /** 10 */
   `10`: 10,
-  /** 13*/
+
+  /** 13 */
   `11`: 11,
+
   /** 12 */
   `12`: 12,
+
   /** 13 */
   `13`: 13,
 }
@@ -360,6 +479,7 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministra
 model MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesExtendedBillingEvent {
   /** To avoid */
   logOnly?: boolean;
+
   /** To avoid */
   billingEvent?: MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent;
 }
@@ -367,62 +487,88 @@ model MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesExtendedBillingE
 model MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
+
   /** to avoid */
   recordType?: int32;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
+
   /** to avoid */
   operation?: string;
 
   /** The unique identifier (UUID) of the resource. */
   organizationId?: string;
+
   /** to avoid */
   userType?: int32;
-    /** to avoid */
+
+  /** to avoid */
   userKey?: string;
-    /** to avoid */
+
+  /** to avoid */
   workload?: string;
-    /** to avoid */
+
+  /** to avoid */
   resultStatus?: string;
-    /** to avoid */
+
+  /** to avoid */
   objectId?: string;
-    /** to avoid */
+
+  /** to avoid */
   userId?: string;
-    /** to avoid */
+
+  /** to avoid */
   clientIp?: string;
-    /** to avoid */
+
+  /** to avoid */
   scope?: int32;
-    /** to avoid */
+
+  /** to avoid */
   appAccessContext?: MicrosoftPurviewDataGovernanceAuditApiEntitiesPartnerAuditRecordAppAccessContext;
-    /** to avoid */
+
+  /** to avoid */
   solutionName?: string;
-    /** to avoid */
+
+  /** to avoid */
   solutionScenario?: string;
-    /** to avoid */
+
+  /** to avoid */
   consumptionValue?: float64;
-    /** to avoid */
+
+  /** to avoid */
   consumptionValueUnit?: string;
-    /** to avoid */
+
+  /** to avoid */
   consumptionType?: string;
-    /** to avoid */
+
+  /** to avoid */
   billingType?: MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType;
-    /** to avoid */
+
+  /** to avoid */
   additionalInfo?: string;
-    /** to avoid */
+
+  /** to avoid */
   correlationId?: string;
-    /** to avoid */
+
+  /** to avoid */
   tags?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   billingStartDate?: utcDateTime;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   billingEndDate?: utcDateTime;
-/** To avoid */
+
+  /** To avoid */
   reportingDimensions?: string;
+
   /** To avoid */
   billingRegion?: string;
+
   /** To avoid */
   resourceId?: string;
 }
@@ -430,17 +576,23 @@ model MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent {
 model MicrosoftPurviewDataGovernanceAuditApiEntitiesPartnerAuditRecordAppAccessContext {
   /** To avoid */
   aadSessionId?: string;
+
   /** To avoid */
   apiId?: string;
+
   /** To avoid */
   clientAppId?: string;
+
   /** To avoid */
   clientAppName?: string;
+
   /** To avoid */
   correlationId?: string;
+
   /** To avoid */
   uniqueTokenId?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   issuedAtTime?: utcDateTime;
 }
@@ -448,24 +600,31 @@ model MicrosoftPurviewDataGovernanceAuditApiEntitiesPartnerAuditRecordAppAccessC
 model MicrosoftPurviewDataGovernanceCatalogModelMetadataAttribute {
   /** To avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelStatus;
+
   /** To avoid */
   fieldType?: MicrosoftPurviewDataGovernanceCatalogModelMetadataAttributeFieldTypeEnum;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** To avoid */
+
+  /** To avoid */
   name?: string;
+
   /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
+
   /** To avoid */
   description?: string;
+
   /** To avoid */
   defaultValue?: string;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
-/** To avoid */
+
+  /** To avoid */
   isOptional?: boolean;
+
   /** To avoid */
   choices?: MicrosoftPurviewDataGovernanceCatalogModelChoice[];
 }
@@ -477,13 +636,15 @@ model MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired {
 
   /** The unique identifier (UUID) of the resource. */
   createdBy?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   lastModifiedBy?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiredAt?: utcDateTime;
 
@@ -494,6 +655,7 @@ model MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired {
 model MicrosoftPurviewDataGovernanceCatalogModelChoice {
   /** To avoid */
   value?: string;
+
   /** To avoid */
   ordinal?: int32;
 }
@@ -504,7 +666,8 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAt
 
   /** The unique identifier (UUID) of the resource. */
   entityId?: string;
-/** To avoid */
+
+  /** To avoid */
   relationshipType?: MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType;
 }
 /** To avoid */
@@ -514,15 +677,18 @@ model MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance {
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** To avoid */
+
+  /** To avoid */
   name?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   createdBy?: string;
-/** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 
@@ -534,8 +700,10 @@ model MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance {
 
   /** The unique identifier (UUID) of the resource. */
   attributeId?: string;
-/** To avoid */
+
+  /** To avoid */
   value?: string;
+
   /** To avoid */
   choices?: MicrosoftPurviewDataGovernanceCatalogModelChoice[];
 }
@@ -543,7 +711,8 @@ model MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance {
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeAttributeInstanceRelationship {
   /** The unique identifier (UUID) of the resource. */
   entityId?: string;
-/** To avoid */
+
+  /** To avoid */
   relationshipType?: MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType;
 
   /** The unique identifier (UUID) of the resource. */
@@ -553,18 +722,25 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAt
 model MicrosoftPurviewActiveGlossaryModelsServiceBillingBillingRequest {
   /** To avoid */
   aggregationType?: string;
+
   /** To avoid */
   aggregationByProperties?: string[];
+
   /** To avoid */
   dimensions?: string[];
+
   /** To avoid */
   tags?: string[];
+
   /** To avoid */
   filters?: MicrosoftPurviewActiveGlossaryModelsServiceBillingFilterConditions[];
+
   /** To avoid */
   dimensionFilters?: MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter[];
+
   /** To avoid */
   tagFilters?: MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter[];
+
   /** To avoid */
   binFunction?: string;
 }
@@ -572,8 +748,10 @@ model MicrosoftPurviewActiveGlossaryModelsServiceBillingBillingRequest {
 model MicrosoftPurviewActiveGlossaryModelsServiceBillingFilterConditions {
   /** To avoid */
   filterProperty?: string;
+
   /** To avoid */
   filterCondition?: string;
+
   /** To avoid */
   filterValue?: string;
 }
@@ -581,6 +759,7 @@ model MicrosoftPurviewActiveGlossaryModelsServiceBillingFilterConditions {
 model MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter {
   /** To avoid */
   name?: string;
+
   /** To avoid */
   value?: string;
 }
@@ -588,8 +767,10 @@ model MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter {
 model MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** To avoid */
+
+  /** To avoid */
   name?: string;
+
   /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
 
@@ -598,85 +779,107 @@ model MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn {
 
   /** The unique identifier (UUID) of the resource. */
   assetId?: string;
-/** To avoid */
+
+  /** To avoid */
   description?: string;
+
   /** To avoid */
   classifications?: string[];
+
   /** To avoid */
   dataType?: string;
+
   /** To avoid */
   assetName?: string;
 }
 /** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElement {
-   /** To avoid */
+  /** To avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelStatus;
-   /** To avoid */
+
+  /** To avoid */
   dataType?: MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElementDataTypeEnum;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
- /** To avoid */
+
+  /** To avoid */
   name?: string;
-   /** To avoid */
+
+  /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
- /** To avoid */
+
+  /** To avoid */
   description?: string;
- /** To avoid */
+
+  /** To avoid */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
- /** To avoid */
+
+  /** To avoid */
   managedAttributes?: MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute[];
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
- /** To avoid */
+
+  /** To avoid */
   description?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute {
-   /** To avoid */
+  /** To avoid */
   name?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCriticalDataElementCriticalDataElementQueryRequest {
-   /** To avoid */
+  /** To avoid */
   skip?: int32;
-   /** To avoid */
+
+  /** To avoid */
   top?: int32;
-   /** To avoid */
+
+  /** To avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
-   /** To avoid */
+
+  /** To avoid */
   iDs?: string[];
-   /** To avoid */
+
+  /** To avoid */
   domainIds?: string[];
-   /** To avoid */
+
+  /** To avoid */
   nameKeyword?: string;
-   /** To avoid */
+
+  /** To avoid */
   owners?: string[];
-   /** To avoid */
+
+  /** To avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
-   /** To avoid */
+
+  /** To avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
-   /** To avoid */
+
+  /** To avoid */
   managedAttributes?: MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter[];
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy {
-   /** To avoid */
+  /** To avoid */
   field?: string;
-   /** To avoid */
+
+  /** To avoid */
   direction?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter {
-   /** To avoid */
+  /** To avoid */
   field?: string;
-   /** To avoid */
+
+  /** To avoid */
   operator?: string;
 
   /**
@@ -684,43 +887,53 @@ model MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSear
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
   value?: unknown;
- /** To avoid */
+
+  /** To avoid */
   type?: string;
 }
 /** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCriticalDataElementCriticalDataElementFacetRequest {
-   /** To avoid */
+  /** To avoid */
   iDs?: string[];
-   /** To avoid */
+
+  /** To avoid */
   domainIds?: string[];
-   /** To avoid */
+
+  /** To avoid */
   nameKeyword?: string;
-   /** To avoid */
+
+  /** To avoid */
   owners?: string[];
-   /** To avoid */
+
+  /** To avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
-   /** To avoid */
+
+  /** To avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
-   /** To avoid */
+
+  /** To avoid */
   facets?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject[];
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject {
-   /** To avoid */
+  /** To avoid */
   name?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelCustomMetadata {
-   /** To avoid */
+  /** To avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelStatus;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
- /** To avoid */
+
+  /** To avoid */
   name?: string;
-   /** To avoid */
+
+  /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
-   /** To avoid */
+
+  /** To avoid */
   description?: string;
 
   /**
@@ -732,73 +945,88 @@ model MicrosoftPurviewDataGovernanceCatalogModelCustomMetadata {
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCustomMetadataCustomMetadataQueryRequest {
-   /** To avoid */
+  /** To avoid */
   skip?: int32;
-   /** To avoid */
+
+  /** To avoid */
   top?: int32;
-   /** To avoid */
+
+  /** To avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
-   /** To avoid */
+
+  /** To avoid */
   iDs?: string[];
-   /** To avoid */
+
+  /** To avoid */
   domainIds?: string[];
-   /** To avoid */
+
+  /** To avoid */
   nameKeyword?: string;
-   /** To avoid */
+
+  /** To avoid */
   owners?: string[];
-   /** To avoid */
+
+  /** To avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationship {
-   /** To avoid */
+  /** To avoid */
   relationshipType?: MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipRelationshipTypeEnum;
-   /** To avoid */
+
+  /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemData;
-   /** To avoid */
+
+  /** To avoid */
   description?: string;
 
   /** The unique identifier (UUID) of the resource. */
   entityId?: string;
- /** To avoid */
+
+  /** To avoid */
   properties?: MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipProperties;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelSystemData {
-   /** To avoid */
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   createdBy?: string;
- /** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   lastModifiedBy?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipProperties {
-   /** To avoid */
+  /** To avoid */
   value?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelDataAsset {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
- /** To avoid */
+
+  /** To avoid */
   name?: string;
-   /** To avoid */
+
+  /** To avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
-   /** To avoid */
+
+  /** To avoid */
   description?: string;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
- /** To avoid */
+
+  /** To avoid */
   source?: MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource;
 
   /**
@@ -806,14 +1034,17 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataAsset {
    * <components·q49vw8·schemas·microsoft-purview-datagovernance-catalog-model-dataasset·properties·contacts·additionalproperties>
    */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
- /** To avoid */
+
+  /** To avoid */
   classifications?: string[];
 
   /** The unique identifier (UUID) of the resource. */
   sensitivityLabel?: string;
- /** To avoid */
+
+  /** To avoid */
   type?: string;
-   /** To avoid */
+
+  /** To avoid */
   schema?: MicrosoftPurviewDataGovernanceCatalogModelDataAssetSchema[];
 
   /**
@@ -821,24 +1052,28 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataAsset {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
   lineage?: unknown;
- /** To avoid */
+
+  /** To avoid */
   dataQualityScore?: float64;
-   /** To avoid */
+
+  /** To avoid */
   openInUrl?: string;
+
   /**
    * Anything
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
   typeProperties?: unknown;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource {
-   /** To avoid */
+  /** To avoid */
   type?: string;
 
   /** The unique identifier (UUID) of the resource. */
   assetId?: string;
- /** To avoid */
+
+  /** To avoid */
   assetType?: string;
 
   /**
@@ -846,139 +1081,185 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
   assetAttributes?: unknown;
- /** To avoid */
+
+  /** To avoid */
   fqn?: string;
-   /** To avoid */
+
+  /** To avoid */
   accountName?: string;
- /** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   lastRefreshedBy?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelDataAssetSchema {
-   /** To avoid */
+  /** To avoid */
   name?: string;
-   /** To avoid */
+
+  /** To avoid */
   description?: string;
-   /** To avoid */
+
+  /** To avoid */
   classifications?: string[];
-   /** To avoid */
+
+  /** To avoid */
   type?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataAssetDataAssetQueryRequest {
-   /** skip . */
+  /** skip . */
   skip?: int32;
-   /** top . */
+
+  /** top . */
   top?: int32;
-   /** orderBy . */
+
+  /** orderBy . */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
+
   /** iDs . */
   iDs?: string[];
-   /** domainIds . */
+
+  /** domainIds . */
   domainIds?: string[];
-   /** nameKeyword . */
+
+  /** nameKeyword . */
   nameKeyword?: string;
-   /** owners . */
+
+  /** owners . */
   owners?: string[];
-   /** dataMapAssetIds . */
+
+  /** dataMapAssetIds . */
   dataMapAssetIds?: string[];
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel {
-   /** To avoid */
+  /** To avoid */
   accountStatusModel?: MicrosoftAzureProjectBabylonMetadataModelsAccountStatusModel;
-   /** To avoid */
+
+  /** To avoid */
   auditModel?: MicrosoftAzureProjectBabylonMetadataModelsAuditModel;
-   /** To avoid */
+
+  /** To avoid */
   cloudConnectors?: MicrosoftAzureProjectBabylonMetadataModelsCloudConnectors;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   createdBy?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   createdByObjectId?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   createMode?: string;
- /** To avoid */
+
+  /** To avoid */
   dataFactoryAccount?: MicrosoftAzureProjectBabylonMetadataModelsDataFactoryAccount;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   defaultCatalogId?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   defaultCollectionName?: string;
- /** To avoid */
-  encryption?: MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel;
-   /** To avoid */
-  endpoints?: MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints;
-   /** To avoid */
-  eventHubAccessKeyInfo?: MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo;
-   /** To avoid */
 
+  /** To avoid */
+  encryption?: MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel;
+
+  /** To avoid */
+  endpoints?: MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints;
+
+  /** To avoid */
+  eventHubAccessKeyInfo?: MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo;
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   hookKafkaConfigurations?: MicrosoftAzureProjectBabylonMetadataModelsHookKafkaConfigurationServiceModel[];
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   id?: string;
- /** To avoid */
+
+  /** To avoid */
   identity?: MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo;
-   /** To avoid */
+
+  /** To avoid */
   ingestionStorageModel?: MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   location?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   managedResourcesPublicNetworkAccess?: string;
- /** To avoid */
+
+  /** To avoid */
   mergeInfo?: MicrosoftAzureProjectBabylonMetadataModelsMergeInfoModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   name?: string;
- /** To avoid */
+
+  /** To avoid */
   networkAcls?: MicrosoftAzureProjectBabylonMetadataModelsNetworkAcls;
-   /** To avoid */
+
+  /** To avoid */
   notificationKafkaConfigurations?: MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationServiceModel;
-   /** To avoid */
+
+  /** To avoid */
   previousAccountState?: MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   privateLinkIds?: int32[];
- /** To avoid */
+
+  /** To avoid */
   processingStorageModel?: MicrosoftAzureProjectBabylonMetadataModelsProcessingStorageModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   provisioningState?: string;
- /** To avoid */
+
+  /** To avoid */
   reconciliationConfig?: MicrosoftAzureProjectBabylonMetadataModelsReconciliationConfigServiceModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   resourceId?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   resourceType?: string;
- /** To avoid */
+
+  /** To avoid */
   sku?: MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   softDeleteRetentionInDays?: int32;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   storageAccounts?: MicrosoftAzureProjectBabylonMetadataModelsManagedResourceServiceModel[];
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
@@ -987,36 +1268,43 @@ model MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel {
    */
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   tenantId?: string;
- /** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   useArtifactStore?: boolean;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftAzureProjectBabylonMetadataModelsAccountStatusModel {
-   /** To avoid */
+  /** To avoid */
   accountExceptionMessageModel?: MicrosoftAzureProjectBabylonMetadataModelsAccountExceptionMessageModel;
-   /** To avoid */
+
+  /** To avoid */
   accountProvisioningState?: string;
 }
- /** To avoid */
+/** To avoid */
 model MicrosoftAzureProjectBabylonMetadataModelsAccountExceptionMessageModel {
-   /** To avoid */
+  /** To avoid */
   correlationId?: string;
- /** To avoid */
+
+  /** To avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   exceptionDateTime?: utcDateTime;
- /** To avoid */
+
+  /** To avoid */
   exceptionErrorCode?: string;
-   /** To avoid */
+
+  /** To avoid */
   exceptionMessage?: string;
 }
 /** To avoid */
 model MicrosoftAzureProjectBabylonMetadataModelsAuditModel {
   /** To avoid */
   auditIngestionEndpoint?: string;
+
   /** To avoid */
   tenantForest?: string;
 }
@@ -1030,18 +1318,25 @@ model MicrosoftAzureProjectBabylonMetadataModelsCloudConnectors {
 model MicrosoftAzureProjectBabylonMetadataModelsDataFactoryAccount {
   /** To avoid */
   apiVersion?: string;
+
   /** To avoid */
   baseManagementUri?: string;
+
   /** To avoid */
   factoryId?: string;
+
   /** To avoid */
   location?: string;
+
   /** To avoid */
   name?: string;
+
   /** To avoid */
   processingStorageLinkedServiceName?: string;
+
   /** To avoid */
   resourceGroup?: string;
+
   /** To avoid */
   subscription?: string;
 }
@@ -1054,8 +1349,10 @@ model MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel {
 model MicrosoftAzureProjectBabylonMetadataModelsKeyEncryptionKey {
   /** To avoid */
   id?: string;
+
   /** To avoid */
   keyVaultResourceId?: string;
+
   /** To avoid */
   type?: string;
 }
@@ -1064,7 +1361,8 @@ model MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints {
   /** To avoid */
   @visibility(Lifecycle.Read)
   catalog?: string;
-/** To avoid */
+
+  /** To avoid */
   @visibility(Lifecycle.Read)
   scan?: string;
 }
@@ -1072,14 +1370,19 @@ model MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints {
 model MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo {
   /** To avoid */
   eventHubName?: string;
+
   /** To avoid */
   externalKeys?: MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys;
+
   /** To avoid */
   internalKeys?: MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys;
+
   /** To avoid */
   managedResource?: boolean;
+
   /** To avoid */
   resourceGroup?: string;
+
   /** To avoid */
   subscriptionId?: string;
 }
@@ -1087,8 +1390,10 @@ model MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo {
 model MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys {
   /** To avoid */
   keyName?: string;
+
   /** To avoid */
   primaryConnectionString?: string;
+
   /** To avoid */
   secondaryConnectionString?: string;
 }
@@ -1096,14 +1401,19 @@ model MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys {
 model MicrosoftAzureProjectBabylonMetadataModelsHookKafkaConfigurationServiceModel {
   /** To avoid */
   consumerGroup?: string;
+
   /** To avoid */
   credentials?: MicrosoftAzureProjectBabylonMetadataModelsCredentials;
+
   /** To avoid */
   eventHubResourceId?: string;
+
   /** To avoid */
   eventHubType?: string;
+
   /** To avoid */
   eventStreamingState?: string;
+
   /** To avoid */
   eventStreamingType?: string;
 }
@@ -1111,6 +1421,7 @@ model MicrosoftAzureProjectBabylonMetadataModelsHookKafkaConfigurationServiceMod
 model MicrosoftAzureProjectBabylonMetadataModelsCredentials {
   /** To avoid */
   identityId?: string;
+
   /** To avoid */
   type?: string;
 }
@@ -1118,12 +1429,16 @@ model MicrosoftAzureProjectBabylonMetadataModelsCredentials {
 model MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo {
   /** To avoid */
   clientId?: string;
+
   /** To avoid */
   identityUrl?: string;
+
   /** To avoid */
   managedIdentityType?: string;
+
   /** To avoid */
   principalId?: string;
+
   /** To avoid */
   tenantId?: string;
 
@@ -1137,12 +1452,16 @@ model MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo {
 model MicrosoftAzureProjectBabylonMetadataModelsUserAssignedIdentityModel {
   /** To avoid */
   authenticationEndpoint?: string;
+
   /** To avoid */
   clientId?: string;
+
   /** To avoid */
   clientSecretUrl?: string;
+
   /** To avoid */
   principalId?: string;
+
   /** To avoid */
   tenantId?: string;
 }
@@ -1150,18 +1469,25 @@ model MicrosoftAzureProjectBabylonMetadataModelsUserAssignedIdentityModel {
 model MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel {
   /** To avoid */
   dnsZone?: string;
+
   /** To avoid */
   endpointSuffix?: string;
+
   /** To avoid */
   location?: string;
+
   /** To avoid */
   name?: string;
+
   /** To avoid */
   primaryEndpoint?: string;
+
   /** To avoid */
   publicNetworkAccess?: string;
+
   /** To avoid */
   resourceId?: string;
+
   /** To avoid */
   sku?: string;
 
@@ -1172,12 +1498,16 @@ model MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel {
 model MicrosoftAzureProjectBabylonMetadataModelsMergeInfoModel {
   /** The unique identifier (UUID) of the resource. */
   accountId?: string;
-/** To avoid */
+
+  /** To avoid */
   accountLocation?: string;
+
   /** To avoid */
   accountResourceId?: string;
+
   /** To avoid */
   mergeStatus?: string;
+
   /** To avoid */
   typeOfAccount?: string;
 }
@@ -1190,14 +1520,19 @@ model MicrosoftAzureProjectBabylonMetadataModelsNetworkAcls {
 model MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationServiceModel {
   /** To avoid */
   credentials?: MicrosoftAzureProjectBabylonMetadataModelsCredentials;
+
   /** To avoid */
   eventHubResourceId?: string;
+
   /** To avoid */
   eventHubType?: string;
+
   /** To avoid */
   eventStreamingState?: string;
+
   /** To avoid */
   eventStreamingType?: string;
+
   /** To avoid */
   partitionId?: string;
 }
@@ -1205,6 +1540,7 @@ model MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationSe
 model MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel {
   /** To avoid */
   resourceType?: string;
+
   /** To avoid */
   sku?: MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel;
 }
@@ -1212,8 +1548,10 @@ model MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel
 model MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel {
   /** To avoid */
   capacity?: int32;
+
   /** To avoid */
   name?: string;
+
   /** To avoid */
   version?: string;
 }
@@ -1221,16 +1559,22 @@ model MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel {
 model MicrosoftAzureProjectBabylonMetadataModelsProcessingStorageModel {
   /** to avoid */
   dnsZone?: string;
+
   /** to avoid */
   endpointSuffix?: string;
+
   /** to avoid */
   location?: string;
+
   /** to avoid */
   name?: string;
+
   /** to avoid */
   primaryEndpoint?: string;
+
   /** to avoid */
   resourceId?: string;
+
   /** to avoid */
   sku?: string;
 
@@ -1250,22 +1594,28 @@ model MicrosoftAzureProjectBabylonMetadataModelsManagedResourceServiceModel {
   /** to avoid */
   @visibility(Lifecycle.Read)
   dnsZone?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   endpointSuffix?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   location?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   name?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   primaryEndpoint?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   resourceId?: string;
-/** to avoid */
+
+  /** to avoid */
   @visibility(Lifecycle.Read)
   sku?: string;
 }
@@ -1273,24 +1623,31 @@ model MicrosoftAzureProjectBabylonMetadataModelsManagedResourceServiceModel {
 model MicrosoftPurviewDataGovernanceCatalogModelDataProduct {
   /** to avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelStatus;
+
   /** to avoid */
   type?: MicrosoftPurviewDataGovernanceCatalogModelDataProductTypeEnum;
+
   /** to avoid */
   updateFrequency?: MicrosoftPurviewDataGovernanceCatalogModelDataProductUpdateFrequencyEnum;
+
   /** to avoid */
   managedAttributes?: MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute[];
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   name?: string;
+
   /** to avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
-/** to avoid */
+
+  /** to avoid */
   description?: string;
+
   /** to avoid */
   businessUse?: string;
 
@@ -1299,20 +1656,28 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataProduct {
    * <components·dc89vp·schemas·microsoft-purview-datagovernance-catalog-model-dataproduct·properties·contacts·additionalproperties>
    */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
-/** to avoid */
+
+  /** to avoid */
   termsOfUse?: MicrosoftPurviewDataGovernanceCatalogModelExternalLink[];
+
   /** to avoid */
   documentation?: MicrosoftPurviewDataGovernanceCatalogModelExternalLink[];
+
   /** to avoid */
   sensitivityLabel?: string;
+
   /** to avoid */
   endorsed?: boolean;
+
   /** to avoid */
   activeSubscriberCount?: int32;
+
   /** to avoid */
   dataQualityScore?: float64;
+
   /** to avoid */
   audience?: MicrosoftPurviewDataGovernanceCatalogModelDataProductAudienceEnum[];
+
   /** to avoid */
   additionalProperties?: MicrosoftPurviewDataGovernanceCatalogModelDataProductAllOfAdditionalProperties;
 }
@@ -1320,6 +1685,7 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataProduct {
 model MicrosoftPurviewDataGovernanceCatalogModelExternalLink {
   /** to avoid */
   url?: string;
+
   /** to avoid */
   name?: string;
 
@@ -1335,26 +1701,37 @@ model MicrosoftPurviewDataGovernanceCatalogModelDataProductAllOfAdditionalProper
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProductQueryRequest {
   /** to avoid */
   skip?: int32;
+
   /** to avoid */
   top?: int32;
+
   /** to avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
+
   /** to avoid */
   iDs?: string[];
+
   /** to avoid */
   domainIds?: string[];
+
   /** to avoid */
   nameKeyword?: string;
+
   /** to avoid */
   type?: string;
+
   /** to avoid */
   types?: string[];
+
   /** to avoid */
   owners?: string[];
+
   /** to avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
+
   /** to avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
+
   /** to avoid */
   managedAttributes?: MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter[];
 }
@@ -1362,20 +1739,28 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProduc
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProductFacetRequest {
   /** to avoid */
   iDs?: string[];
+
   /** to avoid */
   domainIds?: string[];
+
   /** to avoid */
   nameKeyword?: string;
+
   /** to avoid */
   owners?: string[];
+
   /** to avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
+
   /** to avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
+
   /** to avoid */
   type?: string;
+
   /** to avoid */
   types?: string[];
+
   /** to avoid */
   facets?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject[];
 }
@@ -1383,26 +1768,34 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProduc
 model MicrosoftPurviewDataGovernanceCatalogModelDomain {
   /** status . */
   status?: MicrosoftPurviewDataGovernanceCatalogModelDomainStatusEnum;
+
   /** type . */
   type?: MicrosoftPurviewDataGovernanceCatalogModelDomainTypeEnum;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   name?: string;
+
   /** to avoid */
   isRestricted?: boolean;
+
   /** to avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
+
   /** to avoid */
   description?: string;
 
   /** The unique identifier (UUID) of the resource. */
   parentId?: string;
-/** to avoid */
+
+  /** to avoid */
   thumbnail?: MicrosoftPurviewDataGovernanceCatalogModelDomainAllOfThumbnail;
+
   /** to avoid */
   domains?: MicrosoftPurviewDataGovernanceCatalogModelPlatformDomain[];
+
   /** to avoid */
   managedAttributes?: MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute[];
 }
@@ -1415,8 +1808,10 @@ model MicrosoftPurviewDataGovernanceCatalogModelDomainAllOfThumbnail {
 model MicrosoftPurviewDataGovernanceCatalogModelPlatformDomain {
   /** to avoid */
   name?: string;
+
   /** to avoid */
   friendlyName?: string;
+
   /** to avoid */
   relatedCollections?: MicrosoftPurviewDataGovernanceCatalogModelRelatedCollection[];
 }
@@ -1424,8 +1819,10 @@ model MicrosoftPurviewDataGovernanceCatalogModelPlatformDomain {
 model MicrosoftPurviewDataGovernanceCatalogModelRelatedCollection {
   /** to avoid */
   name?: string;
+
   /** to avoid */
   friendlyName?: string;
+
   /** to avoid */
   parentCollection?: MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollection;
 }
@@ -1433,6 +1830,7 @@ model MicrosoftPurviewDataGovernanceCatalogModelRelatedCollection {
 model MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollection {
   /** to avoid */
   type?: MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectionTypeEnum;
+
   /** to avoid */
   refName?: string;
 }
@@ -1440,22 +1838,27 @@ model MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectio
 model MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalProperties {
   /** to avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertiesStatusEnum;
+
   /** to avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   definition?: string;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
-/** to avoid */
+
+  /** to avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   targetDate?: utcDateTime;
-/** to avoid */
+
+  /** to avoid */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
-/** to avoid */
+
+  /** to avoid */
   additionalProperties?: MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties;
 }
 /** to avoid */
@@ -1466,13 +1869,15 @@ model MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed {
 
   /** The unique identifier (UUID) of the resource. */
   createdBy?: string;
-/** to avoid */
+
+  /** to avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 
   /** The unique identifier (UUID) of the resource. */
   lastModifiedBy?: string;
-/** to avoid */
+
+  /** to avoid */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   closedAt?: utcDateTime;
 
@@ -1483,12 +1888,16 @@ model MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed {
 model MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties {
   /** to avoid */
   overallStatus?: MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalPropertiesOverallStatusEnum;
+
   /** to avoid */
   overallProgress?: float64;
+
   /** to avoid */
   overallGoal?: float64;
+
   /** to avoid */
   overallMax?: float64;
+
   /** to avoid */
   keyResultsCount?: int64;
 }
@@ -1496,20 +1905,28 @@ model MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties {
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveQueryRequest {
   /** to avoid */
   skip?: int32;
+
   /** to avoid */
   top?: int32;
+
   /** to avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
+
   /** to avoid */
   iDs?: string[];
+
   /** to avoid */
   domainIds?: string[];
+
   /** to avoid */
   definition?: string;
+
   /** to avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus;
+
   /** to avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus[];
+
   /** to avoid */
   owners?: string[];
 }
@@ -1517,16 +1934,22 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveQ
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveFacetRequest {
   /** to avoid */
   iDs?: string[];
+
   /** to avoid */
   domainIds?: string[];
+
   /** to avoid */
   definition?: string;
+
   /** to avoid */
   owners?: string[];
+
   /** to avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus;
+
   /** to avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus[];
+
   /** to avoid */
   facets?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject[];
   /** to avoid */
@@ -1535,20 +1958,25 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveF
 model MicrosoftPurviewDataGovernanceCatalogModelKeyResult {
   /** to avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelKeyResultStatusEnum;
+
   /** to avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemData;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   definition?: string;
 
   /** The unique identifier (UUID) of the resource. */
   domainId?: string;
-/** to avoid */
+
+  /** to avoid */
   progress?: float64;
+
   /** to avoid */
   goal?: float64;
+
   /** to avoid */
   max?: float64;
 }
@@ -1559,18 +1987,22 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsPolicyAddA
 }
 /** to avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelTerm {
-    /** to avoid */
+  /** to avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelStatus;
 
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   name?: string;
+
   /** to avoid */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
+
   /** to avoid */
   description?: string;
-/** to avoid */
+
+  /** to avoid */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
 
   /** The unique identifier (UUID) of the resource. */
@@ -1578,12 +2010,16 @@ model MicrosoftPurviewDataGovernanceCatalogModelTerm {
 
   /** The unique identifier (UUID) of the resource. */
   parentId?: string;
-/** to avoid */
+
+  /** to avoid */
   acronyms?: string[];
+
   /** to avoid */
   resources?: MicrosoftPurviewDataGovernanceCatalogModelTermResource[];
+
   /** to avoid */
   isLeaf?: boolean;
+
   /** to avoid */
   managedAttributes?: MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute[];
 }
@@ -1591,6 +2027,7 @@ model MicrosoftPurviewDataGovernanceCatalogModelTerm {
 model MicrosoftPurviewDataGovernanceCatalogModelTermResource {
   /** to avoid */
   name?: string;
+
   /** to avoid */
   url?: string;
 }
@@ -1598,43 +2035,60 @@ model MicrosoftPurviewDataGovernanceCatalogModelTermResource {
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermQueryRequest {
   /** to avoid */
   skip?: int32;
+
   /** to avoid */
   top?: int32;
+
   /** to avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
+
   /** to avoid */
   iDs?: string[];
+
   /** to avoid */
   domainIds?: string[];
+
   /** to avoid */
   nameKeyword?: string;
+
   /** to avoid */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
+
   /** to avoid */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
+
   /** to avoid */
   owners?: string[];
+
   /** to avoid */
   acronyms?: string[];
+
   /** to avoid */
   managedAttributes?: MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter[];
 }
 /** to avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermFacetRequest {
-   /** iDs */
+  /** iDs */
   iDs?: string[];
-   /** domainIds */
+
+  /** domainIds */
   domainIds?: string[];
-   /** nameKeyword */
+
+  /** nameKeyword */
   nameKeyword?: string;
-   /** acronyms */
+
+  /** acronyms */
   owners?: string[];
+
   /** to avoid */
   acronyms?: string[];
-  /** status*/
+
+  /** status */
   status?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus;
+
   /** Multistatus */
   multiStatus?: MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus[];
+
   /** facts */
   facets?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject[];
 }
@@ -1645,27 +2099,32 @@ model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermRe
 
   /** The unique identifier (UUID) of the resource. */
   entityId?: string;
-   /** relationshipType */
+
+  /** relationshipType */
   relationshipType?: MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType;
 }
 /** to avoid */
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermsMoveRequest {
   /** The unique identifier (UUID) of the resource. */
   destinationDomainId?: string;
-/** termIds */
+
+  /** termIds */
   termIds?: string[];
 }
 /** to avoid */
 model MicrosoftPurviewDataGovernanceCatalogModelWorkflows {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
+
   /** name */
   name?: string;
-    /** systemData */
+
+  /** systemData */
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemData;
 
   /** The unique identifier (UUID) of the resource. */
   domain?: string;
+
   /** workflowMetadata */
   workflowMetadata?: MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadata[];
 }
@@ -1673,8 +2132,10 @@ model MicrosoftPurviewDataGovernanceCatalogModelWorkflows {
 model MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadata {
   /** to avoid */
   conceptType?: MicrosoftPurviewDataGovernanceCatalogModelConceptType;
+
   /** to avoid */
   status?: MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadataStatusEnum;
+
   /** to avoid */
   approverMetadata?: MicrosoftPurviewDataGovernanceCatalogModelApproverMetadata[];
 }
@@ -1682,6 +2143,7 @@ model MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadata {
 model MicrosoftPurviewDataGovernanceCatalogModelApproverMetadata {
   /** to avoid */
   action?: MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum;
+
   /** to avoid */
   approvers?: MicrosoftPurviewDataGovernanceCatalogModelApprovers[];
 }
@@ -1689,8 +2151,10 @@ model MicrosoftPurviewDataGovernanceCatalogModelApproverMetadata {
 model MicrosoftPurviewDataGovernanceCatalogModelApprovers {
   /** The unique identifier (UUID) of the resource. */
   id?: string;
-/** to avoid */
+
+  /** to avoid */
   description?: string;
+
   /** to avoid */
   email?: string;
 }
@@ -1698,20 +2162,28 @@ model MicrosoftPurviewDataGovernanceCatalogModelApprovers {
 model MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsWorkflowRunQueryRequest {
   /** to avoid */
   skip?: int32;
+
   /** to avoid */
   top?: int32;
+
   /** to avoid */
   orderBy?: MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy[];
+
   /** to avoid */
   conceptId?: string;
+
   /** to avoid */
   conceptType?: MicrosoftPurviewDataGovernanceCatalogModelConceptType;
+
   /** to avoid */
   workflowRunAction?: MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum;
+
   /** to avoid */
   workflowRunStatus?: MicrosoftPurviewDataGovernanceCatalogModelWorkflowRunsStatusEnum;
+
   /** to avoid */
   domain?: string;
+
   /** to avoid */
   conceptName?: string;
 
