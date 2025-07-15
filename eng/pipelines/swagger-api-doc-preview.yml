@@ -78,6 +78,7 @@ jobs:
 
       - task: AzureCLI@2
         displayName: Start docs build
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
         inputs:
           azureSubscription: msdocs-apidrop-connection
           scriptType: pscore
@@ -94,6 +95,7 @@ jobs:
 
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
+          Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
           State: pending
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Waiting for docs build to finish'
@@ -101,6 +103,7 @@ jobs:
 
       - task: AzureCLI@2
         displayName: Wait for docs build to finish
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
         # Retry on failure to handle transient issues or builds that run longer
         # than the token used by az CLI is valid
         retryCountOnTaskFailure: 3
@@ -191,14 +194,24 @@ jobs:
 
           exit 0
         displayName: Interpret docs build results
+        condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
       # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
+          Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
           State: $(CheckState)
           TargetUrl: $(CheckUrl)
           Description: $(CheckDescription)
+          Context: $(StatusName)
+
+      - template: /eng/pipelines/templates/steps/set-sha-check.yml
+        parameters:
+          Condition: and(succeeded(), ne(variables['HasChanges'], 'true'))
+          State: success
+          TargetUrl: $(CurrentBuildUrl)
+          Description: No files changed require docs build
           Context: $(StatusName)
 
       # In the event of a failure in this job (not the docs build job), set the 
