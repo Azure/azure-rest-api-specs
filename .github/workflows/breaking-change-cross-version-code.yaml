@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+name: "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   validateBreakingChange:
-    name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+    name: "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -24,10 +24,11 @@ jobs:
         with:
           dotnet-version: "6.0.x"
 
-      - name: Swagger Breaking Change - Analyze Code
-        id: swagger-breaking-change-analyze-code
+      - name: Breaking Change(Cross-Version) - Analyze Code
+        id: breaking-change-cross-version-analyze-code
         run: |
           npm exec --no -- openapi-diff-runner \
+            --run-type "CrossVersion" \
             --spec-repo-path "$GITHUB_WORKSPACE" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
             --pr-target-branch "$GITHUB_BASE_REF" \
@@ -39,29 +40,28 @@ jobs:
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
           always() && 
-          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
+          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
-          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
 
       # Upload artifact for 'VersioningReviewRequired' label
       - if: |
           always() && 
-          (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
+          (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
-          # Convert "add/remove" to "true/false"
-          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
+          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
 
       # Upload artifact with issue number if labels are present and PR number is valid
       - if: |
           always() &&
-          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
-          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
+          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
+          steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '') &&
           github.event.pull_request.number > 0
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
