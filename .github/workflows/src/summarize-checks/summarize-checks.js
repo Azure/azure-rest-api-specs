@@ -503,60 +503,21 @@ export function updateLabels(
   console.log(targetBranch);
   console.log(isDraft);
 
+  // this is the only labelling that was part of original pipelinebot logic
   processArmReviewLabels(labelContext, existingLabels);
 
-  const { resourceManagerLabelShouldBePresent } = await processPRType(
-    context,
-    labelContext
-  );
-
-  await processSuppression(context, labelContext);
-
-  const {
-    versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent,
-  } = await processBreakingChangeLabels(prContext, labelContext);
-
-  const { rpaasLabelShouldBePresent } = await processRPaaS(
-    context,
-    labelContext
-  );
-
-  const { newRPNamespaceLabelShouldBePresent } = await processNewRPNamespace(
-    context,
-    labelContext,
-    resourceManagerLabelShouldBePresent
-  );
-
-  const {
-    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
-    rpaasExceptionLabelShouldBePresent
-  } = await processNewRpNamespaceWithoutRpaasLabel(
-    context,
-    labelContext,
-    resourceManagerLabelShouldBePresent,
-    newRPNamespaceLabelShouldBePresent,
-    rpaasLabelShouldBePresent
-  );
-
-  const { ciRpaasRPNotInPrivateRepoLabelShouldBePresent } = await processRpaasRpNotInPrivateRepoLabel(
-    context,
-    labelContext,
-    resourceManagerLabelShouldBePresent,
-    rpaasLabelShouldBePresent
-  );
-
-  const { armReviewLabelShouldBePresent } = await processARMReview(
-    context,
-    labelContext,
-    resourceManagerLabelShouldBePresent,
-    versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent,
-    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
-    rpaasExceptionLabelShouldBePresent,
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
-    isDraft,
-  );
+  // // this one SHOULD remain here. It has a lot of the logic around handling ARM review labels
+  // const { armReviewLabelShouldBePresent } = await processARMReview(
+  //   context,
+  //   labelContext,
+  //   resourceManagerLabelShouldBePresent,
+  //   versioningReviewRequiredLabelShouldBePresent,
+  //   breakingChangeReviewRequiredLabelShouldBePresent,
+  //   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+  //   rpaasExceptionLabelShouldBePresent,
+  //   ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+  //   isDraft,
+  // );
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove)
   return labelContext;
@@ -599,7 +560,345 @@ export function processArmReviewLabels(
   }
 }
 
+/**
+This function determines which labels of the ARM review should
+be applied to given PR. It adds and removes the labels as appropriate.
 
+This function does the following, **among other things**:
+
+- Adds the "ARMReview" label if all of the following conditions hold:
+  - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
+  - The PR is not a draft, as determined by "isDraftPR"
+  - The PR is labelled with "resource-manager" label, meaning it pertains
+    to ARM, as previously determined by the "isManagementPR" function,
+    called from the "getPRType" function.
+
+- Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
+*/
+// todo: refactor to take context: PRContext as input instead of IValidatorContext.
+// All downstream usage appears to be using "context.contextConfig() as PRContext".
+async function processARMReview(
+  context: IValidatorContext,
+  owner: string,
+  repo: string,
+  issue_number: number,
+  labelContext: LabelContext,
+  resourceManagerLabelShouldBePresent: boolean,
+  versioningReviewRequiredLabelShouldBePresent: boolean,
+  breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+  rpaasExceptionLabelShouldBePresent: boolean,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean,
+  isDraft: boolean,
+): Promise<{ armReviewLabelShouldBePresent: boolean }> {
+  console.log("ENTER definition processARMReview")
+
+  const armReviewLabel = new Label("ARMReview", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  armReviewLabel.shouldBePresent = false;
+
+  const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  newApiVersionLabel.shouldBePresent = false;
+
+  const branch = (context.contextConfig() as PRContext).targetBranch
+  const prTitle = await getPrTitle(owner, repo, prNumber)
+  const isReleaseBranchVal: boolean = isReleaseBranch(branch)
+  const isShiftLeftPRWithRPSaaSDevVal: boolean = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
+  const isBranchInScopeOfSpecReview: boolean = isReleaseBranchVal || isShiftLeftPRWithRPSaaSDevVal
+  let isNewApiVersionVal: boolean | "not_computed" = "not_computed"
+  let isMissingBaseCommit: boolean | "not_computed" = "not_computed"
+
+  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
+  // determines which kind of review exactly we need.
+  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview
+  if (specReviewApplies) {
+    isNewApiVersionVal = await isNewApiVersion(context)
+    if (isNewApiVersionVal) {
+      // Note that in case of data-plane PRs, the addition of this label will result
+      // in API stewardship board review being required.
+      // See requiredLabelsRules.ts.
+      newApiVersionLabel.shouldBePresent = true;
+    }
+
+    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent
+    await processARMReviewWorkflowLabels(
+      labelContext,
+      armReviewLabel.shouldBePresent,
+      versioningReviewRequiredLabelShouldBePresent,
+      breakingChangeReviewRequiredLabelShouldBePresent,
+      ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+      rpaasExceptionLabelShouldBePresent,
+      ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
+  }
+
+  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+
+  console.log(`RETURN definition processARMReview. `
+    + `url: ${new PRKey(owner, repo, prNumber).toUrl()}, owner: ${owner}, repo: ${repo}, pr: ${prNumber}, branch: ${branch}, `
+    + `isReleaseBranch: ${isReleaseBranchVal}, `
+    + `isShiftLeftPRWithRPSaaSDev: ${isShiftLeftPRWithRPSaaSDevVal}, `
+    + `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, `
+    + `isNewApiVersion: ${isNewApiVersionVal}, `
+    + `isMissingBaseCommit: ${isMissingBaseCommit}, `
+    + `isDraft: ${isDraft}, `
+    + `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, `
+    + `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`)
+
+  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent }
+}
+
+function isReleaseBranch(branchName: string) {
+  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  return branchRegex.some((b) => b.test(branchName));
+}
+
+// For shift-left review process, if the PR target branch is RPSaaSDev, it still need ARM review
+function isShiftLeftPRWithRPSaaSDev(
+  prTitle: string,
+  branch: string
+): boolean {
+  const shiftLeftPRTitle = "[AutoSync]";
+  const isShiftLeftPR = prTitle.includes(shiftLeftPRTitle) && branch === "RPSaaSDev";
+  if (isShiftLeftPR) {
+    console.log(
+      `The PR is shift-left PR with RPSaaSDev branch. it need ARM review`
+    );
+  }
+  return isShiftLeftPR;
+}
+
+async function isNewApiVersion(context: IValidatorContext): Promise<boolean> {
+  const pr = await createPullRequestProperties(
+    context,
+    "pr-summary-new-api-version"
+  );
+  const handlers: ChangeHandler[] = [];
+  let isAddingNewApiVersion = false;
+  const apiVersionSet = new Set<string>();
+
+  const rpFolders = new Set<string>();
+
+  const createSwaggerFileHandler = () => {
+    return (e: PRChange) => {
+      if (e.changeType === "Addition") {
+        const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
+        if (apiVersion) {
+          apiVersionSet.add(apiVersion);
+        }
+        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+        if (rpFolder !== undefined) {
+          rpFolders.add(rpFolder);
+        }
+        console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
+      } else if (e.changeType === "Update") {
+        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+        if (rpFolder !== undefined) {
+          rpFolders.add(rpFolder);
+        }
+      }
+    };
+  };
+
+  handlers.push({ SwaggerFile: createSwaggerFileHandler() });
+  await processPrChanges(context, handlers);
+
+  console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
+
+  const firstRPFolder = Array.from(rpFolders)[0];
+
+  console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
+
+  if (firstRPFolder === undefined) {
+    console.log("RP folder not found.");
+    return false;
+  }
+
+  const targetBranchRPFolder = resolve(pr?.workingDir!, firstRPFolder);
+
+  console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
+
+  const existingApiVersions =
+    getAllApiVersionFromRPFolder(targetBranchRPFolder);
+
+  console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
+
+  for (const apiVersion of apiVersionSet) {
+    if (!existingApiVersions.includes(apiVersion)) {
+      console.log(
+        `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
+      );
+      isAddingNewApiVersion = true;
+    }
+  }
+  return isAddingNewApiVersion;
+}
+
+/**
+CODESYNC:
+- requiredLabelsRules.ts / requiredLabelsRules
+- https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
+
+This function determines which label from the ARM review workflow labels
+should be present on the PR. It adds and removes the labels as appropriate.
+
+In other words, this function captures the
+ARM review workflow label processing logic.
+
+To be exact, this function executes if and only if the PR in question
+has been determined to have the "ARMReview" label, denoting given PR
+is in scope for ARM review.
+
+The implementation of this function is the source of truth specifying the
+desired behavior.
+
+To understand this implementation, the most important constraint to keep in mind
+is that if "ARMReview" label is present, then exactly one of the following
+labels must be present:
+
+- NotReadyForARMReview
+- WaitForARMFeedback
+- ARMChangesRequested
+- ARMSignedOff
+
+Note that another important place in this codebase where ARM review workflow
+labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
+*/
+async function processARMReviewWorkflowLabels(
+  labelContext: LabelContext,
+  armReviewLabelShouldBePresent: boolean,
+  versioningReviewRequiredLabelShouldBePresent: boolean,
+  breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+  rpaasExceptionLabelShouldBePresent: boolean,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean
+): Promise<void> {
+  console.log("ENTER definition processARMReviewWorkflowLabels");
+
+  const notReadyForArmReviewLabel = new Label(
+    "NotReadyForARMReview",
+    labelContext.present);
+
+  const waitForArmFeedbackLabel = new Label(
+      "WaitForARMFeedback",
+      labelContext.present
+    );
+
+  const armChangesRequestedLabel = new Label(
+      "ARMChangesRequested",
+      labelContext.present
+    );
+
+  const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
+
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(
+    labelContext,
+    breakingChangeReviewRequiredLabelShouldBePresent,
+    versioningReviewRequiredLabelShouldBePresent
+  );
+
+  const blockedOnRpaas = getBlockedOnRpaas(
+    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+    rpaasExceptionLabelShouldBePresent,
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+  );
+
+  const blocked = blockedOnVersioningPolicy || blockedOnRpaas;
+
+  // If given PR is in scope of ARM review and it is blocked for any reason,
+  // the "NotReadyForARMReview" label should be present, to the exclusion
+  // of all other ARM review workflow labels.
+  notReadyForArmReviewLabel.shouldBePresent =
+    armReviewLabelShouldBePresent && blocked;
+
+  // If given PR is in scope of ARM review and the review is not blocked,
+  // then "ARMSignedOff" label should remain present on the PR if it was
+  // already present. This means that labels "ARMChangesRequested"
+  // and "WaitForARMFeedback" are invalid and will be removed by automation
+  // in presence of "ARMSignedOff".
+  armSignedOffLabel.shouldBePresent =
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    armSignedOffLabel.present;
+
+  // If given PR is in scope of ARM review and the review is not blocked and
+  // not signed-off, then the label "ARMChangesRequested" should remain present
+  // if it was already present. This means that labels "WaitForARMFeedback"
+  // is invalid and will be removed by automation in presence of
+  // "WaitForARMFeedback".
+  armChangesRequestedLabel.shouldBePresent =
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    !armSignedOffLabel.shouldBePresent &&
+    armChangesRequestedLabel.present;
+
+  // If given PR is in scope of ARM review and the review is not blocked and
+  // not signed-off, and ARM reviewer didn't request any changes,
+  // then the label "WaitForARMFeedback" should be present on the PR, whether
+  // it was present before or not.
+  waitForArmFeedbackLabel.shouldBePresent =
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    !armSignedOffLabel.shouldBePresent &&
+    !armChangesRequestedLabel.shouldBePresent &&
+    (waitForArmFeedbackLabel.present || true);
+
+  const exactlyOneArmReviewWorkflowLabelShouldBePresent =
+    (Number(notReadyForArmReviewLabel.shouldBePresent) +
+      Number(armSignedOffLabel.shouldBePresent) +
+      Number(armChangesRequestedLabel.shouldBePresent) +
+      Number(waitForArmFeedbackLabel.shouldBePresent) ===
+    1) || !armReviewLabelShouldBePresent
+
+  if (!exactlyOneArmReviewWorkflowLabelShouldBePresent) {
+    console.warn(
+      "ASSERTION VIOLATION! exactlyOneArmReviewWorkflowLabelShouldBePresent is false"
+    );
+  }
+
+  notReadyForArmReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armSignedOffLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armChangesRequestedLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  waitForArmFeedbackLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+
+  console.log(
+    `RETURN definition processARMReviewWorkflowLabels. ` +
+      `presentLabels: ${[...labelContext.present].join(",")}, ` +
+      `blockedOnVersioningPolicy: ${blockedOnVersioningPolicy}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}. ` +
+      `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `
+  );
+  return;
+}
+
+function getBlockedOnVersioningPolicy(
+  labelContext: LabelContext,
+  breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+  versioningReviewRequiredLabelShouldBePresent: boolean
+) {
+  const pendingVersioningReview =
+    versioningReviewRequiredLabelShouldBePresent &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    breakingChangeReviewRequiredLabelShouldBePresent &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy =
+    pendingVersioningReview || pendingBreakingChangeReview
+  return blockedOnVersioningPolicy;
+}
+
+function getBlockedOnRpaas(
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+  rpaasExceptionLabelShouldBePresent: boolean,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean
+)
+{
+  return (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
+  || ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+}
 // #endregion
 // #region checks
 /**
