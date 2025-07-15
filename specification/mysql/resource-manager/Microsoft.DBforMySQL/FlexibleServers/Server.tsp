@@ -116,7 +116,7 @@ interface Servers {
   batchUpdate is ArmResourceActionAsync<
     Server,
     ConfigurationListForBatchUpdate,
-    ArmResponse<Configuration[]>,
+    ArmResponse<Configuration>,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
