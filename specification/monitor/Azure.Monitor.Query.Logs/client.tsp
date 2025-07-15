@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using MonitorQueryLogs;
 
-@TypeSpec.Versioning.useDependency(Versions.v2022_10_27)
+@TypeSpec.Versioning.useDependency(Versions.V1)
 namespace ClientCustomizations;
 
 @client({

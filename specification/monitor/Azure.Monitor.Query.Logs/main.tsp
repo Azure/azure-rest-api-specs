@@ -16,18 +16,19 @@ using TypeSpec.Versioning;
 @service(#{ title: "Monitor Query Logs" })
 @versioned(Versions)
 @server(
-  "{endpoint}",
+  "{endpoint}/{apiVersion}",
   "Azure Monitor Logs Query Service",
   {
     /** The Log Analytics service endpoint. */
-    endpoint: url,
+    endpoint: url = "https://api.loganalytics.io",
+    apiVersion: Versions
   }
 )
 namespace MonitorQueryLogs;
 
 /** Service API versions */
 enum Versions {
-  /** The 2022-10-27 API version. */
+  /** The V1 API version. */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2022_10_27: "2022-10-27",
+  V1: "v1",
 }
