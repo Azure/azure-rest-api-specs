@@ -35,4 +35,7 @@ model SharedCustomizationOptions {
 
   @doc("Locale in which the output surrogates are written.")
   surrogateLocale?: string = "en-US";
+
+  @doc("Locale of the input text. Used for better PHI detection. Defaults to 'en-US'.")
+  inputLocale?: string = "en-US";
 }

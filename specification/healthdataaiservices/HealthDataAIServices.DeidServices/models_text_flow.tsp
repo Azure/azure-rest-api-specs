@@ -21,6 +21,10 @@ model DeidentificationContent {
   @added(Versions.v2024_12_15)
   encodedEntities?: Array<EncodedPhiEntity>;
 
+  @doc("List of PHI entities for SurrogateOnly operation with full encoding information. Cannot be used with EncodedEntities.")
+  @added(Versions.v2024_12_15)
+  entities?: Array<PhiEntity>;
+
   @doc("Customization parameters to override default service behaviors.")
   customizations?: DeidentificationCustomizationOptions;
 }
