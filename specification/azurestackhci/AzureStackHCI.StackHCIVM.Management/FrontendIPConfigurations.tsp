@@ -16,7 +16,8 @@ namespace Microsoft.AzureStackHCI;
 @doc("FrontendIPConfiguration resource.")
 @parentResource(LoadBalancer)
 @added(Versions.v2025_09_01_preview)
-model FrontendIPConfiguration is ProxyResource<FrontendIPConfigurationProperties> {
+model FrontendIPConfiguration
+  is ProxyResource<FrontendIPConfigurationProperties> {
   @doc("Name of the frontend ip configuration.")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path

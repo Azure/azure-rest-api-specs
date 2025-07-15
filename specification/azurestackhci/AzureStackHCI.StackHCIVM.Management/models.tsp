@@ -1495,8 +1495,8 @@ model LoadBalancerBackendAddress {
 @added(Versions.v2025_09_01_preview)
 @doc("LoadBalancerRuleProperties")
 model LoadBalancerRuleProperties {
-  @doc("arm reference to frontend IP being used by this LB")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("arm reference to frontend IP being used by this LB")
   frontendIPConfiguration: FrontendIPConfigurationArmReference;
 
   @doc("arm reference to backend pool being used by ths pool")
@@ -1571,12 +1571,12 @@ model ProbeProperties {
   provisioningState?: ProvisioningStateEnum;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 model InboundNATRuleProperties {
-  @doc("Arm Reference to the frontendIP used for this inbound nat rule")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Arm Reference to the frontendIP used for this inbound nat rule")
   frontendIPConfiguration: FrontendIPConfigurationArmReference;
 
   @doc("Frontend Port for the inbound rule")

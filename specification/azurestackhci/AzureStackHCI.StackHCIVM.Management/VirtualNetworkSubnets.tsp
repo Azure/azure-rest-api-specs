@@ -43,7 +43,10 @@ interface VirtualNetworkSubnets {
 
   @doc("The operation to update a virtual network subnet.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<VirtualNetworkSubnet, VirtualNetworkSubnetUpdateRequest>;
+  update is ArmCustomPatchAsync<
+    VirtualNetworkSubnet,
+    VirtualNetworkSubnetUpdateRequest
+  >;
 
   @doc("The operation to delete a virtual network.")
   delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkSubnet>;
