@@ -53,27 +53,27 @@ union GalleryScriptParameterType {
   string,
 
   /**
-   * String
+   * String gallery script parameter type
    */
   String: "String",
 
   /**
-   * Int
+   * Int gallery script parameter type
    */
   Int: "Int",
 
   /**
-   * Double
+   * Double gallery script parameter type
    */
   Double: "Double",
 
   /**
-   * Boolean
+   * Boolean gallery script parameter type
    */
   Boolean: "Boolean",
 
   /**
-   * Enum
+   * Enum gallery script parameter type
    */
   Enum: "Enum",
 }
