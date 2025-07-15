@@ -1,6 +1,8 @@
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace MonitorQueryMetrics;
@@ -95,6 +97,7 @@ op batch is Azure.Core.Foundations.Operation<
 
     /** Metrics batch body including the list of resource ids */
     @bodyRoot
+    @clientName("resourceIDs", "go")
     batchRequest: ResourceIdList;
   },
   MonitorQueryMetrics.MetricResultsResponse,
