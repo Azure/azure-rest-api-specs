@@ -8,11 +8,11 @@
  * @implements {ILogger}
  */
 export class CoreLogger {
-  /** @type {import('github-script').AsyncFunctionArguments['core']} */
+  /** @type {import('@actions/github-script').AsyncFunctionArguments['core']} */
   #core;
 
   /**
-   * @param {import('github-script').AsyncFunctionArguments['core']} core
+   * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
    */
   constructor(core) {
     this.#core = core;
