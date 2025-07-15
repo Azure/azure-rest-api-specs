@@ -1,0 +1,240 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DBforMySQL;
+/**
+ * Represents a server.
+ */
+model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
+  /**
+   * The name of the server.
+   */
+  @key("serverName")
+  @path
+  @segment("flexibleServers")
+  @pattern("^[a-z0-9][-a-z0-9]*(?<!-)$")
+  @minLength(1)
+  @maxLength(63)
+  name: string;
+
+  /**
+   * The cmk identity for the server.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: MySQLServerIdentity;
+
+  /**
+   * The SKU (pricing tier) of the server.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku?: MySQLServerSku;
+}
+
+@armResourceOperations
+interface Servers {
+  /**
+   * Gets information about a server.
+   */
+  get is ArmResourceRead<Server>;
+
+  /**
+   * Creates a new server or updates an existing server. The update action will overwrite the existing server.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    Server,
+    Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
+      Server,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<Server, PatchModel = ServerForUpdate>;
+
+  /**
+   * Deletes a server.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Server,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List all the servers in a given resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<Server>;
+
+  /**
+   * List all the servers in a given subscription.
+   */
+  list is ArmListBySubscription<Server>;
+
+  /**
+   * Exports the backup of the given server by creating a backup if not existing.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("backupAndExport")
+  @operationId("BackupAndExport_Create")
+  backupAndExportCreate is ArmResourceActionAsync<
+    Server,
+    BackupAndExportRequest,
+    ArmResponse<BackupAndExportResponse>
+  >;
+
+  /**
+   * Validates if backup can be performed for given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BackupAndExport_ValidateBackup")
+  validateBackup is ArmResourceActionSync<
+    Server,
+    void,
+    ArmResponse<ValidateBackupResponse>
+  >;
+
+  /**
+   * Update a list of configurations in a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("updateConfigurations")
+  @operationId("Configurations_BatchUpdate")
+  batchUpdate is ArmResourceActionAsync<
+    Server,
+    ConfigurationListForBatchUpdate,
+    ArmResponse<Configuration[]>,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Manual failover a server.
+   */
+  failover is ArmResourceActionAsync<Server, void, OkResponse>;
+
+  /**
+   * Validate a deployment of high availability.
+   */
+  validateEstimateHighAvailability is ArmResourceActionSync<
+    Server,
+    HighAvailabilityValidationEstimation,
+    ArmResponse<HighAvailabilityValidationEstimation>
+  >;
+
+  /**
+   * Restarts a server.
+   */
+  restart is ArmResourceActionAsync<Server, ServerRestartParameter, OkResponse>;
+
+  /**
+   * Starts a server.
+   */
+  start is ArmResourceActionAsync<Server, void, OkResponse>;
+
+  /**
+   * Stops a server.
+   */
+  stop is ArmResourceActionAsync<Server, void, OkResponse>;
+
+  /**
+   * Resets GTID on a server.
+   */
+  resetGtid is ArmResourceActionAsync<
+    Server,
+    ServerGtidSetParameter,
+    OkResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Detach VNet on a server.
+   */
+  detachVNet is ArmResourceActionAsync<
+    Server,
+    ServerDetachVNetParameter,
+    ArmResponse<Server>,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * List all the replicas for a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("replicas")
+  @operationId("Replicas_ListByServer")
+  listByServer is ArmResourceActionSync<
+    Server,
+    void,
+    ArmResponse<ResourceListResult<Server>>
+  >;
+
+  /**
+   * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ServersMigration_CutoverMigration")
+  cutoverMigration is ArmResourceActionAsync<
+    Server,
+    void,
+    ArmResponse<Server>,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * List all the server log files in a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("logFiles")
+  @operationId("LogFiles_ListByServer")
+  logFilesListByServer is ArmResourceActionSync<
+    Server,
+    void,
+    ArmResponse<ResourceListResult<LogFile>>
+  >;
+}
+
+@@doc(Server.name, "The name of the server.");
+@@doc(Server.properties, "Properties of the server.");
+@@doc(Servers.create::parameters.resource,
+  "The required parameters for creating or updating a server."
+);
+@@doc(Servers.update::parameters.properties,
+  "The required parameters for updating a server."
+);
+@@doc(Servers.backupAndExportCreate::parameters.body,
+  "The required parameters for creating and exporting backup of the given server."
+);
+@@doc(Servers.batchUpdate::parameters.body,
+  "The parameters for updating a list of server configuration."
+);
+@@doc(Servers.validateEstimateHighAvailability::parameters.body,
+  "The required parameters for validation of high availability deployment."
+);
+@@doc(Servers.restart::parameters.body,
+  "The required parameters for restarting a server."
+);
+@@doc(Servers.resetGtid::parameters.body,
+  "The required parameters for resetting GTID on a server."
+);
+@@doc(Servers.detachVNet::parameters.body,
+  "The required parameters for detach vnet on a server."
+);

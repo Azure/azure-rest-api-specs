@@ -1,0 +1,80 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Server.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DBforMySQL;
+/**
+ * A server's Advanced Threat Protection.
+ */
+@parentResource(Server)
+model AdvancedThreatProtection
+  is Azure.ResourceManager.ProxyResource<AdvancedThreatProtectionProperties> {
+  ...ResourceNameParameter<
+    Resource = AdvancedThreatProtection,
+    KeyName = "advancedThreatProtectionName",
+    SegmentName = "advancedThreatProtectionSettings",
+    NamePattern = "",
+    Type = AdvancedThreatProtectionName
+  >;
+}
+
+@armResourceOperations
+interface AdvancedThreatProtections {
+  /**
+   * Get a server's Advanced Threat Protection state
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AdvancedThreatProtectionSettings_Get")
+  get is ArmResourceRead<AdvancedThreatProtection>;
+
+  /**
+   * Updates a server's Advanced Threat Protection state.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("AdvancedThreatProtectionSettings_UpdatePut")
+  updatePut is ArmResourceCreateOrReplaceAsync<
+    AdvancedThreatProtection,
+    Response = ArmResourceUpdatedResponse<AdvancedThreatProtection> | ArmResourceCreatedResponse<
+      AdvancedThreatProtection,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates a server's Advanced Threat Protection state.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @patch(#{ implicitOptionality: false })
+  @operationId("AdvancedThreatProtectionSettings_Update")
+  update is ArmCustomPatchAsync<
+    AdvancedThreatProtection,
+    PatchModel = AdvancedThreatProtectionForUpdate
+  >;
+
+  /**
+   * Gets a list of server's Advanced Threat Protection states.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AdvancedThreatProtectionSettings_List")
+  list is ArmResourceListByParent<AdvancedThreatProtection>;
+}
+
+@@doc(AdvancedThreatProtection.name,
+  "The name of the Advanced Threat Protection state."
+);
+@@doc(AdvancedThreatProtection.properties, "Resource properties.");
+@@doc(AdvancedThreatProtections.updatePut::parameters.resource,
+  "The server's Advanced Threat Protection body to update."
+);
+@@doc(AdvancedThreatProtections.update::parameters.properties,
+  "The server's Advanced Threat Protection body to update."
+);

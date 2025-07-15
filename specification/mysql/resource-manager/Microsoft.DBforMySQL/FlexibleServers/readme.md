@@ -51,6 +51,8 @@ input-file:
 - preview/2024-12-01-preview/Maintenances.json
 - preview/2024-12-01-preview/PrivateEndpointConnections.json
 - preview/2024-12-01-preview/PrivateLinkResources.json
+- preview/2024-12-01-preview/common-types.json
+
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -122,7 +124,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
