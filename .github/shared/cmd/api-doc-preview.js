@@ -6,8 +6,7 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, getChangedFiles, pathExists } from "../src/changed-files.js";
-import { filterAsync } from "../src/array.js";
+import { swagger, getChangedFilesStatuses } from "../src/changed-files.js";
 
 import {
   mappingJSONTemplate,
@@ -82,7 +81,7 @@ if (!specRepoPrNumber) {
   validArgs = false;
 }
 
-if (!specRepoRoot || !(await pathExists(resolve(specRepoRoot)))) {
+if (!specRepoRoot) {
   console.log(`Invalid parameter --spec-repo-root. Value given: ${specRepoRoot || "<empty>"}`);
   validArgs = false;
 }
@@ -94,22 +93,26 @@ if (!validArgs) {
 
 // Get selected version and swaggers to process
 
-const changedFiles = await getChangedFiles({ cwd: specRepoRoot });
-console.log(`Found ${changedFiles.length} changed files in ${specRepoRoot}`);
+const changedFileStatuses = await getChangedFilesStatuses({ cwd: specRepoRoot });
+
+// Exclude deleted files as they are not relevant for generating documentation.
+const changedFiles = [
+  ...changedFileStatuses.additions,
+  ...changedFileStatuses.modifications,
+  // Current names of renamed files are interesting, previous names are not.
+  ...changedFileStatuses.renames.map((r) => r.to),
+];
+console.log(`Found ${changedFiles.length} relevant changed files in ${specRepoRoot}`);
 console.log("Changed files:");
 changedFiles.forEach((file) => console.log(`  - ${file}`));
 const swaggerPaths = changedFiles.filter(swagger);
-const existingSwaggerFiles = await filterAsync(
-  swaggerPaths,
-  async (p) => await pathExists(resolve(specRepoRoot, p)),
-);
 
-if (existingSwaggerFiles.length === 0) {
+if (swaggerPaths.length === 0) {
   console.log("No eligible swagger files found. No documentation artifacts will be written.");
   process.exit(0);
 }
 
-const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(existingSwaggerFiles);
+const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(swaggerPaths);
 
 const key = {
   repoName: specRepoName,

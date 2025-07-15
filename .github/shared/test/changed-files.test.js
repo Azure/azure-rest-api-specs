@@ -246,14 +246,4 @@ describe("changedFiles", () => {
       ]);
     });
   });
-
-  describe("pathExists", () => {
-    it("returns true for existing path", async () => {
-      expect(await pathExists(".")).toBe(true);
-    });
-
-    it("returns false for non-existing path", async () => {
-      expect(await pathExists("non/existing/path")).toBe(false);
-    });
-  });
 });
