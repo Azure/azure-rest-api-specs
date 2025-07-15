@@ -26,8 +26,11 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-signalr"
     namespace: "com.azure.resourcemanager.signalr"
-    service-name: "SignalR" # human-readable service name, whitespace allowed
+    service-name: "SignalR"
     flavor: azure
+    resource-collection-associations:
+    - resource: SignalRResource
+      collection: SignalR
   "@azure-tools/typespec-ts":
     package-dir: "arm-signalr"
     flavor: azure
