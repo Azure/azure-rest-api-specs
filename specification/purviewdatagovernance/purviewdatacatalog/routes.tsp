@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace purviewdatacatalog;
+namespace PurviewDataCatalog;
 
 @route("/administration/globalizeDataAssets")
 @post

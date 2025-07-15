@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 /**
  * Creates a data plane client for Purview Data Catalog.
  */
-@service(#{ title: "purviewdatacatalog" })
+@service(#{ title: "PurviewDataCatalog" })
 @server(
   "{$host}",
   "Creates a data plane client for Purview Data Catalog.",
@@ -28,4 +28,4 @@ using TypeSpec.Versioning;
   }
 )
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace purviewdatacatalog;
+namespace PurviewDataCatalog;
