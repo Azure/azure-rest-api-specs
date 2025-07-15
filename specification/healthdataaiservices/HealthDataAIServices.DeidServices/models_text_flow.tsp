@@ -16,7 +16,7 @@ model DeidentificationContent {
   @doc("Operation to perform on the input documents.")
   @clientName("operationType", "csharp,java,python")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
-  
+
   @doc("List of PHI entities with simplified single encoding for SurrogateOnly operation. Cannot be used with Entities.")
   @added(Versions.v2024_12_15)
   encodedEntities?: Array<EncodedPhiEntity>;
