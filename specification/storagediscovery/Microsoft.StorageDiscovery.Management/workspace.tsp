@@ -45,14 +45,11 @@ model StorageDiscoveryWorkspaceProperties {
  * Storage Discovery Sku
  */
 union StorageDiscoverySku {
-  @doc("Free Sku")
-  Free: "Free",
-
   @doc("Standard Sku")
   Standard: "Standard",
 
-  @doc("Premium Sku")
-  Premium: "Premium",
+  @doc("Free Sku")
+  Free: "Free",
 
   string,
 }
