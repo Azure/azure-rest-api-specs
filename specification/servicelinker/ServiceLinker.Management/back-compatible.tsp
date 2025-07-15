@@ -76,3 +76,7 @@ using Microsoft.ServiceLinker;
 // ConfigurationNamesOperationGroup operations with ConfigurationNames_ prefix
 @@clientLocation(ConfigurationNamesOperationGroup.list, "ConfigurationNames");
 @@clientName(ConfigurationNamesOperationGroup.list, "List");
+@@clientName(LinkerResources.generateConfigurations::parameters.body,
+  "parameters"
+);
+@@clientName(Linker.generateConfigurations::parameters.body, "parameters");

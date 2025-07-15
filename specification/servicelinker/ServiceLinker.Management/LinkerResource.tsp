@@ -101,14 +101,9 @@ interface LinkerResources {
    */
   generateConfigurations is LinkerResourceOps.ActionSync<
     LinkerResource,
-    {
-      /**
-       * Connection Info, including format, secret store, etc
-       */
-      @bodyRoot
-      parameters?: ConfigurationInfo;
-    },
-    ArmResponse<ConfigurationResult>
+    ConfigurationInfo,
+    ArmResponse<ConfigurationResult>,
+    OptionalRequestBody = true
   >;
 }
 @armResourceOperations
@@ -197,14 +192,9 @@ interface Linker {
    */
   generateConfigurations is LinkerOps.ActionSync<
     LinkerResource,
-    {
-      /**
-       * Connection Info, including format, secret store, etc
-       */
-      @bodyRoot
-      parameters?: ConfigurationInfo;
-    },
-    ArmResponse<ConfigurationResult>
+    ConfigurationInfo,
+    ArmResponse<ConfigurationResult>,
+    OptionalRequestBody = true
   >;
 }
 
@@ -216,3 +206,9 @@ interface Linker {
 @@doc(LinkerResources.update::parameters.properties, "Connector details.");
 @@doc(Linker.createOrUpdate::parameters.resource, "Linker details.");
 @@doc(Linker.update::parameters.properties, "Linker details.");
+@@doc(LinkerResources.generateConfigurations::parameters.body,
+  "Connection Info, including format, secret store, etc"
+);
+@@doc(Linker.generateConfigurations::parameters.body,
+  "Connection Info, including format, secret store, etc"
+);
