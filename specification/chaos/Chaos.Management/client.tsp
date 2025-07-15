@@ -64,4 +64,3 @@ using Microsoft.Chaos;
 @@flattenProperty(ExperimentExecutionDetails.properties);
 
 @@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript");
-@@clientName(Microsoft.Chaos.Operations.list, "list", "!javascript");

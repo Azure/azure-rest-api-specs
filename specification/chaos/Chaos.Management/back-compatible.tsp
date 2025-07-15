@@ -22,6 +22,6 @@ using Microsoft.Chaos;
 @@clientLocation(ExperimentExecutions.listAllExecutions, Experiments);
 @@clientLocation(ExperimentExecutions.getExecutionDetails, Experiments);
 
-@@clientName(Operations.list, "ListAll");
+@@clientName(Operations.list, "ListAll", "autorest");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(PrivateAccesses.privateLinkResources, "GetPrivateLinkResources");
