@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // @ts-check
+
 import { join, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";

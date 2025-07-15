@@ -1,3 +1,5 @@
+// @ts-check
+
 import { test, describe, expect } from "vitest";
 import {
   parseSwaggerFilePath,
