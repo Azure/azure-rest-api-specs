@@ -1,4 +1,7 @@
+import "@typespec/versioning";
+
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -27,7 +30,6 @@ model PhiEntity {
   confidenceScore?: float64;
 }
 
-
 @doc("Simplified PHI Entity for use in SurrogateOnly operations with single encoding.")
 @added(Versions.v2024_12_15)
 model EncodedPhiEntity {
@@ -46,7 +48,6 @@ model EncodedPhiEntity {
   @doc("Text of the entity (optional).")
   text?: string;
 }
-
 
 @doc("String index encoding model.")
 model StringIndex {
@@ -162,3 +163,16 @@ union PhiCategory {
   string,
 }
 
+@doc("Encoding type for text offset and length calculations.")
+union EncodingType {
+  @doc("UTF-8 encoding.")
+  Utf8: "Utf8",
+
+  @doc("UTF-16 encoding. Primary encoding used by .NET, Java, and JavaScript.")
+  Utf16: "Utf16",
+
+  @doc("CodePoint encoding. Primary encoding used by Python.")
+  CodePoint: "CodePoint",
+
+  string,
+}

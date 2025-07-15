@@ -1,6 +1,6 @@
-import "@azure-tools/typespec-versioning";
+import "@typespec/versioning";
 
-using Azure.Versioning;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
