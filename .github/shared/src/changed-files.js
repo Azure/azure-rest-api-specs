@@ -2,7 +2,6 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { access } from "fs/promises";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
