@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 
-// import * as path from "path";
 import * as fs from "fs";
-// import { glob } from "glob";
+import * as commonmark from "commonmark";
+import yaml from "js-yaml";
+import { glob } from "glob";
+import * as _ from "lodash";
 
-
+import * as path from "path";
 // import { Swagger } from "@azure-tools/specs-shared/swagger";
 // import { includesFolder } from "@azure-tools/specs-shared/path";
 // import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 
-import { FileTypes, ChangeTypes, PRChange, ChangeHandler, PRType, ImpactAssessment, LabelContext } from "./types.js"
+import { FileTypes, ChangeTypes, PRChange, ChangeHandler, PRType, ImpactAssessment, LabelContext, PRContext, Label, DiffResult, ReadmeTag } from "./types.js"
 
-export async function evaluateImpact(context: PRContext, targetDirectory: string, existingLabels: string[], fileList?: string[]): Promise<ImpactAssessment> {
-  const labelContext: LabelContext = {
-    present: new Set(existingLabels),
-    toAdd: new Set(),
-    toRemove: new Set()
-  };
-
+export async function evaluateImpact(context: PRContext, labelContext: LabelContext): Promise<ImpactAssessment> {
   // examine changed files. if changedpaths includes data-plane, add "data-plane"
   // same for "resource-manager". We care about whether resourcemanager will be present for a later check
   const { resourceManagerLabelShouldBePresent } = await processPRType(
@@ -90,7 +86,6 @@ export function isManagementPR(filePaths: string[]): boolean {
 export function isDataPlanePR(filePaths: string[]): boolean {
   return filePaths.some((it) => it.includes("data-plane"));
 }
-
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
   const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
@@ -173,7 +168,7 @@ export const getResourceProviderFromFilePath = (
   return undefined;
 };
 
-async function isNewApiVersion(context: IValidatorContext): Promise<boolean> {
+async function isNewApiVersion(context: PRContext): Promise<boolean> {
   const pr = await createPullRequestProperties(
     context,
     "pr-summary-new-api-version"
@@ -219,7 +214,7 @@ async function isNewApiVersion(context: IValidatorContext): Promise<boolean> {
     return false;
   }
 
-  const targetBranchRPFolder = resolve(pr?.workingDir!, firstRPFolder);
+  const targetBranchRPFolder = path.resolve(pr?.workingDir!, firstRPFolder);
 
   console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
 
@@ -369,63 +364,17 @@ async function processBreakingChangeLabels(
  */
 function checkPrTargetsProductionBranch(prContext: PRContext): boolean {
 
+
   const targetsPublicProductionBranch =
-    prContext.sourceRepoUri.includes("azure-rest-api-specs")
-    && !prContext.sourceRepoUri.includes("azure-rest-api-specs-pr")
-    && prContext.targetBranch == "main"
+    prContext.repo.includes("azure-rest-api-specs")
+    && prContext.repo !== "azure-rest-api-specs-pr"
+    && prContext.targetBranch === "main";
 
   const targetsPrivateProductionBranch =
-    prContext.sourceRepoUri.includes("azure-rest-api-specs-pr")
-    && prContext.targetBranch == "RPSaaSMaster"
+    prContext.repo === "azure-rest-api-specs-pr"
+    && prContext.targetBranch === "RPSaaSMaster"
 
   return targetsPublicProductionBranch || targetsPrivateProductionBranch
-}
-
-\async function processTypeSpec(
-  ctx: IValidatorContext,
-  labelContext: LabelContext,
-) {
-  console.log("ENTER definition processTypeSpec")
-  const typeSpecLabel = new Label("TypeSpec", labelContext.present);
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
-  typeSpecLabel.shouldBePresent = false;
-  const handlers: ChangeHandler[] = [];
-  const typeSpecFileHandler = () => {
-    return (prChange: PRChange) => {
-      // Note: this code will be executed if the PR has a diff on a TypeSpec file,
-      // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
-      typeSpecLabel.shouldBePresent = true;
-    };
-  };
-  const swaggerFileHandler = () => {
-    return (prChange: PRChange) => {
-      if (prChange.changeType !== "Deletion" && isSwaggerGeneratedByTypeSpec(prChange.filePath)) {
-        typeSpecLabel.shouldBePresent = true;
-      }
-    };
-  };
-  handlers.push({
-    TypeSpecFile: typeSpecFileHandler(),
-    SwaggerFile: swaggerFileHandler(),
-  });
-  await processPrChanges(ctx, handlers);
-
-  typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  console.log("RETURN definition processTypeSpec")
-}
-
-
-/**
- * @param {string} swaggerFilePath
- * @returns {boolean}
- */
-function isSwaggerGeneratedByTypeSpec(swaggerFilePath) {
-  try {
-    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info['x-typespec-generated']
-  }
-  catch {
-    return false
-  }
 }
 
 async function processTypeSpec(
@@ -461,13 +410,22 @@ async function processTypeSpec(
   console.log("RETURN definition processTypeSpec")
 }
 
+function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
+  try {
+    return !!JSON.parse(fs.readFileSync(swaggerFilePath).toString())?.info['x-typespec-generated']
+  }
+  catch {
+    return false
+  }
+}
+
 export async function processPrChanges(
-  ctx: IValidatorContext,
+  ctx: PRContext,
   Handlers: ChangeHandler[]
 ) {
   console.log("ENTER definition processPrChanges")
-  const prChange = await getPRChanges(ctx);
-  prChange.forEach((prChange) => {
+  const prChanges = await getPRChanges(ctx);
+  prChanges.forEach((prChange) => {
     Handlers.forEach((handler) => {
       if (prChange.fileType in handler) {
         handler?.[prChange.fileType]?.(prChange);
@@ -477,7 +435,7 @@ export async function processPrChanges(
   console.log("RETURN definition processPrChanges")
 }
 
-export async function getPRChanges(ctx: IValidatorContext): Promise<PRChange[]> {
+export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
   console.log("ENTER definition getPRChanges")
   const results: PRChange[] = [];
 
@@ -539,7 +497,7 @@ export async function getPRChanges(ctx: IValidatorContext): Promise<PRChange[]> 
 // related pending work:
 // If a PR has both data-plane and resource-manager labels, it should fail with appropriate messaging #8144
 // https://github.com/Azure/azure-sdk-tools/issues/8144
-async function processPRType(context: IValidatorContext,
+async function processPRType(context: PRContext,
   labelContext: LabelContext): Promise<{ resourceManagerLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processPRType")
   const types: PRType[] = await getPRType(context);
@@ -549,22 +507,6 @@ async function processPRType(context: IValidatorContext,
 
   console.log("RETURN definition processPRType")
   return { resourceManagerLabelShouldBePresent }
-}
-
-export async function processPrChanges(
-  ctx: IValidatorContext,
-  Handlers: ChangeHandler[]
-) {
-  console.log("ENTER definition processPrChanges")
-  const prChange = await getPRChanges(ctx);
-  prChange.forEach((prChange) => {
-    Handlers.forEach((handler) => {
-      if (prChange.fileType in handler) {
-        handler?.[prChange.fileType]?.(prChange);
-      }
-    });
-  });
-  console.log("RETURN definition processPrChanges")
 }
 
 async function getPRType(context: IValidatorContext): Promise<PRType[]> {
@@ -616,21 +558,22 @@ function processPRTypeLabel(
 }
 
 async function processSuppression(
-  context: IValidatorContext,
+  context: PRContext,
   labelContext: LabelContext,
 ) {
   console.log("ENTER definition processSuppression")
+
   const suppressionReviewRequiredLabel = new Label("SuppressionReviewRequired", labelContext.present);
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   suppressionReviewRequiredLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
-  const pr = await createPullRequestProperties(context, "pr-summary");
+
   const createReadmeFileHandler = () => {
     return (e: PRChange) => {
       if (
         (e.changeType === "Addition" && getSuppressions(e.filePath).length) ||
         (e.changeType === "Update" &&
-          diffSuppression(resolve(pr?.workingDir!, e.filePath), e.filePath)
+          diffSuppression(path.resolve(context.targetDirectory, e.filePath), path.resolve(context.sourceDirectory,e.filePath))
             .length)
       ) {
         suppressionReviewRequiredLabel.shouldBePresent = true;
@@ -676,7 +619,7 @@ function getSuppressions(readmePath: string) {
   };
   let suppressionResult: any[] = [];
   try {
-    const readme = readFileSync(readmePath).toString();
+    const readme = fs.readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(parseCommonmark(readme));
     for (const block of codeBlocks) {
       if (block.literal) {

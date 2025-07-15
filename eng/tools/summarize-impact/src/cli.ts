@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 import { evaluateImpact } from "./runner.js";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 
 import { resolve } from "path";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import fs from "node:fs/promises";
 import { simpleGit } from "simple-git";
-import { extractInputs } from "@azure-tools/specs-shared/context";
+import { LabelContext, PRContext } from "./types.js";
 
 export async function getRootFolder(inputPath: string): Promise<string> {
   try {
@@ -25,9 +25,14 @@ export async function getRootFolder(inputPath: string): Promise<string> {
 export async function main() {
   const config: ParseArgsConfig = {
     options: {
+      // the target branch checked out
       targetDirectory: {
         type: "string",
-        short: "d",
+        multiple: false,
+      },
+      // the pr
+      sourceDirectory: {
+        type: "string",
         multiple: false,
         default: process.cwd(),
       },
@@ -61,59 +66,49 @@ export async function main() {
         type: "string",
         short: "r",
         multiple: false,
+      },
+      labels: {
+        type: "string",
+        short: "l",
+        multiple: false
       }
     },
     allowPositionals: true,
   };
 
   const { values: opts, positionals } = parseArgs(config);
-  console.log(positionals);
-  // this option has a default value of process.cwd(), so we can assume it is always defined
-  // just need to resolve that here to make ts aware of it
+
+  // todo: refactor these opts? They're not really options. I just don't want a bunch of positional args for clarity's sake
+  const sourceDirectory = opts.sourceDirectory as string;
   const targetDirectory = opts.targetDirectory as string;
-
-  const resolvedGitRoot = await getRootFolder(targetDirectory);
-
-  let fileList: string[] | undefined = undefined;
-  if (opts.fileList !== undefined) {
-    const fileListPath = resolve(opts.fileList as string);
-    try {
-      const fileContent = await fs.readFile(fileListPath, { encoding: "utf-8" });
-      fileList = fileContent
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((line) => line.length > 0);
-      console.log(`Loaded ${fileList.length} files from ${opts.fileList}`);
-    } catch (error) {
-      console.error(
-        `Error reading file list from ${opts.fileList}: ${error instanceof Error ? error.message : String(error)}`,
-      );
-      console.error("User provided file list that is not found.");
-      console.error(
-        "Please ensure the file exists and is readable, or do not provide the option 'fileList'",
-      );
-      process.exit(1);
-    }
-  }
-  else {
-    if (!fileList){
-      await getChangedFiles({ cwd: resolvedGitRoot });
-    }
-  }
-
+  const sourceGitRoot = await getRootFolder(sourceDirectory);
+  const targetGitRoot = await getRootFolder(targetDirectory)
+  const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
   const targetBranch = opts.targetBranch as string;
   const repo = opts.repo as string;
   const prNumber = opts.number as string;
+  const existingLabels = (opts.labels as string).split(",").map((l) => l.trim());
 
-  const context: any = {
-    sha,
-    sourceBranch,
-    targetBranch,
-    repo,
-    prNumber
+  const labelContext: LabelContext = {
+    present: new Set(existingLabels),
+    toAdd: new Set(),
+    toRemove: new Set()
   };
 
-  evaluateImpact(context, resolvedGitRoot, fileList,);
+  const prContext = new PRContext(
+    sourceGitRoot,
+    targetGitRoot,
+    labelContext,
+    {
+      sha,
+      sourceBranch,
+      targetBranch,
+      repo,
+      prNumber,
+      fileList
+    });
+
+  evaluateImpact(prContext, labelContext);
 }
