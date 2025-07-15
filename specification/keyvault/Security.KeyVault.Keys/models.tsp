@@ -142,16 +142,18 @@ union JsonWebKeyCurveName {
 /**
  * An algorithm used for key wrapping and unwrapping.
  */
-@added(KeyVault.Versions.`v2025_07_01_preview`)
+@added(KeyVault.Versions.v2025_07_01_preview)
 union JsonWebKeyWrapAlgorithm {
   string,
 
   /** [Not recommended] RSAES-PKCS1-V1_5 key wrap, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
   RSA1_5: "RSA1_5",
+
   /**
    * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems.
    */
   RSA_OAEP: "RSA-OAEP",
+
   /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256. */
   RSA_OAEP256: "RSA-OAEP-256",
 
@@ -160,14 +162,19 @@ union JsonWebKeyWrapAlgorithm {
 
   /** 128-bit AES key wrap. */
   A128_KW: "A128KW",
+
   /** 192-bit AES key wrap. */
   A192_KW: "A192KW",
+
   /** 256-bit AES key wrap. */
   A256_KW: "A256KW",
+
   /** 128-bit AES key wrap with padding. */
   A256_KWPAD: "A256KWPAD",
+
   /** 192-bit AES key wrap with padding. */
   A128_KWPAD: "A128KWPAD",
+
   /** 256-bit AES key wrap with padding. */
   A192_KWPAD: "A192KWPAD",
 }
@@ -468,7 +475,7 @@ model KeyAttestation {
 /**
  * The Secure Key wrap operation result.
  */
-@added(KeyVault.Versions.`v2025_07_01_preview`)
+@added(KeyVault.Versions.v2025_07_01_preview)
 model SecureKeyOperationCommonParameters {
   /**
    * algorithm identifier
@@ -480,7 +487,7 @@ model SecureKeyOperationCommonParameters {
 /**
  * The Secure Key wrap attributes.
  */
-@added(KeyVault.Versions.`v2025_07_01_preview`)
+@added(KeyVault.Versions.v2025_07_01_preview)
 model SecureKeyWrapOperationParameters {
   ...SecureKeyOperationCommonParameters;
 }
@@ -488,9 +495,10 @@ model SecureKeyWrapOperationParameters {
 /**
  * The Secure Key unwrap attributes.
  */
-@added(KeyVault.Versions.`v2025_07_01_preview`)
+@added(KeyVault.Versions.v2025_07_01_preview)
 model SecureKeyUnWrapOperationParameters {
   ...SecureKeyOperationCommonParameters;
+
   /**
    * The value to operate on.
    */
@@ -891,7 +899,7 @@ model KeyOperationsParameters {
 /**
  * The secure key wrap operation result.
  */
-@added(KeyVault.Versions.`v2025_07_01_preview`)
+@added(KeyVault.Versions.v2025_07_01_preview)
 model SecureKeyOperationResult {
   /**
    * Key identifier
