@@ -1,3 +1,6 @@
+/* v8 ignore start */
+// @ts-check
+
 /**
  * Breaking change configuration and constants for Azure REST API specs
  * This file contains the single source of truth for all breaking change and versioning approval labels.
