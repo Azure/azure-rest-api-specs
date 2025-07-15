@@ -133,17 +133,35 @@ union StorageDiscoverySku {
   @removed(ApiVersion.v2025_03_01_preview)
   Basic: "Basic",
 
+  @doc("Standard Sku")
+  Standard: "Standard",
+
   @doc("Free Sku")
   @added(ApiVersion.v2025_03_01_preview)
   Free: "Free",
 
-  @doc("Standard Sku")
-  Standard: "Standard",
-
   @doc("Premium Sku")
+  @removed(ApiVersion.v2025_06_01_preview)
   Premium: "Premium",
 
   string,
+}
+
+@added(ApiVersion.v2025_06_01_preview)
+model StorageDiscoveryWorkspacePropertiesUpdate
+  is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
+    StorageDiscoveryWorkspaceProperties,
+    "oldScopes"
+  >>>>;
+
+@added(ApiVersion.v2025_06_01_preview)
+model StorageDiscoveryWorkspaceUpdate
+  is UpdateableProperties<OptionalProperties<OmitDefaults<OmitProperties<
+    StorageDiscoveryWorkspace,
+    "properties" | "name"
+  >>>> {
+  /** The resource-specific properties for this resource. */
+  properties?: StorageDiscoveryWorkspacePropertiesUpdate;
 }
 
 /**
@@ -249,10 +267,22 @@ model StorageDiscoveryDestination {
 interface StorageDiscoveryWorkspaces {
   get is ArmResourceRead<StorageDiscoveryWorkspace>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<StorageDiscoveryWorkspace>;
-  update is ArmResourcePatchSync<
+
+  @removed(ApiVersion.v2025_06_01_preview)
+  @renamedFrom(ApiVersion.v2025_06_01_preview, "update")
+  @sharedRoute
+  oldUpdate is ArmResourcePatchSync<
     StorageDiscoveryWorkspace,
     StorageDiscoveryWorkspaceProperties
   >;
+
+  @added(ApiVersion.v2025_06_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchSync<
+    StorageDiscoveryWorkspace,
+    StorageDiscoveryWorkspaceUpdate
+  >;
+
   delete is ArmResourceDeleteSync<StorageDiscoveryWorkspace>;
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;
   listBySubscription is ArmListBySubscription<StorageDiscoveryWorkspace>;
