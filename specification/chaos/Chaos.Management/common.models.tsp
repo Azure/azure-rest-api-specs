@@ -13,7 +13,6 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to avoid breaking SDK change"
-
 alias ParentResourceParameters = {
   /**
    * The parent resource provider namespace.

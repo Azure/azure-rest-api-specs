@@ -7,9 +7,15 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 // PrivateEndpointConnections interface operations with PrivateAccesses_ prefix
-@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection, PrivateAccesses);
-@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection, PrivateAccesses);
-@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections, PrivateAccesses);
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  PrivateAccesses
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  PrivateAccesses
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  PrivateAccesses
+);
 
 // ExperimentExecutions interface operations with Experiments_ prefix
 @@clientLocation(ExperimentExecutions.getExecution, Experiments);
