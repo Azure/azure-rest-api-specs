@@ -101,6 +101,7 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "vmInstanceIDs"
 );
+@@clientName(VirtualMachineScaleSets.scaleOut::parameters.body, "parameters");
 @@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
   "vmInstanceIDs"
 );
