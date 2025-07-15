@@ -21,7 +21,9 @@ using TypeSpec.Versioning;
   {
     /** The Log Analytics service endpoint. */
     endpoint: url = "https://api.loganalytics.io",
-    apiVersion: Versions
+
+    /** The service API version. */
+    apiVersion: Versions,
   }
 )
 namespace MonitorQueryLogs;
