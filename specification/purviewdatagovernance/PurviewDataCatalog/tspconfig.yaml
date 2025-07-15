@@ -7,6 +7,14 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json"
+    # input-file:
+    #   - main.tsp
+    #   - client.tsp
+    #   - models.tsp
+    #   - routes.tsp
+  linter:
+    extends:
+      - "@azure-tools/typespec-azure-rulesets/data-plane"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true
@@ -19,6 +27,3 @@ options:
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
   # "@azure-tools/typespec-ts": true
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"

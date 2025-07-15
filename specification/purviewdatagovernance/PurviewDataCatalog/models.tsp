@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace PurviewDataCatalogClient;
+namespace PurviewDataCatalog;
 
 union MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType {
   integer,
