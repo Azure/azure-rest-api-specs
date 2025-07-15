@@ -496,6 +496,13 @@ model SecureKeyUnWrapOperationParameters {
    */
   @encode("base64url")
   value: bytes;
+
+  /**
+   * The attestation assertion for the target of the key release.
+   */
+  @minLength(1)
+  @encodedName("application/json", "target")
+  targetAttestationToken: string;
 }
 
 /**

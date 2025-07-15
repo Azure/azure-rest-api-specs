@@ -480,7 +480,7 @@ op securewrapKey is KeyVaultOperation<
 
 /**
  * The SECURE UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the SECURE WRAP operation. The SECURE UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
- * The secure unwrap operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.
+ * The SECURE UNWRAP operation ensures that MAA (Microsoft Azure Attestation Service) is used to attest the TEE (Trusted Execution Environment) before the key is unwrapped.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -507,7 +507,7 @@ op secureunwrapkey is KeyVaultOperation<
     keyVersion?: string;
 
     /**
-     * The parameters for wrap operation.
+     * The parameters for unwrap operation.
      */
     #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
