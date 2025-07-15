@@ -497,7 +497,6 @@ model VirtualNetworkSubnetIpConfigurationReference {
     {
       type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfiguration";
     }
-    // (abhpandey): Add NAT Gateway and DNS when needed.
   ]>;
 }
 
@@ -562,9 +561,9 @@ model ManagedNetworkFabricArmReference {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("The ARM ID for a Virutal Network subnet")
+@doc("The ARM ID for a Virtual Network subnet")
 model VirtualNetworkSubnetArmReference {
-  @doc("The ARM ID for a Virutal Network subnet.")
+  @doc("The ARM ID for a Virtual Network subnet.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
@@ -829,7 +828,7 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @added(Versions.v2025_09_01_preview)
-  @doc("Managed network fabric l2/l3 ISD for this lnet. If set empty, the lnet remains entirely local.")
+  @doc("Managed network fabric l2/l3 ISD for this logical network. If set empty, the logical network remains entirely local.")
   fabricNetworkConfiguration?: ManagedNetworkFabricArmReference;
 
   @doc("Subnet - list of subnets under the logical network")
@@ -1272,7 +1271,7 @@ model SubnetUpdateProperties {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("Virtual newtork resource properties")
+@doc("Virtual network resource properties")
 model VirtualNetworkProperties {
   @doc("Virtual Network address space. All subnets must be within the defined range.")
   addressSpace: VirtualNetworkAddressSpace;
@@ -1340,7 +1339,7 @@ model VirtualNetworkSubnetProperties {
   @doc("RouteTable defining custom routes for the subnet.")
   routeTable?: RouteTable;
 
-  @doc("List of ipconfiguration")
+  @doc("List of ip configurations for the subnet")
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[];
 
@@ -1386,7 +1385,7 @@ model PublicIPProperties {
   @doc("ipAllocationScope: Arm Reference to the logical network to allocate this from")
   ipAllocationScope: LogicalNetworkArmReference;
 
-  @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from lnet address space.")
+  @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;
 
   @doc("Provisioning state of the public IP")
@@ -1439,7 +1438,7 @@ model NatGatewayStatusProvisioningStatus {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("Load Balancer resource properites.")
+@doc("Load Balancer resource properties")
 model LoadBalancerProperties {
   @doc("Provisioning state of the Load Balancer")
   @visibility(Lifecycle.Read)
@@ -1499,10 +1498,10 @@ model LoadBalancerRuleProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   frontendIPConfiguration: FrontendIPConfigurationArmReference;
 
-  @doc("arm reference to backedn pool being used by ths pool")
+  @doc("arm reference to backend pool being used by ths pool")
   backendAddressPool: BackendAddressPoolArmReference;
 
-  @doc("Frontedn port to accept connections")
+  @doc("Frontend port to accept connections")
   frontendPort: int32;
 
   @doc("backendPort to forward connections")

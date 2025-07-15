@@ -5691,7 +5691,7 @@
     },
     "LoadBalancerProperties": {
       "type": "object",
-      "description": "Load Balancer resource properites.",
+      "description": "Load Balancer resource properties",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -5710,12 +5710,12 @@
         },
         "backendAddressPool": {
           "$ref": "#/definitions/BackendAddressPoolArmReference",
-          "description": "arm reference to backedn pool being used by ths pool"
+          "description": "arm reference to backend pool being used by ths pool"
         },
         "frontendPort": {
           "type": "integer",
           "format": "int32",
-          "description": "Frontedn port to accept connections"
+          "description": "Frontend port to accept connections"
         },
         "backendPort": {
           "type": "integer",
@@ -5898,7 +5898,7 @@
         },
         "fabricNetworkConfiguration": {
           "$ref": "#/definitions/ManagedNetworkFabricArmReference",
-          "description": "Managed network fabric l2/l3 ISD for this lnet. If set empty, the lnet remains entirely local."
+          "description": "Managed network fabric l2/l3 ISD for this logical network. If set empty, the logical network remains entirely local."
         },
         "subnets": {
           "type": "array",
@@ -6910,7 +6910,7 @@
         },
         "ipAddress": {
           "type": "string",
-          "description": "IP Address. This is static. If the user specifies, we allocate that otherwise allocate from lnet address space."
+          "description": "IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -8694,7 +8694,7 @@
     },
     "VirtualNetworkProperties": {
       "type": "object",
-      "description": "Virtual newtork resource properties",
+      "description": "Virtual network resource properties",
       "properties": {
         "addressSpace": {
           "$ref": "#/definitions/VirtualNetworkAddressSpace",
@@ -8773,12 +8773,12 @@
     },
     "VirtualNetworkSubnetArmReference": {
       "type": "object",
-      "description": "The ARM ID for a Virutal Network subnet",
+      "description": "The ARM ID for a Virtual Network subnet",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ID for a Virutal Network subnet.",
+          "description": "The ARM ID for a Virtual Network subnet.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -8853,7 +8853,7 @@
         },
         "ipConfigurations": {
           "type": "array",
-          "description": "List of ipconfiguration",
+          "description": "List of ip configurations for the subnet",
           "items": {
             "$ref": "#/definitions/VirtualNetworkSubnetIpConfigurationReference"
           },

@@ -40,7 +40,7 @@ interface LoadBalancers {
   @doc("The operation to create or update a LoadBalancer. Please note some properties can be set only during LoadBalancer creation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LoadBalancer>;
 
-  @doc("Updates a load balacner tags.")
+  @doc("Updates a load balancer tags.")
   updateTags is ArmTagsPatchAsync<LoadBalancer, TagsObject>;
 
   @doc("The operation to delete a LoadBalancer.")
