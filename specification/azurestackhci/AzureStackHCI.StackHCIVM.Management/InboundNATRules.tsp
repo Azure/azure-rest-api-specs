@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @doc("InboundNATRule resource.")
 @parentResource(LoadBalancer)
 @added(Versions.v2025_09_01_preview)
@@ -29,7 +29,7 @@ model InboundNATRule is ProxyResource<InboundNATRuleProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 interface InboundNATRules {

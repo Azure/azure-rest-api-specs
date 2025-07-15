@@ -1582,8 +1582,9 @@ model InboundNATRuleProperties {
   @doc("Frontend Port for the inbound rule")
   frontendPort: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("IP configuration for the target backend.")
-  backendIpConfiguration: SubnetIpConfigurationReference;
+  backendIPConfiguration: SubnetIpConfigurationReference;
 
   @doc("backend Port for the inbound rule")
   backendPort: int32;
