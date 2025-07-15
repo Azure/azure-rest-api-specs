@@ -33,13 +33,13 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-preview-2025-10
+### Tag: package-2025-10
 
-These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-10'
+```yaml $(tag) == 'package-2025-10'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2025-10-01-preview/deviceregistry.json
+  - Microsoft.DeviceRegistry/stable/2025-10-01/deviceregistry.json
 suppressions:
   - code: AvoidAdditionalProperties
     from:
