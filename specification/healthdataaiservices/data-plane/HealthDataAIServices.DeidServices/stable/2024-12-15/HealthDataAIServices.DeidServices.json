@@ -649,19 +649,16 @@
             ]
           }
         },
-        "encodedEntities": {
-          "type": "array",
-          "description": "List of PHI entities with simplified single encoding for SurrogateOnly operation. Cannot be used with Entities.",
-          "items": {
-            "$ref": "#/definitions/EncodedPhiEntity"
-          }
-        },
         "entities": {
           "type": "array",
-          "description": "List of PHI entities for SurrogateOnly operation with full encoding information. Cannot be used with EncodedEntities.",
+          "description": "List of PHI entities for SurrogateOnly operation with full encoding information. Cannot be used with TaggedEntities.",
           "items": {
-            "$ref": "#/definitions/PhiEntity"
+            "$ref": "#/definitions/PublicPhiEntity"
           }
+        },
+        "taggedEntities": {
+          "$ref": "#/definitions/TaggedPhiEntities",
+          "description": "Grouped PHI entities with single encoding specification for SurrogateOnly operation. Cannot be used with Entities."
         },
         "customizations": {
           "$ref": "#/definitions/DeidentificationCustomizationOptions",
@@ -924,40 +921,6 @@
           "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
         }
       }
-    },
-    "EncodedPhiEntity": {
-      "type": "object",
-      "description": "Simplified PHI Entity for use in SurrogateOnly operations with single encoding.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "PHI Category of the entity."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Starting index of the location from within the input text using the specified encoding."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length of the input text using the specified encoding."
-        },
-        "encoding": {
-          "$ref": "#/definitions/EncodingType",
-          "description": "The encoding used for offset and length values."
-        },
-        "text": {
-          "type": "string",
-          "description": "Text of the entity (optional)."
-        }
-      },
-      "required": [
-        "category",
-        "offset",
-        "length",
-        "encoding"
-      ]
     },
     "EncodingType": {
       "type": "string",
@@ -1265,6 +1228,62 @@
         "entities"
       ]
     },
+    "PublicPhiEntity": {
+      "type": "object",
+      "description": "PHI Entity for public use in SurrogateOnly operations with full encoding information.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/PhiCategory",
+          "description": "PHI Category of the entity."
+        },
+        "offset": {
+          "$ref": "#/definitions/StringIndex",
+          "description": "Starting index of the location from within the input text."
+        },
+        "length": {
+          "$ref": "#/definitions/StringIndex",
+          "description": "Length of the input text."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text of the entity (optional)."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
+    "SimplePhiEntity": {
+      "type": "object",
+      "description": "Simple PHI entity with encoding-specific offset and length values.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/PhiCategory",
+          "description": "PHI Category of the entity."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting index of the location from within the input text using the group's encoding."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of the input text using the group's encoding."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text of the entity (optional)."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
     "SourceStorageLocation": {
       "type": "object",
       "description": "Storage location.",
@@ -1320,6 +1339,27 @@
         "utf8",
         "utf16",
         "codePoint"
+      ]
+    },
+    "TaggedPhiEntities": {
+      "type": "object",
+      "description": "Grouped PHI entities with shared encoding specification.",
+      "properties": {
+        "encoding": {
+          "$ref": "#/definitions/EncodingType",
+          "description": "The encoding type used for all entities in this group."
+        },
+        "entities": {
+          "type": "array",
+          "description": "List of PHI entities using the specified encoding.",
+          "items": {
+            "$ref": "#/definitions/SimplePhiEntity"
+          }
+        }
+      },
+      "required": [
+        "encoding",
+        "entities"
       ]
     },
     "TargetStorageLocation": {
