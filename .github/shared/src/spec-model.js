@@ -2,7 +2,7 @@
 
 import { readdir } from "fs/promises";
 import { resolve } from "path";
-import { mapAsync } from "./array.js";
+import { flatMapAsync, mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
 
 /**
@@ -122,10 +122,7 @@ export class SpecModel {
             const refRefToSwaggerPath = refRefs.get(swaggerPathResolved);
             if (refRefToSwaggerPath) {
               // Add the Swagger object for swaggerPath
-              affectedSwaggers.set(
-                refRefToSwaggerPath.path,
-                refRefToSwaggerPath,
-              );
+              affectedSwaggers.set(refRefToSwaggerPath.path, refRefToSwaggerPath);
 
               // Add the Swagger object that references swaggerPath
               //
@@ -150,9 +147,7 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(
-        `No affected swaggers found in specModel for ${swaggerPath}`,
-      );
+      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
     }
 
     return affectedSwaggers;
@@ -188,15 +183,20 @@ export class SpecModel {
     return this.#readmes;
   }
 
+  async getSwaggers() {
+    const readmes = [...(await this.getReadmes()).values()];
+    const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
+    const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
+    return swaggers;
+  }
+
   /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) =>
-        a.path.localeCompare(b.path),
-      ),
+      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
       async (r) => await r.toJSONAsync(options),
     );
 
