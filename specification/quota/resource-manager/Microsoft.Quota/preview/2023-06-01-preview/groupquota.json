@@ -1459,7 +1459,7 @@
             "in": "body",
             "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotaEnforcementStatus"
             }
           }
         ],
@@ -1467,7 +1467,7 @@
           "200": {
             "description": "OK, Create or Update",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotaEnforcementStatus"
             }
           },
           "201": {
@@ -1533,7 +1533,7 @@
             "in": "body",
             "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotaEnforcementStatus"
             }
           }
         ],
@@ -1541,7 +1541,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotaEnforcementStatus"
             }
           },
           "202": {
@@ -1603,7 +1603,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+              "$ref": "#/definitions/GroupQuotaEnforcementStatus"
             }
           },
           "default": {
@@ -2484,7 +2484,7 @@
           "type": "array",
           "description": "List of Azure Regions.",
           "items": {
-            "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            "$ref": "#/definitions/GroupQuotaEnforcementStatus"
           }
         },
         "nextLink": {
@@ -2507,33 +2507,33 @@
         "modelAsString": true
       }
     },
-    "GroupQuotasEnforcementResponse": {
+    "GroupQuotaEnforcementStatus": {
       "type": "object",
-      "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
+      "description": "The GroupQuota enforcement status for an Azure location/region.",
       "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
+      {
+        "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      }
       ],
       "properties": {
+      "properties": {
+        "type": "object",
         "properties": {
-          "type": "object",
-          "properties": {
-            "enforcementEnabled": {
-              "$ref": "#/definitions/EnforcementState",
-              "description": "Is the GroupQuota Enforcement enabled for the Azure region."
-            },
-            "provisioningState": {
-              "$ref": "#/definitions/RequestState",
-              "readOnly": true
-            },
-            "faultCode": {
-              "type": "string",
-              "description": "Details of the failure.",
-              "readOnly": true
-            }
-          }
+        "enforcementEnabled": {
+          "$ref": "#/definitions/EnforcementState",
+          "description": "Indicates if GroupQuota enforcement is enabled for the Azure region."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        },
+        "faultCode": {
+          "type": "string",
+          "description": "Details of the failure.",
+          "readOnly": true
         }
+        }
+      }
       }
     }
   },
