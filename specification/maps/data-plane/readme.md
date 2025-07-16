@@ -27,7 +27,6 @@ These are the global settings for MapsClient.
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
-tag: package-stable-2023-06-01
 ```
 
 ### Suppression
