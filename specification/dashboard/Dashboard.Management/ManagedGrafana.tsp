@@ -64,10 +64,11 @@ interface ManagedGrafanas {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Grafana_Update")
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     ManagedGrafana,
     PatchModel = ManagedGrafanaUpdateParameters,
-    Response = ArmResponse<ManagedGrafana> | (AcceptedResponse & {
+    Response = ArmResponse<ManagedGrafana> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ManagedGrafana;
     })
