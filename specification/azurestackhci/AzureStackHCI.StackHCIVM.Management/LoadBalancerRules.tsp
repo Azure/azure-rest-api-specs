@@ -41,5 +41,5 @@ interface LoadBalancerRules {
   delete is ArmResourceDeleteWithoutOkAsync<LoadBalancerRule>;
 
   @doc("Gets all loadBalancer Rules in a Load Balancer.")
-  listByNetworkSecurityGroup is ArmResourceListByParent<LoadBalancerRule>;
+  listByLoadBalancer is ArmResourceListByParent<LoadBalancerRule>;
 }

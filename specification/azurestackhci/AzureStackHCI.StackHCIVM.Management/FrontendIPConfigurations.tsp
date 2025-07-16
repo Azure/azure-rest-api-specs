@@ -43,5 +43,5 @@ interface FrontendIPConfigurations {
   delete is ArmResourceDeleteWithoutOkAsync<FrontendIPConfiguration>;
 
   @doc("Gets all frontendIPConfigurations in a LoadBalancer.")
-  listByNetworkSecurityGroup is ArmResourceListByParent<FrontendIPConfiguration>;
+  listByLoadBalancer is ArmResourceListByParent<FrontendIPConfiguration>;
 }

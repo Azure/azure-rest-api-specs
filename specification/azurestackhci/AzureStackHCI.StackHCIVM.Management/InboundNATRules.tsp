@@ -43,5 +43,5 @@ interface InboundNATRules {
   delete is ArmResourceDeleteWithoutOkAsync<InboundNATRule>;
 
   @doc("Gets all inbound NAT rules in a Load Balancer.")
-  listByNetworkSecurityGroup is ArmResourceListByParent<InboundNATRule>;
+  listByLoadBalancer is ArmResourceListByParent<InboundNATRule>;
 }

@@ -41,5 +41,5 @@ interface BackendAddressPools {
   delete is ArmResourceDeleteWithoutOkAsync<BackendAddressPool>;
 
   @doc("Gets all backendAddressPools in a LoadBalancer.")
-  listByNetworkSecurityGroup is ArmResourceListByParent<BackendAddressPool>;
+  listByLoadBalancer is ArmResourceListByParent<BackendAddressPool>;
 }
