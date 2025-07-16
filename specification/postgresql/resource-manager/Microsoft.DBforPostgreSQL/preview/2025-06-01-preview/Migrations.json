@@ -174,10 +174,6 @@
         "x-ms-examples": {
           "Update an existing migration.": {
             "$ref": "./examples/MigrationsUpdate.json"
-          },
-          "Cancel an existing migration.": {
-            "$ref": "./examples/MigrationsCancel.json"
-          }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
         "parameters": [
@@ -225,13 +221,13 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "Migrations_Delete",
+        "operationId": "Migrations_Cancel",
         "x-ms-examples": {
-          "Delete an existing migration.": {
-            "$ref": "./examples/MigrationsDelete.json"
+          "Cancel an active migration.": {
+            "$ref": "./examples/MigrationsCancel.json"
           }
         },
-        "description": "Deletes an existing migration.",
+        "description": "Cancels an active migration.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"

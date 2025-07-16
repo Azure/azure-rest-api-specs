@@ -5,12 +5,7 @@
     "resourceGroupName": "exampleresourcegroup",
     "targetDbServerName": "exampletarget",
     "migrationName": "examplemigration",
-    "migrationMode": "Online",
-    "parameters": {
-      "properties": {
-        "cancel": "True"
-      }
-    }
+    "migrationMode": "Offline"
   },
   "responses": {
     "200": {
@@ -18,24 +13,16 @@
         "properties": {
           "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
           "currentStatus": {
-            "state": "Canceled",
+            "state": "InProgress",
+            "error": "",
             "currentSubStateDetails": {
-              "currentSubState": "Completed"
+              "currentSubState": "PerformingPreRequisiteSteps"
             }
           },
-          "migrationMode": "Online",
-          "migrationWindowEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
-          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
-          "dbsToMigrate": [
-            "postgres"
-          ],
-          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
-          "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
-          "migrateRoles": "False",
           "sourceDbServerMetadata": {
             "location": "eastus",
+            "version": "10",
+            "storageMb": 1024,
             "sku": {
               "name": "B_Gen5_2",
               "tier": "Basic"
@@ -43,11 +30,27 @@
           },
           "targetDbServerMetadata": {
             "location": "eastus",
+            "version": "17",
+            "storageMb": 2048,
             "sku": {
-              "name": "Standard_D2ds_v4",
-              "tier": "GeneralPurpose"
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4ds_v5"
             }
-          }
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "overwriteDbsInTarget": "False",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "False"
         },
         "location": "eastus",
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
