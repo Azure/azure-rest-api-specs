@@ -14,10 +14,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Help;
 
-model DiscoverySolution is ExtensionResource<DiscoveryNlpRequest> {
-  ...ResourceNameParameter<DiscoverySolution>;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 interface CheckNameAvailabilityOperationGroup {
@@ -25,16 +21,10 @@ interface CheckNameAvailabilityOperationGroup {
    * This API is used to check the uniqueness of a resource name used for a diagnostic, troubleshooter or solutions
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @post
-  checkNameAvailability is Legacy.ExtensionOperations.ActionSync<
-    Extension.ScopeParameter,
+  checkNameAvailability is ArmProviderActionSync<
     CommonTypes.CheckNameAvailabilityRequest,
-    Parameters = {
-      ...ApiVersionParameter;
-      ...Extension.ScopeParameter;
-      ...Legacy.Provider;
-    },
-    Response = CheckNameAvailabilityResponse,
+    CheckNameAvailabilityResponse,
+    ExtensionResourceActionScope,
     OptionalRequestBody = true
   >;
 }
@@ -46,9 +36,8 @@ interface DiscoverySolutionOperationGroup {
    */
   @autoRoute
   @get
-  list is Extension.ListByTarget<
-    TargetResource = Extension.Tenant,
-    ExtensionResource = DiscoverySolution,
+  @action("discoverySolutions")
+  list is ArmProviderActionSync<
     Response = DiscoveryResponse,
     Parameters = {
       /**
@@ -75,15 +64,9 @@ interface DiscoverySolutionNLPOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @operationId("DiscoverySolutionNLP_DiscoverSolutions")
-  discoverSolutions is Legacy.ExtensionOperations.ActionSync<
-    Extension.Tenant,
+  discoverSolutions is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
     Response = DiscoveryNlpResponse,
-    Parameters = {
-      ...ApiVersionParameter;
-      ...Extension.Tenant;
-      ...Legacy.Provider;
-    },
     OptionalRequestBody = true
   >;
   /**
@@ -93,25 +76,15 @@ interface DiscoverySolutionNLPOperationGroup {
   @autoRoute
   @action("discoverSolutions")
   @operationId("DiscoverySolutionNLP_DiscoverSolutionsBySubscription")
-  discoverSolutionsBySubscription is Legacy.ExtensionOperations.ActionSync<
-    Extension.Subscription,
+  discoverSolutionsBySubscription is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
     Response = DiscoveryNlpResponse,
-    Parameters = {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...Legacy.Provider;
-    },
+    Scope = SubscriptionActionScope,
+    Parameters = {},
     OptionalRequestBody = true
   >;
 }
 
 @@doc(CheckNameAvailabilityOperationGroup.checkNameAvailability::parameters.body,
   "The required parameters for availability check."
-);
-@@doc(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,
-  "Request body for discovering solutions using NLP."
-);
-@@doc(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription::parameters.body,
-  "Request body for discovering solutions using NLP."
 );
