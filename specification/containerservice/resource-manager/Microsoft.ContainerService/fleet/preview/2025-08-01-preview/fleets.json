@@ -52,6 +52,9 @@
       "name": "FleetManagedNamespaces"
     },
     {
+      "name": "Gates"
+    },
+    {
       "name": "UpdateRuns"
     },
     {
@@ -785,6 +788,202 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/gates": {
+      "get": {
+        "operationId": "Gates_ListByFleet",
+        "tags": [
+          "Gates"
+        ],
+        "description": "List Gate resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/gates/{gateName}": {
+      "get": {
+        "operationId": "Gates_Get",
+        "tags": [
+          "Gates"
+        ],
+        "description": "Get a Gate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "gateName",
+            "in": "path",
+            "description": "The name of the Gate resource, a GUID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Gates_Update",
+        "tags": [
+          "Gates"
+        ],
+        "description": "Update a Gate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "gateName",
+            "in": "path",
+            "description": "The name of the Gate resource, a GUID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{12}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Gate"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3095,6 +3294,13 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "status": {
           "$ref": "#/definitions/FleetMemberStatus",
           "description": "Status information of the last operation for fleet member.",
@@ -3191,6 +3397,13 @@
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet member.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3400,6 +3613,254 @@
         "allowedResources": [
           {
             "type": "Microsoft.ContainerService/fleets/updateStrategies"
+          }
+        ]
+      }
+    },
+    "Gate": {
+      "type": "object",
+      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GateConfiguration": {
+      "type": "object",
+      "description": "GateConfiguration is used to define where Gates should be placed within the Update Run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "type": {
+          "$ref": "#/definitions/GateType",
+          "description": "The type of the Gate determines how it is completed."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "GateListResult": {
+      "type": "object",
+      "description": "The response of a Gate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Gate items on this page",
+          "items": {
+            "$ref": "#/definitions/Gate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GatePatch": {
+      "type": "object",
+      "description": "Patch a Gate resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatePatchProperties",
+          "description": "Properties of a Gate that can be patched."
+        }
+      }
+    },
+    "GatePatchProperties": {
+      "type": "object",
+      "description": "Properties of a Gate that can be patched.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/GateState",
+          "description": "The state of the Gate."
+        }
+      }
+    },
+    "GateProperties": {
+      "type": "object",
+      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/GateProvisioningState",
+          "description": "The provisioning state of the Gate resource.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "gateType": {
+          "$ref": "#/definitions/GateType",
+          "description": "The type of the Gate determines how it is completed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "target": {
+          "$ref": "#/definitions/GateTarget",
+          "description": "The target that the Gate is controlling, e.g. an Update Run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/GateState",
+          "description": "The state of the Gate.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "gateType",
+        "target",
+        "state"
+      ]
+    },
+    "GateProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the Gate resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "GateProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "GateResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/gates"
+          }
+        ]
+      }
+    },
+    "GateState": {
+      "type": "string",
+      "description": "The state of the Gate.",
+      "enum": [
+        "Pending",
+        "Skipped",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "GateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "A Pending Gate will continue to block the staged rollout process it is controlling."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "A Skipped Gate means that the staged rollout process it is controlling was skipped."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "An Completed Gate allows the staged rollout process to continue."
+          }
+        ]
+      }
+    },
+    "GateTarget": {
+      "type": "object",
+      "description": "The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/UpdateRunResourceId",
+          "description": "The resource id that the Gate is controlling the rollout of.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "updateRunProperties": {
+          "$ref": "#/definitions/UpdateRunGateTargetProperties",
+          "description": "The properties of the Update Run that the Gate is targeting.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GateType": {
+      "type": "string",
+      "description": "The type of the Gate determines how it is completed.",
+      "enum": [
+        "Approval"
+      ],
+      "x-ms-enum": {
+        "name": "GateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approval",
+            "value": "Approval",
+            "description": "An approval gate is completed by setting its state to be Completed."
           }
         ]
       }
@@ -4139,6 +4600,30 @@
         ]
       }
     },
+    "Timing": {
+      "type": "string",
+      "description": "Whether the Gate is placed before or after the target.",
+      "enum": [
+        "Before",
+        "After"
+      ],
+      "x-ms-enum": {
+        "name": "Timing",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Before",
+            "value": "Before",
+            "description": "The Gate is before the target."
+          },
+          {
+            "name": "After",
+            "value": "After",
+            "description": "The Gate is after the target."
+          }
+        ]
+      }
+    },
     "UpdateGroup": {
       "type": "object",
       "description": "A group to be updated.",
@@ -4149,6 +4634,22 @@
           "minLength": 1,
           "maxLength": 50,
           "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created before this Group is executed.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created after this Group is executed.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4179,6 +4680,24 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "The list of Gates that will run before this UpdateGroup.",
+          "items": {
+            "$ref": "#/definitions/UpdateRunGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "The list of Gates that will run after this UpdateGroup.",
+          "items": {
+            "$ref": "#/definitions/UpdateRunGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4201,6 +4720,71 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "UpdateRunGateStatus": {
+      "type": "object",
+      "description": "The status of the Gate, as represented in the Update Run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the Gate.",
+          "minLength": 1,
+          "maxLength": 100,
+          "readOnly": true
+        },
+        "gateId": {
+          "$ref": "#/definitions/GateResourceId",
+          "description": "The resource id of the Gate.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/UpdateStatus",
+          "description": "The status of the Gate.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateRunGateTargetProperties": {
+      "type": "object",
+      "description": "The properties of the Update Run that the Gate is targeting.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Update Run.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "The Update Stage of the Update Run.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+          "readOnly": true
+        },
+        "group": {
+          "type": "string",
+          "description": "The Update Group of the Update Run.",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+          "readOnly": true
+        },
+        "timing": {
+          "$ref": "#/definitions/Timing",
+          "description": "Whether the Gate is placed before or after the update itself.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "timing"
       ]
     },
     "UpdateRunListResult": {
@@ -4291,6 +4875,18 @@
       },
       "readOnly": true
     },
+    "UpdateRunResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/updateRuns"
+          }
+        ]
+      }
+    },
     "UpdateRunStatus": {
       "type": "object",
       "description": "The status of a UpdateRun.",
@@ -4362,6 +4958,22 @@
           "type": "integer",
           "format": "int32",
           "description": "The time in seconds to wait at the end of this stage before starting the next one. Defaults to 0 seconds if unspecified."
+        },
+        "beforeGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created before this Stage is executed.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "A list of Gates that will be created after this Stage is executed.",
+          "items": {
+            "$ref": "#/definitions/GateConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4393,6 +5005,24 @@
             "name"
           ]
         },
+        "beforeGates": {
+          "type": "array",
+          "description": "The list of Gates that will run before this UpdateStage.",
+          "items": {
+            "$ref": "#/definitions/UpdateRunGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "afterGates": {
+          "type": "array",
+          "description": "The list of Gates that will run after this UpdateStage.",
+          "items": {
+            "$ref": "#/definitions/UpdateRunGateStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "afterStageWaitStatus": {
           "$ref": "#/definitions/WaitStatus",
           "description": "The status of the wait period configured on the UpdateStage.",
@@ -4410,6 +5040,7 @@
         "Stopped",
         "Skipped",
         "Failed",
+        "Pending",
         "Completed"
       ],
       "x-ms-enum": {
@@ -4445,6 +5076,11 @@
             "name": "Failed",
             "value": "Failed",
             "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is pending."
           },
           {
             "name": "Completed",
