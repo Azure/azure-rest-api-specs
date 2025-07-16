@@ -31,9 +31,8 @@ model InputParameters<
 }
 
 @Rest.autoRoute
-interface VersionedOperations<
+interface ReadableVersionedOperations<
   TEntityType extends Reflection.Model,
-  TInputParameters extends Reflection.Model,
   TListLatestParameters extends Reflection.Model = {},
   TListVersionsParameters extends Reflection.Model = {}
 > {
@@ -83,7 +82,13 @@ interface VersionedOperations<
     },
     Http.NoContentResponse
   >;
+}
 
+@Rest.autoRoute
+interface WritableVersionedOperations<
+  TEntityType extends Reflection.Model,
+  TInputParameters extends Reflection.Model
+> {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc(
     "Create a new or update an existing {name} with the given version id",
@@ -95,4 +100,14 @@ interface VersionedOperations<
     TInputParameters,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
   >;
+}
+
+@Rest.autoRoute
+interface VersionedOperations<
+  TEntityType extends Reflection.Model,
+  TInputParameters extends Reflection.Model,
+  TListLatestParameters extends Reflection.Model = {},
+  TListVersionsParameters extends Reflection.Model = {}
+> extends ReadableVersionedOperations<TEntityType, TListLatestParameters, TListVersionsParameters>,
+    WritableVersionedOperations<TEntityType, TInputParameters> {
 }
