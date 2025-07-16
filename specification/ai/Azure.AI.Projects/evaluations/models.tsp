@@ -238,8 +238,9 @@ model AssistantMessage extends Message {
 @added(Versions.v2025_05_15_preview)
 union EvaluationTargetType {
   @doc("Evaluation target that uses a model for response generation.")
-  modelResponseGeneration: "modelResponseGeneration";
-  string;
+  modelResponseGeneration: "modelResponseGeneration",
+
+  string,
 }
 
 @doc("Abstract base model for defining evaluation targets.")
