@@ -8,20 +8,21 @@ namespace OpenAI;
 
 model VoiceLiveRequestSession {
   ...VoiceLiveSessionBase;
+  model?: string;
   modalities?: VoiceLiveModality[];
-  instructions?: string;
-  `model`?:
-    | "gpt-4o-realtime-preview"
-    | "gpt-4o-realtime-preview-2024-10-01"
-    | "gpt-4o-realtime-preview-2024-12-17"
-    | "gpt-4o-mini-realtime-preview"
-    | "gpt-4o-mini-realtime-preview-2024-12-17";
+  animation?: VoiceLiveAnimation;
   voice?: VoiceIdsShared;
+  instructions?: string;
+  input_audio?: VoiceLiveInputAudio;
+  input_audio_sampling_rate?: int32 = 24000;
   input_audio_format?: VoiceLiveAudioFormat = VoiceLiveAudioFormat.pcm16;
   output_audio_format?: VoiceLiveAudioFormat = VoiceLiveAudioFormat.pcm16;
-  input_audio_transcription?: VoiceLiveAudioInputTranscriptionSettings | null;
   turn_detection?: VoiceLiveTurnDetection | null;
   input_audio_noise_reduction?: VoiceLiveAudioNoiseReduction;
+  input_audio_echo_cancellation?: VoiceLiveAudioEchoCancellation;
+  avatar?: VoiceLiveAvatarConfig;
+  input_audio_transcription?: VoiceLiveAudioInputTranscriptionSettings;
+  output_audio_timestamp_types?: VoiceLiveAudioTimestampType[];
   tools?: VoiceLiveTool[];
   tool_choice?: VoiceLiveToolChoice;
   temperature?: float32;
@@ -30,21 +31,26 @@ model VoiceLiveRequestSession {
 
 model VoiceLiveResponseSession {
   ...VoiceLiveSessionBase;
-  object: "voicelive.session";
   id: string;
-  `model`: string;
+  model: string;
   modalities: VoiceLiveModality[];
   instructions: string;
+  animation?: VoiceLiveAnimation;
   voice: VoiceIdsShared;
+  input_audio?: VoiceLiveInputAudio;
   input_audio_format: VoiceLiveAudioFormat;
   output_audio_format: VoiceLiveAudioFormat;
-  input_audio_transcription: VoiceLiveAudioInputTranscriptionSettings | null;
+  input_audio_sampling_rate?: int32;
   turn_detection: VoiceLiveTurnDetection;
   input_audio_noise_reduction: VoiceLiveAudioNoiseReduction;
-  tools: VoiceLiveTool[];
+  input_audio_echo_cancellation?: VoiceLiveAudioEchoCancellation;
+  avatar?: VoiceLiveAvatarConfig;
+  input_audio_transcription: VoiceLiveAudioInputTranscriptionSettings | null;
+  tools: list<VoiceLiveTool>;
   tool_choice: VoiceLiveToolChoice;
   temperature: float32;
   max_response_output_tokens: int32 | "inf" | null;
+  agent?: AgentConfig;
 }
 
 union VoiceLiveAudioFormat {
@@ -59,106 +65,140 @@ union VoiceLiveAudioInputTranscriptionModel {
   whisper_1: "whisper-1",
 }
 
+@doc("Configuration for input audio transcription.")
 model VoiceLiveAudioInputTranscriptionSettings {
-  `model`?: VoiceLiveAudioInputTranscriptionModel = VoiceLiveAudioInputTranscriptionModel.whisper_1;
+  @doc("The model used for transcription. E.g., 'whisper-1', 'azure-fast-transcription', 's2s-ingraph'.")
+  model: "whisper-1" | "azure-fast-transcription" | "s2s-ingraph";
+
+  @doc("The language code to use for transcription, if specified.")
   language?: string;
-  prompt?: string;
+
+  @doc("Whether transcription is enabled.")
+  enabled: boolean;
+
+  @doc("Whether a custom model is being used.")
+  custom_model: boolean;
 }
 
 union VoiceLiveModality {
   string,
   text: "text",
   audio: "audio",
-}
-
-union VoiceLiveTurnDetectionType {
-  string,
-
-  /**
-   * Indicates that server-side voice activity detection (VAD) should be enabled, allowing the server to determine when
-   * add_user_audio commands present ends of speech and should be automatically committed.
-   *
-   * The API will also detect when the user begins talking, sending a generation_canceled command.
-   */
-  server_vad: "server_vad",
-
-  semantic_vad: "semantic_vad",
+  animation: "animation",
+  avatar: "avatar",
 }
 
 @discriminator("type")
+@doc("Top-level union for turn detection configuration.")
 model VoiceLiveTurnDetection {
-  type: VoiceLiveTurnDetectionType;
-
-  /**
-   * Whether or not to automatically generate a response when VAD is enabled. true by default.
-   */
-  create_response?: boolean = true;
-
-  /**
-   * Whether or not to automatically interrupt any ongoing response with output to the default conversation (i.e. `conversation` of `auto`) when a VAD start event occurs.
-   */
-  interrupt_response?: boolean = true;
+  type: "none" | "server_vad" | "azure_semantic_vad";
 }
 
-model VoiceLiveServerVadTurnDetection extends VoiceLiveTurnDetection {
-  type: VoiceLiveTurnDetectionType.server_vad;
-
-  /**
-   * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A higher threshold will require louder audio to activate the model, and thus might perform better in noisy environments.
-   */
-  threshold?: float32 = 0.5;
-
-  // @encode("milliseconds", int32)
-  /**
-   * Amount of audio to include before the VAD detected speech (in milliseconds). Defaults to 300ms.
-   */
-  prefix_padding_ms?: duration; // = 300ms
-
-  // @encode("milliseconds", int32)
-  /**
-   * Duration of silence to detect speech stop (in milliseconds). Defaults to 500ms. With shorter values the model will respond more quickly, but may jump in on short pauses from the user.
-   */
-  silence_duration_ms?: duration; // = 500ms
+@doc("Disables turn detection.")
+model VoiceLiveNoTurnDetection extends VoiceLiveTurnDetection {
+  type: "none";
 }
 
-model VoiceLiveSemanticVadTurnDetection extends VoiceLiveTurnDetection {
-  type: VoiceLiveTurnDetectionType.semantic_vad;
-
-  /**
-   * Used only for `semantic_vad` mode. The eagerness of the model to respond. `low` will wait longer for the user to continue speaking, `high` will respond more quickly. `auto` is the default and is equivalent to `medium`.
-   */
-  eagerness?: "low" | "medium" | "high" | "auto" = "auto";
+@doc("Base model for VAD-based turn detection.")
+model VoiceLiveServerVad extends VoiceLiveTurnDetection {
+  type: "server_vad";
+  threshold?: float32;
+  prefix_padding_ms?: int32;
+  silence_duration_ms?: int32;
+  end_of_utterance_detection?: unknown;
 }
 
-model VoiceLiveServerEventRateLimitsUpdatedRateLimitsItem {
-  /** The rate limit property name that this item includes information about. */
-  name: string;
-
-  /** The maximum configured limit for this rate limit property. */
-  limit: int32;
-
-  /** The remaining quota available against the configured limit for this rate limit property. */
-  remaining: int32;
-
-  /** The remaining time, in seconds, until this rate limit property is reset. */
-  @encode("seconds", float32)
-  reset_seconds: duration;
+@doc("Semantic VAD settings based on Azure SDK features.")
+model VoiceLiveAzureSemanticVad extends VoiceLiveServerVad {
+  type: "azure_semantic_vad";
+  neg_threshold?: float32;
+  window_size?: int32;
+  distinct_ci_phones?: int32;
+  require_vowel?: boolean;
+  remove_filler_words?: boolean;
 }
 
-union VoiceLiveAudioNoiseReductionType {
-  near_field: "near_field",
-  far_field: "far_field",
-}
-
-@discriminator("type")
+@doc("Configuration for input audio noise reduction.")
 model VoiceLiveAudioNoiseReduction {
-  type: VoiceLiveAudioNoiseReductionType;
+  @doc("The type of noise reduction model.")
+  type: "azure_deep_noise_suppression";
 }
 
-model VoiceLiveAudioNearFieldNoiseReduction extends VoiceLiveAudioNoiseReduction {
-  type: VoiceLiveAudioNoiseReductionType.near_field;
+@doc("Configuration for client audio input. Used to specify the audio model and optional phrase list.")
+model VoiceLiveInputAudio {
+  @doc("The name of the model to use for input audio (currently only 'azure-standard' is supported).")
+  model: "azure-standard";
+
+  @doc("Optional list of phrases to bias the speech recognition engine.")
+  phrase_list?: string[];
 }
 
-model VoiceLiveAudioFarFieldNoiseReduction extends VoiceLiveAudioNoiseReduction {
-  type: VoiceLiveAudioNoiseReductionType.far_field;
+@doc("Echo cancellation configuration for server-side audio processing.")
+model VoiceLiveAudioEchoCancellation {
+  @doc("The type of echo cancellation model to use.")
+  type: "server_echo_cancellation";
+}
+
+@doc("Output timestamp types supported in audio response content.")
+union VoiceLiveAudioTimestampType {
+  string,
+  @doc("Timestamps per word in the output audio.")
+  word: "word",
+}
+
+@doc("Specifies the types of animation data to output.")
+union VoiceLiveAnimationOutputType {
+  blendshapes: "blendshapes",
+  viseme_id: "viseme_id",
+  emotion: "emotion",
+}
+
+@doc("Configuration for animation outputs including blendshapes, visemes, and emotion metadata.")
+model VoiceLiveAnimation {
+  @doc("The name of the animation model to use.")
+  model_name?: string = "default";
+
+  @doc("Set of output data types requested from the animation system.")
+  outputs?: VoiceLiveAnimationOutputType[] = [VoiceLiveAnimationOutputType.blendshapes];
+
+  @doc("Interval for emotion detection in milliseconds. If not set, emotion detection is disabled.")
+  emotion_detection_interval_ms?: int32;
+}
+
+@doc("Configuration for avatar streaming and behavior during the session.")
+model VoiceLiveAvatarConfig {
+  @doc("Optional list of ICE servers to use for WebRTC connection establishment.")
+  ice_servers?: list<IceServer>;
+
+  @doc("The character name or ID used for the avatar.")
+  character: string;
+
+  @doc("Optional avatar style, such as emotional tone or speaking style.")
+  style?: string;
+
+  @doc("Indicates whether the avatar is customized or not.")
+  customized: boolean;
+
+  @doc("Optional video configuration including resolution, bitrate, and codec.")
+  video?: VideoParams;
+}
+
+@doc("ICE server configuration for WebRTC connection negotiation.")
+model IceServer {
+  @doc("List of ICE server URLs (e.g., TURN or STUN endpoints).")
+  urls: list<string>;
+
+  @doc("Optional username used for authentication with the ICE server.")
+  username?: string;
+
+  @doc("Optional credential (e.g., password or token) used for authentication.")
+  credential?: string;
+}
+
+model AgentConfig {
+  type: "agent";
+  name: string;
+  description?: string;
+  agent_id: string;
+  thread_id: string;
 }

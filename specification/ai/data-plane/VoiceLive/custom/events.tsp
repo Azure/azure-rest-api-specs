@@ -2,25 +2,32 @@ using TypeSpec.OpenAPI;
 
 namespace OpenAI;
 
+@doc("Client event types used in VoiceLive protocol.")
 union VoiceLiveClientEventType {
   string,
   session_update: "session.update",
   input_audio_buffer_append: "input_audio_buffer.append",
   input_audio_buffer_commit: "input_audio_buffer.commit",
   input_audio_buffer_clear: "input_audio_buffer.clear",
-  output_audio_buffer_clear: "output_audio_buffer.clear",
+  input_audio_turn_start: "input_audio.turn.start",
+  input_audio_turn_append: "input_audio.turn.append",
+  input_audio_turn_end: "input_audio.turn.end",
+  input_audio_turn_cancel: "input_audio.turn.cancel",
+  input_audio_clear: "input_audio.clear",
   conversation_item_create: "conversation.item.create",
   conversation_item_retrieve: "conversation.item.retrieve",
   conversation_item_truncate: "conversation.item.truncate",
   conversation_item_delete: "conversation.item.delete",
   response_create: "response.create",
   response_cancel: "response.cancel",
-  transcription_session_update: "transcription_session.update",
+  session_avatar_connect: "session.avatar.connect",
 }
 
+@doc("Server event types used in VoiceLive protocol.")
 union VoiceLiveServerEventType {
   string,
   error: "error",
+  session_avatar_connecting: "session.avatar.connecting",
   session_created: "session.created",
   session_updated: "session.updated",
   conversation_created: "conversation.created",
@@ -35,9 +42,6 @@ union VoiceLiveServerEventType {
   input_audio_buffer_cleared: "input_audio_buffer.cleared",
   input_audio_buffer_speech_started: "input_audio_buffer.speech_started",
   input_audio_buffer_speech_stopped: "input_audio_buffer.speech_stopped",
-  output_audio_buffer_cleared: "output_audio_buffer.cleared",
-  output_audio_buffer_started: "output_audio_buffer.started",
-  output_audio_buffer_stopped: "output_audio_buffer.stopped",
   response_created: "response.created",
   response_done: "response.done",
   response_output_item_added: "response.output_item.added",
@@ -50,8 +54,11 @@ union VoiceLiveServerEventType {
   response_audio_transcript_done: "response.audio_transcript.done",
   response_audio_delta: "response.audio.delta",
   response_audio_done: "response.audio.done",
-  response_function_call_arguments_delta: "response.function_call_arguments.delta",
-  response_function_call_arguments_done: "response.function_call_arguments.done",
-  transcription_session_updated: "transcription_session.updated",
-  rate_limits_updated: "rate_limits.updated",
+  response_animation_blendshapes_delta: "response.animation_blendshapes.delta",
+  response_animation_blendshapes_done: "response.animation_blendshapes.done",
+  response_emotion_hypothesis: "response.emotion_hypothesis",
+  response_audio_timestamp_delta: "response.audio_timestamp.delta",
+  response_audio_timestamp_done: "response.audio_timestamp.done",
+  response_animation_viseme_delta: "response.animation_viseme.delta",
+  response_animation_viseme_done: "response.animation_viseme.done",
 }
