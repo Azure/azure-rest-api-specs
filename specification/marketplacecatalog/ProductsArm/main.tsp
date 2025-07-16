@@ -139,7 +139,7 @@ interface ProductGet {
     @doc("Whether to include service instruction templates in the response.")
     @query
     includeServiceInstructionTemplates: boolean,
-  ): ArmResponse<ProductSingle> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by subscription. */
   @autoRoute
@@ -169,7 +169,7 @@ interface ProductGet {
     @doc("Whether to include service instruction templates in the response.")
     @query
     includeServiceInstructionTemplates: boolean,
-  ): ArmResponse<ProductSingle> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing account. */
   @autoRoute
@@ -199,7 +199,7 @@ interface ProductGet {
     @doc("Whether to include service instruction templates in the response.")
     @query
     includeServiceInstructionTemplates: boolean,
-  ): ArmResponse<ProductSingle> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing profile. */
   @autoRoute
@@ -230,7 +230,7 @@ interface ProductGet {
     @doc("Whether to include service instruction templates in the response.")
     @query
     includeServiceInstructionTemplates: boolean,
-  ): ArmResponse<ProductSingle> | ErrorResponse;
+  ): ArmResponse<ProductDetails> | ErrorResponse;
 }
 
 /** The operation to list products by subscription. */
