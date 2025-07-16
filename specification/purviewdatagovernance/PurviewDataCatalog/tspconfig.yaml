@@ -7,12 +7,27 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json"
+  "@azure-tools/typespec-ts":
+    package-dir: "purview-rest"
+    package-details:
+      name: "@azure-rest/purview"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    generate-fakes: true
+    inject-spans: true
+    service-dir: "sdk/purview"
+    package-dir: "azpurview"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-purview"
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Purview"
+    namespace: "Azure.Purview"
+    clear-output-folder: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-parameters:
-  service-dir:
-    default: sdk/purview
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true
