@@ -76,6 +76,15 @@ input-file:
   - Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json
 ```
 
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - Microsoft.ServiceLinker/stable/2025-07-01/servicelinker.json
+```
+
 ### Tag: package-2024-04-01
 
 These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
