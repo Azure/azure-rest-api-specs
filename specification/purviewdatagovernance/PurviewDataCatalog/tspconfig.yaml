@@ -7,9 +7,14 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json"
+  "@azure-tools/typespec-go":
+    generate-fakes: true
+    inject-spans: true
+    service-dir: "sdk/purviewdatacatalog"
+    package-dir: "az-purviewdatacatalog"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-PurviewDataCatalog"
+    package-dir: "azure-purviewdatacatalog"
     package-name: "{package-dir}"
     namespace: "azure.purviewdatacatalog"
     api-version: "2025-06-16-preview"
