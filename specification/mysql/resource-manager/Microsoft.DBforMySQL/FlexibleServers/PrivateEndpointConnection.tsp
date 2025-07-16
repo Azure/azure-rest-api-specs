@@ -21,7 +21,7 @@ model PrivateEndpointConnection
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
-    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+    NamePattern = ""
   >;
 }
 
