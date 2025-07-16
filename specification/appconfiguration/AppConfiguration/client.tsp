@@ -1,10 +1,15 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
 using Azure.ClientGenerator.Core;
 using AzureAppConfiguration;
+using Azure.Core;
+using TypeSpec.Versioning;
 
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace SdkCustomizations;
+
 
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
@@ -33,6 +38,37 @@ namespace SdkCustomizations;
 
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-@@alternateType(KeyValueListResult.`@nextLink`, Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>, "csharp");
+@@scope(getKeyValues, "!csharp");
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
+@summary("Gets a list of key-values.")
+@doc("Gets a list of key-values.")
+@clientName("getKeyValues")
+@scope("csharp")
+op getKeyValuesCustom is Foundations.ResourceList<
+  KeyValue,
+  KeyValuesRequestParams,
+  KeyValueListResult &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+  {},
+  Error
+>;
+
+
+@doc("The result of a list request.")
+@pagedResult
+model KeyValueListResult {
+  @doc("The collection value.")
+  @items
+  items?: KeyValue[];
+
+  @doc("An identifier representing the returned state of the resource.")
+  etag?: string;
+
+  @doc("The URI that can be used to request the next set of paged results.")
+  @nextLink
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>
+}
