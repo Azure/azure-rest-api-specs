@@ -200,6 +200,7 @@ jobs:
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
+          DisplayName: Set PR status from docs build
           Condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
           State: $(CheckState)
           TargetUrl: $(CheckUrl)
@@ -208,6 +209,7 @@ jobs:
 
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
+          DisplayName: Set PR status for no-op
           Condition: and(succeeded(), ne(variables['HasChanges'], 'true'))
           State: success
           TargetUrl: $(CurrentBuildUrl)
@@ -218,6 +220,7 @@ jobs:
       # PR status to failed and link to the current build.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
+          DisplayName: Set PR status for job failure
           # Only run if a previous step in the job failed
           Condition: failed()
           State: failure

@@ -36,6 +36,10 @@ parameters:
     type: string
     default: succeeded()
 
+  - name: DisplayName
+    type: string
+    default: 'Set PR status'
+
   - name: GitHubToken
     type: string
     default: $(azuresdk-github-pat)
@@ -54,7 +58,7 @@ steps:
         -f target_url='${{ parameters.TargetUrl }}' \
         -f description='${{ parameters.Description }}' \
         -f context='${{ parameters.Context }}'
-    displayName: 'Set PR status'
+    displayName: ${{ parameters.DisplayName }}
     condition: ${{ parameters.Condition }}
     env:
       GH_TOKEN: ${{ parameters.GitHubToken }}
