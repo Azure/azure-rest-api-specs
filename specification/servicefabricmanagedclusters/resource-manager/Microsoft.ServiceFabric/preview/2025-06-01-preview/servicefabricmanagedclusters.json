@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceFabricManagedClustersManagementClient",
-    "version": "2025-03-01-preview",
+    "version": "2025-06-01-preview",
     "description": "Service Fabric Managed Clusters Management Client",
     "x-typespec-generated": [
       {
@@ -5636,6 +5636,10 @@
           "type": "string",
           "description": "The VM image the node types are configured with. This property controls the Service Fabric component packages to be used for the cluster. Allowed values are: 'Windows'. The default value is 'Windows'.",
           "default": "Windows"
+        },
+        "enableOutboundOnlyNodeTypes": {
+          "type": "boolean",
+          "description": "Enable the creation of node types with only outbound traffic enabled. If set, a separate load balancer backend pool will be created for node types with inbound traffic enabled. Can only be set at the time of cluster creation."
         }
       },
       "required": [
@@ -6579,6 +6583,10 @@
         "zoneBalance": {
           "type": "boolean",
           "description": "Setting this to true allows stateless node types to scale out without equal distribution across zones."
+        },
+        "isOutboundOnly": {
+          "type": "boolean",
+          "description": "Specifies the node type should be configured for only outbound traffic and not inbound traffic."
         }
       },
       "required": [
