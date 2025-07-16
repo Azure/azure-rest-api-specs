@@ -477,6 +477,20 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2015-06-preview-python-only
+
+These settings apply only when `--tag=package-2015-06-preview-python-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2015-06-preview-python-only'
+input-file:
+- Microsoft.Security/preview/2015-06-01-preview/locations.json
+- Microsoft.Security/preview/2015-06-01-preview/operations.json
+- Microsoft.Security/preview/2015-06-01-preview/tasks.json
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-2015-06-preview-only
 
 These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
