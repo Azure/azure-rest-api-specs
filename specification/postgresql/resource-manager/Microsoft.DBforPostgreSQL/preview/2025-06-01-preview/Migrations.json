@@ -288,7 +288,7 @@
             "$ref": "#/parameters/TargetDbServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MigrationListFilter"
+            "$ref": "#/parameters/MigrationListFilterParameter"
           }
         ],
         "responses": {
@@ -1288,7 +1288,7 @@
       "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
     },
-    "MigrationListFilter": {
+    "MigrationListFilterParameter": {
       "name": "migrationListFilter",
       "in": "query",
       "required": false,
@@ -1297,7 +1297,7 @@
         "All"
       ],
       "type": "string",
-      "description": "Migration list filter. Retrieves either active migrations or all migrations.",
+      "description": "Migration list filter. Retrieves either active migrations or all migrations. Defaults to Active.",
       "x-ms-enum": {
         "name": "MigrationListFilter",
         "modelAsString": true
