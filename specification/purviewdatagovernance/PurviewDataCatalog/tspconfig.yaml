@@ -7,35 +7,53 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json"
-  "@azure-tools/typespec-ts":
-    package-dir: "purview-rest"
-    package-details:
-      name: "@azure-rest/purview"
-    flavor: azure
-  "@azure-tools/typespec-go":
-    generate-fakes: true
-    inject-spans: true
-    service-dir: "sdk/purview"
-    package-dir: "az-purview"
   "@azure-tools/typespec-python":
-    package-dir: "azure-purview"
+    package-mode: "dataplane"
+    package-dir: "azure-PurviewDataCatalog"
+    package-name: "{package-dir}"
+    namespace: "azure.purviewdatacatalog"
+    api-version: "2025-06-16-preview"
     flavor: azure
+    generate-test: true
+    generate-sample: false
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Purview"
-    namespace: "Azure.Purview"
+    package-mode: "dataplane"
+    package-dir: "Azure.PurviewDataCatalog"
+    namespace: "{package-dir}"
+    package-name: "{package-dir}"
+    api-version: "2025-06-16-preview"
+    model-namespace: false
+    flavor: azure
+    generate-test: false
+    generate-sample: false
     clear-output-folder: true
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.PurviewDataCatalog
+    model-namespace: false
+    api-version: "2025-06-16-preview"
+  "@typespec/http-client-csharp":
+    package-name: Azure.PurviewDataCatalog
+    api-version: "2025-06-16-preview"
+  "@azure-tools/typespec-ts":
+    package-dir: "purviewdatacatalog-projects"
+    api-version: "2025-06-16-preview"
+    is-modular-library: true
+    generate-test: true
+    generate-metadata: false
+    package-details:
+      name: "@azure/purviewdatacatalog"
+      description: "Azure Purview Data Catalog Client"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-purview"
-    namespace: "Azure.Purview"
-    clear-output-folder: true
+    package-dir: "azure-purviewdatacatalog"
+    namespace: com.azure.purviewdatacatalog
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
     flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-parameters:
-  service-dir:
-    default: sdk/purview
+  - "@azure-tools/typespec-azure-rulesets/data-plane"
     # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   # "@azure-tools/typespec-python":
   #   "basic-setup-py": true
