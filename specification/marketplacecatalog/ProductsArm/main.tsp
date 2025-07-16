@@ -93,6 +93,21 @@ interface ProductList {
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
+
+  /** Lists products for billing profile. */
+  listByBillingProfile is ArmListByBillingProfile<
+    Products,
+    Parameters = {
+      @doc("The market in which the product is available.")
+      @query
+      market: string;
+
+      @doc("The language to filter by")
+      @query
+      language: string;
+    },
+    Response = ResourceListCustomResult<ProductSummary>
+  >;
 }
 
 @armResourceOperations(ProductSingle)
@@ -185,6 +200,37 @@ interface ProductGet {
     @query
     includeServiceInstructionTemplates: boolean,
   ): ArmResponse<ProductSingle> | ErrorResponse;
+
+  /** Gets a product single by billing profile. */
+  @autoRoute
+  @get
+  @armResourceRead(ProductSingle)
+  getByBillingProfile(
+    ...ApiVersionParameter,
+    ...BillingAccountIdParameter,
+    ...BillingProfileIdParameter,
+    ...ProductIdParameter,
+
+    @doc("The market in which the product is available.")
+    @query
+    market: string,
+
+    @doc("Whether to include stop-sold plans in the response.")
+    @query
+    includeStopSoldPlans: boolean,
+
+    @doc("The language to filter by")
+    @query
+    language: string,
+
+    @doc("Whether to include hidden plans in the response.")
+    @query
+    includeHiddenPlans: boolean,
+
+    @doc("Whether to include service instruction templates in the response.")
+    @query
+    includeServiceInstructionTemplates: boolean,
+  ): ArmResponse<ProductSingle> | ErrorResponse;
 }
 
 /** The operation to list products by subscription. */
@@ -219,19 +265,51 @@ op ArmListByBillingAccount<
   Error
 >;
 
+/** The operation to list products by billing account. */
+@listsResource(Resource)
+@segmentOf(Resource)
+@armResourceList(Resource)
+@autoRoute
+op ArmListByBillingProfile<
+  Resource extends Azure.ResourceManager.Foundations.Resource,
+  Parameters extends {} = {},
+  Response extends {} = ArmResponse<ResourceListResult<ProductSummary>>,
+  Error extends {} = ErrorResponse
+> is Azure.ResourceManager.Foundations.ArmReadOperation<
+  BillingProfileScope<Resource> & Parameters,
+  Response,
+  Error
+>;
+
 /**
  * Parameter model for listing a resource at the billing scope
  * @template Resource The type of the resource.
  */
 model BillingAccountScope<Resource extends Azure.ResourceManager.Foundations.Resource>
-  is ResourceParentParameters<Resource, BillingBaseParameters>;
+  is ResourceParentParameters<Resource, BillingAccountBaseParameters>;
+
+/**
+ * Parameter model for listing a resource at the billing scope
+ * @template Resource The type of the resource.
+ */
+model BillingProfileScope<Resource extends Azure.ResourceManager.Foundations.Resource>
+  is ResourceParentParameters<Resource, BillingProfileBaseParameters>;
 
 /**
  * The static parameters for a billing based resource
  */
-model BillingBaseParameters
+model BillingAccountBaseParameters
   is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...BillingAccountIdParameter;
+}
+
+/**
+ * The static parameters for a billing based resource
+ */
+model BillingProfileBaseParameters
+  is Azure.ResourceManager.Foundations.TenantBaseParameters {
+  ...BillingAccountIdParameter;
+  ...BillingProfileIdParameter;
 }
 
 /**
@@ -243,4 +321,15 @@ model BillingAccountIdParameter {
   @segment("providers/Microsoft.Billing/billingAccounts")
   @minLength(1)
   billingAccountId: string;
+}
+
+/**
+ * The default billing account id parameter type.
+ */
+model BillingProfileIdParameter {
+  /** The ID of the target billing account. */
+  @path
+  @segment("billingProfiles")
+  @minLength(1)
+  billingProfileId: string;
 }
