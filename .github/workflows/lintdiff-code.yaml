@@ -44,14 +44,17 @@ jobs:
             // TODO: Logger
             const changedFiles = await getChangedFiles({ cwd: 'after'});
             console.log('Changed files:', changedFiles);
-            
+
             const filePath = join(process.cwd(), 'changed-files.txt');
             writeFileSync(filePath, changedFiles.join('\n'), 'utf8');
             console.log(`Changed files written to ${filePath}`);
 
       # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
+        id: run-lintdiff
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> $GITHUB_OUTPUT
+
           npm exec --no -- lint-diff \
             --before before \
             --after after \
@@ -62,4 +65,14 @@ jobs:
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
-          NODE_OPTIONS: '--max-old-space-size=8192'
+          NODE_OPTIONS: "--max-old-space-size=8192"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.run-lintdiff.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.run-lintdiff.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
