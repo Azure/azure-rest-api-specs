@@ -33,1420 +33,6 @@
   ],
   "tags": [],
   "paths": {
-    "/administration/backfillDomainParentObject": {
-      "post": {
-        "operationId": "AdministrationBackfillDomainParentObject",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationBusinessDomainObjectBackfillRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/administration/batchBackfillBillingEvents": {
-      "post": {
-        "operationId": "AdministrationBatchBackfillBillingEvents",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationBillingEventBackfillRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/administration/findAssetsWithMandatoryMissingProperties": {
-      "post": {
-        "operationId": "AdministrationFindAssetsWithMandatoryMissingProperties",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationAssetMissingPropertiesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/administration/findInconsistentGraphRecords": {
-      "post": {
-        "operationId": "AdministrationFindInconsistentGraphRecords",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationBusinessDomainObjectBackfillRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/administration/globalizeDataAssets": {
-      "post": {
-        "operationId": "AdministrationGlobalizeDataAssets",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationGlobalAssetCleanupRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes": {
-      "get": {
-        "operationId": "GetAttribute",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/{name}": {
-      "put": {
-        "operationId": "AttributeName",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelMetadataAttribute"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/{attributeId}": {
-      "get": {
-        "operationId": "AttributeAttributeId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "attributeId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Attribute",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "attributeId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/{attributeId}/relationships": {
-      "get": {
-        "operationId": "GetsAttribute",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "attributeId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "AttributesAttributeIdRelationships",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "attributeId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeMetadataAttributeRelationship"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteAttribute",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "attributeId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/instances": {
-      "get": {
-        "operationId": "AttributeInstance",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/instances/{instanceId}": {
-      "get": {
-        "operationId": "GetAttributeInstance",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "AttributeInstanceInstanceId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "AttributeInstanceInstances",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteAttributeInstance",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/attributes/instances/{instanceId}/relationships": {
-      "get": {
-        "operationId": "GetsAttributeInstance",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "AttributeInstanceInstanceIdRelationships",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeAttributeInstanceRelationship"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeletesAttributeInstance",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "instanceId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/billing/getaggregate": {
-      "post": {
-        "operationId": "BillingGetaggregate",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceBillingBillingRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/billing/getaggregates": {
-      "post": {
-        "operationId": "BillingGetaggregates",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceBillingBillingRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/businessdomains": {
-      "get": {
-        "operationId": "GetDomain",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "writeOnly",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "PostDomain",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomain"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/businessdomains/{domainId}": {
-      "get": {
-        "operationId": "Domain",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "DomainDomainId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomain"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteDomain",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/controlplane/account": {
-      "put": {
-        "operationId": "PutDataGovernanceApp",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/controlplane/account/{accountId}": {
-      "delete": {
-        "operationId": "DataGovernanceAppAccountAccountId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "accountId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/criticalDataColumns": {
-      "get": {
-        "operationId": "CriticalDataColumn",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "domainId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "assetId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "PostCriticalDataColumn",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/criticalDataColumns/{criticalDataColumnId}": {
-      "get": {
-        "operationId": "CriticalDataColumnCriticalDataColumnId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "criticalDataColumnId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/criticalDataColumns/{criticalDataColumnId}/relationships": {
-      "get": {
-        "operationId": "GetCriticalDataColumn",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "criticalDataColumnId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "CriticalDataColumnCriticalDataColumnIdRelationships",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "criticalDataColumnId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteCriticalDataColumn",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "criticalDataElementId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": true
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "criticalDataColumnId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/criticalDataElements": {
       "get": {
         "operationId": "GetCriticalDataElement",
@@ -1505,6 +91,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "GetCriticalDataElement_MaximumSet_Gen": {
+            "$ref": "./examples/GetCriticalDataElement_MaximumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1539,6 +130,10 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+        "PostCriticalDataElement_MaximumSet_Gen": {
+        "$ref": "./examples/PostCriticalDataElement_MaximumSet_Gen.json"
         }
       }
     },
@@ -1573,6 +168,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetCriticalDataElementCriticalDataElementId_MaximumSet_Gen": {
+            "$ref": "./examples/GetCriticalDataElementCriticalDataElementId_MaximumSet_Gen.json"
           }
         }
       },
@@ -1615,6 +215,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "PutCriticalDataElement_MaximumSet_Gen": {
+            "$ref": "./examples/PutCriticalDataElement_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1648,7 +253,11 @@
               }
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "DeleteCriticalDataElement_MaximumSet_Gen": {
+            "$ref": "./examples/DeleteCriticalDataElement_MaximumSet_Gen.json"
+          }
       }
     },
     "/criticalDataElements/{criticalDataElementId}/relationships": {
@@ -1687,6 +296,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetsCriticalDataElement_MaximumSet_Gen": {
+            "$ref": "./examples/GetsCriticalDataElement_MaximumSet_Gen.json"
           }
         }
       },
@@ -1735,10 +349,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CriticalDataElementCriticalDataElementIdRelationships_MaximumSet_Gen": {
+            "$ref": "./examples/CriticalDataElementCriticalDataElementIdRelationships_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
-        "operationId": "DeletesCriticalDataElement",
+        "operationId": "DeletsCriticalDataElement",
         "description": "The most basic operation.",
         "parameters": [
           {
@@ -1780,6 +399,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DeletsCriticalDataElement_MaximumSet_Gen": {
+            "$ref": "./examples/DeletsCriticalDataElement_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1815,6 +439,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataElementFacets_MaximumSet_Gen": {
+            "$ref": "./examples/CriticalDataElementFacets_MaximumSet_Gen.json"
+          },
+          "CriticalDataElementFacets_MinimumSet_Gen": {
+            "$ref": "./examples/CriticalDataElementFacets_MinimumSet_Gen.json"
           }
         }
       }
@@ -1859,337 +491,13 @@
               }
             }
           }
-        }
-      }
-    },
-    "/customMetadata": {
-      "get": {
-        "operationId": "GetCustomMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+        },
+        "x-ms-examples": {
+          "CriticalDataElementQuery_MaximumSet_Gen": {
+            "$ref": "./examples/CriticalDataElementQuery_MaximumSet_Gen.json"
           },
-          {
-            "name": "domainId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/customMetadata/{name}": {
-      "put": {
-        "operationId": "CustomMetadataName",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadata"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/customMetadata/{metadataId}": {
-      "get": {
-        "operationId": "CustomMetadataMetadataId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "metadataId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteCustomMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "metadataId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/customMetadata/{metadataId}/relationships": {
-      "get": {
-        "operationId": "CustomMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "metadataId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "PostCustomMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "metadataId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationship"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeletesCustomMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "metadataId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/customMetadata/query": {
-      "post": {
-        "operationId": "CustomMetadataQuery",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCustomMetadataCustomMetadataQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+          "CriticalDataElementQuery_MinimumSet_Gen": {
+            "$ref": "./examples/CriticalDataElementQuery_MinimumSet_Gen.json"
           }
         }
       }
@@ -2273,6 +581,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "PostDataAsset_MaximumSet_Gen": {
+            "$ref": "./examples/PostDataAsset_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -2307,6 +620,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssetDataAssetId_MaximumSet_Gen": {
+            "$ref": "./examples/DataAssetDataAssetId_MaximumSet_Gen.json"
           }
         }
       },
@@ -2349,6 +667,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "PutDataAsset_MaximumSet_Gen": {
+            "$ref": "./examples/PutDataAsset_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2381,6 +704,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDataAsset_MaximumSet_Gen": {
+            "$ref": "./examples/DeleteDataAsset_MaximumSet_Gen.json"
           }
         }
       }
@@ -2421,6 +749,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssetDataAssetIdRelationships_MaximumSet_Gen": {
+            "$ref": "./examples/DataAssetDataAssetIdRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -2469,6 +802,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DataAsset_MaximumSet_Gen": {
+            "$ref": "./examples/DataAsset_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2515,7 +853,12 @@
             }
           }
         }
-      }
+      },
+        "x-ms-examples": {
+          "DeletsDataAsset_MaximumSet_Gen": {
+            "$ref": "./examples/DeletsDataAsset_MaximumSet_Gen.json"
+          }
+        }
     },
     "/dataAssets/query": {
       "post": {
@@ -2549,6 +892,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "PostDataAssetQuery_MaximumSet_Gen": {
+            "$ref": "./examples/PostDataAssetQuery_MaximumSet_Gen.json"
+          },
+          "PostDataAssetQuery_MinimumSet_Gen": {
+            "$ref": "./examples/PostDataAssetQuery_MinimumSet_Gen.json"
           }
         }
       }
@@ -2605,6 +956,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "GetDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/GetDataProduct_MaximumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -2638,6 +994,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "PostDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/PostDataProduct_MaximumSet_Gen.json"
           }
         }
       }
@@ -2673,6 +1034,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductDataProductId_MaximumSet_Gen": {
+            "$ref": "./examples/DataProductDataProductId_MaximumSet_Gen.json"
           }
         }
       },
@@ -2715,6 +1081,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "PutDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/PutDataProduct_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2747,6 +1118,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/DeleteDataProduct_MaximumSet_Gen.json"
           }
         }
       }
@@ -2787,6 +1163,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductDataProductIdRelationships_MaximumSet_Gen": {
+            "$ref": "./examples/DataProductDataProductIdRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -2835,6 +1216,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "PostsDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/PostsDataProduct_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2880,6 +1266,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DeletsDataProduct_MaximumSet_Gen": {
+            "$ref": "./examples/DeletsDataProduct_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -2915,6 +1306,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductFacets_MaximumSet_Gen": {
+            "$ref": "./examples/DataProductFacets_MaximumSet_Gen.json"
+          },
+          "DataProductFacets_MinimumSet_Gen": {
+            "$ref": "./examples/DataProductFacets_MinimumSet_Gen.json"
           }
         }
       }
@@ -2965,6 +1364,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DataProductQuery_MaximumSet_Gen": {
+            "$ref": "./examples/DataProductQuery_MaximumSet_Gen.json"
+          },
+          "DataProductQuery_MinimumSet_Gen": {
+            "$ref": "./examples/DataProductQuery_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3001,6 +1408,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "InternalDataAssetsQueryPublished_MaximumSet_Gen": {
+            "$ref": "./examples/InternalDataAssetsQueryPublished_MaximumSet_Gen.json"
+          },
+          "InternalDataAssetsQueryPublished_MinimumSet_Gen": {
+            "$ref": "./examples/InternalDataAssetsQueryPublished_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3034,6 +1449,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "InternalResolvePolicyeffectiveCriticalDataElements_MaximumSet_Gen": {
+            "$ref": "./examples/InternalResolvePolicyeffectiveCriticalDataElements_MaximumSet_Gen.json"
+          },
+          "InternalResolvePolicyeffectiveCriticalDataElements_MinimumSet_Gen": {
+            "$ref": "./examples/InternalResolvePolicyeffectiveCriticalDataElements_MinimumSet_Gen.json"
           }
         }
       }
@@ -3069,630 +1492,13 @@
               }
             }
           }
-        }
-      }
-    },
-    "/objectives": {
-      "get": {
-        "operationId": "GetOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+        },
+        "x-ms-examples": {
+          "InternalResolvePolicyeffectiveterms_MaximumSet_Gen": {
+            "$ref": "./examples/InternalResolvePolicyeffectiveterms_MaximumSet_Gen.json"
           },
-          {
-            "name": "keyword",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "domainId",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "PostOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalProperties"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/{objectiveId}": {
-      "get": {
-        "operationId": "Okr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "OkrObjectiveId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalProperties"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/{objectiveId}/keyResults": {
-      "get": {
-        "operationId": "OkrObjectiveIdKeyResults",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "PostsOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelKeyResult"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/{objectiveId}/keyResults/{keyResultId}": {
-      "get": {
-        "operationId": "OkrObjectiveIdKeyResultsKeyResultId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "keyResultId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "PutOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "keyResultId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelKeyResult"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeletesOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "keyResultId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/{objectiveId}/relationships": {
-      "get": {
-        "operationId": "GetsOkr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "OkrObjectiveIdRelationships",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Deletes2Okr",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "relationshipType",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/facets": {
-      "post": {
-        "operationId": "OkrFacets",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveFacetRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/objectives/query": {
-      "post": {
-        "operationId": "OkrQuery",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "duplicatecheck",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+          "InternalResolvePolicyeffectiveterms_MinimumSet_Gen": {
+            "$ref": "./examples/InternalResolvePolicyeffectiveterms_MinimumSet_Gen.json"
           }
         }
       }
@@ -3727,6 +1533,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Policy_MaximumSet_Gen": {
+            "$ref": "./examples/Policy_MaximumSet_Gen.json"
+          },
+          "Policy_MinimumSet_Gen": {
+            "$ref": "./examples/Policy_MinimumSet_Gen.json"
           }
         }
       }
@@ -3764,250 +1578,13 @@
               }
             }
           }
-        }
-      }
-    },
-    "/snapshots/catalog/configure/install/{repeatIntervalMinutes}": {
-      "post": {
-        "operationId": "CatalogSnapshotConfigureInstallRepeatIntervalMinutes",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+        },
+        "x-ms-examples": {
+          "PolicyAddAdministrator_MaximumSet_Gen": {
+            "$ref": "./examples/PolicyAddAdministrator_MaximumSet_Gen.json"
           },
-          {
-            "name": "repeatIntervalMinutes",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/configure/status": {
-      "get": {
-        "operationId": "CatalogSnapshotConfigureStatus",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/configure/uninstall": {
-      "post": {
-        "operationId": "CatalogSnapshotConfigureUninstall",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/history": {
-      "get": {
-        "operationId": "CatalogSnapshotHistory",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/history/{snapshotId}": {
-      "get": {
-        "operationId": "CatalogSnapshotHistorySnapshotId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "snapshotId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/history/{snapshotId}/metadata": {
-      "get": {
-        "operationId": "CatalogSnapshotHistorySnapshotIdMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "snapshotId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/latest": {
-      "get": {
-        "operationId": "CatalogSnapshotLatest",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/snapshots/catalog/latest/metadata": {
-      "get": {
-        "operationId": "CatalogSnapshotLatestMetadata",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+          "PolicyAddAdministrator_MinimumSet_Gen": {
+            "$ref": "./examples/PolicyAddAdministrator_MinimumSet_Gen.json"
           }
         }
       }
@@ -4084,6 +1661,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "GetsTerm_MaximumSet_Gen": {
+            "$ref": "./examples/GetsTerm_MaximumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -4117,6 +1699,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "PostTerm_MaximumSet_Gen": {
+            "$ref": "./examples/PostTerm_MaximumSet_Gen.json"
           }
         }
       }
@@ -4152,6 +1739,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Term_MaximumSet_Gen": {
+            "$ref": "./examples/Term_MaximumSet_Gen.json"
           }
         }
       },
@@ -4194,6 +1786,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TermTermId_MaximumSet_Gen": {
+            "$ref": "./examples/TermTermId_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -4226,6 +1823,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTerm_MaximumSet_Gen": {
+            "$ref": "./examples/DeleteTerm_MaximumSet_Gen.json"
           }
         }
       }
@@ -4261,6 +1863,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TermTermIdHierarchies_MaximumSet_Gen": {
+            "$ref": "./examples/TermTermIdHierarchies_MaximumSet_Gen.json"
           }
         }
       }
@@ -4307,6 +1914,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "GetTerm_MaximumSet_Gen": {
+            "$ref": "./examples/GetTerm_MaximumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -4352,6 +1964,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TermTermIdRelationships_MaximumSet_Gen": {
+            "$ref": "./examples/TermTermIdRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -4403,6 +2020,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "DeletesTerm_MaximumSet_Gen": {
+            "$ref": "./examples/DeletesTerm_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -4439,6 +2061,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TermFacets_MaximumSet_Gen": {
+            "$ref": "./examples/TermFacets_MaximumSet_Gen.json"
+          },
+          "TermFacets_MinimumSet_Gen": {
+            "$ref": "./examples/TermFacets_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -4466,6 +2096,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TermMigrationCounts_MaximumSet_Gen": {
+            "$ref": "./examples/TermMigrationCounts_MaximumSet_Gen.json"
+          },
+          "TermMigrationCounts_MinimumSet_Gen": {
+            "$ref": "./examples/TermMigrationCounts_MinimumSet_Gen.json"
           }
         }
       }
@@ -4503,6 +2141,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TermMigrationMoveterms_MaximumSet_Gen": {
+            "$ref": "./examples/TermMigrationMoveterms_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -4531,6 +2174,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TermMigrationStart_MaximumSet_Gen": {
+            "$ref": "./examples/TermMigrationStart_MaximumSet_Gen.json"
+          },
+          "TermMigrationStart_MinimumSet_Gen": {
+            "$ref": "./examples/TermMigrationStart_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -4558,6 +2209,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TermMigrationState_MaximumSet_Gen": {
+            "$ref": "./examples/TermMigrationState_MaximumSet_Gen.json"
+          },
+          "TermMigrationState_MinimumSet_Gen": {
+            "$ref": "./examples/TermMigrationState_MinimumSet_Gen.json"
           }
         }
       }
@@ -4602,379 +2261,13 @@
               }
             }
           }
-        }
-      }
-    },
-    "/workflowRuns": {
-      "get": {
-        "operationId": "WorkflowsRun",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+        },
+        "x-ms-examples": {
+          "TermQuery_MaximumSet_Gen": {
+            "$ref": "./examples/TermQuery_MaximumSet_Gen.json"
           },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflowRuns/{workflowRunId}": {
-      "delete": {
-        "operationId": "WorkflowsRunWorkflowRunId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowRunId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflowRuns/{workflowRunId}/approve": {
-      "post": {
-        "operationId": "WorkflowsRunWorkflowRunIdApprove",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowRunId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApprovers"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflowRuns/{workflowRunId}/reject": {
-      "post": {
-        "operationId": "WorkflowsRunWorkflowRunIdReject",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowRunId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApprovers"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflowRuns/queryRuns": {
-      "post": {
-        "operationId": "WorkflowsRunQueryRuns",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsWorkflowRunQueryRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflows": {
-      "get": {
-        "operationId": "GetWorkflows",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "Workflows",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflows"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/workflows/{workflowId}": {
-      "get": {
-        "operationId": "WorkflowsWorkflowId",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "PutWorkflows",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflows"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteWorkflows",
-        "description": "The most basic operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+          "TermQuery_MinimumSet_Gen": {
+            "$ref": "./examples/TermQuery_MinimumSet_Gen.json"
           }
         }
       }
@@ -8272,3 +5565,6 @@
     }
   }
 }
+  }
+}
+
