@@ -22,6 +22,9 @@ using MonitorQueryMetrics;
 @@clientName(MetricResultsResponseValuesItem.endtime, "EndTime", "go");
 @@clientName(MetricResultsResponseValuesItem.value, "Values", "go");
 @@clientName(MetricResultsResponseValuesItem.resourceid, "ResourceID", "go");
-@@clientName(MetricResultsResponseValuesItem.resourceregion, "ResourceRegion", "go");
+@@clientName(MetricResultsResponseValuesItem.resourceregion,
+  "ResourceRegion",
+  "go"
+);
 
 @@clientName(Metric.timeseries, "TimeSeries", "go");

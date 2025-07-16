@@ -1,12 +1,17 @@
 {
+  "operationId": "Batch",
+  "title": "Query Storage metrics for multiple resources",
+  "description": "This example demonstrates how to query storage metrics for multiple storage accounts in Azure.",
   "parameters": {
-    "baseUrl": "https://eastus.metrics.monitor.azure.com",
     "subscriptionId": "12345678-abcd-1234-abcd-123456789abc",
     "starttime": "2023-02-01T20:00:00.123Z",
     "endtime": "2023-02-01T23:00:00.345Z",
     "interval": "PT15M",
     "metricnamespace": "Microsoft.Storage/storageAccounts",
-    "metricnames": "Ingress,Egress",
+    "metricnames": [
+      "Ingress",
+      "Egress"
+    ],
     "aggregation": "average,minimum,maximum",
     "top": 10,
     "orderby": "average desc",
@@ -516,27 +521,6 @@
             "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
           }
         ]
-      }
-    },
-    "default": {
-      "headers": {
-        "x-ms-error-code": "BadRequest"
-      },
-      "body": {
-        "error": {
-          "additionalInfo": [
-            {
-              "type": "string",
-              "info": "TraceId={00000000-0000-0000-0000-000000000000}"
-            },
-            {
-              "type": "string",
-              "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
-            }
-          ],
-          "code": "BadRequest",
-          "message": "Query endTime: 06/06/2021 00:00:00 is out of the Max metrics retention period: 93.00:00:00, traceId: {00000000-0000-0000-0000-000000000000}"
-        }
       }
     }
   }
