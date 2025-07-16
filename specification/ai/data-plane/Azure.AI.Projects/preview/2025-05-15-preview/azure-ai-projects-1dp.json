@@ -3493,6 +3493,25 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "AzureOpenAIModelConfiguration": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+        }
+      },
+      "required": [
+        "modelDeploymentName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureOpenAIModel"
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -5214,6 +5233,10 @@
           "$ref": "#/definitions/SystemData",
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
         }
       },
       "required": [
@@ -5222,7 +5245,8 @@
         "attackStrategies",
         "simulationOnly",
         "riskCategories",
-        "outputs"
+        "outputs",
+        "target"
       ]
     },
     "RedTeamUpload": {
@@ -5247,7 +5271,7 @@
           "format": "int32",
           "description": "Number of simulation rounds."
         },
-        "attackStrategy": {
+        "attackStrategies": {
           "type": "array",
           "description": "List of attack strategies or nested lists of attack strategies.",
           "items": {
@@ -5298,6 +5322,10 @@
           "$ref": "#/definitions/SystemData",
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
         }
       },
       "required": [
@@ -5610,6 +5638,20 @@
           "readOnly": true
         }
       }
+    },
+    "TargetConfig": {
+      "type": "object",
+      "description": "Abstract class for target configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "TargetHarm": {
       "type": "object",
