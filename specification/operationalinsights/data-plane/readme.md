@@ -34,7 +34,7 @@ openapi-type: data-plane
 
 ``` yaml
 input-file:
-- Microsoft.OperationalInsights/stable/2022-10-27/OperationalInsights.json
+- Microsoft.OperationalInsights/stable/v1/OperationalInsights.json
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
@@ -161,7 +161,7 @@ directive:
     transform: $ = "object"
   ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -178,11 +178,11 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
