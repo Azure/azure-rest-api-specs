@@ -558,6 +558,13 @@
             "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the user identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "beginFrom",
+            "in": "query",
+            "description": "Optional. Specifies the relative path to list paths from. For non-recursive list, only one entity level is supported; For recursive list, multiple entity levels are supported. (Inclusive)",
+            "required": false,
+            "type": "string"
           }
         ]
       },
