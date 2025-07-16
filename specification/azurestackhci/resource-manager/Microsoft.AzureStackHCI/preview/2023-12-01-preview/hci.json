@@ -1,3 +1,4 @@
+
 {
   "swagger": "2.0",
   "info": {
@@ -2887,7 +2888,9 @@
         "ResumeServer",
         "PauseServer",
         "AddNetworkIntent",
-        "ConfigureArcGateway"
+        "ConfigureArcGateway",
+        "VmConnectProvision",
+        "VmConnectRemove"
       ],
       "x-ms-enum": {
         "name": "HciJobType",
@@ -2922,6 +2925,16 @@
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
             "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "VmConnectProvision",
+            "value": "VmConnectProvision",
+            "description": "Job to open port to enable RDP Connection"
+          },
+          {
+            "name": "VmConnectRemove",
+            "value": "VmConnectRemove",
+            "description": "Job to close port to disable RDP Connection"
           }
         ]
       }
@@ -2948,6 +2961,52 @@
         }
       ],
       "x-ms-discriminator-value": "PauseServer"
+    },
+    "VmConnectProvisionJobProperties": {
+      "type": "object",
+      "description": "Properties for enabling VM Connect.",
+      "properties": {
+        "vmConnectProvisionJobDetails": {
+          "type": "array",
+          "description": "Details of VM needed to enable VM Connect",
+          "items": {
+            "$ref": "#/definitions/VmConnectJobDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vmConnectProvisionJobDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VmConnectProvision"
+    },
+    "VmConnectRemoveJobProperties": {
+      "type": "object",
+      "description": "Properties for disabling VM Connect.",
+      "properties": {
+        "vmConnectRemoveJobDetails": {
+          "type": "array",
+          "description": "Details of VM needed to disable VM Connect",
+          "items": {
+            "$ref": "#/definitions/VmConnectJobDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "vmConnectRemoveJobDetails"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "VmConnectRemove"
     },
     "HciProvisioningRequest": {
       "type": "object",
@@ -3073,6 +3132,19 @@
         }
       ],
       "x-ms-discriminator-value": "ResumeServer"
+    },
+    "VmConnectJobDetails": {
+      "type": "object",
+      "description": "Details of vm connect job.",
+      "properties": {
+        "vmName": {
+          "type": "string",
+          "description": "Name of the VM."
+        }
+      },
+      "required": [
+        "vmName"
+      ]
     },
     "HciUpdateConfidentialVmProperties": {
       "type": "object",
