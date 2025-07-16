@@ -29,9 +29,6 @@ op force_models(session: VoiceLiveClientEventSessionUpdate ):
   VoiceLiveServerEventInputAudioBufferCleared|
   VoiceLiveServerEventInputAudioBufferSpeechStarted|
   VoiceLiveServerEventInputAudioBufferSpeechStopped|
-  VoiceLiveServerEventOutputAudioBufferCleared|
-  VoiceLiveServerEventOutputAudioBufferStarted|
-  VoiceLiveServerEventOutputAudioBufferStopped|
   VoiceLiveServerEventResponseCreated|
   VoiceLiveServerEventResponseDone|
   VoiceLiveServerEventResponseOutputItemAdded|
@@ -41,8 +38,4 @@ op force_models(session: VoiceLiveClientEventSessionUpdate ):
   VoiceLiveServerEventResponseTextDone|
   VoiceLiveServerEventResponseAudioTranscriptDelta|
   VoiceLiveServerEventResponseAudioTranscriptDone|
-  VoiceLiveServerEventResponseAudioDone|
-  VoiceLiveServerEventResponseFunctionCallArgumentsDelta|
-  VoiceLiveServerEventResponseFunctionCallArgumentsDone|
-  VoiceLiveServerEventTranscriptionSessionUpdated|
-  VoiceLiveServerEventRateLimitsUpdated; 
+  VoiceLiveServerEventResponseAudioDone;

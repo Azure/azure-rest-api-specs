@@ -8,7 +8,7 @@ namespace VoiceLive;
 
 model VoiceLiveRequestSession {
   ...VoiceLiveSessionBase;
-  model?: string;
+  `model`?: string;
   modalities?: VoiceLiveModality[];
   animation?: VoiceLiveAnimation;
   voice?: VoiceIdsShared;
@@ -32,7 +32,7 @@ model VoiceLiveRequestSession {
 model VoiceLiveResponseSession {
   ...VoiceLiveSessionBase;
   id: string;
-  model: string;
+  `model`: string;
   modalities: VoiceLiveModality[];
   instructions: string;
   animation?: VoiceLiveAnimation;
@@ -46,7 +46,7 @@ model VoiceLiveResponseSession {
   input_audio_echo_cancellation?: VoiceLiveAudioEchoCancellation;
   avatar?: VoiceLiveAvatarConfig;
   input_audio_transcription: VoiceLiveAudioInputTranscriptionSettings | null;
-  tools: list<VoiceLiveTool>;
+  tools: VoiceLiveTool[];
   tool_choice: VoiceLiveToolChoice;
   temperature: float32;
   max_response_output_tokens: int32 | "inf" | null;
@@ -68,7 +68,7 @@ union VoiceLiveAudioInputTranscriptionModel {
 @doc("Configuration for input audio transcription.")
 model VoiceLiveAudioInputTranscriptionSettings {
   @doc("The model used for transcription. E.g., 'whisper-1', 'azure-fast-transcription', 's2s-ingraph'.")
-  model: "whisper-1" | "azure-fast-transcription" | "s2s-ingraph";
+  `model`: "whisper-1" | "azure-fast-transcription" | "s2s-ingraph";
 
   @doc("The language code to use for transcription, if specified.")
   language?: string;
@@ -109,7 +109,7 @@ model VoiceLiveServerVad extends VoiceLiveTurnDetection {
 }
 
 @doc("Semantic VAD settings based on Azure SDK features.")
-model VoiceLiveAzureSemanticVad extends VoiceLiveServerVad {
+model VoiceLiveAzureSemanticVad extends VoiceLiveTurnDetection {
   type: "azure_semantic_vad";
   neg_threshold?: float32;
   window_size?: int32;
@@ -127,7 +127,7 @@ model VoiceLiveAudioNoiseReduction {
 @doc("Configuration for client audio input. Used to specify the audio model and optional phrase list.")
 model VoiceLiveInputAudio {
   @doc("The name of the model to use for input audio (currently only 'azure-standard' is supported).")
-  model: "azure-standard";
+  `model`: "azure-standard";
 
   @doc("Optional list of phrases to bias the speech recognition engine.")
   phrase_list?: string[];
@@ -159,7 +159,7 @@ model VoiceLiveAnimation {
   model_name?: string = "default";
 
   @doc("Set of output data types requested from the animation system.")
-  outputs?: VoiceLiveAnimationOutputType[] = [VoiceLiveAnimationOutputType.blendshapes];
+  outputs?: VoiceLiveAnimationOutputType[] = #[VoiceLiveAnimationOutputType.blendshapes];
 
   @doc("Interval for emotion detection in milliseconds. If not set, emotion detection is disabled.")
   emotion_detection_interval_ms?: int32;
@@ -168,7 +168,7 @@ model VoiceLiveAnimation {
 @doc("Configuration for avatar streaming and behavior during the session.")
 model VoiceLiveAvatarConfig {
   @doc("Optional list of ICE servers to use for WebRTC connection establishment.")
-  ice_servers?: list<IceServer>;
+  ice_servers?: IceServer[];
 
   @doc("The character name or ID used for the avatar.")
   character: string;
@@ -186,7 +186,7 @@ model VoiceLiveAvatarConfig {
 @doc("ICE server configuration for WebRTC connection negotiation.")
 model IceServer {
   @doc("List of ICE server URLs (e.g., TURN or STUN endpoints).")
-  urls: list<string>;
+  urls: string[];
 
   @doc("Optional username used for authentication with the ICE server.")
   username?: string;
@@ -201,4 +201,37 @@ model AgentConfig {
   description?: string;
   agent_id: string;
   thread_id: string;
+}
+
+@doc("Video streaming parameters for avatar.")
+model VideoParams {
+  @doc("Bitrate in bits per second (e.g., 2000000 for 2 Mbps).")
+  bitrate?: int32 = 2000000;
+
+  @doc("Codec to use for encoding. Currently only 'h264' is supported.")
+  codec?: "h264" = "h264";
+
+  @doc("Optional cropping settings for the video stream.")
+  crop?: VideoCrop;
+
+  @doc("Optional resolution settings for the video stream.")
+  resolution?: VideoResolution;
+}
+
+@doc("Bounding box crop for avatar video. Coordinates must be positive.")
+model VideoCrop {
+  @doc("Top-left coordinate of the crop rectangle as [x, y]. Both values must be positive.")
+  top_left: [int32, int32];
+
+  @doc("Bottom-right coordinate of the crop rectangle as [x, y]. Both values must be positive.")
+  bottom_right: [int32, int32];
+}
+
+@doc("Resolution of the video feed in pixels.")
+model VideoResolution {
+  @doc("Width of the video in pixels. Must be greater than 0.")
+  width: int32;
+
+  @doc("Height of the video in pixels. Must be greater than 0.")
+  height: int32;
 }

@@ -7,40 +7,53 @@ using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
+@doc("Error object returned in case of API failure.")
 model Error {
-  code: string | null;
+  @doc("Error code, or null if unspecified.")
+  code?: string;
+
+  @doc("Human-readable error message.")
   message: string;
-  param: string | null;
+
+  @doc("Parameter name related to the error, if applicable.")
+  param?: string;
+
+  @doc("Type or category of the error.")
   type: string;
 }
 
 @error
+@doc("Standard error response envelope.")
 model ErrorResponse {
+  @doc("Error object returned in case of API failure.")
   error: Error;
 }
 
+@doc("Optional metadata property used in request models.")
 model MetadataPropertyForRequest {
   @extension("x-oaiTypeLabel", "map")
   metadata?: Record<string>;
 }
 
+@doc("Metadata property included in response models.")
 model MetadataPropertyForResponse {
   @extension("x-oaiTypeLabel", "map")
-  metadata: Record<string> | null;
+  metadata?: Record<string>;
 }
 
-/** A log probability object. */
+@doc("A single log probability entry for a token.")
 model LogProbProperties {
-  /** The token that was used to generate the log probability. */
+  @doc("The token that was used to generate the log probability.")
   token: string;
 
-  /** The log probability of the token. */
+  @doc("The log probability of the token.")
   logprob: float32;
 
-  /** The bytes that were used to generate the log probability. */
+  @doc("The bytes that were used to generate the log probability.")
   bytes: int32[];
 }
 
+@doc("Identifier for selecting a built-in voice.")
 union VoiceIdsShared {
   string,
   "alloy",
@@ -53,6 +66,7 @@ union VoiceIdsShared {
   "verse",
 }
 
+@doc("Enumerates available service tier configurations.")
 union ServiceTier {
   "auto",
   "default",

@@ -79,7 +79,7 @@ model VoiceLiveClientEventSessionUpdate extends VoiceLiveClientEvent {
   Sent when the client connects and provides its SDP (Session Description Protocol)
   for avatar-related media negotiation.
 """)
-model VoiceLiveClientEventSessionAvatarConnect extends ClientEventBase {
+model VoiceLiveClientEventSessionAvatarConnect extends VoiceLiveClientEvent {
   @doc("The event type, must be 'session.avatar.connect'.")
   type: VoiceLiveClientEventType.session_avatar_connect;
 
@@ -90,7 +90,7 @@ model VoiceLiveClientEventSessionAvatarConnect extends ClientEventBase {
 @doc("""
   Indicates the start of a new audio input turn.
 """)
-model VoiceLiveClientEventInputAudioTurnStart extends ClientEventBase {
+model VoiceLiveClientEventInputAudioTurnStart extends VoiceLiveClientEvent {
   @doc("The event type, must be 'input_audio.turn.start'.")
   type: VoiceLiveClientEventType.input_audio_turn_start;
 
@@ -101,7 +101,7 @@ model VoiceLiveClientEventInputAudioTurnStart extends ClientEventBase {
 @doc("""
   Appends audio data to an ongoing input turn.
 """)
-model VoiceLiveClientEventInputAudioTurnAppend extends ClientEventBase {
+model VoiceLiveClientEventInputAudioTurnAppend extends VoiceLiveClientEvent {
   @doc("The event type, must be 'input_audio.turn.append'.")
   type: VoiceLiveClientEventType.input_audio_turn_append;
 
@@ -115,7 +115,7 @@ model VoiceLiveClientEventInputAudioTurnAppend extends ClientEventBase {
 @doc("""
   Marks the end of an audio input turn.
 """)
-model VoiceLiveClientEventInputAudioTurnEnd extends ClientEventBase {
+model VoiceLiveClientEventInputAudioTurnEnd extends VoiceLiveClientEvent {
   @doc("The event type, must be 'input_audio.turn.end'.")
   type: VoiceLiveClientEventType.input_audio_turn_end;
 
@@ -126,7 +126,7 @@ model VoiceLiveClientEventInputAudioTurnEnd extends ClientEventBase {
 @doc("""
   Cancels an in-progress input audio turn.
 """)
-model VoiceLiveClientEventInputAudioTurnCancel extends ClientEventBase {
+model VoiceLiveClientEventInputAudioTurnCancel extends VoiceLiveClientEvent {
   @doc("The event type, must be 'input_audio.turn.cancel'.")
   type: VoiceLiveClientEventType.input_audio_turn_cancel;
 
@@ -137,7 +137,7 @@ model VoiceLiveClientEventInputAudioTurnCancel extends ClientEventBase {
 @doc("""
   Clears all input audio currently being streamed.
 """)
-model VoiceLiveClientEventInputAudioClear extends ClientEventBase {
+model VoiceLiveClientEventInputAudioClear extends VoiceLiveClientEvent {
   @doc("The event type, must be 'input_audio.clear'.")
   type: VoiceLiveClientEventType.input_audio_clear;
 }
@@ -1104,7 +1104,7 @@ model ResponseAnimationBlendshapeDeltaEvent extends VoiceLiveServerEvent {
   item_id: string;
   output_index: int32;
   content_index: int32;
-  frames: list<list<float32>> | string;
+  frames: float32[][] | string;
   frame_index: int32;
 }
 
@@ -1124,10 +1124,7 @@ Represents an emotion hypothesis detected from response audio with multiple cand
 model ResponseEmotionHypothesis extends VoiceLiveServerEvent {
   type: VoiceLiveServerEventType.response_emotion_hypothesis;
   emotion: string;
-  candidates: list<{
-    emotion: string;
-    confidence: float32;
-  }>;
+  candidates: EmotionCandidate[],
   audio_offset_ms: int32;
   audio_duration_ms: int32;
   response_id: string;
@@ -1199,13 +1196,13 @@ model VoiceLiveResponseCreateParams {
   @doc("""
   Input items to append to the conversation context before generating a response.
   """)
-  append_input_items?: list<VoiceLiveConversationRequestItem>;
+  append_input_items?: VoiceLiveConversationRequestItem[];
 
   @doc("""
   Input items to be used as the context for this response.
   An empty array clears previous context.
   """)
-  input_items?: list<VoiceLiveConversationRequestItem>;
+  input_items?: VoiceLiveConversationRequestItem[];
 
   // Tool customization: Apply reusable modality representation
   /**
@@ -1757,4 +1754,9 @@ model VoiceLiveServerEventConversationItemRetrieved extends VoiceLiveServerEvent
 
   // Tool customization: apply enriched item definition hierarchy
   item: VoiceLiveConversationResponseItem;
+}
+
+model EmotionCandidate {
+  emotion: string;
+  confidence: float32;
 }
