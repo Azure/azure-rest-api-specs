@@ -387,6 +387,10 @@
           "List all reports for the VMSS guest configuration assignment with latest report first": {
             "$ref": "./examples/listAllVMSSGuestConfigurationAssignmentReports.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -1997,6 +2001,9 @@
           "items": {
             "$ref": "#/definitions/GuestConfigurationAssignmentReport"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
