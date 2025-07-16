@@ -29,18 +29,6 @@ model ErrorResponse {
   error: Error;
 }
 
-@doc("Optional metadata property used in request models.")
-model MetadataPropertyForRequest {
-  @extension("x-oaiTypeLabel", "map")
-  metadata?: Record<string>;
-}
-
-@doc("Metadata property included in response models.")
-model MetadataPropertyForResponse {
-  @extension("x-oaiTypeLabel", "map")
-  metadata?: Record<string>;
-}
-
 @doc("A single log probability entry for a token.")
 model LogProbProperties {
   @doc("The token that was used to generate the log probability.")
