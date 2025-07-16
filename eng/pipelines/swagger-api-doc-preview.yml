@@ -28,9 +28,8 @@ jobs:
       - name: CurrentBuildUrl
         value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
-      # TODO: Remove [TEST-IGNORE] when this is ready to go live
       - name: StatusName
-        value: '[TEST-IGNORE] Swagger ApiDocPreview'
+        value: 'Swagger ApiDocPreview'
 
     steps:
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
@@ -52,8 +51,7 @@ jobs:
           # checks out files in the repo root
           Repositories:
             - Name: MicrosoftDocs/AzureRestPreview
-              # TODO: use main branch when this is ready to go live
-              Commitish: refs/heads/doc-preview-migration-test
+              Commitish: main
               WorkingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
@@ -87,7 +85,7 @@ jobs:
             $buildStartRaw = az pipelines build queue `
               --organization "https://dev.azure.com/apidrop/" `
               --project "Content CI" `
-              --definition-id "8120" `
+              --definition-id "8157" `
               --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
             $buildStartRaw | Set-Content buildstart.json
             $buildStart = $buildStartRaw | ConvertFrom-Json
