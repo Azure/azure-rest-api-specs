@@ -100,7 +100,7 @@
       "name": "Probes"
     },
     {
-      "name": "PublicIPs"
+      "name": "PublicIPAddresses"
     },
     {
       "name": "NatGateways"
@@ -1173,13 +1173,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/publicIPs": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/publicIPAddresses": {
       "get": {
-        "operationId": "PublicIPs_ListAll",
+        "operationId": "PublicIpAddresses_ListAll",
         "tags": [
-          "PublicIPs"
+          "PublicIPAddresses"
         ],
-        "description": "Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.",
+        "description": "Lists all of the publicIPAddresses in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1192,7 +1192,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublicIPListResult"
+              "$ref": "#/definitions/PublicIPAddressListResult"
             }
           },
           "default": {
@@ -4785,13 +4785,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses": {
       "get": {
-        "operationId": "PublicIPs_ListByResourceGroup",
+        "operationId": "PublicIpAddresses_ListByResourceGroup",
         "tags": [
-          "PublicIPs"
+          "PublicIPAddresses"
         ],
-        "description": "Lists all of the virtual networks in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.",
+        "description": "Lists all of the publicIPAddresses in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4807,7 +4807,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublicIPListResult"
+              "$ref": "#/definitions/PublicIPAddressListResult"
             }
           },
           "default": {
@@ -4822,11 +4822,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPs/{publicIPName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses/{publicIPName}": {
       "get": {
-        "operationId": "PublicIPs_Get",
+        "operationId": "PublicIpAddresses_Get",
         "tags": [
-          "PublicIPs"
+          "PublicIPAddresses"
         ],
         "description": "The operation to get a virtual network.",
         "parameters": [
@@ -4852,7 +4852,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PublicIP"
+              "$ref": "#/definitions/PublicIPAddress"
             }
           },
           "default": {
@@ -4864,11 +4864,11 @@
         }
       },
       "put": {
-        "operationId": "PublicIPs_CreateOrUpdate",
+        "operationId": "PublicIpAddresses_CreateOrUpdate",
         "tags": [
-          "PublicIPs"
+          "PublicIPAddresses"
         ],
-        "description": "The operation to create or update a virtual network. Please note some properties can be set only during PublicIP creation.",
+        "description": "The operation to create or update a publicIPAddress. Please note some properties can be set only during PublicIP creation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4893,21 +4893,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PublicIP"
+              "$ref": "#/definitions/PublicIPAddress"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PublicIP' update operation succeeded",
+            "description": "Resource 'PublicIPAddress' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PublicIP"
+              "$ref": "#/definitions/PublicIPAddress"
             }
           },
           "201": {
-            "description": "Resource 'PublicIP' create operation succeeded",
+            "description": "Resource 'PublicIPAddress' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PublicIP"
+              "$ref": "#/definitions/PublicIPAddress"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -4933,12 +4933,79 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "operationId": "PublicIPs_Delete",
+      "patch": {
+        "operationId": "PublicIpAddresses_UpdateTags",
         "tags": [
-          "PublicIPs"
+          "PublicIPAddresses"
         ],
-        "description": "The operation to delete a virtual network.",
+        "description": "Updates a publicIPAddress tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "publicIPName",
+            "in": "path",
+            "description": "Name of the public IP",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddressTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIPAddress"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PublicIpAddresses_Delete",
+        "tags": [
+          "PublicIPAddresses"
+        ],
+        "description": "The operation to delete a publicIPAddresses.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6937,7 +7004,7 @@
           "description": "subnet - the subnet from which to allocate the private IP"
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/PublicIPArmReference",
+          "$ref": "#/definitions/PublicIPAddressArmReference",
           "description": "Public IP "
         },
         "provisioningState": {
@@ -7543,6 +7610,27 @@
         }
       }
     },
+    "IPConfigurationArmReference": {
+      "type": "object",
+      "description": "The ARM ID of an IPConfiguration resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID of an IPConfiguration resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/networkInterfaces"
+              }
+            ]
+          }
+        }
+      }
+    },
     "IPConfigurationProperties": {
       "type": "object",
       "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration.",
@@ -7958,7 +8046,7 @@
     },
     "LoadBalancerRuleProperties": {
       "type": "object",
-      "description": "LoadBalancerRuleProperties",
+      "description": "Properties for LoadBalancerRules",
       "properties": {
         "frontendIPConfiguration": {
           "$ref": "#/definitions/FrontendIPConfigurationArmReference",
@@ -8560,7 +8648,7 @@
           "type": "array",
           "description": "List of public ip addresses that the gateway can use for NAT.",
           "items": {
-            "$ref": "#/definitions/PublicIPArmReference"
+            "$ref": "#/definitions/PublicIPAddressArmReference"
           }
         },
         "subnets": {
@@ -9241,12 +9329,12 @@
       },
       "readOnly": true
     },
-    "PublicIP": {
+    "PublicIPAddress": {
       "type": "object",
       "description": "The publicIP resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PublicIPProperties",
+          "$ref": "#/definitions/PublicIPAddressProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -9261,7 +9349,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "PublicIPArmReference": {
+    "PublicIPAddressArmReference": {
       "type": "object",
       "description": "The ARM ID of a Public IP resource",
       "properties": {
@@ -9272,22 +9360,22 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.AzureStackHCI/publicIPs"
+                "type": "Microsoft.AzureStackHCI/publicIPAddresses"
               }
             ]
           }
         }
       }
     },
-    "PublicIPListResult": {
+    "PublicIPAddressListResult": {
       "type": "object",
-      "description": "The response of a PublicIP list operation.",
+      "description": "The response of a PublicIPAddress list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PublicIP items on this page",
+          "description": "The PublicIPAddress items on this page",
           "items": {
-            "$ref": "#/definitions/PublicIP"
+            "$ref": "#/definitions/PublicIPAddress"
           }
         },
         "nextLink": {
@@ -9300,12 +9388,12 @@
         "value"
       ]
     },
-    "PublicIPProperties": {
+    "PublicIPAddressProperties": {
       "type": "object",
       "description": "Public IP Properties resource.",
       "properties": {
         "publicIPAddressVersion": {
-          "type": "string",
+          "$ref": "#/definitions/PublicIPAddressType",
           "description": "Whether the public IP is v4 or v6. Defaults to IPv4"
         },
         "ipAllocationScope": {
@@ -9316,15 +9404,59 @@
           "type": "string",
           "description": "IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space."
         },
+        "natGateway": {
+          "$ref": "#/definitions/NatGatewayArmReference",
+          "description": "nat gateway using this public IP",
+          "readOnly": true
+        },
+        "ipConfiguration": {
+          "$ref": "#/definitions/IPConfigurationArmReference",
+          "description": "nat gateway using this public IP",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the public IP",
           "readOnly": true
         }
-      },
-      "required": [
-        "ipAllocationScope"
-      ]
+      }
+    },
+    "PublicIPAddressTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PublicIPAddress resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PublicIPAddressType": {
+      "type": "string",
+      "description": "Type of public IP addresses",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIPAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 IP Address"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 IP Address"
+          }
+        ]
+      }
     },
     "Route": {
       "type": "object",

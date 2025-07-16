@@ -440,6 +440,18 @@ union IPPoolTypeEnum {
 }
 
 @added(Versions.v2025_09_01_preview)
+@doc("Type of public IP addresses")
+union PublicIPAddressType {
+  @doc("IPv4 IP Address")
+  IPv4: "IPv4",
+
+  @doc("IPv6 IP Address")
+  IPv6: "IPv6",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
 @doc("Type of session persistence [Default, SourceIP, SourceIPProtocol]")
 union LoadBalancerRuleSessionPersistenceType {
   @doc("Default - 5-tuple hashing")
@@ -574,11 +586,26 @@ model VirtualNetworkSubnetArmReference {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("The ARM ID of a Public IP resource")
-model PublicIPArmReference {
+model PublicIPAddressArmReference {
   @doc("The ARM ID of a Public IP resource")
   id?: armResourceIdentifier<[
     {
-      type: "Microsoft.AzureStackHCI/publicIPs";
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID of an IPConfiguration resource")
+model IPConfigurationArmReference {
+  @doc("The ARM ID of an IPConfiguration resource")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
   ]>;
 }
@@ -1375,18 +1402,27 @@ model VirtualNetworkSubnetStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Public IP Properties resource.")
-model PublicIPProperties {
+model PublicIPAddressProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
-  publicIPAddressVersion?: string;
+  publicIPAddressVersion?: PublicIPAddressType;
 
   @doc("ipAllocationScope: Arm Reference to the logical network to allocate this from")
-  ipAllocationScope: LogicalNetworkArmReference;
+  ipAllocationScope?: LogicalNetworkArmReference;
 
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;
+
+  @doc("nat gateway using this public IP")
+  @visibility(Lifecycle.Read)
+  natGateway?: NatGatewayArmReference;
+
+  @doc("nat gateway using this public IP")
+  @visibility(Lifecycle.Read)
+  ipConfiguration?: IPConfigurationArmReference;
 
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
@@ -1398,7 +1434,7 @@ model PublicIPProperties {
 model NatGatewayProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("List of public ip addresses that the gateway can use for NAT.")
-  publicIPAddresses?: PublicIPArmReference[];
+  publicIPAddresses?: PublicIPAddressArmReference[];
 
   @visibility(Lifecycle.Read)
   @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
@@ -1410,7 +1446,6 @@ model NatGatewayProperties {
 
   @doc("The observed state of Nat Gateway")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_09_01_preview)
   status?: NatGatewayStatus;
 }
 
@@ -1462,7 +1497,7 @@ model FrontendIPConfigurationProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Public IP ")
-  publicIPAddress?: PublicIPArmReference;
+  publicIPAddress?: PublicIPAddressArmReference;
 
   @doc("Provisioning state of the FrontendIP configuration.")
   @visibility(Lifecycle.Read)

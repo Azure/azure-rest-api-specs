@@ -24,7 +24,7 @@ import "./BackendAddressPools.tsp";
 import "./InboundNATRules.tsp";
 import "./LoadBalancerRules.tsp";
 import "./Probes.tsp";
-import "./PublicIPs.tsp";
+import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -19,12 +19,12 @@ namespace Microsoft.AzureStackHCI;
 @doc("The publicIP resource definition.")
 @extension("x-ms-azure-resource", true)
 @added(Versions.v2025_09_01_preview)
-model PublicIP is TrackedResource<PublicIPProperties> {
+model PublicIPAddress is TrackedResource<PublicIPAddressProperties> {
   @doc("Name of the public IP")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
   @key("publicIPName")
-  @segment("publicIPs")
+  @segment("publicIPAddresses")
   @visibility(Lifecycle.Read)
   name: string;
 
@@ -35,22 +35,22 @@ model PublicIP is TrackedResource<PublicIPProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
-interface PublicIPs {
+interface PublicIPAddresses {
   @doc("The operation to get a virtual network.")
-  get is ArmResourceRead<PublicIP>;
+  get is ArmResourceRead<PublicIPAddress>;
 
-  @doc("The operation to create or update a virtual network. Please note some properties can be set only during PublicIP creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PublicIP>;
+  @doc("The operation to create or update a publicIPAddress. Please note some properties can be set only during PublicIP creation.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PublicIPAddress>;
 
-  @doc("Updates a Public IP tags.")
-  updateTags is ArmTagsPatchAsync<PublicIP, TagsObject>;
+  @doc("Updates a publicIPAddress tags.")
+  updateTags is ArmTagsPatchAsync<PublicIPAddress, TagsObject>;
 
-  @doc("The operation to delete a virtual network.")
-  delete is ArmResourceDeleteWithoutOkAsync<PublicIP>;
+  @doc("The operation to delete a publicIPAddresses.")
+  delete is ArmResourceDeleteWithoutOkAsync<PublicIPAddress>;
 
-  @doc("Lists all of the virtual networks in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.")
-  listByResourceGroup is ArmResourceListByParent<PublicIP>;
+  @doc("Lists all of the publicIPAddresses in the specified resource group. Use the nextLink property in the response to get the next page of PublicIP.")
+  listByResourceGroup is ArmResourceListByParent<PublicIPAddress>;
 
-  @doc("Lists all of the virtual networks in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.")
-  listAll is ArmListBySubscription<PublicIP>;
+  @doc("Lists all of the publicIPAddresses in the specified subscription. Use the nextLink property in the response to get the next page of PublicIP.")
+  listAll is ArmListBySubscription<PublicIPAddress>;
 }
