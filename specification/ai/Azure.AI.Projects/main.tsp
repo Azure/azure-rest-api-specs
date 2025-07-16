@@ -58,5 +58,8 @@ namespace Azure.AI.Projects {
     @doc("Azure AI API version latest.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v_latest: "latest",
+    @doc("Azure AI API version v1.")
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v1: "v1",
   }
 }

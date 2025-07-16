@@ -35,13 +35,13 @@ alias ListEvaluationResultsParameters = {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 interface EvaluationResults
-  extends ServicePatterns.VersionedOperations<
+  extends VersionedOperations<
       EvaluationResult,
       ListEvaluationResultsParameters,
       ListEvaluationResultsParameters
     > {
   @doc("Create or start a pending upload of a evaluation results for a specific version.")
-  startPendingUpload is ServicePatterns.VersionedResourceAction<
+  startPendingUpload is VersionedResourceAction<
     EvaluationResult,
     PendingUploadRequest,
     PendingUploadResponse
@@ -52,7 +52,7 @@ interface EvaluationResults
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is ServicePatterns.VersionedResourceAction<
+  getCredentials is VersionedResourceAction<
     EvaluationResult,
     AssetCredentialRequest,
     AssetCredentialResponse

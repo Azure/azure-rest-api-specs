@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the Copilot Settings for Azure tenants.
+These are the copilot settings for Azure.
 
 ```yaml
 openapi-type: arm

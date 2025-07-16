@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
@@ -25,7 +24,7 @@ interface Connections {
   @doc("Get a connection by name, with its connection credentials")
   @TypeSpec.Http.post
   @Rest.actionSeparator("/")
-  @Rest.action("withCredentials")
+  @Rest.action("getConnectionWithCredentials")
   getWithCredentials is ConnectionOperations.ResourceAction<
     Connection,
     {},
@@ -43,32 +42,6 @@ interface Connections {
       @doc("List connections that are default connections")
       @query("defaultConnection")
       defaultConnection?: boolean;
-
-      ...StandardListQueryParameters;
     }>
   >;
-
-  @doc("List all connections in the project, with their connection credentials")
-  @TypeSpec.Http.post
-  @Rest.actionSeparator("/")
-  @Rest.action("withCredentials")
-  listWithCredentials is ConnectionOperations.ResourceCollectionAction<
-    Connection,
-    {
-      @doc("List connections of this specific type")
-      @query("connectionType")
-      connectionType?: ConnectionType;
-
-      @doc("List connections that are default connections")
-      @query("defaultConnection")
-      defaultConnection?: boolean;
-
-      ...StandardListQueryParameters;
-    },
-    Internal.ConnectionPaged
-  >;
-}
-
-namespace Internal {
-  model ConnectionPaged is Azure.Core.Page<Connection>;
 }

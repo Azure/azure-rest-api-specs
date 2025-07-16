@@ -8,19 +8,19 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-projects-1dp.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-projects.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-projects-onedp"
+    package-dir: "azure-ai-projects"
     package-name: "{package-dir}"
-    namespace: "azure.ai.projects.onedp"
+    namespace: "azure.ai.projects"
     api-version: "2025-05-15-preview"
     flavor: azure
     generate-test: true
-    generate-sample: true
+    generate-sample: false
   "@azure-tools/typespec-csharp":
     package-mode: "dataplane"
-    package-dir: "Azure.AI.Projects.1DP"
+    package-dir: "Azure.AI.Projects"
     namespace: "{package-dir}"
     package-name: "{package-dir}"
     api-version: "2025-05-15-preview"
@@ -29,13 +29,30 @@ options:
     generate-test: false
     generate-sample: false
     clear-output-folder: true
-  "@azure-tools/typespec-ts":
-    package-dir: "ai-projects-1dp"
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Projects
+    model-namespace: false
     api-version: "2025-05-15-preview"
-    generateTest: true
-    generateMetadata: false
-    packageDetails:
-      name: "@azure/ai-projects-1dp"
+  "@typespec/http-client-csharp":
+    package-name: Azure.AI.Projects
+    api-version: "2025-05-15-preview"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "ai-projects"
+    api-version: "2025-05-15-preview"
+    is-modular-library: true
+    generate-test: true
+    generate-metadata: false
+    package-details:
+      name: "@azure/ai-projects"
+      description: "Azure AI Projects Client"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-projects"
+    namespace: com.azure.ai.projects
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
     flavor: azure
 linter:
   extends:

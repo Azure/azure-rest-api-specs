@@ -55,11 +55,7 @@ union ListViewType {
 }
 
 alias AssetBase = {
-  @doc("Asset stage")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  stage?: string;
-
-  @doc("A unique identifier for the asset, assetId probably?")
+  @doc("Asset ID, a unique identifier for the asset")
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -101,8 +97,8 @@ union PendingUploadType {
   @doc("No pending upload.")
   none: "None",
 
-  @doc("Temporary Blob Reference is the only supported type.")
-  temporaryBlobReference: "TemporaryBlobReference",
+  @doc("Blob Reference is the only supported type.")
+  BlobReference: "BlobReference",
 }
 
 @doc("The type of credential used to access the storage account.")
@@ -118,26 +114,26 @@ model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
 
-  @doc("Name of Azure blob storage connection to use for generating temporary SAS token")
+  @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
-  @doc("TemporaryBlobReference is the only supported type.")
-  pendingUploadType: PendingUploadType.temporaryBlobReference;
+  @doc("BlobReference is the only supported type.")
+  pendingUploadType: PendingUploadType.BlobReference;
 }
 
 @doc("Represents the response for a pending upload request")
 model PendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
-  blobReferenceForConsumption: BlobReferenceForConsumption;
+  blobReference: BlobReference;
 
   @doc("ID for this upload request.")
   pendingUploadId: string;
 
-  @doc("Version of dataset to be created if user did not specify version when initially creating upload")
-  datasetVersion?: string;
+  @doc("Version of asset to be created if user did not specify version when initially creating upload")
+  version?: string;
 
-  @doc("TemporaryBlobReference is the only supported type")
-  pendingUploadType: PendingUploadType.temporaryBlobReference;
+  @doc("BlobReference is the only supported type")
+  pendingUploadType: PendingUploadType.BlobReference;
 }
 
 @doc("SAS Credential definition")
@@ -151,8 +147,8 @@ model SasCredential {
   type: "SAS";
 }
 
-@doc("Represents a reference to a blob for consumption")
-model BlobReferenceForConsumption {
+@doc("Blob reference details.")
+model BlobReference {
   @doc("Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path")
   blobUri: Uri;
 
@@ -172,18 +168,8 @@ model AssetCredentialRequest {
   BlobUri: string;
 }
 
-@doc("Blob Reference Credential Type")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-union BlobReferenceCredentialType {
-  string,
-
-  @doc("Shared Access Signature")
-  SAS: "SAS",
-}
-
 @doc("Represents a reference to a blob for consumption")
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
-  blobReferenceForConsumption: BlobReferenceForConsumption;
+  blobReference: BlobReference;
 }

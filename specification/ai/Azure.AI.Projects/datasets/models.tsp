@@ -28,18 +28,22 @@ union DatasetType {
 @discriminator("type")
 @added(Versions.v2025_05_01)
 model DatasetVersion {
-  @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
+  @doc("URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
-  datasetUri: string;
+  dataUri: string;
 
   @doc("Dataset type")
   type: DatasetType;
 
-  @doc("Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted")
+  @doc("Indicates if the dataset holds a reference to the storage, or the dataset manages storage itself. If true, the underlying data will not be deleted when the dataset version is deleted")
   @visibility(Lifecycle.Read)
   isReference?: boolean;
+
+  @doc("The Azure Storage Account connection name. Required if startPendingUploadVersion was not called before creating the Dataset")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  connectionName?: string;
 
   ...AssetBase;
 }
@@ -49,9 +53,6 @@ model DatasetVersion {
 model FileDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_file;
-
-  @doc("Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features")
-  openAIPurpose: string;
 }
 
 @doc("FileDatasetVersion Definition")

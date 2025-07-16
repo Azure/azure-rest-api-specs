@@ -160,7 +160,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-preview-2025-03-01
+tag: package-2025-03-01-preview
 ```
 
 ### Tag: package-2018-04-01
