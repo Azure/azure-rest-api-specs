@@ -1,7 +1,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using Azure.Core;
 using Azure.ClientGenerator.Core;
 using AzureAppConfiguration;
 
@@ -19,11 +18,12 @@ namespace SdkCustomizations;
 //@@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
 @@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
-@@clientName(putKeyValue, "SetConfigurationSetting", "csharp");
+@@clientName(putKeyValue, "SetConfigurationSettingInternal", "csharp");
 @@clientName(deleteKeyValue, "DeleteConfigurationSetting", "csharp");
 @@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
 @@clientName(putLock, "CreateReadOnlyLock", "csharp");
 @@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
+
 @@access(putKeyValue, Access.internal, "csharp");
 // @@access(deleteKeyValue, Access.internal, "csharp");
 // @@access(getSnapshot, Access.internal, "csharp");
