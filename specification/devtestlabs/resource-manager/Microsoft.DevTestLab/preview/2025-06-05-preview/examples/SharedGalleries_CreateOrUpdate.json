@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "name": "{sharedGalleryName}",
+    "api-version": "2025-06-05-preview",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "sharedGallery": {
+      "location": "{location}",
+      "properties": {
+        "allowAllImages": "{Enabled|Disabled}",
+        "galleryId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.compute/galleries/{sharedGalleryName}"
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{sharedGalleryName}",
+        "type": "Microsoft.DevTestLab/labs/sharedGalleries",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/sharedgalleries/{sharedGalleryName}",
+        "location": "{location}",
+        "properties": {
+          "allowAllImages": "{Enabled|Disabled}",
+          "galleryId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.compute/galleries/{sharedGalleryName}",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "{sharedGalleryName}",
+        "type": "Microsoft.DevTestLab/labs/sharedGalleries",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/sharedgalleries/{sharedGalleryName}",
+        "location": "{location}",
+        "properties": {
+          "allowAllImages": "{Enabled|Disabled}",
+          "galleryId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.compute/galleries/{sharedGalleryName}",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "SharedGalleries_CreateOrUpdate",
+  "title": "SharedGalleries_CreateOrUpdate"
+}
