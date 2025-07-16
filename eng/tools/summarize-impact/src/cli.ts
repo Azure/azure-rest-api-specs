@@ -76,8 +76,8 @@ export async function main() {
         short: "l",
         multiple: false
       },
-      prStatus: {
-        type: "string",
+      isDraft: {
+        type: "boolean",
         multiple: false
       }
     },
@@ -99,7 +99,7 @@ export async function main() {
   const owner = opts.owner as string;
   const prNumber = opts.number as string;
   const existingLabels = (opts.labels as string).split(",").map((l) => l.trim());
-  const prStatus = opts.prStatus as string;
+  const isDraft = opts.prStaisDrafttus as boolean;
 
   const labelContext: LabelContext = {
     present: new Set(existingLabels),
@@ -119,7 +119,7 @@ export async function main() {
       prNumber,
       owner,
       fileList,
-      prStatus
+      isDraft
     });
 
   evaluateImpact(prContext, labelContext);

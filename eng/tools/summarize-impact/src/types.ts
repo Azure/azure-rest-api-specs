@@ -275,7 +275,7 @@ export type PRContextOptions = {
   repo: string;
   owner: string;
   prNumber: string;
-  prStatus: string;
+  isDraft: boolean;
 };
 
 export class PRContext {
@@ -293,7 +293,7 @@ export class PRContext {
   repo: string;
   owner: string;
   prNumber: string;
-  prStatus: string;
+  isDraft: boolean;
   labelContext: LabelContext;
 
   constructor(
@@ -313,7 +313,7 @@ export class PRContext {
     this.repo = options.repo;
     this.prNumber = options.prNumber;
     this.fileList = options.fileList;
-    this.prStatus = options.prStatus;
+    this.isDraft = options.isDraft;
     this.owner = options.owner;
   }
 

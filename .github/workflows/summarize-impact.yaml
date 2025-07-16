@@ -52,7 +52,8 @@ jobs:
             --sha "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}" \
             --owner "${{ github.repository_owner }}" \
-            --labels "${{ steps.get-labels.outputs.labels }}"
+            --labels "${{ steps.get-labels.outputs.labels }}" \
+            --isDraft ${{ github.event.pull_request.draft }}
         env:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
           NODE_OPTIONS: "--max-old-space-size=8192"
