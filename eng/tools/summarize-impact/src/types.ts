@@ -1,4 +1,9 @@
-import { dirname, join, resolve } from "path";
+import { join } from "path";
+
+
+import { Readme } from "@azure-tools/specs-shared/readme";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
+import { swagger, typespec, readme, example } from "@azure-tools/specs-shared/changed-files";
 
 export type FileTypes = "SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile";
 export type ChangeTypes = "Addition" | "Deletion" | "Update";
@@ -274,6 +279,8 @@ export class PRContext {
   // The "before" state is the git root directory without the changes aka targetDirectory
   sourceDirectory: string;
   targetDirectory: string;
+  sourceSpecModel?: SpecModel;
+  targetSpecModel?: SpecModel;
   fileList?: FileListInfo;
   sourceBranch: string;
   targetBranch: string;
@@ -290,6 +297,8 @@ export class PRContext {
   ) {
     this.sourceDirectory = sourceDirectory;
     this.targetDirectory = targetDirectory;
+    this.sourceSpecModel = new SpecModel(sourceDirectory);
+    this.targetSpecModel = new SpecModel(targetDirectory);
     this.labelContext = labelContext;
     this.sourceBranch = options.sourceBranch;
     this.targetBranch = options.targetBranch;
@@ -299,32 +308,77 @@ export class PRContext {
     this.fileList = options.fileList;
   }
 
-  // this is the core of the logic.
 
+  // todo get rid of async here not necessary
+  // todo store the results
   async getTypeSpecDiffs(): Promise<DiffResult<string>> {
+    if (!this.fileList) {
+      return Promise.resolve({
+        additions: [],
+        deletions: [],
+        changes: []
+      });
+    }
+
+    const additions = this.fileList.additions.filter(file => typespec(file));
+    const deletions = this.fileList.deletions.filter(file => typespec(file));
+    const changes = this.fileList.modifications.filter(file => typespec(file));
+
     return Promise.resolve({
-      additions: [],
-      deletions: [],
-      changes: []
+      additions,
+      deletions,
+      changes
     });
   }
 
   async getSwaggerDiffs(): Promise<DiffResult<string>> {
+    if (!this.fileList) {
+      return Promise.resolve({
+        additions: [],
+        deletions: [],
+        changes: []
+      });
+    }
+
+    const additions = this.fileList.additions.filter(file => swagger(file));
+    const deletions = this.fileList.deletions.filter(file => swagger(file));
+    const changes = this.fileList.modifications.filter(file => swagger(file));
+
     return Promise.resolve({
-      additions: [],
-      deletions: [],
-      changes: []
+      additions,
+      deletions,
+      changes
     });
   }
+
   async getExampleDiffs(): Promise<DiffResult<string>> {
+    if (!this.fileList) {
+      return Promise.resolve({
+        additions: [],
+        deletions: [],
+        changes: []
+      });
+    }
+
+    const additions = this.fileList.additions.filter(file => example(file));
+    const deletions = this.fileList.deletions.filter(file => example(file));
+    const changes = this.fileList.modifications.filter(file => example(file));
+
     return Promise.resolve({
-      additions: [],
-      deletions: [],
-      changes: []
+      additions,
+      deletions,
+      changes
     });
   }
 
   async getReadmeDiffs(): Promise<DiffResult<ReadmeTag>> {
+    // get all the readme files
+    // generate the diffresult from it.
+    // Readme
+
+    // console.log(`ahahahah readme tags are ${rmtags}`)
+
+
     // console.log("ENTER definition LocalDirContext.getReadmeDiffs")
     // if (this.readmeDiffs) {
     //   console.log("RETURN definition LocalDirContext.getReadmeDiffs - early return")

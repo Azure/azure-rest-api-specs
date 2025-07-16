@@ -378,7 +378,7 @@ function checkPrTargetsProductionBranch(prContext: PRContext): boolean {
 }
 
 async function processTypeSpec(
-  ctx: IValidatorContext,
+  ctx: PRContext,
   labelContext: LabelContext,
 ) {
   console.log("ENTER definition processTypeSpec")
@@ -509,7 +509,7 @@ async function processPRType(context: PRContext,
   return { resourceManagerLabelShouldBePresent }
 }
 
-async function getPRType(context: IValidatorContext): Promise<PRType[]> {
+async function getPRType(context: PRContext): Promise<PRType[]> {
   console.log("ENTER definition getPRType")
   const prChanges: PRChange[] = await getPRChanges(context);
 
@@ -620,11 +620,11 @@ function getSuppressions(readmePath: string) {
   let suppressionResult: any[] = [];
   try {
     const readme = fs.readFileSync(readmePath).toString();
-    const codeBlocks = getAllCodeBlockNodes(parseCommonmark(readme));
+    const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.safeLoad(block.literal) as any;
+          const blockObject = yaml.load(block.literal) as any;
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(
@@ -661,7 +661,7 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
 }
 
 async function processRPaaS(
-  context: IValidatorContext,
+  context: PRContext,
   labelContext: LabelContext,
 ): Promise<{ rpaasLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRPaaS")
@@ -697,7 +697,7 @@ function isRPSaaS(readmeFilePath: string) {
 }
 
 async function processNewRPNamespace(
-  context: IValidatorContext,
+  context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean
 ): Promise<{newRPNamespaceLabelShouldBePresent: boolean}> {
@@ -705,15 +705,11 @@ async function processNewRPNamespace(
   const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   newRPNamespaceLabel.shouldBePresent = false;
-  const pr: PullRequestProperties | undefined = await createPullRequestProperties(
-    context,
-    "pr-summary-new-rp-namespace"
-  );
   const handlers: ChangeHandler[] = [];
 
   let skip = false;
 
-  const targetBranch = (context.contextConfig() as PRContext).targetBranch;
+  const targetBranch = context.targetBranch;
   if (targetBranch !== "main" && targetBranch !== "ARMCoreRPDev") {
     console.log(`Not main or ARMCoreRPDev branch, skip new RP namespace check`);
     skip = true;
@@ -728,11 +724,11 @@ async function processNewRPNamespace(
     const createSwaggerFileHandler = () => {
       return (e: PRChange) => {
         if (e.changeType === "Addition") {
-          const rpFolder = getRPFolderFromSwaggerFile(dirname(e.filePath));
+          const rpFolder = getRPFolderFromSwaggerFile(path.dirname(e.filePath));
           console.log(`Processing newRPNameSpace rpFolder: ${rpFolder}`);
           if (rpFolder !== undefined) {
-            const rpFolderFullPath = resolve(pr?.workingDir!, rpFolder);
-            if (!existsSync(rpFolderFullPath)) {
+            const rpFolderFullPath = path.resolve(context.targetDirectory, rpFolder);
+            if (!fs.existsSync(rpFolderFullPath)) {
               console.log(`Adding newRPNameSpace rpFolder: ${rpFolder}`);
               newRPNamespaceLabel.shouldBePresent = true;
             }
@@ -754,7 +750,7 @@ async function processNewRPNamespace(
 // - see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
 // - requiredLabelsRules.ts / requiredLabelsRules
 async function processNewRpNamespaceWithoutRpaasLabel(
-  context: IValidatorContext,
+  context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   newRPNamespaceLabelShouldBePresent: boolean,
@@ -775,7 +771,7 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   }
 
   if (!skip) {
-    const branch = (context.contextConfig() as PRContext).targetBranch;
+    const branch = context.targetBranch;
     if (branch === "RPSaaSDev" || branch === "RPSaaSMaster") {
       console.log(`PR is targeting '${branch}' branch. Skip checking for 'CI-NewRPNamespaceWithoutRPaaS'`);
       skip = true;
@@ -807,7 +803,7 @@ async function processNewRpNamespaceWithoutRpaasLabel(
 
 // CODESYNC: see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
 async function processRpaasRpNotInPrivateRepoLabel(
-  context: IValidatorContext,
+  context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean
@@ -825,7 +821,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
   }
 
   if (!skip) {
-    const targetBranch = (context.contextConfig() as PRContext).targetBranch;
+    const targetBranch = context.targetBranch;
     if (targetBranch !== "main" || !rpaasLabelShouldBePresent) {
       console.log(
         "Not main branch or not RPaaS PR, skip block PR when RPaaS RP not onboard"
@@ -835,7 +831,6 @@ async function processRpaasRpNotInPrivateRepoLabel(
   }
 
   if (!skip) {
-
     const rpaasRPFolderList = await getRPaaSFolderList();
     const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
 
