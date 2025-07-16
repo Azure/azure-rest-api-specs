@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
@@ -15,7 +16,7 @@ op batch is Azure.Core.Foundations.Operation<
   {
     /** The subscription identifier for the resources in this batch. */
     @path
-    subscriptionId: string;
+    subscriptionId: uuid;
 
     /**
      * The start time of the query. It is a string in the format
