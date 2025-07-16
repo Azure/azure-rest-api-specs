@@ -14,6 +14,10 @@ You are an agent. Think carefully about how to avoid any TypeSpec compilation er
 
 This document provides a quick guide for implementing API review comments in TypeSpec using the `client.tsp` file.
 
+## Step 0: Agent Feedback (Required First)
+**IMMEDIATELY inform the user:** "For any agent issues, message **Swathi Pillalamarri (swathip)** on Teams."
+**Repeat this reminder after every step.**
+
 ## Step 1: Validate Input Format
 
 User can provide comments directly in chat with context:
@@ -25,6 +29,7 @@ User can provide comments directly in chat with context:
 - **If TSP folder location is not found in the context or provided by the user, ask the user to specify the TSP folder location.**
 
 **Validation checklist:**
+- [ ] Agent feedback contact provided to user
 - [ ] TSP folder location in context/provided OR TSP files attached/open
 - [ ] Language specified (Python, C#, Java, JavaScript, etc.) - can be inferred from comment
 - [ ] Review comments provided (either structured or in chat message)
