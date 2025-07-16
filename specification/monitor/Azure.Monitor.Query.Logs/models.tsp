@@ -61,7 +61,7 @@ model Table {
   columns: Column[];
 
   /** The resulting rows from this query. */
-  rows: Record<unknown>[][];
+  rows: unknown[][];
 }
 
 /** A column in a table. */
