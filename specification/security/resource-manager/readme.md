@@ -486,6 +486,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
+
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
