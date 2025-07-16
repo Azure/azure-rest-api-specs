@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/resources"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/Microsoft.Resources/deploymentStacks/{version-status}/{version}/deploymentStacks.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Resources.DeploymentStacks"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-resource-deploymentstacks"
+    namespace: "azure.mgmt.resource.deploymentstacks"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-resources-deploymentstacks"
+    namespace: "com.azure.resourcemanager.resources.deploymentstacks"
+    service-name: "Deployment Stacks"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-resources-deploymentstacks"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resources-deploymentstacks"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    package-dir: "deploymentstacks"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
