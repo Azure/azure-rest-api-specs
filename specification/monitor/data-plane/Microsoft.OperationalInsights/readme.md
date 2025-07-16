@@ -16,4 +16,7 @@ These settings apply only when `--tag=package-v1` is specified on the command li
 ``` yaml $(tag) == 'package-v1'
 input-file:
 - stable/v1/OperationalInsights.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: Typespec generated definitions can contain anonymous types.
 ```
