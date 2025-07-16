@@ -142,6 +142,10 @@ using Microsoft.ComputeSchedule;
   "CreateResourceOperationResult",
   "csharp"
 );
+@@clientName(ResourceOperationResponse,
+  "RecurringActionsResourceOperationResult",
+  "csharp,javascript,go,python,java"
+);
 @@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
   "V2025-05-01",
   "javascript"
