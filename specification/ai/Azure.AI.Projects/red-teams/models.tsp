@@ -120,6 +120,17 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   modelDeploymentName: string;
 }
 
+@doc("Azure Foundry Agent configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model AzureFoundryAgentConfiguration extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureFoundryAgent";
+
+  @doc("The Foundry Agent ID to be used for the red team run. Example: `agent-12345`.")
+  agentId: string;
+}
+
 @doc("Abstract class for target configuration.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -145,6 +156,9 @@ model RedTeam {
 
   @doc("Number of simulation rounds.")
   numTurns?: int32;
+
+  @doc("Data for red teaming. For eg: seed prompts, policy taxonomy, etc to be used for red teaming.")
+  data: InputData;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
