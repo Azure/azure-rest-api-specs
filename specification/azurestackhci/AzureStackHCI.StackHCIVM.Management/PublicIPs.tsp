@@ -42,6 +42,9 @@ interface PublicIPs {
   @doc("The operation to create or update a virtual network. Please note some properties can be set only during PublicIP creation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PublicIP>;
 
+  @doc("Updates a Public IP tags.")
+  updateTags is ArmTagsPatchAsync<PublicIP, TagsObject>;
+
   @doc("The operation to delete a virtual network.")
   delete is ArmResourceDeleteWithoutOkAsync<PublicIP>;
 

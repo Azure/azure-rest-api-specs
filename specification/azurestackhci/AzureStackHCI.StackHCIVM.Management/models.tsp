@@ -1493,7 +1493,7 @@ model LoadBalancerBackendAddress {
 }
 
 @added(Versions.v2025_09_01_preview)
-@doc("LoadBalancerRuleProperties")
+@doc("Properties for LoadBalancerRules")
 model LoadBalancerRuleProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("arm reference to frontend IP being used by this LB")
