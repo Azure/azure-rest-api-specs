@@ -793,7 +793,7 @@ model SignalRTlsSettings {
   /**
    * Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.
    */
-  clientCertEnabled?: boolean = true;
+  clientCertEnabled?: boolean = false;
 }
 
 /**
