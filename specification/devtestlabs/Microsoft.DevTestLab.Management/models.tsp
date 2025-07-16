@@ -965,11 +965,9 @@ model ArmTemplateProperties {
   /**
    * The contents of the ARM template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  @OpenAPI.extension("type", "object")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  contents?: unknown;
+  contents?: Record<unknown>;
 
   /**
    * The creation date of the armTemplate.
@@ -1004,10 +1002,8 @@ model ParametersValueFileInfo {
   /**
    * Contents of the file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  @OpenAPI.extension("type", "object")
-  parametersValueInfo?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  parametersValueInfo?: Record<unknown>;
 }
 
 /**
@@ -1059,11 +1055,9 @@ model ArtifactProperties {
   /**
    * The artifact's parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  @OpenAPI.extension("type", "object")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 
   /**
    * The artifact's creation date.
@@ -1120,18 +1114,14 @@ model ArmTemplateInfo {
   /**
    * The template's contents.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  @OpenAPI.extension("type", "object")
-  template?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  template?: Record<unknown>;
 
   /**
    * The parameters of the ARM template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
-  @OpenAPI.extension("type", "object")
-  parameters?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  parameters?: Record<unknown>;
 }
 
 /**
