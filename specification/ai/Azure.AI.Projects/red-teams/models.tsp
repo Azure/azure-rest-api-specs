@@ -122,6 +122,26 @@ union RiskCategory {
   UngroundedAttributes: "UngroundedAttributes",
 }
 
+@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AzureOpenAIModelConfiguration extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureOpenAIModel";
+
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
+  modelDeploymentName: string;
+}
+
+@doc("Abstract class for target configuration.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+@discriminator("type")
+model TargetConfig {
+  @doc("Type of the model configuration.")
+  type: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -167,6 +187,9 @@ model RedTeam {
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
+
+  @doc("Target configuration for the red-team run.")
+  target: TargetConfig;
 }
 
 // private red-team upload
@@ -223,7 +246,7 @@ model RedTeamUpload {
   numTurns?: int32;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
-  attackStrategy?: AttackStrategy[];
+  attackStrategies?: AttackStrategy[];
 
   @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
   simulationOnly?: boolean;
@@ -249,6 +272,9 @@ model RedTeamUpload {
   @doc("Metadata containing createdBy and modifiedBy information.")
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
+
+  @doc("Target configuration for the red-team run.")
+  target?: TargetConfig;
 }
 
 // Simulation Private Dto
