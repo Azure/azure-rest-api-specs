@@ -174,7 +174,7 @@
           "description": "Indicates whether reference source data should be included."
         }
       },
-      "required" : [
+      "required": [
         "knowledgeSourceName"
       ],
       "description": "Specifies runtime parameters for a search index knowledge source"
@@ -305,7 +305,7 @@
     },
     "KnowledgeAgentSearchActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "AzureSearchQuery",
+      "x-ms-discriminator-value": "searchQuery",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -350,7 +350,34 @@
     },
     "KnowledgeAgentModelQueryPlanningActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "ModelQueryPlanning",
+      "x-ms-discriminator-value": "modelQueryPlanning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the LLM query planning activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of output tokens for the LLM query planning activity."
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The elapsed time in milliseconds for the model activity."
+        }
+      },
+      "description": "Represents an LLM query planning activity record."
+    },
+    "KnowledgeAgentModelAnswerSynthesisActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "modelAnswerSynthesis",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -377,7 +404,7 @@
     },
     "KnowledgeAgentSemanticRankerActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "AzureSearchSemanticRanker",
+      "x-ms-discriminator-value": "searchSemanticReranker",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -424,7 +451,7 @@
     },
     "KnowledgeAgentAzureSearchDocReference": {
       "type": "object",
-      "x-ms-discriminator-value": "AzureSearchDoc",
+      "x-ms-discriminator-value": "searchDoc",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentReference"
