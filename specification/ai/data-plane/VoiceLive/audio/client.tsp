@@ -2,7 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
-using OpenAI;
+using VoiceLive;
 
 // @@visibility(CreateTranscriptionResponseVerboseJson.words, "read");
 // @@visibility(CreateTranscriptionResponseVerboseJson.segments, "read");

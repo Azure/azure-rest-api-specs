@@ -1,6 +1,6 @@
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 /**
  * The supported tool type discriminators for voicelive tools.

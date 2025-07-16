@@ -3,12 +3,12 @@ import "../models.tsp";
 using TypeSpec.Http;
 
 @service(#{
-  title: "OpenAI API"
-  
+  title: "VoiceLive API"
+
 })
-@server("wss://api.openai.com/v1", "OpenAI Endpoint")
+@server("wss://api.voicelive.com/v1", "VoiceLive Endpoint")
 
 
 @useAuth(BearerAuth)
-namespace OpenAI;
+namespace VoiceLive;
 op force_models(session: VoiceLiveClientEventSessionUpdate ): VoiceLiveServerEventSessionUpdated ;

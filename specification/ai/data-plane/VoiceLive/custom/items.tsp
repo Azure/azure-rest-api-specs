@@ -2,7 +2,7 @@ import "./content_parts.tsp";
 
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 @discriminator("type")
 model VoiceLiveConversationRequestItem {

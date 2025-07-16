@@ -4,7 +4,7 @@ import "@typespec/openapi";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 @discriminator("type")
 model ResponseFormat {
@@ -20,7 +20,7 @@ alias AcceptJsonOrEventStreamHeader = {
 };
 
 alias AssistantsBetaHeader = {
-  @header("OpenAI-Beta") openAIBeta: "assistants=v2";
+  @header("VoiceLive-Beta") voiceLiveBeta: "assistants=v2";
 };
 
 alias PageLimitQueryParameter = {

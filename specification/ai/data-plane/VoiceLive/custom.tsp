@@ -4,7 +4,7 @@ import "./custom/tools.tsp";
 
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 model VoiceLiveRequestSession {
   ...VoiceLiveSessionBase;

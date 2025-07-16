@@ -1,6 +1,6 @@
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 union VoiceLiveContentPartType {
   string,

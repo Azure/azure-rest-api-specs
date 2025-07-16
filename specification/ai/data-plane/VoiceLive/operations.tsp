@@ -4,7 +4,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 @route("voicelive")
 @tag("VoiceLive")
@@ -29,5 +29,5 @@ interface VoiceLive {
 
 
 alias VoiceLiveBetaHeader = {
-  @header("OpenAI-Beta") openAIBeta: "voicelive=v1";
+  @header("VoiceLive-Beta") voiceLiveBeta: "voicelive=v1";
 };

@@ -7,7 +7,7 @@ import "./custom.tsp";
 
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 model Error {
   code: string | null;

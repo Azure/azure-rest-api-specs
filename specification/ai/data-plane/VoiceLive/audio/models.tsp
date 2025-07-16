@@ -8,7 +8,7 @@ import "./custom.tsp";
 
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 // Tool generated type. Extracts from CreateTranscriptionResponseJson.logprobs
 alias CreateTranscriptionResponseJsonLogprob = {

@@ -10,7 +10,7 @@ import "./custom.tsp";
 
 using TypeSpec.OpenAPI;
 
-namespace OpenAI;
+namespace VoiceLive;
 
 // Tool generated type. Extracts from VoiceLiveConversationItemWithReference.content
 alias VoiceLiveConversationItemWithReferenceContent = {
