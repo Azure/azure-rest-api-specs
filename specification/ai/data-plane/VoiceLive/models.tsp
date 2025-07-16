@@ -75,6 +75,73 @@ model VoiceLiveClientEventSessionUpdate extends VoiceLiveClientEvent {
   session: VoiceLiveRequestSession;
 }
 
+@doc("""
+  Sent when the client connects and provides its SDP (Session Description Protocol)
+  for avatar-related media negotiation.
+""")
+model VoiceLiveClientEventSessionAvatarConnect extends ClientEventBase {
+  @doc("The event type, must be 'session.avatar.connect'.")
+  type: VoiceLiveClientEventType.session_avatar_connect;
+
+  @doc("The client's SDP offer.")
+  client_sdp: string;
+}
+
+@doc("""
+  Indicates the start of a new audio input turn.
+""")
+model VoiceLiveClientEventInputAudioTurnStart extends ClientEventBase {
+  @doc("The event type, must be 'input_audio.turn.start'.")
+  type: VoiceLiveClientEventType.input_audio_turn_start;
+
+  @doc("Unique identifier for the input audio turn.")
+  turn_id: string;
+}
+
+@doc("""
+  Appends audio data to an ongoing input turn.
+""")
+model VoiceLiveClientEventInputAudioTurnAppend extends ClientEventBase {
+  @doc("The event type, must be 'input_audio.turn.append'.")
+  type: VoiceLiveClientEventType.input_audio_turn_append;
+
+  @doc("The ID of the turn this audio is part of.")
+  turn_id: string;
+
+  @doc("Base64-encoded audio chunk.")
+  audio: string;
+}
+
+@doc("""
+  Marks the end of an audio input turn.
+""")
+model VoiceLiveClientEventInputAudioTurnEnd extends ClientEventBase {
+  @doc("The event type, must be 'input_audio.turn.end'.")
+  type: VoiceLiveClientEventType.input_audio_turn_end;
+
+  @doc("The ID of the audio turn being ended.")
+  turn_id: string;
+}
+
+@doc("""
+  Cancels an in-progress input audio turn.
+""")
+model VoiceLiveClientEventInputAudioTurnCancel extends ClientEventBase {
+  @doc("The event type, must be 'input_audio.turn.cancel'.")
+  type: VoiceLiveClientEventType.input_audio_turn_cancel;
+
+  @doc("The ID of the turn to cancel.")
+  turn_id: string;
+}
+
+@doc("""
+  Clears all input audio currently being streamed.
+""")
+model VoiceLiveClientEventInputAudioClear extends ClientEventBase {
+  @doc("The event type, must be 'input_audio.clear'.")
+  type: VoiceLiveClientEventType.input_audio_clear;
+}
+
 // Tool customization: establish custom, enriched discriminated type hierarchy
 /** The item to add to the conversation. */
 model VoiceLiveConversationItemBase {
@@ -246,11 +313,10 @@ model VoiceLiveClientEventInputAudioBufferAppend extends VoiceLiveClientEvent {
 
   // Tool customization: use encoded type for audio data
   @doc("""
-    Base64-encoded audio bytes. This must be in the format specified by the
+    Base64-encoded audio. This must be in the format specified by the
     `input_audio_format` field in the session configuration.
     """)
-  @encode("base64")
-  audio: bytes;
+  audio: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -283,21 +349,6 @@ model VoiceLiveClientEventInputAudioBufferClear extends VoiceLiveClientEvent {
     The event type, must be `input_audio_buffer.clear`.
     """)
   type: VoiceLiveClientEventType.input_audio_buffer_clear;
-}
-
-// Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  **WebRTC Only:** Emit to cut off the current audio response. This will trigger the server to
-  stop generating audio and emit a `output_audio_buffer.cleared` event. This
-  event should be preceded by a `response.cancel` client event to stop the
-  generation of the current response.
-  [Learn more](/docs/guides/voicelive-conversations#client-and-server-events-for-audio-in-webrtc).
-  """)
-model VoiceLiveClientEventOutputAudioBufferClear extends VoiceLiveClientEvent {
-  @doc("""
-    The event type, must be `output_audio_buffer.clear`.
-    """)
-  type: VoiceLiveClientEventType.output_audio_buffer_clear;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -491,6 +542,15 @@ model VoiceLiveServerEventSessionUpdated extends VoiceLiveServerEvent {
   session: VoiceLiveResponseSession;
 }
 
+@doc("Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.")
+model VoiceLiveServerEventSessionAvatarConnecting extends VoiceLiveServerEvent {
+  @doc("The event type, must be 'session.avatar.connecting'.")
+  type: VoiceLiveServerEventType.session_avatar_connecting;
+
+  @doc("The server's SDP answer for the avatar connection.")
+  server_sdp: string;
+}
+
 // Tool customization: establish base for enriched request/response split models
 /** VoiceLive session object configuration. */
 model VoiceLiveSessionBase {}
@@ -611,58 +671,6 @@ model VoiceLiveServerEventInputAudioBufferSpeechStopped
 
   /** The ID of the user message item that will be created. */
   item_id: string;
-}
-
-// Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  **WebRTC Only:** Emitted when the output audio buffer is cleared. This happens either in VAD
-  mode when the user has interrupted (`input_audio_buffer.speech_started`),
-  or when the client has emitted the `output_audio_buffer.clear` event to manually
-  cut off the current audio response.
-  [Learn more](/docs/guides/voicelive-conversations#client-and-server-events-for-audio-in-webrtc).
-  """)
-model VoiceLiveServerEventOutputAudioBufferCleared extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `output_audio_buffer.cleared`.
-    """)
-  type: VoiceLiveServerEventType.output_audio_buffer_cleared;
-
-  /** The unique ID of the response that produced the audio. */
-  response_id: string;
-}
-
-// Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  **WebRTC Only:** Emitted when the server begins streaming audio to the client. This event is
-  emitted after an audio content part has been added (`response.content_part.added`)
-  to the response.
-  [Learn more](/docs/guides/voicelive-conversations#client-and-server-events-for-audio-in-webrtc).
-  """)
-model VoiceLiveServerEventOutputAudioBufferStarted extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `output_audio_buffer.started`.
-    """)
-  type: VoiceLiveServerEventType.output_audio_buffer_started;
-
-  /** The unique ID of the response that produced the audio. */
-  response_id: string;
-}
-
-// Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  **WebRTC Only:** Emitted when the output audio buffer has been completely drained on the server,
-  and no more audio is forthcoming. This event is emitted after the full response
-  data has been sent to the client (`response.done`).
-  [Learn more](/docs/guides/voicelive-conversations#client-and-server-events-for-audio-in-webrtc).
-  """)
-model VoiceLiveServerEventOutputAudioBufferStopped extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `output_audio_buffer.stopped`.
-    """)
-  type: VoiceLiveServerEventType.output_audio_buffer_stopped;
-
-  /** The unique ID of the response that produced the audio. */
-  response_id: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -1087,79 +1095,118 @@ model VoiceLiveServerEventResponseAudioDone extends VoiceLiveServerEvent {
   content_index: int32;
 }
 
-// Tool customization (apply_discriminator): apply discriminated type
-/** Returned when the model-generated function call arguments are updated. */
-model VoiceLiveServerEventResponseFunctionCallArgumentsDelta
-  extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `response.function_call_arguments.delta`.
-    """)
-  type: VoiceLiveServerEventType.response_function_call_arguments_delta;
-
-  /** The ID of the response. */
+@doc("""
+Represents a delta update of blendshape animation frames for a specific output of a response.
+""")
+model ResponseAnimationBlendshapeDeltaEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_animation_blendshapes_delta;
   response_id: string;
-
-  /** The ID of the function call item. */
   item_id: string;
-
-  /** The index of the output item in the response. */
   output_index: int32;
-
-  /** The ID of the function call. */
-  call_id: string;
-
-  /** The arguments delta as a JSON string. */
-  delta: string;
+  content_index: int32;
+  frames: list<list<float32>> | string;
+  frame_index: int32;
 }
 
-// Tool customization (apply_discriminator): apply discriminated type
-/**
- * Returned when the model-generated function call arguments are done streaming.
- * Also emitted when a Response is interrupted, incomplete, or cancelled.
- */
-model VoiceLiveServerEventResponseFunctionCallArgumentsDone
-  extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `response.function_call_arguments.done`.
-    """)
-  type: VoiceLiveServerEventType.response_function_call_arguments_done;
-
-  /** The ID of the response. */
+@doc("""
+Indicates the completion of blendshape animation processing for a specific output of a response.
+""")
+model ResponseAnimationBlendshapeDoneEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_animation_blendshapes_done;
   response_id: string;
-
-  /** The ID of the function call item. */
   item_id: string;
-
-  /** The index of the output item in the response. */
   output_index: int32;
-
-  /** The ID of the function call. */
-  call_id: string;
-
-  /** The final arguments as a JSON string. */
-  arguments: string;
 }
 
-// Tool customization (apply_discriminator): apply discriminated type
-/**
- * Emitted at the beginning of a Response to indicate the updated rate limits.
- * When a Response is created some tokens will be "reserved" for the output
- * tokens, the rate limits shown here reflect that reservation, which is then
- * adjusted accordingly once the Response is completed.
- */
-model VoiceLiveServerEventRateLimitsUpdated extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `rate_limits.updated`.
-    """)
-  type: VoiceLiveServerEventType.rate_limits_updated;
+@doc("""
+Represents an emotion hypothesis detected from response audio with multiple candidates.
+""")
+model ResponseEmotionHypothesis extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_emotion_hypothesis;
+  emotion: string;
+  candidates: list<{
+    emotion: string;
+    confidence: float32;
+  }>;
+  audio_offset_ms: int32;
+  audio_duration_ms: int32;
+  response_id: string;
+  item_id: string;
+}
 
-  // Tool customization: use custom type for rate limit items (applying encoded duration)
-  /** List of rate limit information. */
-  rate_limits: VoiceLiveServerEventRateLimitsUpdatedRateLimitsItem[];
+@doc("""
+Represents a word-level audio timestamp delta for a response.
+""")
+model ResponseAudioTimestampDeltaEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_audio_timestamp_delta;
+  response_id: string;
+  item_id: string;
+  output_index: int32;
+  content_index: int32;
+  audio_offset_ms: int32;
+  audio_duration_ms: int32;
+  text: string;
+  timestamp_type: "word";
+}
+
+@doc("""
+Indicates completion of audio timestamp delivery for a response.
+""")
+model ResponseAudioTimestampDoneEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_audio_timestamp_done;
+  response_id: string;
+  item_id: string;
+  output_index: int32;
+  content_index: int32;
+}
+
+@doc("""
+Represents a viseme ID delta update for animation based on audio.
+""")
+model ResponseAnimationVisemeDeltaEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_animation_viseme_delta;
+  response_id: string;
+  item_id: string;
+  output_index: int32;
+  content_index: int32;
+  audio_offset_ms: int32;
+  viseme_id: int32;
+}
+
+@doc("""
+Indicates completion of viseme animation delivery for a response.
+""")
+model ResponseAnimationVisemeDoneEvent extends VoiceLiveServerEvent {
+  type: VoiceLiveServerEventType.response_animation_viseme_done;
+  response_id: string;
+  item_id: string;
+  output_index: int32;
+  content_index: int32;
 }
 
 /** Create a new VoiceLive response with these parameters */
 model VoiceLiveResponseCreateParams {
+  @doc("""
+  Whether to commit the response to the conversation. Defaults to true.
+  """)
+  commit?: boolean = true;
+
+  @doc("""
+  Whether to cancel any ongoing generation before starting this one. Defaults to true.
+  """)
+  cancel_previous?: boolean = true;
+
+  @doc("""
+  Input items to append to the conversation context before generating a response.
+  """)
+  append_input_items?: list<VoiceLiveConversationRequestItem>;
+
+  @doc("""
+  Input items to be used as the context for this response.
+  An empty array clears previous context.
+  """)
+  input_items?: list<VoiceLiveConversationRequestItem>;
+
   // Tool customization: Apply reusable modality representation
   /**
    * The set of modalities the model can respond with. To disable audio,
@@ -1218,26 +1265,6 @@ model VoiceLiveResponseCreateParams {
     given model. Defaults to `inf`.
     """)
   max_output_tokens?: int32 | "inf";
-
-  @doc("""
-    Controls which conversation the response is added to. Currently supports
-    `auto` and `none`, with `auto` as the default value. The `auto` value
-    means that the contents of the response will be added to the default
-    conversation. Set this to `none` to create an out-of-band response which
-    will not add items to default conversation.
-    """)
-  conversation?: string | "auto" | "none";
-
-  ...MetadataPropertyForRequest;
-
-  // Tool customization: apply a customized, more specific discriminated type hierarchy
-  @doc("""
-    Input items to include in the prompt for the model. Using this field
-    creates a new context for this Response instead of using the default
-    conversation. An empty array `[]` will clear the context for this Response.
-    Note that this can include references to items from the default conversation.
-    """)
-  input?: VoiceLiveConversationRequestItem[];
 }
 
 /** VoiceLive session object configuration. */
@@ -1696,18 +1723,6 @@ model VoiceLiveClientEventConversationItemRetrieve extends VoiceLiveClientEvent 
   item_id: string;
 }
 
-// Tool customization (apply_discriminator): apply discriminated type base
-/** Send this event to update a transcription session. */
-model VoiceLiveClientEventTranscriptionSessionUpdate
-  extends VoiceLiveClientEvent {
-  @doc("""
-    The event type, must be `transcription_session.update`.
-    """)
-  type: VoiceLiveClientEventType.transcription_session_update;
-
-  session: VoiceLiveTranscriptionSessionCreateRequest;
-}
-
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the text value of an input audio transcription content part is updated. */
 model VoiceLiveServerEventConversationItemInputAudioTranscriptionDelta
@@ -1742,231 +1757,4 @@ model VoiceLiveServerEventConversationItemRetrieved extends VoiceLiveServerEvent
 
   // Tool customization: apply enriched item definition hierarchy
   item: VoiceLiveConversationResponseItem;
-}
-
-// Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a transcription session is updated with a `transcription_session.update` event, unless
-  there is an error.
-  """)
-model VoiceLiveServerEventTranscriptionSessionUpdated
-  extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `transcription_session.updated`.
-    """)
-  type: VoiceLiveServerEventType.transcription_session_updated;
-
-  session: VoiceLiveTranscriptionSessionCreateResponse;
-}
-
-/** VoiceLive transcription session object configuration. */
-model VoiceLiveTranscriptionSessionCreateRequest {
-  /**
-   * The set of modalities the model can respond with. To disable audio,
-   * set this to ["text"].
-   */
-  modalities?: ("text" | "audio")[];
-
-  @doc("""
-    The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
-    For `pcm16`, input audio must be 16-bit PCM at a 24kHz sample rate,
-    single channel (mono), and little-endian byte order.
-    """)
-  input_audio_format?: "pcm16" | "g711_ulaw" | "g711_alaw" = "pcm16";
-
-  /** Configuration for input audio transcription. The client can optionally set the language and prompt for transcription, these offer additional guidance to the transcription service. */
-  input_audio_transcription?: {
-    @doc("""
-      The model to use for transcription, current options are `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, and `whisper-1`.
-      """)
-    `model`?: "gpt-4o-transcribe" | "gpt-4o-mini-transcribe" | "whisper-1";
-
-    @doc("""
-      The language of the input audio. Supplying the input language in
-      [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-      will improve accuracy and latency.
-      """)
-    language?: string;
-
-    @doc("""
-      An optional text to guide the model's style or continue a previous audio
-      segment.
-      For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
-      For `gpt-4o-transcribe` models, the prompt is a free text string, for example "expect words related to technology".
-      """)
-    prompt?: string;
-  };
-
-  @doc("""
-    Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response.
-    Server VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.
-    Semantic VAD is more advanced and uses a turn detection model (in conjuction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a timeout based on this probability. For example, if user audio trails off with "uhhm", the model will score a low probability of turn end and wait longer for the user to continue speaking. This can be useful for more natural conversations, but may have a higher latency.
-    """)
-  turn_detection?: {
-    /** Type of turn detection. */
-    type?: "server_vad" | "semantic_vad" = "server_vad";
-
-    @doc("""
-      Used only for `semantic_vad` mode. The eagerness of the model to respond. `low` will wait longer for the user to continue speaking, `high` will respond more quickly. `auto` is the default and is equivalent to `medium`.
-      """)
-    eagerness?: "low" | "medium" | "high" | "auto" = "auto";
-
-    @doc("""
-      Used only for `server_vad` mode. Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A
-      higher threshold will require louder audio to activate the model, and
-      thus might perform better in noisy environments.
-      """)
-    threshold?: float32;
-
-    @doc("""
-      Used only for `server_vad` mode. Amount of audio to include before the VAD detected speech (in
-      milliseconds). Defaults to 300ms.
-      """)
-    prefix_padding_ms?: int32;
-
-    @doc("""
-      Used only for `server_vad` mode. Duration of silence to detect speech stop (in milliseconds). Defaults
-      to 500ms. With shorter values the model will respond more quickly,
-      but may jump in on short pauses from the user.
-      """)
-    silence_duration_ms?: int32;
-
-    /** Whether or not to automatically generate a response when a VAD stop event occurs. Not available for transcription sessions. */
-    create_response?: boolean = true;
-
-    @doc("""
-      Whether or not to automatically interrupt any ongoing response with output to the default
-      conversation (i.e. `conversation` of `auto`) when a VAD start event occurs. Not available for transcription sessions.
-      """)
-    interrupt_response?: boolean = true;
-  };
-
-  @doc("""
-    Configuration for input audio noise reduction. This can be set to `null` to turn off.
-    Noise reduction filters audio added to the input audio buffer before it is sent to VAD and the model.
-    Filtering the audio can improve VAD and turn detection accuracy (reducing false positives) and model performance by improving perception of the input audio.
-    """)
-  input_audio_noise_reduction?: {
-    @doc("""
-      Type of noise reduction. `near_field` is for close-talking microphones such as headphones, `far_field` is for far-field microphones such as laptop or conference room microphones.
-      """)
-    type?: "near_field" | "far_field";
-  } | null = null;
-
-  @doc("""
-    The set of items to include in the transcription. Current available items are:
-    - `item.input_audio_transcription.logprobs`
-    """)
-  include?: string[];
-
-  /** Configuration options for the generated client secret. */
-  client_secret?: {
-    /** Configuration for the ephemeral token expiration. */
-    expires_at?: {
-      @doc("""
-        The anchor point for the ephemeral token expiration. Only `created_at` is currently supported.
-        """)
-      anchor?: "created_at" = "created_at";
-
-      @doc("""
-        The number of seconds from the anchor point to the expiration. Select a value between `10` and `7200`.
-        """)
-      seconds?: int32 = 600;
-    };
-  };
-}
-
-/**
- * A new VoiceLive transcription session configuration.
- *
- * When a session is created on the server via REST API, the session object
- * also contains an ephemeral key. Default TTL for keys is 10 minutes. This
- * property is not present when a session is updated via the WebSocket API.
- */
-model VoiceLiveTranscriptionSessionCreateResponse {
-  /**
-   * Ephemeral key returned by the API. Only present when the session is
-   * created on the server via REST API.
-   */
-  client_secret: {
-    /**
-     * Ephemeral key usable in client environments to authenticate connections
-     * to the VoiceLive API. Use this in client-side environments rather than
-     * a standard API token, which should only be used server-side.
-     */
-    value: string;
-
-    // Tool customization: 'created' and fields ending in '_at' are Unix encoded utcDateTime
-    /**
-     * Timestamp for when the token expires. Currently, all tokens expire
-     * after one minute.
-     */
-    @encode("unixTimestamp", int32)
-    expires_at: utcDateTime;
-  };
-
-  /**
-   * The set of modalities the model can respond with. To disable audio,
-   * set this to ["text"].
-   */
-  modalities?: ("text" | "audio")[];
-
-  @doc("""
-    The format of input audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
-    """)
-  input_audio_format?: string;
-
-  /** Configuration of the transcription model. */
-  input_audio_transcription?: {
-    @doc("""
-      The model to use for transcription. Can be `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, or `whisper-1`.
-      """)
-    `model`?: "gpt-4o-transcribe" | "gpt-4o-mini-transcribe" | "whisper-1";
-
-    @doc("""
-      The language of the input audio. Supplying the input language in
-      [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-      will improve accuracy and latency.
-      """)
-    language?: string;
-
-    /**
-     * An optional text to guide the model's style or continue a previous audio
-     * segment. The [prompt](/docs/guides/speech-to-text#prompting) should match
-     * the audio language.
-     */
-    prompt?: string;
-  };
-
-  @doc("""
-    Configuration for turn detection. Can be set to `null` to turn off. Server
-    VAD means that the model will detect the start and end of speech based on
-    audio volume and respond at the end of user speech.
-    """)
-  turn_detection?: {
-    @doc("""
-      Type of turn detection, only `server_vad` is currently supported.
-      """)
-    type?: string;
-
-    /**
-     * Activation threshold for VAD (0.0 to 1.0), this defaults to 0.5. A
-     * higher threshold will require louder audio to activate the model, and
-     * thus might perform better in noisy environments.
-     */
-    threshold?: float32;
-
-    /**
-     * Amount of audio to include before the VAD detected speech (in
-     * milliseconds). Defaults to 300ms.
-     */
-    prefix_padding_ms?: int32;
-
-    /**
-     * Duration of silence to detect speech stop (in milliseconds). Defaults
-     * to 500ms. With shorter values the model will respond more quickly,
-     * but may jump in on short pauses from the user.
-     */
-    silence_duration_ms?: int32;
-  };
 }
