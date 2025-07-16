@@ -90,7 +90,7 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
     rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionRequired: rpaasExceptionLabelShouldBePresent,
     typeSpecChanged: typeSpecLabelShouldBePresent,
-    isDraft: context.prStatus === "draft",
+    isDraft: context.isDraft,
   };
 }
 

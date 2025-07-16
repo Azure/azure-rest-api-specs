@@ -28,11 +28,10 @@ describe("Check Changes", () => {
             prNumber: "35346",
             owner: "Azure",
             fileList: changedFileDetails,
-            isDraft: true
+            isDraft: false
         });
 
         const result = await evaluateImpact(prContext, labelContext);
-
 
         expect(result).toBeDefined();
         expect(changedFileDetails).toBeDefined();
