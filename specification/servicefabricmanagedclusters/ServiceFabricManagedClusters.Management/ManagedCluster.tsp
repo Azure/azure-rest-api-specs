@@ -441,6 +441,12 @@ model ManagedClusterProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known acronym, consistency with other properties"
   @added(Versions.v2025_03_01_preview)
   VMImage?: string = "Windows";
+
+  /**
+   * Enable the creation of node types with only outbound traffic enabled. If set, a separate load balancer backend pool will be created for node types with inbound traffic enabled. Can only be set at the time of cluster creation.
+   */
+  @added(Versions.v2025_06_01_preview)
+  enableOutboundOnlyNodeTypes?: boolean;
 }
 
 /**
