@@ -30,7 +30,6 @@ model PhiEntity {
   confidenceScore?: float64;
 }
 
-
 @doc("PHI Entity for public use in SurrogateOnly operations with full encoding information.")
 @added(Versions.v2024_12_15)
 model PublicPhiEntity {
