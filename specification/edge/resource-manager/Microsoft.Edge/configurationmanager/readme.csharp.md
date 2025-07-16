@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: [[ResourceProviderName]]
-  output-folder: $(csharp-sdks-folder)/configurationmanager/management/[[ResourceProviderName]]/GeneratedProtocol
+  namespace: Azure.ResourceManager.WorkloadOrchestration
+  output-folder: $(csharp-sdks-folder)/workloadorchestration/management/Azure.ResourceManager.WorkloadOrchestration/GeneratedProtocol
 ```
