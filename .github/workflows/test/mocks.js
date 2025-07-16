@@ -14,8 +14,12 @@ export function createMockGithub() {
     rest: {
       actions: {
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
-        listWorkflowRunArtifacts: vi.fn().mockResolvedValue({ data: { artifacts: [] } }),
-        listWorkflowRunsForRepo: vi.fn().mockResolvedValue({ data: { workflow_runs: [] } }),
+        listWorkflowRunArtifacts: vi
+          .fn()
+          .mockResolvedValue({ data: { artifacts: [] } }),
+        listWorkflowRunsForRepo: vi
+          .fn()
+          .mockResolvedValue({ data: { workflow_runs: [] } }),
       },
       checks: {
         listForRef: vi.fn().mockResolvedValue({ data: { check_runs: [] } }),
@@ -50,7 +54,9 @@ export function createMockCore() {
     error: vi.fn(console.error),
     warning: vi.fn(console.warn),
     isDebug: vi.fn().mockReturnValue(true),
-    setOutput: vi.fn((name, value) => console.log(`setOutput('${name}', '${value}')`)),
+    setOutput: vi.fn((name, value) =>
+      console.log(`setOutput('${name}', '${value}')`),
+    ),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
     summary: {
       // eslint-disable-next-line no-unused-vars

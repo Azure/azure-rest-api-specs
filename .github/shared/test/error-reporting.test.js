@@ -20,7 +20,9 @@ describe("ErrorReporting", () => {
 
   it("should warn when GITHUB_STEP_SUMMARY is unset", () => {
     setSummary("hello");
-    expect(logSpy).toHaveBeenCalledWith("GITHUB_STEP_SUMMARY is not set. Skipping summary update.");
+    expect(logSpy).toHaveBeenCalledWith(
+      "GITHUB_STEP_SUMMARY is not set. Skipping summary update.",
+    );
   });
 
   it("should write to the summary file when GITHUB_STEP_SUMMARY is set", async () => {
@@ -44,6 +46,8 @@ describe("ErrorReporting", () => {
 
   it("should emit a GitHub-style error annotation", () => {
     annotateFileError("src/foo.js", "Something broke", 42, 7);
-    expect(logSpy).toHaveBeenCalledWith("::error file=src/foo.js,line=42,col=7::Something broke");
+    expect(logSpy).toHaveBeenCalledWith(
+      "::error file=src/foo.js,line=42,col=7::Something broke",
+    );
   });
 });

@@ -6,7 +6,9 @@ import { SpecModelError } from "../src/spec-model-error.js";
 describe("SpecModelError", () => {
   it("toString`", () => {
     let error = new SpecModelError("test message");
-    expect(error.toString()).toMatchInlineSnapshot(`"SpecModelError: test message"`);
+    expect(error.toString()).toMatchInlineSnapshot(
+      `"SpecModelError: test message"`,
+    );
 
     error.source = "/test/source.json";
     expect(error.toString()).toMatchInlineSnapshot(`

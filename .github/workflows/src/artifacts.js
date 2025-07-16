@@ -86,7 +86,9 @@ export async function getAzurePipelineArtifact({
     const artifacts = /** @type {Artifacts} */ (await response.json());
     core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
     if (!artifacts.resource || !artifacts.resource.downloadUrl) {
-      throw new Error(`Download URL not found for the artifact ${artifactName}`);
+      throw new Error(
+        `Download URL not found for the artifact ${artifactName}`,
+      );
     }
 
     let downloadUrl = artifacts.resource.downloadUrl;
@@ -108,12 +110,16 @@ export async function getAzurePipelineArtifact({
       retryOptions,
     );
     if (!artifactResponse.ok) {
-      throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
+      throw new Error(
+        `Failed to fetch artifact: ${artifactResponse.statusText}`,
+      );
     }
 
     artifactData = await artifactResponse.text();
   } else {
-    core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
+    core.error(
+      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
+    );
     const errorText = await response.text();
     core.error(`Error details: ${errorText}`);
   }
@@ -131,7 +137,9 @@ export function getAdoBuildInfoFromUrl(buildUrl) {
   const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
   const match = buildUrl.match(buildUrlRegex);
   if (!match) {
-    throw new Error(`Could not extract build ID or project URL from the URL: ${buildUrl}`);
+    throw new Error(
+      `Could not extract build ID or project URL from the URL: ${buildUrl}`,
+    );
   }
   return { projectUrl: match[1], buildId: match[2] };
 }
@@ -166,10 +174,14 @@ export async function fetchFailedArtifact({
     retryOptions,
   );
   if (!response.ok) {
-    throw new Error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
+    throw new Error(
+      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
+    );
   }
   /** @type {ListArtifactsResponse} */
-  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (await response.json());
+  const listArtifactResponse = /** @type {ListArtifactsResponse} */ (
+    await response.json()
+  );
   core.info(`Artifacts found: ${JSON.stringify(listArtifactResponse)}`);
   // Use filter to get matching artifacts and sort them in descending alphabetical order
   const artifactsList = listArtifactResponse.value

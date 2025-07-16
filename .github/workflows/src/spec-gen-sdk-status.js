@@ -1,10 +1,18 @@
 // @ts-check
-import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
-import { CheckStatus, CommitStatusState, PER_PAGE_MAX, writeToActionsSummary } from "./github.js";
+import {
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
+} from "./artifacts.js";
+import {
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+  writeToActionsSummary,
+} from "./github.js";
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
 export default async function setSpecGenSdkStatus({ github, context, core }) {
@@ -43,7 +51,14 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<void>}
  */
-export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_url, github, core }) {
+export async function setSpecGenSdkStatusImpl({
+  owner,
+  repo,
+  head_sha,
+  target_url,
+  github,
+  core,
+}) {
   const statusName = "SDK Validation Status";
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
@@ -53,10 +68,14 @@ export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_ur
   });
   // Filter sdk generation check runs
   const specGenSdkChecks = checks.filter(
-    (check) => check.app?.name === "Azure Pipelines" && check.name.includes("SDK Validation"),
+    (check) =>
+      check.app?.name === "Azure Pipelines" &&
+      check.name.includes("SDK Validation"),
   );
 
-  core.info(`Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`);
+  core.info(
+    `Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`,
+  );
   for (const check of specGenSdkChecks) {
     core.info(`- ${check.name}: ${check.status} (${check.conclusion})`);
   }
@@ -69,12 +88,16 @@ export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_ur
     (check) => check.status !== CheckStatus.COMPLETED,
   );
   for (const check of allIncompletedChecks) {
-    core.info(`incompleted check runs: ${check.name}: ${check.status} (${check.conclusion})`);
+    core.info(
+      `incompleted check runs: ${check.name}: ${check.status} (${check.conclusion})`,
+    );
   }
 
   if (!allCompleted) {
     // At least one check is still running or none found yet, set status to pending
-    core.info("Some SDK Validation checks are not completed. Setting status to pending.");
+    core.info(
+      "Some SDK Validation checks are not completed. Setting status to pending.",
+    );
 
     await github.rest.repos.createCommitStatus({
       owner,
@@ -92,7 +115,9 @@ export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_ur
       core,
     });
 
-    core.info(`All SDK Validation checks completed. Setting status to ${result.state}.`);
+    core.info(
+      `All SDK Validation checks completed. Setting status to ${result.state}.`,
+    );
 
     await github.rest.repos.createCommitStatus({
       owner,
@@ -124,7 +149,9 @@ async function processResult({ checkRuns, core }) {
   summaryContent += "|----------|--------|---------------|\n";
 
   for (const checkRun of checkRuns) {
-    core.info(`Processing check run: ${checkRun.name} (${checkRun.conclusion})`);
+    core.info(
+      `Processing check run: ${checkRun.name} (${checkRun.conclusion})`,
+    );
     const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
     const ado_project_url = buildInfo.projectUrl;
     const ado_build_id = buildInfo.buildId;
@@ -171,7 +198,8 @@ async function processResult({ checkRuns, core }) {
   }
 
   if (state === CommitStatusState.FAILURE) {
-    specGenSdkFailedRequiredLanguages = specGenSdkFailedRequiredLanguages.replace(/,\s*$/, "");
+    specGenSdkFailedRequiredLanguages =
+      specGenSdkFailedRequiredLanguages.replace(/,\s*$/, "");
     description = `SDK Validation failed for ${specGenSdkFailedRequiredLanguages} languages`;
   }
 

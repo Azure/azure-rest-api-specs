@@ -106,10 +106,16 @@ export class Readme {
         // Include default block and tagged blocks (```yaml $(tag) == 'package-2021-11-01')
         .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
 
-      const globalConfigYamlBlocks = yamlBlocks.filter((token) => token.lang === "yaml");
+      const globalConfigYamlBlocks = yamlBlocks.filter(
+        (token) => token.lang === "yaml",
+      );
 
       const globalConfig = globalConfigYamlBlocks.reduce(
-        (obj, token) => Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
+        (obj, token) =>
+          Object.assign(
+            obj,
+            yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA }),
+          ),
         {},
       );
 
@@ -123,10 +129,14 @@ export class Readme {
           continue;
         }
 
-        const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
+        const obj = /** @type {any} */ (
+          yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA })
+        );
 
         if (!obj) {
-          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
+          this.#logger?.debug(
+            `No yaml object found for tag ${tagName} in ${this.#path}`,
+          );
           continue;
         }
 
@@ -208,7 +218,9 @@ export class Readme {
    */
   async toJSONAsync(options) {
     const tags = await mapAsync(
-      [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
+      [...(await this.getTags()).values()].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      ),
       async (t) => await t.toJSONAsync(options),
     );
 
