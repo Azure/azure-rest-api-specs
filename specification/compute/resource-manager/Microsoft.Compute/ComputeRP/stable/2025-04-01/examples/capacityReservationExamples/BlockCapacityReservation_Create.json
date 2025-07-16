@@ -2,14 +2,14 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "capacityReservationGroupName": "blockReservationGroup",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
     "capacityReservationName": "blockCapacityReservation",
     "api-version": "2025-04-01",
     "parameters": {
       "location": "East US",
       "sku": {
         "name": "Standard_E4s_v3",
-        "capacity": 10
+        "capacity": 1
       },
       "zones": [
         "1"
@@ -28,13 +28,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockReservationGroup/capacityReservations/blockCapacityReservation",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
         "type": "Microsoft.Compute/capacityReservations",
         "location": "eastus",
         "name": "blockCapacityReservation",
         "sku": {
           "name": "Standard_E4s_v3",
-          "capacity": 10
+          "capacity": 1
         },
         "zones": [
           "1"
@@ -49,7 +49,7 @@
             "end": "2025-08-02T11:30:00Z"
           },
           "provisioningState": "Succeeded",
-          "timeCreated": "2025-07-11T15:45:30.9876543Z",
+          "timeCreated": "2025-07-30T15:45:30.9876543Z",
           "platformFaultDomainCount": 2,
           "virtualMachinesAssociated": []
         }
@@ -57,13 +57,13 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockReservationGroup/capacityReservations/blockCapacityReservation",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
         "type": "Microsoft.Compute/capacityReservations",
         "location": "eastus",
         "name": "blockCapacityReservation",
         "sku": {
           "name": "Standard_E4s_v3",
-          "capacity": 10
+          "capacity": 1
         },
         "zones": [
           "1"
@@ -78,7 +78,7 @@
             "end": "2025-08-02T11:30:00Z"
           },
           "provisioningState": "Creating",
-          "timeCreated": "2025-07-11T15:45:30.9876543Z",
+          "timeCreated": "2025-07-30T15:45:30.9876543Z",
           "platformFaultDomainCount": 2,
           "virtualMachinesAssociated": []
         }
