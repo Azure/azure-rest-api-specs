@@ -51,6 +51,7 @@ jobs:
             --tb "${{ github.event.pull_request.base.ref }}" \
             --sha "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}" \
+            --owner "${{ github.repository_owner }}" \
             --labels "${{ steps.get-labels.outputs.labels }}"
         env:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps

@@ -1,8 +1,22 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest"; //vi
 
 import path from "path";
 
-const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+
+// const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
+
+describe("Check Changes", () => {
+    it("Should return true when the file has changes", async () => {
+        // const targetDirectory = path.join("/home/semick/repo/rest-s/35346", "before");
+        const sourceDirectory = path.join("/home/semick/repo/rest-s/35346", "after");
+
+        const changedFileDetails = await getChangedFilesStatuses({ cwd: sourceDirectory });
+
+        expect(changedFileDetails).toBeDefined();
+        expect(changedFileDetails.total).toBeGreaterThan(0);
+    });
+});
 
 // describe("invocation directory checks", () => {
 //   it("Should return the same path when invoked from the root of a git repo.", async () => {

@@ -5,7 +5,6 @@ import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files
 
 import { resolve } from "path";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import fs from "node:fs/promises";
 import { simpleGit } from "simple-git";
 import { LabelContext, PRContext } from "./types.js";
 
@@ -67,16 +66,25 @@ export async function main() {
         short: "r",
         multiple: false,
       },
+      owner: {
+        type: "string",
+        short: "o",
+        multiple: false,
+      },
       labels: {
         type: "string",
         short: "l",
+        multiple: false
+      },
+      prStatus: {
+        type: "string",
         multiple: false
       }
     },
     allowPositionals: true,
   };
 
-  const { values: opts, positionals } = parseArgs(config);
+  const { values: opts } = parseArgs(config);
 
   // todo: refactor these opts? They're not really options. I just don't want a bunch of positional args for clarity's sake
   const sourceDirectory = opts.sourceDirectory as string;
@@ -88,8 +96,10 @@ export async function main() {
   const sourceBranch = opts.sourceBranch as string;
   const targetBranch = opts.targetBranch as string;
   const repo = opts.repo as string;
+  const owner = opts.owner as string;
   const prNumber = opts.number as string;
   const existingLabels = (opts.labels as string).split(",").map((l) => l.trim());
+  const prStatus = opts.prStatus as string;
 
   const labelContext: LabelContext = {
     present: new Set(existingLabels),
@@ -107,7 +117,9 @@ export async function main() {
       targetBranch,
       repo,
       prNumber,
-      fileList
+      owner,
+      fileList,
+      prStatus
     });
 
   evaluateImpact(prContext, labelContext);

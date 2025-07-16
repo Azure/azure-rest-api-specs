@@ -1,9 +1,9 @@
-import { join } from "path";
+// import { join } from "path";
 
 
-import { Readme } from "@azure-tools/specs-shared/readme";
+// import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import { swagger, typespec, readme, example } from "@azure-tools/specs-shared/changed-files";
+import { swagger, typespec, example } from "@azure-tools/specs-shared/changed-files"; //readme,
 
 export type FileTypes = "SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile";
 export type ChangeTypes = "Addition" | "Deletion" | "Update";
@@ -24,10 +24,10 @@ export type ChangeHandler = {
   [key in FileTypes]?: (event: PRChange) => void;
 };
 
-type Pattern = {
-  includes: string[] | string;
-  excludes?: string[] | string;
-};
+// type Pattern = {
+//   includes: string[] | string;
+//   excludes?: string[] | string;
+// };
 
 export type DiffResult<T> = {
   additions?: T[]
@@ -36,96 +36,96 @@ export type DiffResult<T> = {
 }
 
 // do I need to add minimatch as a dependency? What does it do?
-export const isPathMatch = (
-  path: string,
-  pattern: string[] | string
-): boolean => {
-  if (typeof pattern === "string") {
-    return minimatch(path, pattern, minimatchConfig);
-  } else {
-    return pattern.some((it) => minimatch(path, it, minimatchConfig));
-  }
-};
+// export const isPathMatch = (
+//   path: string,
+//   pattern: string[] | string
+// ): boolean => {
+//   if (typeof pattern === "string") {
+//     return minimatch(path, pattern, minimatchConfig);
+//   } else {
+//     return pattern.some((it) => minimatch(path, it, minimatchConfig));
+//   }
+// };
 
-const isPatternMatch = (path: string, pattern: Pattern): boolean => {
-  if (pattern.excludes) {
-    if (isPathMatch(path, pattern.excludes)) {
-      return false;
-    }
-  }
-  return isPathMatch(path, pattern.includes);
-};
+// const isPatternMatch = (path: string, pattern: Pattern): boolean => {
+//   if (pattern.excludes) {
+//     if (isPathMatch(path, pattern.excludes)) {
+//       return false;
+//     }
+//   }
+//   return isPathMatch(path, pattern.includes);
+// };
 
-export const enumerateFiles = async (path: string, pattern: Pattern) => {
-  let results: any[] = [];
-  if (await exists(path)) {
-    const runEnumerateFiles = (
-      include: string,
-      excludes: string[] | string | undefined
-    ) => {
-      const absolutelyPath = join(path, include);
-      let ignores: string[] = [];
-      if (excludes) {
-        ignores = ignores.concat(excludes);
-      }
-      const files = glob.sync(absolutelyPath, {
-        ignore: ignores,
-      });
-      return files;
-    };
+// export const enumerateFiles = async (path: string, pattern: Pattern) => {
+//   let results: any[] = [];
+//   if (await exists(path)) {
+//     const runEnumerateFiles = (
+//       include: string,
+//       excludes: string[] | string | undefined
+//     ) => {
+//       const absolutelyPath = join(path, include);
+//       let ignores: string[] = [];
+//       if (excludes) {
+//         ignores = ignores.concat(excludes);
+//       }
+//       const files = glob.sync(absolutelyPath, {
+//         ignore: ignores,
+//       });
+//       return files;
+//     };
 
-    if (Array.isArray(pattern.includes)) {
-      for (const pat of pattern.includes) {
-        results = results.concat(runEnumerateFiles(pat, pattern.excludes));
-      }
-    } else {
-      results = runEnumerateFiles(pattern.includes, pattern.excludes);
-    }
-  }
-  return results;
-};
+//     if (Array.isArray(pattern.includes)) {
+//       for (const pat of pattern.includes) {
+//         results = results.concat(runEnumerateFiles(pat, pattern.excludes));
+//       }
+//     } else {
+//       results = runEnumerateFiles(pattern.includes, pattern.excludes);
+//     }
+//   }
+//   return results;
+// };
 
-const exists = async (path: string) => {
-  return existsSync(path);
-};
+// const exists = async (path: string) => {
+//   return fs.existsSync(path);
+// };
 
-const defaultFilePatterns = {
-  example: {
-    includes: "**/examples/**/*.json",
-    excludes: ["**/quickstart-templates/*.json", "**/schema/*.json", "**/scenarios/**/*.json","**/cadl/*.json"],
-  } as Pattern,
+// const defaultFilePatterns = {
+//   example: {
+//     includes: "**/examples/**/*.json",
+//     excludes: ["**/quickstart-templates/*.json", "**/schema/*.json", "**/scenarios/**/*.json","**/cadl/*.json"],
+//   } as Pattern,
 
-  swagger: {
-    includes: "**/*.json",
-    excludes: [
-      "**/quickstart-templates/*.json",
-      "**/schema/*.json",
-      "**/scenarios/**/*.json",
-      "**/examples/**/*.json",
-      "**/package.json",
-      "**/package-lock.json",
-      "**/cadl/**/*.json"
-    ],
-  } as Pattern,
+//   swagger: {
+//     includes: "**/*.json",
+//     excludes: [
+//       "**/quickstart-templates/*.json",
+//       "**/schema/*.json",
+//       "**/scenarios/**/*.json",
+//       "**/examples/**/*.json",
+//       "**/package.json",
+//       "**/package-lock.json",
+//       "**/cadl/**/*.json"
+//     ],
+//   } as Pattern,
 
-  cadl: {
-    includes: "**/*.cadl",
-  } as Pattern,
+//   cadl: {
+//     includes: "**/*.cadl",
+//   } as Pattern,
 
-  typespec: {
-    includes: [
-      "**/*.tsp",
-      // We do not include tspconfig.yml because by design it is invalid. The PR should have tspconfig.yaml instead.
-      // If a PR author adds tspconfig.yml the TypeSpec validation will report issue, blocking the PR from proceeding.
-      // Source code of this validation can be found at:
-      // https://github.com/Azure/azure-rest-api-specs/blob/b8c74fd80b415fa1ebb6fa787d454694c39e0fd5/eng/tools/typespec-validation/src/rules/folder-structure.ts#L27C27-L27C41
-      // "**/*tspconfig.yml",
-      "**/*tspconfig.yaml"
-    ]
-  } as Pattern,
+//   typespec: {
+//     includes: [
+//       "**/*.tsp",
+//       // We do not include tspconfig.yml because by design it is invalid. The PR should have tspconfig.yaml instead.
+//       // If a PR author adds tspconfig.yml the TypeSpec validation will report issue, blocking the PR from proceeding.
+//       // Source code of this validation can be found at:
+//       // https://github.com/Azure/azure-rest-api-specs/blob/b8c74fd80b415fa1ebb6fa787d454694c39e0fd5/eng/tools/typespec-validation/src/rules/folder-structure.ts#L27C27-L27C41
+//       // "**/*tspconfig.yml",
+//       "**/*tspconfig.yaml"
+//     ]
+//   } as Pattern,
 
-  readme: { includes: "**/readme.md" } as Pattern,
-};
+//   readme: { includes: "**/readme.md" } as Pattern,
+// };
 
 export type PRType = "resource-manager" | "data-plane";
 
@@ -164,12 +164,15 @@ export type LabelContext = {
 
 export type ImpactAssessment = {
     prType: string[],
-    suppressionsChanged: boolean,
+    suppressionReviewRequired: boolean,
     versioningReviewRequired: boolean,
     breakingChangeReviewRequired: boolean,
+    rpaasExceptionRequired: boolean,
     rpaasChange: boolean,
     newRP: boolean,
     rpaasRPMissing: boolean
+    typeSpecChanged: boolean
+    isDraft: boolean
 }
 
 export class Label {
@@ -270,7 +273,9 @@ export type PRContextOptions = {
   targetBranch: string;
   sha: string;
   repo: string;
+  owner: string;
   prNumber: string;
+  prStatus: string;
 };
 
 export class PRContext {
@@ -286,7 +291,9 @@ export class PRContext {
   targetBranch: string;
   sha: string;
   repo: string;
+  owner: string;
   prNumber: string;
+  prStatus: string;
   labelContext: LabelContext;
 
   constructor(
@@ -306,6 +313,8 @@ export class PRContext {
     this.repo = options.repo;
     this.prNumber = options.prNumber;
     this.fileList = options.fileList;
+    this.prStatus = options.prStatus;
+    this.owner = options.owner;
   }
 
 

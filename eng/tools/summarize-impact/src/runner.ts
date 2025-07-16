@@ -7,13 +7,22 @@ import { glob } from "glob";
 import * as _ from "lodash";
 
 import * as path from "path";
+
+import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
+
 // import { Swagger } from "@azure-tools/specs-shared/swagger";
 // import { includesFolder } from "@azure-tools/specs-shared/path";
 // import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 
 import { FileTypes, ChangeTypes, PRChange, ChangeHandler, PRType, ImpactAssessment, LabelContext, PRContext, Label, DiffResult, ReadmeTag } from "./types.js"
 
+export declare const breakingChangeLabelVarName = "breakingChangeVar";
+export declare const crossVersionBreakingChangeLabelVarName = "crossVersionBreakingChangeVar";
+
 export async function evaluateImpact(context: PRContext, labelContext: LabelContext): Promise<ImpactAssessment> {
+
+  const typeSpecLabelShouldBePresent = await processTypeSpec(context, labelContext);
+
   // examine changed files. if changedpaths includes data-plane, add "data-plane"
   // same for "resource-manager". We care about whether resourcemanager will be present for a later check
   const { resourceManagerLabelShouldBePresent } = await processPRType(
@@ -31,7 +40,7 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
   const {
     versioningReviewRequiredLabelShouldBePresent,
     breakingChangeReviewRequiredLabelShouldBePresent,
-  } = await processBreakingChangeLabels(prContext, labelContext);
+  } = await processBreakingChangeLabels(context, labelContext);
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(
@@ -68,14 +77,20 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
     rpaasLabelShouldBePresent
   );
 
+
+  // todo:
+  console.log(ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
   return {
     prType: [],
-    suppressionsChanged: labelContext.toAdd.has("suppressionsReviewRequired"),
+    suppressionReviewRequired: labelContext.toAdd.has("suppressionsReviewRequired"),
     versioningReviewRequired: versioningReviewRequiredLabelShouldBePresent,
     breakingChangeReviewRequired: breakingChangeReviewRequiredLabelShouldBePresent,
     rpaasChange: rpaasLabelShouldBePresent,
     newRP: newRPNamespaceLabelShouldBePresent,
-    rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent || rpaasExceptionLabelShouldBePresent
+    rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+    rpaasExceptionRequired: rpaasExceptionLabelShouldBePresent,
+    typeSpecChanged: typeSpecLabelShouldBePresent,
+    isDraft: context.prStatus === "draft",
   };
 }
 
@@ -168,71 +183,72 @@ export const getResourceProviderFromFilePath = (
   return undefined;
 };
 
-async function isNewApiVersion(context: PRContext): Promise<boolean> {
-  const pr = await createPullRequestProperties(
-    context,
-    "pr-summary-new-api-version"
-  );
-  const handlers: ChangeHandler[] = [];
-  let isAddingNewApiVersion = false;
-  const apiVersionSet = new Set<string>();
+// todo: we need to populate this so that we can tell if it's a new APIVersion down stream
+// async function isNewApiVersion(context: PRContext): Promise<boolean> {
+//   const pr = await createPullRequestProperties(
+//     context,
+//     "pr-summary-new-api-version"
+//   );
+//   const handlers: ChangeHandler[] = [];
+//   let isAddingNewApiVersion = false;
+//   const apiVersionSet = new Set<string>();
 
-  const rpFolders = new Set<string>();
+//   const rpFolders = new Set<string>();
 
-  const createSwaggerFileHandler = () => {
-    return (e: PRChange) => {
-      if (e.changeType === "Addition") {
-        const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
-        if (apiVersion) {
-          apiVersionSet.add(apiVersion);
-        }
-        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
-        if (rpFolder !== undefined) {
-          rpFolders.add(rpFolder);
-        }
-        console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
-      } else if (e.changeType === "Update") {
-        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
-        if (rpFolder !== undefined) {
-          rpFolders.add(rpFolder);
-        }
-      }
-    };
-  };
+//   const createSwaggerFileHandler = () => {
+//     return (e: PRChange) => {
+//       if (e.changeType === "Addition") {
+//         const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
+//         if (apiVersion) {
+//           apiVersionSet.add(apiVersion);
+//         }
+//         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+//         if (rpFolder !== undefined) {
+//           rpFolders.add(rpFolder);
+//         }
+//         console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
+//       } else if (e.changeType === "Update") {
+//         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+//         if (rpFolder !== undefined) {
+//           rpFolders.add(rpFolder);
+//         }
+//       }
+//     };
+//   };
 
-  handlers.push({ SwaggerFile: createSwaggerFileHandler() });
-  await processPrChanges(context, handlers);
+//   handlers.push({ SwaggerFile: createSwaggerFileHandler() });
+//   await processPrChanges(context, handlers);
 
-  console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
+//   console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
 
-  const firstRPFolder = Array.from(rpFolders)[0];
+//   const firstRPFolder = Array.from(rpFolders)[0];
 
-  console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
+//   console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
 
-  if (firstRPFolder === undefined) {
-    console.log("RP folder not found.");
-    return false;
-  }
+//   if (firstRPFolder === undefined) {
+//     console.log("RP folder not found.");
+//     return false;
+//   }
 
-  const targetBranchRPFolder = path.resolve(pr?.workingDir!, firstRPFolder);
+//   const targetBranchRPFolder = path.resolve(pr?.workingDir!, firstRPFolder);
 
-  console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
+//   console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
 
-  const existingApiVersions =
-    getAllApiVersionFromRPFolder(targetBranchRPFolder);
+//   const existingApiVersions =
+//     getAllApiVersionFromRPFolder(targetBranchRPFolder);
 
-  console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
+//   console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
 
-  for (const apiVersion of apiVersionSet) {
-    if (!existingApiVersions.includes(apiVersion)) {
-      console.log(
-        `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
-      );
-      isAddingNewApiVersion = true;
-    }
-  }
-  return isAddingNewApiVersion;
-}
+//   for (const apiVersion of apiVersionSet) {
+//     if (!existingApiVersions.includes(apiVersion)) {
+//       console.log(
+//         `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
+//       );
+//       isAddingNewApiVersion = true;
+//     }
+//   }
+//   return isAddingNewApiVersion;
+// }
 
 async function processBreakingChangeLabels(
   prContext: PRContext,
@@ -242,8 +258,6 @@ async function processBreakingChangeLabels(
   }>{
 
   const prTargetsProductionBranch: boolean = checkPrTargetsProductionBranch(prContext);
-  const prKey: PRKey = PRKey.fromSourceRepoUri(prContext.sourceRepoUri, prContext.prNumber);
-
   const breakingChangesLabelsFromOad = getBreakingChangesLabelsFromOad();
 
   const versioningReviewRequiredLabel = new Label(
@@ -256,8 +270,8 @@ async function processBreakingChangeLabels(
     labelContext.present
   );
 
-  const versioningApprovalLabels = breakingChangesCheckType.SameVersion.approvalLabels.map(label => new Label(label, labelContext.present));
-  const breakingChangeApprovalLabels = breakingChangesCheckType.CrossVersion.approvalLabels.map(label => new Label(label, labelContext.present));
+  const versioningApprovalLabels = breakingChangesCheckType.SameVersion.approvalLabels.map((label: string) => new Label(label, labelContext.present));
+  const breakingChangeApprovalLabels = breakingChangesCheckType.CrossVersion.approvalLabels.map((label: string) => new Label(label, labelContext.present));
 
   // ----- Breaking changes label processing logic -----
   // These lines implement the set of rules determining which of the breaking change
@@ -346,7 +360,7 @@ async function processBreakingChangeLabels(
         // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 11/29/2023.
         // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
         // Note it duplicates the label "shouldBePresent" ruleset logic.
-        console.log(`processBreakingChangeLabels: PR: ${prKey.toUrl()}, targetBranch: ${prContext.targetBranch}. `
+        console.log(`processBreakingChangeLabels: PR: ${`https://github.com/${prContext.owner}/${prContext.repo}/pull/${prContext.prNumber}`}, targetBranch: ${prContext.targetBranch}. `
         + `The addition of 'BreakingChangesReviewRequired' or 'VersioningReviewRequired' labels has been prevented `
         + `because we checked that the PR is not targeting a production branch.`);
     }
@@ -380,14 +394,14 @@ function checkPrTargetsProductionBranch(prContext: PRContext): boolean {
 async function processTypeSpec(
   ctx: PRContext,
   labelContext: LabelContext,
-) {
+) : Promise<boolean>{
   console.log("ENTER definition processTypeSpec")
   const typeSpecLabel = new Label("TypeSpec", labelContext.present);
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
-    return (prChange: PRChange) => {
+    return (_: PRChange) => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
       typeSpecLabel.shouldBePresent = true;
@@ -405,9 +419,10 @@ async function processTypeSpec(
     SwaggerFile: swaggerFileHandler(),
   });
   await processPrChanges(ctx, handlers);
-
   typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processTypeSpec")
+
+  return typeSpecLabel.shouldBePresent;
 }
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
@@ -688,12 +703,15 @@ async function processRPaaS(
 }
 
 function isRPSaaS(readmeFilePath: string) {
-  const readmeParser = new ReadmeParser(readmeFilePath);
-  const openapiSubtype = readmeParser.getGlobalConfigByName("openapi-subtype");
-  console.log(
-    `readmeFilePath: ${readmeFilePath} openapi-subtype: ${openapiSubtype}`
-  );
-  return openapiSubtype === "rpaas" || openapiSubtype === "providerHub";
+  //todo: fix this
+  // const readmeParser = new ReadmeParser(readmeFilePath);
+  // const openapiSubtype = readmeParser.getGlobalConfigByName("openapi-subtype");
+  // console.log(
+  //   `readmeFilePath: ${readmeFilePath} openapi-subtype: ${openapiSubtype}`
+  // );
+  // return openapiSubtype === "rpaas" || openapiSubtype === "providerHub";
+  console.log(readmeFilePath);
+  return false;
 }
 
 async function processNewRPNamespace(
@@ -830,41 +848,43 @@ async function processRpaasRpNotInPrivateRepoLabel(
     }
   }
 
-  if (!skip) {
-    const rpaasRPFolderList = await getRPaaSFolderList();
-    const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
+  // if (!skip) {
+  //   // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder
+  //   // names
+  //   const rpaasRPFolderList = await getRPaaSFolderList();
+  //   const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
 
-    console.log(`RPaaS RP folder list: ${rpFolderNames}`);
+  //   console.log(`RPaaS RP folder list: ${rpFolderNames}`);
 
-    const handlers: ChangeHandler[] = [];
+  //   const handlers: ChangeHandler[] = [];
 
-    const processPrChange = () => {
-      return (e: PRChange) => {
-        if (e.changeType === "Addition") {
-          const rpFolderName = getRPRootFolderName(e.filePath);
-          console.log(
-            `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
-          );
+  //   const processPrChange = () => {
+  //     return (e: PRChange) => {
+  //       if (e.changeType === "Addition") {
+  //         const rpFolderName = getRPRootFolderName(e.filePath);
+  //         console.log(
+  //           `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
+  //         );
 
-          if (rpFolderName === undefined) {
-            console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
-            return;
-          }
+  //         if (rpFolderName === undefined) {
+  //           console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
+  //           return;
+  //         }
 
-          if (!rpFolderNames.includes(rpFolderName)) {
-            console.log(
-              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
-              + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
-            );
-            ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
-          }
-        }
-      };
-    };
+  //         if (!rpFolderNames.includes(rpFolderName)) {
+  //           console.log(
+  //             `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
+  //             + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
+  //           );
+  //           ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
+  //         }
+  //       }
+  //     };
+  //   };
 
-    handlers.push({ SwaggerFile: processPrChange() });
-    await processPrChanges(context, handlers);
-  }
+  //   handlers.push({ SwaggerFile: processPrChange() });
+  //   await processPrChanges(context, handlers);
+  // }
 
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processRpaasRpNotInPrivateRepoLabel")
@@ -872,12 +892,3 @@ async function processRpaasRpNotInPrivateRepoLabel(
   return { ciRpaasRPNotInPrivateRepoLabelShouldBePresent: ciRpaasRPNotInPrivateRepoLabel.shouldBePresent }
 }
 
-function warnIfLabelSetsIntersect(labelsToAdd: Set<string>, labelsToRemove: Set<string>) {
-  const intersection: string[] = _.intersection([...labelsToAdd], [...labelsToRemove])
-  if (intersection.length > 0) {
-    console.warn("ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! "
-    + `labelsToAdd: [${[...labelsToAdd].join(", ")}]. `
-    + `labelsToRemove: [${[...labelsToRemove].join(", ")}]. `
-    + `intersection: [${intersection.join(", ")}].`)
-  }
-}
