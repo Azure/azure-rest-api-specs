@@ -33,25 +33,38 @@ interface SharedPrivateLinkResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SignalRResource,
-          KeyName = "resourceName",
-          SegmentName = "signalR",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Replica,
-          KeyName = "replicaName",
-          SegmentName = "replicas",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
+
+        /**
+         * The name of the SignalRResource
+         */
+        @path
+        @segment("signalR")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        resourceName: string,
+
+        /**
+         * The name of the Replica
+         */
+        @path
+        @segment("replicas")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        replicaName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedPrivateLinkResource,
-        KeyName = "sharedPrivateLinkResourceName",
-        SegmentName = "sharedPrivateLinkResources",
-        NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-      >>
+      {
+        /**
+         * The name of the SharedPrivateLinkResource
+         */
+        @path
+        @segment("sharedPrivateLinkResources")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        sharedPrivateLinkResourceName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -89,19 +102,28 @@ interface SignalRSharedPrivateLinkResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SignalRResource,
-          KeyName = "resourceName",
-          SegmentName = "signalR",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
+
+        /**
+         * The name of the SignalRResource
+         */
+        @path
+        @segment("signalR")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedPrivateLinkResource,
-        KeyName = "sharedPrivateLinkResourceName",
-        SegmentName = "sharedPrivateLinkResources",
-        NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-      >>
+      {
+        /**
+         * The name of the SharedPrivateLinkResource
+         */
+        @path
+        @segment("sharedPrivateLinkResources")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        sharedPrivateLinkResourceName: string,
+      }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
