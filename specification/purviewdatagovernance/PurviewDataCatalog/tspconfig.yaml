@@ -6,56 +6,7 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json"
-  "@azure-tools/typespec-go":
-    generate-fakes: true
-    inject-spans: true
-    service-dir: "sdk/purviewdatacatalog"
-    package-dir: "az-purviewdatacatalog"
-  "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    package-dir: "azure-purviewdatacatalog"
-    package-name: "{package-dir}"
-    namespace: "azure.purviewdatacatalog"
-    api-version: "2025-06-16-preview"
-    flavor: azure
-    generate-test: true
-    generate-sample: false
-  "@azure-tools/typespec-csharp":
-    package-mode: "dataplane"
-    package-dir: "Azure.PurviewDataCatalog"
-    namespace: "{package-dir}"
-    package-name: "{package-dir}"
-    api-version: "2025-06-16-preview"
-    model-namespace: false
-    flavor: azure
-    generate-test: false
-    generate-sample: false
-    clear-output-folder: true
-  "@azure-typespec/http-client-csharp":
-    namespace: Azure.PurviewDataCatalog
-    model-namespace: false
-    api-version: "2025-06-16-preview"
-  "@typespec/http-client-csharp":
-    package-name: Azure.PurviewDataCatalog
-    api-version: "2025-06-16-preview"
-  "@azure-tools/typespec-ts":
-    package-dir: "purviewdatacatalog-projects"
-    api-version: "2025-06-16-preview"
-    is-modular-library: true
-    generate-test: true
-    generate-metadata: false
-    package-details:
-      name: "@azure/purviewdatacatalog"
-      description: "Azure Purview Data Catalog Client"
-    flavor: azure
-  "@azure-tools/typespec-java":
-    package-dir: "azure-purviewdatacatalog"
-    namespace: com.azure.purviewdatacatalog
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    flavor: azure
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/CatalogApiService.json" 
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
