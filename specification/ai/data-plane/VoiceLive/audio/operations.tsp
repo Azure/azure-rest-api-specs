@@ -26,45 +26,4 @@ interface Audio {
     @header contentType: "application/octet-stream";
     @body responseBody: bytes;
   } | SseResponseOf<CreateSpeechResponseStreamEvent> | ErrorResponse;
-
-  @route("transcriptions")
-  @post
-  @operationId("createTranscription")
-  @tag("Audio")
-  @summary("Transcribes audio into the input language.")
-  createTranscription(
-    ...AcceptJsonOrEventStreamHeader,
-    @header contentType: "multipart/form-data",
-    @body requestBody: CreateTranscriptionRequest,
-  ):
-    | CreateTranscriptionResponseVerboseJson
-    | CreateTranscriptionResponseJson
-    | SseResponseOf<CreateTranscriptionResponseStreamEvent>
-    | {
-        // TODO: This response is not defined in the OpenAPI spec.
-        @header contentType: "text/plain";
-
-        @body responseBody: string;
-      }
-    | ErrorResponse;
-
-  @route("translations")
-  @post
-  @operationId("createTranslation")
-  @tag("Audio")
-  @summary("Translates audio into English..")
-  createTranslation(
-    @header accept: "application/json",
-    @header contentType: "multipart/form-data",
-    @body requestBody: CreateTranslationRequest,
-  ):
-    | CreateTranslationResponseVerboseJson
-    | CreateTranslationResponseJson
-    | {
-        // TODO: This response is not defined in the OpenAPI spec.
-        @header contentType: "text/plain";
-
-        @body responseBody: string;
-      }
-    | ErrorResponse;
 }
