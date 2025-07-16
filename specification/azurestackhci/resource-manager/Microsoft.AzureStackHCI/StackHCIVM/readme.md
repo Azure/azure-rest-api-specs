@@ -29,7 +29,7 @@ title: Microsoft.AzureStackHCI
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-06-01-preview
+tag: package-preview-2025-09-01-preview
 ```
 
 ## Suppression
