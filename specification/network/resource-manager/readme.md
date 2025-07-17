@@ -221,7 +221,6 @@ directive:
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
-```
 
 ### Tag: package-2024-07-01
 
