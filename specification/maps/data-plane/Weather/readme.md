@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for Weather Client.
 
 ``` yaml
+# 
 title: WeatherClient
 openapi-type: data-plane
 tag: 1.1
@@ -44,7 +45,7 @@ input-file:
   - stable/1.1/weather.json
 ```
 
-### Tag: package-retired-1.0-preview
+### Tag: package-stable-1.0
 
 These settings apply only when `--tag=1.0-preview` is specified on the command line.
 
