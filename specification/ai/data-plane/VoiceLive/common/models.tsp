@@ -41,19 +41,6 @@ model LogProbProperties {
   bytes: int32[];
 }
 
-@doc("Identifier for selecting a built-in voice.")
-union VoiceIdsShared {
-  string,
-  "alloy",
-  "ash",
-  "ballad",
-  "coral",
-  "echo",
-  "sage",
-  "shimmer",
-  "verse",
-}
-
 @doc("Enumerates available service tier configurations.")
 union ServiceTier {
   "auto",

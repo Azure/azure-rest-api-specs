@@ -11,7 +11,7 @@ model VoiceLiveRequestSession {
   `model`?: string;
   modalities?: VoiceLiveModality[];
   animation?: VoiceLiveAnimation;
-  voice?: VoiceIdsShared;
+  voice?: Voice;
   instructions?: string;
   input_audio?: VoiceLiveInputAudio;
   input_audio_sampling_rate?: int32 = 24000;
@@ -36,7 +36,7 @@ model VoiceLiveResponseSession {
   modalities: VoiceLiveModality[];
   instructions: string;
   animation?: VoiceLiveAnimation;
-  voice: VoiceIdsShared;
+  voice: Voice;
   input_audio?: VoiceLiveInputAudio;
   input_audio_format: VoiceLiveAudioFormat;
   output_audio_format: VoiceLiveAudioFormat;
@@ -51,6 +51,77 @@ model VoiceLiveResponseSession {
   temperature: float32;
   max_response_output_tokens: int32 | "inf" | null;
   agent?: AgentConfig;
+}
+
+@doc("Voice configuration for Azure standard or platform voices.")
+model AzureStandardVoice {
+  @doc("Name of the voice.")
+  name: string;
+
+  @doc("Voice type identifier.")
+  type: "azure-standard" | "azure-platform";
+
+  @doc("Optional temperature for generation.")
+  temperature?: float32;
+}
+
+@doc("Voice configuration for Azure custom voice.")
+model AzureCustomVoice {
+  @doc("Name of the voice.")
+  name: string;
+
+  @doc("Custom endpoint ID.")
+  endpoint_id: string;
+
+  @doc("Voice type identifier.")
+  type: "azure-custom" | "custom";
+
+  @doc("Optional temperature for generation.")
+  temperature?: float32;
+
+  @doc("Optional custom lexicon URL.")
+  custom_lexicon_url?: string;
+
+  @doc("Preferred locale list for voice rendering.")
+  prefer_locales?: string[];
+}
+
+@doc("Voice configuration for Azure personal voice.")
+model AzurePersonalVoice {
+  @doc("Name of the voice.")
+  name: string;
+
+  @doc("Voice type identifier.")
+  type: "azure-personal" | "personal";
+
+  @doc("Personal voice model identifier.")
+  `model`: "DragonLatestNeural" | "PhoenixLatestNeural" | "PhoenixV2Neural";
+}
+
+@doc("Voice identifier for OpenAI-provided voices.")
+union OAIVoice {
+  "alloy",
+  "ash",
+  "ballad",
+  "coral",
+  "echo",
+  "sage",
+  "shimmer",
+  "verse"
+}
+
+@doc("Voice identifier for Phi4mm voices.")
+union Phi4mmVoice {
+  "cosyvoice"
+}
+
+@doc("Union of supported voice identifiers and configurations.")
+union Voice {
+  OAIVoice,
+  AzureStandardVoice,
+  AzureCustomVoice,
+  AzurePersonalVoice,
+  Phi4mmVoice
 }
 
 union VoiceLiveAudioFormat {
