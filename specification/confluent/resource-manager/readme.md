@@ -28,7 +28,16 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-07
+tag: package-2025-07-17-preview
+```
+
+### Tag: package-2025-07-17-preview
+
+These settings apply only when `--tag=package-2025-07-17-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-17-preview'
+input-file:
+  - Microsoft.Confluent/preview/2025-07-17-preview/confluent.json
 ```
 
 ### Tag: package-2024-07
