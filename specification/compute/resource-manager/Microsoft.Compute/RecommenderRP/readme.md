@@ -31,28 +31,27 @@ title: AzureComputeRecommenderManagementClient
 ``` yaml
 description: Azure Compute Recommender Client
 openapi-type: arm
-openapi-subtype: rpaas
 tag: package-2025-06-05
 
 suppressions:
   - code: OperationsAPIImplementation
     reason: The operations API is defined in a separate file.
-    from: diagnostic.json
+    from: RecommenderRP.json
   - code: PathForResourceAction
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    from: diagnostic.json
+    from: RecommenderRP.json
   - code: PathForNestedResource
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    from: diagnostic.json
+    from: RecommenderRP.json
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    from: diagnostic.json
+    from: RecommenderRP.json
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The property name contains abbreviations and need to keep it as upper case.
-    from: diagnostic.json
+    from: RecommenderRP.json
   - code: BodyTopLevelProperties
     reason: The is the additional property bag to introduce new nonbreaking properties.
-    from: diagnostic.json
+    from: RecommenderRP.json
 
 ```
 
