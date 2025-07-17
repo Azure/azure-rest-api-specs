@@ -22,76 +22,70 @@ export declare const crossVersionBreakingChangeLabelVarName = "crossVersionBreak
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
-  // const pr = await createPullRequestProperties(
-  //   context,
-  //   "pr-summary-new-api-version"
-  // );
-  // const handlers: ChangeHandler[] = [];
-  // let isAddingNewApiVersion = false;
-  // const apiVersionSet = new Set<string>();
 
-  // const rpFolders = new Set<string>();
+  const handlers: ChangeHandler[] = [];
+  let isAddingNewApiVersion = false;
+  const apiVersionSet = new Set<string>();
 
-  // const createSwaggerFileHandler = () => {
-  //   return (e: PRChange) => {
-  //     if (e.changeType === "Addition") {
-  //       const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
-  //       if (apiVersion) {
-  //         apiVersionSet.add(apiVersion);
-  //       }
-  //       const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
-  //       if (rpFolder !== undefined) {
-  //         rpFolders.add(rpFolder);
-  //       }
-  //       console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
-  //     } else if (e.changeType === "Update") {
-  //       const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
-  //       if (rpFolder !== undefined) {
-  //         rpFolders.add(rpFolder);
-  //       }
-  //     }
-  //   };
-  // };
+  const rpFolders = new Set<string>();
 
-  // handlers.push({ SwaggerFile: createSwaggerFileHandler() });
-  // await processPrChanges(context, handlers);
+  const createSwaggerFileHandler = () => {
+    return (e: PRChange) => {
+      if (e.changeType === "Addition") {
+        const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
+        if (apiVersion) {
+          apiVersionSet.add(apiVersion);
+        }
+        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+        if (rpFolder !== undefined) {
+          rpFolders.add(rpFolder);
+        }
+        console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
+      } else if (e.changeType === "Update") {
+        const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+        if (rpFolder !== undefined) {
+          rpFolders.add(rpFolder);
+        }
+      }
+    };
+  };
 
-  // console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
+  handlers.push({ SwaggerFile: createSwaggerFileHandler() });
+  await processPrChanges(context, handlers);
 
-  // const firstRPFolder = Array.from(rpFolders)[0];
+  console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
 
-  // console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
+  const firstRPFolder = Array.from(rpFolders)[0];
 
-  // if (firstRPFolder === undefined) {
-  //   console.log("RP folder not found.");
-  //   return false;
-  // }
+  console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
 
-  // const targetBranchRPFolder = path.resolve(pr?.workingDir!, firstRPFolder);
+  if (firstRPFolder === undefined) {
+    console.log("RP folder not found.");
+    return false;
+  }
 
-  // console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
+  const targetBranchRPFolder = path.resolve(context.targetDirectory, firstRPFolder);
 
-  // const existingApiVersions =
-  //   getAllApiVersionFromRPFolder(targetBranchRPFolder);
+  console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
 
-  // console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
+  const existingApiVersions =
+    getAllApiVersionFromRPFolder(targetBranchRPFolder);
 
-  // for (const apiVersion of apiVersionSet) {
-  //   if (!existingApiVersions.includes(apiVersion)) {
-  //     console.log(
-  //       `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
-  //     );
-  //     isAddingNewApiVersion = true;
-  //   }
-  // }
-  // return isAddingNewApiVersion;
-  console.log(`${context.owner}/${context.repo} isNewApiVersion: false`);
-  return false;
+  console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
+
+  for (const apiVersion of apiVersionSet) {
+    if (!existingApiVersions.includes(apiVersion)) {
+      console.log(
+        `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
+      );
+      isAddingNewApiVersion = true;
+    }
+  }
+  return isAddingNewApiVersion;
 }
 
 
 export async function evaluateImpact(context: PRContext, labelContext: LabelContext): Promise<ImpactAssessment> {
-
   const typeSpecLabelShouldBePresent = await processTypeSpec(context, labelContext);
 
   // examine changed files. if changedpaths includes data-plane, add "data-plane"
@@ -164,6 +158,7 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
     typeSpecChanged: typeSpecLabelShouldBePresent,
     isNewApiVersion: newApiVersion,
     isDraft: context.isDraft,
+    labelContext: labelContext
   };
 }
 
@@ -863,6 +858,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
       skip = true;
     }
   }
+
   // todo: retrieve the list and populate this value properly.
   // if (!skip) {
   //   // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder

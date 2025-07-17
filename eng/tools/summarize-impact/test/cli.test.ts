@@ -34,6 +34,11 @@ describe("Check Changes", () => {
         const result = await evaluateImpact(prContext, labelContext);
 
         expect(result).toBeDefined();
+        expect(result.typeSpecChanged).toBeTruthy();
+
+        expect(result.labelContext.toAdd.has("ARMReview")).toBeTruthy();
+        expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
+        expect(result.labelContext.toAdd.has("SuppressionReviewRequired")).toBeTruthy();
         expect(changedFileDetails).toBeDefined();
         expect(changedFileDetails.total).toEqual(293);
     });

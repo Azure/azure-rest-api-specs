@@ -175,7 +175,8 @@ export type ImpactAssessment = {
     newRP: boolean,
     rpaasRPMissing: boolean,
     typeSpecChanged: boolean,
-    isDraft: boolean
+    isDraft: boolean,
+    labelContext: LabelContext
 }
 
 export class Label {
@@ -384,12 +385,12 @@ export class PRContext {
   }
 
   async getReadmeDiffs(): Promise<DiffResult<ReadmeTag>> {
+    // todo: properly implement this
     // get all the readme files
     // generate the diffresult from it.
     // Readme
 
     // console.log(`ahahahah readme tags are ${rmtags}`)
-
 
     // console.log("ENTER definition LocalDirContext.getReadmeDiffs")
     // if (this.readmeDiffs) {
