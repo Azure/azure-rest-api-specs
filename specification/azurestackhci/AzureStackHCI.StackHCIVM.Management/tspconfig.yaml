@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/azurestackhci"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,12 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/StackHCIVM/{version-status}/{version}/stackhcivm.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-azurestackhci"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
