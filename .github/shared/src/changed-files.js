@@ -7,6 +7,8 @@ import { simpleGit } from "simple-git";
 debug.enable("simple-git");
 
 /**
+ * Get a list of changed files in a git repository
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
@@ -17,15 +19,9 @@ debug.enable("simple-git");
 export async function getChangedFiles(options = {}) {
   const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
 
-  // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
-  // consider using "--name-status" instead of "--name-only", and return an array of objects like
-  // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
-  // Then add filter functions to filter based on status.  This is more flexible and lets consumers
-  // filter based on status with a single call to `git diff`.
   const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
 
   const files = result.trim().split("\n");
-
   logger?.info("Changed Files:");
   for (const file of files) {
     logger?.info(`  ${file}`);
@@ -36,6 +32,10 @@ export async function getChangedFiles(options = {}) {
 }
 
 /**
+ * Get a list of changed files in a git repository with statuses for additions,
+ * modifications, deletions, and renames. Warning: rename behavior can vary
+ * based on the git client's configuration of diff.renames.
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
@@ -194,12 +194,26 @@ export function example(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function quickstartTemplate(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/quickstart-templates/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function swagger(file) {
   return (
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
+    !quickstartTemplate(file) &&
     !scenario(file)
   );
 }
