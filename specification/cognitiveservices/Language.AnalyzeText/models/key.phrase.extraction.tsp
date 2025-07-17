@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 @doc("Contains the analyze text KeyPhraseExtraction task input.")
 model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
@@ -43,17 +43,14 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 @doc("Contains the KeyPhraseResult.")
 model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
-  @typeChangedFrom(
-    Versions.v2023_11_15_preview,
-    Array<KeyPhrasesDocumentResult>
-  )
-  documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, KeyPhrasesDocumentResult[])
+  documents: KeyPhrasesDocumentResultWithDetectedLanguage[];
 }
 
 @doc("Contains the Key phrase extraction results for a document.")
 model KeyPhrasesDocumentResult is DocumentResult {
   @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
-  keyPhrases: Array<string>;
+  keyPhrases: string[];
 }
 
 @added(Versions.v2023_04_01)

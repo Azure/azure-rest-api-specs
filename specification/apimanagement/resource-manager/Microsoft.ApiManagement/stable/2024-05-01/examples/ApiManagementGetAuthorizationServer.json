@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authsid": "newauthServer2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2",
+        "type": "Microsoft.ApiManagement/service/authorizationServers",
+        "name": "newauthServer2",
+        "properties": {
+          "displayName": "test3",
+          "useInTestConsole": false,
+          "useInApiDocumentation": true,
+          "description": "test server",
+          "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+          "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
+          "authorizationMethods": [
+            "GET"
+          ],
+          "clientAuthenticationMethod": [
+            "Basic"
+          ],
+          "tokenEndpoint": "https://www.contoso.com/oauth2/token",
+          "supportState": true,
+          "defaultScope": "read write",
+          "grantTypes": [
+            "authorizationCode",
+            "implicit"
+          ],
+          "bearerTokenSendingMethods": [
+            "authorizationHeader"
+          ],
+          "clientId": "1",
+          "resourceOwnerUsername": "un",
+          "resourceOwnerPassword": "pwd"
+        }
+      }
+    }
+  }
+}

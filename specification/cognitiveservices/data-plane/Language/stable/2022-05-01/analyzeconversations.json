@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -57,6 +71,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze conversations operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -607,16 +622,14 @@
           "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "extraInformation": {
           "type": "array",
           "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -673,16 +686,14 @@
           "description": "The intent classification results.",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "The entity extraction results.",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -803,7 +814,7 @@
     },
     "ConversationalTask": {
       "type": "object",
-      "description": "The input for a custom conversation task.",
+      "description": "The input for a conversation language understanding task.",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/ConversationAnalysisOptions",
@@ -811,7 +822,7 @@
         },
         "parameters": {
           "$ref": "#/definitions/ConversationTaskParameters",
-          "description": "Input parameters necessary for a Conversation task."
+          "description": "Input parameters necessary for a Conversation language understanding task."
         }
       },
       "required": [
@@ -986,8 +997,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -1504,8 +1514,7 @@
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1767,8 +1776,7 @@
           "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataRecord"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "logicalOperation": {
           "type": "string",
@@ -1784,11 +1792,13 @@
             "values": [
               {
                 "name": "AND",
-                "value": "AND"
+                "value": "AND",
+                "description": "Logical AND"
               },
               {
                 "name": "OR",
-                "value": "OR"
+                "value": "OR",
+                "description": "Logical OR"
               }
             ]
           }
@@ -2010,11 +2020,13 @@
             "values": [
               {
                 "name": "AND",
-                "value": "AND"
+                "value": "AND",
+                "description": "Logical AND"
               },
               {
                 "name": "OR",
-                "value": "OR"
+                "value": "OR",
+                "description": "Logical OR"
               }
             ]
           }

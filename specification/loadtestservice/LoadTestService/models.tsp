@@ -1,12 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
@@ -15,30 +14,79 @@ union PFMetrics {
   string,
 
   @doc("Pass fail criteria for response time metric in milliseconds.")
-  "response_time_ms",
+  ResponseTimeInMilliseconds: "response_time_ms",
 
-  @doc("Pass fail criteria for latency metric in milliseconds.") "latency",
-  @doc("Pass fail criteria for error metric.") "error",
-  @doc("Pass fail criteria for total requests.") "requests",
-  @doc("Pass fail criteria for request per second.") "requests_per_sec",
+  @doc("Pass fail criteria for latency metric in milliseconds.")
+  Latency: "latency",
+
+  @doc("Pass fail criteria for error metric.")
+  Error: "error",
+
+  @doc("Pass fail criteria for total requests.")
+  Requests: "requests",
+
+  @doc("Pass fail criteria for request per second.")
+  RequestsPerSecond: "requests_per_sec",
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
-union PFAgFunc {
+union PassFailAggregationFunction {
   string,
-  @doc("Criteria applies for count value.") "count",
-  @doc("Criteria applies for given percentage value.") "percentage",
-  @doc("Criteria applies for avg value.") "avg",
-  @doc("Criteria applies for 50th percentile value.") "p50",
-  @doc("Criteria applies for 90th percentile value.") "p90",
-  @doc("Criteria applies for 95th percentile value.") "p95",
-  @doc("Criteria applies for 99th percentile value.") "p99",
-  @doc("Criteria applies for minimum value.") "min",
-  @doc("Criteria applies for maximum value.") "max",
+
+  @doc("Criteria applies for count value.")
+  Count: "count",
+
+  @doc("Criteria applies for given percentage value.")
+  Percentage: "percentage",
+
+  @doc("Criteria applies for avg value.")
+  Average: "avg",
+
+  @doc("Criteria applies for 50th percentile value.")
+  Percentile50: "p50",
+
+  @doc("Criteria applies for 75th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile75: "p75",
+
+  @doc("Criteria applies for 90th percentile value.")
+  Percentile90: "p90",
+
+  @doc("Criteria applies for 95th percentile value.")
+  Percentile95: "p95",
+
+  @doc("Criteria applies for 96th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile96: "p96",
+
+  @doc("Criteria applies for 97th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile97: "p97",
+
+  @doc("Criteria applies for 98th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile98: "p98",
+
+  @doc("Criteria applies for 99th percentile value.")
+  Percentile99: "p99",
+
+  @doc("Criteria applies for 99.9th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile999: "p99.9",
+
+  @doc("Criteria applies for 99.99th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  Percentile9999: "p99.99",
+
+  @doc("Criteria applies for minimum value.")
+  Minimum: "min",
+
+  @doc("Criteria applies for maximum value.")
+  Maximum: "max",
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
-union PFAction {
+union PassFailAction {
   string,
 
   @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
@@ -49,7 +97,7 @@ union PFAction {
 }
 
 @doc("Pass/fail criteria result.")
-union PFResult {
+union PassFailResult {
   string,
   @doc("Given pass fail criteria metric has passed.") "passed",
   @doc("Given pass fail criteria metric couldn't determine.") "undetermined",
@@ -59,46 +107,81 @@ union PFResult {
 @doc("Types of secrets supported.")
 union SecretType {
   string,
-  @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
-  @doc("If the secret value provided as plain text.") "SECRET_VALUE",
+
+  @doc("If the secret is stored in an Azure Key Vault.")
+  KeyVaultSecretUri: "AKV_SECRET_URI",
+
+  @doc("If the secret value provided as plain text.")
+  SecretValue: "SECRET_VALUE",
+}
+
+@doc("Managed identity type.")
+union ManagedIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }
 
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
-  @doc("If the certificate is stored in an Azure Key Vault.") "AKV_CERT_URI",
+
+  @doc("If the certificate is stored in an Azure Key Vault.")
+  KeyVaultCertificateUri: "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
 union FileType {
   string,
-  @doc("If the file is a JMX script.") "JMX_FILE",
-  @doc("If the file is a user properties file.") "USER_PROPERTIES",
+
+  @doc("If the file is a JMX script.")
+  JmxFile: "JMX_FILE",
+
+  @doc("If the file is a user properties file.")
+  UserProperties: "USER_PROPERTIES",
 
   @doc("If the file is not among any of the other supported file types.")
-  "ADDITIONAL_ARTIFACTS",
+  AdditionalArtifacts: "ADDITIONAL_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
-  "ZIPPED_ARTIFACTS",
+  ZippedArtifacts: "ZIPPED_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  "URL_TEST_CONFIG_JSON",
+  UrlTestConfig: "URL_TEST_CONFIG",
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("If the file is a test script.")
+  TestScript: "TEST_SCRIPT",
 }
 
 @doc("File status.")
-union FileStatus {
+union FileValidationStatus {
   string,
-  @doc("File is not validated.") "NOT_VALIDATED",
-  @doc("File is validated.") "VALIDATION_SUCCESS",
-  @doc("File validation is failed.") "VALIDATION_FAILURE",
-  @doc("File validation is in progress.") "VALIDATION_INITIATED",
-  @doc("Validation is not required.") "VALIDATION_NOT_REQUIRED",
+
+  @doc("File is not validated.")
+  NotValidated: "NOT_VALIDATED",
+
+  @doc("File is validated.")
+  ValidationSuccess: "VALIDATION_SUCCESS",
+
+  @doc("File validation is failed.")
+  ValidationFailure: "VALIDATION_FAILURE",
+
+  @doc("File validation is in progress.")
+  ValidationInitiated: "VALIDATION_INITIATED",
+
+  @doc("Validation is not required.")
+  ValidationNotRequired: "VALIDATION_NOT_REQUIRED",
 }
 
 @doc("Test result based on pass/fail criteria.")
-union PFTestResult {
+union PassFailTestResult {
   string,
   @doc("Pass/fail criteria has passed.") "PASSED",
   @doc("Pass/fail criteria is not applicable.") "NOT_APPLICABLE",
@@ -106,36 +189,94 @@ union PFTestResult {
 }
 
 @doc("Test run status.")
-union Status {
+union TestRunStatus {
   string,
-  @doc("Test run request is accepted.") "ACCEPTED",
-  @doc("Test run is not yet started.") "NOTSTARTED",
-  @doc("Test run is provisioning.") "PROVISIONING",
-  @doc("Test run is provisioned.") "PROVISIONED",
-  @doc("Test run is getting configured.") "CONFIGURING",
-  @doc("Test run configuration is done.") "CONFIGURED",
-  @doc("Test run has started executing.") "EXECUTING",
-  @doc("Test run execution is completed.") "EXECUTED",
-  @doc("Test run is getting deprovisioned.") "DEPROVISIONING",
-  @doc("Test run is deprovisioned.") "DEPROVISIONED",
-  @doc("Test run is completed.") "DONE",
-  @doc("Test run is being cancelled.") "CANCELLING",
-  @doc("Test run request is cancelled.") "CANCELLED",
-  @doc("Test run request is failed.") "FAILED",
-  @doc("Test run JMX file is validated.") "VALIDATION_SUCCESS",
-  @doc("Test run JMX file validation is failed.") "VALIDATION_FAILURE",
+
+  @doc("Test run request is accepted.")
+  Accepted: "ACCEPTED",
+
+  @doc("Test run is not yet started.")
+  NotStarted: "NOTSTARTED",
+
+  @doc("Test run is provisioning.")
+  Provisioning: "PROVISIONING",
+
+  @doc("Test run is provisioned.")
+  Provisioned: "PROVISIONED",
+
+  @doc("Test run is getting configured.")
+  Configuring: "CONFIGURING",
+
+  @doc("Test run configuration is done.")
+  Configured: "CONFIGURED",
+
+  @doc("Test run has started executing.")
+  Executing: "EXECUTING",
+
+  @doc("Test run execution is completed.")
+  Executed: "EXECUTED",
+
+  @doc("Test run is getting deprovisioned.")
+  Deprovisioning: "DEPROVISIONING",
+
+  @doc("Test run is deprovisioned.")
+  Deprovisioned: "DEPROVISIONED",
+
+  @doc("Test run is completed.")
+  Done: "DONE",
+
+  @doc("Test run is being cancelled.")
+  Cancelling: "CANCELLING",
+
+  @doc("Test run request is cancelled.")
+  Cancelled: "CANCELLED",
+
+  @doc("Test run request is failed.")
+  Failed: "FAILED",
+
+  @doc("Test run JMX file is validated.")
+  ValidationSuccess: "VALIDATION_SUCCESS",
+
+  @doc("Test run JMX file validation is failed.")
+  ValidationFailure: "VALIDATION_FAILURE",
 }
 
 @doc("Aggregation type.")
-union AggregationType {
+union Aggregation {
   string,
   @doc("Average value.") "Average",
   @doc("Total count.") "Count",
   @doc("Aggregation will be average in this case.") "None",
   @doc("Total sum.") "Total",
+
+  @doc("75th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile75",
+
   @doc("90th percentile.") "Percentile90",
   @doc("95th percentile.") "Percentile95",
+
+  @doc("96th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile96",
+
+  @doc("97th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile97",
+
+  @doc("98th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile98",
+
   @doc("99th percentile.") "Percentile99",
+
+  @doc("99.9th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile999",
+
+  @doc("99.99th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile9999",
 }
 
 @doc("Metric unit.")
@@ -175,8 +316,24 @@ union TimeGrain {
 @doc("Test kind")
 union TestKind {
   string,
-  @doc("URL Test") "URL",
-  @doc("JMX Test") "JMX",
+
+  @doc("URL Test")
+  Url: "URL",
+
+  @doc("JMX Test")
+  Jmx: "JMX",
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Locust Test")
+  Locust: "Locust",
+}
+
+@added(APIVersions.v2024_07_01_preview)
+@doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+union CreatedByType {
+  string,
+  @doc("Entity was created by a user.") "User",
+  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
 }
 
 @doc("Test file info.")
@@ -200,12 +357,12 @@ model Test {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata.")
@@ -222,7 +379,7 @@ SECRET_VALUE.
   baselineTestRunId?: string;
 
   @doc("The input artifacts for the test.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestInputArtifacts;
 
   ...TestIdPathParameter;
@@ -254,6 +411,22 @@ SECRET_VALUE.
   @doc("Resource Id of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityId?: string;
 
+  @doc("Type of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Id of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityId?: string;
+
+  @doc("Type of the managed identity built in load test engines")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityType?: ManagedIdentityType;
+
+  @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityIds?: string[];
+
   ...SystemMetaData;
 }
 
@@ -261,6 +434,10 @@ SECRET_VALUE.
 model PassFailCriteria {
   @doc("Map of id and pass fail metrics { id  : pass fail metrics }.")
   passFailMetrics?: Record<PassFailMetric>;
+
+  @doc("Map of id and pass fail server metrics { id  : pass fail metrics }.")
+  @added(APIVersions.v2024_07_01_preview)
+  passFailServerMetrics?: Record<PassFailServerMetric>;
 }
 
 @doc("Pass fail metric")
@@ -269,12 +446,12 @@ model PassFailMetric {
   clientMetric?: PFMetrics;
 
   @doc("""
-The aggregation function to be applied on the client metric. Allowed functions
-- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
-‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-‘count’ - for requests
-""")
-  aggregate?: PFAgFunc;
+    The aggregation function to be applied on the client metric. Allowed functions
+    - ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,
+    ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+    ‘count’ - for requests
+    """)
+  aggregate?: PassFailAggregationFunction;
 
   @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
   condition?: string;
@@ -283,21 +460,53 @@ The aggregation function to be applied on the client metric. Allowed functions
   requestName?: string;
 
   @doc("""
-The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
-100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
-""")
+    The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+    100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
+    """)
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
-  action?: PFAction = PFAction.continue;
+  action?: PassFailAction = PassFailAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actualValue?: float64;
 
   @doc("Outcome of the test run.")
-  @visibility("read")
-  result?: PFResult;
+  @visibility(Lifecycle.Read)
+  result?: PassFailResult;
+}
+
+@doc("Pass fail server metric")
+model PassFailServerMetric {
+  @doc("The resource id of the resource emitting the metric.")
+  resourceId: armResourceIdentifier;
+
+  @doc("The server metric namespace.")
+  metricNamespace: string;
+
+  @doc("The server metric name.")
+  metricName: string;
+
+  @doc("Aggregation Type")
+  aggregation: string;
+
+  @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
+  condition: string;
+
+  @doc("The value to compare with the server metric.")
+  value: float64;
+
+  @doc("Action taken after the threshold is met. Default is ‘continue’.")
+  action?: PassFailAction = PassFailAction.continue;
+
+  @doc("The actual value of the server metric ")
+  @visibility(Lifecycle.Read)
+  actualValue?: float64;
+
+  @doc("Outcome of the test run.")
+  @visibility(Lifecycle.Read)
+  result?: PassFailResult;
 }
 
 @doc("Secret")
@@ -331,37 +540,57 @@ model AutoStopCriteria {
   errorRate?: float32 = 90;
 
   @doc("Time window during which the error percentage should be evaluated in seconds.")
-  errorRateTimeWindowInSeconds?: int32 = 60;
+  @encode(DurationKnownEncoding.seconds, int32)
+  errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
 }
 
 @doc("Configurations for the load test.")
 model LoadTestConfiguration {
   @doc("""
-The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
-""")
+    The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
+    """)
   engineInstances?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
   @doc("""
-If false, Azure Load Testing copies and processes your input files unmodified
-across all test engine instances. If true, Azure Load Testing splits the CSV
-input data evenly across all engine instances. If you provide multiple CSV
-files, each file will be split evenly.
-""")
+    If false, Azure Load Testing copies and processes your input files unmodified
+    across all test engine instances. If true, Azure Load Testing splits the CSV
+    input data evenly across all engine instances. If you provide multiple CSV
+    files, each file will be split evenly.
+    """)
   splitAllCSVs?: boolean = false;
 
   @doc("""
-If true, optionalLoadTestConfig is required and JMX script for the load test is
-not required to upload.
-""")
+    If true, optionalLoadTestConfig is required and JMX script for the load test is
+    not required to upload.
+    """)
   quickStartTest?: boolean = false;
 
   @doc("Configuration for quick load test")
-  optionalLoadTestConfig?: OptionalLoadTestConfig;
+  optionalLoadTestConfig?: OptionalLoadTestConfiguration;
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Region distribution configuration for the load test.")
+  regionalLoadTestConfig?: RegionalConfiguration[];
+}
+
+@doc("Region distribution configuration for the load test.")
+model RegionalConfiguration {
+  @doc("""
+      The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
+    """)
+  engineInstances: int32;
+
+  @doc("""
+    Azure region name.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
+  region: azureLocation;
 }
 
 @doc("Configuration for quick load test")
-model OptionalLoadTestConfig {
+model OptionalLoadTestConfiguration {
   @doc("Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login")
   endpointUrl?: string;
 
@@ -380,21 +609,22 @@ model OptionalLoadTestConfig {
   rampUpTime?: int32;
 
   @doc("Test run duration in seconds.")
-  duration?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  duration?: duration;
 }
 
 @doc("The input artifacts for the test.")
 model TestInputArtifacts {
-  @doc("File info")
+  @doc("The load test YAML file that contains the the test configuration")
   configFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The test script file for the test run")
   testScriptFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The user properties file")
   userPropFileInfo?: TestFileInfo;
 
-  @doc("File info")
+  @doc("The zip file with all input artifacts")
   inputArtifactsZipFileInfo?: TestFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
@@ -402,64 +632,64 @@ model TestInputArtifacts {
   urlTestConfigFileInfo?: TestFileInfo;
 
   @doc("Additional supported files for the test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: TestFileInfo[];
 }
 
 @doc("File info")
 model FileInfo {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "model is output only"
   @doc("Name of the file.")
   @key
-  @visibility
   fileName: string;
 
   @doc("File URL.")
   //update description
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   url?: url;
 
   @doc("File type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileType?: FileType;
 
   @doc("Expiry time of the file (RFC 3339 literal format)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expireDateTime?: utcDateTime;
 
   @doc("Validation status of the file")
-  @visibility("read")
-  validationStatus?: FileStatus;
+  @visibility(Lifecycle.Read)
+  validationStatus?: FileValidationStatus;
 
   @doc("Validation failure error details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationFailureDetails?: string;
 }
 
 @doc("Test app components")
 model TestAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   ...SystemMetaData;
 }
 
 @doc("""
-An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
-""")
+  An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+  """)
 model AppComponent {
   @doc("""
-fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
-""")
-  @visibility("read")
-  resourceId: string;
+    fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+    """)
+  @visibility(Lifecycle.Read)
+  resourceId: armResourceIdentifier;
 
   @doc("Azure resource name, required while creating the app component.")
   resourceName: string;
@@ -471,11 +701,11 @@ fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/provid
   displayName?: string;
 
   @doc("Resource group name of the Azure resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   @doc("Subscription Id of the Azure resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   @doc("Kind of Azure resource type")
@@ -483,33 +713,33 @@ fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/provid
 }
 
 @doc("Test server metrics configuration")
-model TestServerMetricConfig {
+model TestServerMetricsConfiguration {
   @doc("Test identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics: Record<ResourceMetric>;
 
   ...SystemMetaData;
 }
 
 @doc("""
-Associated metric definition for particular metrics of the azure resource (
-Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-""")
+  Associated metric definition for particular metrics of the azure resource (
+  Refer :
+  https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+  """)
 model ResourceMetric {
   @doc("Unique name for metric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Azure resource id.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Metric name space.")
   metricNamespace: string;
@@ -543,12 +773,12 @@ model TestRun {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata")
@@ -558,26 +788,40 @@ SECRET_VALUE.
   environmentVariables?: Record<string>;
 
   @doc("Error details if there is any failure in load test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: ErrorDetails[];
 
-  @doc("Test run statistics.")
-  @visibility("read")
+  @doc("""
+    Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
+    The sampler name is the same as the name mentioned in the test script.
+    Sampler name "Total" represents the aggregated statistics of all the samplers.
+    """)
+  @visibility(Lifecycle.Read)
   testRunStatistics?: Record<TestRunStatistics>;
 
+  @doc("""
+    Regional statistics. Key is the Azure region name and value is the test run statistics.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2024_03_01_preview)
+  regionalStatistics?: Record<TestRunStatistics>;
+
   @doc("The load test configuration.")
+  @visibility(Lifecycle.Read)
   loadTestConfiguration?: LoadTestConfiguration;
 
   @doc("Collection of test run artifacts")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testArtifacts?: TestRunArtifacts;
 
   @doc("Test result for pass/Fail criteria used during the test run.")
-  @visibility("read")
-  testResult?: PFTestResult;
+  @visibility(Lifecycle.Read)
+  testResult?: PassFailTestResult;
 
   @doc("Number of virtual users, for which test has been run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   virtualUsers?: int32;
 
   @maxLength(50)
@@ -595,43 +839,60 @@ SECRET_VALUE.
   description?: string;
 
   @doc("The test run status.")
-  @visibility("read")
-  status?: Status;
+  @visibility(Lifecycle.Read)
+  status?: TestRunStatus;
 
   @doc("The test run start DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startDateTime?: utcDateTime;
 
   @doc("The test run end DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endDateTime?: utcDateTime;
 
   @doc("Test run initiated time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   executedDateTime?: utcDateTime;
 
   @doc("Portal url.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   portalUrl?: string;
 
   @doc("Test run duration in milliseconds.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   duration?: int64;
 
+  @doc("Virtual user hours consumed by the test run.")
+  @visibility(Lifecycle.Read)
+  @added(APIVersions.v2024_07_01_preview)
+  virtualUserHours?: float64;
+
   @doc("Subnet ID on which the load test instances should run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetId?: string;
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("Type of test.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kind?: TestKind;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Request data collection level for test run")
+  requestDataLevel?: RequestDataLevel;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
+  debugLogsEnabled?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publicIPDisabled?: boolean;
+
+  @added(APIVersions.v2024_07_01_preview)
+  @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+  createdByType?: CreatedByType;
 
   ...SystemMetaData;
 }
@@ -639,75 +900,105 @@ SECRET_VALUE.
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
   @doc("Error details in case test run was not successfully run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
 @doc("Test run statistics.")
 model TestRunStatistics {
   @doc("Transaction name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transaction?: string;
 
   @doc("Sampler count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sampleCount?: float64;
 
   @doc("Error count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorCount?: float64;
 
   @doc("Error percentage.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorPct?: float64;
 
   @doc("Mean response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   meanResTime?: float64;
 
   @doc("Median response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   medianResTime?: float64;
 
   @doc("Max response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxResTime?: float64;
 
   @doc("Minimum response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   minResTime?: float64;
 
   @doc("90 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct1ResTime?: float64;
 
   @doc("95 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct2ResTime?: float64;
 
   @doc("99 percentile response time.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   pct3ResTime?: float64;
 
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("75 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct75ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("96 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct96ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("97 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct97ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("98 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct98ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.9 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct999ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.99 percentile response time.")
+  @visibility(Lifecycle.Read)
+  pct9999ResTime?: float64;
+
   @doc("Throughput.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   throughput?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Received network bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   receivedKBytesPerSec?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "KBytes is expected"
   @doc("Send network bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sentKBytesPerSec?: float64;
 }
 
 @doc("Collection of test run artifacts")
 model TestRunArtifacts {
   @doc("The input artifacts for the test run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputArtifacts?: TestRunInputArtifacts;
 
   @doc("The output artifacts for the test run.")
@@ -716,16 +1007,16 @@ model TestRunArtifacts {
 
 @doc("The input artifacts for the test run.")
 model TestRunInputArtifacts {
-  @doc("File info")
+  @doc("The load test YAML file that contains the the test configuration")
   configFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The test script file for the test run")
   testScriptFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The user properties file")
   userPropFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The zip file for all input artifacts")
   inputArtifactsZipFileInfo?: TestRunFileInfo;
 
   @added(APIVersions.v2023_04_01_preview)
@@ -733,21 +1024,25 @@ model TestRunInputArtifacts {
   urlTestConfigFileInfo?: TestRunFileInfo;
 
   @doc("Additional supported files for the test run")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   additionalFileInfo?: TestRunFileInfo[];
 }
 
 @doc("The output artifacts for the test run.")
 model TestRunOutputArtifacts {
-  @doc("File info")
+  @doc("The test run results file")
   resultFileInfo?: TestRunFileInfo;
 
-  @doc("File info")
+  @doc("The test run report with metrics")
   logsFileInfo?: TestRunFileInfo;
 
   @doc("The container for test run artifacts.")
   @added(APIVersions.v2023_04_01_preview)
   artifactsContainerInfo?: ArtifactsContainerInfo;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("The report file for the test run.")
+  reportFileInfo?: TestRunFileInfo;
 }
 
 @doc("Artifacts container info.")
@@ -784,7 +1079,7 @@ model MetricDefinitionCollection {
 @doc("Metric definition")
 model MetricDefinition {
   @doc("List of dimensions")
-  dimensions?: NameAndDesc[];
+  dimensions?: NameAndDescription[];
 
   @doc("The metric description")
   description?: string;
@@ -796,7 +1091,7 @@ model MetricDefinition {
   `namespace`?: string;
 
   @doc("The primary aggregation type value defining how to use the values for display.")
-  primaryAggregationType?: AggregationType;
+  primaryAggregationType?: Aggregation;
 
   @doc("The collection of what all aggregation types are supported.")
   supportedAggregationTypes?: string[];
@@ -805,14 +1100,14 @@ model MetricDefinition {
   unit?: MetricUnit;
 
   @doc("""
-Metric availability specifies the time grain (aggregation interval or
-frequency).
-""")
+    Metric availability specifies the time grain (aggregation interval or
+    frequency).
+    """)
   metricAvailabilities?: MetricAvailability[];
 }
 
 @doc("The name and description")
-model NameAndDesc {
+model NameAndDescription {
   @doc("The description")
   description?: string;
 
@@ -823,20 +1118,20 @@ model NameAndDesc {
 @doc("Metric availability specifies the time grain (aggregation interval or frequency)")
 model MetricAvailability {
   @doc("""
-The time grain specifies the aggregation interval for the metric. Expressed as
-a duration 'PT1M', 'PT1H', etc.
-""")
+    The time grain specifies the aggregation interval for the metric. Expressed as
+    a duration 'PT1M', 'PT1H', etc.
+    """)
   timeGrain?: TimeGrain;
 }
 
 @doc("Filters to fetch the set of metric.")
 model MetricRequestPayload {
   @doc("""
-Get metrics for specific dimension values. Example: Metric contains dimension
-like SamplerName, Error. To retrieve all the time series data where SamplerName
-is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
-{\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
-""")
+    Get metrics for specific dimension values. Example: Metric contains dimension
+    like SamplerName, Error. To retrieve all the time series data where SamplerName
+    is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
+    {\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
+    """)
   filters?: DimensionFilter[];
 }
 
@@ -850,7 +1145,6 @@ model DimensionFilter {
 }
 
 @doc("The response to a metrics query.")
-@friendlyName("Metrics")
 // using friendlyName to change the name of the model due to issue in using projectedName '@encodedName("application/json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
@@ -882,16 +1176,19 @@ model DimensionValue {
 }
 
 @doc("Metrics dimension values.")
+@pagedResult
 model DimensionValueList {
   @doc("The dimension name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2023_04_01_preview)
   name?: string;
 
   @doc("The dimension value")
+  @items
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable.")
+  @nextLink
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 
@@ -910,40 +1207,39 @@ model MetricDimensionsRequest {
   metricNamespace: string;
 
   @doc("""
-  The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
-  """)
+    The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
+    """)
   @query
-  @clientName("time_interval", "python")
   timespan: string;
 }
 
 @doc("Test run app component")
 model TestRunAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test run identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   ...SystemMetaData;
 }
 
 @doc("Test run server metrics configuration")
-model TestRunServerMetricConfig {
+model TestRunServerMetricsConfiguration {
   @doc("Test run identifier")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics?: Record<ResourceMetric>;
 
   ...SystemMetaData;
@@ -952,11 +1248,11 @@ for metric id).
 @doc("Query parameters for list test run operation")
 model OldTestRunIdQueryParam {
   @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
+    Existing test run identifier that should be rerun, if this is provided, the
+    test will run with the JMX file, configuration and app components from the
+    existing test run. You can override the configuration values for new test run
+    in the request body.
+    """)
   @query
   oldTestRunId?: string;
 }
@@ -964,17 +1260,17 @@ in the request body.
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
-asc. Supported fields - executedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+    asc. Supported fields - executedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - description,
-executedUser. For example, to search for a test run, with description 500 VUs,
-the search parameter can be 500.
-""")
+    Prefix based, case sensitive search on searchable fields - description,
+    executedUser. For example, to search for a test run, with description 500 VUs,
+    the search parameter can be 500.
+    """)
   @query
   search?: string;
 
@@ -997,34 +1293,39 @@ the search parameter can be 500.
   @doc("Number of results in response.")
   @query
   maxpagesize?: int32 = 50;
+
+  @doc("Comma separated list of type of entities that have created the test run.")
+  @query(#{ explode: false })
+  @added(APIVersions.v2024_07_01_preview)
+  createdByTypes?: string[];
 }
 
 @doc("Parameters for list test operation")
 model ListTestQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg:
-lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg:
+    lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - displayName,
-createdBy. For example, to search for a test, with display name is Login Test,
-the search parameter can be Login.
-""")
+    Prefix based, case sensitive search on searchable fields - displayName,
+    createdBy. For example, to search for a test, with display name is Login Test,
+    the search parameter can be Login.
+    """)
   @query
   search?: string;
 
   @doc("""
-Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedEndTime?: utcDateTime;
 
@@ -1036,19 +1337,19 @@ End DateTime(RFC 3339 literal format) of the last updated time range to filter t
 @doc("System metadata.")
 model SystemMetaData {
   @doc("The creation datetime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
 
   @doc("The user that created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
 
   @doc("The last Modified datetime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedDateTime?: utcDateTime;
 
   @doc("The user that last modified.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastModifiedBy?: string;
 }
 
@@ -1058,7 +1359,7 @@ model TestIdPathParameter {
   @maxLength(50)
   @minLength(2)
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9_-]*$")
   testId: string;
 }
@@ -1066,12 +1367,24 @@ model TestIdPathParameter {
 @doc("Test run Id path parameter.")
 model TestRunIdPathParameter {
   @doc("Unique test run identifier for the load test run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @minLength(2)
   @key
   @pattern("^[a-z0-9_-]*$")
   testRunId: string;
+}
+
+@added(APIVersions.v2024_05_01_preview)
+@doc("Request data collection level for test run")
+union RequestDataLevel {
+  string,
+
+  @doc("No request data will be collected")
+  NONE: "NONE",
+
+  @doc("Request data will be collected in case of failed requests")
+  ERRORS: "ERRORS",
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &

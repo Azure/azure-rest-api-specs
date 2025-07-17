@@ -1,0 +1,192 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "zones": [
+      "1"
+    ],
+    "containerGroup": {
+      "location": "eastus2",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity": {}
+        }
+      },
+      "properties": {
+        "containers": [
+          {
+            "name": "demo1",
+            "properties": {
+              "command": [],
+              "environmentVariables": [],
+              "image": "nginx",
+              "ports": [
+                {
+                  "port": 80
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "cpu": 1,
+                  "memoryInGB": 1.5
+                }
+              }
+            }
+          }
+        ],
+        "imageRegistryCredentials": [],
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          "type": "Public"
+        },
+        "osType": "Linux",
+        "encryptionProperties": {
+          "vaultBaseUrl": "https://testkeyvault.vault.azure.net",
+          "keyName": "test-key",
+          "keyVersion": "<key version>",
+          "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "encryptionProperties": {
+            "vaultBaseUrl": "https://testkeyvault.vault.azure.net/",
+            "keyName": "test-key",
+            "keyVersion": "<key version>",
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity"
+          },
+          "provisioningState": "Pending",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 80
+              }
+            ],
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          }
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity": {
+              "principalId": "<principal id>",
+              "clientId": "<client id>"
+            }
+          },
+          "tenantId": "<tenant id>",
+          "type": "UserAssigned"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "encryptionProperties": {
+            "vaultBaseUrl": "https://testkeyvault.vault.azure.net/",
+            "keyName": "test-key",
+            "keyVersion": "key version",
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity"
+          },
+          "provisioningState": "Running",
+          "containers": [
+            {
+              "name": "demo1",
+              "properties": {
+                "image": "nginx",
+                "command": [],
+                "ports": [
+                  {
+                    "port": 80
+                  }
+                ],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1.5,
+                    "cpu": 1.0
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "imageRegistryCredentials": [],
+          "ipAddress": {
+            "ports": [
+              {
+                "protocol": "TCP",
+                "port": 80
+              }
+            ],
+            "type": "Public"
+          },
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Pending"
+          }
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/container-group-identity": {
+              "principalId": "<principal id>",
+              "clientId": "<client id>"
+            }
+          },
+          "tenantId": "<tenant id>",
+          "type": "UserAssigned"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus2"
+      }
+    }
+  }
+}

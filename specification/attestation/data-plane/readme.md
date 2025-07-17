@@ -25,7 +25,7 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2022-08-01
+tag: package-2025-06-01
 ```
 
 ### Tag: package-2018-09-01
@@ -64,6 +64,15 @@ input-file:
 - Microsoft.Attestation/preview/2022-09-01-preview/attestation.json
 ```
 
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-06-01'
+input-file:
+- Microsoft.Attestation/stable/2025-06-01/attestation.json
+```
+
 ---
 # Code Generation
 
@@ -74,7 +83,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 
 ## Python

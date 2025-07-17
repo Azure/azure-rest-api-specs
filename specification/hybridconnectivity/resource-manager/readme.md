@@ -27,9 +27,17 @@ These are the global settings for the hybridconnectivity.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-03
+tag: package-2024-12
 ```
 
+### Tag: package-2024-12
+
+These settings apply only when `--tag=package-2024-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12'
+input-file:
+  - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
+```
 
 ### Tag: package-2023-03
 
@@ -57,6 +65,29 @@ input-file:
   - Microsoft.HybridConnectivity/preview/2022-05-01-preview/hybridconnectivity.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property solutionSettings for Solution Configurations settings previously defined like this
+    from: publicCloud.json
+    where:
+      - $.definitions.SolutionConfigurationPropertiesUpdate.properties.solutionSettings
+      - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionTypeSettings.properties.solutionSettings
+      - $.definitions.SolutionSettings
+
+  - suppress: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties violation is a false positive which you can suppress for now
+    from: publicCloud.json
+    where:
+      - $.definitions.InventoryResourceListResult
+      - $.definitions.PublicCloudConnectorListResult
+      - $.definitions.SolutionConfigurationListResult
+      - $.definitions.SolutionTypeResourceListResult
+```
+
 ---
 
 # Code Generation
@@ -68,11 +99,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -82,17 +110,9 @@ swagger-to-sdk:
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

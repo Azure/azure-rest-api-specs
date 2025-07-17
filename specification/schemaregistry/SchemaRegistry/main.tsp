@@ -18,9 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
-  title: "Azure Schema Registry",
-})
+@service(#{ title: "Azure Schema Registry" })
 
 // Supported operations.
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
@@ -34,7 +32,7 @@ using Azure.Core;
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    fullyQualifiedNamespace: url,
+    fullyQualifiedNamespace: string,
   }
 )
 @versioned(ServiceVersion)
@@ -139,7 +137,7 @@ op getSchemaPropertiesByContent is resourceOperations.ResourceAction<
     ...SchemaContentType;
     ...SchemasContent;
   },
-  SchemaProperties
+  Http.NoContentResponse & SchemaProperties
 >;
 
 //  PUT https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}?api-version={apiVersion}
@@ -172,16 +170,21 @@ alias NoContentResponse<T> = TypeSpec.Http.Response<204> & T;
 
 // TODO: Leaving as closed set of values for now, as we're blocked by https://github.com/microsoft/typespec/issues/2853.
 // Need to update once issue is fixed.
+/** Describes closed list of schema content type values. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
 union SchemaContentTypeValues {
+  /** Avro encoding. */
   avro: "application/json; serialization=Avro",
 
+  /** JSON encoding */
   @added(ServiceVersion.V2022_10)
   json: "application/json; serialization=Json",
 
+  /** Plain text custom encoding. */
   @added(ServiceVersion.V2022_10)
   custom: "text/plain; charset=utf-8",
 
+  /** Protobuf encoding. */
   @added(ServiceVersion.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
 }
@@ -193,7 +196,7 @@ alias SchemaContentType = {
 };
 
 alias SchemasContent = {
-  @body
+  @bodyRoot
   @doc("String representation (UTF-8) of the schema.")
   schemaContent: bytes;
 };
@@ -244,8 +247,8 @@ model SchemaGroups {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 /**
@@ -260,8 +263,8 @@ model SchemaVersions {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 // Resource Models
@@ -270,7 +273,7 @@ model SchemaVersions {
 model SchemaGroup {
   @key("groupName")
   @doc("Name of schema group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupName: string;
 }
 
@@ -280,7 +283,7 @@ model SchemaGroup {
 model SchemasName {
   @key("schemaName")
   @doc("Name of schema.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   schemaName: string;

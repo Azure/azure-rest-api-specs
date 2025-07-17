@@ -28,7 +28,126 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-2024-01
+tag: package-2025-01
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Chaos/stable/2025-01-01/openapi.json
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.Chaos/preview/2024-11-01-preview/openapi.json
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Chaos/preview/2024-03-22-preview/capabilities.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/experiments.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/operationStatuses.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/operations.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
 
 ### Tag: package-2024-01
@@ -342,7 +461,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -359,10 +477,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
@@ -383,7 +497,7 @@ directive:
     where: $.definitions.target
     from: targets.json
     reason: |-
-      we defined the toplevelresourcelistbysubscription here:
+      we defined the the top level resource list here:
 
       https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
   - suppress: EnumInsteadOfBoolean

@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "Standard_d4s_v3",
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-datacenter-smalldisk",
+              "version": "latest"
+            },
+            "nodePlacementConfiguration": {
+              "policy": "Zonal"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false
+            }
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 2,
+            "targetLowPriorityNodes": 0
+          }
+        },
+        "upgradePolicy": {
+          "mode": "automatic",
+          "automaticOSUpgradePolicy": {
+            "disableAutomaticRollback": true,
+            "enableAutomaticOSUpgrade": true,
+            "useRollingUpgradePolicy": true,
+            "osRollingUpgradeDeferral": true
+          },
+          "rollingUpgradePolicy": {
+            "enableCrossZoneUpgrade": true,
+            "maxBatchInstancePercent": 20,
+            "maxUnhealthyInstancePercent": 20,
+            "maxUnhealthyUpgradedInstancePercent": 20,
+            "pauseTimeBetweenBatches": "PT0S",
+            "prioritizeUnhealthyInstances": false,
+            "rollbackFailedInstancesOnPolicyBreach": false
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8DB51E64D3C3B69\""
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8DB51E64D3C3B69\"",
+        "properties": {
+          "lastModified": "2023-05-11T06:16:44.2372184Z",
+          "creationTime": "2023-05-11T06:16:44.2372184Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-05-11T06:16:44.2372184Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-05-11T06:16:44.2372184Z",
+          "vmSize": "STANDARD_D4S_V3",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2019-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": false
+              },
+              "nodePlacementConfiguration": {
+                "policy": "Zonal"
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 2,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 2,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-05-11T06:16:44.2372184Z"
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
+          "upgradePolicy": {
+            "mode": "automatic",
+            "automaticOSUpgradePolicy": {
+              "disableAutomaticRollback": true,
+              "enableAutomaticOSUpgrade": true,
+              "useRollingUpgradePolicy": true,
+              "osRollingUpgradeDeferral": true
+            },
+            "rollingUpgradePolicy": {
+              "enableCrossZoneUpgrade": true,
+              "maxBatchInstancePercent": 20,
+              "maxUnhealthyInstancePercent": 20,
+              "maxUnhealthyUpgradedInstancePercent": 20,
+              "pauseTimeBetweenBatches": "PT0S",
+              "prioritizeUnhealthyInstances": false,
+              "rollbackFailedInstancesOnPolicyBreach": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

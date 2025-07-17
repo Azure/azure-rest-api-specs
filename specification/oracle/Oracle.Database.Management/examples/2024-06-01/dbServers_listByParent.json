@@ -1,0 +1,46 @@
+{
+  "operationId": "DbServers_listByCloudExadataInfrastructure",
+  "title": "DbServers_listByCloudExadataInfrastructure",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "cloudexadatainfrastructurename": "infra1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudExadataInfrastructures/infra1/dbServers/ocid1",
+            "type": "Oracle.Database/cloudVmClusters/dbServers",
+            "properties": {
+              "ocid": "ocid1",
+              "displayName": "dbserver1",
+              "compartmentId": "ocid1....aaaa",
+              "exadataInfrastructureId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudExadataInfrastructures/infra1",
+              "cpuCoreCount": 100,
+              "maxMemoryInGbs": 1000,
+              "dbNodeStorageSizeInGbs": 150,
+              "vmClusterIds": [
+                "ocid1..aaaaa"
+              ],
+              "dbNodeIds": [
+                "ocid1..aaaaa"
+              ],
+              "lifecycleState": "Available",
+              "maxCpuCount": 1000,
+              "autonomousVmClusterIds": [
+                "ocid1..aaaaa"
+              ],
+              "autonomousVirtualMachineIds": [
+                "ocid1..aaaaa"
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

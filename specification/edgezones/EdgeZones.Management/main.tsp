@@ -8,12 +8,9 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.EdgeZones")
-@service({
-  title: "Microsoft.EdgeZones",
-})
+@service(#{ title: "Microsoft.EdgeZones" })
 @versioned(Versions)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.EdgeZones;
@@ -65,47 +62,47 @@ union RegistrationState {
 
 @doc("The properties of an Extended Zone resource.")
 model ExtendedZoneProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Status of the last operation performed by the subscription on the Edge Zone resource")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Indicates the Azure Extended Zone registration’s approval status.")
   registrationState?: RegistrationState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Display name of the Azure Extended Zone.")
   displayName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Regional display name of the Azure Extended Zone.")
   regionalDisplayName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Type of region for the Azure Extended Zone.")
   regionType: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Category of region for the Azure Extended Zone.")
   regionCategory: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Geography of the Azure Extended Zone.")
   geography: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Geography Group of the Azure Extended Zone.")
   geographyGroup: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Longitude of the Azure Extended Zone.")
   longitude: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Latitude of the Azure Extended Zone.")
   latitude: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The Home Location of the Azure Extended Zone.")
   homeLocation: string;
 }
@@ -121,19 +118,6 @@ model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
   name: string;
 }
 
-// We will use this in an interface
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
-@autoRoute
-@armResourceAction(TResource)
-@post
-@doc("Arm Resource Action Taking no request body object and returning result object")
-op ArmResourceActionNoBodySync<
-  TResource extends ArmResource,
-  TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResource> | ErrorResponse;
-
 @doc("ExtendedZone operations")
 @armResourceOperations
 interface ExtendedZones {
@@ -144,8 +128,8 @@ interface ExtendedZones {
   listBySubscription is ArmListBySubscription<ExtendedZone>;
 
   @doc("Registers a subscription for an Extended Zone")
-  register is ArmResourceActionNoBodySync<ExtendedZone>;
+  register is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 
   @doc("Unregisters a subscription for an Extended Zone")
-  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
+  unregister is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 }

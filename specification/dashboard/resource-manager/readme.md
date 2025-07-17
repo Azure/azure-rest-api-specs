@@ -28,9 +28,35 @@ These are the global settings for the Dashboard API.
 title: DashboardManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-09-01
+tag: package-2024-11-01-preview
 ```
 
+### Tag: package-2024-11-01-preview
+
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01-preview'
+input-file:
+  - Microsoft.Dashboard/preview/2024-11-01-preview/grafana.json
+```
+
+### Tag: package-2024-10-01
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - Microsoft.Dashboard/stable/2024-10-01/grafana.json
+```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - Microsoft.Dashboard/preview/2023-10-01-preview/grafana.json
+```
 
 ### Tag: package-2023-09-01
 
@@ -85,11 +111,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-java
   - repo: azure-powershell
 ```

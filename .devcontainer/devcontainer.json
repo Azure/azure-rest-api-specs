@@ -1,12 +1,18 @@
 {
   "name": "TypeSpec Dev Container",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "remoteUser": "root"
-  /*,
-  update below source folder to your local sdk-repos folder
-  "mounts": [
-    "source=/home/rc/repos/tmp/sdk-repos,target=/workspaces/sdk-repos,type=bind,consistency=cached"
-  ]*/
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:dev-20",
+  // Default is 2 cores which is too slow for this codebase
+  "hostRequirements": {"cpus": 4},
+  "postCreateCommand": "npm ci",
+  "customizations": {
+    "vscode": {
+      // Keep in sync with .vscode/extensions.json
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "typespec.typespec-vscode",
+        "docsmsft.docs-authoring-pack"
+      ]
+    }
+  }
 }

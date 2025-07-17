@@ -13,7 +13,7 @@ interface DeviceLocation {
   @doc("Verifies whether a device is within a specified location area, defined as an accuracy (radius) around a point, specified by longitude and latitude.")
   verify is Operations.ResourceAction<
     DeviceLocationEndpoint,
-    DeviceLocationVerificationContent,
+    BodyParameter<DeviceLocationVerificationContent>,
     DeviceLocationVerificationResult
   >;
 }
@@ -25,7 +25,7 @@ interface DeviceLocation {
 model DeviceLocationEndpoint {
   @key
   @doc("Static endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location: "location";
 }
 

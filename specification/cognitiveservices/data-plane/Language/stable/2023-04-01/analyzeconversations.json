@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -57,6 +71,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze conversations operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -107,6 +122,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze conversations operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationJobsInput"
@@ -406,8 +422,7 @@
           "description": "errors",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -451,8 +466,7 @@
           "description": "Set of tasks to execute on the input conversation.",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -522,7 +536,7 @@
       "type": "string",
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
-        "ConversationalSummarizationResults"
+        "conversationalSummarizationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -530,7 +544,7 @@
         "values": [
           {
             "name": "ConversationalSummarizationResults",
-            "value": "ConversationalSummarizationResults",
+            "value": "conversationalSummarizationResults",
             "description": "Conversational Summarization Results"
           }
         ]
@@ -553,7 +567,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalSummarizationResults"
+      "x-ms-discriminator-value": "conversationalSummarizationResults"
     },
     "AnalyzeConversationSummarizationTask": {
       "type": "object",
@@ -1036,16 +1050,14 @@
           "description": "The collection of entity resolution objects.",
           "items": {
             "$ref": "#/definitions/BaseResolution"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "extraInformation": {
           "type": "array",
           "description": "The collection of entity extra information objects.",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1118,16 +1130,14 @@
           "description": "The intent classification results.",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "entities": {
           "type": "array",
           "description": "The entity extraction results.",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1374,7 +1384,7 @@
     },
     "ConversationalTask": {
       "type": "object",
-      "description": "The input for a custom conversation task.",
+      "description": "The input for a conversation language understanding task.",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/ConversationAnalysisOptions",
@@ -1382,7 +1392,7 @@
         },
         "parameters": {
           "$ref": "#/definitions/ConversationTaskParameters",
-          "description": "Input parameters necessary for a Conversation task."
+          "description": "Input parameters necessary for a Conversation language understanding task."
         }
       },
       "required": [
@@ -1428,8 +1438,7 @@
           "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "#/definitions/InputWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/ConversationStatistics",
@@ -1440,8 +1449,7 @@
           "description": "array of summaries",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1610,8 +1618,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -2181,8 +2188,7 @@
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2444,8 +2450,7 @@
           "description": "List of metadata.",
           "items": {
             "$ref": "#/definitions/MetadataRecord"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "logicalOperation": {
           "type": "string",
@@ -2461,11 +2466,13 @@
             "values": [
               {
                 "name": "AND",
-                "value": "AND"
+                "value": "AND",
+                "description": "Logical AND"
               },
               {
                 "name": "OR",
-                "value": "OR"
+                "value": "OR",
+                "description": "Logical OR"
               }
             ]
           }
@@ -2703,11 +2710,13 @@
             "values": [
               {
                 "name": "AND",
-                "value": "AND"
+                "value": "AND",
+                "description": "Logical AND"
               },
               {
                 "name": "OR",
-                "value": "OR"
+                "value": "OR",
+                "description": "Logical OR"
               }
             ]
           }
@@ -2852,7 +2861,7 @@
         },
         "regexPattern": {
           "type": "string",
-          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
         }
       },
       "allOf": [
@@ -3319,8 +3328,7 @@
           "description": "Context list of the summary.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3383,8 +3391,7 @@
           "description": "List of results from tasks (if available).",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationJobResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3737,8 +3744,7 @@
           "description": "List of word-level audio timing information.",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "conversationItemLevelTiming": {
           "$ref": "#/definitions/ConversationItemLevelTiming",

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "TXT",
+    "relativeRecordSetName": "recordTXT",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordtxt",
+        "type": "Microsoft.Network/privateDnsZones/TXT",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/TXT/recordtxt",
+        "properties": {
+          "fqdn": "recordtxt.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key2": "value2"
+          },
+          "ttl": 3600,
+          "txtRecords": [
+            {
+              "value": [
+                "string1",
+                "string2"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "PATCH Private DNS Zone TXT Record Set"
+}

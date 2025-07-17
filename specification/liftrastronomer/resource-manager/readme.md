@@ -27,12 +27,30 @@ These are the global settings for the astronomer service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08-01
+tag: package-2024-08-27
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2024-08-27-preview
+
+These settings apply only when `--tag=package-2024-08-27-preview` is specified on the command line. 
+
+```yaml $(tag) == 'package-2024-08-27-preview'
+input-file:
+  - Astronomer.Astro/preview/2024-08-27-preview/astronomer.json
+```
+
+### Tag: package-2024-08-27
+
+These settings apply only when `--tag=package-2024-08-27` is specified on the command line. 
+
+```yaml $(tag) == 'package-2024-08-27'
+input-file:
+  - Astronomer.Astro/stable/2024-08-27/astronomer.json
 ```
 
 ### Tag: package-2023-08-01-preview
@@ -65,17 +83,12 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Java
 

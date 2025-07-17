@@ -4,9 +4,9 @@
   - [Service folder structure](#service-folder-structure)
   - [Libraries for service groups](#libraries-for-service-groups)
 - [Specification versioning](#specification-versioning)
-    - [Organizing services in folders](#organizing-services-in-folders)
-    - [Utilizing feature branches](#utilizing-feature-branches)
-    - [Publishing specifications](#publishing-specifications)
+  - [Organizing services in folders](#organizing-services-in-folders)
+  - [Utilizing feature branches](#utilizing-feature-branches)
+  - [Publishing specifications](#publishing-specifications)
 
 # Guidelines for TypeSpec project repositories
 
@@ -18,7 +18,7 @@ This document provides guidelines for managing TypeSpec projects for Azure. It o
 
 The structure of TypeSpec project repositories starts with the [specification](https://aka.ms/azsdk/spec-dirs) folder, serving as the root for all service specifications. Each child folder, denoted as `<azureTeam>`, corresponds to a service specification for a specific Azure team. In more complex scenarios, such as larger teams, the `<azureTeam>` folder can host multiple services, forming what is known as a service group.
 
-The `<azureTeam>` folder can include multiple `<typeSpecFolder>`s, each containing the TypeSpec specification for a given service or service group.
+The `<azureTeam>` folder can include multiple `<typeSpecSrc>` folders, each containing the TypeSpec specification for a given service or service group.
 
 A given TypeSpec project folder can represent various scenarios:
 
@@ -79,9 +79,13 @@ To differentiate between folders defining a service, an SDK, or both, refer to t
 
 Services should **not** have a `package.json` directly in the TypeSpec project directory. Instead, they should use the `package.json` in the root directory of the repo for installing any required dependencies. This root-level `package.json` should only depend on the `@azure-tools/typespec-autorest` and `@azure-tools/typespec-apiview` emitters.
 
-SDK language-specific emitters won't have direct dependencies in the spec repo. Instead, they will come from the language SDK repo itself for generation. For more information, see the example [emitter-package.json](https://github.com/Azure/azure-sdk-for-net/blob/main/eng/emitter-package.json) and [TypeSpec-Project-Scripts](https://github.com/Azure/azure-sdk-tools/blob/main/doc/common/TypeSpec-Project-Scripts.md).
+SDK language-specific emitters won't have direct dependencies in the spec repo. Instead, they will come from the language SDK repo itself for generation. For more information, see the example [emitter-package.json](https://github.com/Azure/azure-sdk-for-net/blob/main/eng/emitter-package.json).
 
-Services aiming to generate an SDK need to provide emitter configuration for all the SDK emitters in the `tspconfig.yaml` file. See this [example](..\specification\contosowidgetmanager\Contoso.WidgetManager\tspconfig.yaml).
+Services aiming to generate an SDK need to provide emitter configuration for all the SDK emitters in
+ the `tspconfig.yaml` file. See the following samples for more details:
+
+- [management plane sample](https://aka.ms/azsdk/tspconfig-sample-mpg)
+- [data plane sample](https://aka.ms/azsdk/tspconfig-sample-dpg)
 
 ## Libraries for service groups
 

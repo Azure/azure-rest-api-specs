@@ -6,22 +6,28 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerStorage;
 
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Pool>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Pool,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
-  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  update is ArmCustomPatchAsync<
+    Pool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
+  >;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }
@@ -41,14 +47,14 @@ model Pool is TrackedResource<PoolProperties> {
 @doc("Pool Properties")
 model PoolProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The operational status of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ResourceOperationalStatus;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxItems(3)
   @doc("List of availability zones that resources can be created in.")
   zones?: Zone[];
@@ -60,7 +66,7 @@ model PoolProperties {
   poolType: PoolType;
 
   @doc("ReclaimPolicy defines what happens to the backend storage when StoragePool is deleted")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   reclaimPolicy?: ReclaimPolicy;
 
   @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For ElasticSAN there can be many.")
@@ -129,16 +135,16 @@ model Disk {
 
 @doc("Properties shared between azureDisk and elasticSan")
 model ProvisionedPoolProperties<SkuType> {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Managed resource group for the pool.")
   resourceGroup?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Sku name")
   skuName?: SkuType;
 
   @doc("Encryption specifies the encryption configuration for the Azure Disk pool")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   encryption?: Encryption;
 }
 
@@ -188,7 +194,8 @@ model Encryption {
   @doc("The URI of the key vault.")
   keyVaultUri: string;
 
-  ...ManagedServiceIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("Elastic San Pool Properties")

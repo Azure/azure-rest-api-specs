@@ -117,11 +117,11 @@ model StorageClassProperties {
   mountOptions?: string[];
 
   @doc("Provisioner name")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   provisioner?: string;
 
   @doc("Binding mode of volumes: Immediate, WaitForFirstConsumer")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   volumeBindingMode?: VolumeBindingMode;
 
   @doc("The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]")
@@ -144,11 +144,11 @@ model StorageClassProperties {
 
   @doc("Properties of the StorageClass")
   // prevent generation of buggy StorageClassPropertiesUpdate model
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   typeProperties: StorageClassTypeProperties;
 
   @doc("Resource provision state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -282,11 +282,16 @@ model StorageClassResource is ExtensionResource<StorageClassProperties> {
 @armResourceOperations(StorageClassResource)
 interface StorageClass {
   get is ArmResourceRead<StorageClassResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StorageClassResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    StorageClassResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchAsync<
     StorageClassResource,
     StorageClassResourceUpdate
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StorageClassResource>;
-  listByParent is ArmResourceListByParent<StorageClassResource>;
+  list is ArmResourceListByParent<StorageClassResource>;
 }

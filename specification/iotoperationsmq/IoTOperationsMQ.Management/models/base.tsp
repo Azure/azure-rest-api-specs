@@ -8,7 +8,7 @@ namespace Microsoft.IoTOperationsMQ;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Extended location is a valid property"
 alias ExtendedLocation = {
   @doc("Extended Location")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocationProperty;
 };
 
@@ -118,10 +118,10 @@ model CertManagerIssuerRef {
 @doc("SANs for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
-  dns: string[] = [];
+  dns: string[] = #[];
 
   @doc("IP address SANs.")
-  ip: string[] = [];
+  ip: string[] = #[];
 }
 
 @doc("Mqtt Protocol types")

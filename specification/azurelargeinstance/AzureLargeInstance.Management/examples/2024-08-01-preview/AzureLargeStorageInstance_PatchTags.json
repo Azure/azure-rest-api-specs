@@ -1,0 +1,51 @@
+{
+  "operationId": "AzureLargeStorageInstance_Update",
+  "title": "AzureLargeStorageInstance_Update_Tag",
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "f0f4887f-d13c-4943-a8ba-d7da28d2a3fd",
+    "resourceGroupName": "myResourceGroup",
+    "azureLargeStorageInstanceName": "myALSInstance",
+    "tagsParameter": {
+      "tags": {
+        "testkey": "testvalue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.AzureLargeInstance/AzureLargeStorageInstances/myAzureLargeStorageInstance",
+        "location": "westus2",
+        "name": "myAzureLargeStorageInstance",
+        "tags": {
+          "testkey": "testvalue"
+        },
+        "type": "Microsoft.AzureLargeInstance/AzureLargeStorageInstances",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z"
+        },
+        "properties": {
+          "azureLargeStorageInstanceUniqueIdentifier": "23415635-4d7e-41dc-9598-8194f22c24e9",
+          "storageProperties": {
+            "provisioningState": "Succeeded",
+            "offeringType": "EPIC",
+            "storageType": "FC",
+            "generation": "Gen4",
+            "hardwareType": "NetApp",
+            "workloadType": "ODB",
+            "storageBillingProperties": {
+              "billingMode": "PAYG",
+              "sku": ""
+            }
+          }
+        }
+      }
+    }
+  }
+}

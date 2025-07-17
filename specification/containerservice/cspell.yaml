@@ -1,0 +1,70 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - ahub
+  - azpodpolicy
+  - cuda
+  - dcos
+  - ebpf
+  - gmsa
+  - iloveyou
+  - imds
+  - intvl
+  - ipvs
+  - istio
+  - karpenter
+  - kata
+  - keda
+  - krustlet
+  - kubelet
+  - kubenet
+  - kubenet's
+  - mshv
+  - numa
+  - ochestrator
+  - oidc
+  - ossku
+  - pids
+  - reimaged
+  - reimaging
+  - rmem
+  - schedulable
+  - snat
+  - sysctls
+  - tcpkeepalive
+  - vhds
+  - wmem
+overrides:
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-03-30/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-09-30/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerInstance/stable/2021-10-01/containerInstance.json
+    words:
+      - noreuse
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/**/*json
+    words:
+      - acnstls
+      - aksadvancednetworking
+      - kubeletidentity
+      - pdbs
+      - trustedlaunch
+      - undrainable
+      - vtpm
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/**/*.json
+    words:
+      - containerd
+

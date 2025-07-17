@@ -1,0 +1,63 @@
+title: Creates a completion based on Azure Search vector data, previous assistant message and user-assigned managed identity.
+parameters:
+  endpoint: "{endpoint}"
+  api-version: 2024-08-01-preview
+  deployment-id: <deployment-id>
+  body:
+    messages:
+      - role: user
+        content: can you tell me how to care for a cat?
+      - role: assistant
+        content: Content of the completion [doc1].
+        context:
+          intent: cat care
+      - role: user
+        content: how about dog?
+    data_sources:
+      - type: azure_search
+        parameters:
+          endpoint: https://your-search-endpoint.search.windows.net/
+          authentication:
+            type: user_assigned_managed_identity
+            managed_identity_resource_id: /subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resource-name}
+          index_name: "{index name}"
+          query_type: vector
+          embedding_dependency:
+            type: deployment_name
+            deployment_name: "{embedding deployment name}"
+          in_scope: true
+          top_n_documents: 5
+          strictness: 3
+          role_information: You are an AI assistant that helps people find information.
+          fields_mapping:
+            content_fields_separator: \n
+            content_fields:
+              - content
+            filepath_field: filepath
+            title_field: title
+            url_field: url
+            vector_fields:
+              - contentvector
+responses:
+  "200":
+    body:
+      id: chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn
+      created: 1686676106
+      choices:
+        - index: 0
+          finish_reason: stop
+          message:
+            role: assistant
+            content: Content of the completion [doc1].
+            context:
+              citations:
+                - content: Citation content 2.
+                  title: Citation Title 2
+                  filepath: contoso2.txt
+                  url: https://contoso.blob.windows.net/container/contoso2.txt
+                  chunk_id: "0"
+              intent: dog care
+      usage:
+        completion_tokens: 557
+        prompt_tokens: 33
+        total_tokens: 590

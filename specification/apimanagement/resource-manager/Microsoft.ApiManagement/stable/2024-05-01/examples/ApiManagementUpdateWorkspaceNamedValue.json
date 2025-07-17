@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1",
+    "namedValueId": "testprop2",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "displayName": "prop3name",
+        "value": "propValue",
+        "tags": [
+          "foo",
+          "bar2"
+        ],
+        "secret": false
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop2?api-version=2024-05-01&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-05-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop2",
+        "type": "Microsoft.ApiManagement/service/namedValues",
+        "properties": {
+          "displayName": "prop3name",
+          "value": "propValue",
+          "tags": [
+            "foo",
+            "bar2"
+          ],
+          "secret": false
+        }
+      }
+    }
+  }
+}

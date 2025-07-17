@@ -1,0 +1,1199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Resource Provider",
+    "description": "Resource Provider",
+    "version": "2024-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.",
+        "operationId": "Accounts_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Gen2 Account": {
+            "$ref": "./examples/CreateAccountGen2.json"
+          },
+          "Create Account with Managed Identities": {
+            "$ref": "./examples/CreateAccountManagedIdentity.json"
+          },
+          "Create Account with Encryption": {
+            "$ref": "./examples/CreateAccountEncryption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccount",
+            "in": "body",
+            "description": "The new or updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "201": {
+            "description": "The Account was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An error occurred during creating or updating the Account.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.",
+        "operationId": "Accounts_Update",
+        "x-ms-examples": {
+          "Update Account Tags": {
+            "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update to Gen2 Account": {
+            "$ref": "./examples/UpdateAccountGen2.json"
+          },
+          "Update Account Managed Identities": {
+            "$ref": "./examples/UpdateAccountManagedIdentity.json"
+          },
+          "Update Account Encryption": {
+            "$ref": "./examples/UpdateAccountEncryption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccountUpdateParameters",
+            "in": "body",
+            "description": "The updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapsAccountUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An error occurred during creating or updating the Account.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete a Maps Account.",
+        "operationId": "Accounts_Delete",
+        "x-ms-examples": {
+          "DeleteAccount": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was deleted successfully."
+          },
+          "204": {
+            "description": "The specified Account was not found. Nothing was deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get a Maps Account.",
+        "operationId": "Accounts_Get",
+        "x-ms-examples": {
+          "GetAccount": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get all Maps Accounts in a Resource Group",
+        "operationId": "Accounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "List Accounts By Resource Group": {
+            "$ref": "./examples/ListAccountsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccounts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get all Maps Accounts in a Subscription",
+        "operationId": "Accounts_ListBySubscription",
+        "x-ms-examples": {
+          "List Accounts By Subscription": {
+            "$ref": "./examples/ListAccountsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccounts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listSas": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed.",
+        "operationId": "Accounts_ListSas",
+        "x-ms-examples": {
+          "List Account Sas": {
+            "$ref": "./examples/AccountListSAS.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccountSasParameters",
+            "in": "body",
+            "description": "The updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountSasParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountSasToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get the keys to use with the Maps APIs. A key is used to authenticate and authorize access to the Maps REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
+        "operationId": "Accounts_ListKeys",
+        "x-ms-examples": {
+          "List Keys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Regenerate either the primary or secondary key for use with the Maps APIs. The old key will stop working immediately.",
+        "operationId": "Accounts_RegenerateKeys",
+        "x-ms-examples": {
+          "Regenerate Key": {
+            "$ref": "./examples/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "keySpecification",
+            "in": "body",
+            "required": true,
+            "description": "Which key to regenerate:  primary or secondary.",
+            "schema": {
+              "$ref": "#/definitions/MapsKeySpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Maps/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "List operations available for the Maps Resource Provider",
+        "operationId": "Maps_ListOperations",
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators": {
+      "get": {
+        "tags": [
+          "Creators"
+        ],
+        "description": "Get all Creator instances for an Azure Maps Account",
+        "operationId": "Creators_ListByAccount",
+        "x-ms-examples": {
+          "List Creator Resources By Account": {
+            "$ref": "./examples/ListMapsCreatorsByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/CreatorList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}": {
+      "put": {
+        "tags": [
+          "Creators"
+        ],
+        "description": "Create or update a Maps Creator resource. Creator resource will manage Azure resources required to populate a custom set of mapping data. It requires an account to exist before it can be created.",
+        "operationId": "Creators_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Creator Resource": {
+            "$ref": "./examples/CreateMapsCreator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreatorNameParameter"
+          },
+          {
+            "name": "CreatorResource",
+            "in": "body",
+            "description": "The new or updated parameters for the Creator resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Creator is updated with the provided properties.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
+          "201": {
+            "description": "The Creator will be created asynchronously. The Creator will be ready to use once the provisioningState property changed to 'Succeeded' through creators Get API.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Creators"
+        ],
+        "description": "Updates the Maps Creator resource. Only a subset of the parameters may be updated after creation, such as Tags.",
+        "operationId": "Creators_Update",
+        "x-ms-examples": {
+          "Update Creator Resource": {
+            "$ref": "./examples/UpdateMapsCreator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreatorNameParameter"
+          },
+          {
+            "name": "CreatorUpdateParameters",
+            "in": "body",
+            "description": "The update parameters for Maps Creator.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatorUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Maps Creator was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Creators"
+        ],
+        "description": "Delete a Maps Creator resource.",
+        "operationId": "Creators_Delete",
+        "x-ms-examples": {
+          "Delete Creator Resource": {
+            "$ref": "./examples/DeleteMapsCreator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreatorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Maps Creator will be deleted."
+          },
+          "204": {
+            "description": "The specified Maps Creator resource was not found. Nothing was deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Creators"
+        ],
+        "description": "Get a Maps Creator resource.",
+        "operationId": "Creators_Get",
+        "x-ms-examples": {
+          "Get Creator Resource": {
+            "$ref": "./examples/GetMapsCreator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CreatorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/Creator"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the Maps Account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "pattern": "^[^%&:\\\\/#?]+$"
+    },
+    "CreatorNameParameter": {
+      "name": "creatorName",
+      "in": "path",
+      "description": "The name of the Maps Creator instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "pattern": "^[^%&:\\\\/#?]+$"
+    }
+  },
+  "definitions": {
+    "Creator": {
+      "description": "An Azure resource which represents Maps Creator product and provides ability to manage private location data.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The Creator resource properties.",
+          "$ref": "#/definitions/CreatorProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "MapsAccount": {
+      "description": "An Azure resource which represents access to a suite of Maps REST APIs.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "description": "The SKU of this account.",
+          "$ref": "#/definitions/Sku"
+        },
+        "kind": {
+          "description": "Get or Set Kind property.",
+          "$ref": "#/definitions/Kind"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "The map account properties.",
+          "$ref": "#/definitions/MapsAccountProperties"
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "MapsAccountUpdateParameters": {
+      "description": "Parameters used to update an existing Maps Account.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "kind": {
+          "description": "Get or Set Kind property.",
+          "$ref": "#/definitions/Kind"
+        },
+        "sku": {
+          "description": "The SKU of this account.",
+          "$ref": "#/definitions/Sku"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "The map account properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MapsAccountProperties"
+        }
+      }
+    },
+    "CreatorUpdateParameters": {
+      "description": "Parameters used to update an existing Creator resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "properties": {
+          "description": "Creator resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreatorProperties"
+        }
+      }
+    },
+    "MapsAccounts": {
+      "description": "A list of Maps Accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "a Maps Account.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MapsAccount"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CreatorList": {
+      "description": "A list of Creator resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "a Creator account.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Creator"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "Kind": {
+      "description": "The Kind of the Maps Account.",
+      "type": "string",
+      "enum": [
+        "Gen2"
+      ],
+      "x-ms-enum": {
+        "name": "kind",
+        "modelAsString": true
+      }
+    },
+    "Sku": {
+      "description": "The SKU of the Maps Account.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, in standard format (such as G2).",
+          "type": "string",
+          "enum": [
+            "G2"
+          ],
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the sku tier. This is based on the SKU name."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "MapsKeySpecification": {
+      "description": "Whether the operation refers to the primary or secondary key.",
+      "type": "object",
+      "required": [
+        "keyType"
+      ],
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          },
+          "description": "Whether the operation refers to the primary or secondary key."
+        }
+      }
+    },
+    "MapsAccountKeys": {
+      "description": "The set of keys which can be used to access the Maps REST APIs. Two keys are provided for key rotation without interruption.",
+      "type": "object",
+      "properties": {
+        "primaryKeyLastUpdated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The last updated date and time of the primary key."
+        },
+        "primaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The primary key for accessing the Maps REST APIs."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The secondary key for accessing the Maps REST APIs."
+        },
+        "secondaryKeyLastUpdated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The last updated date and time of the secondary key."
+        }
+      }
+    },
+    "AccountSasParameters": {
+      "description": "Parameters used to create an account Shared Access Signature (SAS) token. The REST API access control is provided by Azure Maps Role Based Access (RBAC) identity and access.",
+      "type": "object",
+      "properties": {
+        "signingKey": {
+          "type": "string",
+          "description": "The Maps account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Maps account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
+          "enum": [
+            "primaryKey",
+            "secondaryKey",
+            "managedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "SigningKey",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "The principal Id also known as the object Id of a User Assigned Managed Identity currently assigned to the Maps Account. To assign a Managed Identity of the account, use operation Create or Update an assign a User Assigned Identity resource Id.",
+          "type": "string"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional, allows control of which region locations are permitted access to Azure Maps REST APIs with the SAS token. Example: \"eastus\", \"westus2\". Omitting this parameter will allow all region locations to be accessible."
+        },
+        "maxRatePerSecond": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500,
+          "default": 500,
+          "format": "int32",
+          "exclusiveMinimum": true,
+          "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement."
+        },
+        "start": {
+          "description": "The date time offset of when the token validity begins. For example \"2017-05-24T10:42:03.1567373Z\". Maximum duration allowed is 24 hours between `start` and `expiry`.",
+          "type": "string"
+        },
+        "expiry": {
+          "description": "The date time offset of when the token validity expires. For example \"2017-05-24T10:42:03.1567373Z\". Maximum duration allowed is 24 hours between `start` and `expiry`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "signingKey",
+        "principalId",
+        "maxRatePerSecond",
+        "start",
+        "expiry"
+      ]
+    },
+    "MapsAccountSasToken": {
+      "description": "A new Sas token which can be used to access the Maps REST APIs and is controlled by the specified Managed identity permissions on Azure (IAM) Role Based Access Control.",
+      "type": "object",
+      "properties": {
+        "accountSasToken": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The shared access signature access token."
+        }
+      }
+    },
+    "MapsAccountProperties": {
+      "description": "Additional Maps account properties",
+      "type": "object",
+      "properties": {
+        "uniqueId": {
+          "description": "A unique identifier for the Maps Account",
+          "type": "string",
+          "readOnly": true
+        },
+        "disableLocalAuth": {
+          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage.",
+          "type": "boolean",
+          "default": false
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
+          "readOnly": true
+        },
+        "linkedResources": {
+          "$ref": "#/definitions/LinkedResources"
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsRules",
+          "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
+        },
+        "encryption": {
+          "$ref": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption"
+        },
+        "locations": {
+          "$ref": "#/definitions/Locations",
+          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope)."
+        }
+      }
+    },
+    "LinkedResources": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/LinkedResource"
+      },
+      "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s)."
+    },
+    "LinkedResource": {
+      "type": "object",
+      "properties": {
+        "uniqueName": {
+          "type": "string",
+          "description": "A provided name which uniquely identifies the linked resource."
+        },
+        "id": {
+          "type": "string",
+          "description": "ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/accounts/{storageName}'."
+        }
+      },
+      "required": [
+        "uniqueName",
+        "id"
+      ],
+      "description": "Linked resource is reference to a resource deployed in an Azure subscription, add the linked resource `uniqueName` value as an optional parameter for operations on Azure Maps Geospatial REST APIs."
+    },
+    "CorsRules": {
+      "type": "object",
+      "properties": {
+        "corsRules": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "description": "Specifies a CORS rule for the Maps Account.",
+            "$ref": "#/definitions/CorsRule"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of CORS rules. You can include up to five CorsRule elements in the request. "
+        }
+      },
+      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
+    },
+    "CorsRule": {
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or \"*\" to allow all domains"
+        }
+      },
+      "required": [
+        "allowedOrigins"
+      ],
+      "description": "Specifies a CORS rule for the Map Account."
+    },
+    "Locations": {
+      "description": "The list of data processing locations for the Maps Account.",
+      "type": "array",
+      "items": {
+        "description": "Data processing location.",
+        "type": "object",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The location name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
+      },
+      "x-ms-identifiers": [
+        "locationName"
+      ]
+    },
+    "CreatorProperties": {
+      "description": "Creator resource properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled",
+          "type": "string",
+          "readOnly": true
+        },
+        "storageUnits": {
+          "description": "The storage units to be allocated. Integer values from 1 to 100, inclusive.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "totalStorageUnitSizeInBytes": {
+          "description": "The total allocated storage unit size in bytes for the creator resource.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "consumedStorageUnitSizeInBytes": {
+          "description": "The consumed storage unit size in bytes for the creator resource.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "storageUnits"
+      ]
+    }
+  }
+}

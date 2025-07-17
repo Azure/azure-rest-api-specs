@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -10,8 +11,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
-using Autorest;
-using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
 
 namespace Microsoft.LoadTestService;
@@ -25,7 +24,68 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @segment("loadTests")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
+}
+
+@extensionResource
+@doc("LoadTest mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Mapping name")
+  @key("loadTestMappingName")
+  @path
+  @segment("loadTestMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
+@doc("Azure LoadTest mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource test-id.")
+  @maxLength(256)
+  testId?: string;
+}
+
+@extensionResource
+@doc("LoadTest profile mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingResource
+  is ProxyResource<LoadTestProfileMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Profile Mapping name")
+  @key("loadTestProfileMappingName")
+  @path
+  @segment("loadTestProfileMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
+@doc("Azure LoadTest profile mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId?: string;
+
+  @doc("Mapped Azure Load Test resource test-profile-id.")
+  @maxLength(60)
+  testProfileId?: string;
 }
 
 @doc("Resources provisioning states.")
@@ -52,7 +112,7 @@ union type {
 
 @doc("Details about the connection between the Batch service and the endpoint.")
 model EndpointDetail {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The port an endpoint is connected to.")
   port?: int32;
 }
@@ -60,29 +120,29 @@ model EndpointDetail {
 @doc("A domain name and connection details used to access a dependency.")
 model EndpointDependency {
   @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   domainName: string;
 
   @doc("Human-readable supplemental information about the dependency and when it is applicable.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("The list of connection details for this endpoint.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["port"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["port"])
   endpointDetails?: EndpointDetail[];
 }
 
 @doc("A collection of related endpoints from the same service for which the Batch service requires outbound access.")
 model OutboundEnvironmentEndpoint {
   @doc("The type of service that Azure Load Testing connects to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   category?: string;
 
   @doc("The endpoints for this service to which the Batch service makes outbound calls.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["domainName"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -92,7 +152,7 @@ model EncryptionPropertiesIdentity {
   type?: type;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "We need resourceId to be nullable."
-  @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
+  @doc("User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/a0a0a0a0-bbbb-cccd-dddd-e1e1e1e1e1e1/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.")
   resourceId?: string | null;
 }
 
@@ -116,7 +176,7 @@ model QuotaResourceProperties {
   usage?: int32;
 
   @doc("Resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceState;
 }
 
@@ -128,8 +188,48 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @key("quotaBucketName")
   @path
   @segment("quotas")
-  @extension("x-ms-parameter-location", "method")
   name: string;
+}
+
+@doc("Max monthly virtual usage hours resource limit properties.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursResourceProperties {
+  @doc("Current limit value, with -1 indicating that there is no limit.")
+  @minValue(-1)
+  @visibility(Lifecycle.Read)
+  limit?: int32;
+
+  @doc("Current usage value.")
+  @minValue(0)
+  @visibility(Lifecycle.Read)
+  usage?: int32;
+
+  @doc("Resource provisioning state.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceState;
+}
+
+@parentResource(LoadTestResource)
+@doc("Max monthly virtual usage hours resource.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursResource
+  is ProxyResource<MaxMonthlyVirtualUserHoursResourceProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton"
+  @doc("The limit name.")
+  @key("limitName")
+  @path
+  @segment("limits")
+  name: "maxMonthlyVirtualUserHours";
+}
+
+@doc("Max monthly virtual usage hours limit request payload.")
+@added(APIVersions.v2024_12_01_preview)
+model MaxMonthlyVirtualUserHoursLimitRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("The new maxMonthlyVirtualUserHours limit, with -1 indicating that there is no limit.")
+  @minValue(-1)
+  limit?: int32;
 }
 
 @doc("LoadTest resource properties.")
@@ -138,12 +238,12 @@ model LoadTestProperties {
   @doc("Description of the resource.")
   description?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provisioning state.")
   provisioningState?: ResourceState;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(2083)
   @doc("Resource data plane URI.")
   dataPlaneURI?: string;
@@ -155,23 +255,24 @@ model LoadTestProperties {
 @doc("Check quota availability response object.")
 model CheckQuotaAvailabilityResponse {
   @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: string;
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 
   @doc("The name of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Check quota availability response properties.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CheckQuotaAvailabilityResponseProperties;
 }
 
@@ -186,7 +287,8 @@ model CheckQuotaAvailabilityResponseProperties {
 
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 }
@@ -220,6 +322,7 @@ model QuotaBucketRequestPropertiesDimensions {
   location?: string;
 }
 
+@@identifiers(PagedOutboundEnvironmentEndpoint.value, #[]);
 @doc("Values returned by the List operation.")
-model OutboundEnvironmentEndpointCollection
+model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;

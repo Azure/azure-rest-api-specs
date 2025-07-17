@@ -1,0 +1,39 @@
+{
+  "title": "Create an assistant with a model and instructions.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-08-01-preview",
+    "body": {
+      "name": "Math Tutor",
+      "instructions": "When a customer asks about a specific math problem, use Python to evaluate their query.",
+      "tools": [
+        {
+          "type": "code_interpreter"
+        }
+      ],
+      "model": "gpt-4-1106-preview"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "asst_4nsG2qgNzimRPE7MazXTXbU7",
+        "object": "assistant",
+        "created_at": 1707295707,
+        "name": "Math Tutor",
+        "description": null,
+        "model": "gpt-4-1106-preview",
+        "instructions": "When a customer asks about a specific math problem, use Python to evaluate their query.",
+        "tools": [
+          {
+            "type": "code_interpreter"
+          }
+        ],
+        "metadata": {},
+        "top_p": 1.0,
+        "temperature": 1.0,
+        "response_format": "auto"
+      }
+    }
+  }
+}

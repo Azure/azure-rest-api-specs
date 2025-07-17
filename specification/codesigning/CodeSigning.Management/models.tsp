@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -10,6 +12,7 @@ using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CodeSigning;
 
@@ -125,14 +128,14 @@ union NameUnavailabilityReason {
 @doc("Properties of the trusted signing account.")
 model CodeSigningAccountProperties {
   @doc("The URI of the trusted signing account which is used during signing files.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountUri?: string;
 
   @doc("SKU of the trusted signing account.")
   sku?: AccountSku;
 
   @doc("Status of the current operation on trusted signing account.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -144,18 +147,28 @@ model AccountSku {
 
 @doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags.")
   tags?: Record<string>;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Properties of the trusted signing account.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
 }
 
 @doc("Properties of the trusted signing account.")
 model CodeSigningAccountPatchProperties {
   @doc("SKU of the trusted signing account.")
-  sku?: AccountSku;
+  @typeChangedFrom(Versions.v2024_09_30_preview, AccountSku)
+  sku?: AccountSkuPatch;
+}
+
+@doc("SKU of the trusted signing account.")
+@added(Versions.v2024_09_30_preview)
+model AccountSkuPatch {
+  @doc("Name of the SKU.")
+  name?: SkuName;
 }
 
 @doc("Properties of the certificate profile.")
@@ -163,72 +176,83 @@ model CertificateProfileProperties {
   @doc("Profile type of the certificate.")
   profileType: ProfileType;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as CN in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   commonName?: string;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as O in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   organization?: string;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as OU in the private trust certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   organizationUnit?: string;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as STREET in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   streetAddress?: string;
 
   @doc("Whether to include STREET in the certificate subject name.")
   includeStreetAddress?: boolean = false;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as L in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   city?: string;
 
   @doc("Whether to include L in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCity?: boolean = false;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as S in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: string;
 
   @doc("Whether to include S in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeState?: boolean = false;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as C in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   country?: string;
 
   @doc("Whether to include C in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCountry?: boolean = false;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Used as PC in the certificate subject name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   postalCode?: string;
 
   @doc("Whether to include PC in the certificate subject name.")
   includePostalCode?: boolean = false;
 
+  @removed(Versions.v2024_09_30_preview)
   @doc("Enhanced key usage of the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   enhancedKeyUsage?: string;
 
   @doc("Identity validation id used for the certificate subject name.")
-  identityValidationId?: string;
+  @madeRequired(Versions.v2024_09_30_preview)
+  identityValidationId: string;
 
   @doc("Status of the current operation on certificate profile.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Status of the certificate profile.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: CertificateProfileStatus;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("List of renewed certificates.")
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
-  @extension("x-ms-client-flatten", true)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }
 
@@ -236,6 +260,10 @@ model CertificateProfileProperties {
 model Certificate {
   @doc("Serial number of the certificate.")
   serialNumber?: string;
+
+  @doc("Enhanced key usage of the certificate.")
+  @added(Versions.v2024_09_30_preview)
+  enhancedKeyUsage?: string;
 
   @doc("Subject name of the certificate.")
   subjectName?: string;
@@ -252,8 +280,9 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
+  #suppress "deprecated" "Legacy flatten"
   @doc("Revocations history of a certificate.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;
 }
 
@@ -306,14 +335,14 @@ model CheckNameAvailability {
 @doc("The CheckNameAvailability operation response.")
 model CheckNameAvailabilityResult {
   @doc("A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
   @doc("The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason?: NameUnavailabilityReason;
 
   @doc("An error message explaining the Reason value in more detail.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }

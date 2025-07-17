@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2024-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/resourceType/flexibleServers/usages": {
+      "get": {
+        "tags": [
+          "QuotaUsagesForFlexibleServers"
+        ],
+        "operationId": "QuotaUsages_List",
+        "x-ms-examples": {
+          "List of quota usages for flexible servers": {
+            "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
+          }
+        },
+        "description": "Get quota usages at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaUsagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QuotaUsage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/NameProperty",
+          "description": "Name of quota usage for flexible servers"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Quota limit"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Quota unit",
+          "default": "Count"
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current Quota usage value"
+        },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ARM resource Id"
+        }
+      },
+      "description": "Quota usage for flexible servers"
+    },
+    "NameProperty": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Name value"
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "Localized name"
+        }
+      },
+      "description": "Name property for quota usage"
+    },
+    "QuotaUsagesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of quota usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaUsage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "Capability for the PostgreSQL server"
+    }
+  },
+  "parameters": {}
+}

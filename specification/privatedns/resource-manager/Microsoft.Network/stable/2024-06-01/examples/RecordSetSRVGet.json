@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "SRV",
+    "relativeRecordSetName": "recordSRV",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordsrv",
+        "type": "Microsoft.Network/privateDnsZones/SRV",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/SRV/recordsrv",
+        "properties": {
+          "fqdn": "recordsrv.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "srvRecords": [
+            {
+              "port": 80,
+              "priority": 0,
+              "target": "contoso.com",
+              "weight": 10
+            }
+          ],
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Get",
+  "title": "GET Private DNS Zone SRV Record Set"
+}

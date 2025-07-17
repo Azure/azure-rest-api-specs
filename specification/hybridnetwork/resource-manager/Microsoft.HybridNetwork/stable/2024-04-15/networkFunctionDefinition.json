@@ -1,0 +1,1472 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used by publishers to on-board offerings and manage network functions.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups": {
+      "get": {
+        "tags": [
+          "NetworkFunctionDefinitionGroups"
+        ],
+        "operationId": "NetworkFunctionDefinitionGroups_ListByPublisher",
+        "description": "Gets information of the network function definition groups under a publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting networkFunctionDefinition group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get networkFunctionDefinition groups under publisher resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionGroupsListByPublisherName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}": {
+      "delete": {
+        "tags": [
+          "NetworkFunctionDefinitionGroups"
+        ],
+        "operationId": "NetworkFunctionDefinitionGroups_Delete",
+        "description": "Deletes a specified network function definition group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a network function group resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkFunctionDefinitionGroups"
+        ],
+        "operationId": "NetworkFunctionDefinitionGroups_CreateOrUpdate",
+        "description": "Creates or updates a network function definition group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+            },
+            "description": "Parameters supplied to the create or update publisher network function definition group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting NetworkFunctionDefinitionGroup sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting NetworkFunctionDefinitionGroup sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the network function definition group": {
+            "$ref": "./examples/NetworkFunctionDefinitionGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFunctionDefinitionGroups"
+        ],
+        "operationId": "NetworkFunctionDefinitionGroups_Get",
+        "description": "Gets information about the specified networkFunctionDefinition group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting publisher network function definition group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a networkFunctionDefinition group resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionGroupGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFunctionDefinitionGroups"
+        ],
+        "operationId": "NetworkFunctionDefinitionGroups_Update",
+        "description": "Updates a network function definition group resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update publisher network function definition group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting network function definition group resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the network function definition group resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionGroupUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}": {
+      "delete": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_Delete",
+        "description": "Deletes the specified network function definition version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a network function definition version": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionDelete.json"
+          },
+          "Delete a network function definition version for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionDelete.json"
+          },
+          "Delete a network function definition version for AzureCore VNF": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_CreateOrUpdate",
+        "description": "Creates or updates a network function definition version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+            },
+            "description": "Parameters supplied to the create or update network function definition version operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network function definition sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting network function definition sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a network function definition version resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionCreate.json"
+          },
+          "Create or update a network function definition version resource for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionCreate.json"
+          },
+          "Create or update a network function definition version resource for AzureCore VNF": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_Get",
+        "description": "Gets information about a network function definition version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting NetworkFunctionDefinitionVersion resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a network function definition version resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionGet.json"
+          },
+          "Get network function definition version resource for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionGet.json"
+          },
+          "Get network function definition version resource for AzureCore VNF": {
+            "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_Update",
+        "description": "Updates a network function definition version resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update network function definition version operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting network function definition sub resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the network function definition version tags": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions": {
+      "get": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_ListByNetworkFunctionDefinitionGroup",
+        "description": "Gets information about a list of network function definition versions under a network function definition group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting NetworkFunctionDefinitionVersion resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Publisher resource": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionListByNetworkFunctionDefinitionGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/networkFunctionDefinitionGroups/{networkFunctionDefinitionGroupName}/networkFunctionDefinitionVersions/{networkFunctionDefinitionVersionName}/updateState": {
+      "post": {
+        "tags": [
+          "NetworkFunctionDefinitionVersions"
+        ],
+        "operationId": "NetworkFunctionDefinitionVersions_updateState",
+        "description": "Update network function definition version state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionDefinitionVersionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionUpdateState"
+            },
+            "description": "Parameters supplied to update the state of network function definition version."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated network function definition version state.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionDefinitionVersionUpdateState"
+            }
+          },
+          "202": {
+            "description": "The request of updating network function definition version state is accepted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network function definition version state": {
+            "$ref": "./examples/NetworkFunctionDefinitionVersionUpdateState.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFunctionDefinitionGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/NetworkFunctionDefinitionGroupPropertiesFormat",
+          "description": "Network function definition group properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Network function definition group resource."
+    },
+    "NetworkFunctionDefinitionGroupPropertiesFormat": {
+      "description": "Network function definition group properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network function definition groups resource."
+        },
+        "description": {
+          "type": "string",
+          "description": "The network function definition group description."
+        }
+      }
+    },
+    "NetworkFunctionDefinitionGroupListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionGroup"
+          },
+          "description": "A list of network function definition group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of network function definition group resources."
+    },
+    "NetworkFunctionDefinitionVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionDefinitionVersion"
+          },
+          "description": "A list of network function definition versions."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "A list of network function definition versions."
+    },
+    "NetworkFunctionDefinitionVersion": {
+      "description": "Network function definition version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat",
+          "description": "Network function definition version properties."
+        }
+      }
+    },
+    "NetworkFunctionDefinitionVersionPropertiesFormat": {
+      "description": "Network function definition version properties.",
+      "discriminator": "networkFunctionType",
+      "required": [
+        "networkFunctionType"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the network function definition version resource."
+        },
+        "versionState": {
+          "readOnly": true,
+          "description": "The network function definition version state.",
+          "$ref": "#/definitions/VersionState"
+        },
+        "description": {
+          "type": "string",
+          "description": "The network function definition version description."
+        },
+        "deployParameters": {
+          "type": "string",
+          "description": "The deployment parameters of the network function definition version."
+        },
+        "networkFunctionType": {
+          "description": "The network function type.",
+          "$ref": "./common.json#/definitions/NetworkFunctionType"
+        }
+      }
+    },
+    "ContainerizedNetworkFunctionDefinitionVersion": {
+      "description": "Containerized network function network function definition version properties.",
+      "x-ms-discriminator-value": "ContainerizedNetworkFunction",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "networkFunctionTemplate": {
+          "description": "Containerized network function template.",
+          "$ref": "#/definitions/ContainerizedNetworkFunctionTemplate"
+        }
+      }
+    },
+    "VirtualNetworkFunctionNetworkFunctionDefinitionVersion": {
+      "description": "Virtual network function network function definition version properties.",
+      "x-ms-discriminator-value": "VirtualNetworkFunction",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkFunctionDefinitionVersionPropertiesFormat"
+        }
+      ],
+      "properties": {
+        "networkFunctionTemplate": {
+          "description": "Virtual network function template.",
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate"
+        }
+      }
+    },
+    "ContainerizedNetworkFunctionTemplate": {
+      "description": "Containerized network function template.",
+      "discriminator": "nfviType",
+      "required": [
+        "nfviType"
+      ],
+      "type": "object",
+      "properties": {
+        "nfviType": {
+          "type": "string",
+          "description": "The network function type.",
+          "enum": [
+            "Unknown",
+            "AzureArcKubernetes"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerizedNetworkFunctionNFVIType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "VirtualNetworkFunctionTemplate": {
+      "description": "Virtual network function template.",
+      "discriminator": "nfviType",
+      "required": [
+        "nfviType"
+      ],
+      "type": "object",
+      "properties": {
+        "nfviType": {
+          "type": "string",
+          "description": "The network function type.",
+          "enum": [
+            "Unknown",
+            "AzureCore",
+            "AzureOperatorNexus"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkFunctionNFVIType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "AzureArcKubernetesNetworkFunctionTemplate": {
+      "description": "Azure Arc kubernetes network function template.",
+      "x-ms-discriminator-value": "AzureArcKubernetes",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerizedNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureArcKubernetesNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureArcKubernetesNetworkFunctionApplication": {
+      "description": "Azure arc kubernetes network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "HelmPackage"
+          ],
+          "x-ms-enum": {
+            "name": "AzureArcKubernetesArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureArcKubernetesHelmApplication": {
+      "description": "Azure arc kubernetes helm application configurations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureArcKubernetesNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "HelmPackage",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure arc kubernetes artifact profile.",
+          "$ref": "#/definitions/AzureArcKubernetesArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureArcKubernetesDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureArcKubernetesArtifactProfile": {
+      "description": "Azure arc kubernetes artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "helmArtifactProfile": {
+          "description": "Helm artifact profile.",
+          "$ref": "#/definitions/HelmArtifactProfile"
+        }
+      }
+    },
+    "HelmArtifactProfile": {
+      "description": "Helm artifact profile.",
+      "type": "object",
+      "properties": {
+        "helmPackageName": {
+          "type": "string",
+          "description": "Helm package name."
+        },
+        "helmPackageVersionRange": {
+          "type": "string",
+          "description": "Helm package version range."
+        },
+        "registryValuesPaths": {
+          "type": "array",
+          "description": "The registry values path list.",
+          "items": {
+            "description": "The registry values path.",
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "imagePullSecretsValuesPaths": {
+          "type": "array",
+          "description": "The image pull secrets values path list.",
+          "items": {
+            "description": "The image pull secrets values path.",
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AzureArcKubernetesDeployMappingRuleProfile": {
+      "description": "Azure arc kubernetes deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "helmMappingRuleProfile": {
+          "description": "The helm mapping rule profile.",
+          "$ref": "#/definitions/HelmMappingRuleProfile"
+        }
+      }
+    },
+    "HelmMappingRuleProfile": {
+      "description": "Helm mapping rule profile",
+      "type": "object",
+      "properties": {
+        "releaseNamespace": {
+          "description": "Helm release namespace.",
+          "type": "string"
+        },
+        "releaseName": {
+          "description": "Helm release name.",
+          "type": "string"
+        },
+        "helmPackageVersion": {
+          "description": "Helm package version.",
+          "type": "string"
+        },
+        "values": {
+          "description": "Helm release values.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "options": {
+          "type": "object",
+          "description": "The helm deployment options",
+          "properties": {
+            "installOptions": {
+              "$ref": "#/definitions/HelmInstallOptions",
+              "description": "The helm deployment install options"
+            },
+            "upgradeOptions": {
+              "$ref": "#/definitions/HelmUpgradeOptions",
+              "description": "The helm deployment upgrade options"
+            }
+          }
+        }
+      }
+    },
+    "HelmInstallOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
+        }
+      }
+    },
+    "HelmUpgradeOptions": {
+      "type": "object",
+      "description": "The helm deployment install options",
+      "properties": {
+        "atomic": {
+          "type": "string",
+          "description": "The helm deployment atomic options"
+        },
+        "wait": {
+          "type": "string",
+          "description": "The helm deployment wait options"
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The helm deployment timeout options"
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionTemplate": {
+      "description": "Azure virtual network function template.",
+      "x-ms-discriminator-value": "AzureCore",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureOperatorNexusNetworkFunctionTemplate": {
+      "description": "Azure Operator Distributed Services network function template.",
+      "x-ms-discriminator-value": "AzureOperatorNexus",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkFunctionTemplate"
+        }
+      ],
+      "properties": {
+        "networkFunctionApplications": {
+          "type": "array",
+          "description": "Network function applications.",
+          "items": {
+            "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionApplication": {
+      "description": "Azure virtual network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "VhdImageFile",
+            "ArmTemplate"
+          ],
+          "x-ms-enum": {
+            "name": "AzureCoreArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureOperatorNexusNetworkFunctionApplication": {
+      "description": "Azure Operator Distributed Services network function application definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/NetworkFunctionApplication"
+        }
+      ],
+      "type": "object",
+      "discriminator": "artifactType",
+      "required": [
+        "artifactType"
+      ],
+      "properties": {
+        "artifactType": {
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "Unknown",
+            "ImageFile",
+            "ArmTemplate"
+          ],
+          "x-ms-enum": {
+            "name": "AzureOperatorNexusArtifactType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionVhdApplication": {
+      "description": "Azure core network function vhd application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "VhdImageFile",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure vhd image artifact profile.",
+          "$ref": "#/definitions/AzureCoreVhdImageArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureCoreVhdImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreNetworkFunctionArmTemplateApplication": {
+      "description": "Azure core network function Template application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCoreNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ArmTemplate",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure template artifact profile.",
+          "$ref": "#/definitions/AzureCoreArmTemplateArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureCoreArmTemplateDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusNetworkFunctionImageApplication": {
+      "description": "Azure Operator Distributed Services network function image application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ImageFile",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure Operator Distributed Services image artifact profile.",
+          "$ref": "#/definitions/AzureOperatorNexusImageArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureOperatorNexusImageDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusNetworkFunctionArmTemplateApplication": {
+      "description": "Azure Operator Distributed Services network function Template application definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
+        }
+      ],
+      "x-ms-discriminator-value": "ArmTemplate",
+      "type": "object",
+      "properties": {
+        "artifactProfile": {
+          "description": "Azure Operator Distributed Services Template artifact profile.",
+          "$ref": "#/definitions/AzureOperatorNexusArmTemplateArtifactProfile"
+        },
+        "deployParametersMappingRuleProfile": {
+          "description": "Deploy mapping rule profile.",
+          "$ref": "#/definitions/AzureOperatorNexusArmTemplateDeployMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreVhdImageArtifactProfile": {
+      "description": "Azure vhd artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "vhdArtifactProfile": {
+          "description": "Vhd artifact profile.",
+          "$ref": "#/definitions/VhdImageArtifactProfile"
+        }
+      }
+    },
+    "AzureCoreArmTemplateArtifactProfile": {
+      "description": "Azure template artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "templateArtifactProfile": {
+          "description": "Template artifact profile.",
+          "$ref": "#/definitions/ArmTemplateArtifactProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusImageArtifactProfile": {
+      "description": "Azure Operator Distributed Services image artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "imageArtifactProfile": {
+          "description": "Image artifact profile.",
+          "$ref": "#/definitions/ImageArtifactProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusArmTemplateArtifactProfile": {
+      "description": "Azure Operator Distributed Services vhd artifact profile properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ArtifactProfile"
+        }
+      ],
+      "properties": {
+        "templateArtifactProfile": {
+          "description": "Template artifact profile.",
+          "$ref": "#/definitions/ArmTemplateArtifactProfile"
+        }
+      }
+    },
+    "AzureCoreVhdImageDeployMappingRuleProfile": {
+      "description": "Azure vhd deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "vhdImageMappingRuleProfile": {
+          "description": "The vhd mapping rule profile.",
+          "$ref": "#/definitions/VhdImageMappingRuleProfile"
+        }
+      }
+    },
+    "AzureCoreArmTemplateDeployMappingRuleProfile": {
+      "description": "Azure template deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "templateMappingRuleProfile": {
+          "description": "The template mapping rule profile.",
+          "$ref": "#/definitions/ArmTemplateMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusImageDeployMappingRuleProfile": {
+      "description": "Azure Operator Distributed Services image deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "imageMappingRuleProfile": {
+          "description": "The vhd mapping rule profile.",
+          "$ref": "#/definitions/ImageMappingRuleProfile"
+        }
+      }
+    },
+    "AzureOperatorNexusArmTemplateDeployMappingRuleProfile": {
+      "description": "Azure Operator Distributed Services template deploy mapping rule profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/MappingRuleProfile"
+        }
+      ],
+      "properties": {
+        "templateMappingRuleProfile": {
+          "description": "The template mapping rule profile.",
+          "$ref": "#/definitions/ArmTemplateMappingRuleProfile"
+        }
+      }
+    },
+    "VhdImageArtifactProfile": {
+      "description": "Vhd artifact profile.",
+      "type": "object",
+      "properties": {
+        "vhdName": {
+          "type": "string",
+          "description": "Vhd name."
+        },
+        "vhdVersion": {
+          "type": "string",
+          "description": "Vhd version."
+        }
+      }
+    },
+    "VhdImageMappingRuleProfile": {
+      "description": "Vhd mapping rule profile",
+      "type": "object",
+      "properties": {
+        "userConfiguration": {
+          "description": "List of values.",
+          "type": "string"
+        }
+      }
+    },
+    "ArmTemplateArtifactProfile": {
+      "description": "Template artifact profile.",
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "description": "Template name."
+        },
+        "templateVersion": {
+          "type": "string",
+          "description": "Template version."
+        }
+      }
+    },
+    "ArmTemplateMappingRuleProfile": {
+      "description": "Template mapping rule profile",
+      "type": "object",
+      "properties": {
+        "templateParameters": {
+          "description": "List of template parameters.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageArtifactProfile": {
+      "description": "Image artifact profile.",
+      "type": "object",
+      "properties": {
+        "imageName": {
+          "type": "string",
+          "description": "Image name."
+        },
+        "imageVersion": {
+          "type": "string",
+          "description": "Image version."
+        }
+      }
+    },
+    "ImageMappingRuleProfile": {
+      "description": "Image mapping rule profile",
+      "type": "object",
+      "properties": {
+        "userConfiguration": {
+          "description": "List of values.",
+          "type": "string"
+        }
+      }
+    },
+    "VersionState": {
+      "type": "string",
+      "description": "The network function definition version state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Validating",
+        "ValidationFailed",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "versionState",
+        "modelAsString": true
+      }
+    },
+    "NetworkFunctionDefinitionVersionUpdateState": {
+      "type": "object",
+      "description": "Publisher network function definition version update request definition.",
+      "properties": {
+        "versionState": {
+          "description": "The network function definition version state. Only the 'Active' and 'Deprecated' states are allowed for updates. Other states are used for internal state transitioning.",
+          "$ref": "#/definitions/VersionState",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    }
+  }
+}

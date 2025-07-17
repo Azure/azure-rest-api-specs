@@ -30,7 +30,7 @@ description: HDInsight Containers Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2024-05
+tag: package-preview-2024-05
 ```
 
 ``` yaml
@@ -41,13 +41,13 @@ modelerfour:
 ### Suppression
 
 
-### Tag: package-2024-05
+### Tag: package-preview-2024-05
 
-These settings apply only when `--tag=package-2024-05` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05'
+```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - stable/2024-05-01/hdinsight.json
+  - preview/2024-05-01-preview/hdinsight.json
 
 suppressions:
   - code: ResourceNameRestriction
@@ -143,7 +143,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python

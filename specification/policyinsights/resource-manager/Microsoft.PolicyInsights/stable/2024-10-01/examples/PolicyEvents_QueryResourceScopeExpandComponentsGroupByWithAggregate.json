@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "policyEventsResource": "default",
+    "resourceId": "subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName",
+    "api-version": "2024-10-01",
+    "$filter": "policyAssignmentId eq '/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "$expand": "components($apply=groupby((tenantId, principalOid, policyDefinitionAction), aggregate($count as totalActions)))"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 1,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "timestamp": "2020-02-21T19:42:08.3252921Z",
+            "resourceId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName",
+            "policyAssignmentId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8",
+            "policyDefinitionId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policydefinitions/ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "effectiveParameters": "",
+            "isCompliant": false,
+            "subscriptionId": "e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "resourceType": "Microsoft.KeyVault/vaults",
+            "resourceLocation": "westcentralus",
+            "resourceGroup": "myResourceGroup",
+            "resourceTags": "tbd",
+            "policyAssignmentName": "560050f83dbb4a24974323f8",
+            "policyAssignmentOwner": "tbd",
+            "policyAssignmentParameters": "",
+            "policyAssignmentScope": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "policyDefinitionName": "ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "policyDefinitionAction": "audit",
+            "policyDefinitionCategory": "tbd",
+            "policySetDefinitionId": "",
+            "policySetDefinitionName": "",
+            "policySetDefinitionOwner": "",
+            "policySetDefinitionCategory": "",
+            "policySetDefinitionParameters": "",
+            "managementGroupIds": "PolicyUIMG,AzGovTest5,72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "policyDefinitionReferenceId": "",
+            "complianceState": "NonCompliant",
+            "tenantId": "",
+            "principalOid": "",
+            "components": [
+              {
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "principalOid": "0d81b461-6bb0-4909-a102-d51803a7d275",
+                "policyDefinitionAction": "audit",
+                "totalActions": 6
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

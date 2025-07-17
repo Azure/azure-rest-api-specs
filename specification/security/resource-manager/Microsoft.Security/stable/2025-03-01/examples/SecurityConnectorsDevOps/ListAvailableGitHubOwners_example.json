@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "api-version": "2025-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "ownerUrl": "https://github.com/myGitHubOwner",
+              "onboardingState": "Onboarded",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitHubOwners/myGitHubOwner",
+            "name": "myGitHubOwner",
+            "type": "Microsoft.Security/securityConnectors/devops/gitHubOwners"
+          },
+          {
+            "properties": {
+              "ownerUrl": "https://github.com/anotherGitHubOwner",
+              "onboardingState": "OnboardedByOtherConnector",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitHubOwners/anotherGitHubOwner",
+            "name": "anotherGitHubOwner",
+            "type": "Microsoft.Security/securityConnectors/devops/gitHubOwners"
+          },
+          {
+            "properties": {
+              "ownerUrl": "https://github.com/notOnboardedOwner",
+              "onboardingState": "NotOnboarded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/gitHubOwners/notOnboardedOwner",
+            "name": "notOnboardedOwner",
+            "type": "Microsoft.Security/securityConnectors/devops/gitHubOwners"
+          }
+        ]
+      }
+    }
+  }
+}

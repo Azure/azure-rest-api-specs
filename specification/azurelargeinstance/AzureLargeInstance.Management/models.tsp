@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
@@ -28,7 +29,7 @@ union AzureLargeInstanceHardwareTypeNamesEnum {
   "SDFLEX",
 }
 
-@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://docs.microsoft.com/azure/sap/large-instances/hana-available-skus")
+@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/azure/sap/large-instances/hana-available-skus")
 union AzureLargeInstanceSizeNamesEnum {
   string,
 
@@ -291,55 +292,98 @@ model AzureLargeInstanceProperties {
   @doc("Specifies the network settings for the Azure Large Instance.")
   networkProfile?: NetworkProfile;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceId")
   @doc("Specifies the Azure Large Instance unique ID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  azureLargeInstanceIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance unique ID.")
   azureLargeInstanceId?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "powerState")
   @doc("Resource power state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  powerStateOld?: AzureLargeInstancePowerStateEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource power state")
   powerState?: AzureLargeInstancePowerStateEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "proximityPlacementGroup")
   @doc("Resource proximity placement group")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  proximityPlacementGroupOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Resource proximity placement group")
   proximityPlacementGroup?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hwRevision")
   @doc("Hardware revision of an Azure Large Instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  hwRevisionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Hardware revision of an Azure Large Instance")
   hwRevision?: string;
 
   @doc("""
-ARM ID of another AzureLargeInstance that will share a network with this
-AzureLargeInstance
-""")
+    ARM ID of another AzureLargeInstance that will share a network with this
+    AzureLargeInstance
+    """)
+  @removed(Versions.v2024_04_10)
   partnerNodeId?: string;
 
   @doc("State of provisioning of the AzureLargeInstance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: AzureLargeInstanceProvisioningStatesEnum;
 }
 
 @doc("Specifies the hardware settings for the Azure Large Instance.")
 model HardwareProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "hardwareType")
   @doc("Name of the hardware type (vendor and/or their product name)")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  hardwareTypeOld?: AzureLargeInstanceHardwareTypeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Name of the hardware type (vendor and/or their product name)")
   hardwareType?: AzureLargeInstanceHardwareTypeNamesEnum;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "azureLargeInstanceSize")
   @doc("Specifies the Azure Large Instance SKU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  azureLargeInstanceSizeOld?: AzureLargeInstanceSizeNamesEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the Azure Large Instance SKU.")
   azureLargeInstanceSize?: AzureLargeInstanceSizeNamesEnum;
 }
 
 @doc("Specifies the storage settings for the Azure Large Instance disks.")
 model StorageProfile {
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "nfsIpAddress")
   @doc("IP Address to connect to storage.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  nfsIpAddressOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("IP Address to connect to storage.")
   nfsIpAddress?: string;
 
   @doc("""
-Specifies information about the operating system disk used by Azure Large
-Instance.
-""")
-  @extension("x-ms-identifiers", [])
+    Specifies information about the operating system disk used by Azure Large
+    Instance.
+    """)
+  @identifiers(#[])
   osDisks?: Disk[];
 }
 
@@ -353,11 +397,11 @@ model Disk {
   diskSizeGB?: int32;
 
   @doc("""
-Specifies the logical unit number of the data disk. This value is used to
-identify data disks within the VM and therefore must be unique for each data
-disk attached to a VM.
-""")
-  @visibility("read")
+    Specifies the logical unit number of the data disk. This value is used to
+    identify data disks within the VM and therefore must be unique for each data
+    disk attached to a VM.
+    """)
+  @visibility(Lifecycle.Read)
   lun?: int32;
 }
 
@@ -366,12 +410,24 @@ model OsProfile {
   @doc("Specifies the host OS name of the Azure Large Instance.")
   computerName?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "osType")
   @doc("This property allows you to specify the type of the OS.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  osTypeOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("This property allows you to specify the type of the OS.")
   osType?: string;
 
+  @removed(Versions.v2024_08_01_preview)
+  @renamedFrom(Versions.v2024_08_01_preview, "version")
   @doc("Specifies version of operating system.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  versionOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies version of operating system.")
   version?: string;
 
   @doc("Specifies the SSH public key used to access the operating system.")
@@ -381,28 +437,32 @@ model OsProfile {
 @doc("Specifies the network settings for the Azure Large Instance disks.")
 model NetworkProfile {
   @doc("Specifies the network interfaces for the Azure Large Instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaces?: IpAddress[];
 
+  @removed(Versions.v2024_08_01_preview)
   @doc("Specifies the circuit id for connecting to express route.")
-  @visibility("read")
+  @renamedFrom(Versions.v2024_08_01_preview, "circuitId")
+  @visibility(Lifecycle.Read)
+  circuitIdOld?: string;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("Specifies the circuit id for connecting to express route.")
   circuitId?: string;
 }
 
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Specifies the IP address of the network interface.")
   @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
 @doc("""
-The active state empowers the server with the ability to forcefully terminate
-and halt any existing processes that may be running on the server
-""")
+  The active state empowers the server with the ability to forcefully terminate
+  and halt any existing processes that may be running on the server
+  """)
 model ForceState {
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Whether to force restart by shutting all processes.")
   @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
@@ -411,7 +471,6 @@ model ForceState {
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
@@ -459,3 +518,16 @@ model StorageBillingProperties {
   @doc("the SKU type that is provisioned")
   sku?: string;
 }
+
+@doc("The type used for updating tags in AzureLargeStorageInstance resources.")
+model AzureLargeStorageInstanceTagsUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
+  @clientName("tagsValue", "csharp")
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
+}
+@@added(AzureLargeStorageInstanceTagsUpdate.identity,
+  Versions.v2024_08_01_preview
+);

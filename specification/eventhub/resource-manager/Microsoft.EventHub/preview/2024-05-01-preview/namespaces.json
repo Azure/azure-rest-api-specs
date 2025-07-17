@@ -382,13 +382,14 @@
           "default": {
             "description": "EventHub error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FailOver"
         }
       }
     },
@@ -1002,10 +1003,9 @@
           "type": "string",
           "description": "Query parameter for the new primary location after failover."
         },
-        "maximumGracePeriodInMins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum time duration allowed complete data replication from primary to secondary. Use maximumGracePeriodInMins = 0: For Unplanned Geo-Failover, which switches the role between primary and secondary immediately. The data that is not being replicated yet will be discarded. Use maximumGracePeriodInMins > 0: For Planned Geo-Failover/DR Drill, continue replicating data until grace period expires.  Any data that is not replicated during the grace period will be discarded. During the replication the namespace stops accepting any new publishing requests"
+        "force": {
+          "type": "boolean",
+          "description": "If Force is false then graceful failover is attempted after ensuring no data loss. If Force flag is set to true, Forced failover is attempted with possible data loss."
         }
       }
     },

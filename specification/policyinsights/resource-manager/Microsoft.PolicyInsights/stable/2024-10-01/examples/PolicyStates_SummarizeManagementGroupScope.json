@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "policyStatesSummaryResource": "latest",
+    "managementGroupsNamespace": "Microsoft.Management",
+    "managementGroupName": "myManagementGroup",
+    "api-version": "2024-10-01",
+    "$from": "2019-10-05T18:00:00Z",
+    "$to": "2019-10-06T18:00:00Z",
+    "$filter": "PolicyDefinitionAction eq 'deny' or PolicyDefinitionAction eq 'audit'",
+    "$top": 0
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#summary",
+        "@odata.count": 1,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#summary/$entity",
+            "results": {
+              "queryResultsUri": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/latest/queryResults?api-version=2024-10-01&$from=2019-10-05 18:00:00Z&$to=2019-10-06 18:00:00Z&$filter=(PolicyDefinitionAction eq 'deny' or PolicyDefinitionAction eq 'audit') and IsCompliant eq false",
+              "nonCompliantResources": 15410,
+              "nonCompliantPolicies": 68,
+              "resourceDetails": [
+                {
+                  "complianceState": "compliant",
+                  "count": 1400
+                },
+                {
+                  "complianceState": "noncompliant",
+                  "count": 15410
+                }
+              ],
+              "policyDetails": [
+                {
+                  "complianceState": "noncompliant",
+                  "count": 68
+                }
+              ],
+              "policyGroupDetails": [
+                {
+                  "complianceState": "noncompliant",
+                  "count": 14
+                }
+              ]
+            },
+            "policyAssignments": []
+          }
+        ]
+      }
+    }
+  }
+}

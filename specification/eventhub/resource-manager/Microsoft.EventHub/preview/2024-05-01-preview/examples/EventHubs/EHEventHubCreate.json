@@ -7,10 +7,8 @@
     "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4",
     "parameters": {
       "properties": {
-        "messageRetentionInDays": 4,
         "partitionCount": 4,
         "status": "Active",
-        "messageTimestampType": "AppendTime",
         "userMetadata": "key",
         "captureDescription": {
           "enabled": true,
@@ -29,10 +27,6 @@
           },
           "intervalInSeconds": 120,
           "sizeLimitInBytes": 10485763
-        },
-        "retentionDescription": {
-          "cleanupPolicy": "Delete,Compact",
-          "retentionTimeInHours": 24
         }
       }
     }
@@ -44,10 +38,9 @@
         "name": "sdk-EventHub-10",
         "type": "Microsoft.EventHub/Namespaces/EventHubs",
         "properties": {
-          "messageRetentionInDays": 4,
+          "messageRetentionInDays": 7,
           "partitionCount": 4,
           "status": "Active",
-          "messageTimestampType": "AppendTime",
           "userMetadata": "key",
           "identifier": "identifierIDGUID",
           "createdAt": "2017-06-28T02:45:55.877Z",
@@ -77,8 +70,11 @@
             "sizeLimitInBytes": 10485763
           },
           "retentionDescription": {
-            "cleanupPolicy": "Delete,Compact",
-            "retentionTimeInHours": 24
+            "cleanupPolicy": "Delete",
+            "retentionTimeInHours": 168
+          },
+          "messageTimestampDescription": {
+            "timestampType": "LogAppend"
           }
         }
       }

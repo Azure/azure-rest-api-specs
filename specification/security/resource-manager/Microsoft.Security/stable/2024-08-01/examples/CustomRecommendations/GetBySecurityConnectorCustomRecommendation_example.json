@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/gcpResourceGroup/providers/Microsoft.Security/securityConnectors/gcpconnector",
+    "customRecommendationName": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/gcpResourceGroup/providers/Microsoft.Security/securityConnectors/gcpconnector/providers/Microsoft.Security/customRecommendations/MycustomRecommendation1",
+        "name": "MycustomRecommendation1",
+        "type": "Microsoft.Security/customRecommendations",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-31T13:47:50.328Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-31T13:47:50.328Z"
+        },
+        "properties": {
+          "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
+          "cloudProviders": [
+            "AWS"
+          ],
+          "severity": "Medium",
+          "displayName": "Password Policy",
+          "description": "organization passwords policy",
+          "remediationDescription": "Change password policy to...",
+          "assessmentKey": "d5f442f7-7e77-4bcf-a450-a9c1b9a94eeb",
+          "securityIssue": "Vulnerability"
+        }
+      }
+    }
+  }
+}
