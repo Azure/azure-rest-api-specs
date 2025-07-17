@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for Data Registry Client.
 
 ``` yaml
+# Azure Maps Data Registry APIs V 06-01-2023 will be retired on September 30th, 2025.
 title: DataRegistryClient
 openapi-type: data-plane
 tag: 2023-06-01
@@ -34,7 +35,7 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
-### Tag: 2023-06-01
+### Tag: package-stable-2023-06-01
 
 These settings apply only when `--tag=2023-06-01` is specified on the command line.
 
@@ -43,7 +44,7 @@ input-file:
   - stable/2023-06-01/dataregistry.json
 ```
 
-### Tag: 2022-12-01
+### Tag: package-retired-2022-12-01-preview
 
 These settings apply only when `--tag=2022-12-01-preview` is specified on the command line.
 
