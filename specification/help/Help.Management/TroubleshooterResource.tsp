@@ -23,7 +23,7 @@ model TroubleshooterResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface TroubleshooterResourcesOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {

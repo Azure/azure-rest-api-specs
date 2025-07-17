@@ -23,7 +23,7 @@ interface CheckNameAvailabilityOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   checkNameAvailability is ArmProviderActionSync<
-    CommonTypes.CheckNameAvailabilityRequest,
+    CheckNameAvailabilityRequest,
     CheckNameAvailabilityResponse,
     ExtensionResourceActionScope,
     OptionalRequestBody = true
