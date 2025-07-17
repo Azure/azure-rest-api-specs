@@ -5,3 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ServiceLinker;
 
 @@clientName(Linkers, "LinkersOperations", "java");
+@@clientName(Microsoft.ServiceLinker,
+  "ServiceLinkerManagementClient",
+  "javascript"
+);
