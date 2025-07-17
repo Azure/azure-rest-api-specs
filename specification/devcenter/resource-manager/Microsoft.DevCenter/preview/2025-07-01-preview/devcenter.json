@@ -5655,8 +5655,12 @@
       "type": "object",
       "description": "Project catalog settings for project catalogs under a project associated to this dev center.",
       "allOf": [
-        { "$ref": "#/definitions/FeatureSettings" },
-        { "$ref": "#/definitions/DevCenterProjectCatalogSettings" }
+        {
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        {
+          "$ref": "#/definitions/DevCenterProjectCatalogSettings"
+        }
       ]
     },
     "DevCenterResourceType": {
@@ -6260,7 +6264,13 @@
         },
         "value": {
           "description": "The default value.",
-          "type": ["string", "integer", "boolean", "object", "array"],
+          "type": [
+            "string",
+            "integer",
+            "boolean",
+            "object",
+            "array"
+          ],
           "additionalProperties": {
             "type": "string"
           },
