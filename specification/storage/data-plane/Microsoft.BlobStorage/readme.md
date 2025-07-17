@@ -121,6 +121,15 @@ input-file:
   - stable/2025-07-05/blob.json
 ```
 
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11'
+input-file:
+- stable/2025-11-05/blob.json
+```
+
 ### Tag: package-2025-11-tsp
 
 These settings apply only when `--tag=package-2025-11-tsp` is specified on the command line.
