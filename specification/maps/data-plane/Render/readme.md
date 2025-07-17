@@ -61,36 +61,36 @@ input-file:
 ```
 ### Tag: package-stable-2022-08-01
 
-These settings apply only when `--tag=2022-08-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2022-08-01` is specified on the command line.
 
-``` yaml $(tag) == '2022-08-01'
+``` yaml $(tag) == 'package-stable-2022-08-01'
 input-file:
   - stable/2022-08-01/render.json
 ```
 
 ### Tag: package-retired-2.1-preview
 
-These settings apply only when `--tag=2.1` is specified on the command line.
+These settings apply only when `--tag=package-retired-2.1-preview` is specified on the command line.
 
-``` yaml $(tag) == '2.1'
+``` yaml $(tag) == 'package-retired-2.1-preview'
 input-file:
   - preview/2.1/render.json
 ```
 
 ### Tag: package-retired-2.0-preview
 
-These settings apply only when `--tag=2.0` is specified on the command line.
+These settings apply only when `--tag=package-retired-2.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '2.0'
+``` yaml $(tag) == 'package-retired-2.0-preview'
 input-file:
   - preview/2.0/render.json
 ```
 
 ### Tag: package-deprecated-1.0-preview
 
-These settings apply only when `--tag=1.0` is specified on the command line.
+These settings apply only when `--tag=package-deprecated-1.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '1.0'
+``` yaml $(tag) == 'package-deprecated-1.0-preview'
 input-file:
   - preview/1.0/render.json
 ```
