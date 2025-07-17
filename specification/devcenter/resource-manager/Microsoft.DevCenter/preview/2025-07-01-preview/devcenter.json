@@ -6248,51 +6248,13 @@
           "description": "Indicates the default status of the feature.",
           "$ref": "#/definitions/FeatureStatus"
         },
-        "defaultValue": {
-          "description": "Indicates the default type and value.",
-          "$ref": "#/definitions/FeatureStateDefaultValue"
-        }
-      }
-    },
-    "FeatureStateDefaultValue": {
-      "description": "Default value of feature state.",
-      "type": "object",
-      "properties": {
-        "valueType": {
-          "description": "Indicates the type of the default value.",
-          "$ref": "#/definitions/DefaultValueType"
-        },
-        "value": {
-          "description": "The default value.",
-          "type": [
-            "string",
-            "integer",
-            "boolean",
-            "object",
-            "array"
-          ],
+        "defaultValues": {
+          "description": "The default values of the feature",
+          "type": "object",
           "additionalProperties": {
-            "type": "string"
-          },
-          "items": {
             "type": "string"
           }
         }
-      }
-    },
-    "DefaultValueType": {
-      "description": "Type of default value.",
-      "enum": [
-        "string",
-        "int",
-        "boolean",
-        "object",
-        "array"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DefaultValueType",
-        "modelAsString": true
       }
     },
     "FeatureStatus": {
