@@ -5651,18 +5651,6 @@
         }
       }
     },
-    "ProjectCatalogFeatureSettings": {
-      "type": "object",
-      "description": "Project catalog settings for project catalogs under a project associated to this dev center.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeatureSettings"
-        },
-        {
-          "$ref": "#/definitions/DevCenterProjectCatalogSettings"
-        }
-      ]
-    },
     "DevCenterResourceType": {
       "description": "Indicates dev center resource types.",
       "enum": [
@@ -6144,8 +6132,15 @@
       "type": "object",
       "properties": {
         "projectCatalogSettings": {
-          "$ref": "#/definitions/ProjectCatalogFeatureSettings",
           "description": "Dev Center settings to be used when associating a project with a catalog.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeatureSettings"
+            },
+            {
+              "$ref": "#/definitions/DevCenterProjectCatalogSettings"
+            }
+          ],
           "readOnly": true
         },
         "networkSettings": {
