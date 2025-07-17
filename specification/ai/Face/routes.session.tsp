@@ -208,7 +208,7 @@ interface LivenessSessionOperations {
   @returnsDoc(SessionCreationSuccess)
   createLivenessSession is FaceResourceCreateWithServiceProvidedName<
     LivenessSession,
-    BodyParameter<CreateLivenessSessionOptions>,
+    OptionsParameter<CreateLivenessSessionOptions>,
     LivenessSession
   >;
 
