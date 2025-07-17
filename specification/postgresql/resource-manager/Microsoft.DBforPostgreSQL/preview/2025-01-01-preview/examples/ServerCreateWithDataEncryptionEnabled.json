@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
-    "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
     "parameters": {
       "location": "westus",
       "sku": {
@@ -12,20 +12,20 @@
       },
       "identity": {
         "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {}
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {}
         },
         "type": "UserAssigned"
       },
       "properties": {
-        "administratorLogin": "login",
-        "administratorLoginPassword": "Password1",
+        "administratorLogin": "administratorlogin",
+        "administratorLoginPassword": "examplepassword",
         "version": "16",
         "availabilityZone": "1",
         "createMode": "Create",
         "dataEncryption": {
           "type": "AzureKeyVault",
-          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+          "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
           "geoBackupKeyURI": "",
           "geoBackupUserAssignedIdentityId": ""
         },
@@ -39,8 +39,8 @@
           "geoRedundantBackup": "Disabled"
         },
         "network": {
-          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
         },
         "highAvailability": {
           "mode": "ZoneRedundant"
@@ -57,7 +57,7 @@
         },
         "identity": {
           "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {
               "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
               "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
@@ -69,10 +69,10 @@
           "createdAt": "2025-03-03T17:44:30.7095047Z"
         },
         "properties": {
-          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "16",
           "minorVersion": "8",
-          "administratorLogin": "login",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -81,8 +81,8 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
             "primaryEncryptionKeyStatus": "Valid"
           },
           "storage": {
@@ -99,8 +99,8 @@
           },
           "network": {
             "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -117,8 +117,8 @@
           "replicaCapacity": 5
         },
         "location": "westus",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },
@@ -130,7 +130,7 @@
         },
         "identity": {
           "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {
               "principalId": "pppppppp-pppp-pppp-pppp-pppppppppppp",
               "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
             }
@@ -139,10 +139,10 @@
           "tenantId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
         },
         "properties": {
-          "fullyQualifiedDomainName": "pgtestsvc4.test-private-dns-zone.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.exampleprivatednszone.postgres.database.azure.com",
           "version": "16",
           "minorVersion": "8",
-          "administratorLogin": "login",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "authConfig": {
@@ -151,8 +151,8 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
             "primaryEncryptionKeyStatus": "Valid"
           },
           "storage": {
@@ -169,8 +169,8 @@
           },
           "network": {
             "publicNetworkAccess": "Disabled",
-            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
-            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com"
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
           },
           "highAvailability": {
             "mode": "ZoneRedundant",
@@ -187,8 +187,8 @@
           "replicaCapacity": 5
         },
         "location": "westus",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
-        "name": "pgtestsvc4",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     },

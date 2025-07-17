@@ -8,13 +8,14 @@ options:
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/OnlineExperimentWorkspace.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/OnlineExperimentationWorkspace.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
     package-dir: "Azure.ResourceManager.OnlineExperimentation"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
+    api-version: "2025-05-31-preview"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-onlineexperimentation"
     namespace: "azure.mgmt.onlineexperimentation"
@@ -28,7 +29,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-onlineexperimentation"
-    flavor: "azure"
+    flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-onlineexperimentation"
