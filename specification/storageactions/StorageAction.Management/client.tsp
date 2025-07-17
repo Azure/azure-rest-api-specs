@@ -27,8 +27,3 @@ using Microsoft.StorageActions;
   "PreviewActions",
   "csharp"
 );
-
-@@clientName(StorageTasks.storageTaskAssignmentList,
-  "list",
-  "java,javascript,python,go"
-);
