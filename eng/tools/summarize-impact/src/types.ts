@@ -21,7 +21,7 @@ export type ReadmeTag = {
 };
 
 export type ChangeHandler = {
-  [key in FileTypes]?: (event: PRChange) => void;
+  [key in FileTypes]?: (event: PRChange) => void | Promise<void>;
 };
 
 // type Pattern = {
@@ -164,14 +164,17 @@ export type LabelContext = {
 
 export type ImpactAssessment = {
     prType: string[],
+    resourceManagerRequired: boolean,
     suppressionReviewRequired: boolean,
     versioningReviewRequired: boolean,
     breakingChangeReviewRequired: boolean,
+    isNewApiVersion: boolean,
     rpaasExceptionRequired: boolean,
+    rpaasRpNotInPrivateRepo: boolean,
     rpaasChange: boolean,
     newRP: boolean,
-    rpaasRPMissing: boolean
-    typeSpecChanged: boolean
+    rpaasRPMissing: boolean,
+    typeSpecChanged: boolean,
     isDraft: boolean
 }
 
