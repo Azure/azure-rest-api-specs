@@ -2832,7 +2832,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted."
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Resource deleted successfully."
@@ -6440,7 +6445,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateReadOnly",
-          "description": "Provisioning state of the resource."
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
         }
       },
       "description": "Config for Metrics for firewall metrics",
