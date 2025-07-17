@@ -52,6 +52,47 @@
   },
   "tags": [],
   "paths": {
+    "/criticalDataColumns": {
+      "post": {
+        "operationId": "PostCriticalDataColumn",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostCriticalDataColumn_MaximumSet": {
+            "$ref": "./examples/PostCriticalDataColumn_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/criticalDataElements": {
       "get": {
         "operationId": "GetCriticalDataElement",
@@ -63,21 +104,21 @@
           {
             "name": "domainId",
             "in": "query",
-            "description": "The unique identifier (UUID) of the resource.",
+            "description": "The name of the domainId.",
             "required": false,
             "type": "string"
           },
           {
             "name": "keyword",
             "in": "query",
-            "description": "to avoid",
+            "description": "The name of the keyword.",
             "required": false,
             "type": "string"
           },
           {
             "name": "skip",
             "in": "query",
-            "description": "to avoid",
+            "description": "The name of the skip.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -85,7 +126,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "to avoid",
+            "description": "The name of the top.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -93,7 +134,7 @@
           {
             "name": "orderBy",
             "in": "query",
-            "description": "to avoid",
+            "description": "The name of the orderBy.",
             "required": false,
             "type": "string"
           }
@@ -123,7 +164,7 @@
       },
       "post": {
         "operationId": "PostCriticalDataElement",
-        "description": "Example: PostCriticalDataElement_MaximumSet_Gen\nSee: ./examples/PostCriticalDataElement_MaximumSet_Gen.json",
+        "description": "The most basic operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -157,6 +198,46 @@
         "x-ms-examples": {
           "PostCriticalDataElement_MaximumSet": {
             "$ref": "./examples/PostCriticalDataElement_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/criticalDataElements/{criticalDataElementId}": {
+      "get": {
+        "operationId": "GetCriticalDataElementCriticalDataElementId",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataElementId",
+            "in": "path",
+            "description": "The globally unique identifier of the entity.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCriticalDataElementCriticalDataElementId_MaximumSet": {
+            "$ref": "./examples/GetCriticalDataElementCriticalDataElementId_MaximumSet_Gen.json"
           }
         }
       }

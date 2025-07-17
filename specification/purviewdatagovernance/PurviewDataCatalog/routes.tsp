@@ -7,10 +7,15 @@ using TypeSpec.Http;
 
 namespace PurviewDataCatalog;
 
-/**
- * Example: PostCriticalDataElement_MaximumSet_Gen
- * See: ./examples/PostCriticalDataElement_MaximumSet_Gen.json
- */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns")
+@post
+op postCriticalDataColumn is Azure.Core.Foundations.Operation<
+  MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn,
+  void
+>;
+
 #suppress "@azure-tools/typespec-openapi/example-validation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -31,25 +36,38 @@ op postCriticalDataElement is Azure.Core.Foundations.Operation<
 @get
 op getCriticalDataElement is Azure.Core.Foundations.Operation<
   {
-    /** The unique identifier (UUID) of the resource. */
+    @doc("The name of the domainId.")
     @query("domainId")
     domainId?: string;
 
-    /** to avoid */
+    @doc("The name of the keyword.")
     @query("keyword")
     keyword?: string;
 
-    /** to avoid */
+    @doc("The name of the skip.")
     @query("skip")
     skip?: int32;
 
-    /** to avoid */
+    @doc("The name of the top.")
     @query("top")
     top?: int32;
 
-    /** to avoid */
+    @doc("The name of the orderBy.")
     @query("orderBy")
     orderBy?: string;
+  },
+  void
+>;
+#suppress "@azure-tools/typespec-openapi/example-validation"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataElements/{criticalDataElementId}")
+@get
+op getCriticalDataElementCriticalDataElementId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @path
+    criticalDataElementId: string;
   },
   void
 >;
