@@ -111,6 +111,50 @@ model ResourcePatchRequest {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Create version of ScheduledActionResource without read-only properties")
+model ScheduledActionResourceCreate {
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Request model perform a resource operation in a list of resources")
+model ResourceAttachRequestCreate {
+  @doc("The list of resources we watch to patch")
+  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  resources: Array<ScheduledActionResource>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Create version of ScheduledActionResource without read-only properties")
+model ScheduledActionResourceUpdate {
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Request model perform a resource operation in a list of resources")
+model ResourcePatchRequestUpdate {
+  @doc("The list of resources we watch to patch")
+  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  resources: Array<ScheduledActionResource>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.")

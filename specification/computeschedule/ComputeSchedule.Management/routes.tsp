@@ -157,7 +157,7 @@ interface ScheduledActions {
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   attachResources is ArmResourceActionSync<
     ScheduledAction,
-    ResourceAttachRequest,
+    ResourceAttachRequestCreate,
     ResourceOperationResponse
   >;
 
@@ -171,7 +171,7 @@ interface ScheduledActions {
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   patchResources is ArmResourceActionSync<
     ScheduledAction,
-    ResourcePatchRequest,
+    ResourcePatchRequestUpdate,
     ResourceOperationResponse
   >;
 
