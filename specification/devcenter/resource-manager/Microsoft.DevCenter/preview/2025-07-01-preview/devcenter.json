@@ -6260,29 +6260,13 @@
         },
         "value": {
           "description": "The default value.",
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
+          "type": ["string", "integer", "boolean", "object", "array"],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
