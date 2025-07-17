@@ -150,4 +150,3 @@ using Microsoft.ComputeSchedule;
   "V2025-05-01",
   "javascript"
 );
-@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
