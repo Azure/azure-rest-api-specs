@@ -6,22 +6,38 @@
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "x-ms-query-source-authorization": "00000000-0000-0000-0000-000000000000",
     "$count": true,
-    "facet": ["category,count:10,sort:count"],
+    "facet": [
+      "category,count:10,sort:count"
+    ],
     "$filter": "rating gt 10",
-    "highlight": ["title"],
+    "highlight": [
+      "title"
+    ],
     "highlightPostTag": "</em>",
     "highlightPreTag": "<em>",
     "minimumCoverage": 80,
-    "$orderby": ["search.score() desc", "rating desc"],
+    "$orderby": [
+      "search.score() desc",
+      "rating desc"
+    ],
     "queryType": "simple",
     "sessionId": "mysessionid",
     "scoringStatistics": "global",
-    "scoringParameters": ["currentLocation--122.123,44.77233"],
+    "scoringParameters": [
+      "currentLocation--122.123,44.77233"
+    ],
     "scoringProfile": "sp",
     "search": "nice hotels",
-    "searchFields": ["title", "description"],
+    "searchFields": [
+      "title",
+      "description"
+    ],
     "searchMode": "any",
-    "$select": ["docId", "title", "description"],
+    "$select": [
+      "docId",
+      "title",
+      "description"
+    ],
     "$skip": 100,
     "$top": 10
   },
@@ -46,7 +62,9 @@
           {
             "@search.score": 1.5,
             "@search.highlights": {
-              "title": ["<em>Nice</em> <em>Hotel</em>"]
+              "title": [
+                "<em>Nice</em> <em>Hotel</em>"
+              ]
             },
             "description": "Cheapest hotel in town",
             "docId": "1",
@@ -55,7 +73,9 @@
           {
             "@search.score": 0.7,
             "@search.highlights": {
-              "title": ["Fancy <em>Hotel</em>"]
+              "title": [
+                "Fancy <em>Hotel</em>"
+              ]
             },
             "description": "Best hotel in town",
             "docId": "2",
@@ -84,7 +104,9 @@
           {
             "@search.score": 1.5,
             "@search.highlights": {
-              "title": ["<em>Nice</em> <em>Hotel</em>"]
+              "title": [
+                "<em>Nice</em> <em>Hotel</em>"
+              ]
             },
             "description": "Cheapest hotel in town",
             "docId": "1",
@@ -93,7 +115,9 @@
           {
             "@search.score": 0.7,
             "@search.highlights": {
-              "title": ["Fancy <em>Hotel</em>"]
+              "title": [
+                "Fancy <em>Hotel</em>"
+              ]
             },
             "description": "Best hotel in town",
             "docId": "2",

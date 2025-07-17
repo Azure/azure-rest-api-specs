@@ -146,21 +146,30 @@
       ],
       "defaultScoringProfile": "stringFieldBoost",
       "corsOptions": {
-        "allowedOrigins": ["https://www.example.com/foo"],
+        "allowedOrigins": [
+          "https://www.example.com/foo"
+        ],
         "maxAgeInSeconds": 10
       },
       "suggesters": [
         {
           "name": "sg",
           "searchMode": "analyzingInfixMatching",
-          "sourceFields": ["category", "ownerId"]
+          "sourceFields": [
+            "category",
+            "ownerId"
+          ]
         }
       ],
       "analyzers": [
         {
           "tokenizer": "standard_v2",
-          "tokenFilters": ["common_grams"],
-          "charFilters": ["html_strip"],
+          "tokenFilters": [
+            "common_grams"
+          ],
+          "charFilters": [
+            "html_strip"
+          ],
           "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
           "name": "tagsAnalyzer"
         }
@@ -181,15 +190,22 @@
       ],
       "charFilters": [
         {
-          "mappings": [".=>,", "_=>-"],
+          "mappings": [
+            ".=>,",
+            "_=>-"
+          ],
           "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
           "name": "my_mapping"
         }
       ],
       "normalizers": [
         {
-          "tokenFilters": ["my_tokenFilter"],
-          "charFilters": ["my_mapping"],
+          "tokenFilters": [
+            "my_tokenFilter"
+          ],
+          "charFilters": [
+            "my_mapping"
+          ],
           "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
           "name": "my_normalizer"
         }
@@ -573,14 +589,19 @@
           }
         ],
         "corsOptions": {
-          "allowedOrigins": ["https://www.example.com/foo"],
+          "allowedOrigins": [
+            "https://www.example.com/foo"
+          ],
           "maxAgeInSeconds": 10
         },
         "suggesters": [
           {
             "name": "sg",
             "searchMode": "analyzingInfixMatching",
-            "sourceFields": ["category", "ownerId"]
+            "sourceFields": [
+              "category",
+              "ownerId"
+            ]
           }
         ],
         "analyzers": [
@@ -588,16 +609,24 @@
             "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
             "name": "tagsAnalyzer",
             "tokenizer": "standard_v2",
-            "tokenFilters": ["common_grams"],
-            "charFilters": ["html_strip"]
+            "tokenFilters": [
+              "common_grams"
+            ],
+            "charFilters": [
+              "html_strip"
+            ]
           }
         ],
         "normalizers": [
           {
             "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
             "name": "my_normalizer",
-            "tokenFilters": ["my_tokenFilter"],
-            "charFilters": ["my_mapping"]
+            "tokenFilters": [
+              "my_tokenFilter"
+            ],
+            "charFilters": [
+              "my_mapping"
+            ]
           }
         ],
         "tokenizers": [
@@ -618,7 +647,10 @@
           {
             "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
             "name": "my_mapping",
-            "mappings": [".=>,", "_=>-"]
+            "mappings": [
+              ".=>,",
+              "_=>-"
+            ]
           }
         ],
         "similarity": {
