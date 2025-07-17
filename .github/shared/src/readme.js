@@ -1,5 +1,6 @@
 // @ts-check
 
+import { accessSync, constants } from "fs";
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
@@ -53,8 +54,14 @@ export class Readme {
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
-    this.#path = resolve(options?.specModel?.folder ?? "", path);
+    const resolvedPath = resolve(options?.specModel?.folder ?? "", path);
 
+    if (options?.content === undefined) {
+      // Synchronously verify file can be read, to prevent confusing errors later
+      accessSync(resolvedPath, constants.R_OK);
+    }
+
+    this.#path = resolvedPath;
     this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;

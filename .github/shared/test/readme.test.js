@@ -10,13 +10,8 @@ import { contosoReadme } from "./examples.js";
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("readme", () => {
-  it("can be created with mock path", async () => {
-    const readme = new Readme("bar");
-    expect(readme.path).toBe(resolve("bar"));
-
-    await expect(readme.getTags()).rejects.toThrowError(/no such file or directory/i);
-
-    expect(readme.specModel).toBeUndefined();
+  it("throws if file doesn't exist", async () => {
+    expect(() => new Readme("bar")).toThrowError("ENOENT: no such file or directory");
   });
 
   it("resolves path against SpecModel", async () => {
@@ -64,6 +59,8 @@ describe("readme", () => {
       // Simulate empty file
       content: "",
     });
+
+    expect(readme.specModel).toBeUndefined();
 
     const tags = await readme.getTags();
 
