@@ -37,18 +37,18 @@ credential-scopes: https://atlas.microsoft.com/.default
 
 ### Tag: package-stable-2023-06-01
 
-These settings apply only when `--tag=2023-06-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2023-06-01` is specified on the command line.
 
-``` yaml $(tag) == '2023-06-01'
+``` yaml $(tag) == 'package-stable-2023-06-01'
 input-file:
   - stable/2023-06-01/dataregistry.json
 ```
 
 ### Tag: package-retired-2022-12-01-preview
 
-These settings apply only when `--tag=2022-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2022-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == '2022-12-01-preview'
+``` yaml $(tag) == 'package-retired-2022-12-01-preview'
 input-file:
   - preview/2022-12-01-preview/dataregistry.json
 ```
