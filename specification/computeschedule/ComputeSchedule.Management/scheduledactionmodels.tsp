@@ -129,7 +129,7 @@ model ScheduledActionResourceCreate {
 model ResourceAttachRequestCreate {
   @doc("The list of resources we watch to patch")
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<ScheduledActionResource>;
+  resources: Array<ScheduledActionResourceCreate>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
@@ -151,7 +151,7 @@ model ScheduledActionResourceUpdate {
 model ResourcePatchRequestUpdate {
   @doc("The list of resources we watch to patch")
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<ScheduledActionResource>;
+  resources: Array<ScheduledActionResourceUpdate>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
