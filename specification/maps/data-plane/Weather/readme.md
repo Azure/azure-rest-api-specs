@@ -35,7 +35,7 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 1.1
+### Tag: package-stable-1.1
 
 These settings apply only when `--tag=1.1` is specified on the command line.
 
@@ -44,7 +44,7 @@ input-file:
   - stable/1.1/weather.json
 ```
 
-### Tag: 1.0-preview
+### Tag: package-retired-1.0-preview
 
 These settings apply only when `--tag=1.0-preview` is specified on the command line.
 
