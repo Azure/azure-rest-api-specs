@@ -22,5 +22,11 @@ interface MonitorQueryLogsClient {
   batch is MonitorQueryLogs.Query.batch;
 }
 
-@@clientNamespace(MonitorQueryLogs, "com.azure.monitor.query.logs.implementation", "java");
-@@clientNamespace(ClientCustomizations, "com.azure.monitor.query.logs.implementation", "java");
+@@clientNamespace(MonitorQueryLogs,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
+@@clientNamespace(ClientCustomizations,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
