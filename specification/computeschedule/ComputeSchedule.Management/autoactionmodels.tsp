@@ -26,7 +26,7 @@ union ResourceType {
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Specify which action user wants to be performed on the resources")
-union ScheduledActionType {
+union ActionType {
   @doc("Perform a start action on the specified resources")
   Start: "Start",
 

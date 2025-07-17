@@ -1757,6 +1757,36 @@
     }
   },
   "definitions": {
+    "ActionType": {
+      "type": "string",
+      "description": "Specify which action user wants to be performed on the resources",
+      "enum": [
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Perform a start action on the specified resources"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Perform a deallocate action on the specified resources"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Perform hibernate and deallocate on the specified resources"
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -3619,7 +3649,7 @@
           "description": "The type of resource the scheduled action is targeting"
         },
         "actionType": {
-          "$ref": "#/definitions/ScheduledActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "The action the scheduled action should perform in the resources"
         },
         "startTime": {
@@ -3674,7 +3704,7 @@
           "description": "The type of resource the scheduled action is targeting"
         },
         "actionType": {
-          "$ref": "#/definitions/ScheduledActionType",
+          "$ref": "#/definitions/ActionType",
           "description": "The action the scheduled action should perform in the resources"
         },
         "startTime": {
@@ -3809,36 +3839,6 @@
       "required": [
         "value"
       ]
-    },
-    "ScheduledActionType": {
-      "type": "string",
-      "description": "Specify which action user wants to be performed on the resources",
-      "enum": [
-        "Start",
-        "Deallocate",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduledActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "Perform a start action on the specified resources"
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Perform a deallocate action on the specified resources"
-          },
-          {
-            "name": "Hibernate",
-            "value": "Hibernate",
-            "description": "Perform hibernate and deallocate on the specified resources"
-          }
-        ]
-      }
     },
     "ScheduledActionUpdate": {
       "type": "object",

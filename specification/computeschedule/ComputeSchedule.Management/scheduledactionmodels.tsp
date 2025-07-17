@@ -148,7 +148,7 @@ model ScheduledActionProperties {
   resourceType: ResourceType;
 
   @doc("The action the scheduled action should perform in the resources")
-  actionType: ScheduledActionType;
+  actionType: ActionType;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The time which the scheduled action is supposed to start running")
