@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "projectName": "DevProject"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject/pools/DevPool",
+            "name": "DevPool",
+            "type": "Microsoft.DevCenter/pools",
+            "properties": {
+              "displayName": "Developer Pool",
+              "devBoxDefinitionName": "WebDevBox",
+              "networkConnectionName": "Network1-westus2",
+              "licenseType": "Windows_Client",
+              "localAdministrator": "Enabled",
+              "stopOnDisconnect": {
+                "status": "Enabled",
+                "gracePeriodMinutes": 60
+              },
+              "stopOnNoConnect": {
+                "status": "Enabled",
+                "gracePeriodMinutes": 120
+              },
+              "healthStatus": "Healthy",
+              "devBoxCount": 1,
+              "provisioningState": "Succeeded",
+              "singleSignOnStatus": "Disabled",
+              "virtualNetworkType": "Managed",
+              "managedVirtualNetworkRegions": [
+                "centralus"
+              ],
+              "activeHoursConfiguration": {
+                "keepAwakeEnableStatus": "Enabled",
+                "autoStartEnableStatus": "Enabled",
+                "defaultTimeZone": "America/Los_Angeles",
+                "defaultStartTimeHour": 9,
+                "defaultEndTimeHour": 17,
+                "defaultDaysOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "daysOfWeekLimit": 5
+              }
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:00:36.993Z",
+              "lastModifiedBy": "user1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+            },
+            "location": "centralus"
+          }
+        ]
+      }
+    }
+  }
+}
