@@ -5651,6 +5651,20 @@
         }
       }
     },
+    "DevCenterAndPolicyProjectCatalogSettings": {
+      "type": "object",
+      "description": "Project catalog settings for project catalogs under a project associated to this dev center.",
+      "properties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/FeatureSettings"
+          },
+          {
+            "$ref": "#/definitions/DevCenterProjectCatalogSettings"
+          }
+        ]
+      }
+    },
     "DevCenterResourceType": {
       "description": "Indicates dev center resource types.",
       "enum": [
@@ -6132,7 +6146,7 @@
       "type": "object",
       "properties": {
         "projectCatalogSettings": {
-          "$ref": "#/definitions/DevCenterProjectCatalogSettings",
+          "$ref": "#/definitions/DevCenterAndPolicyProjectCatalogSettings",
           "description": "Dev Center settings to be used when associating a project with a catalog.",
           "readOnly": true
         },
@@ -6140,7 +6154,181 @@
           "$ref": "#/definitions/ProjectNetworkSettings",
           "description": "Network settings that will be enforced on this project.",
           "readOnly": true
+        },
+        "azureAiServicesSettings": {
+          "description": "Azure AI settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "devBoxAutoDeleteSettings": {
+          "description": "Dev box auto-delete settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "devBoxLimitsSettings": {
+          "description": "Dev box limits settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "devBoxTunnelSettings": {
+          "description": "Dev box tunnel settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "serverlessGpuSessionsSettings": {
+          "description": "Serverless GPU sessions settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "userCustomizationsSettings": {
+          "description": "User customizations settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
+        },
+        "workspaceStorageSettings": {
+          "description": "Workspace storage settings that will be enforced on this project.",
+          "$ref": "#/definitions/FeatureSettings"
         }
+      }
+    },
+    "ConfigurationPolicies": {
+      "description": "Represents policies to enforce configuration settings on a project.",
+      "type": "object",
+      "properties": {
+        "azureAiServicesFeatureStatus": {
+          "description": "The property indicates the Azure AI services settings on a project.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "devBoxAutoDeleteFeatureStatus": {
+          "description": "Indicates whether the setting is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "devBoxLimitsFeatureStatus": {
+          "description": "Indicates whether DevBox limits are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "devBoxTunnelFeatureStatus": {
+          "description": "Indicates whether DevBox tunnel settings are configurable at Pool scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "projectCatalogFeatureStatus": {
+          "description": "Indicates whether project catalogs are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "serverlessGpuSessionsFeatureStatus": {
+          "description": "Indicates whether serverless GPU sessions are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "userCustomizationsFeatureStatus": {
+          "description": "Indicates whether user customizations is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        },
+        "workspaceStorageFeatureStatus": {
+          "description": "Indicates whether workspace storage is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureState"
+        }
+      }
+    },
+    "FeatureSettings": {
+      "description": "Dev center project policy feature settings.",
+      "type": "object",
+      "properties": {
+        "statusModifiable": {
+          "description:": "Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "valueModifiable": {
+          "description:": "Indicates whether the feature values are configurable at the Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        }
+      }
+    },
+    "FeatureState": {
+      "description": "Feature state.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureSettings"
+        }
+      ],
+      "properties": {
+        "defaultStatus": {
+          "description": "Indicates the default status of the feature.",
+          "$ref": "#/definitions/FeatureStatus"
+        },
+        "defaultValue": {
+          "description": "Indicates the default type and value.",
+          "$ref": "#/definitions/FeatureStateDefaultValue"
+        }
+      }
+    },
+    "FeatureStateDefaultValue": {
+      "description": "Default value of feature state.",
+      "type": "object",
+      "properties:": {
+        "valueType": {
+          "description": "Indicates the type of the default value.",
+          "$ref": "#/definitions/DefaultValueType"
+        },
+        "value": {
+          "description": "The default value.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "DefaultValueType": {
+      "description": "Type of default value.",
+      "enum": [
+        "string",
+        "int",
+        "boolean",
+        "object",
+        "array"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DefaultValueType",
+        "modelAsString": true
+      }
+    },
+    "FeatureStatus": {
+      "description": "Feature status",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureStatus",
+        "modelAsString": true
+      }
+    },
+    "FeatureStateModifiable": {
+      "description": "Feature enablement status.",
+      "enum": [
+        "FeatureNotModifiable",
+        "FeatureModifiable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureStateModifiable",
+        "modelAsString": true
       }
     },
     "ResourcePolicy": {
@@ -6245,6 +6433,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "configurationPolicies": {
+          "description": "Configuration Policies part of this project policy.",
+          "type": "object",
+          "$ref": "#/definitions/ConfigurationPolicies"
         }
       }
     },
