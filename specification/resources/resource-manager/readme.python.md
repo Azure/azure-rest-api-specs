@@ -131,3 +131,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.resource.privatelinks
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks
 ```
+
+### Tag: package-databoundaries-2024-08 and python
+
+These settings apply only when `--tag=package-databoundaries-2024-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-databoundaries-2024-08'
+namespace: azure.mgmt.resource.databoundaries
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/databoundaries
+directive:
+  - remove-operation: "Operations_List"
+```
