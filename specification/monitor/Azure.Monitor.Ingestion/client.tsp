@@ -8,6 +8,8 @@ using TypeSpec.Versioning;
 @versioned(LogsIngestion.Versions)
 namespace ClientCustomizations;
 
+@@clientNamespace(LogsIngestion, "com.azure.monitor.ingestion.implementation", "java");
+
 @@clientName(LogsIngestion, "Client", "go");
 
 using LogsIngestion;
