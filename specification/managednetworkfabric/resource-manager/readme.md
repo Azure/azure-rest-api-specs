@@ -27,7 +27,21 @@ These are the global settings for the Managed Network Fabric.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-06-15-preview
+tag: package-2025-07-15
+```
+
+### Tag: package-2025-07-15
+
+These settings apply only when `--tag=package-2025-07-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-15'
+input-file:
+  - Microsoft.ManagedNetworkFabric/stable/2025-07-15/managednetworkfabric.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    reason: This error is caused by typespec inbuilt managed identity model.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: Removed deprecated APIs in the new API version
 ```
 
 ### Tag: package-2024-06-15-preview

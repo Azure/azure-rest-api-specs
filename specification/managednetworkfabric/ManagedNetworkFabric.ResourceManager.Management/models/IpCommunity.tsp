@@ -68,6 +68,14 @@ model IpCommunityPatch {
   ...TagsUpdate;
 
   @doc("IP Community patchable properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: IpCommunityPatchableProperties;
+
+  #suppress "deprecated" "Legacy flattening"
+  @doc("IP Community patchable properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: IpCommunityPatchableProperties;
 }
 
