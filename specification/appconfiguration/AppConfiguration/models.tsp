@@ -163,7 +163,8 @@ model KeyValueListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.acceptDatetime, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>;
 }
 
 @doc("A key-value pair representing application settings.")
