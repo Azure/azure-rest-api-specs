@@ -11,6 +11,9 @@ using Microsoft.ComputeSchedule;
   "java"
 );
 
+@@clientName(CancelOccurrenceRequest, "CancelOccurrenceContent", "csharp");
+@@clientName(DelayRequest, "DelayContent", "csharp");
+
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
   "csharp"
@@ -138,6 +141,10 @@ using Microsoft.ComputeSchedule;
 @@clientName(CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
+);
+@@clientName(ResourceOperationResponse,
+  "RecurringActionsResourceOperationResult",
+  "csharp,javascript,go,python,java"
 );
 @@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
   "V2025-05-01",
