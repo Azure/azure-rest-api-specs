@@ -1,5 +1,6 @@
 // @ts-check
 
+import { accessSync, constants } from "fs";
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
@@ -30,6 +31,9 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
+    // Synchronously verify folder can be read, to prevent confusing errors later
+    accessSync(folder, constants.R_OK);
+
     this.#folder = resolve(folder);
     this.#logger = options?.logger;
   }

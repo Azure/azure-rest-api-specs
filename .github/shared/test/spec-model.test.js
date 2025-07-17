@@ -11,11 +11,10 @@ import { repoRoot } from "./repo.js";
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("SpecModel", () => {
-  it("can be created with mock folder", async () => {
-    const specModel = new SpecModel("foo");
-    expect(specModel.folder).toBe(resolve("foo"));
-
-    await expect(specModel.getReadmes()).rejects.toThrowError(/no such file or directory/i);
+  it("throws if folder doesn't exist", async () => {
+    expect(() => new SpecModel("foo")).toThrowErrorMatchingInlineSnapshot(
+      `[Error: ENOENT: no such file or directory, access 'foo']`,
+    );
   });
 
   it("returns spec model", async () => {

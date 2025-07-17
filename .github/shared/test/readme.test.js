@@ -20,10 +20,16 @@ describe("readme", () => {
   });
 
   it("resolves path against SpecModel", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
     const readme = new Readme("readme.md", {
-      specModel: new SpecModel("/specs/foo"),
+      specModel: new SpecModel(folder),
     });
-    expect(readme.path).toBe(resolve("/specs/foo/readme.md"));
+
+    expect(readme.path).toBe(resolve(folder, "readme.md"));
   });
 
   // TODO: Test that path is resolved against backpointer
