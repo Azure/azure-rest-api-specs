@@ -53,6 +53,74 @@
   "tags": [],
   "paths": {
     "/criticalDataColumns": {
+      "get": {
+        "operationId": "CriticalDataColumn",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The globally unique identifier of the entity.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "query",
+            "description": "The identifier of the asset.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The identifier of the skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The identifier of the top.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The identifier of the orderBy.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataColumn_MaximumSet": {
+            "$ref": "./examples/CriticalDataColumn_MaximumSet_Gen.json"
+          }
+        }
+      },
       "post": {
         "operationId": "PostCriticalDataColumn",
         "description": "The most basic operation.",
@@ -89,6 +157,206 @@
         "x-ms-examples": {
           "PostCriticalDataColumn_MaximumSet": {
             "$ref": "./examples/PostCriticalDataColumn_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/criticalDataColumns/{criticalDataColumnId}": {
+      "get": {
+        "operationId": "CriticalDataColumnCriticalDataColumnId",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataColumnId",
+            "in": "path",
+            "description": "The globally unique identifier of the entity.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataColumnCriticalDataColumnId_MaximumSet": {
+            "$ref": "./examples/CriticalDataColumnCriticalDataColumnId_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/criticalDataColumns/{criticalDataColumnId}/relationships": {
+      "get": {
+        "operationId": "GetCriticalDataColumn",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataColumnId",
+            "in": "path",
+            "description": "The globally unique identifier of the entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The identifier of the entityType.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCriticalDataColumn_MaximumSet": {
+            "$ref": "./examples/GetCriticalDataColumn_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CriticalDataColumnCriticalDataColumnIdRelationships",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataColumnId",
+            "in": "path",
+            "description": "The globally unique identifier of the entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The identifier of the entityType.",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The identifier of the body.",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataColumnCriticalDataColumnIdRelationships_MaximumSet": {
+            "$ref": "./examples/CriticalDataColumnCriticalDataColumnIdRelationships_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteCriticalDataColumn",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataElementId",
+            "in": "query",
+            "description": "The globally unique identifier of the entity.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The identifier of the entityType.",
+            "required": true
+          },
+          {
+            "name": "entityId",
+            "in": "query",
+            "description": "The identifier of the entityId.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "criticalDataColumnId",
+            "in": "path",
+            "description": "The globally unique identifier of the entity.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCriticalDataColumn_MaximumSet": {
+            "$ref": "./examples/DeleteCriticalDataColumn_MaximumSet_Gen.json"
           }
         }
       }

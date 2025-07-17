@@ -15,6 +15,113 @@ op postCriticalDataColumn is Azure.Core.Foundations.Operation<
   MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn,
   void
 >;
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns")
+@get
+op criticalDataColumn is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @query("domainId")
+    domainId?: string;
+
+    @doc("The identifier of the asset.")
+    @query("assetId")
+    assetId?: string;
+
+    @doc("The identifier of the skip.")
+    @query("skip")
+    skip?: int32;
+
+    @doc("The identifier of the top.")
+    @query("top")
+    top?: int32;
+
+    @doc("The identifier of the orderBy.")
+    @query("orderBy")
+    orderBy?: string;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns/{criticalDataColumnId}")
+@get
+op criticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @path
+    criticalDataColumnId: string;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+@post
+op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @path
+    criticalDataColumnId: string;
+
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @doc("The identifier of the entityType.")
+    @query("entityType")
+    entityType: unknown;
+
+    @doc("The identifier of the body.")
+    @bodyRoot
+    body?: Record<string>;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+@get
+op getCriticalDataColumn is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @path
+    criticalDataColumnId: string;
+
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @doc("The identifier of the entityType.")
+    @query("entityType")
+    entityType: unknown;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+@delete
+op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
+  {
+    @doc("The globally unique identifier of the entity.")
+    @query("criticalDataElementId")
+    criticalDataElementId?: string;
+
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
+    @doc("The identifier of the entityType.")
+    @query("entityType")
+    entityType: unknown;
+
+    @doc("The identifier of the entityId.")
+    @query("entityId")
+    entityId: string;
+
+    @doc("The globally unique identifier of the entity.")
+    @path
+    criticalDataColumnId: string;
+  },
+  void
+>;
 
 #suppress "@azure-tools/typespec-openapi/example-validation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
