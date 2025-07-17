@@ -46,6 +46,7 @@ model VoiceLiveResponseSession {
   input_audio_echo_cancellation?: VoiceLiveAudioEchoCancellation;
   avatar?: VoiceLiveAvatarConfig;
   input_audio_transcription: VoiceLiveAudioInputTranscriptionSettings | null;
+  output_audio_timestamp_types?: VoiceLiveAudioTimestampType[];
   tools: VoiceLiveTool[];
   tool_choice: VoiceLiveToolChoice;
   temperature: float32;
