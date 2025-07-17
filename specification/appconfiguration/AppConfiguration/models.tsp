@@ -151,6 +151,7 @@ model Error {
   status?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model KeyValueListResult {
@@ -163,8 +164,7 @@ model KeyValueListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.acceptDatetime, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>;
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime, IfMatchHeader.ifMatch, IfNoneMatchHeader.ifNoneMatch]>;
 }
 
 @doc("A key-value pair representing application settings.")
