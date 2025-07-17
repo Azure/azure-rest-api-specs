@@ -31,7 +31,7 @@ model PhiEntity {
 }
 
 @doc("PHI Entity for public use in SurrogateOnly operations with full encoding information.")
-@added(Versions.v2024_12_15)
+@added(Versions.v2025_07_15_preview)
 model PublicPhiEntity {
   @doc("PHI Category of the entity.")
   category: PhiCategory;
@@ -47,7 +47,7 @@ model PublicPhiEntity {
 }
 
 @doc("Grouped PHI entities with shared encoding specification.")
-@added(Versions.v2024_12_15)
+@added(Versions.v2025_07_15_preview)
 model TaggedPhiEntities {
   @doc("The encoding type used for all entities in this group.")
   encoding: EncodingType;
@@ -57,7 +57,7 @@ model TaggedPhiEntities {
 }
 
 @doc("Simple PHI entity with encoding-specific offset and length values.")
-@added(Versions.v2024_12_15)
+@added(Versions.v2025_07_15_preview)
 model SimplePhiEntity {
   @doc("PHI Category of the entity.")
   category: PhiCategory;

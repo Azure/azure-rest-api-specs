@@ -17,7 +17,7 @@ union DeidentificationOperationType {
   Tag: "Tag",
 
   @doc("SurrogateOnly Operation will replace only specified entities of PHI with surrogate values.")
-  @added(Versions.v2024_12_15)
+  @added(Versions.v2025_07_15_preview)
   SurrogateOnly: "SurrogateOnly",
 
   string,

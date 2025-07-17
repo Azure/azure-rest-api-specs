@@ -26,7 +26,7 @@ These are the global settings for the HealthDataAIServices.DeidServices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-12-15
+tag: package-2025-07-15-preview
 title: Azure Health Data Services de-identification service
 security: AADToken
 security-scopes:
@@ -42,13 +42,13 @@ input-file:
   - stable/2024-11-15/HealthDataAIServices.DeidServices.json
 ```
 
-### Tag: package-2024-12-15
+### Tag: package-2025-07-15-preview
 
-These settings apply only when `--tag=package-2024-12-15` is specified on the command line.
+These settings apply only when `--tag=package-2025-07-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-12-15'
+```yaml $(tag) == 'package-2025-07-15-preview'
 input-file:
-  - stable/2024-12-15/HealthDataAIServices.DeidServices.json
+  - preview/2025-07-15-preview/HealthDataAIServices.DeidServices.json
 ```
 
 ---

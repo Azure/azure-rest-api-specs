@@ -18,11 +18,11 @@ model DeidentificationContent {
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("List of PHI entities for SurrogateOnly operation with full encoding information. Cannot be used with TaggedEntities.")
-  @added(Versions.v2024_12_15)
+  @added(Versions.v2025_07_15_preview)
   entities?: Array<PublicPhiEntity>;
 
   @doc("Grouped PHI entities with single encoding specification for SurrogateOnly operation. Cannot be used with Entities.")
-  @added(Versions.v2024_12_15)
+  @added(Versions.v2025_07_15_preview)
   taggedEntities?: TaggedPhiEntities;
 
   @doc("Customization parameters to override default service behaviors.")
