@@ -1,0 +1,39 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - communicationservicessms
+  - dmarc
+  - gcch
+  - msvideo
+  - pstn
+  - revist
+  - rpmsg
+  - rtmp
+  - ssml
+  - unassigning
+  - unassignment
+  - unassigns
+  - vsonline
+  - vsts
+  - xlsb
+overrides:
+  - filename: >-
+      **/specification/communication/data-plane/Chat/**/communicationserviceschat.json
+    words:
+      - heic
+      - readreceipts
+      - webp
+  - filename: '**/specification/communication/data-plane/CallAutomation/**/*.json'
+    words:
+      - transferor's
+      - unhold
+  - filename: '**/specification/communication/data-plane/Sms/preview/**/*.json'
+    words:
+      - optouts
+

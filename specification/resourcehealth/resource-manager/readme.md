@@ -26,10 +26,28 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-2025-05-01
 azure-validator: true
 ```
 
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.ResourceHealth/stable/2025-05-01/ResourceHealth.json
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - Microsoft.ResourceHealth/stable/2025-04-01/ResourceHealth.json
+```
 
 ### Tag: package-2024-02
 
@@ -176,7 +194,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
     after_scripts:
     - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']

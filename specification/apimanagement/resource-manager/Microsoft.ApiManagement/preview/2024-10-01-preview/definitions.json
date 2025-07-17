@@ -2353,6 +2353,23 @@
         "acceptRetryAfter": {
           "type": "boolean",
           "description": "flag to accept Retry-After header from the backend."
+        },
+        "failureResponse": {
+          "$ref": "#/definitions/BackendFailureResponse",
+          "description": "The response of the backend when the circuit breaker gets open."
+        }
+      }
+    },
+    "BackendFailureResponse": {
+      "type": "object",
+      "description": "The response to be returned when a backend fails to respond",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The status code of the response.",
+          "minimum": 100,
+          "maximum": 599
         }
       }
     },
@@ -2606,6 +2623,14 @@
           "example": {
             "services": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends"
           }
+        },
+        "failureResponse": {
+          "$ref": "#/definitions/BackendFailureResponse",
+          "description": "The response to be returned when all the backends in the pool are inactive."
+        },
+        "sessionAffinity": {
+          "$ref": "#/definitions/BackendSessionAffinity",
+          "description": "The session stickiness properties of the backend pool."
         }
       }
     },
@@ -2645,6 +2670,46 @@
       "required": [
         "id"
       ]
+    },
+    "BackendSessionAffinity": {
+      "type": "object",
+      "description": "The session stickiness properties of the backend pool.",
+      "properties": {
+        "sessionId": {
+          "$ref": "#/definitions/BackendSessionId",
+          "description": "The id that identifies the requests belonging to the same session."
+        }
+      }
+    },
+    "BackendSessionId": {
+      "type": "object",
+      "description": "The properties of the id that identifies the requests belonging to the same session.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/BackendSessionIdSource",
+          "description": "Source from where the session id is extracted."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the variable that refers to the session id."
+        }
+      }
+    },
+    "BackendSessionIdSource": {
+      "type": "string",
+      "enum": [
+        "cookie"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "backend-sessionId-source",
+        "values": [
+          {
+            "value": "cookie",
+            "description": "The session id is set by APIM gateway in a cookie and is extracted from the cookies in client requests."
+          }
+        ]
+      }
     },
     "BearerTokenSendingMethodsContract": {
       "type": "string",
@@ -9451,17 +9516,6 @@
         "description": {
           "type": "string",
           "description": "Description of the workspace."
-        },
-        "configurationApi": {
-          "type": "object",
-          "properties": {
-            "hostname": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Hostname to which the agent connects to propagate configuration to the cloud."
-            }
-          },
-          "description": "Information regarding the Configuration API."
         }
       },
       "required": [

@@ -30,7 +30,7 @@ Run `oav run -h` to find all available options.
 
 To run API test, first please prepare an AAD app which is used for provisioning Azure resource. Please grant subscription contributor permission to this AAD app.
 
-For how to create AAD app, please follow this doc https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal
+For how to create AAD app, please follow this doc https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal
 
 ## Authoring steps
 

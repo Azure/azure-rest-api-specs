@@ -36,8 +36,7 @@ These settings apply only when `--tag=package-2021-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-- Microsoft.PowerBIdedicated/stable/2021-01-01/powerbidedicated.json
-- Microsoft.PowerBIdedicated/stable/2021-01-01/autoScaleVCores.json
+- Microsoft.PowerBIdedicated/stable/2021-01-01/openapi.json
 ```
 
 ### Tag: package-2017-10-01
@@ -60,27 +59,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.PowerBIDedicated
-  output-folder: $(csharp-sdks-folder)/powerbidedicated/Microsoft.Azure.Management.PowerBIDedicated/src/Generated
-  clear-output-folder: true
 ```
 
 ## Go

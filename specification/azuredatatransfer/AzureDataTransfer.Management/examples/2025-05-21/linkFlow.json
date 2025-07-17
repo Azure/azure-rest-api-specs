@@ -1,0 +1,28 @@
+{
+  "operationId": "Flows_Link",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "flow": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow"
+    },
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Links the specified flow",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-21"
+      }
+    }
+  }
+}

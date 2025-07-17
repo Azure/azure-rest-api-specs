@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/purview"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -15,7 +14,7 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-purview-datamap"
-    package-name: "{package-dir}"
+    namespace: "azure.purview.datamap"
     package-mode: dataplane
     flavor: azure
     generate-test: true
@@ -26,11 +25,13 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Analytics.Purview.DataMap
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "purview-datamap-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
+    generate-metadata: true
+    package-details:
       name: "@azure-rest/purview-datamap"
       description: Purview DataMap Service"
     flavor: azure

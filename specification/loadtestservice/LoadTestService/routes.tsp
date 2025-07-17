@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 import "./models.testprofile.tsp";
 import "./models.trigger.tsp";
+import "./models.notificationrule.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -113,7 +114,7 @@ interface LoadTestAdministration {
   @summary("Add an app component to a test.")
   @doc("Add an app component to a test by providing the resource Id, name and type.")
   @route("/tests/{testId}/app-components")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -161,7 +162,7 @@ interface LoadTestAdministration {
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -180,9 +181,9 @@ interface LoadTestAdministration {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestServerMetricConfig;
+      body: TestServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -202,7 +203,7 @@ interface LoadTestAdministration {
       @pattern("^[a-z0-9_-]*$")
       testId: string;
     },
-    TestServerMetricConfig
+    TestServerMetricsConfiguration
   >;
 }
 
@@ -347,7 +348,7 @@ interface LoadTestRun {
   @summary("Add an app component to a test run.")
   @doc("Add an app component to a test run by providing the resource Id, name and type.")
   @route("/test-runs/{testRunId}/app-components")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -401,7 +402,7 @@ interface LoadTestRun {
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
-  @patch
+  @patch(#{ implicitOptionality: true })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -420,9 +421,9 @@ interface LoadTestRun {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestRunServerMetricConfig;
+      body: TestRunServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestRunServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -442,7 +443,7 @@ interface LoadTestRun {
       @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
-    TestRunServerMetricConfig
+    TestRunServerMetricsConfiguration
   >;
 }
 
@@ -528,5 +529,23 @@ interface TriggerAdministration {
   listTrigger is StandardResourceOperations.ResourceList<
     Trigger,
     ListQueryParametersTrait<ListTriggerQueryParams>
+  >;
+}
+
+@tag("NotificationRule")
+interface NotificationRuleAdministration {
+  @added(APIVersions.v2024_12_01_preview)
+  getNotificationRule is StandardResourceOperations.ResourceRead<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  createOrUpdateNotificationRule is StandardResourceOperations.ResourceCreateOrUpdate<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  deleteNotificationRule is StandardResourceOperations.ResourceDelete<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  listNotificationRule is StandardResourceOperations.ResourceList<
+    NotificationRule,
+    ListQueryParametersTrait<ListNotificationRuleQueryParams>
   >;
 }
