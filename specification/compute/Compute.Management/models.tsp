@@ -8500,8 +8500,6 @@ model VMScaleSetScaleOutInput {
   /**
    * The input properties for ScaleOut
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VMScaleSetScaleOutInputProperties;
 }
 
