@@ -4,7 +4,6 @@
   "parameters": {
     "api-version": "2024-10-02-preview",
     "identifier": "testSessionIdentifier",
-    "operation-id": "testExecutionId",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Asynchronous",
@@ -14,7 +13,6 @@
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "id": "testExecutionId",
         "identifier": "testSessionIdentifier",
@@ -23,10 +21,6 @@
       }
     },
     "202": {
-      "headers": {
-        "operation-id": "testExecutionId",
-        "Operation-Location": "operation-location-uri"
-      },
       "body": {
         "id": "testExecutionId",
         "identifier": "testSessionIdentifier",
