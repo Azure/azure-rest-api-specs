@@ -127,7 +127,7 @@ interface ScheduledActions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
 
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-  update is ArmCustomPatchAsync<
+  update is ArmCustomPatchSync<
     ScheduledAction,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ScheduledAction,
