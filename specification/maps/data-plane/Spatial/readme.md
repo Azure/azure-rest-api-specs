@@ -36,11 +36,11 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag:  package-deprecated-2022-08-01
+### Tag: package-stable-deprecated-2022-08-01
 
-These settings apply only when `--tag=2022-08-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-deprecated-2022-08-01` is specified on the command line.
 
-``` yaml $(tag) == '2022-08-01'
+``` yaml $(tag) == 'package-stable-deprecated-2022-08-01'
 input-file:
   - stable/2022-08-01/spatial.json
 ```
