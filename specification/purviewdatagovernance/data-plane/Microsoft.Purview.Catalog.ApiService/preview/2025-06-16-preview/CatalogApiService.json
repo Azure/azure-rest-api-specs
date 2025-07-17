@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Purview Data Catalog Client",
+    "title": "PurviewDataCatalog",
     "version": "2025-06-16-preview",
     "description": "Creates a data plane client for Purview Data Catalog.",
     "x-typespec-generated": [
@@ -31,12 +31,31 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://myservice.azure.com/read",
+        "https://myservice.azure.com/write"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://api.example.com/oauth2/authorize",
+      "scopes": {
+        "https://myservice.azure.com/read": "",
+        "https://myservice.azure.com/write": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/criticalDataElements": {
       "get": {
         "operationId": "GetCriticalDataElement",
-        "description": "The most basic operation.",
+        "description": "Example: GetCriticalDataElement_MaximumSet_Gen\nSee: ./examples/GetCriticalDataElement_MaximumSet_Gen.json",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -44,19 +63,21 @@
           {
             "name": "domainId",
             "in": "query",
+            "description": "The unique identifier (UUID) of the resource.",
             "required": false,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "keyword",
             "in": "query",
+            "description": "to avoid",
             "required": false,
             "type": "string"
           },
           {
             "name": "skip",
             "in": "query",
+            "description": "to avoid",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -64,6 +85,7 @@
           {
             "name": "top",
             "in": "query",
+            "description": "to avoid",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -71,6 +93,7 @@
           {
             "name": "orderBy",
             "in": "query",
+            "description": "to avoid",
             "required": false,
             "type": "string"
           }
@@ -93,14 +116,14 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataElement_MaximumSet_Gen": {
+          "GetCriticalDataElement_MaximumSet": {
             "$ref": "./examples/GetCriticalDataElement_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
         "operationId": "PostCriticalDataElement",
-        "description": "The most basic operation.",
+        "description": "Example: PostCriticalDataElement_MaximumSet_Gen\nSee: ./examples/PostCriticalDataElement_MaximumSet_Gen.json",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -132,7 +155,7 @@
           }
         },
         "x-ms-examples": {
-          "PostCriticalDataElement_MaximumSet_Gen": {
+          "PostCriticalDataElement_MaximumSet": {
             "$ref": "./examples/PostCriticalDataElement_MaximumSet_Gen.json"
           }
         }
@@ -188,7 +211,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -202,86 +225,109 @@
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "catalog": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "scan": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAccountExceptionMessageModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "correlationId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "exceptionDateTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "exceptionErrorCode": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "exceptionMessage": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAccountServiceModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "accountStatusModel": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountStatusModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountStatusModel",
+          "description": "To avoid"
         },
         "auditModel": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAuditModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAuditModel",
+          "description": "To avoid"
         },
         "cloudConnectors": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCloudConnectors"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCloudConnectors",
+          "description": "To avoid"
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
+          "description": "To avoid",
           "readOnly": true
         },
         "createdBy": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "createdByObjectId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "createMode": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "dataFactoryAccount": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsDataFactoryAccount"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsDataFactoryAccount",
+          "description": "To avoid"
         },
         "defaultCatalogId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "defaultCollectionName": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "encryption": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel",
+          "description": "To avoid"
         },
         "endpoints": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountEndpoints",
+          "description": "To avoid"
         },
         "eventHubAccessKeyInfo": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo",
+          "description": "To avoid"
         },
         "hookKafkaConfigurations": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsHookKafkaConfigurationServiceModel"
           },
@@ -289,45 +335,57 @@
         },
         "id": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo",
+          "description": "To avoid"
         },
         "ingestionStorageModel": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel",
+          "description": "To avoid"
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
+          "description": "To avoid",
           "readOnly": true
         },
         "location": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "managedResourcesPublicNetworkAccess": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "mergeInfo": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsMergeInfoModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsMergeInfoModel",
+          "description": "To avoid"
         },
         "name": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "networkAcls": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsNetworkAcls"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsNetworkAcls",
+          "description": "To avoid"
         },
         "notificationKafkaConfigurations": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationServiceModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationServiceModel",
+          "description": "To avoid"
         },
         "previousAccountState": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel",
+          "description": "To avoid"
         },
         "privateLinkIds": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -335,33 +393,41 @@
           "readOnly": true
         },
         "processingStorageModel": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsProcessingStorageModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsProcessingStorageModel",
+          "description": "To avoid"
         },
         "provisioningState": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "reconciliationConfig": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsReconciliationConfigServiceModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsReconciliationConfigServiceModel",
+          "description": "To avoid"
         },
         "resourceId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "resourceType": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel",
+          "description": "To avoid"
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
           "format": "int32",
+          "description": "To avoid",
           "readOnly": true
         },
         "storageAccounts": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsManagedResourceServiceModel"
           },
@@ -369,6 +435,7 @@
         },
         "subscriptionId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "tags": {
@@ -381,232 +448,297 @@
         },
         "tenantId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         },
         "useArtifactStore": {
           "type": "boolean",
+          "description": "To avoid",
           "readOnly": true
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "capacity": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAccountStatusModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "accountExceptionMessageModel": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountExceptionMessageModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountExceptionMessageModel",
+          "description": "To avoid"
         },
         "accountProvisioningState": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsAuditModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "auditIngestionEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "tenantForest": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsCloudConnectors": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "awsExternalId": {
           "type": "string",
+          "description": "To avoid",
           "readOnly": true
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsCredentials": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "identityId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsDataFactoryAccount": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "apiVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "baseManagementUri": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "factoryId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "processingStorageLinkedServiceName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "subscription": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsEncryptionModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "systemMasterKey": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsKeyEncryptionKey"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsKeyEncryptionKey",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeyInfo": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "eventHubName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "externalKeys": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys",
+          "description": "To avoid"
         },
         "internalKeys": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys",
+          "description": "To avoid"
         },
         "managedResource": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         },
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "subscriptionId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsEventHubAccessKeys": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "keyName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "primaryConnectionString": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "secondaryConnectionString": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsHookKafkaConfigurationServiceModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "consumerGroup": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "credentials": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCredentials"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCredentials",
+          "description": "To avoid"
         },
         "eventHubResourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventHubType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventStreamingState": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventStreamingType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsIngestionStorageModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "dnsZone": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "endpointSuffix": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "primaryEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "publicNetworkAccess": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "sku": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "tenantId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsKeyEncryptionKey": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "keyVaultResourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsManagedIdentityInfo": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "clientId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "identityUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "managedIdentityType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "principalId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "userAssignedIdentities": {
           "type": "object",
@@ -619,175 +751,220 @@
     },
     "MicrosoftAzureProjectBabylonMetadataModelsManagedResourceServiceModel": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "dnsZone": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "endpointSuffix": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "location": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "name": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "primaryEndpoint": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "resourceId": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         },
         "sku": {
           "type": "string",
+          "description": "to avoid",
           "readOnly": true
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsMergeInfoModel": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "accountId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "accountLocation": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "accountResourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "mergeStatus": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "typeOfAccount": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsNetworkAcls": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "defaultAction": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsNotificationKafkaConfigurationServiceModel": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCredentials"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsCredentials",
+          "description": "To avoid"
         },
         "eventHubResourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventHubType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventStreamingState": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "eventStreamingType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "partitionId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsPreviousAccountStateServiceModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "resourceType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "sku": {
-          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel"
+          "$ref": "#/definitions/MicrosoftAzureProjectBabylonMetadataModelsAccountSkuModel",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsProcessingStorageModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "dnsZone": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "endpointSuffix": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "primaryEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "sku": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "tenantId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsReconciliationConfigServiceModel": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "reconciliationStatus": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "tenantId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftAzureProjectBabylonMetadataModelsUserAssignedIdentityModel": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "authenticationEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "clientId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "clientSecretUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "principalId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationAssetMissingPropertiesRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "dryRun": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationBillingEventBackfillRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "events": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesExtendedBillingEvent"
           }
@@ -796,55 +973,67 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationBusinessDomainObjectBackfillRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "dryRun": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsAdministrationGlobalAssetCleanupRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "dryRun": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCriticalDataElementCriticalDataElementFacetRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "iDs": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "owners": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "To avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "facets": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject"
           }
@@ -853,53 +1042,64 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCriticalDataElementCriticalDataElementQueryRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "owners": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "To avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "managedAttributes": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter"
           }
@@ -908,87 +1108,105 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsCustomMetadataCustomMetadataQueryRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "owners": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataAssetDataAssetQueryRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "skip ."
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "top ."
         },
         "orderBy": {
           "type": "array",
+          "description": "orderBy .",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "iDs .",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "domainIds .",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "nameKeyword ."
         },
         "owners": {
           "type": "array",
+          "description": "owners .",
           "items": {
             "type": "string"
           }
         },
         "dataMapAssetIds": {
           "type": "array",
+          "description": "dataMapAssetIds .",
           "items": {
             "type": "string"
           }
@@ -997,48 +1215,58 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProductFacetRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "iDs": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "owners": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "to avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "types": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "facets": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject"
           }
@@ -1047,62 +1275,75 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsDataProductQueryRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "types": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "owners": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "to avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "managedAttributes": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter"
           }
@@ -1111,78 +1352,93 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeAttributeInstanceRelationship": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "entityId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "relationshipType": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType",
+          "description": "To avoid"
         },
         "value": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsMetadataAttributeMetadataAttributeRelationship": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "entityId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "relationshipType": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveFacetRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "iDs": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "definition": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "owners": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus",
+          "description": "to avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus"
           }
         },
         "facets": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject"
           }
@@ -1191,47 +1447,57 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsObjectiveQueryRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "definition": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus",
+          "description": "to avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus"
           }
         },
         "owners": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
@@ -1240,64 +1506,78 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "field": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "direction": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsPolicyAddAdminRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "userObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermFacetRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "iDs": {
           "type": "array",
+          "description": "iDs",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "domainIds",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "nameKeyword"
         },
         "owners": {
           "type": "array",
+          "description": "acronyms",
           "items": {
             "type": "string"
           }
         },
         "acronyms": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "status"
         },
         "multiStatus": {
           "type": "array",
+          "description": "Multistatus",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "facets": {
           "type": "array",
+          "description": "facts",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsFacetRequestObject"
           }
@@ -1306,59 +1586,71 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermQueryRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "iDs": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
-        "domainIDs": {
+        "domainIds": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "nameKeyword": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus",
+          "description": "to avoid"
         },
         "multiStatus": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus"
           }
         },
         "owners": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "acronyms": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "managedAttributes": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter"
           }
@@ -1367,28 +1659,33 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermRelationship": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "entityId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "relationshipType": {
-          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType"
+          "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType",
+          "description": "relationshipType"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsTermTermsMoveRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "destinationDomainId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "termIds": {
           "type": "array",
+          "description": "termIds",
           "items": {
             "type": "string"
           }
@@ -1397,119 +1694,146 @@
     },
     "MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsWorkflowRunQueryRequest": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "skip": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "top": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "orderBy": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryCatalogApiServiceControllersModelsOrderBy"
           }
         },
         "conceptId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "conceptType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelConceptType"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelConceptType",
+          "description": "to avoid"
         },
         "workflowRunAction": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum",
+          "description": "to avoid"
         },
         "workflowRunStatus": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflowRunsStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflowRunsStatusEnum",
+          "description": "to avoid"
         },
         "domain": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "conceptName": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "createdBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceBillingBillingRequest": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "aggregationType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "aggregationByProperties": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "dimensions": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "tags": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "filters": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceBillingFilterConditions"
           }
         },
         "dimensionFilters": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter"
           }
         },
         "tagFilters": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter"
           }
         },
         "binFunction": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceBillingFilter": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceBillingFilterConditions": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "filterProperty": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "filterCondition": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "filterValue": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceEntityCategory": {
       "type": "number",
+      "description": "EntityCategory",
       "enum": [
         0,
         1,
@@ -1532,65 +1856,80 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "0"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "1"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "2"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "3"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "4"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "5"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "6"
           },
           {
             "name": "7",
-            "value": 7
+            "value": 7,
+            "description": "7"
           },
           {
             "name": "8",
-            "value": 8
+            "value": 8,
+            "description": "8"
           },
           {
             "name": "9",
-            "value": 9
+            "value": 9,
+            "description": "9"
           },
           {
             "name": "10",
-            "value": 10
+            "value": 10,
+            "description": "10"
           },
           {
             "name": "11",
-            "value": 11
+            "value": 11,
+            "description": "13"
           },
           {
             "name": "12",
-            "value": 12
+            "value": 12,
+            "description": "12"
           },
           {
             "name": "13",
-            "value": 13
+            "value": 13,
+            "description": "13"
           }
         ]
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceOkrObjectiveStatus": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         0,
         1,
@@ -1602,21 +1941,25 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "to avoid"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceSharedEntityStatus": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         0,
         1,
@@ -1628,21 +1971,25 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "to avoid"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceSharedRelationshipType": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         0,
         1,
@@ -1654,163 +2001,206 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "to avoid"
           },
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewActiveGlossaryModelsServiceSharedSearchManageAttributeSearchFilter": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "field": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "operator": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "value": {
           "description": "Anything"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
-    "MicrosoftPurviewDataGovernanceAuditAPIEntitiesPartnerAuditRecordAppAccessContext": {
+    "MicrosoftPurviewDataGovernanceAuditApiEntitiesPartnerAuditRecordAppAccessContext": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "aadSessionId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "apiId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "clientAppId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "clientAppName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "correlationId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "uniqueTokenId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "issuedAtTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "recordType": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "creationTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "operation": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "organizationId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "userType": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "userKey": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "workload": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "resultStatus": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "objectId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "userId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
-        "clientIP": {
-          "type": "string"
+        "clientIp": {
+          "type": "string",
+          "description": "to avoid"
         },
         "scope": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "appAccessContext": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceAuditAPIEntitiesPartnerAuditRecordAppAccessContext"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceAuditApiEntitiesPartnerAuditRecordAppAccessContext",
+          "description": "to avoid"
         },
         "solutionName": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "solutionScenario": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "consumptionValue": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "consumptionValueUnit": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "consumptionType": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "billingType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType",
+          "description": "to avoid"
         },
         "additionalInfo": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "correlationId": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "tags": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "billingStartDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "billingEndDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "reportingDimensions": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "billingRegion": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "resourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingType": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         0
       ],
@@ -1820,30 +2210,37 @@
         "values": [
           {
             "name": "0",
-            "value": 0
+            "value": 0,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesExtendedBillingEvent": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "logOnly": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         },
         "billingEvent": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceBillingServiceClientEntitiesBillingEvent",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelApproverMetadata": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "action": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum",
+          "description": "to avoid"
         },
         "approvers": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApprovers"
           }
@@ -1852,6 +2249,7 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelApproverMetadataActionEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -1863,76 +2261,89 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelApprovers": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelAttributeInstance": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "fieldType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelAttributeInstanceFieldTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelAttributeInstanceFieldTypeEnum",
+          "description": "To avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "createdBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "lastModifiedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "attributeId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "choices": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelChoice"
           }
@@ -1941,6 +2352,7 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelAttributeInstanceFieldTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -1960,65 +2372,80 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           },
           {
             "name": "7",
-            "value": 7
+            "value": 7,
+            "description": "to avoid"
           },
           {
             "name": "8",
-            "value": 8
+            "value": 8,
+            "description": "to avoid"
           },
           {
             "name": "9",
-            "value": 9
+            "value": 9,
+            "description": "to avoid"
           },
           {
             "name": "10",
-            "value": 10
+            "value": 10,
+            "description": "to avoid"
           },
           {
             "name": "11",
-            "value": 11
+            "value": 11,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelChoice": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "ordinal": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelConceptType": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2033,110 +2460,131 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "To avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "assetId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "classifications": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "dataType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "assetName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElement": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus",
+          "description": "To avoid"
         },
         "dataType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElementDataTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElementDataTypeEnum",
+          "description": "To avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "To avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "contacts": {
           "type": "object",
-          "description": "Dictionary of\n<components·href·schemas·microsoft-purview-datagovernance-catalog-model-criticaldataelement·properties·contacts·additionalproperties>",
+          "description": "To avoid",
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner"
@@ -2146,6 +2594,7 @@
         },
         "managedAttributes": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute"
           }
@@ -2154,6 +2603,7 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElementDataTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2166,41 +2616,50 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCustomMetadata": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus",
+          "description": "To avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "To avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "contacts": {
           "type": "object",
@@ -2214,41 +2673,49 @@
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationship": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "relationshipType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipRelationshipTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipRelationshipTypeEnum",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData",
+          "description": "To avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "entityId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "properties": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipProperties"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipProperties",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipProperties": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelCustomMetadataRelationshipRelationshipTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2
@@ -2259,37 +2726,44 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataAsset": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "To avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "source": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource",
+          "description": "To avoid"
         },
         "contacts": {
           "type": "object",
@@ -2303,19 +2777,22 @@
         },
         "classifications": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "sensitivityLabel": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "schema": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataAssetSchema"
           }
@@ -2325,10 +2802,12 @@
         },
         "dataQualityScore": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "To avoid"
         },
-        "openInURL": {
-          "type": "string"
+        "openInUrl": {
+          "type": "string",
+          "description": "To avoid"
         },
         "typeProperties": {
           "description": "Anything"
@@ -2337,93 +2816,113 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataAssetSchema": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "classifications": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "type": "string"
           }
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataAssetSource": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "assetId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "assetType": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "assetAttributes": {
           "description": "Anything"
         },
         "fqn": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "accountName": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "lastRefreshedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "lastRefreshedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataProduct": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus",
+          "description": "to avoid"
         },
         "type": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductTypeEnum",
+          "description": "to avoid"
         },
         "updateFrequency": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductUpdateFrequencyEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductUpdateFrequencyEnum",
+          "description": "to avoid"
         },
         "managedAttributes": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute"
           }
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "to avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "businessUse": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "contacts": {
           "type": "object",
@@ -2437,52 +2936,63 @@
         },
         "termsOfUse": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelExternalLink"
           }
         },
         "documentation": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelExternalLink"
           }
         },
         "sensitivityLabel": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "endorsed": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "to avoid"
         },
         "activeSubscriberCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "to avoid"
         },
         "dataQualityScore": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "audience": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductAudienceEnum"
           }
         },
         "additionalProperties": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductAllOfAdditionalProperties"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDataProductAllOfAdditionalProperties",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataProductAllOfAdditionalProperties": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "assetCount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataProductAudienceEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2499,41 +3009,50 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           },
           {
             "name": "7",
-            "value": 7
+            "value": 7,
+            "description": "to avoid"
           },
           {
             "name": "8",
-            "value": 8
+            "value": 8,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataProductTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2557,69 +3076,85 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           },
           {
             "name": "7",
-            "value": 7
+            "value": 7,
+            "description": "to avoid"
           },
           {
             "name": "8",
-            "value": 8
+            "value": 8,
+            "description": "to avoid"
           },
           {
             "name": "9",
-            "value": 9
+            "value": 9,
+            "description": "to avoid"
           },
           {
             "name": "10",
-            "value": 10
+            "value": 10,
+            "description": "to avoid"
           },
           {
             "name": "11",
-            "value": 11
+            "value": 11,
+            "description": "to avoid"
           },
           {
             "name": "12",
-            "value": 12
+            "value": 12,
+            "description": "to avoid"
           },
           {
             "name": "13",
-            "value": 13
+            "value": 13,
+            "description": "to avoid"
           },
           {
             "name": "14",
-            "value": 14
+            "value": 14,
+            "description": "to avoid"
           },
           {
             "name": "15",
-            "value": 15
+            "value": 15,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDataProductUpdateFrequencyEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2634,71 +3169,87 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDomain": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainStatusEnum",
+          "description": "status ."
         },
         "type": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainTypeEnum",
+          "description": "type ."
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "isRestricted": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "to avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "to avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "parentId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "thumbnail": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainAllOfThumbnail"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelDomainAllOfThumbnail",
+          "description": "to avoid"
         },
         "domains": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelPlatformDomain"
           }
         },
         "managedAttributes": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute"
           }
@@ -2707,14 +3258,17 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDomainAllOfThumbnail": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "color": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDomainStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2726,21 +3280,25 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelDomainTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2754,78 +3312,94 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelExternalLink": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "url": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "dataAssetId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelKeyResult": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelKeyResultStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelKeyResultStatusEnum",
+          "description": "to avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData",
+          "description": "to avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "definition": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "domainId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "progress": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "goal": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "max": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelKeyResultStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2838,65 +3412,80 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelMetadataAttribute": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus",
+          "description": "To avoid"
         },
         "fieldType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelMetadataAttributeFieldTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelMetadataAttributeFieldTypeEnum",
+          "description": "To avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "To avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "defaultValue": {
-          "type": "string"
+          "type": "string",
+          "description": "To avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "isOptional": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "To avoid"
         },
         "choices": {
           "type": "array",
+          "description": "To avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelChoice"
           }
@@ -2905,6 +3494,7 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelMetadataAttributeFieldTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -2924,77 +3514,95 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           },
           {
             "name": "5",
-            "value": 5
+            "value": 5,
+            "description": "to avoid"
           },
           {
             "name": "6",
-            "value": 6
+            "value": 6,
+            "description": "to avoid"
           },
           {
             "name": "7",
-            "value": 7
+            "value": 7,
+            "description": "to avoid"
           },
           {
             "name": "8",
-            "value": 8
+            "value": 8,
+            "description": "to avoid"
           },
           {
             "name": "9",
-            "value": 9
+            "value": 9,
+            "description": "to avoid"
           },
           {
             "name": "10",
-            "value": 10
+            "value": 10,
+            "description": "to avoid"
           },
           {
             "name": "11",
-            "value": 11
+            "value": 11,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "overallStatus": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalPropertiesOverallStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalPropertiesOverallStatusEnum",
+          "description": "to avoid"
         },
         "overallProgress": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "overallGoal": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "overallMax": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "to avoid"
         },
         "keyResultsCount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalPropertiesOverallStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -3007,50 +3615,59 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalProperties": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertiesStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertiesStatusEnum",
+          "description": "to avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed",
+          "description": "to avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "definition": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "targetDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "to avoid"
         },
         "contacts": {
           "type": "object",
-          "description": "Dictionary of\n<components·schemas·microsoft-purview-datagovernance-catalog-model-objectivewithadditionalproperties·properties·contacts·additionalproperties>",
+          "description": "to avoid",
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner"
@@ -3059,12 +3676,14 @@
           }
         },
         "additionalProperties": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertiesStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -3076,30 +3695,37 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelPlatformDomain": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "friendlyName": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "relatedCollections": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelRelatedCollection"
           }
@@ -3108,31 +3734,39 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelRelatedCollection": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "friendlyName": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "parentCollection": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollection"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollection",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollection": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "type": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectionTypeEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectionTypeEnum",
+          "description": "to avoid"
         },
         "refName": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelRelatedCollectionParentCollectionTypeEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1
       ],
@@ -3142,13 +3776,15 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelStatus": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -3161,124 +3797,144 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           },
           {
             "name": "4",
-            "value": 4
+            "value": 4,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelSystemData": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "createdBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "lastModifiedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithClosed": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "to avoid"
         },
         "createdBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "to avoid"
         },
         "lastModifiedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "closedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "to avoid"
         },
         "closedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired": {
       "type": "object",
+      "description": "To avoid",
       "properties": {
         "createdAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "createdBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "lastModifiedAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "lastModifiedBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "expiredAt": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "To avoid"
         },
         "expiredBy": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelTerm": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelStatus",
+          "description": "to avoid"
         },
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired",
+          "description": "to avoid"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "contacts": {
           "type": "object",
-          "description": "Dictionary of\n<components·schemas·microsoft-purview-datagovernance-catalog-model-term·properties·contacts·additionalproperties>",
+          "description": "to avoid",
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner"
@@ -3288,29 +3944,33 @@
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "parentId": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "acronyms": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "type": "string"
           }
         },
         "resources": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelTermResource"
           }
         },
         "isLeaf": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "to avoid"
         },
         "managedAttributes": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute"
           }
@@ -3319,26 +3979,33 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelTermResource": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         },
         "url": {
-          "type": "string"
+          "type": "string",
+          "description": "to avoid"
         }
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadata": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "conceptType": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelConceptType"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelConceptType",
+          "description": "to avoid"
         },
         "status": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadataStatusEnum"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadataStatusEnum",
+          "description": "to avoid"
         },
         "approverMetadata": {
           "type": "array",
+          "description": "to avoid",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelApproverMetadata"
           }
@@ -3347,6 +4014,7 @@
     },
     "MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadataStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2
@@ -3357,17 +4025,20 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelWorkflowRunsStatusEnum": {
       "type": "number",
+      "description": "to avoid",
       "enum": [
         1,
         2,
@@ -3379,38 +4050,45 @@
         "values": [
           {
             "name": "1",
-            "value": 1
+            "value": 1,
+            "description": "to avoid"
           },
           {
             "name": "2",
-            "value": 2
+            "value": 2,
+            "description": "to avoid"
           },
           {
             "name": "3",
-            "value": 3
+            "value": 3,
+            "description": "to avoid"
           }
         ]
       }
     },
     "MicrosoftPurviewDataGovernanceCatalogModelWorkflows": {
       "type": "object",
+      "description": "to avoid",
       "properties": {
         "id": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "name"
         },
         "systemData": {
-          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData"
+          "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelSystemData",
+          "description": "systemData"
         },
         "domain": {
           "type": "string",
-          "format": "uuid"
+          "description": "The unique identifier (UUID) of the resource."
         },
         "workflowMetadata": {
           "type": "array",
+          "description": "workflowMetadata",
           "items": {
             "$ref": "#/definitions/MicrosoftPurviewDataGovernanceCatalogModelWorkflowMetadata"
           }
