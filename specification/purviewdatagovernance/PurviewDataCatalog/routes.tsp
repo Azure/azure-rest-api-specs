@@ -11,6 +11,7 @@ namespace PurviewDataCatalog;
  * Example: PostCriticalDataElement_MaximumSet_Gen
  * See: ./examples/PostCriticalDataElement_MaximumSet_Gen.json
  */
+#suppress "@azure-tools/typespec-openapi/example-validation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/criticalDataElements")
@@ -23,6 +24,7 @@ op postCriticalDataElement is Azure.Core.Foundations.Operation<
  * Example: GetCriticalDataElement_MaximumSet_Gen
  * See: ./examples/GetCriticalDataElement_MaximumSet_Gen.json
  */
+#suppress "@azure-tools/typespec-openapi/example-validation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/criticalDataElements")
