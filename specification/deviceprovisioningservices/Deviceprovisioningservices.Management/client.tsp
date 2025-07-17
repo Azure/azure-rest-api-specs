@@ -180,3 +180,7 @@ using Azure.Core;
   "GetKey",
   "csharp"
 );
+@@clientName(ProvisioningServiceDescription.subscriptionid,
+  "subscriptionId",
+  "csharp"
+);
