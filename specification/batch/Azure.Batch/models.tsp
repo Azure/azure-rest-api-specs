@@ -495,7 +495,7 @@ union BatchNodeDeallocationOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Remove Compute Nodes when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
+  @doc("Deprecating. Please upload task data to azure storage in your task and use TaskCompletion instead.")
   RetainedData: "retaineddata",
 }
 
@@ -512,7 +512,7 @@ union BatchNodeDeallocateOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired.")
+  @doc("Deprecating. Please upload task data to azure storage in your task and use TaskCompletion instead.")
   RetainedData: "retaineddata",
 }
 
@@ -688,7 +688,7 @@ union BatchNodeRebootKind {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Restart the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
+  @doc("Deprecating. Please upload task data to azure storage in your task and use TaskCompletion instead.")
   RetainedData: "retaineddata",
 }
 
@@ -705,7 +705,7 @@ union BatchNodeReimageOption {
   @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Reimage the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 
-  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
+  @doc("Deprecating. Please upload task data to azure storage in your task and use TaskCompletion instead.")
   RetainedData: "retaineddata",
 }
 
