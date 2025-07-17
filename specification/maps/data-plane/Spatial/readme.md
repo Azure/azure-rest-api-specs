@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for Spatial Client.
 
 ``` yaml
+# Azure Maps Spatial v2022-08-01 has been deprecated and will be retired on September 30th, 2025.
 title: SpatialClient
 openapi-type: data-plane
 tag: 2022-08-01
@@ -35,7 +36,7 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 2022-08-01
+### Tag:  package-deprecated-2022-08-01
 
 These settings apply only when `--tag=2022-08-01` is specified on the command line.
 
