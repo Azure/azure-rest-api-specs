@@ -1,5 +1,5 @@
 
-# Version Uniform Violation Guidelines
+# Version Uniform Violation Guide
 
 This document provides guidance for service teams on how to handle version uniform violations.
 
