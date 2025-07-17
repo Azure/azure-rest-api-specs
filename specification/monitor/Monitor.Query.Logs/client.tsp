@@ -21,3 +21,12 @@ interface MonitorQueryLogsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   batch is MonitorQueryLogs.Query.batch;
 }
+
+@@clientNamespace(MonitorQueryLogs,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
+@@clientNamespace(ClientCustomizations,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
