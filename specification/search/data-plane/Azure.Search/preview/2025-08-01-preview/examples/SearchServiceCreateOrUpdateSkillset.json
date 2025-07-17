@@ -41,10 +41,7 @@
           "unit": "azureOpenAITokens",
           "azureOpenAITokenizerParameters": {
             "encoderModelName": "cl100k_base",
-            "allowedSpecialTokens": [
-              "[START]",
-              "[END]"
-            ]
+            "allowedSpecialTokens": ["[START]", "[END]"]
           },
           "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
           "name": "skill3",
@@ -131,10 +128,7 @@
         {
           "outputFormat": "text",
           "outputMode": "oneToMany",
-          "extractionOptions": [
-            "images",
-            "locationMetadata"
-          ],
+          "extractionOptions": ["images", "locationMetadata"],
           "chunkingProperties": {
             "unit": "characters",
             "maximumLength": 500,
@@ -184,10 +178,7 @@
               "schema": {
                 "type": "object",
                 "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}",
-                "required": [
-                  "steps",
-                  "answer"
-                ],
+                "required": ["steps", "answer"],
                 "additionalProperties": false
               }
             }
@@ -292,10 +283,7 @@
             ],
             "azureOpenAITokenizerParameters": {
               "encoderModelName": "cl100k_base",
-              "allowedSpecialTokens": [
-                "[START]",
-                "[END]"
-              ]
+              "allowedSpecialTokens": ["[START]", "[END]"]
             }
           },
           {
@@ -373,10 +361,7 @@
             "context": "/document",
             "outputMode": "oneToMany",
             "outputFormat": "text",
-            "extractionOptions": [
-              "images",
-              "locationMetadata"
-            ],
+            "extractionOptions": ["images", "locationMetadata"],
             "inputs": [
               {
                 "name": "file_data",
@@ -463,10 +448,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "steps",
-                    "answer"
-                  ],
+                  "required": ["steps", "answer"],
                   "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
                 }
               }
@@ -535,10 +517,7 @@
             ],
             "azureOpenAITokenizerParameters": {
               "encoderModelName": "cl100k_base",
-              "allowedSpecialTokens": [
-                "[START]",
-                "[END]"
-              ]
+              "allowedSpecialTokens": ["[START]", "[END]"]
             }
           },
           {
@@ -616,10 +595,7 @@
             "context": "/document",
             "outputMode": "oneToMany",
             "outputFormat": "text",
-            "extractionOptions": [
-              "images",
-              "locationMetadata"
-            ],
+            "extractionOptions": ["images", "locationMetadata"],
             "inputs": [
               {
                 "name": "file_data",
@@ -706,10 +682,7 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "steps",
-                    "answer"
-                  ],
+                  "required": ["steps", "answer"],
                   "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
                 }
               }
