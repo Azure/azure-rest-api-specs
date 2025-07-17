@@ -1,0 +1,1102 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Playwright Service API",
+    "version": "2025-07-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Playwright Service API Endpoints (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.\nYou can also find this value in the Azure Playwright Workspace property, such as `dataplaneUri`.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://playwright.microsoft.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://playwright.microsoft.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/playwrightworkspaces/{workspaceId}/access-tokens": {
+      "get": {
+        "operationId": "AccessTokens_List",
+        "description": "Lists access-tokens for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_List": {
+            "$ref": "./examples/AccessTokens_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/access-tokens/{accessTokenId}": {
+      "get": {
+        "operationId": "AccessTokens_Get",
+        "description": "Gets an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_Get": {
+            "$ref": "./examples/AccessTokens_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccessTokens_CreateOrReplace",
+        "description": "Creates an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_CreateOrReplace": {
+            "$ref": "./examples/AccessTokens_CreateOrReplace.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AccessTokens_Delete",
+        "description": "Deletes an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_Delete": {
+            "$ref": "./examples/AccessTokens_Delete.json"
+          }
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/browsers": {
+      "get": {
+        "operationId": "Workspaces_GetBrowsers",
+        "description": "Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "os",
+            "in": "query",
+            "description": "The os provided by client for remote script runs.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Linux",
+              "Windows"
+            ],
+            "x-ms-enum": {
+              "name": "OS",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Linux",
+                  "value": "Linux",
+                  "description": "Linux OS."
+                },
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Windows OS."
+                }
+              ]
+            }
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "The runId provided by client in GUID format.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirection",
+            "headers": {
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The redirect target URL to run script on remote browsers."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces_GetBrowsers": {
+            "$ref": "./examples/Workspaces_GetBrowsers.json"
+          }
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/test-runs": {
+      "get": {
+        "operationId": "TestRuns_List",
+        "description": "Lists test-runs for the given workspace id. It can use OData query params like $filter, $top etc. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_List": {
+            "$ref": "./examples/TestRuns_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/test-runs/{runId}": {
+      "patch": {
+        "operationId": "TestRuns_CreateOrUpdate",
+        "description": "Creates/Updates a test-run for the workspace with given test-run id. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The test-run id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateOrUpdate": {
+            "$ref": "./examples/TestRuns_CreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessToken": {
+      "type": "object",
+      "description": "Model of an access-token linked to a workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The access-token id in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The access-token name.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "jwtToken": {
+          "type": "string",
+          "description": "The access-token value in JWT format.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-token createdAt utcDateTime.",
+          "readOnly": true
+        },
+        "expiryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-token expiryAt utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/AccessTokenState",
+          "description": "The access-token state - Active | Expired.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "createdAt",
+        "expiryAt",
+        "state"
+      ]
+    },
+    "AccessTokenState": {
+      "type": "string",
+      "description": "The access-token state.",
+      "enum": [
+        "Active",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTokenState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The access-token is Active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The access-token is Expired."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CiConfig": {
+      "type": "object",
+      "description": "The run CI config.",
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "The CI provider name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "branch": {
+          "type": "string",
+          "description": "The CI branch.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "author": {
+          "type": "string",
+          "description": "The CI author.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The CI commit id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "revisionUrl": {
+          "type": "string",
+          "description": "The CI revision URL.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "PagedAccessToken": {
+      "type": "object",
+      "description": "Paged collection of AccessToken items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessToken items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessToken"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTestRun": {
+      "type": "object",
+      "description": "Paged collection of TestRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestRun items on this page",
+          "items": {
+            "$ref": "#/definitions/TestRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RunConfig": {
+      "type": "object",
+      "description": "The run config.",
+      "properties": {
+        "framework": {
+          "$ref": "#/definitions/RunFramework",
+          "description": "The framework used for run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sdkLanguage": {
+          "$ref": "#/definitions/SDKLanguage",
+          "description": "The SDK Language used for run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "maxWorkers": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of workers required for the run.",
+          "minimum": 1,
+          "maximum": 500,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RunFramework": {
+      "type": "object",
+      "description": "The run framework.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The framework name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The framework version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runnerName": {
+          "type": "string",
+          "description": "The framework runner name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "RunStatus": {
+      "type": "string",
+      "description": "The run status.",
+      "enum": [
+        "RUNNING",
+        "CLIENT_COMPLETE",
+        "SERVER_COMPLETE"
+      ],
+      "x-ms-enum": {
+        "name": "RunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "The run status is RUNNING"
+          },
+          {
+            "name": "CLIENT_COMPLETE",
+            "value": "CLIENT_COMPLETE",
+            "description": "The run status is CLIENT_COMPLETE"
+          },
+          {
+            "name": "SERVER_COMPLETE",
+            "value": "SERVER_COMPLETE",
+            "description": "The run status is SERVER_COMPLETE"
+          }
+        ]
+      }
+    },
+    "RunSummary": {
+      "type": "object",
+      "description": "The run summary.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/RunStatus",
+          "description": "The run status.",
+          "readOnly": true
+        },
+        "billableTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The run billable time.",
+          "readOnly": true
+        },
+        "numBrowserSessions": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of browser sessions allocated to the run.",
+          "readOnly": true
+        },
+        "maxConcurrentBrowserSessions": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The highest number of browser sessions that were running at the same time during the run.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run start time as utcDateTime.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run end time as utcDateTime.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The run duration.",
+          "readOnly": true
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "The list of error messages corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "startTime"
+      ]
+    },
+    "SDKLanguage": {
+      "type": "string",
+      "description": "The SDK Language used for run.",
+      "enum": [
+        "JAVASCRIPT",
+        "TYPESCRIPT",
+        "CSHARP"
+      ],
+      "x-ms-enum": {
+        "name": "SDKLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JAVASCRIPT",
+            "value": "JAVASCRIPT",
+            "description": "JAVASCRIPT SDK"
+          },
+          {
+            "name": "TYPESCRIPT",
+            "value": "TYPESCRIPT",
+            "description": "TYPESCRIPT SDK"
+          },
+          {
+            "name": "CSHARP",
+            "value": "CSHARP",
+            "description": "CSHARP SDK"
+          }
+        ]
+      }
+    },
+    "TestRun": {
+      "type": "object",
+      "description": "Model of a test-run used for tracking purpose.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The test-run id in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The test-run display name.",
+          "minLength": 1,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "The test-run creator's id.",
+          "readOnly": true
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "The test-run creator's name.",
+          "readOnly": true
+        },
+        "config": {
+          "$ref": "#/definitions/RunConfig",
+          "description": "The test-run config.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "The test-run CI Config.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "summary": {
+          "$ref": "#/definitions/RunSummary",
+          "description": "The test-run summary.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "creatorId",
+        "summary"
+      ]
+    },
+    "TestRunCreateOrUpdate": {
+      "type": "object",
+      "description": "Model of a test-run used for tracking purpose.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The test-run display name.",
+          "minLength": 1,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "config": {
+          "$ref": "#/definitions/RunConfig",
+          "description": "The test-run config.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "The test-run CI Config.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

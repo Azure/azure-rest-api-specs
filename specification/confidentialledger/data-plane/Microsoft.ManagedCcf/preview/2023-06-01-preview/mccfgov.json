@@ -1195,8 +1195,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1223,7 +1222,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1244,8 +1243,7 @@
           "description": "The Member items on this page",
           "items": {
             "$ref": "#/definitions/ServiceState.Member"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1266,8 +1264,7 @@
           "description": "The Node items on this page",
           "items": {
             "$ref": "#/definitions/ServiceState.Node"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1288,8 +1285,7 @@
           "description": "The Proposal items on this page",
           "items": {
             "$ref": "#/definitions/Proposals.Proposal"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1403,8 +1399,7 @@
           "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically.",
           "items": {
             "$ref": "#/definitions/Proposals.Action"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [

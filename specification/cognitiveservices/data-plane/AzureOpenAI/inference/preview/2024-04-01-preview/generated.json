@@ -971,8 +971,7 @@
           "description": "A collection of information about the timing of each processed word.",
           "items": {
             "$ref": "#/definitions/AudioTranscriptionWord"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1204,8 +1203,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1232,7 +1230,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1367,8 +1365,7 @@
           "description": "  The contextual information associated with the Azure chat extensions used for a chat completions request.\n  These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the\n  course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat\n  extensions.",
           "items": {
             "$ref": "#/definitions/AzureChatExtensionDataSourceResponseCitation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "intent": {
           "type": "string",
@@ -1541,8 +1538,7 @@
           "description": "The lines of text detected by the grounding enhancement.",
           "items": {
             "$ref": "#/definitions/AzureGroundingEnhancementLine"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1582,8 +1578,7 @@
           "description": "An array of spans that represent detected objects and its bounding box information.",
           "items": {
             "$ref": "#/definitions/AzureGroundingEnhancementLineSpan"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1614,8 +1609,7 @@
           "description": "An array of objects representing points in the polygon that encloses the detected object.",
           "items": {
             "$ref": "#/definitions/AzureGroundingEnhancementCoordinatePoint"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1940,8 +1934,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ChatTokenLogProbabilityResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1966,8 +1959,7 @@
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/ChatChoice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "model": {
           "type": "string",
@@ -1979,8 +1971,7 @@
           "items": {
             "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "system_fingerprint": {
           "type": "string",
@@ -2055,16 +2046,14 @@
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
           "items": {
             "$ref": "#/definitions/ChatRequestMessage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "functions": {
           "type": "array",
           "description": "A list of functions the model may generate JSON inputs for.",
           "items": {
             "$ref": "#/definitions/FunctionDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "function_call": {
           "description": "Controls how the model responds to function calls. \"none\" means the model does not call a function,\nand responds to the end-user. \"auto\" means the model can pick between an end-user or calling a function.\n Specifying a particular function via `{\"name\": \"my_function\"}` forces the model to call that function.\n \"none\" is the default when no functions are present. \"auto\" is the default if functions are present.",
@@ -2138,8 +2127,7 @@
           "items": {
             "$ref": "#/definitions/AzureChatExtensionConfiguration"
           },
-          "x-ms-client-name": "dataSources",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "dataSources"
         },
         "enhancements": {
           "$ref": "#/definitions/AzureChatEnhancementConfiguration",
@@ -2172,8 +2160,7 @@
           "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "tool_choice": {
           "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
@@ -2539,8 +2526,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ChatTokenLogProbabilityInfo"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2606,16 +2592,14 @@
           "items": {
             "$ref": "#/definitions/ContentFilterResultsForPrompt"
           },
-          "x-ms-client-name": "promptFilterResults",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "promptFilterResults"
         },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
           "items": {
             "$ref": "#/definitions/Choice"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -2702,8 +2686,7 @@
               "x-nullable": true
             }
           },
-          "x-ms-client-name": "topLogprobs",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "topLogprobs"
         },
         "text_offset": {
           "type": "array",
@@ -3277,8 +3260,7 @@
           "description": "Embedding values for the prompts submitted in the request.",
           "items": {
             "$ref": "#/definitions/EmbeddingItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
@@ -3655,8 +3637,7 @@
           "description": "The images generated by the operation.",
           "items": {
             "$ref": "#/definitions/ImageGenerationData"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
