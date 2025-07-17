@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -20,6 +20,14 @@ model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
   name: string;
 
   /** The IP Community Properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: IpCommunityProperties;
+
+  #suppress "deprecated" "Legacy flattening"
+  @doc("The IP Community Properties")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: IpCommunityProperties;
 }
 

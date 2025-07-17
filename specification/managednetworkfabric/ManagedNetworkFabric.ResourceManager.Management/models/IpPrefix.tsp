@@ -64,6 +64,14 @@ model IpPrefixPatch {
   ...TagsUpdate;
 
   @doc("IP Prefix patchable properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: IpPrefixPatchProperties;
+
+  #suppress "deprecated" "Legacy flattening"
+  @doc("IP Prefix patchable properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: IpPrefixPatchProperties;
 }
 

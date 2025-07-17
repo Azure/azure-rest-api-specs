@@ -6,7 +6,7 @@
  */
 import * as oad from "@azure/oad";
 import { OadMessage } from "./types/oad-types.js";
-import { logMessage } from "./log.js";
+import { logMessage, logMessageSafe } from "./log.js";
 
 /**
  * The runOad() function is a wrapper around the "@azure/oad" library whose source is https://github.com/Azure/openapi-diff.
@@ -69,7 +69,7 @@ export async function runOad(
     oadCompareOutput = await oad.compare(oldSpec, newSpec, { consoleLogLevel: "warn" });
   }
 
-  logMessage(`oadCompareOutput: ${oadCompareOutput}`);
+  logMessageSafe(`oadCompareOutput: ${oadCompareOutput}`);
 
   // The oadCompareOutput is emitted by this OAD source:
   // OpenApiDiff.Program.Main():
