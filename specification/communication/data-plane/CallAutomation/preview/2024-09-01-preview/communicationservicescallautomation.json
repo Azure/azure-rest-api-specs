@@ -2314,6 +2314,25 @@
         "enableIntermediateResults": {
           "description": "Enables intermediate results for the transcribed speech.",
           "type": "boolean"
+        },
+        "piiRedactionOptions": {
+          "$ref": "#/definitions/PiiRedactionOptions",
+          "description": "PII redaction configuration options."
+        },
+        "enableSentimentAnalysis": {
+          "description": "Indicating if sentiment analysis should be used.",
+          "type": "boolean"
+        },
+        "locales": {
+          "description": "List of languages for Language Identification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summarizationOptions": {
+          "$ref": "#/definitions/SummarizationOptions",
+          "description": "Summarization configuration options."
         }
       }
     },
@@ -2361,6 +2380,44 @@
         },
         "suggestedActions": {
           "description": "Recommendations for resolving the issue based on the customer’s intent and interaction history",
+          "type": "string"
+        }
+      }
+    },
+    "RedactionType": {
+      "description": "Gets or sets the type of PII redaction to be used.",
+      "enum": [
+        "maskWithCharacter"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RedactionType",
+        "modelAsString": true
+      }
+    },
+    "PiiRedactionOptions": {
+      "description": "PII redaction configuration options.",
+      "type": "object",
+      "properties": {
+        "enable": {
+          "description": "Gets or sets a value indicating whether PII redaction is enabled.",
+          "type": "boolean"
+        },
+        "redactionType": {
+          "$ref": "#/definitions/RedactionType"
+        }
+      }
+    },
+    "SummarizationOptions": {
+      "description": "Configuration options for call summarization.",
+      "type": "object",
+      "properties": {
+        "enableEndCallSummary": {
+          "description": "Indicating whether end call summary should be enabled.",
+          "type": "boolean"
+        },
+        "locale": {
+          "description": "Locale for summarization (e.g., en-US).",
           "type": "string"
         }
       }
@@ -2988,6 +3045,25 @@
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "piiRedactionOptions": {
+          "$ref": "#/definitions/PiiRedactionOptions",
+          "description": "PII redaction configuration options."
+        },
+        "enableSentimentAnalysis": {
+          "description": "Indicating if sentiment analysis should be used.",
+          "type": "boolean"
+        },
+        "locales": {
+          "description": "List of languages for Language Identification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summarizationOptions": {
+          "$ref": "#/definitions/SummarizationOptions",
+          "description": "Summarization configuration options."
         }
       }
     },
@@ -3081,6 +3157,17 @@
         "speechLanguage": {
           "description": "Speech language to be recognized, If not set default is en-US",
           "type": "string"
+        },
+        "speechLanguages": {
+          "description": "Gets or sets a list of languages for Language Identification.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableSentimentAnalysis": {
+          "description": "Gets or sets a value indicating if sentiment analysis should be used.",
+          "type": "boolean"
         },
         "speechRecognitionModelEndpointId": {
           "description": "Endpoint where the custom model was deployed.",
@@ -3262,6 +3349,18 @@
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "piiRedactionOptions": {
+          "$ref": "#/definitions/PiiRedactionOptions",
+          "description": "PII redaction configuration options."
+        },
+        "enableSentimentAnalysis": {
+          "description": "Indicating if sentiment analysis should be used.",
+          "type": "boolean"
+        },
+        "summarizationOptions": {
+          "$ref": "#/definitions/SummarizationOptions",
+          "description": "Summarization configuration options."
         }
       }
     },
@@ -3894,7 +3993,7 @@
       "type": "object",
       "properties": {
         "cognitiveServicesEndpoint": {
-          "description": "The identifier of the Cognitive Service resource assigned to the post recording processing.\r\nThe Cognitive Service resource will be used by the summarization feature.",
+          "description": "The endpoint of the Cognitive Service resource assigned to the post recording processing.\r\nThe Cognitive Service resource will be used by the summarization feature.",
           "type": "string"
         },
         "transcription": {
@@ -4945,6 +5044,19 @@
         "recognizedPhrase": {
           "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
+        },
+        "languageIdentified": {
+          "description": "The identified language for a spoken phrase.",
+          "type": "string"
+        },
+        "sentimentAnalysisResult": {
+          "$ref": "#/definitions/SentimentAnalysisResult",
+          "description": "Gets or sets the sentiment analysis result."
+        },
+        "confidence": {
+          "format": "double",
+          "description": "The confidence level of the recognized speech, if available, ranges from 0.0 to 1.0",
+          "type": "number"
         }
       }
     },
@@ -4958,8 +5070,25 @@
         },
         "confidence": {
           "format": "double",
-          "description": "The confidence of the recognized speech.",
+          "description": "The confidence level of the recognized speech, if available, ranges from 0.0 to 1.0",
           "type": "number"
+        },
+        "languageIdentified": {
+          "description": "The identified language.",
+          "type": "string"
+        },
+        "sentimentAnalysisResult": {
+          "$ref": "#/definitions/SentimentAnalysisResult",
+          "description": "Gets or sets the sentiment analysis result."
+        }
+      }
+    },
+    "SentimentAnalysisResult": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "description": "Gets or sets the value of the sentiment detected (positive, negative, neutral, mixed).",
+          "type": "string"
         }
       }
     },
