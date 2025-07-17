@@ -47,7 +47,10 @@ export type SpecsBreakingChangesLabel =
  * Scheduled to replace type SwaggerVersionType and type ComparedApiVersion.
  * Read more at https://aka.ms/azsdk/spec-dirs
  */
-export type ApiVersionLifecycleStage = "preview" | "stable";
+export enum ApiVersionLifecycleStage {
+  PREVIEW = "preview",
+  STABLE = "stable",
+}
 
 /** The name of the log file used by the openapi-diff-runner utility. */
 export const logFileName = "openapi-diff-runner.log";
@@ -64,7 +67,8 @@ export interface Context {
   headCommit: string;
   runType: BreakingChangesCheckType;
   checkName: string;
-  repo: string; // The format is: "owner/repoName"
+  targetRepo: string; // The format is: "owner/repoName"
+  sourceRepo: string; // The format is: "owner/repoName"
   prNumber: string;
   prSourceBranch: string;
   prTargetBranch: string;
