@@ -1,16 +1,11 @@
 {
-  "operationId": "GroupQuotaLocationSettings_Update",
+  "operationId": "GroupQuotaLocationSettings_Get",
   "parameters": {
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
     "resourceProviderName": "Microsoft.Compute",
     "location": "eastus",
-    "api-version": "2023-06-01-preview",
-    "LocationSettings": {
-      "properties": {
-        "enforcementEnabled": "Enabled"
-      }
-    }
+    "api-version": "2025-07-15"
   },
   "responses": {
     "200": {
@@ -22,14 +17,6 @@
           "enforcementEnabled": "Enabled",
           "provisioningState": "Succeeded"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://contoso.com/operationstatus",
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
-        "Operation-Location": "https://contoso.com/operationstatus",
-        "retry-after": "30"
       }
     }
   }
