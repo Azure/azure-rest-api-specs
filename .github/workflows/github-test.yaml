@@ -63,6 +63,18 @@ jobs:
 
       - run: npm run lint
 
+      - if: ${{ matrix.os == 'ubuntu'}}
+        name: Lint workflows
+        run: |
+          # Ensure "shellcheck" is installed, since it's required for complete validation (pre-installed on GH agents)
+          command -v shellcheck >/dev/null || exit 1
+
+          # Download tool
+          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+
+          # Run tool, ignoring noisy output about missing pyflakes
+          ./actionlint --color --verbose |& grep -v pyflakes
+
       - run: npm run format:check:ci
 
       - run: npm run test:ci
