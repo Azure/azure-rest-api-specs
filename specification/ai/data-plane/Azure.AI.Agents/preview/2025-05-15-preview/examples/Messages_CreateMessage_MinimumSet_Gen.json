@@ -1,0 +1,48 @@
+{
+  "title": "Messages_CreateMessage_MinimumSet",
+  "operationId": "Messages_CreateMessage",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "threadId": "thread_abc123",
+    "body": {
+      "role": "user",
+      "content": "Hello, how can you help me today?"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "msg_abc123",
+        "object": "thread.message",
+        "created_at": 1736869300,
+        "thread_id": "thread_abc123",
+        "status": "completed",
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "completed_at": 1736869302,
+        "incomplete_at": 25,
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": {
+              "value": "Hello, how can you help me today?",
+              "annotations": []
+            }
+          }
+        ],
+        "assistant_id": "flbyv",
+        "run_id": "mdwsaqyplfhtadedzuatxvld",
+        "attachments": [
+          {
+            "tools": [
+              null
+            ]
+          }
+        ],
+        "metadata": {}
+      }
+    }
+  }
+}
