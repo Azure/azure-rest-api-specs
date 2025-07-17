@@ -31,10 +31,12 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    // Synchronously verify folder can be read, to prevent confusing errors later
-    accessSync(folder, constants.R_OK);
+    const resolvedFolder = resolve(folder);
 
-    this.#folder = resolve(folder);
+    // Synchronously verify folder can be read, to prevent confusing errors later
+    accessSync(resolvedFolder, constants.R_OK);
+
+    this.#folder = resolvedFolder;
     this.#logger = options?.logger;
   }
 

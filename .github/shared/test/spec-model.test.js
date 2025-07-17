@@ -12,9 +12,7 @@ const options = { logger: new ConsoleLogger(/*debug*/ true) };
 
 describe("SpecModel", () => {
   it("throws if folder doesn't exist", async () => {
-    expect(() => new SpecModel("foo")).toThrowErrorMatchingInlineSnapshot(
-      `[Error: ENOENT: no such file or directory, access 'foo']`,
-    );
+    expect(() => new SpecModel("foo")).toThrowError("ENOENT: no such file or directory");
   });
 
   it("returns spec model", async () => {
