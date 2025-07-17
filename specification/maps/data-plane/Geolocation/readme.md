@@ -35,7 +35,7 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 1.0-preview
+### Tag: package-1.0-preview
 
 These settings apply only when `--tag=1.0-preview` is specified on the command line.
 
