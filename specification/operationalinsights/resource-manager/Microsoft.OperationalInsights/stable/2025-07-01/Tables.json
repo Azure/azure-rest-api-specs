@@ -707,20 +707,20 @@
           "format": "int32",
           "minimum": 4,
           "maximum": 730,
-          "description": "The table retention in days, between 4 and 730. Setting this property to -1 will default to the workspace retention."
+          "description": "In Analytics table: the tables analytics retention in days, between 4 and 730. Setting this property to -1 will default to the workspace retention. In Basic and Auxiliary table: read only property, always 30."
         },
         "totalRetentionInDays": {
           "type": "integer",
           "format": "int32",
           "minimum": 4,
           "maximum": 4383,
-          "description": "The table total retention in days, between 4 and 4383. Setting this property to -1 will default to table retention."
+          "description": "The table total retention in days, between 4 and 4383. Setting this property to -1 will default to retentionInDays for Analytics table, or to 30 days in Basic and Auxiliary table."
         },
         "archiveRetentionInDays": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
-          "description": "The table data archive retention in days. Calculated as (totalRetentionInDays-retentionInDays)"
+          "description": "The tables long-term retention in days. Calculated as (totalRetentionInDays-retentionInDays)."
         },
         "searchResults": {
           "$ref": "#/definitions/SearchResults",
@@ -740,7 +740,8 @@
           "description": "Instruct the system how to handle and charge the logs ingested to this table.",
           "enum": [
             "Basic",
-            "Analytics"
+            "Analytics",
+            "Auxiliary"
           ],
           "x-ms-enum": {
             "name": "TablePlanEnum",
@@ -748,11 +749,15 @@
             "values": [
               {
                 "value": "Basic",
-                "description": "Logs that are adjusted to support high volume low value verbose logs."
+                "description": "Medium-touch logs needed for troubleshooting and incident response."
               },
               {
                 "value": "Analytics",
-                "description": "Logs  that allow monitoring and analytics."
+                "description": "High-value logs used for continuous monitoring, real-time detection, and performance analytics."
+              },
+              {
+                "value": "Auxiliary",
+                "description": "Low-touch logs, such as verbose logs, and data required for auditing and compliance."
               }
             ]
           }

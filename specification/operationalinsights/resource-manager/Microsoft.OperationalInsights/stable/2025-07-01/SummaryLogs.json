@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2025-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs": {
+      "get": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsListByWorkspace": {
+            "$ref": "./examples/SummaryLogsList.json"
+          }
+        },
+        "operationId": "SummaryLogs_ListByWorkspace",
+        "description": "Gets all summary rules for the specified Log Analytics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}": {
+      "put": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsUpsert": {
+            "$ref": "./examples/SummaryLogsUpsert.json"
+          }
+        },
+        "operationId": "SummaryLogs_CreateOrUpdate",
+        "description": "Updates or creates Log Analytics workspace summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            },
+            "description": "The parameters required to update summary rules properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "201": {
+            "description": "OK response definition.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsGet": {
+            "$ref": "./examples/SummaryLogsGet.json"
+          }
+        },
+        "operationId": "SummaryLogs_Get",
+        "description": "Gets Log Analytics workspace summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsDelete": {
+            "$ref": "./examples/SummaryLogsDelete.json"
+          }
+        },
+        "operationId": "SummaryLogs_Delete",
+        "description": "Deletes Log Analytics workspace summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition (long-running operation).",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start": {
+      "post": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsStart": {
+            "$ref": "./examples/SummaryLogsStart.json"
+          }
+        },
+        "operationId": "SummaryLogs_Start",
+        "description": "Starts a summary rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response definition (long-running operation).",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/stop": {
+      "post": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsStop": {
+            "$ref": "./examples/SummaryLogsStop.json"
+          }
+        },
+        "operationId": "SummaryLogs_Stop",
+        "description": "Stops a running summary rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RuleDefinition": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "SummaryRules rule query."
+        },
+        "binSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scheduled window in minutes. Allowed values: 20, 30, 60, 120, 180, 360, 720, 1440."
+        },
+        "binDelay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum delay before bin processing."
+        },
+        "binStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the first bin will start (UTC)."
+        },
+        "timeSelector": {
+          "type": "string",
+          "enum": [
+            "TimeGenerated"
+          ],
+          "description": "Determines which cursor is used in the rule.",
+          "x-ms-enum": {
+            "name": "TimeSelectorEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TimeGenerated",
+                "description": "TimeGenerated."
+              }
+            ]
+          }
+        },
+        "destinationTable": {
+          "readOnly": true,
+          "type": "string",
+            "description": "The destination table for rule results."
+        }
+      },
+      "description": "Rule definition parameters."
+    },
+    "SummaryLogsProperties": {
+      "type": "object",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "User"
+          ],
+          "description": "SummaryRules rule type: User.",
+          "x-ms-enum": {
+            "name": "RuleTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "User",
+                "description": "User defined summary rule."
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the summary rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the summary rule."
+        },
+        "isActive": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates if the summary rule is active. If not active, the periodic query will not run."
+        },
+        "statusCode": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "UserAction",
+            "DataPlaneError"
+          ],
+          "description": "Indicates the reason for rule deactivation.",
+          "x-ms-enum": {
+            "name": "StatusCodeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "UserAction",
+                "description": "Summary rule stop originated from a user action (Stop was called)."
+              },
+              {
+                "value": "DataPlaneError",
+                "description": "Summary rule stop was caused due to data plane related error."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "SummaryRules current provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the summary rules until the operation is complete.",
+          "enum": [
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updating",
+                "description": "Summary rules is still being built and updated. The resource is currently locked for changes until the procedure is complete."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Summary rules state is stable and without changes. The resource is unlocked and open for new updates."
+              },
+              {
+                "value": "Deleting",
+                "description": "Summary rules state is deleting. The resource is currently locked for changes until the procedure is complete."
+              },
+              {
+                "value": "Failed",
+                "description": "Summary rules state is stable and without changes."
+              },
+              {
+                "value": "Canceled",
+                "description": "Summary rules state is stable and without changes."
+              }
+            ]
+          }
+        },
+        "ruleDefinition": {
+          "$ref": "#/definitions/RuleDefinition",
+          "description": "Rule definition parameters."
+        }
+      },
+      "description": "SummaryRules properties."
+    },
+    "SummaryLogs": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SummaryLogsProperties",
+          "description": "Summary Rules properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Workspace data summary rules definition."
+    },
+    "SummaryLogsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SummaryLogs"
+          },
+          "description": "A list of summary logs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to retrieve the next set of operation list results, if available."
+        }
+      },
+      "description": "The list summary logs operation response."
+    }
+  },
+  "parameters": {
+    "SummaryLogsNameParameter": {
+      "name": "summaryLogsName",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-z][a-z0-9]*$",
+      "type": "string",
+      "description": "The name of the summary logs.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

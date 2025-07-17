@@ -69,6 +69,7 @@ input-file:
   - Microsoft.OperationalInsights/stable/2025-07-01/Workspaces.json
   - Microsoft.OperationalInsights/stable/2025-07-01/WorkspacesFailover.json
   - Microsoft.OperationalInsights/stable/2025-07-01/Workspaces_NetworkSecurityPerimeter_API.json
+  - Microsoft.OperationalInsights/stable/2025-07-01/SummaryLogs.json
 ```
 
 ### Tag: package-2025-02-01
