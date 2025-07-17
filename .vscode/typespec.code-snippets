@@ -1,0 +1,382 @@
+{
+  "LongRunningResourceAction": {
+    "prefix": "lro-resource-action",
+    "body": "LongRunningResourceAction<${1:Resource}, ${2:Parameters},${3:StatusResult}, ${4:StatusError}, ${5:Traits}>;",
+    "description": "Long-running operation signature for a resource action"
+  },
+  "LongRunningResourceCollectionAction": {
+    "prefix": "lro-collection-action",
+    "body": "LongRunningResourceCollectionAction<${1:Resource}, ${2:Parameters},${3:StatusResult}, ${4:StatusError}, ${5:Traits}>;",
+    "description": "Long-running operation signature for an action that applies to a collection of resources"
+  },
+  "LongRunningResourceCreateOrReplace": {
+    "prefix": "lro-create-or-replace",
+    "body": "LongRunningResourceCreateOrReplace<${1:Resource}, ${2:Traits}>;",
+    "description": "Long-running operation signature to create or replace a resource"
+  },
+  "LongRunningResourceCreateOrUpdate": {
+    "prefix": "lro-create-or-update",
+    "body": "LongRunningResourceCreateOrUpdate<${1:Resource}, ${2:Traits}>;",
+    "description": "Long-running operation signature to create or update a resource"
+  },
+  "LongRunningResourceCreateWithServiceProvidedName": {
+    "prefix": "lro-create-with-service-provided-name",
+    "body": "LongRunningResourceCreateWithServiceProvidedName<${1:Resource}, ${2:Traits}>;",
+    "description": "Long-running operation signature to create a resource with a service-provided name"
+  },
+  "LongRunningResourceDelete": {
+    "prefix": "lro-delete",
+    "body": "LongRunningResourceDelete<${1:Resource}, ${2:Traits}>;",
+    "description": "Long-running operation signature to delete a resource"
+  },
+  "LongRunningRpcOperation": {
+    "prefix": "lro-rpc",
+    "body": "LongRunningRpcOperation<${1:Parameters}, ${2:Response},${3:StatusResult}, ${4:StatusError}, ${5:Traits}, ${6:ErrorResponse}, ${7:TraitContexts}>;",
+    "description": "A long-running remote procedure call (RPC) operation"
+  },
+  "LongRunningOperation": {
+    "prefix": "lro-operation",
+    "body": "LongRunningOperation<${1:Parameters}, ${2:Response}, ${3:Traits}, ${4:ErrorResponse}>;",
+    "description": "Long-running operation"
+  },
+  "LongRunningResourceUpdate": {
+    "prefix": "lro-resource-update",
+    "body": "LongRunningResourceUpdate<${1:Resource}, ${2:Traits}, ${3:ErrorResponse}>;",
+    "description": "Long-running operation that updates a resource"
+  },
+  "GetResourceOperationStatus": {
+    "prefix": "resource-opr-status",
+    "body": "GetResourceOperationStatus<${1:Resource},${2:StatusResult},${3:StatusError},${4:Traits}>;",
+    "description": "Operation signature to retrieve a resource operation status"
+  },
+  "ResourceAction": {
+    "prefix": "resource-action",
+    "body": "ResourceAction<${1:Resource}, ${2:Parameters}, ${3:Response}, ${4:Traits}>;",
+    "description": "Operation signature for a resource action"
+  },
+  "ResourceCollectionAction": {
+    "prefix": "resource-collection-action",
+    "body": "ResourceCollectionAction<${1:Resource}, ${2:Parameters}, ${3:Response}, ${4:Traits}>;",
+    "description": "Operation signature for an action that applies to a collection of resources"
+  },
+  "ResourceCreateOrReplace": {
+    "prefix": "resource-create-or-replace",
+    "body": "ResourceCreateOrReplace<${1:Resource},  ${2:Traits}>;",
+    "description": "Operation signature to create or replace a resource"
+  },
+  "ResourceCreateOrUpdate": {
+    "prefix": "resource-create-or-update",
+    "body": "ResourceCreateOrUpdate<${1:Resource},  ${2:Traits}>;",
+    "description": "Operation signature to create or update a resource"
+  },
+  "ResourceCreateWithServiceProvidedName": {
+    "prefix": "resource-create-with-service-provided-name",
+    "body": "ResourceCreateWithServiceProvidedName<${1:Resource},  ${2:Traits}>;",
+    "description": "Operation signature to synchronously create a resource with a service-provided name"
+  },
+  "ResourceDelete": {
+    "prefix": "resource-delete",
+    "body": "ResourceDelete<${1:Resource}, ${2:Traits}>;",
+    "description": "Operation signature to delete a resource"
+  },
+  "ResourceList": {
+    "prefix": "resource-list",
+    "body": "ResourceList<${1:Resource}, ${2:Traits}>;",
+    "description": "Operation signature to list resources in a paginated way"
+  },
+  "ResourceRead": {
+    "prefix": "resource-read",
+    "body": "ResourceRead<${1:Resource}, ${2:Traits}>;",
+    "description": "Operation signature to retrieve a resource"
+  },
+  "ResourceUpdate": {
+    "prefix": "resource-update",
+    "body": "ResourceUpdate<${1:Resource}, ${2:Traits}>;",
+    "description": "Operation signature to update a resource"
+  },
+  "RpcOperation": {
+    "prefix": "rpc-op",
+    "body": "RpcOperation<${1:Parameters}, ${2:Response}, ${3:Traits}, ${4:ErrorResponse}, ${5:TraitContexts}>;",
+    "description": "A remote procedure call (RPC) operation"
+  },
+  "ArmCustomPatchAsync": {
+    "prefix": "arm-custom-patch-async",
+    "body": "ArmCustomPatchAsync<${1:Resource}, ${2:PatchModel}, ${3:OptionalBaseParameters}, ${4:OptionalLroHeaders}, ${5:OptionalParameters}, ${6:OptionalResponse}, ${7:OptionalError}>;",
+    "description": "A long-running resource update using a custom PATCH payload (Asynchronous)"
+  },
+  "ArmCustomPatchSync": {
+    "prefix": "arm-custom-patch-sync",
+    "body": "ArmCustomPatchSync<${1:Resource}, ${2:PatchModel}, ${3:OptionalBaseParameters}, ${4:OptionalParameters}, ${5:OptionalResponse}, ${6:OptionalError}>;",
+    "description": "A resource update using a custom PATCH payload (synchronous)"
+  },
+  "ArmListBySubscription": {
+    "prefix": "arm-list-by-subscription",
+    "body": "ArmListBySubscription<${1:Resource}, ${2:OptionalParameters}, ${3:OptionalResponse}, ${4:OptionalError}>;",
+    "description": "A resource list operation, at the subscription scope"
+  },
+  "ArmProviderActionAsync": {
+    "prefix": "arm-provider-action-async",
+    "body": "ArmProviderActionAsync<${1:Request}, ${2:Response}, ${3:Scope}, ${4:OptionalParameters}, ${5:OptionalLroHeaders}, ${6:OptionalError}>;",
+    "description": "A long-running operation that applies to a resource provider"
+  },
+  "ArmProviderActionSync": {
+    "prefix": "arm-provider-action-sync",
+    "body": "ArmProviderActionSync<${1:Request}, ${2:Response}, ${3:Scope}, ${4:OptionalParameters}, ${5:OptionalError}>;",
+    "description": "An operation that applies to a resource provider"
+  },
+  "ArmResourceActionAsync": {
+    "prefix": "arm-resource-action-async",
+    "body": "ArmResourceActionAsync<${1:Resource}, ${2:Request}, ${3:Response}, ${4:OptionalBaseParameters}, ${5:OptionalLroHeaders}, ${6:OptionalParameters}, ${7:OptionalError}>;",
+    "description": "A long-running operation that applies to a resource"
+  },
+  "ArmResourceActionAsyncBase": {
+    "prefix": "arm-resource-action-async-base",
+    "body": "ArmResourceActionAsyncBase<${1:Resource}, ${2:Request}, ${3:Response}, ${4:OptionalBaseParameters}, ${5:OptionalParameters}, ${6:OptionalError}>;",
+    "description": "A long-running resource action that applies to a resource, with a base type for the request and response types"
+  },
+  "ArmResourceActionNoContentAsync": {
+    "prefix": "arm-resource-action-no-content-async",
+    "body": "ArmResourceActionNoContentAsync<${1:Resource}, ${2:Request}, ${3:OptionalBaseParameters}, ${4:OptionalLroHeaders}, ${5:OptionalParameters}, ${6:OptionalError}>;",
+    "description": "A long-running operation that applies to a resource, with no content in the response"
+  },
+  "ArmResourceActionNoContentSync": {
+    "prefix": "arm-resource-action-sync",
+    "body": "ArmResourceActionNoContentSync<${1:Resource}, ${2:Request},  ${4:OptionalBaseParameters}, ${5:OptionalParameters}, ${6:OptionalError}>;",
+    "description": "A synchronous resource action that returns no content"
+  },
+  "ArmResourceActionNoResponseContentAsync": {
+    "prefix": "arm-resource-action-no-response-content-async",
+    "body": "ArmResourceActionNoResponseContentAsync<${1:Resource}, ${2:Request}, ${3:OptionalBaseParameters}, ${4:OptionalLroHeaders}, ${5:OptionalParameters}, ${6:OptionalError}>;",
+    "description": "A long-running operation that applies to a resource, with no response content"
+  },
+  "ArmResourceActionSync": {
+    "prefix": "arm-resource-action-sync",
+    "body": "ArmResourceActionSync<${1:Resource}, ${2:Request}, ${3:Response}, ${4:OptionalBaseParameters}, ${5:OptionalParameters}, ${6:OptionalError}>;",
+    "description": "A synchronous resource action that applies to a resource"
+  },
+  "ArmResourceCheckExistence": {
+    "prefix": "arm-resource-check-existence",
+    "body": "ArmResourceCheckExistence<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalResponse}, ${4:OptionalError}>;",
+    "description": "Check a resource’s existence via HEAD operation"
+  },
+  "ArmResourceCreateOrReplaceAsync": {
+    "prefix": "arm-resource-create-or-replace-async",
+    "body": "ArmResourceCreateOrReplaceAsync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalLroHeaders}, ${4:OptionalParameters}, ${5:OptionalResponse}, ${6:OptionalError}>;",
+    "description": "A long-running operation to create or replace a resource"
+  },
+  "ArmResourceCreateOrReplaceSync": {
+    "prefix": "arm-resource-create-or-replace-sync",
+    "body": "ArmResourceCreateOrReplaceSync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParameters}, ${4:OptionalResponse}, ${5:OptionalError}>;",
+    "description": "Synchronous PUT operation for Azure Resource Manager resources"
+  },
+  "ArmResourceCreateOrUpdateAsync": {
+    "prefix": "arm-resource-create-or-update-async",
+    "body": "ArmResourceCreateOrUpdateAsync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalLroHeaders}, ${4:OptionalParameters}, ${5:OptionalResponse}, ${6:OptionalError}>;",
+    "description": "A long-running resource CreateOrUpdate (PUT)"
+  },
+  "ArmResourceDeleteAsyncBase": {
+    "prefix": "arm-resource-delete-async-base",
+    "body": "ArmResourceDeleteAsyncBase<${1:Resource}, ${2:Response}, ${3:OptionalBaseParameters}, ${4:OptionalParameters}, ${5:OptionalError}>;",
+    "description": "A long-running resource delete operation with a base type for the request and response types"
+  },
+  "ArmResourceDeleteSync": {
+    "prefix": "arm-resource-delete-sync",
+    "body": "ArmResourceDeleteSync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParameters}, ${4:OptionalResponse}, ${5:OptionalError}>;",
+    "description": "Delete a resource synchronously"
+  },
+  "ArmResourceDeleteWithoutOkAsync": {
+    "prefix": "arm-resource-delete-without-ok-async",
+    "body": "ArmResourceDeleteWithoutOkAsync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalLroHeaders}, ${4:OptionalParameters}, ${5:OptionalResponse}, ${6:OptionalError}>;",
+    "description": "A long-running resource delete operation that does not return an OK response"
+  },
+  "ArmResourceListAtScope": {
+    "prefix": "arm-resource-list-at-scope",
+    "body": "ArmResourceListAtScope<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParameters}, ${4:OptionalResponse}, ${5:OptionalError}>;",
+    "description": "A resource list operation, with scope determined by BaseParameters"
+  },
+  "ArmResourceListByParent": {
+    "prefix": "arm-resource-list-by-parent",
+    "body": "ArmResourceListByParent<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParentName}, ${4:OptionalParentFriendlyName}, ${5:OptionalParameters}, ${6:OptionalResponse}, ${7:OptionalError}>;",
+    "description": "A resource list operation, at the scope of the resource’s parent"
+  },
+  "ArmResourcePatchAsync": {
+    "prefix": "arm-resource-patch-async",
+    "body": "ArmResourcePatchAsync<${1:Resource}, ${2:Properties}, ${3:OptionalBaseParameters}, ${4:OptionalLroHeaders}, ${5:OptionalParameters}>;",
+    "description": "A long-running resource update using a PATCH payload (Asynchronous)"
+  },
+  "ArmResourcePatchSync": {
+    "prefix": "arm-resource-patch-sync",
+    "body": "ArmResourcePatchSync<${1:Resource}, ${2:Properties}, ${3:OptionalBaseParameters}, ${4:OptionalParameters}>;",
+    "description": "A resource update using a PATCH payload (synchronous)"
+  },
+  "ArmResourceRead": {
+    "prefix": "arm-resource-read",
+    "body": "ArmResourceRead<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParameters}, ${4:OptionalResponse}, ${5:OptionalError}>;",
+    "description": "A resource GET operation"
+  },
+  "ArmTagsPatchAsync": {
+    "prefix": "arm-tags-patch-async",
+    "body": "ArmTagsPatchAsync<${1:Resource}, ${2:Properties}, ${3:OptionalBaseParameters}, ${4:OptionalLroHeaders}, ${5:OptionalParameters}>;",
+    "description": "A long-running resource tags update using a PATCH payload (Asynchronous)"
+  },
+  "ArmTagsPatchSync": {
+    "prefix": "arm-tags-patch-sync",
+    "body": "ArmTagsPatchSync<${1:Resource}, ${2:OptionalBaseParameters}, ${3:OptionalParameters}>;",
+    "description": "A resource tags update using a PATCH payload (synchronous)"
+  },
+  "checkGlobalNameAvailability": {
+    "prefix": "check-global-name-availability",
+    "body": "checkGlobalNameAvailability<${1:Request}, ${2:Response}, ${3:AdditionalParams}>;",
+    "description": "Operation signature to check the availability of a global name"
+  },
+  "checkLocalNameAvailability": {
+    "prefix": "check-local-name-availability",
+    "body": "CheckLocalNameAvailability<${1:Resource}, ${2:Parameters}, ${3:AdditionalParams}>;",
+    "description": "Operation signature to check the availability of a local name"
+  },
+  "ArmCreateOperations": {
+    "prefix": "arm-create-operations",
+    "body": "ArmCreateOperations<${1:HttpParameters}, ${2:BodyParameter}, ${3:Response}, ${4:ErrorResponse}>;",
+    "description": "Operation signature to create a resource with operations"
+  },
+  "ArmReadOperations": {
+    "prefix": "arm-read-operations",
+    "body": "ArmReadOperations<${1:Parameters}, ${2:Response}, ${3:ErrorResponse}>;",
+    "description": "Operation signature to read a resource with operations"
+  },
+  "ArmUpdateOperations": {
+    "prefix": "arm-update-operations",
+    "body": "ArmUpdateOperations<${1:HttpParameters}, ${2:BodyParameter}, ${3:Response}, ${4:ErrorResponse}>;",
+    "description": "Operation signature to update a resource with operations"
+  },
+  "checkNameAvailability": {
+    "prefix": "check-name-availability",
+    "body": "checkNameAvailability<${1:ScopeParameters}, ${2:Request}, ${3:Response}, ${4:AdditionalParams}>;",
+    "description": "Adds check name availability operation, normally used if a resource name must be globally unique (for example, if the resource exposes an endpoint that uses the resource name in the url)"
+  },
+  "@finalLocation": {
+    "prefix": "@final-location",
+    "body": "@finalLocation(${1:finalResult?})",
+    "description": "Identifies a ModelProperty as containing the final location for the operation result"
+  },
+  "@finalOperation": {
+    "prefix": "@final-operation",
+    "body": "@finalOperation(${1:linkedOperation}, ${2:parameters?})",
+    "description": "Identifies that an operation is the final operation for an LRO"
+  },
+  "@nextPageOperation": {
+    "prefix": "@next-page-operation",
+    "body": "@nextPageOperation(${1:linkedOperation}, ${2:parameters?})",
+    "description": "Identifies that an operation is used to retrieve the next page for paged operations"
+  },
+  "@operationLink": {
+    "prefix": "@operation-link",
+    "body": "@operationLink(${1:linkedOperation}, ${2:linkType}, ${3:parameters?})",
+    "description": "Identifies an operation that is linked to the target operation"
+  },
+  "@pollingLocation": {
+    "prefix": "@polling-location",
+    "body": "@pollingLocation(${1:options?})",
+    "description": "Identifies a model property as containing the location to poll for operation state"
+  },
+  "@pollingOperation": {
+    "prefix": "@polling-operation",
+    "body": "@pollingOperation(${1:linkedOperation}, ${2:parameters?})",
+    "description": "Identifies that an operation is a polling operation for an LRO"
+  },
+  "@pollingOperationParameter": {
+    "prefix": "@polling-operation-parameter",
+    "body": "@pollingOperationParameter(${1:targetParameter})",
+    "description": "Used to define how to call custom polling operations for long-running operations"
+  },
+  "@useFinalStateVia": {
+    "prefix": "@use-final-state-via",
+    "body": "@useFinalStateVia(${1:finalState})",
+    "description": "Overrides the final state value for an operation"
+  },
+  "@requestParameter": {
+    "prefix": "@request-parameter",
+    "body": "@requestParameter(${1:propertyName })",
+    "description": "Identifies a property on a request model that serves as a linked operation parameter"
+  },
+  "@responseProperty": {
+    "prefix": "@response-property",
+    "body": "@responseProperty(${1:propertyName})",
+    "description": "Identifies a property on all non-error response models that serve as a linked operation parameter"
+  },
+  "@trait": {
+    "prefix": "@trait",
+    "body": "@trait(${1:traitName})",
+    "description": "`@trait` marks a model type as representing a 'trait' and performs basic validation checks"
+  },
+  "@traitAdded": {
+    "prefix": "@trait-added",
+    "body": "@traitAdded(${1:addedVersion})",
+    "description": "Sets the version for when the trait was added to the specification. Can be applied to either a trait model type or its envelope property"
+  },
+  "@traitContext": {
+    "prefix": "@trait-context",
+    "body": "@traitContext(${1:contexts})",
+    "description": "`@traitContext` sets the applicable context for a trait on its envelope property"
+  },
+  "@traitLocation": {
+    "prefix": "@trait-location",
+    "body": "@traitLocation(${1:contexts})",
+    "description": "`@traitLocation` sets the applicable location for a trait on its envelope property"
+  },
+  "@armCommonTypesVersion": {
+    "prefix": "@arm-common-types-version",
+    "body": "@armCommonTypesVersion(${1:version})",
+    "description": "This decorator is used either on a namespace or a version enum value to indicate the version of the Azure Resource Manager common-types to use for refs in emitted Swagger files"
+  },
+  "@armProviderNamespace": {
+    "prefix": "@arm-provider-namespace",
+    "body": "@armProviderNamespace(${1:providerNamespace})",
+    "description": "`@armProviderNamespace` sets the Azure Resource Manager provider name. It will default to use the Namespace element value unless an override value is specified"
+  },
+  "@armResourceAction": {
+    "prefix": "@arm-resource-action",
+    "body": "@armResourceAction(${1:resourceType})",
+    "description": "`@armResourceAction` marks an operation as an Azure Resource Manager resource action"
+  },
+  "@armResourceCreateOrUpdate": {
+    "prefix": "@arm-resource-create-or-update",
+    "body": "@armResourceCreateOrUpdate(${1:resourceType})",
+    "description": "`@armResourceCreateOrUpdate` marks an operation as an Azure Resource Manager resource CreateOrUpdate (PUT)"
+  },
+  "@armResourceDelete": {
+    "prefix": "@arm-resource-delete",
+    "body": "@armResourceDelete(${1:resourceType})",
+    "description": "`@armResourceDelete` marks an operation as an Azure Resource Manager resource delete"
+  },
+  "@armResourceList": {
+    "prefix": "@arm-resource-list",
+    "body": "@armResourceList(${1:resourceType})",
+    "description": "`@armResourceList` marks an operation as an Azure Resource Manager resource list operation"
+  },
+  "@armResourceRead": {
+    "prefix": "@arm-resource-read",
+    "body": "@armResourceRead(${1:resourceType})",
+    "description": "`@armResourceRead` marks an operation as an Azure Resource Manager resource read (GET)"
+  },
+  "@armResourceUpdate": {
+    "prefix": "@arm-resource-update",
+    "body": "@armResourceUpdate(${1:resourceType})",
+    "description": "`@armResourceUpdate` marks an operation as an Azure Resource Manager resource update (PATCH)"
+  },
+  "@resourceBaseType": {
+    "prefix": "@resource-base-type",
+    "body": "@resourceBaseType(${1:baseType})",
+    "description": "This decorator sets the base type of the given resource"
+  },
+  "@singleton": {
+    "prefix": "@singleton",
+    "body": "@singleton(${1:keyValue})",
+    "description": "`@singleton` marks an Azure Resource Manager resource model as a singleton resource, keyValue is 'default' by default"
+  },
+  "@useLibraryNamespace": {
+    "prefix": "@use-library-namespace",
+    "body": "@useLibraryNamespace(${1:namespaces})",
+    "description": "Declare the Azure Resource Manager library namespaces used in this provider. This allows sharing Azure Resource Manager resource types across specifications"
+  }
+}
