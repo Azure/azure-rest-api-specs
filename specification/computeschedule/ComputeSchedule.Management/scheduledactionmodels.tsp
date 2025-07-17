@@ -83,6 +83,22 @@ model ScheduledActionResource {
   notificationSettings?: Array<NotificationProperties>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@parentResource(ScheduledAction)
+@segment("resources")
+@doc("Represents an scheduled action resource metadata.")
+model ScheduledActionResourceCreate {
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+}
+
 @@identifiers(ResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
@@ -92,7 +108,7 @@ model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<ScheduledActionResource>;
+  resources: Array<ScheduledActionResourceCreate>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
@@ -107,51 +123,7 @@ model ResourceDetachRequest {
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<ScheduledActionResource>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Create version of ScheduledActionResource without read-only properties")
-model ScheduledActionResourceCreate {
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
-  resourceId: ValidScheduledActionResourceId;
-
-  @doc("The desired notification settings for the specified resource.")
-  @Azure.ResourceManager.identifiers(#["destination"])
-  notificationSettings?: Array<NotificationProperties>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model perform a resource operation in a list of resources")
-model ResourceAttachRequestCreate {
-  @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
   resources: Array<ScheduledActionResourceCreate>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Create version of ScheduledActionResource without read-only properties")
-model ScheduledActionResourceUpdate {
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
-  resourceId: ValidScheduledActionResourceId;
-
-  @doc("The desired notification settings for the specified resource.")
-  @Azure.ResourceManager.identifiers(#["destination"])
-  notificationSettings?: Array<NotificationProperties>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model perform a resource operation in a list of resources")
-model ResourcePatchRequestUpdate {
-  @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<ScheduledActionResourceUpdate>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
