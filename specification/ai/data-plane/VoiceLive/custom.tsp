@@ -31,26 +31,26 @@ model VoiceLiveRequestSession {
 
 model VoiceLiveResponseSession {
   ...VoiceLiveSessionBase;
-  id: string;
-  `model`: string;
-  modalities: VoiceLiveModality[];
-  instructions: string;
+  id?: string;
+  `model`?: string;
+  modalities?: VoiceLiveModality[];
+  instructions?: string;
   animation?: VoiceLiveAnimation;
-  voice: Voice;
+  voice?: Voice;
   input_audio?: VoiceLiveInputAudio;
-  input_audio_format: VoiceLiveAudioFormat;
-  output_audio_format: VoiceLiveAudioFormat;
+  input_audio_format?: VoiceLiveAudioFormat;
+  output_audio_format?: VoiceLiveAudioFormat;
   input_audio_sampling_rate?: int32;
-  turn_detection: VoiceLiveTurnDetection;
-  input_audio_noise_reduction: VoiceLiveAudioNoiseReduction;
+  turn_detection?: VoiceLiveTurnDetection;
+  input_audio_noise_reduction?: VoiceLiveAudioNoiseReduction;
   input_audio_echo_cancellation?: VoiceLiveAudioEchoCancellation;
   avatar?: VoiceLiveAvatarConfig;
-  input_audio_transcription: VoiceLiveAudioInputTranscriptionSettings | null;
+  input_audio_transcription?: VoiceLiveAudioInputTranscriptionSettings | null;
   output_audio_timestamp_types?: VoiceLiveAudioTimestampType[];
-  tools: VoiceLiveTool[];
-  tool_choice: VoiceLiveToolChoice;
-  temperature: float32;
-  max_response_output_tokens: int32 | "inf" | null;
+  tools?: VoiceLiveTool[];
+  tool_choice?: VoiceLiveToolChoice;
+  temperature?: float32;
+  max_response_output_tokens?: int32 | "inf" | null;
   agent?: AgentConfig;
 }
 
