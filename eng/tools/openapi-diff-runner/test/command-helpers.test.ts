@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  initContext,
+  createContextFromParsedArgs,
   BreakingChangeLabelsToBeAdded,
   getSwaggerDiffs,
   buildPrInfo,
@@ -14,6 +14,7 @@ import {
   isSameVersionBreakingType,
   getCreatedDummySwaggerCount,
   outputBreakingChangeLabelVariables,
+  type ParsedCliArguments,
 } from "../src/command-helpers.js";
 import {
   Context,
@@ -22,6 +23,166 @@ import {
 } from "../src/types/breaking-change.js";
 import { ResultMessageRecord } from "../src/types/message.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { LogLevel } from "../src/log.js";
+
+// Test constants
+const TEST_CONSTANTS = {
+  REPO: {
+    NAME: "test/repo",
+    CUSTOM: "custom/repo",
+    SOURCE: "test/repo",
+  },
+  PATHS: {
+    SPEC_REPO: "/path/to/repo",
+    WORKING_FOLDER: "/working",
+    LOG_FOLDER: "/logs",
+    LOG_FILE: "/log/path",
+    TEMP_REPO: "/working/dir",
+    TEST_PATH: "/test/path",
+    FILE_JS: "/path/to/file.js",
+  },
+  BRANCHES: {
+    MAIN: "main",
+    DEVELOP: "develop",
+    FEATURE: "feature",
+    ARM_CORE: "ARMCoreRPDev",
+  },
+  COMMITS: {
+    HEAD: "HEAD",
+    ABC123: "abc123",
+  },
+  PR: {
+    NUMBER: "123",
+    CUSTOM_NUMBER: "456",
+    URL: "https://github.com/test/repo/pull/123",
+    CUSTOM_URL: "https://github.com/custom/repo/pull/456",
+  },
+  SWAGGER_PATHS: {
+    FOO: "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json",
+    BAR: "specification/bar/data-plane/stable/2023-01-01/bar.json",
+    BAZ: "specification/baz/resource-manager/Microsoft.Baz/stable/2023-01-01/baz.json",
+    QUX_MGMT: "specification/qux/resource-manager/Microsoft.Qux/stable/2023-01-01/qux.json",
+    QUX_DATA: "specification/qux/data-plane/stable/2023-01-01/qux.json",
+    OLD_MGMT: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json",
+    NEW_MGMT: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json",
+    OLD_DATA: "specification/old/data-plane/stable/2023-01-01/old.json",
+  },
+  NON_SWAGGER_PATHS: {
+    YAML: ".github/workflows/test.yaml",
+    EXAMPLE:
+      "specification/bar/resource-manager/Microsoft.Bar/stable/2023-01-01/examples/example.json",
+    README: "README.md",
+    PACKAGE_JSON: "package.json",
+    BUILD_JS: "dist/build.js",
+    OLD_README: "old-readme.md",
+    NEW_README: "new-readme.md",
+  },
+  MESSAGES: {
+    ERROR: "Test error message",
+    WARNING: "Test warning message",
+    SWITCH_BRANCH: "switch target branch to main",
+    CREATED_DUMMY: "created a dummy swagger:",
+  },
+  SWAGGER_DIRS: ["specification"],
+  SWAGGER_CONTENT: {
+    BASIC: {
+      swagger: "2.0",
+      info: { title: "Test API", version: "1.0" },
+    },
+    WITH_PATHS: {
+      swagger: "2.0",
+      info: { title: "Test API", version: "1.0" },
+      paths: { "/test": { get: {} } },
+      "x-ms-paths": { "/test2": { post: {} } },
+      "x-ms-parameterized-host": { hostTemplate: "test.com" },
+      parameters: { testParam: {} },
+      definitions: { TestModel: {} },
+    },
+  },
+};
+
+// Factory functions for commonly used mock objects
+function createMockContext(overrides = {}): Context {
+  return {
+    localSpecRepoPath: TEST_CONSTANTS.PATHS.SPEC_REPO,
+    workingFolder: TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+    logFileFolder: TEST_CONSTANTS.PATHS.LOG_FOLDER,
+    swaggerDirs: TEST_CONSTANTS.SWAGGER_DIRS,
+    baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    headCommit: TEST_CONSTANTS.COMMITS.HEAD,
+    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+    checkName: "test",
+    targetRepo: TEST_CONSTANTS.REPO.NAME,
+    sourceRepo: TEST_CONSTANTS.REPO.SOURCE,
+    prNumber: TEST_CONSTANTS.PR.NUMBER,
+    prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+    prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    oadMessageProcessorContext: {
+      logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
+      prUrl: TEST_CONSTANTS.PR.URL,
+      messageCache: [],
+    },
+    prUrl: TEST_CONSTANTS.PR.URL,
+    ...overrides,
+  } as Context;
+}
+
+function createMockPrInfo(overrides = {}) {
+  return {
+    baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    targetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    sourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+    tempRepoFolder: TEST_CONSTANTS.PATHS.TEMP_REPO,
+    currentBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+    checkout: vi.fn(),
+    ...overrides,
+  };
+}
+
+function createMockSwaggerResult(overrides = {}) {
+  return {
+    additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAR],
+    modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+    deletions: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_DATA],
+    renames: [
+      {
+        from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
+        to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
+      },
+    ],
+    total: 5,
+    ...overrides,
+  };
+}
+
+function createMockMessages(): ResultMessageRecord[] {
+  return [
+    {
+      type: "Result",
+      level: "Error",
+      message: TEST_CONSTANTS.MESSAGES.ERROR,
+      time: new Date("2023-01-01"),
+      paths: [],
+    },
+    {
+      type: "Result",
+      level: "Warning",
+      message: TEST_CONSTANTS.MESSAGES.WARNING,
+      time: new Date("2023-01-02"),
+      paths: [],
+    },
+  ];
+}
+
+function setupCommonMocks() {
+  const mockOadMessageProcessor = {
+    logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
+    prUrl: TEST_CONSTANTS.PR.URL,
+    messageCache: [],
+  };
+  return { mockOadMessageProcessor };
+}
 
 // Mock dependencies
 vi.mock("node:fs");
@@ -73,107 +234,97 @@ describe("command-helpers", () => {
     vi.resetAllMocks();
   });
 
-  describe("initContext", () => {
-    beforeEach(() => {
-      // Mock process.argv
-      vi.stubGlobal("process", {
-        ...process,
-        argv: ["node", "script.js", "--repo=test/repo", "--number=123"],
-      });
+  describe("createContextFromParsedArgs", () => {
+    const createTestParsedArgs = (
+      overrides: Partial<ParsedCliArguments> = {},
+    ): ParsedCliArguments => ({
+      localSpecRepoPath: TEST_CONSTANTS.PATHS.SPEC_REPO,
+      targetRepo: TEST_CONSTANTS.REPO.NAME,
+      sourceRepo: TEST_CONSTANTS.REPO.SOURCE,
+      prNumber: TEST_CONSTANTS.PR.NUMBER,
+      runType: "SameVersion" as const,
+      baseBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+      headCommit: TEST_CONSTANTS.COMMITS.HEAD,
+      prSourceBranch: "",
+      prTargetBranch: "",
+      ...overrides,
     });
 
-    afterEach(() => {
-      vi.unstubAllGlobals();
-    });
-
-    it("should initialize context with default values", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
+    it("should create context with default values", async () => {
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
+      const { mockOadMessageProcessor } = setupCommonMocks();
+      vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
-      vi.mocked(getArgumentValue).mockImplementation((_args, key, defaultValue) => {
-        const argMap: Record<string, string> = {
-          "--repo": "test/repo",
-          "--number": "123",
-          "--rt": "SameVersion",
-          "--bb": "main",
-          "--hc": "HEAD",
-          "--sb": "",
-          "--tb": "",
-        };
-        return argMap[key] || defaultValue || "";
-      });
+      const parsedArgs = createTestParsedArgs();
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
 
-      mockExistsSync.mockReturnValue(false);
-      vi.mocked(createOadMessageProcessor).mockReturnValue({
-        logFilePath: "/log/path",
-        prUrl: "https://github.com/test/repo/pull/123",
-        messageCache: [],
-      });
-
-      const context = initContext();
-
-      expect(context.repo).toBe("test/repo");
-      expect(context.prNumber).toBe("123");
+      expect(context.targetRepo).toBe(TEST_CONSTANTS.REPO.NAME);
+      expect(context.prNumber).toBe(TEST_CONSTANTS.PR.NUMBER);
       expect(context.runType).toBe("SameVersion");
-      expect(context.baseBranch).toBe("main");
-      expect(context.headCommit).toBe("HEAD");
+      expect(context.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
+      expect(context.headCommit).toBe(TEST_CONSTANTS.COMMITS.HEAD);
       expect(context.checkName).toBe("Swagger BreakingChange");
-      expect(context.prUrl).toBe("https://github.com/test/repo/pull/123");
-      expect(mockMkdirSync).toHaveBeenCalledWith(expect.any(String), { recursive: true });
+      expect(context.prUrl).toBe(TEST_CONSTANTS.PR.URL);
+      expect(context.workingFolder).toBe(TEST_CONSTANTS.PATHS.WORKING_FOLDER);
+      expect(context.logFileFolder).toBe(TEST_CONSTANTS.PATHS.LOG_FOLDER);
     });
 
     it("should use custom values when provided", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
-
-      vi.mocked(getArgumentValue).mockImplementation((_args, key, defaultValue) => {
-        const argMap: Record<string, string> = {
-          "--repo": "custom/repo",
-          "--number": "456",
-          "--rt": "CrossVersion",
-          "--bb": "develop",
-          "--hc": "abc123",
-          "--sb": "feature-branch",
-          "--tb": "main",
-        };
-        return argMap[key] || defaultValue || "";
-      });
-
-      mockExistsSync.mockReturnValue(true);
       vi.mocked(createOadMessageProcessor).mockReturnValue({
-        logFilePath: "/log/path",
-        prUrl: "https://github.com/custom/repo/pull/456",
+        logFilePath: TEST_CONSTANTS.PATHS.LOG_FILE,
+        prUrl: TEST_CONSTANTS.PR.CUSTOM_URL,
         messageCache: [],
       });
 
-      const context = initContext();
+      const parsedArgs = createTestParsedArgs({
+        targetRepo: TEST_CONSTANTS.REPO.CUSTOM,
+        prNumber: TEST_CONSTANTS.PR.CUSTOM_NUMBER,
+        runType: "CrossVersion",
+        baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+        headCommit: TEST_CONSTANTS.COMMITS.ABC123,
+        prSourceBranch: TEST_CONSTANTS.BRANCHES.FEATURE,
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN,
+      });
 
-      expect(context.repo).toBe("custom/repo");
-      expect(context.prNumber).toBe("456");
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
+
+      expect(context.targetRepo).toBe(TEST_CONSTANTS.REPO.CUSTOM);
+      expect(context.prNumber).toBe(TEST_CONSTANTS.PR.CUSTOM_NUMBER);
       expect(context.runType).toBe("CrossVersion");
-      expect(context.baseBranch).toBe("develop");
-      expect(context.headCommit).toBe("abc123");
-      expect(context.prSourceBranch).toBe("feature-branch");
-      expect(context.prTargetBranch).toBe("main");
+      expect(context.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.DEVELOP);
+      expect(context.headCommit).toBe(TEST_CONSTANTS.COMMITS.ABC123);
+      expect(context.prSourceBranch).toBe(TEST_CONSTANTS.BRANCHES.FEATURE);
+      expect(context.prTargetBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
       expect(context.checkName).toBe("BreakingChange(Cross-Version)");
-      expect(mockMkdirSync).not.toHaveBeenCalled();
     });
 
-    it("should create log file folder if it doesn't exist", async () => {
-      const { getArgumentValue } = await import("../src/utils/common-utils.js");
+    it("should create proper URL and context structure", async () => {
       const { createOadMessageProcessor } = await import("../src/utils/oad-message-processor.js");
+      const { mockOadMessageProcessor } = setupCommonMocks();
+      vi.mocked(createOadMessageProcessor).mockReturnValue(mockOadMessageProcessor);
 
-      vi.mocked(getArgumentValue).mockReturnValue("");
-      mockExistsSync.mockReturnValue(false);
-      vi.mocked(createOadMessageProcessor).mockReturnValue({
-        logFilePath: "/log/path",
-        prUrl: "https://github.com/test/repo/pull/123",
-        messageCache: [],
-      });
+      const parsedArgs = createTestParsedArgs();
+      const context = createContextFromParsedArgs(
+        parsedArgs,
+        TEST_CONSTANTS.PATHS.WORKING_FOLDER,
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+      );
 
-      initContext();
-
-      expect(mockMkdirSync).toHaveBeenCalledWith(expect.any(String), { recursive: true });
+      expect(context.swaggerDirs).toEqual(["specification", "dev"]);
+      expect(context.oadMessageProcessorContext).toBe(mockOadMessageProcessor);
+      expect(createOadMessageProcessor).toHaveBeenCalledWith(
+        TEST_CONSTANTS.PATHS.LOG_FOLDER,
+        TEST_CONSTANTS.PR.URL,
+      );
     });
   });
 
@@ -193,122 +344,106 @@ describe("command-helpers", () => {
 
   describe("getSwaggerDiffs", () => {
     it("should return changed files successfully", async () => {
-      const mockResult = {
-        additions: [
-          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json",
-          "specification/bar/data-plane/stable/2023-01-01/bar.json",
-        ],
-        modifications: [
-          "specification/baz/resource-manager/Microsoft.Baz/stable/2023-01-01/baz.json",
-        ],
-        deletions: ["specification/qux/data-plane/stable/2023-01-01/qux.json"],
-        renames: [
-          {
-            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json",
-            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json",
-          },
-        ],
-        total: 5,
-      };
-
+      const mockResult = createMockSwaggerResult();
       mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
 
       const result = await getSwaggerDiffs({
-        baseCommitish: "main",
-        cwd: "/test/path",
-        headCommitish: "HEAD",
+        baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
+        cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
+        headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
 
-      expect(result).toEqual(mockResult);
+      // Expected result should have renames added to additions and deletions, and no renames property
+      const expectedResult = {
+        additions: [...mockResult.additions, ...mockResult.renames.map((rename) => rename.to)],
+        modifications: mockResult.modifications,
+        deletions: [...mockResult.deletions, ...mockResult.renames.map((rename) => rename.from)],
+        total:
+          mockResult.additions.length +
+          mockResult.modifications.length +
+          mockResult.deletions.length +
+          mockResult.renames.length * 2,
+      };
+
+      expect(result).toEqual(expectedResult);
       expect(mockGetChangedFilesStatuses).toHaveBeenCalledWith({
-        baseCommitish: "main",
-        cwd: "/test/path",
-        headCommitish: "HEAD",
+        baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
+        cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
+        headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
     });
 
     it("should return empty result on error", async () => {
       mockGetChangedFilesStatuses.mockRejectedValue(new Error("Git error"));
-
       const result = await getSwaggerDiffs();
-
       expect(result).toEqual({
         additions: [],
         modifications: [],
         deletions: [],
-        renames: [],
         total: 0,
       });
-      expect(console.error).toHaveBeenCalledWith(
-        "Error getting categorized changed files:",
-        expect.any(Error),
-      );
     });
 
     it("should filter out non-Swagger files", async () => {
-      const mockResult = {
+      const mockResultWithNonSwagger = {
         additions: [
-          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json", // Valid Swagger
-          ".github/workflows/test.yaml", // Non-Swagger (YAML)
-          "specification/bar/resource-manager/Microsoft.Bar/stable/2023-01-01/examples/example.json", // Example file
-          "README.md", // Non-JSON
-          "specification/baz/data-plane/stable/2023-01-01/baz.json", // Valid Swagger
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO, // Valid Swagger
+          TEST_CONSTANTS.NON_SWAGGER_PATHS.YAML, // Non-Swagger (YAML)
+          TEST_CONSTANTS.NON_SWAGGER_PATHS.EXAMPLE, // Example file
+          TEST_CONSTANTS.NON_SWAGGER_PATHS.README, // Non-JSON
+          TEST_CONSTANTS.SWAGGER_PATHS.BAZ, // Valid Swagger
         ],
         modifications: [
-          "specification/qux/resource-manager/Microsoft.Qux/stable/2023-01-01/qux.json", // Valid Swagger
-          "package.json", // Non-Swagger JSON
+          TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT, // Valid Swagger
+          TEST_CONSTANTS.NON_SWAGGER_PATHS.PACKAGE_JSON, // Non-Swagger JSON
         ],
         deletions: [
-          "specification/old/data-plane/stable/2023-01-01/old.json", // Valid Swagger
-          "dist/build.js", // Non-Swagger
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA, // Valid Swagger
+          TEST_CONSTANTS.NON_SWAGGER_PATHS.BUILD_JS, // Non-Swagger
         ],
         renames: [
           {
-            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json", // Valid Swagger
-            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json", // Valid Swagger
+            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // Valid Swagger
+            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // Valid Swagger
           },
           {
-            from: "old-readme.md", // Non-Swagger
-            to: "new-readme.md", // Non-Swagger
+            from: TEST_CONSTANTS.NON_SWAGGER_PATHS.OLD_README, // Non-Swagger
+            to: TEST_CONSTANTS.NON_SWAGGER_PATHS.NEW_README, // Non-Swagger
           },
         ],
         total: 9,
       };
 
-      mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
+      mockGetChangedFilesStatuses.mockResolvedValue(mockResultWithNonSwagger);
 
       const result = await getSwaggerDiffs();
 
-      // Only Swagger files should be returned
+      // Only Swagger files should be returned, with renames added to additions and deletions
       expect(result).toEqual({
         additions: [
-          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json",
-          "specification/baz/data-plane/stable/2023-01-01/baz.json",
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from valid rename
         ],
-        modifications: [
-          "specification/qux/resource-manager/Microsoft.Qux/stable/2023-01-01/qux.json",
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from valid rename
         ],
-        deletions: ["specification/old/data-plane/stable/2023-01-01/old.json"],
-        renames: [
-          {
-            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json",
-            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json",
-          },
-        ],
-        total: 5,
+        total: 6, // 3 additions + 1 modification + 2 deletions (including rename files)
       });
     });
 
     it("should use default options when none provided", async () => {
-      const mockResult = {
+      const emptyResult = createMockSwaggerResult({
         additions: [],
         modifications: [],
         deletions: [],
         renames: [],
         total: 0,
-      };
+      });
 
-      mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
+      mockGetChangedFilesStatuses.mockResolvedValue(emptyResult);
 
       await getSwaggerDiffs();
 
@@ -318,41 +453,52 @@ describe("command-helpers", () => {
         headCommitish: undefined,
       });
     });
+
+    it("should handle renames by adding them to additions and deletions", async () => {
+      const mockResultWithRenames = {
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        renames: [
+          {
+            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
+            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
+          },
+          {
+            from: "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json",
+            to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
+          },
+        ],
+        total: 6,
+      };
+
+      mockGetChangedFilesStatuses.mockResolvedValue(mockResultWithRenames);
+
+      const result = await getSwaggerDiffs();
+
+      // Renames should be added to additions and deletions, not returned as renames
+      expect(result).toEqual({
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename.to
+          "specification/newapi/data-plane/stable/2023-01-01/newapi.json", // from rename.to
+        ],
+        modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename.from
+          "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json", // from rename.from
+        ],
+        total: 7, // 3 additions + 1 modification + 3 deletions (including from renames)
+      });
+    });
   });
 
   describe("buildPrInfo", () => {
     it("should build PR info successfully", async () => {
       const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "main",
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-      };
-
-      const mockPrInfo = {
-        baseBranch: "main",
-        targetBranch: "main",
-        sourceBranch: "feature",
-        workingDir: "/working/dir",
-        currentBranch: "main",
-        checkout: vi.fn(),
-      };
+      const mockContext = createMockContext();
+      const mockPrInfo = createMockPrInfo();
 
       vi.mocked(createPullRequestProperties).mockResolvedValue(mockPrInfo);
 
@@ -364,36 +510,8 @@ describe("command-helpers", () => {
 
     it("should use cross-version prefix for CrossVersion run type", async () => {
       const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "CrossVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "main",
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-      };
-
-      const mockPrInfo = {
-        baseBranch: "main",
-        targetBranch: "main",
-        sourceBranch: "feature",
-        workingDir: "/working/dir",
-        currentBranch: "main",
-        checkout: vi.fn(),
-      };
+      const mockContext = createMockContext({ runType: "CrossVersion" });
+      const mockPrInfo = createMockPrInfo();
 
       vi.mocked(createPullRequestProperties).mockResolvedValue(mockPrInfo);
 
@@ -404,27 +522,7 @@ describe("command-helpers", () => {
 
     it("should throw error when PR info creation fails", async () => {
       const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "main",
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-      };
+      const mockContext = createMockContext();
 
       vi.mocked(createPullRequestProperties).mockResolvedValue(undefined);
 
@@ -433,36 +531,8 @@ describe("command-helpers", () => {
 
     it("should throw error when PR info has no target branch", async () => {
       const { createPullRequestProperties } = await import("../src/utils/pull-request.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "main",
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-      };
-
-      const mockPrInfo = {
-        baseBranch: "main",
-        targetBranch: "", // Empty target branch
-        sourceBranch: "feature",
-        workingDir: "/working/dir",
-        currentBranch: "main",
-        checkout: vi.fn(),
-      };
+      const mockContext = createMockContext();
+      const mockPrInfo = createMockPrInfo({ targetBranch: "" }); // Empty target branch
 
       vi.mocked(createPullRequestProperties).mockResolvedValue(mockPrInfo);
 
@@ -473,71 +543,26 @@ describe("command-helpers", () => {
   describe("changeBaseBranch", () => {
     it("should change base branch when different from target and not whitelisted", async () => {
       const { logMessage } = await import("../src/log.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "develop", // Different from baseBranch
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-        prInfo: {
-          baseBranch: "develop",
-          targetBranch: "develop",
-          sourceBranch: "feature",
-          workingDir: "/working/dir",
-          currentBranch: "develop",
-          checkout: vi.fn(),
-        },
-      };
+      const mockContext = createMockContext({
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+        prInfo: createMockPrInfo({
+          baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+          targetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+          currentBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+        }),
+      });
 
       changeBaseBranch(mockContext);
 
-      expect(mockContext.prInfo!.baseBranch).toBe("main");
-      expect(logMessage).toHaveBeenCalledWith("switch target branch to main");
+      expect(mockContext.prInfo!.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
+      expect(logMessage).toHaveBeenCalledWith(TEST_CONSTANTS.MESSAGES.SWITCH_BRANCH);
     });
 
     it("should not change base branch when same as target", () => {
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "main", // Same as baseBranch
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-        prInfo: {
-          baseBranch: "main",
-          targetBranch: "main",
-          sourceBranch: "feature",
-          workingDir: "/working/dir",
-          currentBranch: "main",
-          checkout: vi.fn(),
-        },
-      };
+      const mockContext = createMockContext({
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.MAIN, // Same as baseBranch
+        prInfo: createMockPrInfo(),
+      });
 
       const originalBaseBranch = mockContext.prInfo!.baseBranch;
       changeBaseBranch(mockContext);
@@ -546,34 +571,14 @@ describe("command-helpers", () => {
     });
 
     it("should not change base branch for whitelisted branches", () => {
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
-        runType: "SameVersion",
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "ARMCoreRPDev", // Whitelisted branch
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-        prInfo: {
-          baseBranch: "ARMCoreRPDev",
-          targetBranch: "ARMCoreRPDev",
-          sourceBranch: "feature",
-          workingDir: "/working/dir",
-          currentBranch: "ARMCoreRPDev",
-          checkout: vi.fn(),
-        },
-      };
+      const mockContext = createMockContext({
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.ARM_CORE, // Whitelisted branch
+        prInfo: createMockPrInfo({
+          baseBranch: TEST_CONSTANTS.BRANCHES.ARM_CORE,
+          targetBranch: TEST_CONSTANTS.BRANCHES.ARM_CORE,
+          currentBranch: TEST_CONSTANTS.BRANCHES.ARM_CORE,
+        }),
+      });
 
       const originalBaseBranch = mockContext.prInfo!.baseBranch;
       changeBaseBranch(mockContext);
@@ -583,73 +588,40 @@ describe("command-helpers", () => {
 
     it("should change base branch for CrossVersion run type when different from target", async () => {
       const { logMessage } = await import("../src/log.js");
-
-      const mockContext: Context = {
-        localSpecRepoPath: "/path/to/repo",
-        workingFolder: "/working",
-        logFileFolder: "/logs",
-        swaggerDirs: ["specification"],
-        baseBranch: "main",
-        headCommit: "HEAD",
+      const mockContext = createMockContext({
         runType: "CrossVersion", // CrossVersion type
-        checkName: "test",
-        repo: "test/repo",
-        prNumber: "123",
-        prSourceBranch: "feature",
-        prTargetBranch: "develop", // Different from baseBranch
-        oadMessageProcessorContext: {
-          logFilePath: "/log/path",
-          prUrl: "https://github.com/test/repo/pull/123",
-          messageCache: [],
-        },
-        prUrl: "https://github.com/test/repo/pull/123",
-        prInfo: {
-          baseBranch: "develop",
-          targetBranch: "develop",
-          sourceBranch: "feature",
-          workingDir: "/working/dir",
-          currentBranch: "develop",
-          checkout: vi.fn(),
-        },
-      };
+        prTargetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP, // Different from baseBranch
+        prInfo: createMockPrInfo({
+          baseBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+          targetBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+          currentBranch: TEST_CONSTANTS.BRANCHES.DEVELOP,
+        }),
+      });
 
       changeBaseBranch(mockContext);
 
       // CrossVersion also changes base branch when different from target
-      expect(mockContext.prInfo!.baseBranch).toBe("main");
-      expect(logMessage).toHaveBeenCalledWith("switch target branch to main");
+      expect(mockContext.prInfo!.baseBranch).toBe(TEST_CONSTANTS.BRANCHES.MAIN);
+      expect(logMessage).toHaveBeenCalledWith(TEST_CONSTANTS.MESSAGES.SWITCH_BRANCH);
     });
   });
 
   describe("logFullOadMessagesList", () => {
     it("should log all messages individually", async () => {
       const { logMessage } = await import("../src/log.js");
-
-      const msgs: ResultMessageRecord[] = [
-        {
-          type: "Result",
-          level: "Error",
-          message: "Test error message",
-          time: new Date("2023-01-01"),
-          paths: [],
-        },
-        {
-          type: "Result",
-          level: "Warning",
-          message: "Test warning message",
-          time: new Date("2023-01-02"),
-          paths: [],
-        },
-      ];
+      const msgs = createMockMessages();
 
       logFullOadMessagesList(msgs);
 
-      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
       expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[0], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith(JSON.stringify(msgs[1], null, 4) + ",");
       expect(logMessage).toHaveBeenCalledWith("]");
-      expect(logMessage).toHaveBeenCalledWith("---- End of full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith(
+        "---- End of full list of messages ----",
+        LogLevel.EndGroup,
+      );
     });
 
     it("should handle empty message list", async () => {
@@ -657,10 +629,13 @@ describe("command-helpers", () => {
 
       logFullOadMessagesList([]);
 
-      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith("---- Full list of messages ----", LogLevel.Group);
       expect(logMessage).toHaveBeenCalledWith("[");
       expect(logMessage).toHaveBeenCalledWith("]");
-      expect(logMessage).toHaveBeenCalledWith("---- End of full list of messages ----");
+      expect(logMessage).toHaveBeenCalledWith(
+        "---- End of full list of messages ----",
+        LogLevel.EndGroup,
+      );
     });
   });
 
