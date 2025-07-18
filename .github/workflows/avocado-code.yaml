@@ -47,7 +47,7 @@ jobs:
 
           # Avocado doesn't write any output if it was successful, so we add some to simplify later processing
           [[ -e "$AVOCADO_OUTPUT_FILE" ]] || \
-            jq -n \
+            jq -n -c \
               --arg time "$TIME" \
               '{type: "Raw", level: "Info", message: "success", time: $time}' \
               > "$AVOCADO_OUTPUT_FILE"
