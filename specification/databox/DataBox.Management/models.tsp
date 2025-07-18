@@ -2046,6 +2046,43 @@ model Resource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Details {
+  /**
+   * Error code.
+   */
+  code: string;
+
+  /**
+   * Error message.
+   */
+  message: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ErrorDetail {
+  /**
+   * Error code.
+   */
+  code: string;
+
+  /**
+   * Error message.
+   */
+  message: string;
+
+  /**
+   * Error target.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  details?: Details[];
+
+  /**
+   * Additional error info.
+   */
+  target?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ApiError {
   /**

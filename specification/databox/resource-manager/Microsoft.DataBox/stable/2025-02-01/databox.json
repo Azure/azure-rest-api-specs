@@ -1182,7 +1182,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "$ref": "#/definitions/ErrorDetail",
           "description": "The error detail."
         }
       },
@@ -3141,6 +3141,23 @@
         ]
       }
     },
+    "Details": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "DeviceCapabilityDetails": {
       "type": "object",
       "description": "Device capability details for a given sku for a given region.",
@@ -3267,6 +3284,34 @@
           "description": "Defines Hardware level encryption (Only for disk)"
         }
       }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error target.",
+          "items": {
+            "$ref": "#/definitions/Details"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "Additional error info."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "ExportDiskDetails": {
       "type": "object",
