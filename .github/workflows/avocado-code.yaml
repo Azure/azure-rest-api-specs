@@ -23,6 +23,8 @@ jobs:
       - name: Run Avocado
         id: run-avocado
         run: |
+          set -x
+
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
