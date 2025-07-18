@@ -305,7 +305,7 @@ model LabelListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: string
+  `@nextLink`?: string;
 }
 
 @doc("Labels are used to group key-values.")
