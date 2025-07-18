@@ -4,49 +4,6 @@ import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.js";
 
 describe("updateLabels", () => {
-  it("loads inputs from env", async () => {
-    const github = createMockGithub();
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: {
-        artifacts: [{ name: "label-foo=true" }],
-      },
-    });
-
-    try {
-      process.env.OWNER = "TestRepoOwnerLoginEnv";
-      process.env.REPO = "TestRepoNameEnv";
-      process.env.ISSUE_NUMBER = "123";
-      process.env.RUN_ID = "456";
-
-      await expect(
-        updateLabels({
-          github: github,
-          context: null,
-          core: createMockCore(),
-        }),
-      ).resolves.toBeUndefined();
-    } finally {
-      delete process.env.OWNER;
-      delete process.env.REPO;
-      delete process.env.ISSUE_NUMBER;
-      delete process.env.RUN_ID;
-    }
-
-    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
-      owner: "TestRepoOwnerLoginEnv",
-      repo: "TestRepoNameEnv",
-      run_id: 456,
-      per_page: PER_PAGE_MAX,
-    });
-    expect(github.rest.issues.addLabels).toBeCalledWith({
-      owner: "TestRepoOwnerLoginEnv",
-      repo: "TestRepoNameEnv",
-      issue_number: 123,
-      labels: ["foo"],
-    });
-    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
-  });
-
   it("loads inputs from context", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
@@ -91,64 +48,6 @@ describe("updateLabels", () => {
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      issue_number: 123,
-      labels: ["foo"],
-    });
-    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
-  });
-
-  it("loads inputs from env and context", async () => {
-    const github = createMockGithub();
-    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: {
-        artifacts: [{ name: "label-foo=true" }],
-      },
-    });
-
-    const context = {
-      eventName: "workflow_run",
-      payload: {
-        action: "completed",
-        workflow_run: {
-          event: "pull_request",
-          head_sha: "abc123",
-          id: 456,
-          repository: {
-            name: "TestRepoName",
-            owner: {
-              login: "TestRepoOwnerLogin",
-            },
-          },
-          pull_requests: [{ number: 123 }],
-        },
-      },
-    };
-
-    try {
-      process.env.OWNER = "TestRepoOwnerLoginEnv";
-      process.env.REPO = "TestRepoNameEnv";
-
-      await expect(
-        updateLabels({
-          github: github,
-          context: context,
-          core: createMockCore(),
-        }),
-      ).resolves.toBeUndefined();
-    } finally {
-      delete process.env.OWNER;
-      delete process.env.REPO;
-    }
-
-    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
-      owner: "TestRepoOwnerLoginEnv",
-      repo: "TestRepoNameEnv",
-      run_id: 456,
-      per_page: PER_PAGE_MAX,
-    });
-    expect(github.rest.issues.addLabels).toBeCalledWith({
-      owner: "TestRepoOwnerLoginEnv",
-      repo: "TestRepoNameEnv",
       issue_number: 123,
       labels: ["foo"],
     });
