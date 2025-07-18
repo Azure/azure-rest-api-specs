@@ -27,6 +27,7 @@ using Microsoft.BotService;
 @@alternateType(Channel.location, azureLocation, "csharp");
 @@clientName(ChannelName, "BotChannelName", "csharp");
 @@clientName(ChannelSettings, "BotChannelSettings", "csharp");
+@@alternateType(ChannelSettings.botIconUrl, url, "csharp");
 @@usage(ChannelSettings, Usage.input | Usage.output, "csharp");
 @@clientName(CheckNameAvailabilityRequestBody,
   "BotServiceNameAvailabilityContent",
