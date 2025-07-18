@@ -622,7 +622,7 @@ model BatchQueryRequest {
    */
   body: QueryBody;
 
-  /** The query path of a single request in a batch.*/
+  /** The query path of a single request in a batch. */
   path: string;
 
   /** The method of a single request in a batch, defaults to GET */

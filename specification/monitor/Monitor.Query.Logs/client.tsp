@@ -7,9 +7,15 @@ using MonitorQueryLogs;
 @TypeSpec.Versioning.useDependency(Versions.V1)
 namespace ClientCustomizations;
 
-@@clientDoc(BatchQueryRequest.path, "The path for the batch query request.", DocumentationMode.replace);
+@@clientDoc(BatchQueryRequest.path,
+  "The path for the batch query request.",
+  DocumentationMode.replace
+);
 @@alternateType(BatchQueryRequest.path, "/query");
-@@clientDoc(BatchQueryRequest.method, "The method of a single request in a batch.", DocumentationMode.replace);
+@@clientDoc(BatchQueryRequest.method,
+  "The method of a single request in a batch.",
+  DocumentationMode.replace
+);
 @@alternateType(BatchQueryRequest.method, "POST");
 
 @client({
