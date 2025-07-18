@@ -2,13 +2,14 @@ emit:
   - "@azure-tools/typespec-csharp"
 options:
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager"
-    namespace: "{package-dir}"
+    package-dir: "Azure.Data.TestService"
+    namespace: "Azure.Data.TestService"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+    use-system-text-json: true
   "@azure-typespec/http-client-csharp":
-    namespace: Azure.ResourceManager
+    namespace: Azure.Data.TestService
     model-namespace: false
 linter:
   extends:
