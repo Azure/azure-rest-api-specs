@@ -19,9 +19,7 @@ jobs:
       # Since check is required, the job must pass instead of being skipped
       - name: User allowed
         if: ${{ env.user-allowed == 'true' }}
-        run: echo "Account '$PR_USER_LOGIN' is allowed to update protected files"
-        env:
-          PR_USER_LOGIN: ${{ github.event.pull_request.user.login }}
+        run: echo "Account '${{ github.event.pull_request.user.login }}' is allowed to update protected files"
 
       - uses: actions/checkout@v4
         if: ${{ env.user-allowed != 'true' }}
