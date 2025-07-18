@@ -1,0 +1,72 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Profile.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Cdn;
+/**
+ * Friendly RuleSet name mapping to the any RuleSet or secret related information.
+ */
+@parentResource(Profile)
+model RuleSet is Azure.ResourceManager.ProxyResource<RuleSetProperties> {
+  ...ResourceNameParameter<
+    Resource = RuleSet,
+    KeyName = "ruleSetName",
+    SegmentName = "ruleSets",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface RuleSets {
+  /**
+   * Gets an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
+   */
+  get is ArmResourceRead<RuleSet>;
+
+  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
+  /**
+   * Creates a new rule set within the specified profile.
+   */
+  create is ArmResourceCreateOrReplaceSync<RuleSet>;
+
+  /**
+   * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RuleSet,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists existing AzureFrontDoor rule sets within a profile.
+   */
+  listByProfile is ArmResourceListByParent<RuleSet>;
+
+  /**
+   * Checks the quota and actual usage of endpoints under the given Azure Front Door profile..
+   */
+  @action("usages")
+  listResourceUsage is ArmResourceActionSync<
+    RuleSet,
+    void,
+    ArmResponse<UsagesListResult>
+  >;
+}
+
+@@doc(RuleSet.name,
+  "Name of the rule set under the profile which is unique globally."
+);
+@@doc(RuleSet.properties,
+  "The JSON object that contains the properties of the Rule Set to create."
+);

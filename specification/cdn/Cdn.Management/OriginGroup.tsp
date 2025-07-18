@@ -1,0 +1,87 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Endpoint.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Cdn;
+/**
+ * Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.
+ */
+@parentResource(Endpoint)
+model OriginGroup
+  is Azure.ResourceManager.ProxyResource<OriginGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = OriginGroup,
+    KeyName = "originGroupName",
+    SegmentName = "originGroups",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface OriginGroups {
+  /**
+   * Gets an existing origin group within an endpoint.
+   */
+  get is ArmResourceRead<OriginGroup>;
+
+  /**
+   * Creates a new origin group within the specified endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    OriginGroup,
+    Response = ArmResourceUpdatedResponse<OriginGroup> | ArmResourceCreatedResponse<
+      OriginGroup,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: OriginGroup;
+    })
+  >;
+
+  /**
+   * Updates an existing origin group within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    OriginGroup,
+    PatchModel = OriginGroupUpdateParameters,
+    Response = ArmResponse<OriginGroup> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: OriginGroup;
+    })
+  >;
+
+  /**
+   * Deletes an existing origin group within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    OriginGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists all of the existing origin groups within an endpoint.
+   */
+  listByEndpoint is ArmResourceListByParent<OriginGroup>;
+}
+
+@@doc(OriginGroup.name,
+  "Name of the origin group which is unique within the endpoint."
+);
+@@doc(OriginGroup.properties,
+  "The JSON object that contains the properties of the origin group."
+);
+@@doc(OriginGroups.create::parameters.resource, "Origin group properties");
+@@doc(OriginGroups.update::parameters.properties, "Origin group properties");

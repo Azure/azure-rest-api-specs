@@ -1,0 +1,89 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Profile.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Cdn;
+/**
+ * SecurityPolicy association for AzureFrontDoor profile
+ */
+@parentResource(Profile)
+model SecurityPolicy
+  is Azure.ResourceManager.ProxyResource<SecurityPolicyProperties> {
+  ...ResourceNameParameter<
+    Resource = SecurityPolicy,
+    KeyName = "securityPolicyName",
+    SegmentName = "securityPolicies",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface SecurityPolicies {
+  /**
+   * Gets an existing security policy within a profile.
+   */
+  get is ArmResourceRead<SecurityPolicy>;
+
+  /**
+   * Creates a new security policy within the specified profile.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    SecurityPolicy,
+    Response = ArmResourceUpdatedResponse<SecurityPolicy> | ArmResourceCreatedResponse<SecurityPolicy> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: SecurityPolicy;
+    })
+  >;
+
+  /**
+   * Updates an existing security policy within a profile.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @patch(#{ implicitOptionality: false })
+  patch is ArmCustomPatchAsync<
+    SecurityPolicy,
+    PatchModel = SecurityPolicyUpdateParameters,
+    Response = ArmResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: SecurityPolicy;
+    })
+  >;
+
+  /**
+   * Deletes an existing security policy within profile.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SecurityPolicy,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists security policies associated with the profile
+   */
+  listByProfile is ArmResourceListByParent<SecurityPolicy>;
+}
+
+@@doc(SecurityPolicy.name, "Name of the security policy under the profile.");
+@@doc(SecurityPolicy.properties,
+  "The json object that contains properties required to create a security policy"
+);
+@@doc(SecurityPolicies.create::parameters.resource,
+  "The security policy properties."
+);
+@@doc(SecurityPolicies.patch::parameters.properties,
+  "Security policy update properties"
+);

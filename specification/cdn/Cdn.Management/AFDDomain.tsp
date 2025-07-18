@@ -1,0 +1,109 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Profile.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Cdn;
+/**
+ * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
+ */
+@parentResource(Profile)
+model AFDDomain is Azure.ResourceManager.ProxyResource<AFDDomainProperties> {
+  ...ResourceNameParameter<
+    Resource = AFDDomain,
+    KeyName = "customDomainName",
+    SegmentName = "customDomains",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface AFDDomains {
+  /**
+   * Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AFDCustomDomains_Get")
+  get is ArmResourceRead<AFDDomain>;
+
+  /**
+   * Creates a new domain within the specified profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("AFDCustomDomains_Create")
+  create is ArmResourceCreateOrReplaceAsync<
+    AFDDomain,
+    Response = ArmResourceUpdatedResponse<AFDDomain> | ArmResourceCreatedResponse<AFDDomain> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: AFDDomain;
+    })
+  >;
+
+  /**
+   * Updates an existing domain within a profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @patch(#{ implicitOptionality: false })
+  @operationId("AFDCustomDomains_Update")
+  update is ArmCustomPatchAsync<
+    AFDDomain,
+    PatchModel = AFDDomainUpdateParameters,
+    Response = ArmResponse<AFDDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: AFDDomain;
+    })
+  >;
+
+  /**
+   * Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("AFDCustomDomains_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AFDDomain,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists existing AzureFrontDoor domains.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AFDCustomDomains_ListByProfile")
+  listByProfile is ArmResourceListByParent<AFDDomain>;
+
+  /**
+   * Updates the domain validation token.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AFDCustomDomains_RefreshValidationToken")
+  refreshValidationToken is ArmResourceActionAsync<
+    AFDDomain,
+    void,
+    OkResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
+
+@@doc(AFDDomain.name,
+  "Name of the domain under the profile which is unique globally."
+);
+@@doc(AFDDomain.properties,
+  "The JSON object that contains the properties of the domain to create."
+);
+@@doc(AFDDomains.create::parameters.resource, "Domain properties");
+@@doc(AFDDomains.update::parameters.properties, "Domain properties");
