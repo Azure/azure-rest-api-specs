@@ -23,31 +23,34 @@ jobs:
       - name: Run Avocado
         id: run-avocado
         run: |
-          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
+          AVOCADO_OUTPUT_FILE="$RUNNER_TEMP/avocado.ndjson"
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
           npm exec --no -- avocado \
             --excludePaths \
-              "/common-types/" \
-              "/scenarios/" \
-              "/package.json" \
-              "/package-lock.json" \
-              "/cadl/examples/" \
+              '/common-types/' \
+              '/scenarios/' \
+              '/package.json' \
+              '/package-lock.json' \
+              '/cadl/examples/' \
               '(?=/examples/)(?!(?:/stable/|/preview/))' \
-              "/\\.github/" \
-              "/eng/" \
+              '/\\.github/' \
+              '/eng/' \
             --includePaths \
-              "data-plane" \
-              "resource-manager" \
+              'data-plane' \
+              'resource-manager' \
             --file \
               "$AVOCADO_OUTPUT_FILE"
 
-          TIME=$(node -p 'JSON.stringify(new Date())')
+          TIME="$(node -p 'new Date().toISOString()')"
 
           # Avocado doesn't write any output if it was successful, so we add some to simplify later processing
-          [[ -e $AVOCADO_OUTPUT_FILE ]] || \
-            echo "{\"type\":\"Raw\",\"level\":\"Info\",\"message\":\"success\",\"time\":$TIME}" > "$AVOCADO_OUTPUT_FILE"
+          [[ -e "$AVOCADO_OUTPUT_FILE" ]] || \
+            jq -n \
+              --arg time "$TIME" \
+              '{type: "Raw", level: "Info", message: "success", time: $time}' \
+              > "$AVOCADO_OUTPUT_FILE"
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
@@ -74,7 +77,7 @@ jobs:
         with:
           script: |
             const { default: generateJobSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
+              await import(`${process.env.GITHUB_WORKSPACE}/.github/workflows/src/avocado-code.js`);
             return await generateJobSummary({ core });
         env:
           AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
