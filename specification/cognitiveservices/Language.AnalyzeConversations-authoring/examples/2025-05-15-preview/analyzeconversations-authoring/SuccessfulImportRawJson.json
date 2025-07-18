@@ -1,0 +1,18 @@
+{
+  "operationId": "ConversationAuthoringProject_ImportRawJson",
+  "title": "Successful Import Raw Json String",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "projectName": "EmailApp",
+    "body": "{\n  \"projectFileVersion\": \"2022-05-01\",\n  \"stringIndexType\": \"Utf16CodeUnit\",\n  \"metadata\": {\n    \"projectKind\": \"Conversation\",\n    \"settings\": {\n      \"confidenceThreshold\": 0.7\n    },\n    \"projectName\": \"EmailApp\",\n    \"multilingual\": true,\n    \"description\": \"Trying out CLU\",\n    \"language\": \"en-us\"\n  },\n  \"assets\": {\n    \"projectKind\": \"Conversation\",\n    \"intents\": [\n      {\n        \"category\": \"Read\",\n        \"description\": \"The read intent\",\n        \"associatedEntities\": [\n          {\n            \"category\": \"Sender\"\n          }\n        ]\n      },\n      {\n        \"category\": \"Delete\",\n        \"description\": \"The delete intent\"\n      }\n    ],\n    \"entities\": [\n      {\n        \"category\": \"Sender\",\n        \"description\": \"The description of Sender\"\n      },\n      {\n        \"category\": \"Number\",\n        \"description\": \"The description of Number\",\n        \"regex\": {\n          \"expressions\": [\n            {\n              \"regexKey\": \"UK Phone numbers\",\n              \"language\": \"en-us\",\n              \"regexPattern\": \"/^\\\\(?([0-9]{3})\\\\)?[-.\\\\s]?([0-9]{3})[-.\\\\s]?([0-9]{4})$/\"\n            }\n          ]\n        }\n      }\n    ],\n    \"utterances\": [\n      {\n        \"text\": \"Open Blake's email\",\n        \"dataset\": \"Train\",\n        \"intent\": \"Read\",\n        \"entities\": [\n          {\n            \"category\": \"Sender\",\n            \"offset\": 5,\n            \"length\": 5\n          }\n        ]\n      },\n      {\n        \"text\": \"Delete last email\",\n        \"language\": \"en-gb\",\n        \"dataset\": \"Test\",\n        \"intent\": \"Delete\",\n        \"entities\": []\n      }\n    ]\n  }\n}"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-conversations/projects/EmailApp/import/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2025-05-15-preview"
+      }
+    }
+  }
+}
