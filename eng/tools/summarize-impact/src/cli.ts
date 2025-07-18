@@ -44,7 +44,7 @@ export async function main() {
       number: {
         type: "string",
         short: "n",
-        multiple: false
+        multiple: false,
       },
       sourceBranch: {
         type: "string",
@@ -74,12 +74,12 @@ export async function main() {
       labels: {
         type: "string",
         short: "l",
-        multiple: false
+        multiple: false,
       },
       isDraft: {
         type: "boolean",
-        multiple: false
-      }
+        multiple: false,
+      },
     },
     allowPositionals: true,
   };
@@ -90,7 +90,7 @@ export async function main() {
   const sourceDirectory = opts.sourceDirectory as string;
   const targetDirectory = opts.targetDirectory as string;
   const sourceGitRoot = await getRootFolder(sourceDirectory);
-  const targetGitRoot = await getRootFolder(targetDirectory)
+  const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
@@ -104,23 +104,19 @@ export async function main() {
   const labelContext: LabelContext = {
     present: new Set(existingLabels),
     toAdd: new Set(),
-    toRemove: new Set()
+    toRemove: new Set(),
   };
 
-  const prContext = new PRContext(
-    sourceGitRoot,
-    targetGitRoot,
-    labelContext,
-    {
-      sha,
-      sourceBranch,
-      targetBranch,
-      repo,
-      prNumber,
-      owner,
-      fileList,
-      isDraft
-    });
+  const prContext = new PRContext(sourceGitRoot, targetGitRoot, labelContext, {
+    sha,
+    sourceBranch,
+    targetBranch,
+    repo,
+    prNumber,
+    owner,
+    fileList,
+    isDraft,
+  });
 
   evaluateImpact(prContext, labelContext);
 }

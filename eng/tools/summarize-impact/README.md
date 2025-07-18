@@ -6,15 +6,14 @@ The schema of the artifact looks like:
 
 ```json
 {
-    "pr-type": ["resource-manager", "data-plane"],
-    "suppressionsChanged": true,
-    "versioningReviewRequired": false,
-    "breakingChangeReviewRequired": true,
-    "rpaasChange": true,
-    "newRP": true,
-    "rpaasRPMissing": true
+  "pr-type": ["resource-manager", "data-plane"],
+  "suppressionsChanged": true,
+  "versioningReviewRequired": false,
+  "breakingChangeReviewRequired": true,
+  "rpaasChange": true,
+  "newRP": true,
+  "rpaasRPMissing": true
 }
 ```
 
 ## Invocation
-
