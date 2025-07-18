@@ -111,6 +111,7 @@ union LabelFields {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model KeyListResult {
@@ -120,7 +121,7 @@ model KeyListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: string;
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime]>;
 }
 
 @doc("Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.")
@@ -200,6 +201,7 @@ model KeyValue {
   etag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a snapshot list request.")
 @pagedResult
 model SnapshotListResult {
@@ -209,7 +211,7 @@ model SnapshotListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: string;
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken]>;
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
@@ -297,6 +299,7 @@ model SnapshotUpdateParameters {
   status?: SnapshotStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model LabelListResult {
@@ -306,7 +309,7 @@ model LabelListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: string;
+  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime]>;
 }
 
 @doc("Labels are used to group key-values.")

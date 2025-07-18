@@ -429,18 +429,18 @@ alias RevisionsRequestParams = {
     """>;
 };
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-@summary("Gets a list of key-value revisions.")
-@doc("Gets a list of key-value revisions.")
-@route("/revisions")
-@get
-op getRevisions is AppConfigOperation<
-  RevisionsRequestParams,
-  KeyValueListResult &
-    AppConfigResponseHeaders &
-    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+// @summary("Gets a list of key-value revisions.")
+// @doc("Gets a list of key-value revisions.")
+// @route("/revisions")
+// @get
+// op getRevisions is AppConfigOperation<
+//   RevisionsRequestParams,
+//   KeyValueListResult &
+//     AppConfigResponseHeaders &
+//     ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
+// >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
 @summary("Requests the headers and status of the given resource.")
