@@ -30,16 +30,12 @@ interface ManagedCCFs {
   /**
    * Retrieves the properties of a Managed CCF app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedCCF_Get")
   get is ArmResourceRead<ManagedCCF>;
 
   /**
    * Creates a Managed CCF with the specified Managed CCF parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedCCF_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ManagedCCF,
     Response = ArmResourceUpdatedResponse<ManagedCCF> | (CreatedResponse &
@@ -49,17 +45,13 @@ interface ManagedCCFs {
   /**
    * Updates properties of Managed CCF
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("ManagedCCF_Update")
   update is ArmCustomPatchAsync<ManagedCCF, PatchModel = ManagedCCF>;
 
   /**
    * Deletes an existing Managed CCF.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ManagedCCF_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedCCF,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -68,8 +60,6 @@ interface ManagedCCFs {
   /**
    * Retrieves the properties of all Managed CCF apps.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedCCF_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ManagedCCF,
     Parameters = {
@@ -85,8 +75,6 @@ interface ManagedCCFs {
   /**
    * Retrieves the properties of all Managed CCF.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedCCF_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ManagedCCF,
     Parameters = {
@@ -102,8 +90,6 @@ interface ManagedCCFs {
   /**
    * Backs up a Managed CCF Resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedCCF_Backup")
   backup is ArmResourceActionAsync<
     ManagedCCF,
     ManagedCCFBackup,
@@ -113,8 +99,6 @@ interface ManagedCCFs {
   /**
    * Restores a Managed CCF Resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedCCF_Restore")
   restore is ArmResourceActionAsync<
     ManagedCCF,
     ManagedCCFRestore,

@@ -28,23 +28,17 @@ interface ConfidentialLedgers {
   /**
    * Retrieves the properties of a Confidential Ledger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_Get")
   get is ArmResourceRead<ConfidentialLedger>;
 
   /**
    * Creates a  Confidential Ledger with the specified ledger parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_Create")
   create is ArmResourceCreateOrReplaceAsync<ConfidentialLedger>;
 
   /**
    * Updates properties of Confidential Ledger
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("Ledger_Update")
   update is ArmCustomPatchAsync<
     ConfidentialLedger,
     PatchModel = ConfidentialLedger,
@@ -55,9 +49,7 @@ interface ConfidentialLedgers {
   /**
    * Deletes an existing Confidential Ledger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Ledger_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfidentialLedger,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -66,8 +58,6 @@ interface ConfidentialLedgers {
   /**
    * Retrieves the properties of all Confidential Ledgers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ConfidentialLedger,
     Parameters = {
@@ -83,8 +73,6 @@ interface ConfidentialLedgers {
   /**
    * Retrieves the properties of all Confidential Ledgers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ConfidentialLedger,
     Parameters = {
@@ -100,8 +88,6 @@ interface ConfidentialLedgers {
   /**
    * Backs up a Confidential Ledger Resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_Backup")
   backup is ArmResourceActionAsync<
     ConfidentialLedger,
     ConfidentialLedgerBackup,
@@ -111,8 +97,6 @@ interface ConfidentialLedgers {
   /**
    * Restores a Confidential Ledger Resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Ledger_Restore")
   restore is ArmResourceActionAsync<
     ConfidentialLedger,
     ConfidentialLedgerRestore,
