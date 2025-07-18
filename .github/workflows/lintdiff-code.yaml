@@ -53,6 +53,8 @@ jobs:
       - name: Run LintDiff
         id: run-lintdiff
         run: |
+          set -x
+
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
 
           npm exec --no -- lint-diff \
