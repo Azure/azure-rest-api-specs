@@ -98,7 +98,7 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
   // Has to be run in a PR context. Uses addition and update to understand
   // if the suppressions have been changed. If they have, suppressionReviewRequired must be added
   // as a label
-  await processSuppression(context, labelContext);
+  const suppressionRequired = await processSuppression(context, labelContext);
 
   // Has to run in PR context.
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
