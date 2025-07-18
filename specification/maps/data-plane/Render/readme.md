@@ -25,6 +25,9 @@ To see additional help and options, run:
 These are the global settings for Render Client.
 
 ``` yaml
+# Azure Maps Render 1.0 will be retired on 17 September 2026.
+# Azure Maps Render 2.0 - No endpoint.
+# Azure Maps Render 2.1 - No endpoint.
 title: RenderClient
 openapi-type: data-plane
 tag: package-2024-04-01
@@ -48,7 +51,7 @@ directive:
 ```
 
 
-### Tag: package-2024-04-01
+### Tag: package-stable-2024-04-01
 
 These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
 
@@ -56,38 +59,38 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 input-file:
   - stable/2024-04-01/render.json
 ```
-### Tag: 2022-08-01
+### Tag: package-stable-2022-08-01
 
-These settings apply only when `--tag=2022-08-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2022-08-01` is specified on the command line.
 
-``` yaml $(tag) == '2022-08-01'
+``` yaml $(tag) == 'package-stable-2022-08-01'
 input-file:
   - stable/2022-08-01/render.json
 ```
 
-### Tag: 2.1-preview
+### Tag: package-retired-2.1-preview
 
-These settings apply only when `--tag=2.1` is specified on the command line.
+These settings apply only when `--tag=package-retired-2.1-preview` is specified on the command line.
 
-``` yaml $(tag) == '2.1'
+``` yaml $(tag) == 'package-retired-2.1-preview'
 input-file:
   - preview/2.1/render.json
 ```
 
-### Tag: 2.0-preview
+### Tag: package-retired-2.0-preview
 
-These settings apply only when `--tag=2.0` is specified on the command line.
+These settings apply only when `--tag=package-retired-2.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '2.0'
+``` yaml $(tag) == 'package-retired-2.0-preview'
 input-file:
   - preview/2.0/render.json
 ```
 
-### Tag: 1.0-preview
+### Tag: package-deprecated-1.0-preview
 
-These settings apply only when `--tag=1.0` is specified on the command line.
+These settings apply only when `--tag=package-deprecated-1.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '1.0'
+``` yaml $(tag) == 'package-deprecated-1.0-preview'
 input-file:
   - preview/1.0/render.json
 ```
