@@ -1,16 +1,62 @@
+parameters:
+  "service-dir":
+    default: "sdk/testservice"
+  "service-directory-name":
+    default: "testservice"
 emit:
-  - "@azure-tools/typespec-csharp"
-options:
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Data.TestService"
-    namespace: "Azure.Data.TestService"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
-    use-system-text-json: true
-  "@azure-typespec/http-client-csharp":
-    namespace: Azure.Data.TestService
-    model-namespace: false
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/Azure.Data.TestService/{version-status}/{version}/TestService.json"
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+  "@azure-tools/typespec-python":
+    package-pprint-name: '"Azure Test Service"'
+    package-version: 1.0.0
+    package-dir: "azure-testservice"
+    namespace: "azure.testservice"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: Azure.Data.TestService
+    model-namespace: false
+    namespace: Azure.Data.TestService
+    flavor: azure
+    generate-sample-project: false
+  "@azure-typespec/http-client-csharp":
+    package-name: Azure.Data.TestService
+    namespace: Azure.Data.TestService
+    model-namespace: false
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{project-root}/.."
+    namespace: "com.azure.data.testservice"
+    package-dir: azure-data-testservice
+    partial-update: true
+    generate-samples: false
+    generate-tests: false
+    enable-sync-stack: true
+    service-version-exclude-preview: true
+    dev-options:
+      loglevel: info
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "data-testservice"
+    package-details:
+      name: "@azure/data-testservice"
+    flavor: azure
+    experimental-extensible-enums: true
+    is-modular-library: true
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/data/testservice"
+    package-dir: "aztestservice"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    slice-elements-byval: true
+    flavor: "azure"

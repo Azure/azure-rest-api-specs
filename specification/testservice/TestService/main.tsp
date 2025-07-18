@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 @service(#{title: "Sample API"})
 @versioned(Versions)
-namespace Azure.Data.TestService; {
+namespace Azure.Data.TestService {
     @doc("Service API versions")
     enum Versions {
         @doc("Version 2023-01-01")
