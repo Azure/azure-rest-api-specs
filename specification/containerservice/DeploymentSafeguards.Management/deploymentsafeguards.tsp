@@ -31,6 +31,33 @@ model DeploymentSafeguard
   ...EntityTagProperty;
 }
 
+@doc("Deployment Safeguards")
+@resource("deploymentSafeguards")
+@singleton("default")
+model DeploymentSafeguardCreate
+  is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsPropertiesCreate> {
+  @key("deploymentSafeguardName")
+  @doc("Required default name")
+  @segment("deploymentSafeguards")
+  @visibility(Lifecycle.Read)
+  @pattern("default")
+  @path
+  name: string;
+}
+
+@doc("DeploymentSafeguards Properties")
+model DeploymentSafeguardsPropertiesCreate {
+  @doc("The deployment safeguards level. Possible values are Warn and Enforce")
+  level: DeploymentSafeguardsLevel;
+
+  @doc("User defined list of namespaces to exclude from Deployment Safeguards. Deployments in these namespaces will not be checked against any safeguards")
+  excludedNamespaces?: Array<string>;
+
+  @doc("The pod security standards level")
+  @added(Versions.v2025_05_02_preview)
+  podSecurityStandardsLevel?: PodSecurityStandardsLevel;
+}
+
 @doc("Specifies the level of Deployment Safeguards")
 union DeploymentSafeguardsLevel {
   @doc("Best practice violations will only show warnings")
@@ -99,7 +126,7 @@ interface DeploymentSafeguards {
   get is ArmResourceRead<DeploymentSafeguard>;
 
   @doc("Creates or updates a deploymentSafeguard")
-  create is ArmResourceCreateOrUpdateAsync<DeploymentSafeguard>;
+  create is ArmResourceCreateOrUpdateAsync<DeploymentSafeguardCreate>;
 
   @doc("Delete DeploymentSafeguards")
   delete is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
