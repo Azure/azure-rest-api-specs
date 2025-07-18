@@ -30,7 +30,6 @@ union VoiceLiveServerEventType {
   session_avatar_connecting: "session.avatar.connecting",
   session_created: "session.created",
   session_updated: "session.updated",
-  conversation_created: "conversation.created",
   conversation_item_input_audio_transcription_completed: "conversation.item.input_audio_transcription.completed",
   conversation_item_input_audio_transcription_delta: "conversation.item.input_audio_transcription.delta",
   conversation_item_input_audio_transcription_failed: "conversation.item.input_audio_transcription.failed",

@@ -17,7 +17,6 @@ op force_models(session: VoiceLiveClientEventSessionUpdate ):
   VoiceLiveServerEventError | 
   VoiceLiveServerEventResponseTextDelta | 
   VoiceLiveServerEventResponseAudioDelta |
-  VoiceLiveServerEventConversationCreated|
   VoiceLiveServerEventConversationItemCreated|
   VoiceLiveServerEventConversationItemDeleted|
   VoiceLiveServerEventConversationItemRetrieved|

@@ -17,7 +17,7 @@ model VoiceLiveContentPart {
 
 model VoiceLiveRequestTextContentPart extends VoiceLiveContentPart {
   type: VoiceLiveContentPartType.input_text;
-  text: string;
+  text?: string;
 }
 
 model VoiceLiveRequestAudioContentPart extends VoiceLiveContentPart {
@@ -27,10 +27,10 @@ model VoiceLiveRequestAudioContentPart extends VoiceLiveContentPart {
 
 model VoiceLiveResponseTextContentPart extends VoiceLiveContentPart {
   type: VoiceLiveContentPartType.text;
-  text: string;
+  text?: string;
 }
 
 model VoiceLiveResponseAudioContentPart extends VoiceLiveContentPart {
   type: VoiceLiveContentPartType.audio;
-  transcript: string | null;
+  transcript?: string;
 }

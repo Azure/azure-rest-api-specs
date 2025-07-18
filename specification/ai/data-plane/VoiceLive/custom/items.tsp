@@ -56,12 +56,26 @@ model VoiceLiveRequestMessageReferenceItem { // extends VoiceLiveConversationReq
   id: string;
 }
 
+model VoiceLiveConversationItem {
+  ...VoiceLiveConversationItemBase;
+  id?: string;
+  arguments?: string;
+  call_id?: string;
+  content?: VoiceLiveConversationItemWithReferenceContent[];
+  name?: string;
+  object?: "realtime.item";
+  output?: string;
+  role?: "user" | "assistant" | "system";
+  status?: "completed" | "incomplete" | "in_progress";
+  type?: "message" | "function_call" | "function_call_output";
+}
+
 @discriminator("type")
 model VoiceLiveConversationResponseItem {
   ...VoiceLiveConversationItemBase;
-  object: "voicelive.item";
-  type: VoiceLiveItemType;
-  id: string | null;
+  object?: "realtime.item";
+  type?: VoiceLiveItemType;
+  id?: string;
 }
 
 model VoiceLiveResponseMessageItem extends VoiceLiveConversationResponseItem {
@@ -107,3 +121,33 @@ union VoiceLiveMessageRole {
   user: "user",
   assistant: "assistant",
 }
+
+// Tool generated type. Extracts from VoiceLiveConversationItemWithReference.content
+alias VoiceLiveConversationItemWithReferenceContent = {
+  @doc("""
+    The content type (`input_text`, `input_audio`, `item_reference`, `text`).
+    """)
+  type?: "input_audio" | "input_text" | "item_reference" | "text";
+
+  @doc("""
+    The text content, used for `input_text` and `text` content types.
+    """)
+  text?: string;
+
+  @doc("""
+    ID of a previous conversation item to reference (for `item_reference`
+    content types in `response.create` events). These can reference both
+    client and server created items.
+    """)
+  id?: string;
+
+  @doc("""
+    Base64-encoded audio bytes, used for `input_audio` content type.
+    """)
+  audio?: string;
+
+  @doc("""
+    The transcript of the audio, used for `input_audio` content type.
+    """)
+  transcript?: string;
+};

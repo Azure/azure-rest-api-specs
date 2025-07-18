@@ -1,8 +1,7 @@
 // Cleaned TypeSpec file aligned with Python model definitions
 // Removed models not defined or needed based on your Python code baseline
-
-import "./custom.tsp";
-
+import "@typespec/http";
+import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
@@ -19,7 +18,10 @@ model Error {
   param?: string;
 
   @doc("Type or category of the error.")
-  type: string;
+  type?: string;
+
+  @doc("Event id of the error.")
+  event_id?: string;
 }
 
 @error
@@ -39,13 +41,4 @@ model LogProbProperties {
 
   @doc("The bytes that were used to generate the log probability.")
   bytes: int32[];
-}
-
-@doc("Enumerates available service tier configurations.")
-union ServiceTier {
-  "auto",
-  "default",
-  "flex",
-  "scale",
-  "priority",
 }

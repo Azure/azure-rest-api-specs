@@ -1,6 +1,9 @@
 import "./custom/events.tsp";
 import "./custom/items.tsp";
 import "./custom/tools.tsp";
+import "@typespec/http";
+import "@typespec/openapi";
+
 
 using TypeSpec.OpenAPI;
 

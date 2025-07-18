@@ -4,7 +4,6 @@
  */
 
 import "./client.tsp";
-import "./audio";
 import "./common";
 import "./custom.tsp";
 
@@ -12,35 +11,6 @@ using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
-// Tool generated type. Extracts from VoiceLiveConversationItemWithReference.content
-alias VoiceLiveConversationItemWithReferenceContent = {
-  @doc("""
-    The content type (`input_text`, `input_audio`, `item_reference`, `text`).
-    """)
-  type?: "input_audio" | "input_text" | "item_reference" | "text";
-
-  @doc("""
-    The text content, used for `input_text` and `text` content types.
-    """)
-  text?: string;
-
-  @doc("""
-    ID of a previous conversation item to reference (for `item_reference`
-    content types in `response.create` events). These can reference both
-    client and server created items.
-    """)
-  id?: string;
-
-  @doc("""
-    Base64-encoded audio bytes, used for `input_audio` content type.
-    """)
-  audio?: string;
-
-  @doc("""
-    The transcript of the audio, used for `input_audio` content type.
-    """)
-  transcript?: string;
-};
 
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive client event. */
@@ -154,15 +124,15 @@ model VoiceLiveResponse {
   id?: string;
 
   @doc("""
-    The object type, must be `voicelive.response`.
+    The object type, must be `realtime.response`.
     """)
-  object?: "voicelive.response";
+  object?: "realtime.response";
 
   @doc("""
     The final status of the response (`completed`, `cancelled`, `failed`, or
     `incomplete`).
     """)
-  status?: "completed" | "cancelled" | "failed" | "incomplete";
+  status?: "completed" | "cancelled" | "failed" | "incomplete" | "in_progress";
 
   /** Additional details about the status. */
   status_details?: {
@@ -364,6 +334,11 @@ model VoiceLiveClientEventConversationItemCreate extends VoiceLiveClientEvent {
   type: VoiceLiveClientEventType.conversation_item_create;
 
   @doc("""
+    Optional client-generated ID used to identify this event.
+    """)
+  event_id?: string;
+
+  @doc("""
     The ID of the preceding item after which the new item will be inserted.
     If not set, the new item will be appended to the end of the conversation.
     If set to `root`, the new item will be added to the beginning of the conversation.
@@ -373,7 +348,7 @@ model VoiceLiveClientEventConversationItemCreate extends VoiceLiveClientEvent {
   previous_item_id?: string;
 
   // Tool customization: apply enriched item definition hierarchy
-  item: VoiceLiveConversationRequestItem;
+  item?: VoiceLiveConversationItem;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -455,6 +430,11 @@ model VoiceLiveClientEventResponseCreate extends VoiceLiveClientEvent {
   type: VoiceLiveClientEventType.response_create;
 
   response?: VoiceLiveResponseCreateParams;
+
+  @doc("""
+    additional instructions (system prompt) appended to the default instructions of the session. Only affects this response only.
+    """)
+  additional_instructions?: string
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -562,26 +542,6 @@ model VoiceLiveServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-/** Returned when a conversation is created. Emitted right after session creation. */
-model VoiceLiveServerEventConversationCreated extends VoiceLiveServerEvent {
-  @doc("""
-    The event type, must be `conversation.created`.
-    """)
-  type: VoiceLiveServerEventType.conversation_created;
-
-  /** The conversation resource. */
-  conversation: {
-    /** The unique ID of the conversation. */
-    id?: string;
-
-    @doc("""
-      The object type, must be `voicelive.conversation`.
-      """)
-    object?: string;
-  };
-}
-
-// Tool customization (apply_discriminator): apply discriminated type
 @doc("""
   Returned when an input audio buffer is committed, either by the client or
   automatically in server VAD mode. The `item_id` property is the ID of the user
@@ -595,7 +555,7 @@ model VoiceLiveServerEventInputAudioBufferCommitted extends VoiceLiveServerEvent
   type: VoiceLiveServerEventType.input_audio_buffer_committed;
 
   /** The ID of the preceding item after which the new item will be inserted. */
-  previous_item_id: string;
+  previous_item_id?: string;
 
   /** The ID of the user message item that will be created. */
   item_id: string;
@@ -694,7 +654,7 @@ model VoiceLiveServerEventConversationItemCreated extends VoiceLiveServerEvent {
   previous_item_id: string;
 
   // Tool customization: apply enriched item definition hierarchy
-  item: VoiceLiveConversationResponseItem;
+  item?: VoiceLiveConversationItem;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -749,19 +709,7 @@ model VoiceLiveServerEventConversationItemInputAudioTranscriptionFailed
   content_index: int32;
 
   /** Details of the transcription error. */
-  error: {
-    /** The type of error. */
-    type?: string;
-
-    /** Error code, if any. */
-    code?: string;
-
-    /** A human-readable error message. */
-    message?: string;
-
-    /** Parameter related to the error, if any. */
-    param?: string;
-  };
+  error: Error;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -787,6 +735,8 @@ model VoiceLiveServerEventConversationItemTruncated extends VoiceLiveServerEvent
 
   /** The duration up to which the audio was truncated, in milliseconds. */
   audio_end_ms: int32;
+
+  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -803,6 +753,8 @@ model VoiceLiveServerEventConversationItemDeleted extends VoiceLiveServerEvent {
 
   /** The ID of the item that was deleted. */
   item_id: string;
+
+  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -849,7 +801,7 @@ model VoiceLiveServerEventResponseOutputItemAdded extends VoiceLiveServerEvent {
   output_index: int32;
 
   // Tool customization: apply enriched item definition hierarchy
-  item: VoiceLiveConversationResponseItem;
+  item?: VoiceLiveConversationItem;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -870,7 +822,7 @@ model VoiceLiveServerEventResponseOutputItemDone extends VoiceLiveServerEvent {
   output_index: int32;
 
   // Tool customization: apply enriched item definition hierarchy
-  item: VoiceLiveConversationResponseItem;
+  item?: VoiceLiveConversationResponseItem;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -1058,6 +1010,8 @@ model VoiceLiveServerEventResponseAudioDelta extends VoiceLiveServerEvent {
   /** Base64-encoded audio data delta. */
   @encode("base64")
   delta: bytes;
+
+  event_id?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -1116,7 +1070,7 @@ model ResponseEmotionHypothesis extends VoiceLiveServerEvent {
   candidates: EmotionCandidate[],
   audio_offset_ms: int32;
   audio_duration_ms: int32;
-  response_id: string;
+  response_id?: string;
   item_id: string;
 }
 
@@ -1268,9 +1222,9 @@ model VoiceLiveConversationItemWithReference {
   type?: "message" | "function_call" | "function_call_output";
 
   @doc("""
-    Identifier for the API object being returned - always `voicelive.item`.
+    Identifier for the API object being returned - always `realtime.item`.
     """)
-  object?: "voicelive.item";
+  object?: "realtime.item";
 
   @doc("""
     The status of the item (`completed`, `incomplete`). These have no effect
@@ -1366,9 +1320,8 @@ model VoiceLiveServerEventConversationItemRetrieved extends VoiceLiveServerEvent
     The event type, must be `conversation.item.retrieved`.
     """)
   type: VoiceLiveServerEventType.conversation_item_retrieved;
-
-  // Tool customization: apply enriched item definition hierarchy
-  item: VoiceLiveConversationResponseItem;
+  item_id?: string;
+  event_id?: string;
 }
 
 model EmotionCandidate {
