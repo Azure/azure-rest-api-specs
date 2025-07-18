@@ -51,7 +51,6 @@ model SystemAssignedIdentityProperties {
    */
   @visibility(Lifecycle.Read)
   clientSecretUrl?: string;
-
 }
 
 /**
@@ -170,9 +169,9 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
  * Values returned by the List operation for federated identity credentials.
  */
 model FederatedIdentityCredentialsListResult
-  is Azure.Core.Page<FederatedIdentityCredential>;
+  is Page<FederatedIdentityCredential>;
 
-@@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
+// @@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
 
 /**
  * The properties associated with a federated identity credential.

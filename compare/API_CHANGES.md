@@ -50,12 +50,6 @@
 | `definitions.SystemAssignedIdentityProperties.title__deleted` | deleted | `System Assigned Identity properties.` |
 | `definitions.UserAssignedIdentityProperties.title__deleted` | deleted | `User Assigned Identity properties.` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FederatedIdentityCredentialsListResult.required__added` | added | `["value"]` |
-
 ### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
@@ -66,8 +60,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FederatedIdentityCredentialsListResult.properties.value.readOnly__added` | added | `true` |
-| `definitions.Identity.properties.properties.readOnly__deleted` | deleted | `true` |
 | `definitions.SystemAssignedIdentity.properties.properties.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `modelAsExtensible`

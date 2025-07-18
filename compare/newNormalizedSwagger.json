@@ -494,24 +494,21 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Identity": {
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserAssignedIdentityProperties",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },

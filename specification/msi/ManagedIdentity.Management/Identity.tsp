@@ -24,6 +24,7 @@ model Identity
     NamePattern = ""
   >;
 }
+@@visibility(Identity.properties, Lifecycle.Read);
 
 @armResourceOperations
 interface Identities {

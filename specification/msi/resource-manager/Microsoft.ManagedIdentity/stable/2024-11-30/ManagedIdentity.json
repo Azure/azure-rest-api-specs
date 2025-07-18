@@ -701,18 +701,14 @@
           "description": "The FederatedIdentityCredential items on this page",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Identity": {
       "type": "object",
@@ -721,6 +717,7 @@
         "properties": {
           "$ref": "#/definitions/UserAssignedIdentityProperties",
           "description": "The properties associated with the identity.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
