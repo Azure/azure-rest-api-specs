@@ -301,9 +301,6 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: namespace-preview.json 
     reason: Temporarily suppressing linter errors and will be fixed later. 
-  - suppress: XmsPageableForListCalls
-    from: namespace-preview.json
-    reason: Not a mandatory check. 
   - suppress: PostResponseCodes
     from: namespace-preview.json
     reason: Not a mandatory check.
