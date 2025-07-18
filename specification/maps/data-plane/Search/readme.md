@@ -39,11 +39,11 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-2025-06-01-preview
+### Tag: package-retired-2025-06-01-preview
 
-These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2025-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-06-01-preview'
+``` yaml $(tag) == 'package-retired-2025-06-01-preview'
 input-file:
   - preview/2025-06-01-preview/search.json
 ```
@@ -57,11 +57,11 @@ input-file:
   - stable/2025-01-01/search.json
 ```
 
-### Tag: package-2024-04-01-preview
+### Tag: package-retired-2024-04-01-preview
 
-These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2024-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-04-01-preview'
+``` yaml $(tag) == 'package-retired-2024-04-01-preview'
 input-file:
   - preview/2024-04-01-preview/search.json
 ```
@@ -74,6 +74,7 @@ These settings apply only when `--tag=package-stable-2023-06-01` is specified on
 input-file:
   - stable/2023-06-01/search.json
 ```
+
 ### Tag: package-1.0-preview
 
 These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
@@ -101,11 +102,11 @@ input-file:
   - preview/2022-02-01-preview/geocoding.json
 ```
 
-### Tag: package-2022-09-01-preview
+### Tag: package-retired-2022-09-01-preview
 
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+These settings apply only when `--tag=package-retired-2022-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-retired-2022-09-01-preview'
 input-file:
   - preview/2022-09-01-preview/search.json
 ```
