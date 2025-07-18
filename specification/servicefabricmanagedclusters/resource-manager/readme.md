@@ -32,7 +32,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2025-03-preview
+tag: package-2025-06-preview
 
 directive:
   - suppress: ListInOperationName
