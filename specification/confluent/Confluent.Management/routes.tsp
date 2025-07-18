@@ -20,6 +20,7 @@ interface MarketplaceAgreementsOperationGroup {
   @summary("List Confluent marketplace agreements in the subscription.")
   @autoRoute
   @get
+  @list
   @action("agreements")
   list is ArmProviderActionSync<
     Response = ConfluentAgreementResourceListResponse,

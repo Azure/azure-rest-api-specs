@@ -21,6 +21,7 @@ interface SkusOperationGroup {
   @summary("List all the available Skus in the region and information related to them")
   @autoRoute
   @get
+  @list
   @action("skus")
   list is ArmProviderActionSync<
     Response = SkuInformationList,

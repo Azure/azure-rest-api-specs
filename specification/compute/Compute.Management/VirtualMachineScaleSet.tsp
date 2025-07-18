@@ -277,6 +277,7 @@ interface VirtualMachineScaleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
+  @list
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @action("osUpgradeHistory")
   getOSUpgradeHistory is ComputeResourceActionSync<
@@ -400,6 +401,7 @@ interface VirtualMachineScaleSets {
   /**
    * Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.
    */
+  @list
   @get
   @action("skus")
   listSkus is ComputeResourceActionSync<

@@ -128,6 +128,7 @@ interface DocumentTranslationOperations {
     making assumptions about the data returned.
     """)
   @route("/document/batches")
+  @list
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
     GetTranslationsStatusOptions,
@@ -253,6 +254,7 @@ interface DocumentTranslationOperations {
     the data returned.
     """)
   @route("/document/batches/{id}/documents")
+  @list
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     GetDocumentsStatusOptions,

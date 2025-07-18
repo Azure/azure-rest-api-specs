@@ -79,6 +79,7 @@ op trainMultivariateModel is MultivariateServiceAction<
 // https://github.com/Azure/typespec-azure/issues/2798
 // and because the response uses "models" instead of "value" as the array property name.
 @get
+@list
 @route("/multivariate/models")
 @summary("List Multivariate Models")
 @doc("List models of a resource.")

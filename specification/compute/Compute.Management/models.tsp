@@ -5578,6 +5578,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
   /**
    * The list of VMSS VM extensions
    */
+  @pageItems
   @identifiers(#["name", "id"])
   value?: VirtualMachineScaleSetVMExtension[];
 }
@@ -6373,6 +6374,7 @@ model VirtualMachineExtensionsListResult {
   /**
    * The list of extensions
    */
+  @pageItems
   value?: VirtualMachineExtension[];
 }
 

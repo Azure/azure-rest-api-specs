@@ -650,6 +650,7 @@ model CertificateListDescription {
   /**
    * The array of Certificate objects.
    */
+  @pageItems
   value?: CertificateResponse[];
 }
 
@@ -831,6 +832,7 @@ model PrivateLinkResources {
   /**
    * The list of available private link resources for a provisioning service
    */
+  @pageItems
   value?: GroupIdInformation[];
 }
 

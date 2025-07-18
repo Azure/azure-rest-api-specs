@@ -597,7 +597,6 @@ model UpdateProperties {
 /**
  * Result of the List Operations operation
  */
-@Azure.Core.pagedResult
 model OperationsListResult {
   /**
    * The link used to get the next page of operations.
@@ -608,7 +607,7 @@ model OperationsListResult {
   /**
    * A collection of operations
    */
-  @Azure.Core.items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value?: Operation[];
 }

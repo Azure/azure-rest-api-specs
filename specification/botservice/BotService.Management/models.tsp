@@ -14,7 +14,6 @@ namespace Microsoft.BotService;
 /**
  * The list of bot service operation response.
  */
-@Azure.Core.pagedResult
 model OperationEntityListResult {
   /**
    * The link used to get the next page of operations.
@@ -25,7 +24,7 @@ model OperationEntityListResult {
   /**
    * The list of operations.
    */
-  @Azure.Core.items
+  @pageItems
   value: OperationEntity[];
 }
 

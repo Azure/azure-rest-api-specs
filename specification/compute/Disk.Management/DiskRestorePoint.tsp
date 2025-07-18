@@ -68,6 +68,7 @@ interface DiskRestorePoints {
    * Lists diskRestorePoints under a vmRestorePoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @list
   @operationId("DiskRestorePoint_ListByRestorePoint")
   listByRestorePoint is DiskRestorePointsOps.List<
     DiskRestorePoint,
