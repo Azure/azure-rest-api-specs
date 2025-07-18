@@ -1882,8 +1882,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/InstancePools.json
-- ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionBackups.json
-- ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ReplicationLinks.json
