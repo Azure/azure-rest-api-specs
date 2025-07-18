@@ -1492,12 +1492,11 @@ model UsageName {
 /**
  * The List Virtual Machine operation response.
  */
-@pagedResult
 model VirtualMachineSizeListResult {
   /**
    * The list of virtual machine sizes.
    */
-  @items
+  @pageItems
   @identifiers(#["name"])
   value?: VirtualMachineSize[];
 
@@ -7289,12 +7288,11 @@ model DedicatedHostUpdate extends UpdateResource {
 /**
  * The List Dedicated Host sizes operation response.
  */
-@pagedResult
 model DedicatedHostSizeListResult {
   /**
    * The list of dedicated host sizes.
    */
-  @items
+  @pageItems
   value?: string[];
 
   /**

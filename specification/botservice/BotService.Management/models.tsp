@@ -1565,12 +1565,11 @@ model OperationResultsDescription {
 /**
  * List of private endpoint connection associated with the specified storage account
  */
-@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * Array of private endpoint connections
    */
-  @items
+  @pageItems
   value?: PrivateEndpointConnection[];
 
   /**
