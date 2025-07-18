@@ -69,8 +69,8 @@ jobs:
           # Ensure "shellcheck" is installed, since it's required for complete validation (pre-installed on GH agents)
           command -v shellcheck >/dev/null || exit 1
 
-          # Download tool
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          # Download tool. Download script SHA and tool version are pinned, but should be updated regularly.
+          bash <(curl https://github.com/rhysd/actionlint/blob/2ab3a12c7848f6c15faca9a92612ef4261d0e370/scripts/download-actionlint.bash) 1.7.7
 
           # Run tool, ignoring noisy output about missing pyflakes
           ./actionlint --color --verbose |& grep -v pyflakes
