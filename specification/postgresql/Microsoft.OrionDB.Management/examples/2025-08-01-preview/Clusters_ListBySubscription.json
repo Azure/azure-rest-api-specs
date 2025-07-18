@@ -1,0 +1,180 @@
+{
+  "operationId": "Clusters_ListBySubscription",
+  "title": "List OrionDB clusters by subscription",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "api-version": "2025-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/testcluster1",
+            "name": "testcluster1",
+            "type": "Microsoft.OrionDB/clusters",
+            "location": "eastus",
+            "tags": {
+              "Environment": "Development",
+              "Team": "Database"
+            },
+            "properties": {
+              "administratorLogin": "testadmin",
+              "version": "16",
+              "fullyQualifiedDomainName": "testcluster1.postgres.database.azure.com",
+              "state": "Ready",
+              "availabilityZone": "1",
+              "storage": {
+                "storageSizeGB": 512,
+                "autoGrow": "Enabled",
+                "tier": "P10",
+                "iops": 2000
+              },
+              "authConfig": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Enabled",
+                "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "backup": {
+                "retentionDays": 7,
+                "geoRedundantBackup": "Disabled",
+                "earliestRestoreDate": "2025-07-18T00:00:00.000Z"
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "highAvailability": {
+                "mode": "ZoneRedundant",
+                "standbyAvailabilityZone": "2"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Enabled",
+                "dayOfWeek": 0,
+                "startHour": 2,
+                "startMinute": 0
+              }
+            },
+            "sku": {
+              "name": "Standard_D4s_v3",
+              "tier": "GeneralPurpose"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/testcluster2",
+            "name": "testcluster2",
+            "type": "Microsoft.OrionDB/clusters",
+            "location": "westus2",
+            "tags": {
+              "Environment": "Production",
+              "Team": "Database"
+            },
+            "properties": {
+              "administratorLogin": "prodadmin",
+              "version": "17",
+              "fullyQualifiedDomainName": "testcluster2.postgres.database.azure.com",
+              "state": "Ready",
+              "availabilityZone": "2",
+              "storage": {
+                "storageSizeGB": 1024,
+                "autoGrow": "Enabled",
+                "tier": "P20",
+                "iops": 4000
+              },
+              "authConfig": {
+                "activeDirectoryAuth": "Enabled",
+                "passwordAuth": "Disabled",
+                "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+              },
+              "dataEncryption": {
+                "type": "CustomerManaged",
+                "primaryKeyURI": "https://test-keyvault.vault.azure.net/keys/test-key/ffffffffffffffffffffffffffffffff",
+                "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity"
+              },
+              "backup": {
+                "retentionDays": 30,
+                "geoRedundantBackup": "Enabled",
+                "earliestRestoreDate": "2025-07-18T00:00:00.000Z"
+              },
+              "network": {
+                "publicNetworkAccess": "Disabled",
+                "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/prod-vnet/subnets/database",
+                "privateDnsZoneResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateDnsZones/testcluster2.private.postgres.database.azure.com"
+              },
+              "highAvailability": {
+                "mode": "SameZone"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled"
+              }
+            },
+            "sku": {
+              "name": "Standard_D16s_v3",
+              "tier": "GeneralPurpose"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity": {
+                  "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+                  "principalId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/AnotherGroup/providers/Microsoft.OrionDB/clusters/anothercluster",
+            "name": "anothercluster",
+            "type": "Microsoft.OrionDB/clusters",
+            "location": "northeurope",
+            "tags": {
+              "Environment": "Staging",
+              "Team": "QA"
+            },
+            "properties": {
+              "administratorLogin": "stageadmin",
+              "version": "15",
+              "fullyQualifiedDomainName": "anothercluster.postgres.database.azure.com",
+              "state": "Ready",
+              "availabilityZone": "3",
+              "storage": {
+                "storageSizeGB": 256,
+                "autoGrow": "Disabled",
+                "tier": "P6",
+                "iops": 1000
+              },
+              "authConfig": {
+                "activeDirectoryAuth": "Disabled",
+                "passwordAuth": "Enabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "backup": {
+                "retentionDays": 14,
+                "geoRedundantBackup": "Disabled",
+                "earliestRestoreDate": "2025-07-18T00:00:00.000Z"
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "highAvailability": {
+                "mode": "Disabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled"
+              }
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "tier": "Burstable"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "operationId": "Clusters_Update",
+  "title": "Update an OrionDB cluster",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "orionDbClusterName": "testcluster1",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "tags": {
+        "Environment": "Production",
+        "Team": "Database",
+        "Owner": "DataTeam"
+      },
+      "properties": {
+        "administratorLoginPassword": "newPassword123!",
+        "storage": {
+          "storageSizeGB": 1024,
+          "autoGrow": "Enabled",
+          "tier": "P20"
+        },
+        "backup": {
+          "retentionDays": 14,
+          "geoRedundantBackup": "Enabled"
+        },
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "dayOfWeek": 6,
+          "startHour": 3,
+          "startMinute": 30
+        }
+      },
+      "sku": {
+        "name": "Standard_D8s_v3",
+        "tier": "GeneralPurpose"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/testcluster1",
+        "name": "testcluster1",
+        "type": "Microsoft.OrionDB/clusters",
+        "location": "eastus",
+        "tags": {
+          "Environment": "Production",
+          "Team": "Database",
+          "Owner": "DataTeam"
+        },
+        "properties": {
+          "administratorLogin": "testadmin",
+          "version": "16",
+          "fullyQualifiedDomainName": "testcluster1.postgres.database.azure.com",
+          "state": "Ready",
+          "availabilityZone": "1",
+          "storage": {
+            "storageSizeGB": 1024,
+            "autoGrow": "Enabled",
+            "tier": "P20",
+            "iops": 4000
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Enabled",
+            "passwordAuth": "Enabled",
+            "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "backup": {
+            "retentionDays": 14,
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2025-07-18T00:00:00.000Z"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default",
+            "privateDnsZoneResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateDnsZones/testcluster1.private.postgres.database.azure.com"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "2"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Enabled",
+            "dayOfWeek": 6,
+            "startHour": 3,
+            "startMinute": 30
+          }
+        },
+        "sku": {
+          "name": "Standard_D8s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity": {
+              "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "principalId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.OrionDB/locations/eastus/azureAsyncOperation/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2025-08-01-preview",
+        "location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/testcluster1?api-version=2025-08-01-preview"
+      }
+    }
+  }
+}

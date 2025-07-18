@@ -1,0 +1,153 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Create OrionDB cluster with customer-managed encryption",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "orionDbClusterName": "encryptedcluster",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "tags": {
+        "Environment": "Production",
+        "Team": "Database",
+        "Encryption": "CustomerManaged"
+      },
+      "properties": {
+        "createMode": "Default",
+        "administratorLogin": "secureadmin",
+        "administratorLoginPassword": "SuperSecure123!",
+        "version": "17",
+        "availabilityZone": "1",
+        "storage": {
+          "storageSizeGB": 1024,
+          "autoGrow": "Enabled",
+          "tier": "P30"
+        },
+        "authConfig": {
+          "activeDirectoryAuth": "Enabled",
+          "passwordAuth": "Enabled",
+          "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+        },
+        "dataEncryption": {
+          "type": "CustomerManaged",
+          "primaryKeyURI": "https://test-keyvault.vault.azure.net/keys/oriondb-key/ffffffffffffffffffffffffffffffff",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/encryption-identity",
+          "geoBackupKeyURI": "https://backup-keyvault.vault.azure.net/keys/oriondb-backup-key/ffffffffffffffffffffffffffffffff",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/backup-identity"
+        },
+        "backup": {
+          "retentionDays": 30,
+          "geoRedundantBackup": "Enabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Disabled",
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/secure-vnet/subnets/database",
+          "privateDnsZoneResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateDnsZones/encryptedcluster.private.postgres.database.azure.com"
+        },
+        "highAvailability": {
+          "mode": "ZoneRedundant",
+          "standbyAvailabilityZone": "2"
+        },
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "dayOfWeek": 0,
+          "startHour": 3,
+          "startMinute": 0
+        }
+      },
+      "sku": {
+        "name": "Standard_D16s_v3",
+        "tier": "GeneralPurpose"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/encryption-identity": {},
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/backup-identity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/encryptedcluster",
+        "name": "encryptedcluster",
+        "type": "Microsoft.OrionDB/clusters",
+        "location": "eastus",
+        "tags": {
+          "Environment": "Production",
+          "Team": "Database",
+          "Encryption": "CustomerManaged"
+        },
+        "properties": {
+          "administratorLogin": "secureadmin",
+          "version": "17",
+          "state": "Starting",
+          "availabilityZone": "1",
+          "storage": {
+            "storageSizeGB": 1024,
+            "autoGrow": "Enabled",
+            "tier": "P30",
+            "iops": 8000
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Enabled",
+            "passwordAuth": "Enabled",
+            "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          },
+          "dataEncryption": {
+            "type": "CustomerManaged",
+            "primaryKeyURI": "https://test-keyvault.vault.azure.net/keys/oriondb-key/ffffffffffffffffffffffffffffffff",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/encryption-identity",
+            "geoBackupKeyURI": "https://backup-keyvault.vault.azure.net/keys/oriondb-backup-key/ffffffffffffffffffffffffffffffff",
+            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/backup-identity"
+          },
+          "backup": {
+            "retentionDays": 30,
+            "geoRedundantBackup": "Enabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/virtualNetworks/secure-vnet/subnets/database",
+            "privateDnsZoneResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.Network/privateDnsZones/encryptedcluster.private.postgres.database.azure.com"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "2"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Enabled",
+            "dayOfWeek": 0,
+            "startHour": 3,
+            "startMinute": 0
+          }
+        },
+        "sku": {
+          "name": "Standard_D16s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/encryption-identity": {
+              "clientId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "principalId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+            },
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/backup-identity": {
+              "clientId": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "principalId": "dddddddd-dddd-dddd-dddd-dddddddddddd"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.OrionDB/locations/eastus/azureAsyncOperation/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2025-08-01-preview",
+        "location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/encryptedcluster?api-version=2025-08-01-preview"
+      }
+    }
+  }
+}

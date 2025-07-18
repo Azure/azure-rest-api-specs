@@ -1,0 +1,106 @@
+{
+  "operationId": "Clusters_CreateOrUpdate",
+  "title": "Create OrionDB cluster with point-in-time restore",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "orionDbClusterName": "restoredcluster",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "tags": {
+        "Environment": "Development",
+        "Team": "Database",
+        "Purpose": "Restored"
+      },
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "sourceOrionDbResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/testcluster1",
+        "pointInTimeUTC": "2025-07-17T14:30:00.000Z",
+        "version": "16",
+        "availabilityZone": "1",
+        "storage": {
+          "storageSizeGB": 512,
+          "autoGrow": "Enabled",
+          "tier": "P10"
+        },
+        "authConfig": {
+          "activeDirectoryAuth": "Enabled",
+          "passwordAuth": "Enabled",
+          "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+        },
+        "dataEncryption": {
+          "type": "SystemManaged"
+        },
+        "backup": {
+          "retentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Enabled"
+        },
+        "highAvailability": {
+          "mode": "Disabled"
+        }
+      },
+      "sku": {
+        "name": "Standard_D4s_v3",
+        "tier": "GeneralPurpose"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/restoredcluster",
+        "name": "restoredcluster",
+        "type": "Microsoft.OrionDB/clusters",
+        "location": "eastus",
+        "tags": {
+          "Environment": "Development",
+          "Team": "Database",
+          "Purpose": "Restored"
+        },
+        "properties": {
+          "administratorLogin": "testadmin",
+          "version": "16",
+          "state": "Starting",
+          "availabilityZone": "1",
+          "storage": {
+            "storageSizeGB": 512,
+            "autoGrow": "Enabled",
+            "tier": "P10"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Enabled",
+            "passwordAuth": "Enabled",
+            "tenantId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "backup": {
+            "retentionDays": 7,
+            "geoRedundantBackup": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          }
+        },
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.OrionDB/locations/eastus/azureAsyncOperation/ffffffff-ffff-ffff-ffff-ffffffffffff?api-version=2025-08-01-preview",
+        "location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.OrionDB/clusters/restoredcluster?api-version=2025-08-01-preview"
+      }
+    }
+  }
+}
