@@ -34,7 +34,7 @@ model DeploymentSafeguard
 @doc("Deployment Safeguards")
 @resource("deploymentSafeguards")
 @singleton("default")
-model DeploymentSafeguardCreate
+model DeploymentSafeguardCreateOrUpdate
   is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsPropertiesCreate> {
   @key("deploymentSafeguardName")
   @doc("Required default name")
@@ -46,7 +46,7 @@ model DeploymentSafeguardCreate
 }
 
 @doc("DeploymentSafeguards Properties")
-model DeploymentSafeguardsPropertiesCreate {
+model DeploymentSafeguardsPropertiesCreateOrUpdate {
   @doc("The deployment safeguards level. Possible values are Warn and Enforce")
   level: DeploymentSafeguardsLevel;
 
@@ -126,7 +126,7 @@ interface DeploymentSafeguards {
   get is ArmResourceRead<DeploymentSafeguard>;
 
   @doc("Creates or updates a deploymentSafeguard")
-  create is ArmResourceCreateOrUpdateAsync<DeploymentSafeguardCreate>;
+  create is ArmResourceCreateOrUpdateAsync<DeploymentSafeguardCreateOrUpdate>;
 
   @doc("Delete DeploymentSafeguards")
   delete is ArmResourceDeleteWithoutOkAsync<DeploymentSafeguard>;
