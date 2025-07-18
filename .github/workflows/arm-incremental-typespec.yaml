@@ -46,7 +46,7 @@ jobs:
           result-encoding: string
           script: |
             const { default: incrementalTypeSpec } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-incremental-typespec.js');
+              await import(`${process.env.GITHUB_WORKSPACE}/.github/workflows/src/arm-incremental-typespec.js`);
             return await incrementalTypeSpec({ github, context, core });
 
       - name: Upload artifact with results
