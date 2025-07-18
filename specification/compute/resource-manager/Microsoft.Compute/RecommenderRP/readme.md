@@ -64,15 +64,6 @@ input-file:
 - stable/2025-06-05/RecommenderRP.json
 ```
 
-### Tag: package-2025-06-05-only
-
-These settings apply only when `--tag=package-package-2025-06-05-only` is specified on the command line
-
-``` yaml $(tag) == 'package-2025-06-05-only'
-input-file:
-- stable/2025-06-05/RecommenderRP.json
-```
-
 ---
 
 # Code Generation
