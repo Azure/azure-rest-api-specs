@@ -72,6 +72,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicyrestrictions.json
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimpolicyrestrictionsvalidation.json
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalconfigs.json
+  - Microsoft.ApiManagement/preview/2024-10-01-preview/apimclientApplications.json
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2024-10-01-preview/apimprivatelink.json

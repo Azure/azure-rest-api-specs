@@ -2413,6 +2413,176 @@
         }
       }
     },
+    "ClientApplicationCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientApplicationContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged ClientApplication list representation."
+    },
+    "ClientApplicationContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClientApplicationContractProperties",
+          "description": "Client application entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Client application details."
+    },
+    "ClientApplicationContractProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Client application name.",
+          "minLength": 0,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Client application description.",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "A resource identifier for the user who owns the application."
+        },
+        "entraApplicationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Microsoft EntraID Application ID (Client ID). This is the value that is used to identify the application when it is requesting access tokens from Microsoft EntraID. This property is read-only and will be set by the system when the application is created."
+        },
+        "entraTenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Tenant ID is a unique identifier (a GUID) for an organization directory in Microsoft’s cloud. It’s used to identify tenants across Microsoft services."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Client application state. The value derives the state of an application based on the statuses of its associated ClientApplicationProductLinks.",
+          "enum": [
+            "pending",
+            "active",
+            "rejected",
+            "approved"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClientApplicationState",
+            "values": [
+              {
+                "value": "pending",
+                "description": "If there are no associated ClientApplicationLinks or all ClientApplicationLinks are in a state that doesn't meet the criteria for the states: active, rejected, approved (e.g., a mix of active and rejected without any approved)."
+              },
+              {
+                "value": "active",
+                "description": "If there are no approved ClientApplicationLink, but at least one ClientApplicationLink is active, the Application is considered active"
+              },
+              {
+                "value": "rejected",
+                "description": "If all ClientApplicationLinks are rejected, the Application is considered rejected"
+              },
+              {
+                "value": "approved",
+                "description": "If at least one ClientApplicationLink is approved, the Application is considered approved"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "ownerId"
+      ],
+      "description": "Client Application Entity Properties"
+    },
+    "ClientApplicationSecretsContract": {
+      "type": "object",
+      "description": "Specifies client application secrets needed to authorize applications API calls",
+      "properties": {
+        "entra": {
+          "type": "object",
+          "description": "Microsoft EntraID client application secrets",
+          "properties": {
+            "clientSecret": {
+              "type": "string",
+              "x-ms-secret": true,
+              "description": "EntraID client application secret"
+            },
+            "expiresAt": {
+              "type": "string",
+              "readOnly": true,
+              "format": "date-time",
+              "description": "EntraID client application secret expiration date."
+            }
+          }
+        }
+      }
+    },
+    "ClientApplicationProductLinkCollection": {
+      "type": "object",
+      "description": "Paged ClientApplicationProductLinkContract list representation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientApplicationProductLinkContract"
+          },
+          "description": "Page values."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      }
+    },
+    "ClientApplicationProductLinkContract": {
+      "type": "object",
+      "description": "Specifies Client Application - Product link assignment",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClientApplicationProductLinkContractProperties",
+          "description": "Client application - product link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClientApplicationProductLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "The unique resource identifier of the Product."
+        }
+      },
+      "required": [
+        "productId"
+      ]
+    },
     "FailureStatusCodeRange": {
       "type": "object",
       "description": "The failure http status code range",
@@ -5833,6 +6003,30 @@
           "format": "int32",
           "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
         },
+        "authenticationType": {
+          "type": "array",
+          "description": "Type of supported authentication for the product. The application configuration is required for application-token authentication type. The subscription-key authentication type is used by default. If the property is omitted, the subscription-key authentication type is used.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "subscription-key",
+              "application-token"
+            ],
+            "x-ms-enum": {
+              "name": "ProductAuthType",
+              "modelAsString": true
+            }
+          }
+        },
+        "application": {
+          "type": "object",
+          "description": "Specifies identity provider settings needed to authorize applications API calls.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductApplicationContract"
+            }
+          ]
+        },
         "state": {
           "type": "string",
           "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.",
@@ -5899,6 +6093,26 @@
         }
       ],
       "description": "Parameters supplied to the Update Product operation."
+    },
+    "ProductApplicationContract": {
+      "type": "object",
+      "description": "Specifies Microsoft Entra settings needed to authorize product API calls using client applications.",
+      "properties": {
+        "entra": {
+          "type": "object",
+          "description": "Specifies Microsoft Entra settings needed to authorize product API calls using client application with Microsoft Entra OAuth token.",
+          "properties": {
+            "applicationId": {
+              "type": "string",
+              "description": "Product facing EntraID application client ID."
+            },
+            "audience": {
+              "type": "string",
+              "description": "The EntraID application audience claim. The audience claim is used to validate the token."
+            }
+          }
+        }
+      }
     },
     "NamedValueCollection": {
       "type": "object",
