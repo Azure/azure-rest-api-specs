@@ -26,7 +26,7 @@ model ManagedCCF
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
-interface ManagedCCFS {
+interface ManagedCCFs {
   /**
    * Retrieves the properties of a Managed CCF app.
    */
@@ -124,11 +124,11 @@ interface ManagedCCFS {
 
 @@doc(ManagedCCF.name, "Name of the Managed CCF");
 @@doc(ManagedCCF.properties, "Properties of Managed CCF Resource.");
-@@doc(ManagedCCFS.create::parameters.resource,
+@@doc(ManagedCCFs.create::parameters.resource,
   "Managed CCF Create Request Body"
 );
-@@doc(ManagedCCFS.update::parameters.properties,
+@@doc(ManagedCCFs.update::parameters.properties,
   "Request body for Updating Managed CCF App"
 );
-@@doc(ManagedCCFS.backup::parameters.body, "Managed CCF Backup Request Body");
-@@doc(ManagedCCFS.restore::parameters.body, "Managed CCF Restore Request Body");
+@@doc(ManagedCCFs.backup::parameters.body, "Managed CCF Backup Request Body");
+@@doc(ManagedCCFs.restore::parameters.body, "Managed CCF Restore Request Body");

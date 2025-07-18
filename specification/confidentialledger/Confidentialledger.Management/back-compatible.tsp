@@ -14,8 +14,8 @@ using Microsoft.ConfidentialLedger;
   "confidentialLedger"
 );
 
-@@clientName(ManagedCCFS.create::parameters.resource, "ManagedCCF");
-@@clientName(ManagedCCFS.update::parameters.properties, "ManagedCCF");
-@@clientName(ManagedCCFS.backup::parameters.body, "ManagedCCF");
-@@clientName(ManagedCCFS.restore::parameters.body, "ManagedCCF");
+@@clientName(ManagedCCFs.create::parameters.resource, "ManagedCCF");
+@@clientName(ManagedCCFs.update::parameters.properties, "ManagedCCF");
+@@clientName(ManagedCCFs.backup::parameters.body, "ManagedCCF");
+@@clientName(ManagedCCFs.restore::parameters.body, "ManagedCCF");
 @@clientName(checkNameAvailability::parameters.body, "nameAvailabilityRequest");
