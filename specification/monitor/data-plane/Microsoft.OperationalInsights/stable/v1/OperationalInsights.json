@@ -408,23 +408,12 @@
         },
         "path": {
           "type": "string",
-          "description": "The query path of a single request in a batch, defaults to /query",
-          "enum": [
-            "/query"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "The query path of a single request in a batch."
         },
         "method": {
           "type": "string",
-          "description": "The method of a single request in a batch, defaults to POST",
-          "enum": [
-            "POST"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "description": "The method of a single request in a batch, defaults to GET",
+          "default": "GET"
         },
         "workspace": {
           "type": "string",
@@ -434,6 +423,8 @@
       "required": [
         "id",
         "body",
+        "path",
+        "method",
         "workspace"
       ]
     },
