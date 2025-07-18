@@ -22,7 +22,6 @@ export declare const crossVersionBreakingChangeLabelVarName = "crossVersionBreak
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
-
   const handlers: ChangeHandler[] = [];
   let isAddingNewApiVersion = false;
   const apiVersionSet = new Set<string>();
@@ -103,10 +102,12 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
 
   // Has to run in PR context.
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
-  const {
-    versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent,
-  } = await processBreakingChangeLabels(context, labelContext);
+  // const {
+  //   versioningReviewRequiredLabelShouldBePresent,
+  //   breakingChangeReviewRequiredLabelShouldBePresent,
+  // } = await processBreakingChangeLabels(context, labelContext);
+  const versioningReviewRequiredLabelShouldBePresent = false;
+  const breakingChangeReviewRequiredLabelShouldBePresent = false;
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(
@@ -252,6 +253,7 @@ export const getResourceProviderFromFilePath = (
   return undefined;
 };
 
+// todo: is this right?
 async function processBreakingChangeLabels(
   prContext: PRContext,
   labelContext: LabelContext): Promise<{

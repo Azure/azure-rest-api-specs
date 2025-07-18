@@ -9,7 +9,7 @@ import { evaluateImpact } from "../src/runner.js";
 // const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
 
 describe("Check Changes", () => {
-    it("Should return true when the file has changes", async () => {
+    it("Integration test 35346", async () => {
         const targetDirectory = path.join("/home/semick/repo/rest-s/35346", "before");
         const sourceDirectory = path.join("/home/semick/repo/rest-s/35346", "after");
 
@@ -41,5 +41,33 @@ describe("Check Changes", () => {
         expect(result.labelContext.toAdd.has("SuppressionReviewRequired")).toBeTruthy();
         expect(changedFileDetails).toBeDefined();
         expect(changedFileDetails.total).toEqual(293);
-    });
+    }, 60000000);
+
+
+    it("Integration test 35982", async () => {
+        const targetDirectory = path.join("/home/semick/repo/rest-s/35982", "before");
+        const sourceDirectory = path.join("/home/semick/repo/rest-s/35982", "after");
+
+        const changedFileDetails = await getChangedFilesStatuses({ cwd: sourceDirectory, baseCommitish: "origin/main" });
+        const labelContext: LabelContext = {
+            present: new Set(),
+            toAdd: new Set(),
+            toRemove: new Set()
+        };
+
+        const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
+            sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
+            sourceBranch: "features/users/deepika/cosmos-connectors-confluent",
+            targetBranch: "main",
+            repo: "azure-rest-api-specs",
+            prNumber: "35982",
+            owner: "Azure",
+            fileList: changedFileDetails,
+            isDraft: false
+        });
+
+        const result = await evaluateImpact(prContext, labelContext);
+
+        expect(result).toBeDefined();
+    }, 60000000);
 });
