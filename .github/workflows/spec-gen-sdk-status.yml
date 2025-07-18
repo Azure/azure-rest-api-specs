@@ -45,5 +45,5 @@ jobs:
         with:
           script: |
             const setStatus =
-              (await import(`${process.env.GITHUB_WORKSPACE}/.github/workflows/src/spec-gen-sdk-status.js`)).default;
+              (await import('${{ github.workspace }}/.github/workflows/src/spec-gen-sdk-status.js')).default;
             return await setStatus({ github, context, core });
