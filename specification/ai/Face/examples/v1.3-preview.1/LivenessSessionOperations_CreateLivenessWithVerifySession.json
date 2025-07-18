@@ -1,0 +1,42 @@
+{
+  "title": "Create LivenessWithVerify Session",
+  "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
+  "parameters": {
+    "apiVersion": "v1.3-preview.1",
+    "livenessOperationMode": "PassiveActive",
+    "deviceCorrelationIdSetInClient": false,
+    "deviceCorrelationId": "your_device_correlation_id",
+    "userCorrelationIdSetInClient": false,
+    "userCorrelationId": "your_user_correlation_id",
+    "authTokenTimeToLiveInSeconds": 60,
+    "numberOfClientAttemptsAllowed": 1,
+    "expectedClientIpAddress": "1.2.3.4",
+    "verifyImage": "<your-image-bytes-here>"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sessionId": "b12e033e-bda7-4b83-a211-e721c661f30e",
+        "authToken": "eyJhbGciOiJFUzI1NiIsIm",
+        "status": "NotStarted",
+        "modelVersion": "2024-11-15",
+        "isAbuseMonitoringEnabled": true,
+        "results": {
+          "attempts": [],
+          "verifyReferences": [
+            {
+              "referenceType": "image",
+              "faceRectangle": {
+                "top": 316,
+                "left": 131,
+                "width": 498,
+                "height": 677
+              },
+              "qualityForRecognition": "high"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
