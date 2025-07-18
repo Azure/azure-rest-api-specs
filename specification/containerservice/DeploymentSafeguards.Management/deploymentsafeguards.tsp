@@ -35,7 +35,7 @@ model DeploymentSafeguard
 @resource("deploymentSafeguards")
 @singleton("default")
 model DeploymentSafeguardCreateOrUpdate
-  is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsPropertiesCreate> {
+  is Azure.ResourceManager.ExtensionResource<DeploymentSafeguardsPropertiesCreateOrUpdate> {
   @key("deploymentSafeguardName")
   @doc("Required default name")
   @segment("deploymentSafeguards")
