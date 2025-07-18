@@ -8,6 +8,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 using Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.DesktopVirtualization;
 
@@ -3387,6 +3388,10 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
+@@added(HostPoolPatch.identity, Versions.v2025_04_01_preview);
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+@@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
+
 /**
  * HostPool properties that can be patched.
  */
@@ -3403,6 +3408,11 @@ model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
    * HostPool properties that can be patched.
    */
   properties?: HostPoolPatchProperties;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  ...ManagedServiceIdentityProperty;
 }
 
 /**
