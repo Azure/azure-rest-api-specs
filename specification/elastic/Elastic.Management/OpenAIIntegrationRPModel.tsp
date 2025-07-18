@@ -56,8 +56,6 @@ interface OpenAIIntegrationRPModels {
   /**
    * Get detailed information about OpenAI integration rules for a given Elastic monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OpenAI_Get")
   get is ArmResourceRead<
     OpenAIIntegrationRPModel,
     Error = ResourceProviderDefaultErrorResponse
@@ -66,8 +64,6 @@ interface OpenAIIntegrationRPModels {
   /**
    * Create or update an OpenAI integration rule for a given Elastic monitor resource, enabling advanced AI-driven observability and monitoring.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OpenAI_CreateOrUpdate")
   createOrUpdate is OpenAiCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     OpenAIIntegrationRPModel,
     Response = ArmResourceUpdatedResponse<OpenAIIntegrationRPModel> | ArmResourceCreatedResponse<
@@ -80,8 +76,6 @@ interface OpenAIIntegrationRPModels {
   /**
    * Delete an OpenAI integration rule for a given Elastic monitor resource, removing AI-driven observability and monitoring capabilities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OpenAI_Delete")
   delete is ArmResourceDeleteSync<
     OpenAIIntegrationRPModel,
     Error = ResourceProviderDefaultErrorResponse
@@ -90,8 +84,6 @@ interface OpenAIIntegrationRPModels {
   /**
    * List all OpenAI integration rules for a given Elastic monitor resource, helping you manage AI-driven observability and monitoring.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OpenAI_List")
   list is ArmResourceListByParent<
     OpenAIIntegrationRPModel,
     Response = ArmResponse<OpenAIIntegrationRPModelListResponse>,
@@ -101,8 +93,6 @@ interface OpenAIIntegrationRPModels {
   /**
    * Get the status of OpenAI integration for a given Elastic monitor resource, ensuring optimal observability and performance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OpenAI_GetStatus")
   getStatus is ArmResourceActionSync<
     OpenAIIntegrationRPModel,
     void,

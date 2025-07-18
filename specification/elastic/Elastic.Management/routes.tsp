@@ -16,9 +16,7 @@ interface ElasticVersionsOperationGroup {
   /**
    * Retrieve a list of all available Elastic versions for a specified region, helping you choose the best version for your deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve a list of all available Elastic versions for a specified region, helping you choose the best version for your deployment.")
-  @operationId("ElasticVersions_List")
   @autoRoute
   @get
   @action("elasticVersions")
@@ -41,9 +39,7 @@ interface OrganizationsOperationGroup {
   /**
    * Fetch the User API Key from the internal database, if it was generated and stored during the creation of the Elasticsearch Organization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Fetch the User API Key from the internal database, if it was generated and stored during the creation of the Elasticsearch Organization.")
-  @operationId("Organizations_GetApiKey")
   @autoRoute
   @action("getOrganizationApiKey")
   getApiKey is ArmProviderActionSync<
@@ -59,9 +55,7 @@ interface OrganizationsOperationGroup {
   /**
    * Retrieve mapping details between the Elastic Organization and Azure Subscription for the logged-in user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve mapping details between the Elastic Organization and Azure Subscription for the logged-in user.")
-  @operationId("Organizations_GetElasticToAzureSubscriptionMapping")
   @autoRoute
   @action("getElasticOrganizationToAzureSubscriptionMapping")
   getElasticToAzureSubscriptionMapping is ArmProviderActionSync<
