@@ -1,0 +1,50 @@
+{
+  "title": "Get_Namespace",
+  "operationId": "Namespaces_Get",
+  "description": "Get a namespace",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "adr-namespace-gbk0925-n01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1366-430f-0000-cc873bcf2d27/resourceGroups/gbktestRG/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n01",
+        "name": "adr-namespace-gbk1001-n01",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "North Europe",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-01T21:39:27.7050447Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-01T21:39:27.7050447Z"
+        },
+        "identity": {
+          "principalId": "4a06b859-8c07-4d9f-822d-3348a09f72c2",
+          "tenantId": "0006f47a-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "cfbef47a-6971-4c90-a7a9-99be82dea167",
+          "messaging": {
+            "endpoints": {
+              "myPrimaryEventGridEndpoint": {
+                "address": "https://myeventgridtopic1.westeurope-1.eventgrid.azure.net",
+                "endpointType": "Microsoft.EventGrid"
+              },
+              "mySecondaryEventGridEndpoint": {
+                "address": "https://myeventgridtopic2.westeurope-1.eventgrid.azure.net",
+                "endpointType": "Microsoft.EventGrid"
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
