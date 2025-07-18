@@ -40,14 +40,14 @@ jobs:
         run: |
           set -x
 
-          # Copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
-          echo "::add-matcher::.github/matchers/actionlint.json"
-
           # Ensure "shellcheck" is installed, since it's required for complete validation (pre-installed on GH agents)
           command -v shellcheck >/dev/null || exit 1
 
           # Download tool. Script SHA and tool version are pinned, but should be updated regularly.
           bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/scripts/download-actionlint.bash) 1.7.7
+
+          # Copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
+          echo "::add-matcher::.github/matchers/actionlint.json"
 
           # Run tool, ignoring noisy output about missing pyflakes
           ./actionlint --color --verbose |& grep -v pyflakes
