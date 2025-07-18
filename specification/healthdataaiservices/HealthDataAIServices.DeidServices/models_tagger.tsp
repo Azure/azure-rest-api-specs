@@ -1,4 +1,7 @@
+import "@typespec/versioning";
+
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -25,6 +28,48 @@ model PhiEntity {
 
   @doc("Confidence score of the category match.")
   confidenceScore?: float64;
+}
+
+@doc("PHI Entity for public use in SurrogateOnly operations with full encoding information.")
+@added(Versions.v2025_07_15_preview)
+model PublicPhiEntity {
+  @doc("PHI Category of the entity.")
+  category: PhiCategory;
+
+  @doc("Starting index of the location from within the input text.")
+  offset: StringIndex;
+
+  @doc("Length of the input text.")
+  length: StringIndex;
+
+  @doc("Text of the entity (optional).")
+  text?: string;
+}
+
+@doc("Grouped PHI entities with shared encoding specification.")
+@added(Versions.v2025_07_15_preview)
+model TaggedPhiEntities {
+  @doc("The encoding type used for all entities in this group.")
+  encoding: EncodingType;
+
+  @doc("List of PHI entities using the specified encoding.")
+  entities: Array<SimplePhiEntity>;
+}
+
+@doc("Simple PHI entity with encoding-specific offset and length values.")
+@added(Versions.v2025_07_15_preview)
+model SimplePhiEntity {
+  @doc("PHI Category of the entity.")
+  category: PhiCategory;
+
+  @doc("Starting index of the location from within the input text using the group's encoding.")
+  offset: int32;
+
+  @doc("Length of the input text using the group's encoding.")
+  length: int32;
+
+  @doc("Text of the entity (optional).")
+  text?: string;
 }
 
 @doc("String index encoding model.")
@@ -137,6 +182,20 @@ union PhiCategory {
 
   @doc("Zip Code.")
   Zip: "Zip",
+
+  string,
+}
+
+@doc("Encoding type for text offset and length calculations.")
+union EncodingType {
+  @doc("UTF-8 encoding.")
+  Utf8: "Utf8",
+
+  @doc("UTF-16 encoding. Primary encoding used by .NET, Java, and JavaScript.")
+  Utf16: "Utf16",
+
+  @doc("CodePoint encoding. Primary encoding used by Python.")
+  CodePoint: "CodePoint",
 
   string,
 }
