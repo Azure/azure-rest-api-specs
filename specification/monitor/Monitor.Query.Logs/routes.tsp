@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace MonitorQueryLogs;
@@ -56,6 +58,7 @@ interface Query {
 
     /** Optional. The prefer header to set server timeout, query statistics and visualization information. */
     @header("Prefer")
+    @clientName("options", "go")
     prefer?: string,
 
     /** Body Parameter content-type */
@@ -121,6 +124,7 @@ interface Query {
      * visualization information.
      */
     @header("Prefer")
+    @clientName("options", "go")
     prefer?: string,
 
     /** Body Parameter content-type */
