@@ -42,10 +42,6 @@ using Microsoft.Confluent;
 
 @@clientName(OrganizationResource, "ConfluentOrganization", "csharp");
 @@alternateType(OrganizationResourceProperties.organizationId, uuid, "csharp");
-// @@clientName(OrganizationResourceListResult,
-//   "ConfluentOrganizationListResult",
-//   "csharp"
-// );
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
 @@clientName(ConfluentAgreementProperties.accepted, "IsAccepted", "csharp");
 @@clientName(ConfluentAgreementProperties.retrieveDatetime,
