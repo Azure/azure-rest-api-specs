@@ -39,5 +39,6 @@ interface ApiVersions {
   @doc("Deletes specified API version")
   delete is ArmResourceDeleteSync<ApiVersion>;
   @doc("Returns a collection of API versions.")
+  @list
   list is ArmResourceListByParent<ApiVersion>;
 }

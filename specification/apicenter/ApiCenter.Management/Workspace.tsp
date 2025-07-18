@@ -39,5 +39,6 @@ interface Workspaces {
   @doc("Deletes specified workspace.")
   delete is ArmResourceDeleteSync<Workspace>;
   @doc("Returns a collection of workspaces.")
+  @list
   list is ArmResourceListByParent<Workspace>;
 }

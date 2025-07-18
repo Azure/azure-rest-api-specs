@@ -39,5 +39,6 @@ interface MetadataSchemas {
   @doc("Deletes specified metadata schema.")
   delete is ArmResourceDeleteSync<MetadataSchema>;
   @doc("Returns a collection of metadata schemas.")
+  @list
   list is ArmResourceListByParent<MetadataSchema>;
 }

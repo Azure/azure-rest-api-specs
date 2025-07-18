@@ -36,5 +36,6 @@ interface Apis {
   @doc("Deletes specified API.")
   delete is ArmResourceDeleteSync<Api>;
   @doc("Returns a collection of APIs.")
+  @list
   list is ArmResourceListByParent<Api>;
 }

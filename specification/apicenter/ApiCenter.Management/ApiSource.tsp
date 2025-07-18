@@ -43,5 +43,6 @@ interface ApiSources {
   @doc("Deletes specified API source.")
   delete is ArmResourceDeleteSync<ApiSource>;
   @doc("Returns a collection of API sources.")
+  @list
   list is ArmResourceListByParent<ApiSource>;
 }

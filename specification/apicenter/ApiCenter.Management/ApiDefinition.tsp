@@ -39,6 +39,7 @@ interface ApiDefinitions {
   @doc("Deletes specified API definition.")
   delete is ArmResourceDeleteSync<ApiDefinition>;
   @doc("Returns a collection of API definitions.")
+  @list
   list is ArmResourceListByParent<ApiDefinition>;
   @doc("Imports the API specification.")
   importSpecification is ArmResourceActionAsync<

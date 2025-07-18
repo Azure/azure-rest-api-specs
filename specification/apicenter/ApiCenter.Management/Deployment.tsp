@@ -39,5 +39,6 @@ interface Deployments {
   @doc("Deletes API deployment.")
   delete is ArmResourceDeleteSync<Deployment>;
   @doc("Returns a collection of API deployments.")
+  @list
   list is ArmResourceListByParent<Deployment>;
 }

@@ -32,6 +32,7 @@ interface DeletedServices {
   @doc("Permanently deletes specified service.")
   delete is ArmResourceDeleteSync<DeletedService>;
   @doc("Lists soft-deleted services.")
+  @list
   list is ArmResourceListByParent<DeletedService>;
   @doc("Lists services within an Azure subscription.")
   listBySubscription is ArmListBySubscription<DeletedService>;
