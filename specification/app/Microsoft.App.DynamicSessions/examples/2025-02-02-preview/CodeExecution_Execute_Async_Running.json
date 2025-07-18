@@ -1,12 +1,10 @@
 {
   "title": "CodeExecution_Execute_Async_Running",
   "operationId": "CodeExecution_Execute",
-  "headers": {
-    "operation-id": "testExecutionId"
-  },
   "parameters": {
     "api-version": "2025-02-02-preview",
     "identifier": "testSessionIdentifier",
+    "operation-id": "testExecutionId",
     "codeExecutionRequest": {
       "codeInputType": "Inline",
       "executionType": "Asynchronous",
@@ -15,6 +13,15 @@
     }
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "testExecutionId",
+        "identifier": "testSessionIdentifier",
+        "executionType": "Synchronous",
+        "status": "Running"
+      }
+    },
     "202": {
       "headers": {
         "operation-id": "testExecutionId",
