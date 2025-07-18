@@ -39,69 +39,69 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-preview-2025-06
+### Tag: package-2025-06-01-preview
 
-These settings apply only when `--tag=package-preview-2025-06` is specified on the command line.
+These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2025-06'
+``` yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
   - preview/2025-06-01-preview/search.json
 ```
 
-### Tag: package-2025-01
+### Tag: package-stable-2025-01-01
 
-These settings apply only when `--tag=package-2025-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2025-01-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-01'
+```yaml $(tag) == 'package-stable-2025-01-01'
 input-file:
   - stable/2025-01-01/search.json
 ```
 
-### Tag: package-preview-2024-04
+### Tag: package-2024-04-01-preview
 
-These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2024-04'
+``` yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
   - preview/2024-04-01-preview/search.json
 ```
 
-### Tag: package-2023-06
+### Tag: package-stable-2023-06-01
 
-These settings apply only when `--tag=package-2023-06` is specified on the command line.
+These settings apply only when `--tag=package-stable-2023-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+```yaml $(tag) == 'package-stable-2023-06-01'
 input-file:
   - stable/2023-06-01/search.json
 ```
-### Tag: 1.0
+### Tag: package-1.0-preview
 
-These settings apply only when `--tag=1.0` is specified on the command line.
+These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '1.0'
+``` yaml $(tag) == 'package-1.0-preview'
 input-file:
   - preview/1.0/search.json
 ```
 
-### Tag: 2.0-preview
+### Tag: package-retired-2021-11-01-preview
 
-These settings apply only when `--tag=2021-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2021-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == '2021-11-01-preview'
+``` yaml $(tag) == 'package-retired-2021-11-01-preview'
 input-file:
   - preview/2021-11-01-preview/geocoding.json
 ```
 
-### Tag: 2.1-preview
+### Tag: package-retired-2.1-preview
 
-These settings apply only when `--tag=2022-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2.1-preview` is specified on the command line.
 
-``` yaml $(tag) == '2022-02-01-preview'
+``` yaml $(tag) == 'package-retired-2.1-preview'
 input-file:
   - preview/2022-02-01-preview/geocoding.json
 ```
 
-### Tag: package-preview-2022-09
+### Tag: package-2022-09-01-preview
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
@@ -110,11 +110,11 @@ input-file:
   - preview/2022-09-01-preview/search.json
 ```
 
-### Tag: package-preview-2022-12
+### Tag: package-retired-preview-2022-12
 
-These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+These settings apply only when `--tag=package-retired-preview-2022-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-12'
+``` yaml $(tag) == 'package-retired-preview-2022-12'
 input-file:
   - preview/2022-12-01-preview/search.json
 ```
