@@ -111,7 +111,6 @@ union LabelFields {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model KeyListResult {
@@ -121,7 +120,7 @@ model KeyListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime]>;
+  `@nextLink`?: string;
 }
 
 @doc("Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.")
@@ -152,7 +151,6 @@ model Error {
   status?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model KeyValueListResult {
@@ -165,7 +163,7 @@ model KeyValueListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime, IfMatchHeader.ifMatch, IfNoneMatchHeader.ifNoneMatch]>;
+  `@nextLink`?: string;
 }
 
 @doc("A key-value pair representing application settings.")
@@ -201,7 +199,6 @@ model KeyValue {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a snapshot list request.")
 @pagedResult
 model SnapshotListResult {
@@ -211,7 +208,7 @@ model SnapshotListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken]>;
+  `@nextLink`?: string;
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
@@ -299,7 +296,6 @@ model SnapshotUpdateParameters {
   status?: SnapshotStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @doc("The result of a list request.")
 @pagedResult
 model LabelListResult {
@@ -309,7 +305,7 @@ model LabelListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  `@nextLink`?: Azure.Core.Legacy.parameterizedNextLink<[SyncTokenHeader.syncToken, AcceptDatetimeHeader.acceptDatetime]>;
+  `@nextLink`?: string
 }
 
 @doc("Labels are used to group key-values.")
