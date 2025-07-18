@@ -36,17 +36,11 @@
 |------|------------|-------|
 | `definitions.OperationListResult__deleted` | deleted | `{"type":"object","title":"Operations List.","description":"[Placeholder] Discription for page model"...` |
 
-### Changes for `OperationList`
+### Changes for `Azure.Core.uuid`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationList__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `Resource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Resource__added` | added | `{"type":"object","properties":{"id":{"type":"string","format":"arm-id","readOnly":true},"name":{"typ...` |
+| `definitions['Azure.Core.uuid__added']` | added | `{"type":"string","format":"uuid"}` |
 
 ### Changes for `title`
 
@@ -61,8 +55,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.FederatedIdentityCredentialsListResult.required__added` | added | `["value"]` |
-| `definitions.SystemAssignedIdentity.required__deleted` | deleted | `["location"]` |
-| `definitions.UserAssignedIdentitiesListResult.required__added` | added | `["value"]` |
 
 ### Changes for `x-ms-identifiers`
 
@@ -74,31 +66,9 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.FederatedIdentityCredentialsListResult.properties.value.readOnly__added` | added | `true` |
 | `definitions.Identity.properties.properties.readOnly__deleted` | deleted | `true` |
 | `definitions.SystemAssignedIdentity.properties.properties.readOnly__deleted` | deleted | `true` |
-
-### Changes for `location`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SystemAssignedIdentity.properties.location__deleted` | deleted | `{"type":"string","x-ms-mutability":["create","read"]}` |
-
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SystemAssignedIdentity.properties.tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"},"x-ms-mutability":["create","read","update...` |
-
-### Changes for `format`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SystemAssignedIdentityProperties.properties.clientId.format__deleted` | deleted | `uuid` |
-| `definitions.SystemAssignedIdentityProperties.properties.principalId.format__deleted` | deleted | `uuid` |
-| `definitions.SystemAssignedIdentityProperties.properties.tenantId.format__deleted` | deleted | `uuid` |
-| `definitions.UserAssignedIdentityProperties.properties.clientId.format__deleted` | deleted | `uuid` |
-| `definitions.UserAssignedIdentityProperties.properties.principalId.format__deleted` | deleted | `uuid` |
-| `definitions.UserAssignedIdentityProperties.properties.tenantId.format__deleted` | deleted | `uuid` |
 
 ### Changes for `modelAsExtensible`
 
@@ -110,10 +80,9 @@
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.IdentityUpdate.allOf[0].$ref` | `../../../../../common-types/resource-management/v4/types.json#/definitions/Resource` | `#/definitions/Resource` |
 | `paths['/{scope}/providers/Microsoft.ManagedIdentity/identities/default'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/Microsoft.ManagedIdentity/identities/default'].get['x-ms-examples'].MsiOperationsList.$ref` | `./examples/SystemAssignedIdentityGet.json` | `./examples/SystemAssignedIdentities_GetByScope.json` |
-| `paths['/providers/Microsoft.ManagedIdentity/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `#/definitions/OperationList` |
+| `paths['/providers/Microsoft.ManagedIdentity/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult` |
 | `paths['/providers/Microsoft.ManagedIdentity/operations'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities'].get['x-ms-examples'].IdentityListBySubscription.$ref` | `./examples/IdentityListBySubscription.json` | `./examples/UserAssignedIdentities_ListBySubscription.json` |
@@ -123,10 +92,8 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].delete['x-ms-examples'].IdentityDelete.$ref` | `./examples/IdentityDelete.json` | `./examples/UserAssignedIdentities_Delete.json` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].get['x-ms-examples'].IdentityGet.$ref` | `./examples/IdentityGet.json` | `./examples/UserAssignedIdentities_Get.json` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].patch.parameters[1].name` | `parameters` | `properties` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].patch.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].patch['x-ms-examples'].IdentityUpdate.$ref` | `./examples/IdentityUpdate.json` | `./examples/UserAssignedIdentities_Update.json` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].put.parameters[1].name` | `parameters` | `resource` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].put.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}'].put['x-ms-examples'].IdentityCreate.$ref` | `./examples/IdentityCreate.json` | `./examples/UserAssignedIdentities_CreateOrUpdate.json` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
@@ -135,7 +102,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].delete['x-ms-examples'].FederatedIdentityCredentialDelete.$ref` | `./examples/FederatedIdentityCredentialDelete.json` | `./examples/FederatedIdentityCredentials_Delete.json` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].get['x-ms-examples'].FederatedIdentityCredentialGet.$ref` | `./examples/FederatedIdentityCredentialGet.json` | `./examples/FederatedIdentityCredentials_Get.json` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].put.parameters[2].name` | `parameters` | `resource` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].put.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}'].put['x-ms-examples'].FederatedIdentityCredentialCreate.$ref` | `./examples/FederatedIdentityCredentialCreate.json` | `./examples/FederatedIdentityCredentials_CreateOrUpdate.json` |
 

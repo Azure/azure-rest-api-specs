@@ -34,7 +34,7 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/OperationListResult",
-                "__new": "#/definitions/OperationList"
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
               }
             }
           },
@@ -115,20 +115,6 @@
         }
       },
       "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "resource"
-              }
-            }
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -149,20 +135,6 @@
         }
       },
       "patch": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "properties"
-              }
-            }
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -247,23 +219,6 @@
         }
       },
       "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "resource"
-              }
-            }
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -399,52 +354,9 @@
         }
       }
     },
-    "OperationList__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Operation"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "Resource__added": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
+    "Azure.Core.uuid__added": {
+      "type": "string",
+      "format": "uuid"
     },
     "FederatedIdentityCredentialProperties": {
       "title__deleted": "Federated identity credential properties."
@@ -457,7 +369,8 @@
         "value": {
           "x-ms-identifiers__deleted": [
             "id"
-          ]
+          ],
+          "readOnly__added": true
         }
       }
     },
@@ -468,78 +381,19 @@
         }
       }
     },
-    "IdentityUpdate": {
-      "allOf": [
-        [
-          "~",
-          {
-            "$ref": {
-              "__old": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
-            }
-          }
-        ]
-      ]
-    },
     "SystemAssignedIdentity": {
-      "required__deleted": [
-        "location"
-      ],
       "properties": {
-        "location__deleted": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
         "properties": {
           "readOnly__deleted": true
         }
       }
     },
     "SystemAssignedIdentityProperties": {
-      "title__deleted": "System Assigned Identity properties.",
-      "properties": {
-        "tenantId": {
-          "format__deleted": "uuid"
-        },
-        "principalId": {
-          "format__deleted": "uuid"
-        },
-        "clientId": {
-          "format__deleted": "uuid"
-        }
-      }
-    },
-    "UserAssignedIdentitiesListResult": {
-      "required__added": [
-        "value"
-      ]
+      "title__deleted": "System Assigned Identity properties."
     },
     "UserAssignedIdentityProperties": {
       "title__deleted": "User Assigned Identity properties.",
       "properties": {
-        "tenantId": {
-          "format__deleted": "uuid"
-        },
-        "principalId": {
-          "format__deleted": "uuid"
-        },
-        "clientId": {
-          "format__deleted": "uuid"
-        },
         "isolationScope": {
           "x-ms-enum": {
             "modelAsExtensible__deleted": true

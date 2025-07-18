@@ -106,7 +106,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -271,7 +271,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "Parameters to create or update the identity",
             "required": true,
@@ -330,7 +330,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "Parameters to update the identity",
             "required": true,
@@ -554,7 +554,7 @@
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "Parameters to create or update the federated identity credential.",
             "required": true,
@@ -644,6 +644,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "FederatedIdentityCredential": {
       "type": "object",
       "description": "Describes a federated identity credential.",
@@ -696,7 +701,8 @@
           "description": "The FederatedIdentityCredential items on this page",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -757,7 +763,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ]
     },
@@ -783,57 +789,6 @@
         ]
       }
     },
-    "OperationList": {
-      "type": "object",
-      "description": "The paginated list of connected cluster API operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of connected cluster API operations.",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Operation"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to fetch the next page of connected cluster API operations."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
     "SystemAssignedIdentity": {
       "type": "object",
       "description": "Describes a system assigned identity resource.",
@@ -842,8 +797,29 @@
           "$ref": "#/definitions/SystemAssignedIdentityProperties",
           "description": "The properties associated with the identity.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
@@ -855,17 +831,17 @@
       "description": "The properties associated with the system assigned identity.",
       "properties": {
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the tenant which the identity belongs to.",
           "readOnly": true
         },
         "principalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the service principal object associated with the created identity.",
           "readOnly": true
         },
         "clientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI.",
           "readOnly": true
         },
@@ -892,27 +868,24 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "UserAssignedIdentityProperties": {
       "type": "object",
       "description": "The properties associated with the user assigned identity.",
       "properties": {
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the tenant which the identity belongs to.",
           "readOnly": true
         },
         "principalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the service principal object associated with the created identity.",
           "readOnly": true
         },
         "clientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI.",
           "readOnly": true
         },

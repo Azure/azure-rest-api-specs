@@ -16,11 +16,11 @@ namespace Microsoft.ManagedIdentity;
  * Enum to configure regional restrictions on identity assignment, as necessary.
  */
 union IsolationScope {
-  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Regional: "Regional",
+  string,
 }
 
 /**
@@ -32,54 +32,26 @@ model SystemAssignedIdentityProperties {
    * The id of the tenant which the identity belongs to.
    */
   @visibility(Lifecycle.Read)
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * The id of the service principal object associated with the created identity.
    */
   @visibility(Lifecycle.Read)
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   /**
    * The id of the app associated with the identity. This is a random generated UUID by MSI.
    */
   @visibility(Lifecycle.Read)
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 
   /**
    *  The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials.
    */
   @visibility(Lifecycle.Read)
   clientSecretUrl?: string;
-}
 
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**
@@ -119,10 +91,23 @@ model CloudErrorBody {
   details?: CloudErrorBody[];
 }
 
+@Azure.Core.pagedResult
+@friendlyName("Paged{name}", Resource)
+@doc("Paged collection of {name} items", Resource)
+model Page<Resource extends TypeSpec.Reflection.Model> {
+  @doc("The {name} items on this page", Resource)
+  @Azure.Core.items
+  value?: Resource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
+}
+
 /**
  * Values returned by the List operation.
  */
-model UserAssignedIdentitiesListResult is Azure.Core.Page<Identity>;
+model UserAssignedIdentitiesListResult is Page<Identity>;
 
 /**
  * The properties associated with the user assigned identity.
@@ -133,19 +118,19 @@ model UserAssignedIdentityProperties {
    * The id of the tenant which the identity belongs to.
    */
   @visibility(Lifecycle.Read)
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * The id of the service principal object associated with the created identity.
    */
   @visibility(Lifecycle.Read)
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   /**
    * The id of the app associated with the identity. This is a random generated UUID by MSI.
    */
   @visibility(Lifecycle.Read)
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 
   /**
    * Enum to configure regional restrictions on identity assignment, as necessary.
@@ -158,7 +143,7 @@ model UserAssignedIdentityProperties {
  * Describes an identity resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model IdentityUpdate extends Resource {
+model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The geo-location where the resource lives
    */
@@ -186,6 +171,8 @@ model IdentityUpdate extends Resource {
  */
 model FederatedIdentityCredentialsListResult
   is Azure.Core.Page<FederatedIdentityCredential>;
+
+@@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
 
 /**
  * The properties associated with a federated identity credential.

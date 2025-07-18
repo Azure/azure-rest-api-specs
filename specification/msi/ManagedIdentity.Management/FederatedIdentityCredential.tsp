@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Identity.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -65,6 +67,8 @@ interface FederatedIdentityCredentials {
     Response = FederatedIdentityCredentialsListResult
   >;
 }
+
+@@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource, "parameters");
 
 @@doc(FederatedIdentityCredential.name,
   "The name of the federated identity credential resource."

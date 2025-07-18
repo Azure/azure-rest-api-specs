@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -75,6 +77,9 @@ interface Identities {
     Response = UserAssignedIdentitiesListResult
   >;
 }
+
+@@clientName(Identities.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Identities.update::parameters.properties, "parameters");
 
 @@doc(Identity.name, "The name of the identity resource.");
 @@doc(Identity.properties, "The properties associated with the identity.");

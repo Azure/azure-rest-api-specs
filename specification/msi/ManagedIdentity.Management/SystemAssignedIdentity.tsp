@@ -22,6 +22,12 @@ model SystemAssignedIdentity
     SegmentName = "identities",
     NamePattern = ""
   >;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
 }
 
 @armResourceOperations

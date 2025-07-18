@@ -53,7 +53,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -165,7 +165,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -209,7 +209,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -370,7 +370,7 @@
             "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -444,6 +444,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
     "FederatedIdentityCredential": {
       "type": "object",
       "properties": {
@@ -490,7 +494,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -545,56 +550,9 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ]
-    },
-    "OperationList": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Operation"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
     },
     "SystemAssignedIdentity": {
       "type": "object",
@@ -602,8 +560,29 @@
         "properties": {
           "$ref": "#/definitions/SystemAssignedIdentityProperties",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
@@ -615,14 +594,17 @@
       "properties": {
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "clientId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "clientSecretUrl": {
@@ -647,24 +629,24 @@
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "UserAssignedIdentityProperties": {
       "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "principalId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "clientId": {
           "type": "string",
+          "format": "uuid",
           "readOnly": true
         },
         "isolationScope": {
