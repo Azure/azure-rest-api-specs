@@ -36,6 +36,7 @@ interface StartMenuItems {
    * List start menu items in the given application group.
    */
   @get
+  @list
   @action("startMenuItems")
   list is Azure.ResourceManager.ArmResourceActionSync<
     ApplicationGroup,

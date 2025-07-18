@@ -179,6 +179,7 @@ interface Labs {
   /**
    * List disk images available for custom image creation.
    */
+  @list
   listVhds is ArmResourceActionSync<Lab, void, ArmResponse<LabVhdList>>;
 }
 

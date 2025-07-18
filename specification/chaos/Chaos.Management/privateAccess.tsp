@@ -71,6 +71,7 @@ interface PrivateAccesses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
   @get
+  @list
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,
     void,

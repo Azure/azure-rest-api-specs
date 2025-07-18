@@ -73,6 +73,7 @@ interface UserSessions {
   >;
 
   @get
+  @list
   @action("userSessions")
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,

@@ -347,6 +347,7 @@ namespace Azure.ResourceManager.Legacy {
      */
     #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
     @get
+    @list
     @autoRoute
     @listsResource(Resource)
     @segmentOf(Resource)

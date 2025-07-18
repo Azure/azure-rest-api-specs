@@ -274,6 +274,7 @@ interface Schedules {
    * Lists all applicable schedules
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @list
   listApplicable is ScheduleOperationGroupOps.ActionSync<
     Schedule,
     void,

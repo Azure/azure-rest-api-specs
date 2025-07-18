@@ -143,6 +143,7 @@ interface ScheduledActions {
   @listsResource(ScheduledActionResource)
   @armResourceList(ScheduledActionResource)
   @get
+  @list
   @doc("List resources attached to Scheduled Actions")
   listResources(
     ...ResourceInstanceParameters<ScheduledActionResource>,

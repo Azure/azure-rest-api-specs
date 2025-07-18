@@ -35,6 +35,7 @@ interface AppAttachPackageInfo {
    */
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("importAppAttachPackageInfo")
+  @list
   `import` is ArmResourceActionSync<
     HostPool,
     Request = {
@@ -52,6 +53,7 @@ interface MSIXImages {
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  @list
   @action("expandMsixImage")
   expand is ArmResourceActionSync<
     HostPool,
@@ -69,6 +71,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
+  @list
   listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
     HostPool,
     void,
@@ -99,6 +102,7 @@ interface PrivateLinkResources {
    */
   @action("privateLinkResources")
   @get
+  @list
   listByWorkspace is Azure.ResourceManager.ArmResourceActionSync<
     Workspace,
     void,
