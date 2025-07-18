@@ -105,12 +105,10 @@ export async function evaluateImpact(
 
   // Has to run in PR context.
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
-  // const {
-  //   versioningReviewRequiredLabelShouldBePresent,
-  //   breakingChangeReviewRequiredLabelShouldBePresent,
-  // } = await processBreakingChangeLabels(context, labelContext);
-  const versioningReviewRequiredLabelShouldBePresent = false;
-  const breakingChangeReviewRequiredLabelShouldBePresent = false;
+  const {
+    versioningReviewRequiredLabelShouldBePresent,
+    breakingChangeReviewRequiredLabelShouldBePresent,
+  } = await processBreakingChangeLabels(context, labelContext);
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
@@ -502,9 +500,9 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
     }
   }
 
-  genChanges("SwaggerFile", await ctx.getSwaggerDiffs());
-  genChanges("TypeSpecFile", await ctx.getTypeSpecDiffs());
-  genChanges("ExampleFile", await ctx.getExampleDiffs());
+  genChanges("SwaggerFile", ctx.getSwaggerDiffs());
+  genChanges("TypeSpecFile", ctx.getTypeSpecDiffs());
+  genChanges("ExampleFile", ctx.getExampleDiffs());
   genReadmeChanges(await ctx.getReadmeDiffs());
 
   console.log("RETURN definition getPRChanges");

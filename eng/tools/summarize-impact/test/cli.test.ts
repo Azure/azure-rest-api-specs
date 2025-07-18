@@ -4,7 +4,7 @@ import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { PRContext, LabelContext } from "../src/types.js";
-import { evaluateImpact } from "../src/runner.js";
+import { evaluateImpact } from "../src/impact.js";
 
 // const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
 

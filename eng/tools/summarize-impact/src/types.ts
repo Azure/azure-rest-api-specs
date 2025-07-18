@@ -3,7 +3,6 @@ import * as amd from "@azure/openapi-markdown";
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as fs from "fs";
 
-// import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import {
   swagger,
@@ -11,7 +10,7 @@ import {
   example,
   readme,
   specification,
-} from "@azure-tools/specs-shared/changed-files"; //readme,
+} from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 export type FileTypes = "SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile";
@@ -357,7 +356,7 @@ export class PRContext {
     this.owner = options.owner;
   }
 
-  async getChangedFiles(): Promise<string[]> {
+  getChangedFiles(): string[] {
     if (!this.fileList) {
       return [];
     }
@@ -371,64 +370,64 @@ export class PRContext {
 
   // todo get rid of async here not necessary
   // todo store the results
-  async getTypeSpecDiffs(): Promise<DiffResult<string>> {
+  getTypeSpecDiffs(): DiffResult<string> {
     if (!this.fileList) {
-      return Promise.resolve({
+      return {
         additions: [],
         deletions: [],
         changes: [],
-      });
+      };
     }
 
     const additions = this.fileList.additions.filter((file) => typespec(file));
     const deletions = this.fileList.deletions.filter((file) => typespec(file));
     const changes = this.fileList.modifications.filter((file) => typespec(file));
 
-    return Promise.resolve({
+    return {
       additions,
       deletions,
       changes,
-    });
+    };
   }
 
-  async getSwaggerDiffs(): Promise<DiffResult<string>> {
+  getSwaggerDiffs(): DiffResult<string> {
     if (!this.fileList) {
-      return Promise.resolve({
+      return {
         additions: [],
         deletions: [],
         changes: [],
-      });
+      };
     }
 
     const additions = this.fileList.additions.filter((file) => swagger(file));
     const deletions = this.fileList.deletions.filter((file) => swagger(file));
     const changes = this.fileList.modifications.filter((file) => swagger(file));
 
-    return Promise.resolve({
+    return {
       additions,
       deletions,
       changes,
-    });
+    };
   }
 
-  async getExampleDiffs(): Promise<DiffResult<string>> {
+  getExampleDiffs(): DiffResult<string> {
     if (!this.fileList) {
-      return Promise.resolve({
+      return {
         additions: [],
         deletions: [],
         changes: [],
-      });
+      };
     }
 
     const additions = this.fileList.additions.filter((file) => example(file));
     const deletions = this.fileList.deletions.filter((file) => example(file));
     const changes = this.fileList.modifications.filter((file) => example(file));
 
-    return Promise.resolve({
+    return {
       additions,
       deletions,
       changes,
-    });
+    };
   }
 
   async getTagsFromReadme(readmePath: string): Promise<string[]> {
@@ -436,8 +435,8 @@ export class PRContext {
     return [...tags.values()].map((tag) => tag.name);
   }
 
-  async getChangingConfigureFiles(): Promise<string[]> {
-    console.log("ENTER definition getChangingConfigureFiles");
+  async getPossibleParentConfigurations(): Promise<string[]> {
+    console.log("ENTER definition getPossibleParentConfigurations");
     const changedFiles = await this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
     const readmes = changedFiles.filter((f) => readme(f));
@@ -465,11 +464,13 @@ export class PRContext {
           dir = dirname(dir);
         }
       });
-    console.log("RETURN definition getChangingConfigureFiles");
+    console.log("RETURN definition getPossibleParentConfigurations");
     return readmes;
   }
 
   getAllTags(readMeContent: string): string[] {
+    // todo: we should refactor this to use the spec model, but I haven't had the the time to explicitly
+    // diff what oad does does here, so I'm leaving it alone for now until I can build some strong unit tests around this.
     const cmd = parseMarkdown(readMeContent);
     const allTags = new amd.ReadMeManipulator(
       { error: (_msg: string) => {} },
@@ -479,16 +480,17 @@ export class PRContext {
   }
 
   async getInputFiles(readMeContent: string, tag: string) {
+    // todo: we should refactor this to use spec model, but I haven't had time to isolate exactly what
+    // openapi-markdown is doing here, so I'm just going to use the same logic for now
     const cmd = parseMarkdown(readMeContent);
     return amd.getInputFilesForTag(cmd.markDown, tag);
   }
 
   async getChangingTags(): Promise<TagDiff[]> {
-    // this gets all of the readme diffs. no matter if it's removal
-    // const allAffectedReadmes: string[] = await this.pr.getChangingConfigureFiles()
-    // this is retrieving _all_ files from additions, renames, modifications, and deletions.
-    // then we will check if the file is a readme.
-    const allAffectedReadmes: string[] = await this.getChangingConfigureFiles();
+    // we are retrieving all the readme changes, no matter if they're additions, deletions, etc
+    // Additionally, we're also retrieving all the readme files that may be affected by the changes in the PR, which means
+    // climbing up the directory tree until we find a readme.md file if necessary.
+    const allAffectedReadmes: string[] = await this.getPossibleParentConfigurations();
     console.log(`all affected readme are:`);
     console.log(JSON.stringify(allAffectedReadmes, null, 2));
     const Diffs: TagDiff[] = [];
