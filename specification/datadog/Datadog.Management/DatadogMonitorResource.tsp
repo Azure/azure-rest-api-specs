@@ -79,7 +79,7 @@ interface DatadogMonitorResources {
     DatadogMonitorResource,
     PatchModel = DatadogMonitorResourceUpdateParameters,
     Response = ArmResponse<DatadogMonitorResource> | (ArmResourceCreatedResponse<DatadogMonitorResource> &
-      ArmLroLocationHeader),
+      ArmLroLocationHeader<FinalResult = DatadogMonitorResource>),
     OptionalRequestBody = true
   >;
 
