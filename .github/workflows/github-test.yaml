@@ -40,8 +40,6 @@ jobs:
         run: |
           set -x
 
-          echo "::echo::on"
-
           # Copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
           echo "::add-matcher::.github/matchers/actionlint.json"
 
@@ -53,6 +51,8 @@ jobs:
 
           # Run tool, ignoring noisy output about missing pyflakes
           ./actionlint --color --verbose |& grep -v pyflakes
+        # must run from repo root, so paths in error messages can be used by problem matcher
+        working-directory: .
 
       - if: ${{ matrix.folder == '.github' }}
         name: Setup Node 20 and install runtime deps
