@@ -50,6 +50,22 @@ alias CertificateNameQuery2 = {
   `certificate.name`?: string;
 };
 
+alias CertificateNameQuery3 = {
+  /**
+   * Time the certificate is created.
+   */
+  @query("certificate.created")
+  certificateCreated?: utcDateTime;
+};
+
+alias CertificateNameQuery4 = {
+  /**
+   * Certificate last updated time.
+   */
+  @query("certificate.lastUpdated")
+  certificateLastUpdated?: utcDateTime;
+};
+
 @armResourceOperations
 interface CertificateResponses {
   /**
@@ -61,9 +77,8 @@ interface CertificateResponses {
       /**
        * ETag of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      `If-Match`?: string;
+      ifMatch?: string;
     },
     Error = ErrorDetails
   >;
@@ -78,9 +93,8 @@ interface CertificateResponses {
       /**
        * ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      `If-Match`?: string;
+      ifMatch?: string;
     },
     Response = ArmResourceUpdatedResponse<CertificateResponse>,
     Error = ErrorDetails
@@ -95,60 +109,43 @@ interface CertificateResponses {
       /**
        * ETag of the certificate
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      `If-Match`: string;
+      ifMatch: string;
 
       ...CertificateNameQuery2;
 
       /**
        * Raw data within the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.rawBytes")
-      `certificate.rawBytes`?: bytes;
+      certificateRawBytes?: bytes;
 
       /**
        * Indicates if certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.isVerified")
-      `certificate.isVerified`?: boolean;
+      certificateIsVerified?: boolean;
 
       /**
        * A description that mentions the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.purpose")
-      `certificate.purpose`?: CertificatePurpose;
+      certificatePurpose?: CertificatePurpose;
 
-      /**
-       * Time the certificate is created.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.created")
-      `certificate.created`?: utcDateTime;
-
-      /**
-       * Time the certificate is last updated.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.lastUpdated")
-      `certificate.lastUpdated`?: utcDateTime;
+      ...CertificateNameQuery3;
+      ...CertificateNameQuery4;
 
       /**
        * Indicates if the certificate contains a private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.hasPrivateKey")
-      `certificate.hasPrivateKey`?: boolean;
+      certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.nonce")
-      `certificate.nonce`?: string;
+      certificateNonce?: string;
     },
     Error = ErrorDetails
   >;
@@ -173,60 +170,43 @@ interface CertificateResponses {
       /**
        * ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      `If-Match`: string;
+      ifMatch: string;
 
       ...CertificateNameQuery1;
 
       /**
        * Raw data of certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.rawBytes")
-      `certificate.rawBytes`?: bytes;
+      certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.isVerified")
-      `certificate.isVerified`?: boolean;
+      certificateIsVerified?: boolean;
 
       /**
        * Description mentioning the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.purpose")
-      `certificate.purpose`?: CertificatePurpose;
+      certificatePurpose?: CertificatePurpose;
 
-      /**
-       * Certificate creation time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.created")
-      `certificate.created`?: utcDateTime;
-
-      /**
-       * Certificate last updated time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.lastUpdated")
-      `certificate.lastUpdated`?: utcDateTime;
+      ...CertificateNameQuery3;
+      ...CertificateNameQuery4;
 
       /**
        * Indicates if the certificate contains private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.hasPrivateKey")
-      `certificate.hasPrivateKey`?: boolean;
+      certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.nonce")
-      `certificate.nonce`?: string;
+      certificateNonce?: string;
     },
     Error = ErrorDetails
   >;
@@ -243,60 +223,43 @@ interface CertificateResponses {
       /**
        * ETag of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-      `If-Match`: string;
+      ifMatch: string;
 
       ...CertificateNameQuery1;
 
       /**
        * Raw data of certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.rawBytes")
-      `certificate.rawBytes`?: bytes;
+      certificateRawBytes?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.isVerified")
-      `certificate.isVerified`?: boolean;
+      certificateIsVerified?: boolean;
 
       /**
        * Describe the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.purpose")
-      `certificate.purpose`?: CertificatePurpose;
+      certificatePurpose?: CertificatePurpose;
 
-      /**
-       * Certificate creation time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.created")
-      `certificate.created`?: utcDateTime;
-
-      /**
-       * Certificate last updated time.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @query("certificate.lastUpdated")
-      `certificate.lastUpdated`?: utcDateTime;
+      ...CertificateNameQuery3;
+      ...CertificateNameQuery4;
 
       /**
        * Indicates if the certificate contains private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.hasPrivateKey")
-      `certificate.hasPrivateKey`?: boolean;
+      certificateHasPrivateKey?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("certificate.nonce")
-      `certificate.nonce`?: string;
+      certificateNonce?: string;
     },
     Error = ErrorDetails
   >;
