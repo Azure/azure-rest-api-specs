@@ -29,6 +29,7 @@ interface Offerings {
    */
   @autoRoute
   @get
+  @list
   @action("offerings")
   list is ArmProviderActionSync<
     Response = OfferingsListResult,

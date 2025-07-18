@@ -62,6 +62,7 @@ interface ListTenantConfigurationViolationsOperations {
   @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
   @armResourceCollectionAction
   @post
+  @list
   @operationId("ListTenantConfigurationViolations_List")
   list(...ApiVersionParameter): ArmResponse<ViolationsList> | ErrorResponse;
 }
