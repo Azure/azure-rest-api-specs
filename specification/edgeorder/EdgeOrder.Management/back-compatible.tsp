@@ -59,26 +59,32 @@ using Microsoft.EdgeOrder;
 // These ensure consistent operationId generation in the output
 
 // AddressResources interface operations
-@@clientLocation(AddressResources.get, "Addresses");
-@@clientLocation(AddressResources.create, "Addresses");
-@@clientLocation(AddressResources.update, "Addresses");
-@@clientLocation(AddressResources.delete, "Addresses");
-@@clientLocation(AddressResources.listByResourceGroup, "Addresses");
-@@clientLocation(AddressResources.listBySubscription, "Addresses");
+@@clientLocation(AddressResources.get, "Addresses", "!csharp");
+@@clientLocation(AddressResources.create, "Addresses", "!csharp");
+@@clientLocation(AddressResources.update, "Addresses", "!csharp");
+@@clientLocation(AddressResources.delete, "Addresses", "!csharp");
+@@clientLocation(AddressResources.listByResourceGroup, "Addresses", "!csharp");
+@@clientLocation(AddressResources.listBySubscription, "Addresses", "!csharp");
 
 // OrderItemResources interface operations
-@@clientLocation(OrderItemResources.get, "OrderItems");
-@@clientLocation(OrderItemResources.create, "OrderItems");
-@@clientLocation(OrderItemResources.update, "OrderItems");
-@@clientLocation(OrderItemResources.delete, "OrderItems");
-@@clientLocation(OrderItemResources.listByResourceGroup, "OrderItems");
-@@clientLocation(OrderItemResources.listBySubscription, "OrderItems");
-@@clientLocation(OrderItemResources.cancel, "OrderItems");
-@@clientLocation(OrderItemResources.returnOrderItem, "OrderItems");
+@@clientLocation(OrderItemResources.get, "OrderItems", "!csharp");
+@@clientLocation(OrderItemResources.create, "OrderItems", "!csharp");
+@@clientLocation(OrderItemResources.update, "OrderItems", "!csharp");
+@@clientLocation(OrderItemResources.delete, "OrderItems", "!csharp");
+@@clientLocation(OrderItemResources.listByResourceGroup,
+  "OrderItems",
+  "!csharp"
+);
+@@clientLocation(OrderItemResources.listBySubscription,
+  "OrderItems",
+  "!csharp"
+);
+@@clientLocation(OrderItemResources.cancel, "OrderItems", "!csharp");
+@@clientLocation(OrderItemResources.returnOrderItem, "OrderItems", "!csharp");
 @@clientName(OrderItemResources.returnOrderItem, "Return");
 
 // OrderResources interface operations
-@@clientLocation(OrderResources.get, "Orders");
+@@clientLocation(OrderResources.get, "Orders", "!csharp");
 
 // ProductsAndConfigurationsOperationGroup interface operations
 @@clientLocation(ProductsAndConfigurationsOperationGroup.listConfigurations,
@@ -94,3 +100,38 @@ using Microsoft.EdgeOrder;
 // OrdersOperationGroup interface operations
 @@clientLocation(OrdersOperationGroup.listBySubscription, "Orders");
 @@clientLocation(OrdersOperationGroup.listByResourceGroup, "Orders");
+
+//SDKValidation
+@@clientName(AddressResource, "EdgeOrderAddress", "csharp");
+@@clientName(OrderItemResource, "EdgeOrderItem", "csharp");
+@@clientName(OrderResource, "EdgeOrder", "csharp");
+@@clientName(ContactDetails, "EdgeOrderAddressContactDetails", "csharp");
+@@clientName(AddressDetails, "EdgeOrderItemAddressDetails", "csharp");
+@@clientName(AddressProperties, "EdgeOrderItemAddressProperties", "csharp");
+@@clientName(CancellationReason, "EdgeOrderItemCancellationReason", "csharp");
+@@clientName(ReturnOrderItemDetails, "EdgeOrderItemReturnContent", "csharp");
+@@clientName(Configuration, "EdgeOrderConfiguration", "csharp");
+@@clientName(BasicInformation, "EdgeOrderProduct", "csharp");
+@@clientName(BillingMeterDetails,
+  "EdgeOrderProductBillingMeterDetails",
+  "csharp"
+);
+@@clientName(CostInformation, "EdgeOrderProductCostInformation", "csharp");
+@@clientName(DeviceDetails, "EdgeOrderProductDeviceDetails", "csharp");
+@@clientName(ImageInformation, "EdgeOrderProductImageInformation", "csharp");
+@@clientName(ImageType, "EdgeOrderProductImageType", "csharp");
+@@clientName(MeterDetails, "EdgeOrderProductMeterDetails", "csharp");
+@@clientName(ShippingAddress, "EdgeOrderShippingAddress", "csharp");
+@@clientName(StageDetails, "EdgeOrderStageDetails", "csharp");
+@@clientName(Preferences, "OrderItemPreferences", "csharp");
+@@clientName(AvailabilityInformation,
+  "ProductAvailabilityInformation",
+  "csharp"
+);
+@@clientName(Description, "ProductDescription", "csharp");
+@@clientName(Dimensions, "ProductDimensions", "csharp");
+@@clientName(DisplayInfo, "ProductDisplayInfo", "csharp");
+@@clientName(Link, "ProductLink", "csharp");
+@@clientName(Specification, "ProductSpecification", "csharp");
+@@clientName(OrderItemDetailsUpdateParameter, "OrderItemDetailsUpdateContent", "csharp");
+@@clientName(OkResponse, "EdgeOrderOkResponse", "csharp");
