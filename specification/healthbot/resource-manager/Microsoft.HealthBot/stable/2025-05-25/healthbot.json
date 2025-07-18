@@ -595,7 +595,6 @@
           "readOnly": true
         },
         "info": {
-          "type": "object",
           "description": "The additional info.",
           "readOnly": true
         }
@@ -777,8 +776,11 @@
           "description": "The identity type. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the Azure Health Bot"
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentityMap",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },
@@ -833,7 +835,6 @@
           "description": "Origin of the operation"
         },
         "properties": {
-          "type": "object",
           "description": "Additional properties."
         }
       }
@@ -916,12 +917,6 @@
           "description": "The client ID of user assigned identity.",
           "readOnly": true
         }
-      }
-    },
-    "UserAssignedIdentityMap": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedIdentity"
       }
     }
   },

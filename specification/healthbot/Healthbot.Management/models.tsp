@@ -89,7 +89,7 @@ model Identity {
    *
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: UserAssignedIdentityMap;
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**
@@ -308,9 +308,9 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  info?: {};
+  info?: unknown;
 }
 
 /**
@@ -423,8 +423,8 @@ model OperationDetail {
    * Additional properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: unknown;
 }
 
 /**
