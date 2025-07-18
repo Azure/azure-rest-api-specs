@@ -44,7 +44,7 @@ jobs:
           docker run --rm \
             --network none \
             -v '${{ github.workspace }}':/github/workspace \
-            --workdir /github/workspace
+            --workdir /github/workspace \
             rhysd/actionlint:1.7.7 \
             -color -verbose
         # must run from repo root, so paths in error messages can be used by problem matcher
