@@ -14,6 +14,7 @@ namespace Microsoft.Quota;
 /**
  * This represents a Azure subscriptionId that is associated with a GroupQuotasEntity.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(GroupQuotasEntity)
 model GroupQuotaSubscriptionId
   is Azure.ResourceManager.ProxyResource<GroupQuotaSubscriptionIdProperties> {
@@ -30,18 +31,22 @@ interface GroupQuotaSubscriptionIds {
   /**
    * Returns the subscriptionIds along with its provisioning state for being associated with the GroupQuota. If the subscription is not a member of GroupQuota, it will return 404, else 200.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptions_Get")
-  get is Extension.Read<Extension.ManagementGroup<"managementGroupId">, GroupQuotaSubscriptionId>;
+  get is Extension.Read<
+    Extension.ManagementGroup<"managementGroupId">,
+    GroupQuotaSubscriptionId
+  >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Adds a subscription to GroupQuotas. The subscriptions will be validated based on the additionalAttributes defined in the GroupQuota. The additionalAttributes works as filter for the subscriptions, which can be included in the GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptions_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrUpdateAsync<
-  Extension.ManagementGroup<"managementGroupId">,
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionId,
     Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
       LROResponse,
@@ -53,31 +58,39 @@ interface GroupQuotaSubscriptionIds {
   /**
    * Updates the GroupQuotas with the subscription to add to the subscriptions list. The subscriptions will be validated if additionalAttributes are defined in the GroupQuota. The request's TenantId is validated against the subscription's TenantId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("GroupQuotaSubscriptions_Update")
-  update is Extension.CustomPatchAsync<Extension.ManagementGroup<"managementGroupId">, GroupQuotaSubscriptionId, PatchModel = {}>;
+  update is Extension.CustomPatchAsync<
+    Extension.ManagementGroup<"managementGroupId">,
+    GroupQuotaSubscriptionId
+  >;
 
   /**
    * Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptions_Delete")
-  delete is Extension.DeleteWithoutOkAsync<Extension.ManagementGroup<"managementGroupId">, GroupQuotaSubscriptionId>;
+  delete is Extension.DeleteWithoutOkAsync<
+    Extension.ManagementGroup<"managementGroupId">,
+    GroupQuotaSubscriptionId
+  >;
 
   /**
    * Returns a list of the subscriptionIds associated with the GroupQuotas.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptions_List")
   list is Extension.ListByTarget<
-  Extension.ManagementGroup<"managementGroupId">,
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionId,
     Response = ArmResponse<GroupQuotaSubscriptionIdList>
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(GroupQuotaSubscriptionId.name, "uuid");
 @@doc(GroupQuotaSubscriptionId.name,
   "The ID of the target subscription. The value must be an UUID."

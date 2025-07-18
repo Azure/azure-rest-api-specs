@@ -31,8 +31,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity.
+ * Microsoft Azure Quota Resource Provider
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Azure Quota Extension API" })
 @versioned(Versions)
@@ -50,3 +51,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_03_01: "2025-03-01",
 }
+
+@armResourceOperations
+interface QuotaOperation
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = ArmResponse<OperationList>,
+      Error = ExceptionResponse
+    > {}

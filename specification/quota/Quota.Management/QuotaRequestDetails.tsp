@@ -13,6 +13,7 @@ namespace Microsoft.Quota;
 /**
  * List of quota requests with details.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model QuotaRequestDetails
   is Azure.ResourceManager.ExtensionResource<QuotaRequestProperties> {
@@ -29,13 +30,17 @@ interface QuotaRequestStatus {
   /**
    * Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.
    */
-  get is Extension.Read<Extension.ScopeParameter, QuotaRequestDetails>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    QuotaRequestDetails,
+    Error = ExceptionResponse
+  >;
 
   /**
    * For the specified scope, get the current quota requests for a one year period ending at the time is made. Use the **oData** filter to select quota requests.
    */
   list is Extension.ListByTarget<
-  Extension.ScopeParameter,
+    Extension.ScopeParameter,
     QuotaRequestDetails,
     Parameters = {
       /**
@@ -63,7 +68,8 @@ interface QuotaRequestStatus {
       @query("$skiptoken")
       $skiptoken?: string;
     },
-    Response = ArmResponse<QuotaRequestDetailsList>
+    Response = ArmResponse<QuotaRequestDetailsList>,
+    Error = ExceptionResponse
   >;
 }
 

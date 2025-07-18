@@ -13,6 +13,7 @@ namespace Microsoft.Quota;
 /**
  * Resource usage.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model CurrentUsagesBase
   is Azure.ResourceManager.ExtensionResource<UsagesProperties> {
@@ -29,19 +30,37 @@ interface CurrentUsagesBases {
   /**
    * Get the current usage of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Usages_Get")
-  get is Extension.Read<Extension.ScopeParameter, CurrentUsagesBase>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    CurrentUsagesBase,
+    Response = ArmResponse<CurrentUsagesBase> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    },
+    Error = ExceptionResponse
+  >;
 
   /**
    * Get a list of current usage for all resources for the scope specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Usages_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentUsagesBase,
-    Response = ArmResponse<UsagesLimits>
+    Response = ArmResponse<UsagesLimits> & {
+      /**
+       * Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    },
+    Error = ExceptionResponse
   >;
 }
 

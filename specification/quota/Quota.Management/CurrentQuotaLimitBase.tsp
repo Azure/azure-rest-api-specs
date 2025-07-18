@@ -13,6 +13,7 @@ namespace Microsoft.Quota;
 /**
  * Quota limit.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model CurrentQuotaLimitBase
   is Azure.ResourceManager.ExtensionResource<QuotaProperties> {
@@ -24,27 +25,42 @@ model CurrentQuotaLimitBase
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface CurrentQuotaLimitBases {
   /**
    * Get the quota limit of a resource. The response can be used to determine the remaining quota to calculate a new quota limit that can be submitted with a PUT request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Quota_Get")
-  get is Extension.Read<Extension.ScopeParameter, CurrentQuotaLimitBase>;
+  get is Extension.Read<
+    Extension.ScopeParameter,
+    CurrentQuotaLimitBase,
+    Response = ArmResponse<CurrentQuotaLimitBase> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    },
+    Error = ExceptionResponse
+  >;
 
   /**
    * Create or update the quota limit for the specified resource with the requested value. To update the quota, follow these steps:
    * 1. Use the GET operation for quotas and usages to determine how much quota remains for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).
    * 2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Quota_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response = ArmResourceUpdatedResponse<CurrentQuotaLimitBase> | ArmAcceptedLroResponse
+    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse,
+    Error = ExceptionResponse
   >;
 
   /**
@@ -52,24 +68,34 @@ interface CurrentQuotaLimitBases {
    * 1. Use the Usages-GET and Quota-GET operations to determine the remaining quota for the specific resource and to calculate the new quota limit. These steps are detailed in [this example](https://techcommunity.microsoft.com/t5/azure-governance-and-management/using-the-new-quota-rest-api/ba-p/2183670).
    * 2. Use this PUT operation to update the quota limit. Please check the URI in location header for the detailed status of the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Quota_Update")
   update is Extension.CustomPatchAsync<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    PatchModel = CurrentQuotaLimitBase
+    PatchModel = CurrentQuotaLimitBase,
+    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
+    Error = ExceptionResponse
   >;
 
   /**
    * Get a list of current quota limits of all resources for the specified scope. The response from this GET operation can be leveraged to submit requests to update a quota.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Quota_List")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response = ArmResponse<QuotaLimits>
+    Response = ArmResponse<QuotaLimits> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    },
+    Error = ExceptionResponse
   >;
 }
 
