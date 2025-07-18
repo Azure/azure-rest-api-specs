@@ -13,7 +13,7 @@ const SUPPORTED_EVENTS = ["workflow_run", "check_run", "check_suite"];
  * Given the name of a completed check run name and a completed workflow, verify
  * that both have the same conclusion. If conclusions are different, fail the
  * action.
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export async function verifyRunStatus({ github, context, core }) {
   const checkRunName = process.env.CHECK_RUN_NAME;
@@ -53,9 +53,9 @@ export async function verifyRunStatus({ github, context, core }) {
 
 /**
  * @param {Object} params
- * @param {import('github-script').AsyncFunctionArguments["github"]} params.github
- * @param {import('github-script').AsyncFunctionArguments["context"]} params.context
- * @param {import('github-script').AsyncFunctionArguments["core"]} params.core
+ * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} params.github
+ * @param {import('@actions/github-script').AsyncFunctionArguments["context"]} params.context
+ * @param {import('@actions/github-script').AsyncFunctionArguments["core"]} params.core
  * @param {string} params.checkRunName
  * @param {string} [params.commitStatusName]
  * @param {string} [params.workflowName]
@@ -120,6 +120,12 @@ export async function verifyRunStatusImpl({
         commitStatusContext = commitStatuses[0].context;
         commitStatusState = commitStatuses[0].state;
         commitStatusTargetUrl = commitStatuses[0].target_url;
+      } else {
+        // Count the commit status as pending if not found and return with no-op
+        core.notice(
+          `Commit status is in pending state. Skipping comparison with check run conclusion.`,
+        );
+        return;
       }
     } catch (error) {
       core.setFailed(
