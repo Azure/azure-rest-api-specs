@@ -1440,7 +1440,7 @@ input-file:
 - ./Microsoft.Sql/preview/2023-05-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionPolicies.json
-- ./Microsoft.Sql/preview/2023-05-01-preview/Servers.json
+- ./Microsoft.Sql/preview/2024-11-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ReplicationLinks.json
 
 # Needed when there is more than one input file
