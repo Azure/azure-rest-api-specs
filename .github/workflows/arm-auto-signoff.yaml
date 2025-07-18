@@ -74,7 +74,7 @@ jobs:
         with:
           script: |
             const { default: getLabelAction } =
-              await import(`${process.env.GITHUB_WORKSPACE}/.github/workflows/src/arm-auto-signoff.js`);
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff.js');
             return await getLabelAction({ github, context, core });
 
       - if: |

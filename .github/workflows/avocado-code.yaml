@@ -79,7 +79,7 @@ jobs:
         with:
           script: |
             const { default: generateJobSummary } =
-              await import(`${process.env.GITHUB_WORKSPACE}/.github/workflows/src/avocado-code.js`);
+              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
             return await generateJobSummary({ core });
         env:
           AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
