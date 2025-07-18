@@ -301,11 +301,11 @@ export type PRContextOptions = {
   isDraft: boolean;
 };
 
-const toDiffResult = (results: string[]) => {
-  return {
-    additions: results,
-  } as DiffResult<string>;
-};
+// const toDiffResult = (results: string[]) => {
+//   return {
+//     additions: results,
+//   } as DiffResult<string>;
+// };
 
 export class PRContext {
   // we are starting with checking out before and after to different directories

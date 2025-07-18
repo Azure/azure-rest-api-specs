@@ -99,6 +99,7 @@ export async function evaluateImpact(context: PRContext, labelContext: LabelCont
   // if the suppressions have been changed. If they have, suppressionReviewRequired must be added
   // as a label
   const suppressionRequired = await processSuppression(context, labelContext);
+  console.log(`suppressionRequired: ${suppressionRequired}`);
 
   // Has to run in PR context.
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
