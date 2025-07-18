@@ -37,6 +37,8 @@ jobs:
       - if: ${{ matrix.folder == '.github' && matrix.os == 'ubuntu'}}
         name: Lint workflows
         run: |
+          set -x
+
           # Ensure "shellcheck" is installed, since it's required for complete validation (pre-installed on GH agents)
           command -v shellcheck >/dev/null || exit 1
 

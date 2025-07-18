@@ -37,7 +37,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
+            const { getChangedFiles } = await import(`${process.env.GITHUB_WORKSPACE}/.github/shared/src/changed-files.js`);
             const { writeFileSync } = await import('fs');
             const { join } = await import('path');
 
@@ -53,19 +53,23 @@ jobs:
       - name: Run LintDiff
         id: run-lintdiff
         run: |
+          set -x
+
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
 
           npm exec --no -- lint-diff \
             --before before \
             --after after \
             --changed-files-path changed-files.txt \
-            --base-branch ${{ github.event.pull_request.base.ref }} \
-            --compare-sha ${{ github.event.pull_request.head.sha }} \
+            --base-branch "$PR_BASE_REF" \
+            --compare-sha "$PR_HEAD_SHA" \
             --out-file "$GITHUB_STEP_SUMMARY"
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
           NODE_OPTIONS: "--max-old-space-size=8192"
+          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

@@ -27,15 +27,20 @@ jobs:
       - name: Breaking Change(Cross-Version) - Analyze Code
         id: breaking-change-cross-version-analyze-code
         run: |
+          set -x
           npm exec --no -- openapi-diff-runner \
             --run-type "CrossVersion" \
             --spec-repo-path "$GITHUB_WORKSPACE" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
             --pr-target-branch "$GITHUB_BASE_REF" \
-            --head-commit "${{ github.event.pull_request.head.sha }}" \
-            --pr-number "${{ github.event.pull_request.number }}" \
-            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --head-commit "$PR_HEAD_SHA" \
+            --pr-number "$PR_NUMBER" \
+            --source-repo "$PR_HEAD_REPO_FULLNAME" \
             --target-repo "$GITHUB_REPOSITORY"
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_REPO_FULLNAME: ${{ github.event.pull_request.head.repo.full_name }}
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
