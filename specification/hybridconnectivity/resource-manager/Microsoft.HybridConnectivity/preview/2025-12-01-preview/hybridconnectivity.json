@@ -2041,6 +2041,14 @@
             "create"
           ]
         },
+        "managementProjectNumber": {
+          "type": "string",
+          "description": "The project number of the management project under the GCP organization.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "excludedProjectNumbers": {
           "type": "array",
           "description": "List of GCP projects which need to be excluded.",
@@ -2065,7 +2073,8 @@
         }
       },
       "required": [
-        "organizationId"
+        "organizationId",
+        "managementProjectNumber"
       ]
     },
     "GcpOrganizationPropertiesUpdate": {
