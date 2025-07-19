@@ -133,7 +133,7 @@ namespace Azure.AI.Agents {
     @delete
     @added(Versions.v1)
     @route("/{messageId}")
-    deleteMessage is AgentOperation<
+    delete is AgentOperation<
       {
         @doc("Identifier of the thread.")
         @path

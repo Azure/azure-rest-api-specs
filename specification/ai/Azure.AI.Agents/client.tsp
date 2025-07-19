@@ -46,11 +46,8 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.getMessage, "get", "python");
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
-@@access(Azure.AI.Agents.Messages.deleteMessage,
-  Access.internal,
-  "csharp, python"
-);
-@@clientName(Azure.AI.Agents.Messages.deleteMessage,
+@@access(Azure.AI.Agents.Messages.delete, Access.internal, "csharp, python");
+@@clientName(Azure.AI.Agents.Messages.delete,
   "InternalDeleteMessage",
   "csharp"
 );
