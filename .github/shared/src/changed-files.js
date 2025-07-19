@@ -56,7 +56,6 @@ export async function getChangedFilesStatuses(options = {}) {
     modifications: /** @type {string[]} */ ([]),
     deletions: /** @type {string[]} */ ([]),
     renames: /** @type {{from: string, to: string}[]} */ ([]),
-
     total: 0,
   };
 
