@@ -4,16 +4,21 @@ This tool models the PR and produces an artifact that is consumed by the `summar
 
 The schema of the artifact looks like:
 
-```json
-{
-  "pr-type": ["resource-manager", "data-plane"],
-  "suppressionsChanged": true,
-  "versioningReviewRequired": false,
-  "breakingChangeReviewRequired": true,
-  "rpaasChange": true,
-  "newRP": true,
-  "rpaasRPMissing": true
-}
+```typescript
+export type ImpactAssessment = {
+  prType: string[];
+  resourceManagerRequired: boolean;
+  suppressionReviewRequired: boolean;
+  versioningReviewRequired: boolean;
+  breakingChangeReviewRequired: boolean;
+  isNewApiVersion: boolean;
+  rpaasExceptionRequired: boolean;
+  rpaasRpNotInPrivateRepo: boolean;
+  rpaasChange: boolean;
+  newRP: boolean;
+  rpaasRPMissing: boolean;
+  typeSpecChanged: boolean;
+  isDraft: boolean;
+  labelContext: LabelContext;
+};
 ```
-
-## Invocation
