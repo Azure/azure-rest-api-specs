@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+using TypeSpec.Http;
 using Azure.Core;
 
 namespace ConfidentialLedger.Ledger;
@@ -384,11 +385,21 @@ model JsRuntimeOptions {
   returnExceptionDetails?: boolean;
 }
 
+alias CCFTransactionIdHeader = {
+  /**
+   * The transaction id at which this write will become durable.
+   */
+  @header("x-ms-ccf-transaction-id")
+  transactionId: string;
+};
+
 /**
  * Returned as a result of a write to the Confidential Ledger, the transaction id
  * in the response indicates when the write will become durable.
  */
 model LedgerWriteResult {
+  ...CCFTransactionIdHeader;
+
   /**
    * The collection identifier of the ledger entry.
    */
