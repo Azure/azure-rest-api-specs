@@ -26,7 +26,7 @@ These are the global settings for the AppLink.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+openapi-subtype: rpaas
 tag: package-2025-08-01-preview
 ```
 
