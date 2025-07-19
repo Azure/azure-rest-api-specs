@@ -502,7 +502,7 @@ model IotHubDefinitionDescription {
  * Description of the Device Registry namespace that is linked to the provisioning service.
  */
 model DeviceRegistryNamespaceDescription {
-    /**
+  /**
    * The ARM resource ID of the Device Registry namespace.
    */
   resourceId: Azure.Core.armResourceIdentifier<[
