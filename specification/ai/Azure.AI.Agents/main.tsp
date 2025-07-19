@@ -16,6 +16,7 @@ import "./vector_stores/file_batches/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Azure.AI {
@@ -57,6 +58,7 @@ namespace Azure.AI.Agents {
 
     @doc("Azure AI API version 2025-05-15-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @useDependency(Azure.AI.Projects.Versions.v2025_05_15_preview)
     v2025_05_15_preview: "2025-05-15-preview",
   }
 }

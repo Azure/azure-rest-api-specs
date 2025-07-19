@@ -3,11 +3,14 @@ import "@azure-tools/typespec-client-generator-core";
 import "../common/models.tsp";
 import "../threads/models.tsp";
 import "../tools/models.tsp";
+import "../../Azure.AI.Projects/evaluations/models.tsp";
 
 namespace Azure.AI.Agents;
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+
+using Azure.AI.Projects;
 
 @doc("Data representing a single evaluation run of an agent thread.")
 @added(Versions.v2025_05_01)
@@ -185,6 +188,19 @@ model RunCompletionUsage {
   @doc("Total number of tokens used (prompt + completion).")
   @encodedName("application/json", "total_tokens")
   totalTokens: int64;
+}
+
+@doc("(WIP) Evaluation configurations.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationConfiguration {
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Sampling configuration for the evaluation.")
+  samplingConfiguration?: AgentEvaluationSamplingConfiguration;
+
+  @doc("Redaction configuration for the evaluation.")
+  redactionConfiguration?: AgentEvaluationRedactionConfiguration;
 }
 
 @doc("The details used when creating a new run of an agent thread.")
