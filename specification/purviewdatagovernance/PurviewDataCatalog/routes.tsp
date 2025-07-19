@@ -1,180 +1,226 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "./error.tsp";
+import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace PurviewDataCatalog;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns")
-@post
-op postCriticalDataColumn is Azure.Core.Foundations.Operation<
-  MicrosoftPurviewDataGovernanceCatalogModelCriticalDataColumn,
-  void
->;
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns")
-@get
-op criticalDataColumn is Azure.Core.Foundations.Operation<
-  {
-    @doc("The globally unique identifier of the entity.")
-    @query("domainId")
-    domainId?: string;
-
-    @doc("The identifier of the asset.")
-    @query("assetId")
-    assetId?: string;
-
-    @doc("The identifier of the skip.")
-    @query("skip")
-    skip?: int32;
-
-    @doc("The identifier of the top.")
-    @query("top")
-    top?: int32;
-
-    @doc("The identifier of the orderBy.")
-    @query("orderBy")
-    orderBy?: string;
-  },
-  void
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns/{criticalDataColumnId}")
-@get
-op criticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation<
-  {
-    @doc("The globally unique identifier of the entity.")
-    @path
-    criticalDataColumnId: string;
-  },
-  void
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@post
-op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations.Operation<
-  {
-    @doc("The globally unique identifier of the entity.")
-    @path
-    criticalDataColumnId: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
-    @doc("The identifier of the entityType.")
-    @query("entityType")
-    entityType: unknown;
-
-    @doc("The identifier of the body.")
-    @bodyRoot
-    body?: Record<string>;
-  },
-  void
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@get
-op getCriticalDataColumn is Azure.Core.Foundations.Operation<
-  {
-    @doc("The globally unique identifier of the entity.")
-    @path
-    criticalDataColumnId: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
-    @doc("The identifier of the entityType.")
-    @query("entityType")
-    entityType: unknown;
-  },
-  void
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@delete
-op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
-  {
-    @doc("The globally unique identifier of the entity.")
-    @query("criticalDataElementId")
-    criticalDataElementId?: string;
-
-    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is unknown to the server."
-    @doc("The identifier of the entityType.")
-    @query("entityType")
-    entityType: unknown;
-
-    @doc("The identifier of the entityId.")
-    @query("entityId")
-    entityId: string;
-
-    @doc("The globally unique identifier of the entity.")
-    @path
-    criticalDataColumnId: string;
-  },
-  void
->;
-
-#suppress "@azure-tools/typespec-openapi/example-validation"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@route("/criticalDataElements")
-@post
-op postCriticalDataElement is Azure.Core.Foundations.Operation<
-  MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElement,
-  void
->;
-/**
- * Example: GetCriticalDataElement_MaximumSet_Gen
- * See: ./examples/GetCriticalDataElement_MaximumSet_Gen.json
- */
-#suppress "@azure-tools/typespec-openapi/example-validation"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
 @route("/criticalDataElements")
 @get
 op getCriticalDataElement is Azure.Core.Foundations.Operation<
   {
-    @doc("The name of the domainId.")
-    @query("domainId")
+    @doc("Whether to return minimal information for referred Domains.")
+    @query
     domainId?: string;
 
-    @doc("The name of the keyword.")
-    @query("keyword")
+    @doc("Search keyword.")
+    @query
     keyword?: string;
 
-    @doc("The name of the skip.")
-    @query("skip")
+    @doc("Number of items to skip.")
+    @query
     skip?: int32;
 
-    @doc("The name of the top.")
-    @query("top")
+    @doc("Number of items to return.")
+    @query
     top?: int32;
 
-    @doc("The name of the orderBy.")
-    @query("orderBy")
+    @doc("Field to sort by.")
+    @query
     orderBy?: string;
   },
-  void
+  CatalogModelCriticalDataElement[],
+  {},
+  NotFoundError
 >;
-#suppress "@azure-tools/typespec-openapi/example-validation"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements")
+@post
+op postCriticalDataElement is Azure.Core.Foundations.Operation<
+  {
+    @doc("The resource associated with the critical data element.")
+    @body
+    body: CatalogModelCriticalDataElement;
+  },
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the critical data element output.")
+    @body
+    body: CatalogModelCriticalDataElement;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
 @route("/criticalDataElements/{criticalDataElementId}")
 @get
 op getCriticalDataElementCriticalDataElementId is Azure.Core.Foundations.Operation<
   {
-    @doc("The globally unique identifier of the entity.")
+    @doc("The criticalDataElementId of data element.")
     @path
-    criticalDataElementId: string;
+    criticalDataElementId: Azure.Core.uuid;
   },
-  void
+  {
+    @statusCode
+    statusCode: 200;
+
+    @doc("The body associated with the critical data element output.")
+    @body
+    body: CatalogModelCriticalDataElement;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/{criticalDataElementId}")
+@put
+op replaceCriticalDataElement is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data element.")
+    @path
+    criticalDataElementId: Azure.Core.uuid;
+
+    @doc("The body associated with the critical data element output.")
+    @bodyRoot
+    body?: CatalogModelCriticalDataElement;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+
+    @doc("The body associated with the critical data element output.")
+    @body
+    body: CatalogModelCriticalDataElement;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/{criticalDataElementId}")
+@delete
+op deleteCriticalDataElement is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data element.")
+    @path
+    criticalDataElementId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/{criticalDataElementId}/relationships")
+@get
+op getsCriticalDataElement is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data element.")
+    @path
+    criticalDataElementId: Azure.Core.uuid;
+
+    @doc("The body associated with the critical data element output.")
+    @query("entityType")
+    entityType: EntityCategory;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+
+    @doc("The body associated with the critical data element output.")
+    @body
+    body: CatalogModelCriticalDataElement;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/{criticalDataElementId}/relationships")
+@post
+op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data element.")
+    @path
+    criticalDataElementId: Azure.Core.uuid;
+
+    @doc("The body associated with the critical data element output.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("CatalogModelCriticalDataElementRequest")
+    @query
+    body?: string;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/{criticalDataElementId}/relationships")
+@delete
+op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data element.")
+    @path
+    criticalDataElementId: Azure.Core.uuid;
+
+    @doc("EntityCategory")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The unique identifier of the critical data element.")
+    @query
+    entityId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/query")
+@post
+op criticalDataElementQuery is Azure.Core.Foundations.Operation<
+  {
+    @doc("The number of duplicate checks to perform.")
+    @query("duplicatecheck")
+    duplicatecheck?: int32;
+
+    @doc("body")
+    @bodyRoot
+    body?: CriticalDataElementQueryRequest;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("CriticalDataElements")
+@route("/criticalDataElements/facets")
+@post
+op criticalDataElementFacets is Azure.Core.Foundations.Operation<
+  CriticalDataElementFacetRequest,
+  {
+    @statusCode
+    statusCode: 200;
+  }
 >;
