@@ -26,7 +26,7 @@ export function resolveCwd(path, options = {}) {
 }
 
 /**
- * Solve the relative path from {from} to {options.cwd} (if specified), or the current directory
+ * Solve the relative path from {path} to {options.cwd} (if specified), or the current directory
  *
  * @param {string} path
  * @param {Object} [options]
