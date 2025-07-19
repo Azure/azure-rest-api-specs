@@ -40,7 +40,9 @@ describe("changedFiles", () => {
 
     vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
 
-    await expect(getChangedFiles(options)).resolves.toEqual(files.map((f) => resolve(f)));
+    await expect(
+      getChangedFiles(options).then((items) => items.map((i) => relativeCwd(i))),
+    ).resolves.toEqual(files);
   });
 
   const files = [
