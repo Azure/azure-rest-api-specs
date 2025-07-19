@@ -222,6 +222,7 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden enabled tool resources that the agent should use to run the thread.")
   @encodedName("application/json", "tool_resources")
+  @added(Versions.v2025_05_01)
   tool_resources?: ToolResources | null;
 
   /**

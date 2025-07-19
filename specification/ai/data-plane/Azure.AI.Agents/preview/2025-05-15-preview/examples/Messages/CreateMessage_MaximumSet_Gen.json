@@ -1,5 +1,5 @@
 {
-  "title": "Messages_CreateMessage_MaximumSet_Preview",
+  "title": "Messages_CreateMessage_MaximumSet",
   "operationId": "Messages_CreateMessage",
   "parameters": {
     "api-version": "2025-05-15-preview",
@@ -15,7 +15,15 @@
           {
             "type": "image_file",
             "image_file": {
-              "file_id": "file_abc123"
+              "file_id": "file_abc123",
+              "detail": "high"
+            }
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "https://example.com/image.jpg",
+              "detail": "auto"
             }
           }
         ]
@@ -70,7 +78,18 @@
             "type": "text",
             "text": {
               "value": "Please analyze the attached data and provide insights.",
-              "annotations": []
+              "annotations": [
+                {
+                  "type": "file_citation",
+                  "text": "[1]",
+                  "file_citation": {
+                    "file_id": "file_abc123",
+                    "quote": "relevant data excerpt"
+                  },
+                  "start_index": 45,
+                  "end_index": 48
+                }
+              ]
             }
           },
           {
@@ -80,8 +99,8 @@
             }
           }
         ],
-        "assistant_id": "flbyv",
-        "run_id": "mdwsaqyplfhtadedzuatxvld",
+        "assistant_id": "asst_abc123",
+        "run_id": "run_abc123",
         "attachments": [
           {
             "file_id": "file_abc123",
