@@ -28,9 +28,18 @@ These are the global settings for the Batch API.
 title: BatchManagementClient
 description: Batch Client
 openapi-type: arm
-tag: package-2024-07
+tag: package-2025-06
 ```
 
+### Tag: package-2025-06
+
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06'
+input-file:
+  - Microsoft.Batch/stable/2025-06-01/BatchManagement.json
+  - Microsoft.Batch/stable/2025-06-01/NetworkSecurityPerimeter.json
+```
 
 ### Tag: package-2024-07
 
@@ -245,6 +254,13 @@ directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     where: $.definitions.UserAccount
     reason: This field contains a secret (password) and is not returned on a get (but is required on a PUT/PATCH). Previous discussions with the modelling team had said that this was the correct way to model this type of field.
+  
+  - suppress: EnumInsteadOfBoolean
+    from: BatchManagement.json
+    where:
+    - $.definitions.DiskCustomerManagedKey.properties.rotationToLatestKeyVersionEnabled
+    - $.definitions.ProxyAgentSettings.properties.enabled
+    reason:  The boolean properties are part of a pass though with VMSS, were matching their definitions. Approved by Arm Reviewers
 ```
 
 ### Tag: package-2017-05
