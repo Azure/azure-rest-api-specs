@@ -1490,13 +1490,28 @@
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter Configuration",
           "x-ms-client-flatten": true
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.EventHub/Namespaces\" or \"Microsoft.EventHub/Namespaces/EventHubs\""
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The geo-location where the resource lives"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
       "description": "Properties of NetworkSecurityPerimeterConfiguration",
