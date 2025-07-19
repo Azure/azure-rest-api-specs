@@ -298,27 +298,6 @@ directive:
   - suppress: PutResponseCodes
     from: AuthorizationRules.json
     reason: Breaking change in order to change the API response code.
-  - suppress: PostResponseCodes
-    from: namespace-preview.json
-    reason: Not a mandatory check.
-  - suppress: LroLocationHeader
-    from: namespace-preview.json
-    reason: Not a mandatory check.
-  - suppress: ProvisioningStateMustBeReadOnly
-    from: namespace-preview.json
-    reason: Breaking change.
-  - suppress: AllTrackedResourcesMustHaveDelete
-    from: namespace-preview.json
-    reason: Breaking Change.
-  - suppress: TrackedResourcePatchOperation
-    from: namespace-preview.json
-    reason: Breaking change.
-  - suppress: TrackedResourcesMustHavePut
-    from: namespace-preview.json
-    reason: Breaking change.
-  - suppress: LroErrorContent
-    from: namespace-preview.json
-    reason: Not a mandatory check
 ```
 
 
