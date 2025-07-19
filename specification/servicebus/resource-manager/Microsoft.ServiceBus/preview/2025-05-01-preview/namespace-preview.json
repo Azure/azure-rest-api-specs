@@ -733,8 +733,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to reconcile the association accepted."
+          "200": {
+            "description": "httpStatus code OK."
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
@@ -742,8 +742,7 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}": {
