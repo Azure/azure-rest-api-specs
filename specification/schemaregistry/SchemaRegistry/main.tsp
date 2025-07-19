@@ -62,6 +62,7 @@ alias resourceOperations = Azure.Core.StandardResourceOperations;
 @summary("Get list of schema groups.")
 @doc("Gets the list of schema groups user is authorized to access.")
 @route("/$schemaGroups")
+@list
 op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions?api-version={apiVersion}
@@ -69,6 +70,7 @@ op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 @summary("List schema versions.")
 @doc("Gets the list of all versions of one schema.")
 @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
+@list
 op listSchemaVersions is Azure.Core.Foundations.Operation<
   {
     @doc("Name of schema group.")
@@ -238,11 +240,10 @@ model Schema {
 /**
  * The list of schema group names with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaGroups {
   /** The collection of pageable schema group name items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: string[];
 
   /** The link to the next page of items */
@@ -254,11 +255,10 @@ model SchemaGroups {
 /**
  * The list of schema versions with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaVersions {
   /** The collection of schema version pageable items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: int32[];
 
   /** The link to the next page of items */

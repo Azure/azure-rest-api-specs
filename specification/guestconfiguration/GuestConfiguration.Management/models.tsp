@@ -545,12 +545,11 @@ model Resource {
 /**
  * The response of the list guest configuration assignment operation.
  */
-@pagedResult
 model GuestConfigurationAssignmentList {
   /**
    * Result of the list guest configuration assignment operation.
    */
-  @items
+  @pageItems
   value?: GuestConfigurationAssignment[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -690,12 +689,11 @@ model AssignmentReportDetails {
 /**
  * The response model for the list of Automation operations.
  */
-@pagedResult
 model OperationList {
   /**
    * List of Automation operations supported by the Automation resource provider.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
 

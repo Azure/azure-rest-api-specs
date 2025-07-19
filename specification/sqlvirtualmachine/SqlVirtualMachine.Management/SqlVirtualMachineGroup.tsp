@@ -69,6 +69,7 @@ interface SqlVirtualMachineGroups {
    * Gets the list of sql virtual machines in a SQL virtual machine group.
    */
   @get
+  @list
   @action("sqlVirtualMachines")
   listBySqlVmGroup is ArmResourceActionSync<
     SqlVirtualMachineGroup,

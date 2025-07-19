@@ -951,6 +951,7 @@ interface TeamsRequestsForInformation {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "RpcOperation, when specified as a GET, adds a required `body` field which we do not want."
 @route("/numbers")
 @get
+@list
 @readsResource(NumberResource)
 @doc("List all the Numbers associated with this Communications Gateway.")
 op listNumbers is RpcOperation<

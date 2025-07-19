@@ -19,6 +19,7 @@ interface ResourceSkus {
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
   @get
+  @list
   @action("skus")
   @autoRoute
   list is ArmProviderActionSync<

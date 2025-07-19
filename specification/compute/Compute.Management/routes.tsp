@@ -22,6 +22,7 @@ interface UsageOperationGroup {
   @operationId("Usage_List")
   @autoRoute
   @get
+  @list
   @action("usages")
   list is ComputeProviderActionSync<
     Response = ListUsagesResult,
@@ -39,6 +40,7 @@ interface VirtualMachineSizesOperationGroup {
   @operationId("VirtualMachineSizes_List")
   @autoRoute
   @get
+  @list
   @action("vmSizes")
   list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
@@ -56,6 +58,7 @@ interface VirtualMachineScaleSetsOperationGroup {
   @operationId("VirtualMachineScaleSets_ListByLocation")
   @autoRoute
   @get
+  @list
   @action("virtualMachineScaleSets")
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
@@ -73,6 +76,7 @@ interface VirtualMachinesOperationGroup {
   @operationId("VirtualMachines_ListByLocation")
   @autoRoute
   @get
+  @list
   @action("virtualMachines")
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
@@ -591,6 +595,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @operationId("VirtualMachineRunCommands_List")
   @autoRoute
   @get
+  @list
   @action("runCommands")
   list is ComputeProviderActionSync<
     Response = RunCommandListResult & {

@@ -80,6 +80,7 @@ interface ManagedUnsupportedVMSizes {
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedUnsupportedVMSizes")
   @operationId("managedUnsupportedVMSizes_List")
   @tag("ManagedVMSizes")
+  @list
   @get
   list(
     ...ApiVersionParameter,

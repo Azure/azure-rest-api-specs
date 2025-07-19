@@ -362,6 +362,7 @@ interface VirtualMachines {
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
    */
   @get
+  @list
   @action("vmSizes")
   listAvailableSizes is ComputeResourceActionSync<
     VirtualMachine,

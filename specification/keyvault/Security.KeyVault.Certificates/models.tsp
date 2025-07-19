@@ -143,12 +143,11 @@ enum CertificatePolicyAction {
 /**
  * The certificate list result.
  */
-@pagedResult
 model CertificateListResult {
   /**
    * A response message containing a list of certificates in the key vault along with a link to the next page of certificates.
    */
-  @items
+  @pageItems
   value?: CertificateItem[];
 
   /**
@@ -608,12 +607,11 @@ model Contact {
 /**
  * The certificate issuer list result.
  */
-@pagedResult
 model CertificateIssuerListResult {
   /**
    * A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: CertificateIssuerItem[];
 
@@ -1023,12 +1021,11 @@ model CertificateRestoreParameters {
 /**
  * A list of certificates that have been deleted in this vault.
  */
-@pagedResult
 model DeletedCertificateListResult {
   /**
    * A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates.
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: DeletedCertificateItem[];
 

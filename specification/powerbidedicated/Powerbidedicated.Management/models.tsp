@@ -327,12 +327,11 @@ model DedicatedCapacityUpdateParameters {
 /**
  * An array of Dedicated capacities resources.
  */
-@pagedResult
 model DedicatedCapacities {
   /**
    * An array of Dedicated capacities resources.
    */
-  @items
+  @pageItems
   value: DedicatedCapacity[];
 
   /**
@@ -602,12 +601,11 @@ model AutoScaleVCoreUpdateParameters {
  * An array of auto scale v-core resources.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@pagedResult
 model AutoScaleVCoreListResult {
   /**
    * An array of auto scale v-core resources.
    */
-  @items
+  @pageItems
   value: AutoScaleVCore[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -618,13 +616,12 @@ model AutoScaleVCoreListResult {
 /**
  * Result listing capacities. It contains a list of operations and a URL link to get the next set of results.
  */
-@pagedResult
 model OperationListResult {
   /**
    * List of capacities supported by the Microsoft.PowerBIDedicated resource provider.
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value?: Operation[];
 

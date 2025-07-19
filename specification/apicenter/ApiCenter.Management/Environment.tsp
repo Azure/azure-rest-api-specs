@@ -39,5 +39,6 @@ interface Environments {
   @doc("Deletes the environment.")
   delete is ArmResourceDeleteSync<Environment>;
   @doc("Returns a collection of environments.")
+  @list
   list is ArmResourceListByParent<Environment>;
 }

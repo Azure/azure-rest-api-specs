@@ -159,6 +159,7 @@ interface PrivateZones {
    * Lists all record sets in a Private DNS zone.
    */
   @get
+  @list
   @action("ALL")
   recordSetsList is ArmResourceActionSync<
     PrivateZone,

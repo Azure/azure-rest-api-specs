@@ -128,6 +128,7 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
    */
+  @list
   @segment("maintenanceConfigurations")
   list is Extension.ListByTarget<
     Extension.ResourceGroup,

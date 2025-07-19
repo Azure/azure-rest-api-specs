@@ -356,6 +356,7 @@ alias LabelsRequestParams = {
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
+@list
 op getLabels is AppConfigOperation<
   LabelsRequestParams,
   LabelListResult &
@@ -435,6 +436,7 @@ alias RevisionsRequestParams = {
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
+@list
 op getRevisions is AppConfigOperation<
   RevisionsRequestParams,
   KeyValueListResult &

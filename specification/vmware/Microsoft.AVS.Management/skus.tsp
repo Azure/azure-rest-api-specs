@@ -12,6 +12,7 @@ interface Skus {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @doc("A list of SKUs.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AVS/skus")
+  @list
   @get
   list(
     ...ApiVersionParameter,

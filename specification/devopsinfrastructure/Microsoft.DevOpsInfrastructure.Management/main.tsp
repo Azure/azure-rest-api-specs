@@ -708,6 +708,7 @@ interface SubscriptionUsages {
   @action
   @armProviderNameValue
   @get
+  @list
   @armResourceList(Location)
   @doc("List Quota resources by subscription ID")
   usages(

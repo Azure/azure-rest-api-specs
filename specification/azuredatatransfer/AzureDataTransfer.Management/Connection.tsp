@@ -81,6 +81,7 @@ interface Connections {
    * Lists all pending remote connections that are linkable to this connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @list
   @action("listPendingConnections")
   @operationId("ListPendingConnections_List")
   list is ArmResourceActionSync<
@@ -93,6 +94,7 @@ interface Connections {
    * Lists all remote flows that have not yet been linked to local flows
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  @list
   @action("listPendingFlows")
   @operationId("ListPendingFlows_List")
   listPendingFlowsList is ArmResourceActionSync<
