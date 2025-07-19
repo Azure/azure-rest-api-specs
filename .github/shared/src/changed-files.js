@@ -164,63 +164,81 @@ export function readme(file) {
  * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function specification(file, options) {
+export function specification(file, options = {}) {
   // Folder name "specification" should match case, since it already exists in repo
   return (
     typeof file === "string" &&
-    relativeCwd(file, { cwd: options?.repoRoot }).startsWith("specification/")
+    relativeCwd(file, { cwd: options.repoRoot }).startsWith("specification/")
   );
 }
 
 /**
  * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function dataPlane(file) {
+export function dataPlane(file, options = {}) {
   // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/data-plane/");
+  return typeof file === "string" && specification(file, options) && file.includes("/data-plane/");
 }
 
 /**
  * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function resourceManager(file) {
+export function resourceManager(file, options = {}) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/resource-manager/");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
   return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/examples/")
+    typeof file === "string" && specification(file, options) && file.includes("/resource-manager/")
   );
 }
 
 /**
  * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function swagger(file) {
+export function example(file, options = {}) {
+  // Folder name "examples" should match case for consistency across specs
   return (
     typeof file === "string" &&
     json(file) &&
-    (dataPlane(file) || resourceManager(file)) &&
-    !example(file) &&
-    !scenario(file)
+    specification(file, options) &&
+    file.includes("/examples/")
   );
 }
 
 /**
  * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function scenario(file) {
+export function swagger(file, options = {}) {
   return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
+    typeof file === "string" &&
+    json(file) &&
+    (dataPlane(file, options) || resourceManager(file, options)) &&
+    !example(file, options) &&
+    !scenario(file, options)
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
+ * @returns {boolean}
+ */
+export function scenario(file, options = {}) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file, options) &&
+    file.includes("/scenarios/")
   );
 }
