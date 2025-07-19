@@ -24,8 +24,8 @@ import {
 } from "./types.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 
-export declare const breakingChangeLabelVarName = "breakingChangeVar";
-export declare const crossVersionBreakingChangeLabelVarName = "crossVersionBreakingChangeVar";
+export const breakingChangeLabelVarName = "breakingChangeVar";
+export const crossVersionBreakingChangeLabelVarName = "crossVersionBreakingChangeVar";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
@@ -103,7 +103,6 @@ export async function evaluateImpact(
   const suppressionRequired = await processSuppression(context, labelContext);
   console.log(`suppressionRequired: ${suppressionRequired}`);
 
-  // Has to run in PR context.
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
   const {
     versioningReviewRequiredLabelShouldBePresent,
