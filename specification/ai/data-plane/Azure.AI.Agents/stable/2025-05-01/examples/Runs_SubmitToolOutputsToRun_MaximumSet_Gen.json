@@ -1,0 +1,50 @@
+{
+  "title": "Runs_SubmitToolOutputsToRun_MaximumSet",
+  "operationId": "Runs_SubmitToolOutputsToRun",
+  "parameters": {
+    "api-version": "2025-05-01",
+    "threadId": "thread_abc123",
+    "runId": "run_abc123",
+    "body": {
+      "tool_outputs": [
+        {
+          "tool_call_id": "call_abc123",
+          "output": "The mean of the values [1, 2, 3, 4, 5] is 3.0"
+        },
+        {
+          "tool_call_id": "call_def456",
+          "output": "The median of the values [1, 2, 3, 4, 5] is 3.0"
+        }
+      ],
+      "stream": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_abc123",
+        "object": "thread.run",
+        "thread_id": "thread_abc123",
+        "assistant_id": "asst_abc123",
+        "status": "queued",
+        "created_at": 1736869300,
+        "started_at": 1736869300,
+        "model": "gpt-4",
+        "instructions": "You are a helpful assistant specialized in data analysis.",
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "calculate_metrics",
+              "description": "Calculate statistical metrics from a list of values"
+            }
+          }
+        ],
+        "metadata": {
+          "user_id": "user_12345",
+          "session_id": "session_abc123"
+        }
+      }
+    }
+  }
+}
