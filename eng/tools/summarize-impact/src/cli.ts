@@ -118,7 +118,7 @@ export async function main() {
     isDraft,
   });
 
-  let impact = evaluateImpact(prContext, labelContext);
+  let impact = await evaluateImpact(prContext, labelContext);
 
   console.log("Evaluated impact: ", JSON.stringify(impact));
 
