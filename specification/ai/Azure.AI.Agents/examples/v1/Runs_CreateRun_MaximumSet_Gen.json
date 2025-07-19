@@ -1,0 +1,67 @@
+{
+  "title": "Runs_CreateRun_MaximumSet",
+  "operationId": "Runs_CreateRun",
+  "parameters": {
+    "api-version": "v1",
+    "threadId": "thread_abc123",
+    "body": {
+      "assistant_id": "asst_abc123",
+      "model": "gpt-4",
+      "instructions": "You are a helpful assistant specialized in data analysis.",
+      "additional_instructions": "Please be thorough in your analysis.",
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "calculate_metrics",
+            "description": "Calculate statistical metrics from a list of values",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {"type": "number"}
+                },
+                "metric_type": {
+                  "type": "string",
+                  "enum": ["mean", "median", "mode"]
+                }
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "user_id": "user_12345",
+        "session_id": "session_abc123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_abc123",
+        "object": "thread.run",
+        "thread_id": "thread_abc123",
+        "assistant_id": "asst_abc123",
+        "status": "queued",
+        "created_at": 1736869300,
+        "model": "gpt-4",
+        "instructions": "You are a helpful assistant specialized in data analysis.",
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "calculate_metrics",
+              "description": "Calculate statistical metrics from a list of values"
+            }
+          }
+        ],
+        "metadata": {
+          "user_id": "user_12345",
+          "session_id": "session_abc123"
+        }
+      }
+    }
+  }
+}

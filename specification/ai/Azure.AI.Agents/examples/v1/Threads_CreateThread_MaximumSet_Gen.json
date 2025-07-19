@@ -1,0 +1,66 @@
+{
+  "title": "Threads_CreateThread_MaximumSet",
+  "operationId": "Threads_CreateThread",
+  "parameters": {
+    "api-version": "v1",
+    "body": {
+      "tool_resources": {
+        "code_interpreter": {
+          "file_ids": [
+            "file_abc123"
+          ]
+        },
+        "file_search": {
+          "vector_store_ids": [
+            "vs_abc123"
+          ]
+        }
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! I have some questions about the uploaded files.",
+          "attachments": [
+            {
+              "file_id": "file_abc123",
+              "tools": [
+                {
+                  "type": "file_search"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "user_id": "user_12345",
+        "session_type": "analysis"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "thread_abc123",
+        "object": "thread",
+        "created_at": 1736869300,
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": [
+              "file_abc123"
+            ]
+          },
+          "file_search": {
+            "vector_store_ids": [
+              "vs_abc123"
+            ]
+          }
+        },
+        "metadata": {
+          "user_id": "user_12345",
+          "session_type": "analysis"
+        }
+      }
+    }
+  }
+}
