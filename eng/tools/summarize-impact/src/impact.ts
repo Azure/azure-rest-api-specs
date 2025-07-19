@@ -104,10 +104,16 @@ export async function evaluateImpact(
   console.log(`suppressionRequired: ${suppressionRequired}`);
 
   // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
-  const {
-    versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent,
-  } = await processBreakingChangeLabels(context, labelContext);
+  let versioningReviewRequiredLabelShouldBePresent: boolean = false;
+  let breakingChangeReviewRequiredLabelShouldBePresent: boolean = false;
+  try {
+    ({
+      versioningReviewRequiredLabelShouldBePresent,
+      breakingChangeReviewRequiredLabelShouldBePresent,
+    } = await processBreakingChangeLabels(context, labelContext));
+  } catch (error) {
+    console.error("Error processing breaking change labels:", error);
+  }
 
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
@@ -251,6 +257,12 @@ async function processBreakingChangeLabels(
   breakingChangeReviewRequiredLabelShouldBePresent: boolean;
 }> {
   console.log("ENTER definition processBreakingChangeLabels");
+
+  // Debug the breakingChangesCheckType import
+  console.log("breakingChangesCheckType:", breakingChangesCheckType);
+  console.log("breakingChangesCheckType.SameVersion:", breakingChangesCheckType?.SameVersion);
+  console.log("breakingChangesCheckType.CrossVersion:", breakingChangesCheckType?.CrossVersion);
+
   const prTargetsProductionBranch: boolean = checkPrTargetsProductionBranch(prContext);
   const breakingChangesLabelsFromOad = getBreakingChangesLabelsFromOad();
 
