@@ -1,15 +1,6 @@
 // @ts-check
 
-import { relative, resolve, sep } from "path";
-
-/**
- * @param {string} path
- * @param {string} folder
- * @returns {boolean} True if path contains the named folder
- */
-export function includesFolder(path, folder) {
-  return resolve(path).includes(sep + folder + sep);
-}
+import { relative, resolve } from "path";
 
 /**
  * Resolves {path} against {options.cwd} (if specified), or the current directory

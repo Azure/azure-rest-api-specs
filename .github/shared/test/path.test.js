@@ -3,17 +3,7 @@
 import { tmpdir } from "os";
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
-import { includesFolder, relativeCwd, resolveCwd } from "../src/path.js";
-
-describe("includesFolder", () => {
-  it("should return true when path contains the specified folder", () => {
-    expect(includesFolder("/path/to/examples/file.json", "examples")).toEqual(true);
-  });
-
-  it("should return false when path does not contain the specified folder", () => {
-    expect(includesFolder("/path/to/swagger/file.json", "examples")).toEqual(false);
-  });
-});
+import { relativeCwd, resolveCwd } from "../src/path.js";
 
 describe("relativeCwd", () => {
   it("relative to current dir by default", () => {
