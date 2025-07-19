@@ -570,6 +570,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LedgerWriteResult"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
             }
           },
           "default": {
@@ -1021,12 +1027,24 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
             }
           },
           "default": {
