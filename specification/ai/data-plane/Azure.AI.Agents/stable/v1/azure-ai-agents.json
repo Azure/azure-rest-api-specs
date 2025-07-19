@@ -447,6 +447,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Files_UploadFile_MaximumSet": {
+            "$ref": "./examples/Files_UploadFile_MaximumSet_Gen.json"
+          },
+          "Files_UploadFile_MinimumSet": {
+            "$ref": "./examples/Files_UploadFile_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -707,6 +715,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Threads_CreateThread_MaximumSet": {
+            "$ref": "./examples/Threads_CreateThread_MaximumSet_Gen.json"
+          },
+          "Threads_CreateThread_MinimumSet": {
+            "$ref": "./examples/Threads_CreateThread_MinimumSet_Gen.json"
           }
         }
       }
@@ -983,6 +999,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Messages_CreateMessage_MaximumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MaximumSet_Gen.json"
+          },
+          "Messages_CreateMessage_MinimumSet": {
+            "$ref": "./examples/Messages_CreateMessage_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1094,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -1200,6 +1269,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_ListRuns_MaximumSet": {
+            "$ref": "./examples/Runs_ListRuns_MaximumSet_Gen.json"
+          },
+          "Runs_ListRuns_MinimumSet": {
+            "$ref": "./examples/Runs_ListRuns_MinimumSet_Gen.json"
+          }
         }
       },
       "post": {
@@ -1264,6 +1341,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_CreateRun_MaximumSet": {
+            "$ref": "./examples/Runs_CreateRun_MaximumSet_Gen.json"
+          },
+          "Runs_CreateRun_MinimumSet": {
+            "$ref": "./examples/Runs_CreateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1302,6 +1387,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_GetRun_MaximumSet": {
+            "$ref": "./examples/Runs_GetRun_MaximumSet_Gen.json"
+          },
+          "Runs_GetRun_MinimumSet": {
+            "$ref": "./examples/Runs_GetRun_MinimumSet_Gen.json"
           }
         }
       },
@@ -1358,6 +1451,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_UpdateRun_MaximumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MaximumSet_Gen.json"
+          },
+          "Runs_UpdateRun_MinimumSet": {
+            "$ref": "./examples/Runs_UpdateRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1396,6 +1497,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Runs_CancelRun_MaximumSet": {
+            "$ref": "./examples/Runs_CancelRun_MaximumSet_Gen.json"
+          },
+          "Runs_CancelRun_MinimumSet": {
+            "$ref": "./examples/Runs_CancelRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -1690,6 +1799,14 @@
               "$ref": "#/definitions/AgentV1Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Runs_SubmitToolOutputsToRun_MaximumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MaximumSet_Gen.json"
+          },
+          "Runs_SubmitToolOutputsToRun_MinimumSet": {
+            "$ref": "./examples/Runs_SubmitToolOutputsToRun_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1722,6 +1839,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateThreadAndRun_MaximumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MaximumSet_Gen.json"
+          },
+          "CreateThreadAndRun_MinimumSet": {
+            "$ref": "./examples/CreateThreadAndRun_MinimumSet_Gen.json"
           }
         }
       }
@@ -2532,6 +2657,14 @@
             "schema": {
               "$ref": "#/definitions/AgentV1Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStoreFiles_CreateVectorStoreFile_MaximumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MaximumSet_Gen.json"
+          },
+          "VectorStoreFiles_CreateVectorStoreFile_MinimumSet": {
+            "$ref": "./examples/VectorStoreFiles_CreateVectorStoreFile_MinimumSet_Gen.json"
           }
         }
       }
@@ -4413,6 +4546,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
       ]
     },
     "MessageDelta": {
