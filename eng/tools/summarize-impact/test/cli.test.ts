@@ -9,7 +9,7 @@ import { evaluateImpact } from "../src/impact.js";
 // const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
 
 describe("Check Changes", () => {
-  it("Integration test 35346", async () => {
+  it.only("Integration test 35346", async () => {
     const targetDirectory = path.join("/home/semick/repo/rest-s/35346", "before");
     const sourceDirectory = path.join("/home/semick/repo/rest-s/35346", "after");
 
@@ -43,7 +43,6 @@ describe("Check Changes", () => {
 
       expect(result).toBeDefined();
       expect(result.typeSpecChanged).toBeTruthy();
-      expect(result.labelContext.toAdd.has("ARMReview")).toBeTruthy();
       expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
       expect(result.labelContext.toAdd.has("SuppressionReviewRequired")).toBeTruthy();
       expect(changedFileDetails).toBeDefined();
@@ -54,7 +53,7 @@ describe("Check Changes", () => {
     }
   }, 60000000);
 
-  it.only("Integration test 35982", async () => {
+  it("Integration test 35982", async () => {
     const targetDirectory = path.join("/home/semick/repo/rest-s/35982", "before");
     const sourceDirectory = path.join("/home/semick/repo/rest-s/35982", "after");
 

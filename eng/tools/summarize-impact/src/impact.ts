@@ -240,7 +240,9 @@ export const getResourceProviderFromFilePath = (filePath: string): string | unde
   return undefined;
 };
 
-// todo: is this right?
+// todo: download the labels from the breaking change check run
+// right now this logic is coded to parse the ADO build variables that are set
+// by the breakingchange run in an earlier job.
 async function processBreakingChangeLabels(
   prContext: PRContext,
   labelContext: LabelContext,
@@ -248,6 +250,7 @@ async function processBreakingChangeLabels(
   versioningReviewRequiredLabelShouldBePresent: boolean;
   breakingChangeReviewRequiredLabelShouldBePresent: boolean;
 }> {
+  console.log("ENTER definition processBreakingChangeLabels");
   const prTargetsProductionBranch: boolean = checkPrTargetsProductionBranch(prContext);
   const breakingChangesLabelsFromOad = getBreakingChangesLabelsFromOad();
 
@@ -607,6 +610,8 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
 
   suppressionReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processSuppression");
+
+  return suppressionReviewRequiredLabel.shouldBePresent;
 }
 
 function getSuppressions(readmePath: string) {
