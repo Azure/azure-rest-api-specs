@@ -135,7 +135,7 @@ union PrivateLinkServiceConnectionStatus {
 }
 
 /**
- * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+ * IotHub MI authentication type: KeyBased, UserAssigned, and SystemAssigned.
  */
 union IotHubAuthenticationType {
   string,
