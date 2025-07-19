@@ -34,6 +34,12 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
+      # todo: why is this necessary? postinstall should already take care of the build?
+      - name: Build summarize-impact tool
+        run: |
+          cd eng/tools/summarize-impact
+          npm run build
+
       - name: Get PR labels
         id: get-labels
         run: |
