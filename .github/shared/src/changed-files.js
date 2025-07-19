@@ -156,8 +156,6 @@ export function readme(file) {
   return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
 
-// Following need repoRoot parameter
-
 /**
  * @param {string} [file]
  * @param {Object} [options]
