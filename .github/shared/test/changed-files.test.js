@@ -141,6 +141,7 @@ describe("changedFiles", () => {
 
   describe("getChangedFilesStatuses", () => {
     /**
+     * Converts a result to an equivalent result with relative paths
      *
      * @param {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}} result
      * @returns {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}}
