@@ -3,7 +3,7 @@
     "namespaceName": "sdk-Namespace-5357",
     "resourceGroupName": "Default-NotificationHubs-AustraliaEast",
     "eventHubName": "sdk-EventHub-6547",
-    "api-version": "2024-05-01-preview",
+    "api-version": "2025-05-01-preview",
     "subscriptionId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4",
     "parameters": {
       "properties": {
@@ -30,9 +30,8 @@
           "sizeLimitInBytes": 10485763
         },
         "retentionDescription": {
-          "cleanupPolicy": "Compact",
-          "minCompactionLagTimeInMinutes": 10,
-          "tombstoneRetentionTimeInHours": 1
+          "cleanupPolicy": "Delete",
+          "retentionTimeInHours": 24
         },
         "messageTimestampDescription": {
           "timestampType": "LogAppend"
@@ -79,10 +78,8 @@
             "sizeLimitInBytes": 10485763
           },
           "retentionDescription": {
-            "cleanupPolicy": "Compact",
-            "retentionTimeInHours": -1,
-            "minCompactionLagTimeInMinutes": 10,
-            "tombstoneRetentionTimeInHours": 1
+            "cleanupPolicy": "Delete",
+            "retentionTimeInHours": 24
           },
           "messageTimestampDescription": {
             "timestampType": "LogAppend"
