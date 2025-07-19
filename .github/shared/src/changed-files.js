@@ -13,7 +13,7 @@ debug.enable("simple-git");
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files as platform-specific absolute paths. Example: ["/hom/users/specs/specification/foo/Microsoft.Foo/main.tsp"].
+ * @returns {Promise<string[]>} List of changed files as platform-specific absolute paths. Example: ["/home/users/specs/specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
   const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
