@@ -2,6 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { relativeCwd, resolveCwd } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -12,7 +13,7 @@ debug.enable("simple-git");
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
+ * @returns {Promise<string[]>} List of changed files as platform-specific absolute paths. Example: ["/hom/users/specs/specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
   const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
@@ -24,7 +25,10 @@ export async function getChangedFiles(options = {}) {
   // filter based on status with a single call to `git diff`.
   const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
 
-  const files = result.trim().split("\n");
+  const files = result
+    .trim()
+    .split("\n")
+    .map((f) => resolveCwd(f, { cwd }));
 
   logger?.info("Changed Files:");
   for (const file of files) {
@@ -52,6 +56,7 @@ export async function getChangedFilesStatuses(options = {}) {
     modifications: /** @type {string[]} */ ([]),
     deletions: /** @type {string[]} */ ([]),
     renames: /** @type {{from: string, to: string}[]} */ ([]),
+
     total: 0,
   };
 
@@ -64,25 +69,25 @@ export async function getChangedFilesStatuses(options = {}) {
 
       switch (status[0]) {
         case "A":
-          categorizedFiles.additions.push(parts[1]);
+          categorizedFiles.additions.push(resolveCwd(parts[1], { cwd }));
           break;
         case "M":
-          categorizedFiles.modifications.push(parts[1]);
+          categorizedFiles.modifications.push(resolveCwd(parts[1], { cwd }));
           break;
         case "D":
-          categorizedFiles.deletions.push(parts[1]);
+          categorizedFiles.deletions.push(resolveCwd(parts[1], { cwd }));
           break;
         case "R":
           categorizedFiles.renames.push({
-            from: parts[1],
-            to: parts[2],
+            from: resolveCwd(parts[1], { cwd }),
+            to: resolveCwd(parts[2], { cwd }),
           });
           break;
         case "C":
-          categorizedFiles.additions.push(parts[2]);
+          categorizedFiles.additions.push(resolveCwd(parts[2], { cwd }));
           break;
         default:
-          categorizedFiles.modifications.push(parts[1]);
+          categorizedFiles.modifications.push(resolveCwd(parts[1], { cwd }));
       }
     }
 
@@ -152,13 +157,20 @@ export function readme(file) {
   return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
 
+// Following need repoRoot parameter
+
 /**
  * @param {string} [file]
+ * @param {Object} [options]
+ * @param {string} [options.repoRoot] Root directory of repository.  Default: process.cwd().
  * @returns {boolean}
  */
-export function specification(file) {
+export function specification(file, options) {
   // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && file.startsWith("specification/");
+  return (
+    typeof file === "string" &&
+    relativeCwd(file, { cwd: options?.repoRoot }).startsWith("specification/")
+  );
 }
 
 /**

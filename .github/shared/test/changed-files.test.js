@@ -8,6 +8,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
+import { resolve } from "path";
 import * as simpleGit from "simple-git";
 import {
   dataPlane,
@@ -38,7 +39,7 @@ describe("changedFiles", () => {
 
     vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
 
-    await expect(getChangedFiles(options)).resolves.toEqual(files);
+    await expect(getChangedFiles(options)).resolves.toEqual(files.map((f) => resolve(f)));
   });
 
   const files = [
@@ -53,7 +54,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
-  ];
+  ].map((f) => resolve(f));
 
   it("filter:json", () => {
     const expected = [
@@ -63,7 +64,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
-    ];
+    ].map((f) => resolve(f));
 
     expect(files.filter(json)).toEqual(expected);
   });
@@ -73,7 +74,7 @@ describe("changedFiles", () => {
       "README.MD",
       "specification/contosowidgetmanager/data-plane/readme.md",
       "specification/contosowidgetmanager/resource-manager/readme.md",
-    ];
+    ].map((f) => resolve(f));
 
     expect(files.filter(readme)).toEqual(expected);
   });
