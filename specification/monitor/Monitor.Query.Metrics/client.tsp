@@ -28,3 +28,5 @@ using MonitorQueryMetrics;
 );
 
 @@clientName(Metric.timeseries, "TimeSeries", "go");
+
+@@access(batch, Access.internal, "python");
