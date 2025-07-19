@@ -2,7 +2,7 @@
 
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
-import { dirname, join, relative, resolve } from "path";
+import { dirname, join, relative } from "path";
 import { simpleGit } from "simple-git";
 import {
   example,
@@ -23,24 +23,23 @@ debug.enable("simple-git");
  */
 export default async function incrementalTypeSpec({ core }) {
   const options = {
-    cwd: process.env.GITHUB_WORKSPACE,
     logger: new CoreLogger(core),
   };
 
   const changedFiles = await getChangedFiles(options);
 
   // Includes swaggers, readmes, and examples
-  const changedRmFiles = changedFiles.filter(resourceManager);
+  const changedRmFiles = changedFiles.filter((f) => resourceManager(f));
 
   if (changedRmFiles.length == 0) {
     core.info("No changes to files containing path '/resource-manager/'");
     return false;
   }
 
-  const git = simpleGit(options.cwd);
+  const git = simpleGit();
 
   // If any changed swagger file is not typespec-generated, return false
-  for (const file of changedRmFiles.filter(swagger)) {
+  for (const file of changedRmFiles.filter((f) => swagger(f))) {
     /** @type string */
     let swaggerText;
     try {
@@ -74,7 +73,7 @@ export default async function incrementalTypeSpec({ core }) {
   /** @type Set<string> */
   const changedReadmeInputFiles = new Set();
 
-  for (const readmeFile of changedRmFiles.filter(readme)) {
+  for (const readmeFile of changedRmFiles.filter((f) => readme(f))) {
     core.info(`Extracting input files from '${readmeFile}'`);
 
     let readmeText;
@@ -92,7 +91,7 @@ export default async function incrementalTypeSpec({ core }) {
     }
 
     // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
-    const readme = new Readme(resolve(options.cwd ?? "", readmeFile), {
+    const readme = new Readme(readmeFile, {
       content: readmeText,
       logger: options.logger,
     });
@@ -107,8 +106,8 @@ export default async function incrementalTypeSpec({ core }) {
   }
 
   const changedSpecDirs = new Set([
-    ...changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
-    ...changedRmFiles.filter(example).map((f) => dirname(dirname(dirname(dirname(f))))),
+    ...changedRmFiles.filter((f) => swagger(f)).map((f) => dirname(dirname(dirname(f)))),
+    ...changedRmFiles.filter((f) => example(f)).map((f) => dirname(dirname(dirname(dirname(f))))),
     // Readme input files should use the same path format as changed swagger files
     ...[...changedReadmeInputFiles].map((f) => dirname(dirname(dirname(f)))),
   ]);

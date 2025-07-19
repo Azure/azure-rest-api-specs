@@ -3,6 +3,7 @@
 import { readdir } from "fs/promises";
 import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
+import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
 
 /** @type {Map<string, SpecModel>} */
@@ -177,7 +178,7 @@ export class SpecModel {
 
       const readmePaths = files
         // filter before resolve to (slightly) improve perf, since filter only needs filename
-        .filter(readme)
+        .filter((f) => readme(f))
         .map((p) => resolve(this.#folder, p));
 
       this.#logger?.debug(`Found ${readmePaths.length} readme files`);
@@ -225,15 +226,4 @@ export class SpecModel {
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
   }
-}
-
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function readme(file) {
-  // Filename "readme.md" with any case is a valid README file
-  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }

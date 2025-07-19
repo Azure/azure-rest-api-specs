@@ -1,45 +1,28 @@
 // @ts-check
 
-import { describe, it, beforeEach, afterEach } from "vitest";
-import { includesFolder } from "../src/path.js";
-import { strict as assert } from "assert";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { mkdirSync, rmSync, existsSync } from "fs";
+import { tmpdir } from "os";
+import { resolve } from "path";
+import { describe, expect, it } from "vitest";
+import { relativeCwd, resolveCwd } from "../src/path.js";
 
-// Get the directory of this test file
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-/**
- * Unit tests for path.js utility functions
- */
-describe("Path utilities", () => {
-  let tempTestDir;
-
-  beforeEach(() => {
-    // Create a temporary directory for test files
-    tempTestDir = join(__dirname, "temp-path-tests");
-    if (existsSync(tempTestDir)) {
-      rmSync(tempTestDir, { recursive: true, force: true });
-    }
-    mkdirSync(tempTestDir, { recursive: true });
+describe("relativeCwd", () => {
+  it("relative to current dir by default", () => {
+    const abs = resolve("foo.json");
+    expect(relativeCwd(abs)).toEqual("foo.json");
   });
 
-  afterEach(() => {
-    // Clean up temporary directory
-    if (existsSync(tempTestDir)) {
-      rmSync(tempTestDir, { recursive: true, force: true });
-    }
+  it("relative to options.cwd if set", () => {
+    const abs = resolve(tmpdir(), "foo.json");
+    expect(relativeCwd(abs, { cwd: tmpdir() })).toEqual("foo.json");
+  });
+});
+
+describe("resolveCwd", () => {
+  it("resolves against current dir by default", () => {
+    expect(resolveCwd("foo.json")).toEqual(resolve("foo.json"));
   });
 
-  describe("includesFolder", () => {
-    it("should return true when path contains the specified folder", () => {
-      assert.equal(includesFolder("/path/to/examples/file.json", "examples"), true);
-    });
-
-    it("should return false when path does not contain the specified folder", () => {
-      assert.equal(includesFolder("/path/to/swagger/file.json", "examples"), false);
-    });
+  it("resolves against options.cwd if set", () => {
+    expect(resolveCwd("foo.json", { cwd: tmpdir() })).toEqual(resolve(tmpdir(), "foo.json"));
   });
 });

@@ -4,7 +4,7 @@ import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { includesFolder } from "./path.js";
+import { example } from "./changed-files.js";
 import { SpecModelError } from "./spec-model-error.js";
 
 /**
@@ -220,26 +220,6 @@ export class Swagger {
   toString() {
     return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
   }
-}
-
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesFolder(file, "examples");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function json(file) {
-  // Extension "json" with any case is a valid JSON file
-  return typeof file === "string" && file.toLowerCase().endsWith(".json");
 }
 
 // API version lifecycle stages
