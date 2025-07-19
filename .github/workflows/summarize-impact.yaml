@@ -50,6 +50,7 @@ jobs:
 
       - name: Run Summarize Impact
         id: summarize-impact
+        working-directory: after
         run: |
           npm exec --no -- summarize-impact --sourceDirectory after --targetDirectory before \
             --number "${{ github.event.pull_request.number }}" \
