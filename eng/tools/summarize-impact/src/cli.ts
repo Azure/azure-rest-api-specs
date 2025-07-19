@@ -50,12 +50,10 @@ export async function main() {
       },
       sourceBranch: {
         type: "string",
-        short: "sb",
         multiple: false,
       },
       targetBranch: {
         type: "string",
-        short: "tb",
         multiple: false,
       },
       sha: {

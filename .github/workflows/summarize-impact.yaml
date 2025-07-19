@@ -53,8 +53,8 @@ jobs:
         run: |
           npm exec --no -- summarize-impact --sourceDirectory after --targetDirectory before \
             --number "${{ github.event.pull_request.number }}" \
-            --sb "${{ github.event.pull_request.head.ref }}" \
-            --tb "${{ github.event.pull_request.base.ref }}" \
+            --sourceBranch "${{ github.event.pull_request.head.ref }}" \
+            --targetBranch "${{ github.event.pull_request.base.ref }}" \
             --sha "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}" \
             --owner "${{ github.repository_owner }}" \
