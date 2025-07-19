@@ -734,15 +734,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Association reconciled"
+            "description": "Association reconciled",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
           },
           "202": {
-            "description": "Request to reconcile the association accepted."
+            "description": "Request to reconcile the association accepted.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
           },
           "default": {
             "description": "ServiceBus error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
