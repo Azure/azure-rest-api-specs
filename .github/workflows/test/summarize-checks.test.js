@@ -2,13 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
+  updateLabels
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
 
-describe("summarizeChecksImpl", () => {
+describe("Summarize Checks Tests", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
@@ -507,6 +508,107 @@ describe("summarizeChecksImpl", () => {
             "main",
           ),
         ).resolves.not.toThrow();
+      },
+      600000,
+    );
+  });
+
+  describe("label add and remove", () => {
+    const testCases = [
+      {
+        description: "labeled: ARMChangesRequested with WaitForARMFeedback present",
+        eventName: "labeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      },
+      {
+        description: "labeled: ARMChangesRequested without WaitForARMFeedback",
+        eventName: "labeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["other-label", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "labeled: ARMSignedOff with both labels present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "ARMChangesRequested", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"]
+      },
+      {
+        description: "labeled: ARMSignedOff with only WaitForARMFeedback present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      },
+      {
+        description: "labeled: ARMSignedOff with only ARMChangesRequested present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["ARMChangesRequested"]
+      },
+      {
+        description: "labeled: ARMSignedOff with neither label present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["other-label", "ARMSignedOff"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "unlabeled: ARMChangesRequested with WaitForARMFeedback present (buggy case)",
+        eventName: "unlabeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["WaitForARMFeedback", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "unlabeled: ARMChangesRequested without WaitForARMFeedback",
+        eventName: "unlabeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: ["WaitForARMFeedback"],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "labeled: other label should have no effect",
+        eventName: "labeled",
+        changedLabel: "SomeOtherLabel",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      },
+      {
+        description: "unlabeled: other label should have no effect",
+        eventName: "unlabeled",
+        changedLabel: "SomeOtherLabel",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      }
+    ];
+
+    it.each(testCases)(
+      "$description",
+      async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+        const [labelsToAdd, labelsToRemove] = await updateLabels(
+            eventName,
+            "main",
+            existingLabels,
+            changedLabel
+        );
+
+        expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
+        expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());
       },
       600000,
     );

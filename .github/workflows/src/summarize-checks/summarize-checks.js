@@ -23,7 +23,7 @@ import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "../comment.js";
 import { PER_PAGE_MAX } from "../github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
+import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./labelling.js";
 
 import {
   brchTsg,
@@ -34,6 +34,7 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
+import { toASCII } from "punycode";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -52,7 +53,72 @@ import {
  */
 
 /**
- * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
+ * @typedef {Object} WorkflowRunArtifact
+ * @property {string} name
+ * @property {number} id
+ * @property {string} url
+ * @property {string} archive_download_url
+ */
+
+/**
+ * @typedef {Object} WorkflowRunInfo
+ * @property {string} name
+ * @property {number} id
+ * @property {number} databaseId
+ * @property {string} url
+ * @property {number} workflowId
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {string} createdAt
+ * @property {string} updatedAt
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckRun
+ * @property {string} name
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {boolean} isRequired
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuite
+ * @property {GraphQLCheckRun[]} nodes
+ * @property {WorkflowRunInfo} workflowRun
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuites
+ * @property {GraphQLCheckSuite[]} nodes
+ */
+
+/**
+ * @typedef {Object} GraphQLCommit
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResource
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResponse
+ * @property {GraphQLResource} resource
+ * @property {Object} repository
+ * @property {Object} repository.object
+ * @property {Object} repository.object.associatedPullRequests
+ * @property {Array<{number: number, commits: {nodes: Array<{commit: GraphQLCommit}>}}>} repository.object.associatedPullRequests.nodes
+ * @property {Object} rateLimit
+ * @property {number} rateLimit.limit
+ * @property {number} rateLimit.cost
+ * @property {number} rateLimit.used
+ * @property {number} rateLimit.remaining
+ * @property {string} rateLimit.resetAt
+ */
+
+/**
+ * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -254,43 +320,78 @@ export async function summarizeChecksImpl(
     `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
   );
 
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  // we always want fresh labels
+  // we always need a file list. We are pulling the file list from gh because we won't be in the correct file context
+  // to await getChangedFiles, as we run on pull_request_target and workflow_run events. We _aren't_ in the actual PR context
+  // as far as files go
+
+  // If there is a check that DOES need PR context, we will need to shift that logic onto a solo workflow that runs on pull_request
+  // events, and then we can await getChangedFiles.
+  const [labels, files] = await Promise.all([
+    github.paginate(
+      github.rest.issues.listLabelsOnIssue,
+      {
+        owner,
+        repo,
+        issue_number: issue_number,
+        per_page: PER_PAGE_MAX
+      }
+    ),
+    github.paginate(
+      github.rest.pulls.listFiles,
+      {
+        owner,
+        repo,
+        pull_number: issue_number
+      }
+    )
+  ]);
+
+  core.info(JSON.stringify(files));
 
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
-  // handle our label trigger first, we may bail out early if it's a label action we're reacting to
-  // this also implies that if a label action is performed before any workflows complete, we shouldn't
-  // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
-  if (event_name in ["labeled", "unlabeled"]) {
-    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
-    const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-      github,
-      context,
-      core,
-      owner,
-      repo,
-      issue_number,
-      event_name,
-      labelNames,
-    );
+  // /** @type { string | undefined } */
+  // const changedLabel = context.payload.label?.name;
+  const isDraft = context.payload.pull_request?.draft ?? false;
 
-    // adjust labelNames based on labelsToAdd/labelsToRemove
-    labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
-    for (const label of labelsToAdd) {
-      if (!labelNames.includes(label)) {
-        labelNames.push(label);
-      }
+  // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
+  // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
+  let labelContext = await updateLabels(targetBranch, isDraft, labelNames);
+
+  for (const label of labelContext.toRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    // await github.rest.issues.removeLabel({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   name: label,
+    // });
+  }
+
+  if (labelContext.toAdd.size > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    // await github.rest.issues.addLabels({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   labels: Array.from(labelsToAdd),
+    // });
+  }
+
+  // adjust labelNames based on labelsToAdd/labelsToRemove
+  labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
+  for (const label of labelContext.toAdd) {
+    if (!labelNames.includes(label)) {
+      labelNames.push(label);
     }
   }
 
-  /** @type {[CheckRunData[], CheckRunData[]]} */
-  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+  /** @type {[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]} */
+  const [requiredCheckRuns, fyiCheckRuns, workflowRuns] = await getCheckRunTuple(
     github,
     core,
     owner,
@@ -389,6 +490,38 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
           }
         }
       }
+      repository(owner: "${owner}", name: "${repo}") {
+        object(expression: "${sha}") {
+          ... on Commit {
+            associatedPullRequests(first: 10) {
+              nodes {
+                number
+                commits(last: 1) {
+                  nodes {
+                    commit {
+                      checkSuites(first: 20) {
+                        nodes {
+                          workflowRun {
+                            id
+                            databaseId
+                            url
+                            workflowId
+                            name
+                            status
+                            conclusion
+                            createdAt
+                            updatedAt
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       rateLimit {
         limit
         cost
@@ -402,82 +535,467 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 
 // #endregion
 // #region label update
+
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
- * @param {typeof import("@actions/core")} core
- * @param {string} owner
- * @param {string} repo
- * @param {number} issue_number
- * @param {string} event_name
- * @param {string[]} known_labels
- * @returns {Promise<[string[], string[]]>}
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
  */
-// @ts-ignore: 'github' is currently unused but will be used after necessary changes
-export async function handleLabeledEvent(
-  github,
-  context,
-  core,
-  owner,
-  repo,
-  issue_number,
-  event_name,
-  known_labels,
-) {
-  // logic for this event is based on code directly ripped from pipelinebot:
-  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  // todo: further enhance with labelling actions from `PR Summary` check.
-  const changedLabel = context.payload.label?.name;
-  const labelsToAdd = new Set();
-  const labelsToRemove = new Set();
-
-  if (event_name === "labeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-    }
-    if (changedLabel == "ARMSignedOff") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-        labelsToRemove.add("ARMChangesRequested");
-      }
-    }
-
-    for (const label of labelsToRemove) {
-      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.removeLabel({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   name: label,
-      // });
-    }
-  } else if (event_name === "unlabeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToAdd.add("WaitForARMFeedback");
-      }
-    }
-
-    if (labelsToAdd.size > 0) {
-      core.info(
-        `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-      );
-      // await github.rest.issues.addLabels({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   labels: Array.from(labelsToAdd),
-      // });
-    }
-  }
-
-  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+function containsAll(arr, values) {
+  return values.every((value) => arr.includes(value));
 }
 
+/**
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsNone(arr, values) {
+  return values.every((value) => !arr.includes(value));
+}
+
+/**
+ * @param {Set<string>} labelsToAdd
+ * @param {Set<string>} labelsToRemove
+ */
+function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
+  const intersection = Array.from(labelsToAdd).filter(label => labelsToRemove.has(label));
+  if (intersection.length > 0) {
+    console.warn("ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! "
+    + `labelsToAdd: [${[...labelsToAdd].join(", ")}]. `
+    + `labelsToRemove: [${[...labelsToRemove].join(", ")}]. `
+    + `intersection: [${intersection.join(", ")}].`)
+  }
+}
+
+
+// * @param {string} eventName
+// * @param {string | undefined } changedLabel
+/**
+ * @param {string} targetBranch
+ * @param {boolean} isDraft
+ * @param {string[]} existingLabels
+ * @returns {import("./labelling.js").LabelContext}
+ */
+export function updateLabels(
+  // eventName,
+  targetBranch,
+  isDraft,
+  existingLabels,
+  // changedLabel
+) {
+  // logic for this function originally present in:
+  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  //  - public/rest-api-specs-scripts/src/prSummary.ts
+  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
+
+  /** @type {import("./labelling.js").LabelContext} */
+  const labelContext = {
+    present: new Set(existingLabels),
+    toAdd: new Set(),
+    toRemove: new Set()
+  }
+  console.log(targetBranch);
+  console.log(isDraft);
+
+  // this is the only labelling that was part of original pipelinebot logic
+  processArmReviewLabels(labelContext, existingLabels);
+
+  // // this one SHOULD remain here. It has a lot of the logic around handling ARM review labels
+  // const { armReviewLabelShouldBePresent } = await processARMReview(
+  //   context,
+  //   labelContext,
+  //   resourceManagerLabelShouldBePresent,
+  //   versioningReviewRequiredLabelShouldBePresent,
+  //   breakingChangeReviewRequiredLabelShouldBePresent,
+  //   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+  //   rpaasExceptionLabelShouldBePresent,
+  //   ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+  //   isDraft,
+  // );
+
+  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove)
+  return labelContext;
+}
+
+/**
+ * @param {import("./labelling.js").LabelContext} context
+ * @param {string[]} existingLabels
+ * @returns {void}
+ */
+export function processArmReviewLabels(
+  context,
+  existingLabels
+) {
+  // the important part about how this will work depends how the users use it
+  // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
+  // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
+  // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
+  // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
+  // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
+  if (containsAll(existingLabels, ["ARMSignedOff"])) {
+    if (existingLabels.includes("ARMChangesRequested")) {
+      context.toAdd.add("ARMChangesRequested");
+    }
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      context.toRemove.add("WaitForARMFeedback");
+    }
+  }
+  // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
+  else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      context.toRemove.add("WaitForARMFeedback");
+    }
+  }
+  // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
+  else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
+    if (!existingLabels.includes("WaitForARMFeedback")) {
+      context.toAdd.add("WaitForARMFeedback");
+    }
+  }
+}
+
+// /**
+// This function determines which labels of the ARM review should
+// be applied to given PR. It adds and removes the labels as appropriate.
+
+// This function does the following, **among other things**:
+
+// - Adds the "ARMReview" label if all of the following conditions hold:
+//   - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
+//   - The PR is not a draft, as determined by "isDraftPR"
+//   - The PR is labelled with "resource-manager" label, meaning it pertains
+//     to ARM, as previously determined by the "isManagementPR" function,
+//     called from the "getPRType" function.
+
+// - Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
+// */
+// // todo: refactor to take context: PRContext as input instead of IValidatorContext.
+// // All downstream usage appears to be using "context.contextConfig() as PRContext".
+// async function processARMReview(
+//   context: IValidatorContext,
+//   owner: string,
+//   repo: string,
+//   issue_number: number,
+//   labelContext: LabelContext,
+//   resourceManagerLabelShouldBePresent: boolean,
+//   versioningReviewRequiredLabelShouldBePresent: boolean,
+//   breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+//   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+//   rpaasExceptionLabelShouldBePresent: boolean,
+//   ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean,
+//   isDraft: boolean,
+// ): Promise<{ armReviewLabelShouldBePresent: boolean }> {
+//   console.log("ENTER definition processARMReview")
+
+//   const armReviewLabel = new Label("ARMReview", labelContext.present);
+//   // By default this label should not be present. We may determine later in this function that it should be present after all.
+//   armReviewLabel.shouldBePresent = false;
+
+//   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+//   // By default this label should not be present. We may determine later in this function that it should be present after all.
+//   newApiVersionLabel.shouldBePresent = false;
+
+//   const branch = (context.contextConfig() as PRContext).targetBranch
+//   const prTitle = await getPrTitle(owner, repo, prNumber)
+//   const isReleaseBranchVal: boolean = isReleaseBranch(branch)
+//   const isShiftLeftPRWithRPSaaSDevVal: boolean = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
+//   const isBranchInScopeOfSpecReview: boolean = isReleaseBranchVal || isShiftLeftPRWithRPSaaSDevVal
+//   let isNewApiVersionVal: boolean | "not_computed" = "not_computed"
+//   let isMissingBaseCommit: boolean | "not_computed" = "not_computed"
+
+//   // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
+//   // determines which kind of review exactly we need.
+//   let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview
+//   if (specReviewApplies) {
+//     isNewApiVersionVal = await isNewApiVersion(context)
+//     if (isNewApiVersionVal) {
+//       // Note that in case of data-plane PRs, the addition of this label will result
+//       // in API stewardship board review being required.
+//       // See requiredLabelsRules.ts.
+//       newApiVersionLabel.shouldBePresent = true;
+//     }
+
+//     armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent
+//     await processARMReviewWorkflowLabels(
+//       labelContext,
+//       armReviewLabel.shouldBePresent,
+//       versioningReviewRequiredLabelShouldBePresent,
+//       breakingChangeReviewRequiredLabelShouldBePresent,
+//       ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+//       rpaasExceptionLabelShouldBePresent,
+//       ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
+//   }
+
+//   newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+//   armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+
+//   console.log(`RETURN definition processARMReview. `
+//     + `url: ${new PRKey(owner, repo, prNumber).toUrl()}, owner: ${owner}, repo: ${repo}, pr: ${prNumber}, branch: ${branch}, `
+//     + `isReleaseBranch: ${isReleaseBranchVal}, `
+//     + `isShiftLeftPRWithRPSaaSDev: ${isShiftLeftPRWithRPSaaSDevVal}, `
+//     + `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, `
+//     + `isNewApiVersion: ${isNewApiVersionVal}, `
+//     + `isMissingBaseCommit: ${isMissingBaseCommit}, `
+//     + `isDraft: ${isDraft}, `
+//     + `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, `
+//     + `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`)
+
+//   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent }
+// }
+
+// function isReleaseBranch(branchName: string) {
+//   const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+//   return branchRegex.some((b) => b.test(branchName));
+// }
+
+// // For shift-left review process, if the PR target branch is RPSaaSDev, it still need ARM review
+// function isShiftLeftPRWithRPSaaSDev(
+//   prTitle: string,
+//   branch: string
+// ): boolean {
+//   const shiftLeftPRTitle = "[AutoSync]";
+//   const isShiftLeftPR = prTitle.includes(shiftLeftPRTitle) && branch === "RPSaaSDev";
+//   if (isShiftLeftPR) {
+//     console.log(
+//       `The PR is shift-left PR with RPSaaSDev branch. it need ARM review`
+//     );
+//   }
+//   return isShiftLeftPR;
+// }
+
+// async function isNewApiVersion(context: IValidatorContext): Promise<boolean> {
+//   const pr = await createPullRequestProperties(
+//     context,
+//     "pr-summary-new-api-version"
+//   );
+//   const handlers: ChangeHandler[] = [];
+//   let isAddingNewApiVersion = false;
+//   const apiVersionSet = new Set<string>();
+
+//   const rpFolders = new Set<string>();
+
+//   const createSwaggerFileHandler = () => {
+//     return (e: PRChange) => {
+//       if (e.changeType === "Addition") {
+//         const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
+//         if (apiVersion) {
+//           apiVersionSet.add(apiVersion);
+//         }
+//         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+//         if (rpFolder !== undefined) {
+//           rpFolders.add(rpFolder);
+//         }
+//         console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
+//       } else if (e.changeType === "Update") {
+//         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
+//         if (rpFolder !== undefined) {
+//           rpFolders.add(rpFolder);
+//         }
+//       }
+//     };
+//   };
+
+//   handlers.push({ SwaggerFile: createSwaggerFileHandler() });
+//   await processPrChanges(context, handlers);
+
+//   console.log(`rpFolders: ${Array.from(rpFolders).join(",")}`);
+
+//   const firstRPFolder = Array.from(rpFolders)[0];
+
+//   console.log(`apiVersion: ${Array.from(apiVersionSet).join(",")}`);
+
+//   if (firstRPFolder === undefined) {
+//     console.log("RP folder not found.");
+//     return false;
+//   }
+
+//   const targetBranchRPFolder = resolve(pr?.workingDir!, firstRPFolder);
+
+//   console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
+
+//   const existingApiVersions =
+//     getAllApiVersionFromRPFolder(targetBranchRPFolder);
+
+//   console.log(`existingApiVersions: ${existingApiVersions.join(",")}`);
+
+//   for (const apiVersion of apiVersionSet) {
+//     if (!existingApiVersions.includes(apiVersion)) {
+//       console.log(
+//         `The apiVersion ${apiVersion} is added. and not found in existing ApiVersions`
+//       );
+//       isAddingNewApiVersion = true;
+//     }
+//   }
+//   return isAddingNewApiVersion;
+// }
+
+// /**
+// CODESYNC:
+// - requiredLabelsRules.ts / requiredLabelsRules
+// - https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
+
+// This function determines which label from the ARM review workflow labels
+// should be present on the PR. It adds and removes the labels as appropriate.
+
+// In other words, this function captures the
+// ARM review workflow label processing logic.
+
+// To be exact, this function executes if and only if the PR in question
+// has been determined to have the "ARMReview" label, denoting given PR
+// is in scope for ARM review.
+
+// The implementation of this function is the source of truth specifying the
+// desired behavior.
+
+// To understand this implementation, the most important constraint to keep in mind
+// is that if "ARMReview" label is present, then exactly one of the following
+// labels must be present:
+
+// - NotReadyForARMReview
+// - WaitForARMFeedback
+// - ARMChangesRequested
+// - ARMSignedOff
+
+// Note that another important place in this codebase where ARM review workflow
+// labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
+// */
+// async function processARMReviewWorkflowLabels(
+//   labelContext: LabelContext,
+//   armReviewLabelShouldBePresent: boolean,
+//   versioningReviewRequiredLabelShouldBePresent: boolean,
+//   breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+//   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+//   rpaasExceptionLabelShouldBePresent: boolean,
+//   ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean
+// ): Promise<void> {
+//   console.log("ENTER definition processARMReviewWorkflowLabels");
+
+//   const notReadyForArmReviewLabel = new Label(
+//     "NotReadyForARMReview",
+//     labelContext.present);
+
+//   const waitForArmFeedbackLabel = new Label(
+//       "WaitForARMFeedback",
+//       labelContext.present
+//     );
+
+//   const armChangesRequestedLabel = new Label(
+//       "ARMChangesRequested",
+//       labelContext.present
+//     );
+
+//   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
+
+//   const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(
+//     labelContext,
+//     breakingChangeReviewRequiredLabelShouldBePresent,
+//     versioningReviewRequiredLabelShouldBePresent
+//   );
+
+//   const blockedOnRpaas = getBlockedOnRpaas(
+//     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+//     rpaasExceptionLabelShouldBePresent,
+//     ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+//   );
+
+//   const blocked = blockedOnVersioningPolicy || blockedOnRpaas;
+
+//   // If given PR is in scope of ARM review and it is blocked for any reason,
+//   // the "NotReadyForARMReview" label should be present, to the exclusion
+//   // of all other ARM review workflow labels.
+//   notReadyForArmReviewLabel.shouldBePresent =
+//     armReviewLabelShouldBePresent && blocked;
+
+//   // If given PR is in scope of ARM review and the review is not blocked,
+//   // then "ARMSignedOff" label should remain present on the PR if it was
+//   // already present. This means that labels "ARMChangesRequested"
+//   // and "WaitForARMFeedback" are invalid and will be removed by automation
+//   // in presence of "ARMSignedOff".
+//   armSignedOffLabel.shouldBePresent =
+//     armReviewLabelShouldBePresent &&
+//     !blocked &&
+//     armSignedOffLabel.present;
+
+//   // If given PR is in scope of ARM review and the review is not blocked and
+//   // not signed-off, then the label "ARMChangesRequested" should remain present
+//   // if it was already present. This means that labels "WaitForARMFeedback"
+//   // is invalid and will be removed by automation in presence of
+//   // "WaitForARMFeedback".
+//   armChangesRequestedLabel.shouldBePresent =
+//     armReviewLabelShouldBePresent &&
+//     !blocked &&
+//     !armSignedOffLabel.shouldBePresent &&
+//     armChangesRequestedLabel.present;
+
+//   // If given PR is in scope of ARM review and the review is not blocked and
+//   // not signed-off, and ARM reviewer didn't request any changes,
+//   // then the label "WaitForARMFeedback" should be present on the PR, whether
+//   // it was present before or not.
+//   waitForArmFeedbackLabel.shouldBePresent =
+//     armReviewLabelShouldBePresent &&
+//     !blocked &&
+//     !armSignedOffLabel.shouldBePresent &&
+//     !armChangesRequestedLabel.shouldBePresent &&
+//     (waitForArmFeedbackLabel.present || true);
+
+//   const exactlyOneArmReviewWorkflowLabelShouldBePresent =
+//     (Number(notReadyForArmReviewLabel.shouldBePresent) +
+//       Number(armSignedOffLabel.shouldBePresent) +
+//       Number(armChangesRequestedLabel.shouldBePresent) +
+//       Number(waitForArmFeedbackLabel.shouldBePresent) ===
+//     1) || !armReviewLabelShouldBePresent
+
+//   if (!exactlyOneArmReviewWorkflowLabelShouldBePresent) {
+//     console.warn(
+//       "ASSERTION VIOLATION! exactlyOneArmReviewWorkflowLabelShouldBePresent is false"
+//     );
+//   }
+
+//   notReadyForArmReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+//   armSignedOffLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+//   armChangesRequestedLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+//   waitForArmFeedbackLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+
+//   console.log(
+//     `RETURN definition processARMReviewWorkflowLabels. ` +
+//       `presentLabels: ${[...labelContext.present].join(",")}, ` +
+//       `blockedOnVersioningPolicy: ${blockedOnVersioningPolicy}. ` +
+//       `blockedOnRpaas: ${blockedOnRpaas}. ` +
+//       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `
+//   );
+//   return;
+// }
+
+// function getBlockedOnVersioningPolicy(
+//   labelContext: LabelContext,
+//   breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+//   versioningReviewRequiredLabelShouldBePresent: boolean
+// ) {
+//   const pendingVersioningReview =
+//     versioningReviewRequiredLabelShouldBePresent &&
+//     !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+//   const pendingBreakingChangeReview =
+//     breakingChangeReviewRequiredLabelShouldBePresent &&
+//     !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+//   const blockedOnVersioningPolicy =
+//     pendingVersioningReview || pendingBreakingChangeReview
+//   return blockedOnVersioningPolicy;
+// }
+
+// function getBlockedOnRpaas(
+//   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+//   rpaasExceptionLabelShouldBePresent: boolean,
+//   ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean
+// )
+// {
+//   return (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
+//   || ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+// }
 // #endregion
 // #region checks
 /**
@@ -488,7 +1006,7 @@ export async function handleLabeledEvent(
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]>}
  */
 export async function getCheckRunTuple(
   github,
@@ -509,11 +1027,14 @@ export async function getCheckRunTuple(
   const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
-  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
+  /** @type {WorkflowRunInfo[]} */
+  let workflowRuns = [];
+  [reqCheckRuns, fyiCheckRuns, workflowRuns] = extractRunsFromGraphQLResponse(response);
 
   core.info(
     `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}`,
+      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
+      `WorkflowRuns: ${JSON.stringify(workflowRuns)}`,
   );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
@@ -528,7 +1049,7 @@ export async function getCheckRunTuple(
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, workflowRuns];
 }
 
 /**
@@ -553,21 +1074,28 @@ export function checkRunIsSuccessful(checkRun) {
 }
 
 /**
- * @param {any} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[]]}
+ * @param {GraphQLResponse} response - GraphQL response data
+ * @returns {[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]}
  */
 function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = [];
   /** @type {CheckRunData[]} */
   const fyiCheckRuns = [];
+  /** @type {WorkflowRunInfo[]} */
+  const workflowRuns = [];
 
   // Define the automated merging requirements check name
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(
-      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      /** @param {{ checkRuns?: { nodes?: any[] }, workflowRun?: WorkflowRunInfo }} checkSuiteNode */
       (checkSuiteNode) => {
+        // Extract workflow run information if available
+        if (checkSuiteNode.workflowRun) {
+          workflowRuns.push(checkSuiteNode.workflowRun);
+        }
+
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
             // We have some specific guidance for some of the required checks.
@@ -606,7 +1134,29 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-  return [reqCheckRuns, fyiCheckRuns];
+
+  // Also extract workflow runs from the repository.object.associatedPullRequests path
+  if (response.repository?.object?.associatedPullRequests?.nodes) {
+    response.repository.object.associatedPullRequests.nodes.forEach(prNode => {
+      if (prNode.commits?.nodes) {
+        prNode.commits.nodes.forEach(commitNode => {
+          if (commitNode.commit?.checkSuites?.nodes) {
+            commitNode.commit.checkSuites.nodes.forEach(checkSuiteNode => {
+              if (checkSuiteNode.workflowRun) {
+                // Avoid duplicates by checking if we already have this workflow run
+                const existingRun = workflowRuns.find(run => run.id === checkSuiteNode.workflowRun.id);
+                if (!existingRun) {
+                  workflowRuns.push(checkSuiteNode.workflowRun);
+                }
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  return [reqCheckRuns, fyiCheckRuns, workflowRuns];
 }
 // #endregion
 // #region next steps
@@ -823,5 +1373,83 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
       .join("");
   }
   return violatedReqLabelsNextStepsText;
+}
+// #endregion
+
+// #region artifact downloading
+/**
+ * Downloads the job-summary artifact from the summarize-impact workflow
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} head_sha
+ * @returns {Promise<any>} The parsed job summary data
+ */
+export async function downloadJobSummaryArtifact(github, core, owner, repo, head_sha) {
+  try {
+    // Get workflow runs for the commit
+    const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
+      owner,
+      repo,
+      head_sha,
+      status: 'completed'
+    });
+
+    // Find the summarize-impact workflow run
+    const summarizeImpactRun = workflowRuns.data.workflow_runs.find(run =>
+      run.name === '[TEST-IGNORE] Summarize PR Impact'
+    );
+
+    if (!summarizeImpactRun) {
+      core.info('No summarize-impact workflow run found for this commit');
+      return null;
+    }
+
+    // Get artifacts for the workflow run
+    const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      owner,
+      repo,
+      run_id: summarizeImpactRun.id
+    });
+
+    // Find the job-summary artifact
+    const jobSummaryArtifact = artifacts.data.artifacts.find(artifact =>
+      artifact.name === 'job-summary'
+    );
+
+    if (!jobSummaryArtifact) {
+      core.info('No job-summary artifact found');
+      return null;
+    }
+
+    // Download the artifact
+    const download = await github.rest.actions.downloadArtifact({
+      owner,
+      repo,
+      artifact_id: jobSummaryArtifact.id,
+      archive_format: 'zip'
+    });
+
+    // The download.data is a buffer containing the zip file
+    // You'll need to extract and parse the JSON using JSZip
+    // const JSZip = require('jszip');
+    // const zip = new JSZip();
+    // const contents = await zip.loadAsync(download.data);
+    // const fileName = Object.keys(contents.files)[0];
+    // const fileContent = await contents.files[fileName].async('text');
+    // const jobSummary = JSON.parse(fileContent);
+
+    core.info(`Successfully found job summary artifact with ID: ${jobSummaryArtifact.id}`);
+    return {
+      artifactId: jobSummaryArtifact.id,
+      downloadUrl: jobSummaryArtifact.archive_download_url,
+      data: download.data
+    };
+
+  } catch (/** @type {any} */ error) {
+    core.error(`Failed to download job summary artifact: ${error.message}`);
+    return null;
+  }
 }
 // #endregion

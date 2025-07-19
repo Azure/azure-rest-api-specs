@@ -1,8 +1,7 @@
 /*
-    This file determines what labels are required for a given PR. It uses this context to obtain two key
-    pieces of information:
-    1. The labels that are currently present on the PR.
-    2. The target branch of the PR.
+    This file covers two areas of enforcement:
+    1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
+    2. It calculates what set of labels should be added or removed from the PR.
 */
 
 import {
@@ -12,6 +11,40 @@ import {
   notReadyForArmReviewReason,
   wrapInArmReviewMessage,
 } from "./tsgs.js";
+
+import { readFileSync } from "fs";
+
+// #region typedefs
+/**
+ * The LabelContext is used by the updateLabels() to determine which labels to add or remove to the PR.
+ *
+ * The "present" set represents the set of labels that are currently present on the PR and should be populated
+ * ONCE at the beginning of the summarize-checks action script.
+ *
+ * The "toAdd" set is the set of labels to be added to the PR at the end of invocation of updateLabels().
+ * This is to be done by calling GitHub Octokit API to add the labels.
+ *
+ * The "toRemove" set is analogous to "toAdd" set, but instead it is the set of labels to be removed.
+ *
+ * The general pattern used in the code to populate "toAdd" or "toRemove" sets to be ready for
+ * Octokit invocation is as follows:
+ *
+ * - the summary() function passes the context through its invocation chain.
+ * - given function responsible for given label, like e.g. for label "ARMReview",
+ *   creates a new instance of Label: const armReviewLabel = new Label("ARMReview", labelContext.present)
+ * - the function then processes the label to determine if armReviewLabel.shouldBePresent is to be set to true or false.
+ * - the function at the end of its invocation calls armReviewLabel.applyStateChanges(labelContext.toAdd, labelContext.toRemove)
+ *   to update the sets.
+ * - the function may optionally return { armReviewLabel.shouldBePresent } to allow the caller to pass this value
+ *   further to downstream business logic that depends on it.
+ * - at the end of invocation summary() calls Octokit passing it as input labelContext.toAdd and labelContext.toRemove.
+ */
+/**
+ * @typedef {Object} LabelContext
+ * @property {Set<string>} present - The current set of labels
+ * @property {Set<string>} toAdd - The set of labels to add
+ * @property {Set<string>} toRemove - The set of labels to remove
+ */
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -23,6 +56,220 @@ import {
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
+/**
+ * RequiredLabelRule:
+ * IF ((any of the anyPrerequisiteLabels is present
+ *     OR all of the allPrerequisiteLabels are present)
+ *     AND none of the allPrerequisiteAbsentLabels is present)
+ * THEN any of the anyRequiredLabels is required.
+ *
+ * IF any of the anyRequiredLabels is required
+ * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
+ *
+ * @typedef {Object} RequiredLabelRule
+ * @property {number} precedence - If multiple RequiredLabelRules are violated, the one with lowest
+ *   precedence should be displayed to the user first. If multiple rules have
+ *   the same precedence, and one of them should be displayed,
+ *   then all of them should be displayed.
+ *
+ *   Note this independent of the CheckMetadata.precedence. That is,
+ *   if there are failing checks, and failing required label rules,
+ *   both of them will be shown, both taking appropriate lowest precedence.
+ * @property {string[]} [branches] - Branches, in format "repo/branch", e.g. "azure-rest-api-specs/main",
+ *   to which this required label rule applies.
+ *
+ *   To be exact:
+ *   - If there is at least one branch defined, and the evaluated PR is
+ *     not targeting any of the branches defined, then the rule is not applicable (it implicitly passes).
+ *   - If "branches" is empty or undefined, then the rule applies to all branches in all repos.
+ * @property {string[]} [anyPrerequisiteLabels] - If any of anyPrerequisiteLabels is present, the requiredLabel is required.
+ *   This condition is ORed with allPrerequisiteLabels.
+ *
+ *   If the anyRequiredLabels collection is empty or undefined, anyPrerequisiteLabels must have exactly one entry.
+ * @property {string[]} [allPrerequisiteLabels] - If all of allPrerequisiteLabels are present, the requiredLabel is required.
+ *   This condition is ORed with anyPrerequisiteLabels.
+ *
+ *   If the anyRequiredLabels collection is empty or undefined, allPrerequisiteLabels must be empty or undefined.
+ * @property {string[]} [allPrerequisiteAbsentLabels] - If any of the allPrerequisiteAbsentLabels is present,
+ *   the requiredLabel is not required.
+ * @property {string[]} anyRequiredLabels - If any of the labels in anyRequiredLabels is present,
+ *   then the rule prerequisites, as expressed by anyPrerequisiteLabels and allPrerequisiteLabels, are met.
+ *   Conversely, if none of anyRequiredLabels are present, then the rule is violated.
+ *
+ *   For the purposes of determining which label to display as required in the 'automated merging requirements met' check and
+ *   'Next Steps to Merge" comments, the first label in anyRequiredLabels is used.
+ *   The assumption here is that anyRequiredLabels[0] is the 'current' label,
+ *   while the remaining required label options are 'legacy' labels.
+ *
+ *   If given required label string ends with an asterisk, it is treated as a prefix substring match.
+ *   For example, requiredLabel of 'Foo-Approved-*' means that any label with prefix 'Foo-Approved-' will satisfy the rule.
+ *   For example, 'Foo-Approved-Bar' or 'Foo-Approved-Qux', but not 'Foo-Approved' nor 'Foo-Approved-'.
+ *
+ *   If anyRequiredLabels is an empty array, then if the rule is violated, there is no way to meet the rule prerequisites.
+ * @property {string} troubleshootingGuide - The doc to display to the user if the required label is required, but missing.
+ */
+
+/**
+ * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
+ * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
+ *
+ * For additional context, see:
+ *
+ * - "Deep-dive into breaking changes on spec PRs"
+ *   https://aka.ms/azsdk/pr-brch-deep
+ *
+ * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
+ *   https://github.com/Azure/azure-sdk-tools/issues/6374
+ */
+/**
+ * @typedef {"SameVersion" | "CrossVersion"} BreakingChangesCheckType
+ * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired"} ReviewRequiredLabel
+ * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*"} ReviewApprovalPrefixLabel
+ * @typedef {"Versioning-Approved-Benign" | "Versioning-Approved-BugFix" | "Versioning-Approved-PrivatePreview" | "Versioning-Approved-BranchPolicyException" | "Versioning-Approved-Previously" | "Versioning-Approved-Retired"} ValidVersioningApproval
+ * @typedef {"BreakingChange-Approved-Benign" | "BreakingChange-Approved-BugFix" | "BreakingChange-Approved-UserImpact" | "BreakingChange-Approved-BranchPolicyException" | "BreakingChange-Approved-Previously" | "BreakingChange-Approved-Security"} ValidBreakingChangeApproval
+ * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval} SpecsBreakingChangesLabel
+ */
+/**
+ * @typedef {Object} BreakingChangesCheckConfig
+ * @property {ReviewRequiredLabel} reviewRequiredLabel
+ * @property {ReviewApprovalPrefixLabel} approvalPrefixLabel
+ * @property {(ValidVersioningApproval | ValidBreakingChangeApproval)[]} approvalLabels
+ * @property {string} [deprecatedReviewRequiredLabel]
+ */
+
+/**
+ * @typedef {"SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile"} FileTypes
+ */
+
+/**
+ * @typedef {"Addition" | "Deletion" | "Update"} ChangeTypes
+ */
+
+/**
+ * @typedef {Object} PRChange
+ * @property {FileTypes} fileType
+ * @property {ChangeTypes} changeType
+ * @property {string} filePath
+ * @property {any} [additionalInfo]
+ */
+
+/**
+ * @typedef {Object} ChangeHandler
+ * @property {function(PRChange): void} [SwaggerFile]
+ * @property {function(PRChange): void} [TypeSpecFile]
+ * @property {function(PRChange): void} [ExampleFile]
+ * @property {function(PRChange): void} [ReadmeFile]
+ */
+
+/**
+ * @typedef {"resource-manager" | "data-plane"} PRType
+ */
+
+/**
+ * Represents a GitHub label.
+ * Currently used in the context of processing
+ * labels related to the review workflow of PRs submitted to
+ * Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
+ * This processing happens in the prSummary.ts / summary() function.
+ *
+ * See also: https://aka.ms/SpecPRReviewARMInvariants
+ */
+// todo: inject `core` for access to logging
+export class Label {
+  /**
+   * @param {string} name
+   * @param {Set<string>} [presentLabels]
+   */
+  constructor(name, presentLabels) {
+    /** @type {string} */
+    this.name = name;
+
+    /**
+     * Is the label currently present on the pull request?
+     * This is determined at the time of construction of this object.
+     * @type {boolean | undefined}
+     */
+    this.present = presentLabels?.has(this.name) ?? undefined;
+
+    /**
+     * Should this label be present on the pull request?
+     * Must be defined before applyStateChange is called.
+     * Not set at the construction time to facilitate determining desired presence
+     * of multiple labels in single code block, without intermixing it with
+     * label construction logic.
+     * @type {boolean | undefined}
+     */
+    this.shouldBePresent = undefined;
+  }
+
+  /**
+   * If the label should be added, add its name to labelsToAdd.
+   * If the label should be removed, add its name to labelsToRemove.
+   * Otherwise, do nothing.
+   *
+   * Precondition: this.shouldBePresent has been defined.
+   * @param {Set<string>} labelsToAdd
+   * @param {Set<string>} labelsToRemove
+   */
+  applyStateChange(labelsToAdd, labelsToRemove) {
+    if (this.shouldBePresent === undefined) {
+      console.warn(
+        "ASSERTION VIOLATION! " +
+          `Cannot applyStateChange for label '${this.name}' ` +
+          "as its desired presence hasn't been defined. Returning early."
+      );
+      return;
+    }
+
+    if (!this.present && this.shouldBePresent) {
+      if (!labelsToAdd.has(this.name)) {
+        console.log(`Label.applyStateChange: '${this.name}' was not present and should be present. Scheduling addition.`);
+        labelsToAdd.add(this.name);
+      } else {
+        console.log(`Label.applyStateChange: '${this.name}' was not present and should be present. It is already scheduled for addition.`);
+      }
+    } else if (this.present && !this.shouldBePresent) {
+      if (!labelsToRemove.has(this.name)) {
+        console.log(`Label.applyStateChange: '${this.name}' was present and should not be present. Scheduling removal.`);
+        labelsToRemove.add(this.name);
+      } else {
+        console.log(`Label.applyStateChange: '${this.name}' was present and should not be present. It is already scheduled for removal.`);
+      }
+    } else if (this.present === this.shouldBePresent) {
+      console.log(`Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"}. This is the desired state.`);
+    } else {
+      console.warn(
+        "ASSERTION VIOLATION! " +
+          `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"} while it should be ${this.shouldBePresent ? "present" : "not present"}. `
+          + `At this point of execution this should not happen.`
+      );
+    }
+  }
+
+  /**
+   * @param {string} label
+   * @returns {boolean}
+   */
+  isEqualToOrPrefixOf(label) {
+    return this.name.endsWith("*")
+      ? label.startsWith(this.name.slice(0, -1))
+      : this.name === label;
+  }
+
+  /**
+   * @returns {string}
+   */
+  logString() {
+    return (
+      `Label: name: ${this.name}, ` +
+      `present: ${this.present}, ` +
+      `shouldBePresent: ${this.shouldBePresent}. `
+    );
+  }
+}
+
+// #endregion typedefs
+// #region constants
 export const sdkLabels = {
   "azure-cli-extensions": {
     breakingChange: undefined,
@@ -100,37 +347,9 @@ export const sdkLabels = {
 };
 
 /**
- * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
- * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
- *
- * For additional context, see:
- *
- * - "Deep-dive into breaking changes on spec PRs"
- *   https://aka.ms/azsdk/pr-brch-deep
- *
- * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
- *   https://github.com/Azure/azure-sdk-tools/issues/6374
- */
-/**
- * @typedef {"SameVersion" | "CrossVersion"} BreakingChangesCheckType
- * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired"} ReviewRequiredLabel
- * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*"} ReviewApprovalPrefixLabel
- * @typedef {"Versioning-Approved-Benign" | "Versioning-Approved-BugFix" | "Versioning-Approved-PrivatePreview" | "Versioning-Approved-BranchPolicyException" | "Versioning-Approved-Previously" | "Versioning-Approved-Retired"} ValidVersioningApproval
- * @typedef {"BreakingChange-Approved-Benign" | "BreakingChange-Approved-BugFix" | "BreakingChange-Approved-UserImpact" | "BreakingChange-Approved-BranchPolicyException" | "BreakingChange-Approved-Previously" | "BreakingChange-Approved-Security"} ValidBreakingChangeApproval
- * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval} SpecsBreakingChangesLabel
- */
-/**
- * @typedef {Object} BreakingChangesCheckConfig
- * @property {ReviewRequiredLabel} reviewRequiredLabel
- * @property {ReviewApprovalPrefixLabel} approvalPrefixLabel
- * @property {(ValidVersioningApproval | ValidBreakingChangeApproval)[]} approvalLabels
- * @property {string} [deprecatedReviewRequiredLabel]
- */
-
-/**
  * @type {Record<BreakingChangesCheckType, BreakingChangesCheckConfig>}
  */
-// todo: pull this from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
+// todo: pull values from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
 export const breakingChangesCheckType = {
   SameVersion: {
     reviewRequiredLabel: "VersioningReviewRequired",
@@ -158,6 +377,88 @@ export const breakingChangesCheckType = {
   },
 };
 
+// #endregion constants
+// #region LabelContext
+
+
+async function processARMReview(
+  context: IValidatorContext,
+  labelContext: LabelContext,
+  resourceManagerLabelShouldBePresent: boolean,
+  versioningReviewRequiredLabelShouldBePresent: boolean,
+  breakingChangeReviewRequiredLabelShouldBePresent: boolean,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean,
+  rpaasExceptionLabelShouldBePresent: boolean,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean,
+  isDraft: boolean,
+): Promise<{ armReviewLabelShouldBePresent: boolean }> {
+  console.log("ENTER definition processARMReview")
+  const [owner, repo, prNumber] = getPRInfo(context)
+
+  const armReviewLabel = new Label("ARMReview", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  armReviewLabel.shouldBePresent = false;
+
+  const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  newApiVersionLabel.shouldBePresent = false;
+
+  const branch = (context.contextConfig() as PRContext).targetBranch
+  const prTitle = await getPrTitle(owner, repo, prNumber)
+  const isReleaseBranchVal: boolean = isReleaseBranch(branch)
+  const isShiftLeftPRWithRPSaaSDevVal: boolean = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
+  const isBranchInScopeOfSpecReview: boolean = isReleaseBranchVal || isShiftLeftPRWithRPSaaSDevVal
+  let isNewApiVersionVal: boolean | "not_computed" = "not_computed"
+  let isMissingBaseCommit: boolean | "not_computed" = "not_computed"
+
+  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
+  // determines which kind of review exactly we need.
+  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview
+  if (specReviewApplies) {
+    isNewApiVersionVal = await isNewApiVersion(context)
+    if (isNewApiVersionVal) {
+      // Note that in case of data-plane PRs, the addition of this label will result
+      // in API stewardship board review being required.
+      // See requiredLabelsRules.ts.
+      newApiVersionLabel.shouldBePresent = true;
+    }
+
+    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent
+    await processARMReviewWorkflowLabels(
+      labelContext,
+      armReviewLabel.shouldBePresent,
+      versioningReviewRequiredLabelShouldBePresent,
+      breakingChangeReviewRequiredLabelShouldBePresent,
+      ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+      rpaasExceptionLabelShouldBePresent,
+      ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
+  }
+
+  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+
+  console.log(`RETURN definition processARMReview. `
+    + `url: ${new PRKey(owner, repo, prNumber).toUrl()}, owner: ${owner}, repo: ${repo}, pr: ${prNumber}, branch: ${branch}, `
+    + `isReleaseBranch: ${isReleaseBranchVal}, `
+    + `isShiftLeftPRWithRPSaaSDev: ${isShiftLeftPRWithRPSaaSDevVal}, `
+    + `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, `
+    + `isNewApiVersion: ${isNewApiVersionVal}, `
+    + `isMissingBaseCommit: ${isMissingBaseCommit}, `
+    + `isDraft: ${isDraft}, `
+    + `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, `
+    + `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`)
+
+  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent }
+}
+
+function isReleaseBranch(branchName: string) {
+  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  return branchRegex.some((b) => b.test(branchName));
+}
+
+
+// #endregion
+// #region LabelRules
 /**
  * @param {BreakingChangesCheckType} approvalType
  * @param {string[]} labels
@@ -168,59 +469,6 @@ export function anyApprovalLabelPresent(approvalType, labels) {
   const labelsToMatchAgainst = [breakingChangesCheckType[approvalType].approvalPrefixLabel];
   return anyLabelMatches(labelsToMatchAgainst, labels);
 }
-
-/**
- * RequiredLabelRule:
- * IF ((any of the anyPrerequisiteLabels is present
- *     OR all of the allPrerequisiteLabels are present)
- *     AND none of the allPrerequisiteAbsentLabels is present)
- * THEN any of the anyRequiredLabels is required.
- *
- * IF any of the anyRequiredLabels is required
- * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
- *
- * @typedef {Object} RequiredLabelRule
- * @property {number} precedence - If multiple RequiredLabelRules are violated, the one with lowest
- *   precedence should be displayed to the user first. If multiple rules have
- *   the same precedence, and one of them should be displayed,
- *   then all of them should be displayed.
- *
- *   Note this independent of the CheckMetadata.precedence. That is,
- *   if there are failing checks, and failing required label rules,
- *   both of them will be shown, both taking appropriate lowest precedence.
- * @property {string[]} [branches] - Branches, in format "repo/branch", e.g. "azure-rest-api-specs/main",
- *   to which this required label rule applies.
- *
- *   To be exact:
- *   - If there is at least one branch defined, and the evaluated PR is
- *     not targeting any of the branches defined, then the rule is not applicable (it implicitly passes).
- *   - If "branches" is empty or undefined, then the rule applies to all branches in all repos.
- * @property {string[]} [anyPrerequisiteLabels] - If any of anyPrerequisiteLabels is present, the requiredLabel is required.
- *   This condition is ORed with allPrerequisiteLabels.
- *
- *   If the anyRequiredLabels collection is empty or undefined, anyPrerequisiteLabels must have exactly one entry.
- * @property {string[]} [allPrerequisiteLabels] - If all of allPrerequisiteLabels are present, the requiredLabel is required.
- *   This condition is ORed with anyPrerequisiteLabels.
- *
- *   If the anyRequiredLabels collection is empty or undefined, allPrerequisiteLabels must be empty or undefined.
- * @property {string[]} [allPrerequisiteAbsentLabels] - If any of the allPrerequisiteAbsentLabels is present,
- *   the requiredLabel is not required.
- * @property {string[]} anyRequiredLabels - If any of the labels in anyRequiredLabels is present,
- *   then the rule prerequisites, as expressed by anyPrerequisiteLabels and allPrerequisiteLabels, are met.
- *   Conversely, if none of anyRequiredLabels are present, then the rule is violated.
- *
- *   For the purposes of determining which label to display as required in the 'automated merging requirements met' check and
- *   'Next Steps to Merge" comments, the first label in anyRequiredLabels is used.
- *   The assumption here is that anyRequiredLabels[0] is the 'current' label,
- *   while the remaining required label options are 'legacy' labels.
- *
- *   If given required label string ends with an asterisk, it is treated as a prefix substring match.
- *   For example, requiredLabel of 'Foo-Approved-*' means that any label with prefix 'Foo-Approved-' will satisfy the rule.
- *   For example, 'Foo-Approved-Bar' or 'Foo-Approved-Qux', but not 'Foo-Approved' nor 'Foo-Approved-'.
- *
- *   If anyRequiredLabels is an empty array, then if the rule is violated, there is no way to meet the rule prerequisites.
- * @property {string} troubleshootingGuide - The doc to display to the user if the required label is required, but missing.
- */
 
 /**
  * @param {RequiredLabelRule} rule
@@ -772,3 +1020,4 @@ export function isEqualToOrPrefixOf(inputstring, label) {
     ? label.startsWith(inputstring.slice(0, -1))
     : inputstring === label;
 }
+// #endregion
