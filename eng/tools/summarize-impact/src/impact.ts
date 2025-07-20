@@ -148,8 +148,6 @@ export async function evaluateImpact(
 
   const newApiVersion = await isNewApiVersion(context);
 
-  console.log(`Here is the calculated labelContext. ${JSON.stringify(labelContext, null, 2)}`);
-
   return {
     suppressionReviewRequired: labelContext.toAdd.has("suppressionsReviewRequired"),
     versioningReviewRequired: versioningReviewRequiredLabelShouldBePresent,
