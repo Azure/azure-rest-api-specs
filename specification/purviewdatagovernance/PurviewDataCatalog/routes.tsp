@@ -161,7 +161,7 @@ op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundatio
 
     @doc("CatalogModelCriticalDataElementRequest")
     @body
-    body?: JobjectProperties;
+    body?: InputProperties;
   },
   {
     @statusCode

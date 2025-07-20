@@ -251,8 +251,8 @@ model CriticalDataElementFacetRequest {
   facets?: ModelsFacetRequestObject[];
 }
 
-@doc("Jobject properties.")
-model JobjectProperties {
+@doc("InputProperties.")
+model InputProperties {
   @doc("The first additional property.")
   prop1?: string[];
 
