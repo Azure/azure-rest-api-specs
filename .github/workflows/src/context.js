@@ -219,6 +219,15 @@ export async function extractInputs(github, context, core) {
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
+        try {
+          // Fallback: search for PR number by commit SHA
+          core.info(`Falling back to REST API to find PR for commit ${payload.workflow_run.head_sha}`);
+          const fallback = await getIssueNumber({ head_sha: payload.workflow_run.head_sha, github, core });
+          issue_number = fallback.issueNumber;
+        }
+        catch (error) {
+          core.error(`Error: ${error}`);
+        }
       }
     } else {
       throw new Error(
