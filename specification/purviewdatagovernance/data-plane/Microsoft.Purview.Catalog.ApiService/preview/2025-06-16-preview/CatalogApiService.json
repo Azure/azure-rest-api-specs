@@ -582,10 +582,12 @@
           },
           {
             "name": "body",
-            "in": "query",
+            "in": "body",
             "description": "CatalogModelCriticalDataElementRequest",
             "required": false,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/JobjectProperties"
+            }
           }
         ],
         "responses": {
@@ -752,6 +754,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeletesCriticalDataElement_MaximumSet": {
+            "$ref": "./examples/DeletesCriticalDataElement_MaximumSet_Gen.json"
           }
         }
       }
@@ -1474,6 +1481,33 @@
         "code",
         "message"
       ]
+    },
+    "JobjectProperties": {
+      "type": "object",
+      "description": "Jobject properties.",
+      "properties": {
+        "prop1": {
+          "type": "array",
+          "description": "The first additional property.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prop2": {
+          "type": "array",
+          "description": "The second additional property.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prop3": {
+          "type": "array",
+          "description": "The third additional property.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ModelsFacetRequestObject": {
       "type": "object",

@@ -252,7 +252,7 @@ model CriticalDataElementFacetRequest {
 }
 
 @doc("Jobject properties.")
-model additionalProp1 {
+model JobjectProperties {
   @doc("The first additional property.")
   prop1?: string[];
 
