@@ -275,7 +275,6 @@ const EXCLUDED_CHECK_NAMES = [];
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  logGitHubRateLimitInfo(github, core);
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
@@ -422,21 +421,6 @@ export async function summarizeChecksImpl(
   //   commentName,
   //   commentBody
   // )
-}
-
-/**
- * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<void>}
- */
-export async function logGitHubRateLimitInfo(github, core) {
-  try {
-    const { data: rateLimit } = await github.rest.rateLimit.get();
-    const { data: user } = await github.rest.users.getAuthenticated();
-    core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
-  } catch (e) {
-    core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
-  }
 }
 
 /**

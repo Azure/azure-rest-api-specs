@@ -6,10 +6,10 @@ on:
     workflows:
       - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
       - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
+      - "\\[TEST-IGNORE\\] Summarize PR Impact"
       - "Swagger Avocado - Set Status"
       - "Swagger LintDiff - Set Status"
       - "SDK Validation Status"
-      - ["\\[TEST-IGNORE\\] Summarize PR Impact"]
     types:
       - completed
   pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
@@ -25,7 +25,7 @@ permissions:
   contents: read # for actions/checkout
   checks: read # for octokit.rest.checks.listForRef
   statuses: read # for octokit.rest.repos.getCombinedStatusForRef
-  issues: write # to post comments via the Issues API I'm not certain if I need this one or pull-requests only. we'll find out!
+  issues: write # to post comments via the Issues API
   pull-requests: write # to post comments via the Pull Requests API
 
 jobs:
