@@ -1139,8 +1139,11 @@
           }
         },
         "x-ms-examples": {
-          "FineTuningJobs_Get": {
-            "$ref": "./examples/FineTuningJobs_Get.json"
+          "FineTuningJobs_Get_FailedJob": {
+            "$ref": "./examples/FineTuningJobs_Get_FailedJob.json"
+          },
+          "FineTuningJobs_Get_SuccessfulJob": {
+            "$ref": "./examples/FineTuningJobs_Get_SuccessfulJob.json"
           }
         }
       }
@@ -2750,6 +2753,25 @@
           "type": "integer",
           "format": "int32",
           "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "description": "The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs."
+        },
+        "method": {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod",
+          "description": "The method used for fine-tuning."
+        },
+        "integrations": {
+          "type": "object",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FineTuningJobIntegration"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/FineTuningJobError",
+          "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure."
         }
       },
       "required": [
@@ -2760,6 +2782,240 @@
         "training_file",
         "model",
         "seed"
+      ]
+    },
+    "FineTuningJobDPOHyperParameters": {
+      "type": "object",
+      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "beta": {
+          "type": "number",
+          "format": "double",
+          "description": "The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "FineTuningJobDPOTrainingMethod": {
+      "type": "object",
+      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobDPOHyperParameters",
+          "description": "The hyperparameters used for the DPO fine-tuning job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "dpo"
+    },
+    "FineTuningJobError": {
+      "type": "object",
+      "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error message."
+        },
+        "param": {
+          "type": "string",
+          "description": "The parameter that was invalid, usually training_file or validation_file. This field will be null if the failure was not parameter-specific."
+        }
+      }
+    },
+    "FineTuningJobIntegration": {
+      "type": "object",
+      "description": "Integration to enable for fine-tuning job.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of integration to enable. Currently, only 'wandb' (Weights and Biases) is supported."
+        },
+        "wandb": {
+          "$ref": "#/definitions/FineTuningJobIntegrationWeightsAndBiases",
+          "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run."
+        }
+      },
+      "required": [
+        "type",
+        "wandb"
+      ]
+    },
+    "FineTuningJobIntegrationWeightsAndBiases": {
+      "type": "object",
+      "description": "The settings for your integration with Weights and Biases. This payload specifies the project that metrics will be sent to. Optionally, you can set an explicit display name for your run, add tags to your run, and set a default entity (team, username, etc) to be associated with your run.",
+      "properties": {
+        "project": {
+          "type": "string",
+          "description": "The name of the project that the new run will be created under."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity to use for the run. This allows you to set the team or username of the WandB user that you would like associated with the run. If not set, the default entity for the registered WandB API key is used."
+        },
+        "name": {
+          "type": "string",
+          "description": "A display name to set for the run. If not set, we will use the Job ID as the name."
+        },
+        "tags": {
+          "type": "object",
+          "description": "A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "project"
+      ]
+    },
+    "FineTuningJobRFTGrader": {
+      "type": "object",
+      "description": "The grader used for RFT fine-tuning. Abstract base class",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The grader type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FineTuningJobRFTHyperParameters": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "compute_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Multiplier on amount of compute used for exploring search space during training."
+        },
+        "eval_interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps between evaluation runs."
+        },
+        "eval_samples": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of evaluation samples to generate per training step."
+        },
+        "learning_rate_multiplier": {
+          "type": "number",
+          "format": "double",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "reasoning_effort": {
+          "type": "string",
+          "description": "Level of reasoning effort."
+        }
+      }
+    },
+    "FineTuningJobRFTTrainingMethod": {
+      "type": "object",
+      "description": "Configuration for the Reinforcement fine-tuning method.",
+      "properties": {
+        "grader": {
+          "$ref": "#/definitions/FineTuningJobRFTGrader",
+          "description": "The grader used for the fine-tuning job."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobRFTHyperParameters",
+          "description": "The hyperparameters used for the reinforcement fine-tuning job."
+        }
+      },
+      "required": [
+        "grader"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "reinforcement"
+    },
+    "FineTuningJobSFTHyperParameters": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Supervised Fine-Tuning job.",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance."
+        },
+        "learning_rate_multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting."
+        },
+        "n_epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        }
+      }
+    },
+    "FineTuningJobSFTTrainingMethod": {
+      "type": "object",
+      "description": "Configuration for the Supervised Fine-Tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "description": "The hyperparameters used for the DPO fine-tuning job."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "supervised"
+    },
+    "FineTuningJobTrainingMethod": {
+      "type": "object",
+      "description": "The method used for fine-tuning. Abstract base class",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of method. Is either supervised, dpo, or reinforcement."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "FolderDatasetVersion": {
