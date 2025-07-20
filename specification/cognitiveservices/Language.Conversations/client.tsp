@@ -210,11 +210,19 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(analyzeConversationsSubmitJob,
   "AnalyzeConversationSubmitOperation"
 );
+@@clientName(analyzeConversationsSubmitJob,
+  "AnalyzeConversationSubmitJob", "python"
+);
+
 @@clientName(analyzeConversationsJobStatus,
   "GetAnalyzeConversationJobStatus"
 );
 @@clientName(analyzeConversationsCancelJob,
   "CancelAnalyzeConversations"
+);
+
+@@clientName(analyzeConversationsCancelJob,
+  "analyzeConversationCancelJob", "python"
 );
 
 @@clientName(ConversationalPiiResultWithResultBase,
