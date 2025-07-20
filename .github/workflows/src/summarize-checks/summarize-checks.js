@@ -435,6 +435,13 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
         ... on Commit {
           checkSuites(first: 20) {
             nodes {
+              workflowRun {
+                id
+                databaseId
+                workflow {
+                  name
+                }
+              }
               checkRuns(first: 30) {
                 nodes {
                   name
@@ -640,7 +647,7 @@ function extractRunsFromGraphQLResponse(response) {
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(
-      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
       (checkSuiteNode) => {
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
@@ -665,7 +672,7 @@ function extractRunsFromGraphQLResponse(response) {
             // Note the "else" here. It means that:
             // A GH check will be bucketed into "failing FYI check run" if:
             // - It is failing
-            // - AND is is NOT marked as 'required' in GitHub branch policy
+            // - AND it is is NOT marked as 'required' in GitHub branch policy
             // - AND it is marked as 'FYI' in this file's FYI_CHECK_NAMES array
             else if (FYI_CHECK_NAMES.includes(checkRunNode.name)) {
               fyiCheckRuns.push({
@@ -679,6 +686,26 @@ function extractRunsFromGraphQLResponse(response) {
         }
       },
     );
+  }
+  // Log Summarize PR Impact workflow run ID when a successful run is found
+
+
+  if (response.resource?.checkSuites?.nodes) {
+  response.resource.checkSuites.nodes.forEach(
+    /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+    (checkSuiteNode) => {
+      if (checkSuiteNode.checkRuns?.nodes) {
+        checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
+          if (checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact"
+            && checkRunNode.status?.toLowerCase() === 'completed'
+            && checkRunNode.conclusion?.toLowerCase() === 'success') {
+              console.log(
+                `Found matching check run: ${checkRunNode.name} with workflow id of ${checkSuiteNode.workflowRun?.id}`
+              );
+          }
+        });
+      }
+    });
   }
 
   return [reqCheckRuns, fyiCheckRuns];
