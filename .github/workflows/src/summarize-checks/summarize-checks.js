@@ -83,7 +83,6 @@ import {
 /**
  * @typedef {Object} GraphQLCheckSuite
  * @property {GraphQLCheckRun[]} nodes
- * @property {WorkflowRunInfo} workflowRun
  */
 
 /**
@@ -104,10 +103,6 @@ import {
 /**
  * @typedef {Object} GraphQLResponse
  * @property {GraphQLResource} resource
- * @property {Object} repository
- * @property {Object} repository.object
- * @property {Object} repository.object.associatedPullRequests
- * @property {Array<{number: number, commits: {nodes: Array<{commit: GraphQLCommit}>}}>} repository.object.associatedPullRequests.nodes
  * @property {Object} rateLimit
  * @property {number} rateLimit.limit
  * @property {number} rateLimit.cost
@@ -318,15 +313,8 @@ export async function summarizeChecksImpl(
     `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
   );
 
-  // we always want fresh labels
-  // we always need a file list. We are pulling the file list from gh because we won't be in the correct file context
-  // to await getChangedFiles, as we run on pull_request_target and workflow_run events. We _aren't_ in the actual PR context
-  // as far as files go
-
-  // If there is a check that DOES need PR context, we will need to shift that logic onto a solo workflow that runs on pull_request
-  // events, and then we can await getChangedFiles.
-  const [labels, files] = await Promise.all([
-    github.paginate(
+  // retrieve latest labels state
+  const labels = await github.paginate(
       github.rest.issues.listLabelsOnIssue,
       {
         owner,
@@ -334,18 +322,18 @@ export async function summarizeChecksImpl(
         issue_number: issue_number,
         per_page: PER_PAGE_MAX
       }
-    ),
-    github.paginate(
-      github.rest.pulls.listFiles,
-      {
-        owner,
-        repo,
-        pull_number: issue_number
-      }
-    )
-  ]);
+  );
 
-  core.info(JSON.stringify(files));
+  /** @type {[CheckRunData[], CheckRunData[]]} */
+  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+    github,
+    core,
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    EXCLUDED_CHECK_NAMES,
+  );
 
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
@@ -384,17 +372,6 @@ export async function summarizeChecksImpl(
     }
   }
 
-  /** @type {[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]} */
-  const [requiredCheckRuns, fyiCheckRuns, workflowRuns] = await getCheckRunTuple(
-    github,
-    core,
-    owner,
-    repo,
-    head_sha,
-    issue_number,
-    EXCLUDED_CHECK_NAMES,
-  );
-  console.log(workflowRuns);
 
   const commentBody = await createNextStepsComment(
     core,
@@ -470,38 +447,6 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
           }
         }
       }
-      repository(owner: "${owner}", name: "${repo}") {
-        object(expression: "${sha}") {
-          ... on Commit {
-            associatedPullRequests(first: 10) {
-              nodes {
-                number
-                commits(last: 1) {
-                  nodes {
-                    commit {
-                      checkSuites(first: 20) {
-                        nodes {
-                          workflowRun {
-                            id
-                            databaseId
-                            url
-                            workflowId
-                            name
-                            status
-                            conclusion
-                            createdAt
-                            updatedAt
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
       rateLimit {
         limit
         cost
@@ -539,7 +484,6 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
 export function updateLabels(
   existingLabels,
   assessment
-  // changedLabel
 ) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -618,7 +562,7 @@ export function updateLabels(
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
  */
 export async function getCheckRunTuple(
   github,
@@ -639,14 +583,11 @@ export async function getCheckRunTuple(
   const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
-  /** @type {WorkflowRunInfo[]} */
-  let workflowRuns = [];
-  [reqCheckRuns, fyiCheckRuns, workflowRuns] = extractRunsFromGraphQLResponse(response);
+  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
 
   core.info(
     `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
-      `WorkflowRuns: ${JSON.stringify(workflowRuns)}`,
+      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, `
   );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
@@ -661,7 +602,7 @@ export async function getCheckRunTuple(
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns, workflowRuns];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns];
 }
 
 /**
@@ -686,28 +627,21 @@ export function checkRunIsSuccessful(checkRun) {
 }
 
 /**
- * @param {GraphQLResponse} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[], WorkflowRunInfo[]]}
+ * @param {any} response - GraphQL response data
+ * @returns {[CheckRunData[], CheckRunData[]]}
  */
 function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = [];
   /** @type {CheckRunData[]} */
   const fyiCheckRuns = [];
-  /** @type {WorkflowRunInfo[]} */
-  const workflowRuns = [];
 
   // Define the automated merging requirements check name
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(
-      /** @param {{ checkRuns?: { nodes?: any[] }, workflowRun?: WorkflowRunInfo }} checkSuiteNode */
+      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
       (checkSuiteNode) => {
-        // Extract workflow run information if available
-        if (checkSuiteNode.workflowRun) {
-          workflowRuns.push(checkSuiteNode.workflowRun);
-        }
-
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
             // We have some specific guidance for some of the required checks.
@@ -747,28 +681,7 @@ function extractRunsFromGraphQLResponse(response) {
     );
   }
 
-  // Also extract workflow runs from the repository.object.associatedPullRequests path
-  if (response.repository?.object?.associatedPullRequests?.nodes) {
-    response.repository.object.associatedPullRequests.nodes.forEach(prNode => {
-      if (prNode.commits?.nodes) {
-        prNode.commits.nodes.forEach(commitNode => {
-          if (commitNode.commit?.checkSuites?.nodes) {
-            commitNode.commit.checkSuites.nodes.forEach(checkSuiteNode => {
-              if (checkSuiteNode.workflowRun) {
-                // Avoid duplicates by checking if we already have this workflow run
-                const existingRun = workflowRuns.find(run => run.id === checkSuiteNode.workflowRun.id);
-                if (!existingRun) {
-                  workflowRuns.push(checkSuiteNode.workflowRun);
-                }
-              }
-            });
-          }
-        });
-      }
-    });
-  }
-
-  return [reqCheckRuns, fyiCheckRuns, workflowRuns];
+  return [reqCheckRuns, fyiCheckRuns];
 }
 // #endregion
 // #region next steps
