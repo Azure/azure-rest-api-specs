@@ -324,8 +324,8 @@ export async function summarizeChecksImpl(
       }
   );
 
-  /** @type {[CheckRunData[], CheckRunData[]]} */
-  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+  /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
+  const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
     core,
     owner,
@@ -340,7 +340,7 @@ export async function summarizeChecksImpl(
 
   // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
   // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
-  let labelContext = await updateLabels(labelNames, {});
+  let labelContext = await updateLabels(labelNames, impactAssessment);
 
   for (const label of labelContext.toRemove) {
     core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
@@ -485,12 +485,12 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
 // * @param {string | undefined } changedLabel
 /**
  * @param {string[]} existingLabels
- * @param {Object} assessment
+ * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
  * @returns {import("./labelling.js").LabelContext}
  */
 export function updateLabels(
   existingLabels,
-  assessment
+  impactAssessment
 ) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -502,57 +502,37 @@ export function updateLabels(
     present: new Set(existingLabels),
     toAdd: new Set(),
     toRemove: new Set()
-  }
-
-  console.log(`log ${assessment} to eliminate warning. Not actually populated yet. `);
-
-  /** @type {import("./labelling.js").ImpactAssessment} */
-  const impactAssessment = {
-    suppressionReviewRequired: false,
-    versioningReviewRequired: false,
-    breakingChangeReviewRequired: false,
-    rpaasChange: false,
-    newRP: false,
-    rpaasRPMissing: false,
-    rpaasRpNotInPrivateRepo: false,
-    resourceManagerRequired: false,
-    rpaasExceptionRequired: false,
-    typeSpecChanged: false,
-    isNewApiVersion: false,
-    isDraft: false,
-    labelContext: {
-      present: new Set(),
-      toAdd: new Set(),
-      toRemove: new Set()
-    },
-    targetBranch: "main"
   };
 
-  console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-  // Merge impact assessment labels into the main labelContext
-  impactAssessment.labelContext.toAdd.forEach(label => {
-    labelContext.toAdd.add(label);
-  });
-  impactAssessment.labelContext.toRemove.forEach(label => {
-    labelContext.toRemove.add(label);
-  });
+  if (impactAssessment) {
+    console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
+    // Merge impact assessment labels into the main labelContext
+    impactAssessment.labelContext.toAdd.forEach(label => {
+      labelContext.toAdd.add(label);
+    });
+    impactAssessment.labelContext.toRemove.forEach(label => {
+      labelContext.toRemove.add(label);
+    });
+  }
 
   // this is the only labelling that was part of original pipelinebot logic
   processArmReviewLabels(labelContext, existingLabels);
 
-  // will further update the label context if necessary
-  processImpactAssessment(
-    impactAssessment.targetBranch,
-    labelContext,
-    impactAssessment.resourceManagerRequired,
-    impactAssessment.versioningReviewRequired,
-    impactAssessment.breakingChangeReviewRequired,
-    impactAssessment.rpaasRPMissing,
-    impactAssessment.rpaasExceptionRequired,
-    impactAssessment.rpaasRpNotInPrivateRepo,
-    impactAssessment.isNewApiVersion,
-    impactAssessment.isDraft
-  );
+  if (impactAssessment) {
+    // will further update the label context if necessary
+    processImpactAssessment(
+      impactAssessment.targetBranch,
+      labelContext,
+      impactAssessment.resourceManagerRequired,
+      impactAssessment.versioningReviewRequired,
+      impactAssessment.breakingChangeReviewRequired,
+      impactAssessment.rpaasRPMissing,
+      impactAssessment.rpaasExceptionRequired,
+      impactAssessment.rpaasRpNotInPrivateRepo,
+      impactAssessment.isNewApiVersion,
+      impactAssessment.isDraft
+    );
+  }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove)
   return labelContext;
@@ -569,7 +549,7 @@ export function updateLabels(
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]>}
  */
 export async function getCheckRunTuple(
   github,
@@ -587,14 +567,26 @@ export async function getCheckRunTuple(
   /** @type {CheckRunData[]} */
   let fyiCheckRuns = [];
 
+  /** @type {number | undefined} */
+  let impactAssessmentWorkflowRun = undefined;
+
+  /** @type { import("./labelling.js").ImpactAssessment | undefined } */
+  let impactAssessment = undefined;
+
   const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
-  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
+  [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] = extractRunsFromGraphQLResponse(response);
+
+  if (impactAssessmentWorkflowRun) {
+    core.info(`Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`);
+    impactAssessment = await getImpactAssessment(github, core, owner, repo, impactAssessmentWorkflowRun);
+  }
 
   core.info(
     `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, `
+      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
+      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`
   );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
@@ -609,7 +601,7 @@ export async function getCheckRunTuple(
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment];
 }
 
 /**
@@ -635,13 +627,16 @@ export function checkRunIsSuccessful(checkRun) {
 
 /**
  * @param {any} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[]]}
+ * @returns {[CheckRunData[], CheckRunData[], number | undefined]}
  */
 function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = [];
   /** @type {CheckRunData[]} */
   const fyiCheckRuns = [];
+
+  /** @type {number | undefined} */
+  let impactAssessmentWorkflowRun = undefined;
 
   // Define the automated merging requirements check name
 
@@ -698,9 +693,8 @@ function extractRunsFromGraphQLResponse(response) {
             if (checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact"
               && checkRunNode.status?.toLowerCase() === 'completed'
               && checkRunNode.conclusion?.toLowerCase() === 'success') {
-                console.log(
-                  `Found matching check run: ${checkRunNode.name} with workflow id of ${checkSuiteNode.workflowRun?.id}`
-                );
+                // Assign numeric databaseId, not the string node ID
+                impactAssessmentWorkflowRun = checkSuiteNode.workflowRun?.databaseId;
             }
           });
         }
@@ -708,7 +702,7 @@ function extractRunsFromGraphQLResponse(response) {
     );
   }
 
-  return [reqCheckRuns, fyiCheckRuns];
+  return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
 // #endregion
 // #region next steps
@@ -936,9 +930,9 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId - The workflow run databaseId
- * @returns {Promise<any>} The parsed job summary data
+ * @returns {Promise<import("./labelling.js").ImpactAssessment | undefined>} The parsed job summary data
  */
-export async function downloadJobSummaryArtifact(github, core, owner, repo, runId) {
+export async function getImpactAssessment(github, core, owner, repo, runId) {
   try {
     // List artifacts for provided workflow run
     const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
@@ -954,10 +948,10 @@ export async function downloadJobSummaryArtifact(github, core, owner, repo, runI
 
     if (!jobSummaryArtifact) {
       core.info('No job-summary artifact found');
-      return null;
+      return undefined;
     }
 
-    // Download the artifact
+    // Download the artifact as a zip archive
     const download = await github.rest.actions.downloadArtifact({
       owner,
       repo,
@@ -965,25 +959,30 @@ export async function downloadJobSummaryArtifact(github, core, owner, repo, runI
       archive_format: 'zip'
     });
 
-    // The download.data is a buffer containing the zip file
-    // You'll need to extract and parse the JSON using JSZip
-    // const JSZip = require('jszip');
-    // const zip = new JSZip();
-    // const contents = await zip.loadAsync(download.data);
-    // const fileName = Object.keys(contents.files)[0];
-    // const fileContent = await contents.files[fileName].async('text');
-    // const jobSummary = JSON.parse(fileContent);
+    core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
+    // Extract single JSON file from tar and parse
+    const fs = require('fs');
+    const os = require('os');
+    const path = require('path');
+    const { execSync } = require('child_process');
+    // Write zip buffer to temp file and extract JSON
+    const tmpZip = path.join(os.tmpdir(), `job-summary-${runId}.zip`);
+    // Convert ArrayBuffer to Buffer
+    // Convert ArrayBuffer (download.data) to Node Buffer
+    const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
+    const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
+    fs.writeFileSync(tmpZip, zipBuffer);
+    // Extract JSON content from zip archive
+    const jsonContent = execSync(`unzip -p ${tmpZip}`);
+    fs.unlinkSync(tmpZip);
 
-    core.info(`Successfully found job summary artifact with ID: ${jobSummaryArtifact.id}`);
-    return {
-      artifactId: jobSummaryArtifact.id,
-      downloadUrl: jobSummaryArtifact.archive_download_url,
-      data: download.data
-    };
-
+    /** @type {import("./labelling.js").ImpactAssessment} */
+    // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
+    const impact = JSON.parse(jsonContent.toString('utf8'));
+    return impact;
   } catch (/** @type {any} */ error) {
     core.error(`Failed to download job summary artifact: ${error.message}`);
-    return null;
+    return undefined;
   }
 }
 // #endregion
