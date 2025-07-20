@@ -592,7 +592,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelCriticalDataElement"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1088,7 +1091,6 @@
       "enum": [
         "DRAFT",
         "PUBLISHED",
-        "INREVIEW",
         "EXPIRED"
       ],
       "x-ms-enum": {
@@ -1104,11 +1106,6 @@
             "name": "Published",
             "value": "PUBLISHED",
             "description": "The status is published."
-          },
-          {
-            "name": "InReview",
-            "value": "INREVIEW",
-            "description": "The status is InReview."
           },
           {
             "name": "Expired",
