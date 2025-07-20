@@ -166,6 +166,10 @@ op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundatio
   {
     @statusCode
     statusCode: 200;
+
+    @doc("The critical data element with updated relationships.")
+    @body
+    body: CatalogModelCriticalDataElement;
   }
 >;
 

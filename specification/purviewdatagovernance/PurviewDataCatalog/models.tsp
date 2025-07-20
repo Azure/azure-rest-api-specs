@@ -16,9 +16,6 @@ union CatalogModelStatus {
   @doc("The status is published.")
   Published: "PUBLISHED",
 
-  @doc("The status is InReview.")
-  InReview: "INREVIEW",
-
   @doc("The status is Expired.")
   Expired: "EXPIRED",
 
