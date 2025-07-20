@@ -28,7 +28,7 @@
   "securityDefinitions": {
     "DiscoveryApiKey": {
       "type": "apiKey",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview",
       "name": "X-API-Key",
       "in": "header"
     }
@@ -51,7 +51,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "$ref": "#/parameters/SingleMarketParameter"
           },
           {
             "$ref": "#/parameters/LanguageParameter"
@@ -123,7 +123,7 @@
             "$ref": "#/parameters/LocationsParameter"
           },
           {
-            "$ref": "#/parameters/OptionalMarketParameter"
+            "$ref": "#/parameters/ListingMarketParameter"
           },
           {
             "$ref": "#/parameters/HideKeysParameter"
@@ -195,7 +195,7 @@
             "$ref": "#/parameters/LocationsParameter"
           },
           {
-            "$ref": "#/parameters/OptionalMarketParameter"
+            "$ref": "#/parameters/ListingMarketParameter"
           },
           {
             "$ref": "#/parameters/OdataSelectParameter"
@@ -429,7 +429,7 @@
     },
     "DiscoveryApiKey": {
       "type": "object",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview",
       "properties": {
         "type": {
           "type": "string",
@@ -1756,7 +1756,7 @@
     "ExcludeSkuDetailsParameter": {
       "name": "excludeSkuDetails",
       "in": "query",
-      "description": "By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.",
+      "description": "Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE.",
       "required": false,
       "type": "boolean",
       "default": false,
@@ -1801,6 +1801,14 @@
       "default": "en",
       "x-ms-parameter-location": "method"
     },
+    "ListingMarketParameter": {
+      "name": "market",
+      "in": "query",
+      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "LocationsParameter": {
       "name": "locations",
       "in": "query",
@@ -1811,14 +1819,6 @@
         "type": "string"
       },
       "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
-    "MarketParameter": {
-      "name": "market",
-      "in": "query",
-      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "OdataExpandParameter": {
@@ -1853,14 +1853,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OptionalMarketParameter": {
-      "name": "market",
-      "in": "query",
-      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "PricingAudienceParameter": {
       "name": "pricingAudience",
       "in": "query",
@@ -1889,6 +1881,14 @@
       "name": "service",
       "in": "query",
       "description": "The service name of the product, such as 'Virtual Machines'",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SingleMarketParameter": {
+      "name": "market",
+      "in": "query",
+      "description": "Product market value. The response will include plans/availabilities that can be sold in the specified market\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

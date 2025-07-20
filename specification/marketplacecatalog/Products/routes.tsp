@@ -13,7 +13,7 @@ alias ProductsListingTraits = NoClientRequestId &
   NoConditionalRequests &
   QueryParametersTrait<LanguageParameter &
     LocationsParameter &
-    OptionalMarketParameter &
+    ListingMarketParameter &
     HideKeysParameter &
     OdataSelectParameter &
     OdataFilterParameter &
@@ -25,7 +25,7 @@ alias ProductsListingTraits = NoClientRequestId &
 alias ProductsGetTraits = NoClientRequestId &
   SupportsRepeatableRequests &
   NoConditionalRequests &
-  QueryParametersTrait<MarketParameter &
+  QueryParametersTrait<SingleMarketParameter &
     LanguageParameter &
     LocationsParameter &
     IncludeStopSoldPlansParameter &
@@ -55,7 +55,7 @@ alias SkusListingTraits = NoClientRequestId &
     ServiceFamilyParameter &
     LanguageParameter &
     LocationsParameter &
-    OptionalMarketParameter &
+    ListingMarketParameter &
     OdataSelectParameter &
     OdataFilterParameter &
     OdataOrderByParameter>;

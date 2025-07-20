@@ -857,14 +857,14 @@ model Image {
 
 // Market is required in some operations and not in others, so there are 2 models used
 @doc("Marketplace Catalog API")
-model MarketParameter {
+model SingleMarketParameter {
   @query
-  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  @doc("Product market value. The response will include plans/availabilities that can be sold in the specified market\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market: string;
 }
 
 @doc("Marketplace Catalog API")
-model OptionalMarketParameter {
+model ListingMarketParameter {
   @query
   @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market?: string;
@@ -898,10 +898,10 @@ model IncludeStopSoldPlansParameter {
   includeStopSoldPlans?: boolean = false;
 }
 
-@doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
+@doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE.")
 model ExcludeSkuDetailsParameter {
   @query
-  @doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
+  @doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE.")
   excludeSkuDetails?: boolean = false;
 }
 
@@ -977,5 +977,5 @@ model OdataOrderByParameter {
 }
 
 // API key def
-@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header")
+@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview")
 model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
