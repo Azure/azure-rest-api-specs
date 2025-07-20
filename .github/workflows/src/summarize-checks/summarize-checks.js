@@ -687,25 +687,25 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-  // Log Summarize PR Impact workflow run ID when a successful run is found
 
-
+  // extract the ImpactAssessment check run if it is completed and successful
   if (response.resource?.checkSuites?.nodes) {
-  response.resource.checkSuites.nodes.forEach(
-    /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
-    (checkSuiteNode) => {
-      if (checkSuiteNode.checkRuns?.nodes) {
-        checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-          if (checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact"
-            && checkRunNode.status?.toLowerCase() === 'completed'
-            && checkRunNode.conclusion?.toLowerCase() === 'success') {
-              console.log(
-                `Found matching check run: ${checkRunNode.name} with workflow id of ${checkSuiteNode.workflowRun?.id}`
-              );
-          }
-        });
+    response.resource.checkSuites.nodes.forEach(
+      /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      (checkSuiteNode) => {
+        if (checkSuiteNode.checkRuns?.nodes) {
+          checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
+            if (checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact"
+              && checkRunNode.status?.toLowerCase() === 'completed'
+              && checkRunNode.conclusion?.toLowerCase() === 'success') {
+                console.log(
+                  `Found matching check run: ${checkRunNode.name} with workflow id of ${checkSuiteNode.workflowRun?.id}`
+                );
+            }
+          });
+        }
       }
-    });
+    );
   }
 
   return [reqCheckRuns, fyiCheckRuns];
@@ -930,39 +930,21 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
 
 // #region artifact downloading
 /**
- * Downloads the job-summary artifact from the summarize-impact workflow
+ * Downloads the job-summary artifact for a given workflow run.
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
- * @param {string} head_sha
+ * @param {number} runId - The workflow run databaseId
  * @returns {Promise<any>} The parsed job summary data
  */
-export async function downloadJobSummaryArtifact(github, core, owner, repo, head_sha) {
+export async function downloadJobSummaryArtifact(github, core, owner, repo, runId) {
   try {
-    // Get workflow runs for the commit
-    const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
-      owner,
-      repo,
-      head_sha,
-      status: 'completed'
-    });
-
-    // Find the summarize-impact workflow run
-    const summarizeImpactRun = workflowRuns.data.workflow_runs.find(run =>
-      run.name === '[TEST-IGNORE] Summarize PR Impact'
-    );
-
-    if (!summarizeImpactRun) {
-      core.info('No summarize-impact workflow run found for this commit');
-      return null;
-    }
-
-    // Get artifacts for the workflow run
+    // List artifacts for provided workflow run
     const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
       owner,
       repo,
-      run_id: summarizeImpactRun.id
+      run_id: runId
     });
 
     // Find the job-summary artifact
