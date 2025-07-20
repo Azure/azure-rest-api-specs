@@ -360,6 +360,71 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin": {
+      "post": {
+        "tags": [
+          "SummaryLogs"
+        ],
+        "x-ms-examples": {
+          "SummaryLogsRetryBin": {
+            "$ref": "./examples/SummaryLogsRetryBin.json"
+          }
+        },
+        "operationId": "SummaryLogs_RetryBin",
+        "description": "Retries a failed summary logs bin.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SummaryLogsNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsRetryBin"
+            },
+            "description": "The parameters required to retry a summary logs bin."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response definition (long-running operation).",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -548,6 +613,30 @@
         }
       },
       "description": "The list summary logs operation response."
+    },
+    "SummaryLogsRetryBin": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SummaryLogsRetryBinProperties",
+          "description": "Retry bin properties."
+        }
+      },
+      "description": "Request to retry a summary logs bin."
+    },
+    "SummaryLogsRetryBinProperties": {
+      "type": "object",
+      "properties": {
+        "retryBinStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the bin to retry."
+        }
+      },
+      "required": [
+        "retryBinStartTime"
+      ],
+      "description": "Properties for retrying a summary logs bin."
     }
   },
   "parameters": {
@@ -555,9 +644,9 @@
       "name": "summaryLogsName",
       "in": "path",
       "required": true,
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "[^/]+",
       "type": "string",
-      "description": "The name of the summary logs.",
+      "description": "The name of the summary logs. Must not contain '/'.",
       "x-ms-parameter-location": "method"
     }
   }
