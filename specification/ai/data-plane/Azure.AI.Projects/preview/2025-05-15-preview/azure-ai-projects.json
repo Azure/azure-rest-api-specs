@@ -1137,6 +1137,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "FineTuningJobs_Get": {
+            "$ref": "./examples/FineTuningJobs_Get.json"
+          }
         }
       }
     },
@@ -2693,6 +2698,19 @@
           "description": "The job identifier.",
           "readOnly": true
         },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'fine_tuning.job'. Parity with OAI SDK"
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created."
+        },
         "status": {
           "type": "string",
           "description": "The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled."
@@ -2704,11 +2722,6 @@
         "validation_file": {
           "type": "string",
           "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created."
         },
         "estimated_finish": {
           "type": "integer",
@@ -2737,25 +2750,16 @@
           "type": "integer",
           "format": "int32",
           "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'fine_tuning.job'. Parity with OAI SDK"
-        },
-        "organization_id": {
-          "type": "string",
-          "description": "The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK"
         }
       },
       "required": [
         "id",
+        "object",
+        "created_at",
         "status",
         "training_file",
-        "validation_file",
-        "created_at",
         "model",
-        "seed",
-        "object"
+        "seed"
       ]
     },
     "FolderDatasetVersion": {
