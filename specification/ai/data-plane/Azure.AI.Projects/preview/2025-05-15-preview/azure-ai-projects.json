@@ -1092,6 +1092,54 @@
         }
       }
     },
+    "/fine_tuning/jobs/{id}": {
+      "get": {
+        "operationId": "FineTuningJobs_Get",
+        "description": "Get info about a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The job identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
@@ -2635,6 +2683,80 @@
         }
       ],
       "x-ms-discriminator-value": "uri_file"
+    },
+    "FineTuningJob": {
+      "type": "object",
+      "description": "Fine-Tuning Job",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The job identifier.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled."
+        },
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created."
+        },
+        "estimated_finish": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
+        },
+        "finished_at": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
+        },
+        "fine_tuned_model": {
+          "type": "string",
+          "description": "The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running."
+        },
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "trained_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'fine_tuning.job'. Parity with OAI SDK"
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "training_file",
+        "validation_file",
+        "created_at",
+        "model",
+        "seed",
+        "object"
+      ]
     },
     "FolderDatasetVersion": {
       "type": "object",
