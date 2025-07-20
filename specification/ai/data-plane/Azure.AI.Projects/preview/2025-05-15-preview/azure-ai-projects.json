@@ -1502,6 +1502,77 @@
           }
         }
       }
+    },
+    "/fine_tuning": {
+      "get": {
+        "operationId": "Fine_Tuning_List",
+        "description": "List all fine-tuning jobs in the project",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last job from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of fine-tuning jobs to retrieve.",
+            "required": false,
+            "type": "int"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of fine-tuning jobs.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The type of this object."
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJob"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FineTuning_List_MaximumSet": {
+            "$ref": "./examples/FineTuning_List_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3362,6 +3433,28 @@
         }
       ],
       "x-ms-discriminator-value": "modelResponseGeneration"
+    },
+    "FineTuningJob": {
+      "type": "object",
+      "description": "Fine-Tuning Job.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The job identifier."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled."
+        },
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
     }
   },
   "parameters": {
