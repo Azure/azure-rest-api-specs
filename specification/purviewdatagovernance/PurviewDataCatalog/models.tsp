@@ -250,3 +250,15 @@ model CriticalDataElementFacetRequest {
   @doc("To filter by multiple facets.")
   facets?: ModelsFacetRequestObject[];
 }
+
+@doc("Jobject properties.")
+model additionalProp1 {
+  @doc("The first additional property.")
+  prop1?: string[];
+
+  @doc("The second additional property.")
+  prop2?: string[];
+
+  @doc("The third additional property.")
+  prop3?: string[];
+}
