@@ -23,6 +23,15 @@ model FineTuningJob {
   @visibility(Lifecycle.Read)
   id: string;
 
+  @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")
+  object: string;
+
+  @doc("The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK")
+  organization_id?: string;
+
+  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was created.")
+  created_at: int32;
+
   @doc("The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled.")
   status: string;
 
@@ -30,10 +39,7 @@ model FineTuningJob {
   training_file: string;
 
   @doc("The file ID used for validation. You can retrieve the validation results with the Files API.")
-  validation_file: string;
-
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was created.")
-  created_at: int32;
+  validation_file?: string;
 
   @doc("The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
   estimated_finish?: int32;
@@ -52,10 +58,4 @@ model FineTuningJob {
 
   @doc("The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.")
   trained_tokens?: int32;
-
-  @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")
-  object: string;
-
-  @doc("The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK")
-  organization_id?: string;
 }
