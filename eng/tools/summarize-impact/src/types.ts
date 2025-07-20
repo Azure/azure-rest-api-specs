@@ -187,7 +187,6 @@ export type LabelContext = {
 };
 
 export type ImpactAssessment = {
-  prType: string[];
   resourceManagerRequired: boolean;
   suppressionReviewRequired: boolean;
   versioningReviewRequired: boolean;
@@ -201,6 +200,7 @@ export type ImpactAssessment = {
   typeSpecChanged: boolean;
   isDraft: boolean;
   labelContext: LabelContext;
+  targetBranch: string;
 };
 
 export class Label {

@@ -149,7 +149,6 @@ export async function evaluateImpact(
   const newApiVersion = await isNewApiVersion(context);
 
   return {
-    prType: [],
     suppressionReviewRequired: labelContext.toAdd.has("suppressionsReviewRequired"),
     versioningReviewRequired: versioningReviewRequiredLabelShouldBePresent,
     breakingChangeReviewRequired: breakingChangeReviewRequiredLabelShouldBePresent,
@@ -163,6 +162,7 @@ export async function evaluateImpact(
     isNewApiVersion: newApiVersion,
     isDraft: context.isDraft,
     labelContext: labelContext,
+    targetBranch: context.targetBranch
   };
 }
 
