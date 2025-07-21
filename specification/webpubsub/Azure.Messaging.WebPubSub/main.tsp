@@ -19,8 +19,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 /**
- * Azure Web PubSub Service is a managed service that helps developers easily build real-time
- * features in web applications with publish-subscribe patterns.
+ * WebPubSubServiceClient
  */
 @service(#{ title: "Azure Web PubSub Service REST API" })
 @versioned(Versions)
@@ -29,8 +28,7 @@ using Azure.Core;
   "Azure Web PubSub Service",
   {
     /**
-     * The Web PubSub service endpoint (protocol and hostname, for example:
-     * https://myservice.webpubsub.azure.com).
+     * HTTP or HTTPS endpoint for the Web PubSub service instance
      */
     endpoint: url,
   }
