@@ -362,9 +362,6 @@ model FineTuningJobCreate {
   @doc("The base model that is being fine-tuned.")
   `model`: string;
 
-  @doc("The base model provider.")
-  modelProvider?: string;
-
   @doc("The seed used for the fine-tuning job.")
   seed: int32;
 
