@@ -6,11 +6,9 @@
  * @param {String} params.head_sha - The head_sha
  * @param {typeof import("@actions/core")} params.core - GitHub Actions core for logging
  * @param {import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api} params.github - GitHub API client
- * @param {string} [params.owner] - Optional GitHub owner to filter by
- * @param {string} [params.repo] - Optional GitHub repo name to filter by (requires owner)
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
-export async function getIssueNumber({ head_sha, core, github, owner, repo }) {
+export async function getIssueNumber({ head_sha, core, github }) {
   let issueNumber = NaN;
 
   if (!head_sha) {
@@ -20,14 +18,9 @@ export async function getIssueNumber({ head_sha, core, github, owner, repo }) {
   core.info(`Searching for PRs with commit SHA: ${head_sha}`);
 
   try {
-    // Build search query with optional owner/repo filtering
-    let query = `sha:${head_sha} type:pr state:open`;
-    if (owner && repo) {
-      query += ` repo:${owner}/${repo}`;
-    } else if (owner) {
-      query += ` user:${owner}`;
-    }
-    const searchResponse = await github.rest.search.issuesAndPullRequests({ q: query });
+    const searchResponse = await github.rest.search.issuesAndPullRequests({
+      q: `sha:${head_sha} type:pr state:open`,
+    });
 
     const totalCount = searchResponse.data.total_count;
     const itemsCount = searchResponse.data.items.length;
@@ -54,3 +47,4 @@ export async function getIssueNumber({ head_sha, core, github, owner, repo }) {
 
   return { issueNumber };
 }
+
