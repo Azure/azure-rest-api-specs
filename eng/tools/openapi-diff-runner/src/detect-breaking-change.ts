@@ -49,9 +49,6 @@ import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 // The value here is an arbitrary high number to limit the stack trace in case a bug would cause it to be excessively long.
 const stackTraceMaxLength = 500;
 
-// Module-level cache for SpecModel instances
-const specModelCache = new Map<string, SpecModel>();
-
 /**
  * Context for breaking change detection operations
  */
@@ -413,14 +410,9 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
     return undefined;
   }
   logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
-  // Check if we already have a SpecModel for this folder
-  if (specModelCache.has(fullFolderPath)) {
-    return specModelCache.get(fullFolderPath)!;
-  }
 
   // Create new SpecModel and cache it
   const specModel = new SpecModel(fullFolderPath);
-  specModelCache.set(fullFolderPath, specModel);
 
   return specModel;
 }
