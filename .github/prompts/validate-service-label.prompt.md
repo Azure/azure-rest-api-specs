@@ -13,7 +13,7 @@ tools: ['CheckServiceLabel', 'CreatePullRequest']
 - If a label is provided by the user, use `CheckServiceLabel` to validate the service label for the corresponding API spec
     - If the service label is valid and exists, skip remaining label validation steps and allow user to proceed with the SDK release process
 - If the service label is invalid or was not provided by the user:
-    - If it's invalid, inform the user that the service label is invalid and explain why it is invalid (It must exist in common-labels.csv AND have the correct color code to be valid).
+    - If it's invalid, inform the user that the service label is invalid. Ask them to double check spelling, punctuation, and space usage.
     - Fetch the common-labels.csv file from the azure-sdk-tools repository and check if any existing label could fit under the service. If a related service label name already exists in the CSV file, ask and confirm if the user wants to use that existing label for their service.
         - If the user confirms, use that existing label. Skip remaining label validation steps and proceed with the SDK release process
     - If user wants to create an entirely new service label instead, suggest a label name to the user and have them confirm the recommended label name
