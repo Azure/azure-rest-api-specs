@@ -29,6 +29,7 @@ alias languageOperations = ResourceOperations<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listDeployments", "csharp")
+@clientName("listDeployments", "python")
 op conversationAuthoringListDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -39,6 +40,7 @@ op conversationAuthoringListDeployments is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listProjects", "csharp")
+@clientName("listProjects", "python")
 op conversationAuthoringListProjects is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -49,6 +51,7 @@ op conversationAuthoringListProjects is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listSupportedLanguages", "csharp")
+@clientName("listSupportedLanguages", "python")
 op conversationAuthoringListSupportedLanguages is languageOperations.ResourceList<
   AnalyzeConversationAuthoringSupportedLanguage,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -60,6 +63,7 @@ op conversationAuthoringListSupportedLanguages is languageOperations.ResourceLis
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listAssignedResourceDeployments", "csharp")
+@clientName("listAssignedResourceDeployments", "python")
 @added(Versions.v2023_04_15_preview)
 op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
@@ -71,6 +75,7 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listDeploymentResources", "csharp")
+@clientName("listDeploymentResources", "python")
 @added(Versions.v2023_04_15_preview)
 op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
@@ -82,6 +87,7 @@ op conversationAuthoringListDeploymentResources is languageOperations.ResourceLi
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listSupportedPrebuiltEntities", "csharp")
+@clientName("listSupportedPrebuiltEntities", "python")
 op conversationAuthoringListSupportedPrebuiltEntities is languageOperations.ResourceList<
   AnalyzeConversationAuthoringPrebuiltEntity,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -93,6 +99,7 @@ op conversationAuthoringListSupportedPrebuiltEntities is languageOperations.Reso
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listTrainingConfigVersions", "csharp")
+@clientName("listTrainingConfigVersions", "python")
 op conversationAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -104,6 +111,7 @@ op conversationAuthoringListTrainingConfigVersions is languageOperations.Resourc
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listTrainingJobs", "csharp")
+@clientName("listTrainingJobs", "python")
 op conversationAuthoringListTrainingJobs is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -114,6 +122,7 @@ op conversationAuthoringListTrainingJobs is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listTrainedModels", "csharp")
+@clientName("listTrainedModels", "python")
 op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -124,6 +133,7 @@ op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listExportedModels", "csharp")
+@clientName("listExportedModels", "python")
 @added(Versions.v2024_11_15_preview)
 op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
@@ -164,6 +174,7 @@ interface ConversationAuthoringDeployment {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringCreateDeploymentOptions;
     },
     AcceptedResponse,
@@ -228,6 +239,7 @@ interface ConversationAuthoringDeployment {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
@@ -272,6 +284,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
@@ -303,6 +316,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
@@ -364,6 +378,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
@@ -395,6 +410,7 @@ interface ConversationAuthoringProject {
 
       /** The request body */
       @clientName("details", "csharp")
+      @clientName("details", "python")
       @bodyRoot
       body: AnalyzeConversationAuthoringCreateProjectOptions;
     },
@@ -516,6 +532,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("exportedProject", "csharp")
+      @clientName("exportedProject", "python")
       body: AnalyzeConversationAuthoringExportedProject;
     },
     AcceptedResponse,
@@ -542,6 +559,7 @@ interface ConversationAuthoringProject {
   @actionSeparator("/:")
   @action("authorize-copy")
   @clientName("AuthorizeProjectCopy", "csharp")
+  @clientName("AuthorizeProjectCopy", "python")
   copyProjectAuthorization is languageOperations.ResourceAction<
     AnalyzeConversationAuthoringProjectMetadata,
     AnalyzeConversationAuthoringCopyAuthorizationOptions,
@@ -570,6 +588,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringCopiedProjectOptions;
     },
     AcceptedResponse,
@@ -604,6 +623,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
@@ -708,6 +728,7 @@ interface ConversationAuthoringExportedModel {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: ExportedModelOptions;
     },
     AcceptedResponse,
@@ -759,6 +780,7 @@ interface ConversationAuthoringTrainedModel {
        */
       @body
       @clientName("details", "csharp")
+      @clientName("details", "python")
       body: AnalyzeConversationAuthoringEvaluationOptions;
     },
     AcceptedResponse,

@@ -15,6 +15,7 @@ namespace Language.Conversations.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringProjectKind", "csharp")
+@clientName("ConversationAuthoringProjectKind", "python")
 union ProjectKind {
   string,
 
@@ -40,6 +41,7 @@ union ProjectKind {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringErrorCode", "csharp")
+@clientName("ConversationAuthoringErrorCode", "python")
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -67,6 +69,7 @@ union ErrorCode {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringInnerErrorCode", "csharp")
+@clientName("ConversationAuthoringInnerErrorCode", "python")
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -87,6 +90,7 @@ union InnerErrorCode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("StringIndexType", "csharp")
+@clientName("StringIndexType", "python")
 union StringIndexType {
   string,
 
@@ -101,6 +105,7 @@ union StringIndexType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringExportedProjectFormat", "csharp")
+@clientName("ConversationAuthoringExportedProjectFormat", "python")
 union ExportedProjectFormat {
   string,
 
@@ -117,6 +122,7 @@ union ExportedProjectFormat {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringTrainingMode", "csharp")
+@clientName("ConversationAuthoringTrainingMode", "python")
 union TrainingMode {
   string,
 
@@ -133,6 +139,7 @@ union TrainingMode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringEvaluationKind", "csharp")
+@clientName("ConversationAuthoringEvaluationKind", "python")
 union EvaluationKind {
   string,
 
@@ -150,6 +157,7 @@ union EvaluationKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
 @clientName("ConversationAuthoringOperationStatus", "csharp")
+@clientName("ConversationAuthoringOperationStatus", "python")
 union JobStatus {
   string,
   notStarted: "notStarted",
@@ -170,6 +178,7 @@ union JobStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("ConversationAuthoringCompositionMode", "csharp")
+@clientName("ConversationAuthoringCompositionMode", "python")
 union CompositionSetting {
   string,
 
@@ -196,6 +205,7 @@ union CompositionSetting {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("OrchestrationTargetProjectKind", "csharp")
+@clientName("OrchestrationTargetProjectKind", "python")
 union OrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
