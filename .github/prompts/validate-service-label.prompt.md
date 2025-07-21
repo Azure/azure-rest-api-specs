@@ -1,6 +1,6 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'CreatePullRequest'] 
+tools: [`fetch', CheckServiceLabel', 'CreatePullRequest'] 
 ---
 
 # Goal
@@ -14,14 +14,14 @@ tools: ['CheckServiceLabel', 'CreatePullRequest']
     - If the service label is valid and exists, skip remaining label validation steps and allow user to proceed with the SDK release process
 - If the service label is invalid or was not provided by the user:
     - If it's invalid, inform the user that the service label is invalid. Ask them to double check spelling, punctuation, and space usage.
-    - Fetch the common-labels.csv file from the azure-sdk-tools repository and check if any existing label could fit under the service. If a related service label name already exists in the CSV file, ask and confirm if the user wants to use that existing label for their service.
+    - Use `fetch` to retrieve common-labels.csv file from the azure-sdk-tools repository and check if any existing label could fit under the service. If a related service label name already exists in the file, ask and confirm if the user wants to use that existing label for their service.
         - If the user confirms, use that existing label. Skip remaining label validation steps and proceed with the SDK release process
     - If user wants to create an entirely new service label instead, suggest a label name to the user and have them confirm the recommended label name
         - Service label naming guidance:
+            - Use `fetch` to retrieve common-labels.csv file from the azure-sdk-tools repository to find a suitable name
             - Avoid special characters (unless it's a hyphen to denote a sub-service)
             - If multiple words, use spaces to separate them and each word should start with a capital letter
 - Make note of the corresponding service label name the user has confirmed or provided
-
 
 ## Step 3: Create Pull Request (only if new service label is created)
 - If a new service label was created and confirmed by the user, create a pull request using `CreatePullRequest` that adds the new service label to the common-labels.csv file in the azure-sdk-tools repository
