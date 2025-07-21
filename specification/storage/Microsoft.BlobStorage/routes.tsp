@@ -1304,7 +1304,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...VersionIdResponseHeader;
-          ...DateResponseHeaderPrivate;
+          ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
         }
