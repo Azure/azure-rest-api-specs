@@ -29,9 +29,7 @@ interface AdvisorScoreEntities {
   /**
    * Gets the advisor score.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdvisorScores_Get")
   get is ArmResourceRead<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -41,9 +39,7 @@ interface AdvisorScoreEntities {
   /**
    * Gets the list of advisor scores.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AdvisorScores_List")
   list is ArmResourceListByParent<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

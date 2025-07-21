@@ -46,30 +46,40 @@ using Microsoft.Advisor;
 @@clientName(SuppressionContracts.create::parameters.resource,
   "suppressionContract"
 );
-@@clientName(PredictsOperationGroup.predict::parameters.body,
-  "predictionRequest"
-);
+@@clientName(predict::parameters.body, "predictionRequest");
 
 @@clientName(AdvisorScoreEntity, "ScoreEntityForAdvisor", "go");
 
-// @@clientLocation decorators for operations with custom @operationId
+// @@clientName decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
 
-// ResourceRecommendationBases operations
+@@clientLocation(MetadataEntities.get, "RecommendationMetadata");
+@@clientLocation(MetadataEntities.list, "RecommendationMetadata");
+
+@@clientLocation(ResourceRecommendationBases.list, "Recommendations");
 @@clientLocation(ResourceRecommendationBases.get, "Recommendations");
 @@clientLocation(ResourceRecommendationBases.patch, "Recommendations");
-@@clientLocation(ResourceRecommendationBases.list, "Recommendations");
+@@clientName(ResourceRecommendationBases.patch::parameters.properties,
+  "trackedProperties"
+);
+@@clientLocation(ResourceRecommendationBases.listByTenant, "Recommendations");
 
-// AdvisorScoreEntities operations
-@@clientLocation(AdvisorScoreEntities.get, "AdvisorScore");
-@@clientLocation(AdvisorScoreEntities.list, "AdvisorScore");
-
-// SuppressionContracts operations
 @@clientLocation(SuppressionContracts.get, "Suppressions");
 @@clientLocation(SuppressionContracts.create, "Suppressions");
+@@clientName(SuppressionContracts.create::parameters.resource,
+  "suppressionContract"
+);
 @@clientLocation(SuppressionContracts.delete, "Suppressions");
 
-// ConfigurationsOperationGroup operations
+@@clientLocation(AdvisorScoreEntities.get, "AdvisorScores");
+@@clientLocation(AdvisorScoreEntities.list, "AdvisorScores");
+
+@@clientLocation(AssessmentResults.get, "Assessments");
+@@clientLocation(AssessmentResults.put, "Assessments");
+@@clientName(AssessmentResults.put::parameters.resource, "assessmentContract");
+@@clientLocation(AssessmentResults.delete, "Assessments");
+@@clientLocation(AssessmentResults.list, "Assessments");
+
 @@clientLocation(ConfigurationsOperationGroup.listBySubscription,
   "Configurations"
 );
@@ -83,34 +93,13 @@ using Microsoft.Advisor;
   "Configurations"
 );
 
-// RecommendationsOperationGroup operations
 @@clientLocation(RecommendationsOperationGroup.generate, "Recommendations");
 @@clientLocation(RecommendationsOperationGroup.getGenerateStatus,
   "Recommendations"
 );
 
-// SuppressionsOperationGroup operations
 @@clientLocation(SuppressionsOperationGroup.list, "Suppressions");
 
-// PredictsOperationGroup operations
-@@clientLocation(PredictsOperationGroup.predict, "Predict");
-
-// AssessmentTypesOperationGroup operations
 @@clientLocation(AssessmentTypesOperationGroup.list, "AssessmentTypes");
 
-// WorkloadsOperationGroup operations
 @@clientLocation(WorkloadsOperationGroup.list, "Workloads");
-
-// AssessmentResults operations
-@@clientLocation(AssessmentResults.get, "Assessments");
-@@clientLocation(AssessmentResults.put, "Assessments");
-@@clientLocation(AssessmentResults.delete, "Assessments");
-@@clientLocation(AssessmentResults.list, "Assessments");
-
-// MetadataEntities operations
-@@clientLocation(MetadataEntities.get, "RecommendationMetadata");
-@@clientLocation(MetadataEntities.list, "RecommendationMetadata");
-
-// ResiliencyReviews operations
-@@clientLocation(ResiliencyReviews.get, "resiliencyReviews");
-@@clientLocation(ResiliencyReviews.list, "resiliencyReviews");

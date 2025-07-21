@@ -1,13 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Advisor;
 /**
@@ -29,8 +25,6 @@ interface AssessmentResults {
   /**
    * Get a existing Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Assessments_Get")
   get is ArmResourceRead<
     AssessmentResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -39,8 +33,6 @@ interface AssessmentResults {
   /**
    * Create or Overwrite Azure Advisor assessment resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Assessments_Put")
   put is ArmResourceCreateOrReplaceSync<
     AssessmentResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -49,8 +41,6 @@ interface AssessmentResults {
   /**
    * Delete a existing Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Assessments_Delete")
   delete is ArmResourceDeleteSync<
     AssessmentResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -59,8 +49,6 @@ interface AssessmentResults {
   /**
    * Get list of Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Assessments_List")
   list is ArmResourceListByParent<
     AssessmentResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

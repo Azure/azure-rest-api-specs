@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Advisor;
 
@@ -18,10 +16,8 @@ interface ConfigurationsOperationGroup {
   /**
    * Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve Azure Advisor configurations.")
-  @operationId("Configurations_ListBySubscription")
   @autoRoute
   @get
   @action("configurations")
@@ -34,10 +30,8 @@ interface ConfigurationsOperationGroup {
   /**
    * Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.")
-  @operationId("Configurations_CreateInSubscription")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}")
   @put
   createInSubscription(
@@ -60,10 +54,8 @@ interface ConfigurationsOperationGroup {
   /**
    * Retrieve Azure Advisor configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.")
-  @operationId("Configurations_ListByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
   @get
   listByResourceGroup(
@@ -80,10 +72,8 @@ interface ConfigurationsOperationGroup {
   /**
    * Create/Overwrite Azure Advisor configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create/Overwrite Azure Advisor configuration.")
-  @operationId("Configurations_CreateInResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}")
   @put
   createInResourceGroup(
@@ -115,10 +105,8 @@ interface RecommendationsOperationGroup {
   /**
    * Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.")
-  @operationId("Recommendations_Generate")
   @autoRoute
   @action("generateRecommendations")
   generate is ArmProviderActionSync<
@@ -130,10 +118,8 @@ interface RecommendationsOperationGroup {
   /**
    * Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieves the status of the recommendation computation or generation process. Invoke it after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.")
-  @operationId("Recommendations_GetGenerateStatus")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}")
   @get
   getGenerateStatus(
@@ -155,9 +141,7 @@ interface SuppressionsOperationGroup {
   /**
    * Retrieves the list of snoozed or dismissed suppressions for a subscription. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Suppressions_List")
   @autoRoute
   @get
   @action("suppressions")
@@ -181,33 +165,27 @@ interface SuppressionsOperationGroup {
   >;
 }
 
+/**
+ * Predicts a recommendation.
+ */
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface PredictsOperationGroup {
-  /**
-   * Predicts a recommendation.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Predicts Microsoft.Advisor services.")
-  @autoRoute
-  @operationId("Predict")
-  predict is ArmProviderActionSync<
-    Request = PredictionRequest,
-    Response = PredictionResponse,
-    Scope = SubscriptionActionScope,
-    Parameters = {},
-    Error = ArmDefaultErrorResponse
-  >;
-}
+@summary("Predicts Microsoft.Advisor services.")
+@autoRoute
+op predict is ArmProviderActionSync<
+  Request = PredictionRequest,
+  Response = PredictionResponse,
+  Scope = SubscriptionActionScope,
+  Parameters = {},
+  Error = ArmDefaultErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AssessmentTypesOperationGroup {
   /**
    * Get list of Azure Advisor assessment types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get assessment types list.")
-  @operationId("AssessmentTypes_List")
   @autoRoute
   @get
   @action("assessmentTypes")
@@ -223,9 +201,7 @@ interface WorkloadsOperationGroup {
   /**
    * Get list of Workloads.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Workloads list.")
-  @operationId("Workloads_List")
   @autoRoute
   @get
   @action("workloads")
