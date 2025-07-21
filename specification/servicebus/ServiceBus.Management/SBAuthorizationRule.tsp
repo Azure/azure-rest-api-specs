@@ -33,19 +33,26 @@ interface SBAuthorizationRuleOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBNamespace,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = ""
-        >>,
+
+        /**
+         * The namespace name
+         */
+        @path
+        @segment("namespaces")
+        @minLength(6)
+        @maxLength(50)
+        namespaceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SBAuthorizationRule,
-        KeyName = "authorizationRuleName",
-        SegmentName = "AuthorizationRules",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * The authorization rule name.
+         */
+        @path
+        @segment("AuthorizationRules")
+        @minLength(1)
+        @maxLength(50)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
