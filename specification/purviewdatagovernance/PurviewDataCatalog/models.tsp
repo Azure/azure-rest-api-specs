@@ -334,3 +334,119 @@ model RelationshipWrapper {
   @doc("Unique identifier of the entity.")
   entityId?: Azure.Core.uuid;
 }
+
+@doc("CatalogModelDataAssetSource.")
+model CatalogModelDataAssetSource {
+  @doc("Type of the asset.")
+  type?: string;
+
+  @doc("Unique identifier of the entity.")
+  assetId?: Azure.Core.uuid;
+
+  @doc("Type of the asset.")
+  assetType?: string;
+
+  @doc(".Type properties of the asset.")
+  assetAttributes?: string[];
+
+  @doc("Fully qualified name.")
+  fqn?: string;
+
+  @doc("Name of the account.")
+  accountName?: string;
+
+  @doc("FIXME: (utcDateTime) Please double check that this is the correct type for your scenario")
+  lastRefreshedAt?: utcDateTime;
+
+  @doc("Name of the user who last refreshed the asset.")
+  lastRefreshedBy?: string;
+}
+@doc("Schema of the asset.")
+model CatalogModelDataAssetSchema {
+  @doc("Name of the asset.")
+  name?: string;
+
+  @doc("Description of the asset.")
+  description?: string;
+
+  @doc("Classifications of the asset.")
+  classifications?: string[];
+
+  @doc("Type of the asset.")
+  type?: string;
+}
+
+@doc("CatalogModelDataAsset.")
+model CatalogModelDataAsset {
+  @doc("Unique identifier of the asset.")
+  id?: Azure.Core.uuid;
+
+  @doc("Name of the asset.")
+  name?: string;
+
+  @doc("System data associated with the asset.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("Description of the asset.")
+  description?: Azure.Core.uuid;
+
+  @doc("Domain of the asset.")
+  domain?: string;
+
+  @doc("Source of the asset.")
+  source?: CatalogModelDataAssetSource;
+
+  @doc("Contacts associated with the asset.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("Classifications associated with the asset.")
+  classifications?: string[];
+
+  @doc("Unique identifier of the entity.")
+  sensitivityLabel?: Azure.Core.uuid;
+
+  @doc("Type of the asset.")
+  type?: string;
+
+  @doc("Schema of the asset.")
+  schema?: CatalogModelDataAssetSchema[];
+
+  @doc("Lineage information associated with the asset.")
+  lineage?: string[];
+
+  @doc("Data quality score of the asset.")
+  dataQualityScore?: float64;
+
+  @doc("URL to open the asset in the catalog.")
+  openInUrl?: string;
+
+  @doc("Type properties of the asset.")
+  typeProperties?: string[];
+}
+
+@doc("DataAssetDataAssetQueryRequest.")
+model DataAssetDataAssetQueryRequest {
+  @doc("To Skip how many records.")
+  skip?: int32;
+
+  @doc("To return how many records.")
+  top?: int32;
+
+  @doc("To order the records.")
+  orderBy?: CatalogApiServiceOrderBy[];
+
+  @doc("To filter by Ids.")
+  ids?: string[];
+
+  @doc("To filter by domain Ids.")
+  domainIds?: string[];
+
+  @doc("To filter by name keyword.")
+  nameKeyword?: string;
+
+  @doc("To filter by owners.")
+  owners?: string[];
+
+  @doc("To filter by data map asset Ids.")
+  dataMapAssetIds?: string[];
+}

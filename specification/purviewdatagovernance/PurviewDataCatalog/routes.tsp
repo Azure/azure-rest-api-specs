@@ -382,3 +382,170 @@ op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
     statusCode: 204;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Retrieves a list of data assets.")
+@route("/dataAssets")
+@get
+op getDataAsset is Azure.Core.Foundations.Operation<
+  {
+    @doc("Field to sort by.")
+    @query
+    orderBy?: string;
+
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
+  },
+  CatalogModelDataAsset[],
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Creates a new data asset.")
+@route("/dataAssets")
+@post
+op postDataAsset is Azure.Core.Foundations.Operation<
+  CatalogModelDataAsset,
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("RelationshipWrapper.")
+    @body
+    body: CatalogModelDataAsset;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Creates a new data asset with fileted query inputs.")
+@route("/dataAssets/query")
+@post
+op postDataAssetQuery is Azure.Core.Foundations.Operation<
+  DataAssetDataAssetQueryRequest,
+  CatalogModelDataAsset[],
+  {}
+>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Retrieves a data asset by its unique identifier.")
+@route("/dataAssets/{dataAssetId}")
+@get
+op getDataAssetDataAssetId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+  },
+  CatalogModelDataAsset,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Updates a data asset by its unique identifier.")
+@route("/dataAssets/{dataAssetId}")
+@put
+op replaceDataAsset is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+
+    @doc("CatalogModelDataAsset.")
+    @bodyRoot
+    body?: CatalogModelDataAsset;
+  },
+  CatalogModelDataAsset,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Deletes a data asset by its unique identifier.")
+@route("/dataAssets/{dataAssetId}")
+@delete
+op deleteDataAsset is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Retrieves relationships for a data asset.")
+@route("/dataAssets/{dataAssetId}/relationships")
+@get
+op getDataAssetRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+  },
+  RelationshipWrapper[],
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Creates relationships for a data asset.")
+@route("/dataAssets/{dataAssetId}/relationships")
+@post
+op createDataAssetRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The properties of the relationship to create.")
+    @bodyRoot
+    body: Record<InputbodyProperties>;
+  },
+  RelationshipWrapper[],
+  {}
+>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataAsset")
+@doc("Deletes relationships for a data asset.")
+@route("/dataAssets/{dataAssetId}/relationships")
+@delete
+op deleteDataAssetRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the critical data asset.")
+    @path("dataAssetId")
+    dataAssetId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The unique identifier of the critical data asset.")
+    @query("entityId")
+    entityId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
