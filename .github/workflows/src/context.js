@@ -168,7 +168,6 @@ export async function extractInputs(github, context, core) {
               head_sha,
               github,
               core,
-              repo: payload.workflow_run.repository.name
             })
           ).issueNumber;
         } else if (pullRequests.length === 1) {
@@ -223,25 +222,14 @@ export async function extractInputs(github, context, core) {
         }
       }
       if (!issue_number) {
+        core.info(`Attempting to fallback to first pullrequest number in pull_requests array: ${ payload.workflow_run.pull_requests?.[0]?.number }`);
+        issue_number = payload.workflow_run.pull_requests?.[0]?.number;
+      }
+
+      if (!issue_number) {
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
-        try {
-          // Fallback: search for PR number by commit SHA
-          core.info(`Falling back to REST API to find PR for commit ${payload.workflow_run.head_sha}`);
-          const fallback = await getIssueNumber({
-            head_sha: payload.workflow_run.head_sha,
-            github,
-            core,
-            owner: payload.workflow_run.repository.owner.login,
-            repo: payload.workflow_run.repository.name
-          });
-          issue_number = fallback.issueNumber;
-
-        }
-        catch (error) {
-          core.error(`Error: ${error}`);
-        }
       }
     } else {
       throw new Error(
