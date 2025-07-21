@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
  * Microsoft Resource Notifications Resource Provider REST API.
  */
 @armProviderNamespace
-@service({
+@service(#{
   title: "Microsoft Resource Notifications Resource Provider REST API.",
 })
 @versioned(Versions)
