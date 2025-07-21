@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/compute"
+    default: "sdk/computerecommender"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,30 +14,30 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Compute"
+    package-dir: "Azure.ResourceManager.ComputeRecommender"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-compute"
-    namespace: "azure.mgmt.compute"
+    package-dir: "azure-mgmt-computerecommender"
+    namespace: "azure.mgmt.computerecommender"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-compute"
-    namespace: "com.azure.resourcemanager.compute"
-    service-name: "Compute" # human-readable service name, whitespace allowed
+    package-dir: "azure-resourcemanager-computerecommender"
+    namespace: "com.azure.resourcemanager.computerecommender"
+    service-name: "Compute Recommender" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-compute"
+    package-dir: "arm-computerecommender"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-compute"
+      name: "@azure/arm-computerecommender"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/compute"
-    package-dir: "armcompute"
+    service-dir: "sdk/resourcemanager/computerecommender"
+    package-dir: "armcomputerecommender"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
