@@ -228,7 +228,7 @@ export default async function summarizeChecks({ github, context, core }) {
 }
 
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
@@ -324,8 +324,8 @@ export async function summarizeChecksImpl(
 }
 
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
- * @param {typeof import("@actions/core")} core
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<void>}
  */
 export async function logGitHubRateLimitInfo(github, core) {
@@ -403,7 +403,7 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 // #endregion
 // #region label update
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
@@ -481,7 +481,7 @@ export async function handleLabeledEvent(
 // #endregion
 // #region checks
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.

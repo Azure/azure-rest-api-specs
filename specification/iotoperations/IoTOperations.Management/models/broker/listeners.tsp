@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -27,7 +28,8 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
