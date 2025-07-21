@@ -28,8 +28,6 @@ interface JobResources {
   /**
    * Gets information about the specified job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_Get")
   get is ArmResourceRead<
     JobResource,
     Parameters = {
@@ -45,9 +43,7 @@ interface JobResources {
   /**
    * Creates a new job with the specified parameters. Existing job cannot be updated with this API and should instead be updated with the Update job API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_Create")
   create is ArmResourceCreateOrReplaceAsync<
     JobResource,
     Response = ArmResourceUpdatedResponse<JobResource> | ArmAcceptedLroResponse,
@@ -59,10 +55,8 @@ interface JobResources {
   /**
    * Updates the properties of an existing job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Jobs_Update")
   update is ArmCustomPatchAsync<
     JobResource,
     PatchModel = JobResourceUpdateParameter,
@@ -80,9 +74,7 @@ interface JobResources {
   /**
    * Deletes a job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -92,8 +84,6 @@ interface JobResources {
   /**
    * Lists all the jobs available under the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     JobResource,
     Parameters = {
@@ -110,8 +100,6 @@ interface JobResources {
   /**
    * Lists all the jobs available under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_List")
   list is ArmListBySubscription<
     JobResource,
     Parameters = {
@@ -128,8 +116,6 @@ interface JobResources {
   /**
    * Book shipment pick up.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_BookShipmentPickUp")
   bookShipmentPickUp is ArmResourceActionSync<
     JobResource,
     ShipmentPickUpRequest,
@@ -140,8 +126,6 @@ interface JobResources {
   /**
    * CancelJob.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_Cancel")
   cancel is ArmResourceActionSync<
     JobResource,
     CancellationReason,
@@ -152,8 +136,6 @@ interface JobResources {
   /**
    * This method gets the unencrypted secrets related to the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_ListCredentials")
   listCredentials is ArmResourceActionSync<
     JobResource,
     void,
@@ -164,27 +146,25 @@ interface JobResources {
   /**
    * Request to mark devices for a given job as shipped
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Jobs_MarkDevicesShipped")
   markDevicesShipped is ArmResourceActionSync<
     JobResource,
     MarkDevicesShippedRequest,
     NoContentResponse,
     Error = ApiError
   >;
-
-  /**
-   * Request to mitigate for a given job
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Mitigate")
-  mitigate is ArmResourceActionSync<
-    JobResource,
-    MitigateJobRequest,
-    NoContentResponse,
-    Error = ApiError
-  >;
 }
+
+/**
+ * Request to mitigate for a given job
+ */
+@action("mitigate")
+@tag("JobResources")
+op mitigate is ArmResourceActionSync<
+  JobResource,
+  MitigateJobRequest,
+  NoContentResponse,
+  Error = ApiError
+>;
 
 @@maxLength(JobResource.name, 24);
 @@minLength(JobResource.name, 3);
@@ -205,4 +185,4 @@ interface JobResources {
 @@doc(JobResources.markDevicesShipped::parameters.body,
   "Mark Devices Shipped Request"
 );
-@@doc(JobResources.mitigate::parameters.body, "Mitigation Request");
+@@doc(mitigate::parameters.body, "Mitigation Request");

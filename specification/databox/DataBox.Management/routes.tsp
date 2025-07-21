@@ -19,8 +19,6 @@ interface ServiceOperationGroup {
   /**
    * This API provides configuration details specific to given region/location at Subscription level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_RegionConfiguration")
   @autoRoute
   regionConfiguration is ArmProviderActionSync<
     Request = RegionConfigurationRequest,
@@ -32,9 +30,7 @@ interface ServiceOperationGroup {
   /**
    * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "This operation will soon be removed"
-  @operationId("Service_ValidateAddress")
   @autoRoute
   validateAddress is ArmProviderActionSync<
     Request = ValidateAddress,
@@ -46,8 +42,6 @@ interface ServiceOperationGroup {
   /**
    * This method does all necessary pre-job creation validation under subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_ValidateInputs")
   @autoRoute
   validateInputs is ArmProviderActionSync<
     Request = ValidationRequest,
@@ -59,8 +53,6 @@ interface ServiceOperationGroup {
   /**
    * This method provides the list of available skus for the given subscription, resource group and location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_ListAvailableSkusByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus")
   @post
   listAvailableSkusByResourceGroup(
@@ -79,8 +71,6 @@ interface ServiceOperationGroup {
   /**
    * This API provides configuration details specific to given region/location at Resource group level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_RegionConfigurationByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration")
   @post
   regionConfigurationByResourceGroup(
@@ -99,8 +89,6 @@ interface ServiceOperationGroup {
   /**
    * This method does all necessary pre-job creation validation under resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_ValidateInputsByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs")
   @post
   validateInputsByResourceGroup(
