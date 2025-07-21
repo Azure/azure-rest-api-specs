@@ -163,7 +163,14 @@ export async function extractInputs(github, context, core) {
           //
           // In any case, the solution is to fall back to the (lower-rate-limit) search API.
           // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
+          issue_number = (
+            await getIssueNumber({
+              head_sha,
+              github,
+              core,
+              repo: payload.workflow_run.repository.name
+            })
+          ).issueNumber;
         } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
@@ -222,8 +229,15 @@ export async function extractInputs(github, context, core) {
         try {
           // Fallback: search for PR number by commit SHA
           core.info(`Falling back to REST API to find PR for commit ${payload.workflow_run.head_sha}`);
-          const fallback = await getIssueNumber({ head_sha: payload.workflow_run.head_sha, github, core });
+          const fallback = await getIssueNumber({
+            head_sha: payload.workflow_run.head_sha,
+            github,
+            core,
+            owner: payload.workflow_run.repository.owner.login,
+            repo: payload.workflow_run.repository.name
+          });
           issue_number = fallback.issueNumber;
+
         }
         catch (error) {
           core.error(`Error: ${error}`);
