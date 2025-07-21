@@ -1389,6 +1389,7 @@
           "enum": [
             "AlertCreated",
             "StateChange",
+            "SeverityChange",
             "MonitorConditionChange",
             "ActionsTriggered",
             "ActionsSuppressed"
@@ -1453,11 +1454,6 @@
     "PropertyChangeDetails": {
       "x-ms-discriminator-value": "PropertyChange",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDetails"
-        }
-      ],
       "properties": {
         "oldValue": {
           "type": "string",
@@ -1476,11 +1472,6 @@
     "ActionSuppressedDetails": {
       "x-ms-discriminator-value": "ActionsSuppressed",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDetails"
-        }
-      ],
       "properties": {
         "suppressionActionRules": {
           "type": "array",
@@ -1502,11 +1493,6 @@
     "ActionTriggeredDetails": {
       "x-ms-discriminator-value": "ActionsTriggered",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDetails"
-        }
-      ],
       "properties": {
         "actionGroup": {
           "$ref": "#/definitions/TriggeredRule",
