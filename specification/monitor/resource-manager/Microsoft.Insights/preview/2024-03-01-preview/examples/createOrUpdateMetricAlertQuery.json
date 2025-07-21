@@ -22,7 +22,10 @@
         ],
         "evaluationFrequency": "PT1M",
         "criteria": {
-          "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
+          "odata.type": "MMicrosoft.Azure.Monitor.PromQLCriteria",
+          "failingPeriods": {
+            "for": "PT5M"
+          },
           "allOf": [
             {
               "name": "Metric1",
@@ -31,22 +34,22 @@
             }
           ]
         },
-        "failingPeriods": {
-          "for": "PT2M"
-        },
         "resolveConfiguration": {
           "autoResolved": true,
           "timeToResolve": "PT10M"
         },
         "actions": [
           {
-            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
-            "webHookProperties": {
-              "key11": "value11",
-              "key12": "value12"
-            }
+            "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
           }
-        ]
+        ],
+        "actionProperties": {
+          "Email.Sujbect": "my custom email subject"
+        },
+        "customProperties": {
+          "key11": "value11",
+          "key12": "value12"
+        }
       }
     }
   },
@@ -79,7 +82,7 @@
           ],
           "evaluationFrequency": "PT1M",
           "criteria": {
-            "odata.type": "Microsoft.Azure.Monitor.QueryMetricCriteria",
+            "odata.type": "MMicrosoft.Azure.Monitor.PromQLCriteria",
             "allOf": [
               {
                 "name": "Metric1",
@@ -97,13 +100,16 @@
           },
           "actions": [
             {
-              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
-              "webHookProperties": {
-                "key11": "value11",
-                "key12": "value12"
-              }
+              "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
             }
-          ]
+          ],
+          "actionProperties": {
+            "Email.Sujbect": "my custom email subject"
+          },
+          "customProperties": {
+            "key11": "value11",
+            "key12": "value12"
+          }
         }
       }
     }
