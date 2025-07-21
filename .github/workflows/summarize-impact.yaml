@@ -34,12 +34,6 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      # todo: why is this necessary? postinstall should already take care of the build?
-      - name: Build summarize-impact tool
-        run: |
-          cd eng/tools/summarize-impact
-          npm run build
-
       - name: Get PR labels
         id: get-labels
         run: |
@@ -65,7 +59,6 @@ jobs:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
           NODE_OPTIONS: "--max-old-space-size=8192"
 
-      # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}
         uses: actions/upload-artifact@v4
@@ -74,3 +67,12 @@ jobs:
           path: ${{ steps.summarize-impact.outputs.summary }}
           # If the file doesn't exist, just don't add the artifact
           if-no-files-found: ignore
+
+      - if: |
+          always() &&
+          github.event.pull_request.number > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ github.event.pull_request.number }}"
