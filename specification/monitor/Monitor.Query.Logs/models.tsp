@@ -622,11 +622,11 @@ model BatchQueryRequest {
    */
   body: QueryBody;
 
-  /** The query path of a single request in a batch, defaults to /query */
-  path?: "/query";
+  /** The query path of a single request in a batch. */
+  path: string;
 
-  /** The method of a single request in a batch, defaults to POST */
-  method?: "POST";
+  /** The method of a single request in a batch, defaults to GET */
+  method: string = "GET";
 
   /**
    * Primary Workspace ID of the query. This is the Workspace ID from the Properties
