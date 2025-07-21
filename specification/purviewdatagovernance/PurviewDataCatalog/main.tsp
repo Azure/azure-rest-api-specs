@@ -21,10 +21,10 @@ using TypeSpec.Versioning;
  */
 @service(#{ title: "PurviewDataCatalog" })
 @server(
-  "{$host}",
-  "Creates a data plane client for Purview Data Catalog.",
+  "{endpoint}/purviewdatacatalog/api",
+  "PurviewDataCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
-    $host: string,
+    endpoint: url,
   }
 )
 @useAuth(
@@ -49,6 +49,6 @@ enum Versions {
   /**
    * The 2025-06-16-preview API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_06_16_preview: "2025-06-16-preview",
 }

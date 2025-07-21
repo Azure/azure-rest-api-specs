@@ -196,10 +196,10 @@ model CriticalDataElementQueryRequest {
   @doc("To order the records.")
   orderBy?: CatalogApiServiceOrderBy[];
 
-  @doc("To filter by IDs.")
-  iDs?: string[];
+  @doc("To filter by Ids.")
+  ids?: string[];
 
-  @doc("To filter by domain IDs.")
+  @doc("To filter by domain Ids.")
   domainIds?: string[];
 
   @doc("To filter by name keyword.")
@@ -226,10 +226,10 @@ model ModelsFacetRequestObject {
 
 @doc("CriticalDataElementFacetRequest.")
 model CriticalDataElementFacetRequest {
-  @doc("To filter by IDs.")
-  iDs?: string[];
+  @doc("To filter by Ids.")
+  ids?: string[];
 
-  @doc("To filter by domain IDs.")
+  @doc("To filter by domain Ids.")
   domainIds?: string[];
 
   @doc("To filter by name keyword.")
@@ -258,4 +258,79 @@ model InputProperties {
 
   @doc("The third additional property.")
   prop3?: string[];
+}
+
+@doc("CatalogModelCriticalDataColumn.")
+model CatalogModelCriticalDataColumn {
+  @doc("The third additional property.")
+  id?: Azure.Core.uuid;
+
+  @doc("The name of the critical data column.")
+  name?: string;
+
+  @doc("The name of the systemData.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("The name of the domain.")
+  domain?: Azure.Core.uuid;
+
+  @doc("The name of the asset.")
+  assetId?: Azure.Core.uuid;
+
+  @doc("The description of the critical data column.")
+  description?: string;
+
+  @doc("The classifications of the critical data column.")
+  classifications?: string[];
+
+  @doc("The data type of the critical data column.")
+  dataType?: string;
+
+  @doc("The name of the asset.")
+  assetName?: string;
+}
+
+@doc("InputbodyProperties.")
+model InputbodyProperties {
+  @doc("systemData.")
+  systemData?: string[];
+
+  @doc("description.")
+  description?: string;
+
+  @doc("description.")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the asset.")
+  assetId?: Azure.Core.uuid;
+}
+
+@doc("SystemData.")
+model SystemData {
+  @doc("lastModifiedAt.")
+  lastModifiedAt?: string;
+
+  @doc("Unique identifier of the asset.")
+  lastModifiedBy?: Azure.Core.uuid;
+
+  @doc("createdAt.")
+  createdAt?: string;
+
+  @doc("Unique identifier of the asset.")
+  createdBy?: Azure.Core.uuid;
+}
+
+@doc("RelationshipWrapper.")
+model RelationshipWrapper {
+  @doc("systemData.")
+  systemData?: SystemData;
+
+  @doc("description.")
+  description?: string;
+
+  @doc("relationshipType.")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the entity.")
+  entityId?: Azure.Core.uuid;
 }
