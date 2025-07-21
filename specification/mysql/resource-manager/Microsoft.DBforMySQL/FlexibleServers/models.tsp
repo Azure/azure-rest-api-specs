@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -2118,20 +2119,19 @@ model LocationNameParameter {
 }
 
 /**
- * Response model for listing Advanced Threat Protection settings.
- * Contains a paginated list of Advanced Threat Protection configurations.
+ * [Placeholder] Discription for page model
  */
-model AdvancedThreatProtectionListResult {
+@pagedResult
+model AdministratorListResult {
   /**
-   * Array of Advanced Threat Protection settings
+   * [Placeholder] Discription for value property
    */
-  @doc("List of Advanced Threat Protection settings for the server")
-  @visibility(Lifecycle.Read)
-  value?: AdvancedThreatProtection[];
+  @items
+  value?: AzureADAdministrator[];
 
   /**
-   * Link to the next page of results, if applicable
+   * [Placeholder] Discription for nextLink property
    */
-  @doc("URL to retrieve the next page of results")
+  @nextLink
   nextLink?: url;
 }

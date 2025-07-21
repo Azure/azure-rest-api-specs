@@ -65,7 +65,10 @@ interface AzureADAdministrators {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AzureADAdministrators_ListByServer")
-  listByServer is ArmResourceListByParent<AzureADAdministrator>;
+  listByServer is ArmResourceListByParent<
+    AzureADAdministrator,
+    Response = ArmResponse<AdministratorListResult>
+  >;
 }
 
 @@doc(AzureADAdministrator.name, "The name of the Azure AD Administrator.");

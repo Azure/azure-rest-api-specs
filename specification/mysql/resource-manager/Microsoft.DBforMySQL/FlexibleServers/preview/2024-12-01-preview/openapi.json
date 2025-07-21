@@ -912,7 +912,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureADAdministratorListResult"
+              "$ref": "#/definitions/AdministratorListResult"
             }
           },
           "default": {
@@ -4179,6 +4179,24 @@
     }
   },
   "definitions": {
+    "AdministratorListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AzureADAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
     "AdministratorProperties": {
       "type": "object",
       "description": "The properties of an administrator.",
@@ -4385,27 +4403,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "AzureADAdministratorListResult": {
-      "type": "object",
-      "description": "The response of a AzureADAdministrator list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AzureADAdministrator items on this page",
-          "items": {
-            "$ref": "#/definitions/AzureADAdministrator"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "Backup": {
