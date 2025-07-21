@@ -1389,7 +1389,7 @@
           "enum": [
             "AlertCreated",
             "StateChange",
-            "SeverityChange",
+            "severityChange",
             "MonitorConditionChange",
             "ActionsTriggered",
             "ActionsSuppressed"
@@ -1424,36 +1424,33 @@
         },
         "details": {
           "$ref": "#/definitions/BaseDetails",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-discriminator-source": "modificationEvent",
+          "x-discriminator-mapping": {
+            "monitorConditionChange": "#/definitions/PropertyChangeDetails",
+            "StateChange": "#/definitions/PropertyChangeDetails",
+            "severityChange": "#/definitions/PropertyChangeDetails",
+            "ActionsTriggered": "#/definitions/ActionTriggeredDetails",
+            "ActionsSuppressed": "#/definitions/ActionSuppressedDetails"
+          },
+          "description": "Additional details - type determined by modificationEvent value"
         }
       }
     },
     "BaseDetails": {
       "description": "Base details class.",
       "type": "object",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of modification details",
-          "enum": [
-            "PropertyChange",
-            "ActionsSuppressed",
-            "ActionsTriggered"
-          ],
-          "x-ms-enum": {
-            "name": "AlertModificationType",
-            "modelAsString": true
-          }
-        }
       }
     },
     "PropertyChangeDetails": {
       "x-ms-discriminator-value": "PropertyChange",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
         "oldValue": {
           "type": "string",
@@ -1472,6 +1469,11 @@
     "ActionSuppressedDetails": {
       "x-ms-discriminator-value": "ActionsSuppressed",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
         "suppressionActionRules": {
           "type": "array",
@@ -1493,6 +1495,11 @@
     "ActionTriggeredDetails": {
       "x-ms-discriminator-value": "ActionsTriggered",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      ],
       "properties": {
         "actionGroup": {
           "$ref": "#/definitions/TriggeredRule",
