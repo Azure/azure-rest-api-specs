@@ -3,7 +3,7 @@
   "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "managementGroupId": "fdsnap",
+    "managementGroupName": "mymanagementGroup",
     "stageMapName": "testChangeState",
     "resource": {
       "properties": {
@@ -14,26 +14,68 @@
             "stageVariables": {
               "environment": "enterprise",
               "scope": "organization-wide",
-              "compliance": "strict",
+              "governanceLevel": "strict",
               "auditRequired": true
             },
             "nestedStageMap": {
-              "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+              "resourceId": "/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
             }
           }
         ],
         "parameters": {
-          "orchestrationTool": {
+          "complianceLevel": {
             "type": "string",
-            "defaultValue": "helm",
+            "defaultValue": "enterprise",
             "allowedValues": [
-              "helm",
-              "kustomize",
-              "operator"
+              "basic",
+              "standard",
+              "enterprise"
             ],
             "metadata": {
-              "description": "Orchestration tool for deployments",
-              "category": "deployment"
+              "description": "Organization-wide compliance level",
+              "category": "governance"
+            }
+          },
+          "auditRetention": {
+            "type": "number",
+            "defaultValue": 365,
+            "allowedValues": [
+              90,
+              180,
+              365,
+              730
+            ],
+            "metadata": {
+              "description": "Audit log retention period in days",
+              "category": "compliance"
+            }
+          },
+          "policyScope": {
+            "type": "array",
+            "defaultValue": [
+              "security",
+              "compliance"
+            ],
+            "allowedValues": [
+              [
+                "security"
+              ],
+              [
+                "compliance"
+              ],
+              [
+                "security",
+                "compliance"
+              ],
+              [
+                "security",
+                "compliance",
+                "governance"
+              ]
+            ],
+            "metadata": {
+              "description": "Enterprise policy scope areas",
+              "category": "governance"
             }
           }
         }
@@ -52,28 +94,15 @@
               "stageVariables": {
                 "environment": "enterprise",
                 "scope": "organization-wide",
-                "compliance": "strict",
+                "governanceLevel": "strict",
                 "auditRequired": true
               },
               "nestedStageMap": {
-                "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+                "resourceId": "/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
               }
             }
           ],
           "parameters": {
-            "orchestrationTool": {
-              "type": "string",
-              "defaultValue": "helm",
-              "allowedValues": [
-                "helm",
-                "kustomize",
-                "operator"
-              ],
-              "metadata": {
-                "description": "Orchestration tool for deployments",
-                "category": "deployment"
-              }
-            },
             "complianceLevel": {
               "type": "string",
               "defaultValue": "enterprise",
@@ -88,7 +117,7 @@
               }
             },
             "auditRetention": {
-              "type": "int",
+              "type": "number",
               "defaultValue": 365,
               "allowedValues": [
                 90,
@@ -100,10 +129,38 @@
                 "description": "Audit log retention period in days",
                 "category": "compliance"
               }
+            },
+            "policyScope": {
+              "type": "array",
+              "defaultValue": [
+                "security",
+                "compliance"
+              ],
+              "allowedValues": [
+                [
+                  "security"
+                ],
+                [
+                  "compliance"
+                ],
+                [
+                  "security",
+                  "compliance"
+                ],
+                [
+                  "security",
+                  "compliance",
+                  "governance"
+                ]
+              ],
+              "metadata": {
+                "description": "Enterprise policy scope areas",
+                "category": "governance"
+              }
             }
           }
         },
-        "id": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "id": "/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
         "name": "testChangeState",
         "type": "Microsoft.ChangeSafety/stageMaps",
         "systemData": {
@@ -127,28 +184,15 @@
               "stageVariables": {
                 "environment": "enterprise",
                 "scope": "organization-wide",
-                "compliance": "strict",
+                "governanceLevel": "strict",
                 "auditRequired": true
               },
               "nestedStageMap": {
-                "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+                "resourceId": "/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
               }
             }
           ],
           "parameters": {
-            "orchestrationTool": {
-              "type": "string",
-              "defaultValue": "helm",
-              "allowedValues": [
-                "helm",
-                "kustomize",
-                "operator"
-              ],
-              "metadata": {
-                "description": "Orchestration tool for deployments",
-                "category": "deployment"
-              }
-            },
             "complianceLevel": {
               "type": "string",
               "defaultValue": "enterprise",
@@ -163,7 +207,7 @@
               }
             },
             "auditRetention": {
-              "type": "int",
+              "type": "number",
               "defaultValue": 365,
               "allowedValues": [
                 90,
@@ -175,10 +219,38 @@
                 "description": "Audit log retention period in days",
                 "category": "compliance"
               }
+            },
+            "policyScope": {
+              "type": "array",
+              "defaultValue": [
+                "security",
+                "compliance"
+              ],
+              "allowedValues": [
+                [
+                  "security"
+                ],
+                [
+                  "compliance"
+                ],
+                [
+                  "security",
+                  "compliance"
+                ],
+                [
+                  "security",
+                  "compliance",
+                  "governance"
+                ]
+              ],
+              "metadata": {
+                "description": "Enterprise policy scope areas",
+                "category": "governance"
+              }
             }
           }
         },
-        "id": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "id": "/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
         "name": "testChangeState",
         "type": "Microsoft.ChangeSafety/stageMaps",
         "systemData": {
