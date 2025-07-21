@@ -1360,7 +1360,17 @@
           ],
           "x-ms-enum": {
             "name": "KeySource",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Default encryption using Microsoft-managed keys"
+              },
+              {
+                "value": "Microsoft.Keyvault",
+                "description": "Encryption using customer-managed keys in Azure Key Vault"
+              }
+            ]
           },
           "default": "Default"
         },
