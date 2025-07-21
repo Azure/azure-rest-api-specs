@@ -1,0 +1,92 @@
+name: "Swagger Avocado - Analyze Code"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  avocado-code:
+    name: "Swagger Avocado - Analyze Code"
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Must include all branches, for git branch logic in Avocado to work correctly
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Run Avocado
+        id: run-avocado
+        run: |
+          set -x
+
+          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
+
+          echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
+
+          npm exec --no -- avocado \
+            --excludePaths \
+              "/common-types/" \
+              "/scenarios/" \
+              "/package.json" \
+              "/package-lock.json" \
+              "/cadl/examples/" \
+              '(?=/examples/)(?!(?:/stable/|/preview/))' \
+              "/\\.github/" \
+              "/eng/" \
+            --includePaths \
+              "data-plane" \
+              "resource-manager" \
+            --file \
+              "$AVOCADO_OUTPUT_FILE"
+
+          TIME=$(node -p 'JSON.stringify(new Date())')
+
+          # Avocado doesn't write any output if it was successful, so we add some to simplify later processing
+          [[ -e $AVOCADO_OUTPUT_FILE ]] || \
+            echo "{\"type\":\"Raw\",\"level\":\"Info\",\"message\":\"success\",\"time\":$TIME}" > "$AVOCADO_OUTPUT_FILE"
+        env:
+          # Tells Avocado to analyze the files changed between the PR head (default checkout)
+          # and the PR base branch.
+          SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
+          # Avocado hardcodes these env vars to get repo and SHA
+          TRAVIS_REPO_SLUG: ${{ github.repository }}
+          TRAVIS_PULL_REQUEST_SHA: ${{ github.sha }}
+
+      - name: Setup Node 20 and install deps (under .github)
+        if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          # actions/github-script@v7 uses Node 20
+          node-version: 20.x
+          # "--no-audit": improves performance
+          # "--omit dev": not needed at runtime, improves performance
+          install-command: "npm ci --no-audit --omit dev"
+          working-directory: ./.github
+
+      - name: Generate job summary
+        if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
+        id: generate-job-summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { default: generateJobSummary } =
+              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
+            return await generateJobSummary({ core });
+        env:
+          AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.generate-job-summary.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.generate-job-summary.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
