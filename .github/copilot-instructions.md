@@ -212,7 +212,7 @@ Do not skip the step that choose SDK generation method to ensure the user select
 6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
 7. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: Create a release plan for the generated SDKs using spec pull request.
+9. **Create a release plan**: To create a release plan refer to #file:.\prompts\create-release-plan.prompt.md
 10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
 11. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
 
