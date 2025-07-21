@@ -125,25 +125,35 @@ interface DisasterRecoveryConfigOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBNamespace,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = ""
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = ArmDisasterRecovery,
-          KeyName = "alias",
-          SegmentName = "disasterRecoveryConfigs",
-          NamePattern = ""
-        >>,
+
+        /**
+         * The namespace name
+         */
+        @path
+        @segment("namespaces")
+        @minLength(6)
+        @maxLength(50)
+        namespaceName: string,
+
+        /**
+         * The Disaster Recovery configuration name
+         */
+        @path
+        @segment("disasterRecoveryConfigs")
+        @minLength(1)
+        @maxLength(50)
+        `alias`: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SBAuthorizationRule,
-        KeyName = "authorizationRuleName",
-        SegmentName = "authorizationRules",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * The authorization rule name.
+         */
+        @path
+        @segment("authorizationRules")
+        @minLength(1)
+        @maxLength(50)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -181,25 +191,34 @@ interface QueueOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBNamespace,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = ""
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBQueue,
-          KeyName = "queueName",
-          SegmentName = "queues",
-          NamePattern = ""
-        >>,
+
+        /**
+         * The namespace name
+         */
+        @path
+        @segment("namespaces")
+        @minLength(6)
+        @maxLength(50)
+        namespaceName: string,
+
+        /**
+         * The queue name.
+         */
+        @path
+        @segment("queues")
+        @minLength(1)
+        queueName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SBAuthorizationRule,
-        KeyName = "authorizationRuleName",
-        SegmentName = "authorizationRules",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * The authorization rule name.
+         */
+        @path
+        @segment("authorizationRules")
+        @minLength(1)
+        @maxLength(50)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -265,25 +284,34 @@ interface TopicOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBNamespace,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = ""
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = SBTopic,
-          KeyName = "topicName",
-          SegmentName = "topics",
-          NamePattern = ""
-        >>,
+
+        /**
+         * The namespace name
+         */
+        @path
+        @segment("namespaces")
+        @minLength(6)
+        @maxLength(50)
+        namespaceName: string,
+
+        /**
+         * The topic name.
+         */
+        @path
+        @segment("topics")
+        @minLength(1)
+        topicName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SBAuthorizationRule,
-        KeyName = "authorizationRuleName",
-        SegmentName = "authorizationRules",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * The authorization rule name.
+         */
+        @path
+        @segment("authorizationRules")
+        @minLength(1)
+        @maxLength(50)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
