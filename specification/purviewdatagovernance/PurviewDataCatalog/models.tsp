@@ -188,13 +188,13 @@ model SharedSearchManageAttributeSearchFilter {
 @doc("CriticalDataElementQueryRequest.")
 model CriticalDataElementQueryRequest {
   @doc("To Skip how many records.")
-  skip?: int32;
+  skip?: int32 = 0;
 
   @doc("To return how many records.")
   top?: int32;
 
   @doc("To order the records.")
-  orderBy?: CatalogApiServiceOrderBy[];
+  orderby?: CatalogApiServiceOrderBy[];
 
   @doc("To filter by Ids.")
   ids?: string[];
@@ -427,13 +427,13 @@ model CatalogModelDataAsset {
 @doc("DataAssetDataAssetQueryRequest.")
 model DataAssetDataAssetQueryRequest {
   @doc("To Skip how many records.")
-  skip?: int32;
+  skip?: int32 = 0;
 
   @doc("To return how many records.")
   top?: int32;
 
   @doc("To order the records.")
-  orderBy?: CatalogApiServiceOrderBy[];
+  orderby?: CatalogApiServiceOrderBy[];
 
   @doc("To filter by Ids.")
   ids?: string[];
@@ -449,4 +449,42 @@ model DataAssetDataAssetQueryRequest {
 
   @doc("To filter by data map asset Ids.")
   dataMapAssetIds?: string[];
+}
+
+@doc("FacetValue.")
+model FacetValue {
+  @doc("The value of the facet.")
+  value: string;
+
+  @doc("The count of items in the facet.")
+  count: string;
+}
+@doc("FacetsResponse.")
+model FacetsResponse {
+  @doc("The list of facets.")
+  facets: Record<FacetValue[]>;
+}
+
+@doc("Response containing a list of critical data columns.")
+model CriticalDataColumnsResponse {
+  @doc("The list of critical data columns.")
+  value: CatalogModelCriticalDataColumn[];
+}
+
+@doc("Response containing a list of critical data elements.")
+model CriticalDataElementsResponse {
+  @doc("The list of critical data elements.")
+  value: CatalogModelCriticalDataElement[];
+}
+
+@doc("Response containing a list of data assets.")
+model DataAssetsResponse {
+  @doc("The list of data assets.")
+  value: CatalogModelDataAsset[];
+}
+
+@doc("Response containing a list of relationship wrappers.")
+model RelationshipWrappersResponse {
+  @doc("The list of relationships.")
+  value: RelationshipWrapper[];
 }

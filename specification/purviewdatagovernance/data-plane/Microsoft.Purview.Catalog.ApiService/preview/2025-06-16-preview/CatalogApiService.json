@@ -36,8 +36,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://myservice.azure.com/read",
-        "https://myservice.azure.com/write"
+        "https://purview.azure.net/.default"
       ]
     }
   ],
@@ -45,10 +44,9 @@
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
-      "authorizationUrl": "https://api.example.com/oauth2/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://myservice.azure.com/read": "",
-        "https://myservice.azure.com/write": ""
+        "https://purview.azure.net/.default": ""
       }
     }
   },
@@ -97,7 +95,8 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -108,7 +107,7 @@
             "format": "int32"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
             "required": false,
@@ -119,10 +118,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CatalogModelCriticalDataColumn"
-              }
+              "$ref": "#/definitions/CriticalDataColumnsResponse"
             }
           },
           "default": {
@@ -145,7 +141,7 @@
         }
       },
       "post": {
-        "operationId": "PostCriticalDataColumn",
+        "operationId": "CreateCriticalDataColumn",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -185,8 +181,8 @@
           }
         },
         "x-ms-examples": {
-          "PostCriticalDataColumn_MaximumSet": {
-            "$ref": "./examples/PostCriticalDataColumn_MaximumSet_Gen.json"
+          "CreateCriticalDataColumn_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataColumn_MaximumSet_Gen.json"
           }
         }
       }
@@ -215,10 +211,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CatalogModelCriticalDataColumn"
-              }
+              "$ref": "#/definitions/CriticalDataColumnsResponse"
             }
           },
           "default": {
@@ -243,7 +236,7 @@
     },
     "/criticalDataColumns/{criticalDataColumnId}/relationships": {
       "get": {
-        "operationId": "GetCriticalDataColumn",
+        "operationId": "GetCriticalDataColumnRelationships",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -364,10 +357,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RelationshipWrapper"
-              }
+              "$ref": "#/definitions/RelationshipWrappersResponse"
             }
           },
           "default": {
@@ -381,11 +371,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetCriticalDataColumn_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataColumn_MaximumSet_Gen.json"
           }
         }
       },
@@ -518,7 +503,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RelationshipWrappersResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -698,7 +686,7 @@
     },
     "/criticalDataElements": {
       "get": {
-        "operationId": "GetCriticalDataElement",
+        "operationId": "GetCriticalDataElements",
         "tags": [
           "CriticalDataElements"
         ],
@@ -727,7 +715,8 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -738,7 +727,7 @@
             "format": "int32"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
             "required": false,
@@ -749,10 +738,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CatalogModelCriticalDataElement"
-              }
+              "$ref": "#/definitions/CriticalDataElementsResponse"
             }
           },
           "default": {
@@ -766,11 +752,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataElement_MaximumSet_Gen.json"
           }
         }
       },
@@ -1434,7 +1415,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1487,7 +1471,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelCriticalDataElement"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1511,7 +1498,7 @@
     },
     "/dataAssets": {
       "get": {
-        "operationId": "GetDataAsset",
+        "operationId": "GetDataAssets",
         "tags": [
           "DataAsset"
         ],
@@ -1521,7 +1508,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "orderBy",
+            "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
             "required": false,
@@ -1533,7 +1520,8 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "name": "top",
@@ -1548,10 +1536,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CatalogModelDataAsset"
-              }
+              "$ref": "#/definitions/DataAssetsResponse"
             }
           },
           "default": {
@@ -1565,11 +1550,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetDataAsset_MaximumSet": {
-            "$ref": "./examples/GetDataAsset_MaximumSet_Gen.json"
           }
         }
       },
@@ -1885,10 +1865,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RelationshipWrapper"
-              }
+              "$ref": "#/definitions/RelationshipWrappersResponse"
             }
           },
           "default": {
@@ -2044,10 +2021,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RelationshipWrapper"
-              }
+              "$ref": "#/definitions/RelationshipWrappersResponse"
             }
           },
           "default": {
@@ -2243,10 +2217,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CatalogModelDataAsset"
-              }
+              "$ref": "#/definitions/DataAssetsResponse"
             }
           },
           "default": {
@@ -2721,6 +2692,22 @@
         }
       }
     },
+    "CriticalDataColumnsResponse": {
+      "type": "object",
+      "description": "Response containing a list of critical data columns.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of critical data columns.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelCriticalDataColumn"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "CriticalDataElementFacetRequest": {
       "type": "object",
       "description": "CriticalDataElementFacetRequest.",
@@ -2777,14 +2764,15 @@
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "To Skip how many records."
+          "description": "To Skip how many records.",
+          "default": 0
         },
         "top": {
           "type": "integer",
           "format": "int32",
           "description": "To return how many records."
         },
-        "orderBy": {
+        "orderby": {
           "type": "array",
           "description": "To order the records.",
           "items": {
@@ -2836,6 +2824,22 @@
         }
       }
     },
+    "CriticalDataElementsResponse": {
+      "type": "object",
+      "description": "Response containing a list of critical data elements.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of critical data elements.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelCriticalDataElement"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DataAssetDataAssetQueryRequest": {
       "type": "object",
       "description": "DataAssetDataAssetQueryRequest.",
@@ -2843,14 +2847,15 @@
         "skip": {
           "type": "integer",
           "format": "int32",
-          "description": "To Skip how many records."
+          "description": "To Skip how many records.",
+          "default": 0
         },
         "top": {
           "type": "integer",
           "format": "int32",
           "description": "To return how many records."
         },
-        "orderBy": {
+        "orderby": {
           "type": "array",
           "description": "To order the records.",
           "items": {
@@ -2890,6 +2895,22 @@
           }
         }
       }
+    },
+    "DataAssetsResponse": {
+      "type": "object",
+      "description": "Response containing a list of data assets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of data assets.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataAsset"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "EntityCategory": {
       "type": "string",
@@ -2987,6 +3008,43 @@
         ]
       }
     },
+    "FacetValue": {
+      "type": "object",
+      "description": "FacetValue.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the facet."
+        },
+        "count": {
+          "type": "string",
+          "description": "The count of items in the facet."
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ]
+    },
+    "FacetsResponse": {
+      "type": "object",
+      "description": "FacetsResponse.",
+      "properties": {
+        "facets": {
+          "type": "object",
+          "description": "The list of facets.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/FacetValue"
+            },
+            "type": "array"
+          }
+        }
+      },
+      "required": [
+        "facets"
+      ]
+    },
     "InputProperties": {
       "type": "object",
       "description": "InputProperties.",
@@ -3070,6 +3128,22 @@
           "description": "Unique identifier of the entity."
         }
       }
+    },
+    "RelationshipWrappersResponse": {
+      "type": "object",
+      "description": "Response containing a list of relationship wrappers.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of relationships.",
+          "items": {
+            "$ref": "#/definitions/RelationshipWrapper"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SharedEntityStatus": {
       "type": "string",

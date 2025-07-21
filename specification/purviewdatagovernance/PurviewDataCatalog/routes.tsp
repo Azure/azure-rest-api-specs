@@ -14,7 +14,7 @@ namespace PurviewDataCatalog;
 @doc("Searches and retrieves critical data elements based on domain, keyword, and other filters.")
 @route("/criticalDataElements")
 @get
-op getCriticalDataElement is Azure.Core.Foundations.Operation<
+op getCriticalDataElements is Azure.Core.Foundations.Operation<
   {
     @doc("Whether to return minimal information for referred Domains.")
     @query
@@ -26,7 +26,7 @@ op getCriticalDataElement is Azure.Core.Foundations.Operation<
 
     @doc("Number of items to skip.")
     @query
-    skip?: int32;
+    skip?: int32 = 0;
 
     @doc("Number of items to return.")
     @query
@@ -34,9 +34,9 @@ op getCriticalDataElement is Azure.Core.Foundations.Operation<
 
     @doc("Field to sort by.")
     @query
-    orderBy?: string;
+    orderby?: string;
   },
-  CatalogModelCriticalDataElement[],
+  CriticalDataElementsResponse,
   {}
 >;
 
@@ -218,10 +218,8 @@ op criticalDataElementQuery is Azure.Core.Foundations.Operation<
     @bodyRoot
     body?: CriticalDataElementQueryRequest;
   },
-  {
-    @statusCode
-    statusCode: 200;
-  }
+  CatalogModelCriticalDataElement,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -231,10 +229,8 @@ op criticalDataElementQuery is Azure.Core.Foundations.Operation<
 @post
 op criticalDataElementFacets is Azure.Core.Foundations.Operation<
   CriticalDataElementFacetRequest,
-  {
-    @statusCode
-    statusCode: 200;
-  }
+  FacetsResponse,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -242,7 +238,7 @@ op criticalDataElementFacets is Azure.Core.Foundations.Operation<
 @doc("Creates a new critical data column in the catalog.")
 @route("/criticalDataColumns")
 @post
-op postCriticalDataColumn is Azure.Core.Foundations.Operation<
+op createCriticalDataColumn is Azure.Core.Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
     @body
@@ -275,17 +271,17 @@ op getCriticalDataColumns is Azure.Core.Foundations.Operation<
 
     @doc("Number of items to skip.")
     @query("skip")
-    skip?: int32;
+    skip?: int32 = 0;
 
     @doc("Number of items to top.")
     @query("top")
     top?: int32;
 
     @doc("Field to sort by.")
-    @query("orderBy")
-    orderBy?: string;
+    @query("orderby")
+    orderby?: string;
   },
-  CatalogModelCriticalDataColumn[],
+  CriticalDataColumnsResponse,
   {}
 >;
 
@@ -300,7 +296,7 @@ op getCriticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation
     @path("criticalDataColumnId")
     criticalDataColumnId: Azure.Core.uuid;
   },
-  CatalogModelCriticalDataColumn[],
+  CriticalDataColumnsResponse,
   {}
 >;
 
@@ -326,6 +322,10 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations
   {
     @statusCode
     statusCode: 200;
+
+    @doc("RelationshipWrapper.")
+    @body
+    body: RelationshipWrappersResponse;
   }
 >;
 
@@ -334,7 +334,7 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations
 @doc("Retrieves relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
-op getCriticalDataColumn is Azure.Core.Foundations.Operation<
+op getCriticalDataColumnRelationships is Azure.Core.Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @path("criticalDataColumnId")
@@ -350,7 +350,7 @@ op getCriticalDataColumn is Azure.Core.Foundations.Operation<
 
     @doc("RelationshipWrapper.")
     @body
-    body: RelationshipWrapper[];
+    body: RelationshipWrappersResponse;
   }
 >;
 
@@ -388,21 +388,21 @@ op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of data assets.")
 @route("/dataAssets")
 @get
-op getDataAsset is Azure.Core.Foundations.Operation<
+op getDataAssets is Azure.Core.Foundations.Operation<
   {
     @doc("Field to sort by.")
     @query
-    orderBy?: string;
+    orderby?: string;
 
     @doc("Number of items to skip.")
     @query
-    skip?: int32;
+    skip?: int32 = 0;
 
     @doc("Number of items to return.")
     @query
     top?: int32;
   },
-  CatalogModelDataAsset[],
+  DataAssetsResponse,
   {}
 >;
 
@@ -430,7 +430,7 @@ op postDataAsset is Azure.Core.Foundations.Operation<
 @post
 op postDataAssetQuery is Azure.Core.Foundations.Operation<
   DataAssetDataAssetQueryRequest,
-  CatalogModelDataAsset[],
+  DataAssetsResponse,
   {}
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -499,7 +499,7 @@ op getDataAssetRelationships is Azure.Core.Foundations.Operation<
     @query("entityType")
     entityType: EntityCategory;
   },
-  RelationshipWrapper[],
+  RelationshipWrappersResponse,
   {}
 >;
 
@@ -522,7 +522,7 @@ op createDataAssetRelationships is Azure.Core.Foundations.Operation<
     @bodyRoot
     body: Record<InputbodyProperties>;
   },
-  RelationshipWrapper[],
+  RelationshipWrappersResponse,
   {}
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

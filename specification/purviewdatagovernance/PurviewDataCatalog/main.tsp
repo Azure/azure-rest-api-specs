@@ -27,28 +27,27 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@useAuth(
-  OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://api.example.com/oauth2/authorize",
-      refreshUrl: "https://api.example.com/oauth2/refresh",
-      scopes: [
-        "https://myservice.azure.com/read",
-        "https://myservice.azure.com/write"
-      ],
-    }
-  ]>
-)
-@versioned(Versions)
+@doc("""
+  Purview Data Catalog Service is a fully managed cloud service whose users can
+  discover the data sources they need and understand the data sources they find.
+  At the same time, Data Catalog helps organizations get more value from their
+  existing investments. This spec defines REST API of Purview Data Catalog Service.
+  """)
+@useAuth(AuthToken)
+@versioned(ApiVersions)
 namespace PurviewDataCatalog;
-/**
- * The available API versions.
- */
-enum Versions {
-  /**
-   * The 2025-06-16-preview API version.
-   */
+
+@doc("Service API versions")
+enum ApiVersions {
+  @doc("2025-06-16-preview service API version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_06_16_preview: "2025-06-16-preview",
 }
+
+alias AuthToken = OAuth2Auth<[
+  {
+    type: OAuth2FlowType.implicit;
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+    scopes: ["https://purview.azure.net/.default"];
+  }
+]>;
