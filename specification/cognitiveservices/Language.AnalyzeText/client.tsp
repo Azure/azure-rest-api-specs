@@ -701,3 +701,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomEntityActionResult"
 );
 @@clientName(PiiEntityWithTags, "PiiEntity");
+
+@@clientName(analyzeTextSubmitJob, "analyzeTextJob", "python");
+@@clientName(analyzeTextCancelJob, "cancelJob", "python");
+@@clientName(analyzeTextJobStatus, "getJobStatus", "python");
