@@ -29,7 +29,7 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2025-06
+tag: package-2025-09
 ```
 
 ### Tag: package-2025-09
