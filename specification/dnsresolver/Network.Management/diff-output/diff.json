@@ -1,0 +1,1675 @@
+{
+  "info": {
+    "title": {
+      "__old": "DnsResolverPolicyManagementClient",
+      "__new": "DnsResolverManagementClient"
+    },
+    "description": {
+      "__old": "The DNS Resolver Policy Management Client.",
+      "__new": "DNS Resolver Client"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsForwardingRulesets": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnsResolvers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets/{dnsForwardingRulesetName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsForwardingRuleset"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsForwardingRuleset"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets/{dnsForwardingRulesetName}/forwardingRules": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets/{dnsForwardingRulesetName}/forwardingRules/{forwardingRuleName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ForwardingRule"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ForwardingRule"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets/{dnsForwardingRulesetName}/virtualNetworkLinks": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsForwardingRulesets/{dnsForwardingRulesetName}/virtualNetworkLinks/{virtualNetworkLinkName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/VirtualNetworkLink"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/VirtualNetworkLink"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists/{dnsResolverDomainListName}": {
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverDomainList"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverDomainList"
+              }
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverDomainLists/{dnsResolverDomainListName}/bulk": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverDomainListBulk"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverDomainListBulk"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}": {
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverPolicy"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverPolicy"
+              }
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/dnsSecurityRules/{dnsSecurityRuleName}": {
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsSecurityRule"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsSecurityRule"
+              }
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolverPolicies/{dnsResolverPolicyName}/virtualNetworkLinks/{dnsResolverPolicyVirtualNetworkLinkName}": {
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
+              }
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolver"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/DnsResolver"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}/inboundEndpoints": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}/inboundEndpoints/{inboundEndpointName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/InboundEndpoint"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/InboundEndpoint"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}/outboundEndpoints": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsResolvers/{dnsResolverName}/outboundEndpoints/{outboundEndpointName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OutboundEndpoint"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-None-Match",
+                "__new": "if-none-match"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OutboundEndpoint"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "if-match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "If-Match",
+              "in": "header",
+              "type": "string",
+              "x-ms-client-name": "IfMatch"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "If-Match",
+                "__new": "if-match"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsForwardingRulesets": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolverPolicies": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__added": 1,
+              "pattern__added": "^.+$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listDnsResolvers": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError__deleted": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__deleted": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
+    "ResourceGuid__deleted": {
+      "type": "string"
+    },
+    "Azure.ResourceManager.ArmResponse<DnsResolverDomainList>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/DnsResolverDomainList"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "DnsForwardingRuleset": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsForwardingRulesetListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DnsResolver": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsResolverDomainList": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsResolverDomainListListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DnsResolverListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DnsResolverPolicy": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsResolverPolicyListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DnsResolverPolicyVirtualNetworkLink": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsResolverPolicyVirtualNetworkLinkListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DnsSecurityRule": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "DnsSecurityRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ForwardingRule": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "ForwardingRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ForwardingRulePatchProperties": {
+      "properties": {
+        "forwardingRuleState": {
+          "default__deleted": "Enabled"
+        }
+      }
+    },
+    "InboundEndpoint": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "InboundEndpointListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "OutboundEndpoint": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "OutboundEndpointListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SubResourceListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkDnsForwardingRulesetListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkLink": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "x-ms-client-name__added": "eTag"
+        }
+      }
+    },
+    "VirtualNetworkLinkListResult": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
