@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DnsResolverPolicyManagementClient",
+    "title": "DnsResolverManagementClient",
     "version": "2025-05-01",
-    "description": "The DNS Resolver Policy Management Client."
+    "description": "DNS Resolver Client"
   },
   "produces": [
     "application/json"
@@ -33,7 +33,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -138,7 +138,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,7 +173,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -208,7 +208,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -228,24 +228,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsForwardingRuleset"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -267,7 +267,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -288,18 +288,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsForwardingRulesetPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -315,7 +315,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -336,7 +336,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -355,7 +355,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -394,7 +394,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -435,7 +435,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -461,24 +461,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ForwardingRule"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -497,7 +497,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -523,18 +523,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ForwardingRulePatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -547,7 +547,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -573,7 +573,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -589,7 +589,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -627,7 +627,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -668,7 +668,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -694,24 +694,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualNetworkLink"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -733,7 +733,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -760,18 +760,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualNetworkLinkPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -787,7 +787,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -814,7 +814,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -833,7 +833,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -930,24 +930,24 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverDomainList"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -993,18 +993,18 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverDomainListPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -1044,7 +1044,7 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -1086,24 +1086,24 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverDomainListBulk"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -1216,24 +1216,24 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicy"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -1276,18 +1276,18 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicyPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -1327,7 +1327,7 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -1464,24 +1464,24 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsSecurityRule"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -1533,18 +1533,18 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsSecurityRulePatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -1593,7 +1593,7 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -1730,24 +1730,24 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLink"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -1799,18 +1799,18 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverPolicyVirtualNetworkLinkPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -1859,7 +1859,7 @@
             "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -1908,7 +1908,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1943,7 +1943,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1963,24 +1963,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolver"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -2002,7 +2002,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2023,18 +2023,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DnsResolverPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -2050,7 +2050,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2071,7 +2071,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -2090,7 +2090,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2129,7 +2129,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2170,7 +2170,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2196,24 +2196,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InboundEndpoint"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -2235,7 +2235,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2262,18 +2262,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InboundEndpointPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -2289,7 +2289,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2316,7 +2316,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -2335,7 +2335,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2374,7 +2374,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2415,7 +2415,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2441,24 +2441,24 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "if-none-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfNoneMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OutboundEndpoint"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfNoneMatch"
           }
         ],
         "responses": {
@@ -2480,7 +2480,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2507,18 +2507,18 @@
             "type": "string"
           },
           {
+            "name": "if-match",
+            "in": "header",
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/OutboundEndpointPatch"
             }
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "type": "string",
-            "x-ms-client-name": "IfMatch"
           }
         ],
         "responses": {
@@ -2534,7 +2534,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2561,7 +2561,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
+            "name": "if-match",
             "in": "header",
             "type": "string",
             "x-ms-client-name": "IfMatch"
@@ -2580,7 +2580,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2619,7 +2619,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2641,7 +2641,9 @@
             "name": "virtualNetworkName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^.+$"
           }
         ],
         "responses": {
@@ -2695,7 +2697,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2711,6 +2713,17 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ArmResponse<DnsResolverDomainList>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/DnsResolverDomainList"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "CloudError": {
       "type": "object",
       "properties": {
