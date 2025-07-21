@@ -1,0 +1,4321 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "internalConstructors": false
+    },
+    "description__added": "Open API 2.0 Specs for Azure RecoveryServices Backup service",
+    "title": {
+      "__old": "RecoveryServicesBackupClient",
+      "__new": "Recovery Services Backup Client"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.RecoveryServices/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/ClientDiscoveryResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupStatus": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupValidateFeatures": {
+      "post": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDeletedProtectionContainers": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSContainerQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEncryptionConfigs/backupResourceEncryptionConfig": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSBackupEnginesQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEngines/{backupEngineName}": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSBackupEngineQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/backupProtectionIntent/{intentObjectName}": {
+      "get": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSContainerQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/inquire": {
+      "post": {
+        "x-ms-odata__deleted": "#/definitions/BMSContainersInquiryQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/items": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSWorkloadItemQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/GetProtectedItemQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSRPQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/move": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/provisionInstantItemRecovery": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/restore": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/revokeInstantItemRecovery": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPointsRecommendedForMove": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers": {
+      "post": {
+        "x-ms-odata__deleted": "#/definitions/BMSRefreshContainersQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/JobQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
+      "post": {
+        "x-ms-odata__deleted": "#/definitions/JobQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/ProtectionPolicyQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202__added": {
+            "description": "ignore"
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operations/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSPOQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/ProtectedItemQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSContainerQueryObject",
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/ProtectionIntentQueryObject",
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSecurityPIN": {
+      "post": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/fetchTieringCost": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationsStatus/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTriggerValidateOperation": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/BMSBackupSummariesQueryObject",
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationsStatuses/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "x-ms-authorization-auxiliary",
+              "in": "header",
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/operationResults/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/operationStatus/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/prepareDataMove": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig/triggerDataMove": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}/operationsStatus/{operationId}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/NewErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BMSPOQueryObject__deleted": {
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureSql",
+            "AzureBackupServer",
+            "AzureWorkload",
+            "AzureStorage",
+            "DefaultBackup"
+          ],
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "workloadType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        }
+      }
+    },
+    "BMSRPQueryObject__deleted": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "restorePointQueryType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "FullAndDifferential",
+            "All",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointQueryType",
+            "modelAsString": true
+          }
+        },
+        "extendedInfo": {
+          "type": "boolean"
+        },
+        "moveReadyRPOnly": {
+          "type": "boolean"
+        },
+        "includeSoftDeletedRP": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ClientDiscoveryResponse__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "IaasVMILRRegistrationRequest__deleted": {
+      "type": "object",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string"
+        },
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "initiatorName": {
+          "type": "string"
+        },
+        "renewExistingRegistration": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ILRRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
+    },
+    "BackupFabricResource__added": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "BmspoQueryObject__added": {
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "workloadType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        }
+      }
+    },
+    "BmsrpQueryObject__added": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "restorePointQueryType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "FullAndDifferential",
+            "All",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointQueryType",
+            "modelAsString": true
+          }
+        },
+        "extendedInfo": {
+          "type": "boolean"
+        },
+        "moveReadyRPOnly": {
+          "type": "boolean"
+        },
+        "includeSoftDeletedRP": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IaasVmilrRegistrationRequest__added": {
+      "type": "object",
+      "properties": {
+        "recoveryPointId": {
+          "type": "string"
+        },
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "initiatorName": {
+          "type": "string"
+        },
+        "renewExistingRegistration": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ILRRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "IaasVMILRRegistrationRequest"
+    },
+    "NewErrorResponseError__added": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NewErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TypeSpec.Http.OkResponse__added": {
+      "type": "object"
+    },
+    "VaultResource__added": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AzureBackupServerContainer": {
+      "properties__added": {
+        "canReRegister": {
+          "type": "boolean"
+        },
+        "containerId": {
+          "type": "string"
+        },
+        "protectedItemCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dpmAgentVersion": {
+          "type": "string"
+        },
+        "dpmServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "upgradeAvailable": {
+          "type": "boolean"
+        },
+        "protectionStatus": {
+          "type": "string"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/DPMContainerExtendedInfo"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/DpmContainer",
+              "__new": "#/definitions/ProtectionContainer"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSClassicComputeVMContainer": {
+      "properties__added": {
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/IaaSVMContainer",
+              "__new": "#/definitions/ProtectionContainer"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSClassicComputeVMProtectableItem": {
+      "properties__added": {
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/IaaSVMProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSClassicComputeVMProtectedItem": {
+      "properties__added": {
+        "friendlyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "protectionStatus": {
+          "type": "string"
+        },
+        "protectionState": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused",
+            "BackupsSuspended"
+          ],
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "healthStatus": {
+          "type": "string",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "healthDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        },
+        "kpisHealths": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
+        "lastBackupStatus": {
+          "type": "string"
+        },
+        "lastBackupTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "protectedItemDataId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo"
+        },
+        "extendedProperties": {
+          "$ref": "#/definitions/ExtendedProperties"
+        },
+        "policyType": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureIaaSVMProtectedItem",
+              "__new": "#/definitions/ProtectedItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSComputeVMContainer": {
+      "properties__added": {
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/IaaSVMContainer",
+              "__new": "#/definitions/ProtectionContainer"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSComputeVMProtectableItem": {
+      "properties__added": {
+        "virtualMachineId": {
+          "type": "string"
+        },
+        "virtualMachineVersion": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/IaaSVMProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureIaaSComputeVMProtectedItem": {
+      "properties__added": {
+        "friendlyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "protectionStatus": {
+          "type": "string"
+        },
+        "protectionState": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "IRPending",
+            "Protected",
+            "ProtectionError",
+            "ProtectionStopped",
+            "ProtectionPaused",
+            "BackupsSuspended"
+          ],
+          "x-ms-enum": {
+            "name": "ProtectionState",
+            "modelAsString": true
+          }
+        },
+        "healthStatus": {
+          "type": "string",
+          "enum": [
+            "Passed",
+            "ActionRequired",
+            "ActionSuggested",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "healthDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        },
+        "kpisHealths": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
+        "lastBackupStatus": {
+          "type": "string"
+        },
+        "lastBackupTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "protectedItemDataId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureIaaSVMProtectedItemExtendedInfo"
+        },
+        "extendedProperties": {
+          "$ref": "#/definitions/ExtendedProperties"
+        },
+        "policyType": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureIaaSVMProtectedItem",
+              "__new": "#/definitions/ProtectedItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureSQLAGWorkloadContainerProtectionContainer": {
+      "properties__added": {
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureWorkloadContainerExtendedInfo"
+        },
+        "workloadType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "operationType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Register",
+            "Reregister",
+            "Rehydrate"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadContainer",
+              "__new": "#/definitions/ProtectionContainer"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVMAppContainerProtectionContainer": {
+      "properties__added": {
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extendedInfo": {
+          "$ref": "#/definitions/AzureWorkloadContainerExtendedInfo"
+        },
+        "workloadType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase",
+            "SAPHanaDBInstance"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "operationType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Register",
+            "Reregister",
+            "Rehydrate"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadContainer",
+              "__new": "#/definitions/ProtectionContainer"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPAseDatabaseProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectedItem",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPAseDatabaseWorkloadItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPAseSystemProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPAseSystemWorkloadItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaDBInstance": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaDBInstanceProtectedItem": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectedItem",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaDatabaseProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectedItem",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaDatabaseWorkloadItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaHSRProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaSystemProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLAvailabilityGroupProtectableItem": {
+      "properties": {
+        "parentName__added": {
+          "type": "string"
+        },
+        "parentUniqueName__added": {
+          "type": "string"
+        },
+        "serverName__added": {
+          "type": "string"
+        },
+        "isAutoProtectable__added": {
+          "type": "boolean"
+        },
+        "isAutoProtected__added": {
+          "type": "boolean"
+        },
+        "subinquireditemcount__added": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount__added": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation__added": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable__added": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLDatabaseProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLDatabaseProtectedItem": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectedItem",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLDatabaseWorkloadItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLInstanceProtectableItem": {
+      "properties__added": {
+        "parentName": {
+          "type": "string"
+        },
+        "parentUniqueName": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "isAutoProtectable": {
+          "type": "boolean"
+        },
+        "isAutoProtected": {
+          "type": "boolean"
+        },
+        "subinquireditemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subprotectableitemcount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prebackupvalidation": {
+          "$ref": "#/definitions/PreBackupValidation"
+        },
+        "isProtectable": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadProtectableItem",
+              "__new": "#/definitions/WorkloadProtectableItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureVmWorkloadSQLInstanceWorkloadItem": {
+      "properties": {
+        "parentName__added": {
+          "type": "string"
+        },
+        "serverName__added": {
+          "type": "string"
+        },
+        "isAutoProtectable__added": {
+          "type": "boolean"
+        },
+        "subinquireditemcount__added": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subWorkloadItemCount__added": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureVmWorkloadItem",
+              "__new": "#/definitions/WorkloadItem"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadAutoProtectionIntent": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureRecoveryServiceVaultProtectionIntent",
+              "__new": "#/definitions/ProtectionIntent"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadPointInTimeRecoveryPoint": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadPointInTimeRestoreRequest": {
+      "properties": {
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPAsePointInTimeRecoveryPoint": {
+      "properties__added": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointInTimeRange"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPAsePointInTimeRestoreRequest": {
+      "properties": {
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSAPAseRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPAseRecoveryPoint": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPAseRestoreRequest": {
+      "properties__added": {
+        "recoveryType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "propertyBag": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaPointInTimeRecoveryPoint": {
+      "properties__added": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PointInTimeRange"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadPointInTimeRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
+      "properties": {
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSAPHanaRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest": {
+      "properties": {
+        "pointInTime__added": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSAPHanaPointInTimeRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaRecoveryPoint": {
+      "properties__added": {
+        "recoveryPointTimeInUTC": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaRestoreRequest": {
+      "properties__added": {
+        "recoveryType": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "type": "string"
+        },
+        "propertyBag": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSAPHanaRestoreWithRehydrateRequest": {
+      "properties": {
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSAPHanaRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLAutoProtectionIntent": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadAutoProtectionIntent",
+              "__new": "#/definitions/ProtectionIntent"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLPointInTimeRecoveryPoint": {
+      "properties": {
+        "extendedInfo__added": {
+          "$ref": "#/definitions/AzureWorkloadSQLRecoveryPointExtendedInfo"
+        },
+        "recoveryPointTimeInUTC__added": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails__added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo__added": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties__added": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSQLRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLPointInTimeRestoreRequest": {
+      "properties": {
+        "shouldUseAlternateTargetLocation__added": {
+          "type": "boolean"
+        },
+        "isNonRecoverable__added": {
+          "type": "boolean"
+        },
+        "alternateDirectoryPaths__added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLDataDirectoryMapping"
+          }
+        },
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSQLRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest": {
+      "properties": {
+        "pointInTime__added": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "shouldUseAlternateTargetLocation__added": {
+          "type": "boolean"
+        },
+        "isNonRecoverable__added": {
+          "type": "boolean"
+        },
+        "alternateDirectoryPaths__added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLDataDirectoryMapping"
+          }
+        },
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSQLPointInTimeRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLRecoveryPoint": {
+      "properties": {
+        "recoveryPointTimeInUTC__added": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Full",
+            "Log",
+            "Differential",
+            "Incremental",
+            "SnapshotFull",
+            "SnapshotCopyOnlyFull"
+          ],
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": true
+          }
+        },
+        "recoveryPointTierDetails__added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformationV2"
+          }
+        },
+        "recoveryPointMoveReadinessInfo__added": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
+        },
+        "recoveryPointProperties__added": {
+          "$ref": "#/definitions/RecoveryPointProperties"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRecoveryPoint",
+              "__new": "#/definitions/RecoveryPoint"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLRestoreRequest": {
+      "properties": {
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "AzureWorkloadSQLRestoreWithRehydrateRequest": {
+      "properties": {
+        "shouldUseAlternateTargetLocation__added": {
+          "type": "boolean"
+        },
+        "isNonRecoverable__added": {
+          "type": "boolean"
+        },
+        "alternateDirectoryPaths__added": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SQLDataDirectoryMapping"
+          }
+        },
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "propertyBag__added": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetInfo__added": {
+          "$ref": "#/definitions/TargetRestoreInfo"
+        },
+        "recoveryMode__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot",
+            "SnapshotAttachAndRecover"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
+        },
+        "targetResourceGroupName__added": {
+          "type": "string"
+        },
+        "userAssignedManagedIdentityDetails__added": {
+          "$ref": "#/definitions/UserAssignedManagedIdentityDetails"
+        },
+        "snapshotRestoreParameters__added": {
+          "$ref": "#/definitions/SnapshotRestoreParameters"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/AzureWorkloadSQLRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "BMSWorkloadItemQueryObject": {
+      "properties": {
+        "backupManagementType": {
+          "enum": [
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "+",
+              "AzureBackupServer"
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "AzureBackupServer"
+            ],
+            [
+              "+",
+              "AzureStorage"
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "AzureStorage"
+            ],
+            [
+              " "
+            ]
+          ]
+        }
+      }
+    },
+    "BackupManagementUsageList": {
+      "allOf__added": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
+    },
+    "CloudError": {
+      "x-ms-external__deleted": true,
+      "properties": {
+        "error": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "x-ms-external__deleted": true,
+      "properties": {
+        "additionalInfo": {
+          "items": {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo",
+              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+            }
+          }
+        }
+      }
+    },
+    "FetchTieringCostInfoForRehydrationRequest": {
+      "required": [
+        [
+          " "
+        ],
+        [
+          "-",
+          "objectType"
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ],
+        [
+          "-",
+          "sourceTierType"
+        ],
+        [
+          "-",
+          "targetTierType"
+        ]
+      ]
+    },
+    "FetchTieringCostSavingsInfoForPolicyRequest": {
+      "required": [
+        [
+          "-",
+          "objectType"
+        ],
+        [
+          " "
+        ],
+        [
+          "-",
+          "sourceTierType"
+        ],
+        [
+          "-",
+          "targetTierType"
+        ]
+      ]
+    },
+    "FetchTieringCostSavingsInfoForProtectedItemRequest": {
+      "required": [
+        [
+          " "
+        ],
+        [
+          "-",
+          "objectType"
+        ],
+        [
+          " "
+        ],
+        [
+          "-",
+          "sourceTierType"
+        ],
+        [
+          "-",
+          "targetTierType"
+        ]
+      ]
+    },
+    "FetchTieringCostSavingsInfoForVaultRequest": {
+      "required__deleted": [
+        "objectType",
+        "sourceTierType",
+        "targetTierType"
+      ]
+    },
+    "IaasVMRestoreWithRehydrationRequest": {
+      "properties": {
+        "recoveryPointId__added": {
+          "type": "string"
+        },
+        "recoveryType__added": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "OriginalLocation",
+            "AlternateLocation",
+            "RestoreDisks",
+            "Offline"
+          ],
+          "x-ms-enum": {
+            "name": "RecoveryType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId__added": {
+          "type": "string"
+        },
+        "targetVirtualMachineId__added": {
+          "type": "string"
+        },
+        "targetResourceGroupId__added": {
+          "type": "string"
+        },
+        "storageAccountId__added": {
+          "type": "string"
+        },
+        "virtualNetworkId__added": {
+          "type": "string"
+        },
+        "subnetId__added": {
+          "type": "string"
+        },
+        "targetDomainNameId__added": {
+          "type": "string"
+        },
+        "region__added": {
+          "type": "string"
+        },
+        "affinityGroup__added": {
+          "type": "string"
+        },
+        "createNewCloudService__added": {
+          "type": "boolean"
+        },
+        "originalStorageAccountOption__added": {
+          "type": "boolean"
+        },
+        "encryptionDetails__added": {
+          "$ref": "#/definitions/EncryptionDetails"
+        },
+        "restoreDiskLunList__added": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "restoreWithManagedDisks__added": {
+          "type": "boolean"
+        },
+        "diskEncryptionSetId__added": {
+          "type": "string"
+        },
+        "zones__added": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityInfo__added": {
+          "$ref": "#/definitions/IdentityInfo"
+        },
+        "identityBasedRestoreDetails__added": {
+          "$ref": "#/definitions/IdentityBasedRestoreDetails"
+        },
+        "extendedLocation__added": {
+          "$ref": "#/definitions/ExtendedLocation"
+        },
+        "securedVMDetails__added": {
+          "$ref": "#/definitions/SecuredVMDetails"
+        },
+        "targetDiskNetworkAccessSettings__added": {
+          "$ref": "#/definitions/TargetDiskNetworkAccessSettings"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/IaasVMRestoreRequest",
+              "__new": "#/definitions/RestoreRequest"
+            }
+          }
+        ]
+      ]
+    },
+    "InquiryValidation": {
+      "properties": {
+        "protectableItemCount": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "NewErrorResponse": {
+      "properties": {
+        "error": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "code": {
+              "type": "string",
+              "description": "The error code.",
+              "readOnly": true
+            },
+            "message": {
+              "type": "string",
+              "description": "The error message.",
+              "readOnly": true
+            },
+            "target": {
+              "type": "string",
+              "description": "The error target.",
+              "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "description": "The error details.",
+              "items": {
+                "$ref": "#/definitions/NewErrorResponse"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": [
+                "/error/code"
+              ]
+            },
+            "additionalInfo": {
+              "type": "array",
+              "description": "The error additional info.",
+              "items": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
+              },
+              "readOnly": true,
+              "x-ms-identifiers": []
+            }
+          },
+          "$ref__added": "#/definitions/NewErrorResponseError"
+        }
+      }
+    },
+    "ProtectableContainer": {
+      "properties": {
+        "protectableContainerType": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "ProtectionContainer": {
+      "properties": {
+        "containerType": {
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": true,
+              "__new": false
+            }
+          }
+        }
+      }
+    },
+    "RecoveryPointTierInformation": {
+      "properties": {
+        "status": {
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": false,
+              "__new": true
+            }
+          }
+        }
+      }
+    },
+    "RecoveryPointTierInformationV2": {
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "modelAsString": {
+              "__old": true,
+              "__new": false
+            }
+          }
+        }
+      }
+    },
+    "TargetDiskNetworkAccessSettings": {
+      "properties": {
+        "targetDiskNetworkAccessOption": {
+          "x-ms-enum": {
+            "modelAsString__added": false
+          }
+        }
+      }
+    },
+    "TieringCostRehydrationInfo": {
+      "required": [
+        [
+          "-",
+          "objectType"
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ]
+      ]
+    },
+    "TieringCostSavingInfo": {
+      "required": [
+        [
+          "-",
+          "objectType"
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ],
+        [
+          " "
+        ]
+      ]
+    },
+    "ValidateIaasVMRestoreOperationRequest": {
+      "properties__added": {
+        "restoreRequest": {
+          "$ref": "#/definitions/RestoreRequest"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "#/definitions/ValidateRestoreOperationRequest",
+              "__new": "#/definitions/ValidateOperationRequest"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}
