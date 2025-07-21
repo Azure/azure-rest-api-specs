@@ -165,9 +165,6 @@
           "StorageAccountCreateDnsEndpointTypeToStandard": {
             "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToStandard.json"
           },
-          "DeletedStorageAccountRestore": {
-            "$ref": "./examples/DeletedStorageAccountRestore.json"
-          },
           "StorageAccountCreate_placement": {
             "$ref": "./examples/StorageAccountCreate_placement.json"
           },
@@ -206,7 +203,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Create, update or restore storage account request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Create or update storage account request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true
@@ -3347,11 +3344,6 @@
             "modelAsString": true
           },
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
-        },
-        "deletedAccountCreationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the deleted account. This property should only be provided while requesting deleted storage account recovery."
         }
       },
       "description": "The parameters used to create the storage account."
