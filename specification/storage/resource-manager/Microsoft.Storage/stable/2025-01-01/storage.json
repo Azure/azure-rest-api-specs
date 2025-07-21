@@ -3013,7 +3013,7 @@
         "value": {
           "type": "string",
           "x-ms-client-name": "IPAddressOrRange",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+          "description": "Specifies the IP or IP range in CIDR format."
         },
         "action": {
           "type": "string",
@@ -3074,6 +3074,14 @@
             "$ref": "#/definitions/IPRule"
           },
           "description": "Sets the IP ACL rules"
+        },
+        "ipv6Rules": {
+          "type": "array",
+          "items": {
+            "description": "IPv6 rule with specific IP or IP range in CIDR format.",
+            "$ref": "#/definitions/IPRule"
+          },
+          "description": "Sets the IPv6 ACL rules"
         },
         "defaultAction": {
           "type": "string",
