@@ -5,7 +5,7 @@ files, and looks for "new" errors in the results.
 
 Interesting changed files are swagger `.json` files and `readme.md` files.
 Changes to swagger JSON files are mapped to `readme.md` files and tags which
-include the swagger file. The entire tree of swagger dependencies is traversed 
+include the swagger file. The entire tree of swagger dependencies is traversed
 so changes to a file will result in scanning of readme.md and swagger files
 which depend on the changed file.
 
@@ -31,7 +31,7 @@ position in an array changes, the error will not correlate and may be reported.
 
 In most common cases, changes to LintDiff are in the current state of the repo and you'll need to set up a `before` to run against.
 
-At the root of the repo with changes you want to test, run the following commands: 
+At the root of the repo with changes you want to test, run the following commands:
 
 ```bash
 # Clone the specs repo into a temporary location at the base commit
@@ -44,8 +44,8 @@ npm ci
 npm exec --no -- lint-diff --before /tmp/rest-api-specs-before --after . --changed-files changed-files.txt
 ```
 
-## Output 
+## Output
 
-Output is written by default to `lint-diff.md` in the current working 
-directory. The file contains a table of errors. LintDiff itself also 
-formats error output to the console. 
+Output is written by default to `lint-diff.md` in the current working
+directory. The file contains a table of errors. LintDiff itself also
+formats error output to the console.
