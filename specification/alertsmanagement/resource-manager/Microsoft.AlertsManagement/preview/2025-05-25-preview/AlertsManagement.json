@@ -568,8 +568,8 @@
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments": {
       "get": {
-        "operationId": "Alerts_ListEnrichments",
-        "description": "List the enrichments of an alert. It returns a collection of one object named default.",
+        "operationId": "Alerts_GetEnrichments",
+        "description": "Get the enrichments of an alert. It returns a collection of one object named default.",
         "parameters": [
           {
             "$ref": "#/parameters/scope"
@@ -602,42 +602,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments/default": {
-      "get": {
-        "operationId": "Alerts_GetEnrichments",
-        "description": "Get the enrichments of an alert.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
-          {
-            "$ref": "#/parameters/alertId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Returns the enrichments of the specified alert.",
-            "schema": {
-              "$ref": "#/definitions/alertEnrichmentResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Resolve": {
-            "$ref": "./examples/Alerts_GetEnrichments.json"
-          }
         }
       }
     }
