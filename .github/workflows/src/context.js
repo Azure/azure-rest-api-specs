@@ -223,6 +223,9 @@ export async function extractInputs(github, context, core) {
       }
       if (!issue_number) {
         core.info(`Attempting to fallback to first pullrequest number in pull_requests array: ${ payload.workflow_run.pull_requests?.[0]?.number }`);
+        const prs = payload.workflow_run.pull_requests || [];
+        const baseOwner = payload.workflow_run.repository.owner.login;
+        console.log(`Ok What: ${JSON.stringify(payload.workflow_run.pull_requests)}`);
         issue_number = payload.workflow_run.pull_requests?.[0]?.number;
       }
 
