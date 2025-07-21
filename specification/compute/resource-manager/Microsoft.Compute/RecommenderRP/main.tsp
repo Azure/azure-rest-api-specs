@@ -22,11 +22,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Compute Recommender Client
+ * The Compute Recommender Resource Provider Client
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "AzureComputeRecommenderManagementClient" })
+@service(#{ title: "ComputeRecommenderResourceProviderClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Compute;
