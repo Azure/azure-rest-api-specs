@@ -163,13 +163,7 @@ export async function extractInputs(github, context, core) {
           //
           // In any case, the solution is to fall back to the (lower-rate-limit) search API.
           // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (
-            await getIssueNumber({
-              head_sha,
-              github,
-              core,
-            })
-          ).issueNumber;
+          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
         } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
@@ -221,14 +215,6 @@ export async function extractInputs(github, context, core) {
           }
         }
       }
-      if (!issue_number) {
-        core.info(`Attempting to fallback to first pullrequest number in pull_requests array: ${ payload.workflow_run.pull_requests?.[0]?.number }`);
-        const prs = payload.workflow_run.pull_requests || [];
-        const baseOwner = payload.workflow_run.repository.owner.login;
-        console.log(`Ok What: ${JSON.stringify(payload.workflow_run.pull_requests)}`);
-        issue_number = payload.workflow_run.pull_requests?.[0]?.number;
-      }
-
       if (!issue_number) {
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
