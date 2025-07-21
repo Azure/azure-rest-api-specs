@@ -211,18 +211,23 @@ namespace Language.ConversationsClientCustomizations;
   "AnalyzeConversationSubmitOperation"
 );
 @@clientName(analyzeConversationsSubmitJob,
-  "AnalyzeConversationSubmitJob", "python"
+  "AnalyzeConversationJob", "python"
 );
 
 @@clientName(analyzeConversationsJobStatus,
   "GetAnalyzeConversationJobStatus"
 );
+
+@@clientName(analyzeConversationsJobStatus,
+  "getJobStatus", "python"
+);
+
 @@clientName(analyzeConversationsCancelJob,
   "CancelAnalyzeConversations"
 );
 
 @@clientName(analyzeConversationsCancelJob,
-  "analyzeConversationCancelJob", "python"
+  "cancelJob", "python"
 );
 
 @@clientName(ConversationalPiiResultWithResultBase,
