@@ -86,7 +86,7 @@ interface WebPubSubService {
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
-  generateClientToken is Azure.Core.Foundations.Operation<
+  getClientAccessToken is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain

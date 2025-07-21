@@ -24,7 +24,7 @@ model WebSubPubClientOptions {
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.closeAllConnections,
   Azure.Messaging.WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.generateClientToken,
+@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.getClientAccessToken,
   Azure.Messaging.WebPubSubService
 );
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.removeConnectionsFromGroups,
