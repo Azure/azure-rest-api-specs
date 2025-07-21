@@ -5,7 +5,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -41,6 +40,9 @@ model FineTuningJobSFTHyperParameters {
 
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
   n_epochs?: int32;
+  
+  @doc("Other parameters used for training the model.")
+  additionalParameters?: Record<string>;
 }
 
 @doc("Configuration for the Supervised Fine-Tuning method.")
@@ -63,15 +65,18 @@ model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
 model FineTuningJobDPOHyperParameters { 
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
-  
+
   @doc("The beta value for the DPO method. A higher beta value will increase the weight of the penalty between the policy and reference model.")
   beta?: float64;
-  
+
   @doc("Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.")
   learning_rate_multiplier?: float64;
-  
+
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
   n_epochs?: int32;
+  
+  @doc("Other parameters used for training the model.")
+  additionalParameters?: Record<string>;
 }
 
 @doc("Configuration for the Direct Preference Optimization fine-tuning method.")
@@ -79,7 +84,7 @@ model FineTuningJobDPOHyperParameters {
 @removed(Versions.v1)
 model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
   type: "dpo";
-  
+
   @doc("The hyperparameters used for the DPO fine-tuning job.")
   hyperparameters?: FineTuningJobDPOHyperParameters;
 }
@@ -94,24 +99,27 @@ model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
 model FineTuningJobRFTHyperParameters { 
   @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
   batch_size?: int32;
-  
+
   @doc("Multiplier on amount of compute used for exploring search space during training.")
   compute_multiplier?: float64;
-  
+
   @doc("The number of training steps between evaluation runs.")
   eval_interval?: int32;
-  
+
   @doc("Number of evaluation samples to generate per training step.")
   eval_samples?: int32;
-  
+
   @doc("Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.")
   learning_rate_multiplier?: float64;
-  
+
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
   n_epochs?: int32;
-  
+
   @doc("Level of reasoning effort.")
   reasoning_effort?: string;
+
+  @doc("Other parameters used for training the model.")
+  additionalParameters?: Record<string>;
 }
 
 // RFT graders
@@ -124,6 +132,91 @@ model FineTuningJobRFTGrader {
   @doc("The grader type.")
   type: string;
 }
+
+@doc("A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
+  type: "string_check";
+
+  @doc("The input text. This may include template strings.")
+  input: string;
+
+  @doc("The name of the grader.")
+  name: string;
+
+  @doc("The string check operation to perform. One of eq, ne, like, or ilike.")
+  operation: string;
+
+  @doc("The reference text. This may include template strings.")
+  reference: string;
+}
+
+@doc("ScoreModelGrader uses a model to assign a score to the input.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTTextSimilarityGrader extends FineTuningJobRFTGrader {
+  type: "text_similarity";
+
+  @doc("The name of the grader.")
+  name: string;
+
+  @doc("The text being graded.")
+  input: string;
+
+  @doc("The text being graded against.")
+  reference: string;
+
+  @doc("TBD")
+  passThreshold?: float64;
+}
+
+@doc("TextSimilarityGrader grades text based on similarity metrics.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTScoreModelGrader extends FineTuningJobRFTGrader {
+  type: "score_model";
+  
+  //@doc("The input text. This may include template strings.")
+  //input: Array<FineTuningJobModelGraderMessage>;
+
+  @doc("The name of the grader.")
+  name: string;
+
+  @doc("The model to use for the evaluation.")
+  `model`: string;
+
+  @doc("The model to use for the evaluation.")
+  range: Array<float64>;
+  
+  // TBD: sampling_params
+
+  @doc("TBD")
+  passThreshold?: float64;
+}
+
+@doc("ScoreModelGrader uses a model to assign a score to the input.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTLabelModelGraderGrader extends FineTuningJobRFTGrader {
+  type: "label_model";
+
+  @doc("The name of the grader.")
+  name: string;
+
+  @doc("The model to use for the evaluation. Must support structured outputs.")
+  `model`: string;
+
+  //@doc("The text being graded.")
+  //input: string;
+
+  //@doc("The text being graded against.")
+  //labels: string;
+  
+  //passing_labels
+
+}
+// RFT graders end 
 
 @doc("Configuration for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
@@ -172,7 +265,7 @@ model FineTuningJobIntegrationWeightsAndBiases {
   name?: string;
 
   @doc("A list of tags to be attached to the newly created run. These tags are passed through directly to WandB. Some default tags are generated by OpenAI: 'openai/finetune', 'openai/{base-model}', 'openai/{ftjob}.")
-  tags?: Record<string>;
+  tags?: Array<string>;
 }
 
 @doc("Integration to enable for fine-tuning job.")
@@ -186,7 +279,7 @@ model FineTuningJobIntegration {
   wandb: FineTuningJobIntegrationWeightsAndBiases;
 }
 
-//////////////////
+// Fine-tuning integration with W&B ends
 
 @doc("Fine-Tuning Job")
 @resource("jobs")
@@ -202,11 +295,8 @@ model FineTuningJob {
   @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")
   object: string;
 
-  @doc("The organization that owns the fine-tuning job. Unused in AOAI API. It is maintained for parity with OAI SDK")
-  organization_id?: string;
-
   @doc("The Unix timestamp (in seconds) for when the fine-tuning job was created.")
-  created_at: int32;
+  created_at: utcDateTime;
 
   @doc("The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled.")
   status: string;
@@ -218,10 +308,10 @@ model FineTuningJob {
   validation_file?: string;
 
   @doc("The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
-  estimated_finish?: int32;
+  estimated_finish?: utcDateTime;
 
   @doc("The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.")
-  finished_at?: int32;
+  finished_at?: utcDateTime;
 
   @doc("The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.")
   fine_tuned_model?: string;
@@ -229,20 +319,23 @@ model FineTuningJob {
   @doc("The base model that is being fine-tuned.")
   `model`: string;
 
+  @doc("The base model provider.")
+  modelProvider?: string;
+
   @doc("The seed used for the fine-tuning job.")
   seed: int32;
 
   @doc("The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.")
   trained_tokens?: int32;
 
-  @doc("The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs.")
-  hyperparameters?: FineTuningJobSFTHyperParameters;
-
   @doc("The method used for fine-tuning.")
-  method?: FineTuningJobTrainingMethod;
+  method: FineTuningJobTrainingMethod;
+
+  @doc("The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.")
+  result_files?: Array<string>;
 
   @doc("A list of integrations to enable for this fine-tuning job.")
-  integrations?: Record<FineTuningJobIntegration>;
+  integrations?: Array<FineTuningJobIntegration>;
 
   @doc("For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.")
   error?: FineTuningJobError
