@@ -6,10 +6,8 @@ import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files
 import { PRContext, LabelContext } from "../src/types.js";
 import { evaluateImpact } from "../src/impact.js";
 
-// const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
-
 describe("Check Changes", () => {
-  it.only("Integration test 35346", async () => {
+  it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)("Integration test 35346", async () => {
     const targetDirectory = path.join("/home/semick/repo/rest-s/35346", "before");
     const sourceDirectory = path.join("/home/semick/repo/rest-s/35346", "after");
 
@@ -53,7 +51,7 @@ describe("Check Changes", () => {
     }
   }, 60000000);
 
-  it("Integration test 35982", async () => {
+  it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)("Integration test 35982", async () => {
     const targetDirectory = path.join("/home/semick/repo/rest-s/35982", "before");
     const sourceDirectory = path.join("/home/semick/repo/rest-s/35982", "after");
 
@@ -84,13 +82,13 @@ describe("Check Changes", () => {
       });
 
       const result = await evaluateImpact(prContext, labelContext);
-
-      // expect ARMReview, new-api-version, resource-manager, RPaaS, TypeSpec, WaitForARMFeedback
-
       expect(result.isNewApiVersion).toBeTruthy();
       expect(result.labelContext.toAdd.has("TypeSpec")).toBeTruthy();
       expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
+      expect(result.isNewApiVersion).toBeTruthy();
+      expect(result.labelContext.toAdd.has("ARMReview")).toBeTruthy();
       expect(result.labelContext.toAdd.has("RPaaS")).toBeTruthy();
+      expect(result.labelContext.toAdd.has("WaitForARMFeedback")).toBeTruthy();
       expect(result).toBeDefined();
     } finally {
       // Restore original directory

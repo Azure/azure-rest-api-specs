@@ -609,8 +609,7 @@ describe("Summarize Checks Tests", () => {
 
         expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
         expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());
-      },
-      600000,
+      }
     );
   });
 });
