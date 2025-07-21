@@ -8,6 +8,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
+import { resolve } from "path";
 import * as simpleGit from "simple-git";
 import {
   dataPlane,
@@ -22,6 +23,7 @@ import {
   swagger,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
+import { relativeCwd } from "../src/path.js";
 
 describe("changedFiles", () => {
   afterEach(() => {
@@ -38,7 +40,9 @@ describe("changedFiles", () => {
 
     vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
 
-    await expect(getChangedFiles(options)).resolves.toEqual(files);
+    await expect(
+      getChangedFiles(options).then((items) => items.map((i) => relativeCwd(i))),
+    ).resolves.toEqual(files);
   });
 
   const files = [
@@ -46,6 +50,7 @@ describe("changedFiles", () => {
     "cspell.yaml",
     "MixedCase.jSoN",
     "README.MD",
+    "not-a-spec/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/data-plane/readme.md",
     "specification/contosowidgetmanager/Contoso.Management/main.tsp",
     "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
@@ -53,19 +58,20 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
-  ];
+  ].map((f) => resolve(f));
 
   it("filter:json", () => {
     const expected = [
       "cspell.json",
       "MixedCase.jSoN",
+      "not-a-spec/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
-    expect(files.filter(json)).toEqual(expected);
+    expect(files.filter(json).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:readme", () => {
@@ -75,7 +81,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/readme.md",
     ];
 
-    expect(files.filter(readme)).toEqual(expected);
+    expect(files.filter(readme).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:specification", () => {
@@ -89,13 +95,13 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
-    expect(files.filter(specification)).toEqual(expected);
+    expect(files.filter((f) => specification(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:data-plane", () => {
     const expected = ["specification/contosowidgetmanager/data-plane/readme.md"];
 
-    expect(files.filter(dataPlane)).toEqual(expected);
+    expect(files.filter((f) => dataPlane(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:resource-manager", () => {
@@ -105,7 +111,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
-    expect(files.filter(resourceManager)).toEqual(expected);
+    expect(files.filter((f) => resourceManager(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:example", () => {
@@ -114,7 +120,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
-    expect(files.filter(example)).toEqual(expected);
+    expect(files.filter((f) => example(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:scenarios", () => {
@@ -122,7 +128,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
-    expect(files.filter(scenario)).toEqual(expected);
+    expect(files.filter((f) => scenario(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   it("filter:swagger", () => {
@@ -130,10 +136,29 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     ];
 
-    expect(files.filter(swagger)).toEqual(expected);
+    expect(files.filter((f) => swagger(f)).map((f) => relativeCwd(f))).toEqual(expected);
   });
 
   describe("getChangedFilesStatuses", () => {
+    /**
+     * Converts a result to an equivalent result with relative paths
+     *
+     * @param {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}} result
+     * @returns {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}}
+     */
+    function relativeResult(result) {
+      return {
+        ...result,
+        additions: result.additions.map((f) => relativeCwd(f)),
+        modifications: result.modifications.map((f) => relativeCwd(f)),
+        deletions: result.deletions.map((f) => relativeCwd(f)),
+        renames: result.renames.map((r) => ({
+          from: relativeCwd(r.from),
+          to: relativeCwd(r.to),
+        })),
+      };
+    }
+
     it.each([{}, { logger: debugLogger }])(
       "should categorize files correctly with all types of changes (%o)",
       async (options) => {
@@ -148,7 +173,8 @@ describe("changedFiles", () => {
 
         vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
         const result = await getChangedFilesStatuses(options);
-        expect(result).toEqual({
+
+        expect(relativeResult(result)).toEqual({
           additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
           modifications: [
             "specification/existing-service/main.tsp",
@@ -186,7 +212,7 @@ describe("changedFiles", () => {
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
-      expect(result).toEqual({
+      expect(relativeResult(result)).toEqual({
         additions: ["specification/service1/readme.md", "specification/service2/main.tsp"],
         modifications: [],
         deletions: [],
@@ -203,7 +229,7 @@ describe("changedFiles", () => {
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
-      expect(result).toEqual({
+      expect(relativeResult(result)).toEqual({
         additions: [],
         modifications: [],
         deletions: [],
