@@ -427,41 +427,6 @@
         }
       }
     },
-    "DiscoveryApiKey": {
-      "type": "object",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header. Details on obtaining the key can be found at https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/resourcemanager/create-api-key?view=rest-marketplacecatalog-resourcemanager-2023-01-01-preview",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "API key authentication",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "in": {
-          "type": "string",
-          "description": "location of the API key",
-          "enum": [
-            "header"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "name of the API key",
-          "enum": [
-            "X-API-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
-    },
     "Image": {
       "type": "object",
       "description": "Includes link to the product image",
