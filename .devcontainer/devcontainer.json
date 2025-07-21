@@ -1,9 +1,21 @@
 {
   "name": "TypeSpec Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:dev-20",
+  //"image": "mcr.microsoft.com/devcontainers/typescript-node:dev-20",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   // Default is 2 cores which is too slow for this codebase
-  "hostRequirements": {"cpus": 4},
-  "postCreateCommand": "npm ci",
+  "hostRequirements": {
+    "cpus": 4
+  },
+  "postCreateCommand": "apt update",
+  "features": {
+    "mcr.microsoft.com/devcontainers/dotnet:1-8.0": {},
+    "ghcr.io/devcontainers/features/go:1.0.0": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/java:1": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/powershell:1": {},
+    "mcr.microsoft.com/devcontainers/rust": {},
+  },
   "customizations": {
     "vscode": {
       // Keep in sync with .vscode/extensions.json
