@@ -28,26 +28,27 @@ model DynatraceSingleSignOnResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DynatraceSingleSignOnResources {
   /**
    * Get a DynatraceSingleSignOnResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOn_Get")
   get is ArmResourceRead<DynatraceSingleSignOnResource>;
 
   /**
    * Create a DynatraceSingleSignOnResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOn_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DynatraceSingleSignOnResource>;
 
   /**
    * List all DynatraceSingleSignOnResource by monitorName
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOn_List")
   list is ArmResourceListByParent<DynatraceSingleSignOnResource>;
 }

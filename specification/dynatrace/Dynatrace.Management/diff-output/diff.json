@@ -1,60 +1,15 @@
 {
-  "info": {
-    "description__added": "// FIXME: (missing-service-description) Add service description"
-  },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getAllConnectedResourcesCount": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "name": {
-                "__old": "request",
-                "__new": "body"
-              }
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getMarketplaceSaaSResourceDetails": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "name": {
-                "__old": "request",
-                "__new": "body"
-              }
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}": {
       "get": {
-        "x-ms-examples__deleted": {
-          "CreationSupported_Get": {
+        "x-ms-examples": {
+          "CreationSupported_Get__deleted": {
             "$ref": "./examples/CreationSupported_Get.json"
+          },
+          "CreationSupported_List__added": {
+            "$ref": "./examples/CreationSupported_List.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions/default": {
-      "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "required__added": true
-            }
-          ]
-        ]
       }
     }
   },
@@ -152,9 +107,6 @@
         "type__deleted": {
           "type": "string",
           "readOnly": true
-        },
-        "properties": {
-          "x-ms-client-flatten__added": true
         }
       }
     },

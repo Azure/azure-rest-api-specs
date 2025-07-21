@@ -36,10 +36,10 @@ interface MonitoredSubscriptionPropertiesOps
         ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
-        Resource = MonitoredSubscriptionProperties,
-        KeyName = "monitoredSubscription",
-        SegmentName = "monitoredSubscriptions",
-        NamePattern = ""
+        Resource = MonitorResource,
+        KeyName = "monitorName",
+        SegmentName = "monitors",
+        NamePattern = "^[a-zA-Z0-9_-]*$"
       >>
     > {}
 
@@ -53,9 +53,12 @@ interface MonitoredSubscriptions {
   /**
    * Add the subscriptions that should be monitored by the Dynatrace monitor resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @action("monitoredSubscriptions/default")
+  createOrUpdate is MonitoredSubscriptionPropertiesOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**

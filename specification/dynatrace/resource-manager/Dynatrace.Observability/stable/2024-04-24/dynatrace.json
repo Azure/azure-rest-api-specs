@@ -3,7 +3,6 @@
   "info": {
     "title": "Dynatrace.Observability",
     "version": "2024-04-24",
-    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -107,7 +106,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -152,7 +151,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -259,6 +258,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_List": {
+            "$ref": "./examples/CreationSupported_List.json"
           }
         }
       }
@@ -1166,7 +1170,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Monitor resource name",
+            "description": "The name of the MonitorResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9_-]*$"
@@ -1175,7 +1179,7 @@
             "name": "body",
             "in": "body",
             "description": "",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
@@ -2825,8 +2829,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionList",
-          "description": "The request to update subscriptions needed to be monitored by the Dynatrace monitor resource.",
-          "x-ms-client-flatten": true
+          "description": "The request to update subscriptions needed to be monitored by the Dynatrace monitor resource."
         }
       },
       "allOf": [

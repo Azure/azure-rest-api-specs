@@ -36,16 +36,16 @@ using Dynatrace.Observability;
 @@clientName(MonitorResources.listLinkableEnvironments::parameters.body,
   "request"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MonitorResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TagRule.properties);
 
 @@clientLocation(DynatraceSingleSignOnResources.get, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.createOrUpdate, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.list, "SingleSignOn");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DynatraceSingleSignOnResource.properties);
 
 @@clientLocation(MonitorsOperationGroup.getAllConnectedResourcesCount,

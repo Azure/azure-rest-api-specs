@@ -1,16 +1,22 @@
 ## Swagger Changes
 
-### Changes for `description`
+### Changes for `CreationSupported_Get`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `info.description__added` | added | `// FIXME: (missing-service-description) Add service description` |
+| `paths['/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}'].get['x-ms-examples'].CreationSupported_Get__deleted` | deleted | `{"$ref":"./examples/CreationSupported_Get.json"}` |
 
-### Changes for `x-ms-examples`
+### Changes for `CreationSupported_List`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}'].get['x-ms-examples__deleted']` | deleted | `{"CreationSupported_Get":{"$ref":"./examples/CreationSupported_Get.json"}}` |
+| `paths['/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}'].get['x-ms-examples'].CreationSupported_List__added` | added | `{"$ref":"./examples/CreationSupported_List.json"}` |
+
+### Changes for `email`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.email__deleted` | deleted | `{"type":"string","pattern":"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,}$"}` |
 
 ### Changes for `required`
 
@@ -21,13 +27,6 @@
 | `definitions.MonitoredResourceListResponse.required__added` | added | `["value"]` |
 | `definitions.MonitoredSubscriptionPropertiesList.required__added` | added | `["value"]` |
 | `definitions.VMHostsListResponse.required__added` | added | `["value"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions/default'].put.parameters[1].required__added` | added | `true` |
-
-### Changes for `email`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.email__deleted` | deleted | `{"type":"string","pattern":"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,}$"}` |
 
 ### Changes for `x-cadl-name`
 
@@ -72,17 +71,4 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.MonitoredSubscriptionProperties.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
-
-### Changes for `x-ms-client-flatten`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MonitoredSubscriptionProperties.properties.properties['x-ms-client-flatten__added']` | added | `true` |
-
-## Modified Values
-
-| Path | Old Value | New Value |
-|------|-----------|----------|
-| `paths['/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getAllConnectedResourcesCount'].post.parameters[0].name` | `request` | `body` |
-| `paths['/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getMarketplaceSaaSResourceDetails'].post.parameters[0].name` | `request` | `body` |
 

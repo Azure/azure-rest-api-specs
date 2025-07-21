@@ -2,8 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Dynatrace.Observability",
-    "version": "2024-04-24",
-    "description": "// FIXME: (missing-service-description) Add service description"
+    "version": "2024-04-24"
   },
   "produces": [
     "application/json"
@@ -48,7 +47,7 @@
         "operationId": "Monitors_GetAllConnectedResourcesCount",
         "parameters": [
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "required": true,
             "schema": {
@@ -85,7 +84,7 @@
         "operationId": "Monitors_GetMarketplaceSaaSResourceDetails",
         "parameters": [
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "required": true,
             "schema": {
@@ -171,6 +170,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_List": {
+            "$ref": "./examples/CreationSupported_List.json"
           }
         }
       }
@@ -821,7 +825,6 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
@@ -2119,8 +2122,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubscriptionList",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SubscriptionList"
         }
       },
       "allOf": [

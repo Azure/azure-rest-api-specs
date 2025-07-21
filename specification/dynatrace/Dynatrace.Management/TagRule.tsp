@@ -40,7 +40,7 @@ interface TagRules {
   /**
    * Delete a TagRule
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     TagRule,
     LroHeaders = ArmAsyncOperationHeader &
