@@ -21,35 +21,6 @@ model DiagnosticProperties {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
  * SpotPlacementScores API Input.
  */
 model SpotPlacementScoresInput {
