@@ -54,7 +54,7 @@ model WebSubPubClientOptions {
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.sendToGroup,
   Azure.Messaging.WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.listConnectionsInGroup,
+@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.listConnections,
   Azure.Messaging.WebPubSubService
 );
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubService.removeConnectionFromGroup,

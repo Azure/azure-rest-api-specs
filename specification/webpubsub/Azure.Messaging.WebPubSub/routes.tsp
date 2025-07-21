@@ -502,7 +502,7 @@ interface WebPubSubService {
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
-  listConnectionsInGroup is Azure.Core.Foundations.Operation<
+  listConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
