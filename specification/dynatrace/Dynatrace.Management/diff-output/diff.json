@@ -1,0 +1,187 @@
+{
+  "info": {
+    "description__added": "// FIXME: (missing-service-description) Add service description"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getAllConnectedResourcesCount": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name": {
+                "__old": "request",
+                "__new": "body"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getMarketplaceSaaSResourceDetails": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name": {
+                "__old": "request",
+                "__new": "body"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions/default": {
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "required__added": true
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "email__deleted": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    },
+    "AppServiceListResponse": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "DynatraceSingleSignOnProperties": {
+      "properties": {
+        "aadDomains": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "DynatraceSingleSignOnResource": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "DynatraceSingleSignOnResourceListResult": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "Dynatrace.Observability.DynatraceSingleSignOnResource[]"
+        }
+      }
+    },
+    "LinkableEnvironmentListResponse": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LogRules": {
+      "properties": {
+        "filteringTags": {
+          "x-cadl-name__deleted": "FilteringTag[]"
+        }
+      }
+    },
+    "MetricsStatusResponse": {
+      "properties": {
+        "azureResourceIds": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "MonitorResource": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitorResourceListResult": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "Dynatrace.Observability.MonitorResource[]"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "MonitoredResource[]"
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__added": true
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "TagRule": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "TagRuleListResult": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "Dynatrace.Observability.TagRule[]"
+        }
+      }
+    },
+    "VMHostsListResponse": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
