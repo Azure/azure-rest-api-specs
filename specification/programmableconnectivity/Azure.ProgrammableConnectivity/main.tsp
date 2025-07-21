@@ -37,3 +37,5 @@ enum APCVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_09_preview: "2024-02-09-preview",
 }
+
+// This is a test comment to trigger pipeline

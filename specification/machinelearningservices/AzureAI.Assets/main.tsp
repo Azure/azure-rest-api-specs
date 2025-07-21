@@ -52,3 +52,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-05-01-preview`,
 }
+
+// This is a test comment to trigger pipeline
