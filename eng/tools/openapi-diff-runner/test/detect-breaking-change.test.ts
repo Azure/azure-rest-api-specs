@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { existsSync } from "node:fs";
+import * as path from "node:path";
 import {
   getReadmeFolder,
   isInDevFolder,
@@ -322,7 +323,7 @@ describe("detect-breaking-change", () => {
       expect(result1).toBe(result2);
       expect(result1).toBeDefined();
       expect(vi.mocked(existsSync)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join("/path/to/repo", "specification/network/resource-manager"),
       );
     });
 
@@ -334,7 +335,7 @@ describe("detect-breaking-change", () => {
 
       expect(result).toBeUndefined();
       expect(vi.mocked(existsSync)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join("/path/to/repo", "specification/network/resource-manager"),
       );
     });
 
