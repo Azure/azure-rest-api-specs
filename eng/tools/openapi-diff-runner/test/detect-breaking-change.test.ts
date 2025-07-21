@@ -6,6 +6,7 @@ import {
   isInDevFolder,
   checkBreakingChangeOnSameVersion,
   doBreakingChangeDetection,
+  getSpecModel,
   type BreakingChangeDetectionContext,
 } from "../src/detect-breaking-change.js";
 import { Context, ApiVersionLifecycleStage } from "../src/types/breaking-change.js";
@@ -30,7 +31,7 @@ vi.mock("node:fs", async (importOriginal) => {
   };
 });
 
-// Mock getSpecModel and other functions since they're not automatically picked up by vi.mock
+// Mock specific functions but keep getSpecModel as real implementation
 vi.mock("../src/detect-breaking-change.js", async () => {
   const original = await vi.importActual<any>("../src/detect-breaking-change.js");
   return {
@@ -325,8 +326,8 @@ describe("detect-breaking-change", () => {
       vi.mocked(existsSync).mockReturnValue(true);
 
       const repoFolder = "/path/to/repo";
-      const result1 = detectionModule.getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
-      const result2 = detectionModule.getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
+      const result1 = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
+      const result2 = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
 
       expect(result1).toBe(result2);
       expect(result1).toBeDefined();
@@ -341,7 +342,7 @@ describe("detect-breaking-change", () => {
       vi.mocked(existsSync).mockReturnValue(false);
 
       const repoFolder = "/path/to/repo";
-      const result = detectionModule.getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
+      const result = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
 
       expect(result).toBeUndefined();
       expect(vi.mocked(existsSync)).toHaveBeenCalledWith(
@@ -354,8 +355,8 @@ describe("detect-breaking-change", () => {
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const result1 = detectionModule.getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
-      const result2 = detectionModule.getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result1 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result2 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
 
       expect(result1).toBeUndefined();
       expect(result2).toBeUndefined();
@@ -368,8 +369,8 @@ describe("detect-breaking-change", () => {
       vi.mocked(existsSync).mockReturnValue(true);
 
       const repoFolder = "/path/to/repo";
-      const result1 = detectionModule.getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
-      const result2 = detectionModule.getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.storage);
+      const result1 = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
+      const result2 = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.storage);
 
       expect(result1).not.toBe(result2);
       expect(result1).toBeDefined();
