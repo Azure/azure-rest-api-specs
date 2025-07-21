@@ -35,6 +35,23 @@ model Host is Azure.ResourceManager.TrackedResource<HostProperties, false> {
 }
 
 @armResourceOperations
+interface HostsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Host,
+        KeyName = "hostName",
+        SegmentName = "hosts",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Hosts {
   /**
    * Implements host GET method.
@@ -44,13 +61,17 @@ interface Hosts {
   /**
    * Create Or Update host.
    */
-  create is ArmResourceCreateOrReplaceAsync<Host>;
+  create is HostsOps.CreateOrUpdateAsync<Host, OptionalRequestBody = true>;
 
   /**
    * API to update certain properties of the host resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Host, PatchModel = ResourcePatch>;
+  update is HostsOps.CustomPatchSync<
+    Host,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements host DELETE method.

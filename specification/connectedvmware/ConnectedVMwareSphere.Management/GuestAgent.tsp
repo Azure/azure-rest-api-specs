@@ -28,6 +28,25 @@ model GuestAgent
 }
 
 @armResourceOperations
+interface GuestAgentsOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        @path
+        resourceUri: string,
+      },
+      {},
+      {
+        ...Extension.ExtensionProviderNamespace<GuestAgent>,
+        ...KeysOf<GuestAgent>,
+      }
+    > {}
+
+@armResourceOperations
 interface GuestAgents {
   /**
    * Implements GuestAgent GET method.
@@ -44,9 +63,9 @@ interface GuestAgents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VMInstanceGuestAgents_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is GuestAgentsOps.CreateOrUpdateAsync<
     GuestAgent,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    OptionalRequestBody = true
   >;
 
   /**

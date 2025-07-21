@@ -39,6 +39,23 @@ model VirtualMachineTemplate
 }
 
 @armResourceOperations
+interface VirtualMachineTemplatesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = VirtualMachineTemplate,
+        KeyName = "virtualMachineTemplateName",
+        SegmentName = "virtualMachineTemplates",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface VirtualMachineTemplates {
   /**
    * Implements virtual machine template GET method.
@@ -48,15 +65,19 @@ interface VirtualMachineTemplates {
   /**
    * Create Or Update virtual machine template.
    */
-  create is ArmResourceCreateOrReplaceAsync<VirtualMachineTemplate>;
+  create is VirtualMachineTemplatesOps.CreateOrUpdateAsync<
+    VirtualMachineTemplate,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the virtual machine template resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is VirtualMachineTemplatesOps.CustomPatchSync<
     VirtualMachineTemplate,
-    PatchModel = ResourcePatch
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
   >;
 
   /**

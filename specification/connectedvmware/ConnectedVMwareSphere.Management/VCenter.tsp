@@ -36,6 +36,23 @@ model VCenter
 }
 
 @armResourceOperations
+interface VCentersOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = VCenter,
+        KeyName = "vcenterName",
+        SegmentName = "vcenters",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface VCenters {
   /**
    * Implements vCenter GET method.
@@ -45,13 +62,20 @@ interface VCenters {
   /**
    * Create Or Update vCenter.
    */
-  create is ArmResourceCreateOrReplaceAsync<VCenter>;
+  create is VCentersOps.CreateOrUpdateAsync<
+    VCenter,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the vCenter resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<VCenter, PatchModel = ResourcePatch>;
+  update is VCentersOps.CustomPatchSync<
+    VCenter,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements vCenter DELETE method.

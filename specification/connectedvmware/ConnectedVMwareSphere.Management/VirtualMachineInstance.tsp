@@ -35,6 +35,25 @@ model VirtualMachineInstance
 }
 
 @armResourceOperations
+interface VirtualMachineInstancesOps
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
+      {
+        ...ApiVersionParameter,
+
+        /**
+         * The fully qualified Azure Resource manager identifier of the resource.
+         */
+        @path
+        resourceUri: string,
+      },
+      {},
+      {
+        ...Extension.ExtensionProviderNamespace<VirtualMachineInstance>,
+        ...KeysOf<VirtualMachineInstance>,
+      }
+    > {}
+
+@armResourceOperations
 interface VirtualMachineInstances {
   /**
    * Retrieves information about a virtual machine instance.
@@ -47,21 +66,24 @@ interface VirtualMachineInstances {
   /**
    * The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is VirtualMachineInstancesOps.CreateOrUpdateAsync<
     VirtualMachineInstance,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    OptionalRequestBody = true
   >;
 
   /**
    * The operation to update a virtual machine instance.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is VirtualMachineInstancesOps.CustomPatchAsync<
     VirtualMachineInstance,
     PatchModel = VirtualMachineInstanceUpdate,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<VirtualMachineInstance> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OptionalRequestBody = true
   >;
 
   /**

@@ -32,6 +32,23 @@ model InventoryItem
 }
 
 @armResourceOperations
+interface InventoryItemsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = InventoryItem,
+        KeyName = "inventoryItemName",
+        SegmentName = "inventoryItems",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface InventoryItems {
   /**
    * Implements InventoryItem GET method.
@@ -42,7 +59,7 @@ interface InventoryItems {
    * Create Or Update InventoryItem.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
+  create is ArmResourceCreateOrReplaceAsync<
     InventoryItem,
     Response = ArmResourceUpdatedResponse<InventoryItem>
   >;

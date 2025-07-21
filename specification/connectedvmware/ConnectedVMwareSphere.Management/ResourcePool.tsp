@@ -36,6 +36,23 @@ model ResourcePool
 }
 
 @armResourceOperations
+interface ResourcePoolsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ResourcePool,
+        KeyName = "resourcePoolName",
+        SegmentName = "resourcePools",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ResourcePools {
   /**
    * Implements resourcePool GET method.
@@ -45,13 +62,20 @@ interface ResourcePools {
   /**
    * Create Or Update resourcePool.
    */
-  create is ArmResourceCreateOrReplaceAsync<ResourcePool>;
+  create is ResourcePoolsOps.CreateOrUpdateAsync<
+    ResourcePool,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the resourcePool resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<ResourcePool, PatchModel = ResourcePatch>;
+  update is ResourcePoolsOps.CustomPatchSync<
+    ResourcePool,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements resourcePool DELETE method.

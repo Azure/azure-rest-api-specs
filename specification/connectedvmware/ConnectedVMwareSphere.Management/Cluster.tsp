@@ -36,6 +36,23 @@ model Cluster
 }
 
 @armResourceOperations
+interface ClustersOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Cluster,
+        KeyName = "clusterName",
+        SegmentName = "clusters",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Clusters {
   /**
    * Implements cluster GET method.
@@ -45,13 +62,20 @@ interface Clusters {
   /**
    * Create Or Update cluster.
    */
-  create is ArmResourceCreateOrReplaceAsync<Cluster>;
+  create is ClustersOps.CreateOrUpdateAsync<
+    Cluster,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the cluster resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Cluster, PatchModel = ResourcePatch>;
+  update is ClustersOps.CustomPatchSync<
+    Cluster,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements cluster DELETE method.

@@ -36,6 +36,23 @@ model Datastore
 }
 
 @armResourceOperations
+interface DatastoresOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Datastore,
+        KeyName = "datastoreName",
+        SegmentName = "datastores",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Datastores {
   /**
    * Implements datastore GET method.
@@ -45,13 +62,20 @@ interface Datastores {
   /**
    * Create Or Update datastore.
    */
-  create is ArmResourceCreateOrReplaceAsync<Datastore>;
+  create is DatastoresOps.CreateOrUpdateAsync<
+    Datastore,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the datastore resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Datastore, PatchModel = ResourcePatch>;
+  update is DatastoresOps.CustomPatchSync<
+    Datastore,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements datastore DELETE method.

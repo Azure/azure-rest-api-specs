@@ -1,5 +1,13 @@
 ## Swagger Changes
 
+### Changes for `x-ms-skip-url-encoding`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].patch.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
+| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
+| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
+
 ### Changes for `required`
 
 | Path | Change Type | Value |
@@ -11,22 +19,7 @@
 | `definitions.VirtualMachineInventoryItem.required__added` | added | `["inventoryType"]` |
 | `definitions.VirtualMachineTemplateInventoryItem.required__added` | added | `["inventoryType"]` |
 | `definitions.VirtualNetworkInventoryItem.required__added` | added | `["inventoryType"]` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].put.parameters[1].required__added` | added | `true` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default'].put.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/clusters/{clusterName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/clusters/{clusterName}'].put.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/datastores/{datastoreName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/datastores/{datastoreName}'].put.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/hosts/{hostName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/hosts/{hostName}'].put.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/resourcePools/{resourcePoolName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/resourcePools/{resourcePoolName}'].put.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}'].put.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}/inventoryItems/{inventoryItemName}'].put.parameters[2].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineTemplates/{virtualMachineTemplateName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineTemplates/{virtualMachineTemplateName}'].put.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks/{virtualNetworkName}'].patch.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks/{virtualNetworkName}'].put.parameters[1].required__added` | added | `true` |
 
@@ -219,6 +212,5 @@
 | `definitions.StorageProfile.properties.scsiControllers.items.$ref` | `#/definitions/VirtualSCSIController` | `#/definitions/VirtualScsiController` |
 | `definitions.VirtualMachineInstance.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.VmInstanceHybridIdentityMetadata.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
 | `paths['/providers/Microsoft.ConnectedVMwarevSphere/operations'].get.responses.200.schema.$ref` | `#/definitions/operationsList` | `../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
 

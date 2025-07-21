@@ -162,13 +162,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualMachineInstance"
             }
@@ -226,13 +230,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualMachineInstanceUpdate"
             }
@@ -246,7 +254,7 @@
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -272,7 +280,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -425,13 +433,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/GuestAgent"
             }
@@ -1171,7 +1183,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of the cluster.",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string"
           },
@@ -1179,7 +1191,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -1245,7 +1257,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "Name of the cluster.",
+            "description": "The name of the Cluster",
             "required": true,
             "type": "string"
           },
@@ -1253,7 +1265,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -1455,7 +1467,7 @@
           {
             "name": "datastoreName",
             "in": "path",
-            "description": "Name of the datastore.",
+            "description": "The name of the Datastore",
             "required": true,
             "type": "string"
           },
@@ -1463,7 +1475,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Datastore"
             }
@@ -1529,7 +1541,7 @@
           {
             "name": "datastoreName",
             "in": "path",
-            "description": "Name of the datastore.",
+            "description": "The name of the Datastore",
             "required": true,
             "type": "string"
           },
@@ -1537,7 +1549,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -1739,7 +1751,7 @@
           {
             "name": "hostName",
             "in": "path",
-            "description": "Name of the host.",
+            "description": "The name of the Host",
             "required": true,
             "type": "string"
           },
@@ -1747,7 +1759,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/Host"
             }
@@ -1813,7 +1825,7 @@
           {
             "name": "hostName",
             "in": "path",
-            "description": "Name of the host.",
+            "description": "The name of the Host",
             "required": true,
             "type": "string"
           },
@@ -1821,7 +1833,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -2023,7 +2035,7 @@
           {
             "name": "resourcePoolName",
             "in": "path",
-            "description": "Name of the resourcePool.",
+            "description": "The name of the ResourcePool",
             "required": true,
             "type": "string"
           },
@@ -2031,7 +2043,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePool"
             }
@@ -2097,7 +2109,7 @@
           {
             "name": "resourcePoolName",
             "in": "path",
-            "description": "Name of the resourcePool.",
+            "description": "The name of the ResourcePool",
             "required": true,
             "type": "string"
           },
@@ -2105,7 +2117,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -2307,7 +2319,7 @@
           {
             "name": "vcenterName",
             "in": "path",
-            "description": "Name of the vCenter.",
+            "description": "The name of the VCenter",
             "required": true,
             "type": "string"
           },
@@ -2315,7 +2327,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/VCenter"
             }
@@ -2381,7 +2393,7 @@
           {
             "name": "vcenterName",
             "in": "path",
-            "description": "Name of the vCenter.",
+            "description": "The name of the VCenter",
             "required": true,
             "type": "string"
           },
@@ -2389,7 +2401,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -2804,7 +2816,7 @@
           {
             "name": "virtualMachineTemplateName",
             "in": "path",
-            "description": "Name of the virtual machine template resource.",
+            "description": "The name of the VirtualMachineTemplate",
             "required": true,
             "type": "string"
           },
@@ -2812,7 +2824,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplate"
             }
@@ -2878,7 +2890,7 @@
           {
             "name": "virtualMachineTemplateName",
             "in": "path",
-            "description": "Name of the virtual machine template resource.",
+            "description": "The name of the VirtualMachineTemplate",
             "required": true,
             "type": "string"
           },
@@ -2886,7 +2898,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
