@@ -34,13 +34,17 @@ openapi-type: arm
 tag: package-2025-06-05
 
 suppressions:
+  - code: OperationsAPIImplementation
+    reason: The operations API is defined in a separate file.
+    from: RecommenderRP.json
   - code: PathForResourceAction
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: RecommenderRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate"]
   - code: PathForNestedResource
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: RecommenderRP.json
-
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot"]
 ```
 
 ### Tag: package-2025-06-05
