@@ -227,9 +227,17 @@ describe("detect-breaking-change", () => {
     },
 
     setupSpecModelMock: (mockInstance?: any) => {
-      const instance = mockInstance || TestFixtures.createMockSpecModel();
-      vi.mocked(SpecModel).mockImplementation(() => instance as unknown as SpecModel);
-      return instance;
+      if (mockInstance) {
+        // Use the provided instance
+        vi.mocked(SpecModel).mockImplementation(() => mockInstance as unknown as SpecModel);
+        return mockInstance;
+      } else {
+        // Create different instances based on folder path
+        vi.mocked(SpecModel).mockImplementation((folder: string) => {
+          return TestFixtures.createMockSpecModel(folder) as unknown as SpecModel;
+        });
+        return null; // No specific instance to return
+      }
     },
 
     resetAllMocks: () => {
@@ -308,12 +316,12 @@ describe("detect-breaking-change", () => {
   describe("getSpecModel", () => {
     beforeEach(() => {
       MockSetup.resetAllMocks();
-      const mockSpecModelInstance = TestFixtures.createMockSpecModel();
-      MockSetup.setupSpecModelMock(mockSpecModelInstance);
       vi.mocked(existsSync).mockReturnValue(true);
     });
 
     it("should create and cache SpecModel for new folder", async () => {
+      const mockSpecModelInstance = TestFixtures.createMockSpecModel();
+      MockSetup.setupSpecModelMock(mockSpecModelInstance);
       vi.mocked(existsSync).mockReturnValue(true);
 
       const repoFolder = "/path/to/repo";
@@ -328,6 +336,8 @@ describe("detect-breaking-change", () => {
     });
 
     it("should return undefined when folder does not exist", async () => {
+      const mockSpecModelInstance = TestFixtures.createMockSpecModel();
+      MockSetup.setupSpecModelMock(mockSpecModelInstance);
       vi.mocked(existsSync).mockReturnValue(false);
 
       const repoFolder = "/path/to/repo";
@@ -340,6 +350,8 @@ describe("detect-breaking-change", () => {
     });
 
     it("should not cache when folder does not exist", async () => {
+      const mockSpecModelInstance = TestFixtures.createMockSpecModel();
+      MockSetup.setupSpecModelMock(mockSpecModelInstance);
       vi.mocked(existsSync).mockReturnValue(false);
 
       const result1 = detectionModule.getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
@@ -351,6 +363,8 @@ describe("detect-breaking-change", () => {
     });
 
     it("should create different SpecModels for different folders", async () => {
+      // Don't pass a specific mock instance - let it create different ones
+      MockSetup.setupSpecModelMock();
       vi.mocked(existsSync).mockReturnValue(true);
 
       const repoFolder = "/path/to/repo";
