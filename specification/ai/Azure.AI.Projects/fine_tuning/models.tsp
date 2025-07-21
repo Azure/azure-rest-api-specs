@@ -281,6 +281,10 @@ model FineTuningJobIntegration {
 
 // Fine-tuning integration with W&B ends
 
+//
+// Fine-Tuning job
+//
+
 @doc("Fine-Tuning Job")
 @resource("jobs")
 @added(Versions.v2025_05_15_preview)
@@ -339,4 +343,37 @@ model FineTuningJob {
 
   @doc("For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.")
   error?: FineTuningJobError
+}
+
+//
+// Fine-Tuning job definition for create
+//
+
+@doc("Fine-Tuning Job")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobCreate {
+  @doc("The file ID used for training. You can retrieve the training data with the Files API.")
+  training_file: string;
+
+  @doc("The file ID used for validation. You can retrieve the validation results with the Files API.")
+  validation_file?: string;
+
+  @doc("The base model that is being fine-tuned.")
+  `model`: string;
+
+  @doc("The base model provider.")
+  modelProvider?: string;
+
+  @doc("The seed used for the fine-tuning job.")
+  seed: int32;
+
+  @doc("The method used for fine-tuning.")
+  method: FineTuningJobTrainingMethod;
+
+  @doc("A list of integrations to enable for this fine-tuning job.")
+  integrations?: Array<FineTuningJobIntegration>;
+
+  @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
+  suffix?: string;
 }

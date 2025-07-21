@@ -1092,6 +1092,160 @@
         }
       }
     },
+    "/fine_tuning": {
+      "post": {
+        "operationId": "FineTuningJobs_Create",
+        "description": "Creates a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fineTuningJob",
+            "in": "body",
+            "description": "fine-tuning job",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FineTuningJobCreate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fine_tuning/{fine_tuning_job_id}/cancel": {
+      "post": {
+        "operationId": "FineTuningJobs_Cancel",
+        "description": "Cancel a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to cancel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fine_tuning/{fine_tuning_job_id}/pause": {
+      "post": {
+        "operationId": "FineTuningJobs_Pause",
+        "description": "Pause a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to pause.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fine_tuning/{fine_tuning_job_id}/resume": {
+      "post": {
+        "operationId": "FineTuningJobs_Resume",
+        "description": "Resume a fine-tune job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to resume.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/fine_tuning/jobs/{id}": {
       "get": {
         "operationId": "FineTuningJobs_Get",
@@ -2782,6 +2936,54 @@
         "object",
         "created_at",
         "status",
+        "training_file",
+        "model",
+        "seed",
+        "method"
+      ]
+    },
+    "FineTuningJobCreate": {
+      "type": "object",
+      "description": "Fine-Tuning Job",
+      "properties": {
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
+        },
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "modelProvider": {
+          "type": "string",
+          "description": "The base model provider."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "method": {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod",
+          "description": "The method used for fine-tuning."
+        },
+        "integrations": {
+          "type": "array",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobIntegration"
+          }
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        }
+      },
+      "required": [
         "training_file",
         "model",
         "seed",
