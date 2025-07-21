@@ -16,8 +16,6 @@ namespace Language.Conversations.Authoring;
 /**
  * Represents a list of retrieved projects' metadata.
  */
-@clientName("ConversationAuthoringProjectsMetadata", "csharp")
-@clientName("ConversationAuthoringProjectsMetadata", "python")
 model AnalyzeConversationAuthoringProjectsMetadata {
   /**
    * The list of projects.
@@ -34,35 +32,25 @@ model AnalyzeConversationAuthoringProjectsMetadata {
  * Represents the metadata of a project.
  */
 @resource("authoring/analyze-conversations/projects")
-@clientName("ConversationAuthoringProjectMetadata", "csharp")
-@clientName("ConversationAuthoringProjectMetadata", "python")
 model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  @clientName("createdOn", "csharp")
-  @clientName("createdOn", "python")
   createdDateTime: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  @clientName("lastModifiedOn", "csharp")
-  @clientName("lastModifiedOn", "python")
   lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  @clientName("lastTrainedOn", "csharp")
-  @clientName("lastTrainedOn", "python")
   lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  @clientName("lastDeployedOn", "csharp")
-  @clientName("lastDeployedOn", "python")
   lastDeployedDateTime?: utcDateTime;
 
   /**
@@ -114,8 +102,6 @@ model AnalyzeConversationAuthoringProjectMetadata {
 /**
  * Represents the settings used to define the project behavior.
  */
-@clientName("ConversationAuthoringProjectSettings", "csharp")
-@clientName("ConversationAuthoringProjectSettings", "python")
 model AnalyzeConversationAuthoringProjectSettings {
   /**
    * The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to "None". The value of the threshold should be between 0 and 1 inclusive.
@@ -126,8 +112,6 @@ model AnalyzeConversationAuthoringProjectSettings {
 /**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
-@clientName("ConversationAuthoringInnerErrorModel", "csharp")
-@clientName("ConversationAuthoringInnerErrorModel", "python")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
@@ -158,8 +142,6 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("ConversationAuthoringCreateProjectDetails", "csharp")
-@clientName("ConversationAuthoringCreateProjectDetails", "python")
 model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
@@ -202,8 +184,6 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringCopyAuthorizationDetails", "csharp")
-@clientName("ConversationAuthoringCopyAuthorizationDetails", "python")
 model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -225,8 +205,6 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
  * Represents the options for copying an existing project to another Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringCopyProjectDetails", "csharp")
-@clientName("ConversationAuthoringCopyProjectDetails", "python")
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
@@ -262,8 +240,6 @@ model AnalyzeConversationAuthoringCopiedProjectOptions {
 /**
  * Represents an exported project.
  */
-@clientName("ConversationAuthoringExportedProject", "csharp")
-@clientName("ConversationAuthoringExportedProject", "python")
 model AnalyzeConversationAuthoringExportedProject {
   /**
    * The version of the exported file.
@@ -290,8 +266,6 @@ model AnalyzeConversationAuthoringExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ConversationAuthoringExportedProjectAsset", "csharp")
-@clientName("ConversationAuthoringExportedProjectAsset", "python")
 model AnalyzeConversationAuthoringExportedProjectAssets {
   /**
    * The type of project containing the assets.
@@ -302,8 +276,6 @@ model AnalyzeConversationAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("ConversationAuthoringTrainingJobDetails", "csharp")
-@clientName("ConversationAuthoringTrainingJobDetails", "python")
 model AnalyzeConversationAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -335,8 +307,6 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("ConversationAuthoringEvaluationDetails", "csharp")
-@clientName("ConversationAuthoringEvaluationDetails", "python")
 model AnalyzeConversationAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to percentage.
@@ -357,11 +327,9 @@ model AnalyzeConversationAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-@added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringCopyProjectState", "csharp")
-@clientName("ConversationAuthoringCopyProjectState", "python")
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
+@added(Versions.v2023_04_15_preview)
 model AnalyzeConversationAuthoringCopiedProjectJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
@@ -369,8 +337,6 @@ model AnalyzeConversationAuthoringCopiedProjectJobState {
 /**
  * Represents a job's state.
  */
-@clientName("ConversationAuthoringState", "csharp")
-@clientName("ConversationAuthoringState", "python")
 model AnalyzeConversationAuthoringJobState {
   /**
    * The job ID.
@@ -382,22 +348,16 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  @clientName("createdOn", "csharp")
-  @clientName("createdOn", "python")
   createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  @clientName("lastUpdatedOn", "csharp")
-  @clientName("lastUpdatedOn", "python")
   lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  @clientName("expiresOn", "csharp")
-  @clientName("expiresOn", "python")
   expirationDateTime?: utcDateTime;
 
   /**
@@ -419,8 +379,6 @@ model AnalyzeConversationAuthoringJobState {
 /**
  * Represents a list of retrieved deployments.
  */
-@clientName("ConversationAuthoringProjectDeployments", "csharp")
-@clientName("ConversationAuthoringProjectDeployments", "python")
 model AnalyzeConversationAuthoringProjectDeployments {
   /**
    * The list of retrieved deployments.
@@ -436,8 +394,6 @@ model AnalyzeConversationAuthoringProjectDeployments {
 /**
  * Represents a project deployment.
  */
-@clientName("ConversationAuthoringProjectDeployment", "csharp")
-@clientName("ConversationAuthoringProjectDeployment", "python")
 @resource("deployments")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringProjectDeployment {
@@ -456,22 +412,16 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  @clientName("lastTrainedOn", "csharp")
-  @clientName("lastTrainedOn", "python")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  @clientName("lastDeployedOn", "csharp")
-  @clientName("lastDeployedOn", "python")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
-  @clientName("deploymentExpiredOn", "csharp")
-  @clientName("deploymentExpiredOn", "python")
   deploymentExpirationDate: plainDate;
 
   /**
@@ -489,8 +439,6 @@ model AnalyzeConversationAuthoringProjectDeployment {
 /**
  * Represents an Azure resource assigned to a deployment.
  */
-@clientName("ConversationAuthoringDeploymentResource", "csharp")
-@clientName("ConversationAuthoringDeploymentResource", "python")
 model AnalyzeConversationAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
@@ -512,8 +460,6 @@ model AnalyzeConversationAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-@clientName("ConversationAuthoringCreateDeploymentDetails", "csharp")
-@clientName("ConversationAuthoringCreateDeploymentDetails", "python")
 model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -537,8 +483,6 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-@clientName("ConversationAuthoringDeleteDeploymentDetails", "csharp")
-@clientName("ConversationAuthoringDeleteDeploymentDetails", "python")
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -549,8 +493,6 @@ model AnalyzeConversationAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("ConversationAuthoringDeploymentState", "csharp")
-@clientName("ConversationAuthoringDeploymentState", "python")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("jobs")
 model AnalyzeConversationAuthoringDeploymentJobState {
@@ -560,8 +502,6 @@ model AnalyzeConversationAuthoringDeploymentJobState {
 /**
  * Represents the state of an existing delete deployment from specific resources job.
  */
-@clientName("ConversationAuthoringDeploymentDeleteFromResourcesState", "csharp")
-@clientName("ConversationAuthoringDeploymentDeleteFromResourcesState", "python")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("delete-from-resources/jobs")
 model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
@@ -571,8 +511,6 @@ model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("ConversationAuthoringSwapDeploymentsState", "csharp")
-@clientName("ConversationAuthoringSwapDeploymentsState", "python")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @resource("deployments/swap/jobs")
 model AnalyzeConversationAuthoringSwapDeploymentsJobState {
@@ -582,8 +520,6 @@ model AnalyzeConversationAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("ConversationAuthoringSwapDeploymentsDetails", "csharp")
-@clientName("ConversationAuthoringSwapDeploymentsDetails", "python")
 model AnalyzeConversationAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -599,8 +535,6 @@ model AnalyzeConversationAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-@clientName("ConversationAuthoringExportProjectState", "csharp")
-@clientName("ConversationAuthoringExportProjectState", "python")
 @resource("export/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportProjectJobState {
@@ -609,16 +543,12 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
-  @clientName("resultUri", "csharp")
-  @clientName("resultUri", "python")
   resultUrl?: string;
 }
 
 /**
  * Represents the state of an import job.
  */
-@clientName("ConversationAuthoringImportProjectState", "csharp")
-@clientName("ConversationAuthoringImportProjectState", "python")
 @resource("import/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringImportProjectJobState {
@@ -628,8 +558,6 @@ model AnalyzeConversationAuthoringImportProjectJobState {
 /**
  * Represents a list of retrieved trained models.
  */
-@clientName("ConversationAuthoringProjectTrainedModels", "csharp")
-@clientName("ConversationAuthoringProjectTrainedModels", "python")
 model AnalyzeConversationAuthoringProjectTrainedModels {
   /**
    * The list of trained models.
@@ -645,8 +573,6 @@ model AnalyzeConversationAuthoringProjectTrainedModels {
 /**
  * Represents a trained model.
  */
-@clientName("ConversationAuthoringProjectTrainedModel", "csharp")
-@clientName("ConversationAuthoringProjectTrainedModel", "python")
 @resource("models")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringProjectTrainedModel {
@@ -665,8 +591,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  @clientName("lastTrainedOn", "csharp")
-  @clientName("lastTrainedOn", "python")
   lastTrainedDateTime: utcDateTime;
 
   /**
@@ -677,8 +601,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The model expiration date.
    */
-  @clientName("modelExpiredOn", "csharp")
-  @clientName("modelExpiredOn", "python")
   modelExpirationDate: plainDate;
 
   /**
@@ -695,8 +617,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-@clientName("ConversationAuthoringEvaluationState", "csharp")
-@clientName("ConversationAuthoringEvaluationState", "python")
 @resource("evaluate/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringEvaluationJobState {
@@ -709,14 +629,10 @@ model AnalyzeConversationAuthoringEvaluationJobState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationAuthoringEvaluationJobResult", "csharp")
-@clientName("ConversationAuthoringEvaluationJobResult", "python")
 model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  @clientName("evaluationDetails", "csharp")
-  @clientName("evaluationDetails", "python")
   evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
@@ -738,8 +654,6 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
 /**
  * Represent a list of utterances' evaluation results.
  */
-@clientName("ConversationAuthoringEvalResults", "csharp")
-@clientName("ConversationAuthoringEvalResults", "python")
 model AnalyzeConversationAuthoringEvaluationResults {
   /**
    * The utterances evaluation results.
@@ -789,8 +703,6 @@ model ProjectKindQueryParameter {
 /**
  * Represents the evaluation result for an utterance.
  */
-@clientName("UtteranceEvaluationResult", "csharp")
-@clientName("UtteranceEvaluationResult", "python")
 @resource("evaluation/result")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringUtteranceEvaluationResult {
@@ -820,8 +732,6 @@ model AnalyzeConversationAuthoringUtteranceEvaluationResult {
 /**
  * Represents the comparison between the expected and predicted entities for an utterance.
  */
-@clientName("UtteranceEntitiesEvaluationResult", "csharp")
-@clientName("UtteranceEntitiesEvaluationResult", "python")
 model AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult {
   /**
    * Represents the expected entity labels.
@@ -837,8 +747,6 @@ model AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult {
 /**
  * Represents the evaluation output of an entity label or prediction.
  */
-@clientName("UtteranceEntityEvaluationResult", "csharp")
-@clientName("UtteranceEntityEvaluationResult", "python")
 model AnalyzeConversationAuthoringUtteranceEntityEvaluationResult {
   /**
    * Represents the entity category.
@@ -859,8 +767,6 @@ model AnalyzeConversationAuthoringUtteranceEntityEvaluationResult {
 /**
  * Represents the comparison between the expected and the predicted intent for an utterance.
  */
-@clientName("UtteranceIntentsEvaluationResult", "csharp")
-@clientName("UtteranceIntentsEvaluationResult", "python")
 model AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult {
   /**
    * Represents the utterance's expected intent.
@@ -876,8 +782,6 @@ model AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult {
 /**
  * Represents the evaluation result summary.
  */
-@clientName("ConversationAuthoringEvalSummary", "csharp")
-@clientName("ConversationAuthoringEvalSummary", "python")
 model AnalyzeConversationAuthoringEvaluationSummary {
   /**
    * Contains the data related to entities evaluation.
@@ -898,8 +802,6 @@ model AnalyzeConversationAuthoringEvaluationSummary {
 /**
  * Represents the evaluation result summary for the project's entities.
  */
-@clientName("EntitiesEvaluationSummary", "csharp")
-@clientName("EntitiesEvaluationSummary", "python")
 model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
@@ -943,16 +845,12 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationAuthoringConfusionMatrixRow", "csharp")
-@clientName("ConversationAuthoringConfusionMatrixRow", "python")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("ConversationAuthoringConfusionMatrixCell", "csharp")
-@clientName("ConversationAuthoringConfusionMatrixCell", "python")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
@@ -968,8 +866,6 @@ model AnalyzeConversationAuthoringConfusionMatrixCell {
 /**
  * Represents the evaluation result for an entity.
  */
-@clientName("ConversationAuthoringEntityEvalSummary", "csharp")
-@clientName("ConversationAuthoringEntityEvalSummary", "python")
 model AnalyzeConversationAuthoringEntityEvaluationSummary {
   /**
    * Represents the model F1 score
@@ -1010,8 +906,6 @@ model AnalyzeConversationAuthoringEntityEvaluationSummary {
 /**
  * Represents the evaluation summary for the project's intents.
  */
-@clientName("IntentsEvaluationSummary", "csharp")
-@clientName("IntentsEvaluationSummary", "python")
 model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
@@ -1057,8 +951,6 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
 /**
  * The evaluation summary for an intent.
  */
-@clientName("IntentEvaluationSummary", "csharp")
-@clientName("IntentEvaluationSummary", "python")
 model AnalyzeConversationAuthoringIntentEvaluationSummary {
   /**
    * Represents the model precision
@@ -1099,8 +991,6 @@ model AnalyzeConversationAuthoringIntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-@clientName("ConversationAuthoringLoadSnapshotState", "csharp")
-@clientName("ConversationAuthoringLoadSnapshotState", "python")
 @resource("load-snapshot/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringLoadSnapshotJobState {
@@ -1111,8 +1001,6 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
  * Represents the assigned deployment resources.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignedDeploymentResources", "csharp")
-@clientName("ConversationAuthoringAssignedDeploymentResources", "python")
 model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
@@ -1129,8 +1017,6 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
  * Represents the assigned deployment resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignedDeploymentResource", "csharp")
-@clientName("ConversationAuthoringAssignedDeploymentResource", "python")
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringAssignedDeploymentResource {
@@ -1139,8 +1025,6 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    */
   @key
   @visibility(Lifecycle.Read)
-  @clientName("resourceId", "csharp")
-  @clientName("resourceId", "python")
   azureResourceId: string;
 
   /**
@@ -1153,22 +1037,16 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
  * Represents the options for assigning Azure resources to a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignDeploymentResourcesDetails", "csharp")
-@clientName("ConversationAuthoringAssignDeploymentResourcesDetails", "python")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
-  @clientName("metadata", "csharp")
-  @clientName("metadata", "python")
   resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-@clientName("ConversationAuthoringResourceMetadata", "csharp")
-@clientName("ConversationAuthoringResourceMetadata", "python")
 model AnalyzeConversationAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
@@ -1190,8 +1068,6 @@ model AnalyzeConversationAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringUnassignDeploymentResourcesDetails", "csharp")
-@clientName("ConversationAuthoringUnassignDeploymentResourcesDetails", "python")
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1203,8 +1079,6 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
  * Represents the state of a deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringDeploymentResourcesState", "csharp")
-@clientName("ConversationAuthoringDeploymentResourcesState", "python")
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringDeploymentResourcesJobState {
@@ -1214,8 +1088,6 @@ model AnalyzeConversationAuthoringDeploymentResourcesJobState {
 /**
  * Represents a list of retrieved training jobs.
  */
-@clientName("ConversationAuthoringTrainingJobs", "csharp")
-@clientName("ConversationAuthoringTrainingJobs", "python")
 model AnalyzeConversationAuthoringTrainingJobs {
   /**
    * The list of jobs.
@@ -1231,8 +1103,6 @@ model AnalyzeConversationAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-@clientName("ConversationAuthoringTrainingState", "csharp")
-@clientName("ConversationAuthoringTrainingState", "python")
 @resource("train/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringTrainingJobState {
@@ -1247,8 +1117,6 @@ model AnalyzeConversationAuthoringTrainingJobState {
 /**
  * Represents the output of a training job.
  */
-@clientName("ConversationAuthoringTrainingJobResult", "csharp")
-@clientName("ConversationAuthoringTrainingJobResult", "python")
 model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents trained model label.
@@ -1284,16 +1152,12 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  @clientName("estimatedEndOn", "csharp")
-  @clientName("estimatedEndOn", "python")
   estimatedEndDateTime?: utcDateTime;
 }
 
 /**
  * Represents the detailed state of a training sub-operation.
  */
-@clientName("ConversationAuthoringSubTrainingState", "csharp")
-@clientName("ConversationAuthoringSubTrainingState", "python")
 model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
@@ -1303,15 +1167,11 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  @clientName("startedOn", "csharp")
-  @clientName("startedOn", "python")
   startDateTime?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  @clientName("endedOn", "csharp")
-  @clientName("endedOn", "python")
   endDateTime?: utcDateTime;
 
   /**
@@ -1323,8 +1183,6 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-@clientName("ConversationAuthoringProjectDeletionState", "csharp")
-@clientName("ConversationAuthoringProjectDeletionState", "python")
 model AnalyzeConversationAuthoringProjectDeletionJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
@@ -1333,14 +1191,6 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
  * Represents the metadata for deployments assigned to a resource.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName(
-  "ConversationAuthoringAssignedResourceDeploymentsMetadata",
-  "csharp"
-)
-@clientName(
-  "ConversationAuthoringAssignedResourceDeploymentsMetadata",
-  "python"
-)
 model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
@@ -1357,8 +1207,6 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
  * Represents the metadata for assigned deployments for a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignedProjectDeploymentsMetadata", "csharp")
-@clientName("ConversationAuthoringAssignedProjectDeploymentsMetadata", "python")
 @resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
   /**
@@ -1378,8 +1226,6 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
  * Represents the metadata for an assigned deployment
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("ConversationAuthoringAssignedProjectDeploymentMetadata", "csharp")
-@clientName("ConversationAuthoringAssignedProjectDeploymentMetadata", "python")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
@@ -1389,23 +1235,17 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  @clientName("lastDeployedOn", "csharp")
-  @clientName("lastDeployedOn", "python")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
-  @clientName("DeploymentExpiresOn", "csharp")
-  @clientName("DeploymentExpiresOn", "python")
   deploymentExpirationDate: plainDate;
 }
 
 /**
  * Represents a list of retrieved languages.
  */
-@clientName("ConversationAuthoringSupportedLanguages", "csharp")
-@clientName("ConversationAuthoringSupportedLanguages", "python")
 model AnalyzeConversationAuthoringSupportedLanguages {
   /**
    * The list of the languages.
@@ -1420,8 +1260,6 @@ model AnalyzeConversationAuthoringSupportedLanguages {
 /**
  * Represents a supported language.
  */
-@clientName("ConversationAuthoringSupportedLanguage", "csharp")
-@clientName("ConversationAuthoringSupportedLanguage", "python")
 @resource("authoring/analyze-conversations/projects/global/languages")
 model AnalyzeConversationAuthoringSupportedLanguage {
   /**
@@ -1440,8 +1278,6 @@ model AnalyzeConversationAuthoringSupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-@clientName("ConversationAuthoringPrebuiltEntities", "csharp")
-@clientName("ConversationAuthoringPrebuiltEntities", "python")
 model AnalyzeConversationAuthoringPrebuiltEntities {
   /**
    * The supported prebuilt entities.
@@ -1457,8 +1293,6 @@ model AnalyzeConversationAuthoringPrebuiltEntities {
 /**
  * Represents a supported prebuilt entity.
  */
-@clientName("ConversationAuthoringPrebuiltEntity", "csharp")
-@clientName("ConversationAuthoringPrebuiltEntity", "python")
 @resource("authoring/analyze-conversations/projects/global/prebuilt-entities")
 model AnalyzeConversationAuthoringPrebuiltEntity {
   /**
@@ -1482,8 +1316,6 @@ model AnalyzeConversationAuthoringPrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-@clientName("ConversationAuthoringTrainingConfigVersions", "csharp")
-@clientName("ConversationAuthoringTrainingConfigVersions", "python")
 model AnalyzeConversationAuthoringTrainingConfigVersions {
   /**
    * The list of the training config versions.
@@ -1500,8 +1332,6 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
  * Represents a training config version.
  */
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "TODO: This client name renaming explicitly makes us run into the csharp issue. Please fix."
-@clientName("ConversationAuthoringTrainingConfigVersion", "csharp")
-@clientName("ConversationAuthoringTrainingConfigVersion", "python")
 @resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
   /**
@@ -1520,8 +1350,6 @@ model AnalyzeConversationAuthoringTrainingConfigVersion {
 /**
  * Represents an entity with its components.
  */
-@clientName("ConversationExportedEntity", "csharp")
-@clientName("ConversationExportedEntity", "python")
 model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The category of the entity.
@@ -1537,8 +1365,6 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  @clientName("compositionMode", "csharp")
-  @clientName("compositionMode", "python")
   compositionSetting?: CompositionSetting;
 
   /**
@@ -1565,8 +1391,6 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
 /**
  * Represents a list component of an entity.
  */
-@clientName("ConversationAuthoringExportedEntityList", "csharp")
-@clientName("ConversationAuthoringExportedEntityList", "python")
 model AnalyzeConversationAuthoringExportedEntityList {
   /**
    * The sub-lists of the list component.
@@ -1577,8 +1401,6 @@ model AnalyzeConversationAuthoringExportedEntityList {
 /**
  * Represents a sub-list inside a list component.
  */
-@clientName("ConversationAuthoringExportedEntitySublist", "csharp")
-@clientName("ConversationAuthoringExportedEntitySublist", "python")
 model AnalyzeConversationAuthoringExportedEntitySublist {
   /**
    * The key of the sub-list.
@@ -1594,8 +1416,6 @@ model AnalyzeConversationAuthoringExportedEntitySublist {
 /**
  * Represents a list of synonyms inside a list component
  */
-@clientName("ConversationAuthoringExportedEntityListSynonym", "csharp")
-@clientName("ConversationAuthoringExportedEntityListSynonym", "python")
 model AnalyzeConversationAuthoringExportedEntityListSynonym {
   /**
    * Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
@@ -1611,8 +1431,6 @@ model AnalyzeConversationAuthoringExportedEntityListSynonym {
 /**
  * Represents an exported prebuilt entity component
  */
-@clientName("ConversationAuthoringExportedPrebuiltEntity", "csharp")
-@clientName("ConversationAuthoringExportedPrebuiltEntity", "python")
 model AnalyzeConversationAuthoringExportedPrebuiltEntity {
   /**
    * The prebuilt entity category.
@@ -1623,8 +1441,6 @@ model AnalyzeConversationAuthoringExportedPrebuiltEntity {
 /**
  * Represents a regex component of an entity.
  */
-@clientName("ExportedEntityRegex", "csharp")
-@clientName("ExportedEntityRegex", "python")
 model AnalyzeConversationAuthoringExportedEntityRegex {
   /**
    * The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
@@ -1635,8 +1451,6 @@ model AnalyzeConversationAuthoringExportedEntityRegex {
 /**
  * Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
  */
-@clientName("ExportedEntityRegexExpression", "csharp")
-@clientName("ExportedEntityRegexExpression", "python")
 model AnalyzeConversationAuthoringExportedEntityRegexExpression {
   /**
    * The key of the regex expression.
@@ -1657,8 +1471,6 @@ model AnalyzeConversationAuthoringExportedEntityRegexExpression {
 /**
  * Represents an exported intent of a conversational project.
  */
-@clientName("ConversationExportedIntent", "csharp")
-@clientName("ConversationExportedIntent", "python")
 model AnalyzeConversationAuthoringConversationExportedIntent {
   /**
    * The intent category.
@@ -1681,8 +1493,6 @@ model AnalyzeConversationAuthoringConversationExportedIntent {
 /**
  * Represents an associated entity label for an intent.
  */
-@clientName("ConversationExportedAssociatedEntityLabel", "csharp")
-@clientName("ConversationExportedAssociatedEntityLabel", "python")
 @added(Versions.v2025_05_15_preview)
 model AnalyzeConversationExportedAssociatedEntityLabel {
   /**
@@ -1694,8 +1504,6 @@ model AnalyzeConversationExportedAssociatedEntityLabel {
 /**
  * Represents the exported assets of a conversational project.
  */
-@clientName("ConversationExportedProjectAsset", "csharp")
-@clientName("ConversationExportedProjectAsset", "python")
 model AnalyzeConversationAuthoringConversationExportedProjectAsset
   extends AnalyzeConversationAuthoringExportedProjectAssets {
   /**
@@ -1722,8 +1530,6 @@ model AnalyzeConversationAuthoringConversationExportedProjectAsset
 /**
  * Represents an exported utterance for a conversational project.
  */
-@clientName("ConversationExportedUtterance", "csharp")
-@clientName("ConversationExportedUtterance", "python")
 model AnalyzeConversationAuthoringConversationExportedUtterance {
   /**
    * Represents the entity labels of the utterance.
@@ -1771,8 +1577,6 @@ union DatasetType {
 /**
  * Represents an entity label for an utterance.
  */
-@clientName("ExportedUtteranceEntityLabel", "csharp")
-@clientName("ExportedUtteranceEntityLabel", "python")
 model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
   /**
    * The category of the entity label.
@@ -1791,8 +1595,6 @@ model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationSummarizationExportedProjectAsset", "csharp")
-@clientName("ConversationSummarizationExportedProjectAsset", "python")
 model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset {
   /**
    * Represents the conversations of the project.
@@ -1804,8 +1606,6 @@ model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset 
  * Represents an exported conversation for a custom conversation summarization.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("CustomConversationSummarizationConversation", "csharp")
-@clientName("CustomConversationSummarizationConversation", "python")
 model AnalyzeConversationAuthoringCustomConversationSummarizationConversation {
   summaryLocation?: string;
 
@@ -1828,8 +1628,6 @@ model AnalyzeConversationAuthoringCustomConversationSummarizationConversation {
 /**
  * Defines the orchestration details for a Conversational project target.
  */
-@clientName("ExportedConversationOrchestration", "csharp")
-@clientName("ExportedConversationOrchestration", "python")
 model AnalyzeConversationAuthoringExportedConversationOrchestration {
   /**
    * The name of the targeted project.
@@ -1845,8 +1643,6 @@ model AnalyzeConversationAuthoringExportedConversationOrchestration {
 /**
  * Represents the orchestration options for a Conversational project target.
  */
-@clientName("ExportedConversationOrchestrationDetails", "csharp")
-@clientName("ExportedConversationOrchestrationDetails", "python")
 model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1864,8 +1660,6 @@ model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
  * Represents the options used to define the orchestration behavior of an intent.
  */
 @discriminator("targetProjectKind")
-@clientName("ExportedOrchestrationDetails", "csharp")
-@clientName("ExportedOrchestrationDetails", "python")
 model AnalyzeConversationAuthoringExportedOrchestrationOptions {
   targetProjectKind: OrchestrationTargetProjectKind;
 }
@@ -1873,8 +1667,6 @@ model AnalyzeConversationAuthoringExportedOrchestrationOptions {
 /**
  * Defines the orchestration details for a LUIS application target.
  */
-@clientName("ExportedLuisOrchestration", "csharp")
-@clientName("ExportedLuisOrchestration", "python")
 model AnalyzeConversationAuthoringExportedLuisOrchestration {
   /**
    * The LUIS application ID.
@@ -1895,8 +1687,6 @@ model AnalyzeConversationAuthoringExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-@clientName("ExportedLuisOrchestrationDetails", "csharp")
-@clientName("ExportedLuisOrchestrationDetails", "python")
 model AnalyzeConversationAuthoringExportedLuisOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1913,8 +1703,6 @@ model AnalyzeConversationAuthoringExportedLuisOrchestrationOptions
 /**
  * Defines the orchestration details for a Question Answering project target.
  */
-@clientName("ExportedQuestionAnsweringOrchestration", "csharp")
-@clientName("ExportedQuestionAnsweringOrchestration", "python")
 model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration {
   /**
    * The name of the target project.
@@ -1925,8 +1713,6 @@ model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration {
 /**
  * Represents the orchestration options for a Question Answering project target.
  */
-@clientName("ExportedQuestionAnsweringOrchestrationDetails", "csharp")
-@clientName("ExportedQuestionAnsweringOrchestrationDetails", "python")
 model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1943,8 +1729,6 @@ model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions
 /**
  * Represents an exported intent for an orchestration project.
  */
-@clientName("OrchestrationExportedIntent", "csharp")
-@clientName("OrchestrationExportedIntent", "python")
 model AnalyzeConversationAuthoringOrchestrationExportedIntent {
   /**
    * Specifies the behavior of this intent in the orchestration flow.
@@ -1966,8 +1750,6 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
 /**
  * Represents the assets of an orchestration project.
  */
-@clientName("OrchestrationExportedProjectAsset", "csharp")
-@clientName("OrchestrationExportedProjectAsset", "python")
 model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
   extends AnalyzeConversationAuthoringExportedProjectAssets {
   /**
@@ -1989,8 +1771,6 @@ model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
 /**
  * Represents an utterance of an orchestration project.
  */
-@clientName("OrchestrationExportedUtterance", "csharp")
-@clientName("OrchestrationExportedUtterance", "python")
 model AnalyzeConversationAuthoringOrchestrationExportedUtterance {
   /**
    * The utterance text.
@@ -2016,8 +1796,6 @@ model AnalyzeConversationAuthoringOrchestrationExportedUtterance {
 /**
  * Represents an exported trained model.
  */
-@clientName("ConversationAuthoringExportedTrainedModel", "csharp")
-@clientName("ConversationAuthoringExportedTrainedModel", "python")
 @resource("exported-models")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportedTrainedModel {
@@ -2036,22 +1814,16 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  @clientName("lastTrainedOn", "csharp")
-  @clientName("lastTrainedOn", "python")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  @clientName("lastExportedModelOn", "csharp")
-  @clientName("lastExportedModelOn", "python")
   lastExportedModelDateTime: utcDateTime;
 
   /**
    * The model expiration date.
    */
-  @clientName("modelExpiredOn", "csharp")
-  @clientName("modelExpiredOn", "python")
   modelExpirationDate: plainDate;
 
   /**
@@ -2063,8 +1835,6 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
  * Represents the state of a job to create or updated an exported model.
  */
 @added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringExportedModelState", "csharp")
-@clientName("ConversationAuthoringExportedModelState", "python")
 @resource("jobs")
 @parentResource(AnalyzeConversationAuthoringExportedTrainedModel)
 model AnalyzeConversationAuthoringExportedModelJobState {
@@ -2073,8 +1843,6 @@ model AnalyzeConversationAuthoringExportedModelJobState {
 /**
  * Represents the properties for the model file.
  */
-@clientName("ConversationAuthoringModelFile", "csharp")
-@clientName("ConversationAuthoringModelFile", "python")
 @added(Versions.v2024_11_15_preview)
 model AnalyzeConversationAuthoringModelFile {
   /**
@@ -2090,8 +1858,6 @@ model AnalyzeConversationAuthoringModelFile {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ConversationAuthoringExportedModelDetails", "csharp")
-@clientName("ConversationAuthoringExportedModelDetails", "python")
 @added(Versions.v2024_11_15_preview)
 model ExportedModelOptions {
   /**
