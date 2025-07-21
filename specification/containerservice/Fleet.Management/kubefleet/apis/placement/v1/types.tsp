@@ -25,6 +25,7 @@ model PlacementPolicy {
   @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\".")
   affinity?: Affinity;
 
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
   tolerations?: Toleration[];
 }
@@ -54,6 +55,7 @@ model ClusterAffinity {
 
 @doc("ClusterSelector")
 model ClusterSelector {
+  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   clusterSelectorTerms: ClusterSelectorTerm[];
 }
