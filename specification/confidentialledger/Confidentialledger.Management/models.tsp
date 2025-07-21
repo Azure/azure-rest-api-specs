@@ -16,9 +16,9 @@ namespace Microsoft.ConfidentialLedger;
  */
 union CheckNameAvailabilityReason {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AlreadyExists: "AlreadyExists",
 }
 
@@ -27,15 +27,15 @@ union CheckNameAvailabilityReason {
  */
 union RunningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Paused: "Paused",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pausing: "Pausing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Resuming: "Resuming",
 }
 
@@ -44,11 +44,11 @@ union RunningState {
  */
 union LedgerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Public: "Public",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Private: "Private",
 }
 
@@ -57,19 +57,19 @@ union LedgerType {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
 }
 
@@ -78,11 +78,11 @@ union ProvisioningState {
  */
 union LedgerSku {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
 }
 
@@ -91,11 +91,11 @@ union LedgerSku {
  */
 union LedgerRoleName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Reader: "Reader",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Contributor: "Contributor",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Administrator: "Administrator",
 }
 
@@ -104,9 +104,9 @@ union LedgerRoleName {
  */
 union EnclavePlatform {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IntelSgx: "IntelSgx",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AmdSevSnp: "AmdSevSnp",
 }
 
@@ -115,9 +115,9 @@ union EnclavePlatform {
  */
 union ApplicationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ConfidentialLedger: "ConfidentialLedger",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CodeTransparency: "CodeTransparency",
 }
 
@@ -126,13 +126,13 @@ union ApplicationType {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -141,9 +141,9 @@ union CreatedByType {
  */
 union LanguageRuntime {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CPP: "CPP",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   JS: "JS",
 }
 
@@ -296,7 +296,7 @@ model LedgerProperties {
   /**
    * Prefix for the write load balancer. Example: write
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   writeLBAddressPrefix?: string;
 
   /**
@@ -323,7 +323,7 @@ model LedgerProperties {
 /**
  * AAD based security principal with associated Ledger RoleName
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AADBasedSecurityPrincipal {
   /**
    * UUID/GUID based Principal Id of the Security Principal
@@ -423,7 +423,7 @@ model ConfidentialLedgerRestoreResponse {
 /**
  * Additional Managed CCF properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFProperties {
   /**
    * Unique name for the Managed CCF.
@@ -493,8 +493,8 @@ model MemberIdentityCertificate {
   /**
    * Anything
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
-  tags?: CertificateTags[];
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: unknown;
 }
 
 /**
@@ -515,13 +515,13 @@ model DeploymentType {
 /**
  * Object that includes an array of Managed CCF and a possible link for next set.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFList is Azure.Core.Page<ManagedCCF>;
 
 /**
  * Object representing Backup properties of a Managed CCF Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFBackup {
   /**
    * The region where the backup of the managed CCF resource will eventually be restored to.
@@ -538,7 +538,7 @@ model ManagedCCFBackup {
 /**
  * Object representing the backup response of a Managed CCF Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFBackupResponse {
   /**
    * Response body stating if the managed CCF resource is being backed up.
@@ -550,7 +550,7 @@ model ManagedCCFBackupResponse {
 /**
  * Object representing Restore properties of Managed CCF Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFRestore {
   /**
    * Fileshare where the managed CCF resource backup is stored.
@@ -572,7 +572,7 @@ model ManagedCCFRestore {
 /**
  * Object representing the restore response of a Managed CCF Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCFRestoreResponse {
   /**
    * Response body stating if the managed CCF resource is being restored.
@@ -588,6 +588,6 @@ model CertificateTags {
   /**
    * Additional tags for Managed CCF Certificates
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }

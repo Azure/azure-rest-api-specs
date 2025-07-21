@@ -12,7 +12,7 @@ namespace Microsoft.ConfidentialLedger;
 /**
  * To check whether a resource name is available.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 op checkNameAvailability is ArmProviderActionSync<
   Request = Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,

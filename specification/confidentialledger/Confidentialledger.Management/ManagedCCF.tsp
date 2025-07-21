@@ -13,7 +13,7 @@ namespace Microsoft.ConfidentialLedger;
 /**
  * Managed CCF. Contains the properties of Managed CCF Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCCF
   is Azure.ResourceManager.TrackedResource<ManagedCCFProperties> {
   ...ResourceNameParameter<
@@ -24,7 +24,7 @@ model ManagedCCF
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ManagedCCFs {
   /**
@@ -35,7 +35,7 @@ interface ManagedCCFs {
   /**
    * Creates a Managed CCF with the specified Managed CCF parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     ManagedCCF,
     Response = ArmResourceUpdatedResponse<ManagedCCF> | (CreatedResponse &
@@ -51,7 +51,7 @@ interface ManagedCCFs {
   /**
    * Deletes an existing Managed CCF.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedCCF,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

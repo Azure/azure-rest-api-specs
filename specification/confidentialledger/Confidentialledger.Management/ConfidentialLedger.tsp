@@ -43,13 +43,13 @@ interface ConfidentialLedgers {
     ConfidentialLedger,
     PatchModel = ConfidentialLedger,
     Response = ArmResponse<ConfidentialLedger> | (CreatedResponse &
-      ArmLroLocationHeader)
+      ArmLroLocationHeader<FinalResult = ConfidentialLedger>)
   >;
 
   /**
    * Deletes an existing Confidential Ledger.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfidentialLedger,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
