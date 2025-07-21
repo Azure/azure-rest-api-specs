@@ -32,7 +32,17 @@ openapi-type: arm
 tag: package-2025-06
 ```
 
-### Tag: package-2025-04
+### Tag: package-2025-09
+These settings apply only when `--tag=package-2025-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09'
+input-file:
+  - Microsoft.Cdn/stable/2025-09-01/afdx.json
+  - Microsoft.Cdn/stable/2025-09-01/cdn.json
+  - Microsoft.Cdn/stable/2025-09-01/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-2025-06
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-06'
