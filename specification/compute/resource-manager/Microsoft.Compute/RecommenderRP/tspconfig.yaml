@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/widget"
+    default: "sdk/compute"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,32 +11,33 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/RecommenderRP.json"
     examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Widget"
+    package-dir: "Azure.ResourceManager.Compute"
     clear-output-folder: true
     model-namespace: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-widget"
-    namespace: "azure.mgmt.widget"
+    package-dir: "azure-mgmt-compute"
+    namespace: "azure.mgmt.compute"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-widget"
-    namespace: "com.azure.resourcemanager.widget"
-    service-name: "Widget" # human-readable service name, whitespace allowed
+    package-dir: "azure-resourcemanager-compute"
+    namespace: "com.azure.resourcemanager.compute"
+    service-name: "Compute" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-widget"
+    package-dir: "arm-compute"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-widget"
+      name: "@azure/arm-compute"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/widget"
-    package-dir: "armwidget"
+    service-dir: "sdk/resourcemanager/compute"
+    package-dir: "armcompute"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
