@@ -251,7 +251,7 @@ function getSummaryData(
   return (
     summaryTitle +
     summaryDataSuppressionAndDetailsText +
-    `> [!IMPORTANT]\n` +
+    `\n\n> [!IMPORTANT]\n` +
     `> Browse to the job logs to see the details.\n\n`
   );
 }
