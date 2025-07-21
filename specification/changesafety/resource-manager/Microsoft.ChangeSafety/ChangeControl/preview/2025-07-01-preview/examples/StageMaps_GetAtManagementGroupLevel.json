@@ -1,0 +1,59 @@
+{
+  "title": "StageMaps_GetAtManagementGroupLevel",
+  "operationId": "StageMaps_GetAtManagementGroupLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "managementGroupId": "myManagementGroup",
+    "stageMapName": "testChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {
+                "environment": "enterprise",
+                "scope": "organization-wide",
+                "governanceLevel": "standard",
+                "auditRequired": true
+              },
+              "nestedStageMap": {
+                "resourceId": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/enterprise-policy-stages"
+              }
+            }
+          ],
+          "parameters": {
+            "complianceLevel": {
+              "type": "string",
+              "defaultValue": "standard",
+              "allowedValues": [
+                "basic",
+                "standard",
+                "enterprise"
+              ],
+              "metadata": {
+                "description": "Organization-wide compliance level",
+                "category": "governance"
+              }
+            }
+          }
+        },
+        "id": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "governance@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "governance@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

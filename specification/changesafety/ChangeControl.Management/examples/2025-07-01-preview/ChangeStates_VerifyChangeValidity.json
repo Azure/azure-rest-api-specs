@@ -1,0 +1,43 @@
+{
+  "title": "ChangeStates_VerifyChangeValidity",
+  "operationId": "ChangeStates_VerifyChangeValidity",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "testChangeState",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-production/providers/Microsoft.Web/sites/webapp-prod",
+        "httpMethod": "DELETE",
+        "content": {
+          "name": "webapp-prod",
+          "location": "East US",
+          "properties": {
+            "serverFarmId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-production/providers/Microsoft.Web/serverfarms/asp-prod",
+            "enabled": true,
+            "hostNameSslStates": [
+              {
+                "name": "webapp-prod.azurewebsites.net",
+                "sslState": "Disabled"
+              }
+            ]
+          }
+        }
+      },
+      "context": {
+        "applicationId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+      },
+      "stageProgressionResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "Change validation successful. The DELETE operation for webapp-prod is valid and safe to execute.",
+        "validUntil": "2025-07-09T07:30:19.442Z"
+      }
+    }
+  }
+}

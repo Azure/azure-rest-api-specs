@@ -1,0 +1,195 @@
+{
+  "title": "StageMaps_CreateOrUpdateAtManagementGroupLevel_MaximumSet",
+  "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "managementGroupId": "fdsnap",
+    "stageMapName": "testChangeState",
+    "resource": {
+      "properties": {
+        "stages": [
+          {
+            "name": "testChangeState",
+            "sequence": 23,
+            "stageVariables": {
+              "environment": "enterprise",
+              "scope": "organization-wide",
+              "compliance": "strict",
+              "auditRequired": true
+            },
+            "nestedStageMap": {
+              "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+            }
+          }
+        ],
+        "parameters": {
+          "orchestrationTool": {
+            "type": "string",
+            "defaultValue": "helm",
+            "allowedValues": [
+              "helm",
+              "kustomize",
+              "operator"
+            ],
+            "metadata": {
+              "description": "Orchestration tool for deployments",
+              "category": "deployment"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {
+                "environment": "enterprise",
+                "scope": "organization-wide",
+                "compliance": "strict",
+                "auditRequired": true
+              },
+              "nestedStageMap": {
+                "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+              }
+            }
+          ],
+          "parameters": {
+            "orchestrationTool": {
+              "type": "string",
+              "defaultValue": "helm",
+              "allowedValues": [
+                "helm",
+                "kustomize",
+                "operator"
+              ],
+              "metadata": {
+                "description": "Orchestration tool for deployments",
+                "category": "deployment"
+              }
+            },
+            "complianceLevel": {
+              "type": "string",
+              "defaultValue": "enterprise",
+              "allowedValues": [
+                "basic",
+                "standard",
+                "enterprise"
+              ],
+              "metadata": {
+                "description": "Organization-wide compliance level",
+                "category": "governance"
+              }
+            },
+            "auditRetention": {
+              "type": "int",
+              "defaultValue": 365,
+              "allowedValues": [
+                90,
+                180,
+                365,
+                730
+              ],
+              "metadata": {
+                "description": "Audit log retention period in days",
+                "category": "compliance"
+              }
+            }
+          }
+        },
+        "id": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "governance@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "governance@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Provisioning",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {
+                "environment": "enterprise",
+                "scope": "organization-wide",
+                "compliance": "strict",
+                "auditRequired": true
+              },
+              "nestedStageMap": {
+                "resourceId": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+              }
+            }
+          ],
+          "parameters": {
+            "orchestrationTool": {
+              "type": "string",
+              "defaultValue": "helm",
+              "allowedValues": [
+                "helm",
+                "kustomize",
+                "operator"
+              ],
+              "metadata": {
+                "description": "Orchestration tool for deployments",
+                "category": "deployment"
+              }
+            },
+            "complianceLevel": {
+              "type": "string",
+              "defaultValue": "enterprise",
+              "allowedValues": [
+                "basic",
+                "standard",
+                "enterprise"
+              ],
+              "metadata": {
+                "description": "Organization-wide compliance level",
+                "category": "governance"
+              }
+            },
+            "auditRetention": {
+              "type": "int",
+              "defaultValue": 365,
+              "allowedValues": [
+                90,
+                180,
+                365,
+                730
+              ],
+              "metadata": {
+                "description": "Audit log retention period in days",
+                "category": "compliance"
+              }
+            }
+          }
+        },
+        "id": "/managementGroups/fdsnap/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "governance@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "governance@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

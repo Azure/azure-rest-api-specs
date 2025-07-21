@@ -1,0 +1,88 @@
+{
+  "title": "StageMaps_UpdateAtManagementGroupLevel_MaximumSet",
+  "operationId": "StageMaps_UpdateAtManagementGroupLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "managementGroupId": "myManagementGroup",
+    "stageMapName": "testChangeState",
+    "properties": {
+      "properties": {
+        "stages": [
+          {
+            "name": "testChangeState",
+            "sequence": 23,
+            "stageVariables": {
+              "environment": "enterprise",
+              "scope": "organization-wide",
+              "governanceLevel": "strict",
+              "auditRequired": true
+            },
+            "nestedStageMap": {
+              "resourceId": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+            }
+          }
+        ],
+        "parameters": {
+          "orchestrationTool": {
+            "type": "string",
+            "defaultValue": "helm",
+            "allowedValues": [
+              "helm",
+              "kustomize",
+              "operator"
+            ],
+            "metadata": {
+              "description": "Orchestration tool for deployments",
+              "category": "deployment"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {},
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+              }
+            }
+          ],
+          "parameters": {
+            "orchestrationTool": {
+              "type": "string",
+              "defaultValue": "helm",
+              "allowedValues": [
+                "helm",
+                "kustomize",
+                "operator"
+              ],
+              "metadata": {
+                "description": "Orchestration tool for deployments",
+                "category": "deployment"
+              }
+            }
+          }
+        },
+        "id": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "governance@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "governance@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

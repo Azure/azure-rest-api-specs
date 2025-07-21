@@ -1,0 +1,78 @@
+{
+  "title": "ChangeStates_RetrieveNextStages",
+  "operationId": "ChangeStates_RetrieveNextStages",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "testChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeStateResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "lastStageProgressionSequence": 7,
+        "nextStages": [
+          {
+            "stageReference": "staging-deployment",
+            "stageVariables": {
+              "environment": "staging",
+              "region": "East US"
+            },
+            "state": "Initialized",
+            "sequence": 8,
+            "comments": "Next stage: Staging environment deployment",
+            "links": {
+              "workTrackingItem": {
+                "uri": "https://dev.azure.com/contoso/project/_workitems/edit/12345",
+                "description": "Staging deployment work item for next stage",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "approvalRequest": {
+                "uri": "https://approval.contoso.com/requests/STG-789",
+                "description": "Staging deployment approval request",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "supportIncident": {
+                "uri": "https://support.contoso.com/incidents/INC-2024-001234",
+                "description": "Related staging deployment support incident",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "accessElevationRequest": {
+                "uri": "https://access.contoso.com/elevation/STG-567",
+                "description": "Staging access elevation for deployment",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "relatedChangeState": {
+                "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/dev-deployment",
+                "description": "Related development deployment change state",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "testResults": {
+                "uri": "https://testresults.contoso.com/runs/staging-readiness",
+                "description": "Staging readiness test results",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "serviceCatalog": {
+                "uri": "https://catalog.contoso.com/services/staging-deployment",
+                "description": "Staging deployment service catalog entry",
+                "lastModifiedBy": "devops@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              }
+            },
+            "additionalData": {
+              "testSuite": "staging-validation",
+              "healthCheckEnabled": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

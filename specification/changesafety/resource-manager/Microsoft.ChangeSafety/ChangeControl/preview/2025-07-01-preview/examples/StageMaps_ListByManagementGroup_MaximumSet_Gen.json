@@ -1,0 +1,105 @@
+{
+  "title": "StageMaps_ListByManagementGroup_MaximumSet",
+  "operationId": "StageMaps_ListByManagementGroup",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "managementGroupId": "myManagementGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stages": [
+                {
+                  "name": "testChangeState",
+                  "sequence": 23,
+                  "stageVariables": {
+                    "environment": "enterprise",
+                    "scope": "organization-wide",
+                    "governanceLevel": "strict",
+                    "auditRequired": true
+                  },
+                  "nestedStageMap": {
+                    "resourceId": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/enterprise-governance-stages"
+                  }
+                }
+              ],
+              "parameters": {
+                "complianceLevel": {
+                  "type": "string",
+                  "defaultValue": "enterprise",
+                  "allowedValues": [
+                    "basic",
+                    "standard",
+                    "enterprise"
+                  ],
+                  "metadata": {
+                    "description": "Organization-wide compliance level",
+                    "category": "governance"
+                  }
+                },
+                "auditRetention": {
+                  "type": "int",
+                  "defaultValue": 365,
+                  "allowedValues": [
+                    90,
+                    180,
+                    365,
+                    730
+                  ],
+                  "metadata": {
+                    "description": "Audit log retention period in days",
+                    "category": "compliance"
+                  }
+                },
+                "policyScope": {
+                  "type": "array",
+                  "defaultValue": [
+                    "security",
+                    "compliance"
+                  ],
+                  "allowedValues": [
+                    [
+                      "security"
+                    ],
+                    [
+                      "compliance"
+                    ],
+                    [
+                      "security",
+                      "compliance"
+                    ],
+                    [
+                      "security",
+                      "compliance",
+                      "governance"
+                    ]
+                  ],
+                  "metadata": {
+                    "description": "Enterprise policy scope areas",
+                    "category": "governance"
+                  }
+                }
+              }
+            },
+            "id": "/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+            "name": "testChangeState",
+            "type": "Microsoft.ChangeSafety/stageMaps",
+            "systemData": {
+              "createdBy": "governance@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "governance@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

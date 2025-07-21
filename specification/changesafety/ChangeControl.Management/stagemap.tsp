@@ -2,11 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "./commonmodels.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -59,11 +59,24 @@ model Stage {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2025_07_01_preview)
   parameterValues?: Record<string | int32>;
 
   @doc("Stage Map resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2025_07_01_preview)
   nestedStageMapResourceId?: StageMapResourceId;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values, which can be any type"
+  @doc("Variables to apply on the change of that stage. Key value pairs supporting any JSON values.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_07_01_preview)
+  stageVariables?: Record<unknown>;
+
+  @doc("Nested stage map details.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_07_01_preview)
+  nestedStageMap?: NestedStageMap;
 }
 
 @doc("Azure resource Id of a stage map.")

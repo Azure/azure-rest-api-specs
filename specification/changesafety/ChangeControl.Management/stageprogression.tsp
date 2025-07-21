@@ -2,10 +2,12 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+import "./commonmodels.tsp";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -41,20 +43,46 @@ model StageProgressionProperties {
   state: StageProgressionState;
 
   @visibility(Lifecycle.Read)
+  @renamedFrom(Versions.v2025_07_01_preview, "sequence")
+  @removed(Versions.v2025_07_01_preview)
   @doc("The sequence of the stage within the ChangeStage parent resource.")
   @minValue(1)
+  sequenceOld?: int32;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The sequence of the stage within the ChangeStage parent resource.")
+  @minValue(1)
+  @added(Versions.v2025_07_01_preview)
   sequence?: int32;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2025_07_01_preview)
   parameterValues: Record<string | int32>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values, which can be any type"
+  @doc("Variables to apply on the change of that stage. Key value pairs supporting any JSON values.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_07_01_preview)
+  stageVariables?: Record<unknown>;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Comments about the update to the resource.")
   @maxLength(2000)
   comments?: string;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Collection of related links for the change.")
+  @added(Versions.v2025_07_01_preview)
+  links?: ChangeLinks;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for stage specific meta data for diverse orchestration and change scenarios."
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Additional metadata for the stageProgression resource.")
+  @added(Versions.v2025_07_01_preview)
+  additionalData?: {};
 }
 
 @doc("Indicates the current status of the progression of the change within the stage.")
@@ -71,7 +99,12 @@ union StageProgressionState {
   Completed: "Completed",
 
   @doc("Change apply operation was abandoned.")
+  @removed(Versions.v2025_07_01_preview)
   Abandoned: "Abandoned",
+
+  @doc("Change apply operation was cancelled.")
+  @added(Versions.v2025_07_01_preview)
+  Cancelled: "Cancelled",
 
   @doc("Change apply operation was paused.")
   Paused: "Paused",
@@ -82,6 +115,15 @@ union StageProgressionState {
   @doc("Change is not applied to the stage.")
   Skipped: "Skipped",
 }
+
+@added(Versions.v2025_07_01_preview)
+@doc("Azure resource Id of a ChangeState.")
+scalar StageProgressionResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/changeStates/stageProgressions",
+    }
+  ]>;
 
 @armResourceOperations
 @doc("The operations of the stageProgression resource.")

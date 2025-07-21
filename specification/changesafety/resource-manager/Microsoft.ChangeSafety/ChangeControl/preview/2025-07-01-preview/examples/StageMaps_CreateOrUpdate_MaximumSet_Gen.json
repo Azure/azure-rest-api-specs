@@ -1,0 +1,187 @@
+{
+  "title": "StageMaps_CreateOrUpdate_MaximumSet",
+  "operationId": "StageMaps_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "stageMapName": "testChangeState",
+    "resource": {
+      "properties": {
+        "stages": [
+          {
+            "name": "testChangeState",
+            "sequence": 23,
+            "stageVariables": {
+              "environment": "staging",
+              "replicas": 3,
+              "timeout": 300,
+              "enableLogging": true
+            },
+            "nestedStageMap": {
+              "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+            }
+          }
+        ],
+        "parameters": {
+          "deploymentTool": {
+            "type": "string",
+            "defaultValue": "terraform",
+            "allowedValues": [
+              "terraform",
+              "bicep",
+              "arm"
+            ],
+            "metadata": {
+              "description": "Deployment tool for infrastructure changes",
+              "category": "deployment"
+            }
+          },
+          "maxRetries": {
+            "type": "int",
+            "defaultValue": 3,
+            "allowedValues": [
+              1,
+              2,
+              3,
+              5,
+              10
+            ],
+            "metadata": {
+              "description": "Maximum number of retry attempts",
+              "category": "reliability"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {
+                "environment": "staging",
+                "replicas": 3,
+                "timeout": 300,
+                "enableLogging": true
+              },
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+              }
+            }
+          ],
+          "parameters": {
+            "deploymentTool": {
+              "type": "string",
+              "defaultValue": "terraform",
+              "allowedValues": [
+                "terraform",
+                "bicep",
+                "arm"
+              ],
+              "metadata": {
+                "description": "Deployment tool for infrastructure changes",
+                "category": "deployment"
+              }
+            },
+            "maxRetries": {
+              "type": "number",
+              "defaultValue": 3,
+              "allowedValues": [
+                1,
+                2,
+                3,
+                5,
+                10
+              ],
+              "metadata": {
+                "description": "Maximum number of retry attempts",
+                "category": "reliability"
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Provisioning",
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {
+                "environment": "staging",
+                "replicas": 3,
+                "timeout": 300,
+                "enableLogging": true
+              },
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+              }
+            }
+          ],
+          "parameters": {
+            "deploymentTool": {
+              "type": "string",
+              "defaultValue": "terraform",
+              "allowedValues": [
+                "terraform",
+                "bicep",
+                "arm"
+              ],
+              "metadata": {
+                "description": "Deployment tool for infrastructure changes",
+                "category": "deployment"
+              }
+            },
+            "maxRetries": {
+              "type": "number",
+              "defaultValue": 3,
+              "allowedValues": [
+                1,
+                2,
+                3,
+                5,
+                10
+              ],
+              "metadata": {
+                "description": "Maximum number of retry attempts",
+                "category": "reliability"
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

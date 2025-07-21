@@ -1,0 +1,104 @@
+{
+  "title": "StageMaps_ListByResourceGroup_MaximumSet",
+  "operationId": "StageMaps_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stages": [
+                {
+                  "name": "testChangeState",
+                  "sequence": 23,
+                  "stageVariables": {
+                    "environment": "production",
+                    "region": "eastus",
+                    "tier": "premium",
+                    "enableMonitoring": true
+                  },
+                  "nestedStageMap": {
+                    "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/production-deployment-stages"
+                  }
+                }
+              ],
+              "parameters": {
+                "deploymentTool": {
+                  "type": "string",
+                  "defaultValue": "terraform",
+                  "allowedValues": [
+                    "terraform",
+                    "bicep",
+                    "arm"
+                  ],
+                  "metadata": {
+                    "description": "The deployment tool to use for infrastructure changes",
+                    "category": "deployment"
+                  }
+                },
+                "maxRetries": {
+                  "type": "int",
+                  "defaultValue": 3,
+                  "allowedValues": [
+                    1,
+                    2,
+                    3,
+                    5,
+                    10
+                  ],
+                  "metadata": {
+                    "description": "Maximum number of retry attempts",
+                    "category": "reliability"
+                  }
+                },
+                "targetRegions": {
+                  "type": "array",
+                  "defaultValue": [
+                    "eastus",
+                    "westus"
+                  ],
+                  "allowedValues": [
+                    [
+                      "eastus"
+                    ],
+                    [
+                      "eastus",
+                      "westus"
+                    ],
+                    [
+                      "eastus",
+                      "westus",
+                      "centralus"
+                    ]
+                  ],
+                  "metadata": {
+                    "description": "List of target regions for deployment",
+                    "category": "configuration"
+                  }
+                }
+              }
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testChangeState",
+            "name": "testChangeState",
+            "type": "Microsoft.ChangeSafety/stageMaps",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
