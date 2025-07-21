@@ -296,8 +296,14 @@ op getCriticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation
     @path("criticalDataColumnId")
     criticalDataColumnId: Azure.Core.uuid;
   },
-  CriticalDataColumnsResponse,
-  {}
+  {
+    @statusCode
+    statusCode: 200;
+
+    @doc("The body associated with the critical data column output.")
+    @body
+    body: CatalogModelCriticalDataColumn;
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
