@@ -388,7 +388,7 @@ model CatalogModelDataAsset {
   systemData?: CatalogModelSystemDataWithExpired;
 
   @doc("Description of the asset.")
-  description?: Azure.Core.uuid;
+  description?: string;
 
   @doc("Domain of the asset.")
   domain?: string;
