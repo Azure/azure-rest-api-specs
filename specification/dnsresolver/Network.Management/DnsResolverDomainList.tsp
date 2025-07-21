@@ -116,7 +116,7 @@ interface DnsResolverDomainLists {
   bulk is ArmResourceActionAsync<
     DnsResolverDomainList,
     DnsResolverDomainListBulk,
-    ArmResponse<DnsResolverDomainList>,
+    DnsResolverDomainList,
     Parameters = {
       /**
        * ETag of the resource. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
