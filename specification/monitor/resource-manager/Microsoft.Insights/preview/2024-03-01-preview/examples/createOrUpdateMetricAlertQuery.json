@@ -22,7 +22,7 @@
         ],
         "evaluationFrequency": "PT1M",
         "criteria": {
-          "odata.type": "MMicrosoft.Azure.Monitor.PromQLCriteria",
+          "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria",
           "failingPeriods": {
             "for": "PT5M"
           },
@@ -82,7 +82,10 @@
           ],
           "evaluationFrequency": "PT1M",
           "criteria": {
-            "odata.type": "MMicrosoft.Azure.Monitor.PromQLCriteria",
+            "odata.type": "Microsoft.Azure.Monitor.PromQLCriteria",
+            "failingPeriods": {
+              "for": "PT2M"
+            },
             "allOf": [
               {
                 "name": "Metric1",
@@ -90,9 +93,6 @@
                 "query": "floor(minute(vector(time())) / 10 ) % 2 == 1"
               }
             ]
-          },
-          "failingPeriods": {
-            "for": "PT2M"
           },
           "resolveConfiguration": {
             "autoResolved": true,
