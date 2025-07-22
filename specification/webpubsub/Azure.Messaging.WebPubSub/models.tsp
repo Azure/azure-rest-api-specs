@@ -6,7 +6,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
-namespace Azure.Messaging.WebPubSubService;
+namespace WebPubSubService;
 
 /**
  * Details about the client.

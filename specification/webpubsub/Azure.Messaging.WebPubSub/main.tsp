@@ -42,7 +42,7 @@ using Azure.Core;
     }
   ]>
 )
-namespace Azure.Messaging.WebPubSubService;
+namespace WebPubSubService;
 
 /**
  * The available API versions.

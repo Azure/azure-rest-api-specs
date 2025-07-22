@@ -2,7 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Azure.Messaging.WebPubSubService;
+using WebPubSubService;
 
 namespace Customizations;
 
@@ -12,84 +12,84 @@ model WebSubPubClientOptions {
   hub: string;
 }
 
-@@clientInitialization(Azure.Messaging.WebPubSubService,
+@@clientInitialization(WebPubSubService,
   {
     parameters: WebSubPubClientOptions,
   }
 );
 
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.addConnectionsToGroups,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.addConnectionsToGroups,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.closeAllConnections,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.closeAllConnections,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.getClientAccessToken,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.getClientAccessToken,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionsFromGroups,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionsFromGroups,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.sendToAll,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.sendToAll,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.closeConnection,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.closeConnection,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.connectionExists,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.connectionExists,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.sendToConnection,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.sendToConnection,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionFromAllGroups,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionFromAllGroups,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.groupExists,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.groupExists,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.closeGroupConnections,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.closeGroupConnections,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.sendToGroup,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.sendToGroup,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.listConnections,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.listConnections,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionFromGroup,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.removeConnectionFromGroup,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.addConnectionToGroup,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.addConnectionToGroup,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.revokePermission,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.revokePermission,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.hasPermission,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.hasPermission,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.grantPermission,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.grantPermission,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.userExists,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.userExists,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.closeUserConnections,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.closeUserConnections,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.sendToUser,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.sendToUser,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.removeUserFromAllGroups,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.removeUserFromAllGroups,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.removeUserFromGroup,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.removeUserFromGroup,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.addUserToGroup,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.WebPubSubServiceOperationGroup.addUserToGroup,
+  WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.HealthApiOperationGroup.getServiceStatus,
-  Azure.Messaging.WebPubSubService
+@@clientLocation(WebPubSubService.HealthApiOperationGroup.getServiceStatus,
+  WebPubSubService
 );
