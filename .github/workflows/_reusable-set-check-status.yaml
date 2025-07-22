@@ -56,6 +56,7 @@ jobs:
 
       - name: "Set Status"
         uses: actions/github-script@v7
+        id: set-status
         with:
           script: |
             const { default: setStatus } =
@@ -67,22 +68,10 @@ jobs:
               '${{ inputs.overriding_label }}'
             );
 
-      - id: set-issue-number
-        name: Set Issue Number
-        uses: actions/github-script@v7
-        with:
-          result-encoding: string
-          script: |
-            const { extractInputs } =
-              await import('${{ github.workspace }}/.github/workflows/src/context.js');
-            const { setOutput } = await import('${{ github.workspace }}/.github/shared/src/error-reporting.js');
-            const { issue_number } = await extractInputs(github, context, core);
-            await setOutput("issue_number", issue_number);
-
       - if: |
           always()
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
-          value: "${{ steps.set-issue-number.outputs.issue_number }}"
+          value: "${{ steps.set-status.outputs.issue_number }}"
