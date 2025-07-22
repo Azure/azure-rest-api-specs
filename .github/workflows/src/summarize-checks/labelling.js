@@ -405,7 +405,7 @@ export const breakingChangesCheckType = {
 // #region Required Labels
 
 /**
- * @param {import("./labelling.js").LabelContext} context
+ * @param {LabelContext} context
  * @param {string[]} existingLabels
  * @returns {void}
  */

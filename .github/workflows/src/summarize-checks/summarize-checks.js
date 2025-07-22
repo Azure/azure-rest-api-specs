@@ -978,7 +978,7 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
 
     // Write zip buffer to temp file and extract JSON
-    const tmpZip = path.join(os.tmpdir(), `job-summary-${runId}.zip`);
+    const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
     // Convert ArrayBuffer to Buffer
     // Convert ArrayBuffer (download.data) to Node Buffer
     const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
