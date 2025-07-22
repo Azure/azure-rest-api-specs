@@ -37,31 +37,45 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
-@doc("Media Tier enum.")
-enum MediaTier {
-  SSD,
+@doc("Media Tier.")
+union MediaTier {
+  string,
+
+  @doc("SSD media tier.")
+  SSD: "SSD",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
-@doc("Redundancy enum.")
-enum Redundancy {
-  Local,
-  Zone,
+@doc("Redundancy.")
+union Redundancy {
+  string,
+
+  @doc("Local redundancy.")
+  Local: "Local",
+
+  @doc("Zone redundancy.")
+  Zone: "Zone",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
-@doc("Protocol enum.")
-enum Protocol {
-  NFS,
+@doc("Protocol.")
+union Protocol {
+  string,
+
+  @doc("NFS protocol.")
+  NFS: "NFS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Already in previous protocol version"
-@doc("Share root squash enum.")
-enum ShareRootSquash {
-  NoRootSquash,
-  RootSquash,
-  AllSquash,
+@doc("Share root squash.")
+union ShareRootSquash {
+  string,
+
+  @doc("No root squash.")
+  NoRootSquash: "NoRootSquash",
+
+  @doc("Root squash.")
+  RootSquash: "RootSquash",
+
+  @doc("All squash.")
+  AllSquash: "AllSquash",
 }
 
 @doc("State of the public network access.")

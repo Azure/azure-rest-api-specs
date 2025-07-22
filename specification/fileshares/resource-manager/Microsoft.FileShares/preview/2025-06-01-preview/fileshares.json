@@ -1508,13 +1508,20 @@
     },
     "MediaTier": {
       "type": "string",
-      "description": "Media Tier enum.",
+      "description": "Media Tier.",
       "enum": [
         "SSD"
       ],
       "x-ms-enum": {
         "name": "MediaTier",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SSD",
+            "value": "SSD",
+            "description": "SSD media tier."
+          }
+        ]
       }
     },
     "NfsProtocolProperties": {
@@ -1529,13 +1536,20 @@
     },
     "Protocol": {
       "type": "string",
-      "description": "Protocol enum.",
+      "description": "Protocol.",
       "enum": [
         "NFS"
       ],
       "x-ms-enum": {
         "name": "Protocol",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NFS",
+            "value": "NFS",
+            "description": "NFS protocol."
+          }
+        ]
       }
     },
     "PublicAccessProperties": {
@@ -1577,19 +1591,31 @@
     },
     "Redundancy": {
       "type": "string",
-      "description": "Redundancy enum.",
+      "description": "Redundancy.",
       "enum": [
         "Local",
         "Zone"
       ],
       "x-ms-enum": {
         "name": "Redundancy",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Local redundancy."
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "Zone redundancy."
+          }
+        ]
       }
     },
     "ShareRootSquash": {
       "type": "string",
-      "description": "Share root squash enum.",
+      "description": "Share root squash.",
       "enum": [
         "NoRootSquash",
         "RootSquash",
@@ -1597,7 +1623,24 @@
       ],
       "x-ms-enum": {
         "name": "ShareRootSquash",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoRootSquash",
+            "value": "NoRootSquash",
+            "description": "No root squash."
+          },
+          {
+            "name": "RootSquash",
+            "value": "RootSquash",
+            "description": "Root squash."
+          },
+          {
+            "name": "AllSquash",
+            "value": "AllSquash",
+            "description": "All squash."
+          }
+        ]
       }
     }
   },
