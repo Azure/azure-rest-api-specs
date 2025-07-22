@@ -91,3 +91,11 @@ using Microsoft.Network;
 @@clientName(DnsResolverDomainLists.bulk::parameters.body, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DnsResolverDomainList.properties);
+
+@@clientLocation(DnsResolversOperationGroup.listByVirtualNetwork, DnsResolvers);
+@@clientLocation(DnsForwardingRulesetsOperationGroup.listByVirtualNetwork,
+  DnsForwardingRulesets
+);
+@@clientLocation(DnsResolverPoliciesOperationGroup.listByVirtualNetwork,
+  DnsResolverPolicies
+);
