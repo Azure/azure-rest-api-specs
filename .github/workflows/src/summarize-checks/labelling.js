@@ -1,8 +1,7 @@
 /*
-    This file determines what labels are required for a given PR. It uses this context to obtain two key
-    pieces of information:
-    1. The labels that are currently present on the PR.
-    2. The target branch of the PR.
+    This file covers two areas of enforcement:
+    1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
+    2. It calculates what set of labels should be added or removed from the PR.
 */
 
 import {
@@ -12,6 +11,56 @@ import {
   notReadyForArmReviewReason,
   wrapInArmReviewMessage,
 } from "./tsgs.js";
+
+// #region typedefs
+/**
+ * The LabelContext is used by the updateLabels() to determine which labels to add or remove to the PR.
+ *
+ * The "present" set represents the set of labels that are currently present on the PR and should be populated
+ * ONCE at the beginning of the summarize-checks action script.
+ *
+ * The "toAdd" set is the set of labels to be added to the PR at the end of invocation of updateLabels().
+ * This is to be done by calling GitHub Octokit API to add the labels.
+ *
+ * The "toRemove" set is analogous to "toAdd" set, but instead it is the set of labels to be removed.
+ *
+ * The general pattern used in the code to populate "toAdd" or "toRemove" sets to be ready for
+ * Octokit invocation is as follows:
+ *
+ * - the summary() function passes the context through its invocation chain.
+ * - given function responsible for given label, like e.g. for label "ARMReview",
+ *   creates a new instance of Label: const armReviewLabel = new Label("ARMReview", labelContext.present)
+ * - the function then processes the label to determine if armReviewLabel.shouldBePresent is to be set to true or false.
+ * - the function at the end of its invocation calls armReviewLabel.applyStateChanges(labelContext.toAdd, labelContext.toRemove)
+ *   to update the sets.
+ * - the function may optionally return { armReviewLabel.shouldBePresent } to allow the caller to pass this value
+ *   further to downstream business logic that depends on it.
+ * - at the end of invocation summary() calls Octokit passing it as input labelContext.toAdd and labelContext.toRemove.
+ */
+/**
+ * @typedef {Object} LabelContext
+ * @property {Set<string>} present - The current set of labels
+ * @property {Set<string>} toAdd - The set of labels to add
+ * @property {Set<string>} toRemove - The set of labels to remove
+ */
+
+/**
+ * @typedef {Object} ImpactAssessment
+ * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
+ * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
+ * @property {boolean} versioningReviewRequired - Whether a versioning policy review is required.
+ * @property {boolean} breakingChangeReviewRequired - Whether a breaking change review is required.
+ * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
+ * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
+ * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
+ * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
+ * @property {boolean} newRP - Whether this PR introduces a new resource provider.
+ * @property {boolean} rpaasRPMissing - Whether the RPaaS RP label is missing.
+ * @property {boolean} typeSpecChanged - Whether a TypeSpec file has changed.
+ * @property {boolean} isDraft - Whether the PR is a draft.
+ * @property {LabelContext} labelContext - The context containing present, to-add, and to-remove labels.
+ * @property {string} targetBranch - The name of the target branch for the PR.
+ */
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -23,6 +72,230 @@ import {
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
+/**
+ * RequiredLabelRule:
+ * IF ((any of the anyPrerequisiteLabels is present
+ *     OR all of the allPrerequisiteLabels are present)
+ *     AND none of the allPrerequisiteAbsentLabels is present)
+ * THEN any of the anyRequiredLabels is required.
+ *
+ * IF any of the anyRequiredLabels is required
+ * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
+ *
+ * @typedef {Object} RequiredLabelRule
+ * @property {number} precedence - If multiple RequiredLabelRules are violated, the one with lowest
+ *   precedence should be displayed to the user first. If multiple rules have
+ *   the same precedence, and one of them should be displayed,
+ *   then all of them should be displayed.
+ *
+ *   Note this independent of the CheckMetadata.precedence. That is,
+ *   if there are failing checks, and failing required label rules,
+ *   both of them will be shown, both taking appropriate lowest precedence.
+ * @property {string[]} [branches] - Branches, in format "repo/branch", e.g. "azure-rest-api-specs/main",
+ *   to which this required label rule applies.
+ *
+ *   To be exact:
+ *   - If there is at least one branch defined, and the evaluated PR is
+ *     not targeting any of the branches defined, then the rule is not applicable (it implicitly passes).
+ *   - If "branches" is empty or undefined, then the rule applies to all branches in all repos.
+ * @property {string[]} [anyPrerequisiteLabels] - If any of anyPrerequisiteLabels is present, the requiredLabel is required.
+ *   This condition is ORed with allPrerequisiteLabels.
+ *
+ *   If the anyRequiredLabels collection is empty or undefined, anyPrerequisiteLabels must have exactly one entry.
+ * @property {string[]} [allPrerequisiteLabels] - If all of allPrerequisiteLabels are present, the requiredLabel is required.
+ *   This condition is ORed with anyPrerequisiteLabels.
+ *
+ *   If the anyRequiredLabels collection is empty or undefined, allPrerequisiteLabels must be empty or undefined.
+ * @property {string[]} [allPrerequisiteAbsentLabels] - If any of the allPrerequisiteAbsentLabels is present,
+ *   the requiredLabel is not required.
+ * @property {string[]} anyRequiredLabels - If any of the labels in anyRequiredLabels is present,
+ *   then the rule prerequisites, as expressed by anyPrerequisiteLabels and allPrerequisiteLabels, are met.
+ *   Conversely, if none of anyRequiredLabels are present, then the rule is violated.
+ *
+ *   For the purposes of determining which label to display as required in the 'automated merging requirements met' check and
+ *   'Next Steps to Merge" comments, the first label in anyRequiredLabels is used.
+ *   The assumption here is that anyRequiredLabels[0] is the 'current' label,
+ *   while the remaining required label options are 'legacy' labels.
+ *
+ *   If given required label string ends with an asterisk, it is treated as a prefix substring match.
+ *   For example, requiredLabel of 'Foo-Approved-*' means that any label with prefix 'Foo-Approved-' will satisfy the rule.
+ *   For example, 'Foo-Approved-Bar' or 'Foo-Approved-Qux', but not 'Foo-Approved' nor 'Foo-Approved-'.
+ *
+ *   If anyRequiredLabels is an empty array, then if the rule is violated, there is no way to meet the rule prerequisites.
+ * @property {string} troubleshootingGuide - The doc to display to the user if the required label is required, but missing.
+ */
+
+/**
+ * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
+ * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
+ *
+ * For additional context, see:
+ *
+ * - "Deep-dive into breaking changes on spec PRs"
+ *   https://aka.ms/azsdk/pr-brch-deep
+ *
+ * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
+ *   https://github.com/Azure/azure-sdk-tools/issues/6374
+ */
+/**
+ * @typedef {"SameVersion" | "CrossVersion"} BreakingChangesCheckType
+ * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired"} ReviewRequiredLabel
+ * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*"} ReviewApprovalPrefixLabel
+ * @typedef {"Versioning-Approved-Benign" | "Versioning-Approved-BugFix" | "Versioning-Approved-PrivatePreview" | "Versioning-Approved-BranchPolicyException" | "Versioning-Approved-Previously" | "Versioning-Approved-Retired"} ValidVersioningApproval
+ * @typedef {"BreakingChange-Approved-Benign" | "BreakingChange-Approved-BugFix" | "BreakingChange-Approved-UserImpact" | "BreakingChange-Approved-BranchPolicyException" | "BreakingChange-Approved-Previously" | "BreakingChange-Approved-Security"} ValidBreakingChangeApproval
+ * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval} SpecsBreakingChangesLabel
+ */
+/**
+ * @typedef {Object} BreakingChangesCheckConfig
+ * @property {ReviewRequiredLabel} reviewRequiredLabel
+ * @property {ReviewApprovalPrefixLabel} approvalPrefixLabel
+ * @property {(ValidVersioningApproval | ValidBreakingChangeApproval)[]} approvalLabels
+ * @property {string} [deprecatedReviewRequiredLabel]
+ */
+
+/**
+ * @typedef {"SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile"} FileTypes
+ */
+
+/**
+ * @typedef {"Addition" | "Deletion" | "Update"} ChangeTypes
+ */
+
+/**
+ * @typedef {Object} PRChange
+ * @property {FileTypes} fileType
+ * @property {ChangeTypes} changeType
+ * @property {string} filePath
+ * @property {any} [additionalInfo]
+ */
+
+/**
+ * @typedef {Object} ChangeHandler
+ * @property {function(PRChange): void} [SwaggerFile]
+ * @property {function(PRChange): void} [TypeSpecFile]
+ * @property {function(PRChange): void} [ExampleFile]
+ * @property {function(PRChange): void} [ReadmeFile]
+ */
+
+/**
+ * @typedef {"resource-manager" | "data-plane"} PRType
+ */
+
+/**
+ * Represents a GitHub label.
+ * Currently used in the context of processing
+ * labels related to the review workflow of PRs submitted to
+ * Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
+ * This processing happens in the prSummary.ts / summary() function.
+ *
+ * See also: https://aka.ms/SpecPRReviewARMInvariants
+ */
+// todo: inject `core` for access to logging
+export class Label {
+  /**
+   * @param {string} name
+   * @param {Set<string>} [presentLabels]
+   */
+  constructor(name, presentLabels) {
+    /** @type {string} */
+    this.name = name;
+
+    /**
+     * Is the label currently present on the pull request?
+     * This is determined at the time of construction of this object.
+     * @type {boolean | undefined}
+     */
+    this.present = presentLabels?.has(this.name) ?? undefined;
+
+    /**
+     * Should this label be present on the pull request?
+     * Must be defined before applyStateChange is called.
+     * Not set at the construction time to facilitate determining desired presence
+     * of multiple labels in single code block, without intermixing it with
+     * label construction logic.
+     * @type {boolean | undefined}
+     */
+    this.shouldBePresent = undefined;
+  }
+
+  /**
+   * If the label should be added, add its name to labelsToAdd.
+   * If the label should be removed, add its name to labelsToRemove.
+   * Otherwise, do nothing.
+   *
+   * Precondition: this.shouldBePresent has been defined.
+   * @param {Set<string>} labelsToAdd
+   * @param {Set<string>} labelsToRemove
+   */
+  applyStateChange(labelsToAdd, labelsToRemove) {
+    if (this.shouldBePresent === undefined) {
+      console.warn(
+        "ASSERTION VIOLATION! " +
+          `Cannot applyStateChange for label '${this.name}' ` +
+          "as its desired presence hasn't been defined. Returning early.",
+      );
+      throw new Error(
+        `Label '${this.name}' has not been properly initialized with shouldBePresent before being applied.`,
+      );
+    }
+
+    if (!this.present && this.shouldBePresent) {
+      if (!labelsToAdd.has(this.name)) {
+        console.log(
+          `Label.applyStateChange: '${this.name}' was not present and should be present. Scheduling addition.`,
+        );
+        labelsToAdd.add(this.name);
+      } else {
+        console.log(
+          `Label.applyStateChange: '${this.name}' was not present and should be present. It is already scheduled for addition.`,
+        );
+      }
+    } else if (this.present && !this.shouldBePresent) {
+      if (!labelsToRemove.has(this.name)) {
+        console.log(
+          `Label.applyStateChange: '${this.name}' was present and should not be present. Scheduling removal.`,
+        );
+        labelsToRemove.add(this.name);
+      } else {
+        console.log(
+          `Label.applyStateChange: '${this.name}' was present and should not be present. It is already scheduled for removal.`,
+        );
+      }
+    } else if (this.present === this.shouldBePresent) {
+      console.log(
+        `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"}. This is the desired state.`,
+      );
+    } else {
+      console.warn(
+        "ASSERTION VIOLATION! " +
+          `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"} while it should be ${this.shouldBePresent ? "present" : "not present"}. ` +
+          `At this point of execution this should not happen.`,
+      );
+    }
+  }
+
+  /**
+   * @param {string} label
+   * @returns {boolean}
+   */
+  isEqualToOrPrefixOf(label) {
+    return this.name.endsWith("*") ? label.startsWith(this.name.slice(0, -1)) : this.name === label;
+  }
+
+  /**
+   * @returns {string}
+   */
+  logString() {
+    return (
+      `Label: name: ${this.name}, ` +
+      `present: ${this.present}, ` +
+      `shouldBePresent: ${this.shouldBePresent}. `
+    );
+  }
+}
+
+// #endregion typedefs
+// #region constants
 export const sdkLabels = {
   "azure-cli-extensions": {
     breakingChange: undefined,
@@ -100,37 +373,9 @@ export const sdkLabels = {
 };
 
 /**
- * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
- * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
- *
- * For additional context, see:
- *
- * - "Deep-dive into breaking changes on spec PRs"
- *   https://aka.ms/azsdk/pr-brch-deep
- *
- * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
- *   https://github.com/Azure/azure-sdk-tools/issues/6374
- */
-/**
- * @typedef {"SameVersion" | "CrossVersion"} BreakingChangesCheckType
- * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired"} ReviewRequiredLabel
- * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*"} ReviewApprovalPrefixLabel
- * @typedef {"Versioning-Approved-Benign" | "Versioning-Approved-BugFix" | "Versioning-Approved-PrivatePreview" | "Versioning-Approved-BranchPolicyException" | "Versioning-Approved-Previously" | "Versioning-Approved-Retired"} ValidVersioningApproval
- * @typedef {"BreakingChange-Approved-Benign" | "BreakingChange-Approved-BugFix" | "BreakingChange-Approved-UserImpact" | "BreakingChange-Approved-BranchPolicyException" | "BreakingChange-Approved-Previously" | "BreakingChange-Approved-Security"} ValidBreakingChangeApproval
- * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval} SpecsBreakingChangesLabel
- */
-/**
- * @typedef {Object} BreakingChangesCheckConfig
- * @property {ReviewRequiredLabel} reviewRequiredLabel
- * @property {ReviewApprovalPrefixLabel} approvalPrefixLabel
- * @property {(ValidVersioningApproval | ValidBreakingChangeApproval)[]} approvalLabels
- * @property {string} [deprecatedReviewRequiredLabel]
- */
-
-/**
  * @type {Record<BreakingChangesCheckType, BreakingChangesCheckConfig>}
  */
-// todo: pull this from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
+// todo: pull values from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
 export const breakingChangesCheckType = {
   SameVersion: {
     reviewRequiredLabel: "VersioningReviewRequired",
@@ -158,6 +403,355 @@ export const breakingChangesCheckType = {
   },
 };
 
+// #endregion constants
+// #region Required Labels
+
+/**
+ * @param {LabelContext} context
+ * @param {string[]} existingLabels
+ * @returns {void}
+ */
+export function processArmReviewLabels(context, existingLabels) {
+  // the important part about how this will work depends how the users use it
+  // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
+  // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
+  // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
+  // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
+  // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
+  if (containsAll(existingLabels, ["ARMSignedOff"])) {
+    if (existingLabels.includes("ARMChangesRequested")) {
+      context.toRemove.add("ARMChangesRequested");
+    }
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      context.toRemove.add("WaitForARMFeedback");
+    }
+  }
+  // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
+  else if (
+    containsAll(existingLabels, ["ARMChangesRequested"]) &&
+    containsNone(existingLabels, ["ARMSignedOff"])
+  ) {
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      context.toRemove.add("WaitForARMFeedback");
+    }
+  }
+  // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
+  else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
+    if (!existingLabels.includes("WaitForARMFeedback")) {
+      context.toAdd.add("WaitForARMFeedback");
+    }
+  }
+}
+
+/**
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsAll(arr, values) {
+  return values.every((value) => arr.includes(value));
+}
+
+/**
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsNone(arr, values) {
+  return values.every((value) => !arr.includes(value));
+}
+
+/**
+This function determines which labels of the ARM review should
+be applied to given PR. It adds and removes the labels as appropriate. It used to be called
+ProcessARMReview, but was renamed to processImpactAssessment to better reflect its purpose given that is
+merely evaluating the impact assessment of the PR and returning a final set of labels to be applied/removed
+from the PR.
+
+This function does the following, **among other things**:
+
+- Adds the "ARMReview" label if all of the following conditions hold:
+  - The processed PR "isReleaseBranch" or "isShiftLeftPRWithRPSaaSDev"
+  - The PR is not a draft, as determined by "isDraftPR"
+  - The PR is labelled with "resource-manager" label, meaning it pertains
+    to ARM, as previously determined by the "isManagementPR" function,
+    called from the "getPRType" function.
+
+- Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
+*/
+// todo: refactor to take context: PRContext as input instead of IValidatorContext.
+// All downstream usage appears to be using "context.contextConfig() as PRContext".
+/**
+ * @param {string} targetBranch
+ * @param {LabelContext} labelContext
+ * @param {boolean} resourceManagerLabelShouldBePresent
+ * @param {boolean} versioningReviewRequiredLabelShouldBePresent
+ * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
+ * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
+ * @param {boolean} rpaasExceptionLabelShouldBePresent
+ * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+ * @param {boolean} isNewApiVersion
+ * @param {boolean} isDraft
+ * @returns {Promise<{armReviewLabelShouldBePresent: boolean}>}
+ */
+export async function processImpactAssessment(
+  targetBranch,
+  labelContext,
+  resourceManagerLabelShouldBePresent,
+  versioningReviewRequiredLabelShouldBePresent,
+  breakingChangeReviewRequiredLabelShouldBePresent,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+  rpaasExceptionLabelShouldBePresent,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+  isNewApiVersion,
+  isDraft,
+) {
+  console.log("ENTER definition processARMReview");
+
+  const armReviewLabel = new Label("ARMReview", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  armReviewLabel.shouldBePresent = false;
+
+  const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+  // By default this label should not be present. We may determine later in this function that it should be present after all.
+  newApiVersionLabel.shouldBePresent = false;
+
+  const branch = targetBranch;
+  const isReleaseBranchVal = isReleaseBranch(branch);
+
+  // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
+  // with isReleaseBranchVal to see if it's in scope of ARM review. ShiftLeft is not supported anymore,
+  // so we only check if the branch is a release branch.
+  // const prTitle = await getPrTitle(owner, repo, prNumber)
+  // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
+  const isBranchInScopeOfSpecReview = isReleaseBranchVal; // || isShiftLeftPRWithRPSaaSDevVal
+
+  // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
+  // determines which kind of review exactly we need.
+  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview;
+  if (specReviewApplies) {
+    if (isNewApiVersion) {
+      // Note that in case of data-plane PRs, the addition of this label will result
+      // in API stewardship board review being required.
+      // See requiredLabelsRules.ts.
+      newApiVersionLabel.shouldBePresent = true;
+    }
+
+    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent;
+    await processARMReviewWorkflowLabels(
+      labelContext,
+      armReviewLabel.shouldBePresent,
+      versioningReviewRequiredLabelShouldBePresent,
+      breakingChangeReviewRequiredLabelShouldBePresent,
+      ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+      rpaasExceptionLabelShouldBePresent,
+      ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+    );
+  }
+
+  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+
+  console.log(
+    `RETURN definition processARMReview. ` +
+      `isReleaseBranch: ${isReleaseBranchVal}, ` +
+      `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
+      `isNewApiVersion: ${isNewApiVersion}, ` +
+      `isDraft: ${isDraft}, ` +
+      `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
+      `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
+  );
+
+  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
+}
+
+/**
+ * @param {string} branchName
+ * @returns {boolean}
+ */
+function isReleaseBranch(branchName) {
+  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
+  return branchRegex.some((b) => b.test(branchName));
+}
+
+/**
+CODESYNC:
+- requiredLabelsRules.ts / requiredLabelsRules
+- https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
+
+This function determines which label from the ARM review workflow labels
+should be present on the PR. It adds and removes the labels as appropriate.
+
+In other words, this function captures the
+ARM review workflow label processing logic.
+
+To be exact, this function executes if and only if the PR in question
+has been determined to have the "ARMReview" label, denoting given PR
+is in scope for ARM review.
+
+The implementation of this function is the source of truth specifying the
+desired behavior.
+
+To understand this implementation, the most important constraint to keep in mind
+is that if "ARMReview" label is present, then exactly one of the following
+labels must be present:
+
+- NotReadyForARMReview
+- WaitForARMFeedback
+- ARMChangesRequested
+- ARMSignedOff
+
+Note that another important place in this codebase where ARM review workflow
+labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
+*/
+/**
+ * @param {LabelContext} labelContext
+ * @param {boolean} armReviewLabelShouldBePresent
+ * @param {boolean} versioningReviewRequiredLabelShouldBePresent
+ * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
+ * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
+ * @param {boolean} rpaasExceptionLabelShouldBePresent
+ * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+ * @returns {Promise<void>}
+ */
+async function processARMReviewWorkflowLabels(
+  labelContext,
+  armReviewLabelShouldBePresent,
+  versioningReviewRequiredLabelShouldBePresent,
+  breakingChangeReviewRequiredLabelShouldBePresent,
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+  rpaasExceptionLabelShouldBePresent,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+) {
+  console.log("ENTER definition processARMReviewWorkflowLabels");
+
+  const notReadyForArmReviewLabel = new Label("NotReadyForARMReview", labelContext.present);
+
+  const waitForArmFeedbackLabel = new Label("WaitForARMFeedback", labelContext.present);
+
+  const armChangesRequestedLabel = new Label("ARMChangesRequested", labelContext.present);
+
+  const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
+
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(
+    labelContext,
+    breakingChangeReviewRequiredLabelShouldBePresent,
+    versioningReviewRequiredLabelShouldBePresent,
+  );
+
+  const blockedOnRpaas = getBlockedOnRpaas(
+    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+    rpaasExceptionLabelShouldBePresent,
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+  );
+
+  const blocked = blockedOnVersioningPolicy || blockedOnRpaas;
+
+  // If given PR is in scope of ARM review and it is blocked for any reason,
+  // the "NotReadyForARMReview" label should be present, to the exclusion
+  // of all other ARM review workflow labels.
+  notReadyForArmReviewLabel.shouldBePresent = armReviewLabelShouldBePresent && blocked;
+
+  // If given PR is in scope of ARM review and the review is not blocked,
+  // then "ARMSignedOff" label should remain present on the PR if it was
+  // already present. This means that labels "ARMChangesRequested"
+  // and "WaitForARMFeedback" are invalid and will be removed by automation
+  // in presence of "ARMSignedOff".
+  armSignedOffLabel.shouldBePresent =
+    armReviewLabelShouldBePresent && !blocked && armSignedOffLabel.present;
+
+  // If given PR is in scope of ARM review and the review is not blocked and
+  // not signed-off, then the label "ARMChangesRequested" should remain present
+  // if it was already present. This means that labels "WaitForARMFeedback"
+  // is invalid and will be removed by automation in presence of
+  // "WaitForARMFeedback".
+  armChangesRequestedLabel.shouldBePresent =
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    !armSignedOffLabel.shouldBePresent &&
+    armChangesRequestedLabel.present;
+
+  // If given PR is in scope of ARM review and the review is not blocked and
+  // not signed-off, and ARM reviewer didn't request any changes,
+  // then the label "WaitForARMFeedback" should be present on the PR, whether
+  // it was present before or not.
+  waitForArmFeedbackLabel.shouldBePresent =
+    armReviewLabelShouldBePresent &&
+    !blocked &&
+    !armSignedOffLabel.shouldBePresent &&
+    !armChangesRequestedLabel.shouldBePresent &&
+    (waitForArmFeedbackLabel.present || true);
+
+  const exactlyOneArmReviewWorkflowLabelShouldBePresent =
+    Number(notReadyForArmReviewLabel.shouldBePresent) +
+      Number(armSignedOffLabel.shouldBePresent) +
+      Number(armChangesRequestedLabel.shouldBePresent) +
+      Number(waitForArmFeedbackLabel.shouldBePresent) ===
+      1 || !armReviewLabelShouldBePresent;
+
+  if (!exactlyOneArmReviewWorkflowLabelShouldBePresent) {
+    console.warn("ASSERTION VIOLATION! exactlyOneArmReviewWorkflowLabelShouldBePresent is false");
+  }
+
+  notReadyForArmReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armSignedOffLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armChangesRequestedLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  waitForArmFeedbackLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+
+  console.log(
+    `RETURN definition processARMReviewWorkflowLabels. ` +
+      `presentLabels: ${[...labelContext.present].join(",")}, ` +
+      `blockedOnVersioningPolicy: ${blockedOnVersioningPolicy}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}. ` +
+      `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
+  );
+  return;
+}
+
+/**
+ * @param {LabelContext} labelContext
+ * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
+ * @param {boolean} versioningReviewRequiredLabelShouldBePresent
+ * @returns {boolean}
+ */
+function getBlockedOnVersioningPolicy(
+  labelContext,
+  breakingChangeReviewRequiredLabelShouldBePresent,
+  versioningReviewRequiredLabelShouldBePresent,
+) {
+  const pendingVersioningReview =
+    versioningReviewRequiredLabelShouldBePresent &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    breakingChangeReviewRequiredLabelShouldBePresent &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  return blockedOnVersioningPolicy;
+}
+
+/**
+ * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
+ * @param {boolean} rpaasExceptionLabelShouldBePresent
+ * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+ * @returns {boolean}
+ */
+function getBlockedOnRpaas(
+  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
+  rpaasExceptionLabelShouldBePresent,
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+) {
+  return (
+    (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+  );
+}
+
+// #endregion
+// #region LabelRules
 /**
  * @param {BreakingChangesCheckType} approvalType
  * @param {string[]} labels
@@ -168,59 +762,6 @@ export function anyApprovalLabelPresent(approvalType, labels) {
   const labelsToMatchAgainst = [breakingChangesCheckType[approvalType].approvalPrefixLabel];
   return anyLabelMatches(labelsToMatchAgainst, labels);
 }
-
-/**
- * RequiredLabelRule:
- * IF ((any of the anyPrerequisiteLabels is present
- *     OR all of the allPrerequisiteLabels are present)
- *     AND none of the allPrerequisiteAbsentLabels is present)
- * THEN any of the anyRequiredLabels is required.
- *
- * IF any of the anyRequiredLabels is required
- * THEN display the troubleshootingGuide in "Next Steps to Merge" comment.
- *
- * @typedef {Object} RequiredLabelRule
- * @property {number} precedence - If multiple RequiredLabelRules are violated, the one with lowest
- *   precedence should be displayed to the user first. If multiple rules have
- *   the same precedence, and one of them should be displayed,
- *   then all of them should be displayed.
- *
- *   Note this independent of the CheckMetadata.precedence. That is,
- *   if there are failing checks, and failing required label rules,
- *   both of them will be shown, both taking appropriate lowest precedence.
- * @property {string[]} [branches] - Branches, in format "repo/branch", e.g. "azure-rest-api-specs/main",
- *   to which this required label rule applies.
- *
- *   To be exact:
- *   - If there is at least one branch defined, and the evaluated PR is
- *     not targeting any of the branches defined, then the rule is not applicable (it implicitly passes).
- *   - If "branches" is empty or undefined, then the rule applies to all branches in all repos.
- * @property {string[]} [anyPrerequisiteLabels] - If any of anyPrerequisiteLabels is present, the requiredLabel is required.
- *   This condition is ORed with allPrerequisiteLabels.
- *
- *   If the anyRequiredLabels collection is empty or undefined, anyPrerequisiteLabels must have exactly one entry.
- * @property {string[]} [allPrerequisiteLabels] - If all of allPrerequisiteLabels are present, the requiredLabel is required.
- *   This condition is ORed with anyPrerequisiteLabels.
- *
- *   If the anyRequiredLabels collection is empty or undefined, allPrerequisiteLabels must be empty or undefined.
- * @property {string[]} [allPrerequisiteAbsentLabels] - If any of the allPrerequisiteAbsentLabels is present,
- *   the requiredLabel is not required.
- * @property {string[]} anyRequiredLabels - If any of the labels in anyRequiredLabels is present,
- *   then the rule prerequisites, as expressed by anyPrerequisiteLabels and allPrerequisiteLabels, are met.
- *   Conversely, if none of anyRequiredLabels are present, then the rule is violated.
- *
- *   For the purposes of determining which label to display as required in the 'automated merging requirements met' check and
- *   'Next Steps to Merge" comments, the first label in anyRequiredLabels is used.
- *   The assumption here is that anyRequiredLabels[0] is the 'current' label,
- *   while the remaining required label options are 'legacy' labels.
- *
- *   If given required label string ends with an asterisk, it is treated as a prefix substring match.
- *   For example, requiredLabel of 'Foo-Approved-*' means that any label with prefix 'Foo-Approved-' will satisfy the rule.
- *   For example, 'Foo-Approved-Bar' or 'Foo-Approved-Qux', but not 'Foo-Approved' nor 'Foo-Approved-'.
- *
- *   If anyRequiredLabels is an empty array, then if the rule is violated, there is no way to meet the rule prerequisites.
- * @property {string} troubleshootingGuide - The doc to display to the user if the required label is required, but missing.
- */
 
 /**
  * @param {RequiredLabelRule} rule
@@ -772,3 +1313,4 @@ export function isEqualToOrPrefixOf(inputstring, label) {
     ? label.startsWith(inputstring.slice(0, -1))
     : inputstring === label;
 }
+// #endregion
