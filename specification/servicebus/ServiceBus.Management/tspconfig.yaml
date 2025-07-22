@@ -8,7 +8,7 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/serviceBus.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
@@ -24,8 +24,8 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicebus"
-    namespace: "com.azure.resourcemanager.servicebus"
+    package-dir: "azure-resourcemanager-servicebus-generated"
+    namespace: "com.azure.resourcemanager.servicebus.generated"
     service-name: "Service Bus" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
