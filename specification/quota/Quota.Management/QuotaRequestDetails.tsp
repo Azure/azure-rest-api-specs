@@ -13,7 +13,6 @@ namespace Microsoft.Quota;
 /**
  * List of quota requests with details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model QuotaRequestDetails
   is Azure.ResourceManager.ExtensionResource<QuotaRequestProperties> {
@@ -30,19 +29,37 @@ interface QuotaRequestStatus {
   /**
    * Get the quota request details and status by quota request ID for the resources of the resource provider at a specific location. The quota request ID **id** is returned in the response of the PUT operation.
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is ArmResourceRead<
     QuotaRequestDetails,
-    Error = ExceptionResponse
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * Quota request ID.
+       */
+      @path
+      id: string;
+
+      /**
+       * The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.
+       */
+      @path
+      scope: string;
+    }
   >;
 
   /**
    * For the specified scope, get the current quota requests for a one year period ending at the time is made. Use the **oData** filter to select quota requests.
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is ArmResourceListByParent<
     QuotaRequestDetails,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
+      /**
+       * The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.
+       */
+      @path
+      scope: string;
+
       /**
        * | Field                    | Supported operators
        * |---------------------|------------------------
@@ -68,8 +85,7 @@ interface QuotaRequestStatus {
       @query("$skiptoken")
       $skiptoken?: string;
     },
-    Response = ArmResponse<QuotaRequestDetailsList>,
-    Error = ExceptionResponse
+    Response = ArmResponse<QuotaRequestDetailsList>
   >;
 }
 

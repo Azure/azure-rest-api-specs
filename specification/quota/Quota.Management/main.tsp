@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.2
- * Date: 2025-06-30T10:56:37.316Z
+ * Date: 2025-07-22T02:43:23.334Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -20,6 +20,7 @@ import "./GroupQuotaLimitList.tsp";
 import "./SubmittedResourceRequestStatus.tsp";
 import "./SubscriptionQuotaAllocationsList.tsp";
 import "./QuotaAllocationRequestStatus.tsp";
+import "./GroupQuotasEnforcementStatus.tsp";
 import "./CurrentUsagesBase.tsp";
 import "./CurrentQuotaLimitBase.tsp";
 import "./QuotaRequestDetails.tsp";
@@ -31,9 +32,8 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Quota Resource Provider
+ * Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Azure Quota Extension API" })
 @versioned(Versions)
@@ -45,16 +45,11 @@ namespace Microsoft.Quota;
  */
 enum Versions {
   /**
-   * The 2025-03-01 API version.
+   * The 2025-07-15 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_03_01: "2025-03-01",
+  v2025_07_15: "2025-07-15",
 }
 
-@armResourceOperations
-interface QuotaOperation
-  extends Azure.ResourceManager.Legacy.Operations<
-      Response = ArmResponse<OperationList>,
-      Error = ExceptionResponse
-    > {}
+interface Operations extends Azure.ResourceManager.Operations {}

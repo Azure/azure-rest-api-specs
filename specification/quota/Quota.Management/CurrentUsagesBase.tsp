@@ -13,7 +13,6 @@ namespace Microsoft.Quota;
 /**
  * Resource usage.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model CurrentUsagesBase
   is Azure.ResourceManager.ExtensionResource<UsagesProperties> {
@@ -30,37 +29,45 @@ interface CurrentUsagesBases {
   /**
    * Get the current usage of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_Get")
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is ArmResourceRead<
     CurrentUsagesBase,
-    Response = ArmResponse<CurrentUsagesBase> & {
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       * Resource name for a given resource provider. For example:
+       * - SKU name for Microsoft.Compute
+       * - SKU or TotalLowPriorityCores for Microsoft.MachineLearningServices
+       *  For Microsoft.Network PublicIPAddresses.
        */
-      @header("ETag")
-      eTag: string;
-    },
-    Error = ExceptionResponse
+      @path
+      resourceName: string;
+
+      /**
+       * The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.
+       */
+      @path
+      scope: string;
+    }
   >;
 
   /**
    * Get a list of current usage for all resources for the scope specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is ArmResourceListByParent<
     CurrentUsagesBase,
-    Response = ArmResponse<UsagesLimits> & {
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
       /**
-       * Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.
+       * The target Azure resource URI. For example, `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/qms-test/providers/Microsoft.Batch/batchAccounts/testAccount/`. This is the target Azure resource URI for the List GET operation. If a `{resourceName}` is added after `/quotas`, then it's the target Azure resource URI in the GET operation for the specific resource.
        */
-      @header("ETag")
-      eTag: string;
+      @path
+      scope: string;
     },
-    Error = ExceptionResponse
+    Response = ArmResponse<UsagesLimits>
   >;
 }
 

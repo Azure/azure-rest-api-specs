@@ -15,19 +15,19 @@ namespace Microsoft.Quota;
  */
 union RequestState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Created: "Created",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
 }
 
@@ -36,14 +36,27 @@ union RequestState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Key: "Key",
+}
+
+/**
+ * Enforcement status.
+ */
+union EnforcementState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  NotAvailable: "NotAvailable",
 }
 
 /**
@@ -51,9 +64,9 @@ union CreatedByType {
  */
 union UsagesTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Individual: "Individual",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Combined: "Combined",
 }
 
@@ -62,25 +75,25 @@ union UsagesTypes {
  */
 union LimitType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   LimitValue: "LimitValue",
 }
 
 /**
  * Quota request status.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union QuotaRequestState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   InProgress: "InProgress",
 }
 
@@ -89,18 +102,17 @@ union QuotaRequestState {
  */
 union QuotaLimitTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Independent: "Independent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Shared: "Shared",
 }
 
 /**
  * Properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model GroupQuotasEntityProperties extends GroupQuotasEntityBase {}
 
 /**
@@ -122,14 +134,13 @@ model GroupQuotasEntityBase {
 /**
  * The provisioning state for the operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model LROResponse extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   properties?: LROResponseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model LROResponseProperties {
   /**
    * Request status.
@@ -141,7 +152,7 @@ model LROResponseProperties {
 /**
  * Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GroupQuotasEntityPatch
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -153,8 +164,7 @@ model GroupQuotasEntityPatch
 /**
  * Properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GroupQuotasEntityPatchProperties extends GroupQuotasEntityBasePatch {}
 
 /**
@@ -178,7 +188,7 @@ model GroupQuotasEntityBasePatch {
  */
 model GroupQuotaList is Azure.Core.Page<GroupQuotasEntity>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GroupQuotaSubscriptionIdProperties {
   /**
    * An Azure subscriptionId.
@@ -203,7 +213,7 @@ model GroupQuotaSubscriptionIdList is Azure.Core.Page<GroupQuotaSubscriptionId>;
 model GroupQuotaSubscriptionRequestStatusList
   is Azure.Core.Page<GroupQuotaSubscriptionRequestStatus>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GroupQuotaSubscriptionRequestStatusProperties {
   /**
    * The subscription Id
@@ -223,7 +233,7 @@ model GroupQuotaSubscriptionRequestStatusProperties {
   provisioningState?: RequestState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GroupQuotaLimitListProperties {
   /**
    * Request status.
@@ -234,7 +244,6 @@ model GroupQuotaLimitListProperties {
   /**
    * List of Group Quota Limit details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: GroupQuotaLimit[];
 
   /**
@@ -257,8 +266,7 @@ model GroupQuotaLimit {
 /**
  * Group Quota properties for the specified resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GroupQuotaLimitProperties extends GroupQuotaDetails {}
 
 /**
@@ -289,8 +297,9 @@ model GroupQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: GroupQuotaDetailsName;
 
   /**
@@ -330,7 +339,6 @@ model AllocatedQuotaToSubscriptionList {
   /**
    * List of Group Quota Limit allocated to subscriptions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: AllocatedToSubscription[];
 }
 
@@ -349,7 +357,7 @@ model AllocatedToSubscription {
   quotaAllocated?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubmittedResourceRequestStatusProperties {
   /**
    * Requested Resource.
@@ -380,12 +388,13 @@ model SubmittedResourceRequestStatusProperties {
  * The new GroupQuota limit requested.
  */
 model GroupQuotaRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupQuotaRequestBaseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model GroupQuotaRequestBaseProperties {
   /**
    * The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota.
@@ -395,8 +404,9 @@ model GroupQuotaRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: GroupQuotaRequestBasePropertiesName;
 
   /**
@@ -433,7 +443,7 @@ model GroupQuotaRequestBasePropertiesName {
 model SubmittedResourceRequestStatusList
   is Azure.Core.Page<SubmittedResourceRequestStatus>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model SubscriptionQuotaAllocationsListProperties {
   /**
    * Request status.
@@ -444,7 +454,6 @@ model SubscriptionQuotaAllocationsListProperties {
   /**
    * Subscription quota list.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: SubscriptionQuotaAllocations[];
 
   /**
@@ -467,8 +476,7 @@ model SubscriptionQuotaAllocations {
 /**
  * Quota properties for the specified resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SubscriptionQuotaAllocationsProperties extends SubscriptionQuotaDetails {}
 
 /**
@@ -494,8 +502,9 @@ model SubscriptionQuotaDetails {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: SubscriptionQuotaDetailsName;
 }
 
@@ -516,7 +525,7 @@ model SubscriptionQuotaDetailsName {
   localizedValue?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QuotaAllocationRequestStatusProperties {
   /**
    * The new quota request allocated to subscription.
@@ -547,12 +556,13 @@ model QuotaAllocationRequestStatusProperties {
  * The new quota request allocated to subscription.
  */
 model QuotaAllocationRequestBase {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaAllocationRequestBaseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QuotaAllocationRequestBaseProperties {
   /**
    * The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota.
@@ -562,8 +572,9 @@ model QuotaAllocationRequestBaseProperties {
   /**
    * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   name?: QuotaAllocationRequestBasePropertiesName;
 
   /**
@@ -596,9 +607,95 @@ model QuotaAllocationRequestStatusList
   is Azure.Core.Page<QuotaAllocationRequestStatus>;
 
 /**
+ * List of resource usages and quotas for GroupQuota.
+ */
+model ResourceUsageList is Azure.Core.Page<ResourceUsages>;
+
+/**
+ * Resource details with usages and GroupQuota.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ResourceUsages extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Resource details with usages and GroupQuota.
+   */
+  properties?: GroupQuotaUsagesBase;
+}
+
+/**
+ * Resource details with usages and GroupQuota.
+ */
+model GroupQuotaUsagesBase {
+  /**
+   * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  name?: GroupQuotaUsagesBaseName;
+
+  /**
+   * Quota/limits for the resource.
+   */
+  limit?: int64;
+
+  /**
+   * Usages for the resource.
+   */
+  usages?: int64;
+
+  /**
+   * Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: string;
+}
+
+/**
+ * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
+ */
+model GroupQuotaUsagesBaseName {
+  /**
+   * Resource name.
+   */
+  value?: string;
+
+  /**
+   * Resource display name.
+   */
+  @visibility(Lifecycle.Read)
+  localizedValue?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model GroupQuotasEnforcementStatusProperties {
+  /**
+   * Is the GroupQuota Enforcement enabled for the Azure region.
+   */
+  enforcementEnabled?: EnforcementState;
+
+  /**
+   * Request status.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: RequestState;
+
+  /**
+   * Details of the failure.
+   */
+  @visibility(Lifecycle.Read)
+  faultCode?: string;
+}
+
+/**
+ * List of Azure regions, where the group quotas is enabled for enforcement.
+ */
+model GroupQuotasEnforcementListResponse
+  is Azure.Core.Page<GroupQuotasEnforcementStatus>;
+
+/**
  * Usage properties for the specified resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model UsagesProperties {
   /**
    * The quota limit properties for this resource.
@@ -614,7 +711,6 @@ model UsagesProperties {
   /**
    * Resource name provided by the resource provider. Use this property name when requesting quota.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: ResourceName;
 
   /**
@@ -641,8 +737,6 @@ model UsagesProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
 }
 
@@ -735,7 +829,7 @@ model UsagesLimits is Azure.Core.Page<CurrentUsagesBase>;
 /**
  * Quota properties for the specified resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model QuotaProperties {
   /**
    * Resource quota limit properties.
@@ -751,7 +845,6 @@ model QuotaProperties {
   /**
    * Resource name provided by the resource provider. Use this property name when requesting quota.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: ResourceName;
 
   /**
@@ -778,8 +871,6 @@ model QuotaProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
 }
 
@@ -883,17 +974,17 @@ model SubRequest {
  */
 model QuotaRequestDetailsList is Azure.Core.Page<QuotaRequestDetails>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OperationResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   display?: OperationDisplay;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   origin?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OperationDisplay {
   /**
    * Provider name.
@@ -984,76 +1075,6 @@ model ResourceBaseRequest {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
-}
-
-/**
- * List of resource usages and quotas for GroupQuota.
- */
-model ResourceUsageList {
-  /**
-   * List of resource usages at Group Quotas.
-   */
-  value?: ResourceUsages[];
-
-  /**
-   * The URL to use for getting the next set of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
-
-/**
- * Resource details with usages and GroupQuota.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourceUsages extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Resource details with usages and GroupQuota.
-   */
-  properties?: GroupQuotaUsagesBase;
-}
-
-/**
- * Resource details with usages and GroupQuota.
- */
-model GroupQuotaUsagesBase {
-  /**
-   * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  name?: GroupQuotaUsagesBaseName;
-
-  /**
-   * Quota/limits for the resource.
-   */
-  limit?: int64;
-
-  /**
-   * Usages for the resource.
-   */
-  usages?: int64;
-
-  /**
-   * Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond. Based on - https://armwiki.azurewebsites.net/api_contracts/UsagesAPIContract.html?q=usages . Different RPs may have different units, Count, type as int64 should work for most of the integer values.
-   */
-  @visibility(Lifecycle.Read)
-  unit?: string;
-}
-
-/**
- * Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.
- */
-model GroupQuotaUsagesBaseName {
-  /**
-   * Resource name.
-   */
-  value?: string;
-
-  /**
-   * Resource display name.
-   */
-  @visibility(Lifecycle.Read)
-  localizedValue?: string;
 }
 
 /**
@@ -1149,15 +1170,15 @@ model QuotaRequestOneResourceSubmitResponse {
   /**
    * Quota request details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: quotaRequestOneResourceProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: QuotaRequestOneResourceProperties;
 }
 
 /**
  * Quota request.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model quotaRequestOneResourceProperties {
+model QuotaRequestOneResourceProperties {
   /**
    * Quota request status.
    */
@@ -1227,7 +1248,6 @@ model quotaRequestOneResourceProperties {
   /**
    * Additional properties for the specific resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
 }
 
@@ -1284,7 +1304,8 @@ model QuotaRequestSubmitResponse202 {
   /**
    * Quota request status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaRequestStatusDetails;
 }
 
@@ -1337,24 +1358,5 @@ model QuotaRequestStatusDetails {
   /**
    * Additional properties for the specific resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<unknown>;
-}
-/**
- * The paginated list of connected cluster API operations.
- */
-@Azure.Core.pagedResult
-model OperationList {
-  /**
-   * The list of connected cluster API operations.
-   */
-  @Azure.Core.items
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  value: OperationResponse[];
-
-  /**
-   * The link to fetch the next page of connected cluster API operations.
-   */
-  @nextLink
-  nextLink?: string;
 }
