@@ -19,6 +19,11 @@ debug.enable("simple-git");
 export async function getChangedFiles(options = {}) {
   const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
 
+  if (paths.length > 0) {
+    // Use "--" to separate paths from revisions
+    paths.unshift("--");
+  }
+
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
@@ -48,6 +53,12 @@ export async function getChangedFiles(options = {}) {
  */
 export async function getChangedFilesStatuses(options = {}) {
   const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+
+  if (paths.length > 0) {
+    // Use "--" to separate paths from revisions
+    paths.unshift("--");
+  }
+
   const result = await simpleGit(cwd).diff([
     "--name-status",
     baseCommitish,
