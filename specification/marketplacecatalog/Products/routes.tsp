@@ -58,7 +58,8 @@ alias SkusListingTraits = NoClientRequestId &
     ListingMarketParameter &
     OdataSelectParameter &
     OdataFilterParameter &
-    OdataOrderByParameter>;
+    OdataOrderByParameter &
+    PricingAudienceParameter>;
 
 // Operation definitions for Skus
 alias SkusListingOperation = ResourceOperations<SkusListingTraits>;

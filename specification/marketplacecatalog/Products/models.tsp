@@ -919,7 +919,7 @@ model SkuIdParameter {
   skuId?: string;
 }
 
-@doc("Pricing audience header parameter")
+@doc("Pricing audience query parameter")
 model PricingAudienceParameter {
   @query
   @doc("Can be 'DirectCommercial' or 'PartnerCommercial', 'DirectCommercial' is the default")
