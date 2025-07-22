@@ -692,7 +692,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
-  checkPermission is Azure.Core.Foundations.Operation<
+  hasPermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain

@@ -66,7 +66,7 @@ model WebSubPubClientOptions {
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.revokePermission,
   Azure.Messaging.WebPubSubService
 );
-@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.checkPermission,
+@@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.hasPermission,
   Azure.Messaging.WebPubSubService
 );
 @@clientLocation(Azure.Messaging.WebPubSubService.WebPubSubServiceOperationGroup.grantPermission,
