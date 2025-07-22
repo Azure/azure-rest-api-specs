@@ -61,8 +61,17 @@ jobs:
             const { default: setStatus } =
                 await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
             return await setStatus(
-              { github, context, core }, 
+              { github, context, core },
               '${{ inputs.monitored_workflow_name }}',
               '${{ inputs.required_check_name }}',
               '${{ inputs.overriding_label }}'
             );
+
+      - if: |
+          always() &&
+          github.event.pull_request.number > 0
+        name: Upload artifact with issue number
+        uses: ./after/.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ github.event.pull_request.number }}"

@@ -47,3 +47,12 @@ jobs:
             const setStatus =
               (await import('${{ github.workspace }}/.github/workflows/src/spec-gen-sdk-status.js')).default;
             return await setStatus({ github, context, core });
+
+      - if: |
+          always() &&
+          github.event.pull_request.number > 0
+        name: Upload artifact with issue number
+        uses: ./after/.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ github.event.pull_request.number }}"
