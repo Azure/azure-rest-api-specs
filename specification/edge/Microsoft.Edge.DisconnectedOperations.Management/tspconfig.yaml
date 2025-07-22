@@ -1,6 +1,21 @@
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-tools/typespec-ts":
+    experimentalExtensibleEnums:
+      value: true
+    packageDir:
+      pattern: "^arm-[^\\/]+$"
+    packageDetailsName:
+      pattern: "^@azure\\/arm(?:-[a-z]+)+$"
+  "@azure-tools/typespec-csharp":
+    packageDir:
+      pattern: "^Azure\\.ResourceManager\\."
+    namespace:
+      value: "{package-dir}"
+    clearOutputFolder:
+      value: true
+
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
