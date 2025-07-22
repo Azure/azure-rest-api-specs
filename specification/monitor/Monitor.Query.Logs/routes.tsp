@@ -81,7 +81,7 @@ interface Query {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource URI")
-  @route("/{resourceId}/query")
+  @route("/{+resourceId}/query")
   @get
   getWithResourceId(
     /** The identifier of the resource. */
@@ -112,7 +112,7 @@ interface Query {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This service uses path param to specify API version"
   @summary("Execute an Analytics query using resource ID")
-  @route("/{resourceId}/query")
+  @route("/{+resourceId}/query")
   @post
   executeWithResourceId(
     /** The identifier of the resource. */
