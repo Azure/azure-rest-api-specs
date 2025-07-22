@@ -1795,6 +1795,12 @@ model ScheduledEventsPolicy {
    * The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets.
    */
   scheduledEventsAdditionalPublishingTargets?: ScheduledEventsAdditionalPublishingTargets;
+
+  /**
+   * The configuration parameters used while creating AllInstancesDown scheduled event setting creation. 
+   */
+  allInstancesDown?: AllInstancesDown;
+
 }
 
 /**
@@ -1833,6 +1839,21 @@ model EventGridAndResourceGraph {
    * Specifies if event grid and resource graph is enabled for Scheduled event related configurations.
    */
   enable?: boolean;
+  /** 
+   * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered. 
+   */
+  scheduledEventsApiVersion: string;
+}
+
+/** 
+ * Specifies if Scheduled Events should be auto-approved when all instances are down. 
+ */
+model AllInstancesDown {
+  /** 
+   * Specifies if Scheduled Events should be auto-approved when all instances are down. 
+   * its default value is true 
+   */
+  automaticallyApprove: boolean;
 }
 
 /**
