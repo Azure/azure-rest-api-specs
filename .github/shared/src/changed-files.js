@@ -183,6 +183,18 @@ export function example(file) {
 }
 
 /**
+ * @param {string} file
+ * @returns {boolean}
+ */
+export function typespec(file) {
+  return (
+    typeof file === "string" &&
+    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml")) &&
+    specification(file)
+  );
+}
+
+/**
  * @param {string} [file]
  * @returns {boolean}
  */
