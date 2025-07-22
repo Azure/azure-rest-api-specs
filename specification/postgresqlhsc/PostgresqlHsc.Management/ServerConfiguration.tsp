@@ -31,7 +31,6 @@ interface NodeConfigurations {
    * Gets information of a configuration for worker nodes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_GetNode")
   getNode is NodeConfigurationOps.Read<ServerConfiguration>;
 
   /**
@@ -39,8 +38,12 @@ interface NodeConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Configurations_UpdateOnNode")
-  updateOnNode is NodeConfigurationOps.CreateOrUpdateAsync<ServerConfiguration>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  updateOnNode is NodeConfigurationOps.CreateOrUpdateAsync<
+    ServerConfiguration,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerConfiguration> &
+      ArmLroLocationHeader<FinalResult = ServerConfiguration>
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
@@ -50,15 +53,18 @@ interface CoordinatorConfigurations {
    * Gets information of a configuration for coordinator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_GetCoordinator")
   getCoordinator is CoordinatorConfigurationOps.Read<ServerConfiguration>;
 
   /**
    * Updates configuration of coordinator in a cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Configurations_UpdateOnCoordinator")
-  updateOnCoordinator is CoordinatorConfigurationOps.CreateOrUpdateAsync<ServerConfiguration>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  updateOnCoordinator is CoordinatorConfigurationOps.CreateOrUpdateAsync<
+    ServerConfiguration,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ServerConfiguration> &
+      ArmLroLocationHeader<FinalResult = ServerConfiguration>
+  >;
 }
 
 @armResourceOperations

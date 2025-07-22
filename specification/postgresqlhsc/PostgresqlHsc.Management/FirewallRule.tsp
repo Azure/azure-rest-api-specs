@@ -35,12 +35,22 @@ interface FirewallRules {
   /**
    * Creates a new cluster firewall rule or updates an existing cluster firewall rule.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallRule>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FirewallRule,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FirewallRule> &
+      ArmLroLocationHeader<FinalResult = FirewallRule>
+  >;
 
   /**
    * Deletes a cluster firewall rule.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
+  @Azure.Core.useFinalStateVia("location")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FirewallRule,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FirewallRule> &
+      ArmLroLocationHeader<FinalResult = FirewallRule>
+  >;
 
   /**
    * Lists all the firewall rules on cluster.

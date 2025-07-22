@@ -34,12 +34,22 @@ interface Roles {
   /**
    * Creates a new role or updates an existing role.
    */
-  create is ArmResourceCreateOrReplaceAsync<Role>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    Role,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Role> &
+      ArmLroLocationHeader<FinalResult = Role>
+  >;
 
   /**
    * Deletes a cluster role.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Role>;
+  @Azure.Core.useFinalStateVia("location")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Role,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Role> &
+      ArmLroLocationHeader<FinalResult = Role>
+  >;
 
   /**
    * List all the roles in a given cluster.

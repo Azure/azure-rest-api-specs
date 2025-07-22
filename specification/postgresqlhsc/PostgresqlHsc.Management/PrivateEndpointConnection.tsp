@@ -7,8 +7,6 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
@@ -35,12 +33,21 @@ interface PrivateEndpointConnections {
   /**
    * Approves or Rejects a private endpoint connection with a given name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection>
+  >;
 
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  @Azure.Core.useFinalStateVia("location")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PrivateEndpointConnection,
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+  >;
 
   /**
    * Gets list of private endpoint connections on a cluster.

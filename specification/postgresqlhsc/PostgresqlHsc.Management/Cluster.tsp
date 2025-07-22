@@ -38,7 +38,12 @@ interface Clusters {
   /**
    * Creates a new cluster with servers.
    */
-  create is ArmResourceCreateOrReplaceAsync<Cluster>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    Cluster,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
+      ArmLroLocationHeader<FinalResult = Cluster>
+  >;
 
   /**
    * Updates an existing cluster. The request body can contain one or several properties from the cluster definition.
@@ -48,6 +53,8 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterForUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cluster> &
+      ArmLroLocationHeader<FinalResult = Cluster>,
     Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Cluster;
@@ -60,6 +67,7 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
@@ -77,10 +85,12 @@ interface Clusters {
    * Promotes read replica cluster to an independent read-write cluster.
    */
   @action("promote")
+  @Azure.Core.useFinalStateVia("location")
   promoteReadReplica is ArmResourceActionAsyncBase<
     Cluster,
     PromoteRequest,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -88,22 +98,36 @@ interface Clusters {
   /**
    * Restarts all nodes in the cluster.
    */
+  @Azure.Core.useFinalStateVia("location")
   restart is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**
    * Starts stopped compute on all cluster nodes.
    */
-  start is ArmResourceActionAsync<Cluster, void, OkResponse>;
+  @Azure.Core.useFinalStateVia("location")
+  start is ArmResourceActionAsync<
+    Cluster,
+    void,
+    OkResponse,
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+  >;
 
   /**
    * Stops compute on all cluster nodes.
    */
-  stop is ArmResourceActionAsync<Cluster, void, OkResponse>;
+  @Azure.Core.useFinalStateVia("location")
+  stop is ArmResourceActionAsync<
+    Cluster,
+    void,
+    OkResponse,
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+  >;
 }
 
 @@maxLength(Cluster.name, 40);
