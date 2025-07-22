@@ -52,8 +52,12 @@ interface FileWorkspaces {
    * Creates a new file workspace for the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is FileWorkspaceOps.CreateOrUpdateSync<
+  create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
     FileWorkspaceDetails,
+    {
+      ...ApiVersionParameter,
+      ...SubscriptionIdParameter,
+    },
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
 }
