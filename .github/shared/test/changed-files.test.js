@@ -19,7 +19,6 @@ import {
   readme,
   resourceManager,
   scenario,
-  specification,
   swagger,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
@@ -91,26 +90,6 @@ describe("changedFiles", () => {
 
     expect(files.filter(readme)).toEqual(expected);
     expect(filesResolved.filter(readme)).toEqual(expected.map((f) => resolve(f)));
-  });
-
-  it("filter:specification", () => {
-    const expected = [
-      "specification/contosowidgetmanager/data-plane/readme.md",
-      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
-      "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
-      "specification/contosowidgetmanager/resource-manager/readme.md",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
-      "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
-    ];
-
-    expect(files.filter(specification)).toEqual(expected);
-    expect(() => filesResolved.filter(specification)).toThrowError(
-      "Parameter 'file' must be relative to a repo root",
-    );
-
-    // For codecov
-    expect([1].filter(/** @type {(v:any)=>boolean} */ (specification))).toEqual([]);
   });
 
   it("filter:data-plane", () => {

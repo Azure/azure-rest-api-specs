@@ -9,7 +9,6 @@ import {
   getChangedFiles,
   readme,
   resourceManager,
-  specification,
   swagger,
 } from "../../shared/src/changed-files.js";
 import { Readme } from "../../shared/src/readme.js";
@@ -25,13 +24,14 @@ debug.enable("simple-git");
 export default async function incrementalTypeSpec({ core }) {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
+    paths: ["specification"],
     logger: new CoreLogger(core),
   };
 
   const changedFiles = await getChangedFiles(options);
 
   // Includes swaggers, readmes, and examples
-  const changedRmFiles = changedFiles.filter((f) => specification(f) && resourceManager(f));
+  const changedRmFiles = changedFiles.filter(resourceManager);
 
   if (changedRmFiles.length == 0) {
     core.info("No changes to files containing path '/resource-manager/'");

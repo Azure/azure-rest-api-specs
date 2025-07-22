@@ -1,7 +1,6 @@
 // @ts-check
 
 import debug from "debug";
-import { isAbsolute, normalize, sep } from "path";
 import { simpleGit } from "simple-git";
 import { includesFolder } from "./path.js";
 
@@ -11,20 +10,21 @@ debug.enable("simple-git");
 /**
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
+ * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
+ * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
 
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
+  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
 
   const files = result.trim().split("\n");
 
@@ -134,29 +134,8 @@ export async function getChangedFilesStatuses(options = {}) {
   return categorizedFiles;
 }
 
-// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
-
-// Functions requiring paths relative to repo root
-
-/**
- * @param {string} [file] Path to file, **relative to repo root**
- * @returns {boolean}
- */
-export function specification(file) {
-  if (typeof file !== "string") {
-    return false;
-  }
-
-  // Return value would be misleading (false) on absolute paths, so throw to detect misuse
-  if (isAbsolute(file)) {
-    throw new Error(`Parameter 'file' must be relative to a repo root: '${file}'`);
-  }
-
-  // Folder name "specification" should match case, since it already exists in repo
-  return normalize(file).split(sep)[0] === "specification";
-}
-
-// Functions accepting both relative and absolute paths, since paths are resolve()'d before searching (when needed)
+// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity.
+// Functions accept both relative and absolute paths, since paths are resolve()'d before searching (when needed).
 
 /**
  * @param {string} [file]
