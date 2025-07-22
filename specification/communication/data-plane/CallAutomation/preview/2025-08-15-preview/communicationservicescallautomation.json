@@ -673,6 +673,72 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:summarizeCall": {
+      "get": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "API to get a summary of the call so far.",
+        "description": "API to get a summary of the call so far.",
+        "operationId": "CallMedia_SummarizeCall",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "summarizeCallRequest.operationContext",
+            "in": "query",
+            "description": "The value to identify context of the operation.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "summarizeCallRequest.operationCallbackUri",
+            "in": "query",
+            "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "summarizeCallRequest.summarizationOptions.enableEndCallSummary",
+            "in": "query",
+            "description": "Indicating whether end call summary should be enabled.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "summarizeCallRequest.summarizationOptions.locale",
+            "in": "query",
+            "description": "Locale for summarization (e.g., en-US).",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Returns the update transcription response"
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_SummarizeCall": {
+            "$ref": "./examples/CallMedia_SummarizeCall.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:cancelAllMediaOperations": {
       "post": {
         "tags": [
@@ -1897,8 +1963,7 @@
     "TranscriptionOptions": {
       "description": "Options for live transcription.",
       "required": [
-        "transportType",
-        "locale"
+        "transportType"
       ],
       "type": "object",
       "properties": {
@@ -2749,6 +2814,23 @@
         "enableSentimentAnalysis": {
           "description": "Indicating if sentiment analysis should be used.",
           "type": "boolean"
+        },
+        "summarizationOptions": {
+          "$ref": "#/definitions/SummarizationOptions",
+          "description": "Summarization configuration options."
+        }
+      }
+    },
+    "SummarizeCallRequest": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         },
         "summarizationOptions": {
           "$ref": "#/definitions/SummarizationOptions",
@@ -5009,8 +5091,7 @@
     "WebSocketTranscriptionOptions": {
       "description": "Represents the options for WebSocket transport.",
       "required": [
-        "transportType",
-        "locale"
+        "transportType"
       ],
       "type": "object",
       "allOf": [
