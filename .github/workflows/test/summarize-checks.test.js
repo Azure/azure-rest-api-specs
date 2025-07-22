@@ -516,25 +516,16 @@ describe("Summarize Checks Tests", () => {
   describe("label add and remove", () => {
     const testCases = [
       {
-        description: "labeled: ARMChangesRequested with WaitForARMFeedback present",
-        eventName: "labeled",
-        changedLabel: "ARMChangesRequested",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
-        description: "labeled: ARMChangesRequested without WaitForARMFeedback",
-        eventName: "labeled",
-        changedLabel: "ARMChangesRequested",
         existingLabels: ["other-label", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: [],
       },
       {
-        description: "labeled: ARMSignedOff with both labels present",
-        eventName: "labeled",
-        changedLabel: "ARMSignedOff",
         existingLabels: [
           "WaitForARMFeedback",
           "ARMSignedOff",
@@ -545,57 +536,36 @@ describe("Summarize Checks Tests", () => {
         expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
       },
       {
-        description: "labeled: ARMSignedOff with only WaitForARMFeedback present",
-        eventName: "labeled",
-        changedLabel: "ARMSignedOff",
         existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
-        description: "labeled: ARMSignedOff with only ARMChangesRequested present",
-        eventName: "labeled",
-        changedLabel: "ARMSignedOff",
         existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["ARMChangesRequested"],
       },
       {
-        description: "labeled: ARMSignedOff with neither label present",
-        eventName: "labeled",
-        changedLabel: "ARMSignedOff",
         existingLabels: ["other-label", "ARMSignedOff"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: [],
       },
       {
-        description: "unlabeled: ARMChangesRequested with WaitForARMFeedback present (buggy case)",
-        eventName: "unlabeled",
-        changedLabel: "ARMChangesRequested",
         existingLabels: ["WaitForARMFeedback", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: [],
       },
       {
-        description: "unlabeled: ARMChangesRequested without WaitForARMFeedback",
-        eventName: "unlabeled",
-        changedLabel: "ARMChangesRequested",
         existingLabels: ["other-label"],
         expectedLabelsToAdd: ["WaitForARMFeedback"],
         expectedLabelsToRemove: [],
       },
       {
-        description: "labeled: other label should have no effect",
-        eventName: "labeled",
-        changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
-        description: "unlabeled: other label should have no effect",
-        eventName: "unlabeled",
-        changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
@@ -605,21 +575,18 @@ describe("Summarize Checks Tests", () => {
     it.each(testCases)(
       "$description",
       async ({
-        eventName,
-        changedLabel,
         existingLabels,
         expectedLabelsToAdd,
         expectedLabelsToRemove,
       }) => {
-        const [labelsToAdd, labelsToRemove] = await updateLabels(
-          eventName,
-          "main",
+
+        const labelContext = await updateLabels(
           existingLabels,
-          changedLabel,
+          undefined,
         );
 
-        expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
-        expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());
+        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
+        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
       },
     );
   });

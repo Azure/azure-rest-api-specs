@@ -418,7 +418,7 @@ export function processArmReviewLabels(context, existingLabels) {
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
   if (containsAll(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("ARMChangesRequested")) {
-      context.toAdd.add("ARMChangesRequested");
+      context.toRemove.add("ARMChangesRequested");
     }
     if (existingLabels.includes("WaitForARMFeedback")) {
       context.toRemove.add("WaitForARMFeedback");
