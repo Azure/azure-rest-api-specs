@@ -12,16 +12,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@doc("Dataset for evaluation/redteam.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model InputDataset extends InputData {
-  type: "dataset";
-
-  @doc("Input data asset id")
-  id: string;
-}
-
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -34,6 +24,16 @@ model EvaluatorConfiguration {
 
   @doc("Data parameters of the evaluator.")
   dataMapping?: Record<string>;
+}
+
+@doc("Dataset for evaluation/redteam.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputDataset extends InputData {
+  type: "dataset";
+
+  @doc("Input data asset id")
+  id: string;
 }
 
 @doc("Evaluation Definition")

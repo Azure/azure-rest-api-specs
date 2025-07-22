@@ -120,14 +120,14 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   modelDeploymentName: string;
 }
 
-@doc("Azure Foundry Agent configuration. The API version would be selected by the service for querying the model.")
+@doc("Azure AI Agent Target Configuration. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model AzureFoundryAgentConfiguration extends TargetConfig {
+model AzureAIAgentTarget extends TargetConfig {
   @visibility(Lifecycle.Read)
-  type: "AzureFoundryAgent";
+  type: "AzureAIAgent";
 
-  @doc("The Foundry Agent ID to be used for the red team run. Example: `agent-12345`.")
+  @doc("Azure AI Agent ID to be used for the red team run. Example: `agent-12345`.")
   agentId: string;
 }
 
@@ -144,7 +144,7 @@ model TargetConfig {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model SeedPromptsDataset extends InputData {
-  type: "seedPrompts";
+  type: "SeedPromptsDataset";
 
   @doc("Seed prompts dataset asset id")
   id: string;
