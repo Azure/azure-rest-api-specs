@@ -1799,6 +1799,7 @@ model ScheduledEventsPolicy {
   /**
    * The configuration parameters used while creating AllInstancesDown scheduled event setting creation. 
    */
+  @added(Versions.v2025_04_01)
   allInstancesDown?: AllInstancesDown;
 
 }
@@ -1842,6 +1843,7 @@ model EventGridAndResourceGraph {
   /** 
    * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered. 
    */
+  @added(Versions.v2025_04_01)
   scheduledEventsApiVersion: string;
 }
 
@@ -1853,6 +1855,7 @@ model AllInstancesDown {
    * Specifies if Scheduled Events should be auto-approved when all instances are down. 
    * its default value is true 
    */
+  @added(Versions.v2025_04_01)
   automaticallyApprove: boolean;
 }
 
