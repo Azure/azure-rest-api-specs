@@ -1,11 +1,11 @@
-import path from "path";
-import fs from "fs";
+import path from "node:path";
+import fs from "node:fs";
 import { OadMessage } from "../types/oad-types.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
 import { logFileName } from "../types/breaking-change.js";
-import { defaultBreakingChangeBaseBranch as defaultBaseBranch } from "../command-helpers.js";
-import { logMessage } from "../log.js";
+import { logMessage, logMessageSafe } from "../log.js";
+import { Context } from "../types/breaking-change.js";
 
 /**
  * Context for OAD message processing operations
@@ -20,8 +20,9 @@ export interface OadMessageProcessorContext {
  * Convert OAD messages to result message records
  */
 export function convertOadMessagesToResultMessageRecords(
+  context: Context,
   messages: OadMessage[],
-  baseBranchName: string | null = null,
+  baseBranchName: string,
 ): ResultMessageRecord[] {
   return messages.map((oadMessage) => {
     // These paths will be printed out to GitHub check pane table row by invocations to
@@ -30,17 +31,18 @@ export function convertOadMessagesToResultMessageRecords(
     if (oadMessage.new.location) {
       paths.push({
         tag: "New",
-        path: sourceBranchHref(oadMessage.new.location || ""),
+        path: sourceBranchHref(
+          context.sourceRepo,
+          context.headCommit,
+          oadMessage.new.location || "",
+        ),
         jsonPath: oadMessage.new?.path,
       });
     }
     if (oadMessage.old.location) {
       paths.push({
         tag: "Old",
-        path: specificBranchHref(
-          oadMessage.old.location || "",
-          baseBranchName || defaultBaseBranch,
-        ),
+        path: specificBranchHref(context.targetRepo, oadMessage.old.location || "", baseBranchName),
         jsonPath: oadMessage.old?.path,
       });
     }
@@ -110,7 +112,7 @@ export function createMessageKey(message: OadMessage): string {
 export function appendToLogFile(logFilePath: string, msg: string): void {
   fs.appendFileSync(logFilePath, msg);
   fs.appendFileSync(logFilePath, "\n");
-  logMessage("oad-message-processor.appendMsg: " + msg);
+  logMessageSafe("oad-message-processor.appendMsg: " + msg);
 }
 
 /**
@@ -136,12 +138,14 @@ export function appendMarkdownToLog(
  * This function is invoked by BreakingChangeDetector.doBreakingChangeDetection()
  */
 export function processAndAppendOadMessages(
-  context: OadMessageProcessorContext,
+  context: Context,
   oadMessages: OadMessage[],
   baseBranch: string,
 ): ResultMessageRecord[] {
   // Use Set for O(1) lookup instead of O(n) array operations
-  const cacheKeys = new Set(context.messageCache.map((msg) => createMessageKey(msg)));
+  const cacheKeys = new Set(
+    context.oadMessageProcessorContext.messageCache.map((msg) => createMessageKey(msg)),
+  );
 
   // Filter out duplicates - O(n) instead of O(n²)
   const dedupedOadMessages = oadMessages.filter((oadMessage) => {
@@ -156,19 +160,20 @@ export function processAndAppendOadMessages(
   // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
   // TODO output PR information.
   logMessage(
-    `oad-message-processor.processAndAppendOadMessages: PR:${context.prUrl}, baseBranch: ${baseBranch}, ` +
+    `oad-message-processor.processAndAppendOadMessages: PR:${context.oadMessageProcessorContext.prUrl}, baseBranch: ${baseBranch}, ` +
       `oadMessages.length: ${oadMessages.length}, duplicateOadMessages.length: ${duplicateCount}, ` +
-      `messageCache.length: ${context.messageCache.length}.`,
+      `messageCache.length: ${context.oadMessageProcessorContext.messageCache.length}.`,
   );
 
-  context.messageCache.push(...dedupedOadMessages);
+  context.oadMessageProcessorContext.messageCache.push(...dedupedOadMessages);
 
   const msgs: ResultMessageRecord[] = convertOadMessagesToResultMessageRecords(
+    context,
     dedupedOadMessages,
     baseBranch,
   );
 
-  appendToLogFile(context.logFilePath, JSON.stringify(msgs));
+  appendToLogFile(context.oadMessageProcessorContext.logFilePath, JSON.stringify(msgs));
 
   return msgs;
 }

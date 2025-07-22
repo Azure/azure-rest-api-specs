@@ -1,7 +1,20 @@
 /**
  * By design, the members exported from this file are functional breaking change detection utilities.
  *
- * In the "breakingChanges directory invocation depth" this file has depth 2,
+ * In the "breakingChanges directory invocation depth" this fil    if (previousSt    if (previousPreview) {
+      const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
+        detectionContext,
+        path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
+        swaggerPath,
+        BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        "preview",
+      );      const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
+        detectionContext,
+        path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
+        swaggerPath,
+        BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        "stable",
+      );pth 2,
  * i.e. it is invoked by files with depth 1 and invokes files with depth 3.
  */
 import {
@@ -14,17 +27,21 @@ import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import {
   blobHref,
   branchHref,
+  convertRawErrorToUnifiedMsg,
   getRelativeSwaggerPathToRepo,
   processOadRuntimeErrorMessage,
   specIsPreview,
 } from "./utils/common-utils.js";
-import { appendFileSync } from "node:fs";
-import * as path from "path";
+import { appendFileSync, existsSync } from "node:fs";
+import * as path from "node:path";
 import { applyRules } from "./utils/apply-rules.js";
 import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
 import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
-import { logError, logMessage } from "./log.js";
+import { getExistedVersionOperations, getPrecedingSwaggers } from "./utils/spec.js";
+import { logError, LogLevel, logMessage } from "./log.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
 // https://github.com/Azure/autorest/pull/4934
@@ -37,7 +54,9 @@ const stackTraceMaxLength = 500;
  */
 export interface BreakingChangeDetectionContext {
   context: Context;
-  oldSwaggers: string[];
+  existingVersionSwaggers: string[]; // Files in existing API version directories
+  newVersionSwaggers: string[]; // Files in completely new API version directories
+  newVersionChangedSwaggers: string[]; // Files in existing API version directories that have changed
   oadTracer: OadTraceData;
   msgs: ResultMessageRecord[];
   runtimeErrors: RawMessageRecord[];
@@ -49,12 +68,16 @@ export interface BreakingChangeDetectionContext {
  */
 export function createBreakingChangeDetectionContext(
   context: Context,
-  oldSwaggers: string[],
+  existingVersionSwaggers: string[],
+  newVersionSwaggers: string[],
+  newVersionChangedSwaggers: string[],
   oadTracer: OadTraceData,
 ): BreakingChangeDetectionContext {
   return {
     context,
-    oldSwaggers,
+    existingVersionSwaggers,
+    newVersionSwaggers,
+    newVersionChangedSwaggers,
     oadTracer,
     msgs: [],
     runtimeErrors: [],
@@ -65,9 +88,8 @@ export function createBreakingChangeDetectionContext(
 /**
  * The entry points for breaking change detection are:
  * - checkBreakingChangeOnSameVersion()
- * - checkCrossVersionBreakingChange() (TODO: implement)
+ * - checkCrossVersionBreakingChange()
  * both of which are invoked by the function commands.ts / validateBreakingChange()
- * TODO migrate swaggerVersionManager to support cross-version checks
  */
 
 /** The function checkBreakingChangeOnSameVersion()
@@ -75,7 +97,7 @@ export function createBreakingChangeDetectionContext(
  * https://aka.ms/azsdk/pr-brch-deep#diagram-explaining-breaking-changes-and-versioning-issues
  *
  * This function is called by the function commands.ts / validateBreakingChange()
- * This function calls doBreakingChangeDetection with appropriate "type" and "isCrossVersion" parameters.
+ * This function calls doBreakingChangeDetection with appropriate "type" and other parameters.
  */
 export async function checkBreakingChangeOnSameVersion(
   detectionContext: BreakingChangeDetectionContext,
@@ -90,20 +112,129 @@ export async function checkBreakingChangeOnSameVersion(
   let aggregateOadViolationsCnt = 0;
   let aggregateErrorCnt = 0;
 
-  for (const swaggerJson of detectionContext.oldSwaggers) {
+  for (const swaggerPath of detectionContext.existingVersionSwaggers) {
+    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
-      path.resolve(detectionContext.context.prInfo!.workingDir, swaggerJson),
-      swaggerJson,
-      "SameVersion",
-      specIsPreview(swaggerJson) ? "preview" : "stable",
+      path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
+      swaggerPath,
+      BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      specIsPreview(swaggerPath)
+        ? ApiVersionLifecycleStage.PREVIEW
+        : ApiVersionLifecycleStage.STABLE,
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;
+    logMessage("Processing completed", LogLevel.EndGroup);
   }
 
   logMessage(
     `RETURN definition checkBreakingChangeOnSameVersion. ` +
+      `msgs.length: ${detectionContext.msgs.length}, ` +
+      `aggregateOadViolationsCnt: ${aggregateOadViolationsCnt}, aggregateErrorCnt: ${aggregateErrorCnt}`,
+  );
+
+  return {
+    msgs: detectionContext.msgs,
+    runtimeErrors: detectionContext.runtimeErrors,
+    oadViolationsCnt: aggregateOadViolationsCnt,
+    errorCnt: aggregateErrorCnt,
+  };
+}
+
+/** The function checkCrossVersionBreakingChange()
+ * maps to the upper "Cross-version check" rectangle at:
+ * https://aka.ms/azsdk/pr-brch-deep#diagram-explaining-breaking-changes-and-versioning-issues
+ *
+ * This function is called by the function commands.ts / validateBreakingChange()
+ * This function calls this.doBreakingChangeDetection with appropriate "type" and other parameters.
+ */
+export async function checkCrossVersionBreakingChange(
+  detectionContext: BreakingChangeDetectionContext,
+): Promise<{
+  msgs: ResultMessageRecord[];
+  runtimeErrors: RawMessageRecord[];
+  oadViolationsCnt: number;
+  errorCnt: number;
+}> {
+  logMessage(`ENTER definition checkCrossVersionBreakingChange`);
+
+  let aggregateOadViolationsCnt = 0;
+  let aggregateErrorCnt = 0;
+  for (const swaggerPath of detectionContext.newVersionSwaggers
+    .concat(detectionContext.newVersionChangedSwaggers)
+    .concat(detectionContext.existingVersionSwaggers.filter(isInDevFolder))) {
+    logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
+
+    // use the detectionContext.context.localSpecRepoPath to resolve the absolute path as it's the merge commit working directory
+    const absoluteSwaggerPath = path.resolve(
+      detectionContext.context.localSpecRepoPath,
+      swaggerPath,
+    );
+    logMessage(`checkCrossVersionBreakingChange: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+    const specModel = await getSpecModel(
+      detectionContext.context.prInfo!.tempRepoFolder,
+      swaggerPath,
+    );
+
+    // If the specModel is not found, it means the swaggerPath is a new RP
+    if (!specModel) {
+      continue;
+    }
+
+    const availableSwaggers = await specModel.getSwaggers();
+    logMessage(
+      `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
+    );
+    const previousVersions = await getPrecedingSwaggers(swaggerPath, availableSwaggers);
+    logMessage(
+      `checkCrossVersionBreakingChange: previousVersions: ${JSON.stringify(previousVersions)}`,
+    );
+    const previousStableSwaggerPath = previousVersions.stable;
+    const previousPreviewSwaggerPath = previousVersions.preview;
+    if (previousStableSwaggerPath) {
+      const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
+        detectionContext,
+        path.resolve(detectionContext.context.prInfo!.tempRepoFolder, previousStableSwaggerPath),
+        swaggerPath,
+        BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        ApiVersionLifecycleStage.STABLE,
+      );
+      aggregateOadViolationsCnt += oadViolationsCnt;
+      aggregateErrorCnt += errorCnt;
+    }
+    if (previousPreviewSwaggerPath) {
+      const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
+        detectionContext,
+        path.resolve(detectionContext.context.prInfo!.tempRepoFolder, previousPreviewSwaggerPath),
+        swaggerPath,
+        BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        ApiVersionLifecycleStage.PREVIEW,
+      );
+      aggregateErrorCnt += errorCnt;
+      // This code block is commented out because we are purposefully ignoring errorCnt here,
+      // not adding them to aggregateErrorCnt,
+      // as they originate from cross-version comparison with a preview version.
+      //
+      // Comparison to previous preview version must never cause the breaking change process to report failure, per:
+      // - https://github.com/Azure/azure-sdk-tools/issues/6396
+      //
+      // Contrast this with same-version API breaking changes detection on a preview version, which still produces
+      // errors/failures.
+      //
+      // aggregateErrorCnt += errorCnt;
+
+      // There is no need to ignore oadViolationsCnt here, as it is expected to be zero, due
+      // to applyRules.ts / applyRule() function downgrading the severity of all "Error" messages.
+      aggregateOadViolationsCnt += oadViolationsCnt;
+    }
+    if (!previousStableSwaggerPath && !previousPreviewSwaggerPath) {
+      await checkAPIsBeingMovedToANewSpec(detectionContext.context, swaggerPath, availableSwaggers);
+    }
+    logMessage("Processing completed", LogLevel.EndGroup);
+  }
+  logMessage(
+    `RETURN definition checkCrossVersionBreakingChange. ` +
       `msgs.length: ${detectionContext.msgs.length}, ` +
       `aggregateOadViolationsCnt: ${aggregateOadViolationsCnt}, aggregateErrorCnt: ${aggregateErrorCnt}`,
   );
@@ -155,11 +286,7 @@ export async function doBreakingChangeDetection(
   let errorCnt = 0;
 
   try {
-    await detectionContext.context.prInfo!.checkout(detectionContext.context.prInfo!.baseBranch);
-    const oadMessages = await runOad(
-      path.resolve(detectionContext.context.localSpecRepoPath, oldSpec),
-      newSpec,
-    );
+    const oadMessages = await runOad(oldSpec, newSpec);
 
     // Handle tracing separately - no need for a trace of two tags comparison
     detectionContext.oadTracer = addOadTrace(
@@ -179,7 +306,7 @@ export async function doBreakingChangeDetection(
     ).length;
 
     const msgs: ResultMessageRecord[] = processAndAppendOadMessages(
-      detectionContext.context.oadMessageProcessorContext,
+      detectionContext.context,
       modifiedOadMessages,
       detectionContext.context.baseBranch,
     );
@@ -193,11 +320,14 @@ export async function doBreakingChangeDetection(
       time: new Date(),
       groupName: previousApiVersionLifecycleStage,
       extra: {
-        new: blobHref(getRelativeSwaggerPathToRepo(newSpec)),
+        new: blobHref(
+          detectionContext.context.sourceRepo,
+          detectionContext.context.headCommit,
+          getRelativeSwaggerPathToRepo(newSpec),
+        ),
         old: branchHref(
-          getRelativeSwaggerPathToRepo(
-            path.resolve(detectionContext.context.localSpecRepoPath, oldSpec),
-          ),
+          detectionContext.context.targetRepo,
+          getRelativeSwaggerPathToRepo(oldSpec),
           detectionContext.context.baseBranch,
         ),
         details: processOadRuntimeErrorMessage(error.message, stackTraceMaxLength),
@@ -218,4 +348,120 @@ export async function doBreakingChangeDetection(
   );
 
   return { oadViolationsCnt, errorCnt };
+}
+
+export function isInDevFolder(swaggerPath: string) {
+  return swaggerPath.startsWith("dev/");
+}
+
+/**
+ * Example:
+ * input: specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json
+ * returns: specification/network/resource-manager
+ */
+export function getReadmeFolder(swaggerFile: string) {
+  const segments = swaggerFile.split(/\\|\//);
+
+  if (segments && segments.length >= 3) {
+    // Handle dev folder conversion
+    if (segments[0] === "dev") {
+      segments[0] = "specification";
+    }
+
+    // Look for "resource-manager" or "data-plane" in the path
+    const resourceManagerIndex = segments.findIndex((segment) => segment === "resource-manager");
+    if (resourceManagerIndex !== -1) {
+      return segments.slice(0, resourceManagerIndex + 1).join("/");
+    }
+
+    const dataPlaneIndex = segments.findIndex((segment) => segment === "data-plane");
+    if (dataPlaneIndex !== -1) {
+      return segments.slice(0, dataPlaneIndex + 1).join("/");
+    }
+
+    // Default: return first 3 segments
+    return segments.slice(0, 3).join("/");
+  }
+
+  return undefined;
+}
+
+/**
+ * Get or create a SpecModel for the given swagger path.
+ * Uses caching to avoid redundant SpecModel initialization for the same folder.
+ * @param specRepoFolder - The root folder of the spec repository
+ * @param swaggerPath - Path to the swagger file
+ * @returns SpecModel instance for the folder containing the swagger file or undefined if the folder does not exist
+ */
+export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecModel | undefined {
+  const folder = getReadmeFolder(swaggerPath);
+
+  if (!folder) {
+    throw new Error(`Could not determine readme folder for swagger path: ${swaggerPath}`);
+  }
+
+  const fullFolderPath = path.join(specRepoFolder, folder);
+
+  // Return if the readme folder is not found which means it's a new RP
+  if (!existsSync(fullFolderPath)) {
+    logMessage(
+      `getSpecModel: this is a new RP as ${fullFolderPath} folder does not exist in the base branch of spec repo.`,
+    );
+    return undefined;
+  }
+  logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
+
+  // Create new SpecModel and cache it
+  const specModel = new SpecModel(fullFolderPath);
+
+  return specModel;
+}
+
+export async function checkAPIsBeingMovedToANewSpec(
+  context: Context,
+  swaggerPath: string,
+  availableSwaggers: any[],
+) {
+  const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
+  logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
+  const specModel = getSpecModel(context.localSpecRepoPath, swaggerPath);
+  if (!specModel) {
+    return;
+  }
+  const swaggersFromOriginalClonedRepo = await specModel.getSwaggers();
+  const targetSwagger = swaggersFromOriginalClonedRepo.find((s) => s.path === absoluteSwaggerPath);
+  if (!targetSwagger) {
+    logError(
+      `checkAPIsBeingMovedToANewSpec: targetSwagger not found for swaggerPath: ${swaggerPath}`,
+    );
+    return;
+  }
+  const targetOperations = await targetSwagger.getOperations();
+  const movedApis = await getExistedVersionOperations(swaggerPath, availableSwaggers, [
+    ...targetOperations.values(),
+  ]);
+  logMessage(
+    `checkAPIsBeingMovedToANewSpec: swaggerPath: ${swaggerPath}, movedApis.size: ${movedApis.size}`,
+  );
+  if (movedApis.size > 0) {
+    logMessage(
+      `The swagger ${swaggerPath} has no previous version being found, but its APIs were found in other swaggers. It means that you are moving some APIs to this new swagger file.`,
+    );
+    for (const [swaggerFile, operations] of movedApis) {
+      const operationIds = operations.map((op: any) => op.id).join(",");
+      appendFileSync(
+        logFileName,
+        convertRawErrorToUnifiedMsg(
+          context,
+          "APIsBeingMovedToANewSpec",
+          "Attention: There are some existing APIs currently documented in a new spec file. The validation may not be able to report breaking changes with these APIs. It is recommended not to rename swagger file or move public APIs to a new file when creating a new API version." +
+            ` The existing APIs being moved are: ${operationIds};`,
+          "Warning",
+          swaggerFile,
+        ),
+      );
+      logMessage(`The following are details for existing APIs being moved to the new spec:`);
+      logMessage(`  swagger file: ${swaggerFile}, operationIds: ${operationIds}\n`);
+    }
+  }
 }

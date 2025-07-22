@@ -28,12 +28,13 @@ jobs:
         id: swagger-breaking-change-analyze-code
         run: |
           npm exec --no -- openapi-diff-runner \
-            --srp "${{ github.workspace }}" \
-            --number "${{ github.event.pull_request.number }}" \
-            --sb "${{ github.event.pull_request.head.ref }}" \
-            --tb "${{ github.event.pull_request.base.ref }}" \
-            --hc "${{ github.event.pull_request.head.sha }}" \
-            --repo "${{ github.repository }}"
+            --spec-repo-path "$GITHUB_WORKSPACE" \
+            --pr-source-branch "$GITHUB_HEAD_REF" \
+            --pr-target-branch "$GITHUB_BASE_REF" \
+            --head-commit "${{ github.event.pull_request.head.sha }}" \
+            --pr-number "${{ github.event.pull_request.number }}" \
+            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --target-repo "$GITHUB_REPOSITORY"
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
