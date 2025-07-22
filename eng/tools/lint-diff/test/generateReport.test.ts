@@ -147,16 +147,16 @@ describe("getDocUrl", () => {
 
 describe("getFileLink", () => {
   test("does not include #L if line is null", () => {
-    expect(getFileLink("abc123", "file.json", null)).not.toContain("#L");
+    expect(getFileLink("repo/path", "abc123", "file.json", null)).not.toContain("#L");
   });
 
   test("includes #L if line is not null", () => {
-    expect(getFileLink("abc123", "file.json", 1)).toContain("#L1");
+    expect(getFileLink("repo/path", "abc123", "file.json", 1)).toContain("#L1");
   });
 
   test("returns the correct link with preceeding forward slash", () => {
-    expect(getFileLink("abc123", "/file.json", 1)).toEqual(
-      "https://github.com/Azure/azure-rest-api-specs/blob/abc123/file.json#L1",
+    expect(getFileLink("repo/path", "abc123", "/file.json", 1)).toEqual(
+      "https://github.com/repo/path/blob/abc123/file.json#L1",
     );
   });
 });
@@ -387,19 +387,20 @@ describe("generateLintDiffReport", () => {
       outFile,
       "baseBranch",
       "compareSha",
+      "repo/path",
     );
     expect(actual).toBe(false);
     expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
       "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
       | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
       **[must fix]The following errors/warnings are intorduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
-      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/repo/path/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
 
       "
     `);
@@ -445,12 +446,13 @@ describe("generateLintDiffReport", () => {
       outFile,
       "baseBranch",
       "compareSha",
+      "repo/path",
     );
     expect(actual).toBe(false);
     expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
       "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
       | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+      | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
       **[must fix]The following errors/warnings are intorduced by current PR:**
@@ -511,20 +513,21 @@ describe("generateLintDiffReport", () => {
         outFile,
         "baseBranch",
         "compareSha",
+        "repo/path",
       );
       expect(actual).toBe(true);
 
       expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
         "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
         | --- | --- | --- |
-        | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+        | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
         **[must fix]The following errors/warnings are intorduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |
-        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/repo/path/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
 
         "
       `);

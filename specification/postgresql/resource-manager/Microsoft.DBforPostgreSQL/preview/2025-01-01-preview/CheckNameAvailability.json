@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "CheckNameAvailability_Execute",
         "x-ms-examples": {
-          "NameAvailability": {
+          "Check the validity and availability of the given name, to assign it to a new flexible server.": {
             "$ref": "./examples/CheckNameAvailability.json"
           }
         },
-        "description": "Check the availability of name for resource",
+        "description": "Checks the validity and availability of the given name, to assign it to a new flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -60,7 +60,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
             },
-            "description": "The required parameters for checking if resource name is available."
+            "description": "Parameters required to check if a server name is valid and available to assign it to a new flexible server."
           }
         ],
         "responses": {
@@ -86,7 +86,7 @@
         ],
         "operationId": "CheckNameAvailabilityWithLocation_Execute",
         "x-ms-examples": {
-          "NameAvailability": {
+          "Check the validity and availability of the given server name in the given location, to assign it to a new flexible server": {
             "$ref": "./examples/CheckNameAvailabilityLocationBased.json"
           }
         },
@@ -108,7 +108,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
             },
-            "description": "The required parameters for checking if resource name is available."
+            "description": "Parameters required to check if server name is available."
           }
         ],
         "responses": {
@@ -134,16 +134,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "name of the PostgreSQL server.",
+          "description": "Name of the PostgreSQL flexible server.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "type of the server",
+          "description": "Type of the server.",
           "readOnly": true
         }
       },
-      "description": "Represents a resource name availability.",
+      "description": "Availability of a server name.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"

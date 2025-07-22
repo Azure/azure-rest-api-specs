@@ -20,6 +20,7 @@ export async function generateLintDiffReport(
   outFile: string,
   baseBranch: string,
   compareSha: string,
+  githubRepoPath: string,
 ): Promise<boolean> {
   console.log("Generating LintDiff report...");
 
@@ -43,7 +44,7 @@ export async function generateLintDiffReport(
     const afterPath = getPath(after);
     const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(compareSha, afterPath)}) | [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
+    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) |\n`;
   }
 
   outputMarkdown += `\n\n`;
@@ -70,7 +71,7 @@ export async function generateLintDiffReport(
     outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
 
     for (const violation of newViolations.slice(0, 50)) {
-      outputMarkdown += getNewViolationReportRow(violation, compareSha);
+      outputMarkdown += getNewViolationReportRow(violation, githubRepoPath, compareSha);
     }
 
     if (newViolations.some((v) => isFailure(v.level))) {
@@ -99,7 +100,7 @@ export async function generateLintDiffReport(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(githubRepoPath, compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
     LogViolations("Existing violations list", existingViolations);
@@ -208,16 +209,21 @@ export function getPathSegment(path: string): string {
   return path.split("/").slice(-4).join("/");
 }
 
-export function getFileLink(sha: string, path: string, line: number | null = null) {
+export function getFileLink(
+  repoPath: string,
+  sha: string,
+  path: string,
+  line: number | null = null,
+) {
   // Paths can sometimes contain a preceeding slash if coming from a nomralized
   // filesystem path. In this case, remove it so the link doesn't contain two
   // forward slashes.
   const urlPath = path.startsWith("/") ? path.slice(1) : path;
   if (line === null) {
-    return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${urlPath}`;
+    return `https://github.com/${repoPath}/blob/${sha}/${urlPath}`;
   }
 
-  return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${urlPath}#L${line}`;
+  return `https://github.com/${repoPath}/blob/${sha}/${urlPath}#L${line}`;
 }
 
 export function getDocUrl(id: string) {
@@ -241,14 +247,18 @@ export function getLine(lintDiffViolation: LintDiffViolation): number | undefine
   return undefined;
 }
 
-function getNewViolationReportRow(violation: LintDiffViolation, compareSha: string): string {
+function getNewViolationReportRow(
+  violation: LintDiffViolation,
+  githubRepoPath: string,
+  compareSha: string,
+): string {
   const { level, code, message } = violation;
   if (level.toLowerCase() == "fatal") {
     // Fatal errors have fewer details and don't need to be formatted
     return `| ${iconFor(level)} ${code} | ${message} | ${violation.armRpcs?.join(", ")} |\n`;
   }
 
-  return `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+  return `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(githubRepoPath, compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
 }
 
 export function iconFor(type: string) {

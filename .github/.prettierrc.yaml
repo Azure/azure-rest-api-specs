@@ -1,0 +1,12 @@
+# Keep in sync with eng/tools/.prettierrc.yaml
+
+# Aligned with microsoft/typespec
+printWidth: 100
+
+overrides:
+  # tsconfig.json is actually parsed as JSONC
+  - files:
+      - tsconfig.json
+      - tsconfig.*.json
+    options:
+      parser: jsonc

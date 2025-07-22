@@ -68,10 +68,7 @@ using LiftrBase.Storage;
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FileSystemResourceProperties.oneFsUrl,
-  url,
-  "csharp"
-);
+@@alternateType(FileSystemResourceProperties.oneFsUrl, url, "csharp");
 @@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
   armResourceIdentifier,
   "csharp"

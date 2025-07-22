@@ -26,7 +26,7 @@ These are the global settings for the PostgreSQL API.
 
 ``` yaml
 title: PostgreSQLManagementClient
-description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
+description: The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
 openapi-type: arm
 tag: package-flexibleserver-2025-01-01-preview
 ```
@@ -91,14 +91,14 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
     where: $.definitions.SessionsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
     where: $.definitions.SessionDetailsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to changed.
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
 ```
 
-### Tag: package-flexibleserver-2024-11-preview
+### Tag: package-flexibleserver-2024-11-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2024-11-01-preview` is specified on the command line.
 
@@ -206,7 +206,7 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
-### Tag: package-flexibleserver-2024-03-preview
+### Tag: package-flexibleserver-2024-03-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2024-03-01-preview` is specified on the command line.
 
@@ -261,7 +261,7 @@ suppressions:
 ```
 
 
-### Tag: package-preview-2023-12
+### Tag: package-2023-12-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2023-12-01-preview` is specified on the command line.
 
@@ -309,7 +309,7 @@ suppressions:
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
-### Tag: package-preview-2023-06
+### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-01-preview` is specified on the command line.
 
@@ -402,17 +402,17 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
 ```
 
-### Tag: package-flexibleserver-2022-05-01-preview-only
+### Tag: package-flexibleserver-2022-05-01-preview
 
-These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
+``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
 ```
 
-### Tag: package-flexibleserver-2022-03-preview
+### Tag: package-flexibleserver-2022-03-08-preview
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
 
@@ -433,11 +433,11 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
 ```
 
-### Tag: package-flexibleserver-2022-03-privatepreview
+### Tag: package-flexibleserver-2022-03-08-privatepreview
 
-These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-03-08-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview'
+``` yaml $(tag) == 'package-flexibleserver-2022-03-08-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
 - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
@@ -445,11 +445,11 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
 ```
 
-### Tag: package-flexibleserver-2022-01-preview
+### Tag: package-flexibleserver-2022-01-20-preview
 
-These settings apply only when `--tag=package-flexibleserver-2022-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-01-20-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2022-01-preview'
+``` yaml $(tag) == 'package-flexibleserver-2022-01-20-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
@@ -466,22 +466,22 @@ input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
 ```
 
-### Tag: package-flexibleserver-2021-06
+### Tag: package-flexibleserver-2021-06-01
 
-These settings apply only when `--tag=package-flexibleserver-2021-06` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2021-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2021-06'
+``` yaml $(tag) == 'package-flexibleserver-2021-06-01'
 input-file:
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
 - Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
 ```
 
-### Tag: package-flexibleserver-2021-06-preview
+### Tag: package-flexibleserver-2021-06-01-preview
 
-These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is specified on the command line.cd ..
+These settings apply only when `--tag=package-flexibleserver-2021-06-01-preview` is specified on the command line.cd ..
 
-``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
+``` yaml $(tag) == 'package-flexibleserver-2021-06-01-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
 - Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
