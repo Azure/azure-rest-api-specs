@@ -37,7 +37,7 @@ model FileShare is Azure.ResourceManager.TrackedResource<FileShareProperties> {
   name: string;
 }
 
-@doc("Media Tier.")
+@doc("Media Tier enum.")
 union MediaTier {
   string,
 
@@ -45,7 +45,7 @@ union MediaTier {
   SSD: "SSD",
 }
 
-@doc("Redundancy.")
+@doc("Redundancy enum.")
 union Redundancy {
   string,
 
@@ -56,7 +56,7 @@ union Redundancy {
   Zone: "Zone",
 }
 
-@doc("Protocol.")
+@doc("Protocol enum.")
 union Protocol {
   string,
 
@@ -64,7 +64,7 @@ union Protocol {
   NFS: "NFS",
 }
 
-@doc("Share root squash.")
+@doc("Share root squash enum.")
 union ShareRootSquash {
   string,
 
