@@ -35,6 +35,7 @@ If any details are missing, prompt the user accordingly:
 - **SDK Release Type**: Value must be beta or stable.
     - "beta" for preview API versions
     - "stable" for GA API versions
+- **User Email**: Email address of the user creating the release plan
 
 ## Step 4: Create Release Plan
 - If the user doesn't know the required details, direct them to create a release plan using the release planner
