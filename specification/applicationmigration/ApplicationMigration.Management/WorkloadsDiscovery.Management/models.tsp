@@ -122,7 +122,7 @@ union SupportStatus {
   string,
 
   /**
-   * Unknown edition.
+   * Unknown support status.
    */
   Unknown: "Unknown",
 
