@@ -485,13 +485,6 @@ model FileShareProvisioningRecommendationOutput {
   availableRedundancyOptions: Redundancy[];
 }
 
-@doc("Parameters for Informational Requests")
-model InformationalRequestParameters {
-  ...SubscriptionIdParameter;
-  ...ProviderNamespace<FileShare>;
-  ...LocationParameter;
-}
-
 @armResourceOperations
 interface InformationalOperations {
   @doc("Get file shares usage data.")
