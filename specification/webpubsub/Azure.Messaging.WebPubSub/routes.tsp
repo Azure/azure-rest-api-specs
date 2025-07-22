@@ -5,9 +5,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace WebPubSubService;
-
-interface HealthApiOperationGroup {
+namespace WebPubSubService {
   /**
    * Get service health status.
    */
@@ -15,10 +13,8 @@ interface HealthApiOperationGroup {
   @summary("Get service health status.")
   @route("/api/health")
   @head
-  getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
-}
+  op getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 
-interface WebPubSubServiceOperationGroup {
   /**
    * Add filtered connections to multiple groups.
    */
@@ -26,7 +22,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
-  addConnectionsToGroups is Azure.Core.Foundations.Operation<
+  op addConnectionsToGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -52,7 +48,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
-  closeAllConnections is Azure.Core.Foundations.Operation<
+  op closeAllConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -84,7 +80,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
-  getClientAccessToken is Azure.Core.Foundations.Operation<
+  op getClientAccessToken is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -143,7 +139,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
-  removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
+  op removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -170,7 +166,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
-  sendToAll is Azure.Core.Foundations.Operation<
+  op sendToAll is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -227,7 +223,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
-  closeConnection is Azure.Core.Foundations.Operation<
+  op closeConnection is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -260,7 +256,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
-  connectionExists is Azure.Core.Foundations.Operation<
+  op connectionExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -294,7 +290,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
-  sendToConnection is Azure.Core.Foundations.Operation<
+  op sendToConnection is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -345,7 +341,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
-  removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
+  op removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -372,7 +368,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
-  groupExists is Azure.Core.Foundations.Operation<
+  op groupExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -407,7 +403,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
-  closeGroupConnections is Azure.Core.Foundations.Operation<
+  op closeGroupConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -449,7 +445,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
-  sendToGroup is Azure.Core.Foundations.Operation<
+  op sendToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -516,7 +512,7 @@ interface WebPubSubServiceOperationGroup {
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
   @list
-  listConnections is Azure.Core.Foundations.Operation<
+  op listConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -575,7 +571,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
-  removeConnectionFromGroup is Azure.Core.Foundations.Operation<
+  op removeConnectionFromGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -612,7 +608,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
-  addConnectionToGroup is Azure.Core.Foundations.Operation<
+  op addConnectionToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -652,7 +648,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
-  revokePermission is Azure.Core.Foundations.Operation<
+  op revokePermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -693,7 +689,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
-  hasPermission is Azure.Core.Foundations.Operation<
+  op hasPermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -741,7 +737,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
-  grantPermission is Azure.Core.Foundations.Operation<
+  op grantPermission is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -785,7 +781,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
-  userExists is Azure.Core.Foundations.Operation<
+  op userExists is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -818,7 +814,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
-  closeUserConnections is Azure.Core.Foundations.Operation<
+  op closeUserConnections is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -858,7 +854,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
-  sendToUser is Azure.Core.Foundations.Operation<
+  op sendToUser is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -916,7 +912,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
-  removeUserFromAllGroups is Azure.Core.Foundations.Operation<
+  op removeUserFromAllGroups is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -944,7 +940,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
-  removeUserFromGroup is Azure.Core.Foundations.Operation<
+  op removeUserFromGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
@@ -981,7 +977,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
-  addUserToGroup is Azure.Core.Foundations.Operation<
+  op addUserToGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * Target hub name, which should start with alphabetic characters and only contain
