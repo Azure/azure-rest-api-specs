@@ -3124,6 +3124,10 @@
               "modelAsString": true
             }
           }
+        },
+        "reasonForEscalation": {
+          "description": "Reason for escalation / business impact.",
+          "type": "string"
         }
       }
     },
@@ -3304,9 +3308,9 @@
           },
           "x-ms-identifiers": []
         },
-        "azureEEStatus": {
-          "description": "Status of Direct Connect Escalation",
-          "$ref": "#/definitions/AzureEEStatus"
+        "directConnectEscalation": {
+          "$ref": "#/definitions/DirectConnectEscalation",
+          "description": "Direct Connect Escalation details for a support ticket."
         }
       }
     },

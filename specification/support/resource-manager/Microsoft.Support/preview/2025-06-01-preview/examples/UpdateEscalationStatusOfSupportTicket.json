@@ -3,7 +3,13 @@
     "supportTicketName": "testticket",
     "api-version": "2025-06-01-preview",
     "updateSupportTicket": {
-      "azureEEStatus": "EscalationInitiated"
+      "contactDetails": {
+        "phoneNumber": "123-456-7890"
+      },
+      "directConnectEscalation": {
+        "azureEEStatus": "EscalationInitiated",
+        "reasonForEscalation": "Server is down and business is impacted"
+      }
     }
   },
   "responses": {
@@ -31,6 +37,7 @@
               "tname@contoso.com",
               "teamtest@contoso.com"
             ],
+            "phoneNumber": "123-456-7890",
             "preferredTimeZone": "Pacific Standard Time",
             "country": "USA",
             "preferredSupportLanguage": "en-US"
@@ -54,7 +61,8 @@
             "allowedSeverities": [
               "critical",
               "highestcriticalimpact"
-            ]
+            ],
+            "reasonForEscalation": "Server is down and business is impacted"
           },
           "createdDate": "2020-03-20T21:36:18Z",
           "modifiedDate": "2020-03-20T21:36:23Z"
