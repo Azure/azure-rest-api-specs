@@ -488,3 +488,180 @@ model RelationshipWrappersResponse {
   @doc("The list of relationships.")
   value: RelationshipWrapper[];
 }
+
+@doc("CatalogModelDataProductTypeEnum")
+union CatalogModelDataProductTypeEnum {
+  @doc("The status is Master.")
+  Master: "Master",
+
+  @doc("The status is Reference.")
+  Reference: "Reference",
+
+  @doc("The status is Analytical.")
+  Analytical: "Analytical",
+
+  @doc("The status is AI.")
+  AI: "AI",
+
+  @doc("The status is MasterDataAndReferenceData.")
+  MasterDataAndReferenceData: "MasterDataAndReferenceData",
+
+  @doc("The status is BusinessSystemOrApplication.")
+  BusinessSystemOrApplication: "BusinessSystemOrApplication",
+
+  @doc("The status is ModelTypes.")
+  ModelTypes: "ModelTypes",
+
+  @doc("The status is DashboardsOrReports.")
+  DashboardsOrReports: "DashboardsOrReports",
+
+  @doc("The status is Operational.")
+  Operational: "Operational",
+
+  @doc("The status is MLAITrainingDataSet.")
+  MLAITrainingDataSet: "MLAITrainingDataSet",
+
+  @doc("The status is MLAITestingDataSet.")
+  MLAITestingDataSet: "MLAITestingDataSet",
+
+  @doc("The status is TransactionalDataset.")
+  TransactionalDataset: "TransactionalDataset",
+
+  @doc("The status is AnalyticsModel.")
+  AnalyticsModel: "AnalyticsModel",
+
+  @doc("The status is SemanticModel.")
+  SemanticModel: "SemanticModel",
+
+  string,
+}
+
+@doc("UpdateFrequencyEnum")
+union UpdateFrequencyEnum {
+  @doc("The status is Hourly.")
+  Hourly: "Hourly",
+
+  @doc("The status is Daily.")
+  Daily: "Daily",
+
+  @doc("The status is Weekly.")
+  Weekly: "Weekly",
+
+  @doc("The status is Monthly.")
+  Monthly: "Monthly",
+
+  @doc("The status is Quarterly.")
+  Quarterly: "Quarterly",
+
+  @doc("The status is Yearly.")
+  Yearly: "Yearly",
+
+  string,
+}
+
+@doc("Microsoft Purview Data Governance Catalog Model Data Product.")
+model CatalogModelDataProduct {
+  @doc("The status of the data product.")
+  status?: CatalogModelStatus;
+
+  @doc("The type of the data product.")
+  type?: CatalogModelDataProductTypeEnum;
+
+  @doc("The update frequency of the data product.")
+  updateFrequency?: UpdateFrequencyEnum;
+
+  @doc("The managed attributes associated with the data product.")
+  managedAttributes?: CatalogModelManagedAttribute[];
+
+  @doc("The unique identifier of the data product.")
+  id?: Azure.Core.uuid;
+
+  @doc("The name of the data product.")
+  name?: string;
+
+  @doc("The system data of the data product.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("The domain of the data product.")
+  domain?: Azure.Core.uuid;
+
+  @doc("The description of the data product.")
+  description?: string;
+
+  @doc("The business use of the data product.")
+  businessUse?: string;
+
+  @doc("The contacts associated with the data product.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("The terms of use for the data product.")
+  termsOfUse?: CatalogModelExternalLink[];
+
+  @doc("The documentation links for the data product.")
+  documentation?: CatalogModelExternalLink[];
+
+  @doc("The sensitivity label of the data product.")
+  sensitivityLabel?: string;
+
+  @doc("Whether the data product is endorsed.")
+  endorsed?: boolean;
+
+  @doc("The number of active subscribers.")
+  activeSubscriberCount?: int32;
+
+  @doc("The data quality score of the data product.")
+  dataQualityScore?: float64;
+
+  @doc("The target audience for the data product.")
+  audience?: AudienceEnum[];
+
+  @doc("Additional properties of the data product.")
+  additionalProperties?: CatalogModelDataProductAllOfAdditionalProperties;
+}
+
+@doc("External link model for data product.")
+model CatalogModelExternalLink {
+  @doc("The URL of the external link.")
+  url?: string;
+
+  @doc("The name of the external link.")
+  name?: string;
+
+  @doc("The data asset identifier associated with the link.")
+  dataAssetId?: Azure.Core.uuid;
+}
+
+@doc("Audience enumeration for data products.")
+union AudienceEnum {
+  @doc("Data Engineer audience.")
+  DataEngineer: "Data Engineer",
+
+  @doc("BI Engineer audience.")
+  BIEngineer: "BI Engineer",
+
+  @doc("Data Analyst audience.")
+  DataAnalyst: "Data Analyst",
+
+  @doc("Data Scientist audience.")
+  DataScientist: "Data Scientist",
+
+  @doc("Business Analyst audience.")
+  BusinessAnalyst: "Business Analyst",
+
+  @doc("Software Engineer audience.")
+  SoftwareEngineer: "Software Engineer",
+
+  @doc("Business User audience.")
+  BusinessUser: "Business User",
+
+  @doc("Executive audience.")
+  Executive: "Executive",
+
+  string,
+}
+
+@doc("Additional properties for data product model.")
+model CatalogModelDataProductAllOfAdditionalProperties {
+  @doc("The number of assets in the data product.")
+  assetCount?: int64;
+}

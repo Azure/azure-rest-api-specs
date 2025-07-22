@@ -59,6 +59,9 @@
     },
     {
       "name": "DataAsset"
+    },
+    {
+      "name": "DataProduct"
     }
   ],
   "paths": {
@@ -2254,9 +2257,140 @@
           }
         }
       }
+    },
+    "/dataProducts": {
+      "get": {
+        "operationId": "GetDataProduct",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Retrieves a list of data products.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The unique identifier of the domain.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "The field to order by.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDataProduct_MaximumSet": {
+            "$ref": "./examples/GetDataProduct_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AudienceEnum": {
+      "type": "string",
+      "description": "Audience enumeration for data products.",
+      "enum": [
+        "Data Engineer",
+        "BI Engineer",
+        "Data Analyst",
+        "Data Scientist",
+        "Business Analyst",
+        "Software Engineer",
+        "Business User",
+        "Executive"
+      ],
+      "x-ms-enum": {
+        "name": "AudienceEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataEngineer",
+            "value": "Data Engineer",
+            "description": "Data Engineer audience."
+          },
+          {
+            "name": "BIEngineer",
+            "value": "BI Engineer",
+            "description": "BI Engineer audience."
+          },
+          {
+            "name": "DataAnalyst",
+            "value": "Data Analyst",
+            "description": "Data Analyst audience."
+          },
+          {
+            "name": "DataScientist",
+            "value": "Data Scientist",
+            "description": "Data Scientist audience."
+          },
+          {
+            "name": "BusinessAnalyst",
+            "value": "Business Analyst",
+            "description": "Business Analyst audience."
+          },
+          {
+            "name": "SoftwareEngineer",
+            "value": "Software Engineer",
+            "description": "Software Engineer audience."
+          },
+          {
+            "name": "BusinessUser",
+            "value": "Business User",
+            "description": "Business User audience."
+          },
+          {
+            "name": "Executive",
+            "value": "Executive",
+            "description": "Executive audience."
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2631,6 +2765,233 @@
         "lastRefreshedBy": {
           "type": "string",
           "description": "Name of the user who last refreshed the asset."
+        }
+      }
+    },
+    "CatalogModelDataProduct": {
+      "type": "object",
+      "description": "Microsoft Purview Data Governance Catalog Model Data Product.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "The status of the data product."
+        },
+        "type": {
+          "$ref": "#/definitions/CatalogModelDataProductTypeEnum",
+          "description": "The type of the data product."
+        },
+        "updateFrequency": {
+          "$ref": "#/definitions/UpdateFrequencyEnum",
+          "description": "The update frequency of the data product."
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "The managed attributes associated with the data product.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelManagedAttribute"
+          }
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the data product."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the data product."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "The system data of the data product."
+        },
+        "domain": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain of the data product."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the data product."
+        },
+        "businessUse": {
+          "type": "string",
+          "description": "The business use of the data product."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The contacts associated with the data product.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "termsOfUse": {
+          "type": "array",
+          "description": "The terms of use for the data product.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelExternalLink"
+          }
+        },
+        "documentation": {
+          "type": "array",
+          "description": "The documentation links for the data product.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelExternalLink"
+          }
+        },
+        "sensitivityLabel": {
+          "type": "string",
+          "description": "The sensitivity label of the data product."
+        },
+        "endorsed": {
+          "type": "boolean",
+          "description": "Whether the data product is endorsed."
+        },
+        "activeSubscriberCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of active subscribers."
+        },
+        "dataQualityScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The data quality score of the data product."
+        },
+        "audience": {
+          "type": "array",
+          "description": "The target audience for the data product.",
+          "items": {
+            "$ref": "#/definitions/AudienceEnum"
+          }
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/CatalogModelDataProductAllOfAdditionalProperties",
+          "description": "Additional properties of the data product."
+        }
+      }
+    },
+    "CatalogModelDataProductAllOfAdditionalProperties": {
+      "type": "object",
+      "description": "Additional properties for data product model.",
+      "properties": {
+        "assetCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of assets in the data product."
+        }
+      }
+    },
+    "CatalogModelDataProductTypeEnum": {
+      "type": "string",
+      "description": "CatalogModelDataProductTypeEnum",
+      "enum": [
+        "Master",
+        "Reference",
+        "Analytical",
+        "AI",
+        "MasterDataAndReferenceData",
+        "BusinessSystemOrApplication",
+        "ModelTypes",
+        "DashboardsOrReports",
+        "Operational",
+        "MLAITrainingDataSet",
+        "MLAITestingDataSet",
+        "TransactionalDataset",
+        "AnalyticsModel",
+        "SemanticModel"
+      ],
+      "x-ms-enum": {
+        "name": "CatalogModelDataProductTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Master",
+            "value": "Master",
+            "description": "The status is Master."
+          },
+          {
+            "name": "Reference",
+            "value": "Reference",
+            "description": "The status is Reference."
+          },
+          {
+            "name": "Analytical",
+            "value": "Analytical",
+            "description": "The status is Analytical."
+          },
+          {
+            "name": "AI",
+            "value": "AI",
+            "description": "The status is AI."
+          },
+          {
+            "name": "MasterDataAndReferenceData",
+            "value": "MasterDataAndReferenceData",
+            "description": "The status is MasterDataAndReferenceData."
+          },
+          {
+            "name": "BusinessSystemOrApplication",
+            "value": "BusinessSystemOrApplication",
+            "description": "The status is BusinessSystemOrApplication."
+          },
+          {
+            "name": "ModelTypes",
+            "value": "ModelTypes",
+            "description": "The status is ModelTypes."
+          },
+          {
+            "name": "DashboardsOrReports",
+            "value": "DashboardsOrReports",
+            "description": "The status is DashboardsOrReports."
+          },
+          {
+            "name": "Operational",
+            "value": "Operational",
+            "description": "The status is Operational."
+          },
+          {
+            "name": "MLAITrainingDataSet",
+            "value": "MLAITrainingDataSet",
+            "description": "The status is MLAITrainingDataSet."
+          },
+          {
+            "name": "MLAITestingDataSet",
+            "value": "MLAITestingDataSet",
+            "description": "The status is MLAITestingDataSet."
+          },
+          {
+            "name": "TransactionalDataset",
+            "value": "TransactionalDataset",
+            "description": "The status is TransactionalDataset."
+          },
+          {
+            "name": "AnalyticsModel",
+            "value": "AnalyticsModel",
+            "description": "The status is AnalyticsModel."
+          },
+          {
+            "name": "SemanticModel",
+            "value": "SemanticModel",
+            "description": "The status is SemanticModel."
+          }
+        ]
+      }
+    },
+    "CatalogModelExternalLink": {
+      "type": "object",
+      "description": "External link model for data product.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the external link."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the external link."
+        },
+        "dataAssetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier associated with the link."
         }
       }
     },
@@ -3232,6 +3593,54 @@
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier of the asset."
         }
+      }
+    },
+    "UpdateFrequencyEnum": {
+      "type": "string",
+      "description": "UpdateFrequencyEnum",
+      "enum": [
+        "Hourly",
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Quarterly",
+        "Yearly"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateFrequencyEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hourly",
+            "value": "Hourly",
+            "description": "The status is Hourly."
+          },
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "The status is Daily."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "The status is Weekly."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "The status is Monthly."
+          },
+          {
+            "name": "Quarterly",
+            "value": "Quarterly",
+            "description": "The status is Quarterly."
+          },
+          {
+            "name": "Yearly",
+            "value": "Yearly",
+            "description": "The status is Yearly."
+          }
+        ]
       }
     }
   },

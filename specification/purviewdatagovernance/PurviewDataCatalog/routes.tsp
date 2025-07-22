@@ -555,3 +555,30 @@ op deleteDataAssetRelationships is Azure.Core.Foundations.Operation<
     statusCode: 204;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves a list of data products.")
+@route("/dataProducts")
+@get
+op getDataProduct is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the domain.")
+    @query("domainId")
+    domainId?: Azure.Core.uuid;
+
+    @doc("The number of items to skip.")
+    @query("skip")
+    skip?: int32 = 0;
+
+    @doc("The number of items to return.")
+    @query("top")
+    top?: int32;
+
+    @doc("The field to order by.")
+    @query("orderby")
+    orderby?: string;
+  },
+  CatalogModelDataProduct,
+  {}
+>;
