@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 ```yaml $(tag) == 'package-2025-05'
 input-file:
   - Microsoft.Network/stable/2025-05-01/dnsresolver.json
-  - Microsoft.Network/stable/2025-05-01/dnsresolverpolicy.json
 ```
 
 ### Tag: package-preview-2023-07
