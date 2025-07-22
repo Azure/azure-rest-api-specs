@@ -122,7 +122,7 @@ model GroupMember {
 @pagedResult
 model GroupMemberPagedValues {
   /** The group members */
-  @items
+  @pageItems
   value?: GroupMember[];
 
   /** The link to the next page of results */

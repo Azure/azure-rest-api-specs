@@ -515,6 +515,7 @@ interface WebPubSubServiceOperationGroup {
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
+  @list
   listConnections is Azure.Core.Foundations.Operation<
     {
       /**
@@ -560,6 +561,7 @@ interface WebPubSubServiceOperationGroup {
        * If this parameter is omitted, the server will return the first page of results.
        */
       @query
+      @continuationToken
       continuationToken?: string;
     },
     GroupMemberPagedValues
