@@ -33,10 +33,6 @@ model NodeCustomizationProperties {
   @visibility(Lifecycle.Read)
   osSku: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @doc("The disk size of the image in GB.")
-  osDiskSizeGB: int32;
-
   @doc("The list of container image versions to cache on nodes using this image.")
   containerImages: string[];
 

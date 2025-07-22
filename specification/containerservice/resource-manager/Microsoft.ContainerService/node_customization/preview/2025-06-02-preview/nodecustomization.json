@@ -643,11 +643,6 @@
           "description": "The OS SKU of the image.",
           "readOnly": true
         },
-        "osDiskSizeGB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The disk size of the image in GB."
-        },
         "containerImages": {
           "type": "array",
           "description": "The list of container image versions to cache on nodes using this image.",
@@ -681,7 +676,6 @@
       },
       "required": [
         "osSku",
-        "osDiskSizeGB",
         "containerImages"
       ]
     },
@@ -729,11 +723,6 @@
       "type": "object",
       "description": "The updatable properties of the NodeCustomization.",
       "properties": {
-        "osDiskSizeGB": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The disk size of the image in GB."
-        },
         "containerImages": {
           "type": "array",
           "description": "The list of container image versions to cache on nodes using this image.",
