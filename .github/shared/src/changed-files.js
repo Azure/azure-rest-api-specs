@@ -1,7 +1,9 @@
 // @ts-check
 
 import debug from "debug";
+import { sep } from "path";
 import { simpleGit } from "simple-git";
+import { includesFolder } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -132,7 +134,25 @@ export async function getChangedFilesStatuses(options = {}) {
   return categorizedFiles;
 }
 
-// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
+// Functions suitable for passing to string[].filter(), sorted alphabetically
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function dataPlane(file) {
+  // Folder name "data-plane" should match case for consistency across specs
+  return typeof file === "string" && includesFolder(file, "data-plane");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function example(file) {
+  // Folder name "examples" should match case for consistency across specs
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
+}
 
 /**
  * @param {string} [file]
@@ -156,36 +176,26 @@ export function readme(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
-export function specification(file) {
-  // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && file.startsWith("specification/");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function dataPlane(file) {
-  // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && file.includes("/data-plane/");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return typeof file === "string" && file.includes("/resource-manager/");
+  return typeof file === "string" && includesFolder(file, "resource-manager");
 }
 
 /**
  * @param {string} [file]
  * @returns {boolean}
  */
-export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && file.includes("/examples/");
+export function scenario(file) {
+  return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function specification(file) {
+  // Folder name "specification" should match case, since it already exists in repo
+  return typeof file === "string" && file.split(sep)[0] === "specification";
 }
 
 /**
@@ -200,12 +210,4 @@ export function swagger(file) {
     !example(file) &&
     !scenario(file)
   );
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function scenario(file) {
-  return typeof file === "string" && json(file) && file.includes("/scenarios/");
 }
