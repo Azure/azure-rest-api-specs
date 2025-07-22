@@ -189,12 +189,6 @@ model ArmCreatedResponseWithAzureAsyncOperationHeader<T extends TypeSpec.Reflect
   operationLocation: ResourceLocation<ResourceOperationStatus<T>>;
 }
 
-@doc("A virtual network rule for the public endpoint.")
-model VirtualNetworkRule {
-  @doc("The resource ID of a subnet.")
-  id: string;
-}
-
 @doc("The set of properties for control public access.")
 model PublicAccessProperties {
   @doc("The allowed set of subnets when access is restricted.")
