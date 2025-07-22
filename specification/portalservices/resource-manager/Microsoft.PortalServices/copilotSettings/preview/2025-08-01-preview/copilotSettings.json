@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.PortalServices",
-    "version": "2024-04-01-preview",
+    "version": "2025-08-01-preview",
     "description": "Azure Portal Services API Reference",
     "x-typespec-generated": [
       {
@@ -224,7 +224,7 @@
           }
         },
         "x-ms-examples": {
-          "List the operations for the Microsoft.PortalServices provider.": {
+          "List the operations for the Microsoft.PortalServices/copilotSettings provider.": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -284,6 +284,18 @@
           "type": "boolean",
           "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
         },
+        "cosmosResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DocumentDB/databaseAccounts"
+              }
+            ]
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
@@ -301,6 +313,18 @@
         "accessControlEnabled": {
           "type": "boolean",
           "description": "Boolean indicating if role-based access control is enabled for copilot in this tenant."
+        },
+        "cosmosResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DocumentDB/databaseAccounts"
+              }
+            ]
+          }
         }
       }
     },

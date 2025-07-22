@@ -4,11 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using TypeSpec.Http;
 
 namespace Microsoft.PortalServices;
 
@@ -32,6 +29,14 @@ union MfaEnforcement {
 model CopilotSettingsProperties {
   @doc("Boolean indicating if role-based access control is enabled for copilot in this tenant.")
   accessControlEnabled: boolean;
+
+  @added(Versions.v2025_08_01_preview)
+  @doc("The setting for Bring Your Own Storage (BYOS) for copilot in this tenant. If set, copilot will use specified cosmos DB account for storing copilot chat data.")
+  cosmosResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DocumentDB/databaseAccounts";
+    }
+  ]>;
 
   @added(Versions.v2024_08_01_preview)
   @removed(Versions.v2024_09_01_preview)

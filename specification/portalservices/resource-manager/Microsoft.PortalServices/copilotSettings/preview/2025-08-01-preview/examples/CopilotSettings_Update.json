@@ -1,0 +1,37 @@
+{
+  "operationId": "CopilotSettings_Update",
+  "title": "Update Copilot Settings",
+  "parameters": {
+    "name": "default",
+    "api-version": "2025-08-01-preview",
+    "location": "global",
+    "identity": {
+      "type": "SystemAssigned"
+    },
+    "properties": {
+      "properties": {
+        "accessControlEnabled": true,
+        "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "accessControlEnabled": true,
+          "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount"
+        },
+        "location": "global",
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c"
+        },
+        "id": "/providers/Microsoft.Portal/copilotSettings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/copilotSettings"
+      }
+    }
+  }
+}
