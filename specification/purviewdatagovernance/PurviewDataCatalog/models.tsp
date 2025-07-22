@@ -854,3 +854,120 @@ model ControllersModelsPolicyAddAdminRequest {
   @doc("userObjectId")
   userObjectId?: string;
 }
+
+@doc("Microsoft Purview Data Governance Catalog Model Term.")
+model CatalogModelTerm {
+  @doc("The status of the term.")
+  status?: CatalogModelStatus;
+
+  @doc("The unique identifier of the term.")
+  id?: Azure.Core.uuid;
+
+  @doc("The name of the term.")
+  name?: string;
+
+  @doc("The system data of the term.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("The description of the term.")
+  description?: string;
+
+  @doc("The contacts associated with the term.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("The domain associated with the term.")
+  domain?: Azure.Core.uuid;
+
+  @doc("The parent term identifier.")
+  parentId?: Azure.Core.uuid;
+
+  @doc("The list of acronyms for the term.")
+  acronyms?: string[];
+
+  @doc("The resources associated with the term.")
+  resources?: CatalogModelTermResource[];
+
+  @doc("Whether the term is a leaf node.")
+  isLeaf?: boolean;
+
+  @doc("The managed attributes associated with the term.")
+  managedAttributes?: CatalogModelManagedAttribute[];
+}
+
+@doc("Catalog model term resource.")
+model CatalogModelTermResource {
+  @doc("The name of the resource.")
+  name?: string;
+
+  @doc("The URL of the resource.")
+  url?: string;
+}
+
+@doc("Response containing a list of terms.")
+model CatalogModelTermResponse {
+  @doc("The list of terms.")
+  value: CatalogModelTerm[];
+}
+
+@doc("Term query request model.")
+model TermTermQueryRequest {
+  @doc("Number of records to skip.")
+  skip?: int32;
+
+  @doc("Number of records to return.")
+  top?: int32;
+
+  @doc("Order by specifications for the query.")
+  orderby?: CatalogApiServiceOrderBy[];
+
+  @doc("Filter by term IDs.")
+  ids?: string[];
+
+  @doc("Filter by domain IDs.")
+  domainIds?: string[];
+
+  @doc("Filter by name keyword.")
+  nameKeyword?: string;
+
+  @doc("Filter by term status.")
+  status?: CatalogModelStatus;
+
+  @doc("Filter by multiple term statuses.")
+  multiStatus?: CatalogModelStatus[];
+
+  @doc("Filter by term owners.")
+  owners?: string[];
+
+  @doc("Filter by term acronyms.")
+  acronyms?: string[];
+
+  @doc("Filter by managed attributes.")
+  managedAttributes?: SharedSearchManageAttributeSearchFilter[];
+}
+
+@doc("TermFacetRequest.")
+model TermFacetRequest {
+  @doc("To filter by Ids.")
+  ids?: string[];
+
+  @doc("To filter by domain Ids.")
+  domainIds?: string[];
+
+  @doc("To filter by name keyword.")
+  nameKeyword?: string;
+
+  @doc("To filter by owners.")
+  owners?: string[];
+
+  @doc("To filter by acronyms.")
+  acronyms?: string[];
+
+  @doc("To filter by status.")
+  status?: SharedEntityStatus;
+
+  @doc("To filter by multiple status.")
+  multiStatus?: SharedEntityStatus[];
+
+  @doc("To filter by multiple facets.")
+  facets?: ModelsFacetRequestObject[];
+}

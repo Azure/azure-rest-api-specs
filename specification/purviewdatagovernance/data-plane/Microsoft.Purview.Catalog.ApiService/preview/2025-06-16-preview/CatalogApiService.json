@@ -68,6 +68,9 @@
     },
     {
       "name": "Policy"
+    },
+    {
+      "name": "Term"
     }
   ],
   "paths": {
@@ -3411,6 +3414,438 @@
           }
         }
       }
+    },
+    "/terms": {
+      "get": {
+        "operationId": "GetTerm",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a list of terms based on domain, parentId, keyword, and other filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The unique identifier of the domain.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "The unique identifier of the parent term.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Search keyword.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "depth",
+            "in": "query",
+            "description": "The depth of the term.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Field to sort by.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTerm_MaximumSet": {
+            "$ref": "./examples/GetTerm_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateTerm",
+        "tags": [
+          "Term"
+        ],
+        "description": "Adds an administrator to a policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTerm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTerm"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateTerm_MaximumSet": {
+            "$ref": "./examples/CreateTerm_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}": {
+      "get": {
+        "operationId": "GetTermWithId",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTerm"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTermWithId_MaximumSet": {
+            "$ref": "./examples/GetTermWithId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrReplaceTermId",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": ".The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The body associated with the term output.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTerm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTerm"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceTermId_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceTermId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteTerm",
+        "tags": [
+          "Term"
+        ],
+        "description": "Deletes a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTerm_MaximumSet": {
+            "$ref": "./examples/DeleteTerm_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}/hierarchies": {
+      "get": {
+        "operationId": "GetTermIdHierarchies",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves hierarchies for a term by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The unique identifier of the term.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTermIdHierarchies_MaximumSet": {
+            "$ref": "./examples/GetTermIdHierarchies_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/facets": {
+      "post": {
+        "operationId": "ReplaceTermFacets",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves facets for terms.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermFacetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplaceTermFacets_MaximumSet": {
+            "$ref": "./examples/ReplaceTermFacets_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/query": {
+      "post": {
+        "operationId": "TermQuery",
+        "tags": [
+          "Term"
+        ],
+        "description": "Retrieves terms based on specified criteria.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "duplicatecheck",
+            "in": "query",
+            "description": "To check for duplicate terms.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "the body associated with the term output.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/TermTermQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TermQuery_MaximumSet": {
+            "$ref": "./examples/TermQuery_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4328,6 +4763,105 @@
         }
       }
     },
+    "CatalogModelTerm": {
+      "type": "object",
+      "description": "Microsoft Purview Data Governance Catalog Model Term.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "The status of the term."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the term."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the term."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "The system data of the term."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the term."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The contacts associated with the term.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "domain": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain associated with the term."
+        },
+        "parentId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The parent term identifier."
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "The list of acronyms for the term.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "The resources associated with the term.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelTermResource"
+          }
+        },
+        "isLeaf": {
+          "type": "boolean",
+          "description": "Whether the term is a leaf node."
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "The managed attributes associated with the term.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelManagedAttribute"
+          }
+        }
+      }
+    },
+    "CatalogModelTermResource": {
+      "type": "object",
+      "description": "Catalog model term resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the resource."
+        }
+      }
+    },
+    "CatalogModelTermResponse": {
+      "type": "object",
+      "description": "Response containing a list of terms.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of terms.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelTerm"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ControllersModelsPolicyAddAdminRequest": {
       "type": "object",
       "description": "ControllersModelsPolicyAddAdminRequest.",
@@ -5034,6 +5568,135 @@
         "createdBy": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier of the asset."
+        }
+      }
+    },
+    "TermFacetRequest": {
+      "type": "object",
+      "description": "TermFacetRequest.",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "To filter by Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "To filter by domain Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        },
+        "owners": {
+          "type": "array",
+          "description": "To filter by owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "To filter by acronyms.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/SharedEntityStatus",
+          "description": "To filter by status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "To filter by multiple status.",
+          "items": {
+            "$ref": "#/definitions/SharedEntityStatus"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "description": "To filter by multiple facets.",
+          "items": {
+            "$ref": "#/definitions/ModelsFacetRequestObject"
+          }
+        }
+      }
+    },
+    "TermTermQueryRequest": {
+      "type": "object",
+      "description": "Term query request model.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of records to return."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "Order by specifications for the query.",
+          "items": {
+            "$ref": "#/definitions/CatalogApiServiceOrderBy"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "Filter by term IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "Filter by name keyword."
+        },
+        "status": {
+          "$ref": "#/definitions/CatalogModelStatus",
+          "description": "Filter by term status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "Filter by multiple term statuses.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelStatus"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "description": "Filter by term owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acronyms": {
+          "type": "array",
+          "description": "Filter by term acronyms.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "Filter by managed attributes.",
+          "items": {
+            "$ref": "#/definitions/SharedSearchManageAttributeSearchFilter"
+          }
         }
       }
     },

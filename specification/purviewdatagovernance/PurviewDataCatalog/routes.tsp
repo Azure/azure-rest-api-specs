@@ -868,3 +868,154 @@ op addPolicyAdministrator is Azure.Core.Foundations.Operation<
     statusCode: 200;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Adds an administrator to a policy.")
+@route("/terms")
+@post
+op createTerm is Azure.Core.Foundations.Operation<
+  CatalogModelTerm,
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the term output.")
+    @bodyRoot
+    body: CatalogModelTerm;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a list of terms based on domain, parentId, keyword, and other filters.")
+@route("/terms")
+@get
+op getTerm is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the domain.")
+    @query("domainId")
+    domainId?: Azure.Core.uuid;
+
+    @doc("The unique identifier of the parent term.")
+    @query("parentId")
+    parentId?: Azure.Core.uuid;
+
+    @doc("Search keyword.")
+    @query("keyword")
+    keyword?: string;
+
+    @doc("Number of items to skip.")
+    @query("skip")
+    skip?: int32 = 0;
+
+    @doc("Number of items to return.")
+    @query("top")
+    top?: int32;
+
+    @doc("The depth of the term.")
+    @query("depth")
+    depth?: int32;
+
+    @doc("Field to sort by.")
+    @query("orderby")
+    orderby?: string;
+  },
+  CatalogModelTermResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a term by its unique identifier.")
+@route("/terms/{termId}")
+@put
+op createOrReplaceTermId is Azure.Core.Foundations.Operation<
+  {
+    @doc(".The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+
+    @doc("The body associated with the term output.")
+    @bodyRoot
+    body?: CatalogModelTerm;
+  },
+  CatalogModelTerm,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves a term by its unique identifier.")
+@route("/terms/{termId}")
+@get
+op getTermWithId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+  },
+  CatalogModelTerm,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Deletes a term by its unique identifier.")
+@route("/terms/{termId}")
+@delete
+op deleteTerm is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves terms based on specified criteria.")
+@route("/terms/query")
+@post
+op termQuery is Azure.Core.Foundations.Operation<
+  {
+    @doc("To check for duplicate terms.")
+    @query("duplicatecheck")
+    duplicatecheck?: int32;
+
+    @doc("the body associated with the term output.")
+    @bodyRoot
+    body?: TermTermQueryRequest;
+  },
+  CatalogModelTermResponse,
+  {}
+>;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves facets for terms.")
+@route("/terms/facets")
+@post
+op replaceTermFacets is Azure.Core.Foundations.Operation<
+  TermFacetRequest,
+  FacetsResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves hierarchies for a term by its unique identifier.")
+@route("/terms/{termId}/hierarchies")
+@get
+op getTermIdHierarchies is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+  },
+  CatalogModelTermResponse,
+  {}
+>;
