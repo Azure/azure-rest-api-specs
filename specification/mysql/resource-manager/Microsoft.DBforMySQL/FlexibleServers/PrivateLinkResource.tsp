@@ -30,7 +30,10 @@ interface PrivateLinkResources {
   /**
    * Gets a private link resource for MySQL server.
    */
-  get is ArmResourceRead<PrivateLinkResource>;
+  get is ArmResourceRead<
+    PrivateLinkResource,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+  >;
 
   /**
    * Lists the private link resources for MySQL server.

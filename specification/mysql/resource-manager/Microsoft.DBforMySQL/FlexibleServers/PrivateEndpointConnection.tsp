@@ -21,7 +21,7 @@ model PrivateEndpointConnection
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
   >;
 }
 
@@ -30,7 +30,10 @@ interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<
+    PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+  >;
 
   /**
    * Approve or reject a private endpoint connection with a given name.

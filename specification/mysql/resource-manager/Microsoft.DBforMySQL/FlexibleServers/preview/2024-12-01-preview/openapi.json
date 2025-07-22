@@ -3372,14 +3372,15 @@
             "in": "path",
             "description": "The name of the private endpoint connection.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -3426,7 +3427,8 @@
             "in": "path",
             "description": "The name of the private endpoint connection.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           },
           {
             "name": "parameters",
@@ -3520,7 +3522,8 @@
             "in": "path",
             "description": "The name of the private endpoint connection.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
           }
         ],
         "responses": {
@@ -3649,9 +3652,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -6075,22 +6078,6 @@
       "properties": {
         "properties": {
           "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
