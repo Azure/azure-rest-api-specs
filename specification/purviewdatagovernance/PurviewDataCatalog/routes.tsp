@@ -684,3 +684,70 @@ op deleteDataProduct is Azure.Core.Foundations.Operation<
     statusCode: 204;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves relationships for a data product.")
+@route("/dataProducts/{dataProductId}/relationships")
+@get
+op getDataProductDataProductIdRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+  },
+  RelationshipWrappersResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Creates a relationship for a data product.")
+@route("/dataProducts/{dataProductId}/relationships")
+@post
+op replaceDataProductRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The properties of the relationship to create.")
+    @bodyRoot
+    body: Record<InputbodyProperties>;
+  },
+  RelationshipWrappersResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Deletes a relationship for a data product.")
+@route("/dataProducts/{dataProductId}/relationships")
+@delete
+op deleteDataProductRelationship is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The unique identifier of the critical data asset.")
+    @query("entityId")
+    entityId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
