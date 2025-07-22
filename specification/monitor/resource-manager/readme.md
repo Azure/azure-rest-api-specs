@@ -32,19 +32,10 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-03-01-preview
+tag: package-2025-01-01-preview
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
-```
-
-### Tag: package-2024-03-01-preview
-
-These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-01-preview'
-input-file:
-  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
 ```
 
 ### Tag: package-2025-01-01-preview
@@ -88,6 +79,15 @@ suppressions:
   - code: PostResponseCodes
     from: actionGroups_API.json
     reason: Existing service design behavior. Fixing this causes breaking changes.
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
 ```
 
 ### Tag: package-preview-2024-01
