@@ -1,0 +1,40 @@
+{
+  "name": "@azure-tools/summarize-impact",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/main.js",
+  "bin": {
+    "summarize-impact": "cmd/summarize-impact.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest --run",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "dependencies": {
+    "@azure-tools/openapi-tools-common": "^1.2.2",
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@azure/openapi-markdown": "0.9.4",
+    "@ts-common/commonmark-to-markdown": "^2.0.2",
+    "commonmark": "^0.29.0",
+    "glob": "^11.0.3",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.20",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/commonmark": "^0.27.4",
+    "@types/glob": "^8.1.0",
+    "@types/lodash": "^4.14.161",
+    "@types/node": "^20.0.0",
+    "prettier": "~3.5.3",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
