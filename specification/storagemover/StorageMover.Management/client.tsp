@@ -71,7 +71,7 @@ using Azure.Core;
   "UsernameUriString",
   "csharp"
 );
-@@clientName(Minute.`0`, "Zero", "csharp,go");
-@@clientName(Minute.`30`, "Thirty", "csharp,go");
+@@clientName(Minute.`0`, "Zero", "csharp,go,javascript");
+@@clientName(Minute.`30`, "Thirty", "csharp,go,javascript");
 @@usage(JobRun, Usage.input, "csharp");
 @@usage(JobRunError, Usage.output, "csharp");
