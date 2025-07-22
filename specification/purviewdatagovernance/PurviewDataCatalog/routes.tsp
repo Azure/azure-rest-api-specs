@@ -1141,9 +1141,9 @@ op termMigrationMoveterms is Azure.Core.Foundations.Operation<
     @statusCode
     statusCode: 200;
 
-    @doc("The created data product.")
+    @doc("Response message indicating the result of the operation.")
     @body
-    body: "20 terms updated";
+    body: string;
   },
   {}
 >;
