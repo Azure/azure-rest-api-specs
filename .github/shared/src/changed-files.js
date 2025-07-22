@@ -158,15 +158,6 @@ export function readme(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
-export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesFolder(file, "examples");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
 export function specification(file) {
   // Folder name "specification" should match case, since it already exists in repo
   return typeof file === "string" && normalize(file).split(sep)[0] === "specification";
@@ -188,6 +179,15 @@ export function dataPlane(file) {
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
   return typeof file === "string" && includesFolder(file, "resource-manager");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function example(file) {
+  // Folder name "examples" should match case for consistency across specs
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
 }
 
 /**
