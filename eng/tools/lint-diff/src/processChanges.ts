@@ -1,13 +1,13 @@
+import { join, relative, resolve, sep } from "path";
+import { readFile } from "fs/promises";
+import { pathExists } from "./util.js";
 import { readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import deepEqual from "deep-eql";
-import { readFile } from "fs/promises";
-import { join, relative, resolve, sep } from "path";
 import { ReadmeAffectedTags } from "./lintdiff-types.js";
-import { pathExists } from "./util.js";
+import deepEqual from "deep-eql";
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { deduplicateTags } from "./markdown-utils.js";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 export async function getRunList(
   beforePath: string,
