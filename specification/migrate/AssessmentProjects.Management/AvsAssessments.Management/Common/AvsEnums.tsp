@@ -14,6 +14,9 @@ union AzureAvsNodeType {
   @doc("AV36P Node type")
   AV36P: "AV36P",
 
+  @doc("AV48 Node type")
+  AV48: "AV48",
+
   @doc("AV52 Node type")
   AV52: "AV52",
 
