@@ -28,7 +28,7 @@ using Azure.ClientGenerator.Core;
 
 // Do not use terms "request" or "response" in class names as these are REST API terms
 @@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
-@@clientName(Azure.AI.Projects.PendingUploadRequest, "PendingUploadOptions");
+@@clientName(Azure.AI.Projects.PendingUploadRequest, "PendingUploadConfiguration");
 @@clientName(Azure.AI.Projects.PendingUploadResponse, "PendingUploadResult");
 
 // In Python, the emitter changes "keys" to "keys_property", since there is already
@@ -38,7 +38,7 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-// Less generic names for C# SDK
+// Less generic names for C# SDK (avoid one-word class names)
 @@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
 @@clientName(Azure.AI.Projects.Deployment, "AIDeployment", "csharp");
 @@clientName(Azure.AI.Projects.Index, "SearchIndex", "csharp");
