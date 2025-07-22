@@ -64,6 +64,17 @@ enum ShareRootSquash {
   AllSquash,
 }
 
+@doc("State of the public network access.")
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
+}
+
 // Important Technicalities: TypeSpec and ARM have different mindset wrt PUT/PATCH modeling.
 // For ARM - PATCH contract is a replica of PUT contract, which can repeat any member
 // from it and RP is responsible to maintain immutability guarantees.
@@ -199,7 +210,7 @@ model NfsProtocolProperties {
 }
 
 @lroStatus
-@doc("The status of the last operation.")
+@doc("The status of file share's ProvisioningState.")
 union FileShareProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
@@ -215,6 +226,21 @@ union FileShareProvisioningState {
 
   @doc("The operation is accepted.")
   Accepted: "Accepted",
+
+  @doc("The resource has been created.")
+  Created: "Created",
+
+  @doc("The operation is in a transient failure state.")
+  TransientFailure: "TransientFailure",
+
+  @doc("The resource is being created.")
+  Creating: "Creating",
+
+  @doc("The resource is being patched.")
+  Patching: "Patching",
+
+  @doc("The resource is being posted.")
+  Posting: "Posting",
 }
 
 @armResourceOperations
@@ -251,7 +277,10 @@ interface FileShares {
   >;
 
   checkNameAvailability is checkLocalNameAvailability;
+}
 
+@armResourceOperations
+interface FileShareSnapshots {
   getFileShareSnapshot is ArmResourceRead<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
@@ -307,17 +336,6 @@ interface Operations {
   ): ArmResponse<OperationListResult> | ErrorResponse;
 }
 
-@doc("State of the public network access.")
-union PublicNetworkAccess {
-  string,
-
-  @doc("The public network access is enabled")
-  Enabled: "Enabled",
-
-  @doc("The public network access is disabled")
-  Disabled: "Disabled",
-}
-
 @doc("FileShareSnapshot resource")
 @parentResource(FileShare)
 model FileShareSnapshot
@@ -351,4 +369,151 @@ model FileShareSnapshotProperties {
 
   @doc("The metadata")
   metadata?: Record<string>;
+}
+
+@doc("Response structure for file shares usage in the specified subscription/location.")
+model FileShareUsageDataResponse {
+  @doc("The properties of the file share usage data.")
+  properties: FileShareUsageDataOutput;
+}
+
+@doc("File shares usage result.")
+model FileShareUsageDataOutput {
+  @doc("File share usage data for active file shares.")
+  liveShares: LiveSharesUsageData;
+}
+
+@doc("Usage data for live shares.")
+model LiveSharesUsageData {
+  @doc("The number of active file shares.")
+  fileShareCount: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("File share-related limits in the specified subscription/location.")
+model FileShareLimits {
+  @doc("The maximum number of file shares that can be created.")
+  maxFileShares: int32;
+
+  @doc("The maximum number of snapshots allowed per file share.")
+  maxFileShareSnapshots: int32;
+
+  @doc("The maximum number of subnets that can be associated with a file share.")
+  maxFileShareSubnets: int32;
+
+  @doc("The maximum number of private endpoint connections allowed for a file share.")
+  maxFileSharePrivateEndpointConnections: int32;
+
+  @doc("The minimum provisioned storage in GiB for a file share.")
+  minProvisionedStorageGiB: int32;
+
+  @doc("The maximum provisioned storage in GiB for a file share.")
+  maxProvisionedStorageGiB: int32;
+
+  @doc("The minimum provisioned IOPS (Input/Output Operations Per Second) for a file share.")
+  minProvisionedIOPerSec: int32;
+
+  @doc("The maximum provisioned IOPS (Input/Output Operations Per Second) for a file share.")
+  maxProvisionedIOPerSec: int32;
+
+  @doc("The minimum provisioned throughput in MiB/s for a file share.")
+  minProvisionedThroughputMiBPerSec: int32;
+
+  @doc("The maximum provisioned throughput in MiB/s for a file share.")
+  maxProvisionedThroughputMiBPerSec: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Constants used for calculating recommended values of file share provisioning properties.")
+model FileShareProvisioningConstants {
+  @doc("Base IO per second.")
+  baseIOPerSec: int32;
+
+  @doc("Scalar IO per second.")
+  scalarIOPerSec: float64;
+
+  @doc("Base throughput in MiB per second.")
+  baseThroughputMiBPerSec: int32;
+
+  @doc("Scalar throughput in MiB per second.")
+  scalarThroughputMiBPerSec: float64;
+}
+
+@doc("Response structure for file share limits API.")
+model FileShareLimitsResponse {
+  @doc("The properties of the file share limits.")
+  properties: FileShareLimitsOutput;
+}
+
+@doc("File share limits API result.")
+model FileShareLimitsOutput {
+  @doc("The limits for the file share.")
+  limits: FileShareLimits;
+
+  @doc("The provisioning constants for the file share.")
+  provisioningConstants: FileShareProvisioningConstants;
+}
+
+@doc("Request structure for file share provisioning parameters recommendation API.")
+model FileShareProvisioningRecommendationRequest {
+  @doc("The properties of the file share provisioning recommendation input.")
+  properties: FileShareProvisioningRecommendationInput;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("File share provisioning parameters recommendation API input structure.")
+model FileShareProvisioningRecommendationInput {
+  @doc("The desired provisioned storage size of the share in GiB. Will be use to calculate the values of remaining provisioning parameters.")
+  provisionedStorageGiB: int32;
+}
+
+@doc("Response structure for file share provisioning parameters recommendation API.")
+model FileShareProvisioningRecommendationResponse {
+  @doc("The properties of the file share provisioning recommendation output.")
+  properties: FileShareProvisioningRecommendationOutput;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("File share provisioning parameters recommendation API result.")
+model FileShareProvisioningRecommendationOutput {
+  @doc("The recommended value of provisioned IO / sec of the share.")
+  provisionedIOPerSec: int32;
+
+  @doc("The recommended value of provisioned throughput / sec of the share.")
+  provisionedThroughputMiBPerSec: int32;
+
+  @doc("Redundancy options for the share.")
+  availableRedundancyOptions: Redundancy[];
+}
+
+@doc("Parameters for Informational Requests")
+model InformationalRequestParameters {
+  ...SubscriptionIdParameter;
+  ...ProviderNamespace<FileShare>;
+  ...LocationParameter;
+}
+
+@armResourceOperations
+interface InformationalOperations {
+  @doc("Get file shares usage data.")
+  getUsageData is ArmProviderActionSync<
+    Response = FileShareUsageDataResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter
+  >;
+
+  @doc("Get file shares limits.")
+  getLimits is ArmProviderActionSync<
+    Response = FileShareLimitsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter
+  >;
+
+  @doc("Get file shares provisioning parameters recommendation.")
+  getProvisioningRecommendation is ArmProviderActionSync<
+    Request = FileShareProvisioningRecommendationRequest,
+    Response = FileShareProvisioningRecommendationResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationResourceParameter
+  >;
 }
