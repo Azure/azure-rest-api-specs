@@ -2,10 +2,10 @@ namespace Core.V1;
 
 @doc("A toleration operator is the set of operators that can be used in a toleration.")
 union TolerationOperator {
-  @doc("Exists")
+  @doc("Toleration Operator Exists")
   Exists: "Exists",
 
-  @doc("Equal")
+  @doc("Toleration Operator Equal")
   Equal: "Equal",
 
   string,

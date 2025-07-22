@@ -25,16 +25,16 @@ model LabelSelectorRequirement {
 
 @doc("A label selector operator is the set of operators that can be used in a selector requirement.")
 union LabelSelectorOperator {
-  @doc("In")
+  @doc("Label Selector Operator In")
   In: "In",
 
-  @doc("NotIn")
+  @doc("Label Selector Operator NotIn")
   NotIn: "NotIn",
 
-  @doc("Exists")
+  @doc("Label Selector Operator Exists")
   Exists: "Exists",
 
-  @doc("DoesNotExist")
+  @doc("Label Selector Operator DoesNotExist")
   DoesNotExist: "DoesNotExist",
 
   string,
