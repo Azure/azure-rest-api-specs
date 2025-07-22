@@ -76,7 +76,7 @@ jobs:
             const { extractInputs } =
               await import('${{ github.workspace }}/.github/workflows/src/context.js');
             const { setOutput } = await import('${{ github.workspace }}/.github/shared/src/error-reporting.js');
-            const { issue_number } = await extractInputs({ github, context, core });
+            const { issue_number } = await extractInputs(github, context, core);
             await setOutput("issue_number", issue_number);
 
       - if: |
