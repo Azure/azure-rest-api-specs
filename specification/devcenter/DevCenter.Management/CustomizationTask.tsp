@@ -1,0 +1,62 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Catalog.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DevCenter;
+/**
+ * Represents a Task to be used in customizing a Dev Box.
+ */
+@parentResource(Catalog)
+model CustomizationTask
+  is Azure.ResourceManager.ProxyResource<CustomizationTaskProperties> {
+  ...ResourceNameParameter<
+    Resource = CustomizationTask,
+    KeyName = "taskName",
+    SegmentName = "tasks",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+  >;
+}
+
+@armResourceOperations
+interface CustomizationTasks {
+  /**
+   * Gets a Task from the catalog
+   */
+  get is ArmResourceRead<CustomizationTask>;
+
+  /**
+   * List Tasks in the catalog.
+   */
+  listByCatalog is ArmResourceListByParent<
+    CustomizationTask,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * Gets Customization Task error details
+   */
+  getErrorDetails is ArmResourceActionSync<
+    CustomizationTask,
+    void,
+    ArmResponse<CatalogResourceValidationErrorDetails>
+  >;
+}
+
+@@maxLength(CustomizationTask.name, 63);
+@@minLength(CustomizationTask.name, 3);
+@@doc(CustomizationTask.name, "The name of the Task.");
+@@doc(CustomizationTask.properties, "Task properties");

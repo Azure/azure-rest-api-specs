@@ -1,0 +1,114 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Pool.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DevCenter;
+/**
+ * Represents a Schedule to execute a task.
+ */
+@parentResource(Pool)
+model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "scheduleName",
+    SegmentName = "schedules",
+    NamePattern = "^[-\\w]+$"
+  >;
+}
+
+@armResourceOperations
+interface Schedules {
+  /**
+   * Gets a schedule resource.
+   */
+  get is ArmResourceRead<
+    Schedule,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * Creates or updates a Schedule.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Schedule,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * Partially updates a Scheduled.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    Schedule,
+    PatchModel = ScheduleUpdate,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Deletes a Scheduled.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Schedule,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    },
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Lists schedules for a pool
+   */
+  listByPool is ArmResourceListByParent<
+    Schedule,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+}
+
+@@maxLength(Schedule.name, 100);
+@@minLength(Schedule.name, 1);
+@@doc(Schedule.name, "The name of the schedule that uniquely identifies it.");
+@@doc(Schedule.properties, "Properties of a Schedule resource");
+@@doc(Schedules.createOrUpdate::parameters.resource,
+  "Represents a scheduled task"
+);
+@@doc(Schedules.update::parameters.properties, "Represents a scheduled task.");

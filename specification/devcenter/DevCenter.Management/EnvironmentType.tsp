@@ -1,0 +1,84 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DevCenter.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DevCenter;
+/**
+ * Represents an environment type.
+ */
+@parentResource(DevCenter)
+model EnvironmentType
+  is Azure.ResourceManager.ProxyResource<EnvironmentTypeProperties> {
+  ...ResourceNameParameter<
+    Resource = EnvironmentType,
+    KeyName = "environmentTypeName",
+    SegmentName = "environmentTypes",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+  >;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+@armResourceOperations
+interface EnvironmentTypes {
+  /**
+   * Gets an environment type.
+   */
+  get is ArmResourceRead<EnvironmentType>;
+
+  /**
+   * Creates or updates an environment type.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<EnvironmentType>;
+
+  /**
+   * Partially updates an environment type.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    EnvironmentType,
+    PatchModel = EnvironmentTypeUpdate
+  >;
+
+  /**
+   * Deletes an environment type.
+   */
+  delete is ArmResourceDeleteSync<EnvironmentType>;
+
+  /**
+   * Lists environment types for the devcenter.
+   */
+  listByDevCenter is ArmResourceListByParent<
+    EnvironmentType,
+    Parameters = {
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+}
+
+@@maxLength(EnvironmentType.name, 63);
+@@minLength(EnvironmentType.name, 3);
+@@doc(EnvironmentType.name, "The name of the environment type.");
+@@doc(EnvironmentType.properties, "Properties of an environment type.");
+@@doc(EnvironmentTypes.createOrUpdate::parameters.resource,
+  "Represents an Environment Type."
+);
+@@doc(EnvironmentTypes.update::parameters.properties,
+  "Updatable environment type properties."
+);
