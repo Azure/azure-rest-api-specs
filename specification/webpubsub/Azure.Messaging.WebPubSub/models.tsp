@@ -2,8 +2,6 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using Azure.Core;
 
 namespace WebPubSubService;

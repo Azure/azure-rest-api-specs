@@ -13,10 +13,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 /**
  * WebPubSubServiceClient
