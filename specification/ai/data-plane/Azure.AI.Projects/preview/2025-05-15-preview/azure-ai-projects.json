@@ -3136,7 +3136,7 @@
           "format": "int32",
           "description": "Number of simulation rounds."
         },
-        "data": {
+        "inputData": {
           "$ref": "#/definitions/InputData",
           "description": "Data for red teaming. For eg: seed prompts, policy taxonomy, etc to be used for red teaming."
         },
@@ -3189,7 +3189,7 @@
       },
       "required": [
         "id",
-        "data",
+        "inputData",
         "target"
       ]
     },
@@ -3272,6 +3272,25 @@
         "sasUri",
         "type"
       ]
+    },
+    "SeedPromptsDataset": {
+      "type": "object",
+      "description": "Seed prompts dataset for redteam.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Seed prompts dataset asset id"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "seedPrompts"
     },
     "Sku": {
       "type": "object",

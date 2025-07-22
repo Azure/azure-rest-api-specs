@@ -140,6 +140,16 @@ model TargetConfig {
   type: string;
 }
 
+@doc("Seed prompts dataset for redteam.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model SeedPromptsDataset extends InputData {
+  type: "seedPrompts";
+
+  @doc("Seed prompts dataset asset id")
+  id: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -158,7 +168,7 @@ model RedTeam {
   numTurns?: int32;
 
   @doc("Data for red teaming. For eg: seed prompts, policy taxonomy, etc to be used for red teaming.")
-  data: InputData;
+  inputData: InputData;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
