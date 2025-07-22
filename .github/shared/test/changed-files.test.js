@@ -17,9 +17,10 @@ import {
   json,
   readme,
   resourceManager,
+  scenario,
   specification,
   swagger,
-  scenario,
+  typespec,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
 
@@ -48,6 +49,7 @@ describe("changedFiles", () => {
     "README.MD",
     "specification/contosowidgetmanager/data-plane/readme.md",
     "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+    "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
     "specification/contosowidgetmanager/resource-manager/readme.md",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
@@ -82,6 +84,7 @@ describe("changedFiles", () => {
     const expected = [
       "specification/contosowidgetmanager/data-plane/readme.md",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
@@ -90,6 +93,14 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(specification)).toEqual(expected);
+  });
+
+  it("filter:typespec", () => {
+    const expected = [
+      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+    ];
+    expect(files.filter(typespec)).toEqual(expected);
   });
 
   it("filter:data-plane", () => {
@@ -134,34 +145,37 @@ describe("changedFiles", () => {
   });
 
   describe("getChangedFilesStatuses", () => {
-    it("should categorize files correctly with all types of changes", async () => {
-      const gitOutput = [
-        "A\tspecification/new-service/readme.md",
-        "M\tspecification/existing-service/main.tsp",
-        "D\tspecification/old-service/contoso.json",
-        "R100\tspecification/service/old-name.json\tspecification/service/new-name.json",
-        "C90\tspecification/template/base.json\tspecification/service/derived.json",
-        "T\tspecification/service/type-changed.json",
-      ].join("\n");
+    it.each([{}, { logger: debugLogger }])(
+      "should categorize files correctly with all types of changes (%o)",
+      async (options) => {
+        const gitOutput = [
+          "A\tspecification/new-service/readme.md",
+          "M\tspecification/existing-service/main.tsp",
+          "D\tspecification/old-service/contoso.json",
+          "R100\tspecification/service/old-name.json\tspecification/service/new-name.json",
+          "C90\tspecification/template/base.json\tspecification/service/derived.json",
+          "T\tspecification/service/type-changed.json",
+        ].join("\n");
 
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
-      const result = await getChangedFilesStatuses();
-      expect(result).toEqual({
-        additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
-        modifications: [
-          "specification/existing-service/main.tsp",
-          "specification/service/type-changed.json",
-        ],
-        deletions: ["specification/old-service/contoso.json"],
-        renames: [
-          {
-            from: "specification/service/old-name.json",
-            to: "specification/service/new-name.json",
-          },
-        ],
-        total: 6,
-      });
-    });
+        vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+        const result = await getChangedFilesStatuses(options);
+        expect(result).toEqual({
+          additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
+          modifications: [
+            "specification/existing-service/main.tsp",
+            "specification/service/type-changed.json",
+          ],
+          deletions: ["specification/old-service/contoso.json"],
+          renames: [
+            {
+              from: "specification/service/old-name.json",
+              to: "specification/service/new-name.json",
+            },
+          ],
+          total: 6,
+        });
+      },
+    );
 
     it("should handle empty git output", async () => {
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
