@@ -36,14 +36,12 @@ interface Replicas {
    * Get the replica and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicas_Get")
   get is ArmResourceRead<Replica>;
 
   /**
    * Create or update a replica.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicas_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Replica>;
 
   /**
@@ -52,7 +50,6 @@ interface Replicas {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
-  @operationId("SignalRReplicas_Update")
   update is ArmCustomPatchAsync<
     Replica,
     PatchModel = Replica,
@@ -66,14 +63,12 @@ interface Replicas {
    * Operation to delete a replica.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicas_Delete")
   delete is ArmResourceDeleteSync<Replica>;
 
   /**
    * List all replicas belong to this resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicas_List")
   list is ArmResourceListByParent<Replica, Response = ArmResponse<ReplicaList>>;
 
   /**
@@ -82,7 +77,6 @@ interface Replicas {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("skus")
-  @operationId("SignalR_ListReplicaSkus")
   listReplicaSkus is ArmResourceActionSync<Replica, void, ArmResponse<SkuList>>;
 
   /**
@@ -90,7 +84,6 @@ interface Replicas {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
-  @operationId("SignalRReplicas_Restart")
   restart is ArmResourceActionAsync<Replica, void, void>;
 }
 

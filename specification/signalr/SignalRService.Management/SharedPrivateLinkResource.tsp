@@ -73,21 +73,18 @@ interface SharedPrivateLinkResources {
    * Get the specified shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicaSharedPrivateLinkResources_Get")
   get is SharedPrivateLinkResourceOps.Read<SharedPrivateLinkResource>;
 
   /**
    * Create or update a shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate")
   createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<SharedPrivateLinkResource>;
 
   /**
    * List shared private link resources
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRReplicaSharedPrivateLinkResources_List")
   list is SharedPrivateLinkResourceOps.List<
     SharedPrivateLinkResource,
     Response = ArmResponse<SharedPrivateLinkResourceList>
@@ -132,17 +129,20 @@ interface SignalRSharedPrivateLinkResources {
   /**
    * Get the specified shared private link resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is SignalRSharedPrivateLinkResourceOps.Read<SharedPrivateLinkResource>;
 
   /**
    * Create or update a shared private link resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is SignalRSharedPrivateLinkResourceOps.CreateOrUpdateAsync<SharedPrivateLinkResource>;
 
   /**
    * Delete the specified shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is SignalRSharedPrivateLinkResourceOps.DeleteWithoutOkAsync<
     SharedPrivateLinkResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -151,6 +151,7 @@ interface SignalRSharedPrivateLinkResources {
   /**
    * List shared private link resources
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is SignalRSharedPrivateLinkResourceOps.List<
     SharedPrivateLinkResource,
     Response = ArmResponse<SharedPrivateLinkResourceList>

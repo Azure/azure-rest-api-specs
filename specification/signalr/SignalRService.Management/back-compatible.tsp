@@ -98,4 +98,4 @@ using Microsoft.SignalRService;
 @@clientLocation(SignalRResources.restart, "SignalR");
 @@clientLocation(SignalRResources.listSkus, "SignalR");
 @@clientLocation(SignalRResources.list, "SignalRPrivateLinkResources");
-@@clientLocation(UsagesOperationGroup.list, "Usage");
+@@clientLocation(UsagesOperationGroup.list, "Usages");

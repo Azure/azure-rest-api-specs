@@ -51,7 +51,6 @@ interface SignalRResources {
    * Get the resource and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalR_Get")
   get is ArmResourceRead<SignalRResource>;
 
   /**
@@ -60,7 +59,6 @@ interface SignalRResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
-  @operationId("SignalR_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SignalRResource,
@@ -72,7 +70,6 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("SignalR_Update")
   update is ArmCustomPatchAsync<SignalRResource, PatchModel = SignalRResource>;
 
   /**
@@ -80,7 +77,6 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("SignalR_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     SignalRResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -90,7 +86,6 @@ interface SignalRResources {
    * Handles requests to list all resources in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalR_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     SignalRResource,
     Response = ArmResponse<SignalRResourceList>
@@ -100,7 +95,6 @@ interface SignalRResources {
    * Handles requests to list all resources in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalR_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     SignalRResource,
     Response = ArmResponse<SignalRResourceList>
@@ -110,7 +104,6 @@ interface SignalRResources {
    * Get the access keys of the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalR_ListKeys")
   listKeys is ArmResourceActionSync<
     SignalRResource,
     void,
@@ -122,7 +115,6 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("SignalR_RegenerateKey")
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
@@ -137,7 +129,6 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
-  @operationId("SignalR_Restart")
   restart is ArmResourceActionAsync<SignalRResource, void, void>;
 
   /**
@@ -146,7 +137,6 @@ interface SignalRResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("skus")
-  @operationId("SignalR_ListSkus")
   listSkus is ArmResourceActionSync<
     SignalRResource,
     void,
@@ -159,7 +149,6 @@ interface SignalRResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("privateLinkResources")
-  @operationId("SignalRPrivateLinkResources_List")
   list is ArmResourceActionSync<
     SignalRResource,
     void,

@@ -31,7 +31,6 @@ interface PrivateEndpointConnections {
    * Get the specified private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRPrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -39,7 +38,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("SignalRPrivateEndpointConnections_Update")
   update is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -50,7 +48,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("SignalRPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -60,7 +57,6 @@ interface PrivateEndpointConnections {
    * List private endpoint connections
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SignalRPrivateEndpointConnections_List")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>
