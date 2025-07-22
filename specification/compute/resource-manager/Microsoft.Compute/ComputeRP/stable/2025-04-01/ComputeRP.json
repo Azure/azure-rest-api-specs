@@ -15011,6 +15011,22 @@
         }
       ]
     },
+    "MaxInstancePercentPerZonePolicy": {
+      "type": "object",
+      "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Limit on the number of instances in each zone as a percentage of the total capacity of the virtual machine scale set.",
+          "maximum": 100
+        }
+      }
+    },
     "MigrateToVirtualMachineScaleSetInput": {
       "type": "object",
       "description": "Describes the Virtual Machine Scale Set to migrate from Availability Set.",
@@ -16252,6 +16268,10 @@
         "automaticZoneRebalancingPolicy": {
           "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
           "description": "The configuration parameters used while performing automatic AZ balancing."
+        },
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/ZoneAllocationPolicy",
+          "description": "The configuration parameters used while performing zone allocation."
         }
       }
     },
@@ -19871,6 +19891,10 @@
           "type": "string",
           "description": "Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates",
           "readOnly": true
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01."
         }
       },
       "allOf": [
@@ -23170,11 +23194,27 @@
         ]
       }
     },
+    "ZoneAllocationPolicy": {
+      "type": "object",
+      "description": "The configuration parameters for zone allocation of a virtual machine scale set.",
+      "properties": {
+        "maxZoneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of availability zones to use if the ZonePlacementPolicy is 'Auto'. If not specified, all availability zones will be used."
+        },
+        "maxInstancePercentPerZonePolicy": {
+          "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
+          "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.",
+      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
       "enum": [
-        "Any"
+        "Any",
+        "Auto"
       ],
       "x-ms-enum": {
         "name": "ZonePlacementPolicyType",
@@ -23183,6 +23223,11 @@
           {
             "name": "Any",
             "value": "Any"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Automatic zone placement in a Virtual Machine Scale Set."
           }
         ]
       }
