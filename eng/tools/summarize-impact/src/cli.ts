@@ -7,13 +7,13 @@ import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { resolve, join } from "path";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { simpleGit } from "simple-git";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git"
 
-export async function getRootFolder(inputPath: string): Promise<string> {
+export async function getRoot(inputPath: string): Promise<string> {
   try {
-    const gitRoot = await simpleGit(inputPath).revparse("--show-toplevel");
+    const gitRoot = await getRootFolder(inputPath);
     return resolve(gitRoot.trim());
   } catch (error) {
     console.error(
@@ -90,8 +90,8 @@ export async function main() {
   // todo: refactor these opts
   const sourceDirectory = opts.sourceDirectory as string;
   const targetDirectory = opts.targetDirectory as string;
-  const sourceGitRoot = await getRootFolder(sourceDirectory);
-  const targetGitRoot = await getRootFolder(targetDirectory);
+  const sourceGitRoot = await getRoot(sourceDirectory);
+  const targetGitRoot = await getRoot(targetDirectory);
   const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
