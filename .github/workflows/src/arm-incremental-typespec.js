@@ -9,6 +9,7 @@ import {
   getChangedFiles,
   readme,
   resourceManager,
+  specification,
   swagger,
 } from "../../shared/src/changed-files.js";
 import { Readme } from "../../shared/src/readme.js";
@@ -30,7 +31,7 @@ export default async function incrementalTypeSpec({ core }) {
   const changedFiles = await getChangedFiles(options);
 
   // Includes swaggers, readmes, and examples
-  const changedRmFiles = changedFiles.filter(resourceManager);
+  const changedRmFiles = changedFiles.filter((f) => specification(f) && resourceManager(f));
 
   if (changedRmFiles.length == 0) {
     core.info("No changes to files containing path '/resource-manager/'");
@@ -128,7 +129,7 @@ export default async function incrementalTypeSpec({ core }) {
       changedSpecDir,
     ]);
 
-    // Filter files to only include RM swagger files
+    // Filter files to only include RM swagger files.  Should already be filtered to files under "/specification".
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
       .split("\n")
       .filter((file) => resourceManager(file) && swagger(file));
