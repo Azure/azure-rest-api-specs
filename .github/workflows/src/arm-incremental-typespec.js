@@ -129,7 +129,7 @@ export default async function incrementalTypeSpec({ core }) {
       changedSpecDir,
     ]);
 
-    // Filter files to only include RM swagger files.  Should already be filtered to files under "/specification".
+    // Filter files to only include RM swagger files
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
       .split("\n")
       .filter((file) => resourceManager(file) && swagger(file));
