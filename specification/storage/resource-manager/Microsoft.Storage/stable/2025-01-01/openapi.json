@@ -11527,17 +11527,11 @@
       "enum": [
         "Creating",
         "ResolvingDNS",
-        "Succeeded",
-        "ValidateSubscriptionQuotaBegin",
-        "ValidateSubscriptionQuotaEnd",
-        "Accepted",
-        "Deleting",
-        "Canceled",
-        "Failed"
+        "Succeeded"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Creating",
@@ -11550,30 +11544,6 @@
           {
             "name": "Succeeded",
             "value": "Succeeded"
-          },
-          {
-            "name": "ValidateSubscriptionQuotaBegin",
-            "value": "ValidateSubscriptionQuotaBegin"
-          },
-          {
-            "name": "ValidateSubscriptionQuotaEnd",
-            "value": "ValidateSubscriptionQuotaEnd"
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
           }
         ]
       }
@@ -13477,7 +13447,7 @@
           "description": "The storage task assignment report"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/StorageTaskAssignmentProvisioningState",
           "description": "Represents the provisioning state of the storage task assignment.",
           "readOnly": true
         },
@@ -13493,6 +13463,58 @@
         "executionContext",
         "report"
       ]
+    },
+    "StorageTaskAssignmentProvisioningState": {
+      "type": "string",
+      "description": "Gets the status of the storage account at the time the operation was called.",
+      "enum": [
+        "ValidateSubscriptionQuotaBegin",
+        "ValidateSubscriptionQuotaEnd",
+        "Accepted",
+        "Creating",
+        "Succeeded",
+        "Deleting",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTaskAssignmentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ValidateSubscriptionQuotaBegin",
+            "value": "ValidateSubscriptionQuotaBegin"
+          },
+          {
+            "name": "ValidateSubscriptionQuotaEnd",
+            "value": "ValidateSubscriptionQuotaEnd"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
+      }
     },
     "StorageTaskAssignmentReport": {
       "type": "object",
@@ -13557,7 +13579,7 @@
           "description": "The storage task assignment report"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/StorageTaskAssignmentProvisioningState",
           "description": "Represents the provisioning state of the storage task assignment.",
           "readOnly": true
         },
