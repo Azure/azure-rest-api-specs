@@ -31,6 +31,17 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+  - Microsoft.Sql/preview/2025-02-01-preview/SyncAgents.json
+  - Microsoft.Sql/preview/2025-02-01-preview/SyncGroups.json
+  - Microsoft.Sql/preview/2025-02-01-preview/SyncMembers.json
+```
+
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
