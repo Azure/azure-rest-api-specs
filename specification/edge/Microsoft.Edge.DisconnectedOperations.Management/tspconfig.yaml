@@ -3,20 +3,15 @@ emit:
 options:
   "@azure-tools/typespec-ts":
     flavor: azure
-    experimentalExtensibleEnums:
-      value: true
-    packageDir:
-      pattern: "^arm-[^\\/]+$"
-    packageDetailsName:
-      pattern: "^@azure\\/arm(?:-[a-z]+)+$"
+    experimental-extensible-enums: true
+    package-dir: arm-disconnectedoperations
+    package-details:
+      name: "@azure/arm-disconnectedoperations"
   "@azure-tools/typespec-csharp":
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    packageDir:
-      pattern: "^Azure\\.ResourceManager\\."
-    namespace:
-      value: "{package-dir}"
-    clearOutputFolder:
-      value: true
+    flavor: azure
+    package-dir: Azure.ResourceManager.DisconnectedOperations
+    namespace: Azure.ResourceManager.DisconnectedOperations
+    clear-output-folder: true
 
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
