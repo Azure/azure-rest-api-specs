@@ -1,0 +1,895 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Resource Notifications Resource Provider REST API.",
+    "version": "2024-12-01-preview",
+    "description": "Microsoft Resource Notifications Resource Provider REST API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ResourceNotifications"
+    },
+    {
+      "name": "NotificationSessions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ResourceNotifications/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions": {
+      "get": {
+        "operationId": "NotificationSessions_ListByLocation",
+        "tags": [
+          "NotificationSessions"
+        ],
+        "description": "List Notification Sessions by location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceNotifications/locations/{location}/notificationSessions/{notificationSessionName}": {
+      "get": {
+        "operationId": "NotificationSessions_Get",
+        "tags": [
+          "NotificationSessions"
+        ],
+        "description": "Get a Notification Session by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "The name of the Notification Session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSession"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NotificationSessions_CreateOrUpdate",
+        "tags": [
+          "NotificationSessions"
+        ],
+        "description": "Create or update a Notification Session with async provisioning.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "The name of the Notification Session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationSession"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NotificationSession' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NotificationSession"
+            }
+          },
+          "201": {
+            "description": "Resource 'NotificationSession' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NotificationSession"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NotificationSessions_Update",
+        "tags": [
+          "NotificationSessions"
+        ],
+        "description": "Update a Notification Session.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "The name of the Notification Session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationSessionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSession"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NotificationSessions_Delete",
+        "tags": [
+          "NotificationSessions"
+        ],
+        "description": "Delete a Notification Session.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "notificationSessionName",
+            "in": "path",
+            "description": "The name of the Notification Session.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceNotifications/locations/{location}/resourceNotifications": {
+      "get": {
+        "operationId": "ResourceNotifications_ListBySubscription",
+        "tags": [
+          "ResourceNotifications"
+        ],
+        "description": "List Resource Notifications by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNotificationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceNotifications/locations/{location}/resourceNotifications/{resourceNotificationName}": {
+      "get": {
+        "operationId": "ResourceNotifications_Get",
+        "tags": [
+          "ResourceNotifications"
+        ],
+        "description": "Get a Resource Notification by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "resourceNotificationName",
+            "in": "path",
+            "description": "The name of the Resource Notification.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNotification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ResourceNotifications_CreateOrUpdate",
+        "tags": [
+          "ResourceNotifications"
+        ],
+        "description": "Create or update a Resource Notification.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "resourceNotificationName",
+            "in": "path",
+            "description": "The name of the Resource Notification.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNotification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ResourceNotification' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ResourceNotification"
+            }
+          },
+          "201": {
+            "description": "Resource 'ResourceNotification' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ResourceNotification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ResourceNotifications_Update",
+        "tags": [
+          "ResourceNotifications"
+        ],
+        "description": "Update a Resource Notification.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "resourceNotificationName",
+            "in": "path",
+            "description": "The name of the Resource Notification.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNotificationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNotification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ResourceNotifications_Delete",
+        "tags": [
+          "ResourceNotifications"
+        ],
+        "description": "Delete a Resource Notification.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "resourceNotificationName",
+            "in": "path",
+            "description": "The name of the Resource Notification.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Error detail information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Standard error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "Error details"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "NotificationSession": {
+      "type": "object",
+      "description": "A Notification Session resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotificationSessionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NotificationSessionListResult": {
+      "type": "object",
+      "description": "The response of a NotificationSession list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NotificationSession items on this page",
+          "items": {
+            "$ref": "#/definitions/NotificationSession"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NotificationSessionProperties": {
+      "type": "object",
+      "description": "Properties of a Notification Session.",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp of the notification session."
+        },
+        "lastUsedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last used timestamp of the notification session."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the notification session."
+        }
+      }
+    },
+    "NotificationSessionUpdate": {
+      "type": "object",
+      "description": "A Notification Session resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotificationSessionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "NotificationSeverity": {
+      "type": "string",
+      "description": "The severity level of a notification.",
+      "enum": [
+        "Information",
+        "Warning",
+        "Error",
+        "Critical"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Information level notification"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level notification"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error level notification"
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical level notification"
+          }
+        ]
+      }
+    },
+    "NotificationStatus": {
+      "type": "string",
+      "description": "The status of a notification.",
+      "enum": [
+        "Active",
+        "Acknowledged",
+        "Resolved",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The notification is active"
+          },
+          {
+            "name": "Acknowledged",
+            "value": "Acknowledged",
+            "description": "The notification has been acknowledged"
+          },
+          {
+            "name": "Resolved",
+            "value": "Resolved",
+            "description": "The notification has been resolved"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The notification has expired"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource creation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource creation was canceled"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource creation was accepted"
+          }
+        ]
+      }
+    },
+    "ResourceNotification": {
+      "type": "object",
+      "description": "A Resource Notification resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceNotificationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ResourceNotificationListResult": {
+      "type": "object",
+      "description": "The response of a ResourceNotification list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceNotification items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceNotification"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceNotificationProperties": {
+      "type": "object",
+      "description": "Properties of a Resource Notification.",
+      "properties": {
+        "notificationType": {
+          "type": "string",
+          "description": "The type of notification."
+        },
+        "targetResource": {
+          "type": "string",
+          "description": "The target resource for the notification."
+        },
+        "message": {
+          "type": "string",
+          "description": "The notification message content.",
+          "maxLength": 1000
+        },
+        "severity": {
+          "$ref": "#/definitions/NotificationSeverity",
+          "description": "The severity level of the notification."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp of the notification."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified timestamp of the notification."
+        },
+        "status": {
+          "$ref": "#/definitions/NotificationStatus",
+          "description": "The current status of the notification."
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Additional properties for the notification.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceNotificationUpdate": {
+      "type": "object",
+      "description": "A Resource Notification resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceNotificationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

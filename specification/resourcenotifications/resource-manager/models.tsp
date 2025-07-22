@@ -6,10 +6,11 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Microsoft.ResourceNotifications;
+
+// Example model for a Resource Notification resource
+// You can customize this based on your specific requirements
 
 /** Properties of a Resource Notification. */
 model ResourceNotificationProperties {
@@ -27,12 +28,15 @@ model ResourceNotificationProperties {
   severity?: NotificationSeverity;
 
   /** The creation timestamp of the notification. */
+  @visibility("read")
   createdDateTime?: utcDateTime;
 
   /** The last modified timestamp of the notification. */
+  @visibility("read")
   lastModifiedDateTime?: utcDateTime;
 
   /** The current status of the notification. */
+  @visibility("read")
   status?: NotificationStatus;
 
   /** Additional properties for the notification. */
@@ -98,6 +102,9 @@ interface ResourceNotifications {
   /** Delete a Resource Notification. */
   delete is ArmResourceDeleteSync<ResourceNotification>;
 
+  /** List Resource Notifications by subscription and location. */
+  listByLocation is ArmResourceListByParent<ResourceNotification>;
+
   /** List Resource Notifications by subscription. */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ResourceNotifications_ListBySubscription")
@@ -109,12 +116,15 @@ interface ResourceNotifications {
 /** Properties of a Notification Session. */
 model NotificationSessionProperties {
   /** The creation timestamp of the notification session. */
+  @visibility("read")
   creationTime?: utcDateTime;
 
   /** The last used timestamp of the notification session. */
+  @visibility("read")
   lastUsedTime?: utcDateTime;
 
   /** The provisioning state of the notification session. */
+  @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
@@ -131,9 +141,6 @@ union ProvisioningState {
   /** The resource creation failed */
   Failed: "Failed",
 
-  /** The resource creation was canceled */
-  Canceled: "Canceled",
-
   /** The resource is being updated */
   Updating: "Updating",
 
@@ -144,22 +151,8 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-/** Standard error response. */
-model ErrorResponse {
-  /** Error details */
-  error: ErrorDetail;
-}
-
-/** Error detail information. */
-model ErrorDetail {
-  /** Error code */
-  code: string;
-  /** Error message */
-  message: string;
-}
-
 /** A Notification Session resource. */
-@parentResource(SubscriptionLocationResource)
+@parentResource(LocationResource)
 model NotificationSession is Azure.ResourceManager.TrackedResource<NotificationSessionProperties> {
   /** The name of the Notification Session. */
   @pattern("^[a-zA-Z0-9]([a-zA-Z0-9\\-_]{0,62}[a-zA-Z0-9])?$")
