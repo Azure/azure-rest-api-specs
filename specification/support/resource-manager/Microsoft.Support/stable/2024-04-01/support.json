@@ -171,18 +171,10 @@
           {
             "name": "fileWorkspaceName",
             "in": "path",
-            "description": "The name of the FileWorkspaceDetails",
+            "description": "File Workspace Name",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FileWorkspaceDetails"
-            }
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z_\\-. ]+$"
           }
         ],
         "responses": {

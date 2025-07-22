@@ -21,6 +21,7 @@ import "./ChatTranscriptDetails.tsp";
 import "./FileWorkspaceDetails.tsp";
 import "./FileDetails.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

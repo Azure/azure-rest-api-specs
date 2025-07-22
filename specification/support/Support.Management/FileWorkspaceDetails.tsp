@@ -80,13 +80,15 @@ interface FileWorkspacesNoSubscription {
    */
   get is FileWorkspacesNoSubscriptionOps.Read<FileWorkspaceDetails>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new file workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is FileWorkspacesNoSubscriptionOps.CreateOrUpdateSync<
+  create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
     FileWorkspaceDetails,
+      {
+        ...ApiVersionParameter,
+      },
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
 }
