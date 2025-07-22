@@ -139,36 +139,38 @@ export class Swagger {
       // Process regular paths
       if (swagger.paths) {
         for (const [path, pathItem] of Object.entries(swagger.paths)) {
-          for (const [method, operation] of Object.entries(pathItem)) {
-            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
-              const operationObj = {
-                id: operation.operationId,
-                httpMethod: method.toUpperCase(),
-                path: path,
-              };
-              this.#operations.set(operation.operationId, operationObj);
-            }
-          }
+          this.addOperations(this.#operations, path, pathItem);
         }
       }
 
       // Process x-ms-paths (Azure extension)
       if (swagger["x-ms-paths"]) {
         for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
-          for (const [method, operation] of Object.entries(pathItem)) {
-            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
-              const operationObj = {
-                id: operation.operationId,
-                httpMethod: method.toUpperCase(),
-                path: path,
-              };
-              this.#operations.set(operation.operationId, operationObj);
-            }
-          }
+          this.addOperations(this.#operations, path, pathItem);
         }
       }
     }
     return this.#operations;
+  }
+
+  /**
+   *
+   * @param {Map<string, Operation>} operations
+   * @param {string} path
+   * @param {any} pathItem
+   * @returns {void}
+   */
+  addOperations(operations, path, pathItem) {
+    for (const [method, operation] of Object.entries(pathItem)) {
+      if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+        const operationObj = {
+          id: operation.operationId,
+          httpMethod: method.toUpperCase(),
+          path: path,
+        };
+        operations.set(operation.operationId, operationObj);
+      }
+    }
   }
 
   /**
