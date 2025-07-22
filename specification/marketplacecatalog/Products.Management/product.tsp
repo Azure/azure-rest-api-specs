@@ -588,9 +588,6 @@ model PlanDetails extends PlanSummary {
   @doc("What blade to open when someone wants to create a marketplace item")
   uiDefinitionUri?: string;
 
-  @doc("Files related to the marketplace item")
-  artifacts?: Artifact[];
-
   @doc("Version of the marketplace item")
   version?: string;
 
