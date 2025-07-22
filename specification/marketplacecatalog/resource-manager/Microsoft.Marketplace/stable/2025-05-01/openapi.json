@@ -718,37 +718,6 @@
         "displayRank"
       ]
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "AzureBenefit": {
       "type": "string",
       "description": "Eligibility for Azure consumption commitment benefit. For more details see: https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit",
@@ -1810,11 +1779,6 @@
       "type": "object",
       "description": "Returns a subset of Product attributes",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Testing",
-          "readOnly": true
-        },
         "displayName": {
           "type": "string",
           "description": "Product display name"

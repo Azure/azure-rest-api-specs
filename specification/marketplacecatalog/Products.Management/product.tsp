@@ -4,16 +4,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Http;
-using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 @doc("Returns a subset of Product attributes")
 model ProductSummary {
-  @visibility(Lifecycle.Read)
-  @doc("Testing")
-  provisioningState?: ResourceProvisioningState;
-
   @doc("Product display name")
   displayName?: string;
 
@@ -470,6 +466,7 @@ model MarketStartPrice {
   currency?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
 model ProductDetails extends ProductSummary {
