@@ -12,6 +12,8 @@ import {
   wrapInArmReviewMessage,
 } from "./tsgs.js";
 
+import { isReleaseBranch } from "../../../shared/src/branch.js";
+
 // #region typedefs
 /**
  * The LabelContext is used by the updateLabels() to determine which labels to add or remove to the PR.
@@ -551,15 +553,6 @@ export async function processImpactAssessment(
   );
 
   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
-}
-
-/**
- * @param {string} branchName
- * @returns {boolean}
- */
-function isReleaseBranch(branchName) {
-  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
-  return branchRegex.some((b) => b.test(branchName));
 }
 
 /**

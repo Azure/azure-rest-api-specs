@@ -10,7 +10,7 @@ import * as _ from "lodash";
 
 import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
 
-import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files"
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 
 import {
   DiffResult,
