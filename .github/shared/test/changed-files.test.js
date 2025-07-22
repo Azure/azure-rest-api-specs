@@ -109,6 +109,7 @@ describe("changedFiles", () => {
       "Parameter 'file' must be relative to a repo root",
     );
 
+    // For codecov
     expect([1].filter(/** @type {(v:any)=>boolean} */ (specification))).toEqual([]);
   });
 
