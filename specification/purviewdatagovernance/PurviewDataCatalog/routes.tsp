@@ -622,3 +622,65 @@ op createDataProductQuery is Azure.Core.Foundations.Operation<
   DataProductResponse,
   {}
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves facets for data products.")
+@route("/dataProducts/facets")
+@post
+op dataProductFacets is Azure.Core.Foundations.Operation<
+  DataProductFacetRequest,
+  FacetsResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Retrieves a data product by its dataProductId.")
+@route("/dataProducts/{dataProductId}")
+@get
+op getDataProductDataProductId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+  },
+  CatalogModelDataProduct,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Updates a data product by its DataProductId.")
+@route("/dataProducts/{dataProductId}")
+@put
+op replaceDataProductDataProductId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+
+    @doc("The updated data product.")
+    @bodyRoot
+    body?: CatalogModelDataProduct;
+  },
+  CatalogModelDataProduct,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Deletes a data product by its dataProductId.")
+@route("/dataProducts/{dataProductId}")
+@delete
+op deleteDataProduct is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the data product.")
+    @path
+    dataProductId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;

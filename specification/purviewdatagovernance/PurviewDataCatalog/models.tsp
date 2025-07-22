@@ -710,3 +710,33 @@ model DataProductQueryRequest {
   @doc("To filter by managed attributes.")
   managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
+
+@doc("DataProductFacetRequest.")
+model DataProductFacetRequest {
+  @doc("To filter by Ids.")
+  ids?: string[];
+
+  @doc("To filter by domain Ids.")
+  domainIds?: string[];
+
+  @doc("To filter by name keyword.")
+  nameKeyword?: string;
+
+  @doc("To filter by owners.")
+  owners?: string[];
+
+  @doc("To filter by status.")
+  status?: SharedEntityStatus;
+
+  @doc("To filter by multiple status.")
+  multiStatus?: SharedEntityStatus[];
+
+  @doc("To filter by type.")
+  type?: string;
+
+  @doc("To filter by multiple types.")
+  types?: string[];
+
+  @doc("To filter by multiple facets.")
+  facets?: ModelsFacetRequestObject[];
+}

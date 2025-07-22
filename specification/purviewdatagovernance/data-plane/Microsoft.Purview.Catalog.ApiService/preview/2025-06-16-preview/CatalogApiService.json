@@ -2374,6 +2374,196 @@
         }
       }
     },
+    "/dataProducts/{dataProductId}": {
+      "get": {
+        "operationId": "GetDataProductDataProductId",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Retrieves a data product by its dataProductId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The unique identifier of the data product.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDataProductDataProductId_MaximumSet": {
+            "$ref": "./examples/GetDataProductDataProductId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReplaceDataProductDataProductId",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Updates a data product by its DataProductId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The unique identifier of the data product.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The updated data product.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplaceDataProductDataProductId_MaximumSet": {
+            "$ref": "./examples/ReplaceDataProductDataProductId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDataProduct",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Deletes a data product by its dataProductId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The unique identifier of the data product.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDataProduct_MaximumSet": {
+            "$ref": "./examples/DeleteDataProduct_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/facets": {
+      "post": {
+        "operationId": "DataProductFacets",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Retrieves facets for data products.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataProductFacetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductFacets_MaximumSet": {
+            "$ref": "./examples/DataProductFacets_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/dataProducts/query": {
       "post": {
         "operationId": "CreateDataProductQuery",
@@ -3395,6 +3585,66 @@
       "required": [
         "value"
       ]
+    },
+    "DataProductFacetRequest": {
+      "type": "object",
+      "description": "DataProductFacetRequest.",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "To filter by Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "To filter by domain Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        },
+        "owners": {
+          "type": "array",
+          "description": "To filter by owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/SharedEntityStatus",
+          "description": "To filter by status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "To filter by multiple status.",
+          "items": {
+            "$ref": "#/definitions/SharedEntityStatus"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "To filter by type."
+        },
+        "types": {
+          "type": "array",
+          "description": "To filter by multiple types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "description": "To filter by multiple facets.",
+          "items": {
+            "$ref": "#/definitions/ModelsFacetRequestObject"
+          }
+        }
+      }
     },
     "DataProductQueryRequest": {
       "type": "object",
