@@ -9,8 +9,13 @@ npm install -g @azure-tools/typespec-client-generator-cli
 # go setup
 go install golang.org/x/tools/cmd/goimports@latest
 
+# engsys
+pwsh -c "Install-Module -Name Az -Repository PSGallery -Force"
+
+# javascript
 echo ". /usr/local/share/nvm/nvm.sh" >> ~/.bashrc
 
+# clone all the repos
 pushd /workspaces
 
 langs=(net js java python go)
