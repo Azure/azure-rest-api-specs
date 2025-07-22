@@ -23,6 +23,7 @@ import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "../comment.js";
 import { PER_PAGE_MAX } from "../github.js";
+import { execFile } from "../../../shared/src/exec.js";
 import {
   verRevApproval,
   brChRevApproval,
@@ -41,7 +42,7 @@ import {
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
 
-import fs from "fs";
+import fs from "fs/promises";
 import os from "os";
 import path from "path";
 import { execSync } from "child_process";
@@ -983,14 +984,14 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     // Convert ArrayBuffer (download.data) to Node Buffer
     const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
     const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
-    fs.writeFileSync(tmpZip, zipBuffer);
+    await fs.writeFile(tmpZip, zipBuffer);
     // Extract JSON content from zip archive
-    const jsonContent = execSync(`unzip -p ${tmpZip}`);
-    fs.unlinkSync(tmpZip);
+    const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+    await fs.unlink(tmpZip);
 
     /** @type {import("./labelling.js").ImpactAssessment} */
     // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
-    const impact = JSON.parse(jsonContent.toString("utf8"));
+    const impact = JSON.parse(jsonContent);
     return impact;
   } catch (/** @type {any} */ error) {
     core.error(`Failed to download job summary artifact: ${error.message}`);

@@ -234,7 +234,9 @@ export class Label {
           `Cannot applyStateChange for label '${this.name}' ` +
           "as its desired presence hasn't been defined. Returning early.",
       );
-      return;
+      throw new Error(
+        `Label '${this.name}' has not been properly initialized with shouldBePresent before being applied.`,
+      );
     }
 
     if (!this.present && this.shouldBePresent) {

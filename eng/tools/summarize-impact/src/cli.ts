@@ -9,7 +9,7 @@ import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-import { getRootFolder } from "@azure-tools/specs-shared/simple-git"
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
