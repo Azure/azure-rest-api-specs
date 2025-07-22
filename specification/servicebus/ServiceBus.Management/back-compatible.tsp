@@ -78,3 +78,5 @@ using Microsoft.ServiceBus;
 @@clientName(SBSubscriptions.createOrUpdate::parameters.resource, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SBSubscription.properties);
+
+@@clientName(Microsoft.ServiceBus.Resource, "ResourceAutogen", "python");
