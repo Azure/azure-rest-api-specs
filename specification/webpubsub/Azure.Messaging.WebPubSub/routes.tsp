@@ -106,7 +106,7 @@ interface WebPubSubServiceOperationGroup {
        * Roles that the connection with the generated token will have.
        */
       @query("role")
-      role?: string[];
+      roles?: string[];
 
       /**
        * The expire time of the generated token.
@@ -119,7 +119,7 @@ interface WebPubSubServiceOperationGroup {
        * Groups that the connection will join when it connects.
        */
       @query("group")
-      group?: string[];
+      groups?: string[];
 
       /**
        * The type of client. Case-insensitive. If not set, it's "Default". For Web
@@ -127,7 +127,7 @@ interface WebPubSubServiceOperationGroup {
        * valid values are 'Default' and 'MQTT'.
        */
       @query("clientType")
-      clientType?: WebPubSubClientType = WebPubSubClientType.Default;
+      clientProtocol?: WebPubSubClientType = WebPubSubClientType.Default;
     },
     ClientTokenResponse & {
       @header("content-type")
