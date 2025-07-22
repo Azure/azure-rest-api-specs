@@ -1,5 +1,6 @@
 // @ts-check
 
+import { randomUUID } from "crypto";
 import { readdir } from "fs/promises";
 import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
@@ -16,6 +17,15 @@ describe("SpecModel", () => {
     expect(specModel.folder).toBe(resolve("foo"));
 
     await expect(specModel.getReadmes()).rejects.toThrowError(/no such file or directory/i);
+  });
+
+  it("returns cached spec model", async () => {
+    const path = randomUUID();
+
+    const specModel1 = new SpecModel(path);
+    const specModel2 = new SpecModel(path);
+
+    expect(specModel1).toBe(specModel2);
   });
 
   it("returns spec model", async () => {
