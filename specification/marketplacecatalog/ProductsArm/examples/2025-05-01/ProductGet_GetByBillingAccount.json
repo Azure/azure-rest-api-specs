@@ -4,7 +4,7 @@
   "parameters": {
     "productId": "securescan-enterprise",
     "language": "en",
-    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
+    "billingAccountId": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
     "market": "US",
     "api-version": "2025-05-01"
   },
@@ -75,14 +75,6 @@
         "linkedAddIns": [
           "cloudguard-cli:latest"
         ],
-        "linkedAddInsTypes": {
-          "cli": "Command Line Interface"
-        },
-        "additionalProductProperties": {
-          "complianceStandards": "PCI-DSS,HIPAA,SOC2,ISO27001",
-          "deploymentMode": "Automated",
-          "customField": "value"
-        },
         "smallIconUri": "https://www.cloudguard.com/icons/small.png",
         "description": "CloudGuard Security Scanner provides comprehensive cloud security monitoring and compliance management for enterprises. Key features include:\n\n- Continuous Security Monitoring: Real-time scanning of cloud resources for security vulnerabilities\n- Compliance Management: Pre-built compliance templates for major standards (PCI DSS, HIPAA, SOC 2)\n- Automated Remediation: Smart suggestions for fixing security issues with one-click implementation\n- Custom Policies: Create and enforce organization-specific security policies\n- Integration Support: Works with major DevOps tools and CI/CD pipelines\n- Advanced Reporting: Detailed security insights and compliance reports\n\nOur solution helps organizations maintain security best practices while accelerating their cloud journey.",
         "ratingBuckets": [
@@ -99,17 +91,7 @@
             "cspState": "OptIn",
             "metadata": {
               "generation": "2023",
-              "altStackReference": "basic-tier",
-              "relatedSkus": [
-                {
-                  "sku": {
-                    "name": "basic",
-                    "generation": "2023",
-                    "identity": "cloudguard-scanner-basic"
-                  },
-                  "relationType": "upgrade-from"
-                }
-              ]
+              "altStackReference": "basic-tier"
             },
             "altStackReference": "basic-tier",
             "stackType": "Gen2",
@@ -188,13 +170,7 @@
             },
             "billingComponents": [
               {
-                "billingTag": "enterprise-scanner",
-                "customMeterIds": {
-                  "scanOperations": [
-                    1001,
-                    1002
-                  ]
-                }
+                "billingTag": "enterprise-scanner"
               }
             ],
             "purchaseDurationDiscounts": [
