@@ -574,16 +574,8 @@ describe("Summarize Checks Tests", () => {
 
     it.each(testCases)(
       "$description",
-      async ({
-        existingLabels,
-        expectedLabelsToAdd,
-        expectedLabelsToRemove,
-      }) => {
-
-        const labelContext = await updateLabels(
-          existingLabels,
-          undefined,
-        );
+      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+        const labelContext = await updateLabels(existingLabels, undefined);
 
         expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
         expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
