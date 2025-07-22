@@ -108,6 +108,8 @@ describe("changedFiles", () => {
     expect(() => filesResolved.filter(specification)).toThrowError(
       "Parameter 'file' must be relative to a repo root",
     );
+
+    expect([1].filter(/** @type {(v:any)=>boolean} */ (specification))).toEqual([]);
   });
 
   it("filter:data-plane", () => {
