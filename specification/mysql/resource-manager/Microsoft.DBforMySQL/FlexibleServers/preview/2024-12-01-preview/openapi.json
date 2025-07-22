@@ -4181,11 +4181,11 @@
   "definitions": {
     "AdministratorListResult": {
       "type": "object",
-      "description": "[Placeholder] Discription for page model",
+      "description": "A List of azure ad administrators.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "[Placeholder] Discription for value property",
+          "description": "The list of azure ad administrator of a server.",
           "items": {
             "$ref": "#/definitions/AzureADAdministrator"
           }
@@ -4193,7 +4193,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
+          "description": "The link used to get the next page of operations."
         }
       }
     },
@@ -4785,20 +4785,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Capability items on this page",
+          "description": "The CapabilitySetsList items on this page",
           "items": {
             "$ref": "#/definitions/Capability"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Configuration": {
       "type": "object",

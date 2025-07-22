@@ -757,11 +757,13 @@ model ConfigurationForBatchUpdateProperties {
   /**
    * Value of the configuration.
    */
+  @doc("Value of the configuration.")
   value?: string;
 
   /**
    * Source of the configuration.
    */
+  @doc("Source of the configuration.")
   source?: string;
 }
 
@@ -1420,7 +1422,7 @@ model LogFileProperties {
 @pagedResult
 model CapabilitiesListResult {
   /**
-   * Array of Advanced Threat Protection settings
+   * Array of Capability settings
    */
   @doc("The CapabilityProperties items on this page")
   @visibility(Lifecycle.Read)
@@ -1587,7 +1589,23 @@ model SkuCapability {
 /**
  * location capability set
  */
-model CapabilitySetsList is Azure.Core.Page<Capability>;
+@pagedResult
+model CapabilitySetsList {
+  /**
+   * Array of CapabilitySets settings
+   */
+  @doc("The CapabilitySetsList items on this page")
+  @visibility(Lifecycle.Read)
+  @items
+  value?: Capability[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Location capability.
@@ -2135,18 +2153,18 @@ model LocationNameParameter {
 }
 
 /**
- * [Placeholder] Discription for page model
+ * A List of azure ad administrators.
  */
 @pagedResult
 model AdministratorListResult {
   /**
-   * [Placeholder] Discription for value property
+   * The list of azure ad administrator of a server.
    */
   @items
   value?: AzureADAdministrator[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The link used to get the next page of operations.
    */
   @nextLink
   nextLink?: url;
