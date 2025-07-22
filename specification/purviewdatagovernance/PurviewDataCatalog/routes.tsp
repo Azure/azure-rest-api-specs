@@ -838,3 +838,33 @@ op deleteDomain is Azure.Core.Foundations.Operation<
     statusCode: 204;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Policy")
+@doc("Retrieves a list of policies.")
+@route("/policies")
+@get
+op getPolicy is Azure.Core.Foundations.Operation<
+  {
+    @doc("skiptoken")
+    @query("skipToken")
+    skipToken?: string;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Policy")
+@doc("Adds an administrator to a policy.")
+@route("/policies/addAdministrator")
+@post
+op addPolicyAdministrator is Azure.Core.Foundations.Operation<
+  ControllersModelsPolicyAddAdminRequest,
+  {
+    @statusCode
+    statusCode: 200;
+  }
+>;

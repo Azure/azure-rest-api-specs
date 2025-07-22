@@ -849,3 +849,8 @@ model CatalogModelDomainResponse {
   @doc("The list of domains.")
   value: CatalogModelDomain[];
 }
+@doc("ControllersModelsPolicyAddAdminRequest.")
+model ControllersModelsPolicyAddAdminRequest {
+  @doc("userObjectId")
+  userObjectId?: string;
+}

@@ -65,6 +65,9 @@
     },
     {
       "name": "BusinessDomain"
+    },
+    {
+      "name": "Policy"
     }
   ],
   "paths": {
@@ -3321,6 +3324,93 @@
           }
         }
       }
+    },
+    "/policies": {
+      "get": {
+        "operationId": "GetPolicy",
+        "tags": [
+          "Policy"
+        ],
+        "description": "Retrieves a list of policies.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "skiptoken",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPolicy_MaximumSet": {
+            "$ref": "./examples/GetPolicy_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/policies/addAdministrator": {
+      "post": {
+        "operationId": "AddPolicyAdministrator",
+        "tags": [
+          "Policy"
+        ],
+        "description": "Adds an administrator to a policy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ControllersModelsPolicyAddAdminRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddPolicyAdministrator_MaximumSet": {
+            "$ref": "./examples/AddPolicyAdministrator_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4235,6 +4325,16 @@
         "expiredBy": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The user who expired the record."
+        }
+      }
+    },
+    "ControllersModelsPolicyAddAdminRequest": {
+      "type": "object",
+      "description": "ControllersModelsPolicyAddAdminRequest.",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "userObjectId"
         }
       }
     },
