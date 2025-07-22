@@ -971,3 +971,62 @@ model TermFacetRequest {
   @doc("To filter by multiple facets.")
   facets?: ModelsFacetRequestObject[];
 }
+
+@doc("TermRelationship.")
+model TermRelationship {
+  @doc("description for the term relationship")
+  description?: string;
+
+  @doc("The unique identifier of the entity.")
+  entityId?: Azure.Core.uuid;
+
+  @doc("The system data of the term relationship.")
+  relationshipType?: TermRelationshipType;
+}
+
+@doc("Response containing a list of terms.")
+model TermRelationshipResponse {
+  @doc("The list of terms.")
+  value: TermRelationship[];
+}
+
+@doc("TermRelationshipType")
+union TermRelationshipType {
+  @doc("The status is Related.")
+  Related: "Related",
+
+  @doc("The status is Synonym.")
+  Synonym: "Synonym",
+
+  @doc("The status is Parent.")
+  Parent: "Parent",
+
+  string,
+}
+
+@doc("TermMigrationState.")
+model TermMigrationState {
+  @doc("Indicates whether the term has been migrated.")
+  hasBeenMigrated?: boolean;
+}
+
+@doc("TermMigrationCounts.")
+model TermMigrationCounts {
+  @doc("TermTemplateCount")
+  termTemplateCount?: int32;
+
+  @doc("GlossaryCount")
+  glossaryCount?: int32;
+
+  @doc("TermCount")
+  termCount?: int32;
+}
+
+@doc("TermsMoveRequest.")
+model TermsMoveRequest {
+  @doc("The unique identifier of the destination domain.")
+  destinationDomainId?: Azure.Core.uuid;
+
+  @doc("List of term IDs to be moved.")
+  termIds?: string[];
+}

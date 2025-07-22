@@ -1019,3 +1019,131 @@ op getTermIdHierarchies is Azure.Core.Foundations.Operation<
   CatalogModelTermResponse,
   {}
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves relationships for a term by its unique identifier.")
+@route("/terms/{termId}/relationships")
+@post
+op createOrReplaceTermIdRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @bodyRoot
+    body?: TermRelationship;
+  },
+  TermRelationshipResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Deletes relationships for a term by its unique identifier and specified entity type and relationship type.")
+@route("/terms/{termId}/relationships")
+@delete
+op deletesTerm is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @query("relationshipType")
+    relationshipType?: TermRelationshipType;
+
+    @doc("The unique identifier of the critical data asset.")
+    @query("entityId")
+    entityId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.")
+@route("/terms/{termId}/relationships")
+@get
+op getTermRelationships is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the term.")
+    @path
+    termId: Azure.Core.uuid;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query("entityType")
+    entityType: EntityCategory;
+
+    @doc("The type of relationship to retrieve.")
+    @query("relationshipType")
+    relationshipType?: TermRelationshipType;
+  },
+  TermRelationshipResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves the state of term migration.")
+@route("/terms/migration/state")
+@get
+op getTermMigrationState is Azure.Core.Foundations.Operation<
+  {},
+  TermMigrationState,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Retrieves the counts of terms that are in the process of migration.")
+@route("/terms/migration/counts")
+@get
+op getTermMigrationCounts is Azure.Core.Foundations.Operation<
+  {},
+  TermMigrationCounts,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Starts the migration process for terms.")
+@route("/terms/migration/start")
+@post
+op termMigrationStart is Azure.Core.Foundations.Operation<
+  {},
+  {
+    @statusCode
+    statusCode: 202;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("Term")
+@doc("Moves terms from the old glossary to the new glossary.")
+@route("/terms/migration/moveterms")
+@post
+op termMigrationMoveterms is Azure.Core.Foundations.Operation<
+  TermsMoveRequest,
+  {
+    @statusCode
+    statusCode: 200;
+
+    @doc("The created data product.")
+    @body
+    body: "20 terms updated";
+  },
+  {}
+>;
