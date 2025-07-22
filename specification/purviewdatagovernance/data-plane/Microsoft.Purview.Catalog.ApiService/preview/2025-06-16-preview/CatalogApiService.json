@@ -2306,7 +2306,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CatalogModelDataProduct"
+              "$ref": "#/definitions/DataProductResponse"
             }
           },
           "default": {
@@ -2325,6 +2325,114 @@
         "x-ms-examples": {
           "GetDataProduct_MaximumSet": {
             "$ref": "./examples/GetDataProduct_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateDataProduct",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Creates a new data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelDataProduct"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateDataProduct_MaximumSet": {
+            "$ref": "./examples/CreateDataProduct_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/query": {
+      "post": {
+        "operationId": "CreateDataProductQuery",
+        "tags": [
+          "DataProduct"
+        ],
+        "description": "Queries data products based on specified criteria.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "duplicatecheck",
+            "in": "query",
+            "description": "To check for duplicate data products.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "dataProductOwner",
+            "in": "query",
+            "description": "To filter by data product owner.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for the query.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DataProductQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataProductResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateDataProductQuery_MaximumSet": {
+            "$ref": "./examples/CreateDataProductQuery_MaximumSet_Gen.json"
           }
         }
       }
@@ -3288,6 +3396,100 @@
         "value"
       ]
     },
+    "DataProductQueryRequest": {
+      "type": "object",
+      "description": "DataProductQueryRequest.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "To Skip how many records.",
+          "default": 0
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "To return how many records."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "To order the records.",
+          "items": {
+            "$ref": "#/definitions/CatalogApiServiceOrderBy"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "To filter by Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "To filter by domain Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        },
+        "type": {
+          "type": "string",
+          "description": "To filter by type."
+        },
+        "types": {
+          "type": "array",
+          "description": "To filter by multiple types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "description": "To filter by owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/SharedEntityStatus",
+          "description": "To filter by status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "To filter by multiple status.",
+          "items": {
+            "$ref": "#/definitions/SharedEntityStatus"
+          }
+        },
+        "managedAttributes": {
+          "type": "array",
+          "description": "To filter by managed attributes.",
+          "items": {
+            "$ref": "#/definitions/SharedSearchManageAttributeSearchFilter"
+          }
+        }
+      }
+    },
+    "DataProductResponse": {
+      "type": "object",
+      "description": "Response containing a list of data products.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of data products.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataProduct"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "EntityCategory": {
       "type": "string",
       "description": "EntityCategory",
@@ -3525,9 +3727,9 @@
       "type": "string",
       "description": "SharedEntityStatus",
       "enum": [
-        "DRAFT",
-        "PUBLISHED",
-        "EXPIRED"
+        "Draft",
+        "Published",
+        "Expired"
       ],
       "x-ms-enum": {
         "name": "SharedEntityStatus",
@@ -3535,17 +3737,17 @@
         "values": [
           {
             "name": "Draft",
-            "value": "DRAFT",
+            "value": "Draft",
             "description": "The status is Draft."
           },
           {
             "name": "Published",
-            "value": "PUBLISHED",
+            "value": "Published",
             "description": "The status is published."
           },
           {
             "name": "Expired",
-            "value": "EXPIRED",
+            "value": "Expired",
             "description": "The status is Expired."
           }
         ]

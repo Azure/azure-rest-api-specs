@@ -579,6 +579,46 @@ op getDataProduct is Azure.Core.Foundations.Operation<
     @query("orderby")
     orderby?: string;
   },
+  DataProductResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Creates a new data product.")
+@route("/dataProducts")
+@post
+op createDataProduct is Azure.Core.Foundations.Operation<
   CatalogModelDataProduct,
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The created data product.")
+    @body
+    body: CatalogModelDataProduct;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("DataProduct")
+@doc("Queries data products based on specified criteria.")
+@route("/dataProducts/query")
+@post
+op createDataProductQuery is Azure.Core.Foundations.Operation<
+  {
+    @doc("To check for duplicate data products.")
+    @query("duplicatecheck")
+    duplicatecheck?: int32;
+
+    @doc("To filter by data product owner.")
+    @query("dataProductOwner")
+    dataProductOwner?: boolean;
+
+    @doc("The request body for the query.")
+    @bodyRoot
+    body?: DataProductQueryRequest;
+  },
+  DataProductResponse,
   {}
 >;

@@ -40,13 +40,13 @@ union CatalogModelCriticalDataElementDataTypeEnum {
 @doc("SharedEntityStatus")
 union SharedEntityStatus {
   @doc("The status is Draft.")
-  Draft: "DRAFT",
+  Draft: "Draft",
 
   @doc("The status is published.")
-  Published: "PUBLISHED",
+  Published: "Published",
 
   @doc("The status is Expired.")
-  Expired: "EXPIRED",
+  Expired: "Expired",
 
   string,
 }
@@ -664,4 +664,49 @@ union AudienceEnum {
 model CatalogModelDataProductAllOfAdditionalProperties {
   @doc("The number of assets in the data product.")
   assetCount?: int64;
+}
+
+@doc("Response containing a list of data products.")
+model DataProductResponse {
+  @doc("The list of data products.")
+  value: CatalogModelDataProduct[];
+}
+
+@doc("DataProductQueryRequest.")
+model DataProductQueryRequest {
+  @doc("To Skip how many records.")
+  skip?: int32 = 0;
+
+  @doc("To return how many records.")
+  top?: int32;
+
+  @doc("To order the records.")
+  orderby?: CatalogApiServiceOrderBy[];
+
+  @doc("To filter by Ids.")
+  ids?: string[];
+
+  @doc("To filter by domain Ids.")
+  domainIds?: string[];
+
+  @doc("To filter by name keyword.")
+  nameKeyword?: string;
+
+  @doc("To filter by type.")
+  type?: string;
+
+  @doc("To filter by multiple types.")
+  types?: string[];
+
+  @doc("To filter by owners.")
+  owners?: string[];
+
+  @doc("To filter by status.")
+  status?: SharedEntityStatus;
+
+  @doc("To filter by multiple status.")
+  multiStatus?: SharedEntityStatus[];
+
+  @doc("To filter by managed attributes.")
+  managedAttributes?: SharedSearchManageAttributeSearchFilter[];
 }
