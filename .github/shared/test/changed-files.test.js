@@ -21,6 +21,7 @@ import {
   scenario,
   specification,
   swagger,
+  typespec,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
 
@@ -54,6 +55,7 @@ describe("changedFiles", () => {
     "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/data-plane/readme.md",
     "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+    "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
     "specification/contosowidgetmanager/resource-manager/readme.md",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
@@ -97,6 +99,7 @@ describe("changedFiles", () => {
     const expected = [
       "specification/contosowidgetmanager/data-plane/readme.md",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
@@ -111,6 +114,14 @@ describe("changedFiles", () => {
 
     // For codecov
     expect([1].filter(/** @type {(v:any)=>boolean} */ (specification))).toEqual([]);
+  });
+
+  it("filter:typespec", () => {
+    const expected = [
+      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+    ];
+    expect(files.filter(typespec)).toEqual(expected);
   });
 
   it("filter:data-plane", () => {

@@ -2,13 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
+  updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
 
-describe("summarizeChecksImpl", () => {
+describe("Summarize Checks Tests", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
@@ -509,6 +510,76 @@ describe("summarizeChecksImpl", () => {
         ).resolves.not.toThrow();
       },
       600000,
+    );
+  });
+
+  describe("label add and remove", () => {
+    const testCases = [
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["other-label", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: [
+          "WaitForARMFeedback",
+          "ARMSignedOff",
+          "ARMChangesRequested",
+          "other-label",
+        ],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["ARMChangesRequested"],
+      },
+      {
+        existingLabels: ["other-label", "ARMSignedOff"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: ["WaitForARMFeedback"],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+    ];
+
+    it.each(testCases)(
+      "$description",
+      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+        const labelContext = await updateLabels(existingLabels, undefined);
+
+        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
+        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
+      },
     );
   });
 });
