@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AI",
-    "version": "2025-05-15-preview",
+    "version": "2025-07-31-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -167,11 +167,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Connections_List_MaximumSet": {
-            "$ref": "./examples/Connections_List_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -222,11 +217,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Connections_Get_MaximumSet": {
-            "$ref": "./examples/Connections_Get_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -275,11 +265,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Connections_GetWithCredentials_MaximumSet": {
-            "$ref": "./examples/Connections_GetWithCredentials_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -310,14 +295,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_ListLatest_MaximumSet": {
-            "$ref": "./examples/Datasets_ListLatest_MaximumSet_Gen.json"
-          },
-          "Datasets_ListLatest_MinimumSet": {
-            "$ref": "./examples/Datasets_ListLatest_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -359,14 +336,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_ListVersions_MaximumSet": {
-            "$ref": "./examples/Datasets_ListVersions_MaximumSet_Gen.json"
-          },
-          "Datasets_ListVersions_MinimumSet": {
-            "$ref": "./examples/Datasets_ListVersions_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -415,14 +384,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_GetVersion_MaximumSet": {
-            "$ref": "./examples/Datasets_GetVersion_MaximumSet_Gen.json"
-          },
-          "Datasets_GetVersion_MinimumSet": {
-            "$ref": "./examples/Datasets_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -485,14 +446,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Datasets_CreateOrUpdateVersion_MaximumSet": {
-            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MaximumSet_Gen.json"
-          },
-          "Datasets_CreateOrUpdateVersion_MinimumSet": {
-            "$ref": "./examples/Datasets_CreateOrUpdateVersion_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -532,14 +485,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_DeleteVersion_MaximumSet": {
-            "$ref": "./examples/Datasets_DeleteVersion_MaximumSet_Gen.json"
-          },
-          "Datasets_DeleteVersion_MinimumSet": {
-            "$ref": "./examples/Datasets_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -585,14 +530,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_GetCredentials_MaximumSet": {
-            "$ref": "./examples/Datasets_GetCredentials_MaximumSet_Gen.json"
-          },
-          "Datasets_GetCredentials_MinimumSet": {
-            "$ref": "./examples/Datasets_GetCredentials_MinimumSet_Gen.json"
           }
         }
       }
@@ -647,14 +584,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Datasets_StartPendingUploadVersion_MaximumSet": {
-            "$ref": "./examples/Datasets_StartPendingUploadVersion_MaximumSet_Gen.json"
-          },
-          "Datasets_StartPendingUploadVersion_MinimumSet": {
-            "$ref": "./examples/Datasets_StartPendingUploadVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -733,11 +662,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Deployments_List_MaximumSet": {
-            "$ref": "./examples/Deployments_List_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -788,11 +712,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Deployments_Get_MaximumSet": {
-            "$ref": "./examples/Deployments_Get_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -803,6 +722,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter expression to narrow down the list of evaluations based on specific criteria. Supports filtering by properties such as status, tags, or properties to help manage large evaluation collections.",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -835,13 +761,63 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Evaluations_List_MaximumSet": {
-            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Evaluations_CreateEvaluation",
+        "description": "Creates a new evaluation with the specified configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         }
       }
     },
@@ -871,6 +847,10 @@
               "$ref": "#/definitions/Evaluation"
             },
             "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Recommended time interval in seconds before making another request when the evaluation is still processing. This helps prevent excessive polling and reduces server load during long-running evaluations."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -890,10 +870,63 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_Get_MaximumSet": {
-            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
+        }
+      },
+      "patch": {
+        "operationId": "Evaluations_Update",
+        "description": "Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       },
@@ -937,11 +970,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Delete_MaximumSet": {
-            "$ref": "./examples/Evaluations_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -988,107 +1016,60 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Evaluations_Cancel_MaximumSet": {
-            "$ref": "./examples/Evaluations_Cancel_MaximumSet_Gen.json"
-          }
         }
       }
     },
-    "/evaluations/runs:run": {
-      "post": {
-        "operationId": "Evaluations_Create",
-        "description": "Creates an evaluation run.",
+    "/evaluations/runs/{name}/results": {
+      "get": {
+        "operationId": "Evaluations_GetEvaluationResults",
+        "description": "Retrieves detailed row-by-row evaluation results with pagination support. This endpoint provides access to individual evaluation outcomes, scores, and reasoning for each data row processed.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "name",
+            "in": "path",
+            "description": "Unique identifier of the evaluation whose results are being retrieved",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Evaluation to be run",
+            "name": "api-version",
+            "in": "query",
+            "description": "API version specifier for this operation",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of result items to return in a single response. Must be a multiple of 10 (e.g., 10, 20, 100, 1000). Defaults to 10 if not specified.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of result items to skip before returning results, enabling pagination through large result sets. Must be a multiple of 10. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/PagedEvaluationResult"
             }
           }
         },
-        "x-ms-examples": {
-          "Evaluations_Create_MaximumSet": {
-            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
-          },
-          "Evaluations_Create_MinimumSet": {
-            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/evaluations/runs:runAgent": {
-      "post": {
-        "operationId": "Evaluations_CreateAgentEvaluation",
-        "description": "Creates an agent evaluation run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Agent evaluation to be run",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgentEvaluationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/AgentEvaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_CreateAgentEvaluation_MaximumSet": {
-            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MaximumSet_Gen.json"
-          },
-          "Evaluations_CreateAgentEvaluation_MinimumSet": {
-            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1119,14 +1100,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Indexes_ListLatest_MaximumSet": {
-            "$ref": "./examples/Indexes_ListLatest_MaximumSet_Gen.json"
-          },
-          "Indexes_ListLatest_MinimumSet": {
-            "$ref": "./examples/Indexes_ListLatest_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1168,14 +1141,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Indexes_ListVersions_MaximumSet": {
-            "$ref": "./examples/Indexes_ListVersions_MaximumSet_Gen.json"
-          },
-          "Indexes_ListVersions_MinimumSet": {
-            "$ref": "./examples/Indexes_ListVersions_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1224,14 +1189,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Indexes_GetVersion_MaximumSet": {
-            "$ref": "./examples/Indexes_GetVersion_MaximumSet_Gen.json"
-          },
-          "Indexes_GetVersion_MinimumSet": {
-            "$ref": "./examples/Indexes_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -1294,14 +1251,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Indexes_CreateOrUpdateVersion_MaximumSet": {
-            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MaximumSet_Gen.json"
-          },
-          "Indexes_CreateOrUpdateVersion_MinimumSet": {
-            "$ref": "./examples/Indexes_CreateOrUpdateVersion_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -1341,14 +1290,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Indexes_DeleteVersion_MaximumSet": {
-            "$ref": "./examples/Indexes_DeleteVersion_MaximumSet_Gen.json"
-          },
-          "Indexes_DeleteVersion_MinimumSet": {
-            "$ref": "./examples/Indexes_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -1390,11 +1331,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "RedTeams_List_MaximumSet": {
-            "$ref": "./examples/RedTeams_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1447,11 +1383,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "RedTeams_Get_MaximumSet": {
-            "$ref": "./examples/RedTeams_Get_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1492,19 +1423,34 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "RedTeams_Create_MaximumSet": {
-            "$ref": "./examples/RedTeams_Create_MaximumSet_Gen.json"
-          },
-          "RedTeams_Create_MinimumSet": {
-            "$ref": "./examples/RedTeams_Create_MinimumSet_Gen.json"
-          }
         }
       }
     }
   },
   "definitions": {
+    "AIContent": {
+      "type": "object",
+      "description": "Content for AI requests and responses.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The content of the message.",
+          "enum": [
+            "text",
+            "image_url",
+            "tool_call",
+            "tool_result"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "AgentEvaluation": {
       "type": "object",
       "description": "Evaluation response for agent evaluation run.",
@@ -1664,6 +1610,132 @@
         "maxRequestRate"
       ]
     },
+    "AgentToolDefinition": {
+      "type": "object",
+      "description": "Definition of a tool that can be used by the agent.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the tool."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the tool in JSON Schema format.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name",
+        "parameters"
+      ]
+    },
+    "AggregatedScore": {
+      "type": "object",
+      "description": "Represents an aggregated score calculated using a specific statistical method across all rows of data.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The calculated aggregated value based on the specified method. This value is undefined in case aggregation is not applicable or the method does not produce a numeric result."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the aggregation calculation",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "AggregationConfiguration": {
+      "type": "object",
+      "description": "Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/AggregationMethod",
+          "description": "The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "AggregationConfigurationUpdate": {
+      "type": "object",
+      "description": "Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/AggregationMethod",
+          "description": "The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "AggregationMethod": {
+      "type": "string",
+      "description": "Statistical aggregation methods available for summarizing evaluation results across multiple data points.",
+      "enum": [
+        "sum",
+        "average",
+        "max",
+        "min",
+        "count",
+        "percentile",
+        "standardDeviation"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sum",
+            "value": "sum",
+            "description": "Calculate the sum of all values"
+          },
+          {
+            "name": "average",
+            "value": "average",
+            "description": "Calculate the arithmetic mean of all values"
+          },
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Find the maximum value"
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Find the minimum value"
+          },
+          {
+            "name": "count",
+            "value": "count",
+            "description": "Count the total number of values"
+          },
+          {
+            "name": "percentile",
+            "value": "percentile",
+            "description": "Calculate the nth percentile value. Needs a parameter to specify the percentile level (e.g., level: 95 for 95th percentile analysis)"
+          },
+          {
+            "name": "standardDeviation",
+            "value": "standardDeviation",
+            "description": "Calculate the standard deviation"
+          }
+        ]
+      }
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1681,6 +1753,16 @@
         }
       ],
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "AppInsightsDestinationConfiguration": {
+      "type": "object",
+      "description": "Configuration for exporting evaluation results to Azure Application Insights. This enables monitoring, alerting, and analytics on evaluation performance and trends.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDestinationConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "appInsightsStorage"
     },
     "AssetCredentialResponse": {
       "type": "object",
@@ -1921,6 +2003,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -2014,6 +2138,77 @@
         "storageAccountArmId",
         "credential"
       ]
+    },
+    "ChatMessages": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "response",
+        "toolDefinitions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineData"
+        }
+      ],
+      "x-ms-discriminator-value": "chatMessages"
+    },
+    "ChatMessagesUpdate": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineDataUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "chatMessages"
     },
     "Connection": {
       "type": "object",
@@ -2253,6 +2448,10 @@
       ],
       "x-ms-discriminator-value": "CustomKeys"
     },
+    "DatasetId": {
+      "type": "string",
+      "description": "Unique identifier of a dataset registered in AI Foundry workspace. The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/data/{datasetName}/versions/{versionNumber}"
+    },
     "DatasetType": {
       "type": "string",
       "description": "Enum to determine the type of data.",
@@ -2442,9 +2641,13 @@
           "readOnly": true,
           "x-ms-client-name": "name"
         },
-        "data": {
-          "$ref": "#/definitions/InputData",
-          "description": "Data for evaluation."
+        "dataSource": {
+          "$ref": "#/definitions/EvaluationDataSource",
+          "description": "Data source configuration that specifies where the evaluation data comes from. This replaces the legacy 'data' field and provides more flexible data source options."
+        },
+        "resultSettings": {
+          "$ref": "#/definitions/EvaluationResultSettings",
+          "description": "Configuration settings that control how evaluation results are processed, stored, and exported"
         },
         "displayName": {
           "type": "string",
@@ -2454,9 +2657,9 @@
           "type": "string",
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
-        "status": {
-          "type": "string",
-          "description": "Status of the evaluation. It is set by service and is read-only.",
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current operational state of the evaluation. This field is managed by the service and reflects the evaluation's progress from initiation to completion.",
           "readOnly": true
         },
         "tags": {
@@ -2480,24 +2683,49 @@
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
         },
-        "target": {
-          "$ref": "#/definitions/EvaluationTarget",
-          "description": "Specifies the type and configuration of the entity used for this evaluation."
+        "aggregations": {
+          "type": "object",
+          "description": "Statistical aggregation methods to apply when summarizing evaluation results. Specify which aggregation functions should be calculated across all evaluation scores. For example, use 'average' to get mean scores, 'percentile' with parameter level: 95 for 95th percentile analysis, or 'standardDeviation' to measure score variability.\nIf not specified, average and count aggregations will be applied by default.\nKey is the any label for the aggregation, which can be used to identify it in results.\nAvailable methods: sum, average, max, min, count, percentile, standardDeviation.\nNote: Aggregations are only calculated for evaluators that produce numeric scores. Non-numeric evaluators will not contribute to these aggregations.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AggregationConfiguration"
+          }
+        },
+        "summary": {
+          "type": "object",
+          "description": "Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows and is available once the evaluation completes.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorResultSummary"
+          },
+          "readOnly": true
+        },
+        "resultDatasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": " Unique identifier of the dataset containing detailed evaluation results. This dataset is created automatically upon evaluation completion and contains row-by-row results for analysis.\n The identifier follows the format: azureai://accounts/{resourceName}/projects/{projectName}/datasets/{datasetName}/versions/{versionNumber}.\n Note: This dataset is only available when the result retention policy permits detailed result storage.",
+          "readOnly": true
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System-generated metadata containing internal service information for debugging and operational purposes. This field is managed by the service and cannot be modified by clients.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
         "id",
-        "data",
+        "dataSource",
+        "state",
         "evaluators"
       ]
     },
-    "EvaluationTarget": {
+    "EvaluationDataSource": {
       "type": "object",
-      "description": "Abstract base model for defining evaluation targets.",
+      "description": "Base class for different types of evaluation data sources. Use the discriminator field 'type' to specify the specific data source implementation.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/EvaluationTargetType",
-          "description": "Discriminator that defines the type of the evaluation target."
+          "$ref": "#/definitions/EvaluationDataSourceType",
+          "description": "Specifies the type of data source being used for evaluation"
         }
       },
       "discriminator": "type",
@@ -2505,22 +2733,366 @@
         "type"
       ]
     },
-    "EvaluationTargetType": {
+    "EvaluationDataSourceType": {
       "type": "string",
-      "description": "Allowed types of evaluation targets.",
+      "description": "Specifies the type of data source used for evaluation. Different types support various data input methods and formats.",
       "enum": [
-        "modelResponseGeneration"
+        "inlineJsonData",
+        "dataset",
+        "foundryAgentRun",
+        "FoundryModelDeploymentInline",
+        "foundryModelDeploymentDataset"
       ],
       "x-ms-enum": {
-        "name": "EvaluationTargetType",
+        "name": "EvaluationDataSourceType",
         "modelAsString": true,
         "values": [
           {
-            "name": "modelResponseGeneration",
-            "value": "modelResponseGeneration",
-            "description": "Evaluation target that uses a model for response generation."
+            "name": "InlineJsonData",
+            "value": "inlineJsonData",
+            "description": "Use inline JSON data provided directly in the request"
+          },
+          {
+            "name": "Dataset",
+            "value": "dataset",
+            "description": "Use a dataset that has been registered and stored in AI Foundry workspace"
+          },
+          {
+            "name": "FoundryAgentRun",
+            "value": "foundryAgentRun",
+            "description": "Use conversation data from a specific agent run execution"
+          },
+          {
+            "name": "FoundryModelDeploymentInline",
+            "value": "FoundryModelDeploymentInline",
+            "description": "Use data generated by running a model deployment against inline queries provided in the request"
+          },
+          {
+            "name": "FoundryModelDeploymentDataset",
+            "value": "foundryModelDeploymentDataset",
+            "description": "Use data generated by running a model deployment against a registered dataset"
           }
         ]
+      }
+    },
+    "EvaluationDataSourceUpdate": {
+      "type": "object",
+      "description": "Base class for different types of evaluation data sources. Use the discriminator field 'type' to specify the specific data source implementation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationDataSourceType",
+          "description": "Specifies the type of data source being used for evaluation"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationDestinationConfiguration": {
+      "type": "object",
+      "description": "Base configuration for exporting evaluation results to external storage destinations. This enables integration with external analytics and monitoring systems.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationDestinationConfigurationType",
+          "description": "Specifies the type of external storage destination"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Name of the connection resource configured in the AI Foundry workspace. This connection must be properly configured with appropriate credentials before use."
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current state of the export operation to this destination. This field is managed by the service and cannot be modified by clients.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "connectionName"
+      ]
+    },
+    "EvaluationDestinationConfigurationType": {
+      "type": "string",
+      "description": "Specifies the type of external storage destination where evaluation results can be exported for further analysis or long-term retention.",
+      "enum": [
+        "appInsightsStorage",
+        "storageAccountStorage"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationDestinationConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AppInsightsStorage",
+            "value": "appInsightsStorage",
+            "description": "Export evaluation results to Azure Application Insights for monitoring and analytics"
+          },
+          {
+            "name": "StorageAccountStorage",
+            "value": "storageAccountStorage",
+            "description": "Export evaluation results to Azure Blob Storage for data archival and custom processing"
+          }
+        ]
+      }
+    },
+    "EvaluationModelConfiguration": {
+      "type": "object",
+      "description": "Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+        },
+        "modelParameters": {
+          "type": "object",
+          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "modelDeploymentName"
+      ]
+    },
+    "EvaluationModelConfigurationUpdate": {
+      "type": "object",
+      "description": "Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+        },
+        "modelParameters": {
+          "type": "object",
+          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "EvaluationModelSourceCommon": {
+      "type": "object",
+      "description": "Common properties shared across model deployment configurations used in evaluations.",
+      "properties": {
+        "modelConfiguration": {
+          "$ref": "#/definitions/EvaluationModelConfiguration",
+          "description": "Configuration for the model deployment used in evaluation."
+        },
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      },
+      "required": [
+        "modelConfiguration",
+        "baseMessages"
+      ]
+    },
+    "EvaluationResult": {
+      "type": "object",
+      "description": "Comprehensive evaluation results for a single data row, including the input data, processing state, and results from all configured evaluators.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this evaluation result row",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current processing state of this data row. Tracks progress from initial processing through completion or failure."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message describing why the evaluation failed for this data row, if applicable"
+        },
+        "inputDataJson": {
+          "type": "string",
+          "description": "Original input data for this row in JSON string format. This preserves the exact data that was evaluated for reference and debugging."
+        },
+        "evaluatorResults": {
+          "type": "object",
+          "description": "Collection of evaluation results from each configured evaluator for this data row. The key is the evaluator identifier and the value contains the detailed evaluation results.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorResult"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "evaluatorResults"
+      ]
+    },
+    "EvaluationResultOutcome": {
+      "type": "string",
+      "description": "Defines the possible outcomes of an evaluation result, indicating whether the evaluated data meets the specified criteria or standards.",
+      "enum": [
+        "pass",
+        "fail",
+        "notEvaluated",
+        "notApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationResultOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pass",
+            "value": "pass",
+            "description": "The evaluation completed successfully and met the specified criteria or threshold"
+          },
+          {
+            "name": "fail",
+            "value": "fail",
+            "description": "The evaluation completed but did not meet the specified criteria or threshold"
+          },
+          {
+            "name": "notEvaluated",
+            "value": "notEvaluated",
+            "description": "The evaluation has not been processed yet or is still in progress"
+          },
+          {
+            "name": "notApplicable",
+            "value": "notApplicable",
+            "description": "The evaluation criteria do not apply to this particular data row or context"
+          }
+        ]
+      }
+    },
+    "EvaluationResultSettings": {
+      "type": "object",
+      "description": "Configuration settings that control how evaluation results are processed, stored, and exported. These settings affect data privacy, retention, and integration with external systems.",
+      "properties": {
+        "redactionLevel": {
+          "$ref": "#/definitions/RedactionLevel",
+          "description": "Level of data redaction to apply to evaluation results. Defaults to 'sensitive' in production environments to protect confidential information."
+        },
+        "additionalDestinations": {
+          "type": "array",
+          "description": "List of external storage destinations where evaluation results should be exported in addition to the default AI Foundry storage",
+          "items": {
+            "$ref": "#/definitions/EvaluationDestinationConfiguration"
+          }
+        }
+      }
+    },
+    "EvaluationScore": {
+      "type": "object",
+      "description": "Score assigned by the evaluator to a specific data row",
+      "properties": {
+        "label": {
+          "description": "Score of the evaluation."
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for the score, providing context on how it was derived or what it represents"
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Threshold value that this score is compared against to determine the evaluation outcome"
+        },
+        "desirableDirection": {
+          "$ref": "#/definitions/EvaluatorDesirableDirection",
+          "description": "Direction of the score that indicates whether a higher or lower score is desirable for this evaluator"
+        },
+        "scoreType": {
+          "$ref": "#/definitions/EvaluatorScoreType",
+          "description": "Type of the score that indicates whether it is a boolean, continuous, or ordinal score"
+        },
+        "outcome": {
+          "$ref": "#/definitions/EvaluationResultOutcome",
+          "description": "Outcome of the evaluation based on the score and threshold. Indicates whether the score meets, exceeds, or falls below expectations"
+        },
+        "additionalMetrics": {
+          "type": "object",
+          "description": "Optional additional details that may include metadata or other relevant information about the score",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "justification"
+      ]
+    },
+    "EvaluationSummaryStatistics": {
+      "type": "object",
+      "description": "Statistical summary of evaluation results including aggregated scores and pass/fail rates.",
+      "properties": {
+        "aggregatedScores": {
+          "type": "object",
+          "description": "Aggregated scores calculated using specified aggregation methods. This provides a summary of the evaluator's performance across all data rows.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AggregatedScore"
+          }
+        },
+        "passRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Value between 0 and 1 representing the proportion of rows where outcome is 'pass'."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of rows that were evaluated."
+        }
+      },
+      "required": [
+        "aggregatedScores",
+        "passRate",
+        "sampleCount"
+      ]
+    },
+    "EvaluationUpdate": {
+      "type": "object",
+      "description": "Evaluation Definition",
+      "properties": {
+        "dataSource": {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate",
+          "description": "Data source configuration that specifies where the evaluation data comes from. This replaces the legacy 'data' field and provides more flexible data source options."
+        },
+        "resultSettings": {
+          "$ref": "#/definitions/EvaluationResultSettings",
+          "description": "Configuration settings that control how evaluation results are processed, stored, and exported"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfigurationUpdate"
+          }
+        },
+        "aggregations": {
+          "type": "object",
+          "description": "Statistical aggregation methods to apply when summarizing evaluation results. Specify which aggregation functions should be calculated across all evaluation scores. For example, use 'average' to get mean scores, 'percentile' with parameter level: 95 for 95th percentile analysis, or 'standardDeviation' to measure score variability.\nIf not specified, average and count aggregations will be applied by default.\nKey is the any label for the aggregation, which can be used to identify it in results.\nAvailable methods: sum, average, max, min, count, percentile, standardDeviation.\nNote: Aggregations are only calculated for evaluators that produce numeric scores. Non-numeric evaluators will not contribute to these aggregations.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AggregationConfigurationUpdate"
+          }
+        }
       }
     },
     "EvaluatorConfiguration": {
@@ -2531,9 +3103,9 @@
           "type": "string",
           "description": "Identifier of the evaluator."
         },
-        "initParams": {
+        "initialParameters": {
           "type": "object",
-          "description": "Initialization parameters of the evaluator.",
+          "description": "Initial parameters of the evaluator.",
           "additionalProperties": {}
         },
         "dataMapping": {
@@ -2547,6 +3119,195 @@
       "required": [
         "id"
       ]
+    },
+    "EvaluatorConfigurationUpdate": {
+      "type": "object",
+      "description": "Evaluator Configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluator."
+        },
+        "initialParameters": {
+          "type": "object",
+          "description": "Initial parameters of the evaluator.",
+          "additionalProperties": {}
+        },
+        "dataMapping": {
+          "type": "object",
+          "description": "Data parameters of the evaluator.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvaluatorDesirableDirection": {
+      "type": "string",
+      "description": "Describes the desirable direction for the evaluation score. This indicates whether a higher or lower score is preferred for this evaluator.",
+      "enum": [
+        "increase",
+        "decrease",
+        "neutral"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorDesirableDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "increase",
+            "value": "increase",
+            "description": "Indicates that a higher score is desirable for this evaluator"
+          },
+          {
+            "name": "decrease",
+            "value": "decrease",
+            "description": "Indicates that a lower score is desirable for this evaluator"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Indicates that the score should be neutral, meaning it does not have a preferred direction"
+          }
+        ]
+      }
+    },
+    "EvaluatorResult": {
+      "type": "object",
+      "description": "Detailed result of a specific evaluator's assessment on a single data row. Contains the evaluation outcome, score, reasoning, and additional metrics.",
+      "properties": {
+        "evaluatorId": {
+          "type": "string",
+          "description": "Unique identifier of the evaluator that produced this result"
+        },
+        "systemData": {
+          "$ref": "#/definitions/EvaluatorResultSystemData",
+          "description": "Metadata about the evaluation execution environment and resource usage."
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
+        },
+        "score": {
+          "$ref": "#/definitions/EvaluationScore",
+          "description": "Score for the evaluation result"
+        }
+      },
+      "required": [
+        "evaluatorId",
+        "state",
+        "score"
+      ]
+    },
+    "EvaluatorResultCommon": {
+      "type": "object",
+      "description": "Common properties shared across all evaluator results, including metadata about the evaluation execution and resource consumption.",
+      "properties": {
+        "evaluatorId": {
+          "type": "string",
+          "description": "Unique identifier of the evaluator that produced this result"
+        },
+        "systemData": {
+          "$ref": "#/definitions/EvaluatorResultSystemData",
+          "description": "Metadata about the evaluation execution environment and resource usage."
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
+        }
+      },
+      "required": [
+        "evaluatorId",
+        "state"
+      ]
+    },
+    "EvaluatorResultSummary": {
+      "type": "object",
+      "description": "Aggregated summary of evaluation results for a specific evaluator across all data rows. This provides a high-level overview of the evaluator's performance.",
+      "properties": {
+        "evaluatorId": {
+          "type": "string",
+          "description": "Unique identifier of the evaluator that produced this result"
+        },
+        "systemData": {
+          "$ref": "#/definitions/EvaluatorResultSystemData",
+          "description": "Metadata about the evaluation execution environment and resource usage."
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
+        },
+        "statistics": {
+          "$ref": "#/definitions/EvaluationSummaryStatistics",
+          "description": "Statistical summary of evaluation results."
+        }
+      },
+      "required": [
+        "evaluatorId",
+        "state"
+      ]
+    },
+    "EvaluatorResultSystemData": {
+      "type": "object",
+      "description": "Represents system Metadata about the evaluation execution environment and resource usage.",
+      "properties": {
+        "inputTokenCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of input tokens consumed during the evaluation process. This helps track resource usage and costs."
+        },
+        "outputTokenCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of output tokens generated during the evaluation process. This helps track resource usage and costs."
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total time taken to complete the evaluation, measured in milliseconds. This includes processing time and any network latency."
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "Additional details about the evaluator result",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "inputTokenCount",
+        "outputTokenCount",
+        "duration",
+        "additionalDetails"
+      ]
+    },
+    "EvaluatorScoreType": {
+      "type": "string",
+      "description": "Type of score assigned by the evaluator. This indicates whether the score is boolean, continuous, or ordinal.",
+      "enum": [
+        "boolean",
+        "continuous",
+        "ordinal"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorScoreType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Boolean score type, where the score is either true or false"
+          },
+          {
+            "name": "continuous",
+            "value": "continuous",
+            "description": "Continuous score type, where the score is a floating-point number representing a continuous value"
+          },
+          {
+            "name": "ordinal",
+            "value": "ordinal",
+            "description": "Ordinal score type, where the score represents an ordered category or rank"
+          }
+        ]
+      }
     },
     "FieldMapping": {
       "type": "object",
@@ -2628,6 +3389,245 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
+    "FoundryAgentRunSource": {
+      "type": "object",
+      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the agent to evaluate."
+        },
+        "runId": {
+          "type": "string",
+          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
+        }
+      },
+      "required": [
+        "id",
+        "runId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgentRun"
+    },
+    "FoundryAgentRunSourceUpdate": {
+      "type": "object",
+      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the agent to evaluate."
+        },
+        "runId": {
+          "type": "string",
+          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgentRun"
+    },
+    "FoundryDatasetDataSource": {
+      "type": "object",
+      "description": "Data source that uses a dataset registered and stored in AI Foundry workspace. This is the recommended approach for large datasets or reusable evaluation data.",
+      "properties": {
+        "datasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": "Unique identifier of the dataset registered in AI Foundry workspace"
+        }
+      },
+      "required": [
+        "datasetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
+    },
+    "FoundryDatasetDataSourceUpdate": {
+      "type": "object",
+      "description": "Data source that uses a dataset registered and stored in AI Foundry workspace. This is the recommended approach for large datasets or reusable evaluation data.",
+      "properties": {
+        "datasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": "Unique identifier of the dataset registered in AI Foundry workspace"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
+    },
+    "FoundryModelDatasetSource": {
+      "type": "object",
+      "description": "Data source that uses a model deployment with a dataset containing prompts. The model processes each prompt from the dataset to generate responses, which are then evaluated against the configured evaluators.",
+      "properties": {
+        "modelConfiguration": {
+          "$ref": "#/definitions/EvaluationModelConfiguration",
+          "description": "Configuration for the model deployment used in evaluation."
+        },
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "datasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": "Unique identifier of the dataset containing prompts that will be processed by the model deployment"
+        },
+        "queryField": {
+          "type": "string",
+          "description": "Name of the column in the dataset that contains the queries to be processed by the model deployment. This allows specifying which column should be used as input for evaluation. eg.. queryField: '{{item.messages}}'"
+        }
+      },
+      "required": [
+        "modelConfiguration",
+        "baseMessages",
+        "datasetId",
+        "queryField"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryModelDeploymentDataset"
+    },
+    "FoundryModelDatasetSourceUpdate": {
+      "type": "object",
+      "description": "Data source that uses a model deployment with a dataset containing prompts. The model processes each prompt from the dataset to generate responses, which are then evaluated against the configured evaluators.",
+      "properties": {
+        "modelConfiguration": {
+          "$ref": "#/definitions/EvaluationModelConfigurationUpdate",
+          "description": "Configuration for the model deployment used in evaluation."
+        },
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "datasetId": {
+          "$ref": "#/definitions/DatasetId",
+          "description": "Unique identifier of the dataset containing prompts that will be processed by the model deployment"
+        },
+        "queryField": {
+          "type": "string",
+          "description": "Name of the column in the dataset that contains the queries to be processed by the model deployment. This allows specifying which column should be used as input for evaluation. eg.. queryField: '{{item.messages}}'"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryModelDeploymentDataset"
+    },
+    "FoundryModelInlineSource": {
+      "type": "object",
+      "description": "Data source that uses a model deployment with inline queries. The specified model processes each query to generate responses, which are then evaluated against the configured evaluators.",
+      "properties": {
+        "modelConfiguration": {
+          "$ref": "#/definitions/EvaluationModelConfiguration",
+          "description": "Configuration for the model deployment used in evaluation."
+        },
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "queries": {
+          "type": "array",
+          "description": "Inline queries to be processed by the model deployment. The response is then evaluated against the configured evaluators.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "modelConfiguration",
+        "baseMessages",
+        "queries"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "FoundryModelDeploymentInline"
+    },
+    "FoundryModelInlineSourceUpdate": {
+      "type": "object",
+      "description": "Data source that uses a model deployment with inline queries. The specified model processes each query to generate responses, which are then evaluated against the configured evaluators.",
+      "properties": {
+        "modelConfiguration": {
+          "$ref": "#/definitions/EvaluationModelConfigurationUpdate",
+          "description": "Configuration for the model deployment used in evaluation."
+        },
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "queries": {
+          "type": "array",
+          "description": "Inline queries to be processed by the model deployment. The response is then evaluated against the configured evaluators.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "FoundryModelDeploymentInline"
+    },
+    "ImageUrlContent": {
+      "type": "object",
+      "description": "Content for image URL messages in AI conversations.",
+      "properties": {
+        "imageUrl": {
+          "type": "string",
+          "description": "The URL of the image."
+        }
+      },
+      "required": [
+        "imageUrl"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image_url"
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -2707,6 +3707,172 @@
         ]
       }
     },
+    "InlineData": {
+      "type": "object",
+      "description": "Base class for inline evaluation data with format discrimination.",
+      "properties": {
+        "dataFormat": {
+          "$ref": "#/definitions/InlineDataFormat",
+          "description": "Format of the inline data structure"
+        }
+      },
+      "discriminator": "dataFormat",
+      "required": [
+        "dataFormat"
+      ]
+    },
+    "InlineDataFormat": {
+      "type": "string",
+      "description": "Available formats for structuring inline evaluation data.",
+      "enum": [
+        "queryResponseMessage",
+        "chatMessages",
+        "inlineJson"
+      ],
+      "x-ms-enum": {
+        "name": "InlineDataFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queryResponseMessage",
+            "value": "queryResponseMessage",
+            "description": "Query-response pairs for Q&A and chatbot evaluations"
+          },
+          {
+            "name": "chatMessages",
+            "value": "chatMessages",
+            "description": "Multi-turn conversations with role-based messages and tool definitions"
+          },
+          {
+            "name": "inlineJson",
+            "value": "inlineJson",
+            "description": "Flexible JSON format for custom data structures"
+          }
+        ]
+      }
+    },
+    "InlineDataUpdate": {
+      "type": "object",
+      "description": "Base class for inline evaluation data with format discrimination.",
+      "properties": {
+        "dataFormat": {
+          "$ref": "#/definitions/InlineDataFormat",
+          "description": "Format of the inline data structure"
+        }
+      },
+      "discriminator": "dataFormat",
+      "required": [
+        "dataFormat"
+      ]
+    },
+    "InlineJson": {
+      "type": "object",
+      "description": "Custom JSON format for complex evaluation scenarios requiring flexible data structures.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of JSON strings with custom fields and metadata",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineData"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineJson"
+    },
+    "InlineJsonDataSource": {
+      "type": "object",
+      "description": "Data source using inline data provided directly in the request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
+        },
+        "data": {
+          "$ref": "#/definitions/InlineData",
+          "description": "Inline data structured according to the specified format"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineJsonData"
+    },
+    "InlineJsonDataSourceUpdate": {
+      "type": "object",
+      "description": "Data source using inline data provided directly in the request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
+        },
+        "data": {
+          "$ref": "#/definitions/InlineDataUpdate",
+          "description": "Inline data structured according to the specified format"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineJsonData"
+    },
+    "InlineJsonUpdate": {
+      "type": "object",
+      "description": "Custom JSON format for complex evaluation scenarios requiring flexible data structures.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of JSON strings with custom fields and metadata",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineDataUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineJson"
+    },
+    "InlineMessagesType": {
+      "type": "string",
+      "description": "The type of inline messages used for evaluation. This union allows for different inline message formats to be specified.",
+      "enum": [
+        "queryResponseMessage",
+        "roleContentType"
+      ],
+      "x-ms-enum": {
+        "name": "InlineMessagesType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queryResponseMessage",
+            "value": "queryResponseMessage",
+            "description": "Inline messages that consist of query-response pairs for evaluation. Each pair includes a query string and the corresponding response generated by the model."
+          },
+          {
+            "name": "roleContentType",
+            "value": "roleContentType",
+            "description": "role content type message"
+          }
+        ]
+      }
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -2780,7 +3946,6 @@
           }
         },
         "content": {
-          "type": "string",
           "description": "The content of the message."
         }
       },
@@ -2924,6 +4089,27 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEvaluationResult": {
+      "type": "object",
+      "description": "Paged collection of EvaluationResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationResult items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationResult"
           }
         },
         "nextLink": {
@@ -3080,6 +4266,72 @@
         ]
       }
     },
+    "QueryResponseInlineMessages": {
+      "type": "object",
+      "description": "Query-response pairs for evaluating Q&A systems and response accuracy.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of query-response pairs with optional context and ground truth",
+          "items": {
+            "$ref": "#/definitions/QueryResponseMessage"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineData"
+        }
+      ],
+      "x-ms-discriminator-value": "queryResponseMessage"
+    },
+    "QueryResponseInlineMessagesUpdate": {
+      "type": "object",
+      "description": "Query-response pairs for evaluating Q&A systems and response accuracy.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Array of query-response pairs with optional context and ground truth",
+          "items": {
+            "$ref": "#/definitions/QueryResponseMessage"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineDataUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "queryResponseMessage"
+    },
+    "QueryResponseMessage": {
+      "type": "object",
+      "description": "Represents a message that contains a query and its corresponding response.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query message sent to the model."
+        },
+        "response": {
+          "type": "string",
+          "description": "The response generated by the model in reply to the query."
+        },
+        "context": {
+          "type": "string",
+          "description": "Optional context information that may include additional details about the query or response, such as metadata or processing instructions."
+        },
+        "ground_truth": {
+          "type": "string",
+          "description": "Optional ground truth value for the query, which can be used to compare against the model's response during evaluation."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
@@ -3150,6 +4402,30 @@
         "id",
         "target"
       ]
+    },
+    "RedactionLevel": {
+      "type": "string",
+      "description": "Controls the level of data redaction applied to evaluation results to protect sensitive information and ensure compliance with privacy requirements.",
+      "enum": [
+        "sensitive",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "RedactionLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sensitive",
+            "value": "sensitive",
+            "description": "Apply redaction to sensitive data in evaluation results. This is the recommended setting for production environments to ensure data privacy."
+          },
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Do not apply any data redaction to evaluation results. Use this setting only in development or testing environments where data privacy is not a concern."
+          }
+        ]
+      }
     },
     "RiskCategory": {
       "type": "string",
@@ -3265,6 +4541,25 @@
         "tier"
       ]
     },
+    "StorageAccountDestinationConfiguration": {
+      "type": "object",
+      "description": "Configuration for exporting evaluation results to Azure Blob Storage. This provides long-term storage and enables custom data processing workflows.",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "Name of the container within the Azure Blob Storage account where evaluation results will be stored"
+        }
+      },
+      "required": [
+        "containerName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDestinationConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "storageAccountStorage"
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A message authored by the system to guide model behavior.",
@@ -3289,6 +4584,75 @@
         "type"
       ]
     },
+    "TextContent": {
+      "type": "object",
+      "description": "Content for text messages in AI conversations.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content of the message."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "ToolCallContent": {
+      "type": "object",
+      "description": "Content for text messages in AI conversations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool being called."
+        },
+        "toolCallId": {
+          "type": "string",
+          "description": "The unique identifier of the tool call."
+        },
+        "arguments": {
+          "type": "object",
+          "description": "The parameters for the tool call in JSON format.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name",
+        "toolCallId",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "tool_call"
+    },
+    "ToolResultContent": {
+      "type": "object",
+      "description": "Content for tool results in AI conversations.",
+      "properties": {
+        "results": {
+          "type": "object",
+          "description": "The result of the tool call in JSON format.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "tool_result"
+    },
     "UserMessage": {
       "type": "object",
       "description": "A message authored by the end user as input to the model.",
@@ -3298,39 +4662,6 @@
         }
       ],
       "x-ms-discriminator-value": "user"
-    },
-    "modelResponseGenerationTarget": {
-      "type": "object",
-      "description": "Evaluation target for generating responses using a given model and dataset.",
-      "properties": {
-        "baseMessages": {
-          "type": "array",
-          "description": "A list of messages comprising the conversation so far.",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "modelDeploymentName": {
-          "type": "string",
-          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-        },
-        "modelParams": {
-          "type": "object",
-          "description": "Optional parameters passed to the model for evaluation.",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "baseMessages",
-        "modelDeploymentName",
-        "modelParams"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationTarget"
-        }
-      ],
-      "x-ms-discriminator-value": "modelResponseGeneration"
     }
   },
   "parameters": {
