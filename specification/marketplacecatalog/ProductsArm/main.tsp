@@ -57,11 +57,11 @@ interface ProductList {
 
     @doc("The market in which the product is available.")
     @query
-    market: string,
+    market?: string,
 
     @doc("The language to filter by")
     @query
-    language: string,
+    language?: string,
   ): ArmResponse<ResourceListCustomResult<ProductSummary>> | ErrorResponse;
 
   /** Lists products for subscription. */
@@ -70,11 +70,11 @@ interface ProductList {
     Parameters = {
       @doc("The market in which the product is available.")
       @query
-      market: string;
+      market?: string;
 
       @doc("The language to filter by")
       @query
-      language: string;
+      language?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -85,11 +85,11 @@ interface ProductList {
     Parameters = {
       @doc("The market in which the product is available.")
       @query
-      market: string;
+      market?: string;
 
       @doc("The language to filter by")
       @query
-      language: string;
+      language?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -100,11 +100,11 @@ interface ProductList {
     Parameters = {
       @doc("The market in which the product is available.")
       @query
-      market: string;
+      market?: string;
 
       @doc("The language to filter by")
       @query
-      language: string;
+      language?: string;
     },
     Response = ResourceListCustomResult<ProductSummary>
   >;
@@ -126,19 +126,19 @@ interface ProductGet {
 
     @doc("Whether to include stop-sold plans in the response.")
     @query
-    includeStopSoldPlans: boolean,
+    includeStopSoldPlans?: boolean,
 
     @doc("The language to filter by")
     @query
-    language: string,
+    language?: string,
 
     @doc("Whether to include hidden plans in the response.")
     @query
-    includeHiddenPlans: boolean,
+    includeHiddenPlans?: boolean,
 
     @doc("Whether to include service instruction templates in the response.")
     @query
-    includeServiceInstructionTemplates: boolean,
+    includeServiceInstructionTemplates?: boolean,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by subscription. */
@@ -156,19 +156,19 @@ interface ProductGet {
 
     @doc("Whether to include stop-sold plans in the response.")
     @query
-    includeStopSoldPlans: boolean,
+    includeStopSoldPlans?: boolean,
 
     @doc("The language to filter by")
     @query
-    language: string,
+    language?: string,
 
     @doc("Whether to include hidden plans in the response.")
     @query
-    includeHiddenPlans: boolean,
+    includeHiddenPlans?: boolean,
 
     @doc("Whether to include service instruction templates in the response.")
     @query
-    includeServiceInstructionTemplates: boolean,
+    includeServiceInstructionTemplates?: boolean,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing account. */
@@ -186,19 +186,19 @@ interface ProductGet {
 
     @doc("Whether to include stop-sold plans in the response.")
     @query
-    includeStopSoldPlans: boolean,
+    includeStopSoldPlans?: boolean,
 
     @doc("The language to filter by")
     @query
-    language: string,
+    language?: string,
 
     @doc("Whether to include hidden plans in the response.")
     @query
-    includeHiddenPlans: boolean,
+    includeHiddenPlans?: boolean,
 
     @doc("Whether to include service instruction templates in the response.")
     @query
-    includeServiceInstructionTemplates: boolean,
+    includeServiceInstructionTemplates?: boolean,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing profile. */
@@ -217,19 +217,19 @@ interface ProductGet {
 
     @doc("Whether to include stop-sold plans in the response.")
     @query
-    includeStopSoldPlans: boolean,
+    includeStopSoldPlans?: boolean,
 
     @doc("The language to filter by")
     @query
-    language: string,
+    language?: string,
 
     @doc("Whether to include hidden plans in the response.")
     @query
-    includeHiddenPlans: boolean,
+    includeHiddenPlans?: boolean,
 
     @doc("Whether to include service instruction templates in the response.")
     @query
-    includeServiceInstructionTemplates: boolean,
+    includeServiceInstructionTemplates?: boolean,
   ): ArmResponse<ProductDetails> | ErrorResponse;
 }
 
