@@ -513,54 +513,6 @@ model ConnectionState {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model ProxyResource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.EventHub/Namespaces" or "Microsoft.EventHub/Namespaces/EventHubs"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-}
-
-/**
- * The Resource definition.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model TrackedResource extends Resource {
-  /**
-   * The Geo-location where the resource lives
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-}
-
-/**
  * The Resource definition for other than namespace.
  */
 model Resource {
