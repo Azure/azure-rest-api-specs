@@ -18,7 +18,7 @@ model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
     Resource = Profile,
     KeyName = "profileName",
     SegmentName = "profiles",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
   >;
 
   /**
@@ -51,10 +51,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Profile,
-    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<
-      Profile,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<Profile> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Profile;
     })
@@ -80,7 +77,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

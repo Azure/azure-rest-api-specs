@@ -175,3 +175,14 @@ using Microsoft.Cdn;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CdnWebApplicationFirewallPolicy.properties);
+@@clientName(checkNameAvailability::parameters.body,
+  "checkNameAvailabilityInput"
+);
+@@clientName(checkNameAvailabilityWithSubscription::parameters.body,
+  "checkNameAvailabilityInput"
+);
+@@clientName(validateProbe::parameters.body, "validateProbeInput");
+@@maxLength(Profile.name, 260);
+@@minLength(Profile.name, 1);
+@@clientName(CidrIpAddress, "cidrIpAddress");
+@@clientName(PolicySettings, "policySettings");

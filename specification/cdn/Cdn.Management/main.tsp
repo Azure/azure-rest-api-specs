@@ -29,6 +29,7 @@ import "./OriginGroup.tsp";
 import "./CustomDomain.tsp";
 import "./CdnWebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
+import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -37,10 +38,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Cdn Management Client
+ * APIs to manage web application firewall rules for Azure CDN
  */
 @armProviderNamespace
-@service(#{ title: "CdnManagementClient" })
+@service(#{ title: "Azure CDN WebApplicationFirewallManagement" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Cdn;
@@ -57,4 +58,5 @@ enum Versions {
   v2025_06_01: "2025-06-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationsListResult>> {}

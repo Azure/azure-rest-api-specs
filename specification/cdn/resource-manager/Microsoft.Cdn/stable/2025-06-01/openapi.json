@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "CdnManagementClient",
+    "title": "Azure CDN WebApplicationFirewallManagement",
     "version": "2025-06-01",
-    "description": "Cdn Management Client",
+    "description": "APIs to manage web application firewall rules for Azure CDN",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -98,7 +98,7 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "checkNameAvailabilityInput",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -177,7 +177,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationsListResult"
             }
           },
           "default": {
@@ -245,7 +245,7 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "checkNameAvailabilityInput",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -362,7 +362,7 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "validateProbeInput",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -424,8 +424,12 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -444,7 +448,11 @@
           "Profiles_CanMigrate": {
             "$ref": "./examples/Profiles_CanMigrate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/cdnWebApplicationFirewallPolicies": {
@@ -582,10 +590,6 @@
               "$ref": "#/definitions/CdnWebApplicationFirewallPolicy"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -602,11 +606,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -824,6 +823,18 @@
               "$ref": "#/definitions/MigrateResult"
             }
           },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/MigrateResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -835,7 +846,11 @@
           "Profiles_Migrate": {
             "$ref": "./examples/Profiles_Migrate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles": {
@@ -902,7 +917,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -946,7 +964,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "profile",
@@ -971,10 +992,6 @@
               "$ref": "#/definitions/Profile"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1037,7 +1054,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "profileUpdateParameters",
@@ -1111,7 +1131,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -1124,11 +1147,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1175,7 +1193,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -1224,7 +1245,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1275,7 +1299,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1344,7 +1371,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1369,7 +1396,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1404,11 +1434,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1425,7 +1450,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1450,7 +1475,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1467,9 +1495,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1494,7 +1522,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1521,7 +1549,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1598,7 +1629,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1654,7 +1688,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1712,7 +1749,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1788,7 +1828,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1813,7 +1853,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1901,7 +1944,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -1979,7 +2025,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -2035,7 +2084,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -2097,7 +2149,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -2161,7 +2216,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "migrationParameters",
@@ -2234,7 +2292,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "checkEndpointNameAvailabilityInput",
@@ -2289,7 +2350,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "checkHostNameAvailabilityInput",
@@ -2344,7 +2408,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -2393,7 +2460,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -2442,7 +2512,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "customDomainName",
@@ -2493,7 +2566,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "customDomainName",
@@ -2587,7 +2663,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "customDomainName",
@@ -2668,7 +2747,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "customDomainName",
@@ -2739,7 +2821,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "customDomainName",
@@ -2807,7 +2892,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -2856,7 +2944,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -2907,7 +2998,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3005,7 +3099,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3086,7 +3183,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3157,7 +3257,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3213,7 +3316,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3269,7 +3375,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3327,7 +3436,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3432,7 +3544,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3513,7 +3628,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3591,7 +3709,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3681,7 +3802,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3758,7 +3882,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3814,7 +3941,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3872,7 +4002,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -3977,7 +4110,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4065,7 +4201,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4143,7 +4282,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4199,7 +4341,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4257,7 +4402,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4362,7 +4510,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4450,7 +4601,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4528,7 +4682,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4605,7 +4762,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4676,7 +4836,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4747,7 +4910,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "endpointName",
@@ -4809,7 +4975,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -4855,7 +5024,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -4901,7 +5073,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "metrics",
@@ -5010,29 +5185,7 @@
               ],
               "x-ms-enum": {
                 "name": "LogMetricsGroupBy",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "httpStatusCode",
-                    "value": "httpStatusCode"
-                  },
-                  {
-                    "name": "protocol",
-                    "value": "protocol"
-                  },
-                  {
-                    "name": "cacheStatus",
-                    "value": "cacheStatus"
-                  },
-                  {
-                    "name": "countryOrRegion",
-                    "value": "countryOrRegion"
-                  },
-                  {
-                    "name": "customDomain",
-                    "value": "customDomain"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5121,7 +5274,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "rankings",
@@ -5139,29 +5295,7 @@
               ],
               "x-ms-enum": {
                 "name": "LogRanking",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "url",
-                    "value": "url"
-                  },
-                  {
-                    "name": "referrer",
-                    "value": "referrer"
-                  },
-                  {
-                    "name": "browser",
-                    "value": "browser"
-                  },
-                  {
-                    "name": "userAgent",
-                    "value": "userAgent"
-                  },
-                  {
-                    "name": "countryOrRegion",
-                    "value": "countryOrRegion"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5183,33 +5317,7 @@
               ],
               "x-ms-enum": {
                 "name": "LogRankingMetric",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "clientRequestCount",
-                    "value": "clientRequestCount"
-                  },
-                  {
-                    "name": "clientRequestTraffic",
-                    "value": "clientRequestTraffic"
-                  },
-                  {
-                    "name": "hitCount",
-                    "value": "hitCount"
-                  },
-                  {
-                    "name": "missCount",
-                    "value": "missCount"
-                  },
-                  {
-                    "name": "userErrorCount",
-                    "value": "userErrorCount"
-                  },
-                  {
-                    "name": "errorCount",
-                    "value": "errorCount"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5289,7 +5397,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -5335,7 +5446,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -5381,7 +5495,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "metrics",
@@ -5395,13 +5512,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafMetric",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "clientRequestCount",
-                    "value": "clientRequestCount"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5464,25 +5575,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafAction",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "allow",
-                    "value": "allow"
-                  },
-                  {
-                    "name": "block",
-                    "value": "block"
-                  },
-                  {
-                    "name": "log",
-                    "value": "log"
-                  },
-                  {
-                    "name": "redirect",
-                    "value": "redirect"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5500,17 +5593,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafRankingGroupBy",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "httpStatusCode",
-                    "value": "httpStatusCode"
-                  },
-                  {
-                    "name": "customDomain",
-                    "value": "customDomain"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5529,21 +5612,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafRuleType",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "managed",
-                    "value": "managed"
-                  },
-                  {
-                    "name": "custom",
-                    "value": "custom"
-                  },
-                  {
-                    "name": "bot",
-                    "value": "bot"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5592,7 +5661,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "metrics",
@@ -5606,13 +5678,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafMetric",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "clientRequestCount",
-                    "value": "clientRequestCount"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5657,41 +5723,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafRankingType",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "action",
-                    "value": "action"
-                  },
-                  {
-                    "name": "ruleGroup",
-                    "value": "ruleGroup"
-                  },
-                  {
-                    "name": "ruleId",
-                    "value": "ruleId"
-                  },
-                  {
-                    "name": "userAgent",
-                    "value": "userAgent"
-                  },
-                  {
-                    "name": "clientIp",
-                    "value": "clientIp"
-                  },
-                  {
-                    "name": "url",
-                    "value": "url"
-                  },
-                  {
-                    "name": "countryOrRegion",
-                    "value": "countryOrRegion"
-                  },
-                  {
-                    "name": "ruleType",
-                    "value": "ruleType"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5711,25 +5743,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafAction",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "allow",
-                    "value": "allow"
-                  },
-                  {
-                    "name": "block",
-                    "value": "block"
-                  },
-                  {
-                    "name": "log",
-                    "value": "log"
-                  },
-                  {
-                    "name": "redirect",
-                    "value": "redirect"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5748,21 +5762,7 @@
               ],
               "x-ms-enum": {
                 "name": "WafRuleType",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "managed",
-                    "value": "managed"
-                  },
-                  {
-                    "name": "custom",
-                    "value": "custom"
-                  },
-                  {
-                    "name": "bot",
-                    "value": "bot"
-                  }
-                ]
+                "modelAsString": true
               }
             },
             "collectionFormat": "multi"
@@ -5811,7 +5811,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -5869,7 +5872,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -5930,7 +5936,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -5979,7 +5988,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6030,7 +6042,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6124,7 +6139,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6205,7 +6223,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6276,7 +6297,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6332,7 +6356,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6390,7 +6417,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6491,7 +6521,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6579,7 +6612,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6657,7 +6693,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "originGroupName",
@@ -6713,7 +6752,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -6762,7 +6804,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -6813,7 +6858,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -6821,15 +6869,6 @@
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
           }
         ],
         "responses": {
@@ -6879,7 +6918,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -6950,7 +6992,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7006,7 +7051,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7064,7 +7112,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7165,7 +7216,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7253,7 +7307,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7331,7 +7388,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "ruleSetName",
@@ -7387,7 +7447,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -7436,7 +7499,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "secretName",
@@ -7487,7 +7553,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "secretName",
@@ -7581,7 +7650,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "secretName",
@@ -7652,7 +7724,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -7701,7 +7776,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "securityPolicyName",
@@ -7752,7 +7830,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "securityPolicyName",
@@ -7846,7 +7927,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "securityPolicyName",
@@ -7927,7 +8011,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "securityPolicyName",
@@ -7998,7 +8085,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "profileUpgradeParameters",
@@ -8071,7 +8161,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           }
         ],
         "responses": {
@@ -8120,7 +8213,10 @@
             "in": "path",
             "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
           },
           {
             "name": "validateSecretInput",
@@ -8530,6 +8626,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "minimum": 0,
           "maximum": 50
         },
         "sessionAffinityState": {
@@ -8583,6 +8680,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "minimum": 0,
           "maximum": 50
         },
         "sessionAffinityState": {
@@ -8689,7 +8787,10 @@
           "$ref": "#/definitions/DeploymentStatus",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "hostName"
+      ]
     },
     "AFDOriginUpdateParameters": {
       "type": "object",
@@ -8766,7 +8867,10 @@
           "description": "Whether to enable certificate name check at origin level",
           "default": true
         }
-      }
+      },
+      "required": [
+        "hostName"
+      ]
     },
     "AFDStateProperties": {
       "type": "object",
@@ -9136,19 +9240,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<AFDEndpoint>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/AFDEndpoint",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Azure.ResourceManager.ArmResponse<AFDOrigin>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -9390,7 +9481,8 @@
         },
         "cacheDuration": {
           "type": "string",
-          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss"
+          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "x-nullable": true
         }
       },
       "required": [
@@ -9414,7 +9506,8 @@
         },
         "queryParameters": {
           "type": "string",
-          "description": "query parameters to include or exclude (comma separated)."
+          "description": "query parameters to include or exclude (comma separated).",
+          "x-nullable": true
         }
       },
       "required": [
@@ -9657,7 +9750,7 @@
       "description": "Defines CDN web application firewall policy properties.",
       "properties": {
         "policySettings": {
-          "$ref": "#/definitions/PolicySettings",
+          "$ref": "#/definitions/policySettings",
           "description": "Describes  policySettings for policy"
         },
         "rateLimitRules": {
@@ -9877,21 +9970,6 @@
         }
       }
     },
-    "CidrIpAddress": {
-      "type": "object",
-      "description": "CIDR Ip address",
-      "properties": {
-        "baseIpAddress": {
-          "type": "string",
-          "description": "Ip address itself."
-        },
-        "prefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the prefix of the ip address."
-        }
-      }
-    },
     "ClientPortMatchConditionParameters": {
       "type": "object",
       "description": "Defines the parameters for ClientPort match conditions",
@@ -9902,7 +9980,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -10101,7 +10180,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -11556,6 +11636,24 @@
         ]
       }
     },
+    "DimensionProperties": {
+      "type": "object",
+      "description": "Type of operation: get, read, delete, etc.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of dimension."
+        }
+      }
+    },
     "DomainValidationProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties to validate a domain.",
@@ -11838,8 +11936,19 @@
           "default": true
         },
         "queryStringCachingBehavior": {
-          "$ref": "#/definitions/QueryStringCachingBehavior",
-          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL."
+          "type": "string",
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "default": "NotSet",
+          "enum": [
+            "IgnoreQueryString",
+            "BypassCaching",
+            "UseQueryString",
+            "NotSet"
+          ],
+          "x-ms-enum": {
+            "name": "QueryStringCachingBehavior",
+            "modelAsString": false
+          }
         },
         "optimizationType": {
           "$ref": "#/definitions/OptimizationType",
@@ -12179,7 +12288,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -12298,7 +12408,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -12354,7 +12465,7 @@
           "type": "array",
           "description": "The list of ip v4 addresses.",
           "items": {
-            "$ref": "#/definitions/CidrIpAddress"
+            "$ref": "#/definitions/cidrIpAddress"
           },
           "x-ms-identifiers": [
             "baseIpAddress"
@@ -12364,7 +12475,7 @@
           "type": "array",
           "description": "The list of ip v6 addresses.",
           "items": {
-            "$ref": "#/definitions/CidrIpAddress"
+            "$ref": "#/definitions/cidrIpAddress"
           },
           "x-ms-identifiers": [
             "baseIpAddress"
@@ -12382,7 +12493,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -12584,6 +12696,28 @@
       "required": [
         "contentPaths"
       ]
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Log specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of log specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of log specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration of specification."
+        },
+        "logFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        }
+      }
     },
     "ManagedCertificateParameters": {
       "type": "object",
@@ -12988,6 +13122,81 @@
         ]
       }
     },
+    "MetricAvailability": {
+      "type": "object",
+      "description": "Retention policy of a resource metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit. Possible values include: 'Bytes', 'Count', 'Milliseconds'."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The metric aggregation type. Possible values include: 'Average', 'Count', 'Total'."
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "Retention policies of a resource metric.",
+          "items": {
+            "$ref": "#/definitions/MetricAvailability"
+          },
+          "x-ms-identifiers": []
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of metric",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Property to specify whether to fill gap with zero."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern to filter based on name"
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Property to specify metric is internal or not."
+        }
+      }
+    },
     "MetricsGranularity": {
       "type": "string",
       "enum": [
@@ -13235,6 +13444,93 @@
         "name": "MinimumTlsVersion",
         "modelAsString": false
       }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "CDN REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "operationProperties"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.Cdn",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation type: Read, write, delete, etc.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "OperationsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Operator": {
       "type": "string",
@@ -13911,33 +14207,6 @@
         ]
       }
     },
-    "PolicySettings": {
-      "type": "object",
-      "description": "Defines contents of a web application firewall global configuration",
-      "properties": {
-        "enabledState": {
-          "$ref": "#/definitions/PolicyEnabledState",
-          "description": "describes if the policy is in enabled state or disabled state"
-        },
-        "mode": {
-          "$ref": "#/definitions/PolicyMode",
-          "description": "Describes if it is in detection mode or prevention mode at policy level."
-        },
-        "defaultRedirectUrl": {
-          "type": "string",
-          "description": "If action type is redirect, this field represents the default redirect URL for the client."
-        },
-        "defaultCustomBlockResponseStatusCode": {
-          "$ref": "#/definitions/PolicySettingsDefaultCustomBlockResponseStatusCode",
-          "description": "If the action type is block, this field defines the default customer overridable http response status code."
-        },
-        "defaultCustomBlockResponseBody": {
-          "type": "string",
-          "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
-          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
-        }
-      }
-    },
     "PolicySettingsDefaultCustomBlockResponseStatusCode": {
       "type": "number",
       "description": "If the action type is block, this field defines the default customer overridable http response status code.",
@@ -13989,7 +14258,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -14550,20 +14820,6 @@
         ]
       }
     },
-    "QueryStringCachingBehavior": {
-      "type": "string",
-      "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-      "enum": [
-        "IgnoreQueryString",
-        "BypassCaching",
-        "UseQueryString",
-        "NotSet"
-      ],
-      "x-ms-enum": {
-        "name": "QueryStringCachingBehavior",
-        "modelAsString": false
-      }
-    },
     "QueryStringMatchConditionParameters": {
       "type": "object",
       "description": "Defines the parameters for QueryString match conditions",
@@ -14574,7 +14830,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -14816,7 +15073,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -14880,7 +15138,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -14983,7 +15242,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -15082,7 +15342,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "transforms": {
           "type": "array",
@@ -15182,7 +15443,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "transforms": {
           "type": "array",
@@ -15257,7 +15519,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -15664,8 +15927,32 @@
           "description": "The caching configuration for this route. To disable caching, do not provide a cacheConfiguration object."
         },
         "forwardingProtocol": {
-          "$ref": "#/definitions/ForwardingProtocol",
-          "description": "Protocol this rule will use when forwarding traffic to backends."
+          "type": "string",
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "default": "MatchRequest",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "HttpOnly",
+                "value": "HttpOnly"
+              },
+              {
+                "name": "HttpsOnly",
+                "value": "HttpsOnly"
+              },
+              {
+                "name": "MatchRequest",
+                "value": "MatchRequest"
+              }
+            ]
+          }
         },
         "linkToDefaultDomain": {
           "type": "string",
@@ -15793,8 +16080,32 @@
           "description": "The caching configuration for this route. To disable caching, do not provide a cacheConfiguration object."
         },
         "forwardingProtocol": {
-          "$ref": "#/definitions/ForwardingProtocol",
-          "description": "Protocol this rule will use when forwarding traffic to backends."
+          "type": "string",
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "default": "MatchRequest",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "HttpOnly",
+                "value": "HttpOnly"
+              },
+              {
+                "name": "HttpsOnly",
+                "value": "HttpsOnly"
+              },
+              {
+                "name": "MatchRequest",
+                "value": "MatchRequest"
+              }
+            ]
+          }
         },
         "linkToDefaultDomain": {
           "type": "string",
@@ -16489,7 +16800,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -16576,6 +16888,32 @@
             "value": "RegEx"
           }
         ]
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "One property of operation, include log specifications.",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "Log specifications of operation.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specifications of operation.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
       }
     },
     "SharedPrivateLinkResourceProperties": {
@@ -16716,7 +17054,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -16802,7 +17141,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -17018,7 +17358,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -17117,7 +17458,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -17216,7 +17558,8 @@
         },
         "negateCondition": {
           "type": "boolean",
-          "description": "Describes if this is negate condition or not"
+          "description": "Describes if this is negate condition or not",
+          "default": false
         },
         "matchValues": {
           "type": "array",
@@ -17938,6 +18281,48 @@
             "$ref": "#/definitions/ComponentsKpo1PjSchemasWafrankingsresponsePropertiesDataItemsPropertiesMetricsItems"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "cidrIpAddress": {
+      "type": "object",
+      "description": "CIDR Ip address",
+      "properties": {
+        "baseIpAddress": {
+          "type": "string",
+          "description": "Ip address itself."
+        },
+        "prefixLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the prefix of the ip address."
+        }
+      }
+    },
+    "policySettings": {
+      "type": "object",
+      "description": "Defines contents of a web application firewall global configuration",
+      "properties": {
+        "enabledState": {
+          "$ref": "#/definitions/PolicyEnabledState",
+          "description": "describes if the policy is in enabled state or disabled state"
+        },
+        "mode": {
+          "$ref": "#/definitions/PolicyMode",
+          "description": "Describes if it is in detection mode or prevention mode at policy level."
+        },
+        "defaultRedirectUrl": {
+          "type": "string",
+          "description": "If action type is redirect, this field represents the default redirect URL for the client."
+        },
+        "defaultCustomBlockResponseStatusCode": {
+          "$ref": "#/definitions/PolicySettingsDefaultCustomBlockResponseStatusCode",
+          "description": "If the action type is block, this field defines the default customer overridable http response status code."
+        },
+        "defaultCustomBlockResponseBody": {
+          "type": "string",
+          "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
         }
       }
     }

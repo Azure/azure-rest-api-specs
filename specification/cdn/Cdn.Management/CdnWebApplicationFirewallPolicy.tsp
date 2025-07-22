@@ -53,10 +53,7 @@ interface CdnWebApplicationFirewallPolicies {
   @operationId("Policies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CdnWebApplicationFirewallPolicy,
-    Response = ArmResourceUpdatedResponse<CdnWebApplicationFirewallPolicy> | ArmResourceCreatedResponse<
-      CdnWebApplicationFirewallPolicy,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<CdnWebApplicationFirewallPolicy> | ArmResourceCreatedResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
       @bodyRoot
       _: CdnWebApplicationFirewallPolicy;
     })

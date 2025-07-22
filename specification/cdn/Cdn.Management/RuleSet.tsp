@@ -35,7 +35,8 @@ interface RuleSets {
   /**
    * Creates a new rule set within the specified profile.
    */
-  create is ArmResourceCreateOrReplaceSync<RuleSet>;
+  // create is ArmResourceCreateOrReplaceSync<RuleSet>;
+  create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodyAsync<RuleSet>;
 
   /**
    * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.

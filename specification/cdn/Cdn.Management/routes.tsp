@@ -82,7 +82,8 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     canMigrateParameters: CanMigrateParameters,
-  ): ArmResponse<CanMigrateResult> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<CanMigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> &
+    Azure.Core.Foundations.RetryAfterHeader) | ErrorResponse;
 
   /**
    * Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.
@@ -101,7 +102,9 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     migrationParameters: MigrationParameters,
-  ): ArmResponse<MigrateResult> | ErrorResponse;
+  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> & {
+    @bodyRoot _: MigrateResult;
+  }) | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

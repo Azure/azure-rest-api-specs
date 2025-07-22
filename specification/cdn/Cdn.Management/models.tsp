@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Cdn;
 
@@ -525,15 +526,15 @@ union LogMetricsGranularity {
 union LogMetricsGroupBy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  httpStatusCode: "httpStatusCode",
+  "httpStatusCode",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  protocol: "protocol",
+  "protocol",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  cacheStatus: "cacheStatus",
+  "cacheStatus",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  countryOrRegion: "countryOrRegion",
+  "countryOrRegion",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  customDomain: "customDomain",
+  "customDomain",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -564,39 +565,39 @@ union MetricsSeriesUnit {
 union LogRanking {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  url: "url",
+  "url",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  referrer: "referrer",
+  "referrer",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  browser: "browser",
+  "browser",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  userAgent: "userAgent",
+  "userAgent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  countryOrRegion: "countryOrRegion",
+  "countryOrRegion",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union LogRankingMetric {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  clientRequestCount: "clientRequestCount",
+  "clientRequestCount",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  clientRequestTraffic: "clientRequestTraffic",
+  "clientRequestTraffic",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  hitCount: "hitCount",
+  "hitCount",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  missCount: "missCount",
+  "missCount",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  userErrorCount: "userErrorCount",
+  "userErrorCount",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  errorCount: "errorCount",
+  "errorCount",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union WafMetric {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  clientRequestCount: "clientRequestCount",
+  "clientRequestCount",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -614,33 +615,33 @@ union WafGranularity {
 union WafAction {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  allow: "allow",
+  "allow",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  block: "block",
+  "block",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  log: "log",
+  "log",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  redirect: "redirect",
+  "redirect",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union WafRankingGroupBy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  httpStatusCode: "httpStatusCode",
+  "httpStatusCode",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  customDomain: "customDomain",
+  "customDomain",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union WafRuleType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  managed: "managed",
+  "managed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  custom: "custom",
+  "custom",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  bot: "bot",
+  "bot",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -665,21 +666,21 @@ union WafMetricsSeriesUnit {
 union WafRankingType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  action: "action",
+  "action",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ruleGroup: "ruleGroup",
+  "ruleGroup",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ruleId: "ruleId",
+  "ruleId",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  userAgent: "userAgent",
+  "userAgent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  clientIp: "clientIp",
+  "clientIp",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  url: "url",
+  "url",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  countryOrRegion: "countryOrRegion",
+  "countryOrRegion",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  ruleType: "ruleType",
+  "ruleType",
 }
 
 /**
@@ -2484,6 +2485,7 @@ model AFDOriginGroupUpdatePropertiesParameters {
    * Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.
    */
   @maxValue(50)
+  @minValue(0)
   trafficRestorationTimeToHealedOrNewEndpointsInMinutes?: int32;
 
   /**
@@ -2603,7 +2605,7 @@ model AFDOriginUpdatePropertiesParameters {
   /**
    * The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.
    */
-  hostName?: string;
+  hostName: string;
 
   /**
    * The value of the HTTP port. Must be between 1 and 65535.
@@ -2756,7 +2758,7 @@ model RouteUpdatePropertiesParameters {
   /**
    * Protocol this rule will use when forwarding traffic to backends.
    */
-  forwardingProtocol?: ForwardingProtocol;
+  forwardingProtocol?: ForwardingProtocol = ForwardingProtocol.MatchRequest;
 
   /**
    * whether this route will be linked to the default endpoint domain.
@@ -3805,7 +3807,7 @@ model EndpointPropertiesUpdateParameters {
   /**
    * Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.
    */
-  queryStringCachingBehavior?: QueryStringCachingBehavior;
+  queryStringCachingBehavior?: QueryStringCachingBehavior = QueryStringCachingBehavior.NotSet;
 
   /**
    * Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization.
@@ -4297,6 +4299,25 @@ model ValidateProbeOutput {
    */
   @visibility(Lifecycle.Read)
   message?: string;
+}
+
+/**
+ * [Placeholder] Discription for page model
+ */
+@pagedResult
+model OperationsListResult {
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value: Operation[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5304,7 +5325,7 @@ model RemoteAddressMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match.
@@ -5347,7 +5368,7 @@ model RequestMethodMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * List of transforms
@@ -5390,7 +5411,7 @@ model QueryStringMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5437,7 +5458,7 @@ model PostArgsMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5480,7 +5501,7 @@ model RequestUriMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5528,7 +5549,7 @@ model RequestHeaderMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5571,7 +5592,7 @@ model RequestBodyMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5614,7 +5635,7 @@ model RequestSchemeMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * List of transforms
@@ -5656,7 +5677,7 @@ model UrlPathMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5699,7 +5720,7 @@ model UrlFileExtensionMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5742,7 +5763,7 @@ model UrlFileNameMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5785,7 +5806,7 @@ model HttpVersionMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5832,7 +5853,7 @@ model CookiesMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5874,7 +5895,7 @@ model IsDeviceMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5917,7 +5938,7 @@ model SocketAddrMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -5960,7 +5981,7 @@ model ClientPortMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -6003,7 +6024,7 @@ model ServerPortMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -6045,7 +6066,7 @@ model HostNameMatchConditionParameters extends DeliveryRuleConditionParameters {
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -6088,7 +6109,7 @@ model SslProtocolMatchConditionParameters
   /**
    * Describes if this is negate condition or not
    */
-  negateCondition?: boolean;
+  negateCondition?: boolean = false;
 
   /**
    * The match value for the condition of the delivery rule
@@ -6351,7 +6372,7 @@ model CacheExpirationActionParameters extends DeliveryRuleActionParameters {
   /**
    * The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss
    */
-  cacheDuration?: string;
+  cacheDuration?: string | null;
 
   typeName: "DeliveryRuleCacheExpirationActionParameters";
 }
@@ -6383,7 +6404,7 @@ model CacheKeyQueryStringActionParameters extends DeliveryRuleActionParameters {
   /**
    * query parameters to include or exclude (comma separated).
    */
-  queryParameters?: string;
+  queryParameters?: string | null;
 
   typeName: "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters";
 }
