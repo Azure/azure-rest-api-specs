@@ -1,30 +1,30 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  createContextFromParsedArgs,
   BreakingChangeLabelsToBeAdded,
-  getSwaggerDiffs,
   buildPrInfo,
   changeBaseBranch,
-  logFullOadMessagesList,
-  createDummySwagger,
   cleanDummySwagger,
-  isSameVersionBreakingType,
+  createContextFromParsedArgs,
+  createDummySwagger,
   getCreatedDummySwaggerCount,
+  getSwaggerDiffs,
+  isSameVersionBreakingType,
+  logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
   type ParsedCliArguments,
 } from "../src/command-helpers.js";
+import { LogLevel } from "../src/log.js";
 import {
-  Context,
   BreakingChangeReviewRequiredLabel,
+  Context,
   VersioningReviewRequiredLabel,
 } from "../src/types/breaking-change.js";
 import { ResultMessageRecord } from "../src/types/message.js";
-import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { LogLevel } from "../src/log.js";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -451,6 +451,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+        paths: ["specification"],
       });
     });
 
