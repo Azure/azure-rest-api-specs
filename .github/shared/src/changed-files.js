@@ -195,8 +195,7 @@ export function example(file) {
 export function typespec(file) {
   return (
     typeof file === "string" &&
-    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml")) &&
-    specification(file)
+    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml"))
   );
 }
 
