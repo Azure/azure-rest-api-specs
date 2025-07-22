@@ -11,8 +11,6 @@ using TypeSpec.Rest;
 // @armResourceOperations
 @doc("Workload Network Dns Services")
 interface WorkloadNetworkDnsServices {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListDnsServices")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsService,
     Response = ArmResponse<ResourceList<
@@ -21,21 +19,15 @@ interface WorkloadNetworkDnsServices {
     >>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetDnsService")
   get is ArmResourceRead<WorkloadNetworkDnsService>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @operationId("WorkloadNetworks_CreateDnsService")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkDnsService,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_UpdateDnsService")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
@@ -44,8 +36,6 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Can not change existing response codes."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_DeleteDnsService")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}")
   @doc("Delete a {name}", WorkloadNetworkDnsService)
   @armResourceDelete(WorkloadNetworkDnsService)

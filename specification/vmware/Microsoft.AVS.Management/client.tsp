@@ -281,6 +281,18 @@ using TypeSpec.Versioning;
 );
 @@clientName(ResourceSkuZoneDetails, "AvsResourceSkuZoneDetails", "csharp");
 
+@@useFinalStateVia(WorkloadNetworkDhcpConfigurations.create, "azure-async-operation");
+@@useFinalStateVia(WorkloadNetworkDnsServices.create, "azure-async-operation");
+@@useFinalStateVia(WorkloadNetworkDnsZones.create, "azure-async-operation");
+@@useFinalStateVia(WorkloadNetworkPortMirroringProfiles.create, "azure-async-operation");
+@@useFinalStateVia(WorkloadNetworkPublicIps.create, "azure-async-operation");
+@@useFinalStateVia(WorkloadNetworkSegments.create, "azure-async-operation");
+
+@@clientName(WorkloadNetworkPublicIps.list, "list_public_ips", "python");
+@@clientName(WorkloadNetworkPublicIps.get, "getPublicIp", "java");
+@@clientName(WorkloadNetworkPublicIps.create, "createPublicIp", "java");
+@@clientName(WorkloadNetworkPublicIps.delete, "deletePublicIp", "java");
+
 // model
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
 
@@ -324,8 +336,6 @@ using TypeSpec.Versioning;
   "workloadNetworkPublicIp",
   "java"
 );
-
-@@clientName(Customization, "AvsClient", "java");
 
 // flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"

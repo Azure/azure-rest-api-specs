@@ -36,6 +36,7 @@ import "./workloadNetworks-segments.tsp";
 import "./workloadNetworks-virtualMachines.tsp";
 import "./workloadNetworks-vmGroups.tsp";
 import "./workloadNetworks.tsp";
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
