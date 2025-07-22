@@ -1,7 +1,7 @@
 // @ts-check
 
 import debug from "debug";
-import { normalize, sep } from "path";
+import { isAbsolute, normalize, sep } from "path";
 import { simpleGit } from "simple-git";
 import { includesFolder } from "./path.js";
 
@@ -136,6 +136,28 @@ export async function getChangedFilesStatuses(options = {}) {
 
 // Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
 
+// Functions requiring paths relative to repo root
+
+/**
+ * @param {string} [file] Path to file, **relative to repo root**
+ * @returns {boolean}
+ */
+export function specification(file) {
+  if (typeof file !== "string") {
+    return false;
+  }
+
+  // Return value would be misleading (false) on absolute paths, so throw to detect misuse
+  if (isAbsolute(file)) {
+    throw new Error(`Parameter 'file' must be relative to a repo root: '${file}'`);
+  }
+
+  // Folder name "specification" should match case, since it already exists in repo
+  return normalize(file).split(sep)[0] === "specification";
+}
+
+// Functions accepting both relative and absolute paths, since paths are resolve()'d before searching (when needed)
+
 /**
  * @param {string} [file]
  * @returns {boolean}
@@ -152,15 +174,6 @@ export function json(file) {
 export function readme(file) {
   // Filename "readme.md" with any case is a valid README file
   return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function specification(file) {
-  // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && normalize(file).split(sep)[0] === "specification";
 }
 
 /**
