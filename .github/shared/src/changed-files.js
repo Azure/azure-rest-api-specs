@@ -134,25 +134,7 @@ export async function getChangedFilesStatuses(options = {}) {
   return categorizedFiles;
 }
 
-// Functions suitable for passing to string[].filter(), sorted alphabetically
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function dataPlane(file) {
-  // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && includesFolder(file, "data-plane");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesFolder(file, "examples");
-}
+// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
 
 /**
  * @param {string} [file]
@@ -176,6 +158,33 @@ export function readme(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function example(file) {
+  // Folder name "examples" should match case for consistency across specs
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function specification(file) {
+  // Folder name "specification" should match case, since it already exists in repo
+  return typeof file === "string" && normalize(file).split(sep)[0] === "specification";
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function dataPlane(file) {
+  // Folder name "data-plane" should match case for consistency across specs
+  return typeof file === "string" && includesFolder(file, "data-plane");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
   return typeof file === "string" && includesFolder(file, "resource-manager");
@@ -187,15 +196,6 @@ export function resourceManager(file) {
  */
 export function scenario(file) {
   return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-export function specification(file) {
-  // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && normalize(file).split(sep)[0] === "specification";
 }
 
 /**
