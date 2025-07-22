@@ -232,32 +232,42 @@ export class Label {
       console.warn(
         "ASSERTION VIOLATION! " +
           `Cannot applyStateChange for label '${this.name}' ` +
-          "as its desired presence hasn't been defined. Returning early."
+          "as its desired presence hasn't been defined. Returning early.",
       );
       return;
     }
 
     if (!this.present && this.shouldBePresent) {
       if (!labelsToAdd.has(this.name)) {
-        console.log(`Label.applyStateChange: '${this.name}' was not present and should be present. Scheduling addition.`);
+        console.log(
+          `Label.applyStateChange: '${this.name}' was not present and should be present. Scheduling addition.`,
+        );
         labelsToAdd.add(this.name);
       } else {
-        console.log(`Label.applyStateChange: '${this.name}' was not present and should be present. It is already scheduled for addition.`);
+        console.log(
+          `Label.applyStateChange: '${this.name}' was not present and should be present. It is already scheduled for addition.`,
+        );
       }
     } else if (this.present && !this.shouldBePresent) {
       if (!labelsToRemove.has(this.name)) {
-        console.log(`Label.applyStateChange: '${this.name}' was present and should not be present. Scheduling removal.`);
+        console.log(
+          `Label.applyStateChange: '${this.name}' was present and should not be present. Scheduling removal.`,
+        );
         labelsToRemove.add(this.name);
       } else {
-        console.log(`Label.applyStateChange: '${this.name}' was present and should not be present. It is already scheduled for removal.`);
+        console.log(
+          `Label.applyStateChange: '${this.name}' was present and should not be present. It is already scheduled for removal.`,
+        );
       }
     } else if (this.present === this.shouldBePresent) {
-      console.log(`Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"}. This is the desired state.`);
+      console.log(
+        `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"}. This is the desired state.`,
+      );
     } else {
       console.warn(
         "ASSERTION VIOLATION! " +
-          `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"} while it should be ${this.shouldBePresent ? "present" : "not present"}. `
-          + `At this point of execution this should not happen.`
+          `Label.applyStateChange: '${this.name}' is ${this.present ? "present" : "not present"} while it should be ${this.shouldBePresent ? "present" : "not present"}. ` +
+          `At this point of execution this should not happen.`,
       );
     }
   }
@@ -267,9 +277,7 @@ export class Label {
    * @returns {boolean}
    */
   isEqualToOrPrefixOf(label) {
-    return this.name.endsWith("*")
-      ? label.startsWith(this.name.slice(0, -1))
-      : this.name === label;
+    return this.name.endsWith("*") ? label.startsWith(this.name.slice(0, -1)) : this.name === label;
   }
 
   /**
@@ -396,16 +404,12 @@ export const breakingChangesCheckType = {
 // #endregion constants
 // #region Required Labels
 
-
 /**
  * @param {import("./labelling.js").LabelContext} context
  * @param {string[]} existingLabels
  * @returns {void}
  */
-export function processArmReviewLabels(
-  context,
-  existingLabels
-) {
+export function processArmReviewLabels(context, existingLabels) {
   // the important part about how this will work depends how the users use it
   // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
   // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -421,7 +425,10 @@ export function processArmReviewLabels(
     }
   }
   // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
-  else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
+  else if (
+    containsAll(existingLabels, ["ARMChangesRequested"]) &&
+    containsNone(existingLabels, ["ARMSignedOff"])
+  ) {
     if (existingLabels.includes("WaitForARMFeedback")) {
       context.toRemove.add("WaitForARMFeedback");
     }
@@ -499,7 +506,7 @@ export async function processImpactAssessment(
   isNewApiVersion,
   isDraft,
 ) {
-  console.log("ENTER definition processARMReview")
+  console.log("ENTER definition processARMReview");
 
   const armReviewLabel = new Label("ARMReview", labelContext.present);
   // By default this label should not be present. We may determine later in this function that it should be present after all.
@@ -510,18 +517,18 @@ export async function processImpactAssessment(
   newApiVersionLabel.shouldBePresent = false;
 
   const branch = targetBranch;
-  const isReleaseBranchVal = isReleaseBranch(branch)
+  const isReleaseBranchVal = isReleaseBranch(branch);
 
   // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
   // with isReleaseBranchVal to see if it's in scope of ARM review. ShiftLeft is not supported anymore,
   // so we only check if the branch is a release branch.
   // const prTitle = await getPrTitle(owner, repo, prNumber)
   // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
-  const isBranchInScopeOfSpecReview = isReleaseBranchVal// || isShiftLeftPRWithRPSaaSDevVal
+  const isBranchInScopeOfSpecReview = isReleaseBranchVal; // || isShiftLeftPRWithRPSaaSDevVal
 
   // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
   // determines which kind of review exactly we need.
-  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview
+  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview;
   if (specReviewApplies) {
     if (isNewApiVersion) {
       // Note that in case of data-plane PRs, the addition of this label will result
@@ -530,7 +537,7 @@ export async function processImpactAssessment(
       newApiVersionLabel.shouldBePresent = true;
     }
 
-    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent
+    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent;
     await processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
@@ -538,21 +545,24 @@ export async function processImpactAssessment(
       breakingChangeReviewRequiredLabelShouldBePresent,
       ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
       rpaasExceptionLabelShouldBePresent,
-      ciRpaasRPNotInPrivateRepoLabelShouldBePresent)
+      ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+    );
   }
 
-  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
-  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove)
+  newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
 
-  console.log(`RETURN definition processARMReview. `
-    + `isReleaseBranch: ${isReleaseBranchVal}, `
-    + `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, `
-    + `isNewApiVersion: ${isNewApiVersion}, `
-    + `isDraft: ${isDraft}, `
-    + `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, `
-    + `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`)
+  console.log(
+    `RETURN definition processARMReview. ` +
+      `isReleaseBranch: ${isReleaseBranchVal}, ` +
+      `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
+      `isNewApiVersion: ${isNewApiVersion}, ` +
+      `isDraft: ${isDraft}, ` +
+      `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
+      `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
+  );
 
-  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent }
+  return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
 }
 
 /**
@@ -611,36 +621,28 @@ async function processARMReviewWorkflowLabels(
   breakingChangeReviewRequiredLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
   rpaasExceptionLabelShouldBePresent,
-  ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
 ) {
   console.log("ENTER definition processARMReviewWorkflowLabels");
 
-  const notReadyForArmReviewLabel = new Label(
-    "NotReadyForARMReview",
-    labelContext.present);
+  const notReadyForArmReviewLabel = new Label("NotReadyForARMReview", labelContext.present);
 
-  const waitForArmFeedbackLabel = new Label(
-      "WaitForARMFeedback",
-      labelContext.present
-    );
+  const waitForArmFeedbackLabel = new Label("WaitForARMFeedback", labelContext.present);
 
-  const armChangesRequestedLabel = new Label(
-      "ARMChangesRequested",
-      labelContext.present
-    );
+  const armChangesRequestedLabel = new Label("ARMChangesRequested", labelContext.present);
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
   const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(
     labelContext,
     breakingChangeReviewRequiredLabelShouldBePresent,
-    versioningReviewRequiredLabelShouldBePresent
+    versioningReviewRequiredLabelShouldBePresent,
   );
 
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
   const blocked = blockedOnVersioningPolicy || blockedOnRpaas;
@@ -648,8 +650,7 @@ async function processARMReviewWorkflowLabels(
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
   // of all other ARM review workflow labels.
-  notReadyForArmReviewLabel.shouldBePresent =
-    armReviewLabelShouldBePresent && blocked;
+  notReadyForArmReviewLabel.shouldBePresent = armReviewLabelShouldBePresent && blocked;
 
   // If given PR is in scope of ARM review and the review is not blocked,
   // then "ARMSignedOff" label should remain present on the PR if it was
@@ -657,9 +658,7 @@ async function processARMReviewWorkflowLabels(
   // and "WaitForARMFeedback" are invalid and will be removed by automation
   // in presence of "ARMSignedOff".
   armSignedOffLabel.shouldBePresent =
-    armReviewLabelShouldBePresent &&
-    !blocked &&
-    armSignedOffLabel.present;
+    armReviewLabelShouldBePresent && !blocked && armSignedOffLabel.present;
 
   // If given PR is in scope of ARM review and the review is not blocked and
   // not signed-off, then the label "ARMChangesRequested" should remain present
@@ -684,16 +683,14 @@ async function processARMReviewWorkflowLabels(
     (waitForArmFeedbackLabel.present || true);
 
   const exactlyOneArmReviewWorkflowLabelShouldBePresent =
-    (Number(notReadyForArmReviewLabel.shouldBePresent) +
+    Number(notReadyForArmReviewLabel.shouldBePresent) +
       Number(armSignedOffLabel.shouldBePresent) +
       Number(armChangesRequestedLabel.shouldBePresent) +
       Number(waitForArmFeedbackLabel.shouldBePresent) ===
-    1) || !armReviewLabelShouldBePresent
+      1 || !armReviewLabelShouldBePresent;
 
   if (!exactlyOneArmReviewWorkflowLabelShouldBePresent) {
-    console.warn(
-      "ASSERTION VIOLATION! exactlyOneArmReviewWorkflowLabelShouldBePresent is false"
-    );
+    console.warn("ASSERTION VIOLATION! exactlyOneArmReviewWorkflowLabelShouldBePresent is false");
   }
 
   notReadyForArmReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
@@ -706,7 +703,7 @@ async function processARMReviewWorkflowLabels(
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
       `blockedOnVersioningPolicy: ${blockedOnVersioningPolicy}. ` +
       `blockedOnRpaas: ${blockedOnRpaas}. ` +
-      `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `
+      `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
   return;
 }
@@ -720,7 +717,7 @@ async function processARMReviewWorkflowLabels(
 function getBlockedOnVersioningPolicy(
   labelContext,
   breakingChangeReviewRequiredLabelShouldBePresent,
-  versioningReviewRequiredLabelShouldBePresent
+  versioningReviewRequiredLabelShouldBePresent,
 ) {
   const pendingVersioningReview =
     versioningReviewRequiredLabelShouldBePresent &&
@@ -730,8 +727,7 @@ function getBlockedOnVersioningPolicy(
     breakingChangeReviewRequiredLabelShouldBePresent &&
     !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
 
-  const blockedOnVersioningPolicy =
-    pendingVersioningReview || pendingBreakingChangeReview
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
   return blockedOnVersioningPolicy;
 }
 
@@ -744,11 +740,12 @@ function getBlockedOnVersioningPolicy(
 function getBlockedOnRpaas(
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
   rpaasExceptionLabelShouldBePresent,
-  ciRpaasRPNotInPrivateRepoLabelShouldBePresent
-)
-{
-  return (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
-  || ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+) {
+  return (
+    (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
+    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+  );
 }
 
 // #endregion

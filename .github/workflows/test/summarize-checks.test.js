@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
-  updateLabels
+  updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
@@ -521,7 +521,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMChangesRequested",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"]
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
         description: "labeled: ARMChangesRequested without WaitForARMFeedback",
@@ -529,15 +529,20 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMChangesRequested",
         existingLabels: ["other-label", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: [],
       },
       {
         description: "labeled: ARMSignedOff with both labels present",
         eventName: "labeled",
         changedLabel: "ARMSignedOff",
-        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "ARMChangesRequested", "other-label"],
+        existingLabels: [
+          "WaitForARMFeedback",
+          "ARMSignedOff",
+          "ARMChangesRequested",
+          "other-label",
+        ],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"]
+        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
       },
       {
         description: "labeled: ARMSignedOff with only WaitForARMFeedback present",
@@ -545,7 +550,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMSignedOff",
         existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"]
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
         description: "labeled: ARMSignedOff with only ARMChangesRequested present",
@@ -553,7 +558,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMSignedOff",
         existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["ARMChangesRequested"]
+        expectedLabelsToRemove: ["ARMChangesRequested"],
       },
       {
         description: "labeled: ARMSignedOff with neither label present",
@@ -561,7 +566,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMSignedOff",
         existingLabels: ["other-label", "ARMSignedOff"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: [],
       },
       {
         description: "unlabeled: ARMChangesRequested with WaitForARMFeedback present (buggy case)",
@@ -569,7 +574,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMChangesRequested",
         existingLabels: ["WaitForARMFeedback", "other-label"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: [],
       },
       {
         description: "unlabeled: ARMChangesRequested without WaitForARMFeedback",
@@ -577,7 +582,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "ARMChangesRequested",
         existingLabels: ["other-label"],
         expectedLabelsToAdd: ["WaitForARMFeedback"],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: [],
       },
       {
         description: "labeled: other label should have no effect",
@@ -585,7 +590,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"]
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
         description: "unlabeled: other label should have no effect",
@@ -593,23 +598,29 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: ["WaitForARMFeedback"]
-      }
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
     ];
 
     it.each(testCases)(
       "$description",
-      async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+      async ({
+        eventName,
+        changedLabel,
+        existingLabels,
+        expectedLabelsToAdd,
+        expectedLabelsToRemove,
+      }) => {
         const [labelsToAdd, labelsToRemove] = await updateLabels(
-            eventName,
-            "main",
-            existingLabels,
-            changedLabel
+          eventName,
+          "main",
+          existingLabels,
+          changedLabel,
         );
 
         expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
         expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());
-      }
+      },
     );
   });
 });

@@ -95,7 +95,10 @@ describe("changedFiles", () => {
   });
 
   it("filter:typespec", () => {
-    const expected = ["specification/contosowidgetmanager/Contoso.Management/main.tsp"];
+    const expected = [
+      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+    ];
     expect(files.filter(typespec)).toEqual(expected);
   });
 

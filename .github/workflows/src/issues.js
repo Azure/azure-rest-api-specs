@@ -47,4 +47,3 @@ export async function getIssueNumber({ head_sha, core, github }) {
 
   return { issueNumber };
 }
-

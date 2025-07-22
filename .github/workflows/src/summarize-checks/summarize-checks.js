@@ -23,7 +23,13 @@ import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "../comment.js";
 import { PER_PAGE_MAX } from "../github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules, processArmReviewLabels, processImpactAssessment } from "./labelling.js";
+import {
+  verRevApproval,
+  brChRevApproval,
+  getViolatedRequiredLabelsRules,
+  processArmReviewLabels,
+  processImpactAssessment,
+} from "./labelling.js";
 
 import {
   brchTsg,
@@ -314,15 +320,12 @@ export async function summarizeChecksImpl(
   );
 
   // retrieve latest labels state
-  const labels = await github.paginate(
-      github.rest.issues.listLabelsOnIssue,
-      {
-        owner,
-        repo,
-        issue_number: issue_number,
-        per_page: PER_PAGE_MAX
-      }
-  );
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
@@ -371,7 +374,6 @@ export async function summarizeChecksImpl(
       labelNames.push(label);
     }
   }
-
 
   const commentBody = await createNextStepsComment(
     core,
@@ -472,12 +474,14 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
  * @param {Set<string>} labelsToRemove
  */
 function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
-  const intersection = Array.from(labelsToAdd).filter(label => labelsToRemove.has(label));
+  const intersection = Array.from(labelsToAdd).filter((label) => labelsToRemove.has(label));
   if (intersection.length > 0) {
-    console.warn("ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! "
-    + `labelsToAdd: [${[...labelsToAdd].join(", ")}]. `
-    + `labelsToRemove: [${[...labelsToRemove].join(", ")}]. `
-    + `intersection: [${intersection.join(", ")}].`)
+    console.warn(
+      "ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! " +
+        `labelsToAdd: [${[...labelsToAdd].join(", ")}]. ` +
+        `labelsToRemove: [${[...labelsToRemove].join(", ")}]. ` +
+        `intersection: [${intersection.join(", ")}].`,
+    );
   }
 }
 
@@ -488,10 +492,7 @@ function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
  * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
  * @returns {import("./labelling.js").LabelContext}
  */
-export function updateLabels(
-  existingLabels,
-  impactAssessment
-) {
+export function updateLabels(existingLabels, impactAssessment) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
@@ -501,16 +502,16 @@ export function updateLabels(
   const labelContext = {
     present: new Set(existingLabels),
     toAdd: new Set(),
-    toRemove: new Set()
+    toRemove: new Set(),
   };
 
   if (impactAssessment) {
     console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
     // Merge impact assessment labels into the main labelContext
-    impactAssessment.labelContext.toAdd.forEach(label => {
+    impactAssessment.labelContext.toAdd.forEach((label) => {
       labelContext.toAdd.add(label);
     });
-    impactAssessment.labelContext.toRemove.forEach(label => {
+    impactAssessment.labelContext.toRemove.forEach((label) => {
       labelContext.toRemove.add(label);
     });
   }
@@ -530,14 +531,13 @@ export function updateLabels(
       impactAssessment.rpaasExceptionRequired,
       impactAssessment.rpaasRpNotInPrivateRepo,
       impactAssessment.isNewApiVersion,
-      impactAssessment.isDraft
+      impactAssessment.isDraft,
     );
   }
 
-  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove)
+  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
   return labelContext;
 }
-
 
 // #endregion
 // #region checks
@@ -576,17 +576,26 @@ export async function getCheckRunTuple(
   const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
-  [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] = extractRunsFromGraphQLResponse(response);
+  [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] =
+    extractRunsFromGraphQLResponse(response);
 
   if (impactAssessmentWorkflowRun) {
-    core.info(`Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`);
-    impactAssessment = await getImpactAssessment(github, core, owner, repo, impactAssessmentWorkflowRun);
+    core.info(
+      `Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`,
+    );
+    impactAssessment = await getImpactAssessment(
+      github,
+      core,
+      owner,
+      repo,
+      impactAssessmentWorkflowRun,
+    );
   }
 
   core.info(
     `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
       `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
-      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`
+      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`,
   );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
@@ -690,15 +699,17 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-            if (checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact"
-              && checkRunNode.status?.toLowerCase() === 'completed'
-              && checkRunNode.conclusion?.toLowerCase() === 'success') {
-                // Assign numeric databaseId, not the string node ID
-                impactAssessmentWorkflowRun = checkSuiteNode.workflowRun?.databaseId;
+            if (
+              checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact" &&
+              checkRunNode.status?.toLowerCase() === "completed" &&
+              checkRunNode.conclusion?.toLowerCase() === "success"
+            ) {
+              // Assign numeric databaseId, not the string node ID
+              impactAssessmentWorkflowRun = checkSuiteNode.workflowRun?.databaseId;
             }
           });
         }
-      }
+      },
     );
   }
 
@@ -938,16 +949,16 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
       owner,
       repo,
-      run_id: runId
+      run_id: runId,
     });
 
     // Find the job-summary artifact
-    const jobSummaryArtifact = artifacts.data.artifacts.find(artifact =>
-      artifact.name === 'job-summary'
+    const jobSummaryArtifact = artifacts.data.artifacts.find(
+      (artifact) => artifact.name === "job-summary",
     );
 
     if (!jobSummaryArtifact) {
-      core.info('No job-summary artifact found');
+      core.info("No job-summary artifact found");
       return undefined;
     }
 
@@ -956,15 +967,15 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
       owner,
       repo,
       artifact_id: jobSummaryArtifact.id,
-      archive_format: 'zip'
+      archive_format: "zip",
     });
 
     core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
     // Extract single JSON file from tar and parse
-    const fs = require('fs');
-    const os = require('os');
-    const path = require('path');
-    const { execSync } = require('child_process');
+    const fs = require("fs");
+    const os = require("os");
+    const path = require("path");
+    const { execSync } = require("child_process");
     // Write zip buffer to temp file and extract JSON
     const tmpZip = path.join(os.tmpdir(), `job-summary-${runId}.zip`);
     // Convert ArrayBuffer to Buffer
@@ -978,7 +989,7 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
 
     /** @type {import("./labelling.js").ImpactAssessment} */
     // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
-    const impact = JSON.parse(jsonContent.toString('utf8'));
+    const impact = JSON.parse(jsonContent.toString("utf8"));
     return impact;
   } catch (/** @type {any} */ error) {
     core.error(`Failed to download job summary artifact: ${error.message}`);
