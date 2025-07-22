@@ -140,8 +140,8 @@ export async function getChangedFilesStatuses(options = {}) {
   return categorizedFiles;
 }
 
-// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity.
-// Functions accept both relative and absolute paths, since paths are resolve()'d before searching (when needed).
+// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
+// Functions accept both relative and absolute paths, since paths are resolve()'d before searching (when needed)
 
 /**
  * @param {string} [file]
