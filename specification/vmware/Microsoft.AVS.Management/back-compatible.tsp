@@ -83,9 +83,15 @@ namespace Microsoft.AVS;
 
 @@clientName(WorkloadNetworkPortMirroringProfiles.list, "ListPortMirroring");
 @@clientName(WorkloadNetworkPortMirroringProfiles.get, "GetPortMirroring");
-@@clientName(WorkloadNetworkPortMirroringProfiles.create, "CreatePortMirroring");
-@@clientName(WorkloadNetworkPortMirroringProfiles.update, "UpdatePortMirroring");
-@@clientName(WorkloadNetworkPortMirroringProfiles.delete, "DeletePortMirroring");
+@@clientName(WorkloadNetworkPortMirroringProfiles.create,
+  "CreatePortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.update,
+  "UpdatePortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.delete,
+  "DeletePortMirroring"
+);
 
 @@clientName(WorkloadNetworkGateways.list, "ListGateways");
 @@clientName(WorkloadNetworkGateways.get, "GetGateway");
