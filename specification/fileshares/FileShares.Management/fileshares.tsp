@@ -353,7 +353,6 @@ model FileShareSnapshot
 @doc("FileShareSnapshot properties")
 model FileShareSnapshotProperties {
   // The FileShareSnapshot time of the file share FileShareSnapshot.
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @visibility(Lifecycle.Read)
   @doc("The FileShareSnapshot time in UTC in string representation")
   snapshotTime?: string;
