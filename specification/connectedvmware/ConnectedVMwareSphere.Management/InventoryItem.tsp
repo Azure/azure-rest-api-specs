@@ -39,6 +39,10 @@ interface InventoryItemsOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
+
+        @path
+        @segment("vcenters")
+        vcenterName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = InventoryItem,
@@ -59,9 +63,10 @@ interface InventoryItems {
    * Create Or Update InventoryItem.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
+  create is InventoryItemsOps.CreateOrUpdateAsync<
     InventoryItem,
-    Response = ArmResourceUpdatedResponse<InventoryItem>
+    Response = ArmResourceUpdatedResponse<InventoryItem>,
+    OptionalRequestBody = true
   >;
 
   /**

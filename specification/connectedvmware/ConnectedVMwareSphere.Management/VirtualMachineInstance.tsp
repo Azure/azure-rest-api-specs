@@ -81,7 +81,7 @@ interface VirtualMachineInstances {
     PatchModel = VirtualMachineInstanceUpdate,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResponse<VirtualMachineInstance> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    Response = VirtualMachineInstance | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;

@@ -8,21 +8,6 @@
 | `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
 | `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.DatastoreInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.HostInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.ResourcePoolInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualMachineInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualMachineTemplateInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualNetworkInventoryItem.required__added` | added | `["inventoryType"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}/inventoryItems/{inventoryItemName}'].put.parameters[2].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks/{virtualNetworkName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks/{virtualNetworkName}'].put.parameters[1].required__added` | added | `true` |
-
 ### Changes for `Condition`
 
 | Path | Change Type | Value |
@@ -46,12 +31,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.operationsList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"nextLink":{...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<VirtualMachineInstance>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<VirtualMachineInstance>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/VirtualMachineInstance"}},"required":["...` |
 
 ### Changes for `VirtualScsiController`
 
@@ -161,6 +140,18 @@
 |------|------------|-------|
 | `definitions.ClusterInventoryItem.properties__added` | added | `{"inventoryType":{"type":"string","enum":["Cluster"],"x-ms-enum":{"modelAsString":false}}}` |
 | `definitions.VirtualNetworkInventoryItem.properties__added` | added | `{"inventoryType":{"type":"string","enum":["VirtualNetwork"],"x-ms-enum":{"modelAsString":false}}}` |
+
+### Changes for `required`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ClusterInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.DatastoreInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.HostInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.ResourcePoolInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.VirtualMachineInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.VirtualMachineTemplateInventoryItem.required__added` | added | `["inventoryType"]` |
+| `definitions.VirtualNetworkInventoryItem.required__added` | added | `["inventoryType"]` |
 
 ### Changes for `inventoryType`
 

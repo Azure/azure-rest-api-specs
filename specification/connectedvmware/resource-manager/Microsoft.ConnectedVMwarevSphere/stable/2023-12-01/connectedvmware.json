@@ -248,7 +248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineInstance"
             }
@@ -2617,14 +2617,13 @@
           {
             "name": "vcenterName",
             "in": "path",
-            "description": "Name of the vCenter.",
             "required": true,
             "type": "string"
           },
           {
             "name": "inventoryItemName",
             "in": "path",
-            "description": "Name of the inventoryItem.",
+            "description": "The name of the InventoryItem",
             "required": true,
             "type": "string"
           },
@@ -2632,7 +2631,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/InventoryItem"
             }
@@ -3100,7 +3099,7 @@
           {
             "name": "virtualNetworkName",
             "in": "path",
-            "description": "Name of the virtual network resource.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           },
@@ -3108,7 +3107,7 @@
             "name": "body",
             "in": "body",
             "description": "Request payload.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
             }
@@ -3174,7 +3173,7 @@
           {
             "name": "virtualNetworkName",
             "in": "path",
-            "description": "Name of the virtual network resource.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           },
@@ -3182,7 +3181,7 @@
             "name": "body",
             "in": "body",
             "description": "Resource properties to update.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ResourcePatch"
             }
@@ -3280,19 +3279,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ArmResponse<VirtualMachineInstance>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/VirtualMachineInstance",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Cluster": {
       "type": "object",
       "description": "Define the cluster.",

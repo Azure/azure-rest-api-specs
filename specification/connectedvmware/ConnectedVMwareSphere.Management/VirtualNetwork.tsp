@@ -36,6 +36,23 @@ model VirtualNetwork
 }
 
 @armResourceOperations
+interface VirtualNetworksOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = VirtualNetwork,
+        KeyName = "virtualNetworkName",
+        SegmentName = "virtualNetworks",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface VirtualNetworks {
   /**
    * Implements virtual network GET method.
@@ -45,13 +62,20 @@ interface VirtualNetworks {
   /**
    * Create Or Update virtual network.
    */
-  create is ArmResourceCreateOrReplaceAsync<VirtualNetwork>;
+  create is VirtualNetworksOps.CreateOrUpdateAsync<
+    VirtualNetwork,
+    OptionalRequestBody = true
+  >;
 
   /**
    * API to update certain properties of the virtual network resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<VirtualNetwork, PatchModel = ResourcePatch>;
+  update is VirtualNetworksOps.CustomPatchSync<
+    VirtualNetwork,
+    PatchModel = ResourcePatch,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Implements virtual network DELETE method.
