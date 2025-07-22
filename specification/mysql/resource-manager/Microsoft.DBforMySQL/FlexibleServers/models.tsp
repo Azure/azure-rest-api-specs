@@ -1176,6 +1176,7 @@ model ImportSourceProperties {
    * Sas token for accessing source storage. Read and list permissions are required for sas token.
    */
   @visibility(Lifecycle.Create)
+  @secret
   sasToken?: string;
 
   /**
@@ -2202,6 +2203,46 @@ model ConfigurationListResult {
   @doc("The Configuration items on this page")
   @items
   value?: Configuration[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a Database list operation.
+ */
+@pagedResult
+model DatabaseListResult {
+  /**
+   * Array of Database
+   */
+  @doc("The Database items on this page")
+  @items
+  value?: Database[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a FirewallRule list operation.
+ */
+@pagedResult
+model FirewallRuleListResult {
+  /**
+   * Array of FirewallRule
+   */
+  @doc("The FirewallRule items on this page")
+  @items
+  value?: FirewallRule[];
 
   /**
    * Link to the next page of results, if applicable

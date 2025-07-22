@@ -5061,10 +5061,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DatabaseProperties": {
       "type": "object",
@@ -5170,10 +5167,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "FirewallRuleProperties": {
       "type": "object",
@@ -5370,10 +5364,12 @@
         },
         "sasToken": {
           "type": "string",
+          "format": "password",
           "description": "Sas token for accessing source storage. Read and list permissions are required for sas token.",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "dataDirPath": {
           "type": "string",

@@ -55,7 +55,10 @@ interface Databases {
   /**
    * List all the databases in a given server.
    */
-  listByServer is ArmResourceListByParent<Database>;
+  listByServer is ArmResourceListByParent<
+    Database,
+    Response = ArmResponse<DatabaseListResult>
+  >;
 }
 
 @@doc(Database.name, "The name of the database.");

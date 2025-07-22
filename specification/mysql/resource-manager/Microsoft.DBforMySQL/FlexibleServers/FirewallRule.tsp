@@ -56,7 +56,10 @@ interface FirewallRules {
   /**
    * List all the firewall rules in a given server.
    */
-  listByServer is ArmResourceListByParent<FirewallRule>;
+  listByServer is ArmResourceListByParent<
+    FirewallRule,
+    Response = ArmResponse<FirewallRuleListResult>
+  >;
 }
 
 @@doc(FirewallRule.name, "The name of the server firewall rule.");
