@@ -26,7 +26,7 @@ These are the global settings for the marketplacecatalog.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-07-31
+tag: package-2025-05-01
 ```
 
 ### Tag: package-2022-07-31
