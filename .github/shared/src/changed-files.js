@@ -1,7 +1,7 @@
 // @ts-check
 
 import debug from "debug";
-import { sep } from "path";
+import { normalize, sep } from "path";
 import { simpleGit } from "simple-git";
 import { includesFolder } from "./path.js";
 
@@ -195,7 +195,7 @@ export function scenario(file) {
  */
 export function specification(file) {
   // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && file.split(sep)[0] === "specification";
+  return typeof file === "string" && normalize(file).split(sep)[0] === "specification";
 }
 
 /**
