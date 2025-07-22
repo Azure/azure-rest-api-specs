@@ -10,10 +10,10 @@ debug.enable("simple-git");
 /**
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
- * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
+ * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
@@ -43,11 +43,17 @@ export async function getChangedFiles(options = {}) {
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
+ * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
 export async function getChangedFilesStatuses(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
-  const result = await simpleGit(cwd).diff(["--name-status", baseCommitish, headCommitish]);
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+  const result = await simpleGit(cwd).diff([
+    "--name-status",
+    baseCommitish,
+    headCommitish,
+    ...paths,
+  ]);
 
   const categorizedFiles = {
     additions: /** @type {string[]} */ ([]),
