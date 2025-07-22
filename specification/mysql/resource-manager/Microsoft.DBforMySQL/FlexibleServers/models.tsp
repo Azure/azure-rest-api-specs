@@ -2190,3 +2190,23 @@ model AdvancedThreatProtectionListResult {
   @nextLink
   nextLink?: url;
 }
+
+/**
+ * The response of a Configuration list operation.
+ */
+@pagedResult
+model ConfigurationListResult {
+  /**
+   * Array of Configuration
+   */
+  @doc("The Configuration items on this page")
+  @items
+  value?: Configuration[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}

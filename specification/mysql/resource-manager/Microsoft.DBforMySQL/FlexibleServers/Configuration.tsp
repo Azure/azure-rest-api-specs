@@ -77,7 +77,8 @@ interface Configurations {
        */
       @query("pageSize")
       pageSize?: int32;
-    }
+    },
+    Response = ArmResponse<ConfigurationListResult>
   >;
 }
 
