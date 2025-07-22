@@ -161,7 +161,7 @@ model TranslateTarget {
     in future. Customer should have deployed it in their resource.
     
     """)
-  deploymentNameModel?: string = "general";
+  deploymentName?: string = "general";
 
   @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
@@ -327,6 +327,7 @@ model TranslatedTextItem {
     """)
   translations: TranslationText[];
 
+  @removed(APIVersion.v2025_05_01_preview)
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
     the input is expressed in a script that's not the usual script for the language. For example, 
