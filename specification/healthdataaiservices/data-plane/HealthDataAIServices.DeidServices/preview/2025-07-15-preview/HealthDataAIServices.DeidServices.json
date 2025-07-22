@@ -104,11 +104,8 @@
           }
         },
         "x-ms-examples": {
-          "De-identify text using SurrogateOnly operation with EncodedEntities format.": {
-            "$ref": "./examples/DeidentifyTextSurrogateOnlyEncodedEntities.json"
-          },
-          "De-identify text using SurrogateOnly operation with Entities format.": {
-            "$ref": "./examples/DeidentifyTextSurrogateOnlyEntities.json"
+          "De-identify text using SurrogateOnly operation.": {
+            "$ref": "./examples/SurrogateOnly.json"
           },
           "De-identify text.": {
             "$ref": "./examples/DeidentifyText.json"
@@ -649,16 +646,9 @@
             ]
           }
         },
-        "entities": {
-          "type": "array",
-          "description": "List of PHI entities for SurrogateOnly operation with full encoding information. Cannot be used with TaggedEntities.",
-          "items": {
-            "$ref": "#/definitions/PublicPhiEntity"
-          }
-        },
         "taggedEntities": {
           "$ref": "#/definitions/TaggedPhiEntities",
-          "description": "Grouped PHI entities with single encoding specification for SurrogateOnly operation. Cannot be used with Entities."
+          "description": "Grouped PHI entities with single encoding specification for SurrogateOnly operation."
         },
         "customizations": {
           "$ref": "#/definitions/DeidentificationCustomizationOptions",
@@ -1226,33 +1216,6 @@
       },
       "required": [
         "entities"
-      ]
-    },
-    "PublicPhiEntity": {
-      "type": "object",
-      "description": "PHI Entity for public use in SurrogateOnly operations with full encoding information.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/PhiCategory",
-          "description": "PHI Category of the entity."
-        },
-        "offset": {
-          "$ref": "#/definitions/StringIndex",
-          "description": "Starting index of the location from within the input text."
-        },
-        "length": {
-          "$ref": "#/definitions/StringIndex",
-          "description": "Length of the input text."
-        },
-        "text": {
-          "type": "string",
-          "description": "Text of the entity (optional)."
-        }
-      },
-      "required": [
-        "category",
-        "offset",
-        "length"
       ]
     },
     "SimplePhiEntity": {

@@ -30,22 +30,6 @@ model PhiEntity {
   confidenceScore?: float64;
 }
 
-@doc("PHI Entity for public use in SurrogateOnly operations with full encoding information.")
-@added(Versions.v2025_07_15_preview)
-model PublicPhiEntity {
-  @doc("PHI Category of the entity.")
-  category: PhiCategory;
-
-  @doc("Starting index of the location from within the input text.")
-  offset: StringIndex;
-
-  @doc("Length of the input text.")
-  length: StringIndex;
-
-  @doc("Text of the entity (optional).")
-  text?: string;
-}
-
 @doc("Grouped PHI entities with shared encoding specification.")
 @added(Versions.v2025_07_15_preview)
 model TaggedPhiEntities {
