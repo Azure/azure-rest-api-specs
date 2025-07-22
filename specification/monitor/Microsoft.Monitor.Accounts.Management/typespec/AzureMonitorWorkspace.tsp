@@ -89,6 +89,11 @@ namespace Microsoft.Monitor {
      * Creates or updates metrics container settings for a monitoring account.
      */
     createOrUpdate is ArmResourceCreateOrReplaceSync<MacMetricsContainerResource>;
+
+    /**
+     * Lists metrics containers for a monitoring account.
+     */
+    listByAzureMonitorWorkspace is ArmResourceListByParent<MacMetricsContainerResource>;
   }
 
   @@doc(AzureMonitorWorkspaceResource.name,

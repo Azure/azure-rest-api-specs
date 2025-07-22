@@ -12,15 +12,16 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API was moved to its own service."
 @armProviderNamespace("Microsoft.Monitor")
-@useAuth(
-  OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["user_impersonation"],
-    }
-  ]>
-)
+@useAuth(azure_auth)
+// @useAuth(
+//   OAuth2Auth<[
+//     {
+//       type: OAuth2FlowType.implicit,
+//       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+//       scopes: ["user_impersonation"],
+//     }
+//   ]>
+// )
 @service(#{ title: "Azure Monitor Workspaces Control Plane API" })
 @versioned(Versions)
 namespace Microsoft.Monitor;
@@ -38,3 +39,15 @@ enum Versions {
   @doc("API Version 2025-05-03-preview")
   v2025_05_03: "2025-05-03-preview",
 }
+
+/**
+ * Azure Active Directory OAuth2 Flow
+ */
+model azure_auth
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["user_impersonation"];
+    }
+  ]>;
