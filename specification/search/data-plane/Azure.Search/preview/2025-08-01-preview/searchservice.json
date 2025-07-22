@@ -2674,9 +2674,21 @@
           "type": "boolean",
           "description": "Indicates whether references should be included for data retrieved from this source."
         },
+        "includeReferenceSourceData": {
+          "type": "boolean",
+          "description": "Indicates whether references should include the structured data obtained during retrieval in their payload."
+        },
         "alwaysQuerySource": {
           "type": "boolean",
           "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
+        },
+        "maxSubQueries": {
+          "type": "integer",
+          "description": "The maximum number of queries that can be issued at a time when retrieving data from this source."
+        },
+        "rerankerThreshold": {
+          "type": "number",
+          "description": "The reranker threshold all retrieved documents must meet to be included in the response."
         }
       },
       "required": [
@@ -2877,13 +2889,13 @@
       "properties": {
         "searchIndexParameters": {
           "$ref": "#/definitions/SearchIndexKnowledgeSourceParameters",
-          "description": "The type of the knowledge source."
+          "description": "The parameters for the knowledge source."
         }
       },
       "required": [
         "searchIndexParameters"
       ],
-      "description": "Knowledge Source targeting a search index"
+      "description": "Knowledge Source targeting a search index."
     },
     "SearchIndexKnowledgeSourceParameters": {
       "type": "object",
@@ -2891,18 +2903,6 @@
         "searchIndexName": {
           "type": "string",
           "description": "The name of the Search index."
-        },
-        "defaultRerankerThreshold": {
-          "type": "number",
-          "description": "Default reranker threshold."
-        },
-        "defaultIncludeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Include reference source data by default."
-        },
-        "defaultMaxDocsForReranker": {
-          "type": "integer",
-          "description": "Default maximum documents for reranker."
         },
         "sourceDataSelect": {
           "type": "string",
@@ -2913,6 +2913,107 @@
         "searchIndexName"
       ],
       "description": "Parameters for search index knowledge source."
+    },
+    "WebKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "webParameters": {
+          "$ref": "#/definitions/WebKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "webParameters"
+      ],
+      "description": "Knowledge Source targeting web results."
+    },
+    "WebKnowledgeSourceParameters": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "The language of the web results."
+        },
+        "market": {
+          "type": "string",
+          "description": "The market of the web results."
+        },
+        "freshness": {
+          "type": "string",
+          "description": "The freshness of web results."
+        },
+        "allowedDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          },
+          "description": "Domains that are allowed for web results"
+        },
+        "blockedDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+          },
+          "description": "Domains that are blocked from web results"
+        }
+      },
+      "description": "Parameters for web knowledge source."
+    },
+    "WebKnowledgeSourceDomain": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "whether or not to include subpages from this domain."
+        },
+        "rankingAdjustment": {
+          "$ref": "#/definitions/WebKnowledgeSourceDomainRankingAdjustmentKind"
+        }
+      },
+      "required": [
+        "address"
+      ],
+      "description": "Configuration for web knowledge source domain."
+    },
+    "WebKnowledgeSourceDomainRankingAdjustmentKind": {
+      "type": "string",
+      "enum": [
+        "boost",
+        "superBoost",
+        "demote"
+      ],
+      "x-ms-enum": {
+        "name": "WebKnowledgeSourceRankingAdjustment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "boost",
+            "name": "boost",
+            "description": "Boost ranking."
+          },
+          {
+            "value": "superBoost",
+            "name": "superBoost",
+            "description": "Super boost ranking."
+          },
+          {
+            "value": "demote",
+            "name": "demote",
+            "description": "Demote ranking."
+          }
+        ]
+      },
+      "description": "The ranking adjustment to perform on the web results."
     },
     "AzureBlobKnowledgeSource": {
       "type": "object",
@@ -2983,7 +3084,8 @@
       "type": "string",
       "enum": [
         "searchIndex",
-        "azureBlob"
+        "azureBlob",
+        "web"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -2998,6 +3100,11 @@
             "value": "azureBlob",
             "name": "AzureBlob",
             "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
+          },
+          {
+            "value": "web",
+            "name": "Web",
+            "description": "A knowledge source that reads data from the web."
           }
         ]
       },
@@ -9044,6 +9151,11 @@
     "SearchIndexerStatus": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the indexer."
+        },
         "status": {
           "$ref": "#/definitions/IndexerStatus",
           "readOnly": true,
@@ -9079,6 +9191,7 @@
         }
       },
       "required": [
+        "name",
         "status",
         "runtime",
         "executionHistory",

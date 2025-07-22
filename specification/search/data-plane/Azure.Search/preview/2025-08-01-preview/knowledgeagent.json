@@ -130,6 +130,10 @@
       "type": "object",
       "discriminator": "kind",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The name of the index the params apply to."
+        },
         "kind": {
           "$ref": "searchservice.json#/definitions/KnowledgeSourceKind",
           "x-nullable": false,
@@ -137,6 +141,7 @@
         }
       },
       "required": [
+        "knowledgeSourceName",
         "kind"
       ]
     },
@@ -149,35 +154,28 @@
         }
       ],
       "properties": {
-        "knowledgeSourceName": {
-          "type": "string",
-          "description": "The name of the index the params apply to."
-        },
         "filterAddOn": {
           "type": "string",
           "description": "A filter condition applied to the index (e.g., 'State eq VA')."
-        },
-        "maxDocsForReranker": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Limits the number of documents considered for ranking."
-        },
-        "rerankerThreshold": {
-          "type": "number",
-          "format": "float",
-          "minimum": 0,
-          "maximum": 4,
-          "description": "A threshold for reranking results (range: 0-4)."
-        },
-        "includeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Indicates whether reference source data should be included."
         }
       },
-      "required": [
-        "knowledgeSourceName"
-      ],
       "description": "Specifies runtime parameters for a search index knowledge source"
+    },
+    "WebKnowledgeSourceParams": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "properties": {
+        "freshness": {
+          "type": "string",
+          "description": "The freshness of web results."
+        }
+      },
+      "description": "Specifies runtime parameters for a web knowledge source"
     },
     "KnowledgeAgentMessage": {
       "type": "object",
@@ -194,7 +192,6 @@
         }
       },
       "required": [
-        "role",
         "content"
       ],
       "description": "The natural language message style object."
@@ -303,19 +300,45 @@
       ],
       "description": "Base type for activity records."
     },
-    "KnowledgeAgentSearchActivityRecord": {
+    "KnowledgeAgentRetrievalActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "searchQuery",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
         }
       ],
       "properties": {
-        "targetIndex": {
+        "knowledgeSourceName": {
           "type": "string",
-          "description": "The target index for the retrieval activity."
+          "description": "The knowledge source for the retrieval activity."
         },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The elapsed time in milliseconds for the retrieval activity."
+        }
+      },
+      "description": "Represents a retrieval activity record."
+    },
+    "KnowledgeAgentSearchIndexActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "searchIndex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
         "query": {
           "type": "object",
           "properties": {
@@ -329,24 +352,45 @@
             }
           },
           "description": "The query details for the retrieval activity."
-        },
-        "queryTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The query time for this retrieval activity."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The count of documents retrieved."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The elapsed time in milliseconds for the retrieval activity."
         }
       },
-      "description": "Represents a retrieval activity record."
+      "description": "Represents a search index retrieval activity record."
+    },
+    "KnowledgeAgentAzureBlobActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureBlob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "searchTerm": {
+          "type": "string",
+          "description": "The search term for the retrieval activity."
+        }
+      },
+      "description": "Represents a azure blob retrieval activity record."
+    },
+    "KnowledgeAgentWebActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "searchTerm": {
+          "type": "string",
+          "description": "The search term for the retrieval activity."
+        },
+        "freshness": {
+          "type": "string",
+          "description": "The freshness for the retrieval activity."
+        }
+      },
+      "description": "Represents a web retrieval activity record."
     },
     "KnowledgeAgentModelQueryPlanningActivityRecord": {
       "type": "object",
@@ -440,27 +484,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The source activity ID for the reference."
-        }
-      },
-      "required": [
-        "type",
-        "id",
-        "activitySource"
-      ],
-      "description": "Base type for references."
-    },
-    "KnowledgeAgentAzureSearchDocReference": {
-      "type": "object",
-      "x-ms-discriminator-value": "searchDoc",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentReference"
-        }
-      ],
-      "properties": {
-        "docKey": {
-          "type": "string",
-          "description": "The document key for the reference."
         },
         "sourceData": {
           "type": "object",
@@ -472,7 +495,60 @@
           "description": "The reranker score for the document reference."
         }
       },
+      "required": [
+        "type",
+        "id",
+        "activitySource"
+      ],
+      "description": "Base type for references."
+    },
+    "KnowledgeAgentSearchIndexReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "searchIndex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "docKey": {
+          "type": "string",
+          "description": "The document key for the reference."
+        }
+      },
       "description": "Represents an Azure Search document reference."
+    },
+    "KnowledgeAgentAzureBlobReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureBlob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The file name for the reference."
+        }
+      },
+      "description": "Represents an Azure Blob Storage document reference."
+    },
+    "KnowledgeAgentWebReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The url the reference data originated from."
+        }
+      },
+      "description": "Represents a web document reference."
     }
   },
   "parameters": {
