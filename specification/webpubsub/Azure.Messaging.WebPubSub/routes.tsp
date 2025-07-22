@@ -20,7 +20,7 @@ interface HealthApiOperationGroup {
   getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
 }
 
-interface WebPubSubService {
+interface WebPubSubServiceOperationGroup {
   /**
    * Add filtered connections to multiple groups.
    */
@@ -132,6 +132,9 @@ interface WebPubSubService {
     ClientTokenResponse & {
       @header("content-type")
       contentType: ResponseContentType;
+
+      @statusCode
+      statusCode: 200;
     }
   >;
 
@@ -276,7 +279,13 @@ interface WebPubSubService {
       @path
       connectionId: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    } | {
+      @statusCode
+      statusCode: 404;
+    }
   >;
 
   /**
@@ -384,7 +393,13 @@ interface WebPubSubService {
       @path
       group: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    } | {
+      @statusCode
+      statusCode: 404;
+    }
   >;
 
   /**
@@ -622,7 +637,10 @@ interface WebPubSubService {
       @path
       connectionId: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    }
   >;
 
   /**
@@ -705,7 +723,13 @@ interface WebPubSubService {
       @query("targetName")
       targetName?: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    } | {
+      @statusCode
+      statusCode: 404;
+    }
   >;
 
   /**
@@ -746,7 +770,10 @@ interface WebPubSubService {
       @query("targetName")
       targetName?: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    }
   >;
 
   /**
@@ -773,7 +800,13 @@ interface WebPubSubService {
       @path
       userId: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    } | {
+      @statusCode
+      statusCode: 404;
+    }
   >;
 
   /**
@@ -971,6 +1004,9 @@ interface WebPubSubService {
       @path
       userId: string;
     },
-    void
+    {
+      @statusCode
+      statusCode: 200;
+    }
   >;
 }
