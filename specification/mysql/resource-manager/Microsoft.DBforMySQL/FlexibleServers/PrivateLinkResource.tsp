@@ -32,7 +32,7 @@ interface PrivateLinkResources {
    */
   get is ArmResourceRead<
     PrivateLinkResource,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResource>
   >;
 
   /**
