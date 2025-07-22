@@ -10,6 +10,8 @@ import * as _ from "lodash";
 
 import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
 
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files"
+
 import {
   DiffResult,
   ReadmeTag,
@@ -169,11 +171,11 @@ export async function evaluateImpact(
 }
 
 export function isManagementPR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("resource-manager"));
+  return filePaths.some((it) => resourceManager(it));
 }
 
 export function isDataPlanePR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("data-plane"));
+  return filePaths.some((it) => dataPlane(it));
 }
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {

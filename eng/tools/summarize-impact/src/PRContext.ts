@@ -36,22 +36,75 @@ export type PRContextOptions = {
   isDraft: boolean;
 };
 
+/**
+ * Represents the context of a Pull Request (PR) in a repository.
+ * It contains information about the source and target directories, branches, SHA, and other relevant details while
+ * providing methods to abstract the differences between the source and target states.
+ */
 export class PRContext {
-  // we are starting with checking out before and after to different directories
-  // sourceDirectory corresponds to "after". EG the PR context is the "after" state of the PR.
-  // The "before" state is the git root directory without the changes aka targetDirectory
+  /**
+   * Path to the source directory representing the code actually being changed.
+   *
+   * This directory contains all the files as they exist on the PR branch and is
+   * compared against `targetDirectory` to compute additions, deletions, and modifications.
+   */
   sourceDirectory: string;
+  /**
+   * Path to the source directory representing the code before the changes in the PR.
+   *
+   * This directory contains all the files as they exist on the target branch and is
+   * compared against `sourceDirectory` to compute additions, deletions, and modifications.
+   */
   targetDirectory: string;
+  /**
+   * The spec model for the source directory.
+   *
+   * This is used to analyze the TypeSpec files in the source directory.
+   */
   sourceSpecModel?: SpecModel;
+  /**
+   * The spec model for the target directory.
+   *
+   * This is used to analyze the TypeSpec files in the target directory.
+   */
   targetSpecModel?: SpecModel;
+  /**
+   * The information generated about the PR from getChangedFileStatuses() call.
+   */
   fileList?: FileListInfo;
+  /**
+   * The branch from which the PR is created.
+   */
   sourceBranch: string;
+  /**
+   * The branch into which the PR is merged.
+   */
   targetBranch: string;
+  /**
+   * The SHA of the commit that is being merged in the PR. Originates from sourceBranch.
+   */
   sha: string;
+  /**
+   * The repository where the PR is created.
+   */
   repo: string;
+  /**
+   * The owner of the repository where the PR is created.
+   */
   owner: string;
+  /**
+   * The pull request number.
+   */
   prNumber: string;
+  /**
+   * Is the PR a draft PR?
+   */
   isDraft: boolean;
+
+  /**
+   * The context for labels applied to the PR. This context is passed throughout the labeling actions, and
+   * is used to determine which labels should be added or removed at the end of the labeling process.
+   */
   labelContext: LabelContext;
 
   constructor(
@@ -87,7 +140,6 @@ export class PRContext {
     return changedFiles;
   }
 
-  // todo get rid of async here not necessary
   // todo store the results
   getTypeSpecDiffs(): DiffResult<string> {
     if (!this.fileList) {
@@ -272,12 +324,6 @@ export class PRContext {
   // this function is based upon LocalDirContext.getReadmeDiffs() and CommonPRContext.getReadmeDiffs() which are
   // very different from each other (because why not). This implementation is based MOSTLY on CommonPRContext
   async getReadmeDiffs(): Promise<DiffResult<ReadmeTag>> {
-    // this gets all of the readme diffs
-    // const readmeAdditions = this.fileList?.additions.filter(file => readme(file)) || [];
-    // const readmeChanges = this.fileList?.modifications.filter(file => readme(file))
-    // const readmeDeletions = this.fileList?.deletions.filter(file => readme(file));
-    //const changedFiles: DiffFileResult | undefined = await this.localPRContext?.getChangingFiles();
-
     const changedFiles = await this.fileList;
     const tagDiffs = (await this.getChangingTags()) || [];
 
