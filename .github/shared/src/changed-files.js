@@ -194,14 +194,6 @@ export function resourceManager(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
-export function scenario(file) {
-  return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
 export function swagger(file) {
   return (
     typeof file === "string" &&
@@ -210,4 +202,12 @@ export function swagger(file) {
     !example(file) &&
     !scenario(file)
   );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function scenario(file) {
+  return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
 }
