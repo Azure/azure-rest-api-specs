@@ -4,12 +4,7 @@ import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
 
-import {
-  example,
-  getChangedFiles,
-  specification,
-  swagger,
-} from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
+import { example, getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { ReportableOavError } from "./formatting.js";
 
@@ -17,7 +12,8 @@ export async function preCheckFiltering(
   rootDirectory: string,
   fileList?: string[],
 ): Promise<string[]> {
-  const changedFiles = fileList ?? (await getChangedFiles({ cwd: rootDirectory }));
+  const changedFiles =
+    fileList ?? (await getChangedFiles({ cwd: rootDirectory, paths: ["specification"] }));
 
   const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
@@ -140,10 +136,6 @@ export async function processFilesToSpecificationList(
   // files from get-changed-files are relative to the root of the repo,
   // though that context is passed into this from cli arguments.
   for (const file of files) {
-    if (!specification(file)) {
-      continue;
-    }
-
     const absoluteFilePath = path.join(rootDirectory, file);
 
     // if the file is an example, we need to find the swagger file that references it
