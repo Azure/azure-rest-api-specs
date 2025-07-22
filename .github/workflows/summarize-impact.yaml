@@ -31,6 +31,7 @@ jobs:
 
       - name: Get PR labels
         id: get-labels
+        working-directory: after
         run: |
           labels=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '[.labels[].name] | join(",")')
           echo "labels=$labels" >> "$GITHUB_OUTPUT"
