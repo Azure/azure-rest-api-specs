@@ -7,6 +7,7 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
@@ -68,19 +69,26 @@ interface NodeConfigurationOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Cluster,
-          KeyName = "clusterName",
-          SegmentName = "serverGroupsv2",
-          NamePattern = "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$"
-        >>,
+
+        /** The name of the cluster. */
+        @path
+        @minLength(3)
+        @maxLength(40)
+        @segment("serverGroupsv2")
+        @key
+        @pattern("^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$")
+        clusterName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ServerConfiguration,
-        KeyName = "configurationName",
-        SegmentName = "nodeConfigurations",
-        NamePattern = "^[-\\w\\._]+$"
-      >>
+      {
+        /** The name of the cluster configuration. */
+        @path
+        @minLength(1)
+        @maxLength(90)
+        @segment("nodeConfigurations")
+        @key
+        @pattern("^[-\\w\\._]+$")
+        configurationName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -91,19 +99,26 @@ interface CoordinatorConfigurationOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Cluster,
-          KeyName = "clusterName",
-          SegmentName = "serverGroupsv2",
-          NamePattern = "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$"
-        >>,
+
+        /** The name of the cluster. */
+        @path
+        @minLength(3)
+        @maxLength(40)
+        @segment("serverGroupsv2")
+        @key
+        @pattern("^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$")
+        clusterName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ServerConfiguration,
-        KeyName = "configurationName",
-        SegmentName = "coordinatorConfigurations",
-        NamePattern = "^[-\\w\\._]+$"
-      >>
+      {
+        /** The name of the cluster configuration. */
+        @path
+        @minLength(1)
+        @maxLength(90)
+        @segment("coordinatorConfigurations")
+        @key
+        @pattern("^[-\\w\\._]+$")
+        configurationName: string,
+      }
     > {}
 
 @@doc(ServerConfiguration.name, "The name of the ServerConfiguration");
