@@ -25,7 +25,7 @@ jobs:
           path: before
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: ./after/.github/actions/setup-node-install-deps
         with:
           working-directory: after
 
@@ -68,7 +68,7 @@ jobs:
           always() &&
           github.event.pull_request.number > 0
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: ./after/.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ github.event.pull_request.number }}"
