@@ -31,7 +31,7 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
     target_url,
     github,
     core,
-    issue_number
+    issue_number,
   });
 }
 
@@ -46,7 +46,15 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<void>}
  */
-export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_url, github, core, issue_number }) {
+export async function setSpecGenSdkStatusImpl({
+  owner,
+  repo,
+  head_sha,
+  target_url,
+  github,
+  core,
+  issue_number,
+}) {
   const statusName = "SDK Validation Status";
   await core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
