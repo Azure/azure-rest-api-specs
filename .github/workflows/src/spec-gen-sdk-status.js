@@ -1,10 +1,10 @@
 // @ts-check
-import { extractInputs } from "./context.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
+import { extractInputs } from "./context.js";
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX, writeToActionsSummary } from "./github.js";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
 export default async function setSpecGenSdkStatus({ github, context, core }) {
