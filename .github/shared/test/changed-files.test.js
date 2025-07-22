@@ -8,6 +8,7 @@ vi.mock("simple-git", () => ({
   }),
 }));
 
+import { relative, resolve } from "path";
 import * as simpleGit from "simple-git";
 import {
   dataPlane,
@@ -60,6 +61,8 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
   ];
 
+  const filesResolved = files.map((f) => resolve(f));
+
   it("filter:json", () => {
     const expected = [
       "cspell.json",
@@ -74,6 +77,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(json)).toEqual(expected);
+    expect(filesResolved.filter(json).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:readme", () => {
@@ -86,6 +90,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(readme)).toEqual(expected);
+    expect(filesResolved.filter(readme).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:specification", () => {
@@ -100,6 +105,9 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(specification)).toEqual(expected);
+    expect(() => filesResolved.filter(specification)).toThrowErrorMatchingInlineSnapshot(
+      `[Error: Parameter 'file' must be relative to a repo root: '/home/mharder/specs-mh/.github/shared/cspell.json']`,
+    );
   });
 
   it("filter:data-plane", () => {
@@ -109,6 +117,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(dataPlane)).toEqual(expected);
+    expect(filesResolved.filter(dataPlane).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:resource-manager", () => {
@@ -121,6 +130,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(resourceManager)).toEqual(expected);
+    expect(filesResolved.filter(resourceManager).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:example", () => {
@@ -131,6 +141,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(example)).toEqual(expected);
+    expect(filesResolved.filter(example).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:scenarios", () => {
@@ -140,6 +151,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(scenario)).toEqual(expected);
+    expect(filesResolved.filter(scenario).map((f) => relative("", f))).toEqual(expected);
   });
 
   it("filter:swagger", () => {
@@ -149,6 +161,7 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(swagger)).toEqual(expected);
+    expect(filesResolved.filter(swagger).map((f) => relative("", f))).toEqual(expected);
   });
 
   describe("getChangedFilesStatuses", () => {
