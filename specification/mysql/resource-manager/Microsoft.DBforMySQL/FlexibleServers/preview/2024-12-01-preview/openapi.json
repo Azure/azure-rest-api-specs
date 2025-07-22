@@ -244,7 +244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CapabilitiesListResult"
             }
@@ -4276,17 +4276,15 @@
           "description": "The AdvancedThreatProtection items on this page",
           "items": {
             "$ref": "#/definitions/AdvancedThreatProtection"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AdvancedThreatProtectionProperties": {
       "type": "object",
@@ -4678,17 +4676,15 @@
           "description": "The CapabilityProperties items on this page",
           "items": {
             "$ref": "#/definitions/CapabilityProperties"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Capability": {
       "type": "object",

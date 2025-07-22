@@ -65,7 +65,10 @@ interface AdvancedThreatProtections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AdvancedThreatProtectionSettings_List")
-  list is ArmResourceListByParent<AdvancedThreatProtection>;
+  list is ArmResourceListByParent<
+    AdvancedThreatProtection,
+    Response = ArmResponse<AdvancedThreatProtectionListResult>
+  >;
 }
 
 @@doc(AdvancedThreatProtection.name,

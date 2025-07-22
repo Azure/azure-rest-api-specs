@@ -24,7 +24,7 @@ interface LocationBasedCapabilitiesOperationGroup {
   @get
   @action("capabilities")
   list is ArmProviderActionSync<
-    Response = CapabilitiesListResult,
+    Response = ArmResponse<CapabilitiesListResult>,
     Scope = SubscriptionActionScope,
     Parameters = LocationNameParameter
   >;

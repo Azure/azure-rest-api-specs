@@ -1417,7 +1417,23 @@ model LogFileProperties {
 /**
  * location capability
  */
-model CapabilitiesListResult is Azure.Core.Page<CapabilityProperties>;
+@pagedResult
+model CapabilitiesListResult {
+  /**
+   * Array of Advanced Threat Protection settings
+   */
+  @doc("The CapabilityProperties items on this page")
+  @visibility(Lifecycle.Read)
+  @items
+  value?: CapabilityProperties[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * Location capabilities.
@@ -2132,6 +2148,27 @@ model AdministratorListResult {
   /**
    * [Placeholder] Discription for nextLink property
    */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a AdvancedThreatProtection list operation.
+ */
+@pagedResult
+model AdvancedThreatProtectionListResult {
+  /**
+   * Array of Advanced Threat Protection settings
+   */
+  @doc("The AdvancedThreatProtection items on this page")
+  @visibility(Lifecycle.Read)
+  @items
+  value?: AdvancedThreatProtection[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
   @nextLink
   nextLink?: url;
 }
