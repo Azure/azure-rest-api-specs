@@ -42,7 +42,7 @@ using Azure.ClientGenerator.Core;
 
 // Less generic names for C# SDK (avoid one-word class names)
 @@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
-@@clientName(Azure.AI.Projects.Deployment, "AIDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");
 @@clientName(Azure.AI.Projects.Index, "SearchIndex", "csharp");
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
