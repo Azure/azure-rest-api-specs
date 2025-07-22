@@ -112,7 +112,8 @@ interface RecommendationsOperationGroup {
   generate is ArmProviderActionSync<
     Scope = SubscriptionActionScope,
     Parameters = {},
-    Response = ArmAcceptedResponse,
+    Response = ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ArmDefaultErrorResponse
   >;
   /**
