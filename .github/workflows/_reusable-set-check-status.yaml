@@ -71,7 +71,7 @@ jobs:
           always() &&
           github.event.pull_request.number > 0
         name: Upload artifact with issue number
-        uses: .github/actions/add-empty-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ github.event.pull_request.number }}"
