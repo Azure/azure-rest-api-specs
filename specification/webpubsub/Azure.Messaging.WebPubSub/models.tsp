@@ -131,17 +131,6 @@ model GroupMemberPagedValues {
 }
 
 /**
- * Error detail information.
- */
-model InnerError {
-  /** Error code. */
-  code?: string;
-
-  /** Error message. */
-  message?: string;
-}
-
-/**
  * Web PubSub permission
  */
 union WebPubSubPermission {
