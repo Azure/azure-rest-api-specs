@@ -46,6 +46,11 @@ describe("changedFiles", () => {
     "cspell.yaml",
     "MixedCase.jSoN",
     "README.MD",
+    "not-spec/contosowidgetmanager/data-plane/readme.md",
+    "not-spec/contosowidgetmanager/resource-manager/readme.md",
+    "not-spec/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
+    "not-spec/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+    "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/data-plane/readme.md",
     "specification/contosowidgetmanager/Contoso.Management/main.tsp",
     "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
@@ -59,6 +64,9 @@ describe("changedFiles", () => {
     const expected = [
       "cspell.json",
       "MixedCase.jSoN",
+      "not-spec/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
+      "not-spec/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+      "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
@@ -71,6 +79,8 @@ describe("changedFiles", () => {
   it("filter:readme", () => {
     const expected = [
       "README.MD",
+      "not-spec/contosowidgetmanager/data-plane/readme.md",
+      "not-spec/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/data-plane/readme.md",
       "specification/contosowidgetmanager/resource-manager/readme.md",
     ];
@@ -93,13 +103,18 @@ describe("changedFiles", () => {
   });
 
   it("filter:data-plane", () => {
-    const expected = ["specification/contosowidgetmanager/data-plane/readme.md"];
+    const expected = [
+      "not-spec/contosowidgetmanager/data-plane/readme.md",
+      "specification/contosowidgetmanager/data-plane/readme.md",
+    ];
 
     expect(files.filter(dataPlane)).toEqual(expected);
   });
 
   it("filter:resource-manager", () => {
     const expected = [
+      "not-spec/contosowidgetmanager/resource-manager/readme.md",
+      "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
@@ -110,6 +125,7 @@ describe("changedFiles", () => {
 
   it("filter:example", () => {
     const expected = [
+      "not-spec/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
@@ -119,6 +135,7 @@ describe("changedFiles", () => {
 
   it("filter:scenarios", () => {
     const expected = [
+      "not-spec/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
@@ -127,6 +144,7 @@ describe("changedFiles", () => {
 
   it("filter:swagger", () => {
     const expected = [
+      "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     ];
 

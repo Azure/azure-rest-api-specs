@@ -167,7 +167,7 @@ export function specification(file) {
  */
 export function dataPlane(file) {
   // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/data-plane/");
+  return typeof file === "string" && file.includes("/data-plane/");
 }
 
 /**
@@ -176,7 +176,7 @@ export function dataPlane(file) {
  */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/resource-manager/");
+  return typeof file === "string" && file.includes("/resource-manager/");
 }
 
 /**
@@ -185,9 +185,7 @@ export function resourceManager(file) {
  */
 export function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/examples/")
-  );
+  return typeof file === "string" && json(file) && file.includes("/examples/");
 }
 
 /**
@@ -209,7 +207,5 @@ export function swagger(file) {
  * @returns {boolean}
  */
 export function scenario(file) {
-  return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
-  );
+  return typeof file === "string" && json(file) && file.includes("/scenarios/");
 }
