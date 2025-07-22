@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
+import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
-import * as fs from "fs";
 
+import { example, getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { Swagger } from "@azure-tools/specs-shared/swagger";
-import { includesFolder } from "@azure-tools/specs-shared/path";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
 export async function preCheckFiltering(
@@ -123,24 +122,6 @@ async function getFiles(rootDirectory: string, directory: string): Promise<strin
     .map((d) => path.join(target, d.name))
     .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"))
     .filter((d) => d.includes("specification" + path.sep));
-}
-
-function example(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    includesFolder(file, "examples")
-  );
-}
-
-function swagger(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
-    includesFolder(file, "specification") &&
-    !includesFolder(file, "examples")
-  );
 }
 
 export async function processFilesToSpecificationList(
