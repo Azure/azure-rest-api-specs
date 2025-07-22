@@ -55,8 +55,8 @@ interface FileWorkspaces {
   create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
     FileWorkspaceDetails,
     {
-      ...ApiVersionParameter,
-      ...SubscriptionIdParameter,
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
     },
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
@@ -90,9 +90,9 @@ interface FileWorkspacesNoSubscription {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodySync<
     FileWorkspaceDetails,
-      {
-        ...ApiVersionParameter,
-      },
+    {
+      ...ApiVersionParameter;
+    },
     Response = ArmResourceCreatedSyncResponse<FileWorkspaceDetails>
   >;
 }

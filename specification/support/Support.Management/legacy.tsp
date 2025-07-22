@@ -23,9 +23,7 @@ op CreateOrUpdateWithoutBodySync<
   Resource extends Foundations.SimpleResource,
   BaseParameters = DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
-  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
-    Resource,
-  >,
+  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<Resource>,
   Error extends {} = ErrorResponse
 > is ArmCreateOperation<
   ResourceInstanceParameters<Resource, BaseParameters> & Parameters,
