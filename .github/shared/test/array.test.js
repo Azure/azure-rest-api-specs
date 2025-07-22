@@ -1,7 +1,7 @@
 // @ts-check
 
 import { describe, expect, it } from "vitest";
-import { filterAsync, flatMapAsync, mapAsync } from "../src/array.js";
+import { filterAsync, flatMapAsync, mapAsync, includesAll, includesNone } from "../src/array.js";
 import { sleep } from "../src/sleep.js";
 
 describe("array", () => {
@@ -36,5 +36,22 @@ describe("array", () => {
     });
 
     expect(result).toEqual([0, 2, 6]);
+  });
+
+  it("includesAll", () => {
+    const input = [1, 2, 3];
+    const values = [1, 2];
+
+    expect(includesAll(input, values)).toBe(true);
+    expect(includesAll(input, [4])).toBe(false);
+    expect(includesAll(input, [])).toBe(true);
+  });
+
+  it("includesNone", () => {
+    const input = [1, 2, 3];
+    const values = [4, 5];
+
+    expect(includesNone(input, values)).toBe(true);
+    expect(includesNone(input, [2])).toBe(false);
   });
 });

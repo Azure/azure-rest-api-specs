@@ -530,8 +530,6 @@ export function updateLabels(existingLabels, impactAssessment) {
       impactAssessment.targetBranch,
       labelContext,
       impactAssessment.resourceManagerRequired,
-      impactAssessment.versioningReviewRequired,
-      impactAssessment.breakingChangeReviewRequired,
       impactAssessment.rpaasRPMissing,
       impactAssessment.rpaasExceptionRequired,
       impactAssessment.rpaasRpNotInPrivateRepo,

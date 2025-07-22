@@ -31,3 +31,23 @@ export async function flatMapAsync(array, asyncMapper) {
 export async function mapAsync(array, asyncMapper) {
   return Promise.all(array.map(asyncMapper));
 }
+
+/**
+ * @template T
+ * @param {T[]} array
+ * @param {T[]} values
+ * @returns
+ */
+export function includesAll(array, values) {
+  return values.every((value) => array.includes(value));
+}
+
+/**
+ * @template T
+ * @param {T[]} array
+ * @param {T[]} values
+ * @returns
+ */
+export function includesNone(array, values) {
+  return values.every((value) => !array.includes(value));
+}
