@@ -119,11 +119,14 @@ model GroupMember {
 /**
  * Paged response for group members
  */
+@pagedResult
 model GroupMemberPagedValues {
   /** The group members */
+  @items
   value?: GroupMember[];
 
   /** The link to the next page of results */
+  @nextLink
   nextLink?: string;
 }
 
