@@ -1,12 +1,6 @@
-# `Summarize Impact`
+import { LabelContext } from "./labelling-types.js";
 
-This tool models the PR and produces an artifact that is consumed by the `summarize-checks` check.
-
-The schema of the artifact looks like:
-
-```typescript
 export type ImpactAssessment = {
-  prType: string[];
   resourceManagerRequired: boolean;
   suppressionReviewRequired: boolean;
   versioningReviewRequired: boolean;
@@ -20,5 +14,5 @@ export type ImpactAssessment = {
   typeSpecChanged: boolean;
   isDraft: boolean;
   labelContext: LabelContext;
+  targetBranch: string;
 };
-```

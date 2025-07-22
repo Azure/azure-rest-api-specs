@@ -8,7 +8,8 @@ import { resolve, join } from "path";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { simpleGit } from "simple-git";
-import { LabelContext, PRContext } from "./types.js";
+import { LabelContext } from "./labelling-types.js";
+import { PRContext } from "./PRContext.js";
 
 export async function getRootFolder(inputPath: string): Promise<string> {
   try {

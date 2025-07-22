@@ -9,19 +9,21 @@ import yaml from "js-yaml";
 import * as _ from "lodash";
 
 import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
+
 import {
+  DiffResult,
+  ReadmeTag,
   FileTypes,
   ChangeTypes,
   PRChange,
   ChangeHandler,
-  PRType,
-  ImpactAssessment,
-  LabelContext,
-  PRContext,
-  Label,
-  DiffResult,
-  ReadmeTag,
-} from "./types.js";
+} from "./diff-types.js";
+
+import { PRType, Label, LabelContext } from "./labelling-types.js";
+
+import { ImpactAssessment } from "./ImpactAssessment.js";
+import { PRContext } from "./PRContext.js";
+
 import { Readme } from "@azure-tools/specs-shared/readme";
 
 export const breakingChangeLabelVarName = "breakingChangeVar";
@@ -162,7 +164,7 @@ export async function evaluateImpact(
     isNewApiVersion: newApiVersion,
     isDraft: context.isDraft,
     labelContext: labelContext,
-    targetBranch: context.targetBranch
+    targetBranch: context.targetBranch,
   };
 }
 

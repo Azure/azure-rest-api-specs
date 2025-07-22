@@ -41,10 +41,10 @@ import {
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
 
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { execSync } from 'child_process';
+import fs from "fs";
+import os from "os";
+import path from "path";
+import { execSync } from "child_process";
 
 /**
  * @typedef {Object} CheckMetadata
