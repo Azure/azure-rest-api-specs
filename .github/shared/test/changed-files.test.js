@@ -49,6 +49,8 @@ describe("changedFiles", () => {
     "README.MD",
     "not-spec/contosowidgetmanager/data-plane/readme.md",
     "not-spec/contosowidgetmanager/resource-manager/readme.md",
+    "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
+    "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     "not-spec/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
     "not-spec/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     "not-spec/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
@@ -96,6 +98,8 @@ describe("changedFiles", () => {
 
   it("filter:typespec", () => {
     const expected = [
+      "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
+      "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
       "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
