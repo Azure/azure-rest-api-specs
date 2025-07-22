@@ -105,8 +105,8 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(specification)).toEqual(expected);
-    expect(() => filesResolved.filter(specification)).toThrowErrorMatchingInlineSnapshot(
-      `[Error: Parameter 'file' must be relative to a repo root: '/home/mharder/specs-mh/.github/shared/cspell.json']`,
+    expect(() => filesResolved.filter(specification)).toThrowError(
+      "Parameter 'file' must be relative to a repo root",
     );
   });
 
