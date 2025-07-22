@@ -41,6 +41,11 @@ import {
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
 
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { execSync } from 'child_process';
+
 /**
  * @typedef {Object} CheckMetadata
  * @property {number} precedence
@@ -971,11 +976,7 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     });
 
     core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
-    // Extract single JSON file from tar and parse
-    const fs = require("fs");
-    const os = require("os");
-    const path = require("path");
-    const { execSync } = require("child_process");
+
     // Write zip buffer to temp file and extract JSON
     const tmpZip = path.join(os.tmpdir(), `job-summary-${runId}.zip`);
     // Convert ArrayBuffer to Buffer
