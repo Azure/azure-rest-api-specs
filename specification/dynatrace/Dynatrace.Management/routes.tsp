@@ -18,8 +18,6 @@ interface MonitorsOperationGroup {
   /**
    * Get the total number of connected resources for the given marketplace subscription Id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Monitors_GetAllConnectedResourcesCount")
   @autoRoute
   getAllConnectedResourcesCount is ArmProviderActionSync<
     Request = MarketplaceSubscriptionIdRequest,
@@ -30,9 +28,7 @@ interface MonitorsOperationGroup {
   /**
    * Get Marketplace SaaS resource details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Monitors_GetMarketplaceSaaSResourceDetails")
   @autoRoute
   getMarketplaceSaaSResourceDetails is ArmProviderActionSync<
     Request = MarketplaceSaaSResourceDetailsRequest,
@@ -47,9 +43,7 @@ interface CreationSupportedOperationGroup {
   /**
    * Informs if the current subscription is being already monitored for selected Dynatrace environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Dynatrace environment.")
-  @operationId("CreationSupported_List")
   @route("/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/subscriptionStatuses/{dynatraceEnvironmentId}")
   @get
   list(
@@ -66,9 +60,7 @@ interface CreationSupportedOperationGroup {
   /**
    * Informs if the current subscription is being already monitored for selected Dynatrace environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Dynatrace environment.")
-  @operationId("CreationSupported_Get")
   @autoRoute
   @get
   @action("default")
