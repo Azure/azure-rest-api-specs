@@ -26,6 +26,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(Azure.AI.Projects.Sku, "ModelDeploymentSku");
 @@clientName(Azure.AI.Projects.SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
+// Do not use terms "request" or "response" in class names as these are REST API terms
+@@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
+@@clientName(Azure.AI.Projects.PendingUploadRequest, "PendingUploadOptions");
+@@clientName(Azure.AI.Projects.PendingUploadResponse, "PendingUploadResult");
+
 // In Python, the emitter changes "keys" to "keys_property", since there is already
 // a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
 @@clientName(Azure.AI.Projects.CustomCredential.keys,
