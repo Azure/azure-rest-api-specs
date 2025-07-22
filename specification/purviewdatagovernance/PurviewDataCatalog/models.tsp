@@ -740,3 +740,112 @@ model DataProductFacetRequest {
   @doc("To filter by multiple facets.")
   facets?: ModelsFacetRequestObject[];
 }
+
+@doc("Catalog model domain.")
+model CatalogModelDomain {
+  @doc("The status of the domain.")
+  status?: CatalogModelStatus;
+
+  @doc("The type of the domain.")
+  type?: CatalogModelDomainTypeEnum;
+
+  @doc("The unique identifier of the domain.")
+  id?: Azure.Core.uuid;
+
+  @doc("The name of the domain.")
+  name?: string;
+
+  @doc("Whether the domain is restricted.")
+  isRestricted?: boolean;
+
+  @doc("The system data of the domain.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("The description of the domain.")
+  description?: string;
+
+  @doc("The parent domain identifier.")
+  parentId?: Azure.Core.uuid;
+
+  @doc("The thumbnail properties of the domain.")
+  thumbnail?: CatalogModelDomainAllOfThumbnail;
+
+  @doc("The list of platform domains.")
+  domains?: CatalogModelPlatformDomain[];
+
+  @doc("The managed attributes associated with the domain.")
+  managedAttributes?: CatalogModelManagedAttribute[];
+}
+
+@doc("CatalogModelDomainTypeEnum")
+union CatalogModelDomainTypeEnum {
+  @doc("The status is FunctionalUnit.")
+  FunctionalUnit: "FunctionalUnit",
+
+  @doc("The status is LineOfBusiness.")
+  LineOfBusiness: "LineOfBusiness",
+
+  @doc("The status is DataDomain.")
+  DataDomain: "DataDomain",
+
+  @doc("The status is Regulatory.")
+  Regulatory: "Regulatory",
+
+  @doc("The status is Project.")
+  Project: "Project",
+
+  string,
+}
+
+@doc("Catalog model domain thumbnail properties.")
+model CatalogModelDomainAllOfThumbnail {
+  @doc("The color of the thumbnail.")
+  color?: string;
+}
+
+@doc("Catalog model platform domain.")
+model CatalogModelPlatformDomain {
+  @doc("The name of the platform domain.")
+  name?: string;
+
+  @doc("The friendly name of the platform domain.")
+  friendlyName?: string;
+
+  @doc("The related collections of the platform domain.")
+  relatedCollections?: CatalogModelRelatedCollection[];
+}
+
+@doc("Catalog model related collection.")
+model CatalogModelRelatedCollection {
+  @doc("The name of the related collection.")
+  name?: string;
+
+  @doc("The friendly name of the related collection.")
+  friendlyName?: string;
+
+  @doc("The parent collection of the related collection.")
+  parentCollection?: CatalogModelRelatedCollectionParentCollection;
+}
+
+@doc("Catalog model related collection parent collection.")
+model CatalogModelRelatedCollectionParentCollection {
+  @doc("The type of the parent collection.")
+  type?: RelatedCollectionParentCollectionTypeEnum;
+
+  @doc("The reference name of the parent collection.")
+  refName?: string;
+}
+
+@doc("Related collection parent collection type enumeration.")
+union RelatedCollectionParentCollectionTypeEnum {
+  @doc("Collection reference type.")
+  CollectionReference: "CollectionReference",
+
+  string,
+}
+
+@doc("Response containing a list of domains.")
+model CatalogModelDomainResponse {
+  @doc("The list of domains.")
+  value: CatalogModelDomain[];
+}

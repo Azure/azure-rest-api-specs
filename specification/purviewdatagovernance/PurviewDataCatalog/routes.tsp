@@ -751,3 +751,90 @@ op deleteDataProductRelationship is Azure.Core.Foundations.Operation<
     statusCode: 204;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Retrieves a list of business domains.")
+@route("/businessdomains")
+@get
+op getDomain is Azure.Core.Foundations.Operation<
+  {
+    @doc("skiptoken")
+    @query("$skipToken")
+    $skipToken?: string;
+
+    @doc("writeOnly")
+    @query("writeOnly")
+    writeOnly?: boolean;
+  },
+  CatalogModelDomainResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Creates a new business domain.")
+@route("/businessdomains")
+@post
+op createDomain is Azure.Core.Foundations.Operation<
+  CatalogModelDomain,
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The created business domain.")
+    @body
+    body: CatalogModelDomain;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Updates an existing business domain.")
+@route("/businessdomains/{domainId}")
+@put
+op replaceDomainDomainId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the business domain.")
+    @path
+    domainId: Azure.Core.uuid;
+
+    @doc("The updated business domain.")
+    @bodyRoot
+    body?: CatalogModelDomain;
+  },
+  CatalogModelDomain,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Retrieves an existing business domain.")
+@route("/businessdomains/{domainId}")
+@get
+op getDomainDomainId is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the business domain.")
+    @path
+    domainId: Azure.Core.uuid;
+  },
+  CatalogModelDomain,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("BusinessDomain")
+@doc("Deletes an existing business domain.")
+@route("/businessdomains/{domainId}")
+@delete
+op deleteDomain is Azure.Core.Foundations.Operation<
+  {
+    @doc("The unique identifier of the business domain.")
+    @path
+    domainId: Azure.Core.uuid;
+  },
+  {
+    @statusCode
+    statusCode: 204;
+  }
+>;
