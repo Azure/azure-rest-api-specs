@@ -6,7 +6,7 @@ using WebPubSubService;
 
 namespace Customizations;
 
-model WebSubPubClientOptions {
+model WebPubSubClientOptions {
   /** Target hub name, which should start with alphabetic characters and only contain
      alpha-numeric characters or underscore. */
   hub: string;
@@ -14,7 +14,7 @@ model WebSubPubClientOptions {
 
 @@clientInitialization(WebPubSubService,
   {
-    parameters: WebSubPubClientOptions,
+    parameters: WebPubSubClientOptions,
   }
 );
 
