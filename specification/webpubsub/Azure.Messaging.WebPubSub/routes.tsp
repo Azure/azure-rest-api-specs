@@ -65,13 +65,13 @@ interface WebPubSubServiceOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections in the hub.
        */
-      @query("excluded")
+      @query
       excluded?: string[];
 
       /**
        * The reason closing the client connection.
        */
-      @query("reason")
+      @query
       reason?: string;
     },
     void
@@ -97,26 +97,26 @@ interface WebPubSubServiceOperationGroup {
       /**
        * User Id.
        */
-      @query("userId")
+      @query
       userId?: string;
 
       /**
        * Roles that the connection with the generated token will have.
        */
-      @query("role")
+      @query
       roles?: string[];
 
       /**
        * The expire time of the generated token.
        */
       @minValue(1)
-      @query("minutesToExpire")
+      @query
       minutesToExpire?: int32 = 60;
 
       /**
        * Groups that the connection will join when it connects.
        */
-      @query("group")
+      @query
       groups?: string[];
 
       /**
@@ -124,7 +124,7 @@ interface WebPubSubServiceOperationGroup {
        * PubSub for Socket.IO, only the default value is supported. For Web PubSub, the
        * valid values are 'Default' and 'MQTT'.
        */
-      @query("clientType")
+      @query
       clientProtocol?: WebPubSubClientType = WebPubSubClientType.Default;
     },
     ClientTokenResponse & {
@@ -183,14 +183,14 @@ interface WebPubSubServiceOperationGroup {
       /**
        * Excluded connection Ids.
        */
-      @query("excluded")
+      @query
       excluded?: string[];
 
       /**
        * Following OData filter syntax to filter out the subscribers receiving the
        * messages.
        */
-      @query("filter")
+      @query
       filter?: string;
 
       /**
@@ -201,7 +201,7 @@ interface WebPubSubServiceOperationGroup {
        * can help when the client's bandwidth is limited.
        */
       @maxValue(300)
-      @query("messageTtlSeconds")
+      @query
       messageTtlSeconds?: int32;
 
       /**
@@ -247,7 +247,7 @@ interface WebPubSubServiceOperationGroup {
       /**
        * The reason closing the client connection.
        */
-      @query("reason")
+      @query
       reason?: string;
     },
     void
@@ -319,7 +319,7 @@ interface WebPubSubServiceOperationGroup {
        * can help when the client's bandwidth is limited.
        */
       @maxValue(300)
-      @query("messageTtlSeconds")
+      @query
       messageTtlSeconds?: int32;
 
       /**
@@ -429,13 +429,13 @@ interface WebPubSubServiceOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections in the group.
        */
-      @query("excluded")
+      @query
       excluded?: string[];
 
       /**
        * The reason closing the client connection.
        */
-      @query("reason")
+      @query
       reason?: string;
     },
     void
@@ -471,14 +471,14 @@ interface WebPubSubServiceOperationGroup {
       /**
        * Excluded connection Ids
        */
-      @query("excluded")
+      @query
       excluded?: string[];
 
       /**
        * Following OData filter syntax to filter out the subscribers receiving the
        * messages.
        */
-      @query("filter")
+      @query
       filter?: string;
 
       /**
@@ -489,7 +489,7 @@ interface WebPubSubServiceOperationGroup {
        * can help when the client's bandwidth is limited.
        */
       @maxValue(300)
-      @query("messageTtlSeconds")
+      @query
       messageTtlSeconds?: int32;
 
       /**
@@ -540,7 +540,7 @@ interface WebPubSubServiceOperationGroup {
        */
       @maxValue(200)
       @minValue(1)
-      @query("maxpagesize")
+      @query
       maxpagesize?: int32;
 
       /**
@@ -549,7 +549,7 @@ interface WebPubSubServiceOperationGroup {
        */
       @maxValue(2147483647)
       @minValue(1)
-      @query("top")
+      @query
       top?: int32;
 
       /**
@@ -559,7 +559,7 @@ interface WebPubSubServiceOperationGroup {
        * continuationToken in the next request to receive the subsequent page of data.
        * If this parameter is omitted, the server will return the first page of results.
        */
-      @query("continuationToken")
+      @query
       continuationToken?: string;
     },
     GroupMemberPagedValues
@@ -677,7 +677,7 @@ interface WebPubSubServiceOperationGroup {
        * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
        * the group name.
        */
-      @query("targetName")
+      @query
       targetName?: string;
     },
     void
@@ -718,7 +718,7 @@ interface WebPubSubServiceOperationGroup {
        * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
        * the group name.
        */
-      @query("targetName")
+      @query
       targetName?: string;
     },
     {
@@ -765,7 +765,7 @@ interface WebPubSubServiceOperationGroup {
        * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
        * the group name.
        */
-      @query("targetName")
+      @query
       targetName?: string;
     },
     {
@@ -834,13 +834,13 @@ interface WebPubSubServiceOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections for the user.
        */
-      @query("excluded")
+      @query
       excluded?: string[];
 
       /**
        * The reason closing the client connection.
        */
-      @query("reason")
+      @query
       reason?: string;
     },
     void
@@ -875,7 +875,7 @@ interface WebPubSubServiceOperationGroup {
        * Following OData filter syntax to filter out the subscribers receiving the
        * messages.
        */
-      @query("filter")
+      @query
       filter?: string;
 
       /**
@@ -886,7 +886,7 @@ interface WebPubSubServiceOperationGroup {
        * can help when the client's bandwidth is limited.
        */
       @maxValue(300)
-      @query("messageTtlSeconds")
+      @query
       messageTtlSeconds?: int32;
 
       /**
