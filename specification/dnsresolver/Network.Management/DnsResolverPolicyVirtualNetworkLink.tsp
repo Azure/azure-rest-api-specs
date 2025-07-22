@@ -46,13 +46,13 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        * ETag of the resource. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
       @header
-      IfMatch?: string;
+      ifMatch?: string;
 
       /**
        * Set to '*' to allow a new resource to be created, but to prevent updating an existing resource. Other values will be ignored.
        */
       @header
-      IfNoneMatch?: string;
+      ifNoneMatch?: string;
     },
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -69,7 +69,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        * ETag of the resource. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
       @header
-      IfMatch?: string;
+      ifMatch?: string;
     }
   >;
 
@@ -83,7 +83,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        * ETag of the resource. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
       @header
-      IfMatch?: string;
+      ifMatch?: string;
     }
   >;
 

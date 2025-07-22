@@ -51,3 +51,8 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_05_01: "2025-05-01",
 }
+
+/**
+ * Common operations available on all Azure Resource Manager resources.
+ */
+interface Operations extends Azure.ResourceManager.Operations {}
