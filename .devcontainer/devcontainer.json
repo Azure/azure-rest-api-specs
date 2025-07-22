@@ -6,7 +6,7 @@
   "hostRequirements": {
     "cpus": 4
   },
-  "postCreateCommand": "apt update",
+  "postCreateCommand": "bash .devcontainer/init.sh",
   "features": {
     // these are already in the codespaces image.
     // "mcr.microsoft.com/devcontainers/dotnet:9.0-noble": {},
@@ -14,10 +14,39 @@
     //"ghcr.io/devcontainers/features/node:1": {},
     // "ghcr.io/devcontainers/features/java:1": {},
     // "ghcr.io/devcontainers/features/python:1": {},
-    "ghcr.io/devcontainers/features/powershell:1": {},
-    "mcr.microsoft.com/devcontainers/rust": {}
+    "ghcr.io/devcontainers/features/powershell:1": {}
+    // "mcr.microsoft.com/devcontainers/rust": {}
   },
   "customizations": {
+    "codespaces": {
+      "repositories": {
+        "Azure/azure-sdk-for-net": {
+          "permissions": {
+            "contents": "write"
+          }
+        },
+        "Azure/azure-sdk-for-java": {
+          "permissions": {
+            "contents": "write"
+          }
+        },
+        "Azure/azure-sdk-for-js": {
+          "permissions": {
+            "contents": "write"
+          }
+        },
+        "Azure/azure-sdk-for-python": {
+          "permissions": {
+            "contents": "write"
+          }
+        },
+        "Azure/azure-sdk-for-go": {
+          "permissions": {
+            "contents": "write"
+          }
+        }
+      }
+    },
     "vscode": {
       // Keep in sync with .vscode/extensions.json
       "extensions": [
