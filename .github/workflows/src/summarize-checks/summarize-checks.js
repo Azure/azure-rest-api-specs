@@ -45,7 +45,6 @@ import {
 import fs from "fs/promises";
 import os from "os";
 import path from "path";
-import { execSync } from "child_process";
 
 /**
  * @typedef {Object} CheckMetadata
