@@ -1,3 +1,5 @@
+// Keep in sync with .github/shared/eslint.config.js
+
 import js from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import globals from "globals";
