@@ -465,6 +465,24 @@
         ]
       }
     },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "title": "Tracked Resource",
@@ -484,6 +502,53 @@
         }
       ]
     },
+    "IdentitySelector": {
+      "type": "object",
+      "description": "IdentitySelector represents the selection of a managed identity for use.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/ManagedServiceIdentitySelectorType",
+          "description": "The type of managed identity that is being selected."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identityType"
+      ]
+    },
+    "IdentitySelectorUpdate": {
+      "type": "object",
+      "description": "IdentitySelector represents the selection of a managed identity for use.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/ManagedServiceIdentitySelectorType",
+          "description": "The type of managed identity that is being selected."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
     "IdentitySetResource": {
       "type": "object",
       "description": "Identity Set resource definition",
@@ -491,6 +556,10 @@
         "properties": {
           "$ref": "#/definitions/IdentitySetResourceProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -572,6 +641,10 @@
           "type": "string",
           "description": "The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data"
         },
+        "storageAccountConfiguration": {
+          "$ref": "#/definitions/StorageAccountConfiguration",
+          "description": "Bring your own storage account configurations for IdentitySet."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -627,6 +700,10 @@
         "keyVaultId": {
           "type": "string",
           "description": "The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data"
+        },
+        "storageAccountConfiguration": {
+          "$ref": "#/definitions/StorageAccountConfigurationUpdate",
+          "description": "Bring your own storage account configurations for IdentitySet."
         }
       }
     },
@@ -637,6 +714,10 @@
         "properties": {
           "$ref": "#/definitions/IdentitySetResourcePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -644,6 +725,30 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "ManagedServiceIdentitySelectorType": {
+      "type": "string",
+      "description": "The type of managed identity.",
+      "enum": [
+        "SystemAssignedIdentity",
+        "UserAssignedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentitySelectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "SystemAssignedIdentity",
+            "description": "System Assigned Identity."
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "UserAssignedIdentity",
+            "description": "User Assigned Identity."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -693,6 +798,50 @@
         ]
       },
       "readOnly": true
+    },
+    "StorageAccountConfiguration": {
+      "type": "object",
+      "description": "Storage account configuration.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "IdentitySet storage account resource identifier.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "storageAccountIdentity": {
+          "$ref": "#/definitions/IdentitySelector",
+          "description": "The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned."
+        }
+      }
+    },
+    "StorageAccountConfigurationUpdate": {
+      "type": "object",
+      "description": "Storage account configuration.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "IdentitySet storage account resource identifier.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "storageAccountIdentity": {
+          "$ref": "#/definitions/IdentitySelectorUpdate",
+          "description": "The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned."
+        }
+      }
     }
   },
   "parameters": {}

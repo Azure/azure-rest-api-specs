@@ -34,6 +34,43 @@ union ProvisioningState {
   string,
 }
 
+@doc("IdentitySelector represents the selection of a managed identity for use.")
+model IdentitySelector {
+  @doc("The type of managed identity that is being selected.")
+  identityType: ManagedServiceIdentitySelectorType;
+
+  @doc("The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.")
+  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@doc("The type of managed identity.")
+union ManagedServiceIdentitySelectorType {
+  @doc("System Assigned Identity.")
+  SystemAssignedIdentity: "SystemAssignedIdentity",
+
+  @doc("User Assigned Identity.")
+  UserAssignedIdentity: "UserAssignedIdentity",
+
+  string,
+}
+
+@doc("Storage account configuration.")
+model StorageAccountConfiguration {
+  @doc("IdentitySet storage account resource identifier.")
+  storageAccountId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
+  storageAccountIdentity?: IdentitySelector;
+}
+
 @doc("Identity Set Properties defines the properties of the Identity Set.")
 model IdentitySetResourceProperties {
   @doc("Tenant id in which scopes are present. Identity service should have the User.Read.All permission on this tenant.")
@@ -70,6 +107,9 @@ model IdentitySetResourceProperties {
   @doc("The URI of the keyvault which stores the keys for encryption and decryption of the sensitive client data")
   keyVaultId?: string;
 
+  @doc("Bring your own storage account configurations for IdentitySet.")
+  storageAccountConfiguration?: StorageAccountConfiguration;
+
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -94,6 +134,8 @@ model IdentitySetResource is TrackedResource<IdentitySetResourceProperties> {
   @doc("The name of the Identity Set resource.")
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
