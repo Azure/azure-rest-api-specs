@@ -38,9 +38,9 @@ Generate all API versions currently shipped for this package
 multiapi: true
 default-api-version: "2024-11-01"
 batch:
+  - tag: package-2025-03-01-only
   - tag: package-2024-11-04-only
   - tag: package-2024-11-01-only
-  - tag: package-2024-03-02-only
   - tag: package-2023-10-02-only
   - tag: package-2023-07-03-only
   - tag: package-2023-04-02-only
@@ -66,6 +66,16 @@ output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compu
 perform-load: false
 ```
 
+### Tag: package-2025-03-01-only
+
+These settings apply only when `--tag=package-2025-03-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2025-03-01-only'
+namespace: azure.mgmt.compute.v2025_01_02
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2025_01_02
+```
+
 ### Tag: package-2024-11-04-only
 
 These settings apply only when `--tag=package-2024-11-04-only --python` is specified on the command line.
@@ -85,17 +95,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: azure.mgmt.compute.v2024_11_01
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2024_11_01
 ```
-
-### Tag: package-2024-03-02-only
-
-These settings apply only when `--tag=package-2024-03-02-only --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2024-03-02-only'
-namespace: azure.mgmt.compute.v2024_03_02
-output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2024_03_02
-```
-
 
 ### Tag: package-2023-10-02-only
 

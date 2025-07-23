@@ -1,0 +1,190 @@
+{
+  "title": "Runs_SubmitToolOutputsToRun_MaximumSet",
+  "operationId": "Runs_SubmitToolOutputsToRun",
+  "parameters": {
+    "api-version": "v1",
+    "threadId": "thread_abc123",
+    "runId": "run_def456",
+    "body": {
+      "tool_outputs": [
+        {
+          "tool_call_id": "call_abc123",
+          "output": "{\"result\": 3.0, \"type\": \"mean\", \"count\": 5}"
+        },
+        {
+          "tool_call_id": "call_def456",
+          "output": "{\"chart_url\": \"https://example.com/chart.png\", \"format\": \"png\"}"
+        }
+      ],
+      "stream": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_def456",
+        "object": "thread.run",
+        "thread_id": "thread_abc123",
+        "assistant_id": "asst_abc123",
+        "status": "in_progress",
+        "required_action": {
+          "type": "submit_tool_outputs",
+          "submit_tool_outputs": {
+            "tool_calls": [
+              {
+                "id": "call_abc123",
+                "type": "function",
+                "function": {
+                  "name": "calculate_metrics",
+                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
+                }
+              },
+              {
+                "id": "call_def456",
+                "type": "function",
+                "function": {
+                  "name": "generate_chart",
+                  "arguments": "{\"data\": [10, 20, 30], \"chart_type\": \"line\"}"
+                }
+              }
+            ]
+          }
+        },
+        "last_error": {
+          "code": "server_error",
+          "message": "jadlgjrkhbhukfc"
+        },
+        "model": "gpt-4",
+        "instructions": "You are a helpful assistant. Analyze the data carefully and provide insights.",
+        "tools": [
+          {
+            "type": "code_interpreter"
+          },
+          {
+            "type": "file_search"
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "calculate_metrics",
+              "description": "Calculate statistical metrics",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  },
+                  "metric_type": {
+                    "type": "string",
+                    "enum": [
+                      "mean",
+                      "median",
+                      "std"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "generate_chart",
+              "description": "Generate a chart from data",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array"
+                  },
+                  "chart_type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "created_at": 1736869300,
+        "expires_at": 1736872900,
+        "started_at": 1736869301,
+        "completed_at": 12,
+        "cancelled_at": 18,
+        "failed_at": 15,
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 2,
+          "total_tokens": 10
+        },
+        "temperature": 0.8,
+        "top_p": 0.95,
+        "max_prompt_tokens": 8192,
+        "max_completion_tokens": 4096,
+        "truncation_strategy": {
+          "type": "last_messages",
+          "last_messages": 10
+        },
+        "tool_choice": "auto",
+        "response_format": {
+          "type": "json_object"
+        },
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": [
+              "file_abc123",
+              "file_def456"
+            ],
+            "data_sources": [
+              {
+                "uri": "https://example.com/dataset.csv",
+                "type": "uri_asset"
+              }
+            ]
+          },
+          "file_search": {
+            "vector_store_ids": [
+              "vs_abc123"
+            ],
+            "vector_stores": [
+              {
+                "name": "knowledge_base",
+                "configuration": {
+                  "data_sources": [
+                    {
+                      "uri": "https://example.com/docs.pdf",
+                      "type": "uri_asset"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "azure_ai_search": {
+            "indexes": [
+              {
+                "index_connection_id": "conn_abc123",
+                "index_name": "data_index",
+                "query_type": "semantic",
+                "top_k": 5,
+                "filter": "timestamp gt 2024-01-01",
+                "index_asset_id": "idx_abc123"
+              }
+            ]
+          }
+        },
+        "parallel_tool_calls": true,
+        "metadata": {
+          "task_id": "analysis_001",
+          "priority": "high",
+          "user": "analyst_user"
+        }
+      }
+    }
+  }
+}
