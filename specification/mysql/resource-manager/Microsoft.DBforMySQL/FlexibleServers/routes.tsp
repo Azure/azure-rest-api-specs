@@ -118,7 +118,7 @@ interface OperationProgress {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface getPrivateDnsZoneSuffix {
+interface GetPrivateDnsZoneSuffix {
   /**
    * Get private DNS zone suffix in the cloud.
    */
