@@ -12248,10 +12248,12 @@
       "properties": {
         "automaticallyApprove": {
           "type": "boolean",
-          "description": "Specifies if Scheduled Events should be auto-approved when all instances are down, its default value is true"
-
+          "description": "Specifies if Scheduled Events should be auto-approved when all instances are down.\nits default value is true"
         }
-      }
+      },
+      "required": [
+        "automaticallyApprove"
+      ]
     },
     "AllocationStrategy": {
       "type": "string",
@@ -13938,7 +13940,10 @@
           "type": "string",
           "description": "Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered."
         }
-      }
+      },
+      "required": [
+        "scheduledEventsApiVersion"
+      ]
     },
     "ExecutionState": {
       "type": "string",
