@@ -169,7 +169,7 @@ namespace Microsoft.EventGrid {
 
     @doc("added doc")
     docstring: string;
-  };
+  }
 
   @doc("The result of the Reject operation.")
   model RejectResult {
