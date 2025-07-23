@@ -99,7 +99,7 @@ interface Servers {
   backupAndExportCreate is ArmResourceActionAsync<
     Server,
     BackupAndExportRequest,
-    ArmResponse<BackupAndExportResponse>
+    BackupAndExportResponse
   >;
 
   /**
