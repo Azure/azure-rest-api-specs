@@ -139,17 +139,17 @@ interface Evaluations {
 
 @route("singleEvaluation")
 @added(Versions.v2025_05_15_preview)
-interface SingleEvaluations {
+interface SingleEvaluationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of a single evaluation operation.")
   @added(Versions.v2025_07_31_preview)
   @route("/{operationId}")
-  getSingleEvaluationStatus is Foundations.GetOperationStatus<{}, SingleEvaluationResults>;
+  getSingleEvaluationStatus is Foundations.GetOperationStatus<{}, SingleEvaluationResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create an single evaluation run with the specified configuration.")
   @added(Versions.v2025_07_31_preview)
-  @pollingOperation(SingleEvaluations.getSingleEvaluationStatus)
+  @pollingOperation(SingleEvaluationOperations.getSingleEvaluationStatus)
   @post
   op createSingleEvaluation is Foundations.LongRunningOperation<
     {
@@ -163,7 +163,7 @@ interface SingleEvaluations {
 
       @doc("Immediate result of the evaluation.")
       @Http.bodyRoot
-      SingleEvaluationResults: SingleEvaluationResults;
+      SingleEvaluationResults: SingleEvaluationResult;
     },
     AcceptedResponse
   >;

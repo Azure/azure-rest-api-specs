@@ -1430,7 +1430,7 @@
     },
     "/singleEvaluation": {
       "post": {
-        "operationId": "SingleEvaluations_CreateSingleEvaluation",
+        "operationId": "SingleEvaluationOperations_CreateSingleEvaluation",
         "summary": "Create an single evaluation run with the specified configuration.",
         "description": "Long-running operation.",
         "parameters": [
@@ -1451,7 +1451,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/SingleEvaluationResults"
+              "$ref": "#/definitions/SingleEvaluationResult"
             },
             "headers": {
               "Operation-Location": {
@@ -1479,7 +1479,7 @@
     },
     "/singleEvaluation/{operationId}": {
       "get": {
-        "operationId": "SingleEvaluations_GetSingleEvaluationStatus",
+        "operationId": "SingleEvaluationOperations_GetSingleEvaluationStatus",
         "description": "Get the result of a single evaluation operation.",
         "parameters": [
           {
@@ -1513,7 +1513,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/SingleEvaluationResults",
+                  "$ref": "#/definitions/SingleEvaluationResult",
                   "description": "The result of the operation."
                 }
               },
@@ -4660,7 +4660,7 @@
         "evaluators"
       ]
     },
-    "SingleEvaluationResults": {
+    "SingleEvaluationResult": {
       "type": "object",
       "description": "Single Evaluation Results Definition",
       "properties": {

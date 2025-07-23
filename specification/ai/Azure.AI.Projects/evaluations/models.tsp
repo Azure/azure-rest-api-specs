@@ -446,7 +446,7 @@ model SingleEvaluation {
 
 @doc("Single Evaluation Results Definition")
 @added(Versions.v2025_07_31_preview)
-model SingleEvaluationResults {
+model SingleEvaluationResult {
   @doc("Results of a single row of data processed across evaluators.")
   evaluationResult: EvaluationResult;
 }
