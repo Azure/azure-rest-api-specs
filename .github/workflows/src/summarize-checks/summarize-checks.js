@@ -346,7 +346,10 @@ export async function summarizeChecksImpl(
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
   core.info(
-    `Summarize checks against ${owner}/${repo}#${issue_number} will be: \nRemoving labels [${Array.from(labelContext.toRemove).join(", ")}] then \nAdding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+    `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
+      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
+      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
   // for (const label of labelContext.toRemove) {
