@@ -56,20 +56,6 @@ model VoiceLiveRequestMessageReferenceItem { // extends VoiceLiveConversationReq
   id: string;
 }
 
-model VoiceLiveConversationItem {
-  ...VoiceLiveConversationItemBase;
-  id?: string;
-  arguments?: string;
-  call_id?: string;
-  content?: VoiceLiveConversationItemWithReferenceContent[];
-  name?: string;
-  object?: "realtime.item";
-  output?: string;
-  role?: "user" | "assistant" | "system";
-  status?: "completed" | "incomplete" | "in_progress";
-  type?: "message" | "function_call" | "function_call_output";
-}
-
 @discriminator("type")
 model VoiceLiveConversationResponseItem {
   ...VoiceLiveConversationItemBase;

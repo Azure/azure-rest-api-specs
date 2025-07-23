@@ -348,7 +348,7 @@ model VoiceLiveClientEventConversationItemCreate extends VoiceLiveClientEvent {
   previous_item_id?: string;
 
   // Tool customization: apply enriched item definition hierarchy
-  item?: VoiceLiveConversationItem;
+  item?: VoiceLiveConversationItemWithReferenceContent;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
@@ -654,7 +654,7 @@ model VoiceLiveServerEventConversationItemCreated extends VoiceLiveServerEvent {
   previous_item_id: string;
 
   // Tool customization: apply enriched item definition hierarchy
-  item?: VoiceLiveConversationItem;
+  item?: VoiceLiveConversationItemWithReferenceContent;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
@@ -801,7 +801,7 @@ model VoiceLiveServerEventResponseOutputItemAdded extends VoiceLiveServerEvent {
   output_index: int32;
 
   // Tool customization: apply enriched item definition hierarchy
-  item?: VoiceLiveConversationItem;
+  item?: VoiceLiveConversationItemWithReferenceContent;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
