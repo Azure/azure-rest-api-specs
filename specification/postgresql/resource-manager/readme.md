@@ -69,27 +69,47 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json
     reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: PutResponseCodes
     from: BackupsAutomaticAndOnDemand.json
     reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: BackupsAutomaticAndOnDemand.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Capabilities.json
+    where: $.definitions.CapabiityList
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Operations.json
+    where: $.definitions.OperationList
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
     from: PrivateEndpointConnections.json
     reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: AdvancedThreatProtectionSettings.json
-    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualEndpoints.json
-    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: QuotaUsages.json
+    where: $.definitions.QuotaUsageList
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    where: $.definitions.TuningOptionsList
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPatch
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: VirtualEndpoints.json
+    where: $.definitions.VirtualEndpointsList
+    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
     from: VirtualEndpoints.json
     reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
