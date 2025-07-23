@@ -66,7 +66,7 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
-  await core.setOutput("issue_number", issue_number);
+  core.setOutput("issue_number", issue_number);
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
