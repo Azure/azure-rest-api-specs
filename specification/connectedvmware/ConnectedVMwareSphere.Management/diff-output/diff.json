@@ -1,48 +1,5 @@
 {
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default": {
-      "put": {
-        "parameters": [
-          [
-            "~",
-            {
-              "x-ms-skip-url-encoding__deleted": true
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      },
-      "patch": {
-        "parameters": [
-          [
-            "~",
-            {
-              "x-ms-skip-url-encoding__deleted": true
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default": {
-      "put": {
-        "parameters": [
-          [
-            "~",
-            {
-              "x-ms-skip-url-encoding__deleted": true
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
     "/providers/Microsoft.ConnectedVMwarevSphere/operations": {
       "get": {
         "responses": {
@@ -179,23 +136,6 @@
         ]
       ]
     },
-    "ClusterInventoryItem": {
-      "x-ms-discriminator-value__deleted": "Cluster",
-      "properties__added": {
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "Cluster"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required__added": [
-        "inventoryType"
-      ]
-    },
     "Datastore": {
       "allOf__added": [
         {
@@ -241,23 +181,6 @@
           " "
         ]
       ]
-    },
-    "DatastoreInventoryItem": {
-      "x-ms-discriminator-value__deleted": "Datastore",
-      "required__added": [
-        "inventoryType"
-      ],
-      "properties": {
-        "inventoryType__added": {
-          "type": "string",
-          "enum": [
-            "Datastore"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
     },
     "GuestAgent": {
       "allOf": [
@@ -329,24 +252,12 @@
         ]
       ]
     },
-    "HostInventoryItem": {
-      "x-ms-discriminator-value__deleted": "Host",
-      "required__added": [
-        "inventoryType"
-      ],
-      "properties": {
-        "inventoryType__added": {
-          "type": "string",
-          "enum": [
-            "Host"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "InventoryItem": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten__deleted": true
+        }
+      },
       "allOf": [
         [
           "~",
@@ -359,9 +270,6 @@
           }
         ]
       ]
-    },
-    "InventoryItemProperties": {
-      "discriminator__deleted": "inventoryType"
     },
     "OsProfileForVMInstance": {
       "properties": {
@@ -415,23 +323,6 @@
           " "
         ]
       ]
-    },
-    "ResourcePoolInventoryItem": {
-      "x-ms-discriminator-value__deleted": "ResourcePool",
-      "required__added": [
-        "inventoryType"
-      ],
-      "properties": {
-        "inventoryType__added": {
-          "type": "string",
-          "enum": [
-            "ResourcePool"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
     },
     "VCenter": {
       "allOf__added": [
@@ -500,23 +391,6 @@
         ]
       ]
     },
-    "VirtualMachineInventoryItem": {
-      "x-ms-discriminator-value__deleted": "VirtualMachine",
-      "required__added": [
-        "inventoryType"
-      ],
-      "properties": {
-        "inventoryType__added": {
-          "type": "string",
-          "enum": [
-            "VirtualMachine"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "VirtualMachineTemplate": {
       "allOf__added": [
         {
@@ -563,23 +437,6 @@
         ]
       ]
     },
-    "VirtualMachineTemplateInventoryItem": {
-      "x-ms-discriminator-value__deleted": "VirtualMachineTemplate",
-      "required__added": [
-        "inventoryType"
-      ],
-      "properties": {
-        "inventoryType__added": {
-          "type": "string",
-          "enum": [
-            "VirtualMachineTemplate"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "VirtualNetwork": {
       "allOf__added": [
         {
@@ -624,23 +481,6 @@
         [
           " "
         ]
-      ]
-    },
-    "VirtualNetworkInventoryItem": {
-      "x-ms-discriminator-value__deleted": "VirtualNetwork",
-      "properties__added": {
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "VirtualNetwork"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required__added": [
-        "inventoryType"
       ]
     },
     "VmInstanceHybridIdentityMetadata": {

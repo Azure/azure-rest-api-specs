@@ -166,7 +166,8 @@
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -234,7 +235,8 @@
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -437,7 +439,8 @@
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -3309,26 +3312,12 @@
     "ClusterInventoryItem": {
       "type": "object",
       "description": "The cluster inventory item.",
-      "properties": {
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "Cluster"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Cluster"
     },
     "ClusterProperties": {
       "type": "object",
@@ -3480,26 +3469,14 @@
           "type": "integer",
           "format": "int64",
           "description": "Gets or sets Available space of this datastore, in GBs."
-        },
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "Datastore"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Datastore"
     },
     "DatastoreProperties": {
       "type": "object",
@@ -3916,26 +3893,14 @@
           "type": "string",
           "description": "Gets or sets the power state of the host.",
           "readOnly": true
-        },
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "Host"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Host"
     },
     "HostProperties": {
       "type": "object",
@@ -4156,8 +4121,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InventoryItemProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+          "description": "Resource properties."
         },
         "kind": {
           "type": "string",
@@ -4217,6 +4181,7 @@
           "readOnly": true
         }
       },
+      "discriminator": "inventoryType",
       "required": [
         "inventoryType"
       ]
@@ -4829,26 +4794,14 @@
         "parent": {
           "$ref": "#/definitions/InventoryItemDetails",
           "description": "Parent resourcePool inventory resource details."
-        },
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "ResourcePool"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResourcePool"
     },
     "ResourcePoolProperties": {
       "type": "object",
@@ -5702,26 +5655,14 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileInventory",
           "description": "Network properties."
-        },
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "VirtualMachine"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualMachine"
     },
     "VirtualMachineTemplate": {
       "type": "object",
@@ -5790,26 +5731,14 @@
         "folderPath": {
           "type": "string",
           "description": "Gets or sets the folder path of the template."
-        },
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "VirtualMachineTemplate"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualMachineTemplate"
     },
     "VirtualMachineTemplateProperties": {
       "type": "object",
@@ -5975,26 +5904,12 @@
     "VirtualNetworkInventoryItem": {
       "type": "object",
       "description": "The Virtual network inventory item.",
-      "properties": {
-        "inventoryType": {
-          "type": "string",
-          "description": "They inventory type.",
-          "enum": [
-            "VirtualNetwork"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualNetwork"
     },
     "VirtualNetworkProperties": {
       "type": "object",

@@ -13,6 +13,7 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Defines the vCenter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VCenter
   is Azure.ResourceManager.TrackedResource<VCenterProperties, false> {
   ...ResourceNameParameter<
@@ -25,16 +26,17 @@ model VCenter
   /**
    * Gets or sets the extended location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface VCentersOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -52,6 +54,7 @@ interface VCentersOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface VCenters {
   /**
@@ -80,7 +83,7 @@ interface VCenters {
   /**
    * Implements vCenter DELETE method.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VCenter,
     Parameters = {

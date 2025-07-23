@@ -14,6 +14,7 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Defines the HybridIdentityMetadata.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @extensionResource
 @parentResource(VirtualMachineInstance)
@@ -35,7 +36,7 @@ interface VmInstanceHybridIdentityMetadataOperationGroup {
   /**
    * Implements HybridIdentityMetadata GET method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VmInstanceHybridIdentityMetadata_Get")
   get is ArmResourceRead<
     VmInstanceHybridIdentityMetadata,
@@ -45,7 +46,7 @@ interface VmInstanceHybridIdentityMetadataOperationGroup {
   /**
    * Returns the list of HybridIdentityMetadata of the given vm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VmInstanceHybridIdentityMetadata_List")
   list is ArmResourceListByParent<
     VmInstanceHybridIdentityMetadata,

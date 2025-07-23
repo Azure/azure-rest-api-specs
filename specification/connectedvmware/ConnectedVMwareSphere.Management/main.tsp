@@ -34,6 +34,7 @@ using TypeSpec.Versioning;
 /**
  * Self service experience for VMware.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Azure Arc VMware Management Service API" })
 @versioned(Versions)

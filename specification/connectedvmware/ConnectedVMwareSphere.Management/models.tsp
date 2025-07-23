@@ -15,21 +15,21 @@ namespace Microsoft.ConnectedVMwarevSphere;
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Created: "Created",
 }
 
@@ -38,11 +38,11 @@ union ProvisioningState {
  */
 union OsType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Windows: "Windows",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Linux: "Linux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Other: "Other",
 }
 
@@ -51,17 +51,17 @@ union OsType {
  */
 union NICType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmxnet3: "vmxnet3",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmxnet2: "vmxnet2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmxnet: "vmxnet",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   e1000: "e1000",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   e1000e: "e1000e",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pcnet32: "pcnet32",
 }
 
@@ -70,9 +70,9 @@ union NICType {
  */
 union PowerOnBootOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enabled: "enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disabled: "disabled",
 }
 
@@ -81,17 +81,17 @@ union PowerOnBootOption {
  */
 union IPAddressAllocationMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unset: "unset",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dynamic: "dynamic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   static: "static",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   linklayer: "linklayer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   random: "random",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   other: "other",
 }
 
@@ -100,11 +100,11 @@ union IPAddressAllocationMethod {
  */
 union DiskMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   persistent: "persistent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   independent_persistent: "independent_persistent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   independent_nonpersistent: "independent_nonpersistent",
 }
 
@@ -113,19 +113,19 @@ union DiskMode {
  */
 union DiskType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   flat: "flat",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pmem: "pmem",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rawphysical: "rawphysical",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rawvirtual: "rawvirtual",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sparse: "sparse",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sesparse: "sesparse",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `unknown`: "unknown",
 }
 
@@ -134,9 +134,9 @@ union DiskType {
  */
 union FirmwareType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bios: "bios",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   efi: "efi",
 }
 
@@ -145,19 +145,19 @@ union FirmwareType {
  */
 union InventoryType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ResourcePool: "ResourcePool",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VirtualMachine: "VirtualMachine",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VirtualMachineTemplate: "VirtualMachineTemplate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VirtualNetwork: "VirtualNetwork",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cluster: "Cluster",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Datastore: "Datastore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Host: "Host",
 }
 
@@ -166,13 +166,13 @@ union InventoryType {
  */
 union SCSIControllerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lsilogic: "lsilogic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buslogic: "buslogic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pvscsi: "pvscsi",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   lsilogicsas: "lsilogicsas",
 }
 
@@ -181,11 +181,11 @@ union SCSIControllerType {
  */
 union VirtualSCSISharing {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   noSharing: "noSharing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   physicalSharing: "physicalSharing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   virtualSharing: "virtualSharing",
 }
 
@@ -194,11 +194,11 @@ union VirtualSCSISharing {
  */
 union ProvisioningAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   install: "install",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   uninstall: "uninstall",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repair: "repair",
 }
 
@@ -244,6 +244,7 @@ model ResourcePoolProperties {
    * Gets or sets CPUReservationMHz which specifies the CPU size in MHz that is guaranteed
    * to be available.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cpuReservationMHz?: int64;
 
@@ -251,6 +252,7 @@ model ResourcePoolProperties {
    * Gets or sets CPULimitMHz which specifies a CPU usage limit in MHz.
    * Utilization will not exceed this limit even if there are available resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cpuLimitMHz?: int64;
 
@@ -265,6 +267,7 @@ model ResourcePoolProperties {
    * Gets or sets MemReservationMB which specifies the guaranteed available memory in
    * megabytes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memReservationMB?: int64;
 
@@ -272,30 +275,35 @@ model ResourcePoolProperties {
    * Gets or sets MemLimitMB specifies a memory usage limit in megabytes.
    * Utilization will not exceed the specified limit even if there are available resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memLimitMB?: int64;
 
   /**
    * Gets the used physical memory on the pool in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memOverallUsageGB?: int64;
 
   /**
    * Gets the total amount of physical memory on the pool in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memCapacityGB?: int64;
 
   /**
    * Gets the used CPU usage across all cores on the pool in MHz.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cpuOverallUsageMHz?: int64;
 
   /**
    * Gets the max CPU usage across all cores on the pool in MHz.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cpuCapacityMHz?: int64;
 
@@ -395,7 +403,7 @@ model ResourcePatch {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -451,24 +459,28 @@ model ClusterProperties {
   /**
    * Gets the used physical memory on the cluster in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   usedMemoryGB?: int64;
 
   /**
    * Gets the total amount of physical memory on the cluster in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalMemoryGB?: int64;
 
   /**
    * Gets the used CPU usage across all cores on the cluster in MHz.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   usedCpuMHz?: int64;
 
   /**
    * Gets the max CPU usage across all cores on the cluster in MHz.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalCpuMHz?: int64;
 
@@ -543,18 +555,21 @@ model HostProperties {
   /**
    * Gets the used physical memory on the host in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overallMemoryUsageGB?: int64;
 
   /**
    * Gets the total amount of physical memory on the host in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memorySizeGB?: int64;
 
   /**
    * Gets the used CPU usage across all cores in MHz.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overallCpuUsageMHz?: int64;
 
@@ -635,12 +650,14 @@ model DatastoreProperties {
   /**
    * Gets or sets Maximum capacity of this datastore in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   capacityGB?: int64;
 
   /**
    * Gets or sets Available space of this datastore in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   freeSpaceGB?: int64;
 
@@ -659,6 +676,7 @@ model DatastoresList is Azure.Core.Page<Datastore>;
 /**
  * Describes the properties of a VCenter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VCenterProperties {
   /**
    * Gets or sets a unique identifier for this resource.
@@ -724,6 +742,7 @@ model VCenterProperties {
 /**
  * Username / Password Credentials to connect to vcenter.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VICredential {
   /**
    * Gets or sets username to connect with the vCenter.
@@ -741,6 +760,7 @@ model VICredential {
 /**
  * List of VCenters.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VCentersList is Azure.Core.Page<VCenter>;
 
 /**
@@ -778,12 +798,14 @@ model VirtualMachineTemplateProperties {
   /**
    * Gets or sets memory size in MBs for the template.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memorySizeMB?: int32;
 
   /**
    * Gets or sets the number of vCPUs for the template.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   numCPUs?: int32;
 
@@ -972,6 +994,7 @@ model NicIPSettings {
   /**
    * Gets or sets the IP address information being reported for this NIC. This contains the same IPv4 information above plus IPV6 information.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   ipAddressInfo?: NicIPAddressSettings[];
 }
@@ -979,6 +1002,7 @@ model NicIPSettings {
 /**
  * IP address information for a virtual network adapter reported by the fabric.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NicIPAddressSettings {
   /**
    * Gets the ip address allocation method.
@@ -1023,6 +1047,7 @@ model VirtualDisk {
   /**
    * Gets or sets the disk total size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeGB?: int32;
 
   /**
@@ -1402,11 +1427,13 @@ model HardwareProfile {
   /**
    * Gets or sets memory size in MBs for the vm.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memorySizeMB?: int32;
 
   /**
    * Gets or sets the number of vCPUs for the vm.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numCPUs?: int32;
 
   /**
@@ -1455,6 +1482,7 @@ model StorageProfile {
   /**
    * Gets or sets the list of virtual SCSI controllers associated with the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   scsiControllers?: VirtualSCSIController[];
 }
@@ -1462,6 +1490,7 @@ model StorageProfile {
 /**
  * This data object type contains the properties of a SCSI controller device attached to a virtual machine that is reported by the controller.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualSCSIController {
   /**
    * Gets or sets the controller type.
@@ -1576,7 +1605,7 @@ model VirtualMachineInstanceUpdate {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualMachineInstanceUpdateProperties;
 }
@@ -1623,6 +1652,7 @@ model VirtualDiskUpdate {
   /**
    * Gets or sets the disk total size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskSizeGB?: int32;
 
   /**
@@ -1848,6 +1878,7 @@ model VirtualDiskInventory {
   /**
    * Gets or sets the disk total size.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 
@@ -2020,6 +2051,7 @@ model StorageProfileInventory {
 /**
  * The resource pool inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourcePoolInventoryItem extends InventoryItemProperties {
   /**
    * Parent resourcePool inventory resource details.
@@ -2055,6 +2087,7 @@ model InventoryItemDetails {
 /**
  * The VM inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualMachineInventoryItem extends InventoryItemProperties {
   /**
    * Gets or sets the type of the os.
@@ -2170,12 +2203,14 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   /**
    * Gets or sets memory size in MBs for the vm.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memorySizeMB?: int32;
 
   /**
    * Gets or sets the number of vCPU for the vm.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   numCPUs?: int32;
 
@@ -2198,15 +2233,18 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
 /**
  * The VM Template inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
   /**
    * Gets or sets memory size in MBs for the template.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memorySizeMB?: int32;
 
   /**
    * Gets or sets the number of vCPUs for the template.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numCPUs?: int32;
 
   /**
@@ -2251,6 +2289,7 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
 /**
  * The Virtual network inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkInventoryItem extends InventoryItemProperties {
   /**
    * They inventory type.
@@ -2261,6 +2300,7 @@ model VirtualNetworkInventoryItem extends InventoryItemProperties {
 /**
  * The cluster inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterInventoryItem extends InventoryItemProperties {
   /**
    * They inventory type.
@@ -2271,15 +2311,18 @@ model ClusterInventoryItem extends InventoryItemProperties {
 /**
  * The datastore inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatastoreInventoryItem extends InventoryItemProperties {
   /**
    * Gets or sets Maximum capacity of this datastore, in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   capacityGB?: int64;
 
   /**
    * Gets or sets Available space of this datastore, in GBs.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   freeSpaceGB?: int64;
 
   /**
@@ -2291,6 +2334,7 @@ model DatastoreInventoryItem extends InventoryItemProperties {
 /**
  * The host inventory item.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HostInventoryItem extends InventoryItemProperties {
   /**
    * Parent host inventory resource details.
@@ -2324,6 +2368,7 @@ model HostInventoryItem extends InventoryItemProperties {
   /**
    * Gets the total amount of physical memory on the host in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   memorySizeGB?: int64;
 

@@ -13,6 +13,7 @@ namespace Microsoft.ConnectedVMwarevSphere;
 /**
  * Define the virtualMachineInstance.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @extensionResource
 model VirtualMachineInstance
@@ -30,7 +31,7 @@ model VirtualMachineInstance
   /**
    * Gets or sets the extended location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -43,7 +44,7 @@ interface VirtualMachineInstancesOps
         /**
          * The fully qualified Azure Resource manager identifier of the resource.
          */
-        @path
+        @path(#{ allowReserved: true })
         resourceUri: string,
       },
       {},
@@ -74,6 +75,7 @@ interface VirtualMachineInstances {
   /**
    * The operation to update a virtual machine instance.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is VirtualMachineInstancesOps.CustomPatchAsync<
@@ -89,7 +91,7 @@ interface VirtualMachineInstances {
   /**
    * The operation to delete a virtual machine instance.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,

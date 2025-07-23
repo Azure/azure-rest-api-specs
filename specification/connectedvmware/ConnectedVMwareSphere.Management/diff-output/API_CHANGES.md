@@ -1,13 +1,5 @@
 ## Swagger Changes
 
-### Changes for `x-ms-skip-url-encoding`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].patch.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
-| `paths['/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default'].put.parameters[0]['x-ms-skip-url-encoding__deleted']` | deleted | `true` |
-
 ### Changes for `Condition`
 
 | Path | Change Type | Value |
@@ -110,47 +102,6 @@
 | `definitions.VirtualMachineTemplate.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.VirtualNetwork.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
-### Changes for `x-ms-discriminator-value`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `Cluster` |
-| `definitions.DatastoreInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `Datastore` |
-| `definitions.HostInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `Host` |
-| `definitions.ResourcePoolInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `ResourcePool` |
-| `definitions.VirtualMachineInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `VirtualMachine` |
-| `definitions.VirtualMachineTemplateInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `VirtualMachineTemplate` |
-| `definitions.VirtualNetworkInventoryItem['x-ms-discriminator-value__deleted']` | deleted | `VirtualNetwork` |
-
-### Changes for `properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterInventoryItem.properties__added` | added | `{"inventoryType":{"type":"string","enum":["Cluster"],"x-ms-enum":{"modelAsString":false}}}` |
-| `definitions.VirtualNetworkInventoryItem.properties__added` | added | `{"inventoryType":{"type":"string","enum":["VirtualNetwork"],"x-ms-enum":{"modelAsString":false}}}` |
-
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ClusterInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.DatastoreInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.HostInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.ResourcePoolInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualMachineInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualMachineTemplateInventoryItem.required__added` | added | `["inventoryType"]` |
-| `definitions.VirtualNetworkInventoryItem.required__added` | added | `["inventoryType"]` |
-
-### Changes for `inventoryType`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DatastoreInventoryItem.properties.inventoryType__added` | added | `{"type":"string","enum":["Datastore"],"x-ms-enum":{"modelAsString":false}}` |
-| `definitions.HostInventoryItem.properties.inventoryType__added` | added | `{"type":"string","enum":["Host"],"x-ms-enum":{"modelAsString":false}}` |
-| `definitions.ResourcePoolInventoryItem.properties.inventoryType__added` | added | `{"type":"string","enum":["ResourcePool"],"x-ms-enum":{"modelAsString":false}}` |
-| `definitions.VirtualMachineInventoryItem.properties.inventoryType__added` | added | `{"type":"string","enum":["VirtualMachine"],"x-ms-enum":{"modelAsString":false}}` |
-| `definitions.VirtualMachineTemplateInventoryItem.properties.inventoryType__added` | added | `{"type":"string","enum":["VirtualMachineTemplate"],"x-ms-enum":{"modelAsString":false}}` |
-
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -170,11 +121,11 @@
 | `definitions.VICredential.properties.password.format__added` | added | `password` |
 | `definitions.WindowsConfiguration.properties.domainUserPassword.format__added` | added | `password` |
 
-### Changes for `discriminator`
+### Changes for `x-ms-client-flatten`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InventoryItemProperties.discriminator__deleted` | deleted | `inventoryType` |
+| `definitions.InventoryItem.properties.properties['x-ms-client-flatten__deleted']` | deleted | `true` |
 
 ## Modified Values
 

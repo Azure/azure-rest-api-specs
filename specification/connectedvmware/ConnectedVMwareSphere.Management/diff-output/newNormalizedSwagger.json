@@ -87,7 +87,8 @@
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -134,7 +135,8 @@
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -292,7 +294,8 @@
             "name": "resourceUri",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "body",
@@ -2218,25 +2221,12 @@
     },
     "ClusterInventoryItem": {
       "type": "object",
-      "properties": {
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "Cluster"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Cluster"
     },
     "ClusterProperties": {
       "type": "object",
@@ -2380,25 +2370,14 @@
         "freeSpaceGB": {
           "type": "integer",
           "format": "int64"
-        },
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "Datastore"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Datastore"
     },
     "DatastoreProperties": {
       "type": "object",
@@ -2707,25 +2686,14 @@
         "powerState": {
           "type": "string",
           "readOnly": true
-        },
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "Host"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Host"
     },
     "HostProperties": {
       "type": "object",
@@ -2896,8 +2864,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InventoryItemProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/InventoryItemProperties"
         },
         "kind": {
           "type": "string"
@@ -2986,6 +2953,7 @@
           "readOnly": true
         }
       },
+      "discriminator": "inventoryType",
       "required": [
         "inventoryType"
       ]
@@ -3384,25 +3352,14 @@
       "properties": {
         "parent": {
           "$ref": "#/definitions/InventoryItemDetails"
-        },
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "ResourcePool"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ResourcePool"
     },
     "ResourcePoolProperties": {
       "type": "object",
@@ -4209,25 +4166,14 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileInventory"
-        },
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "VirtualMachine"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualMachine"
     },
     "VirtualMachineTemplate": {
       "type": "object",
@@ -4292,25 +4238,14 @@
         },
         "folderPath": {
           "type": "string"
-        },
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "VirtualMachineTemplate"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualMachineTemplate"
     },
     "VirtualMachineTemplateProperties": {
       "type": "object",
@@ -4482,25 +4417,12 @@
     },
     "VirtualNetworkInventoryItem": {
       "type": "object",
-      "properties": {
-        "inventoryType": {
-          "type": "string",
-          "enum": [
-            "VirtualNetwork"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "inventoryType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/InventoryItemProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "VirtualNetwork"
     },
     "VirtualNetworkProperties": {
       "type": "object",
