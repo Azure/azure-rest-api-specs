@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/monitor"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -6,12 +9,42 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
-    azure-resource-provider-folder: "resource-manager"
     emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     output-file: "{azure-resource-provider-folder}/Microsoft.Monitor/Accounts/{version-status}/{version}/azuremonitorworkspace.json"
     new-line: lf
     omit-unreachable-types: true
-parameters:
-  service-dir:
-    default: sdk/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Monitor"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-monitor"
+    namespace: "azure.mgmt.monitor"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-monitor"
+    namespace: "com.azure.resourcemanager.monitor"
+    service-name: "Monitor"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-monitor"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitor"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    package-dir: "armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
