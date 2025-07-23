@@ -103,7 +103,7 @@ suppressions:
   - code: PutGetPatchResponseSchema
     from: FirewallRules.json
     reason: The existing API contract is like this and not be able to change.
-  - code: DeleteResponseBody
+  - code: DeleteResponseBodyEmpty
     from: Migrations.json
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
