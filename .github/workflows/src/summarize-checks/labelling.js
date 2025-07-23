@@ -4,7 +4,7 @@
     2. It calculates what set of labels should be added or removed from the PR.
 */
 
-import { includesAll, includesNone } from "../../../shared/src/array.js";
+import { includesEvery, includesNone } from "../../../shared/src/array.js";
 import {
   brchTsg,
   diagramTsg,
@@ -417,7 +417,7 @@ export function processArmReviewLabels(context, existingLabels) {
   // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
   // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
-  if (includesAll(existingLabels, ["ARMSignedOff"])) {
+  if (includesEvery(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("ARMChangesRequested")) {
       context.toRemove.add("ARMChangesRequested");
     }
@@ -427,7 +427,7 @@ export function processArmReviewLabels(context, existingLabels) {
   }
   // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
   else if (
-    includesAll(existingLabels, ["ARMChangesRequested"]) &&
+    includesEvery(existingLabels, ["ARMChangesRequested"]) &&
     includesNone(existingLabels, ["ARMSignedOff"])
   ) {
     if (existingLabels.includes("WaitForARMFeedback")) {
