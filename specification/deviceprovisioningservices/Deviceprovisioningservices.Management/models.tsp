@@ -139,10 +139,12 @@ union PrivateLinkServiceConnectionStatus {
  */
 union DeviceRegistryNamespaceAuthenticationType {
   string,
- /**
+
+  /**
    * User assigned authentication type.
    */
   UserAssigned: "UserAssigned",
+
   /**
    * System assigned authentication type.
    */
