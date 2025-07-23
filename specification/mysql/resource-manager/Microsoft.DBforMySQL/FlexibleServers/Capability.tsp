@@ -47,8 +47,7 @@ interface LocationBasedCapabilitySet {
   list is ArmResourceListByParent<
     Capability,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<CapabilitySetsList>,
-    Parameters = LocationNameParameter
+    Response = ArmResponse<CapabilitySetsList>
   >;
 }
 

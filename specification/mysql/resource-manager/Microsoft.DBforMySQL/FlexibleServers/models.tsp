@@ -1041,7 +1041,7 @@ model Storage {
   /**
    * Enable IO Auto Scaling or not.
    */
-  autoIoScaling?: EnableStatusEnum = "Disabled";
+  autoIoScaling?: EnableStatusEnum = "Enabled";
 
   /**
    * The redundant type of the server storage. The parameter is used for server creation.
@@ -1845,7 +1845,7 @@ model OperationStatusExtendedResult
    * The extended properties of Operation Results
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<unknown>;
+  properties?: ExtendedData;
 }
 
 /**
@@ -2361,4 +2361,13 @@ model ServerListResult {
 model ExtendedData {
   /** Additional properties that can be added to the object */
   ...Record<unknown>;
+}
+
+/**
+ * The static parameters for a subscription based resource
+ */
+model SubscriptionBaseParameters {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...LocationNameParameter;
 }

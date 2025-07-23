@@ -266,6 +266,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{location}/capabilitySets": {
+      "get": {
+        "operationId": "LocationBasedCapabilitySet_List",
+        "tags": [
+          "LocationBasedCapabilitySet"
+        ],
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilitySetsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilitySetsResult": {
+            "$ref": "./examples/CapabilitySetListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{location}/capabilitySets/{capabilitySetName}": {
       "get": {
         "operationId": "LocationBasedCapabilitySet_Get",
@@ -401,51 +443,6 @@
           "CheckVirtualNetworkSubnetUsage": {
             "$ref": "./examples/CheckVirtualNetworkSubnetUsage.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{location}/locations/{locationName}/capabilitySets": {
-      "get": {
-        "operationId": "LocationBasedCapabilitySet_List",
-        "tags": [
-          "LocationBasedCapabilitySet"
-        ],
-        "description": "Get capabilities at specified location in a given subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/LocationNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CapabilitySetsList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CapabilitySetsResult": {
-            "$ref": "./examples/CapabilitySetListByLocation.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5119,6 +5116,11 @@
         ]
       }
     },
+    "ExtendedData": {
+      "type": "object",
+      "description": "Extended data with additional properties",
+      "additionalProperties": {}
+    },
     "FeatureProperty": {
       "type": "object",
       "description": "Server version capabilities.",
@@ -6020,9 +6022,8 @@
       "description": "Represents Operation Results API Response",
       "properties": {
         "properties": {
-          "type": "object",
-          "description": "The extended properties of Operation Results",
-          "additionalProperties": {}
+          "$ref": "#/definitions/ExtendedData",
+          "description": "The extended properties of Operation Results"
         }
       },
       "allOf": [
@@ -6900,7 +6901,7 @@
         "autoIoScaling": {
           "type": "string",
           "description": "Enable IO Auto Scaling or not.",
-          "default": "Disabled",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
