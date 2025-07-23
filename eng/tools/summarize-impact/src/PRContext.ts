@@ -7,12 +7,7 @@ import * as amd from "@azure/openapi-markdown";
 import { includesFolder } from "@azure-tools/specs-shared/path";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import {
-  swagger,
-  typespec,
-  example,
-  readme,
-} from "@azure-tools/specs-shared/changed-files";
+import { swagger, typespec, example, readme } from "@azure-tools/specs-shared/changed-files";
 
 import { LabelContext } from "./labelling-types.js";
 import { DiffResult, ReadmeTag, TagDiff, TagConfigDiff } from "./diff-types.js";

@@ -102,12 +102,14 @@ export async function main() {
     ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
   });
 
-  const labels = (await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: Number(prNumber),
-    per_page: 100,
-  })).map((label: any) => label.name);
+  const labels = (
+    await github.paginate(github.rest.issues.listLabelsOnIssue, {
+      owner,
+      repo,
+      issue_number: Number(prNumber),
+      per_page: 100,
+    })
+  ).map((label: any) => label.name);
 
   const labelContext: LabelContext = {
     present: new Set(labels),
