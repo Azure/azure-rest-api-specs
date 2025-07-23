@@ -87,13 +87,13 @@ interface Configurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("updateConfigurations")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("Configurations_BatchUpdate")
   batchUpdate is ArmResourceActionAsync<
     Server,
     ConfigurationListForBatchUpdate,
     ArmResponse<Configuration>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 }
 
