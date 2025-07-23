@@ -45,7 +45,10 @@ interface Maintenances {
   /**
    * List maintenances.
    */
-  list is ArmResourceListByParent<Maintenance>;
+  list is ArmResourceListByParent<
+    Maintenance,
+    Response = ArmResponse<MaintenanceListResult>
+  >;
 }
 
 @@doc(Maintenance.name, "The name of the maintenance.");

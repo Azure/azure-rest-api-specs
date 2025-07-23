@@ -51,7 +51,10 @@ interface ServerBackups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Backups_ListByServer")
-  listByServer is ArmResourceListByParent<ServerBackup>;
+  listByServer is ArmResourceListByParent<
+    ServerBackup,
+    Response = ArmResponse<ServerBackupListResult>
+  >;
 }
 
 @@doc(ServerBackup.name, "The name of the backup.");

@@ -5496,10 +5496,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "LogFileProperties": {
       "type": "object",
@@ -5565,10 +5562,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "MaintenancePolicy": {
       "type": "object",
@@ -5839,12 +5833,8 @@
           "description": "Type of managed service identity."
         },
         "userAssignedIdentities": {
-          "type": "object",
-          "description": "Metadata of user assigned identity.",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          }
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "Metadata of user assigned identity."
         }
       }
     },
@@ -5961,7 +5951,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OperationProgressResponseType",
-          "description": "The response properties specific to the operation"
+          "description": "The response properties specific to the operation",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -6214,10 +6205,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ServerBackupProperties": {
       "type": "object",
@@ -6297,10 +6285,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ServerDetachVNetParameter": {
       "type": "object",
@@ -6433,10 +6418,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ServerProperties": {
       "type": "object",
@@ -6508,6 +6490,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of replicas that a primary server can have.",
+          "minimum": 0,
           "readOnly": true
         },
         "dataEncryption": {
@@ -6858,12 +6841,50 @@
           "description": "Storage IOPS for a server."
         },
         "autoGrow": {
-          "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Enable Storage Auto Grow or not."
+          "type": "string",
+          "description": "Enable Storage Auto Grow or not.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "logOnDisk": {
-          "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Enable Log On Disk or not."
+          "type": "string",
+          "description": "Enable Log On Disk or not.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "storageSku": {
           "type": "string",
@@ -6871,12 +6892,50 @@
           "readOnly": true
         },
         "autoIoScaling": {
-          "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Enable IO Auto Scaling or not."
+          "type": "string",
+          "description": "Enable IO Auto Scaling or not.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "storageRedundancy": {
-          "$ref": "#/definitions/StorageRedundancyEnum",
+          "type": "string",
           "description": "The redundant type of the server storage. The parameter is used for server creation.",
+          "default": "LocalRedundancy",
+          "enum": [
+            "LocalRedundancy",
+            "ZoneRedundancy"
+          ],
+          "x-ms-enum": {
+            "name": "StorageRedundancyEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "LocalRedundancy",
+                "value": "LocalRedundancy"
+              },
+              {
+                "name": "ZoneRedundancy",
+                "value": "ZoneRedundancy"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -6931,31 +6990,25 @@
         }
       }
     },
-    "StorageRedundancyEnum": {
-      "type": "string",
-      "description": "Enum to indicate whether storage sku value is 'ZoneRedundancy' or 'LocalRedundancy'",
-      "enum": [
-        "LocalRedundancy",
-        "ZoneRedundancy"
-      ],
-      "x-ms-enum": {
-        "name": "StorageRedundancyEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LocalRedundancy",
-            "value": "LocalRedundancy"
-          },
-          {
-            "name": "ZoneRedundancy",
-            "value": "ZoneRedundancy"
-          }
-        ]
-      }
-    },
     "TypeSpec.Http.OkResponse": {
       "type": "object",
       "description": "The request has succeeded."
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "Metadata of user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of user assigned identity",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of user assigned identity",
+          "readOnly": true
+        }
+      }
     },
     "ValidateBackupResponse": {
       "type": "object",

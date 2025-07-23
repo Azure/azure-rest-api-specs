@@ -77,12 +77,18 @@ interface Servers {
   /**
    * List all the servers in a given resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Server>;
+  listByResourceGroup is ArmResourceListByParent<
+    Server,
+    Response = ArmResponse<ServerListResult>
+  >;
 
   /**
    * List all the servers in a given subscription.
    */
-  list is ArmListBySubscription<Server>;
+  list is ArmListBySubscription<
+    Server,
+    Response = ArmResponse<ServerListResult>
+  >;
 
   /**
    * Exports the backup of the given server by creating a backup if not existing.
@@ -182,7 +188,7 @@ interface Servers {
   listByServer is ArmResourceActionSync<
     Server,
     void,
-    ArmResponse<ResourceListResult<Server>>
+    Response = ArmResponse<ServerListResult>
   >;
 
   /**
@@ -208,7 +214,7 @@ interface Servers {
   logFilesListByServer is ArmResourceActionSync<
     Server,
     void,
-    ArmResponse<ResourceListResult<LogFile>>
+    Response = ArmResponse<LogFileListResult>
   >;
 }
 

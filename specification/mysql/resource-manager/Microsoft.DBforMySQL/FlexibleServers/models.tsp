@@ -826,7 +826,7 @@ model MySQLServerIdentity {
    * Metadata of user assigned identity.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<Record<unknown>>;
+  userAssignedIdentities?: UserAssignedIdentity;
 }
 
 /**
@@ -907,6 +907,7 @@ model ServerProperties {
    * The maximum number of replicas that a primary server can have.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   replicaCapacity?: int32;
 
   /**
@@ -1023,12 +1024,12 @@ model Storage {
   /**
    * Enable Storage Auto Grow or not.
    */
-  autoGrow?: EnableStatusEnum;
+  autoGrow?: EnableStatusEnum = "Disabled";
 
   /**
    * Enable Log On Disk or not.
    */
-  logOnDisk?: EnableStatusEnum;
+  logOnDisk?: EnableStatusEnum = "Disabled";
 
   /**
    * The sku name of the server storage.
@@ -1039,13 +1040,13 @@ model Storage {
   /**
    * Enable IO Auto Scaling or not.
    */
-  autoIoScaling?: EnableStatusEnum;
+  autoIoScaling?: EnableStatusEnum = "Disabled";
 
   /**
    * The redundant type of the server storage. The parameter is used for server creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageRedundancy?: StorageRedundancyEnum;
+  storageRedundancy?: StorageRedundancyEnum = "LocalRedundancy";
 }
 
 /**
@@ -1855,6 +1856,7 @@ model OperationProgressResult
   /**
    * The response properties specific to the operation
    */
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProgressResponseType;
 }
 
@@ -2243,6 +2245,106 @@ model FirewallRuleListResult {
   @doc("The FirewallRule items on this page")
   @items
   value?: FirewallRule[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a LogFile list operation.
+ */
+@pagedResult
+model LogFileListResult {
+  /**
+   * Array of LogFile
+   */
+  @doc("The LogFile items on this page")
+  @items
+  value?: LogFile[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a Maintenance list operation.
+ */
+@pagedResult
+model MaintenanceListResult {
+  /**
+   * Array of Maintenance
+   */
+  @doc("The Maintenance items on this page")
+  @items
+  value?: Maintenance[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a ServerBackup list operation.
+ */
+@pagedResult
+model ServerBackupListResult {
+  /**
+   * Array of ServerBackup
+   */
+  @doc("The ServerBackup items on this page")
+  @items
+  value?: ServerBackup[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a ServerBackupV2 list operation.
+ */
+@pagedResult
+model ServerBackupV2ListResult {
+  /**
+   * Array of ServerBackupV2
+   */
+  @doc("The ServerBackupV2 items on this page")
+  @items
+  value?: ServerBackupV2[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The response of a Server list operation.
+ */
+@pagedResult
+model ServerListResult {
+  /**
+   * Array of Server
+   */
+  @doc("The Server items on this page")
+  @items
+  value?: Server[];
 
   /**
    * Link to the next page of results, if applicable

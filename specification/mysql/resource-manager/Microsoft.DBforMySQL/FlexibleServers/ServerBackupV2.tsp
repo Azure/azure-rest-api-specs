@@ -52,7 +52,10 @@ interface ServerBackupV2s {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LongRunningBackups_List")
-  list is ArmResourceListByParent<ServerBackupV2>;
+  list is ArmResourceListByParent<
+    ServerBackupV2,
+    Response = ArmResponse<ServerBackupV2ListResult>
+  >;
 }
 
 @@doc(ServerBackupV2.name, "The name of the backup.");
