@@ -416,13 +416,14 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
     throw new Error(`Could not determine readme folder for swagger path: ${swaggerPath}`);
   }
 
+  let isNewRp = false;
   let fullFolderPath = path.join(specRepoFolder, folder);
+  if (!existsSync(fullFolderPath)) {
+    isNewRp = true;
+  }
+
   // If the initial folder doesn't exist, search upward for a folder with readme.md
-  while (
-    !existsSync(fullFolderPath) &&
-    !fullFolderPath.endsWith("resource-manager") &&
-    !fullFolderPath.endsWith("data-plane")
-  ) {
+  while (!fullFolderPath.endsWith("resource-manager") && !fullFolderPath.endsWith("data-plane")) {
     const parent = path.dirname(fullFolderPath);
 
     // Prevent infinite loop if we reach the root
@@ -435,12 +436,13 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
 
     // If we find a readme.md, use this folder
     if (existsSync(readmePath)) {
+      isNewRp = false;
       break;
     }
   }
 
   // Return if the readme folder is not found which means it's a new RP
-  if (!existsSync(fullFolderPath)) {
+  if (isNewRp) {
     logMessage(
       `getSpecModel: this is a new RP as ${fullFolderPath} folder does not exist in the base branch of spec repo.`,
     );
