@@ -592,6 +592,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @autoRoute
   @get
   @action("runCommands")
+  @list
   list is ComputeProviderActionSync<
     Response = RunCommandListResult & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"

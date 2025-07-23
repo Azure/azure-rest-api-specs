@@ -64,6 +64,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
+  @list
   list(
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

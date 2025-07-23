@@ -238,11 +238,10 @@ model Schema {
 /**
  * The list of schema group names with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaGroups {
   /** The collection of pageable schema group name items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: string[];
 
   /** The link to the next page of items */
@@ -254,11 +253,10 @@ model SchemaGroups {
 /**
  * The list of schema versions with server paging support.
  */
-@Azure.Core.pagedResult
 model SchemaVersions {
   /** The collection of schema version pageable items. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.items
+  @pageItems
   Value: int32[];
 
   /** The link to the next page of items */
