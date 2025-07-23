@@ -54,25 +54,8 @@ enum Versions {
  * Azure Resource Manager service. It implements
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @armUpdateProviderNamespace
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  list(
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @query("api-version")
-    `api-version`: string,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationListResult> | ErrorDetails;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorDetails
+    > {}
