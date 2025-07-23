@@ -31,7 +31,7 @@ interface LocalUserOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalUsers_Get")
-  get is ArmResourceRead<LocalUser>;
+  get is ArmResourceRead<LocalUser, Error = ErrorResponse>;
 
   /**
    * Create or update the properties of a local user associated with the storage account. Properties for NFSv3 enablement and extended groups cannot be set with other properties.
@@ -41,7 +41,8 @@ interface LocalUserOperationGroup {
   @operationId("LocalUsers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LocalUser,
-    Response = ArmResourceUpdatedResponse<LocalUser>
+    Response = ArmResourceUpdatedResponse<LocalUser>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -49,7 +50,7 @@ interface LocalUserOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalUsers_Delete")
-  delete is ArmResourceDeleteSync<LocalUser>;
+  delete is ArmResourceDeleteSync<LocalUser, Error = ErrorResponse>;
 
   /**
    * List the local users associated with the storage account.
@@ -79,7 +80,8 @@ interface LocalUserOperationGroup {
       @query("$include")
       $include?: ListLocalUserIncludeParam;
     },
-    Response = ArmResponse<LocalUsers>
+    Response = ArmResponse<LocalUsers>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -90,7 +92,8 @@ interface LocalUserOperationGroup {
   listKeys is ArmResourceActionSync<
     LocalUser,
     void,
-    ArmResponse<LocalUserKeys>
+    ArmResponse<LocalUserKeys>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -101,7 +104,8 @@ interface LocalUserOperationGroup {
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
     void,
-    ArmResponse<LocalUserRegeneratePasswordResult>
+    ArmResponse<LocalUserRegeneratePasswordResult>,
+    Error = ErrorResponse
   >;
 }
 

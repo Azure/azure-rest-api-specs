@@ -32,7 +32,8 @@ interface DeletedAccounts {
    */
   get is ArmResourceRead<
     DeletedAccount,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = ErrorResponse
   >;
 }
 

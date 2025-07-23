@@ -69,7 +69,8 @@ interface StorageAccounts {
     Request = StorageAccountCheckNameAvailabilityParameters,
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ErrorResponse
   >;
   /**
    * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
@@ -82,7 +83,8 @@ interface StorageAccounts {
        */
       @query("$expand")
       $expand?: StorageAccountExpand;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -108,23 +110,27 @@ interface StorageAccounts {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StorageAccount,
-    PatchModel = StorageAccountUpdateParameters
+    PatchModel = StorageAccountUpdateParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes a storage account in Microsoft Azure.
    */
-  delete is ArmResourceDeleteSync<StorageAccount>;
+  delete is ArmResourceDeleteSync<StorageAccount, Error = ErrorResponse>;
 
   /**
    * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  listByResourceGroup is ArmResourceListByParent<StorageAccount>;
+  listByResourceGroup is ArmResourceListByParent<
+    StorageAccount,
+    Error = ErrorResponse
+  >;
 
   /**
    * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
    */
-  list is ArmListBySubscription<StorageAccount>;
+  list is ArmListBySubscription<StorageAccount, Error = ErrorResponse>;
 
   /**
    * Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
@@ -139,7 +145,8 @@ interface StorageAccounts {
        */
       @query("$expand")
       $expand?: ListKeyExpand;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -148,7 +155,8 @@ interface StorageAccounts {
   regenerateKey is ArmResourceActionSync<
     StorageAccount,
     StorageAccountRegenerateKeyParameters,
-    ArmResponse<StorageAccountListKeysResult>
+    ArmResponse<StorageAccountListKeysResult>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -161,7 +169,8 @@ interface StorageAccounts {
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
-    ArmResponse<ListAccountSasResponse>
+    ArmResponse<ListAccountSasResponse>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -174,7 +183,8 @@ interface StorageAccounts {
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
-    ArmResponse<ListServiceSasResponse>
+    ArmResponse<ListServiceSasResponse>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -190,7 +200,8 @@ interface StorageAccounts {
        */
       @query("failoverType")
       failoverType?: FailoverType;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -207,7 +218,8 @@ interface StorageAccounts {
        */
       @query("requestType")
       requestType: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -217,7 +229,8 @@ interface StorageAccounts {
   abortHierarchicalNamespaceMigration is ArmResourceActionAsync<
     StorageAccount,
     void,
-    OkResponse
+    OkResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -227,7 +240,8 @@ interface StorageAccounts {
   customerInitiatedMigration is ArmResourceActionAsync<
     StorageAccount,
     StorageAccountMigration,
-    OkResponse
+    OkResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -241,7 +255,8 @@ interface StorageAccounts {
     Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: BlobRestoreStatus;
-    })
+    }),
+    Error = ErrorResponse
   >;
 
   /**
@@ -250,7 +265,8 @@ interface StorageAccounts {
   revokeUserDelegationKeys is ArmResourceActionSync<
     StorageAccount,
     void,
-    OkResponse
+    OkResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -263,7 +279,8 @@ interface StorageAccounts {
   listByStorageAccount is ArmResourceActionSync<
     StorageAccount,
     void,
-    ArmResponse<PrivateLinkResourceListResult>
+    ArmResponse<PrivateLinkResourceListResult>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -289,7 +306,8 @@ interface StorageAccounts {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

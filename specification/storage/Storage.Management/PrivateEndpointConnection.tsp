@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the storage account.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorResponse>;
 
   /**
    * Update the state of specified private endpoint connection associated with the storage account.
@@ -38,20 +38,22 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   put is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes the specified private endpoint connection associated with the storage account.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteSync<PrivateEndpointConnection, Error = ErrorResponse>;
 
   /**
    * List all the private endpoint connections associated with the storage account.
    */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnectionListResult>
+    Response = ArmResponse<PrivateEndpointConnectionListResult>,
+    Error = ErrorResponse
   >;
 }
 

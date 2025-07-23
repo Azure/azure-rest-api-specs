@@ -37,23 +37,23 @@ interface BlobContainers {
   /**
    * Gets properties of a specified container.
    */
-  get is ArmResourceRead<BlobContainer>;
+  get is ArmResourceRead<BlobContainer, Error = ErrorResponse>;
 
   /**
    * Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container.
    */
-  create is ArmResourceCreateOrReplaceSync<BlobContainer>;
+  create is ArmResourceCreateOrReplaceSync<BlobContainer, Error = ErrorResponse>;
 
   /**
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer>;
+  update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer, Error = ErrorResponse>;
 
   /**
    * Deletes specified container under its account.
    */
-  delete is ArmResourceDeleteSync<BlobContainer>;
+  delete is ArmResourceDeleteSync<BlobContainer, Error = ErrorResponse>;
 
   /**
    * Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request.
@@ -61,7 +61,8 @@ interface BlobContainers {
   setLegalHold is ArmResourceActionSync<
     BlobContainer,
     LegalHold,
-    ArmResponse<LegalHold>
+    ArmResponse<LegalHold>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -70,7 +71,8 @@ interface BlobContainers {
   clearLegalHold is ArmResourceActionSync<
     BlobContainer,
     LegalHold,
-    ArmResponse<LegalHold>
+    ArmResponse<LegalHold>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -85,7 +87,8 @@ interface BlobContainers {
       @bodyRoot
       parameters?: LeaseContainerRequest;
     },
-    ArmResponse<LeaseContainerResponse>
+    ArmResponse<LeaseContainerResponse>,
+    Error = ErrorResponse
   >;
 
   /**

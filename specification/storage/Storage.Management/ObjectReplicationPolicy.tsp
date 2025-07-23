@@ -32,7 +32,7 @@ interface ObjectReplicationPolicyOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ObjectReplicationPolicies_Get")
-  get is ArmResourceRead<ObjectReplicationPolicy>;
+  get is ArmResourceRead<ObjectReplicationPolicy, Error = ErrorResponse>;
 
   /**
    * Create or update the object replication policy of the storage account.
@@ -42,7 +42,8 @@ interface ObjectReplicationPolicyOperationGroup {
   @operationId("ObjectReplicationPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ObjectReplicationPolicy,
-    Response = ArmResourceUpdatedResponse<ObjectReplicationPolicy>
+    Response = ArmResourceUpdatedResponse<ObjectReplicationPolicy>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -50,7 +51,7 @@ interface ObjectReplicationPolicyOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ObjectReplicationPolicies_Delete")
-  delete is ArmResourceDeleteSync<ObjectReplicationPolicy>;
+  delete is ArmResourceDeleteSync<ObjectReplicationPolicy, Error = ErrorResponse>;
 
   /**
    * List the object replication policies associated with the storage account.
@@ -59,7 +60,8 @@ interface ObjectReplicationPolicyOperationGroup {
   @operationId("ObjectReplicationPolicies_List")
   list is ArmResourceListByParent<
     ObjectReplicationPolicy,
-    Response = ArmResponse<ObjectReplicationPolicies>
+    Response = ArmResponse<ObjectReplicationPolicies>,
+    Error = ErrorResponse
   >;
 }
 

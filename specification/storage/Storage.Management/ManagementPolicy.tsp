@@ -31,7 +31,7 @@ interface ManagementPolicies {
   /**
    * Gets the managementpolicy associated with the specified storage account.
    */
-  get is ArmResourceRead<ManagementPolicy>;
+  get is ArmResourceRead<ManagementPolicy, Error = ErrorResponse>;
 
   /**
    * Sets the managementpolicy to the specified storage account.
@@ -39,13 +39,14 @@ interface ManagementPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagementPolicy,
-    Response = ArmResourceUpdatedResponse<ManagementPolicy>
+    Response = ArmResourceUpdatedResponse<ManagementPolicy>,
+    Error = ErrorResponse
   >;
 
   /**
    * Deletes the managementpolicy associated with the specified storage account.
    */
-  delete is ArmResourceDeleteSync<ManagementPolicy>;
+  delete is ArmResourceDeleteSync<ManagementPolicy, Error = ErrorResponse>;
 }
 
 @@doc(ManagementPolicy.name,

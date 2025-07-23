@@ -56,7 +56,8 @@ interface ImmutabilityPolicies {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -81,7 +82,8 @@ interface ImmutabilityPolicies {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -106,7 +108,8 @@ interface ImmutabilityPolicies {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -132,7 +135,8 @@ interface ImmutabilityPolicies {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -164,7 +168,8 @@ interface ImmutabilityPolicies {
        */
       @header("ETag")
       eTag: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

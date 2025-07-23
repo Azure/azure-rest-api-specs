@@ -31,18 +31,18 @@ interface EncryptionScopes {
   /**
    * Returns the properties for the specified encryption scope.
    */
-  get is ArmResourceRead<EncryptionScope>;
+  get is ArmResourceRead<EncryptionScope, Error = ErrorResponse>;
 
   /**
    * Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.
    */
-  put is ArmResourceCreateOrReplaceSync<EncryptionScope>;
+  put is ArmResourceCreateOrReplaceSync<EncryptionScope, Error = ErrorResponse>;
 
   /**
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
   @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope>;
+  patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope, Error = ErrorResponse>;
 
   /**
    * Lists all the encryption scopes available under the specified storage account.
@@ -69,7 +69,8 @@ interface EncryptionScopes {
        */
       @query("$include")
       $include?: ListEncryptionScopesInclude;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

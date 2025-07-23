@@ -33,7 +33,7 @@ interface StorageTaskAssignments {
   /**
    * Get the storage task assignment properties
    */
-  get is ArmResourceRead<StorageTaskAssignment>;
+  get is ArmResourceRead<StorageTaskAssignment, Error = ErrorResponse>;
 
   /**
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
@@ -41,7 +41,8 @@ interface StorageTaskAssignments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -51,7 +52,8 @@ interface StorageTaskAssignments {
   update is ArmCustomPatchAsync<
     StorageTaskAssignment,
     PatchModel = StorageTaskAssignmentUpdateParameters,
-    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +61,8 @@ interface StorageTaskAssignments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
@@ -74,7 +77,8 @@ interface StorageTaskAssignments {
       @query("$maxpagesize")
       $maxpagesize?: int32;
     },
-    Response = ArmResponse<StorageTaskAssignmentsList>
+    Response = ArmResponse<StorageTaskAssignmentsList>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -100,7 +104,8 @@ interface StorageTaskAssignments {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

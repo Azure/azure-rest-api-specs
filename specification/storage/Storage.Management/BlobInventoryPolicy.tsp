@@ -53,7 +53,8 @@ interface BlobInventoryPolicies {
    */
   list is ArmResourceListByParent<
     BlobInventoryPolicy,
-    Response = ArmResponse<ListBlobInventoryPolicy>
+    Response = ArmResponse<ListBlobInventoryPolicy>,
+    Error = ErrorResponse
   >;
 }
 

@@ -26,7 +26,8 @@ interface SkusOperationGroup {
   list is ArmProviderActionSync<
     Response = StorageSkuListResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ErrorResponse
   >;
 }
 
@@ -43,7 +44,8 @@ interface DeletedAccountsOperationGroup {
   list is ArmProviderActionSync<
     Response = ResourceListResult<DeletedAccount>,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = ErrorResponse
   >;
 }
 
@@ -60,6 +62,7 @@ interface UsagesOperationGroup {
   listByLocation is ArmProviderActionSync<
     Response = UsageListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ErrorResponse
   >;
 }

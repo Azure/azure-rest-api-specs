@@ -39,7 +39,10 @@ interface BlobServices {
   /**
    * Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  getServiceProperties is ArmResourceRead<BlobServiceProperties>;
+  getServiceProperties is ArmResourceRead<
+    BlobServiceProperties,
+    Error = ErrorResponse
+  >;
 
   /**
    * Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -47,7 +50,8 @@ interface BlobServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     BlobServiceProperties,
-    Response = ArmResourceUpdatedResponse<BlobServiceProperties>
+    Response = ArmResourceUpdatedResponse<BlobServiceProperties>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -55,7 +59,8 @@ interface BlobServices {
    */
   list is ArmResourceListByParent<
     BlobServiceProperties,
-    Response = ArmResponse<BlobServiceItems>
+    Response = ArmResponse<BlobServiceItems>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -87,7 +92,8 @@ interface BlobServices {
        */
       @query("$include")
       $include?: ListContainersInclude;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 

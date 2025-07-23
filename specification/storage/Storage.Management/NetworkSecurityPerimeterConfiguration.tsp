@@ -30,14 +30,15 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets effective NetworkSecurityPerimeterConfiguration for association
    */
-  get is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+  get is ArmResourceRead<NetworkSecurityPerimeterConfiguration, Error = ErrorResponse>;
 
   /**
    * Gets list of effective NetworkSecurityPerimeterConfiguration for storage account
    */
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
-    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
+    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,
+    Error = ErrorResponse
   >;
 
   /**
@@ -47,7 +48,8 @@ interface NetworkSecurityPerimeterConfigurations {
     NetworkSecurityPerimeterConfiguration,
     void,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkSecurityPerimeterConfiguration>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkSecurityPerimeterConfiguration>,
+    Error = ErrorResponse
   >;
 }
 
