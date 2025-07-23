@@ -5,6 +5,9 @@ import { resolve } from "path";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { Readme } from "./readme.js";
 
+/** @type {Map<string, SpecModel>} */
+const specModelCache = new Map();
+
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [includeRefs]
@@ -16,6 +19,7 @@ import { Readme } from "./readme.js";
 
 export class SpecModel {
   /** @type {string} absolute path */
+  // @ts-ignore Ignore error that value may not be set in ctor (since we may returned cached value)
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -30,8 +34,17 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    this.#folder = resolve(folder);
+    const resolvedFolder = resolve(folder);
+
+    const cachedSpecModel = specModelCache.get(resolvedFolder);
+    if (cachedSpecModel !== undefined) {
+      return cachedSpecModel;
+    }
+
+    this.#folder = resolvedFolder;
     this.#logger = options?.logger;
+
+    specModelCache.set(resolvedFolder, this);
   }
 
   /**
