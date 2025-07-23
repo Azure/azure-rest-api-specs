@@ -5,74 +5,84 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
     "resourceGroupName": "rgChangeControl",
-    "changeStateName": "testChangeState",
-    "stageProgressionName": "testStageProgression"
+    "changeStateName": "ecommerceDeploymentChangeState",
+    "stageProgressionName": "loadTestingProgression"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
-          "state": "Initialized",
-          "sequence": 12,
-          "stageVariables": {},
-          "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+          "provisioningState": "Succeeded",
+          "stageReference": "load-testing-validation",
+          "state": "Completed",
+          "sequence": 2,
+          "stageVariables": {
+            "testDuration": "PT1H",
+            "maxConcurrentUsers": 1000,
+            "targetRPS": 500,
+            "testEnvironment": "staging",
+            "regions": [
+              "eastus",
+              "westus2",
+              "centraleurope"
+            ]
+          },
+          "comments": "Load testing stage progression for e-commerce platform deployment. This stage validates system performance under expected peak traffic loads with comprehensive monitoring of response times, throughput, and resource utilization across multiple regions.",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://dev.azure.com/contoso/ECommerce/_workitems/edit/12349",
+              "description": "E-commerce load testing work item for platform performance validation and capacity planning",
+              "lastModifiedBy": "daniel.loadtest@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:35:30.442Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://approval.contoso.com/requests/load-892",
+              "description": "Load testing approval request with performance engineering team sign-off",
+              "lastModifiedBy": "emma.performance@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:30:15.225Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://support.contoso.com/incidents/INC-793",
+              "description": "Related support incident for load testing environment coordination",
+              "lastModifiedBy": "frank.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:45.167Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://pim.contoso.com/requests/elev-325",
+              "description": "Performance testing environment access elevation for load testing activities",
+              "lastModifiedBy": "grace.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:20.889Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/integrationTestingChangeState",
+              "description": "Related integration testing change state that completed successfully before load testing",
+              "lastModifiedBy": "henry.integration@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:10.334Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://testing.contoso.com/results/load-validation-658",
+              "description": "Load testing results with performance metrics, response times, and capacity analysis",
+              "lastModifiedBy": "iris.testing@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:35.556Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://catalog.contoso.com/services/ecommerce-platform",
+              "description": "E-commerce platform service catalog entry with load testing procedures and performance baselines",
+              "lastModifiedBy": "jack.catalog@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:25.778Z"
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-        "name": "uebdyrdhxmoqzhfgsz",
-        "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/ecommerceDeploymentChangeState/stageProgressions/loadTestingProgression",
+        "name": "loadTestingProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "daniel.loadtest@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "daniel.loadtest@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+          "lastModifiedAt": "2025-07-09T08:35:30.442Z"
         }
       }
     }

@@ -5,17 +5,29 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
     "resourceGroupName": "rgChangeControl",
-    "changeStateName": "testChangeState",
-    "properties": {
+    "changeStateName": "databaseUpdateChangeState",
+    "resource": {
       "properties": {
-        "description": "Updated description for the change state",
-        "parameters": {
-          "key1": {
-            "type": "ParameterUpdate",
-            "metadata": {
-              "key1": "updated value"
-            }
+        "state": "InProgress",
+        "comments": "Database update deployment progressing with schema migration and data validation enabled.",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+            "description": "Work item for database update deployment with schema migration"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/67916",
+            "description": "Database update deployment approval with DBA review"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC001260",
+            "description": "Support incident for database update coordination"
           }
+        },
+        "additionalData": {
+          "migrationRequired": true,
+          "backupCompleted": true,
+          "validationEnabled": true
         }
       }
     }
@@ -24,91 +36,114 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
+          "provisioningState": "InProgress",
           "changeType": "AppDeployment",
           "rolloutType": "Normal",
-          "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+          "description": "Database update deployment to production environment with schema migration and data validation. This deployment includes performance improvements, index optimizations, and security enhancements for the core database platform.",
           "stageMap": {
-            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/databaseUpdateStageMap"
           },
           "parameters": {
-            "key1882": {
-              "type": "Parameter",
+            "databaseVersion": {
+              "type": "string",
               "metadata": {
-                "key8983": "rnieiditroeccsflmw"
+                "description": "Version of the database to update"
               }
             }
           },
-          "state": "Initialized",
-          "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+          "state": "InProgress",
+          "comments": "Database update deployment progressing with schema migration and data validation enabled.",
           "changeDefinitions": [
             {
-              "name": "tntubey",
+              "name": "databaseUpdateDeployment",
               "type": "ArmOperation",
-              "details": {}
+              "details": {
+                "templateUri": "https://templates.contoso.com/database-update.json",
+                "parameters": {
+                  "version": "5.2.3",
+                  "environment": "production",
+                  "enableMigration": true
+                }
+              }
             }
           ],
-          "releaseLabel": "qajbssixgrlzat",
+          "releaseLabel": "Release-5.2.3-Database",
           "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-          "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-          "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+          "anticipatedEndTime": "2025-07-09T12:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
           "links": {
             "workTrackingItem": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+              "description": "Work item for database update deployment with schema migration",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "approvalRequest": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://approval.contoso.com/requests/67916",
+              "description": "Database update deployment approval with DBA review",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "supportIncident": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://support.contoso.com/incidents/INC001260",
+              "description": "Support incident for database update coordination",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "accessElevationRequest": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://access.contoso.com/requests/AER-5704",
+              "description": "Access elevation request for database update deployment",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "relatedChangeState": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/applicationUpdateState",
+              "description": "Related application update change state for database coordination",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "testResults": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://testresults.contoso.com/runs/TR-9902",
+              "description": "Database update test results with schema validation",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "serviceCatalog": {
-              "uri": "lojekqwnximf",
-              "description": "ilfsvpvyjnjbuwsflwohwgecrharpeltdwxmofkgbvorsuoeyaptfaqskuqnehmoeqadjlsatboieviuzbiscoyvrggppindtmznsrumfzvbiribbrjhupeivooejjcypqsrdjzzivmnbykpaszqqbfcmwgjhxkgsjtgtsqxmyfohjomsqrwpkswtxnhwmwzovkfnqzgfuoxqeyrkbkkrakwvyeqewnaiqabbajhvbediioqnplbblnpjlfosojqcfayundipifmogybwweyokyempwkcncpjcfibwllkxvefjloanrspubaisholnvivyzljyuadcikqhrogcwycaisryrdhmqfvejqzzkjqdxgvlemzdrcvvxfosvaezgatdyoemqjtfqprlngiailztgbejxzglcwkdcysaxvubupevmqdvvnjfwblnzjxketvrzvtqgzvctpaddmaeorjxovdaowrqdslcxscnacpngqppdpqgnqsuikxetjagwvensqzhniqjiojeavxmfigyouifjcprreirlnrqeuccngreaialsymdcrrvxweynivhxkivumigmrwwejwyiexuwcbreihqlhrgacyuuxzjjrqbdicudizeapoadwuoxptshfglwysommidhsnuidfvjhkgiylxtrzwqamgvnenxfvbgglogrgrxgeoqwuaxe",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://catalog.contoso.com/services/database-platform",
+              "description": "Database platform service catalog entry with update specifications",
+              "lastModifiedBy": "database@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             }
           },
-          "additionalData": {},
+          "additionalData": {
+            "migrationRequired": true,
+            "backupCompleted": true,
+            "validationEnabled": true,
+            "performanceOptimization": "enabled"
+          },
           "stageMapSnapshot": [
-            null
+            {
+              "stageName": "backup",
+              "status": "completed"
+            },
+            {
+              "stageName": "migration",
+              "status": "in-progress"
+            },
+            {
+              "stageName": "validation",
+              "status": "pending"
+            }
           ]
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
-        "name": "pzuiqzcrr",
-        "type": "xmkqwcglyhu",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/databaseUpdateChangeState",
+        "name": "databaseUpdateChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "database@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "database@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-07-09T07:30:16.534Z"
         }

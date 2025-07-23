@@ -4,43 +4,53 @@
   "parameters": {
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
-    "changeStateName": "testChangeState",
-    "stageProgressionName": "testStageProgression",
+    "changeStateName": "subscriptionNetworkingChangeState",
+    "stageProgressionName": "networkingDeploymentProgression",
     "resource": {
       "properties": {
-        "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
-        "state": "Initialized",
-        "sequence": 12,
-        "stageVariables": {},
-        "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+        "stageReference": "subscription-networking-deployment",
+        "state": "InProgress",
+        "sequence": 2,
+        "stageVariables": {
+          "networkScope": "subscription",
+          "regions": [
+            "eastus",
+            "westus2"
+          ],
+          "vnetConfiguration": {
+            "addressSpace": "10.0.0.0/8",
+            "multiRegion": true
+          }
+        },
+        "comments": "Subscription-level networking deployment stage progression for multi-region infrastructure. This stage deploys virtual networks, subnets, and connectivity components across multiple Azure regions with enterprise networking standards.",
         "links": {
           "workTrackingItem": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://dev.azure.com/contoso/Networking/_workitems/edit/12348",
+            "description": "Subscription networking deployment work item for multi-region infrastructure"
           },
           "approvalRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://approval.contoso.com/requests/net-891",
+            "description": "Subscription networking deployment approval request with network architecture review"
           },
           "supportIncident": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://support.contoso.com/incidents/INC-792",
+            "description": "Related support incident for subscription networking deployment coordination"
           },
           "accessElevationRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://pim.contoso.com/requests/elev-324",
+            "description": "Subscription-level network access elevation for deployment activities"
           },
           "relatedChangeState": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState",
+            "description": "Related security change state for networking security coordination"
           },
           "testResults": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://testing.contoso.com/results/networking-validation-657",
+            "description": "Subscription networking deployment test results with connectivity and security validation"
           },
           "serviceCatalog": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://catalog.contoso.com/services/subscription-networking",
+            "description": "Subscription networking service catalog entry with deployment and configuration procedures"
           }
         }
       }
@@ -50,134 +60,154 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
-          "state": "Initialized",
-          "sequence": 12,
-          "stageVariables": {},
-          "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+          "provisioningState": "Succeeded",
+          "stageReference": "subscription-networking-deployment",
+          "state": "InProgress",
+          "sequence": 2,
+          "stageVariables": {
+            "networkScope": "subscription",
+            "regions": [
+              "eastus",
+              "westus2"
+            ],
+            "vnetConfiguration": {
+              "addressSpace": "10.0.0.0/8",
+              "multiRegion": true
+            }
+          },
+          "comments": "Subscription-level networking deployment stage progression for multi-region infrastructure. This stage deploys virtual networks, subnets, and connectivity components across multiple Azure regions with enterprise networking standards.",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://dev.azure.com/contoso/Networking/_workitems/edit/12348",
+              "description": "Subscription networking deployment work item for multi-region infrastructure",
+              "lastModifiedBy": "wendy.network@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:30:30.442Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://approval.contoso.com/requests/net-891",
+              "description": "Subscription networking deployment approval request with network architecture review",
+              "lastModifiedBy": "xavier.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:15.225Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://support.contoso.com/incidents/INC-792",
+              "description": "Related support incident for subscription networking deployment coordination",
+              "lastModifiedBy": "yara.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:45.167Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://pim.contoso.com/requests/elev-324",
+              "description": "Subscription-level network access elevation for deployment activities",
+              "lastModifiedBy": "zane.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:20.889Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState",
+              "description": "Related security change state for networking security coordination",
+              "lastModifiedBy": "amy.security@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:10.334Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://testing.contoso.com/results/networking-validation-657",
+              "description": "Subscription networking deployment test results with connectivity and security validation",
+              "lastModifiedBy": "ben.testing@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:35.556Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://catalog.contoso.com/services/subscription-networking",
+              "description": "Subscription networking service catalog entry with deployment and configuration procedures",
+              "lastModifiedBy": "claire.catalog@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:25.778Z"
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-        "name": "uebdyrdhxmoqzhfgsz",
-        "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionNetworkingChangeState/stageProgressions/networkingDeploymentProgression",
+        "name": "networkingDeploymentProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "wendy.network@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "wendy.network@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+          "lastModifiedAt": "2025-07-09T08:30:30.442Z"
         }
       }
     },
     "201": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
+          "provisioningState": "Creating",
+          "stageReference": "subscription-networking-deployment",
           "state": "Initialized",
-          "sequence": 12,
-          "stageVariables": {},
-          "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+          "sequence": 2,
+          "stageVariables": {
+            "networkScope": "subscription",
+            "regions": [
+              "eastus",
+              "westus2"
+            ],
+            "vnetConfiguration": {
+              "addressSpace": "10.0.0.0/8",
+              "multiRegion": true
+            }
+          },
+          "comments": "Subscription-level networking deployment stage progression for multi-region infrastructure. This stage deploys virtual networks, subnets, and connectivity components across multiple Azure regions with enterprise networking standards.",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://dev.azure.com/contoso/Networking/_workitems/edit/12348",
+              "description": "Subscription networking deployment work item for multi-region infrastructure",
+              "lastModifiedBy": "wendy.network@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:30:30.442Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://approval.contoso.com/requests/net-891",
+              "description": "Subscription networking deployment approval request with network architecture review",
+              "lastModifiedBy": "xavier.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:15.225Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://support.contoso.com/incidents/INC-792",
+              "description": "Related support incident for subscription networking deployment coordination",
+              "lastModifiedBy": "yara.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:45.167Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://pim.contoso.com/requests/elev-324",
+              "description": "Subscription-level network access elevation for deployment activities",
+              "lastModifiedBy": "zane.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:20.889Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState",
+              "description": "Related security change state for networking security coordination",
+              "lastModifiedBy": "amy.security@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:10.334Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://testing.contoso.com/results/networking-validation-657",
+              "description": "Subscription networking deployment test results with connectivity and security validation",
+              "lastModifiedBy": "ben.testing@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:35.556Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://catalog.contoso.com/services/subscription-networking",
+              "description": "Subscription networking service catalog entry with deployment and configuration procedures",
+              "lastModifiedBy": "claire.catalog@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:25.778Z"
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-        "name": "uebdyrdhxmoqzhfgsz",
-        "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionNetworkingChangeState/stageProgressions/networkingDeploymentProgression",
+        "name": "networkingDeploymentProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "wendy.network@contoso.com",
           "createdByType": "User",
-          "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "createdAt": "2025-07-09T08:30:30.442Z",
+          "lastModifiedBy": "wendy.network@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+          "lastModifiedAt": "2025-07-09T08:30:30.442Z"
         }
       }
     }

@@ -4,67 +4,87 @@
   "parameters": {
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
-    "changeStateName": "testChangeState",
+    "changeStateName": "subscriptionLevelChangeState",
     "resource": {
       "properties": {
         "changeType": "AppDeployment",
         "rolloutType": "Normal",
-        "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+        "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
         "stageMap": {
-          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
         },
         "parameters": {
-          "key1882": {
+          "deploymentScope": {
             "type": "Parameter",
             "metadata": {
-              "key8983": "rnieiditroeccsflmw"
+              "description": "Scope of the subscription-level deployment"
             }
           }
         },
         "state": "Initialized",
-        "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+        "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
         "changeDefinitions": [
           {
-            "name": "tntubey",
+            "name": "subscriptionDeployment",
             "type": "ArmOperation",
-            "details": {}
+            "details": {
+              "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+              "parameters": {
+                "subscriptionScope": true,
+                "regions": [
+                  "eastus2",
+                  "westus2",
+                  "centralus"
+                ],
+                "complianceLevel": "enterprise"
+              }
+            }
           }
         ],
-        "releaseLabel": "qajbssixgrlzat",
+        "releaseLabel": "Release-3.0.0-Subscription",
         "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-        "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-        "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+        "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+        "orchestrationTool": "Azure Resource Manager",
         "links": {
           "workTrackingItem": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12361",
+            "description": "Work item for subscription-level deployment with multi-region governance"
           },
           "approvalRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://approval.contoso.com/requests/67906",
+            "description": "Subscription-level deployment approval with enterprise governance requirements"
           },
           "supportIncident": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://support.contoso.com/incidents/INC001250",
+            "description": "Support incident for subscription-level deployment coordination and monitoring"
           },
           "accessElevationRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://access.contoso.com/requests/AER-5694",
+            "description": "Access elevation request for subscription-level deployment with enterprise privileges"
           },
           "relatedChangeState": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/globalGovernanceState",
+            "description": "Related global governance change state for enterprise compliance coordination"
           },
           "testResults": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://testresults.contoso.com/runs/TR-9892",
+            "description": "Subscription-level deployment test results with comprehensive multi-region validation"
           },
           "serviceCatalog": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://catalog.contoso.com/services/subscription-enterprise-platform",
+            "description": "Subscription enterprise platform service catalog entry with governance specifications"
           }
         },
-        "additionalData": {}
+        "additionalData": {
+          "scope": "subscription",
+          "regions": [
+            "eastus2",
+            "westus2",
+            "centralus"
+          ],
+          "governanceLevel": "enterprise",
+          "complianceFramework": "SOC2"
+        }
       }
     }
   },
@@ -72,91 +92,122 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
+          "provisioningState": "Succeeded",
           "changeType": "AppDeployment",
           "rolloutType": "Normal",
-          "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+          "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
           "stageMap": {
-            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
           },
           "parameters": {
-            "key1882": {
+            "deploymentScope": {
               "type": "Parameter",
               "metadata": {
-                "key8983": "rnieiditroeccsflmw"
+                "description": "Scope of the subscription-level deployment"
               }
             }
           },
           "state": "Initialized",
-          "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+          "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
           "changeDefinitions": [
             {
-              "name": "tntubey",
+              "name": "subscriptionDeployment",
               "type": "ArmOperation",
-              "details": {}
+              "details": {
+                "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+                "parameters": {
+                  "subscriptionScope": true,
+                  "regions": [
+                    "eastus2",
+                    "westus2",
+                    "centralus"
+                  ],
+                  "complianceLevel": "enterprise"
+                }
+              }
             }
           ],
-          "releaseLabel": "qajbssixgrlzat",
+          "releaseLabel": "Release-3.0.0-Subscription",
           "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-          "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-          "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Resource Manager",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12361",
+              "description": "Work item for subscription-level deployment with multi-region governance",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://approval.contoso.com/requests/67906",
+              "description": "Subscription-level deployment approval with enterprise governance requirements",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://support.contoso.com/incidents/INC001250",
+              "description": "Support incident for subscription-level deployment coordination and monitoring",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://access.contoso.com/requests/AER-5694",
+              "description": "Access elevation request for subscription-level deployment with enterprise privileges",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/globalGovernanceState",
+              "description": "Related global governance change state for enterprise compliance coordination",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://testresults.contoso.com/runs/TR-9892",
+              "description": "Subscription-level deployment test results with comprehensive multi-region validation",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://catalog.contoso.com/services/subscription-enterprise-platform",
+              "description": "Subscription enterprise platform service catalog entry with governance specifications",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             }
           },
-          "additionalData": {},
+          "additionalData": {
+            "scope": "subscription",
+            "regions": [
+              "eastus2",
+              "westus2",
+              "centralus"
+            ],
+            "governanceLevel": "enterprise",
+            "complianceFramework": "SOC2"
+          },
           "stageMapSnapshot": [
-            null
+            {
+              "stageName": "governance",
+              "status": "completed"
+            },
+            {
+              "stageName": "compliance",
+              "status": "completed"
+            },
+            {
+              "stageName": "deployment",
+              "status": "initialized"
+            }
           ]
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
-        "name": "pzuiqzcrr",
-        "type": "xmkqwcglyhu",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionLevelChangeState",
+        "name": "subscriptionLevelChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "enterprise@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "enterprise@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-07-09T07:30:16.534Z"
         }
@@ -165,91 +216,122 @@
     "201": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
+          "provisioningState": "Succeeded",
           "changeType": "AppDeployment",
           "rolloutType": "Normal",
-          "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+          "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
           "stageMap": {
-            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
           },
           "parameters": {
-            "key1882": {
+            "deploymentScope": {
               "type": "Parameter",
               "metadata": {
-                "key8983": "rnieiditroeccsflmw"
+                "description": "Scope of the subscription-level deployment"
               }
             }
           },
           "state": "Initialized",
-          "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+          "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
           "changeDefinitions": [
             {
-              "name": "tntubey",
+              "name": "subscriptionDeployment",
               "type": "ArmOperation",
-              "details": {}
+              "details": {
+                "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+                "parameters": {
+                  "subscriptionScope": true,
+                  "regions": [
+                    "eastus2",
+                    "westus2",
+                    "centralus"
+                  ],
+                  "complianceLevel": "enterprise"
+                }
+              }
             }
           ],
-          "releaseLabel": "qajbssixgrlzat",
+          "releaseLabel": "Release-3.0.0-Subscription",
           "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-          "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-          "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Resource Manager",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12361",
+              "description": "Work item for subscription-level deployment with multi-region governance",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://approval.contoso.com/requests/67906",
+              "description": "Subscription-level deployment approval with enterprise governance requirements",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://support.contoso.com/incidents/INC001250",
+              "description": "Support incident for subscription-level deployment coordination and monitoring",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://access.contoso.com/requests/AER-5694",
+              "description": "Access elevation request for subscription-level deployment with enterprise privileges",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/globalGovernanceState",
+              "description": "Related global governance change state for enterprise compliance coordination",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://testresults.contoso.com/runs/TR-9892",
+              "description": "Subscription-level deployment test results with comprehensive multi-region validation",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://catalog.contoso.com/services/subscription-enterprise-platform",
+              "description": "Subscription enterprise platform service catalog entry with governance specifications",
+              "lastModifiedBy": "enterprise@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             }
           },
-          "additionalData": {},
+          "additionalData": {
+            "scope": "subscription",
+            "regions": [
+              "eastus2",
+              "westus2",
+              "centralus"
+            ],
+            "governanceLevel": "enterprise",
+            "complianceFramework": "SOC2"
+          },
           "stageMapSnapshot": [
-            null
+            {
+              "stageName": "governance",
+              "status": "completed"
+            },
+            {
+              "stageName": "compliance",
+              "status": "completed"
+            },
+            {
+              "stageName": "deployment",
+              "status": "initialized"
+            }
           ]
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
-        "name": "pzuiqzcrr",
-        "type": "xmkqwcglyhu",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionLevelChangeState",
+        "name": "subscriptionLevelChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "enterprise@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "enterprise@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-07-09T07:30:16.534Z"
         }

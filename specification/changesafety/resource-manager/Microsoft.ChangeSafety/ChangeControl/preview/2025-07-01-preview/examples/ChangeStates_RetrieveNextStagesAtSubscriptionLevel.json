@@ -4,65 +4,72 @@
   "parameters": {
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
-    "changeStateName": "testChangeState"
+    "changeStateName": "platformUpgradeChangeState"
   },
   "responses": {
     "200": {
       "body": {
-        "changeStateResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "changeStateResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/platformUpgradeChangeState",
         "lastStageProgressionSequence": 7,
         "nextStages": [
           {
-            "stageReference": "mnrldseqqbwxtglgfubizznufmywe",
-            "stageVariables": {},
+            "stageReference": "subscription-platform-upgrade",
+            "stageVariables": {
+              "upgradeScope": "subscription",
+              "maintenanceWindow": "enabled"
+            },
             "state": "Initialized",
             "sequence": 8,
-            "comments": "zokmxprvxmsgdgdijwi",
+            "comments": "Next stage: Subscription platform upgrade with maintenance window coordination",
             "links": {
               "workTrackingItem": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://dev.azure.com/contoso/PlatformProject/_workitems/edit/12371",
+                "description": "Subscription platform upgrade work item for next stage",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "approvalRequest": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://approval.contoso.com/requests/UPG-891",
+                "description": "Subscription platform upgrade approval request",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "supportIncident": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://support.contoso.com/incidents/INC-2024-001236",
+                "description": "Related subscription platform upgrade support incident",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "accessElevationRequest": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://access.contoso.com/elevation/UPG-679",
+                "description": "Subscription platform upgrade access elevation",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "relatedChangeState": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/maintenance-coordination",
+                "description": "Related maintenance coordination change state for platform upgrade",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "testResults": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://testresults.contoso.com/runs/platform-upgrade-readiness",
+                "description": "Subscription platform upgrade readiness test results",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               },
               "serviceCatalog": {
-                "uri": "azy",
-                "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                "uri": "https://catalog.contoso.com/services/subscription-platform-upgrade",
+                "description": "Subscription platform upgrade service catalog entry",
+                "lastModifiedBy": "platform@contoso.com",
                 "lastModifiedAt": "2025-07-09T07:30:17.815Z"
               }
             },
-            "additionalData": {}
+            "additionalData": {
+              "upgradeType": "platform",
+              "maintenanceWindowEnabled": true,
+              "backupRequired": true
+            }
           }
         ]
       }

@@ -12,97 +12,120 @@
         "value": [
           {
             "properties": {
-              "provisioningState": "Provisioning",
+              "provisioningState": "Succeeded",
               "changeType": "AppDeployment",
               "rolloutType": "Normal",
-              "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+              "description": "E-commerce platform deployment to production environment with comprehensive testing and monitoring. This deployment includes frontend updates, payment processing enhancements, inventory management improvements, and performance optimizations for the customer-facing e-commerce platform.",
               "stageMap": {
-                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/ecommerceStageMap"
               },
               "parameters": {
-                "key1882": {
-                  "type": "Parameter",
+                "platformVersion": {
+                  "type": "string",
                   "metadata": {
-                    "key8983": "rnieiditroeccsflmw"
+                    "description": "Version of the e-commerce platform to deploy"
                   }
                 }
               },
-              "state": "Initialized",
-              "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+              "state": "InProgress",
+              "comments": "E-commerce platform deployment in progress with comprehensive testing and automated rollback capabilities enabled.",
               "changeDefinitions": [
                 {
-                  "name": "tntubey",
+                  "name": "ecommercePlatformDeployment",
                   "type": "ArmOperation",
-                  "details": {}
+                  "details": {
+                    "templateUri": "https://templates.contoso.com/ecommerce-platform.json",
+                    "parameters": {
+                      "version": "4.2.0",
+                      "environment": "production",
+                      "enableCanaryDeployment": true
+                    }
+                  }
                 }
               ],
-              "releaseLabel": "qajbssixgrlzat",
+              "releaseLabel": "Release-4.2.0-Ecommerce",
               "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-              "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-              "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+              "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+              "orchestrationTool": "Azure DevOps",
               "links": {
                 "workTrackingItem": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://dev.azure.com/contoso/EcommerceProject/_workitems/edit/12367",
+                  "description": "Work item for e-commerce platform production deployment with enhanced payment features",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "approvalRequest": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://approval.contoso.com/requests/67912",
+                  "description": "E-commerce platform deployment approval with business stakeholder and security review",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "supportIncident": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://support.contoso.com/incidents/INC001256",
+                  "description": "Support incident for e-commerce platform deployment coordination and customer impact monitoring",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "accessElevationRequest": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://access.contoso.com/requests/AER-5700",
+                  "description": "Access elevation request for e-commerce platform production deployment",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "relatedChangeState": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/paymentGatewayState",
+                  "description": "Related payment gateway change state for e-commerce platform coordination",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "testResults": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://testresults.contoso.com/runs/TR-9898",
+                  "description": "E-commerce platform deployment test results with payment and inventory validation",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 },
                 "serviceCatalog": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+                  "uri": "https://catalog.contoso.com/services/ecommerce-platform",
+                  "description": "E-commerce platform service catalog entry with deployment and scaling specifications",
+                  "lastModifiedBy": "ecommerce@contoso.com",
                   "lastModifiedAt": "2025-07-09T07:30:17.815Z"
                 }
               },
-              "additionalData": {},
+              "additionalData": {
+                "deploymentStrategy": "canary",
+                "customerFacing": true,
+                "paymentProcessing": true,
+                "inventoryIntegration": "enabled"
+              },
               "stageMapSnapshot": [
-                null
+                {
+                  "stageName": "testing",
+                  "status": "completed"
+                },
+                {
+                  "stageName": "security",
+                  "status": "completed"
+                },
+                {
+                  "stageName": "production",
+                  "status": "in-progress"
+                }
               ]
             },
-            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
-            "name": "pzuiqzcrr",
-            "type": "xmkqwcglyhu",
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/ecommercePlatformChangeState",
+            "name": "ecommercePlatformChangeState",
+            "type": "Microsoft.ChangeSafety/changeStates",
             "systemData": {
-              "createdBy": "amslizkqjsbiignryruaukfusgd",
+              "createdBy": "ecommerce@contoso.com",
               "createdByType": "User",
               "createdAt": "2025-07-09T07:30:16.534Z",
-              "lastModifiedBy": "dycpwstsfmppugke",
+              "lastModifiedBy": "ecommerce@contoso.com",
               "lastModifiedByType": "User",
               "lastModifiedAt": "2025-07-09T07:30:16.534Z"
             }
           }
         ],
-        "nextLink": "https://microsoft.com/a"
+        "nextLink": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates?api-version=2025-07-01-preview&$skiptoken=def456"
       }
     }
   }

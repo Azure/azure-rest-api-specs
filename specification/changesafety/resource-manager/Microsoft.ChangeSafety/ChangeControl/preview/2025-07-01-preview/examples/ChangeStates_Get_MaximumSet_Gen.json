@@ -5,97 +5,120 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
     "resourceGroupName": "rgChangeControl",
-    "changeStateName": "testChangeState"
+    "changeStateName": "microserviceChangeState"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
+          "provisioningState": "Succeeded",
           "changeType": "AppDeployment",
           "rolloutType": "Normal",
-          "description": "kopbewaitithqcmhsaeaifwblvvmimhzvayblucyizmfbsopzkughfodvpqzbwpivezemwkwanceldxydspphtgrqrmsllhkirramrpycvzwoucrtaeijxijvrpiwdujnmuvhpqyakivlpyfmizrzkdfvyqhowiegdsqcwhulratoeibwvdnadzhrkykfgqwzcesqantwjzcsdkoxpljarbuhebrmbyustoweiacmjrmyeskfkgnhwlescbvtkqluijnrxfcfcfuqvizkfswesnxysxelxncwtogvusmdwxyxnwpeckoigdahpdlqiuygkhvnxwwxrfvifznxykiufopuphpdlbonkhicqjwlzpxmhmqnefthyckoaebcypudoexjqlgervsdkydxtbuabsixdrzalcjcrhdleegidsozhaxfklbpjnqw",
+          "description": "Microservice deployment to production environment with comprehensive testing and monitoring. This change includes API updates, database schema migrations, security enhancements, and performance optimizations for the core microservices platform.",
           "stageMap": {
-            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/testStageMap"
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/microserviceStageMap"
           },
           "parameters": {
-            "key1882": {
+            "serviceVersion": {
               "type": "Parameter",
               "metadata": {
-                "key8983": "rnieiditroeccsflmw"
+                "description": "Version of the microservice to deploy"
               }
             }
           },
-          "state": "Initialized",
-          "comments": "pmxjubggzxvxegbpflrkkhdstdqqeasodyzczlnecycnlipopdrwlszyckjfzoehokplvywyfbrsfcefzmxquxnoybardhxykihdzibnkfszixr",
+          "state": "InProgress",
+          "comments": "Microservice deployment in progress with comprehensive testing and automated rollback capabilities enabled.",
           "changeDefinitions": [
             {
-              "name": "tntubey",
+              "name": "microserviceDeployment",
               "type": "ArmOperation",
-              "details": {}
+              "details": {
+                "templateUri": "https://templates.contoso.com/microservice-deployment.json",
+                "parameters": {
+                  "serviceVersion": "3.2.1",
+                  "environment": "production",
+                  "enableCanaryDeployment": true
+                }
+              }
             }
           ],
-          "releaseLabel": "qajbssixgrlzat",
+          "releaseLabel": "Release-3.2.1-Production",
           "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
-          "anticipatedEndTime": "2025-07-09T07:30:17.815Z",
-          "orchestrationTool": "thynybsflrvxkbgkqaxvx",
+          "anticipatedEndTime": "2025-07-09T10:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12362",
+              "description": "Work item for microservice production deployment with enhanced API features",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://approval.contoso.com/requests/67907",
+              "description": "Microservice deployment approval with technical lead and security review",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://support.contoso.com/incidents/INC001251",
+              "description": "Support incident for microservice deployment coordination and monitoring",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://access.contoso.com/requests/AER-5695",
+              "description": "Access elevation request for microservice production deployment",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/databaseChangeState",
+              "description": "Related database change state for schema migration coordination",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://testresults.contoso.com/runs/TR-9893",
+              "description": "Microservice deployment test results with API and integration validation",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
+              "uri": "https://catalog.contoso.com/services/microservice-platform",
+              "description": "Microservice platform service catalog entry with deployment specifications",
+              "lastModifiedBy": "microservice@contoso.com",
               "lastModifiedAt": "2025-07-09T07:30:17.815Z"
             }
           },
-          "additionalData": {},
+          "additionalData": {
+            "deploymentStrategy": "canary",
+            "apiVersion": "v3.2",
+            "databaseMigration": true,
+            "performanceMetrics": "enabled"
+          },
           "stageMapSnapshot": [
-            null
+            {
+              "stageName": "development",
+              "status": "completed"
+            },
+            {
+              "stageName": "testing",
+              "status": "completed"
+            },
+            {
+              "stageName": "production",
+              "status": "in-progress"
+            }
           ]
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
-        "name": "pzuiqzcrr",
-        "type": "xmkqwcglyhu",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/microserviceChangeState",
+        "name": "microserviceChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "microservice@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "microservice@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-07-09T07:30:16.534Z"
         }

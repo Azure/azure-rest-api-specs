@@ -5,7 +5,7 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
     "resourceGroupName": "rgChangeControl",
-    "changeStateName": "testChangeState"
+    "changeStateName": "databaseDeploymentChangeState"
   },
   "responses": {
     "200": {
@@ -13,71 +13,75 @@
         "value": [
           {
             "properties": {
-              "provisioningState": "Provisioning",
-              "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
-              "state": "Initialized",
-              "sequence": 12,
-              "stageVariables": {},
-              "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+              "provisioningState": "Succeeded",
+              "stageReference": "database-backup-validation",
+              "state": "Completed",
+              "sequence": 1,
+              "stageVariables": {
+                "backupType": "full",
+                "retentionDays": 30,
+                "environment": "production"
+              },
+              "comments": "Database backup validation stage for production deployment. This stage ensures all critical data is backed up before schema changes are applied.",
               "links": {
                 "workTrackingItem": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://dev.azure.com/contoso/Database/_workitems/edit/12353",
+                  "description": "Database backup validation work item for production deployment safety",
+                  "lastModifiedBy": "olivia.dba@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:55:30.442Z"
                 },
                 "approvalRequest": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://approval.contoso.com/requests/db-896",
+                  "description": "Database backup approval request with DBA team sign-off",
+                  "lastModifiedBy": "paul.dba@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:50:15.225Z"
                 },
                 "supportIncident": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://support.contoso.com/incidents/INC-797",
+                  "description": "Related support incident for database environment coordination",
+                  "lastModifiedBy": "quinn.support@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:45:45.167Z"
                 },
                 "accessElevationRequest": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://pim.contoso.com/requests/elev-329",
+                  "description": "Production database access elevation for backup validation activities",
+                  "lastModifiedBy": "rose.ops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:40:20.889Z"
                 },
                 "relatedChangeState": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/schemaValidationChangeState",
+                  "description": "Related schema validation change state for database structure verification",
+                  "lastModifiedBy": "sam.dev@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:35:10.334Z"
                 },
                 "testResults": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://testing.contoso.com/results/backup-validation-662",
+                  "description": "Database backup validation results with integrity checks and recovery testing",
+                  "lastModifiedBy": "tina.testing@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:30:35.556Z"
                 },
                 "serviceCatalog": {
-                  "uri": "azy",
-                  "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-                  "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                  "uri": "https://catalog.contoso.com/services/database-operations",
+                  "description": "Database operations service catalog entry with backup procedures and recovery plans",
+                  "lastModifiedBy": "victor.catalog@contoso.com",
+                  "lastModifiedAt": "2025-07-09T08:25:25.778Z"
                 }
               }
             },
-            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-            "name": "uebdyrdhxmoqzhfgsz",
-            "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/databaseDeploymentChangeState/stageProgressions/backupValidationProgression",
+            "name": "backupValidationProgression",
+            "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
             "systemData": {
-              "createdBy": "amslizkqjsbiignryruaukfusgd",
+              "createdBy": "olivia.dba@contoso.com",
               "createdByType": "User",
               "createdAt": "2025-07-09T07:30:16.534Z",
-              "lastModifiedBy": "dycpwstsfmppugke",
+              "lastModifiedBy": "olivia.dba@contoso.com",
               "lastModifiedByType": "User",
-              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+              "lastModifiedAt": "2025-07-09T08:55:30.442Z"
             }
           }
         ],
-        "nextLink": "https://microsoft.com/a"
+        "nextLink": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/databaseDeploymentChangeState/stageProgressions?api-version=2025-07-01-preview&$skiptoken=def789"
       }
     }
   }

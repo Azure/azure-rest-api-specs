@@ -4,43 +4,52 @@
   "parameters": {
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
-    "changeStateName": "testChangeState",
-    "stageProgressionName": "testStageProgression",
+    "changeStateName": "subscriptionComplianceChangeState",
+    "stageProgressionName": "complianceValidationProgression",
     "resource": {
       "properties": {
-        "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
+        "stageReference": "subscription-compliance-validation",
         "state": "Initialized",
-        "sequence": 12,
-        "stageVariables": {},
-        "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+        "sequence": 1,
+        "stageVariables": {
+          "complianceFramework": "SOC2-GDPR",
+          "validationScope": "subscription",
+          "auditLevel": "comprehensive",
+          "governanceChecks": [
+            "policy-compliance",
+            "security-baseline",
+            "access-controls"
+          ]
+        },
+        "comments": "Subscription-level compliance validation stage progression for enterprise governance framework deployment. This stage performs comprehensive compliance checks, policy validation, and security baseline verification across the entire subscription scope.",
         "links": {
           "workTrackingItem": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://dev.azure.com/contoso/Governance/_workitems/edit/12347",
+            "description": "Subscription compliance validation work item for enterprise governance framework deployment"
           },
           "approvalRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://approval.contoso.com/requests/comp-890",
+            "description": "Subscription compliance validation approval request with executive and legal team sign-offs"
           },
           "supportIncident": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://support.contoso.com/incidents/INC-791",
+            "description": "Related support incident for subscription compliance validation coordination"
           },
           "accessElevationRequest": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://pim.contoso.com/requests/elev-323",
+            "description": "Subscription-level privileged access elevation for compliance validation activities"
           },
           "relatedChangeState": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/policyFrameworkChangeState",
+            "description": "Related policy framework change state for subscription governance coordination"
           },
           "testResults": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://testing.contoso.com/results/compliance-validation-656",
+            "description": "Subscription compliance validation test results with governance and security framework verification"
           },
           "serviceCatalog": {
-            "uri": "azy",
-            "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx"
+            "uri": "https://catalog.contoso.com/services/subscription-governance",
+            "description": "Subscription governance service catalog entry with compliance and security procedures"
           }
         }
       }
@@ -50,134 +59,152 @@
     "200": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
+          "provisioningState": "Succeeded",
+          "stageReference": "subscription-compliance-validation",
           "state": "Initialized",
-          "sequence": 12,
-          "stageVariables": {},
-          "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+          "sequence": 1,
+          "stageVariables": {
+            "complianceFramework": "SOC2-GDPR",
+            "validationScope": "subscription",
+            "auditLevel": "comprehensive",
+            "governanceChecks": [
+              "policy-compliance",
+              "security-baseline",
+              "access-controls"
+            ]
+          },
+          "comments": "Subscription-level compliance validation stage progression for enterprise governance framework deployment. This stage performs comprehensive compliance checks, policy validation, and security baseline verification across the entire subscription scope.",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://dev.azure.com/contoso/Governance/_workitems/edit/12347",
+              "description": "Subscription compliance validation work item for enterprise governance framework deployment",
+              "lastModifiedBy": "olivia.compliance@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:30.442Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://approval.contoso.com/requests/comp-890",
+              "description": "Subscription compliance validation approval request with executive and legal team sign-offs",
+              "lastModifiedBy": "paul.legal@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:15.225Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://support.contoso.com/incidents/INC-791",
+              "description": "Related support incident for subscription compliance validation coordination",
+              "lastModifiedBy": "quinn.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:45.167Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://pim.contoso.com/requests/elev-323",
+              "description": "Subscription-level privileged access elevation for compliance validation activities",
+              "lastModifiedBy": "rose.governance@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:20.889Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/policyFrameworkChangeState",
+              "description": "Related policy framework change state for subscription governance coordination",
+              "lastModifiedBy": "sam.policy@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:10.334Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://testing.contoso.com/results/compliance-validation-656",
+              "description": "Subscription compliance validation test results with governance and security framework verification",
+              "lastModifiedBy": "tina.audit@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:35.556Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://catalog.contoso.com/services/subscription-governance",
+              "description": "Subscription governance service catalog entry with compliance and security procedures",
+              "lastModifiedBy": "victor.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:25.778Z"
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-        "name": "uebdyrdhxmoqzhfgsz",
-        "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionComplianceChangeState/stageProgressions/complianceValidationProgression",
+        "name": "complianceValidationProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "olivia.compliance@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "lastModifiedBy": "olivia.compliance@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+          "lastModifiedAt": "2025-07-09T08:25:30.442Z"
         }
       }
     },
     "201": {
       "body": {
         "properties": {
-          "provisioningState": "Provisioning",
-          "stageReference": "qhktnhmuxvhpwdemrvscuttirpbliecpjahkjrmahcezzkeyyjeupfxvbnifabtkdtxliunyaiqosiczbpkxyrubcczkpbmnpketmmywlohfdncvquzccvmikwlusumgduvwgpdvfccqcefrqvuurtgqmgefkntotmnlzyxbxcjrvqxhsxiwzlqqwsspooltwzyomqnf",
+          "provisioningState": "Creating",
+          "stageReference": "subscription-compliance-validation",
           "state": "Initialized",
-          "sequence": 12,
-          "stageVariables": {},
-          "comments": "wsdymwgrxsuxtueawkbzowtpxkncggbhkhcgcmnldhkmcfubkvavueqduhmenoyklghxdfduwtusvrsabcwrbsrrjleluqyqnnpfepfahkzlaidvejbwpndxxwpixhdnutkhfatubkpprpngfxmttupphmnpqevwvdbdoawathtjtxkcluxjlwovacqjvcdsrmfvmyiifkmpocslupywuetlmkicwowmjwaniugchtxutfnfjkdohbuktcgioezbrydiyjniycsttqosxmnmmiafgrdhddztxebachvhfiwbihpjzdcssrkycmyklmuzdhezaghxgqxamwtkgylezbdukujmnnjddlmqvugfkacuosomvxflijxrxclptgcisrokieoturhedeggnstriyzqhmjzteawtuvmgqrdawxuenhscbnsdtgdevgvgzfmcvtcauqtekasxdqgyclvqnwhrmkkargpfnhyefrigsmkimycjlwswqlsleiokrjncmwablzyzodypibjrnopvdkcasrozaoocicfupjpffbicxydoewnttjcrchangdvpvtpppuswpdhrlofoxoplvrbcclxmixqpfowrpmcbctslwdvjdlvtyrmndufzmjybcgjpzscdcoeyyaparnanrawquxxhpaeiwxdhiysjosvcfncvijpzozsttwcbmqzrlqtwmrabrcyfhejahhwrbajxkeuisizzhctksvznnugsrvvpccnuhsrodpaeabzthwfdmcrqmoeznmghmonhfgpwulhwyguqspimnillcqtnrtdbxbmgjzbfqumyhovzhomdnjaivondgjollkdumhornlamuqvqkmoocyixuaoyosfwgtqrlgiqnahtdamuiiimbmkbygqqkuhyobjyhbldfnlctgjsidwbudnfcgxbfkgfnnswyavrrudwvxzbwuvujdzoccjbazcortkaejqgvmdezcqyjskpokxukylwivfbmejfjlyvlqwzusgfzfuvaayvcjleecmyayawouayfhvfjdwumgrwiptbzgvuthavjvwpyysbfqgtxfxoaalcgcphqvjdxuxmzizlgbwecgwbdtunagguvbavoyfocfwnfijncczggzizjxdtllfwrihxkbxjtahbgdtigsasluaekpbvoqaaxjnjftjhkiwccgkimgniyvjojjrimzqtygsrembbwizrnxpqjtkzmssywelwsjplxgsiiuzgfxkrgyrildkadtrmklckncnwxbgcibvkjpjuewtbfbahubaofpujazdmxrdggmubyhjfqextiotlphlivbfpvafoyooijitxbcxqexafqcfpwaduhrmwmctdzpxihairgrdhxyobklhrokjotbbzyrmyblxpkeyamsxiajkhhknjmkmqlvuzxmzftjasonfisyrbpthjtxqfbhnprojvkaxstwbhdzzwykyzbyzhkkyhcvddliqiyvfboxgbwudblpicqaydrovyzbcwwbrqflzuocluoytjqwrqllsuhfkhebwqwhzxfehwhrmmhqnflftcocmndlqfmrkiuazicqtwxilamuxmlfswlavjooxhyqqdkjqycnufikphjpuhxnnjaevnspupimeyqsknsyoxkzbhzerspfjnioyvjxliomsxsxoznpsezbjgcplmrbvfvbwirycwkqgpzniahertmvtlsbpavrrjelhxzwkzhntfbfflsdsympezqnmxqzfeejdvyunysbihzlpavirdoqvgfgisscjoyjojadhptgtkvbijmbysxjfxrrdibemwkfghlhjuzxvafjtmbphqkfvttxsxzsgcuyadbgcrvzgszseoqahgbllbgzzvlswgzprchguodniyhhcmhrkpnyqyqqfokcmwxzqrwvtxnbrfolrhguvyghrnq",
+          "sequence": 1,
+          "stageVariables": {
+            "complianceFramework": "SOC2-GDPR",
+            "validationScope": "subscription",
+            "auditLevel": "comprehensive",
+            "governanceChecks": [
+              "policy-compliance",
+              "security-baseline",
+              "access-controls"
+            ]
+          },
+          "comments": "Subscription-level compliance validation stage progression for enterprise governance framework deployment. This stage performs comprehensive compliance checks, policy validation, and security baseline verification across the entire subscription scope.",
           "links": {
             "workTrackingItem": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://dev.azure.com/contoso/Governance/_workitems/edit/12347",
+              "description": "Subscription compliance validation work item for enterprise governance framework deployment",
+              "lastModifiedBy": "olivia.compliance@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:25:30.442Z"
             },
             "approvalRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://approval.contoso.com/requests/comp-890",
+              "description": "Subscription compliance validation approval request with executive and legal team sign-offs",
+              "lastModifiedBy": "paul.legal@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:20:15.225Z"
             },
             "supportIncident": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://support.contoso.com/incidents/INC-791",
+              "description": "Related support incident for subscription compliance validation coordination",
+              "lastModifiedBy": "quinn.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:45.167Z"
             },
             "accessElevationRequest": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://pim.contoso.com/requests/elev-323",
+              "description": "Subscription-level privileged access elevation for compliance validation activities",
+              "lastModifiedBy": "rose.governance@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:20.889Z"
             },
             "relatedChangeState": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/policyFrameworkChangeState",
+              "description": "Related policy framework change state for subscription governance coordination",
+              "lastModifiedBy": "sam.policy@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:10.334Z"
             },
             "testResults": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://testing.contoso.com/results/compliance-validation-656",
+              "description": "Subscription compliance validation test results with governance and security framework verification",
+              "lastModifiedBy": "tina.audit@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:35.556Z"
             },
             "serviceCatalog": {
-              "uri": "azy",
-              "description": "gkyviteryufowjmubbyuvxovzbqxlwuaibfurwzslvywttoxqjswaewwsjlkfirygvsyqwoaezmryfplorlnyoyeetpnbkswwrlydehcqabjsqypwtkcyfgdjywkhrzgnjlzfohrweoybxvmrwcdwqsoqnlcpwuxryqclhlhidcydsjkzjgjzheragupfuzzuttgbsupjugoiiaptskonypvsczxhmgiwtbxavftuarqockqdniwdynfqlhbbpcbayafedfsydgriwagtlolypaidojtrllkgzzrxaibempnohntjkxvmazympmbeplgumqmtooztdyapmratukssbppzwivajrxipfhiglshfuatnczvwxqfpnqpjufcbhhveiiobazgojmjzhtidbgtxfiwnbosxailbnrtcsdtprflzgcmehnqsgqdcmonwvwwlemekkyalxavghgjxzvcpckjqfuocsmzdwueqmsvcgubdsctuermqsabffvtwyzlxkcjclzclfyytaoatfszszgwdudeamftvuxlcysoxbfcvokbxdepgmltdkrlqprpudqsyfcwccibjyzizoxfzhyssyelaesuybvedtllfvfrafolylktkxdjglrmuyodxaejvwewesahbvforyxjtmetombhzkicckvhrdulkuyphrpltvelwtkofvtulbbyvpypviqxaihiikbbgcsuqxtmkgwcwyvwrpwhcodinfecwridrcrzjvxgvgtfzuguuskeoeabbmpvvyinevtyasexbkdckqldfriqxutkkobvhxgqwsmwayitfmugwfxhpowstqwqtpaqifenwkmaxskuamikihkddmwmjptqhnppnjhqhihnpdkvsisgjlpolgdsvpidqsjehxmwdlowoijfgaxcjaurkwgdtjqavvrhlhoddjogx",
-              "lastModifiedBy": "glgdbexjjasvkqicnilwldemudead",
-              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              "uri": "https://catalog.contoso.com/services/subscription-governance",
+              "description": "Subscription governance service catalog entry with compliance and security procedures",
+              "lastModifiedBy": "victor.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:25.778Z"
             }
           }
         },
-        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression",
-        "name": "uebdyrdhxmoqzhfgsz",
-        "type": "hbqoaxzexsbgmiyrhtjhyteyslwzz",
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionComplianceChangeState/stageProgressions/complianceValidationProgression",
+        "name": "complianceValidationProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
         "systemData": {
-          "createdBy": "amslizkqjsbiignryruaukfusgd",
+          "createdBy": "olivia.compliance@contoso.com",
           "createdByType": "User",
-          "createdAt": "2025-07-09T07:30:16.534Z",
-          "lastModifiedBy": "dycpwstsfmppugke",
+          "createdAt": "2025-07-09T08:25:30.442Z",
+          "lastModifiedBy": "olivia.compliance@contoso.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+          "lastModifiedAt": "2025-07-09T08:25:30.442Z"
         }
       }
     }

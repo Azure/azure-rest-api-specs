@@ -5,26 +5,59 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
     "resourceGroupName": "rgChangeControl",
-    "changeStateName": "testChangeState",
+    "changeStateName": "apiServiceChangeState",
     "body": {
       "operation": {
-        "uri": "https://microsoft.com/a",
-        "httpMethod": "DELETE",
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-production/providers/Microsoft.Web/sites/api-service-prod",
+        "httpMethod": "PUT",
         "content": {
-          "name": "bezhpcvcgkcs",
-          "location": "bokcnpj",
-          "properties": {}
+          "name": "api-service-prod",
+          "location": "East US",
+          "properties": {
+            "serverFarmId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-production/providers/Microsoft.Web/serverfarms/asp-prod",
+            "enabled": true,
+            "siteConfig": {
+              "appSettings": [
+                {
+                  "name": "ENVIRONMENT",
+                  "value": "production"
+                },
+                {
+                  "name": "API_VERSION",
+                  "value": "v2.1"
+                }
+              ],
+              "connectionStrings": [
+                {
+                  "name": "DefaultConnection",
+                  "connectionString": "Server=prod-db.database.windows.net;Database=ApiServiceDB;",
+                  "type": "SQLAzure"
+                }
+              ]
+            }
+          }
         }
       },
-      "stageProgressionResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/testStageProgression"
+      "context": {
+        "applicationId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "deploymentId": "deploy-api-service-2025-07-09",
+        "environment": "production"
+      },
+      "stageProgressionResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/apiServiceChangeState/stageProgressions/productionDeployment"
     }
   },
   "responses": {
     "200": {
       "body": {
         "outcome": "Succeeded",
-        "message": "kgscxeektrkbfoexqbtftylx",
-        "validUntil": "2025-07-09T07:30:19.442Z"
+        "message": "Change validation successful. The PUT operation for api-service-prod has been validated and is safe to execute. All dependencies are available and configuration is valid.",
+        "validUntil": "2025-07-09T08:30:19.442Z",
+        "validationDetails": {
+          "dependencyChecks": "passed",
+          "configurationValidation": "passed",
+          "securityCompliance": "approved",
+          "resourceAvailability": "confirmed"
+        }
       }
     }
   }
