@@ -1850,6 +1850,7 @@ model EventGridAndResourceGraph {
 /**
  * Specifies if Scheduled Events should be auto-approved when all instances are down.
  */
+@added(Versions.v2025_04_01)
 model AllInstancesDown {
   /**
    * Specifies if Scheduled Events should be auto-approved when all instances are down.
