@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
@@ -39,6 +40,11 @@ model CopilotSettingsResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backwards compatibility with existing spec"
   location?: string;
 }
+/**
+ * Introducing managed identity and location standard envelope properties from version 2025-08-01-preview onwards to avoid breaking change for previous api versions
+ */
+@@added(CopilotSettingsResource.identity, Versions.v2025_08_01_preview);
+@@added(CopilotSettingsResource.location, Versions.v2025_08_01_preview);
 
 @armResourceOperations
 interface CopilotSettings {

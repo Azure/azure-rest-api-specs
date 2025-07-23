@@ -235,16 +235,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (either system assigned, or none)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        }
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -312,14 +302,6 @@
           "$ref": "#/definitions/CopilotSettingsProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure Region where the resource lives (will be set to \"global\" for this global proxy resource)"
         }
       },
       "allOf": [
@@ -336,14 +318,6 @@
           "$ref": "#/definitions/CopilotSettingsPropertiesUpdate",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure Region where the resource lives (will be set to \"global\" for this global proxy resource)"
         }
       },
       "allOf": [
