@@ -882,6 +882,7 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
+  @list
   listSubTasks is ReadOperation<
     {
       ...CommonParameters;
