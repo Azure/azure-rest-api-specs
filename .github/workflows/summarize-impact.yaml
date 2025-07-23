@@ -29,15 +29,6 @@ jobs:
         with:
           working-directory: after
 
-      - name: Get PR labels
-        id: get-labels
-        working-directory: after
-        run: |
-          labels=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '[.labels[].name] | join(",")')
-          echo "labels=$labels" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ github.token }}
-
       - name: Run Summarize Impact
         id: summarize-impact
         working-directory: after
@@ -49,7 +40,6 @@ jobs:
             --sha "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}" \
             --owner "${{ github.repository_owner }}" \
-            --labels "${{ steps.get-labels.outputs.labels }}" \
             --isDraft ${{ github.event.pull_request.draft }}
         env:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
