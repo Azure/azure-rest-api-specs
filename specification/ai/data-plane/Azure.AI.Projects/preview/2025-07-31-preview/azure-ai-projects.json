@@ -1649,93 +1649,6 @@
         }
       }
     },
-    "AggregationConfiguration": {
-      "type": "object",
-      "description": "Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/AggregationMethod",
-          "description": "The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "AggregationConfigurationUpdate": {
-      "type": "object",
-      "description": "Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/AggregationMethod",
-          "description": "The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')"
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "AggregationMethod": {
-      "type": "string",
-      "description": "Statistical aggregation methods available for summarizing evaluation results across multiple data points.",
-      "enum": [
-        "sum",
-        "average",
-        "max",
-        "min",
-        "count",
-        "percentile",
-        "standardDeviation"
-      ],
-      "x-ms-enum": {
-        "name": "AggregationMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sum",
-            "value": "sum",
-            "description": "Calculate the sum of all values"
-          },
-          {
-            "name": "average",
-            "value": "average",
-            "description": "Calculate the arithmetic mean of all values"
-          },
-          {
-            "name": "max",
-            "value": "max",
-            "description": "Find the maximum value"
-          },
-          {
-            "name": "min",
-            "value": "min",
-            "description": "Find the minimum value"
-          },
-          {
-            "name": "count",
-            "value": "count",
-            "description": "Count the total number of values"
-          },
-          {
-            "name": "percentile",
-            "value": "percentile",
-            "description": "Calculate the nth percentile value. Needs a parameter to specify the percentile level (e.g., level: 95 for 95th percentile analysis)"
-          },
-          {
-            "name": "standardDeviation",
-            "value": "standardDeviation",
-            "description": "Calculate the standard deviation"
-          }
-        ]
-      }
-    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -2683,18 +2596,11 @@
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
         },
-        "aggregations": {
-          "type": "object",
-          "description": "Statistical aggregation methods to apply when summarizing evaluation results. Specify which aggregation functions should be calculated across all evaluation scores. For example, use 'average' to get mean scores, 'percentile' with parameter level: 95 for 95th percentile analysis, or 'standardDeviation' to measure score variability.\nIf not specified, average and count aggregations will be applied by default.\nKey is the any label for the aggregation, which can be used to identify it in results.\nAvailable methods: sum, average, max, min, count, percentile, standardDeviation.\nNote: Aggregations are only calculated for evaluators that produce numeric scores. Non-numeric evaluators will not contribute to these aggregations.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AggregationConfiguration"
-          }
-        },
         "summary": {
           "type": "object",
           "description": "Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows and is available once the evaluation completes.",
           "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorResultSummary"
+            "$ref": "#/definitions/EvaluatorSummaryResult"
           },
           "readOnly": true
         },
@@ -2914,7 +2820,7 @@
         },
         "evaluatorResults": {
           "type": "object",
-          "description": "Collection of evaluation results from each configured evaluator for this data row. The key is the evaluator identifier and the value contains the detailed evaluation results.",
+          "description": "Evaluation results from all the configured evaluators for this data row.",
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorResult"
           }
@@ -3007,7 +2913,7 @@
           "$ref": "#/definitions/EvaluationResultOutcome",
           "description": "Outcome of the evaluation based on the score and threshold. Indicates whether the score meets, exceeds, or falls below expectations"
         },
-        "additionalMetrics": {
+        "additionalDetails": {
           "type": "object",
           "description": "Optional additional details that may include metadata or other relevant information about the score",
           "additionalProperties": {}
@@ -3021,27 +2927,48 @@
       "type": "object",
       "description": "Statistical summary of evaluation results including aggregated scores and pass/fail rates.",
       "properties": {
-        "aggregatedScores": {
-          "type": "object",
-          "description": "Aggregated scores calculated using specified aggregation methods. This provides a summary of the evaluator's performance across all data rows.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AggregatedScore"
-          }
-        },
-        "passRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Value between 0 and 1 representing the proportion of rows where outcome is 'pass'."
-        },
         "sampleCount": {
           "type": "integer",
           "format": "int64",
           "description": "Total number of rows that were evaluated."
+        },
+        "defectRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Proportion of evaluation results that failed to meet the specified criteria or threshold, expressed as a value between 0 and 1."
+        },
+        "minScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Lowest score value observed across all evaluation results."
+        },
+        "maxScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Highest score value observed across all evaluation results."
+        },
+        "averageScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Arithmetic mean of all score values in the evaluation results."
+        },
+        "standardDeviation": {
+          "type": "number",
+          "format": "float",
+          "description": "Standard deviation of score values, measuring the variability or spread of the evaluation results."
+        },
+        "confidenceIntervalLower": {
+          "type": "number",
+          "format": "float",
+          "description": "Lower bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results."
+        },
+        "confidenceIntervalUpper": {
+          "type": "number",
+          "format": "float",
+          "description": "Upper bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results."
         }
       },
       "required": [
-        "aggregatedScores",
-        "passRate",
         "sampleCount"
       ]
     },
@@ -3084,13 +3011,6 @@
           "description": "Evaluators to be used for the evaluation.",
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfigurationUpdate"
-          }
-        },
-        "aggregations": {
-          "type": "object",
-          "description": "Statistical aggregation methods to apply when summarizing evaluation results. Specify which aggregation functions should be calculated across all evaluation scores. For example, use 'average' to get mean scores, 'percentile' with parameter level: 95 for 95th percentile analysis, or 'standardDeviation' to measure score variability.\nIf not specified, average and count aggregations will be applied by default.\nKey is the any label for the aggregation, which can be used to identify it in results.\nAvailable methods: sum, average, max, min, count, percentile, standardDeviation.\nNote: Aggregations are only calculated for evaluators that produce numeric scores. Non-numeric evaluators will not contribute to these aggregations.",
-          "additionalProperties": {
-            "$ref": "#/definitions/AggregationConfigurationUpdate"
           }
         }
       }
@@ -3189,14 +3109,16 @@
           "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
         },
         "score": {
-          "$ref": "#/definitions/EvaluationScore",
-          "description": "Score for the evaluation result"
+          "type": "object",
+          "description": "Score for the evaluation result",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluationScore"
+          }
         }
       },
       "required": [
         "evaluatorId",
-        "state",
-        "score"
+        "state"
       ]
     },
     "EvaluatorResultCommon": {
@@ -3214,32 +3136,6 @@
         "state": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
-        }
-      },
-      "required": [
-        "evaluatorId",
-        "state"
-      ]
-    },
-    "EvaluatorResultSummary": {
-      "type": "object",
-      "description": "Aggregated summary of evaluation results for a specific evaluator across all data rows. This provides a high-level overview of the evaluator's performance.",
-      "properties": {
-        "evaluatorId": {
-          "type": "string",
-          "description": "Unique identifier of the evaluator that produced this result"
-        },
-        "systemData": {
-          "$ref": "#/definitions/EvaluatorResultSystemData",
-          "description": "Metadata about the evaluation execution environment and resource usage."
-        },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
-        },
-        "statistics": {
-          "$ref": "#/definitions/EvaluationSummaryStatistics",
-          "description": "Statistical summary of evaluation results."
         }
       },
       "required": [
@@ -3308,6 +3204,35 @@
           }
         ]
       }
+    },
+    "EvaluatorSummaryResult": {
+      "type": "object",
+      "description": "Aggregated summary of evaluation results for a specific evaluator across all data rows. This provides a high-level overview of the evaluator's performance.",
+      "properties": {
+        "evaluatorId": {
+          "type": "string",
+          "description": "Unique identifier of the evaluator that produced this result"
+        },
+        "systemData": {
+          "$ref": "#/definitions/EvaluatorResultSystemData",
+          "description": "Metadata about the evaluation execution environment and resource usage."
+        },
+        "state": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
+        },
+        "statistics": {
+          "type": "object",
+          "description": "Statistical summary of evaluation results where key is the metric id.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluationSummaryStatistics"
+          }
+        }
+      },
+      "required": [
+        "evaluatorId",
+        "state"
+      ]
     },
     "FieldMapping": {
       "type": "object",

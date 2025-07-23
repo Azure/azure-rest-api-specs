@@ -270,42 +270,42 @@ model FoundryModelDatasetSource extends EvaluationDataSource {
   queryField: string;
 }
 
-@doc("Statistical aggregation methods available for summarizing evaluation results across multiple data points.")
-@added(Versions.v2025_07_31_preview)
-union AggregationMethod {
-  @doc("Calculate the sum of all values")
-  sum: "sum",
+// @doc("Statistical aggregation methods available for summarizing evaluation results across multiple data points.")
+// @added(Versions.v2025_07_31_preview)
+// union AggregationMethod {
+//   @doc("Calculate the sum of all values")
+//   sum: "sum",
 
-  @doc("Calculate the arithmetic mean of all values")
-  average: "average",
+//   @doc("Calculate the arithmetic mean of all values")
+//   average: "average",
 
-  @doc("Find the maximum value")
-  max: "max",
+//   @doc("Find the maximum value")
+//   max: "max",
 
-  @doc("Find the minimum value")
-  min: "min",
+//   @doc("Find the minimum value")
+//   min: "min",
 
-  @doc("Count the total number of values")
-  count: "count",
+//   @doc("Count the total number of values")
+//   count: "count",
 
-  @doc("Calculate the nth percentile value. Needs a parameter to specify the percentile level (e.g., level: 95 for 95th percentile analysis)")
-  percentile: "percentile",
+//   @doc("Calculate the nth percentile value. Needs a parameter to specify the percentile level (e.g., level: 95 for 95th percentile analysis)")
+//   percentile: "percentile",
 
-  @doc("Calculate the standard deviation")
-  standardDeviation: "standardDeviation",
+//   @doc("Calculate the standard deviation")
+//   standardDeviation: "standardDeviation",
 
-  string,
-}
+//   string,
+// }
 
-@doc("Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.")
-@added(Versions.v2025_07_31_preview)
-model AggregationConfiguration {
-  @doc("The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')")
-  method: AggregationMethod;
+// @doc("Configuration for a specific aggregation method, allowing customization of how the aggregation is calculated.")
+// @added(Versions.v2025_07_31_preview)
+// model AggregationConfiguration {
+//   @doc("The statistical aggregation method to apply (e.g., 'average', 'percentile', 'standardDeviation')")
+//   method: AggregationMethod;
 
-  @doc("Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.")
-  parameters?: Record<unknown>;
-}
+//   @doc("Optional parameters specific to the aggregation method. For example, 'populationVariance: true' for standard deviation, or 'interpolation: linear' for percentiles.")
+//   parameters?: Record<unknown>;
+// }
 
 @doc("Represents system Metadata about the evaluation execution environment and resource usage.")
 @added(Versions.v2025_07_31_preview)
@@ -349,23 +349,38 @@ model AggregatedScore {
 @added(Versions.v2025_07_31_preview)
 @doc("Statistical summary of evaluation results including aggregated scores and pass/fail rates.")
 model EvaluationSummaryStatistics {
-  @doc("Aggregated scores calculated using specified aggregation methods. This provides a summary of the evaluator's performance across all data rows.")
-  aggregatedScores: Record<AggregatedScore>;
-
-  @doc("Value between 0 and 1 representing the proportion of rows where outcome is 'pass'.")
-  passRate: float32;
-
   @doc("Total number of rows that were evaluated.")
   sampleCount: int64;
+
+  @doc("Proportion of evaluation results that failed to meet the specified criteria or threshold, expressed as a value between 0 and 1.")
+  defectRate?: float32;
+
+  @doc("Lowest score value observed across all evaluation results.")
+  minScore?: float32;
+
+  @doc("Highest score value observed across all evaluation results.")
+  maxScore?: float32;
+
+  @doc("Arithmetic mean of all score values in the evaluation results.")
+  averageScore?: float32;
+
+  @doc("Standard deviation of score values, measuring the variability or spread of the evaluation results.")
+  standardDeviation?: float32;
+
+  @doc("Lower bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results.")
+  confidenceIntervalLower?: float32;
+
+  @doc("Upper bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results.")
+  confidenceIntervalUpper?: float32;
 }
 
 @doc("Aggregated summary of evaluation results for a specific evaluator across all data rows. This provides a high-level overview of the evaluator's performance.")
 @added(Versions.v2025_07_31_preview)
-model EvaluatorResultSummary {
+model EvaluatorSummaryResult {
   ...EvaluatorResultCommon;
 
-  @doc("Statistical summary of evaluation results.")
-  statistics?: EvaluationSummaryStatistics;
+  @doc("Statistical summary of evaluation results where key is the metric id.")
+  statistics?: Record<EvaluationSummaryStatistics>;
 }
 
 @doc("Specifies the type of external storage destination where evaluation results can be exported for further analysis or long-term retention.")
@@ -472,16 +487,6 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
-  @doc("""
-    Statistical aggregation methods to apply when summarizing evaluation results. Specify which aggregation functions should be calculated across all evaluation scores. For example, use 'average' to get mean scores, 'percentile' with parameter level: 95 for 95th percentile analysis, or 'standardDeviation' to measure score variability.
-    If not specified, average and count aggregations will be applied by default.
-    Key is the any label for the aggregation, which can be used to identify it in results.
-    Available methods: sum, average, max, min, count, percentile, standardDeviation.
-    Note: Aggregations are only calculated for evaluators that produce numeric scores. Non-numeric evaluators will not contribute to these aggregations.
-    """)
-  @added(Versions.v2025_07_31_preview)
-  aggregations?: Record<AggregationConfiguration>;
-
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   @removed(Versions.v2025_07_31_preview)
   target?: EvaluationTarget;
@@ -489,7 +494,7 @@ model Evaluation {
   @doc("Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows and is available once the evaluation completes.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_31_preview)
-  summary?: Record<EvaluatorResultSummary>;
+  summary?: Record<EvaluatorSummaryResult>;
 
   @doc("""
      Unique identifier of the dataset containing detailed evaluation results. This dataset is created automatically upon evaluation completion and contains row-by-row results for analysis.
@@ -658,7 +663,7 @@ model EvaluatorResult {
   ...EvaluatorResultCommon;
 
   @doc("Score for the evaluation result")
-  score: EvaluationScore;
+  score?: Record<EvaluationScore>;
 }
 
 @doc("Describes the desirable direction for the evaluation score. This indicates whether a higher or lower score is preferred for this evaluator.")
@@ -696,7 +701,7 @@ union EvaluatorScoreType {
 model EvaluationScore {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
   @doc("Score of the evaluation.")
-  label?: boolean | string | float64;
+  label?: boolean | string | float32;
 
   @doc("Justification for the score, providing context on how it was derived or what it represents")
   justification: string;
@@ -714,7 +719,7 @@ model EvaluationScore {
   outcome?: EvaluationResultOutcome;
 
   @doc("Optional additional details that may include metadata or other relevant information about the score")
-  additionalMetrics?: Record<unknown>;
+  additionalDetails?: Record<unknown>;
 }
 
 @doc("Comprehensive evaluation results for a single data row, including the input data, processing state, and results from all configured evaluators.")
@@ -736,6 +741,6 @@ model EvaluationResult {
   @added(Versions.v2025_07_31_preview)
   inputDataJson?: string;
 
-  @doc("Collection of evaluation results from each configured evaluator for this data row. The key is the evaluator identifier and the value contains the detailed evaluation results.")
+  @doc("Evaluation results from all the configured evaluators for this data row.")
   evaluatorResults: Record<EvaluatorResult>;
 }
