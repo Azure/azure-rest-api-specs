@@ -5164,7 +5164,54 @@
         ],
         "operationId": "QuotaTiers_Update",
         "summary": "Updates the Quota Tier resource for a subscription. The only properties that can be updated are  \"tierUpgradePolicy\"",
-        "description": "Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "description": "Update the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
+          },
+          {
+            "name": "tier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            },
+            "description": "The parameters to provide for the quota tier resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the quota tier resource for a subscription": {
+            "$ref": "./examples/UpdateQuotaTier.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "operationId": "QuotaTiers_CreateOrUpdate",
+        "summary": "Updates the Quota Tier resource for a subscription.",
+        "description": "Update the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
