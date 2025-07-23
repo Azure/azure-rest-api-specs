@@ -43,6 +43,20 @@ input-file:
   - Microsoft.PortalServices/extensions/preview/2024-10-01-preview/extensions.json
   - Microsoft.PortalServices/settings/preview/2025-04-01-preview/settings.json
 suppressions:
+  - code: PathForTrackedResourceTypes
+    reason: >
+      The resource type copilotSettings in the Microsoft.PortalServices resource provider is a proxy resource that
+      contains location property, it is not a tracked resource. This is a false positive.
+    from:
+      - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    reason: >
+      The resource type copilotSettings in the Microsoft.PortalServices resource provider is a proxy resource that
+      contains location property, it is not a tracked resource. This is a false positive.
+    from:
+      - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: EvenSegmentedPathForPutOperation
     reason: >
       The resource type copilotSettings in the Microsoft.PortalServices resource provider is @singleton
@@ -113,20 +127,6 @@ input-file:
   - Microsoft.PortalServices/extensions/preview/2024-10-01-preview/extensions.json
   - Microsoft.PortalServices/settings/preview/2025-04-01-preview/settings.json
 suppressions:
-  - code: PathForTrackedResourceTypes
-    reason: >
-      The resource type copilotSettings in the Microsoft.PortalServices resource provider is a proxy resource that
-      contains location property, it is not a tracked resource. This is a false positive.
-    from:
-      - copilotSettings.json
-    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    reason: >
-      The resource type copilotSettings in the Microsoft.PortalServices resource provider is a proxy resource that
-      contains location property, it is not a tracked resource. This is a false positive.
-    from:
-      - copilotSettings.json
-    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: EvenSegmentedPathForPutOperation
     reason: >
       The resource type copilotSettings in the Microsoft.PortalServices resource provider is @singleton
