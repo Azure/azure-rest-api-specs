@@ -107,7 +107,7 @@ export async function buildState(
         readme: (await specModel.getReadmes()).get(readmePath)!,
         changedTags: new Set(),
       };
-      for (const [tagName,] of tags) {
+      for (const [tagName] of tags) {
         affectedTags.changedTags.add(tagName);
       }
       readmeTags.set(readmePath, affectedTags);
@@ -118,11 +118,11 @@ export async function buildState(
   const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
     const tagMap = await tags.readme.getTags();
-    const tagsAndInputFiles = [...tags.changedTags].map(changedTag => {
-      return { 
+    const tagsAndInputFiles = [...tags.changedTags].map((changedTag) => {
+      return {
         tagName: changedTag,
         inputFiles: [...tagMap.get(changedTag)!.inputFiles.keys()],
-      }
+      };
     });
 
     const dedupedTags = deduplicateTags(tagsAndInputFiles);

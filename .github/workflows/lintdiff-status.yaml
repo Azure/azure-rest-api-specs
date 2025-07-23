@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger LintDiff - Set Status"
+name: "Swagger LintDiff - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger LintDiff - Analyze Code"]
+    workflows: ["Swagger LintDiff - Analyze Code"]
     types: [completed]
 
 permissions:
@@ -28,8 +28,8 @@ permissions:
 jobs:
   lintdiff-status:
     name: Set LintDiff Status
-    uses: ./.github/workflows/_reusable-set-check-status.yml
+    uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
-      required_check_name: "[TEST-IGNORE] Swagger LintDiff"
+      monitored_workflow_name: "Swagger LintDiff - Analyze Code"
+      required_check_name: "Swagger LintDiff"
       overriding_label: "Approved-LintDiff"

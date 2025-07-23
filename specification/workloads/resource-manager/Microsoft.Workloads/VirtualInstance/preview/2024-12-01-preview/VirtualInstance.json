@@ -1148,6 +1148,30 @@
         "resources"
       ]
     },
+    "WorkloadEnrollmentState": {
+      "type": "string",
+      "description": "Defines the enrollment state of a Virtual Instance / Component as per the workload definition.",
+      "enum": [
+        "NeedsAttention",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadEnrollmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "Indicates the state where the VI / Component isn't fully following the workload definition and thus, enrollment needing attention."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete."
+          }
+        ]
+      }
+    },
     "WorkloadResourceId": {
       "type": "string",
       "format": "arm-id",

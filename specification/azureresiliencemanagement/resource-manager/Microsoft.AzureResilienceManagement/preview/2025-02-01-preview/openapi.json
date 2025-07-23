@@ -625,10 +625,10 @@
           {
             "name": "drillResourceName",
             "in": "path",
-            "description": "The name of the DrillResource",
+            "description": "The name of the DrillResource (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -925,10 +925,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -985,10 +985,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1048,10 +1048,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobChildJobName",
@@ -1116,10 +1116,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1179,10 +1179,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobResourceName",
@@ -5186,6 +5186,15 @@
         "jobExtendedInfo": {
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
+        },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5464,6 +5473,15 @@
         "jobExtendedInfo": {
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
+        },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "parentJobId": {
           "type": "string",
@@ -7514,6 +7532,15 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "jobType": {
           "$ref": "#/definitions/JobType",
           "description": "The type of job.",
@@ -7584,6 +7611,15 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "jobId": {
           "type": "string",
           "description": "Id of the Job under which this job-resource exists.",
@@ -7602,11 +7638,16 @@
         "jobResourceType": {
           "$ref": "#/definitions/JobResourceType",
           "description": "Discriminator for the JobResource object hierarchy."
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected."
         }
       },
       "discriminator": "jobResourceType",
       "required": [
-        "jobResourceType"
+        "jobResourceType",
+        "protectionSolutionType"
       ]
     },
     "JobResourceType": {
@@ -7700,7 +7741,9 @@
         "Pending",
         "InProgress",
         "Completed",
+        "CompletedWithWarnings",
         "Failed",
+        "Skipped",
         "Cancelling",
         "Cancelled",
         "Paused"
@@ -7730,9 +7773,19 @@
             "description": "The job has been completed successfully."
           },
           {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "The job has been completed with warnings."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The job has failed."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The job skipped for the resource (resource not qualified or not applicable)."
           },
           {
             "name": "Cancelling",
@@ -7806,7 +7859,7 @@
         },
         "userComments": {
           "type": "array",
-          "description": "List of sub-tasks associated with this job.",
+          "description": "User Comments.",
           "items": {
             "$ref": "#/definitions/JobUserComment"
           },
@@ -9529,6 +9582,7 @@
         "None",
         "AzureNative",
         "AzureSiteRecovery",
+        "CrossZoneVMRecovery",
         "CustomRunbook"
       ],
       "x-ms-enum": {
@@ -9549,6 +9603,11 @@
             "name": "AzureSiteRecovery",
             "value": "AzureSiteRecovery",
             "description": "Resource protected with the Azure solution provided by the native Azure Site Service for Azure VMs."
+          },
+          {
+            "name": "CrossZoneVMRecovery",
+            "value": "CrossZoneVMRecovery",
+            "description": "Cross zone recovery enabled Azure VMs."
           },
           {
             "name": "CustomRunbook",

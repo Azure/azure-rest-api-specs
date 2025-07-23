@@ -240,6 +240,10 @@ model GcpOrganizationProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   organizationId: string;
 
+  @doc("The project number of the management project under the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  managementProjectNumber: string;
+
   @doc("List of GCP projects which need to be excluded.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   excludedProjectNumbers?: string[];

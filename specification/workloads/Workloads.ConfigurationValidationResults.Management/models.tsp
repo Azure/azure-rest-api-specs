@@ -364,13 +364,19 @@ model ConfigurationValidationResultsProperties {
    * The name of the role within the workload instance being validated.
    */
   @doc("The name of the role being validated.")
-  roleName: string;
+  roleName?: string;
 
   /**
    * The ARM IDs of resources associated with this validation.
    */
   @doc("The ARM IDs of resources associated with this validation.")
   resourceArmIds: string[];
+
+  /**
+   * The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.
+   */
+  @doc("The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.")
+  workloadType?: string;
 
   /**
    * The template ID of the configuration checks being applied to the workload instance.

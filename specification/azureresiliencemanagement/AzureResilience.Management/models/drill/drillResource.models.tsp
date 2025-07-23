@@ -21,8 +21,8 @@ namespace Microsoft.AzureResilienceManagement;
 @parentResource(Drill)
 @doc("Drill Resource")
 model DrillResource is ProxyResource<DrillResourceProperties> {
-  @doc("The name of the DrillResource")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @doc("The name of the DrillResource (GUID).")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("drillResourceName")
   @segment("drillResources")
   @path

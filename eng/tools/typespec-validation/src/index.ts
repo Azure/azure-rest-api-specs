@@ -1,5 +1,5 @@
-import { ParseArgsConfig, parseArgs } from "node:util";
 import { stat } from "node:fs/promises";
+import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
@@ -11,6 +11,9 @@ import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
+// Context argument may add new properties or override checkingAllSpecs
+export var context: Record<string, any> = { checkingAllSpecs: false };
+
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
@@ -18,9 +21,18 @@ export async function main() {
       type: "string",
       short: "f",
     },
+    context: {
+      type: "string",
+      short: "c",
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
+
+  if (parsedArgs.positionals[1]) {
+    context = { ...context, ...JSON.parse(parsedArgs.positionals[1]) };
+  }
+
   const absolutePath = normalizePath(folder);
 
   if (!(await fileExists(absolutePath))) {

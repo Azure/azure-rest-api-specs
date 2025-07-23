@@ -27,7 +27,41 @@ These are the global settings for the DeviceOnboarding.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-01-preview
+tag: package-2025-05-01-preview
+```
+
+### Tag: package-2025-05-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+  - Microsoft.DeviceOnboarding/preview/2025-05-01-preview/DeviceOnboarding.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies/{policyName}"].patch.parameters[4].schema
+    reason: This is a false positive. Discriminator is required for PATCH.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DeviceOnboarding/discoveryServices"]
+    reason: This API path is not supported by default api version 2025-05-01-preview and should not be included in the default tag.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices"]
+    reason: This API path is not supported by default api version 2025-05-01-preview and should not be included in the default tag.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}"]
+    reason: This API path is not supported by default api version 2025-05-01-preview and should not be included in the default tag.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/ownershipVoucherPublicKeys"]
+    reason: This API path is not supported by default api version 2025-05-01-preview and should not be included in the default tag.
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: DeviceOnboarding.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/discoveryServices/{discoveryServiceName}/ownershipVoucherPublicKeys/{ownershipVoucherPublicKeyName}"]
+    reason: This API path is not supported by default api version 2025-05-01-preview and should not be included in the default tag.
 ```
 
 ### Tag: package-2024-12-01-preview

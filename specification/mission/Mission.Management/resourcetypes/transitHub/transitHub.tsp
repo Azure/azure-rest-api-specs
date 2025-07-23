@@ -3,19 +3,16 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "../shared/provisioningstate.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Specifies the state of the transitHub.")
 union TransitHubState {
+  string,
+
   @doc("TransitHubState Type PendingApproval")
   PendingApproval: "PendingApproval",
 
@@ -30,12 +27,12 @@ union TransitHubState {
 
   @doc("TransitHubState Type Failed")
   Failed: "Failed",
-
-  string,
 }
 
 @doc("Specifies the type of the transitOption.")
 union TransitOptionType {
+  string,
+
   @doc("TransitOptionType ExpressRoute")
   ExpressRoute: "ExpressRoute",
 
@@ -44,8 +41,6 @@ union TransitOptionType {
 
   @doc("TransitOptionType Peering")
   Peering: "Peering",
-
-  string,
 }
 
 @doc("TransitOptionParams Properties")
@@ -54,7 +49,7 @@ model TransitOptionParams {
   scaleUnits?: int64;
 
   @doc("Transit Option Params remoteVirtualNetworkId.")
-  remoteVirtualNetworkId?: string;
+  remoteVirtualNetworkId?: VirtualNetworkResourceId;
 }
 
 @doc("TransitOption Properties")
@@ -79,5 +74,19 @@ model TransitHubProperties {
   transitOption?: TransitOption;
 
   @doc("List of resource ids modified by transitHubs.")
-  resourceCollection?: string[];
+  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
+  resourceCollection?: armResourceIdentifier[];
+}
+
+@doc("Transit Hub patchable Properties")
+model TransitHubPatchProperties
+  is UpdateableProperties<OmitDefaults<TransitHubProperties>>;
+
+@doc("TH Patch Resource")
+model TransitHubPatchModel {
+  @doc("The TransitHub resource.")
+  properties?: TransitHubPatchProperties;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

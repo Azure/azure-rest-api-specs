@@ -6,7 +6,7 @@ import { readFileList } from "../src/processChanges.js";
 // These tests are in a separate module because fs mocking is difficult to undo
 
 vi.mock("node:fs/promises", async () => {
-  const memfs = await vi.importActual("memfs") as typeof import("memfs");
+  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
   return {
     ...memfs.fs.promises,
   };

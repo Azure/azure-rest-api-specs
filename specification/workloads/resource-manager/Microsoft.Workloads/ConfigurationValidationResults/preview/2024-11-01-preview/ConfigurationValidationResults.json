@@ -453,6 +453,10 @@
             "type": "string"
           }
         },
+        "workloadType": {
+          "type": "string",
+          "description": "The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc."
+        },
         "configurationChecksTemplateId": {
           "type": "string",
           "description": "The template ID of the configuration checks being applied."
@@ -492,7 +496,6 @@
       "required": [
         "workloadInstanceArmId",
         "environment",
-        "roleName",
         "resourceArmIds",
         "evaluationType",
         "evaluationTimestamp",

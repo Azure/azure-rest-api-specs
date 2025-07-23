@@ -103,7 +103,7 @@
           {
             "name": "configurationChecksTemplateName",
             "in": "path",
-            "description": "The name of the configuration check template.",
+            "description": "The name of the configuration check template resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,63}$"
@@ -128,6 +128,75 @@
             "$ref": "./examples/ConfigurationChecksTemplates_Get.json"
           }
         }
+      },
+      "patch": {
+        "operationId": "ConfigurationChecksTemplates_Update",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "Update configuration checks template resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "configurationChecksTemplateName",
+            "in": "path",
+            "description": "The name of the configuration check template resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request body to update the configuration check template resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplate"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Configuration Checks Template": {
+            "$ref": "./examples/ConfigurationChecksTemplates_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Workloads/operations": {
@@ -176,6 +245,13 @@
           "type": "string",
           "description": "The unique identifier of the check defined in check definition."
         },
+        "applicableTo": {
+          "type": "array",
+          "description": "Represents the check applicability on the list of roles, component level resources.",
+          "items": {
+            "type": "string"
+          }
+        },
         "originType": {
           "$ref": "#/definitions/CheckOriginType",
           "description": "The origin of how the check applied at the role level in the virtual instance.",
@@ -204,8 +280,7 @@
       },
       "required": [
         "checkId",
-        "status",
-        "outputParameters"
+        "status"
       ]
     },
     "CheckEvaluationCondition": {
@@ -340,17 +415,43 @@
         ]
       }
     },
+    "ChecksConfigurationUpdateRequest": {
+      "type": "object",
+      "description": "Defines the configuration for the template properties.",
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "List of components managed at the workload level.",
+          "items": {
+            "$ref": "#/definitions/WorkloadComponents"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonChecks": {
+          "type": "array",
+          "description": "List of common checks to be executed for all the components (or) at parent resource level.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
+        }
+      }
+    },
     "Configuration": {
       "type": "object",
       "description": "Defines the configuration for the template properties.",
       "properties": {
         "workloadType": {
           "type": "string",
-          "description": "The type of workload for which the checks are executed. Referenced from VI resource."
+          "description": "The type of workload for which the checks are executed. Referenced from VI resource.",
+          "readOnly": true
         },
         "environmentType": {
           "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment for which the checks are executed. Referenced from VI resource."
+          "description": "The type of environment for which the checks are executed. Referenced from VI resource.",
+          "readOnly": true
         },
         "components": {
           "type": "array",
@@ -424,12 +525,38 @@
         "configuration": {
           "$ref": "#/definitions/Configuration",
           "description": "The configurations for the template."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Represents whether the checks template was generated by platform or authored by the customer.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Represents errors encountered on the configuration checks template resource.",
+          "readOnly": true
         }
       },
       "required": [
         "executionInterval",
         "configuration"
       ]
+    },
+    "ConfigurationChecksTemplatePropertiesUpdateRequest": {
+      "type": "object",
+      "description": "Defines the properties to be updated in the configuration checks template.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/ChecksConfigurationUpdateRequest",
+          "description": "The configurations for the template."
+        }
+      }
     },
     "ConfigurationChecksTemplateProvisioningState": {
       "type": "string",
@@ -473,6 +600,16 @@
         ]
       },
       "readOnly": true
+    },
+    "ConfigurationChecksTemplateUpdateRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating the properties of the configuration checks template.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationChecksTemplatePropertiesUpdateRequest",
+          "description": "Represents the properties to be updated in the configuration checks template."
+        }
+      }
     },
     "DataType": {
       "type": "string",
@@ -588,8 +725,7 @@
       "properties": {
         "roleName": {
           "type": "string",
-          "description": "Name of the role.",
-          "readOnly": true
+          "description": "Name of the role."
         },
         "checks": {
           "type": "array",
@@ -645,6 +781,20 @@
         "name": {
           "type": "string",
           "description": "Name of the component."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the component."
+        },
+        "checks": {
+          "type": "array",
+          "description": "List of checks to be executed for the role.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
         },
         "roles": {
           "type": "array",
