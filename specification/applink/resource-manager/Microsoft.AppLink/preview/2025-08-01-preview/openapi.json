@@ -47,9 +47,6 @@
     },
     {
       "name": "AppLinkMembers"
-    },
-    {
-      "name": "AppLinkReleaseChannelProfiles"
     }
   ],
   "paths": {
@@ -82,48 +79,6 @@
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.AppLink/appLinkReleaseChannelProfiles": {
-      "get": {
-        "operationId": "AppLinkReleaseChannelProfiles_ListByLocation",
-        "tags": [
-          "AppLinkReleaseChannelProfiles"
-        ],
-        "description": "List AppLinkReleaseChannelProfile resources by location",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AppLinkReleaseChannelProfileListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AppLinkReleaseChannelProfiles_ListByLocation": {
-            "$ref": "./examples/AppLinkReleaseChannelProfiles_ListByLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -909,85 +864,6 @@
         }
       }
     },
-    "AppLinkReleaseChannel": {
-      "type": "object",
-      "description": "AppLink Release Channel",
-      "properties": {
-        "releaseChannel": {
-          "type": "string",
-          "description": "The name of the AppLink Release Channel"
-        },
-        "revision": {
-          "type": "string",
-          "description": "The version of the AppLink Release Channel"
-        },
-        "compatibleWith": {
-          "type": "array",
-          "description": "Compatible with other AppLink Release Channels",
-          "items": {
-            "$ref": "#/definitions/CompatibleWith"
-          }
-        }
-      },
-      "required": [
-        "releaseChannel",
-        "revision",
-        "compatibleWith"
-      ]
-    },
-    "AppLinkReleaseChannelProfile": {
-      "type": "object",
-      "description": "AppLink Release Channel Profile resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AppLinkReleaseChannelProfileProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AppLinkReleaseChannelProfileListResult": {
-      "type": "object",
-      "description": "The response of a AppLinkReleaseChannelProfile list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AppLinkReleaseChannelProfile items on this page",
-          "items": {
-            "$ref": "#/definitions/AppLinkReleaseChannelProfile"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AppLinkReleaseChannelProfileProperties": {
-      "type": "object",
-      "description": "AppLink Release Channel Profile properties",
-      "properties": {
-        "appLinkReleaseChannels": {
-          "type": "array",
-          "description": "AppLink Release Channels",
-          "items": {
-            "$ref": "#/definitions/AppLinkReleaseChannel"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "appLinkReleaseChannels"
-      ]
-    },
     "AppLinkUpdate": {
       "type": "object",
       "description": "AppLink resource",
@@ -1020,27 +896,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
-      ]
-    },
-    "CompatibleWith": {
-      "type": "object",
-      "description": "Compatible With version of AppLink Release Channel",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the compatible AppLink Release Channel"
-        },
-        "versions": {
-          "type": "array",
-          "description": "The versions of the compatible AppLink Release Channel",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "versions"
       ]
     },
     "Metadata": {
