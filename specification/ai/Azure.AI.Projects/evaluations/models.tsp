@@ -26,7 +26,7 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
-@doc("Dataset for evaluation/redteam.")
+@doc("Dataset as source for evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model InputDataset extends InputData {
