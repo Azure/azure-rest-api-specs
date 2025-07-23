@@ -20,6 +20,7 @@ vi.mock("@azure-tools/specs-shared/spec-model", () => ({
 vi.mock("../src/utils/spec.js", () => ({
   getExistedVersionOperations: vi.fn(),
   getPrecedingSwaggers: vi.fn(),
+  deduplicateSwaggers: vi.fn(),
 }));
 
 vi.mock("node:fs", async (importOriginal) => {

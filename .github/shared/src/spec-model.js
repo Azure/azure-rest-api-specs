@@ -202,17 +202,7 @@ export class SpecModel {
     const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
     const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
     const refs = await flatMapAsync(swaggers, async (s) => [...(await s.getRefs()).values()]);
-    const allSwaggers = [...swaggers, ...refs];
-    
-    // Deduplicate by path
-    const seen = new Set();
-    return allSwaggers.filter(swagger => {
-      if (seen.has(swagger.path)) {
-        return false;
-      }
-      seen.add(swagger.path);
-      return true;
-    });
+    return [...swaggers, ...refs];
   }
 
   /**

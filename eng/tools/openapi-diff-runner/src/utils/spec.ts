@@ -157,3 +157,20 @@ export function getBaseNameForSwagger(filePath: string, version: string = ""): s
   }
   return basename(filePath);
 }
+
+/**
+ * Deduplicate swagger objects in an array by their path.
+ * @param swaggers The array of swagger objects to deduplicate.
+ * @returns A new array with duplicate swagger objects removed.
+ */
+export function deduplicateSwaggers(swaggers: Swagger[]): Swagger[] {
+  // Deduplicate by path
+  const seen = new Set();
+  return swaggers.filter((swagger) => {
+    if (seen.has(swagger.path)) {
+      return false;
+    }
+    seen.add(swagger.path);
+    return true;
+  });
+}

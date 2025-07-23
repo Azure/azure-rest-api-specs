@@ -38,7 +38,11 @@ import { applyRules } from "./utils/apply-rules.js";
 import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
 import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
-import { getExistedVersionOperations, getPrecedingSwaggers } from "./utils/spec.js";
+import {
+  deduplicateSwaggers,
+  getExistedVersionOperations,
+  getPrecedingSwaggers,
+} from "./utils/spec.js";
 import { logError, LogLevel, logMessage } from "./log.js";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
@@ -182,7 +186,8 @@ export async function checkCrossVersionBreakingChange(
       continue;
     }
 
-    const availableSwaggers = await specModel.getSwaggers();
+    const originalReturnedSwaggers = await specModel.getSwaggers();
+    const availableSwaggers = deduplicateSwaggers(originalReturnedSwaggers);
     logMessage(
       `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
     );
