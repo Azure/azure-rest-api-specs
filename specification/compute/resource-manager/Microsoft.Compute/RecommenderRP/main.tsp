@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ComputeRecommenderResourceProviderClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Compute;
 
 /**

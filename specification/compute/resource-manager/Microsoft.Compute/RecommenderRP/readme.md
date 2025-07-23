@@ -25,11 +25,11 @@ To see additional help and options, run:
 These are the global settings for the AzureComputeRecommenderClient API.
 
 ``` yaml !$(python) || !$(track2)
-title: AzureComputeRecommenderManagementClient
+title: ComputeRecommenderResourceProviderClient
 ```
 
 ``` yaml
-description: Azure Compute Recommender Client
+description: The Compute Recommender Resource Provider Client
 openapi-type: arm
 tag: package-2025-06-05
 
@@ -40,19 +40,11 @@ suppressions:
   - code: PathForResourceAction
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: RecommenderRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate"]
   - code: PathForNestedResource
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: RecommenderRP.json
-  - code: XmsPageableForListCalls
-    reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    from: RecommenderRP.json
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property name contains abbreviations and need to keep it as upper case.
-    from: RecommenderRP.json
-  - code: BodyTopLevelProperties
-    reason: The is the additional property bag to introduce new nonbreaking properties.
-    from: RecommenderRP.json
-
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot"]
 ```
 
 ### Tag: package-2025-06-05
