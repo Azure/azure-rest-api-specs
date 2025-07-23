@@ -80,3 +80,7 @@ using Microsoft.ServiceBus;
 @@flattenProperty(SBSubscription.properties);
 
 @@clientName(Microsoft.ServiceBus.Resource, "ResourceAutogen", "python");
+
+@@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);
