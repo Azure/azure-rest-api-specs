@@ -20,6 +20,9 @@ model EmployeeProperties {
   /** Age of employee */
   age?: int32;
 
+  /** Height of employee */
+  height?: int32;
+
   /** City of employee */
   city?: string;
 
