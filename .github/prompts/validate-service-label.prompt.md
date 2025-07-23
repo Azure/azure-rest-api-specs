@@ -27,6 +27,7 @@ tools: [CheckServiceLabel', 'CreateServiceLabel']
 - If a new service label was created and confirmed by the user, create a pull request using `CreateServiceLabel` that adds the new service label to the common-labels.csv file in the azure-sdk-tools repository
     - Ensure that the pull request:
         - Is in a branch separate from the main branch
+            - If the branch already exists, guide user to the compare link to review the changes
         - Inserts the new service label name so that the file maintains alphabetical order
         - Uses "e99695" as the color code for the new service label
 - Provide the user with a link to the pull request for review and merging
