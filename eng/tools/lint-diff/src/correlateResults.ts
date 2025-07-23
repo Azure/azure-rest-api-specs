@@ -150,7 +150,7 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
 
     const result = JSON.parse(line.trim());
     if (result.code == undefined) {
-      // Results without a code can be assumed to be fatal errors. Set the code 
+      // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
       result.code = "FATAL";
     }

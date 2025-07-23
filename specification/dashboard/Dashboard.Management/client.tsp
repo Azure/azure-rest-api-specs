@@ -57,3 +57,21 @@ using Microsoft.Dashboard;
 );
 @@clientName(StartTLSPolicy.MandatoryStartTLS, "MandatoryStartTls", "csharp");
 @@clientName(StartTLSPolicy.NoStartTLS, "NoStartTls", "csharp");
+
+@@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
+@@clientName(StartTLSPolicy, "StartTlsPolicy", "java");
+@@clientName(ManagedGrafanaProperties.deterministicOutboundIP,
+  "deterministicOutboundIp",
+  "java"
+);
+@@clientName(ManagedGrafanaPropertiesUpdateParameters.deterministicOutboundIP,
+  "deterministicOutboundIp",
+  "java"
+);
+@@clientName(ManagedPrivateEndpointModelProperties.privateLinkServicePrivateIP,
+  "privateLinkServicePrivateIp",
+  "java"
+);
+@@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
+@@clientName(Microsoft.Dashboard, "DashboardManagementClient", "javascript");
+@@clientName(Microsoft.Dashboard, "DashboardManagementClient", "python");
