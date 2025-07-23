@@ -215,6 +215,9 @@ model Message {
 
   @doc("The content.")
   Content?: string;
+
+  @doc("The context.")
+  Context?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
