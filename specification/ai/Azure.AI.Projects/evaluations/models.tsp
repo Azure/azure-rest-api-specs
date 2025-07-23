@@ -32,7 +32,7 @@ model EvaluatorConfiguration {
 model InputDataset extends InputData {
   type: "dataset";
 
-  @doc("Input data asset id")
+  @doc("Evaluation input data")
   id: string;
 }
 
