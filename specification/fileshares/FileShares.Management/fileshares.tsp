@@ -286,19 +286,23 @@ interface FileShares {
   checkNameAvailability is checkLocalNameAvailability;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
 @armResourceOperations
 interface FileShareSnapshots {
+  @operationId("FileShareSnapshot_Get")
   getFileShareSnapshot is ArmResourceRead<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
   >;
 
+  @operationId("FileShareSnapshot_CreateOrUpdate")
   @doc("Create a FileShareSnapshot.")
   createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceSync<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
   >;
 
+  @operationId("FileShareSnapshot_Update")
   @doc("Update a FileShareSnapshot.")
   updateFileShareSnapshot is ArmCustomPatchAsync<
     FileShareSnapshot,
@@ -309,12 +313,14 @@ interface FileShareSnapshots {
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
+  @operationId("FileShareSnapshot_Delete")
   @doc("Delete a FileShareSnapshot.")
   deleteFileShareSnapshot is ArmResourceDeleteWithoutOkAsync<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
   >;
 
+  @operationId("FileShareSnapshot_List")
   @doc("List FileShareSnapshot by FileShare.")
   listByFileShare is ArmResourceListByParent<
     FileShareSnapshot,
@@ -501,9 +507,11 @@ model FileShareProvisioningRecommendationOutput {
   availableRedundancyOptions: Redundancy[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
 @armResourceOperations
 interface InformationalOperations {
   @doc("Get file shares usage data.")
+  @operationId("FileShare_GetUsageData")
   getUsageData is ArmProviderActionSync<
     Response = FileShareUsageDataResponse,
     Scope = SubscriptionActionScope,
@@ -511,6 +519,7 @@ interface InformationalOperations {
   >;
 
   @doc("Get file shares limits.")
+  @operationId("FileShare_GetLimits")
   getLimits is ArmProviderActionSync<
     Response = FileShareLimitsResponse,
     Scope = SubscriptionActionScope,
@@ -518,6 +527,7 @@ interface InformationalOperations {
   >;
 
   @doc("Get file shares provisioning parameters recommendation.")
+  @operationId("FileShare_GetProvisioningRecommendation")
   getProvisioningRecommendation is ArmProviderActionSync<
     Request = FileShareProvisioningRecommendationRequest,
     Response = FileShareProvisioningRecommendationResponse,
