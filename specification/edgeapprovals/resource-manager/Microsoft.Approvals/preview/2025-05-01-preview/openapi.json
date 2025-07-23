@@ -976,7 +976,7 @@
           }
         },
         "x-ms-examples": {
-          "ApprovalSettings_ListBySubscription_MaximumSet": {
+          "ApprovalSettings_ListByTenant_MaximumSet": {
             "$ref": "./examples/ApprovalSettings_ListByTenant_MaximumSet_Gen.json"
           }
         },
@@ -1471,8 +1471,8 @@
           "description": "The name of the stage, unique within a single approval workflow definition."
         },
         "dependsOn": {
-          "type": "object",
-          "description": "The logic rules about how the stage depends on other stages, representing as a JSON object."
+          "$ref": "#/definitions/ApprovalStageDependency",
+          "description": "The logical representation of how the stage depends on other stages."
         },
         "approvers": {
           "type": "array",
@@ -1493,6 +1493,35 @@
         "approvers",
         "minimumApprovalsRequired"
       ]
+    },
+    "ApprovalStageDependency": {
+      "type": "object",
+      "description": "Logical representation of how a stage depends on other stages. Only one of the top-level properties should be used.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "The list of stage names which this stage directly depends on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "and": {
+          "type": "array",
+          "description": "The list of nested dependencies which this stage depends on with a logical AND operation.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStageDependency"
+          },
+          "x-ms-identifiers": []
+        },
+        "or": {
+          "type": "array",
+          "description": "The list of nested dependencies which this stage depends on with a logical OR operation.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStageDependency"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "ApprovalStageExecutionInput": {
       "type": "object",

@@ -52,15 +52,28 @@ model ApprovalStage {
   @doc("The name of the stage, unique within a single approval workflow definition.")
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
-  @doc("The logic rules about how the stage depends on other stages, representing as a JSON object.")
-  dependsOn?: {};
+  @doc("The logical representation of how the stage depends on other stages.")
+  dependsOn?: ApprovalStageDependency;
 
   @doc("The list of identifiers of approvers in the stage.")
   approvers: string[];
 
   @doc("The minimal number of approvals required to complete the stage. The default value '1' means at least one approval is needed.")
   minimumApprovalsRequired: int32 = 1;
+}
+
+@doc("Logical representation of how a stage depends on other stages. Only one of the top-level properties should be used.")
+model ApprovalStageDependency {
+  @doc("The list of stage names which this stage directly depends on.")
+  stages?: string[];
+
+  @doc("The list of nested dependencies which this stage depends on with a logical AND operation.")
+  @extension("x-ms-identifiers", #[])
+  and?: ApprovalStageDependency[];
+
+  @doc("The list of nested dependencies which this stage depends on with a logical OR operation.")
+  @extension("x-ms-identifiers", #[])
+  or?: ApprovalStageDependency[];
 }
 
 @armResourceOperations(ApprovalWorkflowDefinition)
