@@ -99,7 +99,6 @@ directive:
       - $.definitions.StageProgressionProperties.properties.additionalData
       - $.definitions.StageProgressionPropertiesUpdate.properties.additionalData
       - $.definitions.RetrieveNextStagesResponseItem.properties.additionalData
-      - $.definitions.VerifyChangeValidityRequest.properties.context
       - $.definitions.StageVariables
       - $.definitions.ChangeDefinition.properties.details
       - $.definitions.Stage.properties.stageVariables

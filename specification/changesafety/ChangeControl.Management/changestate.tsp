@@ -481,11 +481,17 @@ model VerifyChangeValidityRequest {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageProgressionResourceId?: armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Enables an extensible object schema to provide additional context data for the verification request."
   @doc("The context of the verify change validity request.")
   @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  context?: {};
+  context?: VerifyChangeValidityRequsestContext;
+}
+
+@added(Versions.v2025_07_01_preview)
+@doc("The context object of the verify change validity request.")
+model VerifyChangeValidityRequsestContext {
+  @doc("The application Id performing the ARM operation.")
+  applicationId: string
 }
 
 @added(Versions.v2025_03_01_preview)
