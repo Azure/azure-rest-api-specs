@@ -6,6 +6,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.Core.Foundations;
 
 namespace PurviewDataCatalog;
 
