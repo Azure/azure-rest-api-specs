@@ -64,14 +64,26 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
 suppressions:
   - code: PutResponseCodes
+    from: AdministratorsMicrosoftEntra.json
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: AdministratorsMicrosoftEntra.json
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: PutResponseCodes
+    from: BackupsAutomaticAndOnDemand.json
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: BackupsAutomaticAndOnDemand.json
+    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
+  - code: PutResponseCodes
     from: PrivateEndpointConnections.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdvancedThreatProtectionSettings.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: PutResponseCodes
     from: AdvancedThreatProtectionSettings.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
   - code: ProvisioningStateSpecifiedForLROPut
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
@@ -80,21 +92,7 @@ suppressions:
     reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
   - code: PutResponseCodes
     from: VirtualEndpoints.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: PutResponseCodes
-    from: BackupsAutomaticAndOnDemand.json
-    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: BackupsAutomaticAndOnDemand.json
-    reason: The existing API contract is like this and not be able to change. Received suppression approval from ARM review in previous versions.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: TuningOptions.json
-    where: $.definitions.SessionsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: TuningOptions.json
-    where: $.definitions.SessionDetailsListResult
-    reason: Suppression for this PR. The existing API contract is like this and not be able to change.
+    reason: Microsoft.DBforPostgreSQL namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
 ### Tag: package-flexibleserver-2025-01-01-preview
