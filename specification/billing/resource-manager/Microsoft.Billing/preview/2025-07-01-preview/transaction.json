@@ -1,0 +1,862 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transactions": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Lists the billed or unbilled transactions by customer id for given start date and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "The type of transaction.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Other",
+              "Billed",
+              "Unbilled"
+            ],
+            "x-ms-enum": {
+              "name": "TransactionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of transactions.",
+            "schema": {
+              "$ref": "#/definitions/TransactionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionsListByCustomer": {
+            "$ref": "./examples/transactionsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transactions": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Lists the billed or unbilled transactions by invoice section name for given start date and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "The type of transaction.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Other",
+              "Billed",
+              "Unbilled"
+            ],
+            "x-ms-enum": {
+              "name": "TransactionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of transactions.",
+            "schema": {
+              "$ref": "#/definitions/TransactionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionsListByInvoiceSection": {
+            "$ref": "./examples/transactionsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/transactions": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Lists the billed or unbilled transactions by billing profile name for given start and end date. Transactions include purchases, refunds and Azure usage charges. Unbilled transactions are listed under pending invoice Id and do not include tax. Tax is added to the amount once an invoice is generated.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "query",
+            "name": "periodStartDate",
+            "description": "The start date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "periodEndDate",
+            "description": "The end date to fetch the transactions. The date should be specified in MM-DD-YYYY format.",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "The type of transaction.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Other",
+              "Billed",
+              "Unbilled"
+            ],
+            "x-ms-enum": {
+              "name": "TransactionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of transactions.",
+            "schema": {
+              "$ref": "#/definitions/TransactionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionsListByBillingProfile": {
+            "$ref": "./examples/transactionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactions": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Lists the transactions for an invoice. Transactions include purchases, refunds and Azure usage charges.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_ListByInvoice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of transactions.",
+            "schema": {
+              "$ref": "#/definitions/TransactionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionsListByInvoice": {
+            "$ref": "./examples/transactionsListByInvoice.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionsDownload": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Gets a URL to download the transactions document for an invoice. The operation is supported for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_TransactionsDownloadByInvoice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A secure URL that can be used to download a an entity until the URL expires.",
+            "schema": {
+              "$ref": "#/definitions/DocumentDownloadResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "TransactionsDownloadByInvoice": {
+            "$ref": "./examples/transactionsDownloadByInvoice.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/transactionSummary": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "description": "Gets the transaction summary for an invoice. Transactions include purchases, refunds and Azure usage charges.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Transactions_GetTransactionSummaryByInvoice",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "The filter query option allows clients to filter the line items that are aggregated to create the line item summary.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "description": "The search query option allows clients to filter the line items that are aggregated to create the line item summary.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A transaction summary.",
+            "schema": {
+              "$ref": "#/definitions/TransactionSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransactionSummaryGetByInvoice": {
+            "$ref": "./examples/transactionSummaryGetByInvoice.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DocumentDownloadResult": {
+      "description": "A secure URL that can be used to download a an entity until the URL expires.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "The time in UTC when the download URL will expire.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "The URL to the PDF or .zip file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RefundTransactionDetails": {
+      "description": "The refund details of a transaction.",
+      "type": "object",
+      "properties": {
+        "amountRequested": {
+          "description": "The amount of refund requested.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "amountRefunded": {
+          "description": "The amount refunded.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "refundOperationId": {
+          "description": "The ID of refund operation.",
+          "type": "string"
+        }
+      }
+    },
+    "Transaction": {
+      "description": "A transaction.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransactionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TransactionListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "TransactionProperties": {
+      "description": "A transaction.",
+      "type": "object",
+      "properties": {
+        "azureCreditApplied": {
+          "description": "The amount of any Azure credits automatically applied to this transaction.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "azurePlan": {
+          "description": "Details of the Azure plan.",
+          "type": "string"
+        },
+        "billingCurrency": {
+          "description": "The ISO 4217 code for the currency in which this transaction is billed.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile."
+        },
+        "billingProfileId": {
+          "description": "The fully qualified ID that uniquely identifies a billing profile.",
+          "type": "string"
+        },
+        "consumptionCommitmentDecremented": {
+          "description": "The amount of Microsoft Azure Consumption Commitment(MACC) decrement through the transaction.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer.",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The fully qualified ID that uniquely identifies a customer.",
+          "type": "string"
+        },
+        "creditType": {
+          "description": "The credit type of the transaction. Applies only to credited transactions.",
+          "enum": [
+            "Other",
+            "AzureFreeCredit",
+            "AzureCreditOffer",
+            "ServiceInterruption",
+            "Refund"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CreditType",
+            "modelAsString": true
+          }
+        },
+        "date": {
+          "format": "date-time",
+          "description": "The date of transaction.",
+          "type": "string"
+        },
+        "discount": {
+          "description": "The percentage discount, if any, applied to this transaction.",
+          "type": "number"
+        },
+        "effectivePrice": {
+          "description": "The price of the product after applying any discounts.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "exchangeRate": {
+          "description": "The exchange rate used to convert charged amount to billing currency, if applicable.",
+          "type": "number"
+        },
+        "invoice": {
+          "description": "Invoice name on which the transaction was billed or 'Pending' if the transaction is not billed.",
+          "type": "string"
+        },
+        "invoiceId": {
+          "description": "The fully qualified ID of the invoice on which the transaction was billed. This field is only applicable for transactions which are billed.",
+          "type": "string"
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        },
+        "invoiceSectionId": {
+          "description": "The fully qualified ID that uniquely identifies an invoice section.",
+          "type": "string"
+        },
+        "isThirdParty": {
+          "description": "Whether or not the transaction is third party.",
+          "type": "boolean"
+        },
+        "kind": {
+          "description": "Type of the transaction, billed or unbilled.",
+          "enum": [
+            "Other",
+            "All",
+            "Reservation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransactionKind",
+            "modelAsString": true
+          }
+        },
+        "marketPrice": {
+          "description": "The retail price of the product.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "partNumber": {
+          "description": "The part number of the product for which the transaction took place. The field is only applicable for Enterprise Agreement invoices.",
+          "type": "string"
+        },
+        "pricingCurrency": {
+          "description": "The ISO 4217 code for the currency in which the product is priced.",
+          "type": "string"
+        },
+        "productDescription": {
+          "description": "The description of the product for which the transaction took place.",
+          "type": "string"
+        },
+        "productFamily": {
+          "description": "The family of the product for which the transaction took place.",
+          "type": "string"
+        },
+        "productTypeId": {
+          "description": "The ID of the product type for which the transaction took place.",
+          "type": "string"
+        },
+        "productType": {
+          "description": "The type of the product for which the transaction took place.",
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "The quantity purchased in the transaction.",
+          "type": "integer"
+        },
+        "reasonCode": {
+          "description": "There reason code for the transaction.",
+          "type": "string"
+        },
+        "servicePeriodStartDate": {
+          "format": "date-time",
+          "description": "The date of the purchase of the product, or the start date of the month in which usage started.",
+          "type": "string"
+        },
+        "servicePeriodEndDate": {
+          "format": "date-time",
+          "description": "The end date of the product term, or the end date of the month in which usage ended.",
+          "type": "string"
+        },
+        "subTotal": {
+          "description": "The pre-tax charged amount for the transaction.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "tax": {
+          "description": "The tax amount applied to the transaction.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "transactionAmount": {
+          "description": "The charge associated with the transaction.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Amount"
+            }
+          ]
+        },
+        "transactionType": {
+          "description": "The type of transaction.",
+          "type": "string"
+        },
+        "units": {
+          "description": "The number of units used for a given product.",
+          "type": "number"
+        },
+        "unitOfMeasure": {
+          "description": "The unit of measure used to bill for the product. For example, compute services are billed per hour.",
+          "type": "string"
+        },
+        "unitType": {
+          "description": "The description for the unit of measure for a given product.",
+          "type": "string"
+        },
+        "specialTaxationType": {
+          "description": "Identifies the type of tax calculation used for the invoice. The field is applicable only to invoices with special tax calculation logic.",
+          "enum": [
+            "SubtotalLevel",
+            "InvoiceLevel"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SpecialTaxationType",
+            "modelAsString": true
+          }
+        },
+        "refundTransactionDetails": {
+          "description": "The refund details of a transaction.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RefundTransactionDetails"
+            }
+          ]
+        }
+      }
+    },
+    "TransactionSummary": {
+      "description": "A transaction summary.",
+      "type": "object",
+      "properties": {
+        "azureCreditApplied": {
+          "description": "The total amount of any Azure credits applied.",
+          "type": "number",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "The ISO 4217 code for the currency in which the transactions are billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumptionCommitmentDecremented": {
+          "description": "The total Microsoft Azure Consumption Commitment (MACC) decrement through the invoice.",
+          "type": "number",
+          "readOnly": true
+        },
+        "subTotal": {
+          "description": "The total pre-tax charged amount.",
+          "type": "number",
+          "readOnly": true
+        },
+        "tax": {
+          "description": "The total tax amount applied.",
+          "type": "number",
+          "readOnly": true
+        },
+        "total": {
+          "description": "The total charges.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}
