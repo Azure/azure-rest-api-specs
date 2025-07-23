@@ -2609,13 +2609,17 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "privateKey": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -3281,10 +3285,12 @@
         },
         "adminPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "guestId": {
           "type": "string"
@@ -3577,7 +3583,8 @@
       "type": "object",
       "properties": {
         "skipShutdown": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -3593,7 +3600,7 @@
         "scsiControllers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualScsiController"
+            "$ref": "#/definitions/VirtualSCSIController"
           },
           "readOnly": true
         }
@@ -3752,10 +3759,12 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4568,7 +4577,7 @@
         "value"
       ]
     },
-    "VirtualScsiController": {
+    "VirtualSCSIController": {
       "type": "object",
       "properties": {
         "type": {
@@ -4580,7 +4589,7 @@
             "lsilogicsas"
           ],
           "x-ms-enum": {
-            "name": "ScsiControllerType",
+            "name": "SCSIControllerType",
             "modelAsString": true
           }
         },
@@ -4604,7 +4613,7 @@
             "virtualSharing"
           ],
           "x-ms-enum": {
-            "name": "VirtualScsiSharing",
+            "name": "VirtualSCSISharing",
             "modelAsString": true
           }
         }
@@ -4694,10 +4703,12 @@
         },
         "domainUserPassword": {
           "type": "string",
+          "format": "password",
           "x-ms-mutability": [
             "create",
             "update"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "workGroupName": {
           "type": "string"

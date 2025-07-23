@@ -14,12 +14,6 @@
 |------|------------|-------|
 | `definitions.Condition__deleted` | deleted | `{"type":"object","properties":{"status":{"type":"string","readOnly":true},"reason":{"type":"string",...` |
 
-### Changes for `VirtualSCSIController`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualSCSIController__deleted` | deleted | `{"type":"object","properties":{"type":{"type":"string","enum":["lsilogic","buslogic","pvscsi","lsilo...` |
-
 ### Changes for `operation`
 
 | Path | Change Type | Value |
@@ -31,12 +25,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.operationsList__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"nextLink":{...` |
-
-### Changes for `VirtualScsiController`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.VirtualScsiController__added` | added | `{"type":"object","properties":{"type":{"type":"string","enum":["lsilogic","buslogic","pvscsi","lsilo...` |
 
 ### Changes for `allOf`
 
@@ -172,15 +160,15 @@
 | `definitions.VirtualMachineInstance.allOf[0].description__deleted` | deleted | `The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than location and tags.` |
 | `definitions.VmInstanceHybridIdentityMetadata.allOf[0].description__deleted` | deleted | `The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags.` |
 
-### Changes for `x-ms-secret`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.GuestCredential.properties.password['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.GuestCredential.properties.privateKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.OsProfileForVMInstance.properties.adminPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.VICredential.properties.password['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WindowsConfiguration.properties.domainUserPassword['x-ms-secret__deleted']` | deleted | `true` |
+| `definitions.GuestCredential.properties.password.format__added` | added | `password` |
+| `definitions.GuestCredential.properties.privateKey.format__added` | added | `password` |
+| `definitions.OsProfileForVMInstance.properties.adminPassword.format__added` | added | `password` |
+| `definitions.VICredential.properties.password.format__added` | added | `password` |
+| `definitions.WindowsConfiguration.properties.domainUserPassword.format__added` | added | `password` |
 
 ### Changes for `discriminator`
 
@@ -188,19 +176,12 @@
 |------|------------|-------|
 | `definitions.InventoryItemProperties.discriminator__deleted` | deleted | `inventoryType` |
 
-### Changes for `default`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StopVirtualMachineOptions.properties.skipShutdown.default__deleted` | deleted | `false` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.GuestAgent.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.InventoryItem.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `definitions.StorageProfile.properties.scsiControllers.items.$ref` | `#/definitions/VirtualSCSIController` | `#/definitions/VirtualScsiController` |
 | `definitions.VirtualMachineInstance.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.VmInstanceHybridIdentityMetadata.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `paths['/providers/Microsoft.ConnectedVMwarevSphere/operations'].get.responses.200.schema.$ref` | `#/definitions/operationsList` | `../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |

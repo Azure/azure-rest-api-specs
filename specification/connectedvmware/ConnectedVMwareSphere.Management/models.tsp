@@ -164,7 +164,7 @@ union InventoryType {
 /**
  * Defines the different types of SCSI controllers.
  */
-union ScsiControllerType {
+union SCSIControllerType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   lsilogic: "lsilogic",
@@ -179,7 +179,7 @@ union ScsiControllerType {
 /**
  * Defines the sharing mode for sharing the SCSI bus.
  */
-union VirtualScsiSharing {
+union VirtualSCSISharing {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   noSharing: "noSharing",
@@ -734,6 +734,7 @@ model VICredential {
    * Gets or sets the password to connect with the vCenter.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   password?: string;
 }
 
@@ -1119,6 +1120,7 @@ model VirtualNetworksList is Azure.Core.Page<VirtualNetwork>;
 /**
  * Describes the properties of an Inventory Item.
  */
+@discriminator("inventoryType")
 model InventoryItemProperties {
   /**
    * They inventory type.
@@ -1359,6 +1361,7 @@ model WindowsConfiguration {
    * Sets domain user password.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   domainUserPassword?: string;
 
   /**
@@ -1453,17 +1456,17 @@ model StorageProfile {
    * Gets or sets the list of virtual SCSI controllers associated with the virtual machine.
    */
   @visibility(Lifecycle.Read)
-  scsiControllers?: VirtualScsiController[];
+  scsiControllers?: VirtualSCSIController[];
 }
 
 /**
  * This data object type contains the properties of a SCSI controller device attached to a virtual machine that is reported by the controller.
  */
-model VirtualScsiController {
+model VirtualSCSIController {
   /**
    * Gets or sets the controller type.
    */
-  type?: ScsiControllerType;
+  type?: SCSIControllerType;
 
   /**
    * Gets or sets the key of the controller.
@@ -1483,7 +1486,7 @@ model VirtualScsiController {
   /**
    * Gets or sets the sharing mode.
    */
-  sharing?: VirtualScsiSharing;
+  sharing?: VirtualSCSISharing;
 }
 
 /**
@@ -1705,7 +1708,7 @@ model StopVirtualMachineOptions {
   /**
    * Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.
    */
-  skipShutdown?: boolean;
+  skipShutdown?: boolean = false;
 }
 
 /**
@@ -2335,3 +2338,7 @@ model HostInventoryItem extends InventoryItemProperties {
    */
   inventoryType: "Host";
 }
+
+@@secret(GuestCredential.password);
+@@secret(GuestCredential.privateKey);
+@@secret(OsProfileForVMInstance.adminPassword);

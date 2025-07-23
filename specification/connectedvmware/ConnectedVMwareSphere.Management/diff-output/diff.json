@@ -80,48 +80,6 @@
         }
       }
     },
-    "VirtualSCSIController__deleted": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "lsilogic",
-            "buslogic",
-            "pvscsi",
-            "lsilogicsas"
-          ],
-          "x-ms-enum": {
-            "name": "SCSIControllerType",
-            "modelAsString": true
-          }
-        },
-        "controllerKey": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "busNumber": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "scsiCtlrUnitNumber": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "sharing": {
-          "type": "string",
-          "enum": [
-            "noSharing",
-            "physicalSharing",
-            "virtualSharing"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualSCSISharing",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "operation__deleted": {
       "type": "object",
       "properties": {
@@ -174,48 +132,6 @@
       "required": [
         "value"
       ]
-    },
-    "VirtualScsiController__added": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "lsilogic",
-            "buslogic",
-            "pvscsi",
-            "lsilogicsas"
-          ],
-          "x-ms-enum": {
-            "name": "ScsiControllerType",
-            "modelAsString": true
-          }
-        },
-        "controllerKey": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "busNumber": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "scsiCtlrUnitNumber": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "sharing": {
-          "type": "string",
-          "enum": [
-            "noSharing",
-            "physicalSharing",
-            "virtualSharing"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualScsiSharing",
-            "modelAsString": true
-          }
-        }
-      }
     },
     "Cluster": {
       "allOf__added": [
@@ -360,10 +276,10 @@
     "GuestCredential": {
       "properties": {
         "password": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "privateKey": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -450,7 +366,7 @@
     "OsProfileForVMInstance": {
       "properties": {
         "adminPassword": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -517,25 +433,6 @@
         }
       }
     },
-    "StopVirtualMachineOptions": {
-      "properties": {
-        "skipShutdown": {
-          "default__deleted": false
-        }
-      }
-    },
-    "StorageProfile": {
-      "properties": {
-        "scsiControllers": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VirtualSCSIController",
-              "__new": "#/definitions/VirtualScsiController"
-            }
-          }
-        }
-      }
-    },
     "VCenter": {
       "allOf__added": [
         {
@@ -585,7 +482,7 @@
     "VICredential": {
       "properties": {
         "password": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -763,7 +660,7 @@
     "WindowsConfiguration": {
       "properties": {
         "domainUserPassword": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     }
