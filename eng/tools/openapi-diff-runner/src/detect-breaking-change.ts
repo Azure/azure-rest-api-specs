@@ -423,7 +423,11 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
   }
 
   // If the initial folder doesn't exist, search upward for a folder with readme.md
-  while (!fullFolderPath.endsWith("resource-manager") && !fullFolderPath.endsWith("data-plane")) {
+  while (
+    isNewRp &&
+    !fullFolderPath.endsWith("resource-manager") &&
+    !fullFolderPath.endsWith("data-plane")
+  ) {
     const parent = path.dirname(fullFolderPath);
 
     // Prevent infinite loop if we reach the root
