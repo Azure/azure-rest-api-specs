@@ -116,7 +116,13 @@ interface Servers {
   /**
    * Manual failover a server.
    */
-  failover is ArmResourceActionAsync<Server, void, OkResponse>;
+  failover is ArmResourceActionAsyncBase<
+    Server,
+    void,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Validate a deployment of high availability.
@@ -130,27 +136,46 @@ interface Servers {
   /**
    * Restarts a server.
    */
-  restart is ArmResourceActionAsync<Server, ServerRestartParameter, OkResponse>;
+  restart is ArmResourceActionAsyncBase<
+    Server,
+    ServerRestartParameter,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Starts a server.
    */
-  start is ArmResourceActionAsync<Server, void, OkResponse>;
+  start is ArmResourceActionAsyncBase<
+    Server,
+    void,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Stops a server.
    */
-  stop is ArmResourceActionAsync<Server, void, OkResponse>;
+  stop is ArmResourceActionAsyncBase<
+    Server,
+    void,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
 
   /**
    * Resets GTID on a server.
    */
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  resetGtid is ArmResourceActionAsync<
+  resetGtid is ArmResourceActionAsyncBase<
     Server,
     ServerGtidSetParameter,
-    OkResponse,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader>,
+    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
