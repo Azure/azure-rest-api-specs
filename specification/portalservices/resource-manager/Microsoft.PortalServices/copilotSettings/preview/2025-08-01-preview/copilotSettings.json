@@ -343,7 +343,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The Azure Region where the resource lives (will be set to \"global\" for this global proxy resource)"
+          "description": "The Azure Region where the resource lives (will be set to \"global\" for this global proxy resource)",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -364,10 +368,6 @@
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure Region where the resource lives (will be set to \"global\" for this global proxy resource)"
         }
       },
       "allOf": [
