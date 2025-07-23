@@ -84,6 +84,7 @@ interface Configurations {
   /**
    * Update a list of configurations in a given server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("updateConfigurations")
   @operationId("Configurations_BatchUpdate")
