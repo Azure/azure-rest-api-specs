@@ -421,6 +421,30 @@ model EvaluationResultSettings {
   additionalDestinations?: Array<EvaluationDestinationConfiguration>;
 }
 
+@doc("Single Evaluation Definition")
+@resource("singleEvaluation")
+@added(Versions.v2025_07_31_preview)
+model SingleEvaluation {
+  @doc("Identifier of the single evaluation.")
+  @key("name")
+  @encodedName("application/json", "id")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Input data to evaluate. Single row support only.")
+  dataSource: InlineJsonDataSource;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators: Record<EvaluatorConfiguration>;
+}
+
+@doc("Single Evaluation Results Definition")
+@added(Versions.v2025_07_31_preview)
+model SingleEvaluationResults {
+  @doc("Results of a single row of data processed across evaluators.")
+  evaluationResult: EvaluationResult;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "@typespec/http";
 
 using TypeSpec.Http;
 using Azure.Core;
@@ -30,7 +31,7 @@ alias DisplayPreferencesTypeParameterTrait = {
   filter?: string;
 };
 
-alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias EvaluationsOperations = ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
 @added(Versions.v2025_05_15_preview)
@@ -134,4 +135,37 @@ interface Evaluations {
 
   @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
+}
+
+@route("singleEvaluation")
+@added(Versions.v2025_05_15_preview)
+interface SingleEvaluations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
+  @doc("Get the result of a single evaluation operation.")
+  @added(Versions.v2025_07_31_preview)
+  @route("/{operationId}")
+  getSingleEvaluationStatus is Foundations.GetOperationStatus<{}, SingleEvaluationResults>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create an single evaluation run with the specified configuration.")
+  @added(Versions.v2025_07_31_preview)
+  @pollingOperation(SingleEvaluations.getSingleEvaluationStatus)
+  @post
+  op createSingleEvaluation is Foundations.LongRunningOperation<
+    {
+      @added(Versions.v2025_07_31_preview)
+      @doc("Single evaluation operation request.")
+      @body
+      evaluation: SingleEvaluation;
+    },
+    {
+      @statusCode statusCode: 201;
+
+      @doc("Immediate result of the evaluation.")
+      @Http.bodyRoot
+      SingleEvaluationResults: SingleEvaluationResults;
+    },
+    AcceptedResponse
+  >;
+
 }
