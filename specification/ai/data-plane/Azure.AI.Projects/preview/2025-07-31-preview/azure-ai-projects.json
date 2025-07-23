@@ -3493,8 +3493,6 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
-<<<<<<< HEAD
-=======
     "FolderDatasetVersionUpdate": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -3505,59 +3503,6 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
-    "FoundryAgentRunSource": {
-      "type": "object",
-      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the agent to evaluate."
-        },
-        "runId": {
-          "type": "string",
-          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
-        }
-      },
-      "required": [
-        "id",
-        "runId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSource"
-        }
-      ],
-      "x-ms-discriminator-value": "foundryAgentRun"
-    },
-    "FoundryAgentRunSourceUpdate": {
-      "type": "object",
-      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the agent to evaluate."
-        },
-        "runId": {
-          "type": "string",
-          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSourceUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "foundryAgentRun"
-    },
->>>>>>> ae3f89dca5 (initial modeling for real-time api: single evaluation)
     "FoundryDatasetDataSource": {
       "type": "object",
       "description": "Data source that uses a dataset registered and stored in AI Foundry workspace. This is the recommended approach for large datasets or reusable evaluation data.",
@@ -4687,7 +4632,7 @@
           "x-ms-client-name": "name"
         },
         "dataSource": {
-          "$ref": "#/definitions/InlineJsonDataSource",
+          "$ref": "#/definitions/InlineDataSource",
           "description": "Input data to evaluate. Single row support only."
         },
         "evaluators": {
@@ -4695,6 +4640,13 @@
           "description": "Evaluators to be used for the evaluation.",
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       },

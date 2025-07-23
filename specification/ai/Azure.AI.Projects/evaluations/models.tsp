@@ -432,10 +432,13 @@ model SingleEvaluation {
   name: string;
 
   @doc("Input data to evaluate. Single row support only.")
-  dataSource: InlineJsonDataSource;
+  dataSource: InlineDataSource;
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
 }
 
 @doc("Single Evaluation Results Definition")
