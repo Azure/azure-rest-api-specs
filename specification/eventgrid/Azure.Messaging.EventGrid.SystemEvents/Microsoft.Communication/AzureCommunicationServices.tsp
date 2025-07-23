@@ -940,10 +940,10 @@ union recordingFormatType {
   "Wav",
 
   /** MP3 format */
-  "Mp3",
+  Mp3: "Mp3",
 
   /** MP4 format */
-  "Mp4",
+  Mp4: "Mp4",
 
   string,
 }

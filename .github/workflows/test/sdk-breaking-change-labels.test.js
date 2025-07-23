@@ -1,15 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { LabelAction } from "../src/label.js";
-import {
-  getLabelAndAction,
-  getLabelAndActionImpl,
-} from "../src/sdk-breaking-change-labels.js";
-import {
-  createMockContext,
-  createMockCore,
-  createMockGithub,
-} from "./mocks.js";
+import { getLabelAndAction, getLabelAndActionImpl } from "../src/sdk-breaking-change-labels.js";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.js";
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
@@ -33,8 +26,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should extract inputs and call getLabelAndActionImpl", async () => {
       // Mock extracted inputs
       const mockInputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -93,8 +85,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should correctly set labelAction to Remove", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -173,8 +164,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should handle API failure", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -210,8 +200,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should complete without op when artifact does not exist", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -225,10 +214,7 @@ describe("sdk-breaking-change-labels", () => {
             statusText: "Not Found",
             text: vi.fn().mockResolvedValue("Artifact not found"),
           });
-        } else if (
-          url.includes("artifacts?api-version=7.0") &&
-          !url.includes("artifactName=")
-        ) {
+        } else if (url.includes("artifacts?api-version=7.0") && !url.includes("artifactName=")) {
           // List artifacts API call (used by fetchFailedArtifact)
           return Promise.resolve({
             ok: true,
@@ -238,8 +224,7 @@ describe("sdk-breaking-change-labels", () => {
                   name: "spec-gen-sdk-artifact-failed",
                   id: "12345",
                   resource: {
-                    downloadUrl:
-                      "https://dev.azure.com/download-failed?format=zip",
+                    downloadUrl: "https://dev.azure.com/download-failed?format=zip",
                   },
                 },
               ],
@@ -280,8 +265,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error if resource is empty from the artifact api response", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -312,8 +296,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error if missing download url from the artifact api response", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -346,8 +329,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error when fail to fetch artifact content", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -394,8 +376,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should handle exception during processing", async () => {
       // Setup inputs
       const inputs = {
-        details_url:
-          "https://dev.azure.com/project/_build/results?buildId=12345",
+        details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
