@@ -64,6 +64,8 @@ interface Client {
   queryBatch is MonitorQueryLogs.Query.batch;
 }
 
+@@access(Versions, Access.internal, "go");
+
 @@clientName(BatchQueryRequest.workspace, "WorkspaceID", "go");
 
 @@clientName(BatchQueryResults.render, "Visualization", "go");

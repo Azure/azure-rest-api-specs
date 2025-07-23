@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ComputeRecommenderResourceProviderClient",
+    "title": "AzureComputeRecommenderManagementClient",
     "version": "2025-06-05",
-    "description": "The Compute Recommender Resource Provider Client",
+    "description": "Azure Compute Recommender Client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -30,9 +30,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -53,13 +53,13 @@
         "description": "Gets Spot Placement Scores metadata.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -92,13 +92,13 @@
         "description": "Generates placement scores for Spot VM skus.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "spotPlacementScoresInput",
@@ -120,7 +120,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -144,7 +144,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
