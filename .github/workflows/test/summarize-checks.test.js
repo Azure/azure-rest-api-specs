@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
@@ -5,7 +6,6 @@ import {
   updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
-import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
 

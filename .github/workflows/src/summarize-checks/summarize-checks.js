@@ -20,23 +20,22 @@
 
 // #region imports/constants
 import { extractInputs } from "../context.js";
-// eslint-disable-next-line no-unused-vars
-import { commentOrUpdate } from "../comment.js";
-import { PER_PAGE_MAX } from "../github.js";
+// import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
+import { PER_PAGE_MAX } from "../github.js";
 import {
-  verRevApproval,
   brChRevApproval,
   getViolatedRequiredLabelsRules,
   processArmReviewLabels,
   processImpactAssessment,
+  verRevApproval,
 } from "./labelling.js";
 
 import {
   brchTsg,
-  diagramTsg,
   checkAndDiagramTsg,
   defaultTsg,
+  diagramTsg,
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
