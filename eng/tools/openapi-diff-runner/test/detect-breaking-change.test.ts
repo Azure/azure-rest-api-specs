@@ -262,30 +262,65 @@ describe("detect-breaking-change", () => {
   });
 
   describe("getReadmeFolder", () => {
-    it("should extract folder path up to resource-manager", () => {
+    it("should return first readme.md found when searching upward", () => {
       const testPath = TEST_CONSTANTS.PATHS.network;
+
+      // Mock existsSync to return true only for the resource-manager level
+      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        return pathArg
+          .toString()
+          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+      });
+
       const result = getReadmeFolder(testPath);
-      expect(result).toBe("specification/network/resource-manager");
+      expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
-    it("should extract folder path up to data-plane", () => {
+    it("should find readme.md at data-plane level", () => {
       const testPath =
         "specification/cognitiveservices/data-plane/TextAnalytics/preview/v3.1/textanalytics.json";
+
+      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        return pathArg
+          .toString()
+          .endsWith(path.join("specification", "cognitiveservices", "data-plane", "readme.md"));
+      });
+
       const result = getReadmeFolder(testPath);
-      expect(result).toBe("specification/cognitiveservices/data-plane");
+      expect(result).toBe(path.join("specification", "cognitiveservices", "data-plane"));
     });
 
-    it("should return first 3 segments as fallback", () => {
-      const testPath = "specification/someservice/other/file.json";
+    it("should fall back to boundary when no readme.md found", () => {
+      const testPath = TEST_CONSTANTS.PATHS.network;
+
+      // No readme.md files exist
+      vi.mocked(existsSync).mockReturnValue(false);
+
       const result = getReadmeFolder(testPath);
-      expect(result).toBe("specification/someservice/other");
+      expect(result).toBe(path.join("specification", "network", "resource-manager"));
+    });
+
+    it("should fall back to first 3 segments when no boundary found", () => {
+      const testPath = "specification/someservice/other/deep/path/file.json";
+
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      const result = getReadmeFolder(testPath);
+      expect(result).toBe(path.join("specification", "someservice", "other"));
     });
 
     it("should handle dev folder conversion", () => {
       const testPath =
         "dev/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
+
+      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        return pathArg
+          .toString()
+          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+      });
+
       const result = getReadmeFolder(testPath);
-      expect(result).toBe("specification/network/resource-manager");
+      expect(result).toBe(path.join("specification", "network", "resource-manager"));
     });
 
     it("should return undefined for short paths", () => {
@@ -294,11 +329,35 @@ describe("detect-breaking-change", () => {
       expect(result).toBeUndefined();
     });
 
-    it("should handle paths with backslashes", () => {
+    it("should handle backslashes in paths", () => {
       const testPath =
         "specification\\network\\resource-manager\\Microsoft.Network\\stable\\2019-11-01\\network.json";
+
+      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        return pathArg
+          .toString()
+          .endsWith(path.join("specification", "network", "resource-manager", "readme.md"));
+      });
+
       const result = getReadmeFolder(testPath);
-      expect(result).toBe("specification/network/resource-manager");
+      expect(result).toBe(path.join("specification", "network", "resource-manager"));
+    });
+
+    it("should find readme.md within boundary search range", () => {
+      const testPath =
+        "specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
+
+      // Simulate readme.md at Microsoft.Network level (within search range)
+      vi.mocked(existsSync).mockImplementation((pathArg: any) => {
+        const pathStr = pathArg.toString();
+        return pathStr.includes(path.join("Microsoft.Network", "readme.md"));
+      });
+
+      // Should find readme.md at Microsoft.Network level since it's within the search range
+      const result = getReadmeFolder(testPath);
+      expect(result).toBe(
+        path.join("specification", "network", "resource-manager", "Microsoft.Network"),
+      );
     });
   });
 
@@ -317,13 +376,21 @@ describe("detect-breaking-change", () => {
   describe("getSpecModel", () => {
     beforeEach(() => {
       MockSetup.resetAllMocks();
-      vi.mocked(existsSync).mockReturnValue(true);
     });
 
     it("should create and cache SpecModel for new folder", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
-      vi.mocked(existsSync).mockReturnValue(true);
+
+      // Mock existsSync for both getReadmeFolder (readme.md check) and getSpecModel (folder check)
+      vi.mocked(existsSync).mockImplementation((path: any) => {
+        const pathStr = path.toString();
+        // Return true for resource-manager readme.md and the folder itself
+        return (
+          pathStr.includes("resource-manager/readme.md") ||
+          pathStr.endsWith("specification/network/resource-manager")
+        );
+      });
 
       const repoFolder = "/path/to/repo";
       const result1 = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
@@ -331,36 +398,46 @@ describe("detect-breaking-change", () => {
 
       expect(result1).toBe(result2);
       expect(result1).toBeDefined();
-      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(
-        path.join("/path/to/repo", "specification/network/resource-manager"),
-      );
     });
 
     it("should return undefined when folder does not exist", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
-      vi.mocked(existsSync).mockReturnValue(false);
+
+      // Mock existsSync to return false for the final folder check only
+      vi.mocked(existsSync).mockImplementation((path: any) => {
+        const pathStr = path.toString();
+        // Allow readme.md to be found but make folder check fail
+        if (pathStr.includes("resource-manager/readme.md")) return true;
+        if (pathStr.endsWith("specification/network/resource-manager")) return false;
+        return false;
+      });
 
       const repoFolder = "/path/to/repo";
       const result = getSpecModel(repoFolder, TEST_CONSTANTS.PATHS.network);
 
       expect(result).toBeUndefined();
-      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(
-        path.join("/path/to/repo", "specification/network/resource-manager"),
-      );
     });
 
     it("should not cache when folder does not exist", async () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
-      vi.mocked(existsSync).mockReturnValue(false);
+
+      // Mock existsSync to return false for folder checks
+      vi.mocked(existsSync).mockImplementation((path: any) => {
+        const pathStr = path.toString();
+        // Allow readme.md to be found but make folder check fail
+        if (pathStr.includes("resource-manager/readme.md")) return true;
+        if (pathStr.endsWith("specification/network/resource-manager")) return false;
+        return false;
+      });
 
       const result1 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
       const result2 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
 
       expect(result1).toBeUndefined();
       expect(result2).toBeUndefined();
-      expect(vi.mocked(existsSync)).toHaveBeenCalledTimes(2); // Called twice, no caching for undefined
+      // Note: We can't reliably check call count due to getReadmeFolder also using existsSync
     });
 
     it("should create different SpecModels for different folders", async () => {

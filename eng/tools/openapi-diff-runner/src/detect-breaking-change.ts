@@ -186,7 +186,9 @@ export async function checkCrossVersionBreakingChange(
     logMessage(
       `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
     );
-    const previousVersions = await getPrecedingSwaggers(swaggerPath, availableSwaggers);
+
+    // use absoluteSwaggerPath as it will need to it will fall back to use the version info in the swagger content
+    const previousVersions = await getPrecedingSwaggers(absoluteSwaggerPath, availableSwaggers);
     logMessage(
       `checkCrossVersionBreakingChange: previousVersions: ${JSON.stringify(previousVersions)}`,
     );
@@ -355,35 +357,49 @@ export function isInDevFolder(swaggerPath: string) {
 }
 
 /**
+ * Find the path to the closest readme.md file based on the input file path,
+ * searching upward from the file's directory up to the 'resource-manager' or 'data-plane' sub path.
  * Example:
  * input: specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json
- * returns: specification/network/resource-manager
+ * returns: path to the directory containing the closest readme.md file, up to specification/network/resource-manager
  */
 export function getReadmeFolder(swaggerFile: string) {
   const segments = swaggerFile.split(/\\|\//);
 
-  if (segments && segments.length >= 3) {
-    // Handle dev folder conversion
-    if (segments[0] === "dev") {
-      segments[0] = "specification";
-    }
-
-    // Look for "resource-manager" or "data-plane" in the path
-    const resourceManagerIndex = segments.findIndex((segment) => segment === "resource-manager");
-    if (resourceManagerIndex !== -1) {
-      return segments.slice(0, resourceManagerIndex + 1).join("/");
-    }
-
-    const dataPlaneIndex = segments.findIndex((segment) => segment === "data-plane");
-    if (dataPlaneIndex !== -1) {
-      return segments.slice(0, dataPlaneIndex + 1).join("/");
-    }
-
-    // Default: return first 3 segments
-    return segments.slice(0, 3).join("/");
+  if (!segments || segments.length < 3) {
+    return undefined;
   }
 
-  return undefined;
+  // Handle dev folder conversion
+  if (segments[0] === "dev") {
+    segments[0] = "specification";
+  }
+
+  // Find the boundary index (resource-manager or data-plane)
+  const resourceManagerIndex = segments.findIndex((segment) => segment === "resource-manager");
+  const dataPlaneIndex = segments.findIndex((segment) => segment === "data-plane");
+  const boundaryIndex = resourceManagerIndex !== -1 ? resourceManagerIndex : dataPlaneIndex;
+
+  // Determine search range: from file's parent directory up to boundary (or root if no boundary found)
+  const startIndex = segments.length - 2; // Start from parent directory of the file
+  const minIndex = boundaryIndex !== -1 ? boundaryIndex : 2; // Stop at boundary or at least keep first 3 segments
+
+  // Search upward for readme.md
+  for (let i = startIndex; i >= minIndex; i--) {
+    const currentPath = segments.slice(0, i + 1).join(path.sep);
+    const readmePath = path.join(currentPath, "readme.md");
+
+    if (existsSync(readmePath)) {
+      return currentPath;
+    }
+  }
+
+  // Fallback: return up to boundary if found, otherwise first 3 segments
+  if (boundaryIndex !== -1) {
+    return segments.slice(0, boundaryIndex + 1).join(path.sep);
+  }
+
+  return segments.slice(0, 3).join(path.sep);
 }
 
 /**
@@ -437,7 +453,9 @@ export async function checkAPIsBeingMovedToANewSpec(
     return;
   }
   const targetOperations = await targetSwagger.getOperations();
-  const movedApis = await getExistedVersionOperations(swaggerPath, availableSwaggers, [
+
+  // use absoluteSwaggerPath as it will need to it will fall back to use the version info in the swagger content
+  const movedApis = await getExistedVersionOperations(absoluteSwaggerPath, availableSwaggers, [
     ...targetOperations.values(),
   ]);
   logMessage(
