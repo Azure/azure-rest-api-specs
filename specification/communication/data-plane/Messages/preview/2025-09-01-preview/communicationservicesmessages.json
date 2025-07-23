@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CommunicationMessagesClient",
-    "version": "2025-04-01-preview",
+    "version": "2025-09-01-preview",
     "description": "Azure Communication Messages Service",
     "x-typespec-generated": [
       {
@@ -137,11 +137,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of templates": {
-            "$ref": "./examples/Template_ListTemplates.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -212,11 +207,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Retrieves list of conversations": {
-            "$ref": "./examples/ConversationThread_ListConversations.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -258,11 +248,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a new conversation": {
-            "$ref": "./examples/ConversationAdministration_CreateConversation.json"
           }
         }
       }
@@ -314,11 +299,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the details of a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_GetConversation.json"
           }
         }
       },
@@ -395,11 +375,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_DeleteConversation.json"
           }
         }
       }
@@ -478,11 +453,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Terminates a specific conversation": {
-            "$ref": "./examples/ConversationAdministration_TerminateConversation.json"
           }
         }
       }
@@ -565,11 +535,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get AI Analysis of a conversation": {
-            "$ref": "./examples/ConversationThread_AnalyzeConversation.json"
-          }
         }
       }
     },
@@ -635,11 +600,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves list of conversation messages": {
-            "$ref": "./examples/ConversationThread_ListMessages.json"
           }
         },
         "x-ms-pageable": {
@@ -728,11 +688,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Sends a conversation message from Business to User": {
-            "$ref": "./examples/ConversationThread_SendMessage.json"
-          }
         }
       }
     },
@@ -816,11 +771,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Adds participants to a specific conversation": {
-            "$ref": "./examples/ConversationThread_AddParticipants.json"
           }
         }
       }
@@ -906,11 +856,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "remove a participant from a conversation": {
-            "$ref": "./examples/ConversationThread_RemoveParticipants.json"
-          }
         }
       }
     },
@@ -988,41 +933,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Sends a notification message - Interactive Button": {
-            "$ref": "./examples/NotificationMessages_SendButtonInteractiveMessage.json"
-          },
-          "Sends a notification message - Interactive List": {
-            "$ref": "./examples/NotificationMessages_SendListInteractiveMessage.json"
-          },
-          "Sends a notification message - Interactive Url": {
-            "$ref": "./examples/NotificationMessages_SendUrlInteractiveMessage.json"
-          },
-          "Sends a notification message - Reaction": {
-            "$ref": "./examples/NotificationMessages_SendReaction.json"
-          },
-          "Sends a notification message - Sticker": {
-            "$ref": "./examples/NotificationMessages_SendSticker.json"
-          },
-          "Sends a notification message - Template": {
-            "$ref": "./examples/NotificationMessages_SendTemplate.json"
-          },
-          "Sends a notification message - audio": {
-            "$ref": "./examples/NotificationMessages_SendAudio.json"
-          },
-          "Sends a notification message - document": {
-            "$ref": "./examples/NotificationMessages_SendDocument.json"
-          },
-          "Sends a notification message - image": {
-            "$ref": "./examples/NotificationMessages_SendImage.json"
-          },
-          "Sends a notification message - text": {
-            "$ref": "./examples/NotificationMessages_SendText.json"
-          },
-          "Sends a notification message - video": {
-            "$ref": "./examples/NotificationMessages_SendVideo.json"
-          }
         }
       }
     },
@@ -1077,11 +987,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Download media": {
-            "$ref": "./examples/Stream_GetMedia.json"
           }
         }
       }
@@ -1430,7 +1335,8 @@
         "template",
         "sticker",
         "reaction",
-        "interactive"
+        "interactive",
+        "status"
       ],
       "x-ms-enum": {
         "name": "CommunicationMessageKind",
@@ -1485,6 +1391,11 @@
             "name": "interactive",
             "value": "interactive",
             "description": "Interactive Actionable message type."
+          },
+          {
+            "name": "status",
+            "value": "status",
+            "description": "Status message type."
           }
         ]
       }
@@ -2668,6 +2579,81 @@
         "receipts"
       ]
     },
+    "Status": {
+      "type": "string",
+      "description": "The status of a message.",
+      "enum": [
+        "sent",
+        "read"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sent",
+            "value": "sent",
+            "description": "Message has been sent."
+          },
+          {
+            "name": "read",
+            "value": "read",
+            "description": "Message has been read."
+          }
+        ]
+      }
+    },
+    "StatusContent": {
+      "type": "object",
+      "description": "Content describing the status of a message.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status value of the message."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The id of the message this status refers to."
+        },
+        "statusDetails": {
+          "$ref": "#/definitions/StatusDetails",
+          "description": "Optional additional details about the status."
+        }
+      },
+      "required": [
+        "status",
+        "messageId"
+      ]
+    },
+    "StatusDetails": {
+      "type": "object",
+      "description": "Additional status details.",
+      "properties": {
+        "typingIndicator": {
+          "$ref": "#/definitions/TypingIndicator",
+          "description": "Typing indicator status."
+        }
+      }
+    },
+    "StatusNotificationContent": {
+      "type": "object",
+      "description": "A request to send a status notification.",
+      "properties": {
+        "statusContent": {
+          "$ref": "#/definitions/StatusContent",
+          "description": "Status information of the message."
+        }
+      },
+      "required": [
+        "statusContent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "status"
+    },
     "StickerNotificationContent": {
       "type": "object",
       "description": "A request to send a Sticker notification.",
@@ -2782,6 +2768,37 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "TypingIndicator": {
+      "type": "object",
+      "description": "Typing indicator content.",
+      "properties": {
+        "typingType": {
+          "$ref": "#/definitions/TypingType",
+          "description": "Type of typing indicator."
+        }
+      },
+      "required": [
+        "typingType"
+      ]
+    },
+    "TypingType": {
+      "type": "string",
+      "description": "Typing status type.",
+      "enum": [
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "TypingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "User is typing a text."
+          }
+        ]
+      }
     },
     "UpdateParticipantsResult": {
       "type": "object",

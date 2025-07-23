@@ -54,6 +54,10 @@ union CommunicationMessageKind {
   @added(Versions.c2025_01_15_Preview)
   @doc("Interactive Actionable message type.")
   interactive: "interactive",
+
+  @added(Versions.c2025_09_01_Preview)
+  @doc("Status message type.")
+  status: "status",
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -289,6 +293,61 @@ model InteractiveNotificationContent extends NotificationContent {
 
   @doc("The interactive message content.")
   interactiveMessage: InteractiveMessage;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a status notification.")
+model StatusNotificationContent extends NotificationContent {
+  @doc("Message notification type is status.")
+  kind: CommunicationMessageKind.status;
+
+  @doc("Status information of the message.")
+  statusContent: StatusContent;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Content describing the status of a message.")
+model StatusContent {
+  @doc("The status value of the message.")
+  status: Status;
+
+  @doc("The id of the message this status refers to.")
+  messageId: string;
+
+  @doc("Optional additional details about the status.")
+  statusDetails?: StatusDetails;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Additional status details.")
+model StatusDetails {
+  @doc("Typing indicator status.")
+  typingIndicator?: TypingIndicator;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Typing indicator content.")
+model TypingIndicator {
+  @doc("Type of typing indicator.")
+  typingType: TypingType;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("The status of a message.")
+union Status {
+  string,
+
+  @doc("Message has been read.")
+  read: "read",
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Typing status type.")
+union TypingType {
+  string,
+
+  @doc("User is typing a text.")
+  text: "text",
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -1082,4 +1141,8 @@ enum Versions {
   @doc("Azure Communication Messages 2025-04-01-preview api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_04_01_Preview: "2025-04-01-preview",
+
+  @doc("Azure Communication Messages 2025-09-01-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_09_01_Preview: "2025-09-01-preview",
 }
