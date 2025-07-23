@@ -139,33 +139,32 @@ model FileShareProperties {
   @doc("A date/time value that specifies when the provisioned storage for the file share is permitted to be reduced.")
   provisionedStorageNextAllowedDowngrade?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The provisioned IO / sec of the share.")
   provisionedIOPerSec?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @visibility(Lifecycle.Read)
   @doc("A date/time value that specifies when the provisioned IOPS for the file share is permitted to be reduced.")
   provisionedIOPerSecNextAllowedDowngrade?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The provisioned throughput / sec of the share.")
   provisionedThroughputMiBPerSec?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @visibility(Lifecycle.Read)
   @doc("A date/time value that specifies when the provisioned throughput for the file share is permitted to be reduced.")
   provisionedThroughputNextAllowedDowngrade?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @visibility(Lifecycle.Read)
   @minValue(3000)
   @doc("Burst IOPS are extra buffer IOPS enabling you to consume more than your provisioned IOPS for a short period of time, depending on the burst credits available for your share.")
   includedBurstIOPerSec?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @visibility(Lifecycle.Read)
   @minValue(0)
   @doc("Max burst IOPS credits shows the maximum number of burst credits the share can have at the current IOPS provisioning level.")
@@ -396,7 +395,6 @@ model LiveSharesUsageData {
   fileShareCount: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("File share-related limits in the specified subscription/location.")
 model FileShareLimits {
   @doc("The maximum number of file shares that can be created.")
@@ -411,37 +409,46 @@ model FileShareLimits {
   @doc("The maximum number of private endpoint connections allowed for a file share.")
   maxFileSharePrivateEndpointConnections: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The minimum provisioned storage in GiB for a file share.")
   minProvisionedStorageGiB: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The maximum provisioned storage in GiB for a file share.")
   maxProvisionedStorageGiB: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The minimum provisioned IOPS (Input/Output Operations Per Second) for a file share.")
   minProvisionedIOPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The maximum provisioned IOPS (Input/Output Operations Per Second) for a file share.")
   maxProvisionedIOPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The minimum provisioned throughput in MiB/s for a file share.")
   minProvisionedThroughputMiBPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The maximum provisioned throughput in MiB/s for a file share.")
   maxProvisionedThroughputMiBPerSec: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Constants used for calculating recommended values of file share provisioning properties.")
 model FileShareProvisioningConstants {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Base IO per second.")
   baseIOPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Scalar IO per second.")
   scalarIOPerSec: float64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Base throughput in MiB per second.")
   baseThroughputMiBPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("Scalar throughput in MiB per second.")
   scalarThroughputMiBPerSec: float64;
 }
@@ -467,9 +474,9 @@ model FileShareProvisioningRecommendationRequest {
   properties: FileShareProvisioningRecommendationInput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("File share provisioning parameters recommendation API input structure.")
 model FileShareProvisioningRecommendationInput {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The desired provisioned storage size of the share in GiB. Will be use to calculate the values of remaining provisioning parameters.")
   provisionedStorageGiB: int32;
 }
@@ -480,12 +487,13 @@ model FileShareProvisioningRecommendationResponse {
   properties: FileShareProvisioningRecommendationOutput;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("File share provisioning parameters recommendation API result.")
 model FileShareProvisioningRecommendationOutput {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The recommended value of provisioned IO / sec of the share.")
   provisionedIOPerSec: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
   @doc("The recommended value of provisioned throughput / sec of the share.")
   provisionedThroughputMiBPerSec: int32;
 
