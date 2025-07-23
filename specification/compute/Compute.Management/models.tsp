@@ -1844,7 +1844,7 @@ model EventGridAndResourceGraph {
    * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered.
    */
   @added(Versions.v2025_04_01)
-  scheduledEventsApiVersion: string;
+  scheduledEventsApiVersion?: string;
 }
 
 /**
@@ -1856,7 +1856,7 @@ model AllInstancesDown {
    * its default value is true
    */
   @added(Versions.v2025_04_01)
-  automaticallyApprove: boolean;
+  automaticallyApprove?: boolean;
 }
 
 /**
