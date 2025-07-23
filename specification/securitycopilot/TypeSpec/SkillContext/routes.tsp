@@ -45,6 +45,15 @@ op getSkillsetDescriptors(
 ): SkillsetDescriptor[];
 
 @get
+@route("/skillContext/skillDescriptorWithSkillsetName")
+@doc("Get skill descriptor with skillset name and skill name")
+op getSkillDescriptorWithSkillsetName(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query skillName: string,
+@query skillsetName: string,
+): SkillDescriptor;
+
+@get
 @route("/skillContext/executionContext")
 @doc("Get execution context")
 op getExecutionContext(
