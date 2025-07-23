@@ -152,7 +152,7 @@ model QueryResponseInlineMessages extends InlineData {
   dataFormat: InlineDataFormat.queryResponseMessage;
 
   @doc("Array of query-response pairs with optional context and ground truth")
-  items: QueryResponseMessage[];
+  messages: QueryResponseMessage[];
 }
 
 @added(Versions.v2025_07_31_preview)
@@ -178,7 +178,7 @@ model InlineJson extends InlineData {
   dataFormat: InlineDataFormat.inlineJson;
 
   @doc("Array of JSON strings with custom fields and metadata")
-  items: string[];
+  messages: string[];
 }
 
 @doc("Data source using inline data provided directly in the request.")
