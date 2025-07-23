@@ -2356,3 +2356,9 @@ model ServerListResult {
   @nextLink
   nextLink?: url;
 }
+
+/** Extended data with additional properties */
+model ExtendedData {
+  /** Additional properties that can be added to the object */
+  ...Record<unknown>;
+}
