@@ -63,31 +63,49 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualEndpoints.json
   - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
 suppressions:
-  - code: PutResponseCodes
+  - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json
     reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
+  - code: PutGetPatchResponseSchema
+    from: AdministratorsMicrosoftEntra.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
     from: AdministratorsMicrosoftEntra.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdvancedThreatProtectionSettings.json
     reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
+  - code: PutGetPatchResponseSchema
     from: AdvancedThreatProtectionSettings.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
     from: BackupsAutomaticAndOnDemand.json
     reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
+  - code: PutGetPatchResponseSchema
+    from: BackupsAutomaticAndOnDemand.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
     from: BackupsAutomaticAndOnDemand.json
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: Capabilities.json
     where: $.definitions.CapabilityList
     reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: Operations.json
     where: $.definitions.OperationList
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: PrivateEndpointConnections.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
     from: PrivateEndpointConnections.json
@@ -102,6 +120,9 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: Servers.json
     reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
     from: Servers.json
     reason: The existing API contract is like this and not be able to change.
@@ -113,6 +134,9 @@ suppressions:
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
