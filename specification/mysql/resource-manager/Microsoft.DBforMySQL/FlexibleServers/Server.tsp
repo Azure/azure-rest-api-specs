@@ -114,20 +114,6 @@ interface Servers {
   >;
 
   /**
-   * Update a list of configurations in a given server.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("updateConfigurations")
-  @operationId("Configurations_BatchUpdate")
-  batchUpdate is ArmResourceActionAsync<
-    Server,
-    ConfigurationListForBatchUpdate,
-    ArmResponse<Configuration>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
    * Manual failover a server.
    */
   failover is ArmResourceActionAsync<Server, void, OkResponse>;
@@ -228,9 +214,6 @@ interface Servers {
 );
 @@doc(Servers.backupAndExportCreate::parameters.body,
   "The required parameters for creating and exporting backup of the given server."
-);
-@@doc(Servers.batchUpdate::parameters.body,
-  "The parameters for updating a list of server configuration."
 );
 @@doc(Servers.validateEstimateHighAvailability::parameters.body,
   "The required parameters for validation of high availability deployment."

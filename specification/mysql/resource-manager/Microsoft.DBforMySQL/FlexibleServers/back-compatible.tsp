@@ -56,7 +56,7 @@ using Microsoft.DBforMySQL;
 @@clientName(Servers.create::parameters.resource, "parameters");
 @@clientName(Servers.update::parameters.properties, "parameters");
 @@clientName(Servers.backupAndExportCreate::parameters.body, "parameters");
-@@clientName(Servers.batchUpdate::parameters.body, "parameters");
+@@clientName(Configurations.batchUpdate::parameters.body, "parameters");
 @@clientName(Servers.validateEstimateHighAvailability::parameters.body,
   "parameters"
 );
@@ -72,10 +72,10 @@ using Microsoft.DBforMySQL;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(AdvancedThreatProtections.updatePut::parameters.resource,
+@@clientName(advancedThreatProtectionSettings.updatePut::parameters.resource,
   "parameters"
 );
-@@clientName(AdvancedThreatProtections.update::parameters.properties,
+@@clientName(advancedThreatProtectionSettings.update::parameters.properties,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

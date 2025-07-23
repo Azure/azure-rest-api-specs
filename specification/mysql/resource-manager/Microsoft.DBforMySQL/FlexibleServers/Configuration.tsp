@@ -80,6 +80,20 @@ interface Configurations {
     },
     Response = ArmResponse<ConfigurationListResult>
   >;
+
+  /**
+   * Update a list of configurations in a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("updateConfigurations")
+  @operationId("Configurations_BatchUpdate")
+  batchUpdate is ArmResourceActionAsync<
+    Server,
+    ConfigurationListForBatchUpdate,
+    ArmResponse<Configuration>,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(Configuration.name, "The name of the server configuration.");
@@ -89,4 +103,7 @@ interface Configurations {
 );
 @@doc(Configurations.update::parameters.properties,
   "The required parameters for updating a server configuration."
+);
+@@doc(Configurations.batchUpdate::parameters.body,
+  "The parameters for updating a list of server configuration."
 );

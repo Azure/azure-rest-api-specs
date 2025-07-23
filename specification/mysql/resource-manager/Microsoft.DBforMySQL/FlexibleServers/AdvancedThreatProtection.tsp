@@ -27,7 +27,7 @@ model AdvancedThreatProtection
 }
 
 @armResourceOperations
-interface AdvancedThreatProtections {
+interface advancedThreatProtectionSettings {
   /**
    * Get a server's Advanced Threat Protection state
    */
@@ -75,9 +75,9 @@ interface AdvancedThreatProtections {
   "The name of the Advanced Threat Protection state."
 );
 @@doc(AdvancedThreatProtection.properties, "Resource properties.");
-@@doc(AdvancedThreatProtections.updatePut::parameters.resource,
+@@doc(advancedThreatProtectionSettings.updatePut::parameters.resource,
   "The server's Advanced Threat Protection body to update."
 );
-@@doc(AdvancedThreatProtections.update::parameters.properties,
+@@doc(advancedThreatProtectionSettings.update::parameters.properties,
   "The server's Advanced Threat Protection body to update."
 );

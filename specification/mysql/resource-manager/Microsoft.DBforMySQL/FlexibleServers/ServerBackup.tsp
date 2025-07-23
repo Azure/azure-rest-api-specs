@@ -26,7 +26,7 @@ model ServerBackup
 }
 
 @armResourceOperations
-interface ServerBackups {
+interface Backups {
   /**
    * List all the backups for a given server.
    */
