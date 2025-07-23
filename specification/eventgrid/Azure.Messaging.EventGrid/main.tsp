@@ -166,9 +166,6 @@ namespace Microsoft.EventGrid {
     @doc("Array of lock tokens for the successfully released cloud events.")
     @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
-
-    @doc("added doc")
-    docstring: string;
   }
 
   @doc("The result of the Reject operation.")
