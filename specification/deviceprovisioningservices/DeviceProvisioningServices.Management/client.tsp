@@ -184,3 +184,7 @@ using Azure.Core;
   "subscriptionId",
   "csharp"
 );
+@@clientName(ProvisioningServiceDescription.resourcegroup,
+  "resourceGroup",
+  "csharp"
+);
