@@ -368,9 +368,6 @@ model JsonWebKey {
 
   @doc("Y coordinate for the Elliptic Curve point")
   y?: string;
-
-  @doc("z")
-  z?: string;
 }
 
 // -----------------------------------------------------------------
