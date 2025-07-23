@@ -56,7 +56,7 @@ suppressions:
       contains location property, it is not a tracked resource. This is a false positive.
     from:
       - copilotSettings.json
-    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"].put
   - code: EvenSegmentedPathForPutOperation
     reason: >
       The resource type copilotSettings in the Microsoft.PortalServices resource provider is @singleton
