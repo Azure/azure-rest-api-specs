@@ -36,7 +36,9 @@ async function getPrecedingSwaggerByType(
     swagger,
     version: getVersionFromInputFile(swagger.path),
     fileName: getBaseNameForSwagger(swagger.path, getVersionFromInputFile(swagger.path)),
-    versionKind: swagger.versionKind,
+    versionKind: getVersionFromInputFile(swagger.path, true).includes("preview")
+      ? ApiVersionLifecycleStage.PREVIEW
+      : ApiVersionLifecycleStage.STABLE,
   }));
 
   const versionsOfType = swaggersWithVersions.filter(
