@@ -23,7 +23,14 @@ import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "../comment.js";
 import { PER_PAGE_MAX } from "../github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
+import { execFile } from "../../../shared/src/exec.js";
+import {
+  verRevApproval,
+  brChRevApproval,
+  getViolatedRequiredLabelsRules,
+  processArmReviewLabels,
+  processImpactAssessment,
+} from "./labelling.js";
 
 import {
   brchTsg,
@@ -34,6 +41,10 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
+
+import fs from "fs/promises";
+import os from "os";
+import path from "path";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -52,7 +63,67 @@ import {
  */
 
 /**
- * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
+ * @typedef {Object} WorkflowRunArtifact
+ * @property {string} name
+ * @property {number} id
+ * @property {string} url
+ * @property {string} archive_download_url
+ */
+
+/**
+ * @typedef {Object} WorkflowRunInfo
+ * @property {string} name
+ * @property {number} id
+ * @property {number} databaseId
+ * @property {string} url
+ * @property {number} workflowId
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {string} createdAt
+ * @property {string} updatedAt
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckRun
+ * @property {string} name
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {boolean} isRequired
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuite
+ * @property {GraphQLCheckRun[]} nodes
+ */
+
+/**
+ * @typedef {Object} GraphQLCheckSuites
+ * @property {GraphQLCheckSuite[]} nodes
+ */
+
+/**
+ * @typedef {Object} GraphQLCommit
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResource
+ * @property {GraphQLCheckSuites} checkSuites
+ */
+
+/**
+ * @typedef {Object} GraphQLResponse
+ * @property {GraphQLResource} resource
+ * @property {Object} rateLimit
+ * @property {number} rateLimit.limit
+ * @property {number} rateLimit.cost
+ * @property {number} rateLimit.used
+ * @property {number} rateLimit.remaining
+ * @property {string} rateLimit.resetAt
+ */
+
+/**
+ * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -209,7 +280,6 @@ const EXCLUDED_CHECK_NAMES = [];
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  logGitHubRateLimitInfo(github, core);
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
@@ -254,43 +324,16 @@ export async function summarizeChecksImpl(
     `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
   );
 
+  // retrieve latest labels state
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
+    owner,
+    repo,
     issue_number: issue_number,
     per_page: PER_PAGE_MAX,
   });
 
-  /** @type {string[]} */
-  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
-
-  // handle our label trigger first, we may bail out early if it's a label action we're reacting to
-  // this also implies that if a label action is performed before any workflows complete, we shouldn't
-  // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
-  if (event_name in ["labeled", "unlabeled"]) {
-    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
-    const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-      github,
-      context,
-      core,
-      owner,
-      repo,
-      issue_number,
-      event_name,
-      labelNames,
-    );
-
-    // adjust labelNames based on labelsToAdd/labelsToRemove
-    labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
-    for (const label of labelsToAdd) {
-      if (!labelNames.includes(label)) {
-        labelNames.push(label);
-      }
-    }
-  }
-
-  /** @type {[CheckRunData[], CheckRunData[]]} */
-  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+  /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
+  const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
     github,
     core,
     owner,
@@ -299,6 +342,43 @@ export async function summarizeChecksImpl(
     issue_number,
     EXCLUDED_CHECK_NAMES,
   );
+
+  /** @type {string[]} */
+  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
+
+  // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
+  // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
+  let labelContext = await updateLabels(labelNames, impactAssessment);
+
+  for (const label of labelContext.toRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    // await github.rest.issues.removeLabel({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   name: label,
+    // });
+  }
+
+  if (labelContext.toAdd.size > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    // await github.rest.issues.addLabels({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   labels: Array.from(labelsToAdd),
+    // });
+  }
+
+  // adjust labelNames based on labelsToAdd/labelsToRemove
+  labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
+  for (const label of labelContext.toAdd) {
+    if (!labelNames.includes(label)) {
+      labelNames.push(label);
+    }
+  }
 
   const commentBody = await createNextStepsComment(
     core,
@@ -321,21 +401,6 @@ export async function summarizeChecksImpl(
   //   commentName,
   //   commentBody
   // )
-}
-
-/**
- * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<void>}
- */
-export async function logGitHubRateLimitInfo(github, core) {
-  try {
-    const { data: rateLimit } = await github.rest.rateLimit.get();
-    const { data: user } = await github.rest.users.getAuthenticated();
-    core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
-  } catch (e) {
-    core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
-  }
 }
 
 /**
@@ -377,6 +442,13 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
         ... on Commit {
           checkSuites(first: 20) {
             nodes {
+              workflowRun {
+                id
+                databaseId
+                workflow {
+                  name
+                }
+              }
               checkRuns(first: 30) {
                 nodes {
                   name
@@ -403,79 +475,73 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 // #endregion
 // #region label update
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
- * @param {typeof import("@actions/core")} core
- * @param {string} owner
- * @param {string} repo
- * @param {number} issue_number
- * @param {string} event_name
- * @param {string[]} known_labels
- * @returns {Promise<[string[], string[]]>}
+ * @param {Set<string>} labelsToAdd
+ * @param {Set<string>} labelsToRemove
  */
-// @ts-ignore: 'github' is currently unused but will be used after necessary changes
-export async function handleLabeledEvent(
-  github,
-  context,
-  core,
-  owner,
-  repo,
-  issue_number,
-  event_name,
-  known_labels,
-) {
-  // logic for this event is based on code directly ripped from pipelinebot:
-  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  // todo: further enhance with labelling actions from `PR Summary` check.
-  const changedLabel = context.payload.label?.name;
-  const labelsToAdd = new Set();
-  const labelsToRemove = new Set();
+function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
+  const intersection = Array.from(labelsToAdd).filter((label) => labelsToRemove.has(label));
+  if (intersection.length > 0) {
+    console.warn(
+      "ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! " +
+        `labelsToAdd: [${[...labelsToAdd].join(", ")}]. ` +
+        `labelsToRemove: [${[...labelsToRemove].join(", ")}]. ` +
+        `intersection: [${intersection.join(", ")}].`,
+    );
+  }
+}
 
-  if (event_name === "labeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-    }
-    if (changedLabel == "ARMSignedOff") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-        labelsToRemove.add("ARMChangesRequested");
-      }
-    }
+// * @param {string} eventName
+// * @param {string | undefined } changedLabel
+/**
+ * @param {string[]} existingLabels
+ * @param {import("./labelling.js").ImpactAssessment | undefined} impactAssessment
+ * @returns {import("./labelling.js").LabelContext}
+ */
+export function updateLabels(existingLabels, impactAssessment) {
+  // logic for this function originally present in:
+  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  //  - public/rest-api-specs-scripts/src/prSummary.ts
+  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
 
-    for (const label of labelsToRemove) {
-      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.removeLabel({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   name: label,
-      // });
-    }
-  } else if (event_name === "unlabeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToAdd.add("WaitForARMFeedback");
-      }
-    }
+  /** @type {import("./labelling.js").LabelContext} */
+  const labelContext = {
+    present: new Set(existingLabels),
+    toAdd: new Set(),
+    toRemove: new Set(),
+  };
 
-    if (labelsToAdd.size > 0) {
-      core.info(
-        `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-      );
-      // await github.rest.issues.addLabels({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   labels: Array.from(labelsToAdd),
-      // });
-    }
+  if (impactAssessment) {
+    console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
+    // Merge impact assessment labels into the main labelContext
+    impactAssessment.labelContext.toAdd.forEach((label) => {
+      labelContext.toAdd.add(label);
+    });
+    impactAssessment.labelContext.toRemove.forEach((label) => {
+      labelContext.toRemove.add(label);
+    });
   }
 
-  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+  // this is the only labelling that was part of original pipelinebot logic
+  processArmReviewLabels(labelContext, existingLabels);
+
+  if (impactAssessment) {
+    // will further update the label context if necessary
+    processImpactAssessment(
+      impactAssessment.targetBranch,
+      labelContext,
+      impactAssessment.resourceManagerRequired,
+      impactAssessment.versioningReviewRequired,
+      impactAssessment.breakingChangeReviewRequired,
+      impactAssessment.rpaasRPMissing,
+      impactAssessment.rpaasExceptionRequired,
+      impactAssessment.rpaasRpNotInPrivateRepo,
+      impactAssessment.isNewApiVersion,
+      impactAssessment.isDraft,
+    );
+  }
+
+  warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
+  return labelContext;
 }
 
 // #endregion
@@ -488,7 +554,7 @@ export async function handleLabeledEvent(
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]>}
  */
 export async function getCheckRunTuple(
   github,
@@ -506,14 +572,35 @@ export async function getCheckRunTuple(
   /** @type {CheckRunData[]} */
   let fyiCheckRuns = [];
 
+  /** @type {number | undefined} */
+  let impactAssessmentWorkflowRun = undefined;
+
+  /** @type { import("./labelling.js").ImpactAssessment | undefined } */
+  let impactAssessment = undefined;
+
   const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
-  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
+  [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] =
+    extractRunsFromGraphQLResponse(response);
+
+  if (impactAssessmentWorkflowRun) {
+    core.info(
+      `Impact Assessment Workflow Run ID is present: ${impactAssessmentWorkflowRun}. Downloading job summary artifact`,
+    );
+    impactAssessment = await getImpactAssessment(
+      github,
+      core,
+      owner,
+      repo,
+      impactAssessmentWorkflowRun,
+    );
+  }
 
   core.info(
     `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}`,
+      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
+      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`,
   );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
@@ -528,7 +615,7 @@ export async function getCheckRunTuple(
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment];
 }
 
 /**
@@ -554,7 +641,7 @@ export function checkRunIsSuccessful(checkRun) {
 
 /**
  * @param {any} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[]]}
+ * @returns {[CheckRunData[], CheckRunData[], number | undefined]}
  */
 function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
@@ -562,11 +649,14 @@ function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const fyiCheckRuns = [];
 
+  /** @type {number | undefined} */
+  let impactAssessmentWorkflowRun = undefined;
+
   // Define the automated merging requirements check name
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(
-      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
       (checkSuiteNode) => {
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
@@ -591,7 +681,7 @@ function extractRunsFromGraphQLResponse(response) {
             // Note the "else" here. It means that:
             // A GH check will be bucketed into "failing FYI check run" if:
             // - It is failing
-            // - AND is is NOT marked as 'required' in GitHub branch policy
+            // - AND it is is NOT marked as 'required' in GitHub branch policy
             // - AND it is marked as 'FYI' in this file's FYI_CHECK_NAMES array
             else if (FYI_CHECK_NAMES.includes(checkRunNode.name)) {
               fyiCheckRuns.push({
@@ -606,7 +696,29 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-  return [reqCheckRuns, fyiCheckRuns];
+
+  // extract the ImpactAssessment check run if it is completed and successful
+  if (response.resource?.checkSuites?.nodes) {
+    response.resource.checkSuites.nodes.forEach(
+      /** @param {{ workflowRun?: WorkflowRunInfo, checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      (checkSuiteNode) => {
+        if (checkSuiteNode.checkRuns?.nodes) {
+          checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
+            if (
+              checkRunNode.name === "[TEST-IGNORE] Summarize PR Impact" &&
+              checkRunNode.status?.toLowerCase() === "completed" &&
+              checkRunNode.conclusion?.toLowerCase() === "success"
+            ) {
+              // Assign numeric databaseId, not the string node ID
+              impactAssessmentWorkflowRun = checkSuiteNode.workflowRun?.databaseId;
+            }
+          });
+        }
+      },
+    );
+  }
+
+  return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
 // #endregion
 // #region next steps
@@ -823,5 +935,66 @@ function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
       .join("");
   }
   return violatedReqLabelsNextStepsText;
+}
+// #endregion
+
+// #region artifact downloading
+/**
+ * Downloads the job-summary artifact for a given workflow run.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} runId - The workflow run databaseId
+ * @returns {Promise<import("./labelling.js").ImpactAssessment | undefined>} The parsed job summary data
+ */
+export async function getImpactAssessment(github, core, owner, repo, runId) {
+  try {
+    // List artifacts for provided workflow run
+    const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+      owner,
+      repo,
+      run_id: runId,
+    });
+
+    // Find the job-summary artifact
+    const jobSummaryArtifact = artifacts.data.artifacts.find(
+      (artifact) => artifact.name === "job-summary",
+    );
+
+    if (!jobSummaryArtifact) {
+      core.info("No job-summary artifact found");
+      return undefined;
+    }
+
+    // Download the artifact as a zip archive
+    const download = await github.rest.actions.downloadArtifact({
+      owner,
+      repo,
+      artifact_id: jobSummaryArtifact.id,
+      archive_format: "zip",
+    });
+
+    core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
+
+    // Write zip buffer to temp file and extract JSON
+    const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
+    // Convert ArrayBuffer to Buffer
+    // Convert ArrayBuffer (download.data) to Node Buffer
+    const arrayBuffer = /** @type {ArrayBuffer} */ (download.data);
+    const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
+    await fs.writeFile(tmpZip, zipBuffer);
+    // Extract JSON content from zip archive
+    const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
+    await fs.unlink(tmpZip);
+
+    /** @type {import("./labelling.js").ImpactAssessment} */
+    // todo: we need to zod this to ensure the structure is correct, however we do not have zod installed at time of run
+    const impact = JSON.parse(jsonContent);
+    return impact;
+  } catch (/** @type {any} */ error) {
+    core.error(`Failed to download job summary artifact: ${error.message}`);
+    return undefined;
+  }
 }
 // #endregion
