@@ -7,15 +7,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: AzureMonitorAccountsClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-monitor
-namespace: azure.mgmt.monitor
+package-name: azure-mgmt-monitoraccounts
+namespace: azure.mgmt.monitoraccounts
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor
+output-folder: $(python-sdks-folder)/monitoraccounts/azure-mgmt-monitoraccounts/azure/mgmt/monitoraccounts
 ```
 
 ``` yaml $(python)
