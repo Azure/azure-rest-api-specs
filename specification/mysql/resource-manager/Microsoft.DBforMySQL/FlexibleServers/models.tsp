@@ -827,7 +827,7 @@ model MySQLServerIdentity {
    * Metadata of user assigned identity.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: UserAssignedIdentity;
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**

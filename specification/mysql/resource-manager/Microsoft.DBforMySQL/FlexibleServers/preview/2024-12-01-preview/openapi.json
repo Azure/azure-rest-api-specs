@@ -5833,8 +5833,11 @@
           "description": "Type of managed service identity."
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentity",
-          "description": "Metadata of user assigned identity."
+          "type": "object",
+          "description": "Metadata of user assigned identity.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },
