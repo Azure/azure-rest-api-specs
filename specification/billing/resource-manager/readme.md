@@ -26,7 +26,40 @@ These are the global settings for the Billing API.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-04
+tag: package-preview-2025-07-01-preview
+```
+
+### Tag: package-preview-2025-07-01-preview
+
+These settings apply only when `--tag=package-preview-2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-01-preview'
+input-file:
+  - Microsoft.Billing/preview/2025-07-01-preview/agreement.json
+  - Microsoft.Billing/preview/2025-07-01-preview/associatedTenant.json
+  - Microsoft.Billing/preview/2025-07-01-preview/availableBalance.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingAccount.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingPermission.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingProfile.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingProperty.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingRequest.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingRoleAssignment.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingRoleDefinition.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingSavingsPlan.json
+  - Microsoft.Billing/preview/2025-07-01-preview/billingSubscription.json
+  - Microsoft.Billing/preview/2025-07-01-preview/customer.json
+  - Microsoft.Billing/preview/2025-07-01-preview/department.json
+  - Microsoft.Billing/preview/2025-07-01-preview/enrollmentAccount.json
+  - Microsoft.Billing/preview/2025-07-01-preview/invoice.json
+  - Microsoft.Billing/preview/2025-07-01-preview/invoiceSection.json
+  - Microsoft.Billing/preview/2025-07-01-preview/operation.json
+  - Microsoft.Billing/preview/2025-07-01-preview/payment.json
+  - Microsoft.Billing/preview/2025-07-01-preview/policy.json
+  - Microsoft.Billing/preview/2025-07-01-preview/product.json
+  - Microsoft.Billing/preview/2025-07-01-preview/reservation.json
+  - Microsoft.Billing/preview/2025-07-01-preview/transaction.json
+  - Microsoft.Billing/preview/2025-07-01-preview/transfers.json
+  - Microsoft.Billing/preview/2025-07-01-preview/types.json
 ```
 
 ### Tag: package-2024-04
