@@ -34,7 +34,7 @@ model PhiEntity {
 @added(Versions.v2025_07_15_preview)
 model TaggedPhiEntities {
   @doc("The encoding type used for all entities in this group.")
-  encoding: EncodingType;
+  encoding: TextEncodingType;
 
   @doc("List of PHI entities using the specified encoding.")
   entities: Array<SimplePhiEntity>;
@@ -171,7 +171,7 @@ union PhiCategory {
 }
 
 @doc("Encoding type for text offset and length calculations.")
-union EncodingType {
+union TextEncodingType {
   @doc("UTF-8 encoding.")
   Utf8: "Utf8",
 

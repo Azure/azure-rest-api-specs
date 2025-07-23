@@ -912,36 +912,6 @@
         }
       }
     },
-    "EncodingType": {
-      "type": "string",
-      "description": "Encoding type for text offset and length calculations.",
-      "enum": [
-        "Utf8",
-        "Utf16",
-        "CodePoint"
-      ],
-      "x-ms-enum": {
-        "name": "EncodingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Utf8",
-            "value": "Utf8",
-            "description": "UTF-8 encoding."
-          },
-          {
-            "name": "Utf16",
-            "value": "Utf16",
-            "description": "UTF-16 encoding. Primary encoding used by .NET, Java, and JavaScript."
-          },
-          {
-            "name": "CodePoint",
-            "value": "CodePoint",
-            "description": "CodePoint encoding. Primary encoding used by Python."
-          }
-        ]
-      }
-    },
     "PagedDeidentificationDocumentDetails": {
       "type": "object",
       "description": "Paged collection of DeidentificationDocumentDetails items",
@@ -1309,7 +1279,7 @@
       "description": "Grouped PHI entities with shared encoding specification.",
       "properties": {
         "encoding": {
-          "$ref": "#/definitions/EncodingType",
+          "$ref": "#/definitions/TextEncodingType",
           "description": "The encoding type used for all entities in this group."
         },
         "entities": {
@@ -1349,6 +1319,36 @@
         "location",
         "prefix"
       ]
+    },
+    "TextEncodingType": {
+      "type": "string",
+      "description": "Encoding type for text offset and length calculations.",
+      "enum": [
+        "Utf8",
+        "Utf16",
+        "CodePoint"
+      ],
+      "x-ms-enum": {
+        "name": "TextEncodingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utf8",
+            "value": "Utf8",
+            "description": "UTF-8 encoding."
+          },
+          {
+            "name": "Utf16",
+            "value": "Utf16",
+            "description": "UTF-16 encoding. Primary encoding used by .NET, Java, and JavaScript."
+          },
+          {
+            "name": "CodePoint",
+            "value": "CodePoint",
+            "description": "CodePoint encoding. Primary encoding used by Python."
+          }
+        ]
+      }
     }
   },
   "parameters": {
