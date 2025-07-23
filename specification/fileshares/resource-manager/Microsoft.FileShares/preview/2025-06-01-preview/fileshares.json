@@ -680,16 +680,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource 'FileShareSnapshot' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FileShareSnapshot"
-            }
-          },
-          "201": {
-            "description": "Resource 'FileShareSnapshot' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FileShareSnapshot"
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -698,7 +704,11 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "FileShareSnapshot_Update",

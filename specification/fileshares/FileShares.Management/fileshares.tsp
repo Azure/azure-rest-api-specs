@@ -295,11 +295,15 @@ interface FileShareSnapshots {
     BaseParameters<FileShareSnapshot>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
   @operationId("FileShareSnapshot_CreateOrUpdate")
   @doc("Create a FileShareSnapshot.")
-  createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceSync<
+  createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceAsync<
     FileShareSnapshot,
-    BaseParameters<FileShareSnapshot>
+    BaseParameters<FileShareSnapshot>,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @operationId("FileShareSnapshot_Update")
