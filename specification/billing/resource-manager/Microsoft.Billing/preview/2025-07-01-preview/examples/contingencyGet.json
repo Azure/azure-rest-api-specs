@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "billingAccountId": "1234:5678",
+    "lotId": "lot1",
+    "contingencyId": "contingency1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/providers/Microsoft.Consumption/lots/lot1/contingencies/contingency1",
+            "name": "lot1/contingency1",
+            "type": "Microsoft.Consumption/lots",
+            "kind": "MACC contingency",
+            "properties": {
+              "targetAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "progressAmount": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "status": "Active",
+              "subState": "PendingFinalInvoice",
+              "startDate": "2025-06-01T00:00:00Z",
+              "endDate": "2025-07-01T00:00:00Z"
+            }
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "ccmnoida@microsoft.com"
+    },
+    "version": "2025-07-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/lots/{lotId}/contingencies/{contingencyId}": {
+      "get": {
+        "tags": [
+          "Contingency"
+        ],
+        "description": "Gets a contingency by its ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Contingency_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountId"
+          },
+          {
+            "$ref": "./types.json#/parameters/lotId"
+          },
+          {
+            "$ref": "./types.json#/parameters/contingencyId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response will have contingency details.",
+            "schema": {
+              "$ref": "#/definitions/Contingency"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContingencyGet": {
+            "$ref": "./examples/contingencyGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/lots/{lotId}/contingencies": {
+      "get": {
+        "tags": [
+          "Contingency"
+        ],
+        "description": "Lists the contingencies that a user has access to.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Contingency_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountId"
+          },
+          {
+            "$ref": "./types.json#/parameters/lotId"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of contingencies.",
+            "schema": {
+              "$ref": "#/definitions/ContingencyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContingencyList": {
+            "$ref": "./examples/contingecyList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contingency": {
+      "description": "A contingency.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContingencyProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ContingencyListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contingency"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "amount": {
+      "description": "The amount plus currency .",
+      "properties": {
+        "currency": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Amount currency."
+        },
+        "value": {
+          "readOnly": true,
+          "type": "number",
+          "format": "decimal",
+          "description": "Amount."
+        }
+      }
+    },
+    "ContingencyProperties": {
+      "description": "The properties of a contingency.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "format": "date-time",
+          "description": "The start date of the enrollment.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The end date of the enrollment.",
+          "type": "string"
+        },
+        "status": {
+          "description": "This represent the status of a contingency.",
+          "enum": [
+            "Created",
+            "Active",
+            "Cancelled",
+            "PendingSettlement",
+            "Completed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "subState": {
+          "description": "This represent the subState of a contingency.",
+          "type": "string"
+        },
+        "targetAmount": {
+          "description": "The target amount for contingency.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        },
+        "progressAmount": {
+          "description": "The progress amount for contingency",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        }
+      }        
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}
