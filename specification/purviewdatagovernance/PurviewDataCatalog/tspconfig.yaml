@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/UnifiedCatalog"
+    default: "sdk/purview"
   "dependencies":
     default: ""
 emit:
@@ -26,9 +26,6 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
-  "@azure-typespec/http-client-csharp":
-    namespace: Azure.Purview.UnifiedCatalog
-    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "Purview-UnifiedCatalog-rest"
     package-details:
@@ -39,12 +36,11 @@ options:
     namespace: com.azure.Purview.UnifiedCatalog
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    service-dir: "sdk/UnifiedCatalog"
-    package-dir: "UnifiedCatalog"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/purview/azpurviewcatalog"
+    service-dir: "sdk/purview"
+    package-dir: "azpurviewcatalog"
     module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
     single-client: true
-    slice-elements-byval: true
     flavor: azure
