@@ -38,11 +38,17 @@ interface StorageTaskAssignments {
   /**
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is ArmResourceCreateOrReplaceAsync<
+  @put
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      StorageTaskAssignment,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>
+    >,
     StorageTaskAssignment,
-    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>,
-    Error = ErrorResponse
+    ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse
   >;
 
   /**
