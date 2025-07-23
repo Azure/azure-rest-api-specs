@@ -54,7 +54,6 @@ input-file:
   - Microsoft.OperationalInsights/stable/2025-07-01/LinkedServices.json
   - Microsoft.OperationalInsights/stable/2025-07-01/LinkedStorageAccounts.json
   - Microsoft.OperationalInsights/stable/2025-07-01/ManagementGroups.json
-  - Microsoft.OperationalInsights/stable/2025-07-01/networksecurityperimeter.json
   - Microsoft.OperationalInsights/stable/2025-07-01/Operations.json
   - Microsoft.OperationalInsights/stable/2025-07-01/OperationStatuses.json
   - Microsoft.OperationalInsights/stable/2025-07-01/QueryPackQueries.json
