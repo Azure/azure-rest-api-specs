@@ -197,23 +197,6 @@ model ImageProperties {
 }
 
 @doc("The image download properties")
-model ImageDownloadResponse {
-  ...ImageProperties;
-
-  @visibility(Lifecycle.Read)
-  @doc("The unique Id of the download")
-  transactionId: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The download uri")
-  downloadLink: url;
-
-  @visibility(Lifecycle.Read)
-  @doc("The download link expiry time")
-  linkExpiry: utcDateTime;
-}
-
-@doc("The image download properties")
 model ImageDownloadResult {
   ...ImageProperties;
 
