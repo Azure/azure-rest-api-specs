@@ -41,8 +41,8 @@ updates:
       eslint:
         patterns:
           - "*eslint*"
-    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
-    versioning-strategy: increase-if-necessary
+    # I prefer "increase-if-necessary", but I believe we may need to use "increase" since we're a monorepo
+    versioning-strategy: increase
   - package-ecosystem: "npm"
     directories:
       - "/.github"
@@ -63,5 +63,5 @@ updates:
       eslint:
         patterns:
           - "*eslint*"
-    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
-    versioning-strategy: increase-if-necessary
+    # I prefer "increase-if-necessary", but we should align with the root package.json
+    versioning-strategy: increase
