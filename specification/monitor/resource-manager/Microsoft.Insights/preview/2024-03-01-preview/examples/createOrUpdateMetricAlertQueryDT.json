@@ -30,7 +30,10 @@
             {
               "name": "Metric1",
               "criterionType": "StaticThresholdCriterion",
-              "query": "avg({\"system.cpu.utilization\"}) > 90"
+              "query": "avg({\"system.cpu.utilization\"})",
+              "operator": "LessThan",
+              "alertSensitivity": "Medium",
+              "ignoreDataBefore": "2019-04-04T21:00:00.000Z"
             }
           ]
         },
@@ -90,7 +93,10 @@
               {
                 "name": "Metric1",
                 "criterionType": "StaticThresholdCriterion",
-                "query": "avg({\"system.cpu.utilization\"}) > 90"
+                "query": "avg({\"system.cpu.utilization\"})",
+                "operator": "LessThan",
+                "alertSensitivity": "Medium",
+                "ignoreDataBefore": "2019-04-04T21:00:00.000Z"
               }
             ]
           },
