@@ -65,10 +65,7 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -555,7 +552,8 @@
             "in": "header",
             "description": "ETag of the certificate.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
@@ -613,7 +611,8 @@
             "in": "header",
             "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "certificateDescription",
@@ -680,7 +679,8 @@
             "in": "header",
             "description": "ETag of the certificate",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "certificate.name",
@@ -695,14 +695,16 @@
             "description": "Raw data within the certificate.",
             "required": false,
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
           },
           {
             "name": "certificate.isVerified",
             "in": "query",
             "description": "Indicates if certificate has been verified by owner of the private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
           },
           {
             "name": "certificate.purpose",
@@ -727,7 +729,8 @@
                   "value": "serverAuthentication"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "certificatePurpose"
           },
           {
             "name": "certificate.created",
@@ -735,29 +738,33 @@
             "description": "Time the certificate is created.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
           },
           {
             "name": "certificate.lastUpdated",
             "in": "query",
-            "description": "Time the certificate is last updated.",
+            "description": "Certificate last updated time.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
           },
           {
             "name": "certificate.hasPrivateKey",
             "in": "query",
             "description": "Indicates if the certificate contains a private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
           },
           {
             "name": "certificate.nonce",
             "in": "query",
             "description": "Random number generated to indicate Proof of Possession.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
           }
         ],
         "responses": {
@@ -817,7 +824,8 @@
             "in": "header",
             "description": "ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "certificate.name",
@@ -832,14 +840,16 @@
             "description": "Raw data of certificate.",
             "required": false,
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
           },
           {
             "name": "certificate.isVerified",
             "in": "query",
             "description": "Indicates if the certificate has been verified by owner of the private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
           },
           {
             "name": "certificate.purpose",
@@ -864,15 +874,17 @@
                   "value": "serverAuthentication"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "certificatePurpose"
           },
           {
             "name": "certificate.created",
             "in": "query",
-            "description": "Certificate creation time.",
+            "description": "Time the certificate is created.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
           },
           {
             "name": "certificate.lastUpdated",
@@ -880,21 +892,24 @@
             "description": "Certificate last updated time.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
           },
           {
             "name": "certificate.hasPrivateKey",
             "in": "query",
             "description": "Indicates if the certificate contains private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
           },
           {
             "name": "certificate.nonce",
             "in": "query",
             "description": "Random number generated to indicate Proof of Possession.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
           }
         ],
         "responses": {
@@ -954,7 +969,8 @@
             "in": "header",
             "description": "ETag of the certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "certificate.name",
@@ -969,14 +985,16 @@
             "description": "Raw data of certificate.",
             "required": false,
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "x-ms-client-name": "certificateRawBytes"
           },
           {
             "name": "certificate.isVerified",
             "in": "query",
             "description": "Indicates if the certificate has been verified by owner of the private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateIsVerified"
           },
           {
             "name": "certificate.purpose",
@@ -1001,15 +1019,17 @@
                   "value": "serverAuthentication"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "certificatePurpose"
           },
           {
             "name": "certificate.created",
             "in": "query",
-            "description": "Certificate creation time.",
+            "description": "Time the certificate is created.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateCreated"
           },
           {
             "name": "certificate.lastUpdated",
@@ -1017,21 +1037,24 @@
             "description": "Certificate last updated time.",
             "required": false,
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "x-ms-client-name": "certificateLastUpdated"
           },
           {
             "name": "certificate.hasPrivateKey",
             "in": "query",
             "description": "Indicates if the certificate contains private key.",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "x-ms-client-name": "certificateHasPrivateKey"
           },
           {
             "name": "certificate.nonce",
             "in": "query",
             "description": "Random number generated to indicate Proof of Possession.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "certificateNonce"
           },
           {
             "name": "request",
