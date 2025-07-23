@@ -92,7 +92,7 @@ export async function main() {
   const targetDirectory = opts.targetDirectory as string;
   const sourceGitRoot = await getRoot(sourceDirectory);
   const targetGitRoot = await getRoot(targetDirectory);
-  const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot });
+  const fileList = await getChangedFilesStatuses({ cwd: sourceGitRoot, paths: ["specification"] });
   const sha = opts.sha as string;
   const sourceBranch = opts.sourceBranch as string;
   const targetBranch = opts.targetBranch as string;
