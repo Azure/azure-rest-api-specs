@@ -15,8 +15,8 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Microsoft.Purview.UnifiedCatalog/{version-status}/{version}/CatalogApiService.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-Purview-UnifiedCatalog"
-    namespace: "azure.Purview.UnifiedCatalog"
+    package-dir: "azure-purview-unifiedcatalog"
+    namespace: "azure.purview.unifiedcatalog"
     generate-test: true
     generate-sample: true
     flavor: azure
@@ -24,19 +24,22 @@ options:
     package-dir: "Azure.Purview.UnifiedCatalog"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.Purview.UnifiedCatalog"
+    namespace: "{package-dir}"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Purview.UnifiedCatalog
+    model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "Purview-UnifiedCatalog-rest"
+    package-dir: "purview-unifiedcatalog-rest"
     package-details:
-      name: "@azure-rest/Purview-UnifiedCatalog"
+      name: "rest/purview-unifiedcatalog"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-Purview-UnifiedCatalog"
-    namespace: com.azure.Purview.UnifiedCatalog
+    package-dir: "azure-purview-unifiedcatalog"
+    namespace: com.azure.purview.unifiedcatalog
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/sdk/purview/azpurviewcatalog"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/unifiedcatalog"
     package-dir: "azpurviewcatalog"
     module-version: "0.0.1"
