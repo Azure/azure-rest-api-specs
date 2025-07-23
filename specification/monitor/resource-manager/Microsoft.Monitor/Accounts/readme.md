@@ -33,12 +33,6 @@ description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-05-03-preview
-
-directive:
-  - suppress: OperationsAPIImplementation
-    from: azuremonitorworkspace.json
-    where: $.paths
-    reason: "Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json)"
 ```
 
 ### Tag: package-2025-05-03-preview
@@ -68,4 +62,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - code: OperationsAPIImplementation
+    from: azuremonitorworkspace.json
+    reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
 ```
