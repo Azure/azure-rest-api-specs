@@ -348,8 +348,7 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 0
+            "format": "int32"
           },
           {
             "name": "top",
@@ -973,8 +972,7 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 0
+            "format": "int32"
           },
           {
             "name": "top",
@@ -1723,6 +1721,23 @@
             "format": "int32"
           },
           {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "body",
@@ -1783,8 +1798,7 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 0
+            "format": "int32"
           },
           {
             "name": "top",
@@ -2473,6 +2487,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -2533,8 +2564,7 @@
             "description": "The number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 0
+            "format": "int32"
           },
           {
             "name": "top",
@@ -3292,6 +3322,23 @@
             "type": "boolean"
           },
           {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "The request body for the query.",
@@ -3455,8 +3502,7 @@
             "description": "Number of items to skip.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 0
+            "format": "int32"
           },
           {
             "name": "top",
@@ -4490,6 +4536,23 @@
             "format": "int32"
           },
           {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "the body associated with the term output.",
@@ -4647,6 +4710,14 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "type": "object",
+      "description": "Provides the standard 'skip' query parameter for list operations."
+    },
+    "Azure.Core.TopQueryParameter": {
+      "type": "object",
+      "description": "Provides the standard 'top' query parameter for list operations."
     },
     "Azure.Core.uuid": {
       "type": "string",
@@ -5250,6 +5321,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelDomain"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -5535,6 +5610,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelTerm"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -5561,6 +5640,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelCriticalDataColumn"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -5621,14 +5704,11 @@
       "description": "CriticalDataElementQueryRequest.",
       "properties": {
         "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "To Skip how many records.",
-          "default": 0
+          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
+          "description": "To Skip how many records."
         },
         "top": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
           "description": "To return how many records."
         },
         "orderby": {
@@ -5693,6 +5773,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelCriticalDataElement"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -5704,14 +5788,11 @@
       "description": "DataAssetDataAssetQueryRequest.",
       "properties": {
         "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "To Skip how many records.",
-          "default": 0
+          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
+          "description": "To Skip how many records."
         },
         "top": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
           "description": "To return how many records."
         },
         "orderby": {
@@ -5765,6 +5846,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelDataAsset"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -5836,14 +5921,11 @@
       "description": "DataProductQueryRequest.",
       "properties": {
         "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "To Skip how many records.",
-          "default": 0
+          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
+          "description": "To Skip how many records."
         },
         "top": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
           "description": "To return how many records."
         },
         "orderby": {
@@ -5919,6 +6001,10 @@
           "items": {
             "$ref": "#/definitions/CatalogModelDataProduct"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -6170,6 +6256,10 @@
           "items": {
             "$ref": "#/definitions/RelationshipWrapper"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -6234,6 +6324,7 @@
       "properties": {
         "lastModifiedAt": {
           "type": "string",
+          "format": "date-time",
           "description": "lastModifiedAt."
         },
         "lastModifiedBy": {
@@ -6357,14 +6448,18 @@
     },
     "TermRelationshipResponse": {
       "type": "object",
-      "description": "Response containing a list of terms.",
+      "description": "Response containing a list of term relationships.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of terms.",
+          "description": "The list of term relationships.",
           "items": {
             "$ref": "#/definitions/TermRelationship"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -6406,13 +6501,11 @@
       "description": "Term query request model.",
       "properties": {
         "skip": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
           "description": "Number of records to skip."
         },
         "top": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
           "description": "Number of records to return."
         },
         "orderby": {

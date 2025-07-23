@@ -1,24 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/UnifiedCatalog"
+  "dependencies":
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
-
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/Microsoft.Purview.Catalog.ApiService/{version-status}/{version}/CatalogApiService.json"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-      # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+    output-file: "{azure-resource-provider-folder}/Microsoft.Purview.UnifiedCatalog.ApiService/{version-status}/{version}/CatalogApiService.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-Purview-UnifiedCatalog"
+    namespace: "azure.Purview.UnifiedCatalog"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Purview.UnifiedCatalog"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Purview.UnifiedCatalog
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "Purview-UnifiedCatalog-rest"
+    package-details:
+      name: "@azure-rest/Purview-UnifiedCatalog"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-Purview-UnifiedCatalog"
+    namespace: com.azure.Purview.UnifiedCatalog
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/UnifiedCatalog"
+    package-dir: "UnifiedCatalog"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
+     

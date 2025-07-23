@@ -2,12 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using Azure.Core;
 
 namespace PurviewDataCatalog;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @doc("CatalogModelStatus")
 union CatalogModelStatus {
   @doc("The status is Draft.")
@@ -21,6 +19,7 @@ union CatalogModelStatus {
 
   string,
 }
+
 @doc("CatalogModelCriticalDataElementDataTypeEnum")
 union CatalogModelCriticalDataElementDataTypeEnum {
   @doc("The status is Text.")
@@ -37,6 +36,7 @@ union CatalogModelCriticalDataElementDataTypeEnum {
 
   string,
 }
+
 @doc("SharedEntityStatus")
 union SharedEntityStatus {
   @doc("The status is Draft.")
@@ -57,33 +57,36 @@ model CatalogModelSystemDataWithExpired {
   createdAt?: utcDateTime;
 
   @doc("The user who created the record.")
-  createdBy?: Azure.Core.uuid;
+  createdBy?: uuid;
 
   @doc("The user who Last modified the record.")
   lastModifiedAt?: utcDateTime;
 
   @doc("The user who last modified the record.")
-  lastModifiedBy?: Azure.Core.uuid;
+  lastModifiedBy?: uuid;
 
   @doc("The expiration time of the record.")
   expiredAt?: utcDateTime;
 
   @doc("The user who expired the record.")
-  expiredBy?: Azure.Core.uuid;
+  expiredBy?: uuid;
 }
+
 @doc("CatalogModelContactsValueInner")
 model CatalogModelContactsValueInner {
   @doc("The unique identifier of the contact.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The description of the contact.")
   description?: string;
 }
+
 @doc("CatalogModelManagedAttribute")
 model CatalogModelManagedAttribute {
   @doc("The name of the managed attribute.")
   name?: string;
 }
+
 @doc("CatalogModelCriticalDataElement represents a critical data element in the catalog.")
 model CatalogModelCriticalDataElement {
   @doc("The unique identifier of the critical data element.")
@@ -93,7 +96,7 @@ model CatalogModelCriticalDataElement {
   dataType?: CatalogModelCriticalDataElementDataTypeEnum;
 
   @doc("The unique identifier of the critical data element.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The name of the critical data element.")
   name?: string;
@@ -102,7 +105,7 @@ model CatalogModelCriticalDataElement {
   systemData?: CatalogModelSystemDataWithExpired;
 
   @doc("The unique identifier of the critical data element.")
-  domain?: Azure.Core.uuid;
+  domain?: uuid;
 
   @doc("The description of the critical data element.")
   description?: string;
@@ -188,10 +191,10 @@ model SharedSearchManageAttributeSearchFilter {
 @doc("CriticalDataElementQueryRequest.")
 model CriticalDataElementQueryRequest {
   @doc("To Skip how many records.")
-  skip?: int32 = 0;
+  skip?: SkipQueryParameter;
 
   @doc("To return how many records.")
-  top?: int32;
+  top?: TopQueryParameter;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -263,7 +266,7 @@ model InputProperties {
 @doc("CatalogModelCriticalDataColumn.")
 model CatalogModelCriticalDataColumn {
   @doc("The third additional property.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The name of the critical data column.")
   name?: string;
@@ -272,10 +275,10 @@ model CatalogModelCriticalDataColumn {
   systemData?: CatalogModelSystemDataWithExpired;
 
   @doc("The name of the domain.")
-  domain?: Azure.Core.uuid;
+  domain?: uuid;
 
   @doc("The name of the asset.")
-  assetId?: Azure.Core.uuid;
+  assetId?: uuid;
 
   @doc("The description of the critical data column.")
   description?: string;
@@ -302,22 +305,22 @@ model InputbodyProperties {
   relationshipType?: string;
 
   @doc("Unique identifier of the asset.")
-  assetId?: Azure.Core.uuid;
+  assetId?: uuid;
 }
 
 @doc("SystemData.")
 model SystemData {
   @doc("lastModifiedAt.")
-  lastModifiedAt?: string;
+  lastModifiedAt?: utcDateTime;
 
   @doc("Unique identifier of the asset.")
-  lastModifiedBy?: Azure.Core.uuid;
+  lastModifiedBy?: uuid;
 
   @doc("createdAt.")
   createdAt?: string;
 
   @doc("Unique identifier of the asset.")
-  createdBy?: Azure.Core.uuid;
+  createdBy?: uuid;
 }
 
 @doc("RelationshipWrapper.")
@@ -332,7 +335,7 @@ model RelationshipWrapper {
   relationshipType?: string;
 
   @doc("Unique identifier of the entity.")
-  entityId?: Azure.Core.uuid;
+  entityId?: uuid;
 }
 
 @doc("CatalogModelDataAssetSource.")
@@ -341,7 +344,7 @@ model CatalogModelDataAssetSource {
   type?: string;
 
   @doc("Unique identifier of the entity.")
-  assetId?: Azure.Core.uuid;
+  assetId?: uuid;
 
   @doc("Type of the asset.")
   assetType?: string;
@@ -361,6 +364,7 @@ model CatalogModelDataAssetSource {
   @doc("Name of the user who last refreshed the asset.")
   lastRefreshedBy?: string;
 }
+
 @doc("Schema of the asset.")
 model CatalogModelDataAssetSchema {
   @doc("Name of the asset.")
@@ -379,7 +383,7 @@ model CatalogModelDataAssetSchema {
 @doc("CatalogModelDataAsset.")
 model CatalogModelDataAsset {
   @doc("Unique identifier of the asset.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("Name of the asset.")
   name?: string;
@@ -403,7 +407,7 @@ model CatalogModelDataAsset {
   classifications?: string[];
 
   @doc("Unique identifier of the entity.")
-  sensitivityLabel?: Azure.Core.uuid;
+  sensitivityLabel?: uuid;
 
   @doc("Type of the asset.")
   type?: string;
@@ -427,10 +431,10 @@ model CatalogModelDataAsset {
 @doc("DataAssetDataAssetQueryRequest.")
 model DataAssetDataAssetQueryRequest {
   @doc("To Skip how many records.")
-  skip?: int32 = 0;
+  skip?: SkipQueryParameter;
 
   @doc("To return how many records.")
-  top?: int32;
+  top?: TopQueryParameter;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -459,6 +463,7 @@ model FacetValue {
   @doc("The count of items in the facet.")
   count: string;
 }
+
 @doc("FacetsResponse.")
 model FacetsResponse {
   @doc("The list of facets.")
@@ -469,24 +474,36 @@ model FacetsResponse {
 model CriticalDataColumnsResponse {
   @doc("The list of critical data columns.")
   value: CatalogModelCriticalDataColumn[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Response containing a list of critical data elements.")
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
   value: CatalogModelCriticalDataElement[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Response containing a list of data assets.")
 model DataAssetsResponse {
   @doc("The list of data assets.")
   value: CatalogModelDataAsset[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Response containing a list of relationship wrappers.")
 model RelationshipWrappersResponse {
   @doc("The list of relationships.")
   value: RelationshipWrapper[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("CatalogModelDataProductTypeEnum")
@@ -574,7 +591,7 @@ model CatalogModelDataProduct {
   managedAttributes?: CatalogModelManagedAttribute[];
 
   @doc("The unique identifier of the data product.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The name of the data product.")
   name?: string;
@@ -583,7 +600,7 @@ model CatalogModelDataProduct {
   systemData?: CatalogModelSystemDataWithExpired;
 
   @doc("The domain of the data product.")
-  domain?: Azure.Core.uuid;
+  domain?: uuid;
 
   @doc("The description of the data product.")
   description?: string;
@@ -628,7 +645,7 @@ model CatalogModelExternalLink {
   name?: string;
 
   @doc("The data asset identifier associated with the link.")
-  dataAssetId?: Azure.Core.uuid;
+  dataAssetId?: uuid;
 }
 
 @doc("Audience enumeration for data products.")
@@ -670,15 +687,18 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 model DataProductResponse {
   @doc("The list of data products.")
   value: CatalogModelDataProduct[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("DataProductQueryRequest.")
 model DataProductQueryRequest {
   @doc("To Skip how many records.")
-  skip?: int32 = 0;
+  skip?: SkipQueryParameter;
 
   @doc("To return how many records.")
-  top?: int32;
+  top?: TopQueryParameter;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -750,7 +770,7 @@ model CatalogModelDomain {
   type?: CatalogModelDomainTypeEnum;
 
   @doc("The unique identifier of the domain.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The name of the domain.")
   name?: string;
@@ -765,7 +785,7 @@ model CatalogModelDomain {
   description?: string;
 
   @doc("The parent domain identifier.")
-  parentId?: Azure.Core.uuid;
+  parentId?: uuid;
 
   @doc("The thumbnail properties of the domain.")
   thumbnail?: CatalogModelDomainAllOfThumbnail;
@@ -848,7 +868,11 @@ union RelatedCollectionParentCollectionTypeEnum {
 model CatalogModelDomainResponse {
   @doc("The list of domains.")
   value: CatalogModelDomain[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
+
 @doc("ControllersModelsPolicyAddAdminRequest.")
 model ControllersModelsPolicyAddAdminRequest {
   @doc("userObjectId")
@@ -861,7 +885,7 @@ model CatalogModelTerm {
   status?: CatalogModelStatus;
 
   @doc("The unique identifier of the term.")
-  id?: Azure.Core.uuid;
+  id?: uuid;
 
   @doc("The name of the term.")
   name?: string;
@@ -876,10 +900,10 @@ model CatalogModelTerm {
   contacts?: Record<CatalogModelContactsValueInner[]>;
 
   @doc("The domain associated with the term.")
-  domain?: Azure.Core.uuid;
+  domain?: uuid;
 
   @doc("The parent term identifier.")
-  parentId?: Azure.Core.uuid;
+  parentId?: uuid;
 
   @doc("The list of acronyms for the term.")
   acronyms?: string[];
@@ -907,15 +931,18 @@ model CatalogModelTermResource {
 model CatalogModelTermResponse {
   @doc("The list of terms.")
   value: CatalogModelTerm[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Term query request model.")
 model TermTermQueryRequest {
   @doc("Number of records to skip.")
-  skip?: int32;
+  skip?: SkipQueryParameter;
 
   @doc("Number of records to return.")
-  top?: int32;
+  top?: TopQueryParameter;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -978,16 +1005,19 @@ model TermRelationship {
   description?: string;
 
   @doc("The unique identifier of the entity.")
-  entityId?: Azure.Core.uuid;
+  entityId?: uuid;
 
   @doc("The system data of the term relationship.")
   relationshipType?: TermRelationshipType;
 }
 
-@doc("Response containing a list of terms.")
+@doc("Response containing a list of term relationships.")
 model TermRelationshipResponse {
-  @doc("The list of terms.")
+  @doc("The list of term relationships.")
   value: TermRelationship[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("TermRelationshipType")
@@ -1025,7 +1055,7 @@ model TermMigrationCounts {
 @doc("TermsMoveRequest.")
 model TermsMoveRequest {
   @doc("The unique identifier of the destination domain.")
-  destinationDomainId?: Azure.Core.uuid;
+  destinationDomainId?: uuid;
 
   @doc("List of term IDs to be moved.")
   termIds?: string[];

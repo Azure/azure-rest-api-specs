@@ -14,7 +14,7 @@ namespace PurviewDataCatalog;
 @doc("Searches and retrieves critical data elements based on domain, keyword, and other filters.")
 @route("/criticalDataElements")
 @get
-op getCriticalDataElements is Azure.Core.Foundations.Operation<
+op getCriticalDataElements is Foundations.Operation<
   {
     @doc("Whether to return minimal information for referred Domains.")
     @query
@@ -26,7 +26,7 @@ op getCriticalDataElements is Azure.Core.Foundations.Operation<
 
     @doc("Number of items to skip.")
     @query
-    skip?: int32 = 0;
+    skip?: int32;
 
     @doc("Number of items to return.")
     @query
@@ -45,10 +45,10 @@ op getCriticalDataElements is Azure.Core.Foundations.Operation<
 @doc("Creates a new critical data element in the catalog.")
 @route("/criticalDataElements")
 @post
-op postCriticalDataElement is Azure.Core.Foundations.Operation<
+op postCriticalDataElement is Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
-    @body
+    @bodyRoot
     body: CatalogModelCriticalDataElement;
   },
   {
@@ -56,7 +56,7 @@ op postCriticalDataElement is Azure.Core.Foundations.Operation<
     statusCode: 201;
 
     @doc("The body associated with the critical data element output.")
-    @body
+    @bodyRoot
     body: CatalogModelCriticalDataElement;
   }
 >;
@@ -66,20 +66,14 @@ op postCriticalDataElement is Azure.Core.Foundations.Operation<
 @doc("Searches and retrieves critical data elements based on Id.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @get
-op getCriticalDataElementCriticalDataElementId is Azure.Core.Foundations.Operation<
+op getCriticalDataElementCriticalDataElementId is Foundations.Operation<
   {
     @doc("The criticalDataElementId of data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("The body associated with the critical data element output.")
-    @body
-    body: CatalogModelCriticalDataElement;
-  }
+  CatalogModelCriticalDataElement,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -87,24 +81,18 @@ op getCriticalDataElementCriticalDataElementId is Azure.Core.Foundations.Operati
 @doc("Updates an existing critical data element in the catalog.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @put
-op replaceCriticalDataElement is Azure.Core.Foundations.Operation<
+op replaceCriticalDataElement is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
 
     @doc("The body associated with the critical data element output.")
     @bodyRoot
     body?: CatalogModelCriticalDataElement;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("The body associated with the critical data element output.")
-    @body
-    body: CatalogModelCriticalDataElement;
-  }
+  CatalogModelCriticalDataElement,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -112,16 +100,13 @@ op replaceCriticalDataElement is Azure.Core.Foundations.Operation<
 @doc("Deletes an existing critical data element in the catalog.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @delete
-op deleteCriticalDataElement is Azure.Core.Foundations.Operation<
+op deleteCriticalDataElement is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -129,24 +114,18 @@ op deleteCriticalDataElement is Azure.Core.Foundations.Operation<
 @doc("Retrieves relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @get
-op getsCriticalDataElement is Azure.Core.Foundations.Operation<
+op getsCriticalDataElement is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
 
     @doc("The body associated with the critical data element output.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("The body associated with the critical data element output.")
-    @body
-    body: CatalogModelCriticalDataElement;
-  }
+  CatalogModelCriticalDataElement,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -154,28 +133,22 @@ op getsCriticalDataElement is Azure.Core.Foundations.Operation<
 @doc("Updates relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @post
-op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundations.Operation<
+op criticalDataElementCriticalDataElementIdRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
 
     @doc("The body associated with the critical data element output.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("CatalogModelCriticalDataElementRequest")
-    @body
+    @bodyRoot
     body?: InputProperties;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("The critical data element with updated relationships.")
-    @body
-    body: CatalogModelCriticalDataElement;
-  }
+  CatalogModelCriticalDataElement,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -183,11 +156,11 @@ op criticalDataElementCriticalDataElementIdRelationships is Azure.Core.Foundatio
 @doc("Deletes relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @delete
-op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
+op deletesCriticalDataElement is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
-    criticalDataElementId: Azure.Core.uuid;
+    criticalDataElementId: uuid;
 
     @doc("EntityCategory")
     @query
@@ -195,12 +168,9 @@ op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
 
     @doc("The unique identifier of the critical data element.")
     @query
-    entityId: Azure.Core.uuid;
+    entityId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -208,10 +178,10 @@ op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
 @doc("Queries critical data elements based on various criteria.")
 @route("/criticalDataElements/query")
 @post
-op criticalDataElementQuery is Azure.Core.Foundations.Operation<
+op criticalDataElementQuery is Foundations.Operation<
   {
     @doc("The number of duplicate checks to perform.")
-    @query("duplicatecheck")
+    @query
     duplicatecheck?: int32;
 
     @doc("body")
@@ -227,7 +197,7 @@ op criticalDataElementQuery is Azure.Core.Foundations.Operation<
 @doc("Retrieves facets for critical data elements.")
 @route("/criticalDataElements/facets")
 @post
-op criticalDataElementFacets is Azure.Core.Foundations.Operation<
+op criticalDataElementFacets is Foundations.Operation<
   CriticalDataElementFacetRequest,
   FacetsResponse,
   {}
@@ -238,10 +208,10 @@ op criticalDataElementFacets is Azure.Core.Foundations.Operation<
 @doc("Creates a new critical data column in the catalog.")
 @route("/criticalDataColumns")
 @post
-op createCriticalDataColumn is Azure.Core.Foundations.Operation<
+op createCriticalDataColumn is Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
-    @body
+    @bodyRoot
     body: CatalogModelCriticalDataColumn;
   },
   {
@@ -249,7 +219,7 @@ op createCriticalDataColumn is Azure.Core.Foundations.Operation<
     statusCode: 201;
 
     @doc("The body associated with the critical data column output.")
-    @body
+    @bodyRoot
     body: CatalogModelCriticalDataColumn;
   }
 >;
@@ -259,26 +229,26 @@ op createCriticalDataColumn is Azure.Core.Foundations.Operation<
 @doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
 @route("/criticalDataColumns")
 @get
-op getCriticalDataColumns is Azure.Core.Foundations.Operation<
+op getCriticalDataColumns is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
-    @query("domainId")
-    domainId?: Azure.Core.uuid;
+    @query
+    domainId?: uuid;
 
     @doc("The unique identifier of the critical data column.")
-    @query("assetId")
-    assetId?: Azure.Core.uuid;
+    @query
+    assetId?: uuid;
 
     @doc("Number of items to skip.")
-    @query("skip")
-    skip?: int32 = 0;
+    @query
+    skip?: int32;
 
     @doc("Number of items to top.")
-    @query("top")
+    @query
     top?: int32;
 
     @doc("Field to sort by.")
-    @query("orderby")
+    @query
     orderby?: string;
   },
   CriticalDataColumnsResponse,
@@ -290,20 +260,14 @@ op getCriticalDataColumns is Azure.Core.Foundations.Operation<
 @doc("Searches and retrieves critical data columns based on Id.")
 @route("/criticalDataColumns/{criticalDataColumnId}")
 @get
-op getCriticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation<
+op getCriticalDataColumnCriticalDataColumnId is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
-    @path("criticalDataColumnId")
-    criticalDataColumnId: Azure.Core.uuid;
+    @path
+    criticalDataColumnId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("The body associated with the critical data column output.")
-    @body
-    body: CatalogModelCriticalDataColumn;
-  }
+  CatalogModelCriticalDataColumn,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -311,28 +275,22 @@ op getCriticalDataColumnCriticalDataColumnId is Azure.Core.Foundations.Operation
 @doc("Updates an existing critical data column in the catalog.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @post
-op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations.Operation<
+op criticalDataColumnCriticalDataColumnIdRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
-    @path("criticalDataColumnId")
-    criticalDataColumnId: Azure.Core.uuid;
+    @path
+    criticalDataColumnId: uuid;
 
     @doc("The body associated with the critical data column")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("InputbodyProperties")
-    @body
+    @bodyRoot
     body?: InputbodyProperties;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("RelationshipWrapper.")
-    @body
-    body: RelationshipWrappersResponse;
-  }
+  RelationshipWrappersResponse,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -340,24 +298,18 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Azure.Core.Foundations
 @doc("Retrieves relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
-op getCriticalDataColumnRelationships is Azure.Core.Foundations.Operation<
+op getCriticalDataColumnRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
-    @path("criticalDataColumnId")
-    criticalDataColumnId: Azure.Core.uuid;
+    @path
+    criticalDataColumnId: uuid;
 
     @doc("The body associated with the critical data column")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
   },
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("RelationshipWrapper.")
-    @body
-    body: RelationshipWrappersResponse;
-  }
+  RelationshipWrappersResponse,
+  {}
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -365,28 +317,25 @@ op getCriticalDataColumnRelationships is Azure.Core.Foundations.Operation<
 @doc("Deletes relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @delete
-op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
+op deleteCriticalDataColumn is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
-    @query("criticalDataElementId")
-    criticalDataElementId?: Azure.Core.uuid;
+    @query
+    criticalDataElementId?: uuid;
 
     @doc("The body associated with the critical data column")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The unique identifier of the critical data column.")
-    @query("entityId")
-    entityId: Azure.Core.uuid;
+    @query
+    entityId: uuid;
 
     @doc("The unique identifier of the critical data column.")
     @path
     criticalDataColumnId: string;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -394,7 +343,7 @@ op deleteCriticalDataColumn is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of data assets.")
 @route("/dataAssets")
 @get
-op getDataAssets is Azure.Core.Foundations.Operation<
+op getDataAssets is Foundations.Operation<
   {
     @doc("Field to sort by.")
     @query
@@ -402,7 +351,7 @@ op getDataAssets is Azure.Core.Foundations.Operation<
 
     @doc("Number of items to skip.")
     @query
-    skip?: int32 = 0;
+    skip?: int32;
 
     @doc("Number of items to return.")
     @query
@@ -417,14 +366,14 @@ op getDataAssets is Azure.Core.Foundations.Operation<
 @doc("Creates a new data asset.")
 @route("/dataAssets")
 @post
-op postDataAsset is Azure.Core.Foundations.Operation<
+op postDataAsset is Foundations.Operation<
   CatalogModelDataAsset,
   {
     @statusCode
     statusCode: 201;
 
     @doc("RelationshipWrapper.")
-    @body
+    @bodyRoot
     body: CatalogModelDataAsset;
   }
 >;
@@ -434,7 +383,7 @@ op postDataAsset is Azure.Core.Foundations.Operation<
 @doc("Creates a new data asset with fileted query inputs.")
 @route("/dataAssets/query")
 @post
-op postDataAssetQuery is Azure.Core.Foundations.Operation<
+op postDataAssetQuery is Foundations.Operation<
   DataAssetDataAssetQueryRequest,
   DataAssetsResponse,
   {}
@@ -444,11 +393,11 @@ op postDataAssetQuery is Azure.Core.Foundations.Operation<
 @doc("Retrieves a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @get
-op getDataAssetDataAssetId is Azure.Core.Foundations.Operation<
+op getDataAssetDataAssetId is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
   },
   CatalogModelDataAsset,
   {}
@@ -459,11 +408,11 @@ op getDataAssetDataAssetId is Azure.Core.Foundations.Operation<
 @doc("Updates a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @put
-op replaceDataAsset is Azure.Core.Foundations.Operation<
+op replaceDataAsset is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
 
     @doc("CatalogModelDataAsset.")
     @bodyRoot
@@ -478,16 +427,13 @@ op replaceDataAsset is Azure.Core.Foundations.Operation<
 @doc("Deletes a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @delete
-op deleteDataAsset is Azure.Core.Foundations.Operation<
+op deleteDataAsset is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -495,14 +441,14 @@ op deleteDataAsset is Azure.Core.Foundations.Operation<
 @doc("Retrieves relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @get
-op getDataAssetRelationships is Azure.Core.Foundations.Operation<
+op getDataAssetRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
   },
   RelationshipWrappersResponse,
@@ -514,14 +460,14 @@ op getDataAssetRelationships is Azure.Core.Foundations.Operation<
 @doc("Creates relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @post
-op createDataAssetRelationships is Azure.Core.Foundations.Operation<
+op createDataAssetRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The properties of the relationship to create.")
@@ -536,24 +482,21 @@ op createDataAssetRelationships is Azure.Core.Foundations.Operation<
 @doc("Deletes relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @delete
-op deleteDataAssetRelationships is Azure.Core.Foundations.Operation<
+op deleteDataAssetRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
-    @path("dataAssetId")
-    dataAssetId: Azure.Core.uuid;
+    @path
+    dataAssetId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The unique identifier of the critical data asset.")
-    @query("entityId")
-    entityId: Azure.Core.uuid;
+    @query
+    entityId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -561,22 +504,22 @@ op deleteDataAssetRelationships is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of data products.")
 @route("/dataProducts")
 @get
-op getDataProduct is Azure.Core.Foundations.Operation<
+op getDataProduct is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
-    @query("domainId")
-    domainId?: Azure.Core.uuid;
+    @query
+    domainId?: uuid;
 
     @doc("The number of items to skip.")
-    @query("skip")
-    skip?: int32 = 0;
+    @query
+    skip?: int32;
 
     @doc("The number of items to return.")
-    @query("top")
+    @query
     top?: int32;
 
     @doc("The field to order by.")
-    @query("orderby")
+    @query
     orderby?: string;
   },
   DataProductResponse,
@@ -588,14 +531,14 @@ op getDataProduct is Azure.Core.Foundations.Operation<
 @doc("Creates a new data product.")
 @route("/dataProducts")
 @post
-op createDataProduct is Azure.Core.Foundations.Operation<
+op createDataProduct is Foundations.Operation<
   CatalogModelDataProduct,
   {
     @statusCode
     statusCode: 201;
 
     @doc("The created data product.")
-    @body
+    @bodyRoot
     body: CatalogModelDataProduct;
   }
 >;
@@ -605,14 +548,14 @@ op createDataProduct is Azure.Core.Foundations.Operation<
 @doc("Queries data products based on specified criteria.")
 @route("/dataProducts/query")
 @post
-op createDataProductQuery is Azure.Core.Foundations.Operation<
+op createDataProductQuery is Foundations.Operation<
   {
     @doc("To check for duplicate data products.")
-    @query("duplicatecheck")
+    @query
     duplicatecheck?: int32;
 
     @doc("To filter by data product owner.")
-    @query("dataProductOwner")
+    @query
     dataProductOwner?: boolean;
 
     @doc("The request body for the query.")
@@ -628,7 +571,7 @@ op createDataProductQuery is Azure.Core.Foundations.Operation<
 @doc("Retrieves facets for data products.")
 @route("/dataProducts/facets")
 @post
-op dataProductFacets is Azure.Core.Foundations.Operation<
+op dataProductFacets is Foundations.Operation<
   DataProductFacetRequest,
   FacetsResponse,
   {}
@@ -639,11 +582,11 @@ op dataProductFacets is Azure.Core.Foundations.Operation<
 @doc("Retrieves a data product by its dataProductId.")
 @route("/dataProducts/{dataProductId}")
 @get
-op getDataProductDataProductId is Azure.Core.Foundations.Operation<
+op getDataProductDataProductId is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
   },
   CatalogModelDataProduct,
   {}
@@ -654,11 +597,11 @@ op getDataProductDataProductId is Azure.Core.Foundations.Operation<
 @doc("Updates a data product by its DataProductId.")
 @route("/dataProducts/{dataProductId}")
 @put
-op replaceDataProductDataProductId is Azure.Core.Foundations.Operation<
+op replaceDataProductDataProductId is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
 
     @doc("The updated data product.")
     @bodyRoot
@@ -673,16 +616,13 @@ op replaceDataProductDataProductId is Azure.Core.Foundations.Operation<
 @doc("Deletes a data product by its dataProductId.")
 @route("/dataProducts/{dataProductId}")
 @delete
-op deleteDataProduct is Azure.Core.Foundations.Operation<
+op deleteDataProduct is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -690,14 +630,14 @@ op deleteDataProduct is Azure.Core.Foundations.Operation<
 @doc("Retrieves relationships for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @get
-op getDataProductDataProductIdRelationships is Azure.Core.Foundations.Operation<
+op getDataProductDataProductIdRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
   },
   RelationshipWrappersResponse,
@@ -709,14 +649,14 @@ op getDataProductDataProductIdRelationships is Azure.Core.Foundations.Operation<
 @doc("Creates a relationship for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @post
-op replaceDataProductRelationships is Azure.Core.Foundations.Operation<
+op replaceDataProductRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The properties of the relationship to create.")
@@ -732,24 +672,21 @@ op replaceDataProductRelationships is Azure.Core.Foundations.Operation<
 @doc("Deletes a relationship for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @delete
-op deleteDataProductRelationship is Azure.Core.Foundations.Operation<
+op deleteDataProductRelationship is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
-    dataProductId: Azure.Core.uuid;
+    dataProductId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The unique identifier of the critical data asset.")
-    @query("entityId")
-    entityId: Azure.Core.uuid;
+    @query
+    entityId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -757,14 +694,14 @@ op deleteDataProductRelationship is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of business domains.")
 @route("/businessdomains")
 @get
-op getDomain is Azure.Core.Foundations.Operation<
+op getDomain is Foundations.Operation<
   {
     @doc("skiptoken")
-    @query("$skipToken")
+    @query
     $skipToken?: string;
 
     @doc("writeOnly")
-    @query("writeOnly")
+    @query
     writeOnly?: boolean;
   },
   CatalogModelDomainResponse,
@@ -776,14 +713,14 @@ op getDomain is Azure.Core.Foundations.Operation<
 @doc("Creates a new business domain.")
 @route("/businessdomains")
 @post
-op createDomain is Azure.Core.Foundations.Operation<
+op createDomain is Foundations.Operation<
   CatalogModelDomain,
   {
     @statusCode
     statusCode: 201;
 
     @doc("The created business domain.")
-    @body
+    @bodyRoot
     body: CatalogModelDomain;
   }
 >;
@@ -793,11 +730,11 @@ op createDomain is Azure.Core.Foundations.Operation<
 @doc("Updates an existing business domain.")
 @route("/businessdomains/{domainId}")
 @put
-op replaceDomainDomainId is Azure.Core.Foundations.Operation<
+op replaceDomainDomainId is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
-    domainId: Azure.Core.uuid;
+    domainId: uuid;
 
     @doc("The updated business domain.")
     @bodyRoot
@@ -812,11 +749,11 @@ op replaceDomainDomainId is Azure.Core.Foundations.Operation<
 @doc("Retrieves an existing business domain.")
 @route("/businessdomains/{domainId}")
 @get
-op getDomainDomainId is Azure.Core.Foundations.Operation<
+op getDomainDomainId is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
-    domainId: Azure.Core.uuid;
+    domainId: uuid;
   },
   CatalogModelDomain,
   {}
@@ -827,16 +764,13 @@ op getDomainDomainId is Azure.Core.Foundations.Operation<
 @doc("Deletes an existing business domain.")
 @route("/businessdomains/{domainId}")
 @delete
-op deleteDomain is Azure.Core.Foundations.Operation<
+op deleteDomain is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
-    domainId: Azure.Core.uuid;
+    domainId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -844,10 +778,10 @@ op deleteDomain is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of policies.")
 @route("/policies")
 @get
-op getPolicy is Azure.Core.Foundations.Operation<
+op getPolicy is Foundations.Operation<
   {
     @doc("skiptoken")
-    @query("skipToken")
+    @query
     skipToken?: string;
   },
   {
@@ -861,7 +795,7 @@ op getPolicy is Azure.Core.Foundations.Operation<
 @doc("Adds an administrator to a policy.")
 @route("/policies/addAdministrator")
 @post
-op addPolicyAdministrator is Azure.Core.Foundations.Operation<
+op addPolicyAdministrator is Foundations.Operation<
   ControllersModelsPolicyAddAdminRequest,
   {
     @statusCode
@@ -874,7 +808,7 @@ op addPolicyAdministrator is Azure.Core.Foundations.Operation<
 @doc("Adds an administrator to a policy.")
 @route("/terms")
 @post
-op createTerm is Azure.Core.Foundations.Operation<
+op createTerm is Foundations.Operation<
   CatalogModelTerm,
   {
     @statusCode
@@ -891,34 +825,34 @@ op createTerm is Azure.Core.Foundations.Operation<
 @doc("Retrieves a list of terms based on domain, parentId, keyword, and other filters.")
 @route("/terms")
 @get
-op getTerm is Azure.Core.Foundations.Operation<
+op getTerm is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
-    @query("domainId")
-    domainId?: Azure.Core.uuid;
+    @query
+    domainId?: uuid;
 
     @doc("The unique identifier of the parent term.")
-    @query("parentId")
-    parentId?: Azure.Core.uuid;
+    @query
+    parentId?: uuid;
 
     @doc("Search keyword.")
-    @query("keyword")
+    @query
     keyword?: string;
 
     @doc("Number of items to skip.")
-    @query("skip")
-    skip?: int32 = 0;
+    @query
+    skip?: int32;
 
     @doc("Number of items to return.")
-    @query("top")
+    @query
     top?: int32;
 
     @doc("The depth of the term.")
-    @query("depth")
+    @query
     depth?: int32;
 
     @doc("Field to sort by.")
-    @query("orderby")
+    @query
     orderby?: string;
   },
   CatalogModelTermResponse,
@@ -930,11 +864,11 @@ op getTerm is Azure.Core.Foundations.Operation<
 @doc("Retrieves a term by its unique identifier.")
 @route("/terms/{termId}")
 @put
-op createOrReplaceTermId is Azure.Core.Foundations.Operation<
+op createOrReplaceTermId is Foundations.Operation<
   {
     @doc(".The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
 
     @doc("The body associated with the term output.")
     @bodyRoot
@@ -949,11 +883,11 @@ op createOrReplaceTermId is Azure.Core.Foundations.Operation<
 @doc("Retrieves a term by its unique identifier.")
 @route("/terms/{termId}")
 @get
-op getTermWithId is Azure.Core.Foundations.Operation<
+op getTermWithId is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
   },
   CatalogModelTerm,
   {}
@@ -964,16 +898,13 @@ op getTermWithId is Azure.Core.Foundations.Operation<
 @doc("Deletes a term by its unique identifier.")
 @route("/terms/{termId}")
 @delete
-op deleteTerm is Azure.Core.Foundations.Operation<
+op deleteTerm is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -981,10 +912,10 @@ op deleteTerm is Azure.Core.Foundations.Operation<
 @doc("Retrieves terms based on specified criteria.")
 @route("/terms/query")
 @post
-op termQuery is Azure.Core.Foundations.Operation<
+op termQuery is Foundations.Operation<
   {
     @doc("To check for duplicate terms.")
-    @query("duplicatecheck")
+    @query
     duplicatecheck?: int32;
 
     @doc("the body associated with the term output.")
@@ -999,7 +930,7 @@ op termQuery is Azure.Core.Foundations.Operation<
 @doc("Retrieves facets for terms.")
 @route("/terms/facets")
 @post
-op replaceTermFacets is Azure.Core.Foundations.Operation<
+op replaceTermFacets is Foundations.Operation<
   TermFacetRequest,
   FacetsResponse,
   {}
@@ -1010,11 +941,11 @@ op replaceTermFacets is Azure.Core.Foundations.Operation<
 @doc("Retrieves hierarchies for a term by its unique identifier.")
 @route("/terms/{termId}/hierarchies")
 @get
-op getTermIdHierarchies is Azure.Core.Foundations.Operation<
+op getTermIdHierarchies is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
   },
   CatalogModelTermResponse,
   {}
@@ -1025,14 +956,14 @@ op getTermIdHierarchies is Azure.Core.Foundations.Operation<
 @doc("Retrieves relationships for a term by its unique identifier.")
 @route("/terms/{termId}/relationships")
 @post
-op createOrReplaceTermIdRelationships is Azure.Core.Foundations.Operation<
+op createOrReplaceTermIdRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The type of relationship to retrieve.")
@@ -1048,28 +979,25 @@ op createOrReplaceTermIdRelationships is Azure.Core.Foundations.Operation<
 @doc("Deletes relationships for a term by its unique identifier and specified entity type and relationship type.")
 @route("/terms/{termId}/relationships")
 @delete
-op deletesTerm is Azure.Core.Foundations.Operation<
+op deletesTerm is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The type of relationship to retrieve.")
-    @query("relationshipType")
+    @query
     relationshipType?: TermRelationshipType;
 
     @doc("The unique identifier of the critical data asset.")
-    @query("entityId")
-    entityId: Azure.Core.uuid;
+    @query
+    entityId: uuid;
   },
-  {
-    @statusCode
-    statusCode: 204;
-  }
+  void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1077,18 +1005,18 @@ op deletesTerm is Azure.Core.Foundations.Operation<
 @doc("Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.")
 @route("/terms/{termId}/relationships")
 @get
-op getTermRelationships is Azure.Core.Foundations.Operation<
+op getTermRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
-    termId: Azure.Core.uuid;
+    termId: uuid;
 
     @doc("The type of entity to retrieve relationships for.")
-    @query("entityType")
+    @query
     entityType: EntityCategory;
 
     @doc("The type of relationship to retrieve.")
-    @query("relationshipType")
+    @query
     relationshipType?: TermRelationshipType;
   },
   TermRelationshipResponse,
@@ -1100,29 +1028,21 @@ op getTermRelationships is Azure.Core.Foundations.Operation<
 @doc("Retrieves the state of term migration.")
 @route("/terms/migration/state")
 @get
-op getTermMigrationState is Azure.Core.Foundations.Operation<
-  {},
-  TermMigrationState,
-  {}
->;
+op getTermMigrationState is Foundations.Operation<{}, TermMigrationState, {}>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves the counts of terms that are in the process of migration.")
 @route("/terms/migration/counts")
 @get
-op getTermMigrationCounts is Azure.Core.Foundations.Operation<
-  {},
-  TermMigrationCounts,
-  {}
->;
+op getTermMigrationCounts is Foundations.Operation<{}, TermMigrationCounts, {}>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("Term")
 @doc("Starts the migration process for terms.")
 @route("/terms/migration/start")
 @post
-op termMigrationStart is Azure.Core.Foundations.Operation<
+op termMigrationStart is Foundations.Operation<
   {},
   {
     @statusCode
@@ -1135,15 +1055,8 @@ op termMigrationStart is Azure.Core.Foundations.Operation<
 @doc("Moves terms from the old glossary to the new glossary.")
 @route("/terms/migration/moveterms")
 @post
-op termMigrationMoveterms is Azure.Core.Foundations.Operation<
+op termMigrationMoveterms is Foundations.Operation<
   TermsMoveRequest,
-  {
-    @statusCode
-    statusCode: 200;
-
-    @doc("Response message indicating the result of the operation.")
-    @body
-    body: string;
-  },
+  string,
   {}
 >;
