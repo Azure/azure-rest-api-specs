@@ -59,7 +59,7 @@ scalar DatasetId extends string;
 @added(Versions.v2025_07_31_preview)
 union EvaluationDataSourceType {
   @doc("Use inline JSON data provided directly in the request")
-  InlineJsonData: "inlineJsonData",
+  InlineData: "inlineData",
 
   @doc("Use a dataset that has been registered and stored in AI Foundry workspace")
   Dataset: "dataset",
@@ -183,9 +183,9 @@ model InlineJson extends InlineData {
 
 @doc("Data source using inline data provided directly in the request.")
 @added(Versions.v2025_07_31_preview)
-model InlineJsonDataSource extends EvaluationDataSource {
+model InlineDataSource extends EvaluationDataSource {
   @doc("Specifies inline JSON data source")
-  type: EvaluationDataSourceType.InlineJsonData;
+  type: EvaluationDataSourceType.InlineData;
 
   @doc("Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources.")
   id?: string;

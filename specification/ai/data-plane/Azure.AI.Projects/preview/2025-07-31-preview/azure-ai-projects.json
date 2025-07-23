@@ -2645,7 +2645,7 @@
       "type": "string",
       "description": "Specifies the type of data source used for evaluation. Different types support various data input methods and formats.",
       "enum": [
-        "inlineJsonData",
+        "inlineData",
         "dataset",
         "FoundryModelDeploymentInline",
         "foundryModelDeploymentDataset"
@@ -2655,8 +2655,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "InlineJsonData",
-            "value": "inlineJsonData",
+            "name": "InlineData",
+            "value": "inlineData",
             "description": "Use inline JSON data provided directly in the request"
           },
           {
@@ -3620,6 +3620,49 @@
         ]
       }
     },
+    "InlineDataSource": {
+      "type": "object",
+      "description": "Data source using inline data provided directly in the request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
+        },
+        "data": {
+          "$ref": "#/definitions/InlineData",
+          "description": "Inline data structured according to the specified format"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSource"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineData"
+    },
+    "InlineDataSourceUpdate": {
+      "type": "object",
+      "description": "Data source using inline data provided directly in the request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
+        },
+        "data": {
+          "$ref": "#/definitions/InlineDataUpdate",
+          "description": "Inline data structured according to the specified format"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationDataSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "inlineData"
+    },
     "InlineDataUpdate": {
       "type": "object",
       "description": "Base class for inline evaluation data with format discrimination.",
@@ -3655,49 +3698,6 @@
         }
       ],
       "x-ms-discriminator-value": "inlineJson"
-    },
-    "InlineJsonDataSource": {
-      "type": "object",
-      "description": "Data source using inline data provided directly in the request.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
-        },
-        "data": {
-          "$ref": "#/definitions/InlineData",
-          "description": "Inline data structured according to the specified format"
-        }
-      },
-      "required": [
-        "data"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSource"
-        }
-      ],
-      "x-ms-discriminator-value": "inlineJsonData"
-    },
-    "InlineJsonDataSourceUpdate": {
-      "type": "object",
-      "description": "Data source using inline data provided directly in the request.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Optional unique identifier for the inline data source. This can be an agent id or a custom identifier to distinguish between different inline data sources."
-        },
-        "data": {
-          "$ref": "#/definitions/InlineDataUpdate",
-          "description": "Inline data structured according to the specified format"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSourceUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "inlineJsonData"
     },
     "InlineJsonUpdate": {
       "type": "object",
