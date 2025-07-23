@@ -32,7 +32,7 @@ import {
   processOadRuntimeErrorMessage,
   specIsPreview,
 } from "./utils/common-utils.js";
-import { appendFileSync } from "node:fs";
+import { appendFileSync, existsSync } from "node:fs";
 import * as path from "node:path";
 import { applyRules } from "./utils/apply-rules.js";
 import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
@@ -48,9 +48,6 @@ import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 // For console (diagnostic) logs we want to display the entire stack trace.
 // The value here is an arbitrary high number to limit the stack trace in case a bug would cause it to be excessively long.
 const stackTraceMaxLength = 500;
-
-// Module-level cache for SpecModel instances
-const specModelCache = new Map<string, SpecModel>();
 
 /**
  * Context for breaking change detection operations
@@ -168,6 +165,7 @@ export async function checkCrossVersionBreakingChange(
     .concat(detectionContext.newVersionChangedSwaggers)
     .concat(detectionContext.existingVersionSwaggers.filter(isInDevFolder))) {
     logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
+
     // use the detectionContext.context.localSpecRepoPath to resolve the absolute path as it's the merge commit working directory
     const absoluteSwaggerPath = path.resolve(
       detectionContext.context.localSpecRepoPath,
@@ -178,6 +176,12 @@ export async function checkCrossVersionBreakingChange(
       detectionContext.context.prInfo!.tempRepoFolder,
       swaggerPath,
     );
+
+    // If the specModel is not found, it means the swaggerPath is a new RP
+    if (!specModel) {
+      continue;
+    }
+
     const availableSwaggers = await specModel.getSwaggers();
     logMessage(
       `checkCrossVersionBreakingChange: swaggerPath: ${swaggerPath}, availableSwaggers.length: ${availableSwaggers?.length}`,
@@ -387,9 +391,9 @@ export function getReadmeFolder(swaggerFile: string) {
  * Uses caching to avoid redundant SpecModel initialization for the same folder.
  * @param specRepoFolder - The root folder of the spec repository
  * @param swaggerPath - Path to the swagger file
- * @returns SpecModel instance for the folder containing the swagger file
+ * @returns SpecModel instance for the folder containing the swagger file or undefined if the folder does not exist
  */
-export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecModel {
+export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecModel | undefined {
   const folder = getReadmeFolder(swaggerPath);
 
   if (!folder) {
@@ -397,16 +401,18 @@ export function getSpecModel(specRepoFolder: string, swaggerPath: string): SpecM
   }
 
   const fullFolderPath = path.join(specRepoFolder, folder);
-  logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
 
-  // Check if we already have a SpecModel for this folder
-  if (specModelCache.has(fullFolderPath)) {
-    return specModelCache.get(fullFolderPath)!;
+  // Return if the readme folder is not found which means it's a new RP
+  if (!existsSync(fullFolderPath)) {
+    logMessage(
+      `getSpecModel: this is a new RP as ${fullFolderPath} folder does not exist in the base branch of spec repo.`,
+    );
+    return undefined;
   }
+  logMessage(`getSpecModel: folder: ${fullFolderPath}, swaggerPath: ${swaggerPath}`);
 
   // Create new SpecModel and cache it
   const specModel = new SpecModel(fullFolderPath);
-  specModelCache.set(fullFolderPath, specModel);
 
   return specModel;
 }
@@ -419,6 +425,9 @@ export async function checkAPIsBeingMovedToANewSpec(
   const absoluteSwaggerPath = path.resolve(context.localSpecRepoPath, swaggerPath);
   logMessage(`checkAPIsBeingMovedToANewSpec: absoluteSwaggerPath: ${absoluteSwaggerPath}`);
   const specModel = getSpecModel(context.localSpecRepoPath, swaggerPath);
+  if (!specModel) {
+    return;
+  }
   const swaggersFromOriginalClonedRepo = await specModel.getSwaggers();
   const targetSwagger = swaggersFromOriginalClonedRepo.find((s) => s.path === absoluteSwaggerPath);
   if (!targetSwagger) {

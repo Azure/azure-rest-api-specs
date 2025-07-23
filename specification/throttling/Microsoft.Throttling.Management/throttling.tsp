@@ -219,5 +219,5 @@ model RuleProperties {
   // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
   //@minValue("?")
   //@maxValue("?")
-  minEnforcementDuration: duration;
+  minEnforcementDuration?: duration;
 }
