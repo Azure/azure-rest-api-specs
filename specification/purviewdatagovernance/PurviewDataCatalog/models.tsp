@@ -1166,3 +1166,126 @@ model ObjectiveWithAdditionalPropertiesResponse {
   @doc("The link to the next page of results.")
   nextLink?: string;
 }
+
+@doc("ObjectiveQueryRequest.")
+model ObjectiveQueryRequest {
+  @doc("Number of records to skip.")
+  skip?: SkipQueryParameter;
+
+  @doc("Number of records to return.")
+  top?: TopQueryParameter;
+
+  @doc("Order by specifications for the query.")
+  orderby?: CatalogApiServiceOrderBy[];
+
+  @doc("Filter by objective IDs.")
+  ids?: string[];
+
+  @doc("Filter by domain IDs.")
+  domainIds?: string[];
+
+  @doc("Filter by objective definition.")
+  definition?: string;
+
+  @doc("Filter by objective status.")
+  status?: OkrSharedEntityStatus;
+
+  @doc("Filter by multiple objective statuses.")
+  multiStatus?: OkrSharedEntityStatus[];
+
+  @doc("Filter by objective owners.")
+  owners?: string[];
+}
+
+@doc("Objective facet request model.")
+model ObjectiveFacetRequest {
+  @doc("Filter by objective IDs.")
+  ids?: string[];
+
+  @doc("Filter by domain IDs.")
+  domainIds?: string[];
+
+  @doc("Filter by objective definition.")
+  definition?: string;
+
+  @doc("Filter by objective owners.")
+  owners?: string[];
+
+  @doc("Filter by objective status.")
+  status?: OkrSharedEntityStatus;
+
+  @doc("Filter by multiple objective statuses.")
+  multiStatus?: OkrSharedEntityStatus[];
+
+  @doc("Filter by facet objects.")
+  facets?: FacetRequestObject[];
+}
+
+@doc("Facet request object model.")
+model FacetRequestObject {
+  @doc("The name of the facet.")
+  name?: string;
+}
+
+@doc("Additional properties for objective query.")
+model ObjectiveQueryAdditionalProperties {
+  @doc("The overall status of the objective.")
+  status?: OkrSharedEntityStatus;
+
+  @doc("The system data associated with the objective.")
+  systemData?: OkrSystemDataWithExpired;
+
+  @doc("The unique identifier of the objective.")
+  id?: uuid;
+
+  @doc("The definition of the objective.")
+  definition?: string;
+
+  @doc("The domain associated with the objective.")
+  domain?: uuid;
+
+  @doc("The target date for the objective.")
+  targetDate?: utcDateTime;
+
+  @doc("The contacts associated with the objective.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("Additional properties for objective query.")
+  additionalProperties?: OverallStatusEnum;
+}
+
+@doc("Microsoft Purview Data Governance Catalog Key Result.")
+model ModelKeyResult {
+  @doc("The status of the key result.")
+  status?: OverallStatusEnum;
+
+  @doc("The system data associated with the key result.")
+  systemData?: SystemData;
+
+  @doc("The unique identifier of the key result.")
+  id?: uuid;
+
+  @doc("The definition of the key result.")
+  definition?: string;
+
+  @doc("The unique identifier of the domain.")
+  domainId?: uuid;
+
+  @doc("The progress of the key result.")
+  progress?: float64;
+
+  @doc("The goal value for the key result.")
+  goal?: float64;
+
+  @doc("The maximum value for the key result.")
+  max?: float64;
+}
+
+@doc("Response containing a list of key results.")
+model ModelKeyResultResponse {
+  @doc("The list of key results.")
+  value: ModelKeyResult[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
+}

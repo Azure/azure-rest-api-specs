@@ -3499,6 +3499,370 @@
         }
       }
     },
+    "/objectives/{objectiveId}": {
+      "get": {
+        "operationId": "GetOkrObjective",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves an existing objective (OKR) by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOkrObjective_MaximumSet": {
+            "$ref": "./examples/GetOkrObjective_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrReplaceOkrObjectiveId",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Updates an existing objective (OKR) by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The additional properties for the objective query.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ObjectiveQueryAdditionalProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceOkrObjectiveId_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceOkrObjectiveId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteOkr",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Deletes an existing objective (OKR) by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteOkr_MaximumSet": {
+            "$ref": "./examples/DeleteOkr_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/objectives/{objectiveId}/keyResults": {
+      "get": {
+        "operationId": "GetOkrObjectiveIdKeyResults",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves key results for a specific objective (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelKeyResultResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOkrObjectiveIdKeyResults_MaximumSet": {
+            "$ref": "./examples/GetOkrObjectiveIdKeyResults_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateOrReplaceOkrKeyResults",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Creates a new key result for a specific objective (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The body associated with the key result.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ModelKeyResult"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ModelKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceOkrKeyResults_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceOkrKeyResults_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/objectives/facets": {
+      "post": {
+        "operationId": "OkrFacets",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves the facets for objectives (OKRs).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObjectiveFacetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OkrFacets_MaximumSet": {
+            "$ref": "./examples/OkrFacets_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/objectives/query": {
+      "post": {
+        "operationId": "CreateOrReplaceOkrQuery",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Queries objectives (OKRs) based on specified criteria.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "duplicatecheck",
+            "in": "query",
+            "description": "Checks for duplicate OKRs.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of result items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The number of result items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body for querying OKRs.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ObjectiveQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalPropertiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceOkrQuery_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceOkrQuery_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/policies": {
       "get": {
         "operationId": "GetPolicy",
@@ -6231,6 +6595,16 @@
         ]
       }
     },
+    "FacetRequestObject": {
+      "type": "object",
+      "description": "Facet request object model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the facet."
+        }
+      }
+    },
     "FacetValue": {
       "type": "object",
       "description": "FacetValue.",
@@ -6320,6 +6694,67 @@
         }
       }
     },
+    "ModelKeyResult": {
+      "type": "object",
+      "description": "Microsoft Purview Data Governance Catalog Key Result.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OverallStatusEnum",
+          "description": "The status of the key result."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "The system data associated with the key result."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the key result."
+        },
+        "definition": {
+          "type": "string",
+          "description": "The definition of the key result."
+        },
+        "domainId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the domain."
+        },
+        "progress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress of the key result."
+        },
+        "goal": {
+          "type": "number",
+          "format": "double",
+          "description": "The goal value for the key result."
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum value for the key result."
+        }
+      }
+    },
+    "ModelKeyResultResponse": {
+      "type": "object",
+      "description": "Response containing a list of key results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of key results.",
+          "items": {
+            "$ref": "#/definitions/ModelKeyResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ModelsFacetRequestObject": {
       "type": "object",
       "description": "ModelsFacetRequestObject.",
@@ -6357,6 +6792,157 @@
           "type": "integer",
           "format": "int64",
           "description": "The number of key results associated with the objective."
+        }
+      }
+    },
+    "ObjectiveFacetRequest": {
+      "type": "object",
+      "description": "Objective facet request model.",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "Filter by objective IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "definition": {
+          "type": "string",
+          "description": "Filter by objective definition."
+        },
+        "owners": {
+          "type": "array",
+          "description": "Filter by objective owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/OkrSharedEntityStatus",
+          "description": "Filter by objective status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "Filter by multiple objective statuses.",
+          "items": {
+            "$ref": "#/definitions/OkrSharedEntityStatus"
+          }
+        },
+        "facets": {
+          "type": "array",
+          "description": "Filter by facet objects.",
+          "items": {
+            "$ref": "#/definitions/FacetRequestObject"
+          }
+        }
+      }
+    },
+    "ObjectiveQueryAdditionalProperties": {
+      "type": "object",
+      "description": "Additional properties for objective query.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OkrSharedEntityStatus",
+          "description": "The overall status of the objective."
+        },
+        "systemData": {
+          "$ref": "#/definitions/OkrSystemDataWithExpired",
+          "description": "The system data associated with the objective."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the objective."
+        },
+        "definition": {
+          "type": "string",
+          "description": "The definition of the objective."
+        },
+        "domain": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain associated with the objective."
+        },
+        "targetDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The target date for the objective."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The contacts associated with the objective.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/OverallStatusEnum",
+          "description": "Additional properties for objective query."
+        }
+      }
+    },
+    "ObjectiveQueryRequest": {
+      "type": "object",
+      "description": "ObjectiveQueryRequest.",
+      "properties": {
+        "skip": {
+          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
+          "description": "Number of records to skip."
+        },
+        "top": {
+          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
+          "description": "Number of records to return."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "Order by specifications for the query.",
+          "items": {
+            "$ref": "#/definitions/CatalogApiServiceOrderBy"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "Filter by objective IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "definition": {
+          "type": "string",
+          "description": "Filter by objective definition."
+        },
+        "status": {
+          "$ref": "#/definitions/OkrSharedEntityStatus",
+          "description": "Filter by objective status."
+        },
+        "multiStatus": {
+          "type": "array",
+          "description": "Filter by multiple objective statuses.",
+          "items": {
+            "$ref": "#/definitions/OkrSharedEntityStatus"
+          }
+        },
+        "owners": {
+          "type": "array",
+          "description": "Filter by objective owners.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

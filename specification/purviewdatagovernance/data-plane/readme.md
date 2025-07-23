@@ -1,7 +1,35 @@
 # Azure Purview Catalog
 
+> This service has been migrated to TypeSpec. For the latest specification, see the TypeSpec project at `../PurviewDataCatalog/`.
+
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for Purview Catalog.
+
+This is the legacy AutoRest configuration file for Purview Catalog.
+
+**Note: This service has been migrated to TypeSpec. For active development and the latest API  
+specification, please refer to the TypeSpec project located at `../PurviewDataCatalog/`.**
+
+## TypeSpec Project
+
+The current TypeSpec specification is located at:
+
+- **Main TypeSpec files**: `../PurviewDataCatalog/`
+- **Configuration**: `../PurviewDataCatalog/tspconfig.yaml`
+- **Models**: `../PurviewDataCatalog/models.tsp`
+- **Routes**: `../PurviewDataCatalog/routes.tsp`
+
+To compile the TypeSpec specification:
+
+```bash
+cd ../PurviewDataCatalog
+npx tsp compile .
+```
+
+---
+
+## Legacy AutoRest Configuration (Deprecated)
+
+The following configuration is maintained for backward compatibility but is deprecated.
 
 ---
 
@@ -31,7 +59,7 @@ These settings apply only when `--tag=package-2025-06-16-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-06-16-preview'
 input-file:
-  - Microsoft.Purview.Catalog.ApiService/preview/2025-06-16-preview/CatalogApiService.json
+  - Microsoft.Purview.UnifiedCatalog/preview/2025-06-16-preview/CatalogApiService.json
 ```
 
 ---
@@ -48,6 +76,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Purview.CatalogClient
   add-credentials: true
-  output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Purview.Catalog/src/Generated
+  output-folder: $(csharp-sdks-folder)/purview/Microsoft.Azure.Purview.UnifiedCatalog/src/Generated
   clear-output-folder: true
 ```

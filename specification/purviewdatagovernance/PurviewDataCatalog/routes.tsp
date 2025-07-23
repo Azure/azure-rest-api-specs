@@ -1109,3 +1109,121 @@ op createOrReplaceOkr is Foundations.Operation<
     body: ObjectiveWithAdditionalProperties;
   }
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Queries objectives (OKRs) based on specified criteria.")
+@route("/objectives/query")
+@post
+op createOrReplaceOkrQuery is Foundations.Operation<
+  {
+    @doc("Checks for duplicate OKRs.")
+    @query
+    duplicatecheck?: int32;
+
+    @doc("The request body for querying OKRs.")
+    @bodyRoot
+    body?: ObjectiveQueryRequest;
+  },
+  ObjectiveWithAdditionalPropertiesResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves the facets for objectives (OKRs).")
+@route("/objectives/facets")
+@post
+op okrFacets is Foundations.Operation<
+  ObjectiveFacetRequest,
+  FacetsResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Updates an existing objective (OKR) by ID.")
+@route("/objectives/{objectiveId}")
+@put
+op createOrReplaceOkrObjectiveId is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+
+    @doc("The additional properties for the objective query.")
+    @bodyRoot
+    body?: ObjectiveQueryAdditionalProperties;
+  },
+  ObjectiveWithAdditionalProperties,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Deletes an existing objective (OKR) by ID.")
+@route("/objectives/{objectiveId}")
+@delete
+op deleteOkr is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves an existing objective (OKR) by ID.")
+@route("/objectives/{objectiveId}")
+@get
+op getOkrObjective is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+  },
+  ObjectiveWithAdditionalProperties,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves key results for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults")
+@get
+op getOkrObjectiveIdKeyResults is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+  },
+  ModelKeyResultResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Creates a new key result for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults")
+@post
+op createOrReplaceOkrKeyResults is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+
+    @doc("The body associated with the key result.")
+    @bodyRoot
+    body?: ModelKeyResult;
+  },
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the key result output.")
+    @bodyRoot
+    body: ModelKeyResult;
+  }
+>;
