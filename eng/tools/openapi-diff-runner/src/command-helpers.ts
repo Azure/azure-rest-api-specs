@@ -133,6 +133,7 @@ export async function getSwaggerDiffs(
       baseCommitish: options.baseCommitish,
       cwd: options.cwd,
       headCommitish: options.headCommitish,
+      paths: ["specification"],
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
