@@ -51,7 +51,6 @@ input-file:
 - preview/2024-12-01-preview/Maintenances.json
 - preview/2024-12-01-preview/PrivateEndpointConnections.json
 - preview/2024-12-01-preview/PrivateLinkResources.json
-- preview/2024-12-01-preview/common-types.json
 
 suppressions:
   - code: PostOperationAsyncResponseValidation
