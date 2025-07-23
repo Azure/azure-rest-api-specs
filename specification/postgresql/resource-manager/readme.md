@@ -94,6 +94,9 @@ suppressions:
     from: Capabilities.json
     where: $.definitions.CapabilityList
     reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
   - code: PutGetPatchResponseSchema
     from: Databases.json
     reason: The existing API contract is like this and not be able to change.
@@ -104,6 +107,9 @@ suppressions:
     from: Operations.json
     where: $.definitions.OperationList
     reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: PrivateEndpointConnections.json
+    reason: The existing API contract is like this and not be able to change.
   - code: PutGetPatchResponseSchema
     from: PrivateEndpointConnections.json
     reason: The existing API contract is like this and not be able to change.
@@ -113,6 +119,9 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: QuotaUsages.json
     where: $.definitions.QuotaUsageList
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: Servers.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPatch
     from: Servers.json
@@ -134,6 +143,9 @@ suppressions:
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
     from: VirtualEndpoints.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutGetPatchResponseSchema
