@@ -28,7 +28,7 @@ model Capability
 }
 
 @armResourceOperations
-interface Capabilities {
+interface LocationBasedCapabilitySet {
   /**
    * Get capabilities at specified location in a given subscription.
    */
