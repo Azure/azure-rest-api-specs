@@ -72,10 +72,10 @@ using Microsoft.DBforMySQL;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(advancedThreatProtectionSettings.updatePut::parameters.resource,
+@@clientName(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
   "parameters"
 );
-@@clientName(advancedThreatProtectionSettings.update::parameters.properties,
+@@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
