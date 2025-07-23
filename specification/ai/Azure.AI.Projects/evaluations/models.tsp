@@ -437,6 +437,9 @@ model SingleEvaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
+  @doc("External storage destinations where evaluation results can be exported.")
+  additionalDestinations?: EvaluationDestinationConfiguration;
+
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
 }
