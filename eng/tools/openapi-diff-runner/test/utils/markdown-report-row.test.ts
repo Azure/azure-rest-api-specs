@@ -9,85 +9,126 @@ import {
 import { BrChMsgRecord, ResultMessageRecord } from "../../src/types/message.js";
 
 describe("markdown-report-row", () => {
+  // Test constants
+  const DATE = new Date("2023-01-01");
+  const IDS = {
+    test: "test-id",
+    test1: "test-id-1",
+    test2: "test-id-2",
+  };
+  const MESSAGES = {
+    error: "Test error message",
+    rawError: "Raw error message",
+    aMessage: "A message",
+    zMessage: "Z message",
+    removedProperty: "Property 'test' was removed",
+    withSpecialChars: "Test message\nwith newlines\tand tabs\r",
+    testMessage: "Test message",
+  };
+  const PATHS = {
+    newSimple: "https://github.com/owner/repo/blob/main/specification/test.json#L10:5",
+    oldSimple: "https://github.com/owner/repo/blob/old/specification/test.json#L8:3",
+    newStorage:
+      "https://github.com/owner/repo/blob/main/specification/storage/resource-manager/Microsoft.Storage/stable/2021-01-01/storage.json#L100:5",
+    oldStorage:
+      "https://github.com/owner/repo/blob/old/specification/storage/resource-manager/Microsoft.Storage/stable/2021-01-01/storage.json#L95:3",
+  };
+  const JSON_PATHS = {
+    simple: "$.paths./test.get",
+    simpleOld: "$.paths./test.get.old",
+    storageProperty: "$.definitions.StorageAccount.properties.test",
+    storagePropertyOld: "$.definitions.StorageAccount.properties.test.old",
+  };
+
+  // Helper functions
+  const createPath = (tag: string, path: string, jsonPath: string) => ({ tag, path, jsonPath });
+
+  const createResultMessage = (
+    message: string,
+    paths: Array<{ tag: string; path: string; jsonPath: string }> = [],
+    id = IDS.test,
+  ): ResultMessageRecord =>
+    ({
+      type: "Result",
+      id,
+      level: "Error",
+      message,
+      time: DATE,
+      paths,
+    }) as ResultMessageRecord;
+
+  const createRawMessage = (message: string, extra: Record<string, any> = {}): BrChMsgRecord => ({
+    type: "Raw",
+    level: "Error",
+    message,
+    time: DATE,
+    groupName: "test-group",
+    extra,
+  });
+
+  const createRow = (
+    index: number,
+    description: string,
+    msg: BrChMsgRecord,
+  ): BreakingChangeMdRow => ({
+    index,
+    description,
+    msg,
+  });
+
+  const expectRowStructure = (result: BreakingChangeMdRow[], expectedLength: number) => {
+    expect(result).toHaveLength(expectedLength);
+    if (expectedLength > 0) {
+      expect(result[0]).toMatchObject({
+        index: 1,
+        msg: expect.any(Object),
+        description: expect.any(String),
+      });
+    }
+  };
+
+  const createSimplePaths = () => [
+    createPath("New", PATHS.newSimple, JSON_PATHS.simple),
+    createPath("Old", PATHS.oldSimple, JSON_PATHS.simpleOld),
+  ];
+
+  const createStoragePaths = () => [
+    createPath("New", PATHS.newStorage, JSON_PATHS.storageProperty),
+    createPath("Old", PATHS.oldStorage, JSON_PATHS.storagePropertyOld),
+  ];
   describe("createBreakingChangeMdRows", () => {
     it("should create rows from Result messages", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "test-id",
-          level: "Error",
-          message: "Test error message",
-          time: new Date("2023-01-01"),
-          paths: [
-            {
-              tag: "New",
-              path: "https://github.com/owner/repo/blob/main/specification/test.json#L10:5",
-              jsonPath: "$.paths./test.get",
-            },
-            {
-              tag: "Old",
-              path: "https://github.com/owner/repo/blob/old/specification/test.json#L8:3",
-              jsonPath: "$.paths./test.get.old",
-            },
-          ],
-        } as ResultMessageRecord,
-      ];
+      const paths = createSimplePaths();
+      const msgs = [createResultMessage(MESSAGES.error, paths)];
 
       const result = createBreakingChangeMdRows(msgs);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].index).toBe(1);
+      expectRowStructure(result, 1);
       expect(result[0].msg).toBe(msgs[0]);
-      expect(result[0].description).toContain("Test error message");
+      expect(result[0].description).toContain(MESSAGES.error);
     });
 
     it("should create rows from Raw messages", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Raw",
-          level: "Error",
-          message: "Raw error message",
-          time: new Date("2023-01-01"),
-          groupName: "test-group",
-          extra: {
-            details: "Additional details",
-            code: "ERROR_CODE",
-          },
-        },
-      ];
+      const extra = { details: "Additional details", code: "ERROR_CODE" };
+      const msgs = [createRawMessage(MESSAGES.rawError, extra)];
 
       const result = createBreakingChangeMdRows(msgs);
 
-      expect(result).toHaveLength(1);
-      expect(result[0].index).toBe(1);
+      expectRowStructure(result, 1);
       expect(result[0].description).toContain('"details":"Additional details"');
       expect(result[0].description).toContain('"code":"ERROR_CODE"');
     });
 
     it("should sort rows by description", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "test-id-2",
-          level: "Error",
-          message: "Z message",
-          time: new Date("2023-01-01"),
-          paths: [],
-        } as ResultMessageRecord,
-        {
-          type: "Result",
-          id: "test-id-1",
-          level: "Error",
-          message: "A message",
-          time: new Date("2023-01-01"),
-          paths: [],
-        } as ResultMessageRecord,
+      const msgs = [
+        createResultMessage(MESSAGES.zMessage, [], IDS.test2),
+        createResultMessage(MESSAGES.aMessage, [], IDS.test1),
       ];
 
       const result = createBreakingChangeMdRows(msgs);
 
-      expect(result[0].msg.message).toBe("A message");
-      expect(result[1].msg.message).toBe("Z message");
+      expect(result[0].msg.message).toBe(MESSAGES.zMessage);
+      expect(result[1].msg.message).toBe(MESSAGES.aMessage);
     });
   });
 
@@ -112,18 +153,8 @@ describe("markdown-report-row", () => {
 
   describe("rowToString", () => {
     it("should convert row to markdown string", () => {
-      const row: BreakingChangeMdRow = {
-        index: 1,
-        description: "Test description with <br/> tags",
-        msg: {
-          type: "Result",
-          id: "test-id",
-          level: "Error",
-          message: "Test message",
-          time: new Date("2023-01-01"),
-          paths: [],
-        } as ResultMessageRecord,
-      };
+      const msg = createResultMessage(MESSAGES.testMessage);
+      const row = createRow(1, "Test description with <br/> tags", msg);
 
       const result = rowToString(row);
       expect(result).toBe("| 1 | Test description with <br/> tags |\n");
@@ -132,27 +163,8 @@ describe("markdown-report-row", () => {
 
   describe("integration with complex messages", () => {
     it("should handle Result message with multiple paths", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "test-id",
-          level: "Error",
-          message: "Property 'test' was removed",
-          time: new Date("2023-01-01"),
-          paths: [
-            {
-              tag: "New",
-              path: "https://github.com/owner/repo/blob/main/specification/storage/resource-manager/Microsoft.Storage/stable/2021-01-01/storage.json#L100:5",
-              jsonPath: "$.definitions.StorageAccount.properties.test",
-            },
-            {
-              tag: "Old",
-              path: "https://github.com/owner/repo/blob/old/specification/storage/resource-manager/Microsoft.Storage/stable/2021-01-01/storage.json#L95:3",
-              jsonPath: "$.definitions.StorageAccount.properties.test.old",
-            },
-          ],
-        } as ResultMessageRecord,
-      ];
+      const paths = createStoragePaths();
+      const msgs = [createResultMessage(MESSAGES.removedProperty, paths)];
 
       const result = createBreakingChangeMdRows(msgs);
       const description = result[0].description;
@@ -164,16 +176,7 @@ describe("markdown-report-row", () => {
     });
 
     it("should handle message with newlines and tabs", () => {
-      const msgs: BrChMsgRecord[] = [
-        {
-          type: "Result",
-          id: "test-id",
-          level: "Error",
-          message: "Test message\nwith newlines\tand tabs\r",
-          time: new Date("2023-01-01"),
-          paths: [],
-        } as ResultMessageRecord,
-      ];
+      const msgs = [createResultMessage(MESSAGES.withSpecialChars)];
 
       const result = createBreakingChangeMdRows(msgs);
       expect(result[0].description).toBe("Test message with newlines and tabs <br/>");
