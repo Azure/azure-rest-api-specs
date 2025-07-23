@@ -67,8 +67,8 @@ swagger-to-sdk:
 ## Suppression
 
 ``` yaml
-directive:
+suppressions:
   - code: OperationsAPIImplementation
-    from: azuremonitorworkspace.json
     reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
+    from: azuremonitorworkspace.json
 ```
