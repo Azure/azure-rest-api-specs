@@ -1,3 +1,7 @@
+// no-unresolved is not aware of exports definition in package.json
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+//
+// eslint-disable-next-line import/no-unresolved
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
