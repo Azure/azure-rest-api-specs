@@ -139,9 +139,13 @@ union PrivateLinkServiceConnectionStatus {
  */
 union DeviceRegistryNamespaceAuthenticationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+ /**
+   * User assigned authentication type.
+   */
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * System assigned authentication type.
+   */
   SystemAssigned: "SystemAssigned",
 }
 
