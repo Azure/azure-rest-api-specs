@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DBforMySQL;
 
@@ -2078,12 +2079,14 @@ model UserAssignedIdentity {
    * Principal Id of user assigned identity
    */
   @visibility(Lifecycle.Read)
+  @clientName("PrincipalId")
   principalId?: string;
 
   /**
    * Client Id of user assigned identity
    */
   @visibility(Lifecycle.Read)
+  @clientName("ClientId")
   clientId?: string;
 }
 
