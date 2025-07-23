@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -70,6 +71,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
    * Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @added(Versions.v2025_04_01)
   placement?: Placement;
 }
 
