@@ -496,50 +496,52 @@ describe("generateLintDiffReport", () => {
     `);
   });
 
-  test.skipIf(isWindows())("passes and displays warning if before has errors", async ({ expect }) => {
-    const afterViolation = {
-      extensionName: "@microsoft.azure/openapi-validator",
-      level: "warning",
-      code: "SomeCode",
-      message: "A warning occurred",
-      source: [],
-      details: {},
-    };
+  test.skipIf(isWindows())(
+    "passes and displays warning if before has errors",
+    async ({ expect }) => {
+      const afterViolation = {
+        extensionName: "@microsoft.azure/openapi-validator",
+        level: "warning",
+        code: "SomeCode",
+        message: "A warning occurred",
+        source: [],
+        details: {},
+      };
 
-    const beforeResult = {
-      error: new Error("Autorest failed"),
-      stdout: "",
-      stderr: "",
-      rootPath: "",
-      readme: new Readme("file1.md"),
-      tag: "",
-    } as AutorestRunResult;
-    const afterResult = {
-      error: null,
-      stdout: JSON.stringify(afterViolation),
-      stderr: "",
-      rootPath: "",
-      readme: new Readme("file1.md"),
-      tag: "",
-    } as AutorestRunResult;
+      const beforeResult = {
+        error: new Error("Autorest failed"),
+        stdout: "",
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
+      const afterResult = {
+        error: null,
+        stdout: JSON.stringify(afterViolation),
+        stderr: "",
+        rootPath: "",
+        readme: new Readme("file1.md"),
+        tag: "",
+      } as AutorestRunResult;
 
-    const runCorrelations = new Map<string, BeforeAfter>([
-      ["file1.md", { before: beforeResult, after: afterResult }],
-    ]);
+      const runCorrelations = new Map<string, BeforeAfter>([
+        ["file1.md", { before: beforeResult, after: afterResult }],
+      ]);
 
-    const outFile = "test-output-fatal.md";
-    const actual = await generateLintDiffReport(
-      runCorrelations,
-      new Set<string>([
-        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-      ]),
-      outFile,
-      "baseBranch",
-      "compareSha",
-      "repo/path",
-    );
-    expect(actual).toBe(true);
-    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      const outFile = "test-output-fatal.md";
+      const actual = await generateLintDiffReport(
+        runCorrelations,
+        new Set<string>([
+          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+        ]),
+        outFile,
+        "baseBranch",
+        "compareSha",
+        "repo/path",
+      );
+      expect(actual).toBe(true);
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
       "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
       | --- | --- | --- |
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) Autorest Failed|
@@ -550,7 +552,8 @@ describe("generateLintDiffReport", () => {
 
       "
     `);
-  });
+    },
+  );
 
   test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",
@@ -687,4 +690,3 @@ describe("generateAutoRestErrorReport", () => {
     `);
   });
 });
-

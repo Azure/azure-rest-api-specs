@@ -49,8 +49,8 @@ export async function generateLintDiffReport(
 
   outputMarkdown += `\n\n`;
 
-  for(const [, {before,}] of runCorrelations.entries()) {
-    if (before && before.error) { 
+  for (const [, { before }] of runCorrelations.entries()) {
+    if (before && before.error) {
       outputMarkdown += `> [!WARNING]\n`;
       outputMarkdown += `> Autorest failed checking before state of ${relative(before.rootPath, before.readme.path)} ${before.tag}\n\n`;
     }
@@ -286,8 +286,8 @@ export function getPath(result: AutorestRunResult) {
   return tag ? `${readmePathRelative}#tag-${tag}` : readmePathRelative;
 }
 
-export function getAutoRestFailedMessage(result: AutorestRunResult | null) : string { 
-  if (result?.error) { 
+export function getAutoRestFailedMessage(result: AutorestRunResult | null): string {
+  if (result?.error) {
     return "Autorest Failed";
   }
   return "";
