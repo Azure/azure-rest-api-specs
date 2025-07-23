@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
+import { includesFolder } from "@azure-tools/specs-shared/path";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import {
@@ -11,7 +12,6 @@ import {
   typespec,
   example,
   readme,
-  specification,
 } from "@azure-tools/specs-shared/changed-files";
 
 import { LabelContext } from "./labelling-types.js";
@@ -168,7 +168,7 @@ export class PRContext {
         if (visitedFolder.has(dir)) {
           return;
         }
-        while (specification(dir)) {
+        while (includesFolder(dir, "specification")) {
           if (visitedFolder.has(dir)) {
             break;
           }
