@@ -12,6 +12,8 @@ import {
   wrapInArmReviewMessage,
 } from "./tsgs.js";
 
+import { isReleaseBranch } from "../../../shared/src/branch.js";
+
 // #region typedefs
 /**
  * The LabelContext is used by the updateLabels() to determine which labels to add or remove to the PR.
@@ -190,31 +192,36 @@ import {
  *
  * See also: https://aka.ms/SpecPRReviewARMInvariants
  */
-// todo: inject `core` for access to logging
 export class Label {
+  /**
+   * The name of the label.
+   * @type {string}
+   */
+  name;
+
+  /**
+   * Is the label currently present on the pull request?
+   * @type {boolean}
+   */
+  present;
+
+  /**
+   * Should this label be present on the pull request?
+   * Must be defined before applyStateChange is called.
+   * Not set at the construction time to facilitate determining desired presence
+   * of multiple labels in single code block, without intermixing it with
+   * label construction logic.
+   * @type {boolean | undefined}
+   */
+  shouldBePresent;
+
   /**
    * @param {string} name
    * @param {Set<string>} [presentLabels]
    */
   constructor(name, presentLabels) {
-    /** @type {string} */
     this.name = name;
-
-    /**
-     * Is the label currently present on the pull request?
-     * This is determined at the time of construction of this object.
-     * @type {boolean | undefined}
-     */
-    this.present = presentLabels?.has(this.name) ?? undefined;
-
-    /**
-     * Should this label be present on the pull request?
-     * Must be defined before applyStateChange is called.
-     * Not set at the construction time to facilitate determining desired presence
-     * of multiple labels in single code block, without intermixing it with
-     * label construction logic.
-     * @type {boolean | undefined}
-     */
+    this.present = presentLabels?.has(this.name) ?? false;
     this.shouldBePresent = undefined;
   }
 
@@ -272,25 +279,6 @@ export class Label {
           `At this point of execution this should not happen.`,
       );
     }
-  }
-
-  /**
-   * @param {string} label
-   * @returns {boolean}
-   */
-  isEqualToOrPrefixOf(label) {
-    return this.name.endsWith("*") ? label.startsWith(this.name.slice(0, -1)) : this.name === label;
-  }
-
-  /**
-   * @returns {string}
-   */
-  logString() {
-    return (
-      `Label: name: ${this.name}, ` +
-      `present: ${this.present}, ` +
-      `shouldBePresent: ${this.shouldBePresent}. `
-    );
   }
 }
 
@@ -565,15 +553,6 @@ export async function processImpactAssessment(
   );
 
   return { armReviewLabelShouldBePresent: armReviewLabel.shouldBePresent };
-}
-
-/**
- * @param {string} branchName
- * @returns {boolean}
- */
-function isReleaseBranch(branchName) {
-  const branchRegex = [/main/, /RPSaaSMaster/, /release*/, /ARMCoreRPDev/];
-  return branchRegex.some((b) => b.test(branchName));
 }
 
 /**
