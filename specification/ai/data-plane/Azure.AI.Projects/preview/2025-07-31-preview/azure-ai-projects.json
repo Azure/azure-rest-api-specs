@@ -764,61 +764,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "Evaluations_CreateEvaluation",
-        "description": "Creates a new evaluation with the specified configuration.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "repeatabilityRequestId"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "repeatabilityFirstSent"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/evaluations/runs/{name}": {
@@ -1070,6 +1015,63 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluations:runs": {
+      "post": {
+        "operationId": "Evaluations_CreateEvaluation",
+        "description": "Creates a new evaluation with the specified configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         }
       }
     },
@@ -2645,7 +2647,6 @@
       "enum": [
         "inlineJsonData",
         "dataset",
-        "foundryAgentRun",
         "FoundryModelDeploymentInline",
         "foundryModelDeploymentDataset"
       ],
@@ -2662,11 +2663,6 @@
             "name": "Dataset",
             "value": "dataset",
             "description": "Use a dataset that has been registered and stored in AI Foundry workspace"
-          },
-          {
-            "name": "FoundryAgentRun",
-            "value": "foundryAgentRun",
-            "description": "Use conversation data from a specific agent run execution"
           },
           {
             "name": "FoundryModelDeploymentInline",
@@ -3313,58 +3309,6 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
-    },
-    "FoundryAgentRunSource": {
-      "type": "object",
-      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the agent to evaluate."
-        },
-        "runId": {
-          "type": "string",
-          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
-        }
-      },
-      "required": [
-        "id",
-        "runId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSource"
-        }
-      ],
-      "x-ms-discriminator-value": "foundryAgentRun"
-    },
-    "FoundryAgentRunSourceUpdate": {
-      "type": "object",
-      "description": "Data source that uses conversation data from a specific agent run execution for evaluation. This allows evaluating agent performance based on actual conversation history.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the agent to evaluate."
-        },
-        "runId": {
-          "type": "string",
-          "description": "Unique identifier of the agent run to evaluate. Example: run_1234"
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Unique identifier of the conversation thread within the agent run. This is required when evaluating OpenAI-based agents or models to isolate specific conversation contexts."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationDataSourceUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "foundryAgentRun"
     },
     "FoundryDatasetDataSource": {
       "type": "object",
