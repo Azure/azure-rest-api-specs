@@ -39,10 +39,10 @@
         "tags": [
           "CapabilitiesByLocation"
         ],
-        "operationId": "CapabilitiesByLocation_Get",
+        "operationId": "CapabilitiesByLocation_List",
         "x-ms-examples": {
           "List the capabilities available in a given location for a specific subscription.": {
-            "$ref": "./examples/CapabilitiesByLocationGet.json"
+            "$ref": "./examples/CapabilitiesByLocationList.json"
           }
         },
         "description": "Lists the capabilities available in a given location for a specific subscription.",
@@ -81,10 +81,10 @@
         "tags": [
           "CapabilitiesByServer"
         ],
-        "operationId": "CapabilitiesByServer_Get",
+        "operationId": "CapabilitiesByServer_List",
         "x-ms-examples": {
           "List the capabilities available for a given server.": {
-            "$ref": "./examples/CapabilitiesByServerGet.json"
+            "$ref": "./examples/CapabilitiesByServerList.json"
           }
         },
         "description": "Lists the capabilities available for a given server.",
@@ -252,7 +252,7 @@
               "ZoneRedundant"
             ],
             "x-ms-enum": {
-              "name": "HaMode",
+              "name": "HighAvailabilityMode",
               "modelAsString": true
             }
           },
@@ -296,7 +296,7 @@
         "11"
       ],
       "x-ms-enum": {
-        "name": "ServerVersion",
+        "name": "PostgresMajorVersion",
         "modelAsString": true
       }
     },
@@ -386,7 +386,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "supportedFeatureStatusEnum",
+            "name": "FeatureStatus",
             "modelAsString": true
           }
         }
@@ -527,7 +527,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "fastProvisioningSupportedEnum",
+            "name": "FastProvisioningSupport",
             "modelAsString": true
           }
         },
@@ -551,7 +551,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "geoBackupSupportedEnum",
+            "name": "GeographicallyRedundantBackupSupport",
             "modelAsString": true
           }
         },
@@ -564,7 +564,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "zoneRedundantHaSupportedEnum",
+            "name": "ZoneRedundantHighAvailabilitySupport",
             "modelAsString": true
           }
         },
@@ -577,7 +577,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "zoneRedundantHaAndGeoBackupSupportedEnum",
+            "name": "ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport",
             "modelAsString": true
           }
         },
@@ -590,20 +590,20 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "storageAutoGrowthSupportedEnum",
+            "name": "StorageAutoGrowthSupport",
             "modelAsString": true
           }
         },
         "onlineResizeSupported": {
           "type": "string",
-          "description": "Indicates if resizing the storage without interrupting the operation of the database engine is supported in this location for the given subscription. \"Enabled\" means resizing the storage without interrupting the operation of the database engine is supported. \"Disabled\" means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for \"OnlineResize\".",
+          "description": "Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. \"Enabled\" means resizing the storage without interrupting the operation of the database engine is supported. \"Disabled\" means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for \"OnlineResize\".",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "onlineResizeSupportedEnum",
+            "name": "OnlineStorageResizeSupport",
             "modelAsString": true
           }
         },
@@ -616,7 +616,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "restrictedEnum",
+            "name": "LocationRestricted",
             "modelAsString": true
           }
         }

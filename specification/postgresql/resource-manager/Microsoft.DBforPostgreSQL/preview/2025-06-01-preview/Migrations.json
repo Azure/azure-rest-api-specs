@@ -465,10 +465,10 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "LogicalReplicationOnSourceDbEnum",
+            "name": "LogicalReplicationOnSourceServer",
             "modelAsString": true
           },
-          "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed."
+          "description": "Indicates whether to setup logical replication on source server, if needed."
         },
         "overwriteDbsInTarget": {
           "type": "string",
@@ -477,7 +477,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "OverwriteDbsInTargetEnum",
+            "name": "OverwriteDatabasesOnTargetServer",
             "modelAsString": true
           },
           "description": "Indicates if databases on the target server can be overwritten when already present. If set to 'False', when the migration workflow detects that the database already exists on the target server, it will wait for a confirmation."
@@ -499,7 +499,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "MigrateRolesEnum",
+            "name": "MigrateRolesAndPermissions",
             "modelAsString": true
           },
           "description": "Indicates if roles and permissions must be migrated."
@@ -511,7 +511,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "StartDataMigrationEnum",
+            "name": "StartDataMigration",
             "modelAsString": true
           },
           "description": "Indicates if data migration must start right away."
@@ -523,7 +523,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "TriggerCutoverEnum",
+            "name": "TriggerCutover",
             "modelAsString": true
           },
           "description": "Indicates if cutover must be triggered for the entire migration."
@@ -543,7 +543,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "CancelEnum",
+            "name": "Cancel",
             "modelAsString": true
           },
           "description": "Indicates if cancel must be triggered for the entire migration."
@@ -632,10 +632,10 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "LogicalReplicationOnSourceDbEnum",
+            "name": "LogicalReplicationOnSourceServer",
             "modelAsString": true
           },
-          "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed."
+          "description": "Indicates whether to setup logical replication on source server, if needed."
         },
         "overwriteDbsInTarget": {
           "type": "string",
@@ -644,7 +644,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "OverwriteDbsInTargetEnum",
+            "name": "OverwriteDatabasesOnTargetServer",
             "modelAsString": true
           },
           "description": "Indicates if databases on the target server can be overwritten when already present. If set to 'False', when the migration workflow detects that the database already exists on the target server, it will wait for a confirmation."
@@ -661,7 +661,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "MigrateRolesEnum",
+            "name": "MigrateRolesAndPermissions",
             "modelAsString": true
           },
           "description": "Indicates if roles and permissions must be migrated."
@@ -673,7 +673,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "StartDataMigrationEnum",
+            "name": "StartDataMigration",
             "modelAsString": true
           },
           "description": "Indicates if data migration must start right away."
@@ -685,7 +685,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "TriggerCutoverEnum",
+            "name": "TriggerCutover",
             "modelAsString": true
           },
           "description": "Indicates if cutover must be triggered for the entire migration."
@@ -705,7 +705,7 @@
             "False"
           ],
           "x-ms-enum": {
-            "name": "CancelEnum",
+            "name": "Cancel",
             "modelAsString": true
           },
           "description": "Indicates if cancel must be triggered for the entire migration."
@@ -907,21 +907,21 @@
       "type": "string",
       "description": "Substate of migration.",
       "x-ms-enum": {
-        "name": "MigrationSubState",
+        "name": "MigrationSubstate",
         "modelAsString": true
       }
     },
-    "MigrationSubStateDetails": {
+    "MigrationSubstateDetails": {
       "type": "object",
       "properties": {
         "currentSubState": {
-          "$ref": "#/definitions/MigrationSubState",
+          "$ref": "#/definitions/MigrationSubstate",
           "readOnly": true
         },
         "dbDetails": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/DbMigrationStatus"
+            "$ref": "#/definitions/DatabaseMigrationState"
           }
         },
         "validationDetails": {
@@ -930,9 +930,9 @@
       },
       "description": "Details of migration substate."
     },
-    "DbMigrationStatus": {
+    "DatabaseMigrationState": {
       "type": "object",
-      "description": "Migration status of a database.",
+      "description": "Migration state of a database.",
       "properties": {
         "databaseName": {
           "type": "string",
@@ -950,7 +950,7 @@
             "Canceling"
           ],
           "x-ms-enum": {
-            "name": "MigrationDbState",
+            "name": "MigrationDatabaseState",
             "modelAsString": true
           }
         },
@@ -1300,7 +1300,7 @@
         "All"
       ],
       "type": "string",
-      "description": "Migration list filter. Retrieves either active migrations or all migrations. Defaults to Active.",
+      "description": "Migration list filter. Indicates if the request should retrieve only active migrations or all migrations. Defaults to Active.",
       "x-ms-enum": {
         "name": "MigrationListFilter",
         "modelAsString": true
