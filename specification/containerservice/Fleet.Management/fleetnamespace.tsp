@@ -31,9 +31,6 @@ model FleetManagedNamespace
   name: string;
 
   ...EntityTagProperty;
-
-  /* The ARM tags of the fleet managed namespace resource.*/
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The properties of a fleet managed namespace.")
