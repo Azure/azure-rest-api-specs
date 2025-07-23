@@ -1061,3 +1061,51 @@ op termMigrationMoveterms is Foundations.Operation<
   string,
   {}
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.")
+@route("/objectives")
+@get
+op getOkr is Foundations.Operation<
+  {
+    @doc("Search keyword for OKRs.")
+    @query
+    keyword?: string;
+
+    @doc("The unique identifier of the domain.")
+    @query
+    domainId?: string;
+
+    @doc("Field to sort by.")
+    @query
+    orderby?: string;
+
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
+  },
+  ObjectiveWithAdditionalPropertiesResponse,
+  {}
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Creates a new objective (OKR).")
+@route("/objectives")
+@post
+op createOrReplaceOkr is Foundations.Operation<
+  ObjectiveWithAdditionalProperties,
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the objective output.")
+    @bodyRoot
+    body: ObjectiveWithAdditionalProperties;
+  }
+>;

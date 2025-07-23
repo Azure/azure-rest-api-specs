@@ -1060,3 +1060,109 @@ model TermsMoveRequest {
   @doc("List of term IDs to be moved.")
   termIds?: string[];
 }
+
+@doc("Objective with additional properties model.")
+model ObjectiveWithAdditionalProperties {
+  @doc("The status of the objective.")
+  status?: OkrSharedEntityStatus;
+
+  @doc("The system data associated with the objective.")
+  systemData?: OkrSystemDataWithExpired;
+
+  @doc("The unique identifier of the objective.")
+  id?: uuid;
+
+  @doc("The definition of the objective.")
+  definition?: string;
+
+  @doc("The domain associated with the objective.")
+  domain?: uuid;
+
+  @doc("The target date for the objective.")
+  targetDate?: utcDateTime;
+
+  @doc("The contacts associated with the objective.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("Additional properties for the objective.")
+  additionalProperties?: ObjectiveAdditionalProperties;
+}
+
+@doc("OkrSharedEntityStatus")
+union OkrSharedEntityStatus {
+  @doc("The status is Draft.")
+  Draft: "Draft",
+
+  @doc("The status is published.")
+  Published: "Published",
+
+  @doc("The status is Closed.")
+  Closed: "Closed",
+
+  string,
+}
+
+@doc("OkrSystemDataWithExpired")
+model OkrSystemDataWithExpired {
+  @doc("The created time of the record.")
+  createdAt?: utcDateTime;
+
+  @doc("The user who created the record.")
+  createdBy?: uuid;
+
+  @doc("The user who Last modified the record.")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("The user who last modified the record.")
+  lastModifiedBy?: uuid;
+
+  @doc("The time when the record was closed.")
+  closedAt?: utcDateTime;
+
+  @doc("The user who closed the record.")
+  closedBy?: uuid;
+}
+
+@doc("Additional properties for objective model.")
+model ObjectiveAdditionalProperties {
+  @doc("The overall status of the objective.")
+  overallStatus?: OverallStatusEnum;
+
+  @doc("The overall progress of the objective.")
+  overallProgress?: float64;
+
+  @doc("The overall goal value for the objective.")
+  overallGoal?: float64;
+
+  @doc("The maximum value for the objective.")
+  overallMax?: float64;
+
+  @doc("The number of key results associated with the objective.")
+  keyResultsCount?: int64;
+}
+
+@doc("OverallStatusEnum")
+union OverallStatusEnum {
+  @doc("The status is NotTracked.")
+  NotTracked: "NotTracked",
+
+  @doc("The status is OnTrack.")
+  OnTrack: "OnTrack",
+
+  @doc("The status is Behind.")
+  Behind: "Behind",
+
+  @doc("The status is AtRisk.")
+  AtRisk: "AtRisk",
+
+  string,
+}
+
+@doc("Response containing a list of objectives with additional properties.")
+model ObjectiveWithAdditionalPropertiesResponse {
+  @doc("The list of objectives with additional properties.")
+  value: ObjectiveWithAdditionalProperties[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
+}

@@ -71,6 +71,9 @@
     },
     {
       "name": "Term"
+    },
+    {
+      "name": "OKR"
     }
   ],
   "paths": {
@@ -3375,6 +3378,127 @@
         }
       }
     },
+    "/objectives": {
+      "get": {
+        "operationId": "GetOkr",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Search keyword for OKRs.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "domainId",
+            "in": "query",
+            "description": "The unique identifier of the domain.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Field to sort by.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalPropertiesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOkr_MaximumSet": {
+            "$ref": "./examples/GetOkr_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateOrReplaceOkr",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Creates a new objective (OKR).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceOkr_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceOkr_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/policies": {
       "get": {
         "operationId": "GetPolicy",
@@ -6204,6 +6328,200 @@
           "type": "string",
           "description": "name"
         }
+      }
+    },
+    "ObjectiveAdditionalProperties": {
+      "type": "object",
+      "description": "Additional properties for objective model.",
+      "properties": {
+        "overallStatus": {
+          "$ref": "#/definitions/OverallStatusEnum",
+          "description": "The overall status of the objective."
+        },
+        "overallProgress": {
+          "type": "number",
+          "format": "double",
+          "description": "The overall progress of the objective."
+        },
+        "overallGoal": {
+          "type": "number",
+          "format": "double",
+          "description": "The overall goal value for the objective."
+        },
+        "overallMax": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum value for the objective."
+        },
+        "keyResultsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of key results associated with the objective."
+        }
+      }
+    },
+    "ObjectiveWithAdditionalProperties": {
+      "type": "object",
+      "description": "Objective with additional properties model.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OkrSharedEntityStatus",
+          "description": "The status of the objective."
+        },
+        "systemData": {
+          "$ref": "#/definitions/OkrSystemDataWithExpired",
+          "description": "The system data associated with the objective."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the objective."
+        },
+        "definition": {
+          "type": "string",
+          "description": "The definition of the objective."
+        },
+        "domain": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain associated with the objective."
+        },
+        "targetDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The target date for the objective."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "The contacts associated with the objective.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/ObjectiveAdditionalProperties",
+          "description": "Additional properties for the objective."
+        }
+      }
+    },
+    "ObjectiveWithAdditionalPropertiesResponse": {
+      "type": "object",
+      "description": "Response containing a list of objectives with additional properties.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of objectives with additional properties.",
+          "items": {
+            "$ref": "#/definitions/ObjectiveWithAdditionalProperties"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OkrSharedEntityStatus": {
+      "type": "string",
+      "description": "OkrSharedEntityStatus",
+      "enum": [
+        "Draft",
+        "Published",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "OkrSharedEntityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Draft",
+            "value": "Draft",
+            "description": "The status is Draft."
+          },
+          {
+            "name": "Published",
+            "value": "Published",
+            "description": "The status is published."
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "The status is Closed."
+          }
+        ]
+      }
+    },
+    "OkrSystemDataWithExpired": {
+      "type": "object",
+      "description": "OkrSystemDataWithExpired",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the record."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The user who created the record."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The user who Last modified the record."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The user who last modified the record."
+        },
+        "closedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the record was closed."
+        },
+        "closedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The user who closed the record."
+        }
+      }
+    },
+    "OverallStatusEnum": {
+      "type": "string",
+      "description": "OverallStatusEnum",
+      "enum": [
+        "NotTracked",
+        "OnTrack",
+        "Behind",
+        "AtRisk"
+      ],
+      "x-ms-enum": {
+        "name": "OverallStatusEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotTracked",
+            "value": "NotTracked",
+            "description": "The status is NotTracked."
+          },
+          {
+            "name": "OnTrack",
+            "value": "OnTrack",
+            "description": "The status is OnTrack."
+          },
+          {
+            "name": "Behind",
+            "value": "Behind",
+            "description": "The status is Behind."
+          },
+          {
+            "name": "AtRisk",
+            "value": "AtRisk",
+            "description": "The status is AtRisk."
+          }
+        ]
       }
     },
     "RelatedCollectionParentCollectionTypeEnum": {
