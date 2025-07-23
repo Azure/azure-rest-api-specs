@@ -37,20 +37,7 @@ These settings apply only when `--tag=package-flexibleserver-2024-12-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2024-12-01-preview'
 input-file:
-- preview/2024-12-01-preview/AzureADAdministrator.json
-- preview/2024-12-01-preview/Backups.json
-- preview/2024-12-01-preview/BackupAndExport.json
-- preview/2024-12-01-preview/LongRunningBackups.json
-- preview/2024-12-01-preview/Configurations.json
-- preview/2024-12-01-preview/Databases.json
-- preview/2024-12-01-preview/FirewallRules.json
-- preview/2024-12-01-preview/FlexibleServers.json
-- preview/2024-12-01-preview/AdvancedThreatProtectionSettings.json
-- preview/2024-12-01-preview/LogFiles.json
-- preview/2024-12-01-preview/ServiceOperations.json
-- preview/2024-12-01-preview/Maintenances.json
-- preview/2024-12-01-preview/PrivateEndpointConnections.json
-- preview/2024-12-01-preview/PrivateLinkResources.json
+- preview/2024-12-01-preview/openapi.json
 
 suppressions:
   - code: PostOperationAsyncResponseValidation
