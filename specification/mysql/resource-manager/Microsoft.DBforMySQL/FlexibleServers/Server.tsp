@@ -145,23 +145,24 @@ interface Servers {
   /**
    * Resets GTID on a server.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   resetGtid is ArmResourceActionAsync<
     Server,
     ServerGtidSetParameter,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 
   /**
    * Detach VNet on a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   detachVNet is ArmResourceActionAsync<
     Server,
     ServerDetachVNetParameter,
     ArmResponse<Server>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 
   /**
@@ -182,12 +183,12 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServersMigration_CutoverMigration")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   cutoverMigration is ArmResourceActionAsync<
     Server,
     void,
     ArmResponse<Server>,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 
   /**

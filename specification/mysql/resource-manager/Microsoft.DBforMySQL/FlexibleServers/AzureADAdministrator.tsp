@@ -14,6 +14,7 @@ namespace Microsoft.DBforMySQL;
 /**
  * Represents a Administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(Server)
 model AzureADAdministrator
   is Azure.ResourceManager.ProxyResource<AdministratorProperties> {
@@ -26,6 +27,7 @@ model AzureADAdministrator
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AzureADAdministrators {
   /**

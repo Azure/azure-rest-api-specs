@@ -548,6 +548,8 @@ model BackupAndExportResponse
   /**
    * The name of the backup and export response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/resource-name" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" ""
   @key("backupAndExportResponseName")
   @segment("backupAndExportResponses")
   name: string;
@@ -555,23 +557,27 @@ model BackupAndExportResponse
   /**
    * The operation status
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   status?: OperationStatus;
 
   /**
    * Start time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   startTime?: utcDateTime;
 
   /**
    * End time
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   endTime?: utcDateTime;
 
   /**
    * Operation progress (0-100).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @maxValue(100)
   @minValue(0)
   percentComplete?: float64;
@@ -580,6 +586,7 @@ model BackupAndExportResponse
 /**
  * BackupAndExport Response Properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 model BackupAndExportResponseProperties {
   /**
    * Size of datasource in bytes

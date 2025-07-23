@@ -25,6 +25,7 @@ model ServerBackupV2
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface ServerBackupV2s {
   /**
