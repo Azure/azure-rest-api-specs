@@ -52,8 +52,6 @@ interface GuestAgents {
   /**
    * Implements GuestAgent GET method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VMInstanceGuestAgents_Get")
   get is ArmResourceRead<
     GuestAgent,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -62,8 +60,6 @@ interface GuestAgents {
   /**
    * Create Or Update GuestAgent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VMInstanceGuestAgents_Create")
   create is GuestAgentsOps.CreateOrUpdateAsync<
     GuestAgent,
     OptionalRequestBody = true
@@ -72,8 +68,6 @@ interface GuestAgents {
   /**
    * Implements GuestAgent DELETE method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VMInstanceGuestAgents_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     GuestAgent,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -82,8 +76,6 @@ interface GuestAgents {
   /**
    * Returns the list of GuestAgent of the given vm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VMInstanceGuestAgents_List")
   list is ArmResourceListByParent<
     GuestAgent,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,

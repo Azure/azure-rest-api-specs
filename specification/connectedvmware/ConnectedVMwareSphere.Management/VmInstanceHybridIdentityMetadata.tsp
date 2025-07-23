@@ -36,8 +36,6 @@ interface VmInstanceHybridIdentityMetadataOperationGroup {
   /**
    * Implements HybridIdentityMetadata GET method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VmInstanceHybridIdentityMetadata_Get")
   get is ArmResourceRead<
     VmInstanceHybridIdentityMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -46,8 +44,6 @@ interface VmInstanceHybridIdentityMetadataOperationGroup {
   /**
    * Returns the list of HybridIdentityMetadata of the given vm.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VmInstanceHybridIdentityMetadata_List")
   list is ArmResourceListByParent<
     VmInstanceHybridIdentityMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,

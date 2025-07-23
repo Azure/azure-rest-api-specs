@@ -58,5 +58,8 @@ using Microsoft.ConnectedVMwarevSphere;
 @@flattenProperty(VmInstanceHybridIdentityMetadata.properties);
 
 @@clientName(GuestAgents.create::parameters.resource, "body");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(GuestAgent.properties);
+@@clientLocation(GuestAgents.get, "VMInstanceGuestAgents");
+@@clientLocation(GuestAgents.create, "VMInstanceGuestAgents");
+@@clientName(GuestAgents.create::parameters.resource, "body");
+@@clientLocation(GuestAgents.delete, "VMInstanceGuestAgents");
+@@clientLocation(GuestAgents.list, "VMInstanceGuestAgents");

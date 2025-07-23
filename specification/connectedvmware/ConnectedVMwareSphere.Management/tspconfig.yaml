@@ -9,6 +9,34 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/connectedvmware.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-connectedvmware"
+    namespace: "azure.mgmt.connectedvmware"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-connectedvmware"
+    namespace: "com.azure.resourcemanager.connectedvmware"
+    service-name: "ConnectedVMware" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-connectedvmware"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-connectedvmware"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/connectedvmware"
+    package-dir: "armconnectedvmware"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
