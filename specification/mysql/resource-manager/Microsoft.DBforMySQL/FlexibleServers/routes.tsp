@@ -14,7 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.DBforMySQL;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface LocationBasedCapabilitiesOperationGroup {
+interface LocationBasedCapabilities {
   /**
    * Get capabilities at specified location in a given subscription.
    */
@@ -31,7 +31,7 @@ interface LocationBasedCapabilitiesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface CheckVirtualNetworkSubnetUsageOperationGroup {
+interface CheckVirtualNetworkSubnetUsage {
   /**
    * Get virtual network subnet usage for a given vNet resource id.
    */
@@ -48,7 +48,7 @@ interface CheckVirtualNetworkSubnetUsageOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface CheckNameAvailabilityOperationGroup {
+interface CheckNameAvailability {
   /**
    * Check the availability of name for server
    */
@@ -65,7 +65,7 @@ interface CheckNameAvailabilityOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface CheckNameAvailabilityWithoutLocationOperationGroup {
+interface CheckNameAvailabilityWithoutLocation {
   /**
    * Check the availability of name for server
    */
@@ -82,7 +82,7 @@ interface CheckNameAvailabilityWithoutLocationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface OperationResultsOperationGroup {
+interface OperationResults {
   /**
    * Get the operation result for a long running operation.
    */
@@ -100,7 +100,7 @@ interface OperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface OperationProgressOperationGroup {
+interface OperationProgress {
   /**
    * Get the operation result for a long running operation.
    */
@@ -118,7 +118,7 @@ interface OperationProgressOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface GetPrivateDnsZoneSuffixOperationGroup {
+interface getPrivateDnsZoneSuffix {
   /**
    * Get private DNS zone suffix in the cloud.
    */

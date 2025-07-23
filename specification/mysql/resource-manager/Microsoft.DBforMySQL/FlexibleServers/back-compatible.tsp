@@ -91,14 +91,14 @@ using Microsoft.DBforMySQL;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(CheckNameAvailabilityWithoutLocationOperationGroup.execute::parameters.body,
+@@clientName(CheckNameAvailabilityWithoutLocation.execute::parameters.body,
   "nameAvailabilityRequest"
 );
 
-@@clientName(CheckVirtualNetworkSubnetUsageOperationGroup.execute::parameters.body,
+@@clientName(CheckVirtualNetworkSubnetUsage.execute::parameters.body,
   "parameters"
 );
 
-@@clientName(CheckNameAvailabilityOperationGroup.execute::parameters.body,
+@@clientName(CheckNameAvailability.execute::parameters.body,
   "nameAvailabilityRequest"
 );
