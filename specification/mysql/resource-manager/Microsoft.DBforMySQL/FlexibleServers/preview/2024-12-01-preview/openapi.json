@@ -266,7 +266,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{location}/capabilitySets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilitySets": {
       "get": {
         "operationId": "LocationBasedCapabilitySet_List",
         "tags": [
@@ -281,7 +281,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/LocationNameParameter"
           }
         ],
         "responses": {
@@ -308,7 +308,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{location}/capabilitySets/{capabilitySetName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/capabilitySets/{capabilitySetName}": {
       "get": {
         "operationId": "LocationBasedCapabilitySet_Get",
         "tags": [
@@ -323,7 +323,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/LocationNameParameter"
           },
           {
             "name": "capabilitySetName",

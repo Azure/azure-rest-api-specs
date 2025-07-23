@@ -27,6 +27,38 @@ model Capability
   name: string = "default";
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface LocationBasedCapabilityOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...LocationNameParameter,
+      },
+      {}
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface LocationBasedCapabilityOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+        ...LocationNameParameter,
+
+        /**
+         * Name of capability set
+         */
+        @path
+        @segment("capabilitySets")
+        @pattern("^[a-z0-9][-a-z0-9]*(?<!-)$")
+        capabilitySetName: string = "default",
+      },
+      {}
+    > {}
+
 @armResourceOperations
 interface LocationBasedCapabilitySet {
   /**
@@ -34,19 +66,16 @@ interface LocationBasedCapabilitySet {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LocationBasedCapabilitySet_Get")
-  get is ArmResourceRead<
-    Capability,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is LocationBasedCapabilityOperationOps.Read<Capability>;
 
   /**
    * Get capabilities at specified location in a given subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("capabilitySets")
   @operationId("LocationBasedCapabilitySet_List")
-  list is ArmResourceListByParent<
+  list is LocationBasedCapabilityOps.Read<
     Capability,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<CapabilitySetsList>
   >;
 }
