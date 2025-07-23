@@ -20,7 +20,6 @@ import "./FederatedIdentityCredential.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 /**
@@ -33,7 +32,30 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(CommonTypes.Versions.v4)
 namespace Microsoft.ManagedIdentity;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+// interface Operations2 extends Azure.ResourceManager.Operations {}
+
+/**
+ * This is the interface that implements the standard Azure Resource Manager operation that returns
+ * all supported RP operations. You should have exactly one declaration for each
+ * Azure Resource Manager service. It implements
+ *   GET "/providers/Microsoft.ContosoProviderHub/operations"
+ */
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}
 
 /**
  * The available API versions.

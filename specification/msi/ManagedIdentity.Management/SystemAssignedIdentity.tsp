@@ -29,6 +29,7 @@ model SystemAssignedIdentity
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
+@@visibility(SystemAssignedIdentity.properties, Lifecycle.Read);
 
 @armResourceOperations
 interface SystemAssignedIdentities {

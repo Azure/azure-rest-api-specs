@@ -53,7 +53,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -464,6 +464,7 @@
     },
     "FederatedIdentityCredentialProperties": {
       "type": "object",
+      "title": "Federated identity credential properties.",
       "properties": {
         "issuer": {
           "type": "string",
@@ -494,7 +495,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -551,11 +555,72 @@
         }
       ]
     },
+    "Operation": {
+      "type": "object",
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Operation Name."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "title": "Operation Display."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "title": "Operation Display.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Resource Provider Name."
+        },
+        "resource": {
+          "type": "string",
+          "title": "Resource Type."
+        },
+        "operation": {
+          "type": "string",
+          "title": "Operation Type."
+        },
+        "description": {
+          "type": "string",
+          "title": "Operation description"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "title": "Operations List.",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Operations List.",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "Next Link",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
     "SystemAssignedIdentity": {
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SystemAssignedIdentityProperties",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "location": {
@@ -588,6 +653,7 @@
     },
     "SystemAssignedIdentityProperties": {
       "type": "object",
+      "title": "System Assigned Identity properties.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -630,6 +696,7 @@
     },
     "UserAssignedIdentityProperties": {
       "type": "object",
+      "title": "User Assigned Identity properties.",
       "properties": {
         "tenantId": {
           "type": "string",

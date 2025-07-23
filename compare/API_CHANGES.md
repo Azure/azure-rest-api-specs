@@ -18,49 +18,11 @@
 |------|------------|-------|
 | `definitions.CloudErrorBody__deleted` | deleted | `{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"target":{"type"...` |
 
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","title":"Microsoft.ManagedIdentity Operation.","properties":{"name":{"type":"string...` |
-
-### Changes for `OperationDisplay`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationDisplay__deleted` | deleted | `{"type":"object","title":"Operation Display.","properties":{"provider":{"type":"string","title":"Res...` |
-
-### Changes for `OperationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","title":"Operations List.","description":"[Placeholder] Discription for page model"...` |
-
 ### Changes for `Azure.Core.uuid`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions['Azure.Core.uuid__added']` | added | `{"type":"string","format":"uuid"}` |
-
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FederatedIdentityCredentialProperties.title__deleted` | deleted | `Federated identity credential properties.` |
-| `definitions.SystemAssignedIdentityProperties.title__deleted` | deleted | `System Assigned Identity properties.` |
-| `definitions.UserAssignedIdentityProperties.title__deleted` | deleted | `User Assigned Identity properties.` |
-
-### Changes for `x-ms-identifiers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FederatedIdentityCredentialsListResult.properties.value['x-ms-identifiers__deleted']` | deleted | `["id"]` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SystemAssignedIdentity.properties.properties.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `modelAsExtensible`
 
@@ -74,7 +36,6 @@
 |------|-----------|----------|
 | `paths['/{scope}/providers/Microsoft.ManagedIdentity/identities/default'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/{scope}/providers/Microsoft.ManagedIdentity/identities/default'].get['x-ms-examples'].MsiOperationsList.$ref` | `./examples/SystemAssignedIdentityGet.json` | `./examples/SystemAssignedIdentities_GetByScope.json` |
-| `paths['/providers/Microsoft.ManagedIdentity/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult` |
 | `paths['/providers/Microsoft.ManagedIdentity/operations'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities'].get.responses.default.schema.$ref` | `#/definitions/CloudError` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities'].get['x-ms-examples'].IdentityListBySubscription.$ref` | `./examples/IdentityListBySubscription.json` | `./examples/UserAssignedIdentities_ListBySubscription.json` |

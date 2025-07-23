@@ -30,14 +30,6 @@
           }
         },
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -294,94 +286,11 @@
       },
       "x-ms-external": true
     },
-    "Operation__deleted": {
-      "type": "object",
-      "title": "Microsoft.ManagedIdentity Operation.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Operation Name."
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "title": "Operation Display."
-        }
-      }
-    },
-    "OperationDisplay__deleted": {
-      "type": "object",
-      "title": "Operation Display.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "title": "Resource Provider Name."
-        },
-        "operation": {
-          "type": "string",
-          "title": "Operation Type."
-        },
-        "resource": {
-          "type": "string",
-          "title": "Resource Type."
-        },
-        "description": {
-          "type": "string",
-          "title": "Operation description"
-        }
-      }
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "title": "Operations List.",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "title": "Operations List.",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "title": "Next Link",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "Azure.Core.uuid__added": {
       "type": "string",
       "format": "uuid"
     },
-    "FederatedIdentityCredentialProperties": {
-      "title__deleted": "Federated identity credential properties."
-    },
-    "FederatedIdentityCredentialsListResult": {
-      "properties": {
-        "value": {
-          "x-ms-identifiers__deleted": [
-            "id"
-          ]
-        }
-      }
-    },
-    "SystemAssignedIdentity": {
-      "properties": {
-        "properties": {
-          "readOnly__deleted": true
-        }
-      }
-    },
-    "SystemAssignedIdentityProperties": {
-      "title__deleted": "System Assigned Identity properties."
-    },
     "UserAssignedIdentityProperties": {
-      "title__deleted": "User Assigned Identity properties.",
       "properties": {
         "isolationScope": {
           "x-ms-enum": {

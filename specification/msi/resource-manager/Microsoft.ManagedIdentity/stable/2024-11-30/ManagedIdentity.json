@@ -106,7 +106,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -667,6 +667,7 @@
     },
     "FederatedIdentityCredentialProperties": {
       "type": "object",
+      "title": "Federated identity credential properties.",
       "description": "The properties associated with a federated identity credential.",
       "properties": {
         "issuer": {
@@ -701,7 +702,10 @@
           "description": "The FederatedIdentityCredential items on this page",
           "items": {
             "$ref": "#/definitions/FederatedIdentityCredential"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -786,6 +790,74 @@
         ]
       }
     },
+    "Operation": {
+      "type": "object",
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Operation Name.",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\""
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "title": "Operation Display.",
+          "description": "Localized display information for this particular operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "title": "Operation Display.",
+      "description": "Localized display information for and operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Resource Provider Name.",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\"."
+        },
+        "resource": {
+          "type": "string",
+          "title": "Resource Type.",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\"."
+        },
+        "operation": {
+          "type": "string",
+          "title": "Operation Type.",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\"."
+        },
+        "description": {
+          "type": "string",
+          "title": "Operation description",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "title": "Operations List.",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Operations List.",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "Next Link",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
     "SystemAssignedIdentity": {
       "type": "object",
       "description": "Describes a system assigned identity resource.",
@@ -793,6 +865,7 @@
         "properties": {
           "$ref": "#/definitions/SystemAssignedIdentityProperties",
           "description": "The properties associated with the identity.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         },
         "location": {
@@ -825,6 +898,7 @@
     },
     "SystemAssignedIdentityProperties": {
       "type": "object",
+      "title": "System Assigned Identity properties.",
       "description": "The properties associated with the system assigned identity.",
       "properties": {
         "tenantId": {
@@ -869,6 +943,7 @@
     },
     "UserAssignedIdentityProperties": {
       "type": "object",
+      "title": "User Assigned Identity properties.",
       "description": "The properties associated with the user assigned identity.",
       "properties": {
         "tenantId": {

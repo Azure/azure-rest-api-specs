@@ -27,6 +27,7 @@ union IsolationScope {
  * The properties associated with the system assigned identity.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@summary("System Assigned Identity properties.")
 model SystemAssignedIdentityProperties {
   /**
    * The id of the tenant which the identity belongs to.
@@ -112,6 +113,7 @@ model UserAssignedIdentitiesListResult is Page<Identity>;
  * The properties associated with the user assigned identity.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@summary("User Assigned Identity properties.")
 model UserAssignedIdentityProperties {
   /**
    * The id of the tenant which the identity belongs to.
@@ -170,6 +172,7 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
  */
 model FederatedIdentityCredentialsListResult
   is Page<FederatedIdentityCredential>;
+@@extension(FederatedIdentityCredentialsListResult.value, "x-ms-identifiers", #["id"]);
 
 // @@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
 
@@ -177,6 +180,7 @@ model FederatedIdentityCredentialsListResult
  * The properties associated with a federated identity credential.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@summary("Federated identity credential properties.")
 model FederatedIdentityCredentialProperties {
   /**
    * The URL of the issuer to be trusted.
@@ -216,4 +220,57 @@ model ScopeParameter {
 model ScopeParameters<Resource extends {}> {
   ...ApiVersionParameter;
   ...ScopeParameter;
+}
+
+/**
+ * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+ */
+// @friendlyName("OperationListResult")
+@summary("Operations List.")
+model OperationListResult is Page<Operation>;
+@@summary(OperationListResult.value, "Operations List.");
+@@summary(OperationListResult.nextLink, "Next Link");
+@@extension(OperationListResult.value, "x-ms-identifiers", #["name"]);
+/**
+ * Details of a REST API operation, returned from the Resource Provider Operations API
+ */
+@summary("Microsoft.ManagedIdentity Operation.")
+model Operation {
+  /** 
+    The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"
+     */
+  @summary("Operation Name.")
+  name?: string;
+
+  /** Localized display information for this particular operation. */
+  @summary("Operation Display.")
+  display?: OperationDisplay;
+}
+
+/**
+ * Localized display information for and operation.
+ */
+@summary("Operation Display.")
+model OperationDisplay {
+  /** 
+  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @summary("Resource Provider Name.")
+  provider?: string;
+
+  /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @summary("Resource Type.")
+  resource?: string;
+
+  /** 
+    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+     */
+  @summary("Operation Type.")
+  operation?: string;
+
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  @summary("Operation description")
+  description?: string;
 }
