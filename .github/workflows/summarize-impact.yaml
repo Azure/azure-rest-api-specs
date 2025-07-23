@@ -1,0 +1,75 @@
+name: "[TEST-IGNORE] Summarize PR Impact"
+
+on: pull_request
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  impact:
+    name: "[TEST-IGNORE] Summarize PR Impact"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./after/.github/actions/setup-node-install-deps
+        with:
+          working-directory: after
+
+      - name: Get PR labels
+        id: get-labels
+        working-directory: after
+        run: |
+          labels=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '[.labels[].name] | join(",")')
+          echo "labels=$labels" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Run Summarize Impact
+        id: summarize-impact
+        working-directory: after
+        run: |
+          npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
+            --number "${{ github.event.pull_request.number }}" \
+            --sourceBranch "$HEAD_REF" \
+            --targetBranch "${{ github.event.pull_request.base.ref }}" \
+            --sha "${{ github.event.pull_request.head.sha }}" \
+            --repo "${{ github.repository }}" \
+            --owner "${{ github.repository_owner }}" \
+            --labels "${{ steps.get-labels.outputs.labels }}" \
+            --isDraft ${{ github.event.pull_request.draft }}
+        env:
+          # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
+          NODE_OPTIONS: "--max-old-space-size=8192"
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.summarize-impact.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.summarize-impact.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
+
+      - if: |
+          always() &&
+          github.event.pull_request.number > 0
+        name: Upload artifact with issue number
+        uses: ./after/.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ github.event.pull_request.number }}"

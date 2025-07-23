@@ -1980,3 +1980,66 @@ op listNodeFilesCustomization is Azure.Batch.ListOperation<
   "parameters",
   "java"
 );
+
+// Updating original operations that have been converted to LRO methods to have internal access
+@@access(Azure.Batch.Nodes.deallocateNode, Access.internal, "java");
+@@access(BatchNodeDeallocateOptions, Access.public, "java");
+
+@@access(Azure.Batch.Certificates.deleteCertificate, Access.internal, "java");
+@@access(BatchCertificateDeleteOptions, Access.public, "java");
+
+@@access(Azure.Batch.Jobs.deleteJob, Access.internal, "java");
+@@access(BatchJobDeleteOptions, Access.public, "java");
+
+@@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "java");
+@@access(BatchJobScheduleDeleteOptions, Access.public, "java");
+
+@@access(Azure.Batch.Pools.deletePool, Access.internal, "java");
+@@access(BatchPoolDeleteOptions, Access.public, "java");
+
+@@access(Azure.Batch.Jobs.disableJob, Access.internal, "java");
+@@access(BatchJobDisableOptions, Access.public, "java");
+
+@@access(Azure.Batch.Jobs.enableJob, Access.internal, "java");
+@@access(BatchJobEnableOptions, Access.public, "java");
+
+@@access(Azure.Batch.Nodes.rebootNode, Access.internal, "java");
+@@access(BatchNodeRebootOptions, Access.public, "java");
+
+@@access(Azure.Batch.Nodes.reimageNode, Access.internal, "java");
+@@access(BatchNodeReimageOptions, Access.public, "java");
+
+@@access(Azure.Batch.Pools.removeNodes, Access.internal, "java");
+@@access(BatchNodesRemoveOptions, Access.public, "java");
+
+@@access(Azure.Batch.Pools.resizePool, Access.internal, "java");
+@@access(BatchPoolResizeOptions, Access.public, "java");
+
+@@access(Azure.Batch.Nodes.startNode, Access.internal, "java");
+@@access(BatchNodeStartOptions, Access.public, "java");
+
+@@access(Azure.Batch.Pools.stopPoolResize, Access.internal, "java");
+@@access(BatchPoolResizeStopOptions, Access.public, "java");
+
+@@access(Azure.Batch.Jobs.terminateJob, Access.internal, "java");
+@@access(BatchJobTerminateOptions, Access.public, "java");
+
+@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+  Access.internal,
+  "java"
+);
+@@access(BatchJobScheduleTerminateOptions, Access.public, "java");
+
+@@access(Azure.Batch.BatchNodeReimageOption, Access.public, "java");
+@@access(Azure.Batch.DisableBatchJobOption, Access.public, "java");
+@@access(Azure.Batch.BatchNodeDeallocateOption, Access.public, "java");
+@@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "java");
+@@access(Azure.Batch.BatchJobDisableOptions, Access.public, "java");
+@@access(Azure.Batch.BatchJobTerminateOptions, Access.public, "java");
+@@access(Azure.Batch.BatchNodeDeallocateOptions, Access.public, "java");
+@@access(Azure.Batch.BatchNodeRebootKind, Access.public, "java");
+@@access(Azure.Batch.BatchNodeRebootKind, Access.public, "java");
+@@access(Azure.Batch.BatchNodeRebootOptions, Access.public, "java");
+@@access(Azure.Batch.BatchNodeReimageOptions, Access.public, "java");
+@@access(Azure.Batch.BatchNodeRemoveOptions, Access.public, "java");
+@@access(Azure.Batch.BatchPoolResizeOptions, Access.public, "java");
