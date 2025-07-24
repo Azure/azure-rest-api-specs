@@ -1,6 +1,6 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'isValidCodeOwner', 'ValidateCodeOwnersForService', 'AddCodeOwnerEntry', 'AddCodeOwner', 'DeleteCodeOwner'] 
+tools: ['CheckServiceLabel', 'isValidCodeOwner', 'ValidateCodeOwnersForService', 'AddCodeOwnerEntry', 'AddCodeOwners', 'DeleteCodeOwners'] 
 ---
 
 # Goal
@@ -25,10 +25,10 @@ tools: ['CheckServiceLabel', 'isValidCodeOwner', 'ValidateCodeOwnersForService',
         - Ask which language repository or repositories they want to add the code owner to. (e.g., Python, Java, etc.)
         - Check if the service already exists in the code owners file for the selected repository or repositories.
             - If service does not exist in the code owners file, use the `AddCodeOwnerEntry` tool to add a new service entry along with its code owner
-            - If the service already exists, use the `AddCodeOwner` tool to add the new code owner to the existing entry.
-    - If invalid, inform the user that the code owner is invalid and provide guidance on how to fix it.
+            - If the service already exists, use the `AddCodeOwners` tool to add the new code owners to the existing entry.
+    - If invalid, inform the user that the code owners are invalid and provide guidance on how to fix it.
 - If the user wants to delete a code owner:
     - Ask which language repository or repositories they want to delete the code owner from.
-    - Use the `DeleteCodeOwner` tool to remove the code owner from the specified repository or repositories.
+    - Use the `DeleteCodeOwners` tool to remove the code owner from the specified repository or repositories.
     - If the service entry would become empty after deletion, prompt the user that they must provide a new code owner.
         - If the user does not provide a new code owner, DO NOT delete the code owner. Each service entry must have at least one code owner.
