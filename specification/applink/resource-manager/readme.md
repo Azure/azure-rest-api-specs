@@ -39,17 +39,6 @@ input-file:
   - Microsoft.AppLink/preview/2025-08-01-preview/openapi.json
 ```
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: AvoidAdditionalProperties
-    reason: Pure proxy doesn't has id.
-    from: openapi.json
-    where:
-      - $.definitions.AppLinkReleaseChannelProfile.id
-```
-
 ---
 
 # Code Generation
