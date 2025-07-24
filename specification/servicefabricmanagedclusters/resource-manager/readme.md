@@ -421,6 +421,9 @@ suppressions:
     where:
       - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration.format
       - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeDomainTimeout.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration.format
       - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout.format

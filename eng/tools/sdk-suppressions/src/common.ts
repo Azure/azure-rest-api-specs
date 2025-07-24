@@ -1,12 +1,12 @@
-import { parse as yamlParse } from "yaml";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { parse as yamlParse } from "yaml";
 
 /**
  * @returns {string[]}
  * @description get the changed files in the current PR
  */
 export async function getSDKSuppressionsChangedFiles() {
-  const changedFiles = await getChangedFiles();
+  const changedFiles = await getChangedFiles({ paths: ["specification"] });
   const sdkSuppressionsFiles = changedFiles.filter((file) =>
     file.endsWith("sdk-suppressions.yaml"),
   );
