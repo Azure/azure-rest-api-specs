@@ -484,12 +484,12 @@ model VerifyChangeValidityRequest {
   @doc("The context of the verify change validity request.")
   @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  context?: VerifyChangeValidityRequsestContext;
+  context?: VerifyChangeValidityRequestContext;
 }
 
 @added(Versions.v2025_07_01_preview)
 @doc("The context object of the verify change validity request.")
-model VerifyChangeValidityRequsestContext {
+model VerifyChangeValidityRequestContext {
   @doc("The application Id performing the ARM operation.")
   applicationId: string
 }
