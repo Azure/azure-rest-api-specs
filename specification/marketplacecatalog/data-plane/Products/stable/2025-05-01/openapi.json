@@ -256,7 +256,7 @@
         },
         "artifactType": {
           "type": "string",
-          "description": "The type of the artifact. Possible values include \n- `Template` - Contains link to the main ARM template\n- `Fragment` - Contains link to the nested ARM template\n- `Custom` - Custom artifact type\n- `Metadata` - Metadata artifact type"
+          "description": "Defines the artifact resource type and its role in the marketplace offering deployment process.\n- `Template` - Primary Azure Resource Manager template containing the main deployment configuration\n- `Fragment` - Nested Azure Resource Manager template referenced by the primary template for modular deployments\n- `Custom` - Publisher-defined artifact with specialized deployment or configuration requirements\n- `Metadata` - Supplementary information and configuration data supporting the deployment process"
         }
       },
       "required": [
@@ -298,7 +298,7 @@
         },
         "pricingAudience": {
           "type": "string",
-          "description": "Supported pricing audiences. Possible values include \n- `DirectCommercial` - Available to commercial direct channel\n- `PartnerCommercial` - Available to Cloud Solution Providers (CSP)"
+          "description": "Specifies the distribution channel and customer segment for product pricing and availability.\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution"
         },
         "terms": {
           "type": "array",
@@ -867,11 +867,11 @@
         },
         "vmArchitectureType": {
           "type": "string",
-          "description": "VM Architecture Type. Applicable to Virtual Machine products only. Possible values include \n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2\n- `Arm64` - The VM image architecture of the plan is Arm64"
+          "description": "Specifies the virtual machine processor architecture and generation. Applies exclusively to Virtual Machine product types.\n- `X64Gen1` - x64 processor architecture with Generation 1 virtual machine firmware and BIOS support\n- `X64Gen2` - x64 processor architecture with Generation 2 virtual machine firmware and UEFI support\n- `Arm64` - ARM 64-bit processor architecture optimized for energy efficiency and cloud-native workloads"
         },
         "cspState": {
           "type": "string",
-          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values include \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `OptOut` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects"
+          "description": "Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment"
         },
         "metadata": {
           "$ref": "#/definitions/PlanMetadata",
@@ -902,14 +902,14 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The pricing types for which this plan is designated. Possible values include \n- `Free` - Product has at least one plan that is free of charge\n- `FreeTrial` - Product has at least one plan that is free trial\n- `Byol` - Product has at least one plan that is bring your own license\n- `Payg` - Product has at least one plan that is Pay as you go\n- `Ri` - Product has at least one plan that is Reserved Instance billing model",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
           "items": {
             "type": "string"
           }
         },
         "vmSecuritytypes": {
           "type": "array",
-          "description": "VM security type. Applicable to Virtual Machine products only. Possible values include \n- `None` - Default value\n- `Trusted` - Trusted Launch security\n- `Confidential` - Confidential security",
+          "description": "Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads",
           "items": {
             "type": "string"
           }
@@ -928,7 +928,7 @@
         },
         "planType": {
           "type": "string",
-          "description": "The delivery method or deployment model. Possible values include \n- `None` - Default value\n- `DevService` - Dev Service\n- `ManagedApplication` - Managed Application plan type\n- `VirtualMachine` - Virtual Machine\n- `AzureApplication` - Azure Application\n- `Container` - Container\n- `SaaS` - Software as a Service\n- `SolutionTemplate` - Solution Template\n- `IotEdgeModules` - IoT Edge Module\n- `ManagedServices` - Managed Service\n- `ContainerApps` - Container App\n- `VisualStudioExtension` - Visual Studio Extension\n- `DynamicsOps` - Dynamics Operations\n- `DynamicsCE` - Dynamics CE\n- `DynamicsBC` - Dynamics Business Central\n- `PowerBI` - Power BI\n- `ConsultingServices` - Consulting Services\n- `CosellOnly` - Co-sell Only\n- `CoreVirtualMachine` - Core Virtual Machine\n- `PowerBIVisuals` - Power BI Visuals\n- `Office365` - Office 365\n- `AADApps` - Azure Active Directory Applications\n- `AzureServices` - Azure Services\n- `AppService` - App Service\n- `LogAnalytics` - Log Analytics\n- `MicrosoftProduct` - Microsoft Product"
+          "description": "Defines the deployment model for Azure Applications marketplace products. This property applies exclusively to Azure Applications product types.\n- `SolutionTemplate` - Azure Resource Manager template-based deployment that provisions and configures multiple Azure resources as an integrated solution. Customers deploy resources directly into their own Azure subscriptions with full control and management responsibility\n- `ManagedApplication` - Azure-managed deployment model where the publisher maintains administrative control over deployed resources while customers retain usage access. Azure handles resource lifecycle, access policies, and cross-resource management within the customer's subscription"
         },
         "displayRank": {
           "type": "string",
@@ -1067,7 +1067,7 @@
         },
         "legalTermsType": {
           "type": "string",
-          "description": "Supported legal terms type. Possible values include \n- `None` - No specific legal terms\n- `EA` - Microsoft Enterprise Agreement"
+          "description": "Identifies the legal agreement framework governing product licensing and usage terms.\n- `None` - Standard marketplace terms apply without additional legal agreement requirements\n- `EA` - Microsoft Enterprise Agreement terms for volume licensing and enterprise customer deployments"
         },
         "supportUri": {
           "type": "string",
@@ -1187,22 +1187,22 @@
         },
         "azureBenefit": {
           "type": "string",
-          "description": "Eligibility for Azure consumption commitment benefit. For more details see: https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit. Possible values include \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit"
+          "description": "Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs"
         },
         "badges": {
           "type": "array",
-          "description": "Badge type. Possible values include \n- `PreferredSolution` - Preferred Solution badge\n- `PowerBICertified` - Power BI Certified badge\n- `AdditionalPurchaseRequirement` - Additional Purchase Requirement badge",
+          "description": "Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality\n- `MAICPP` - Microsoft AI Cloud Partner Program designation recognizing ISV solutions that meet quality differentiation criteria for marketplace and co-sell acceleration\n- `MACCEligible` - Product purchases qualify toward customer's Microsoft Azure Consumption Commitment (MACC) benefit calculations",
           "items": {
             "type": "string"
           }
         },
         "publisherType": {
           "type": "string",
-          "description": "A value indicating whether this is a Microsoft or third party product. Possible values include \n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `ThirdParty` - Product is published by Third Party Vendor"
+          "description": "Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance"
         },
         "publishingStage": {
           "type": "string",
-          "description": "Product publishing stage. Possible values include \n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace"
+          "description": "Indicates the product availability status and customer access level within Azure Marketplace.\n- `Preview` - Limited availability to selected customers for testing and early access evaluation\n- `Public` - General availability to all Azure Marketplace customers for production deployment"
         },
         "uniqueProductId": {
           "type": "string",
@@ -1211,7 +1211,7 @@
         },
         "productType": {
           "type": "string",
-          "description": "The delivery method or deployment model. Possible values include \n- `None` - Default value\n- `DevService` - Dev Service\n- `ManagedApplication` - Managed Application plan type\n- `VirtualMachine` - Virtual Machine\n- `AzureApplication` - Azure Application\n- `Container` - Container\n- `SaaS` - Software as a Service\n- `SolutionTemplate` - Solution Template\n- `IotEdgeModules` - IoT Edge Module\n- `ManagedServices` - Managed Service\n- `ContainerApps` - Container App\n- `VisualStudioExtension` - Visual Studio Extension\n- `DynamicsOps` - Dynamics Operations\n- `DynamicsCE` - Dynamics CE\n- `DynamicsBC` - Dynamics Business Central\n- `PowerBI` - Power BI\n- `ConsultingServices` - Consulting Services\n- `CosellOnly` - Co-sell Only\n- `CoreVirtualMachine` - Core Virtual Machine\n- `PowerBIVisuals` - Power BI Visuals\n- `Office365` - Office 365\n- `AADApps` - Azure Active Directory Applications\n- `AzureServices` - Azure Services\n- `AppService` - App Service\n- `LogAnalytics` - Log Analytics\n- `MicrosoftProduct` - Microsoft Product"
+          "description": "Specifies the primary deployment model and hosting architecture for the marketplace product stored in the Marketplace Catalog.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels"
         },
         "productSubType": {
           "type": "string",
@@ -1230,7 +1230,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The pricing types for which this plan is designated. Possible values include \n- `Free` - Product has at least one plan that is free of charge\n- `FreeTrial` - Product has at least one plan that is free trial\n- `Byol` - Product has at least one plan that is bring your own license\n- `Payg` - Product has at least one plan that is Pay as you go\n- `Ri` - Product has at least one plan that is Reserved Instance billing model",
+          "description": "Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing",
           "items": {
             "type": "string"
           }
@@ -1272,7 +1272,7 @@
         },
         "ratingBuckets": {
           "type": "array",
-          "description": "Rating Bucket. Possible values include \n- `AboveOne` - Above one star rating\n- `AboveTwo` - Above two stars rating\n- `AboveThree` - Above three stars rating\n- `AboveFour` - Above four stars rating",
+          "description": "Categorizes products by customer rating thresholds for marketplace filtering and discovery.\n- `AboveOne` - Products with customer ratings exceeding 1.0 stars based on marketplace reviews\n- `AboveTwo` - Products with customer ratings exceeding 2.0 stars based on marketplace reviews\n- `AboveThree` - Products with customer ratings exceeding 3.0 stars based on marketplace reviews\n- `AboveFour` - Products with customer ratings exceeding 4.0 stars based on marketplace reviews",
           "items": {
             "type": "string"
           }
@@ -1493,11 +1493,11 @@
         },
         "publisherType": {
           "type": "string",
-          "description": "A value indicating whether this is a Microsoft or third party product. Possible values include \n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `ThirdParty` - Product is published by Third Party Vendor"
+          "description": "Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance"
         },
         "productType": {
           "type": "string",
-          "description": "The delivery method or deployment model. Possible values include \n- `None` - Default value\n- `DevService` - Dev Service\n- `ManagedApplication` - Managed Application plan type\n- `VirtualMachine` - Virtual Machine\n- `AzureApplication` - Azure Application\n- `Container` - Container\n- `SaaS` - Software as a Service\n- `SolutionTemplate` - Solution Template\n- `IotEdgeModules` - IoT Edge Module\n- `ManagedServices` - Managed Service\n- `ContainerApps` - Container App\n- `VisualStudioExtension` - Visual Studio Extension\n- `DynamicsOps` - Dynamics Operations\n- `DynamicsCE` - Dynamics CE\n- `DynamicsBC` - Dynamics Business Central\n- `PowerBI` - Power BI\n- `ConsultingServices` - Consulting Services\n- `CosellOnly` - Co-sell Only\n- `CoreVirtualMachine` - Core Virtual Machine\n- `PowerBIVisuals` - Power BI Visuals\n- `Office365` - Office 365\n- `AADApps` - Azure Active Directory Applications\n- `AzureServices` - Azure Services\n- `AppService` - App Service\n- `LogAnalytics` - Log Analytics\n- `MicrosoftProduct` - Microsoft Product"
+          "description": "Specifies the primary deployment model and hosting architecture for the marketplace product.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels"
         },
         "productSubType": {
           "type": "string",
@@ -1590,7 +1590,7 @@
         },
         "cspState": {
           "type": "string",
-          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values include \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `OptOut` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects"
+          "description": "Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available exclusively to publisher-selected Cloud Solution Provider partners"
         },
         "hasRi": {
           "type": "boolean",
@@ -1630,7 +1630,7 @@
         },
         "reason": {
           "type": "string",
-          "description": "Reason for stopping to sell an item. Possible values include \n- `EndOfSupport` - End of support for the item\n- `SecurityIssue` - Security issue with the item\n- `Other` - Other reason"
+          "description": "Specifies the business or technical justification for discontinuing product sales in the marketplace.\n- `EndOfSupport` - Product lifecycle has reached end-of-support status with no further updates or maintenance\n- `SecurityIssue` - Critical security vulnerability or compliance issue requiring immediate sales suspension\n- `Other` - Alternative business reason not covered by standard discontinuation categories"
         },
         "alternativeOfferId": {
           "type": "string",
