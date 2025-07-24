@@ -47,7 +47,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,7 +96,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -141,7 +141,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -215,9 +215,6 @@
           },
           "ConfigurationStores_Create_With_Telemetry": {
             "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
-          },
-          "ConfigurationStores_Create_With_AzureFrontDoor": {
-            "$ref": "./examples/ConfigurationStoresCreateWithAzureFrontDoor.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -270,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -326,7 +323,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -378,7 +375,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -430,7 +427,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -484,7 +481,7 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1664,10 +1661,6 @@
           "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
           "description": "Managed On Behalf Of Configuration.",
           "readOnly": true
-        },
-        "azureFrontDoor": {
-          "$ref": "#/definitions/AzureFrontDoorProperties",
-          "description": "Property specifying the configuration of Azure Front Door for this configuration store"
         }
       }
     },
@@ -1837,10 +1830,6 @@
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry to update for this configuration store"
-        },
-        "azureFrontDoor": {
-          "$ref": "#/definitions/AzureFrontDoorProperties",
-          "description": "Property specifying the configuration of Azure Front Door for this configuration store"
         }
       }
     },
@@ -2824,17 +2813,6 @@
       "properties": {
         "resourceId": {
           "description": "Resource ID of a resource enabling telemetry collection",
-          "type": "string",
-          "format": "arm-id"
-        }
-      }
-    },
-    "AzureFrontDoorProperties": {
-      "description": "Azure Front Door settings",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Resource ID of an Azure Front Door profile",
           "type": "string",
           "format": "arm-id"
         }
