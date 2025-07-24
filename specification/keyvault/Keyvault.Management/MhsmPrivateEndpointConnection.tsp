@@ -62,8 +62,6 @@ interface MhsmPrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the managed HSM Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MHSMPrivateEndpointConnections_Get")
   get is ArmResourceRead<
     MhsmPrivateEndpointConnection,
     Error = ManagedHsmError
@@ -72,9 +70,7 @@ interface MhsmPrivateEndpointConnections {
   /**
    * Updates the specified private endpoint connection associated with the managed hsm pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MHSMPrivateEndpointConnections_Put")
   put is ArmResourceCreateOrReplaceSync<
     MhsmPrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection>,
@@ -84,9 +80,7 @@ interface MhsmPrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the managed hsm pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MHSMPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     MhsmPrivateEndpointConnection,
     Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -96,8 +90,6 @@ interface MhsmPrivateEndpointConnections {
   /**
    * The List operation gets information about the private endpoint connections associated with the managed HSM Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MHSMPrivateEndpointConnections_ListByResource")
   listByResource is ArmResourceListByParent<
     MhsmPrivateEndpointConnection,
     Response = ArmResponse<MHSMPrivateEndpointConnectionsListResult>,

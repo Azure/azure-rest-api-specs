@@ -28,8 +28,6 @@ interface DeletedManagedHsms {
   /**
    * Gets the specified deleted managed HSM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedHsms_GetDeleted")
   getDeleted is ArmResourceRead<
     DeletedManagedHsm,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -39,9 +37,7 @@ interface DeletedManagedHsms {
   /**
    * Permanently deletes the specified managed HSM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("purge")
-  @operationId("ManagedHsms_PurgeDeleted")
   purgeDeleted is ArmResourceActionAsyncBase<
     DeletedManagedHsm,
     void,

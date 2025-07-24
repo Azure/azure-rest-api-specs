@@ -19,8 +19,6 @@ interface VaultsOperationGroup {
   /**
    * Gets information about the deleted vaults in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Vaults_ListDeleted")
   @autoRoute
   @get
   @action("deletedVaults")
@@ -33,10 +31,8 @@ interface VaultsOperationGroup {
   /**
    * The List operation gets information about the vaults associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Vaults_List")
   @route("/subscriptions/{subscriptionId}/resources")
   @get
   list(
@@ -56,6 +52,7 @@ interface VaultsOperationGroup {
      * Azure Resource Manager Api Version.
      */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @apiVersion(false)
     @query("api-version")
     @OpenAPI.extension("x-ms-api-version", false)
@@ -67,8 +64,6 @@ interface VaultsOperationGroup {
   /**
    * Checks that the vault name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Vaults_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = VaultCheckNameAvailabilityParameters,
@@ -84,8 +79,6 @@ interface ManagedHsmsOperationGroup {
   /**
    * The List operation gets information about the deleted managed HSMs associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedHsms_ListDeleted")
   @autoRoute
   @get
   @action("deletedManagedHSMs")
@@ -98,8 +91,6 @@ interface ManagedHsmsOperationGroup {
   /**
    * Checks that the managed hsm name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedHsms_CheckMhsmNameAvailability")
   @autoRoute
   checkMhsmNameAvailability is ArmProviderActionSync<
     Request = CheckMhsmNameAvailabilityParameters,

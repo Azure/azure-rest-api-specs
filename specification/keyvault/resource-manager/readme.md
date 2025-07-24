@@ -315,7 +315,12 @@ directive:
     - $.definitions.ManagedHsmKeyProperties.properties.release_policy
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
-
+- suppress: INVALID_REQUEST_PARAMETER
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: openapi.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.

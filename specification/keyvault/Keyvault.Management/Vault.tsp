@@ -127,10 +127,8 @@ interface Vaults {
   /**
    * Gets the private link resources supported for the key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByVault")
   listByVault is ArmResourceActionSync<
     Vault,
     void,
