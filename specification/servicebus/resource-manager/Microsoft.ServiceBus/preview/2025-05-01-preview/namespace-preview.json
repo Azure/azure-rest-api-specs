@@ -1494,7 +1494,14 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceBus/Namespaces/networkSecurityPerimeterConfigurations"
+              }
+            ]
+          }
         },
         "name": {
           "readOnly": true,
@@ -1659,7 +1666,14 @@
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
-          "type": "string"
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules"
+              }
+            ]
+          }
         },
         "name": {
           "description": "Name of the resource",
