@@ -23,8 +23,13 @@ op listCriticalDataElements is Foundations.Operation<
     @query
     keyword?: string;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
 
     @doc("Field to sort by.")
     @query
@@ -226,8 +231,13 @@ op listCriticalDataColumns is Foundations.Operation<
     @query
     assetId?: uuid;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
 
     @doc("Field to sort by.")
     @query
@@ -327,8 +337,13 @@ op listDataAssets is Foundations.Operation<
     @query
     orderby?: string;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
   },
   DataAssetsResponse
 >;
@@ -478,8 +493,13 @@ op listDataProduct is Foundations.Operation<
     @query
     domainId?: uuid;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
 
     @doc("The field to order by.")
     @query
@@ -792,8 +812,13 @@ op listTerms is Foundations.Operation<
     @query
     keyword?: string;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
 
     @doc("The depth of the term.")
     @query
@@ -1013,8 +1038,13 @@ op listOkr is Foundations.Operation<
     @query
     orderby?: string;
 
-    ...SkipQueryParameter;
-    ...TopQueryParameter;
+    @doc("Number of items to skip.")
+    @query
+    skip?: int32;
+
+    @doc("Number of items to return.")
+    @query
+    top?: int32;
   },
   ObjectiveWithAdditionalPropertiesResponse
 >;

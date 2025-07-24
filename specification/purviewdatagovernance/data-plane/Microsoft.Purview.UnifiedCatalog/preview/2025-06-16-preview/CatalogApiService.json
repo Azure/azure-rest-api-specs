@@ -346,10 +346,20 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "orderby",
@@ -960,10 +970,20 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "orderby",
@@ -1759,10 +1779,20 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2498,10 +2528,20 @@
             "format": "uuid"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "orderby",
@@ -3320,10 +3360,20 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -4101,6 +4151,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrReplaceOkrObjectiveIdRelationships_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceOkrObjectiveIdRelationships_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -4483,10 +4538,20 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "name": "top",
+            "in": "query",
+            "description": "Number of items to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "depth",
@@ -7992,25 +8057,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     }
   }
 }
