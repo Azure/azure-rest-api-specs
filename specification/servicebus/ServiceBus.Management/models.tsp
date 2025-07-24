@@ -718,6 +718,7 @@ model Operation {
    * Properties of the operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }
@@ -1535,9 +1536,3 @@ model CheckNameAvailabilityResult {
    */
   reason?: UnavailableReason;
 }
-
-/**
- * Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model SqlRuleAction extends Action {}
