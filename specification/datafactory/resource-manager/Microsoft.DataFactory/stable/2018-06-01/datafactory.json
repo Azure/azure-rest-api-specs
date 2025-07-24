@@ -1776,6 +1776,7 @@
           }
         },
         "description": "Enable interactive authoring of Managed Virtual Network integration runtime.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1806,6 +1807,15 @@
           "200": {
             "description": "OK."
           },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
@@ -1827,6 +1837,7 @@
           }
         },
         "description": "Disable interactive authoring of Managed Virtual Network integration runtime.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1847,6 +1858,15 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
