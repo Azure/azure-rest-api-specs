@@ -9,14 +9,21 @@ namespace ClientCustomizations;
 
 @@clientName(MonitorQueryMetrics.batch, "queryResources");
 
+using MonitorQueryMetrics;
+
 @@clientNamespace(MonitorQueryMetrics,
   "com.azure.monitor.query.metrics.implementation",
   "java"
 );
 
 @@clientNamespace(MonitorQueryMetrics.MetricUnit, "com.azure.monitor.query.metrics", "java");
+@@clientNamespace(MonitorQueryMetrics.Metric, "com.azure.monitor.query.metrics", "java");
+@@clientNamespace(MonitorQueryMetrics.MetricResultsResponse, "com.azure.monitor.query.metrics", "java");
+@@clientNamespace(MonitorQueryMetrics.MetricResultsResponseValuesItem, "com.azure.monitor.query.metrics", "java");
 
-using MonitorQueryMetrics;
+@@clientName(MonitorQueryMetrics.MetricResultsResponse, "MetricsQueryResourcesResult", "java");
+@@clientName(MonitorQueryMetrics.MetricResultsResponseValuesItem, "MetricsQueryResult", "java");
+@@clientName(MonitorQueryMetrics.MetricResultsResponseValuesItem.value, "metrics", "java");
 
 @@clientName(MetricResultsResponse, "MetricResults", "go");
 
@@ -34,4 +41,4 @@ using MonitorQueryMetrics;
   "go"
 );
 
-@@clientName(Metric.timeseries, "TimeSeries", "go");
+@@clientName(Metric.timeseries, "TimeSeries", "go,java");
