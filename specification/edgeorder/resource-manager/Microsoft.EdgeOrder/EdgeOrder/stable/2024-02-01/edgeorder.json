@@ -91,7 +91,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/addresses": {
       "get": {
-        "operationId": "AddressResources_ListBySubscription",
+        "operationId": "Addresses_ListBySubscription",
         "tags": [
           "AddressResources"
         ],
@@ -140,6 +140,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListAddressesAtSubscriptionLevel": {
+            "$ref": "./examples/ListAddressesAtSubscriptionLevel.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -147,7 +152,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/listConfigurations": {
       "post": {
-        "operationId": "ProductsAndConfigurationsOperationGroup_ListConfigurations",
+        "operationId": "ProductsAndConfigurations_ListConfigurations",
         "description": "List configurations for the given product family, product line and product for the given subscription.",
         "parameters": [
           {
@@ -187,6 +192,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListConfigurations": {
+            "$ref": "./examples/ListConfigurations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -194,7 +204,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/listProductFamilies": {
       "post": {
-        "operationId": "ProductsAndConfigurationsOperationGroup_ListProductFamilies",
+        "operationId": "ProductsAndConfigurations_ListProductFamilies",
         "description": "List product families for the given subscription.",
         "parameters": [
           {
@@ -241,6 +251,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListProductFamilies": {
+            "$ref": "./examples/ListProductFamilies.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -248,7 +263,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orderItems": {
       "get": {
-        "operationId": "OrderItemResources_ListBySubscription",
+        "operationId": "OrderItems_ListBySubscription",
         "tags": [
           "OrderItemResources"
         ],
@@ -304,6 +319,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListOrderItemsAtSubscriptionLevel": {
+            "$ref": "./examples/ListOrderItemsAtSubscriptionLevel.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -311,7 +331,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
-        "operationId": "OrdersOperationGroup_ListBySubscription",
+        "operationId": "Orders_ListBySubscription",
         "description": "List orders at subscription level.",
         "parameters": [
           {
@@ -350,6 +370,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListOrderAtSubscriptionLevel": {
+            "$ref": "./examples/ListOrderAtSubscriptionLevel.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -357,7 +382,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/productFamiliesMetadata": {
       "post": {
-        "operationId": "ProductsAndConfigurationsOperationGroup_ListProductFamiliesMetadata",
+        "operationId": "ProductsAndConfigurations_ListProductFamiliesMetadata",
         "description": "List product families metadata for the given subscription.",
         "parameters": [
           {
@@ -388,6 +413,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListProductFamiliesMetadata": {
+            "$ref": "./examples/ListProductFamiliesMetadata.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -395,7 +425,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/addresses": {
       "get": {
-        "operationId": "AddressResources_ListByResourceGroup",
+        "operationId": "Addresses_ListByResourceGroup",
         "tags": [
           "AddressResources"
         ],
@@ -447,6 +477,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListAddressesAtResourceGroupLevel": {
+            "$ref": "./examples/ListAddressesAtResourceGroupLevel.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -454,7 +489,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/addresses/{addressName}": {
       "get": {
-        "operationId": "AddressResources_Get",
+        "operationId": "Addresses_Get",
         "tags": [
           "AddressResources"
         ],
@@ -493,10 +528,15 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAddressByName": {
+            "$ref": "./examples/GetAddressByName.json"
+          }
         }
       },
       "put": {
-        "operationId": "AddressResources_Create",
+        "operationId": "Addresses_Create",
         "tags": [
           "AddressResources"
         ],
@@ -559,13 +599,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CreateAddress": {
+            "$ref": "./examples/CreateAddress.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "AddressResources_Update",
+        "operationId": "Addresses_Update",
         "tags": [
           "AddressResources"
         ],
@@ -635,13 +680,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateAddress": {
+            "$ref": "./examples/UpdateAddress.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AddressResources_Delete",
+        "operationId": "Addresses_Delete",
         "tags": [
           "AddressResources"
         ],
@@ -692,6 +742,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteAddressByName": {
+            "$ref": "./examples/DeleteAddressByName.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -700,7 +755,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}": {
       "get": {
-        "operationId": "OrderResources_Get",
+        "operationId": "Orders_Get",
         "tags": [
           "OrderResources"
         ],
@@ -739,12 +794,17 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetOrderByName": {
+            "$ref": "./examples/GetOrderByName.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems": {
       "get": {
-        "operationId": "OrderItemResources_ListByResourceGroup",
+        "operationId": "OrderItems_ListByResourceGroup",
         "tags": [
           "OrderItemResources"
         ],
@@ -803,6 +863,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListOrderItemsAtResourceGroupLevel": {
+            "$ref": "./examples/ListOrderItemsAtResourceGroupLevel.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -810,7 +875,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}": {
       "get": {
-        "operationId": "OrderItemResources_Get",
+        "operationId": "OrderItems_Get",
         "tags": [
           "OrderItemResources"
         ],
@@ -856,10 +921,15 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetOrderItemByName": {
+            "$ref": "./examples/GetOrderItemByName.json"
+          }
         }
       },
       "put": {
-        "operationId": "OrderItemResources_Create",
+        "operationId": "OrderItems_Create",
         "tags": [
           "OrderItemResources"
         ],
@@ -922,13 +992,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CreateOrderItem": {
+            "$ref": "./examples/CreateOrderItem.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "OrderItemResources_Update",
+        "operationId": "OrderItems_Update",
         "tags": [
           "OrderItemResources"
         ],
@@ -998,13 +1073,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateOrderItem": {
+            "$ref": "./examples/UpdateOrderItem.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "OrderItemResources_Delete",
+        "operationId": "OrderItems_Delete",
         "tags": [
           "OrderItemResources"
         ],
@@ -1055,6 +1135,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteOrderItemByName": {
+            "$ref": "./examples/DeleteOrderItemByName.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1063,7 +1148,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}/cancel": {
       "post": {
-        "operationId": "OrderItemResources_Cancel",
+        "operationId": "OrderItems_Cancel",
         "tags": [
           "OrderItemResources"
         ],
@@ -1111,12 +1196,17 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CancelOrderItem": {
+            "$ref": "./examples/CancelOrderItem.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orderItems/{orderItemName}/return": {
       "post": {
-        "operationId": "OrderItemResources_Return",
+        "operationId": "OrderItems_Return",
         "tags": [
           "OrderItemResources"
         ],
@@ -1176,6 +1266,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ReturnOrderItem": {
+            "$ref": "./examples/ReturnOrderItem.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1184,7 +1279,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders": {
       "get": {
-        "operationId": "OrdersOperationGroup_ListByResourceGroup",
+        "operationId": "Orders_ListByResourceGroup",
         "description": "List orders at resource group level.",
         "parameters": [
           {
@@ -1224,6 +1319,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListOrderAtResourceGroupLevel": {
+            "$ref": "./examples/ListOrderAtResourceGroupLevel.json"
           }
         },
         "x-ms-pageable": {
