@@ -238,6 +238,11 @@ directive:
     suppress:
       - BodyTopLevelProperties
   - where:
+      - $.definitions.VirtualMachineScaleSet
+    suppress:
+      - BodyTopLevelProperties
+    reason: Placement (introduced in version 2025-04-01) is an ARM level property
+  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
