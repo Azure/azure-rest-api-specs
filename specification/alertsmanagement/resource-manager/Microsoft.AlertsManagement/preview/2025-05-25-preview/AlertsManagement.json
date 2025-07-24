@@ -726,14 +726,6 @@
       "required": false,
       "x-ms-parameter-location": "method"
     },
-    "smartGroupId": {
-      "description": "Smart group unique id. ",
-      "name": "smartGroupId",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
     "newState": {
       "description": "New state of the alert.",
       "name": "newState",
@@ -764,23 +756,6 @@
     "alertState": {
       "description": "Filter by state of the alert instance. Default value is to select all.",
       "name": "alertState",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "New",
-        "Acknowledged",
-        "Closed"
-      ],
-      "x-ms-enum": {
-        "name": "AlertState",
-        "modelAsString": true
-      }
-    },
-    "smartGroupState": {
-      "description": "Filter by state of the smart group. Default value is to select all.",
-      "name": "smartGroupState",
       "type": "string",
       "in": "query",
       "required": false,
@@ -922,25 +897,6 @@
         "modelAsString": true
       }
     },
-    "smartGroupsSortBy": {
-      "description": "Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'.",
-      "name": "sortBy",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "alertsCount",
-        "state",
-        "severity",
-        "startDateTime",
-        "lastModifiedDateTime"
-      ],
-      "x-ms-enum": {
-        "name": "SmartGroupsSortByFields",
-        "modelAsString": true
-      }
-    },
     "sortOrder": {
       "description": "Sort the query results order in either ascending or descending.  Default value is 'desc' for time fields and 'asc' for others.",
       "name": "sortOrder",
@@ -1010,6 +966,10 @@
               "description": "Description of the operation"
             }
           }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation"
         }
       }
     },
@@ -1088,6 +1048,7 @@
       }
     },
     "alert": {
+      "type": "object",
       "description": "An alert created in alert management service.",
       "allOf": [
         {
@@ -1101,6 +1062,7 @@
       }
     },
     "alertsList": {
+      "type": "object",
       "description": "List the alerts.",
       "properties": {
         "nextLink": {
@@ -1541,6 +1503,7 @@
       }
     },
     "alertsSummary": {
+      "type": "object",
       "description": "Summary of alerts based on the input filters and 'groupby' parameters.",
       "allOf": [
         {
@@ -1636,161 +1599,8 @@
         }
       }
     },
-    "smartGroupsList": {
-      "description": "List the alerts.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of alerts.",
-          "type": "string"
-        },
-        "value": {
-          "description": "List of alerts",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/smartGroup"
-          }
-        }
-      }
-    },
-    "smartGroup": {
-      "description": "Set of related alerts grouped together smartly by AMS.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/smartGroupProperties"
-        }
-      }
-    },
-    "smartGroupProperties": {
-      "type": "object",
-      "description": "Properties of smart group.",
-      "properties": {
-        "alertsCount": {
-          "type": "integer",
-          "description": "Total number of alerts in smart group"
-        },
-        "smartGroupState": {
-          "type": "string",
-          "description": "Smart group state",
-          "readOnly": true,
-          "enum": [
-            "New",
-            "Acknowledged",
-            "Closed"
-          ],
-          "x-ms-enum": {
-            "name": "State",
-            "modelAsString": true
-          }
-        },
-        "severity": {
-          "type": "string",
-          "description": "Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.",
-          "readOnly": true,
-          "enum": [
-            "Sev0",
-            "Sev1",
-            "Sev2",
-            "Sev3",
-            "Sev4"
-          ],
-          "x-ms-enum": {
-            "name": "Severity",
-            "modelAsString": true
-          }
-        },
-        "startDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of smart group. Date-Time in ISO-8601 format.",
-          "readOnly": true
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last updated time of smart group. Date-Time in ISO-8601 format.",
-          "readOnly": true
-        },
-        "lastModifiedUserName": {
-          "type": "string",
-          "description": "Last modified by user name.",
-          "readOnly": true
-        },
-        "resources": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of target resources in the smart group"
-        },
-        "resourceTypes": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of target resource types in the smart group"
-        },
-        "resourceGroups": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of target resource groups in the smart group"
-        },
-        "monitorServices": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of monitorServices in the smart group"
-        },
-        "monitorConditions": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of monitorConditions in the smart group"
-        },
-        "alertStates": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of alertStates in the smart group"
-        },
-        "alertSeverities": {
-          "items": {
-            "$ref": "#/definitions/smartGroupAggregatedProperty"
-          },
-          "type": "array",
-          "description": "Summary of alertSeverities in the smart group"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of alerts. Call ListNext() with this URI to fetch the next page alerts."
-        }
-      }
-    },
-    "smartGroupAggregatedProperty": {
-      "type": "object",
-      "description": "Aggregated property of each type",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the type."
-        },
-        "count": {
-          "type": "integer",
-          "description": "Total number of items of type."
-        }
-      }
-    },
     "MonitorServiceList": {
+      "type": "object",
       "title": "Monitor service details",
       "description": "Monitor service details",
       "required": [
