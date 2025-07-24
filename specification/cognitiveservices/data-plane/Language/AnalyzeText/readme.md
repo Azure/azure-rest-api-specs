@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Language is 2024-11-15-preview.
+The current preview release of Language - Text is 2025-05-15-preview.
 
-The current stable release of Language is 2024-11-01.
+The current stable release of Language - Text is 2024-11-01.
 
 ```yaml
-tag: release_2024-11-15-preview
+tag: release_2025-05-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -21,6 +21,19 @@ directive:
   - suppress: R3016
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
+```
+
+### Release 2025-05-15-preview
+
+These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025-05-15-preview'
+input-file:
+  - preview/2025-05-15-preview/analyzetext.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Release 2024-11-15-preview
@@ -49,32 +62,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2023-11-15-preview
-
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023-11-15-preview'
-input-file:
-  - preview/2023-11-15-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2023-04-15-preview
-
-These settings apply only when `--tag=release_2023_04_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023-04-15-preview'
-input-file:
-  - preview/2023-04-15-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Release 2023-04-01
 
 These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
@@ -89,48 +76,6 @@ modelerfour:
 
 ```
 
-### Release 2022-10-01-preview
-
-These settings apply only when `--tag=release_2022_10_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_10_01_preview'
-input-file:
-  - preview/2022-10-01-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-07-01-preview
-
-These settings apply only when `--tag=release_2022_07_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_07_01_preview'
-input-file:
-  - preview/2022-07-01-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-05-15-preview
-
-These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_05_15_preview'
-input-file:
-  - preview/2022-05-15-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
 ### Release 2022-05-01
 
 These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
@@ -138,45 +83,6 @@ These settings apply only when `--tag=release_2022_05_01` is specified on the co
 ``` yaml $(tag) == 'release_2022_05_01'
 input-file:
   - stable/2022-05-01/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2022-03-01-preview
-
-These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_03_01_preview'
-input-file:
-  - preview/2022-03-01-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2022-02-01-preview
-
-These settings apply only when `--tag=release_2022_02_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_02_01_preview'
-input-file:
-- preview/2022-02-01-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-11-01-preview
-
-These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_11_01_preview'
-input-file:
-- preview/2021-11-01-preview/analyzetext.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:

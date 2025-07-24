@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language - Questi
 
 ## Releases
 
-The current preview release of Language is 2023-11-15-preview.
+The current preview release of Language is 2025-05-15-preview.
 
 The current stable release of Language is 2024-04-01.
 
 ```yaml
-tag: release_2023-11-15-preview
+tag: release_2025-05-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -23,26 +23,13 @@ directive:
     reason: ISO should be upper case.
 ```
 
-### Release 2023-11-15-preview
+### Release 2025-05-15-preview
 
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2023-11-15-preview'
+``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
-  - preview/2023-11-15-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service - Question Answering Authoring
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2023-04-15-preview
-
-These settings apply only when `--tag=release_2023_04_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023-04-15-preview'
-input-file:
-  - preview/2023-04-15-preview/questionanswering-authoring.json
+  - preview/2025-05-15-preview/questionanswering-authoring.json
 title:
   Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
@@ -63,34 +50,6 @@ modelerfour:
 
 ```
 
-### Release 2022-10-01-preview
-
-These settings apply only when `--tag=release_2022_10_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_10_01_preview'
-input-file:
-  - preview/2022-10-01-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service - Question Answering Authoring
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-07-01-preview
-
-These settings apply only when `--tag=release_2022_07_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_07_01_preview'
-input-file:
-  - preview/2022-07-01-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service - Question Answering Authoring
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
 ### Release 2021-10-01
 
 These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
@@ -99,32 +58,6 @@ These settings apply only when `--tag=release_2021_10_01` is specified on the co
 input-file: 
   - stable/2021-10-01/questionanswering-authoring.json
 title: 
-  Microsoft Cognitive Language Service - Question Answering Authoring
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-07-15-preview
-
-These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_07_15_preview'
-input-file:
-- preview/2021-07-15-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service - Question Answering Authoring
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-05-01-preview
-
-These settings apply only when `--tag=release_2021_05_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_05_01_preview'
-input-file:
-- preview/2021-05-01-preview/questionanswering-authoring.json
-title:
   Microsoft Cognitive Language Service - Question Answering Authoring
 modelerfour:
   lenient-model-deduplication: true
