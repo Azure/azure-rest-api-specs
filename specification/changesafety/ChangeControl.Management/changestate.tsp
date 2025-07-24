@@ -491,7 +491,7 @@ model VerifyChangeValidityRequest {
 @doc("The context object of the verify change validity request.")
 model VerifyChangeValidityRequestContext {
   @doc("The application Id performing the ARM operation.")
-  applicationId: string
+  applicationId: string;
 }
 
 @added(Versions.v2025_03_01_preview)
