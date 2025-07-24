@@ -58,6 +58,7 @@ model SystemAssignedIdentityProperties {
  * An error response from the ManagedServiceIdentity service.
  */
 @error
+@extension("x-ms-external", true)
 model CloudError {
   /**
    * A list of additional details about the error.
@@ -68,6 +69,7 @@ model CloudError {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
+@extension("x-ms-external", true)
 model CloudErrorBody {
   /**
    * An identifier for the error.
@@ -225,7 +227,6 @@ model ScopeParameters<Resource extends {}> {
 /**
  * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
  */
-// @friendlyName("OperationListResult")
 @summary("Operations List.")
 model OperationListResult is Page<Operation>;
 @@summary(OperationListResult.value, "Operations List.");

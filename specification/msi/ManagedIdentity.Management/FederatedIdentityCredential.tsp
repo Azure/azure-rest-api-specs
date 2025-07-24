@@ -32,18 +32,18 @@ interface FederatedIdentityCredentials {
   /**
    * Gets the federated identity credential.
    */
-  get is ArmResourceRead<FederatedIdentityCredential>;
+  get is ArmResourceRead<FederatedIdentityCredential, Error = CloudError>;
 
   /**
    * Create or update a federated identity credential under the specified user assigned identity.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FederatedIdentityCredential>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<FederatedIdentityCredential, Error = CloudError>;
 
   /**
    * Deletes the federated identity credential.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<FederatedIdentityCredential>;
+  delete is ArmResourceDeleteSync<FederatedIdentityCredential, Error = CloudError>;
 
   /**
    * Lists all the federated identity credentials under the specified user assigned identity.
@@ -64,7 +64,8 @@ interface FederatedIdentityCredentials {
       @query("$skiptoken")
       $skiptoken?: string;
     },
-    Response = FederatedIdentityCredentialsListResult
+    Response = FederatedIdentityCredentialsListResult,
+    Error = CloudError
   >;
 }
 

@@ -33,14 +33,14 @@ interface Identities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserAssignedIdentities_Get")
-  get is ArmResourceRead<Identity>;
+  get is ArmResourceRead<Identity, Error = CloudError>;
 
   /**
    * Create or update an identity in the specified subscription and resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserAssignedIdentities_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Identity>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Identity, Error = CloudError>;
 
   /**
    * Update an identity in the specified subscription and resource group.
@@ -48,7 +48,7 @@ interface Identities {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   // @parameterVisibility
   @operationId("UserAssignedIdentities_Update")
-  update is ArmCustomPatchSync<Identity, IdentityUpdate>;
+  update is ArmCustomPatchSync<Identity, IdentityUpdate, Error = CloudError>;
 
   /**
    * Deletes the identity.
@@ -56,7 +56,7 @@ interface Identities {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("UserAssignedIdentities_Delete")
-  delete is ArmResourceDeleteSync<Identity>;
+  delete is ArmResourceDeleteSync<Identity, Error = CloudError>;
 
   /**
    * Lists all the userAssignedIdentities available under the specified ResourceGroup.
@@ -65,7 +65,8 @@ interface Identities {
   @operationId("UserAssignedIdentities_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Identity,
-    Response = UserAssignedIdentitiesListResult
+    Response = UserAssignedIdentitiesListResult,
+    Error = CloudError,
   >;
 
   /**
@@ -75,7 +76,8 @@ interface Identities {
   @operationId("UserAssignedIdentities_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     Identity,
-    Response = UserAssignedIdentitiesListResult
+    Response = UserAssignedIdentitiesListResult,
+    Error = CloudError,
   >;
 }
 

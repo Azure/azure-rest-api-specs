@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -38,9 +39,10 @@ interface SystemAssignedIdentities {
    */
   // TODO: original "x-ms-identifiers", #["code"], but common type v4 is  ["message", "target"]
   // @OpenAPI.extension("x-ms-identifiers", #["code"])
-  getByScope is ArmResourceRead<
+  getByScope is Extension.Read<
+    Extension.ScopeParameter,
     SystemAssignedIdentity,
-    ScopeParameters<SystemAssignedIdentity>
+    Error = CloudError
   >;
 }
 
