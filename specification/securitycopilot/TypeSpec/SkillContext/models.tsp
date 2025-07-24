@@ -1502,4 +1502,45 @@ namespace SkillContext
 		@doc("The error details.")
 		errorDetails: string;
 	}
+
+	@doc("Scoping options for skill cache. All cached entries are default scope to User ID. Tenant Id is not supported as User ID is already tenant-scoped")
+	enum SkillUtilityCacheScope {
+		@doc("Skillset scope: accessible across skills within a skillset.")
+		Skillset,
+		@doc("Skill scope: accessible only within a given skill.")
+		Skill,
+		@doc("Session scope: accessible only within a given session.")
+		Session,
+		@doc("Workspace scope: accessible within a given workspace.")
+		Workspace
+	}
+
+	@doc("Scoping options for skill cache. All cached entries are default scope to User ID. Tenant Id is not supported as User ID is already tenant-scoped")
+	enum SkillUtilityCacheDataType {
+		@doc("Default unknown to catch places where this enum isn't set.")
+		Unknown = 0,
+		@doc("Normal data type: anything can be stored, including customer content.")
+		Normal = 1,
+		@doc("Internal metadata type: only internal metadata that doesn't contain customer content.")
+		InternalMetadata = 2
+	}
+	
+	@doc("Request model for setting cached entity")
+	model SetCachedEntityRequest{
+		@doc("Entity to cache")
+		entity: string;
+
+		@doc("Optional suffix to make cache key unique; if not specified, entity type is used as the suffix")
+		cacheKeySuffix?: string;
+
+		@doc("Scopes to limit the cache entry to (scoped to user already by default)")
+		scopes?: HashSet<SkillUtilityCacheScope>;
+
+		@doc("Time to live for the cache entry")
+		ttl?: timespan;
+
+		@doc("Type of data to be stored in the cache")
+		dataType: SkillUtilityCacheDataType;
+	}
+
 }

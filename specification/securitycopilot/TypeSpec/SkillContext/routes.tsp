@@ -175,6 +175,24 @@ op setFinalResponseSettings(
 @body setFinalResponseSettingsRequest  : SetFinalResponseSettingsRequest,
 ): NoContentResponse;
 
+@get
+@route("/skillContext/getCachedEntityAsync")
+@doc("Gets the cached entity")
+op getCachedEntity(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query cacheKeySuffix? : string,
+@query scopes? : HashSet<SkillUtilityCacheScope>,
+@query dataType? : SkillUtilityCacheDataType,
+): object;
+
+@post
+@route("/skillContext/setCachedEntityAsync")
+@doc("Sets the cached entity")
+op setCachedEntity(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body setCachedEntityRequest : SetCachedEntityRequest,
+): NoContentResponse;
+
 @post
 @route("/skillContext/createMemoryAsync")
 @doc("Create a memory")
