@@ -830,37 +830,6 @@ op DeleteDomainByIdAsync is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("Policy")
-@doc("Retrieves a list of policies.")
-@route("/policies")
-@get
-op ListPolicies is Foundations.Operation<
-  {
-    @doc("skiptoken")
-    @query
-    skipToken?: string;
-  },
-  PolicyListResponse
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("Policy")
-@doc("Adds an administrator to a policy.")
-@route("/policies/addAdministrator")
-@post
-op AddDataGovernanceAdmin is Foundations.Operation<
-  ControllersModelsPolicyAddAdminRequest,
-  {
-    @statusCode
-    statusCode: 200;
-  }
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Creates a new term in the catalog.")
 @route("/terms")

@@ -313,11 +313,6 @@ model CriticalDataColumnRelationshipRequest {
   ...Record<CriticalDataColumnProperties>;
 }
 
-@doc("Response for listing policies.")
-model PolicyListResponse {
-  ...Record<string>;
-}
-
 @doc("System metadata for tracking entity lifecycle.")
 model SystemData {
   @doc("The timestamp when the entity was last modified.")
