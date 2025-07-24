@@ -12,7 +12,7 @@
     "application/json"
   ],
   "paths": {
-    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+    "/{scope}/providers/microsoft.ManagedIdentity/identities/default": {
       "get": {
         "operationId": "SystemAssignedIdentities_GetByScope",
         "parameters": [
@@ -40,12 +40,12 @@
         },
         "x-ms-examples": {
           "MsiOperationsList": {
-            "$ref": "./examples/SystemAssignedIdentities_GetByScope.json"
+            "$ref": "./examples/SystemAssignedIdentityGet.json"
           }
         }
       }
     },
-    "/providers/Microsoft.ManagedIdentity/operations": {
+    "/providers/microsoft.ManagedIdentity/operations": {
       "get": {
         "operationId": "Operations_List",
         "parameters": [],
@@ -63,12 +63,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": "./examples/MsiOperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.ManagedIdentity/userAssignedIdentities": {
       "get": {
         "operationId": "UserAssignedIdentities_ListBySubscription",
         "parameters": [],
@@ -88,7 +93,7 @@
         },
         "x-ms-examples": {
           "IdentityListBySubscription": {
-            "$ref": "./examples/UserAssignedIdentities_ListBySubscription.json"
+            "$ref": "./examples/IdentityListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -96,7 +101,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities": {
       "get": {
         "operationId": "UserAssignedIdentities_ListByResourceGroup",
         "parameters": [],
@@ -116,7 +121,7 @@
         },
         "x-ms-examples": {
           "IdentityListByResourceGroup": {
-            "$ref": "./examples/UserAssignedIdentities_ListByResourceGroup.json"
+            "$ref": "./examples/IdentityListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -124,7 +129,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
       "get": {
         "operationId": "UserAssignedIdentities_Get",
         "parameters": [
@@ -151,7 +156,7 @@
         },
         "x-ms-examples": {
           "IdentityGet": {
-            "$ref": "./examples/UserAssignedIdentities_Get.json"
+            "$ref": "./examples/IdentityGet.json"
           }
         }
       },
@@ -195,7 +200,7 @@
         },
         "x-ms-examples": {
           "IdentityCreate": {
-            "$ref": "./examples/UserAssignedIdentities_CreateOrUpdate.json"
+            "$ref": "./examples/IdentityCreate.json"
           }
         }
       },
@@ -233,7 +238,7 @@
         },
         "x-ms-examples": {
           "IdentityUpdate": {
-            "$ref": "./examples/UserAssignedIdentities_Update.json"
+            "$ref": "./examples/IdentityUpdate.json"
           }
         }
       },
@@ -263,12 +268,12 @@
         },
         "x-ms-examples": {
           "IdentityDelete": {
-            "$ref": "./examples/UserAssignedIdentities_Delete.json"
+            "$ref": "./examples/IdentityDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
       "get": {
         "operationId": "FederatedIdentityCredentials_List",
         "parameters": [
@@ -307,7 +312,7 @@
         },
         "x-ms-examples": {
           "FederatedIdentityCredentialList": {
-            "$ref": "./examples/FederatedIdentityCredentials_List.json"
+            "$ref": "./examples/FederatedIdentityCredentialList.json"
           }
         },
         "x-ms-pageable": {
@@ -315,7 +320,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
       "get": {
         "operationId": "FederatedIdentityCredentials_Get",
         "parameters": [
@@ -349,7 +354,7 @@
         },
         "x-ms-examples": {
           "FederatedIdentityCredentialGet": {
-            "$ref": "./examples/FederatedIdentityCredentials_Get.json"
+            "$ref": "./examples/FederatedIdentityCredentialGet.json"
           }
         }
       },
@@ -400,7 +405,7 @@
         },
         "x-ms-examples": {
           "FederatedIdentityCredentialCreate": {
-            "$ref": "./examples/FederatedIdentityCredentials_CreateOrUpdate.json"
+            "$ref": "./examples/FederatedIdentityCredentialCreate.json"
           }
         }
       },
@@ -437,7 +442,7 @@
         },
         "x-ms-examples": {
           "FederatedIdentityCredentialDelete": {
-            "$ref": "./examples/FederatedIdentityCredentials_Delete.json"
+            "$ref": "./examples/FederatedIdentityCredentialDelete.json"
           }
         }
       }

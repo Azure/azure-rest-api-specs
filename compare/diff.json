@@ -1,34 +1,7 @@
 {
   "paths": {
-    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+    "/{scope}/providers/microsoft.ManagedIdentity/identities/default": {
       "get": {
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MsiOperationsList": {
-            "$ref": {
-              "__old": "./examples/SystemAssignedIdentityGet.json",
-              "__new": "./examples/SystemAssignedIdentities_GetByScope.json"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.ManagedIdentity/operations": {
-      "get": {
-        "x-ms-examples__deleted": {
-          "MsiOperationsList": {
-            "$ref": "./examples/MsiOperationsList.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -41,7 +14,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+    "/providers/microsoft.ManagedIdentity/operations": {
       "get": {
         "responses": {
           "default": {
@@ -50,20 +23,12 @@
                 "__old": "#/definitions/CloudError",
                 "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IdentityListBySubscription": {
-            "$ref": {
-              "__old": "./examples/IdentityListBySubscription.json",
-              "__new": "./examples/UserAssignedIdentities_ListBySubscription.json"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.ManagedIdentity/userAssignedIdentities": {
       "get": {
         "responses": {
           "default": {
@@ -72,20 +37,12 @@
                 "__old": "#/definitions/CloudError",
                 "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IdentityListByResourceGroup": {
-            "$ref": {
-              "__old": "./examples/IdentityListByResourceGroup.json",
-              "__new": "./examples/UserAssignedIdentities_ListByResourceGroup.json"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities": {
       "get": {
         "responses": {
           "default": {
@@ -96,12 +53,18 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "IdentityGet": {
-            "$ref": {
-              "__old": "./examples/IdentityGet.json",
-              "__new": "./examples/UserAssignedIdentities_Get.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
             }
           }
         }
@@ -114,14 +77,6 @@
                 "__old": "#/definitions/CloudError",
                 "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IdentityCreate": {
-            "$ref": {
-              "__old": "./examples/IdentityCreate.json",
-              "__new": "./examples/UserAssignedIdentities_CreateOrUpdate.json"
             }
           }
         }
@@ -136,14 +91,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "IdentityUpdate": {
-            "$ref": {
-              "__old": "./examples/IdentityUpdate.json",
-              "__new": "./examples/UserAssignedIdentities_Update.json"
-            }
-          }
         }
       },
       "delete": {
@@ -156,18 +103,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "IdentityDelete": {
-            "$ref": {
-              "__old": "./examples/IdentityDelete.json",
-              "__new": "./examples/UserAssignedIdentities_Delete.json"
-            }
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
       "get": {
         "responses": {
           "default": {
@@ -178,18 +117,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "FederatedIdentityCredentialList": {
-            "$ref": {
-              "__old": "./examples/FederatedIdentityCredentialList.json",
-              "__new": "./examples/FederatedIdentityCredentials_List.json"
-            }
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
       "get": {
         "responses": {
           "default": {
@@ -198,14 +129,6 @@
                 "__old": "#/definitions/CloudError",
                 "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FederatedIdentityCredentialGet": {
-            "$ref": {
-              "__old": "./examples/FederatedIdentityCredentialGet.json",
-              "__new": "./examples/FederatedIdentityCredentials_Get.json"
             }
           }
         }
@@ -220,14 +143,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "FederatedIdentityCredentialCreate": {
-            "$ref": {
-              "__old": "./examples/FederatedIdentityCredentialCreate.json",
-              "__new": "./examples/FederatedIdentityCredentials_CreateOrUpdate.json"
-            }
-          }
         }
       },
       "delete": {
@@ -238,14 +153,6 @@
                 "__old": "#/definitions/CloudError",
                 "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FederatedIdentityCredentialDelete": {
-            "$ref": {
-              "__old": "./examples/FederatedIdentityCredentialDelete.json",
-              "__new": "./examples/FederatedIdentityCredentials_Delete.json"
             }
           }
         }
