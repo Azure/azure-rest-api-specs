@@ -73,13 +73,202 @@
   },
   "tags": [],
   "paths": {
-    "/indexes": {
+    "/registries/{registryName}/{name}/versions/{version}": {
+      "post": {
+        "operationId": "DeploymentTemplates_Create",
+        "description": "Creates a deployment template version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the AzureML registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the deployment template.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the deployment template.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties of a Deployment Template Version.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registries/{registryName}/deploymenttemplates/{name}/versions/{version}": {
+      "get": {
+        "operationId": "DeploymentTemplates_Get",
+        "description": "Get a specific version of a deployment template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the AzureML registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the deployment template.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the deployment template.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetResourceTenantId",
+            "in": "query",
+            "description": "Asset resource tenant ID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registries/{registryName}/deploymenttemplates/{name}/versions/{version}/{type}": {
+      "delete": {
+        "operationId": "DeploymentTemplates_DeleteGenericAsset",
+        "description": "Delete a specific version of a deployment template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "registryName",
+            "in": "path",
+            "description": "The name of the AzureML registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of the deployment template.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the deployment template.",
+            "required": true,
+            "type": "string",
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Version of the deployment template.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
         "description": "List the latest version of each index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -121,13 +310,20 @@
         }
       }
     },
-    "/indexes/{name}": {
+    "/workspaces/{workspaceName}/indexes/{name}": {
       "get": {
         "operationId": "Indexes_GetLatest",
         "description": "Get latest version of the Index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -166,13 +362,20 @@
         }
       }
     },
-    "/indexes/{name}:getNextVersion": {
+    "/workspaces/{workspaceName}/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
         "description": "Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -211,13 +414,20 @@
         }
       }
     },
-    "/indexes/{name}/versions": {
+    "/workspaces/{workspaceName}/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_List",
         "description": "List the versions of an Index given the name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -290,13 +500,20 @@
         }
       }
     },
-    "/indexes/{name}/versions/{version}": {
+    "/workspaces/{workspaceName}/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_Get",
         "description": "Get a specific version of an Index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -347,6 +564,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the AzureML workspace or AI project.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "name",
@@ -511,6 +735,116 @@
         }
       }
     },
+    "DeploymentTemplate": {
+      "type": "object",
+      "description": "DeploymentTemplate resource definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
+          "default": "Development"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description information of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Asset's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deploymentTemplateType": {
+          "type": "string",
+          "description": "The type of deployment template."
+        },
+        "environmentId": {
+          "type": "string",
+          "description": "The ID of the environment asset."
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables for the deployment.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "allowedEnvironmentVariableOverrides": {
+          "type": "array",
+          "description": "List of environment variable names that can be overridden.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "modelMountPath": {
+          "type": "string",
+          "description": "Path where the model will be mounted."
+        },
+        "requestSettings": {
+          "$ref": "#/definitions/OnlineRequestSettings",
+          "description": "Request settings for online deployment."
+        },
+        "livenessProbe": {
+          "$ref": "#/definitions/ProbeSettings",
+          "description": "Liveness probe settings."
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/ProbeSettings",
+          "description": "Readiness probe settings."
+        },
+        "allowedInstanceType": {
+          "type": "array",
+          "description": "List of allowed instance types for the deployment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultInstanceType": {
+          "type": "string",
+          "description": "Default instance type for the deployment."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances for the deployment."
+        },
+        "scoringPath": {
+          "type": "string",
+          "description": "Path for scoring requests."
+        },
+        "scoringPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for scoring requests."
+        }
+      },
+      "required": [
+        "id",
+        "deploymentTemplateType",
+        "environmentId",
+        "allowedInstanceType",
+        "defaultInstanceType",
+        "instanceCount"
+      ]
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -558,6 +892,26 @@
         "storageUri"
       ]
     },
+    "OnlineRequestSettings": {
+      "type": "object",
+      "description": "Settings for online request configuration.",
+      "properties": {
+        "requestTimeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The timeout duration for requests."
+        },
+        "maxConcurrentRequestsPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of concurrent requests per instance."
+        }
+      },
+      "required": [
+        "requestTimeout",
+        "maxConcurrentRequestsPerInstance"
+      ]
+    },
     "PagedIndex": {
       "type": "object",
       "description": "Paged collection of IndexVersion items.",
@@ -578,6 +932,64 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ProbeSettings": {
+      "type": "object",
+      "description": "Settings for probe configuration.",
+      "properties": {
+        "initialDelay": {
+          "type": "string",
+          "format": "duration",
+          "description": "The initial delay before starting probes."
+        },
+        "period": {
+          "type": "string",
+          "format": "duration",
+          "description": "The period between probe executions."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The timeout duration for each probe."
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive failures required to consider the probe as failed."
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive successes required to consider the probe as successful."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path for the probe request."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number for the probe."
+        },
+        "scheme": {
+          "type": "string",
+          "description": "The scheme for the probe (e.g., HTTP, HTTPS)."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The HTTP method for the probe request."
+        }
+      },
+      "required": [
+        "period",
+        "timeout",
+        "failureThreshold",
+        "successThreshold",
+        "path",
+        "port",
+        "scheme",
+        "httpMethod"
       ]
     },
     "SystemData": {
