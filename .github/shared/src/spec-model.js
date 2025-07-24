@@ -20,7 +20,7 @@ const specModelCache = new Map();
 
 export class SpecModel {
   /** @type {string} absolute path */
-  // @ts-ignore Ignore error that value may not be set in ctor (since we may returned cached value)
+  // @ts-expect-error Ignore error that value may not be set in ctor (since we may returned cached value)
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
