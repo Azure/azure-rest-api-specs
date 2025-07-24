@@ -1,17 +1,17 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   detectChangedSpecConfigFiles,
   groupSpecConfigPaths,
   processTypeSpecProjectsV2FolderStructure,
 } from "../src/spec-helpers.js";
 import { SpecGenSdkCmdInput } from "../src/types.js";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
 import {
   type ChangedSpecs,
   type SpecConfigs,
-  normalizePath,
   getChangedFiles,
+  normalizePath,
 } from "../src/utils.js";
 
 vi.mock("../src/utils.js", async () => {
