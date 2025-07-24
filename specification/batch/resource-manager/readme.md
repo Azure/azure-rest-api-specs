@@ -249,13 +249,6 @@ directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     where: $.definitions.UserAccount
     reason: This field contains a secret (password) and is not returned on a get (but is required on a PUT/PATCH). Previous discussions with the modelling team had said that this was the correct way to model this type of field.
-  
-  - suppress: EnumInsteadOfBoolean
-    from: BatchManagement.json
-    where:
-    - $.definitions.DiskCustomerManagedKey.properties.rotationToLatestKeyVersionEnabled
-    - $.definitions.ProxyAgentSettings.properties.enabled
-    reason:  The boolean properties are part of a pass though with VMSS, were matching their definitions. Approved by Arm Reviewers
 ```
 
 ### Tag: package-2017-05
