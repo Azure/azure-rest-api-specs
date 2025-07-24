@@ -79,7 +79,7 @@
   "paths": {
     "/businessdomains": {
       "get": {
-        "operationId": "ListDomains",
+        "operationId": "EnumerateDomainsAsync",
         "tags": [
           "BusinessDomain"
         ],
@@ -99,7 +99,7 @@
             "name": "writeOnly",
             "in": "query",
             "description": "writeOnly",
-            "required": false,
+            "required": true,
             "type": "boolean"
           }
         ],
@@ -124,13 +124,13 @@
           }
         },
         "x-ms-examples": {
-          "ListDomains_MaximumSet": {
-            "$ref": "./examples/ListDomains_MaximumSet_Gen.json"
+          "EnumerateDomainsAsync_MaximumSet": {
+            "$ref": "./examples/EnumerateDomainsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateDomain",
+        "operationId": "CreateDomainAsync",
         "tags": [
           "BusinessDomain"
         ],
@@ -169,15 +169,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateDomain_MaximumSet": {
-            "$ref": "./examples/CreateDomain_MaximumSet_Gen.json"
+          "CreateDomainAsync_MaximumSet": {
+            "$ref": "./examples/CreateDomainAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/businessdomains/{domainId}": {
       "get": {
-        "operationId": "GetDomainDomainId",
+        "operationId": "GetDomainByIdAsync",
         "tags": [
           "BusinessDomain"
         ],
@@ -216,13 +216,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDomainDomainId_MaximumSet": {
-            "$ref": "./examples/GetDomainDomainId_MaximumSet_Gen.json"
+          "GetDomainByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetDomainByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "ReplaceDomainDomainId",
+        "operationId": "UpdateDomainAsync",
         "tags": [
           "BusinessDomain"
         ],
@@ -270,13 +270,13 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceDomainDomainId_MaximumSet": {
-            "$ref": "./examples/ReplaceDomainDomainId_MaximumSet_Gen.json"
+          "UpdateDomainAsync_MaximumSet": {
+            "$ref": "./examples/UpdateDomainAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDomain",
+        "operationId": "DeleteDomainByIdAsync",
         "tags": [
           "BusinessDomain"
         ],
@@ -312,15 +312,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDomain_MaximumSet": {
-            "$ref": "./examples/DeleteDomain_MaximumSet_Gen.json"
+          "DeleteDomainByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDomainByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataColumns": {
       "get": {
-        "operationId": "ListCriticalDataColumns",
+        "operationId": "ListCriticalDataColumnAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -365,7 +365,7 @@
             "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -390,13 +390,13 @@
           }
         },
         "x-ms-examples": {
-          "ListCriticalDataColumns_MaximumSet": {
-            "$ref": "./examples/ListCriticalDataColumns_MaximumSet_Gen.json"
+          "ListCriticalDataColumnAsync_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataColumnAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateCriticalDataColumn",
+        "operationId": "CreateCriticalDataColumnAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -436,15 +436,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateCriticalDataColumn_MaximumSet": {
-            "$ref": "./examples/CreateCriticalDataColumn_MaximumSet_Gen.json"
+          "CreateCriticalDataColumnAsync_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataColumnAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataColumns/{criticalDataColumnId}": {
       "get": {
-        "operationId": "GetCriticalDataColumnCriticalDataColumnId",
+        "operationId": "GetCriticalDataColumnByIdAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -483,15 +483,15 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataColumnCriticalDataColumnId_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataColumnCriticalDataColumnId_MaximumSet_Gen.json"
+          "GetCriticalDataColumnByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetCriticalDataColumnByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataColumns/{criticalDataColumnId}/relationships": {
       "get": {
-        "operationId": "ListCriticalDataColumnRelationships",
+        "operationId": "ListCriticalDataColumnRelationshipsAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -629,13 +629,13 @@
           }
         },
         "x-ms-examples": {
-          "ListCriticalDataColumnRelationships_MaximumSet": {
-            "$ref": "./examples/ListCriticalDataColumnRelationships_MaximumSet_Gen.json"
+          "ListCriticalDataColumnRelationshipsAsync_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataColumnRelationshipsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CriticalDataColumnCriticalDataColumnIdRelationships",
+        "operationId": "CreateCriticalDataColumnRelationshipAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -752,7 +752,7 @@
             }
           },
           {
-            "name": "body",
+            "name": "relationship",
             "in": "body",
             "description": "CriticalDataColumnProperties",
             "required": true,
@@ -782,13 +782,13 @@
           }
         },
         "x-ms-examples": {
-          "CriticalDataColumnCriticalDataColumnIdRelationships_MaximumSet": {
-            "$ref": "./examples/CriticalDataColumnCriticalDataColumnIdRelationships_MaximumSet_Gen.json"
+          "CreateCriticalDataColumnRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataColumnRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteCriticalDataColumn",
+        "operationId": "DeleteCriticalDataColumnRelationshipAsync",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -917,7 +917,8 @@
             "in": "path",
             "description": "The unique identifier of the critical data column.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -938,15 +939,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteCriticalDataColumn_MaximumSet": {
-            "$ref": "./examples/DeleteCriticalDataColumn_MaximumSet_Gen.json"
+          "DeleteCriticalDataColumnRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/DeleteCriticalDataColumnRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements": {
       "get": {
-        "operationId": "ListCriticalDataElements",
+        "operationId": "ListCriticalDataElementAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -960,7 +961,8 @@
             "in": "query",
             "description": "Whether to return minimal information for referred Domains.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "keyword",
@@ -1014,13 +1016,13 @@
           }
         },
         "x-ms-examples": {
-          "ListCriticalDataElements_MaximumSet": {
-            "$ref": "./examples/ListCriticalDataElements_MaximumSet_Gen.json"
+          "ListCriticalDataElementAsync_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataElementAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateCriticalDataElement",
+        "operationId": "CreateCriticalDataElementAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1060,15 +1062,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/CreateCriticalDataElement_MaximumSet_Gen.json"
+          "CreateCriticalDataElementAsync_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataElementAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/{criticalDataElementId}": {
       "get": {
-        "operationId": "GetCriticalDataElementCriticalDataElementId",
+        "operationId": "GetCriticalDataElementByIdAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1107,13 +1109,13 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataElementCriticalDataElementId_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataElementCriticalDataElementId_MaximumSet_Gen.json"
+          "GetCriticalDataElementByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetCriticalDataElementByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "ReplaceCriticalDataElement",
+        "operationId": "UpdateCriticalDataElementAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1161,13 +1163,13 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/ReplaceCriticalDataElement_MaximumSet_Gen.json"
+          "UpdateCriticalDataElementAsync_MaximumSet": {
+            "$ref": "./examples/UpdateCriticalDataElementAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteCriticalDataElement",
+        "operationId": "DeleteCriticalDataElementByIdAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1203,15 +1205,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/DeleteCriticalDataElement_MaximumSet_Gen.json"
+          "DeleteCriticalDataElementByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteCriticalDataElementByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/{criticalDataElementId}/relationships": {
       "get": {
-        "operationId": "GetsCriticalDataElement",
+        "operationId": "ListCriticalDataElementRelationshipsAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1349,13 +1351,13 @@
           }
         },
         "x-ms-examples": {
-          "GetsCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/GetsCriticalDataElement_MaximumSet_Gen.json"
+          "ListCriticalDataElementRelationshipsAsync_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataElementRelationshipsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CriticalDataElementCriticalDataElementIdRelationships",
+        "operationId": "CreateCriticalDataElementRelationshipAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1502,13 +1504,13 @@
           }
         },
         "x-ms-examples": {
-          "CriticalDataElementCriticalDataElementIdRelationships_MaximumSet": {
-            "$ref": "./examples/CriticalDataElementCriticalDataElementIdRelationships_MaximumSet_Gen.json"
+          "CreateCriticalDataElementRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataElementRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeletesCriticalDataElement",
+        "operationId": "DeleteCriticalDataElementRelationshipAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1651,15 +1653,15 @@
           }
         },
         "x-ms-examples": {
-          "DeletesCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/DeletesCriticalDataElement_MaximumSet_Gen.json"
+          "DeleteCriticalDataElementRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/DeleteCriticalDataElementRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/facets": {
       "post": {
-        "operationId": "CriticalDataElementFacets",
+        "operationId": "GetCriticalDataElementFacetsAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1698,15 +1700,15 @@
           }
         },
         "x-ms-examples": {
-          "CriticalDataElementFacets_MaximumSet": {
-            "$ref": "./examples/CriticalDataElementFacets_MaximumSet_Gen.json"
+          "GetCriticalDataElementFacetsAsync_MaximumSet": {
+            "$ref": "./examples/GetCriticalDataElementFacetsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/criticalDataElements/query": {
       "post": {
-        "operationId": "CriticalDataElementQuery",
+        "operationId": "QueryCriticalDataElementsAsync",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1754,15 +1756,15 @@
           }
         },
         "x-ms-examples": {
-          "CriticalDataElementQuery_MaximumSet": {
-            "$ref": "./examples/CriticalDataElementQuery_MaximumSet_Gen.json"
+          "QueryCriticalDataElementsAsync_MaximumSet": {
+            "$ref": "./examples/QueryCriticalDataElementsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataAssets": {
       "get": {
-        "operationId": "ListDataAssets",
+        "operationId": "ListDataAssetsAsync",
         "tags": [
           "DataAsset"
         ],
@@ -1775,7 +1777,7 @@
             "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -1816,13 +1818,13 @@
           }
         },
         "x-ms-examples": {
-          "ListDataAssets_MaximumSet": {
-            "$ref": "./examples/ListDataAssets_MaximumSet_Gen.json"
+          "ListDataAssetsAsync_MaximumSet": {
+            "$ref": "./examples/ListDataAssetsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateOrReplaceDataAsset",
+        "operationId": "CreateDataAssetAsync",
         "tags": [
           "DataAsset"
         ],
@@ -1861,15 +1863,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceDataAsset_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceDataAsset_MaximumSet_Gen.json"
+          "CreateDataAssetAsync_MaximumSet": {
+            "$ref": "./examples/CreateDataAssetAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataAssets/{dataAssetId}": {
       "get": {
-        "operationId": "GetDataAssetDataAssetId",
+        "operationId": "GetDataAssetByIdAsync",
         "tags": [
           "DataAsset"
         ],
@@ -1908,13 +1910,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDataAssetDataAssetId_MaximumSet": {
-            "$ref": "./examples/GetDataAssetDataAssetId_MaximumSet_Gen.json"
+          "GetDataAssetByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetDataAssetByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "ReplaceDataAsset",
+        "operationId": "UpdateDataAssetAsync",
         "tags": [
           "DataAsset"
         ],
@@ -1932,7 +1934,7 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "dataAsset",
             "in": "body",
             "description": "CatalogModelDataAsset.",
             "required": true,
@@ -1962,13 +1964,13 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceDataAsset_MaximumSet": {
-            "$ref": "./examples/ReplaceDataAsset_MaximumSet_Gen.json"
+          "UpdateDataAssetAsync_MaximumSet": {
+            "$ref": "./examples/UpdateDataAssetAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataAsset",
+        "operationId": "DeleteDataAssetByIdAsync",
         "tags": [
           "DataAsset"
         ],
@@ -2004,15 +2006,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataAsset_MaximumSet": {
-            "$ref": "./examples/DeleteDataAsset_MaximumSet_Gen.json"
+          "DeleteDataAssetByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDataAssetByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataAssets/{dataAssetId}/relationships": {
       "get": {
-        "operationId": "ListDataAssetRelationships",
+        "operationId": "ListDataAssetRelationshipsAsync",
         "tags": [
           "DataAsset"
         ],
@@ -2150,13 +2152,13 @@
           }
         },
         "x-ms-examples": {
-          "ListDataAssetRelationships_MaximumSet": {
-            "$ref": "./examples/ListDataAssetRelationships_MaximumSet_Gen.json"
+          "ListDataAssetRelationshipsAsync_MaximumSet": {
+            "$ref": "./examples/ListDataAssetRelationshipsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateDataAssetRelationships",
+        "operationId": "CreateDataAssetRelationshipAsync",
         "tags": [
           "DataAsset"
         ],
@@ -2273,7 +2275,7 @@
             }
           },
           {
-            "name": "body",
+            "name": "relationship",
             "in": "body",
             "description": "The properties of the relationship to create.",
             "required": true,
@@ -2306,13 +2308,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateDataAssetRelationships_MaximumSet": {
-            "$ref": "./examples/CreateDataAssetRelationships_MaximumSet_Gen.json"
+          "CreateDataAssetRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/CreateDataAssetRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataAssetRelationships",
+        "operationId": "DeleteDataAssetRelationshipAsync",
         "tags": [
           "DataAsset"
         ],
@@ -2455,15 +2457,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataAssetRelationships_MaximumSet": {
-            "$ref": "./examples/DeleteDataAssetRelationships_MaximumSet_Gen.json"
+          "DeleteDataAssetRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDataAssetRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataAssets/query": {
       "post": {
-        "operationId": "CreateOrReplaceDataAssetQuery",
+        "operationId": "CueryDataAssetsAsync",
         "tags": [
           "DataAsset"
         ],
@@ -2500,17 +2502,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "CreateOrReplaceDataAssetQuery_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceDataAssetQuery_MaximumSet_Gen.json"
-          }
         }
       }
     },
     "/dataProducts": {
       "get": {
-        "operationId": "ListDataProduct",
+        "operationId": "ListDataProductsAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2547,7 +2544,7 @@
             "name": "orderby",
             "in": "query",
             "description": "The field to order by.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -2572,13 +2569,13 @@
           }
         },
         "x-ms-examples": {
-          "ListDataProduct_MaximumSet": {
-            "$ref": "./examples/ListDataProduct_MaximumSet_Gen.json"
+          "ListDataProductsAsync_MaximumSet": {
+            "$ref": "./examples/ListDataProductsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateDataProduct",
+        "operationId": "CreateDataProductAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2617,15 +2614,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateDataProduct_MaximumSet": {
-            "$ref": "./examples/CreateDataProduct_MaximumSet_Gen.json"
+          "CreateDataProductAsync_MaximumSet": {
+            "$ref": "./examples/CreateDataProductAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataProducts/{dataProductId}": {
       "get": {
-        "operationId": "GetDataProductDataProductId",
+        "operationId": "GetDataProductByIdAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2664,13 +2661,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDataProductDataProductId_MaximumSet": {
-            "$ref": "./examples/GetDataProductDataProductId_MaximumSet_Gen.json"
+          "GetDataProductByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetDataProductByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "ReplaceDataProductDataProductId",
+        "operationId": "UpdateDataProductAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2718,13 +2715,13 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceDataProductDataProductId_MaximumSet": {
-            "$ref": "./examples/ReplaceDataProductDataProductId_MaximumSet_Gen.json"
+          "UpdateDataProductAsync_MaximumSet": {
+            "$ref": "./examples/UpdateDataProductAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataProduct",
+        "operationId": "DeleteDataProductByIdAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2760,15 +2757,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataProduct_MaximumSet": {
-            "$ref": "./examples/DeleteDataProduct_MaximumSet_Gen.json"
+          "DeleteDataProductByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDataProductByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataProducts/{dataProductId}/relationships": {
       "get": {
-        "operationId": "ListDataProductDataProductIdRelationships",
+        "operationId": "ListDataProductRelationshipsAsync",
         "tags": [
           "DataProduct"
         ],
@@ -2906,13 +2903,13 @@
           }
         },
         "x-ms-examples": {
-          "ListDataProductDataProductIdRelationships_MaximumSet": {
-            "$ref": "./examples/ListDataProductDataProductIdRelationships_MaximumSet_Gen.json"
+          "ListDataProductRelationshipsAsync_MaximumSet": {
+            "$ref": "./examples/ListDataProductRelationshipsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "ReplaceDataProductRelationships",
+        "operationId": "CreateDataProductRelationshipAsync",
         "tags": [
           "DataProduct"
         ],
@@ -3029,7 +3026,7 @@
             }
           },
           {
-            "name": "body",
+            "name": "relationship",
             "in": "body",
             "description": "The properties of the relationship to create.",
             "required": true,
@@ -3062,13 +3059,13 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceDataProductRelationships_MaximumSet": {
-            "$ref": "./examples/ReplaceDataProductRelationships_MaximumSet_Gen.json"
+          "CreateDataProductRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/CreateDataProductRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteDataProductRelationship",
+        "operationId": "DeleteDataProductRelationshipAsync",
         "tags": [
           "DataProduct"
         ],
@@ -3211,15 +3208,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDataProductRelationship_MaximumSet": {
-            "$ref": "./examples/DeleteDataProductRelationship_MaximumSet_Gen.json"
+          "DeleteDataProductRelationshipAsync_MaximumSet": {
+            "$ref": "./examples/DeleteDataProductRelationshipAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataProducts/facets": {
       "post": {
-        "operationId": "DataProductFacets",
+        "operationId": "GetDataProductFacetsAsync",
         "tags": [
           "DataProduct"
         ],
@@ -3258,15 +3255,15 @@
           }
         },
         "x-ms-examples": {
-          "DataProductFacets_MaximumSet": {
-            "$ref": "./examples/DataProductFacets_MaximumSet_Gen.json"
+          "GetDataProductFacetsAsync_MaximumSet": {
+            "$ref": "./examples/GetDataProductFacetsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataProducts/query": {
       "post": {
-        "operationId": "CreateDataProductQuery",
+        "operationId": "QueryDataProductsAsync",
         "tags": [
           "DataProduct"
         ],
@@ -3287,11 +3284,11 @@
             "name": "dataProductOwner",
             "in": "query",
             "description": "To filter by data product owner.",
-            "required": false,
+            "required": true,
             "type": "boolean"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "The request body for the query.",
             "required": true,
@@ -3321,15 +3318,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateDataProductQuery_MaximumSet": {
-            "$ref": "./examples/CreateDataProductQuery_MaximumSet_Gen.json"
+          "QueryDataProductsAsync_MaximumSet": {
+            "$ref": "./examples/QueryDataProductsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/objectives": {
       "get": {
-        "operationId": "ListOkr",
+        "operationId": "ListObjectivesAsync",
         "tags": [
           "OKR"
         ],
@@ -3342,21 +3339,21 @@
             "name": "keyword",
             "in": "query",
             "description": "Search keyword for OKRs.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
             "name": "domainId",
             "in": "query",
             "description": "The unique identifier of the domain.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
             "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -3397,13 +3394,13 @@
           }
         },
         "x-ms-examples": {
-          "ListOkr_MaximumSet": {
-            "$ref": "./examples/ListOkr_MaximumSet_Gen.json"
+          "ListObjectivesAsync_MaximumSet": {
+            "$ref": "./examples/ListObjectivesAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateOrReplaceOkr",
+        "operationId": "CreateObjectiveAsync",
         "tags": [
           "OKR"
         ],
@@ -3442,15 +3439,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceOkr_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceOkr_MaximumSet_Gen.json"
+          "CreateObjectiveAsync_MaximumSet": {
+            "$ref": "./examples/CreateObjectiveAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}": {
       "get": {
-        "operationId": "GetOkrObjective",
+        "operationId": "GetObjectiveByIdAsync",
         "tags": [
           "OKR"
         ],
@@ -3489,13 +3486,13 @@
           }
         },
         "x-ms-examples": {
-          "GetOkrObjective_MaximumSet": {
-            "$ref": "./examples/GetOkrObjective_MaximumSet_Gen.json"
+          "GetObjectiveByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetObjectiveByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "CreateOrReplaceOkrObjectiveId",
+        "operationId": "UpdateObjectiveAsync",
         "tags": [
           "OKR"
         ],
@@ -3513,7 +3510,7 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "objective",
             "in": "body",
             "description": "The additional properties for the objective query.",
             "required": true,
@@ -3543,13 +3540,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceOkrObjectiveId_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceOkrObjectiveId_MaximumSet_Gen.json"
+          "UpdateObjectiveAsync_MaximumSet": {
+            "$ref": "./examples/UpdateObjectiveAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteOkr",
+        "operationId": "DeleteObjectiveByIdAsync",
         "tags": [
           "OKR"
         ],
@@ -3585,15 +3582,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteOkr_MaximumSet": {
-            "$ref": "./examples/DeleteOkr_MaximumSet_Gen.json"
+          "DeleteObjectiveByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteObjectiveByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}/keyResults": {
       "get": {
-        "operationId": "ListOkrObjectiveIdKeyResults",
+        "operationId": "ListKeyResultsAsync",
         "tags": [
           "OKR"
         ],
@@ -3632,13 +3629,13 @@
           }
         },
         "x-ms-examples": {
-          "ListOkrObjectiveIdKeyResults_MaximumSet": {
-            "$ref": "./examples/ListOkrObjectiveIdKeyResults_MaximumSet_Gen.json"
+          "ListKeyResultsAsync_MaximumSet": {
+            "$ref": "./examples/ListKeyResultsAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateOrReplaceOkrKeyResults",
+        "operationId": "CreateKeyResultAsync",
         "tags": [
           "OKR"
         ],
@@ -3656,7 +3653,7 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "keyResult",
             "in": "body",
             "description": "The body associated with the key result.",
             "required": true,
@@ -3686,15 +3683,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceOkrKeyResults_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceOkrKeyResults_MaximumSet_Gen.json"
+          "CreateKeyResultAsync_MaximumSet": {
+            "$ref": "./examples/CreateKeyResultAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/objectives/{objectiveId}/keyResults/{keyResultId}": {
       "get": {
-        "operationId": "GetOkrObjectiveIdKeyResultsKeyResultId",
+        "operationId": "GetKeyResultByIdAsync",
         "tags": [
           "OKR"
         ],
@@ -3741,13 +3738,13 @@
           }
         },
         "x-ms-examples": {
-          "GetOkrObjectiveIdKeyResultsKeyResultId_MaximumSet": {
-            "$ref": "./examples/GetOkrObjectiveIdKeyResultsKeyResultId_MaximumSet_Gen.json"
+          "GetKeyResultByIdAsync_MaximumSet": {
+            "$ref": "./examples/GetKeyResultByIdAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "CreateOrUpdateOkr",
+        "operationId": "UpdateKeyResultAsync",
         "tags": [
           "OKR"
         ],
@@ -3773,7 +3770,7 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "keyResult",
             "in": "body",
             "description": "The body associated with the key result output.",
             "required": true,
@@ -3783,8 +3780,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CatalogModelKeyResultResponse"
             }
@@ -3803,13 +3800,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateOkr_MaximumSet": {
-            "$ref": "./examples/CreateOrUpdateOkr_MaximumSet_Gen.json"
+          "UpdateKeyResultAsync_MaximumSet": {
+            "$ref": "./examples/UpdateKeyResultAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteOkrWithKeyResult",
+        "operationId": "DeleteKeyResultByIdAsync",
         "tags": [
           "OKR"
         ],
@@ -3853,8 +3850,8 @@
           }
         },
         "x-ms-examples": {
-          "DeleteOkrWithKeyResult_MaximumSet": {
-            "$ref": "./examples/DeleteOkrWithKeyResult_MaximumSet_Gen.json"
+          "DeleteKeyResultByIdAsync_MaximumSet": {
+            "$ref": "./examples/DeleteKeyResultByIdAsync_MaximumSet_Gen.json"
           }
         }
       }
@@ -4003,161 +4000,6 @@
           }
         }
       },
-      "post": {
-        "operationId": "CreateOrReplaceOkrObjectiveIdRelationships",
-        "tags": [
-          "OKR"
-        ],
-        "description": "Creates or replaces relationships for a specific objective (OKR) by its ID.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "objectiveId",
-            "in": "path",
-            "description": "The unique identifier of the objective (OKR).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entityType",
-            "in": "query",
-            "description": "The type of entity to retrieve relationships for.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "DOMAIN",
-              "DATAPRODUCT",
-              "TERM",
-              "DATAASSET",
-              "OBJECTIVE",
-              "KEYRESULT",
-              "CRITICALDATAELEMENT",
-              "CRITICALDATACOLUMN",
-              "CUSTOMMETADATA",
-              "ATTRIBUTE",
-              "ATTRIBUTEINSTANCE",
-              "WORKFLOW",
-              "CATALOGSNAPSHOT",
-              "WORKFLOWRUN"
-            ],
-            "x-ms-enum": {
-              "name": "EntityCategory",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Domain",
-                  "value": "DOMAIN",
-                  "description": "The DOMAIN associated with the critical data element."
-                },
-                {
-                  "name": "DataProduct",
-                  "value": "DATAPRODUCT",
-                  "description": "The DATAPRODUCT associated with the critical data element."
-                },
-                {
-                  "name": "Term",
-                  "value": "TERM",
-                  "description": "The TERM associated with the critical data element."
-                },
-                {
-                  "name": "DataAsset",
-                  "value": "DATAASSET",
-                  "description": "The DATAASSET associated with the critical data element."
-                },
-                {
-                  "name": "Objective",
-                  "value": "OBJECTIVE",
-                  "description": "The OBJECTIVE associated with the critical data element."
-                },
-                {
-                  "name": "KeyResult",
-                  "value": "KEYRESULT",
-                  "description": "The KEYRESULT associated with the critical data element."
-                },
-                {
-                  "name": "CriticalDataElement",
-                  "value": "CRITICALDATAELEMENT",
-                  "description": "The CRITICALDATAELEMENT associated with the critical data element."
-                },
-                {
-                  "name": "CriticalDataColumn",
-                  "value": "CRITICALDATACOLUMN",
-                  "description": "The CRITICALDATACOLUMN associated with the critical data element."
-                },
-                {
-                  "name": "CustomMetadata",
-                  "value": "CUSTOMMETADATA",
-                  "description": "The CUSTOMMETADATA associated with the critical data element."
-                },
-                {
-                  "name": "Attribute",
-                  "value": "ATTRIBUTE",
-                  "description": "The ATTRIBUTE associated with the critical data element."
-                },
-                {
-                  "name": "AttributeInstance",
-                  "value": "ATTRIBUTEINSTANCE",
-                  "description": "The ATTRIBUTEINSTANCE associated with the critical data element."
-                },
-                {
-                  "name": "Workflow",
-                  "value": "WORKFLOW",
-                  "description": "The WORKFLOW associated with the critical data element."
-                },
-                {
-                  "name": "CatalogSnapshot",
-                  "value": "CATALOGSNAPSHOT",
-                  "description": "The CATALOGSNAPSHOT associated with the critical data element."
-                },
-                {
-                  "name": "WorkflowRun",
-                  "value": "WORKFLOWRUN",
-                  "description": "The WORKFLOWRUN associated with the critical data element."
-                }
-              ]
-            }
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The relationships to create or replace.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/RelationshipWrapper"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/RelationshipWrapper"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrReplaceOkrObjectiveIdRelationships_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceOkrObjectiveIdRelationships_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "DeleteOkrObjectiveIdRelationships",
         "tags": [
@@ -4179,14 +4021,14 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
             "name": "entityId",
             "in": "query",
             "description": "The unique identifier of the entity.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -4285,7 +4127,7 @@
             "name": "relationshipType",
             "in": "query",
             "description": "The type of relationship to delete.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -4315,7 +4157,7 @@
     },
     "/objectives/facets": {
       "post": {
-        "operationId": "OkrFacets",
+        "operationId": "GetObjectiveFacetsAsync",
         "tags": [
           "OKR"
         ],
@@ -4354,15 +4196,15 @@
           }
         },
         "x-ms-examples": {
-          "OkrFacets_MaximumSet": {
-            "$ref": "./examples/OkrFacets_MaximumSet_Gen.json"
+          "GetObjectiveFacetsAsync_MaximumSet": {
+            "$ref": "./examples/GetObjectiveFacetsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/objectives/query": {
       "post": {
-        "operationId": "CreateOrReplaceOkrQuery",
+        "operationId": "QueryObjectivesAsync",
         "tags": [
           "OKR"
         ],
@@ -4410,15 +4252,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceOkrQuery_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceOkrQuery_MaximumSet_Gen.json"
+          "QueryObjectivesAsync_MaximumSet": {
+            "$ref": "./examples/QueryObjectivesAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/policies": {
       "get": {
-        "operationId": "GetPolicy",
+        "operationId": "ListPolicies",
         "tags": [
           "Policy"
         ],
@@ -4453,15 +4295,15 @@
           }
         },
         "x-ms-examples": {
-          "GetPolicy_MaximumSet": {
-            "$ref": "./examples/GetPolicy_MaximumSet_Gen.json"
+          "ListPolicies_MaximumSet": {
+            "$ref": "./examples/ListPolicies_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/policies/addAdministrator": {
       "post": {
-        "operationId": "AddPolicyAdministrator",
+        "operationId": "AddDataGovernanceAdmin",
         "tags": [
           "Policy"
         ],
@@ -4497,15 +4339,15 @@
           }
         },
         "x-ms-examples": {
-          "AddPolicyAdministrator_MaximumSet": {
-            "$ref": "./examples/AddPolicyAdministrator_MaximumSet_Gen.json"
+          "AddDataGovernanceAdmin_MaximumSet": {
+            "$ref": "./examples/AddDataGovernanceAdmin_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms": {
       "get": {
-        "operationId": "ListTerms",
+        "operationId": "ListTermAsync",
         "tags": [
           "Term"
         ],
@@ -4534,7 +4376,7 @@
             "name": "keyword",
             "in": "query",
             "description": "Search keyword.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -4565,7 +4407,7 @@
             "name": "orderby",
             "in": "query",
             "description": "Field to sort by.",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -4590,13 +4432,13 @@
           }
         },
         "x-ms-examples": {
-          "ListTerms_MaximumSet": {
-            "$ref": "./examples/ListTerms_MaximumSet_Gen.json"
+          "ListTermAsync_MaximumSet": {
+            "$ref": "./examples/ListTermAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateTerm",
+        "operationId": "CreateTermAsync",
         "tags": [
           "Term"
         ],
@@ -4635,15 +4477,15 @@
           }
         },
         "x-ms-examples": {
-          "CreateTerm_MaximumSet": {
-            "$ref": "./examples/CreateTerm_MaximumSet_Gen.json"
+          "CreateTermAsync_MaximumSet": {
+            "$ref": "./examples/CreateTermAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}": {
       "get": {
-        "operationId": "GetTermWithId",
+        "operationId": "GetTermAsync",
         "tags": [
           "Term"
         ],
@@ -4682,13 +4524,13 @@
           }
         },
         "x-ms-examples": {
-          "GetTermWithId_MaximumSet": {
-            "$ref": "./examples/GetTermWithId_MaximumSet_Gen.json"
+          "GetTermAsync_MaximumSet": {
+            "$ref": "./examples/GetTermAsync_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "CreateOrReplaceTermId",
+        "operationId": "UpdateTermAsync",
         "tags": [
           "Term"
         ],
@@ -4706,7 +4548,7 @@
             "format": "uuid"
           },
           {
-            "name": "body",
+            "name": "term",
             "in": "body",
             "description": "The body associated with the term output.",
             "required": true,
@@ -4736,13 +4578,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceTermId_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceTermId_MaximumSet_Gen.json"
+          "UpdateTermAsync_MaximumSet": {
+            "$ref": "./examples/UpdateTermAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeleteTerm",
+        "operationId": "DeleteTermAsync",
         "tags": [
           "Term"
         ],
@@ -4778,15 +4620,15 @@
           }
         },
         "x-ms-examples": {
-          "DeleteTerm_MaximumSet": {
-            "$ref": "./examples/DeleteTerm_MaximumSet_Gen.json"
+          "DeleteTermAsync_MaximumSet": {
+            "$ref": "./examples/DeleteTermAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}/hierarchies": {
       "get": {
-        "operationId": "ListTermIdHierarchies",
+        "operationId": "ListHierarchyTermsAsync",
         "tags": [
           "Term"
         ],
@@ -4825,15 +4667,15 @@
           }
         },
         "x-ms-examples": {
-          "ListTermIdHierarchies_MaximumSet": {
-            "$ref": "./examples/ListTermIdHierarchies_MaximumSet_Gen.json"
+          "ListHierarchyTermsAsync_MaximumSet": {
+            "$ref": "./examples/ListHierarchyTermsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}/relationships": {
       "get": {
-        "operationId": "ListTermRelationships",
+        "operationId": "ListRelatedEntitiesAsync",
         "tags": [
           "Term"
         ],
@@ -5004,13 +4846,13 @@
           }
         },
         "x-ms-examples": {
-          "ListTermRelationships_MaximumSet": {
-            "$ref": "./examples/ListTermRelationships_MaximumSet_Gen.json"
+          "ListRelatedEntitiesAsync_MaximumSet": {
+            "$ref": "./examples/ListRelatedEntitiesAsync_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "CreateOrReplaceTermIdRelationships",
+        "operationId": "AddRelatedEntityAsync",
         "tags": [
           "Term"
         ],
@@ -5127,7 +4969,7 @@
             }
           },
           {
-            "name": "body",
+            "name": "termRelation",
             "in": "body",
             "description": "The type of relationship to retrieve.",
             "required": true,
@@ -5157,13 +4999,13 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrReplaceTermIdRelationships_MaximumSet": {
-            "$ref": "./examples/CreateOrReplaceTermIdRelationships_MaximumSet_Gen.json"
+          "AddRelatedEntityAsync_MaximumSet": {
+            "$ref": "./examples/AddRelatedEntityAsync_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "DeletesTerm",
+        "operationId": "DeleteRelatedTermAsync",
         "tags": [
           "Term"
         ],
@@ -5339,15 +5181,15 @@
           }
         },
         "x-ms-examples": {
-          "DeletesTerm_MaximumSet": {
-            "$ref": "./examples/DeletesTerm_MaximumSet_Gen.json"
+          "DeleteRelatedTermAsync_MaximumSet": {
+            "$ref": "./examples/DeleteRelatedTermAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/facets": {
       "post": {
-        "operationId": "ReplaceTermFacets",
+        "operationId": "GetTermFacetsAsync",
         "tags": [
           "Term"
         ],
@@ -5386,180 +5228,15 @@
           }
         },
         "x-ms-examples": {
-          "ReplaceTermFacets_MaximumSet": {
-            "$ref": "./examples/ReplaceTermFacets_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/migration/counts": {
-      "get": {
-        "operationId": "GetTermMigrationCounts",
-        "tags": [
-          "Term"
-        ],
-        "description": "Retrieves the counts of terms that are in the process of migration.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TermMigrationCounts"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTermMigrationCounts_MaximumSet": {
-            "$ref": "./examples/GetTermMigrationCounts_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/migration/moveterms": {
-      "post": {
-        "operationId": "TermMigrationMoveterms",
-        "tags": [
-          "Term"
-        ],
-        "description": "Moves terms from the old glossary to the new glossary.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TermsMoveRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TermMigrationMoveterms_MaximumSet": {
-            "$ref": "./examples/TermMigrationMoveterms_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/migration/start": {
-      "post": {
-        "operationId": "TermMigrationStart",
-        "tags": [
-          "Term"
-        ],
-        "description": "Starts the migration process for terms.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TermMigrationStart_MaximumSet": {
-            "$ref": "./examples/TermMigrationStart_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/migration/state": {
-      "get": {
-        "operationId": "GetTermMigrationState",
-        "tags": [
-          "Term"
-        ],
-        "description": "Retrieves the state of term migration.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TermMigrationState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTermMigrationState_MaximumSet": {
-            "$ref": "./examples/GetTermMigrationState_MaximumSet_Gen.json"
+          "GetTermFacetsAsync_MaximumSet": {
+            "$ref": "./examples/GetTermFacetsAsync_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/query": {
       "post": {
-        "operationId": "TermQuery",
+        "operationId": "QueryTermsAsync",
         "tags": [
           "Term"
         ],
@@ -5577,7 +5254,7 @@
             "format": "int32"
           },
           {
-            "name": "body",
+            "name": "request",
             "in": "body",
             "description": "the body associated with the term output.",
             "required": true,
@@ -5607,8 +5284,8 @@
           }
         },
         "x-ms-examples": {
-          "TermQuery_MaximumSet": {
-            "$ref": "./examples/TermQuery_MaximumSet_Gen.json"
+          "QueryTermsAsync_MaximumSet": {
+            "$ref": "./examples/QueryTermsAsync_MaximumSet_Gen.json"
           }
         }
       }
@@ -7809,37 +7486,6 @@
         }
       }
     },
-    "TermMigrationCounts": {
-      "type": "object",
-      "description": "TermMigrationCounts.",
-      "properties": {
-        "termTemplateCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TermTemplateCount"
-        },
-        "glossaryCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "GlossaryCount"
-        },
-        "termCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TermCount"
-        }
-      }
-    },
-    "TermMigrationState": {
-      "type": "object",
-      "description": "TermMigrationState.",
-      "properties": {
-        "hasBeenMigrated": {
-          "type": "boolean",
-          "description": "Indicates whether the term has been migrated."
-        }
-      }
-    },
     "TermRelationship": {
       "type": "object",
       "description": "TermRelationship.",
@@ -7977,23 +7623,6 @@
           "description": "Filter by managed attributes.",
           "items": {
             "$ref": "#/definitions/SharedSearchManageAttributeSearchFilter"
-          }
-        }
-      }
-    },
-    "TermsMoveRequest": {
-      "type": "object",
-      "description": "TermsMoveRequest.",
-      "properties": {
-        "destinationDomainId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the destination domain."
-        },
-        "termIds": {
-          "type": "array",
-          "description": "List of term IDs to be moved.",
-          "items": {
-            "type": "string"
           }
         }
       }

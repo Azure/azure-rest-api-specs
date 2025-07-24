@@ -9,15 +9,17 @@ using Azure.Core;
 namespace PurviewDataCatalog;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Searches and retrieves critical data elements based on domain, keyword, and other filters.")
 @route("/criticalDataElements")
 @get
-op listCriticalDataElements is Foundations.Operation<
+op ListCriticalDataElementAsync is Foundations.Operation<
   {
     @doc("Whether to return minimal information for referred Domains.")
     @query
-    domainId?: string;
+    domainId?: uuid;
 
     @doc("Search keyword.")
     @query
@@ -39,11 +41,13 @@ op listCriticalDataElements is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Creates a new critical data element in the catalog.")
 @route("/criticalDataElements")
 @post
-op createCriticalDataElement is Foundations.Operation<
+op CreateCriticalDataElementAsync is Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
     @bodyRoot
@@ -60,11 +64,13 @@ op createCriticalDataElement is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Searches and retrieves critical data elements based on Id.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @get
-op getCriticalDataElementCriticalDataElementId is Foundations.Operation<
+op GetCriticalDataElementByIdAsync is Foundations.Operation<
   {
     @doc("The criticalDataElementId of data element.")
     @path
@@ -74,11 +80,13 @@ op getCriticalDataElementCriticalDataElementId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Updates an existing critical data element in the catalog.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @put
-op replaceCriticalDataElement is Foundations.Operation<
+op UpdateCriticalDataElementAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
@@ -92,11 +100,13 @@ op replaceCriticalDataElement is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Deletes an existing critical data element in the catalog.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @delete
-op deleteCriticalDataElement is Foundations.Operation<
+op DeleteCriticalDataElementByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
@@ -106,11 +116,13 @@ op deleteCriticalDataElement is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Retrieves relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @get
-op getsCriticalDataElement is Foundations.Operation<
+op ListCriticalDataElementRelationshipsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
@@ -124,11 +136,13 @@ op getsCriticalDataElement is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Updates relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @post
-op criticalDataElementCriticalDataElementIdRelationships is Foundations.Operation<
+op CreateCriticalDataElementRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
@@ -146,11 +160,13 @@ op criticalDataElementCriticalDataElementIdRelationships is Foundations.Operatio
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Deletes relationships for a critical data element.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @delete
-op deletesCriticalDataElement is Foundations.Operation<
+op DeleteCriticalDataElementRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data element.")
     @path
@@ -168,11 +184,13 @@ op deletesCriticalDataElement is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Queries critical data elements based on various criteria.")
 @route("/criticalDataElements/query")
 @post
-op criticalDataElementQuery is Foundations.Operation<
+op QueryCriticalDataElementsAsync is Foundations.Operation<
   {
     @doc("The number of duplicate checks to perform.")
     @query
@@ -186,21 +204,25 @@ op criticalDataElementQuery is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Retrieves facets for critical data elements.")
 @route("/criticalDataElements/facets")
 @post
-op criticalDataElementFacets is Foundations.Operation<
+op GetCriticalDataElementFacetsAsync is Foundations.Operation<
   CriticalDataElementFacetRequest,
   FacetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Creates a new critical data column in the catalog.")
 @route("/criticalDataColumns")
 @post
-op createCriticalDataColumn is Foundations.Operation<
+op CreateCriticalDataColumnAsync is Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
     @bodyRoot
@@ -217,11 +239,13 @@ op createCriticalDataColumn is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
 @route("/criticalDataColumns")
 @get
-op listCriticalDataColumns is Foundations.Operation<
+op ListCriticalDataColumnAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @query
@@ -241,17 +265,19 @@ op listCriticalDataColumns is Foundations.Operation<
 
     @doc("Field to sort by.")
     @query
-    orderby?: string;
+    orderby: string;
   },
   CriticalDataColumnsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Searches and retrieves critical data columns based on Id.")
 @route("/criticalDataColumns/{criticalDataColumnId}")
 @get
-op getCriticalDataColumnCriticalDataColumnId is Foundations.Operation<
+op GetCriticalDataColumnByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @path
@@ -261,11 +287,13 @@ op getCriticalDataColumnCriticalDataColumnId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Updates an existing critical data column in the catalog.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @post
-op criticalDataColumnCriticalDataColumnIdRelationships is Foundations.Operation<
+op CreateCriticalDataColumnRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @path
@@ -277,17 +305,19 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Foundations.Operation<
 
     @doc("CriticalDataColumnProperties")
     @bodyRoot
-    body: CriticalDataColumnProperties;
+    relationship: CriticalDataColumnProperties;
   },
   RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Retrieves relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
-op listCriticalDataColumnRelationships is Foundations.Operation<
+op ListCriticalDataColumnRelationshipsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @path
@@ -301,11 +331,13 @@ op listCriticalDataColumnRelationships is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataColumns")
 @doc("Deletes relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @delete
-op deleteCriticalDataColumn is Foundations.Operation<
+op DeleteCriticalDataColumnRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @query
@@ -321,21 +353,23 @@ op deleteCriticalDataColumn is Foundations.Operation<
 
     @doc("The unique identifier of the critical data column.")
     @path
-    criticalDataColumnId: string;
+    criticalDataColumnId: uuid;
   },
   void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Retrieves a list of data assets.")
 @route("/dataAssets")
 @get
-op listDataAssets is Foundations.Operation<
+op ListDataAssetsAsync is Foundations.Operation<
   {
     @doc("Field to sort by.")
     @query
-    orderby?: string;
+    orderby: string;
 
     @doc("Number of items to skip.")
     @query
@@ -349,11 +383,13 @@ op listDataAssets is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Creates a new data asset.")
 @route("/dataAssets")
 @post
-op createOrReplaceDataAsset is Foundations.Operation<
+op CreateDataAssetAsync is Foundations.Operation<
   CatalogModelDataAsset,
   {
     @statusCode
@@ -366,21 +402,25 @@ op createOrReplaceDataAsset is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Creates a new data asset with fileted query inputs.")
 @route("/dataAssets/query")
 @post
-op createOrReplaceDataAssetQuery is Foundations.Operation<
+op CueryDataAssetsAsync is Foundations.Operation<
   DataAssetDataAssetQueryRequest,
   DataAssetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Retrieves a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @get
-op getDataAssetDataAssetId is Foundations.Operation<
+op GetDataAssetByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -390,11 +430,13 @@ op getDataAssetDataAssetId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Updates a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @put
-op replaceDataAsset is Foundations.Operation<
+op UpdateDataAssetAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -402,17 +444,19 @@ op replaceDataAsset is Foundations.Operation<
 
     @doc("CatalogModelDataAsset.")
     @bodyRoot
-    body: CatalogModelDataAsset;
+    dataAsset: CatalogModelDataAsset;
   },
   CatalogModelDataAsset
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Deletes a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @delete
-op deleteDataAsset is Foundations.Operation<
+op DeleteDataAssetByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -422,11 +466,13 @@ op deleteDataAsset is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Retrieves relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @get
-op listDataAssetRelationships is Foundations.Operation<
+op ListDataAssetRelationshipsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -440,11 +486,13 @@ op listDataAssetRelationships is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Creates relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @post
-op createDataAssetRelationships is Foundations.Operation<
+op CreateDataAssetRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -456,16 +504,19 @@ op createDataAssetRelationships is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    body: Record<CriticalDataColumnProperties>;
+    relationship: Record<CriticalDataColumnProperties>;
   },
   RelationshipWrappersResponse
 >;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Deletes relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @delete
-op deleteDataAssetRelationships is Foundations.Operation<
+op DeleteDataAssetRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -483,11 +534,13 @@ op deleteDataAssetRelationships is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Retrieves a list of data products.")
 @route("/dataProducts")
 @get
-op listDataProduct is Foundations.Operation<
+op ListDataProductsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
     @query
@@ -503,17 +556,19 @@ op listDataProduct is Foundations.Operation<
 
     @doc("The field to order by.")
     @query
-    orderby?: string;
+    orderby: string;
   },
   DataProductResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Creates a new data product.")
 @route("/dataProducts")
 @post
-op createDataProduct is Foundations.Operation<
+op CreateDataProductAsync is Foundations.Operation<
   CatalogModelDataProduct,
   {
     @statusCode
@@ -526,11 +581,13 @@ op createDataProduct is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Queries data products based on specified criteria.")
 @route("/dataProducts/query")
 @post
-op createDataProductQuery is Foundations.Operation<
+op QueryDataProductsAsync is Foundations.Operation<
   {
     @doc("To check for duplicate data products.")
     @query
@@ -538,31 +595,35 @@ op createDataProductQuery is Foundations.Operation<
 
     @doc("To filter by data product owner.")
     @query
-    dataProductOwner?: boolean;
+    dataProductOwner: boolean;
 
     @doc("The request body for the query.")
     @bodyRoot
-    body: DataProductQueryRequest;
+    request: DataProductQueryRequest;
   },
   DataProductResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Retrieves facets for data products.")
 @route("/dataProducts/facets")
 @post
-op dataProductFacets is Foundations.Operation<
+op GetDataProductFacetsAsync is Foundations.Operation<
   DataProductFacetRequest,
   FacetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Retrieves a data product by its dataProductId.")
 @route("/dataProducts/{dataProductId}")
 @get
-op getDataProductDataProductId is Foundations.Operation<
+op GetDataProductByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -572,11 +633,13 @@ op getDataProductDataProductId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Updates a data product by its DataProductId.")
 @route("/dataProducts/{dataProductId}")
 @put
-op replaceDataProductDataProductId is Foundations.Operation<
+op UpdateDataProductAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -590,11 +653,13 @@ op replaceDataProductDataProductId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Deletes a data product by its dataProductId.")
 @route("/dataProducts/{dataProductId}")
 @delete
-op deleteDataProduct is Foundations.Operation<
+op DeleteDataProductByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -604,11 +669,13 @@ op deleteDataProduct is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Retrieves relationships for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @get
-op listDataProductDataProductIdRelationships is Foundations.Operation<
+op ListDataProductRelationshipsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -622,11 +689,13 @@ op listDataProductDataProductIdRelationships is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Creates a relationship for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @post
-op replaceDataProductRelationships is Foundations.Operation<
+op CreateDataProductRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -638,17 +707,19 @@ op replaceDataProductRelationships is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    body: Record<CriticalDataColumnProperties>;
+    relationship: Record<CriticalDataColumnProperties>;
   },
   RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Deletes a relationship for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @delete
-op deleteDataProductRelationship is Foundations.Operation<
+op DeleteDataProductRelationshipAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -666,11 +737,13 @@ op deleteDataProductRelationship is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Retrieves a list of business domains.")
 @route("/businessdomains")
 @get
-op listDomains is Foundations.Operation<
+op EnumerateDomainsAsync is Foundations.Operation<
   {
     @doc("skiptoken")
     @query
@@ -678,17 +751,19 @@ op listDomains is Foundations.Operation<
 
     @doc("writeOnly")
     @query
-    writeOnly?: boolean;
+    writeOnly: boolean;
   },
   CatalogModelDomainResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Creates a new business domain.")
 @route("/businessdomains")
 @post
-op createDomain is Foundations.Operation<
+op CreateDomainAsync is Foundations.Operation<
   CatalogModelDomain,
   {
     @statusCode
@@ -701,11 +776,13 @@ op createDomain is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Updates an existing business domain.")
 @route("/businessdomains/{domainId}")
 @put
-op replaceDomainDomainId is Foundations.Operation<
+op UpdateDomainAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
@@ -719,11 +796,13 @@ op replaceDomainDomainId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Retrieves an existing business domain.")
 @route("/businessdomains/{domainId}")
 @get
-op getDomainDomainId is Foundations.Operation<
+op GetDomainByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
@@ -733,11 +812,13 @@ op getDomainDomainId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Deletes an existing business domain.")
 @route("/businessdomains/{domainId}")
 @delete
-op deleteDomain is Foundations.Operation<
+op DeleteDomainByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the business domain.")
     @path
@@ -747,11 +828,13 @@ op deleteDomain is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Policy")
 @doc("Retrieves a list of policies.")
 @route("/policies")
 @get
-op getPolicy is Foundations.Operation<
+op ListPolicies is Foundations.Operation<
   {
     @doc("skiptoken")
     @query
@@ -764,11 +847,13 @@ op getPolicy is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Policy")
 @doc("Adds an administrator to a policy.")
 @route("/policies/addAdministrator")
 @post
-op addPolicyAdministrator is Foundations.Operation<
+op AddDataGovernanceAdmin is Foundations.Operation<
   ControllersModelsPolicyAddAdminRequest,
   {
     @statusCode
@@ -777,11 +862,13 @@ op addPolicyAdministrator is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Adds an administrator to a policy.")
 @route("/terms")
 @post
-op createTerm is Foundations.Operation<
+op CreateTermAsync is Foundations.Operation<
   CatalogModelTerm,
   {
     @statusCode
@@ -794,11 +881,13 @@ op createTerm is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves a list of terms based on domain, parentId, keyword, and other filters.")
 @route("/terms")
 @get
-op listTerms is Foundations.Operation<
+op ListTermAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
     @query
@@ -810,7 +899,7 @@ op listTerms is Foundations.Operation<
 
     @doc("Search keyword.")
     @query
-    keyword?: string;
+    keyword: string;
 
     @doc("Number of items to skip.")
     @query
@@ -826,17 +915,19 @@ op listTerms is Foundations.Operation<
 
     @doc("Field to sort by.")
     @query
-    orderby?: string;
+    orderby: string;
   },
   CatalogModelTermResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves a term by its unique identifier.")
 @route("/terms/{termId}")
 @put
-op createOrReplaceTermId is Foundations.Operation<
+op UpdateTermAsync is Foundations.Operation<
   {
     @doc(".The unique identifier of the term.")
     @path
@@ -844,17 +935,19 @@ op createOrReplaceTermId is Foundations.Operation<
 
     @doc("The body associated with the term output.")
     @bodyRoot
-    body: CatalogModelTerm;
+    term: CatalogModelTerm;
   },
   CatalogModelTerm
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves a term by its unique identifier.")
 @route("/terms/{termId}")
 @get
-op getTermWithId is Foundations.Operation<
+op GetTermAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -864,11 +957,13 @@ op getTermWithId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Deletes a term by its unique identifier.")
 @route("/terms/{termId}")
 @delete
-op deleteTerm is Foundations.Operation<
+op DeleteTermAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -878,11 +973,13 @@ op deleteTerm is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves terms based on specified criteria.")
 @route("/terms/query")
 @post
-op termQuery is Foundations.Operation<
+op QueryTermsAsync is Foundations.Operation<
   {
     @doc("To check for duplicate terms.")
     @query
@@ -890,23 +987,30 @@ op termQuery is Foundations.Operation<
 
     @doc("the body associated with the term output.")
     @bodyRoot
-    body: TermTermQueryRequest;
+    request: TermTermQueryRequest;
   },
   CatalogModelTermResponse
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves facets for terms.")
 @route("/terms/facets")
 @post
-op replaceTermFacets is Foundations.Operation<TermFacetRequest, FacetsResponse>;
+op GetTermFacetsAsync is Foundations.Operation<
+  TermFacetRequest,
+  FacetsResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves hierarchies for a term by its unique identifier.")
 @route("/terms/{termId}/hierarchies")
 @get
-op listTermIdHierarchies is Foundations.Operation<
+op ListHierarchyTermsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -916,11 +1020,13 @@ op listTermIdHierarchies is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves relationships for a term by its unique identifier.")
 @route("/terms/{termId}/relationships")
 @post
-op createOrReplaceTermIdRelationships is Foundations.Operation<
+op AddRelatedEntityAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -932,17 +1038,19 @@ op createOrReplaceTermIdRelationships is Foundations.Operation<
 
     @doc("The type of relationship to retrieve.")
     @bodyRoot
-    body: TermRelationship;
+    termRelation: TermRelationship;
   },
   TermRelationshipResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Deletes relationships for a term by its unique identifier and specified entity type and relationship type.")
 @route("/terms/{termId}/relationships")
 @delete
-op deletesTerm is Foundations.Operation<
+op DeleteRelatedTermAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -964,11 +1072,13 @@ op deletesTerm is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.")
 @route("/terms/{termId}/relationships")
 @get
-op listTermRelationships is Foundations.Operation<
+op ListRelatedEntitiesAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -986,57 +1096,25 @@ op listTermRelationships is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@tag("Term")
-@doc("Retrieves the state of term migration.")
-@route("/terms/migration/state")
-@get
-op getTermMigrationState is Foundations.Operation<{}, TermMigrationState, {}>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@tag("Term")
-@doc("Retrieves the counts of terms that are in the process of migration.")
-@route("/terms/migration/counts")
-@get
-op getTermMigrationCounts is Foundations.Operation<{}, TermMigrationCounts, {}>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@tag("Term")
-@doc("Starts the migration process for terms.")
-@route("/terms/migration/start")
-@post
-op termMigrationStart is Foundations.Operation<
-  {},
-  {
-    @statusCode
-    statusCode: 202;
-  }
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@tag("Term")
-@doc("Moves terms from the old glossary to the new glossary.")
-@route("/terms/migration/moveterms")
-@post
-op termMigrationMoveterms is Foundations.Operation<TermsMoveRequest, string>;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.")
 @route("/objectives")
 @get
-op listOkr is Foundations.Operation<
+op ListObjectivesAsync is Foundations.Operation<
   {
     @doc("Search keyword for OKRs.")
     @query
-    keyword?: string;
+    keyword: string;
 
     @doc("The unique identifier of the domain.")
     @query
-    domainId?: string;
+    domainId: string;
 
     @doc("Field to sort by.")
     @query
-    orderby?: string;
+    orderby: string;
 
     @doc("Number of items to skip.")
     @query
@@ -1050,11 +1128,13 @@ op listOkr is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Creates a new objective (OKR).")
 @route("/objectives")
 @post
-op createOrReplaceOkr is Foundations.Operation<
+op CreateObjectiveAsync is Foundations.Operation<
   ObjectiveWithAdditionalProperties,
   {
     @statusCode
@@ -1067,11 +1147,13 @@ op createOrReplaceOkr is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Queries objectives (OKRs) based on specified criteria.")
 @route("/objectives/query")
 @post
-op createOrReplaceOkrQuery is Foundations.Operation<
+op QueryObjectivesAsync is Foundations.Operation<
   {
     @doc("Checks for duplicate OKRs.")
     @query
@@ -1085,18 +1167,25 @@ op createOrReplaceOkrQuery is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves the facets for objectives (OKRs).")
 @route("/objectives/facets")
 @post
-op okrFacets is Foundations.Operation<ObjectiveFacetRequest, FacetsResponse>;
+op GetObjectiveFacetsAsync is Foundations.Operation<
+  ObjectiveFacetRequest,
+  FacetsResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Updates an existing objective (OKR) by ID.")
 @route("/objectives/{objectiveId}")
 @put
-op createOrReplaceOkrObjectiveId is Foundations.Operation<
+op UpdateObjectiveAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1104,17 +1193,19 @@ op createOrReplaceOkrObjectiveId is Foundations.Operation<
 
     @doc("The additional properties for the objective query.")
     @bodyRoot
-    body: ObjectiveQueryAdditionalProperties;
+    objective: ObjectiveQueryAdditionalProperties;
   },
   ObjectiveWithAdditionalProperties
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Deletes an existing objective (OKR) by ID.")
 @route("/objectives/{objectiveId}")
 @delete
-op deleteOkr is Foundations.Operation<
+op DeleteObjectiveByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1124,11 +1215,13 @@ op deleteOkr is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves an existing objective (OKR) by ID.")
 @route("/objectives/{objectiveId}")
 @get
-op getOkrObjective is Foundations.Operation<
+op GetObjectiveByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1138,11 +1231,13 @@ op getOkrObjective is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves key results for a specific objective (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults")
 @get
-op listOkrObjectiveIdKeyResults is Foundations.Operation<
+op ListKeyResultsAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1152,11 +1247,13 @@ op listOkrObjectiveIdKeyResults is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Creates a new key result for a specific objective (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults")
 @post
-op createOrReplaceOkrKeyResults is Foundations.Operation<
+op CreateKeyResultAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1164,7 +1261,7 @@ op createOrReplaceOkrKeyResults is Foundations.Operation<
 
     @doc("The body associated with the key result.")
     @bodyRoot
-    body: ModelKeyResult;
+    keyResult: ModelKeyResult;
   },
   {
     @statusCode
@@ -1177,11 +1274,13 @@ op createOrReplaceOkrKeyResults is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves a specific key result (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @get
-op getOkrObjectiveIdKeyResultsKeyResultId is Foundations.Operation<
+op GetKeyResultByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1195,11 +1294,13 @@ op getOkrObjectiveIdKeyResultsKeyResultId is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Updates an existing key result (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @put
-op createOrUpdateOkr is Foundations.Operation<
+op UpdateKeyResultAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1211,24 +1312,19 @@ op createOrUpdateOkr is Foundations.Operation<
 
     @doc("The body associated with the key result output.")
     @bodyRoot
-    body: CatalogModelKeyResult;
+    keyResult: CatalogModelKeyResult;
   },
-  {
-    @statusCode
-    statusCode: 201;
-
-    @doc("The body associated with the key result output.")
-    @bodyRoot
-    body: CatalogModelKeyResultResponse;
-  }
+  CatalogModelKeyResultResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Deletes an existing key result (OKR) by ID.")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @delete
-op deleteOkrWithKeyResult is Foundations.Operation<
+op DeleteKeyResultByIdAsync is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
@@ -1242,35 +1338,8 @@ op deleteOkrWithKeyResult is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@tag("OKR")
-@doc("Creates or replaces relationships for a specific objective (OKR) by its ID.")
-@route("/objectives/{objectiveId}/relationships")
-@post
-op createOrReplaceOkrObjectiveIdRelationships is Foundations.Operation<
-  {
-    @doc("The unique identifier of the objective (OKR).")
-    @path
-    objectiveId: string;
-
-    @doc("The type of entity to retrieve relationships for.")
-    @query
-    entityType: EntityCategory;
-
-    @doc("The relationships to create or replace.")
-    @bodyRoot
-    body: Record<RelationshipWrapper>;
-  },
-  {
-    @statusCode
-    statusCode: 201;
-
-    @doc("The body associated with the key result output.")
-    @bodyRoot
-    body: RelationshipWrapper;
-  }
->;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Deletes an existing relationship for a specific objective (OKR) by its ID.")
 @route("/objectives/{objectiveId}/relationships")
@@ -1283,20 +1352,22 @@ op deleteOkrObjectiveIdRelationships is Foundations.Operation<
 
     @doc("The type of entity to retrieve relationships for.")
     @query
-    entityType?: string;
+    entityType: string;
 
     @doc("The unique identifier of the entity.")
     @query
-    entityId?: EntityCategory;
+    entityId: EntityCategory;
 
     @doc("The type of relationship to delete.")
     @query
-    relationshipType?: string;
+    relationshipType: string;
   },
   void
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves all relationships for a specific objective (OKR) by its ID.")
 @route("/objectives/{objectiveId}/relationships")
