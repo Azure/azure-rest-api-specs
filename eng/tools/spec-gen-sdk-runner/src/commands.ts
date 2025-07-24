@@ -87,6 +87,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let executionReport;
   let changedSpecPathText = "";
   let hasManagementPlaneSpecs = false;
+  let hasTypeSpecProjects = false;
   let overallRunHasBreakingChange = false;
   let currentRunHasBreakingChange = false;
   let sdkGenerationExecuted = true;
@@ -151,6 +152,9 @@ export async function generateSdkForSpecPr(): Promise<number> {
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
         for (const pkg of executionReport.packages) {
+          if (pkg.typespecProject) {
+            hasTypeSpecProjects = true;
+          }
           if (pkg.apiViewArtifact) {
             apiViewRequestData.push({
               packageName: pkg.packageName,
@@ -181,6 +185,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       overallExecutionResult,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
+      hasTypeSpecProjects,
       stagedArtifactsFolder,
       apiViewRequestData,
       sdkGenerationExecuted,
