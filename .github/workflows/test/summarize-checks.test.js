@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
@@ -5,7 +6,6 @@ import {
   updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
-import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
 
@@ -21,7 +21,7 @@ describe("Summarize Checks Tests", () => {
         "VersioningReviewRequired",
       ];
       const fyiCheckRuns = [];
-      const expectedOutput =
+      const expectedComment =
         "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul>" +
         "<li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. " +
         "These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered " +
@@ -35,6 +35,7 @@ describe("Summarize Checks Tests", () => {
         'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
         "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
         'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>';
+      const expectedOutput = [expectedComment, "blocked"];
 
       const requiredCheckRuns = [
         {
@@ -213,8 +214,10 @@ describe("Summarize Checks Tests", () => {
       const labelNames = [];
       const fyiCheckRuns = [];
       const requiredCheckRuns = [];
-      const expectedOutput =
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        "pending",
+      ];
 
       const output = await createNextStepsComment(
         mockCore,
@@ -233,8 +236,10 @@ describe("Summarize Checks Tests", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput =
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.';
+      const expectedOutput = [
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
+        "success",
+      ];
 
       const requiredCheckRuns = [
         {
@@ -412,8 +417,10 @@ describe("Summarize Checks Tests", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput =
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        "pending",
+      ];
 
       const requiredCheckRuns = [
         {

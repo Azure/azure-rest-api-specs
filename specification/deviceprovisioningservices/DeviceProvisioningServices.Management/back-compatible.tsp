@@ -29,54 +29,86 @@ using Microsoft.Devices;
 // These ensure consistent operationId generation in the output
 
 // CertificateResponses interface operations
-@@clientLocation(CertificateResponses.get, "DpsCertificate");
-@@clientLocation(CertificateResponses.createOrUpdate, "DpsCertificate");
-@@clientLocation(CertificateResponses.delete, "DpsCertificate");
-@@clientLocation(CertificateResponses.list, "DpsCertificate");
-@@clientLocation(CertificateResponses.generateVerificationCode,
-  "DpsCertificate"
+@@clientLocation(CertificateResponses.get, "DpsCertificate", "!csharp");
+@@clientLocation(CertificateResponses.createOrUpdate,
+  "DpsCertificate",
+  "!csharp"
 );
-@@clientLocation(CertificateResponses.verifyCertificate, "DpsCertificate");
+@@clientLocation(CertificateResponses.delete, "DpsCertificate", "!csharp");
+@@clientLocation(CertificateResponses.list, "DpsCertificate", "!csharp");
+@@clientLocation(CertificateResponses.generateVerificationCode,
+  "DpsCertificate",
+  "!csharp"
+);
+@@clientLocation(CertificateResponses.verifyCertificate,
+  "DpsCertificate",
+  "!csharp"
+);
 
 // GroupIdInformations interface operations
-@@clientLocation(GroupIdInformations.getPrivateLinkResources, "IotDpsResource");
+@@clientLocation(GroupIdInformations.getPrivateLinkResources,
+  "IotDpsResource",
+  "!csharp"
+);
 @@clientLocation(GroupIdInformations.listPrivateLinkResources,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 
 // PrivateEndpointConnections interface operations
 @@clientLocation(PrivateEndpointConnections.getPrivateEndpointConnection,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.deletePrivateEndpointConnection,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 
 // ProvisioningServiceDescriptions interface operations
-@@clientLocation(ProvisioningServiceDescriptions.get, "IotDpsResource");
-@@clientLocation(ProvisioningServiceDescriptions.createOrUpdate,
-  "IotDpsResource"
+@@clientLocation(ProvisioningServiceDescriptions.get,
+  "IotDpsResource",
+  "!csharp"
 );
-@@clientLocation(ProvisioningServiceDescriptions.update, "IotDpsResource");
-@@clientLocation(ProvisioningServiceDescriptions.delete, "IotDpsResource");
+@@clientLocation(ProvisioningServiceDescriptions.createOrUpdate,
+  "IotDpsResource",
+  "!csharp"
+);
+@@clientLocation(ProvisioningServiceDescriptions.update,
+  "IotDpsResource",
+  "!csharp"
+);
+@@clientLocation(ProvisioningServiceDescriptions.delete,
+  "IotDpsResource",
+  "!csharp"
+);
 @@clientLocation(ProvisioningServiceDescriptions.listByResourceGroup,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 @@clientLocation(ProvisioningServiceDescriptions.listBySubscription,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 @@clientLocation(ProvisioningServiceDescriptions.listValidSkus,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
-@@clientLocation(ProvisioningServiceDescriptions.listKeys, "IotDpsResource");
+@@clientLocation(ProvisioningServiceDescriptions.listKeys,
+  "IotDpsResource",
+  "!csharp"
+);
 @@clientLocation(ProvisioningServiceDescriptions.listKeysForKeyName,
-  "IotDpsResource"
+  "IotDpsResource",
+  "!csharp"
 );
 
 // ProvisioningServiceDescriptionOperations interface operations
@@ -87,14 +119,4 @@ using Microsoft.Devices;
 // IotDpsResourceOperationGroup interface operations
 @@clientLocation(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "IotDpsResource"
-);
-
-@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
-  "certificate_name1",
-  "python"
-);
-
-@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
-  "certificate_name1",
-  "python"
 );
