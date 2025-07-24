@@ -15155,7 +15155,7 @@
       "description": "The updatable properties of the HypervSite.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -15174,7 +15174,7 @@
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "items": {
-            "$ref": "#/definitions/SiteApplianceProperties"
+            "$ref": "#/definitions/SiteAppliancePropertiesFabricSites"
           },
           "x-ms-identifiers": []
         },
@@ -17726,7 +17726,7 @@
       "description": "The updatable properties of the ServerSiteResource.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -17745,7 +17745,7 @@
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "items": {
-            "$ref": "#/definitions/SiteApplianceProperties"
+            "$ref": "#/definitions/SiteAppliancePropertiesFabricSites"
           },
           "x-ms-identifiers": []
         }
@@ -18050,6 +18050,24 @@
         }
       }
     },
+    "SiteAppliancePropertiesFabricSites": {
+      "type": "object",
+      "description": "Class for site appliance properties.",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "description": " Gets or sets the service principal identity details used by agent for  communication              to the service.  "
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        }
+      }
+    },
     "SiteErrorSummary": {
       "type": "object",
       "description": "Site error summary.",
@@ -18207,7 +18225,7 @@
           "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -18231,7 +18249,7 @@
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "items": {
-            "$ref": "#/definitions/SiteApplianceProperties"
+            "$ref": "#/definitions/SiteAppliancePropertiesFabricSites"
           },
           "x-ms-identifiers": []
         },
@@ -18275,6 +18293,40 @@
         }
       }
     },
+    "SiteSpnPropertiesFabricSites": {
+      "type": "object",
+      "description": "Class for site properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Gets or sets the tenant Id for the service principal with which the\non-premise\n            management/data plane components would communicate with\nour Azure services."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Gets or sets the application/client Id for the service principal with which\nthe\n            on-premise management/data plane components would communicate\nwith our Azure \n            services."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Gets or sets the object Id of the service principal with which the on-premise\n\n           management/data plane components would communicate with our Azure\nservices."
+        },
+        "audience": {
+          "type": "string",
+          "description": "Gets or sets the intended audience for the service principal."
+        },
+        "aadAuthority": {
+          "type": "string",
+          "description": "Gets or sets the AAD Authority URL which was used to request the token for\nthe\n            service principal."
+        },
+        "rawCertData": {
+          "type": "string",
+          "description": "Gets or sets the raw certificate data for building certificate expiry flows."
+        },
+        "machineResourceId": {
+          "$ref": "#/definitions/MachineResourceId",
+          "description": "Gets or sets the ARM ID of the arc for servers resource."
+        }
+      }
+    },
     "SitesProperties": {
       "type": "object",
       "description": "The properties of SiteResource",
@@ -18285,7 +18337,7 @@
           "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -18309,7 +18361,7 @@
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "items": {
-            "$ref": "#/definitions/SiteApplianceProperties"
+            "$ref": "#/definitions/SiteAppliancePropertiesFabricSites"
           },
           "x-ms-identifiers": []
         },
@@ -21458,7 +21510,7 @@
       "description": "The updatable properties of the VmwareSite.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
+          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -21477,7 +21529,7 @@
           "type": "array",
           "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance.",
           "items": {
-            "$ref": "#/definitions/SiteApplianceProperties"
+            "$ref": "#/definitions/SiteAppliancePropertiesFabricSites"
           },
           "x-ms-identifiers": []
         },
