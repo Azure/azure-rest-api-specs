@@ -624,7 +624,7 @@ interface Fleets {
   @listsResource(VirtualMachineScaleSet)
   @armResourceList(VirtualMachineScaleSet)
   @get
-  @doc("List VirtualMachineScaleSet resources of a Managed Fleet.")
+  @doc("List VirtualMachineScaleSet resources by Fleet")
   listVirtualMachineScaleSets(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
