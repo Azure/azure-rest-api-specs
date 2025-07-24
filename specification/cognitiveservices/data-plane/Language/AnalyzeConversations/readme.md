@@ -22,6 +22,7 @@ directive:
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
 ```
+<<<<<<< HEAD
 ### Release 2024-05-15-preview
 
 These settings apply only when `--tag=release_2024_05_15_preview` is specified on the command line.
@@ -29,6 +30,42 @@ These settings apply only when `--tag=release_2024_05_15_preview` is specified o
 ``` yaml $(tag) == 'release_2024-05-15-preview'
 input-file:
   - preview/2024-05-15-preview/analyzeconversations.json
+=======
+
+### Release 2025-05-15-preview
+
+These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025-05-15-preview'
+input-file:
+  - preview/2025-05-15-preview/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service - Conversations
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2024-11-15-preview
+
+These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024-11-15-preview'
+input-file:
+  - preview/2024-11-15-preview/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service - Conversations
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2024-11-01
+
+These settings apply only when `--tag=release_2024_11_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024-11-01'
+input-file:
+  - stable/2024-11-01/analyzeconversations.json
+>>>>>>> 10cc644042 (Restructure 2025-05-15-preview)
 title:
   Microsoft Cognitive Language Service - Conversations
 modelerfour:
@@ -48,6 +85,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+<<<<<<< HEAD
 
 ### Release 2023-11-15-preview
 
@@ -75,6 +113,8 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+=======
+>>>>>>> 10cc644042 (Restructure 2025-05-15-preview)
 ### Release 2023-04-01
 
 These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
@@ -89,6 +129,7 @@ modelerfour:
 
 ```
 
+<<<<<<< HEAD
 ### Release 2022-10-01-preview
 
 These settings apply only when `--tag=release_2022_10_01_preview` is specified on the command line.
@@ -131,6 +172,8 @@ modelerfour:
 
 ```
 
+=======
+>>>>>>> 10cc644042 (Restructure 2025-05-15-preview)
 ### Release 2022-05-01
 
 These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
@@ -143,6 +186,7 @@ title:
 modelerfour:
   lenient-model-deduplication: true
 ```
+<<<<<<< HEAD
 ### Release 2022-03-01-preview
 
 These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
@@ -182,6 +226,8 @@ title:
 modelerfour:
   lenient-model-deduplication: true
 ```
+=======
+>>>>>>> 10cc644042 (Restructure 2025-05-15-preview)
 
 ## Swagger to SDK
 
