@@ -41,8 +41,7 @@ interface CreateOrUpdateImmutabilityPolicyOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
+
         @doc("The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.")
         @path
         @segment("storageAccounts")
@@ -54,7 +53,7 @@ interface CreateOrUpdateImmutabilityPolicyOps
         #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("blobServices")
-        defaultBlobServices: "default",
+        default: "default",
 
         @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
         @path
@@ -62,11 +61,12 @@ interface CreateOrUpdateImmutabilityPolicyOps
         @minLength(3)
         @maxLength(63)
         containerName: string,
-
+      },
+      {
         #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("immutabilityPolicies")
-        defaultImmutabilityPolicies: "default",
+        default: "default",
       },
       ErrorType = ErrorResponse
     > {}
