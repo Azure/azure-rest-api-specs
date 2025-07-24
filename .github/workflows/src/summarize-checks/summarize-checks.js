@@ -319,7 +319,17 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
+  core.info(
+    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}@${head_sha}.`,
+  );
+
+  // == null covers === undefined implicitly
+  if (issue_number == null || isNaN(issue_number) || issue_number <= 0) {
+    core.info(
+      "This summarize-checks was triggered off a workflow that doesn't provide the issue-number artifact, early exiting.",
+    );
+    return;
+  }
 
   // retrieve latest labels state
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
