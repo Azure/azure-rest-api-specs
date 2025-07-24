@@ -62,6 +62,7 @@ alias resourceOperations = Azure.Core.StandardResourceOperations;
 @summary("Get list of schema groups.")
 @doc("Gets the list of schema groups user is authorized to access.")
 @route("/$schemaGroups")
+@list
 op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups/{groupName}/schemas/{schemaName}/versions?api-version={apiVersion}
@@ -69,6 +70,7 @@ op listSchemaGroups is Azure.Core.Foundations.Operation<{}, SchemaGroups, {}>;
 @summary("List schema versions.")
 @doc("Gets the list of all versions of one schema.")
 @route("/$schemaGroups/{groupName}/schemas/{schemaName}/versions")
+@list
 op listSchemaVersions is Azure.Core.Foundations.Operation<
   {
     @doc("Name of schema group.")
