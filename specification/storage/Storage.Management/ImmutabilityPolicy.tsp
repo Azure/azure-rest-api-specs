@@ -33,6 +33,44 @@ model ImmutabilityPolicy
   etag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface CreateOrUpdateImmutabilityPolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        @doc("The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.")
+        @path
+        @segment("storageAccounts")
+        @minLength(3)
+        @maxLength(24)
+        @pattern("^[a-z0-9]+$")
+        accountName: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @path
+        @segment("blobServices")
+        defaultBlobServices: "default",
+
+        @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
+        @path
+        @segment("containers")
+        @minLength(3)
+        @maxLength(63)
+        containerName: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @path
+        @segment("immutabilityPolicies")
+        defaultImmutabilityPolicies: "default",
+      },
+      ErrorType = ErrorResponse
+    > {}
+
 @armResourceOperations
 interface ImmutabilityPolicies {
   /**
@@ -66,7 +104,7 @@ interface ImmutabilityPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("BlobContainers_CreateOrUpdateImmutabilityPolicy")
-  createOrUpdateImmutabilityPolicy is ArmResourceCreateOrReplaceSync<
+  createOrUpdateImmutabilityPolicy is CreateOrUpdateImmutabilityPolicyOps.CreateOrUpdateSync<
     ImmutabilityPolicy,
     Parameters = {
       /**
@@ -83,7 +121,8 @@ interface ImmutabilityPolicies {
       @header("ETag")
       eTag: string;
     },
-    Error = ErrorResponse
+    OverrideErrorType = ErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
