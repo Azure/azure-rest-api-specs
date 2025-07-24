@@ -15,14 +15,19 @@ namespace Microsoft.Cache;
  */
 @parentResource(RedisResource)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
+  is Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
+  /** The name of the private endpoint connection associated with the Azure resource */
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateEndpointConnections")
+  @key
+  privateEndpointConnectionName: string;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Http.Private.includeInapplicableMetadataInPayload(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  false
+);
 
 @armResourceOperations
 interface PrivateEndpointConnections {
@@ -56,9 +61,6 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
-  "The name of the private endpoint connection associated with the Azure resource"
-);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.put::parameters.resource,
   "The private endpoint connection properties."

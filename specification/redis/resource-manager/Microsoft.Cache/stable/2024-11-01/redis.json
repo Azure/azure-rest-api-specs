@@ -2296,7 +2296,7 @@
             "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -2304,13 +2304,13 @@
           "200": {
             "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Location": {
@@ -2802,22 +2802,6 @@
         }
       ]
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The Private Endpoint Connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
       "description": "The response of a PrivateEndpointConnection list operation.",
@@ -2826,8 +2810,12 @@
           "type": "array",
           "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "x-ms-identifiers": [
+            "privateEndpointConnectionName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3727,9 +3715,13 @@
           "type": "array",
           "description": "List of private endpoint connection associated with the specified redis cache",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "privateEndpointConnectionName",
+            "id"
+          ]
         }
       },
       "allOf": [
