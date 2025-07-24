@@ -58,8 +58,6 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Existing property in previous GA version.
     where:
-      - $.definitions.SparkJob.properties.conf
-      - $.definitions.SparkJob.properties.environmentVariables
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
   - code: LroLocationHeader
