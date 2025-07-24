@@ -6,7 +6,7 @@ import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from ".
 // TODO: Add tests
 /* v8 ignore start */
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} monitoredWorkflowName
  * @param {string} requiredStatusName
  * @param {string} overridingLabel
@@ -66,6 +66,8 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  core.setOutput("issue_number", issue_number);
+
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
