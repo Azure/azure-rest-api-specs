@@ -4965,9 +4965,35 @@
           "type": "string",
           "description": "The version of node image"
         },
+        "upgradeStrategy": {
+          "type": "string",
+          "description": "Defines the upgrade strategy for the agent pool. The default is Rolling.",
+          "enum": [
+            "Rolling",
+            "BlueGreen"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Rolling",
+                "description": "Specifies that the agent pool will conduct rolling upgrade. This is the default upgrade strategy."
+              },
+              {
+                "value": "BlueGreen",
+                "description": "Specifies that the agent pool will conduct blue-green upgrade."
+              }
+            ]
+          }
+        },
         "upgradeSettings": {
           "$ref": "#/definitions/AgentPoolUpgradeSettings",
-          "description": "Settings for upgrading the agentpool"
+          "description": "Settings for upgrading the agentpool. Applies when upgrade strategy is set to Rolling."
+        },
+        "upgradeSettingsBlueGreen": {
+          "$ref": "#/definitions/AgentPoolBlueGreenUpgradeSettings",
+          "description": "Settings for Blue-Green upgrade on the agentpool. Applies when upgrade strategy is set to BlueGreen."
         },
         "provisioningState": {
           "readOnly": true,
@@ -5384,7 +5410,38 @@
           }
         }
       },
-      "description": "Settings for upgrading an agentpool"
+      "description": "Settings for rolling upgrade on an agentpool"
+    },
+    "AgentPoolBlueGreenUpgradeSettings": {
+      "type": "object",
+      "properties": {
+        "drainBatchSize": {
+          "type": "string",
+          "description": "The number or percentage of nodes to drain in batch during blue-green upgrade. Must be a non-zero number. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total number of blue nodes of the initial upgrade operation. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
+        },
+        "drainTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 1440,
+          "minimum": 1,
+          "description": "The drain timeout for a node, i.e., the amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes."
+        },
+        "batchSoakDurationInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 1440,
+          "minimum": 0,
+          "description": "The soak duration after draining a batch of nodes, i.e., the amount of time (in minutes) to wait after draining a batch of nodes before moving on the next batch. If not specified, the default is 15 minutes."
+        },
+        "finalSoakDurationInMinutes": {
+          "type": "integer",
+          "description": "The soak duration for a node pool, i.e., the amount of time (in minutes) to wait after all old nodes are drained before we remove the old nodes. If not specified, the default is 60 minutes. Only applicable for blue-green upgrade strategy.",
+          "format": "int32",
+          "maximum": 10080,
+          "minimum": 0
+        }
+      },
+      "description": "Settings for blue-green upgrade on an agentpool"
     },
     "AgentPool": {
       "type": "object",
