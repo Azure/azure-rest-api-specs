@@ -1,16 +1,16 @@
-import { join, dirname } from "path";
 import * as fs from "fs";
+import { dirname, join } from "path";
 
 import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
+import { example, readme, swagger, typespec } from "@azure-tools/specs-shared/changed-files";
 import { includesFolder } from "@azure-tools/specs-shared/path";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { swagger, typespec, example, readme } from "@azure-tools/specs-shared/changed-files";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
+import { DiffResult, ReadmeTag, TagConfigDiff, TagDiff } from "./diff-types.js";
 import { LabelContext } from "./labelling-types.js";
-import { DiffResult, ReadmeTag, TagDiff, TagConfigDiff } from "./diff-types.js";
 
 export type FileListInfo = {
   additions: string[];

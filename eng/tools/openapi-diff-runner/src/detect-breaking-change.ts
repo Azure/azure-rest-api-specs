@@ -17,6 +17,12 @@
       );pth 2,
  * i.e. it is invoked by files with depth 1 and invokes files with depth 3.
  */
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
+import { appendFileSync, existsSync } from "node:fs";
+import * as path from "node:path";
+import { logError, LogLevel, logMessage } from "./log.js";
+import { runOad } from "./run-oad.js";
 import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
@@ -24,6 +30,8 @@ import {
   logFileName,
 } from "./types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import { addOadTrace, OadMessage, OadTraceData } from "./types/oad-types.js";
+import { applyRules } from "./utils/apply-rules.js";
 import {
   blobHref,
   branchHref,
@@ -32,20 +40,12 @@ import {
   processOadRuntimeErrorMessage,
   specIsPreview,
 } from "./utils/common-utils.js";
-import { appendFileSync, existsSync } from "node:fs";
-import * as path from "node:path";
-import { applyRules } from "./utils/apply-rules.js";
-import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
-import { runOad } from "./run-oad.js";
 import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
 import {
   deduplicateSwaggers,
   getExistedVersionOperations,
   getPrecedingSwaggers,
 } from "./utils/spec.js";
-import { logError, LogLevel, logMessage } from "./log.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
 // https://github.com/Azure/autorest/pull/4934

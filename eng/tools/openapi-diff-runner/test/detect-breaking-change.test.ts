@@ -1,16 +1,16 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { existsSync } from "node:fs";
 import * as path from "node:path";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  getReadmeFolder,
-  isInDevFolder,
   checkBreakingChangeOnSameVersion,
   doBreakingChangeDetection,
+  getReadmeFolder,
   getSpecModel,
+  isInDevFolder,
   type BreakingChangeDetectionContext,
 } from "../src/detect-breaking-change.js";
-import { Context, ApiVersionLifecycleStage } from "../src/types/breaking-change.js";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model";
+import { ApiVersionLifecycleStage, Context } from "../src/types/breaking-change.js";
 import { getExistedVersionOperations, getPrecedingSwaggers } from "../src/utils/spec.js";
 
 vi.mock("@azure-tools/specs-shared/spec-model", () => ({
