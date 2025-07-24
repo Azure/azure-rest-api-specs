@@ -269,7 +269,6 @@ interface TextAuthoringProject {
   @route("/authoring/analyze-text/projects/{projectName}/:import")
   @post
   @pollingOperation(TextAuthoringProject.getImportStatus)
-  @sharedRoute
   `import` is Foundations.LongRunningOperation<
     {
       /**
@@ -290,50 +289,6 @@ interface TextAuthoringProject {
        */
       @body
       body: TextAnalysisAuthoringExportedProject;
-    },
-    AcceptedResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
-
-  /**
-   * Triggers a job to import a project using raw JSON string input.
-   * This is an alternative to the structured import method, and is useful when importing directly from exported project files.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-text/projects/{projectName}/:import")
-  @post
-  @pollingOperation(TextAuthoringProject.getImportStatus)
-  @sharedRoute
-  @added(Versions.v2025_05_15_preview)
-  importRawJson is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @path
-      projectName: string;
-
-      /**
-       * The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.
-       */
-      @header
-      format?: string;
-
-      /**
-       * Specifies the content type of the request body.
-       * This must be set to "application/json" to indicate that the payload is raw JSON.
-       */
-      @header
-      contentType: "application/json";
-
-      /**
-       * A raw JSON string representing the entire project to import.
-       * This string should match the format of an exported Text Authoring project.
-       */
-      @body
-      @clientName("exportedProject", "csharp")
-      body: string;
     },
     AcceptedResponse,
     {},
