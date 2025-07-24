@@ -95,6 +95,28 @@ interface Evaluations {
     ResourceCreatedResponse<Evaluation>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Independent API operation to perform a single evaluation and immediately get a result.")
+  @added(Versions.v2025_07_31_preview)
+  @route(":evaluateOne")
+  @post
+  createOneEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @header("Repeatability-Request-ID")
+      @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
+      repeatabilityRequestId?: string;
+
+      @doc("Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.")
+      @header("Repeatability-First-Sent")
+      repeatabilityFirstSent?: utcDateTime;
+
+      @doc("Complete evaluation configuration including data source, evaluators, and result settings")
+      @body
+      oneEvaluation: OneEvaluation;
+    },
+    ResourceCreatedResponse<EvaluationResult>
+  >;
+
   @doc("Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.")
   @added(Versions.v2025_07_31_preview)
   update is EvaluationsOperations.ResourceUpdate<Evaluation>;
@@ -135,37 +157,4 @@ interface Evaluations {
 
   @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
-}
-
-@route("singleEvaluation")
-@added(Versions.v2025_05_15_preview)
-interface SingleEvaluationOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
-  @doc("Get the result of a single evaluation operation.")
-  @added(Versions.v2025_07_31_preview)
-  @route("/{operationId}")
-  getSingleEvaluationStatus is Foundations.GetOperationStatus<{}, SingleEvaluationResult>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Create an single evaluation run with the specified configuration.")
-  @added(Versions.v2025_07_31_preview)
-  @pollingOperation(SingleEvaluationOperations.getSingleEvaluationStatus)
-  @post
-  op createSingleEvaluation is Foundations.LongRunningOperation<
-    {
-      @added(Versions.v2025_07_31_preview)
-      @doc("Single evaluation operation request.")
-      @body
-      evaluation: SingleEvaluation;
-    },
-    {
-      @statusCode statusCode: 201;
-
-      @doc("Immediate result of the evaluation.")
-      @Http.bodyRoot
-      SingleEvaluationResults: SingleEvaluationResult;
-    },
-    AcceptedResponse
-  >;
-
 }

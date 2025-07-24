@@ -421,10 +421,10 @@ model EvaluationResultSettings {
   additionalDestinations?: Array<EvaluationDestinationConfiguration>;
 }
 
-@doc("Single Evaluation Definition")
+@doc("One Evaluation Definition")
 @resource("singleEvaluation")
 @added(Versions.v2025_07_31_preview)
-model SingleEvaluation {
+model OneEvaluation {
   @doc("Identifier of the single evaluation.")
   @key("name")
   @encodedName("application/json", "id")
@@ -442,13 +442,6 @@ model SingleEvaluation {
 
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
-}
-
-@doc("Single Evaluation Results Definition")
-@added(Versions.v2025_07_31_preview)
-model SingleEvaluationResult {
-  @doc("Results of a single row of data processed across evaluators.")
-  evaluationResult: EvaluationResult;
 }
 
 @doc("Evaluation Definition")

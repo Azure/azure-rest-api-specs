@@ -1018,6 +1018,63 @@
         }
       }
     },
+    "/evaluations:evaluateOne": {
+      "post": {
+        "operationId": "Evaluations_CreateOneEvaluation",
+        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "oneEvaluation",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneEvaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations:runs": {
       "post": {
         "operationId": "Evaluations_CreateEvaluation",
@@ -1411,116 +1468,6 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/RedTeam"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/singleEvaluation": {
-      "post": {
-        "operationId": "SingleEvaluationOperations_CreateSingleEvaluation",
-        "summary": "Create an single evaluation run with the specified configuration.",
-        "description": "Long-running operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Single evaluation operation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SingleEvaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/SingleEvaluationResult"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/singleEvaluation/{operationId}": {
-      "get": {
-        "operationId": "SingleEvaluationOperations_GetSingleEvaluationStatus",
-        "description": "Get the result of a single evaluation operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The unique ID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/SingleEvaluationResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
             }
           },
           "default": {
@@ -4126,6 +4073,45 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "OneEvaluation": {
+      "type": "object",
+      "description": "One Evaluation Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the single evaluation.",
+          "readOnly": true,
+          "x-ms-client-name": "name"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/InlineDataSource",
+          "description": "Input data to evaluate. Single row support only."
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "additionalDestinations": {
+          "$ref": "#/definitions/EvaluationDestinationConfiguration",
+          "description": "External storage destinations where evaluation results can be exported."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "dataSource",
+        "evaluators"
+      ]
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -4619,58 +4605,6 @@
       "required": [
         "sasUri",
         "type"
-      ]
-    },
-    "SingleEvaluation": {
-      "type": "object",
-      "description": "Single Evaluation Definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the single evaluation.",
-          "readOnly": true,
-          "x-ms-client-name": "name"
-        },
-        "dataSource": {
-          "$ref": "#/definitions/InlineDataSource",
-          "description": "Input data to evaluate. Single row support only."
-        },
-        "evaluators": {
-          "type": "object",
-          "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorConfiguration"
-          }
-        },
-        "additionalDestinations": {
-          "$ref": "#/definitions/EvaluationDestinationConfiguration",
-          "description": "External storage destinations where evaluation results can be exported."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "dataSource",
-        "evaluators"
-      ]
-    },
-    "SingleEvaluationResult": {
-      "type": "object",
-      "description": "Single Evaluation Results Definition",
-      "properties": {
-        "evaluationResult": {
-          "$ref": "#/definitions/EvaluationResult",
-          "description": "Results of a single row of data processed across evaluators."
-        }
-      },
-      "required": [
-        "evaluationResult"
       ]
     },
     "Sku": {
