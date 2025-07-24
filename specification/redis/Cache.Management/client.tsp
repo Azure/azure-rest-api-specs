@@ -12,3 +12,4 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Cache.TlsVersion.`1.0`, "One0", "go");
 @@clientName(Microsoft.Cache.TlsVersion.`1.1`, "One1", "go");
 @@clientName(Microsoft.Cache.TlsVersion.`1.2`, "One2", "go");
+@@clientName(Microsoft.Cache.RedisResource, "ResourceInfo", "go");
