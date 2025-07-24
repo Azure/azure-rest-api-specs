@@ -86,6 +86,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppLink/appLinks": {
+      "get": {
+        "operationId": "AppLinks_ListBySubscription",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "List AppLink resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinks_ListBySubscription": {
+            "$ref": "./examples/AppLinks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/appLinks": {
       "get": {
         "operationId": "AppLinks_ListByResourceGroup",

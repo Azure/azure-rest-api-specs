@@ -27,4 +27,5 @@ interface AppLinks {
   update is ArmResourcePatchAsync<AppLink, AppLinkProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<AppLink>;
   listByResourceGroup is ArmResourceListByParent<AppLink>;
+  listBySubscription is ArmListBySubscription<AppLink>;
 }
