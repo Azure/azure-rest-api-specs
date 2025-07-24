@@ -49,7 +49,7 @@ op ListCriticalDataElementAsync is Foundations.Operation<
 @post
 op CreateCriticalDataElementAsync is Foundations.Operation<
   {
-    @doc("The resource associated with the critical data element.")
+    @doc("The critical data element to create.")
     @bodyRoot
     body: CatalogModelCriticalDataElement;
   },
@@ -57,7 +57,7 @@ op CreateCriticalDataElementAsync is Foundations.Operation<
     @statusCode
     statusCode: 201;
 
-    @doc("The body associated with the critical data element output.")
+    @doc("The created critical data element.")
     @bodyRoot
     body: CatalogModelCriticalDataElement;
   }
@@ -72,7 +72,7 @@ op CreateCriticalDataElementAsync is Foundations.Operation<
 @get
 op GetCriticalDataElementByIdAsync is Foundations.Operation<
   {
-    @doc("The criticalDataElementId of data element.")
+    @doc("The unique identifier of the critical data element.")
     @path
     criticalDataElementId: uuid;
   },
@@ -92,7 +92,7 @@ op UpdateCriticalDataElementAsync is Foundations.Operation<
     @path
     criticalDataElementId: uuid;
 
-    @doc("The body associated with the critical data element output.")
+    @doc("The updated critical data element data.")
     @bodyRoot
     body: CatalogModelCriticalDataElement;
   },
@@ -148,11 +148,11 @@ op CreateCriticalDataElementRelationshipAsync is Foundations.Operation<
     @path
     criticalDataElementId: uuid;
 
-    @doc("The body associated with the critical data element output.")
+    @doc("The type of entity for the relationship.")
     @query
     entityType: EntityCategory;
 
-    @doc("CatalogModelCriticalDataElementRequest")
+    @doc("The input properties for creating the relationship.")
     @bodyRoot
     body: InputProperties;
   },
@@ -172,11 +172,11 @@ op DeleteCriticalDataElementRelationshipAsync is Foundations.Operation<
     @path
     criticalDataElementId: uuid;
 
-    @doc("EntityCategory")
+    @doc("The type of entity for the relationship.")
     @query
     entityType: EntityCategory;
 
-    @doc("The unique identifier of the critical data element.")
+    @doc("The unique identifier of the related entity.")
     @query
     entityId: uuid;
   },
@@ -196,7 +196,7 @@ op QueryCriticalDataElementsAsync is Foundations.Operation<
     @query
     duplicatecheck?: int32;
 
-    @doc("body")
+    @doc("The request body containing query criteria.")
     @bodyRoot
     body: CriticalDataElementQueryRequest;
   },
@@ -504,7 +504,7 @@ op CreateDataAssetRelationshipAsync is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    relationship: Record<CriticalDataColumnProperties>;
+    relationship: CriticalDataColumnRelationshipRequest;
   },
   RelationshipWrappersResponse
 >;
@@ -707,7 +707,7 @@ op CreateDataProductRelationshipAsync is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    relationship: Record<CriticalDataColumnProperties>;
+    relationship: CriticalDataColumnRelationshipRequest;
   },
   RelationshipWrappersResponse
 >;
@@ -840,7 +840,7 @@ op ListPolicies is Foundations.Operation<
     @query
     skipToken?: string;
   },
-  Record<unknown>
+  PolicyListResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -862,7 +862,7 @@ op AddDataGovernanceAdmin is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
-@doc("Adds an administrator to a policy.")
+@doc("Creates a new term in the catalog.")
 @route("/terms")
 @post
 op CreateTermAsync is Foundations.Operation<
@@ -871,7 +871,7 @@ op CreateTermAsync is Foundations.Operation<
     @statusCode
     statusCode: 201;
 
-    @doc("The body associated with the term output.")
+    @doc("The created term.")
     @bodyRoot
     body: CatalogModelTerm;
   }
@@ -926,11 +926,11 @@ op ListTermAsync is Foundations.Operation<
 @put
 op UpdateTermAsync is Foundations.Operation<
   {
-    @doc(".The unique identifier of the term.")
+    @doc("The unique identifier of the term.")
     @path
     termId: uuid;
 
-    @doc("The body associated with the term output.")
+    @doc("The updated term data.")
     @bodyRoot
     term: CatalogModelTerm;
   },
@@ -982,7 +982,7 @@ op QueryTermsAsync is Foundations.Operation<
     @query
     duplicatecheck?: int32;
 
-    @doc("the body associated with the term output.")
+    @doc("The request body containing query criteria.")
     @bodyRoot
     request: TermTermQueryRequest;
   },

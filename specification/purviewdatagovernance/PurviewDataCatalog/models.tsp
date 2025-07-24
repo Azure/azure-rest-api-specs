@@ -6,93 +6,93 @@ using Azure.Core;
 
 namespace PurviewDataCatalog;
 
-@doc("CatalogModelStatus")
+@doc("Status of a catalog model entity indicating its lifecycle state.")
 union CatalogModelStatus {
-  @doc("The status is Draft.")
+  @doc("The entity is in draft state.")
   Draft: "DRAFT",
 
-  @doc("The status is published.")
+  @doc("The entity is published and active.")
   Published: "PUBLISHED",
 
-  @doc("The status is Expired.")
+  @doc("The entity has expired and is no longer active.")
   Expired: "EXPIRED",
 
   string,
 }
 
-@doc("CatalogModelCriticalDataElementDataTypeEnum")
+@doc("Data types supported for critical data elements.")
 union CatalogModelCriticalDataElementDataTypeEnum {
-  @doc("The status is Text.")
+  @doc("Text data type.")
   Text: "TEXT",
 
-  @doc("The status is Number.")
+  @doc("Numeric data type.")
   Number: "NUMBER",
 
-  @doc("The status is DateTime.")
+  @doc("Date and time data type.")
   DateTime: "DATETIME",
 
-  @doc("The status is Boolean.")
+  @doc("Boolean data type.")
   Boolean: "BOOLEAN",
 
   string,
 }
 
-@doc("SharedEntityStatus")
+@doc("Status of shared entities in the catalog.")
 union SharedEntityStatus {
-  @doc("The status is Draft.")
+  @doc("The entity is in draft state.")
   Draft: "Draft",
 
-  @doc("The status is published.")
+  @doc("The entity is published and active.")
   Published: "Published",
 
-  @doc("The status is Expired.")
+  @doc("The entity has expired and is no longer active.")
   Expired: "Expired",
 
   string,
 }
 
-@doc("CatalogModelSystemDataWithExpired")
+@doc("System metadata with expiration information for catalog entities.")
 model CatalogModelSystemDataWithExpired {
-  @doc("The created time of the record.")
+  @doc("The timestamp when the record was created.")
   createdAt?: utcDateTime;
 
-  @doc("The user who created the record.")
+  @doc("The unique identifier of the user who created the record.")
   createdBy?: uuid;
 
-  @doc("The user who Last modified the record.")
+  @doc("The timestamp when the record was last modified.")
   lastModifiedAt?: utcDateTime;
 
-  @doc("The user who last modified the record.")
+  @doc("The unique identifier of the user who last modified the record.")
   lastModifiedBy?: uuid;
 
-  @doc("The expiration time of the record.")
+  @doc("The timestamp when the record expires.")
   expiredAt?: utcDateTime;
 
-  @doc("The user who expired the record.")
+  @doc("The unique identifier of the user who expired the record.")
   expiredBy?: uuid;
 }
 
-@doc("CatalogModelContactsValueInner")
+@doc("Contact information for catalog entities.")
 model CatalogModelContactsValueInner {
   @doc("The unique identifier of the contact.")
   id?: uuid;
 
-  @doc("The description of the contact.")
+  @doc("A description or note about the contact.")
   description?: string;
 }
 
-@doc("CatalogModelManagedAttribute")
+@doc("Managed attribute configuration for catalog entities.")
 model CatalogModelManagedAttribute {
   @doc("The name of the managed attribute.")
   name?: string;
 }
 
-@doc("CatalogModelCriticalDataElement represents a critical data element in the catalog.")
+@doc("Represents a critical data element in the catalog with metadata and relationships.")
 model CatalogModelCriticalDataElement {
-  @doc("The unique identifier of the critical data element.")
+  @doc("The current status of the critical data element.")
   status?: CatalogModelStatus;
 
-  @doc("The status of the critical data element.")
+  @doc("The data type of the critical data element.")
   dataType?: CatalogModelCriticalDataElementDataTypeEnum;
 
   @doc("The unique identifier of the critical data element.")
@@ -101,102 +101,102 @@ model CatalogModelCriticalDataElement {
   @doc("The name of the critical data element.")
   name?: string;
 
-  @doc("The system data of the critical data element.")
+  @doc("System metadata including creation and modification information.")
   systemData?: CatalogModelSystemDataWithExpired;
 
-  @doc("The unique identifier of the critical data element.")
+  @doc("The unique identifier of the domain this element belongs to.")
   domain?: uuid;
 
-  @doc("The description of the critical data element.")
+  @doc("A detailed description of the critical data element.")
   description?: string;
 
-  @doc("The contacts associated with the critical data element.")
+  @doc("The contacts associated with this critical data element.")
   contacts?: Record<CatalogModelContactsValueInner[]>;
 
-  @doc("The tags associated with the critical data element.")
+  @doc("Managed attributes associated with this critical data element.")
   managedAttributes?: CatalogModelManagedAttribute[];
 }
 
-@doc("EntityCategory")
+@doc("Categories of entities that can be managed in the catalog.")
 union EntityCategory {
-  @doc("The DOMAIN associated with the critical data element.")
+  @doc("Domain entity category.")
   Domain: "DOMAIN",
 
-  @doc("The DATAPRODUCT associated with the critical data element.")
+  @doc("Data product entity category.")
   DataProduct: "DATAPRODUCT",
 
-  @doc("The TERM associated with the critical data element.")
+  @doc("Term entity category.")
   Term: "TERM",
 
-  @doc("The DATAASSET associated with the critical data element.")
+  @doc("Data asset entity category.")
   DataAsset: "DATAASSET",
 
-  @doc("The OBJECTIVE associated with the critical data element.")
+  @doc("Objective entity category.")
   Objective: "OBJECTIVE",
 
-  @doc("The KEYRESULT associated with the critical data element.")
+  @doc("Key result entity category.")
   KeyResult: "KEYRESULT",
 
-  @doc("The CRITICALDATAELEMENT associated with the critical data element.")
+  @doc("Critical data element entity category.")
   CriticalDataElement: "CRITICALDATAELEMENT",
 
-  @doc("The CRITICALDATACOLUMN associated with the critical data element.")
+  @doc("Critical data column entity category.")
   CriticalDataColumn: "CRITICALDATACOLUMN",
 
-  @doc("The CUSTOMMETADATA associated with the critical data element.")
+  @doc("Custom metadata entity category.")
   CustomMetadata: "CUSTOMMETADATA",
 
-  @doc("The ATTRIBUTE associated with the critical data element.")
+  @doc("Attribute entity category.")
   Attribute: "ATTRIBUTE",
 
-  @doc("The ATTRIBUTEINSTANCE associated with the critical data element.")
+  @doc("Attribute instance entity category.")
   AttributeInstance: "ATTRIBUTEINSTANCE",
 
-  @doc("The WORKFLOW associated with the critical data element.")
+  @doc("Workflow entity category.")
   Workflow: "WORKFLOW",
 
-  @doc("The CATALOGSNAPSHOT associated with the critical data element.")
+  @doc("Catalog snapshot entity category.")
   CatalogSnapshot: "CATALOGSNAPSHOT",
 
-  @doc("The WORKFLOWRUN associated with the critical data element.")
+  @doc("Workflow run entity category.")
   WorkflowRun: "WORKFLOWRUN",
 
   string,
 }
 
-@doc("CatalogApiServiceOrderBy.")
+@doc("Ordering configuration for API service results.")
 model CatalogApiServiceOrderBy {
-  @doc("The field to order by.")
+  @doc("The field name to order by.")
   field?: string;
 
-  @doc("The direction of the order.")
+  @doc("The sort direction (ascending or descending).")
   direction?: string;
 }
 
-@doc("SharedSearchManageAttributeSearchFilter.")
+@doc("Filter configuration for searching managed attributes.")
 model SharedSearchManageAttributeSearchFilter {
-  @doc("The field to filter by.")
+  @doc("The field name to filter on.")
   field?: string;
 
-  @doc("The operator to use for the filter.")
+  @doc("The comparison operator to use for filtering.")
   operator?: string;
 
-  @doc("The value to filter by.")
+  @doc("The value to compare against.")
   value?: string;
 
-  @doc("The type of the value.")
+  @doc("The data type of the filter value.")
   type?: string;
 }
 
-@doc("CriticalDataElementQueryRequest.")
+@doc("Request parameters for querying critical data elements.")
 model CriticalDataElementQueryRequest {
-  @doc("Number of items to skip.")
+  @doc("Number of items to skip for pagination.")
   skip?: int32;
 
-  @doc("Number of items to return.")
+  @doc("Maximum number of items to return.")
   top?: int32;
 
-  @doc("To order the records.")
+  @doc("Ordering criteria for the results.")
   orderby?: CatalogApiServiceOrderBy[];
 
   @doc("To filter by Ids.")
@@ -293,9 +293,9 @@ model CatalogModelCriticalDataColumn {
   assetName?: string;
 }
 
-@doc("Critical data column properties.")
+@doc("Properties for critical data column relationships.")
 model CriticalDataColumnProperties {
-  @doc("System data for the relationship.")
+  @doc("System metadata for the relationship.")
   systemData?: string[];
 
   @doc("Description of the relationship.")
@@ -304,49 +304,59 @@ model CriticalDataColumnProperties {
   @doc("Type of the relationship.")
   relationshipType?: string;
 
-  @doc("Unique identifier of the asset.")
+  @doc("Unique identifier of the associated asset.")
   assetId?: uuid;
 }
 
-@doc("SystemData.")
+@doc("Request body for creating relationships with critical data column properties.")
+model CriticalDataColumnRelationshipRequest {
+  ...Record<CriticalDataColumnProperties>;
+}
+
+@doc("Response for listing policies.")
+model PolicyListResponse {
+  ...Record<string>;
+}
+
+@doc("System metadata for tracking entity lifecycle.")
 model SystemData {
-  @doc("lastModifiedAt.")
+  @doc("The timestamp when the entity was last modified.")
   lastModifiedAt?: utcDateTime;
 
-  @doc("Unique identifier of the asset.")
+  @doc("The unique identifier of the user who last modified the entity.")
   lastModifiedBy?: uuid;
 
-  @doc("createdAt.")
+  @doc("The timestamp when the entity was created.")
   createdAt?: string;
 
   @doc("Unique identifier of the asset.")
   createdBy?: uuid;
 }
 
-@doc("RelationshipWrapper.")
+@doc("Wrapper for relationship information between entities.")
 model RelationshipWrapper {
-  @doc("systemData.")
+  @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
-  @doc("description.")
+  @doc("Description of the relationship.")
   description?: string;
 
-  @doc("relationshipType.")
+  @doc("Type of the relationship.")
   relationshipType?: string;
 
-  @doc("Unique identifier of the entity.")
+  @doc("Unique identifier of the related entity.")
   entityId?: uuid;
 }
 
-@doc("CatalogModelDataAssetSource.")
+@doc("Source information for data assets.")
 model CatalogModelDataAssetSource {
-  @doc("Type of the asset.")
+  @doc("The type of the data source.")
   type?: string;
 
-  @doc("Unique identifier of the entity.")
+  @doc("Unique identifier of the asset.")
   assetId?: uuid;
 
-  @doc("Type of the asset.")
+  @doc("The type of the asset.")
   assetType?: string;
 
   @doc(".Type properties of the asset.")
