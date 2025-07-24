@@ -81,7 +81,7 @@ interface Tables {
   create is TablesCreateOps.CreateOrUpdateSync<
     Table,
     Response = ArmResourceUpdatedResponse<Table>,
-    OverrideErrortype = CloudError,
+    OverrideErrorType = CloudError,
     OptionalRequestBody = true
   >;
   /**
@@ -94,7 +94,7 @@ interface Tables {
     Table,
     PatchModel = Table,
     Response = ArmResourceUpdatedResponse<Table>,
-    OverrideErrortype = CloudError,
+    OverrideErrorType = CloudError,
     OptionalRequestBody = true
   >;
 
