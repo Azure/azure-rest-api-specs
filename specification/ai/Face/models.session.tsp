@@ -381,6 +381,10 @@ model LivenessSessionCommonData {
   @added(Versions.v1_3_preview_1)
   @doc("Denotes if the abuse monitoring feature was enabled during this session.")
   isAbuseMonitoringEnabled?: HttpPart<boolean>;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
 }
 
 @added(Versions.v1_2)
