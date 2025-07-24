@@ -5,12 +5,12 @@ import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { evaluateImpact } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import { Octokit } from "@octokit/rest";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { join, resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-import { Octokit } from "@octokit/rest";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
