@@ -20,23 +20,22 @@
 
 // #region imports/constants
 import { extractInputs } from "../context.js";
-// eslint-disable-next-line no-unused-vars
-import { commentOrUpdate } from "../comment.js";
-import { PER_PAGE_MAX } from "../github.js";
+// import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
+import { PER_PAGE_MAX } from "../github.js";
 import {
-  verRevApproval,
   brChRevApproval,
   getViolatedRequiredLabelsRules,
   processArmReviewLabels,
   processImpactAssessment,
+  verRevApproval,
 } from "./labelling.js";
 
 import {
   brchTsg,
-  diagramTsg,
   checkAndDiagramTsg,
   defaultTsg,
+  diagramTsg,
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
@@ -320,9 +319,7 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  core.info(
-    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
-  );
+  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
   // retrieve latest labels state
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
@@ -346,31 +343,36 @@ export async function summarizeChecksImpl(
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
-  // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
-  // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
-  for (const label of labelContext.toRemove) {
-    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-    // await github.rest.issues.removeLabel({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   name: label,
-    // });
-  }
+  core.info(
+    `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
+      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
+      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+  );
 
-  if (labelContext.toAdd.size > 0) {
-    core.info(
-      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-    );
-    // await github.rest.issues.addLabels({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   labels: Array.from(labelsToAdd),
-    // });
-  }
+  // for (const label of labelContext.toRemove) {
+  //   core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+  //   await github.rest.issues.removeLabel({
+  //     owner: owner,
+  //     repo: repo,
+  //     issue_number: issue_number,
+  //     name: label,
+  //   });
+  // }
+
+  // if (labelContext.toAdd.size > 0) {
+  //   core.info(
+  //     `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+  //   );
+  //   await github.rest.issues.addLabels({
+  //     owner: owner,
+  //     repo: repo,
+  //     issue_number: issue_number,
+  //     labels: Array.from(labelContext.toAdd),
+  //   });
+  // }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
   labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
@@ -380,7 +382,7 @@ export async function summarizeChecksImpl(
     }
   }
 
-  const commentBody = await createNextStepsComment(
+  const [commentBody, automatedChecksMet] = await createNextStepsComment(
     core,
     repo,
     labelNames,
@@ -401,6 +403,10 @@ export async function summarizeChecksImpl(
   //   commentName,
   //   commentBody
   // )
+
+  core.info(
+    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${automatedChecksMet}.`,
+  );
 }
 
 /**
@@ -530,8 +536,6 @@ export function updateLabels(existingLabels, impactAssessment) {
       impactAssessment.targetBranch,
       labelContext,
       impactAssessment.resourceManagerRequired,
-      impactAssessment.versioningReviewRequired,
-      impactAssessment.breakingChangeReviewRequired,
       impactAssessment.rpaasRPMissing,
       impactAssessment.rpaasExceptionRequired,
       impactAssessment.rpaasRpNotInPrivateRepo,
@@ -730,7 +734,7 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @returns {Promise<string>}
+ * @returns {Promise<[string, string]>}
  */
 export async function createNextStepsComment(
   core,
@@ -744,6 +748,8 @@ export async function createNextStepsComment(
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
+
+  // determine if required runs have any successful runs.
   const requiredCheckInfosPresent = requiredRuns.some((run) => {
     const status = run.status.toLowerCase();
     return status !== "queued" && status !== "in_progress";
@@ -752,7 +758,7 @@ export async function createNextStepsComment(
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const commentBody = await buildNextStepsToMergeCommentBody(
+  const [commentBody, automatedChecksMet] = await buildNextStepsToMergeCommentBody(
     core,
     labels,
     `${repo}/${targetBranch}`,
@@ -761,7 +767,7 @@ export async function createNextStepsComment(
     fyiCheckInfos,
   );
 
-  return commentBody;
+  return [commentBody, automatedChecksMet];
 }
 
 /**
@@ -771,7 +777,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @returns {Promise<string>}
+ * @returns {Promise<[string, string]>}
  */
 async function buildNextStepsToMergeCommentBody(
   core,
@@ -797,7 +803,7 @@ async function buildNextStepsToMergeCommentBody(
   const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
 
   // Compose the body based on the current state
-  const commentBody = getCommentBody(
+  const [commentBody, automatedChecksMet] = getCommentBody(
     requirementsMet,
     anyBlockerPresent,
     anyFyiPresent,
@@ -806,7 +812,7 @@ async function buildNextStepsToMergeCommentBody(
     violatedReqLabelsRules,
   );
 
-  return commentTitle + commentBody;
+  return [commentTitle + commentBody, automatedChecksMet];
 }
 
 /**
@@ -817,7 +823,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
- * @returns {string} The body content HTML
+ * @returns {[string, string]} The body content HTML and the status that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet,
@@ -828,10 +834,12 @@ function getCommentBody(
   violatedRequiredLabelsRules,
 ) {
   let bodyProper = "";
+  let automatedChecksMet = "pending";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
+      automatedChecksMet = "blocked";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -845,6 +853,7 @@ function getCommentBody(
       }
     }
   } else if (requirementsMet) {
+    automatedChecksMet = "success";
     bodyProper =
       `✅ All automated merging requirements have been met! ` +
       `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
@@ -852,7 +861,7 @@ function getCommentBody(
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
   }
-  return bodyProper;
+  return [bodyProper, automatedChecksMet];
 }
 
 /**

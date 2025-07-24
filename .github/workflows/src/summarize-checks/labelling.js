@@ -4,6 +4,7 @@
     2. It calculates what set of labels should be added or removed from the PR.
 */
 
+import { includesEvery, includesNone } from "../../../shared/src/array.js";
 import {
   brchTsg,
   diagramTsg,
@@ -48,8 +49,6 @@ import {
  * @typedef {Object} ImpactAssessment
  * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
  * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
- * @property {boolean} versioningReviewRequired - Whether a versioning policy review is required.
- * @property {boolean} breakingChangeReviewRequired - Whether a breaking change review is required.
  * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
  * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
  * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
@@ -418,7 +417,7 @@ export function processArmReviewLabels(context, existingLabels) {
   // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
   // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
-  if (containsAll(existingLabels, ["ARMSignedOff"])) {
+  if (includesEvery(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("ARMChangesRequested")) {
       context.toRemove.add("ARMChangesRequested");
     }
@@ -428,39 +427,19 @@ export function processArmReviewLabels(context, existingLabels) {
   }
   // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
   else if (
-    containsAll(existingLabels, ["ARMChangesRequested"]) &&
-    containsNone(existingLabels, ["ARMSignedOff"])
+    includesEvery(existingLabels, ["ARMChangesRequested"]) &&
+    includesNone(existingLabels, ["ARMSignedOff"])
   ) {
     if (existingLabels.includes("WaitForARMFeedback")) {
       context.toRemove.add("WaitForARMFeedback");
     }
   }
   // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
-  else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
+  else if (includesNone(existingLabels, ["ARMChangesRequested"])) {
     if (!existingLabels.includes("WaitForARMFeedback")) {
       context.toAdd.add("WaitForARMFeedback");
     }
   }
-}
-
-/**
- *
- * @param {any[]} arr
- * @param {any[]} values
- * @returns
- */
-function containsAll(arr, values) {
-  return values.every((value) => arr.includes(value));
-}
-
-/**
- *
- * @param {any[]} arr
- * @param {any[]} values
- * @returns
- */
-function containsNone(arr, values) {
-  return values.every((value) => !arr.includes(value));
 }
 
 /**
@@ -487,8 +466,6 @@ This function does the following, **among other things**:
  * @param {string} targetBranch
  * @param {LabelContext} labelContext
  * @param {boolean} resourceManagerLabelShouldBePresent
- * @param {boolean} versioningReviewRequiredLabelShouldBePresent
- * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
  * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
  * @param {boolean} rpaasExceptionLabelShouldBePresent
  * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
@@ -500,8 +477,6 @@ export async function processImpactAssessment(
   targetBranch,
   labelContext,
   resourceManagerLabelShouldBePresent,
-  versioningReviewRequiredLabelShouldBePresent,
-  breakingChangeReviewRequiredLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
   rpaasExceptionLabelShouldBePresent,
   ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
@@ -543,8 +518,6 @@ export async function processImpactAssessment(
     await processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
-      versioningReviewRequiredLabelShouldBePresent,
-      breakingChangeReviewRequiredLabelShouldBePresent,
       ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
       rpaasExceptionLabelShouldBePresent,
       ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
@@ -609,8 +582,6 @@ labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
 /**
  * @param {LabelContext} labelContext
  * @param {boolean} armReviewLabelShouldBePresent
- * @param {boolean} versioningReviewRequiredLabelShouldBePresent
- * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
  * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
  * @param {boolean} rpaasExceptionLabelShouldBePresent
  * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
@@ -619,8 +590,6 @@ labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
 async function processARMReviewWorkflowLabels(
   labelContext,
   armReviewLabelShouldBePresent,
-  versioningReviewRequiredLabelShouldBePresent,
-  breakingChangeReviewRequiredLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
   rpaasExceptionLabelShouldBePresent,
   ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
@@ -635,19 +604,13 @@ async function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
-  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(
-    labelContext,
-    breakingChangeReviewRequiredLabelShouldBePresent,
-    versioningReviewRequiredLabelShouldBePresent,
-  );
-
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnVersioningPolicy || blockedOnRpaas;
+  const blocked = blockedOnRpaas;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -703,34 +666,10 @@ async function processARMReviewWorkflowLabels(
   console.log(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
-      `blockedOnVersioningPolicy: ${blockedOnVersioningPolicy}. ` +
       `blockedOnRpaas: ${blockedOnRpaas}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
   return;
-}
-
-/**
- * @param {LabelContext} labelContext
- * @param {boolean} breakingChangeReviewRequiredLabelShouldBePresent
- * @param {boolean} versioningReviewRequiredLabelShouldBePresent
- * @returns {boolean}
- */
-function getBlockedOnVersioningPolicy(
-  labelContext,
-  breakingChangeReviewRequiredLabelShouldBePresent,
-  versioningReviewRequiredLabelShouldBePresent,
-) {
-  const pendingVersioningReview =
-    versioningReviewRequiredLabelShouldBePresent &&
-    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
-
-  const pendingBreakingChangeReview =
-    breakingChangeReviewRequiredLabelShouldBePresent &&
-    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
-
-  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
-  return blockedOnVersioningPolicy;
 }
 
 /**
