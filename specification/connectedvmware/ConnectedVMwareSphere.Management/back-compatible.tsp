@@ -42,6 +42,9 @@ using Microsoft.ConnectedVMwarevSphere;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VirtualNetwork.properties);
 
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(GuestAgent.properties);
+
 @@clientName(InventoryItems.create::parameters.resource, "body");
 
 @@clientName(VirtualMachineInstances.createOrUpdate::parameters.resource,
