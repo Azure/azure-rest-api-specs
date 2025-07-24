@@ -18,7 +18,6 @@ model RedisPatchSchedule
   is Azure.ResourceManager.ProxyResource<ScheduleEntries, false> {
   ...ResourceNameParameter<
     Resource = RedisPatchSchedule,
-    KeyName = "default",
     SegmentName = "patchSchedules",
     NamePattern = "",
     Type = DefaultName
