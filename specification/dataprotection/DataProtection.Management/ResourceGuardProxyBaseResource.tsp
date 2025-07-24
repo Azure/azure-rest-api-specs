@@ -32,7 +32,10 @@ interface ResourceGuardProxyBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DppResourceGuardProxy_Get")
-  get is ArmResourceRead<ResourceGuardProxyBaseResource>;
+  get is ArmResourceRead<
+    Resource = ResourceGuardProxyBaseResource,
+    Error = CloudError
+  >;
 
   /**
    * Creates or Updates a ResourceGuardProxy
@@ -42,7 +45,8 @@ interface ResourceGuardProxyBaseResources {
   @operationId("DppResourceGuardProxy_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ResourceGuardProxyBaseResource,
-    Response = ArmResourceUpdatedResponse<ResourceGuardProxyBaseResource>
+    Response = ArmResourceUpdatedResponse<ResourceGuardProxyBaseResource>,
+    Error = CloudError
   >;
 
   /**
@@ -50,7 +54,10 @@ interface ResourceGuardProxyBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DppResourceGuardProxy_Delete")
-  delete is ArmResourceDeleteSync<ResourceGuardProxyBaseResource>;
+  delete is ArmResourceDeleteSync<
+    Resource = ResourceGuardProxyBaseResource,
+    Error = CloudError
+  >;
 
   /**
    * Returns the list of ResourceGuardProxies associated with the vault
@@ -60,7 +67,8 @@ interface ResourceGuardProxyBaseResources {
   @list
   list is ArmResourceListByParent<
     ResourceGuardProxyBaseResource,
-    Response = ArmResponse<ResourceGuardProxyBaseResourceList>
+    Response = ArmResponse<ResourceGuardProxyBaseResourceList>,
+    Error = CloudError
   >;
 
   /**
@@ -76,7 +84,8 @@ interface ResourceGuardProxyBaseResources {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

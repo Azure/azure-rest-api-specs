@@ -32,7 +32,10 @@ interface AzureBackupRecoveryPointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RecoveryPoints_Get")
-  get is ArmResourceRead<AzureBackupRecoveryPointResource>;
+  get is ArmResourceRead<
+    Resource = AzureBackupRecoveryPointResource,
+    Error = CloudError
+  >;
 
   /**
    * Returns a list of Recovery Points for a DataSource in a vault.
@@ -55,7 +58,8 @@ interface AzureBackupRecoveryPointResources {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<AzureBackupRecoveryPointResourceList>
+    Response = ArmResponse<AzureBackupRecoveryPointResourceList>,
+    Error = CloudError
   >;
 }
 

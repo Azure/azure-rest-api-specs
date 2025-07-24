@@ -47,7 +47,10 @@ interface BackupVaultResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupVaults_Get")
-  get is BackupVaultResourceOps.Read<BackupVaultResource>;
+  get is BackupVaultResourceOps.Read<
+    Resource = BackupVaultResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Creates or updates a BackupVault resource belonging to a resource group.
@@ -61,7 +64,9 @@ interface BackupVaultResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -77,7 +82,8 @@ interface BackupVaultResources {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -88,7 +94,8 @@ interface BackupVaultResources {
   @operationId("BackupVaults_Delete")
   delete is BackupVaultResourceOps.DeleteWithoutOkAsync<
     BackupVaultResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -101,7 +108,8 @@ interface BackupVaultResources {
   @list
   getInSubscription is ArmListBySubscription<
     BackupVaultResource,
-    Response = ArmResponse<BackupVaultResourceList>
+    Response = ArmResponse<BackupVaultResourceList>,
+    Error = CloudError
   >;
 
   /**
@@ -118,7 +126,8 @@ interface BackupVaultResources {
       @segment("operationStatus")
       @path
       operationId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -129,7 +138,8 @@ interface BackupVaultResources {
   validateForBackup is BackupVaultResourceOps.ActionAsync<
     BackupVaultResource,
     ValidateForBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>
+    ArmResponse<OperationJobExtendedInfo>,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -141,7 +151,8 @@ interface BackupVaultResources {
   trigger is BackupVaultResourceOps.ActionAsync<
     BackupVaultResource,
     void,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -160,7 +171,8 @@ interface BackupVaultResources {
       @path
       @segment("backupJobs/operations")
       operationId: string;
-    }
+    },
+    OverrideErrorType = CloudError
   >;
 }
 @armResourceOperations
@@ -190,7 +202,8 @@ interface BackupVaultOperationResultOps
 interface BackupVaultOperationResults {
   get is BackupVaultOperationResultOps.Read<
     BackupVaultResource,
-    Response = ArmResponse<BackupVaultResource> | AcceptedResponse
+    Response = ArmResponse<BackupVaultResource> | AcceptedResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -201,7 +214,8 @@ interface BackupVaultOperationResults {
   @list
   getInResourceGroup is ArmResourceListByParent<
     BackupVaultResource,
-    Response = ArmResponse<BackupVaultResourceList>
+    Response = ArmResponse<BackupVaultResourceList>,
+    Error = CloudError
   >;
 }
 

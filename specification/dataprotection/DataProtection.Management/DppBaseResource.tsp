@@ -74,7 +74,10 @@ interface ResourceGuards {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  getDefaultDeleteResourceGuardProxyRequestsObject is ResourceGuardOps.Read<DppBaseResource>;
+  getDefaultDeleteResourceGuardProxyRequestsObject is ResourceGuardOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -82,7 +85,8 @@ interface ResourceGuards {
   @action("deleteResourceGuardProxyRequests")
   getDeleteResourceGuardProxyRequestsObjects is ResourceGuardOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
 }
 @armResourceOperations
@@ -184,7 +188,10 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDefaultDisableSoftDeleteRequestsObject")
-  getDefaultDisableSoftDeleteRequestsObject is DppBaseResourceOps.Read<DppBaseResource>;
+  getDefaultDisableSoftDeleteRequestsObject is DppBaseResourceOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -194,14 +201,18 @@ interface DppBaseResourceOperationGroup {
   @action("disableSoftDeleteRequests")
   getDisableSoftDeleteRequestsObjects is DppBaseResourceOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDefaultUpdateProtectedItemRequestsObject")
-  getDefaultUpdateProtectedItemRequestsObject is DppBaseResourceUpdateProtectedItemOperationGroupOps.Read<DppBaseResource>;
+  getDefaultUpdateProtectedItemRequestsObject is DppBaseResourceUpdateProtectedItemOperationGroupOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -211,7 +222,8 @@ interface DppBaseResourceOperationGroup {
   @operationId("ResourceGuards_GetUpdateProtectedItemRequestsObjects")
   getUpdateProtectedItemRequestsObjects is DppBaseResourceUpdateProtectedItemOperationGroupOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -219,7 +231,10 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDefaultUpdateProtectionPolicyRequestsObject")
-  getDefaultUpdateProtectionPolicyRequestsObject is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.Read<DppBaseResource>;
+  getDefaultUpdateProtectionPolicyRequestsObject is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -229,7 +244,8 @@ interface DppBaseResourceOperationGroup {
   @operationId("ResourceGuards_GetUpdateProtectionPolicyRequestsObjects")
   getUpdateProtectionPolicyRequestsObjects is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -237,7 +253,10 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDefaultDeleteProtectedItemRequestsObject")
-  getDefaultDeleteProtectedItemRequestsObject is DppBaseResourceDeleteProtectedItemOperationGroupOps.Read<DppBaseResource>;
+  getDefaultDeleteProtectedItemRequestsObject is DppBaseResourceDeleteProtectedItemOperationGroupOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -247,7 +266,8 @@ interface DppBaseResourceOperationGroup {
   @action("deleteProtectedItemRequests")
   getDeleteProtectedItemRequestsObjects is DppBaseResourceDeleteProtectedItemOperationGroupOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -255,7 +275,10 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDefaultBackupSecurityPINRequestsObject")
-  getDefaultBackupSecurityPINRequestsObject is DppBaseResourceGetBackupSecurityPINOperationGroupOps.Read<DppBaseResource>;
+  getDefaultBackupSecurityPINRequestsObject is DppBaseResourceGetBackupSecurityPINOperationGroupOps.Read<
+    Resource = DppBaseResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
@@ -265,7 +288,8 @@ interface DppBaseResourceOperationGroup {
   @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
   getBackupSecurityPINRequestsObjects is DppBaseResourceGetBackupSecurityPINOperationGroupOps.List<
     DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
+    Response = ArmResponse<DppBaseResourceList>,
+    OverrideErrorType = CloudError
   >;
 }
 

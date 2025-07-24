@@ -34,7 +34,7 @@ interface BackupVaultsOperationGroup {
      */
     @bodyRoot
     parameters: CheckNameAvailabilityRequest,
-  ): ArmResponse<CheckNameAvailabilityResult> | ErrorResponse;
+  ): ArmResponse<CheckNameAvailabilityResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -56,7 +56,7 @@ interface OperationResultOperationGroup {
     operationId: string,
 
     ...LocationResourceParameter,
-  ): ArmResponse<OperationJobExtendedInfo> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<OperationJobExtendedInfo> | ArmAcceptedResponse | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -77,7 +77,7 @@ interface OperationStatusOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @path
     operationId: string,
-  ): ArmResponse<OperationResource> | ErrorResponse;
+  ): ArmResponse<OperationResource> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -98,7 +98,7 @@ interface OperationStatusResourceGroupContextOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @path
     operationId: string,
-  ): ArmResponse<OperationResource> | ErrorResponse;
+  ): ArmResponse<OperationResource> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -114,7 +114,8 @@ interface DataProtectionOperationGroup {
     Request = FeatureValidationRequestBase,
     Response = FeatureValidationResponseBase,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }
 
@@ -194,7 +195,7 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
      */
     @bodyRoot
     parameters: FetchSecondaryRPsRequestParameters,
-  ): ArmResponse<AzureBackupRecoveryPointResourceList> | ErrorResponse;
+  ): ArmResponse<AzureBackupRecoveryPointResourceList> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -217,7 +218,7 @@ interface FetchCrossRegionRestoreJobOperationGroup {
      */
     @bodyRoot
     parameters: CrossRegionRestoreJobRequest,
-  ): ArmResponse<AzureBackupJobResource> | ErrorResponse;
+  ): ArmResponse<AzureBackupJobResource> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -247,7 +248,7 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
      */
     @bodyRoot
     parameters: CrossRegionRestoreJobsRequest,
-  ): ArmResponse<AzureBackupJobResourceList> | ErrorResponse;
+  ): ArmResponse<AzureBackupJobResourceList> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -268,5 +269,5 @@ interface BackupInstancesExtensionRoutingOperationGroup {
      */
     @path
     resourceId: string,
-  ): ArmResponse<BackupInstanceResourceList> | ErrorResponse;
+  ): ArmResponse<BackupInstanceResourceList> | CloudError;
 }

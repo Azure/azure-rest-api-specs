@@ -28,14 +28,17 @@ interface ResourceGuardResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_Get")
-  get is ArmResourceRead<ResourceGuardResource>;
+  get is ArmResourceRead<Resource = ResourceGuardResource, Error = CloudError>;
 
   /**
    * Creates or updates a ResourceGuard resource belonging to a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_Put")
-  put is ArmResourceCreateOrReplaceSync<ResourceGuardResource>;
+  put is ArmResourceCreateOrReplaceSync<
+    Resource = ResourceGuardResource,
+    Error = CloudError
+  >;
 
   /**
    * Updates a ResourceGuard resource belonging to a resource group. For example, updating tags for a resource.
@@ -45,7 +48,8 @@ interface ResourceGuardResources {
   @operationId("ResourceGuards_Patch")
   patch is ArmCustomPatchSync<
     ResourceGuardResource,
-    PatchModel = PatchResourceGuardInput
+    PatchModel = PatchResourceGuardInput,
+    Error = CloudError
   >;
 
   /**
@@ -53,7 +57,10 @@ interface ResourceGuardResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_Delete")
-  delete is ArmResourceDeleteSync<ResourceGuardResource>;
+  delete is ArmResourceDeleteSync<
+    Resource = ResourceGuardResource,
+    Error = CloudError
+  >;
 
   /**
    * Returns ResourceGuards collection belonging to a ResourceGroup.
@@ -63,7 +70,8 @@ interface ResourceGuardResources {
   @list
   getResourcesInResourceGroup is ArmResourceListByParent<
     ResourceGuardResource,
-    Response = ArmResponse<ResourceGuardResourceList>
+    Response = ArmResponse<ResourceGuardResourceList>,
+    Error = CloudError
   >;
 
   /**
@@ -74,7 +82,8 @@ interface ResourceGuardResources {
   @list
   getResourcesInSubscription is ArmListBySubscription<
     ResourceGuardResource,
-    Response = ArmResponse<ResourceGuardResourceList>
+    Response = ArmResponse<ResourceGuardResourceList>,
+    Error = CloudError
   >;
 }
 

@@ -31,7 +31,7 @@ interface AzureBackupJobResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Jobs_Get")
-  get is ArmResourceRead<AzureBackupJobResource>;
+  get is ArmResourceRead<Resource = AzureBackupJobResource, Error = CloudError>;
 
   /**
    * Returns list of jobs belonging to a backup vault
@@ -41,7 +41,8 @@ interface AzureBackupJobResources {
   @list
   list is ArmResourceListByParent<
     AzureBackupJobResource,
-    Response = ArmResponse<AzureBackupJobResourceList>
+    Response = ArmResponse<AzureBackupJobResourceList>,
+    Error = CloudError
   >;
 }
 

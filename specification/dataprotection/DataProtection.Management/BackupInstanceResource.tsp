@@ -33,12 +33,16 @@ interface BackupInstanceResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = BackupVaultResource,
-          KeyName = "vaultName",
-          SegmentName = "backupVaults",
-          NamePattern = ""
-        >>,
+
+        /**
+         * The name of the backup vault.
+         */
+        @path
+        @segment("backupVaults")
+        @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+        @minLength(2)
+        @maxLength(50)
+        vaultName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = BackupInstanceResource,
@@ -55,7 +59,10 @@ interface BackupInstanceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupInstances_Get")
-  get is BackupInstanceResourceOps.Read<BackupInstanceResource>;
+  get is BackupInstanceResourceOps.Read<
+    Resource = BackupInstanceResource,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Create or update a backup instance in a backup vault
@@ -73,7 +80,8 @@ interface BackupInstanceResources {
     Response = ArmResourceUpdatedResponse<BackupInstanceResource> | ArmResourceCreatedResponse<
       BackupInstanceResource,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -89,7 +97,8 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -101,7 +110,8 @@ interface BackupInstanceResources {
   adhocBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     TriggerBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>
+    ArmResponse<OperationJobExtendedInfo>,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -124,7 +134,8 @@ interface BackupInstanceResources {
   triggerRehydrate is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     AzureBackupRehydrationRequest,
-    NoContentResponse
+    NoContentResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -141,7 +152,8 @@ interface BackupInstanceResources {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -152,7 +164,8 @@ interface BackupInstanceResources {
   resumeBackups is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
-    OkResponse
+    OkResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -163,7 +176,8 @@ interface BackupInstanceResources {
   resumeProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
-    OkResponse
+    OkResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -185,7 +199,8 @@ interface BackupInstanceResources {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -207,7 +222,8 @@ interface BackupInstanceResources {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    }
+    },
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -220,7 +236,8 @@ interface BackupInstanceResources {
   syncBackupInstance is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     SyncBackupInstanceRequest,
-    OkResponse
+    OkResponse,
+    OverrideErrortype = CloudError
   >;
 
   /**
@@ -232,7 +249,8 @@ interface BackupInstanceResources {
   validateForRestore is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateRestoreRequestObject,
-    ArmResponse<OperationJobExtendedInfo>
+    ArmResponse<OperationJobExtendedInfo>,
+    OverrideErrortype = CloudError
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -241,7 +259,8 @@ interface BackupInstanceResources {
   find is BackupInstanceResourceOps.ActionSync<
     BackupInstanceResource,
     AzureBackupFindRestorableTimeRangesRequest,
-    ArmResponse<AzureBackupFindRestorableTimeRangesResponseResource>
+    ArmResponse<AzureBackupFindRestorableTimeRangesResponseResource>,
+    OverrideErrortype = CloudError
   >;
 }
 @armResourceOperations
@@ -280,7 +299,8 @@ interface BackupInstances {
    */
   getBackupInstanceOperationResult is BackupInstanceOps.Read<
     BackupInstanceResource,
-    Response = ArmResponse<BackupInstanceResource> | AcceptedResponse
+    Response = ArmResponse<BackupInstanceResource> | AcceptedResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -289,7 +309,8 @@ interface BackupInstances {
   @list
   list is ArmResourceListByParent<
     BackupInstanceResource,
-    Response = ArmResponse<BackupInstanceResourceList>
+    Response = ArmResponse<BackupInstanceResourceList>,
+    Error = CloudError
   >;
 }
 

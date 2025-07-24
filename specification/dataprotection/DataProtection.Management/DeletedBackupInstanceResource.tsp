@@ -32,7 +32,10 @@ interface DeletedBackupInstanceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedBackupInstances_Get")
-  get is ArmResourceRead<DeletedBackupInstanceResource>;
+  get is ArmResourceRead<
+    Resource = DeletedBackupInstanceResource,
+    Error = CloudError
+  >;
 
   /**
    * Gets deleted backup instances belonging to a backup vault
@@ -43,7 +46,8 @@ interface DeletedBackupInstanceResources {
   @list
   list is ArmResourceListByParent<
     DeletedBackupInstanceResource,
-    Response = ArmResponse<DeletedBackupInstanceResourceList>
+    Response = ArmResponse<DeletedBackupInstanceResourceList>,
+    Error = CloudError
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -51,7 +55,8 @@ interface DeletedBackupInstanceResources {
   undelete is ArmResourceActionAsync<
     DeletedBackupInstanceResource,
     void,
-    OkResponse
+    OkResponse,
+    Error = CloudError
   >;
 }
 

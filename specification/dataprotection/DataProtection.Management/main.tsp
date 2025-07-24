@@ -36,7 +36,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Data Protection Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DataProtection;
 
 /**

@@ -32,7 +32,10 @@ interface BaseBackupPolicyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupPolicies_Get")
-  get is ArmResourceRead<BaseBackupPolicyResource>;
+  get is ArmResourceRead<
+    Resource = BaseBackupPolicyResource,
+    Error = CloudError
+  >;
 
   /**
    * Creates or Updates a backup policy belonging to a backup vault
@@ -42,7 +45,8 @@ interface BaseBackupPolicyResources {
   @operationId("BackupPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BaseBackupPolicyResource,
-    Response = ArmResourceUpdatedResponse<BaseBackupPolicyResource>
+    Response = ArmResourceUpdatedResponse<BaseBackupPolicyResource>,
+    Error = CloudError
   >;
 
   /**
@@ -50,7 +54,7 @@ interface BaseBackupPolicyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupPolicies_Delete")
-  delete is ArmResourceDeleteSync<BaseBackupPolicyResource>;
+  delete is ArmResourceDeleteSync<Resource = BaseBackupPolicyResource, Error = CloudError>;
 
   /**
    * Returns list of backup policies belonging to a backup vault
@@ -60,7 +64,8 @@ interface BaseBackupPolicyResources {
   @list
   list is ArmResourceListByParent<
     BaseBackupPolicyResource,
-    Response = ArmResponse<BaseBackupPolicyResourceList>
+    Response = ArmResponse<BaseBackupPolicyResourceList>,
+    Error = CloudError
   >;
 }
 
