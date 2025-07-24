@@ -109,10 +109,10 @@ union RiskCategory {
   SelfHarm: "SelfHarm",
 }
 
-@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@doc("Azure OpenAI model target. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model AzureOpenAIModelConfiguration extends TargetConfig {
+model AzureOpenAIModelTarget extends TargetConfig {
   @visibility(Lifecycle.Read)
   type: "AzureOpenAIModel";
 
@@ -120,7 +120,7 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   modelDeploymentName: string;
 }
 
-@doc("Azure AI Agent Target Configuration. The API version would be selected by the service for querying the model.")
+@doc("Azure AI Agent target. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model AzureAIAgentTarget extends TargetConfig {
