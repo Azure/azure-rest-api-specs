@@ -596,7 +596,7 @@ export class SdkTspConfigValidationRule implements Rule {
         const emitterName = emitterOptionSubRule.getEmitterName();
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
           console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`,
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
           );
           isSubRuleSuccess = true;
         }
