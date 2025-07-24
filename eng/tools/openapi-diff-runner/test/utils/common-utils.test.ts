@@ -1,21 +1,32 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { Context } from "../../src/types/breaking-change.js";
 import {
   blobHref,
-  targetHref,
   branchHref,
+  convertRawErrorToUnifiedMsg,
+  cutoffMsg,
+  getArgumentValue,
   getGithubStyleFilePath,
   getRelativeSwaggerPathToRepo,
-  sourceBranchHref,
-  targetBranchHref,
-  specificBranchHref,
   getVersionFromInputFile,
-  getArgumentValue,
-  cutoffMsg,
   processOadRuntimeErrorMessage,
+  sourceBranchHref,
+  specificBranchHref,
   specIsPreview,
-  convertRawErrorToUnifiedMsg,
+  targetBranchHref,
+  targetHref,
 } from "../../src/utils/common-utils.js";
-import { Context } from "../../src/types/breaking-change.js";
+
+// Mock node:fs module for file content parsing tests
+vi.mock("node:fs", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("node:fs")>();
+  return {
+    ...actual,
+    existsSync: vi.fn(),
+    readFileSync: vi.fn(),
+  };
+});
 
 describe("common-utils", () => {
   let originalEnv: NodeJS.ProcessEnv;
@@ -225,6 +236,11 @@ describe("common-utils", () => {
   });
 
   describe("getVersionFromInputFile", () => {
+    beforeEach(() => {
+      vi.mocked(existsSync).mockReset();
+      vi.mocked(readFileSync).mockReset();
+    });
+
     it("should extract version from data-plane path", () => {
       const result = getVersionFromInputFile(TEST_CONSTANTS.DATA_PLANE_PATH);
       expect(result).toBe(TEST_CONSTANTS.VERSION);
@@ -245,9 +261,96 @@ describe("common-utils", () => {
       expect(result).toBe("");
     });
 
-    it("should return folder name when no valid API version found", () => {
+    it("should return empty string when no valid API version found", () => {
       const result = getVersionFromInputFile("invalid/path.json");
-      expect(result).toBe("invalid");
+      expect(result).toBe("");
+    });
+
+    it("should extract version from file content when path regex fails and file exists", () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          version: "2023-05-01",
+        },
+      });
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(mockFileContent);
+
+      const result = getVersionFromInputFile(filePath);
+      expect(result).toBe("2023-05-01");
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should extract preview version from file content when includePreview is true", () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          version: "2023-05-01-preview",
+        },
+      });
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(mockFileContent);
+
+      const result = getVersionFromInputFile(filePath, true);
+      expect(result).toBe("2023-05-01-preview");
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should return empty string when file content has no version", () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = JSON.stringify({
+        info: {
+          title: "Test API",
+        },
+      });
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(mockFileContent);
+
+      const result = getVersionFromInputFile(filePath);
+      expect(result).toBe("");
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should throw error when file content is invalid JSON", () => {
+      const filePath = "some/custom/path/spec.json";
+      const mockFileContent = "invalid json content";
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(mockFileContent);
+
+      expect(() => getVersionFromInputFile(filePath)).toThrow();
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).toHaveBeenCalledWith(filePath, "utf8");
+    });
+
+    it("should return empty string when file does not exist and path regex fails", () => {
+      const filePath = "non/existent/path/spec.json";
+
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      const result = getVersionFromInputFile(filePath);
+      expect(result).toBe("");
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).not.toHaveBeenCalled();
+    });
+
+    it("should throw error when file read fails", () => {
+      const filePath = "some/custom/path/spec.json";
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockImplementation(() => {
+        throw new Error("File read error");
+      });
+
+      expect(() => getVersionFromInputFile(filePath)).toThrow("File read error");
+      expect(vi.mocked(existsSync)).toHaveBeenCalledWith(filePath);
+      expect(vi.mocked(readFileSync)).toHaveBeenCalledWith(filePath, "utf8");
     });
   });
 
