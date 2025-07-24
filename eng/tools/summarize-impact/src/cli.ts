@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-import { evaluateImpact } from "./impact.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { setOutput } from "@azure-tools/specs-shared/error-reporting";
+import { evaluateImpact } from "./impact.js";
 
-import { resolve, join } from "path";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
+import { join, resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
