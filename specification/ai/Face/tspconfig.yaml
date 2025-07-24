@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/face"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -15,7 +14,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-vision-face"
-    package-name: "{package-dir}"
+    namespace: "azure.ai.vision.face"
     package-version: 1.0.0b2
     package-mode: dataplane
     flavor: azure
@@ -27,19 +26,22 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Vision.Face
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-face-rest"
-    generateMetadata: true
-    generateTest: true
+    generate-metadata: true
     flavor: azure
-    packageDetails:
+    package-details:
       name: "@azure-rest/ai-vision-face"
       description: "Face API REST Client"
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
-    customization-class: customization/src/main/java/FaceCustomizations.java
+    use-eclipse-language-server: false
+    enable-subclient: true
     generate-samples: false
     generate-tests: false
     flavor: azure

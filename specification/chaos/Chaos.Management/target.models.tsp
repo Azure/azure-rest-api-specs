@@ -17,7 +17,7 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Target resource.
  */
-model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
+model Target is Azure.ResourceManager.ProxyResource<Record<unknown>, false> {
   ...ResourceNameParameter<
     Resource = Target,
     KeyName = "targetName",

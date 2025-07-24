@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "eventTrackingId": "eventTrackingId",
+    "api-version": "2025-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.ResourceHealth/events/{eventTrackingId}",
+        "name": "{eventTrackingId}",
+        "type": "/providers/Microsoft.ResourceHealth/events",
+        "properties": {
+          "eventType": "Billing",
+          "eventSubType": "Underbilling",
+          "eventSource": "ServiceHealth",
+          "status": "Active",
+          "title": "Upcoming billing changes to your resources",
+          "summary": "Upcoming billing changes to your resources.",
+          "header": "Your service might have been impacted by an Azure service issue",
+          "article": {
+            "articleContent": "<html>Upcoming billing changes to your resources</html>"
+          },
+          "links": [
+            {
+              "type": "Hyperlink",
+              "displayText": {
+                "value": "Request RCA",
+                "localizedValue": "Request RCA"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "bladeName": "RequestRCABlade",
+              "parameters": {
+                "trackingId": "{eventTrackingId}",
+                "rcaRequested": "False"
+              }
+            },
+            {
+              "type": "Button",
+              "displayText": {
+                "value": "Sign up for updates",
+                "localizedValue": "Sign up for updates"
+              },
+              "extensionName": "Microsoft_Azure_Health",
+              "bladeName": "AzureHealthBrowseBlade",
+              "parameters": {
+                "trackingId": "{eventTrackingId}"
+              }
+            }
+          ],
+          "level": "Warning",
+          "eventLevel": "Warning",
+          "isEventSensitive": false,
+          "impactStartTime": "2025-06-12T14:45:48.1203530Z",
+          "impactMitigationTime": "2025-07-14T15:43:48.1203530Z",
+          "impact": [
+            {
+              "impactedService": "Microsoft Cost Management",
+              "impactedServiceGuid": "80853877-1df8-40c2-9c79-44c0d1c95e01",
+              "impactedRegions": [
+                {
+                  "impactedRegion": "Global",
+                  "status": "Active",
+                  "impactedSubscriptions": [
+                    "{subscriptionId}"
+                  ],
+                  "impactedTenants": [],
+                  "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+                  "updates": [
+                    {
+                      "summary": "Upcoming billing changes to your resources.",
+                      "updateDateTime": "2025-05-13T15:43:48.1203530Z"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "recommendedActions": {
+            "message": "Recommended actions title",
+            "actions": [
+              {
+                "groupId": 23243,
+                "actionText": "action 1"
+              },
+              {
+                "groupId": 23432,
+                "actionText": "action 2"
+              }
+            ],
+            "localeCode": "en"
+          },
+          "faqs": [
+            {
+              "question": "This is a question",
+              "answer": "This is an answer",
+              "localeCode": "en"
+            }
+          ],
+          "newRate": 1.0,
+          "oldRate": 0.88,
+          "currencyType": "USD",
+          "billingId": "595959",
+          "isHIR": false,
+          "enableMicrosoftSupport": true,
+          "enableChatWithUs": false,
+          "priority": 2,
+          "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+          "hirStage": "resolved"
+        }
+      }
+    }
+  }
+}

@@ -8,10 +8,12 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
 @armResourceOperations
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 interface PrivateAccesses {
   /**
    * Get a private access resource
@@ -26,7 +28,7 @@ interface PrivateAccesses {
   /**
    * Patch a private access tags
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<PrivateAccess, PrivateAccessPatch>;
 
   /**
@@ -68,7 +70,6 @@ interface PrivateAccesses {
    * Gets the private link resources possible under private access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
-  @operationId("PrivateAccesses_GetPrivateLinkResources")
   @get
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,

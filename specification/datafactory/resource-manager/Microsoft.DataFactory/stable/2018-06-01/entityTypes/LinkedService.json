@@ -1655,7 +1655,7 @@
     },
     "OracleLinkedService": {
       "x-ms-discriminator-value": "Oracle",
-      "description": "Oracle database.",
+      "description": "Oracle database. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -1680,24 +1680,97 @@
         "connectionString": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Only used for Version 1.0."
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The location of Oracle database you want to connect to, the supported forms include connector descriptor, Easy Connect (Plus) Naming and Oracle Net Services Name (Only self-hosted IR). Type: string. Only used for Version 2.0."
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "OracleAuthenticationType",
+            "modelAsString": true
+          },
+          "description": "Authentication type for connecting to the Oracle database. Only used for Version 2.0."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Oracle database username. Type: string. Only used for Version 2.0."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."
         },
+        "encryptionClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the encryption client behavior. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "encryptionTypesClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the encryption algorithms that client can use. Supported values are AES128, AES192, AES256, 3DES112, 3DES168, default value is (AES256). Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the desired data integrity behavior when this client connects to a server. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumTypesClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the crypto-checksum algorithms that client can use. Supported values are SHA1, SHA256, SHA384, SHA512, default value is (SHA512). Type: string. Only used for Version 2.0."
+        },
+        "initialLobFetchSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the amount that the source initially fetches for LOB columns, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "fetchSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the number of bytes that the driver allocates to fetch the data in one database round-trip, default value is 10485760. Type: integer. Only used for Version 2.0."
+        },
+        "statementCacheSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the number of cursors or statements to be cached for each database connection, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "initializationString": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies a command that is issued immediately after connecting to the database to manage session settings. Type: string. Only used for Version 2.0."
+        },
+        "enableBulkLoad": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether to use bulk copy or batch insert when loading data into the database, default value is true. Type: boolean. Only used for Version 2.0."
+        },
+        "supportV1DataTypes": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether to use the Version 1.0 data type mappings. Do not set this to true unless you want to keep backward compatibility with Version 1.0's data type mappings, default value is false. Type: boolean. Only used for Version 2.0."
+        },
+        "fetchTswtzAsTimestamp": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether the driver returns column value with the TIMESTAMP WITH TIME ZONE data type as DateTime or string. This setting is ignored if supportV1DataTypes is not true, default value is true. Type: boolean. Only used for Version 2.0."
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AmazonRdsForOracleLinkedService": {
       "x-ms-discriminator-value": "AmazonRdsForOracle",
-      "description": "AmazonRdsForOracle database.",
+      "description": "AmazonRdsForOracle database. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -1722,20 +1795,93 @@
         "connectionString": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Only used for Version 1.0."
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The location of AmazonRdsForOracle database you want to connect to, the supported forms include connector descriptor, Easy Connect (Plus) Naming and Oracle Net Services Name (Only self-hosted IR). Type: string. Only used for Version 2.0."
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "AmazonRdsForOracleAuthenticationType",
+            "modelAsString": true
+          },
+          "description": "Authentication type for connecting to the AmazonRdsForOracle database. Only used for Version 2.0."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The AmazonRdsForOracle database username. Type: string. Only used for Version 2.0."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of password in connection string."
         },
+        "encryptionClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the encryption client behavior. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "encryptionTypesClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the encryption algorithms that client can use. Supported values are AES128, AES192, AES256, 3DES112, 3DES168, default value is (AES256). Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the desired data integrity behavior when this client connects to a server. Supported values are accepted, rejected, requested or required, default value is required. Type: string. Only used for Version 2.0."
+        },
+        "cryptoChecksumTypesClient": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the crypto-checksum algorithms that client can use. Supported values are SHA1, SHA256, SHA384, SHA512, default value is (SHA512). Type: string. Only used for Version 2.0."
+        },
+        "initialLobFetchSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the amount that the source initially fetches for LOB columns, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "fetchSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the number of bytes that the driver allocates to fetch the data in one database round-trip, default value is 10485760. Type: integer. Only used for Version 2.0."
+        },
+        "statementCacheSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies the number of cursors or statements to be cached for each database connection, default value is 0. Type: integer. Only used for Version 2.0."
+        },
+        "initializationString": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Specifies a command that is issued immediately after connecting to the database to manage session settings. Type: string. Only used for Version 2.0."
+        },
+        "enableBulkLoad": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether to use bulk copy or batch insert when loading data into the database, default value is true. Type: boolean. Only used for Version 2.0."
+        },
+        "supportV1DataTypes": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether to use the Version 1.0 data type mappings. Do not set this to true unless you want to keep backward compatibility with Version 1.0's data type mappings, default value is false. Type: boolean. Only used for Version 2.0."
+        },
+        "fetchTswtzAsTimestamp": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specifies whether the driver returns column value with the TIMESTAMP WITH TIME ZONE data type as DateTime or string. This setting is ignored if supportV1DataTypes is not true, default value is true. Type: boolean. Only used for Version 2.0."
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AzureMySqlLinkedService": {
       "x-ms-discriminator-value": "AzureMySql",
@@ -2231,7 +2377,7 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Only applied for version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
@@ -2260,6 +2406,36 @@
         "password": {
           "description": "Password for authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SSL mode for connection. Valid values including: “Disable”, “Allow”, “Prefer”, “Require”, “Verify-CA”, “Verify-Full”. Default value is “Verify-Full”. Type: string (or Expression with resultType string). Only applied for version 2.0."
+        },
+        "portNumber": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port numbers when connecting to server through non HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only used for V2. Only applied for version 2.0."
+        },
+        "httpsPortNumber": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port numbers when connecting to server through HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only applied for version 2.0."
+        },
+        "useDataEncryption": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies whether to encrypt all communication with the Teradata database. Allowed values are 0 or 1. This setting will be ignored for HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only applied for version 2.0."
+        },
+        "characterSet": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The character set to use for the connection. Type: string (or Expression with resultType string). Only applied for version 2.0."
+        },
+        "maxRespSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The maximum size of the response buffer for SQL requests, in bytes. Type: integer. Only applied for version 2.0."
         },
         "encryptedCredential": {
           "type": "string",
@@ -3311,6 +3487,19 @@
         },
         "servicePrincipalKey": {
           "description": "Specify the application's key.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type for authentication.'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. If not specified, 'ServicePrincipalKey' is in use. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
@@ -4970,6 +5159,42 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The ID of the service principal used to authenticate against Azure Database for PostgreSQL Flexible server. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The key of the service principal used to authenticate against Azure Database for PostgreSQL Flexible server.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -5379,6 +5604,52 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "GreenplumAuthenticationType",
+            "modelAsString": true
+          },
+          "description": "The authentication type to use. Type: string. Only used for V2."
+        },
+        "host": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Host name for connection. Type: string. Only used for V2."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer. Only used for V2."
+        },
+        "username": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string. Only used for V2."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string. Only used for V2."
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer. Only used for V2."
+        },
+        "connectionTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer. Only used for V2."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer. Only used for V2."
         }
       }
     },
@@ -5580,6 +5851,11 @@
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
           "type": "object",
@@ -5731,8 +6007,24 @@
           "description": "The password corresponding to the user name when using UsernameAndPassword.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "thriftTransportProtocol": {
+          "description": "The transport protocol to use in the Thrift layer (for V2 only). Default value is Binary.",
+          "type": "string",
+          "enum": [
+            "Binary",
+            "HTTP"
+          ],
+          "x-ms-enum": {
+            "name": "ImpalaThriftTransportProtocol"
+          }
+        },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specify whether to enable server SSL certificate validation when you connect.Always use System Trust Store (for V2 only). The default value is true.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -6228,7 +6520,7 @@
     },
     "PrestoLinkedService": {
       "x-ms-discriminator-value": "Presto",
-      "description": "Presto server linked service.",
+      "description": "Presto server linked service. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -6256,7 +6548,7 @@
           "x-ms-format": "dfe-string"
         },
         "serverVersion": {
-          "description": "The version of the Presto server. (i.e. 0.148-t)",
+          "description": "The version of the Presto server. (i.e. 0.148-t) Only used for Version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
@@ -6266,7 +6558,7 @@
           "x-ms-format": "dfe-string"
         },
         "port": {
-          "description": "The TCP port that the Presto server uses to listen for client connections. The default value is 8080.",
+          "description": "The TCP port that the Presto server uses to listen for client connections. The default value is 8080 when disable SSL, default value is 443 when enable SSL.",
           "type": "object",
           "x-ms-format": "dfe-int"
         },
@@ -6292,32 +6584,37 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "enableSsl": {
-          "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "description": "Specifies whether the connections to the server are encrypted using SSL. The default value for legacy version is False. The default value for version 2.0 is True.",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
-          "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
+          "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR. Only used for Version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
-          "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
+          "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false. Only used for Version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
-          "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
+          "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false. Only used for Version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
-          "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
+          "description": "Specifies whether to allow self-signed certificates from the server. The default value is false. Only used for Version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
         "timeZoneID": {
-          "description": "The local time zone used by the connection. Valid values for this option are specified in the IANA Time Zone Database. The default value is the system time zone.",
+          "description": "The local time zone used by the connection. Valid values for this option are specified in the IANA Time Zone Database. The default value for Version 1.0 is the client system time zone. The default value for Version 2.0 is server system timeZone",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
@@ -6328,14 +6625,13 @@
       },
       "required": [
         "host",
-        "serverVersion",
         "catalog",
         "authenticationType"
       ]
     },
     "QuickBooksLinkedService": {
       "x-ms-discriminator-value": "QuickBooks",
-      "description": "QuickBooks server linked service.",
+      "description": "QuickBooks server linked service. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -6372,24 +6668,28 @@
           "x-ms-format": "dfe-string"
         },
         "consumerKey": {
-          "description": "The consumer key for OAuth 1.0 authentication.",
+          "description": "The consumer key for OAuth 2.0 authentication.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
         "consumerSecret": {
-          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "description": "The consumer secret for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication.",
+          "description": "The access token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication.",
+          "description": "The access token secret is deprecated for OAuth 1.0 authentication. Only used for version 1.0.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
-          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Only used for version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -6630,6 +6930,11 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "enableServerCertificateValidation": {
+          "description": "Specifies whether the connections to the server will validate server certificate, the default value is True. Only used for Version 2.0",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },
@@ -7442,6 +7747,11 @@
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
+        },
+        "dataSecurityMode": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The data security mode for the Databricks Cluster. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -8150,10 +8460,20 @@
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of private key password for KeyPair auth with encrypted private key."
         },
+        "role": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The default access control role to use in the Snowflake session. Type: string (or Expression with resultType string)."
+        },
         "host": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The host name of the Snowflake account."
+          "description": "The host name of the Snowflake account. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "string",
@@ -8278,8 +8598,8 @@
       ]
     },
     "LakeHouseLinkedService": {
-      "x-ms-discriminator-value": "LakeHouse",
-      "description": "Microsoft Fabric LakeHouse linked service.",
+      "x-ms-discriminator-value": "Lakehouse",
+      "description": "Microsoft Fabric Lakehouse linked service.",
       "type": "object",
       "allOf": [
         {
@@ -8288,7 +8608,7 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Microsoft Fabric LakeHouse linked service properties.",
+          "description": "Microsoft Fabric Lakehouse linked service properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LakeHouseLinkedServiceTypeProperties"
         }
@@ -8298,7 +8618,7 @@
       ]
     },
     "LakeHouseLinkedServiceTypeProperties": {
-      "description": "Microsoft Fabric LakeHouse linked service properties.",
+      "description": "Microsoft Fabric Lakehouse linked service properties.",
       "type": "object",
       "properties": {
         "workspaceId": {
@@ -8309,15 +8629,15 @@
         "artifactId": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string)."
+          "description": "The ID of Microsoft Fabric Lakehouse artifact. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType string)."
+          "description": "The ID of the application used to authenticate against Microsoft Fabric Lakehouse. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
-          "description": "The Key of the application used to authenticate against Microsoft Fabric LakeHouse.",
+          "description": "The Key of the application used to authenticate against Microsoft Fabric Lakehouse.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {

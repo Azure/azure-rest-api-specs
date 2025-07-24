@@ -375,6 +375,10 @@
       "get": {
         "operationId": "SessionResourceFiles_GetContent",
         "description": "Get the content of the file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -397,8 +401,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           },
           "default": {
@@ -444,8 +447,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -472,7 +474,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -602,8 +604,7 @@
           "description": "The SessionResourceFile items on this page",
           "items": {
             "$ref": "#/definitions/SessionResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -750,8 +751,7 @@
           "description": "The files uploaded.",
           "items": {
             "$ref": "#/definitions/SessionResourceFile"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [

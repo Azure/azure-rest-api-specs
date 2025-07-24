@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2024-11-15-preview",
+    "endpoint": "https://resourcename.communication.azure.com",
+    "expand": "trunks/health"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "domains": {
+          "xyz.biz": {
+            "enabled": true
+          },
+          "abc.biz": {
+            "enabled": true
+          }
+        },
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061,
+            "enabled": true,
+            "directTransfer": false,
+            "privacyHeader": "none",
+            "ipAddressVersion": "ipv4",
+            "health": {
+              "tls": {
+                "status": "unknown"
+              },
+              "ping": {
+                "status": "unknown"
+              },
+              "overall": {
+                "status": "unknown"
+              }
+            }
+          },
+          "vendor.abc.biz": {
+            "sipSignalingPort": 5061,
+            "enabled": true,
+            "directTransfer": false,
+            "privacyHeader": "id",
+            "ipAddressVersion": "ipv6",
+            "health": {
+              "tls": {
+                "status": "certExpiring"
+              },
+              "ping": {
+                "status": "ok"
+              },
+              "overall": {
+                "status": "inactive",
+                "reason": "noRecentCalls"
+              }
+            }
+          }
+        },
+        "routes": [
+          {
+            "name": "LocalRoute",
+            "numberPattern": "^\\+1[0-9]{10}$"
+          },
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ],
+            "callerIdOverride": "+1234567890"
+          }
+        ]
+      }
+    }
+  }
+}

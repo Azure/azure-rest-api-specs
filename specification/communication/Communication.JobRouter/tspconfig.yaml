@@ -34,11 +34,13 @@ options:
     namespace: Azure.Communication.JobRouter
     package-dir: "Azure.Communication.JobRouter"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Communication.JobRouter
+    model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: '"Communication JobRouter"'
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-dir: "azure-communication-jobrouter"
-    package-name: "{package-dir}"
+    namespace: "azure.communication.jobrouter"
     package-version: 1.1.0b1
     flavor: azure
     generate-test: true
@@ -53,11 +55,12 @@ options:
     custom-types: "CancelJobResultInternal,CloseJobResultInternal,CompleteJobResultInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal"
     customization-class: customization/src/main/java/JobRouterSdkCustomization.java
     use-object-for-unknown: true
+    use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
     package-dir: "communication-job-router-rest"
-    packageDetails:
+    package-details:
       name: "@azure-rest/communication-job-router"
       description: "Azure client library for Azure Communication Job Router services"
     flavor: azure

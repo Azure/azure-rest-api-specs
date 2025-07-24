@@ -34,7 +34,115 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-09
+tag: package-2025-05
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05'
+input-file:
+  - stable/2025-05-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-05
+
+These settings apply only when `--tag=package-preview-2025-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-05'
+input-file:
+  - preview/2025-05-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-04
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04'
+input-file:
+  - stable/2025-04-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-04
+
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-04'
+input-file:
+  - preview/2025-04-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03'
+input-file:
+  - stable/2025-03-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-03
+
+These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-03'
+input-file:
+  - preview/2025-03-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+  - stable/2025-02-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-02
+
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - preview/2025-02-02-preview/managedClusters.json
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+  - stable/2025-01-01/managedClusters.json
+```
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - preview/2025-01-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10'
+input-file:
+  - stable/2024-10-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - preview/2024-10-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2024-09
@@ -126,6 +234,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 input-file:
   - preview/2024-03-02-preview/managedClusters.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
@@ -1189,7 +1298,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -1228,4 +1337,28 @@ directive:
     from: managedClusters.json
     where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
     reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResultList
+    reason: The model referenced in the common type does not conform to the definition of the rule, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.NodeImageVersionsListResult
+    reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.labels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.annotations
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.MachineKubernetesProfile.properties.nodeLabels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.LocalDNSOverrides
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```

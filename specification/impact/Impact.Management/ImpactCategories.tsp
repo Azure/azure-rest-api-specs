@@ -21,7 +21,7 @@ model ImpactCategory
   @key("impactCategoryName")
   @segment("impactCategories")
   @doc("Name of the impact category")
-  @visibility("Read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -40,7 +40,7 @@ model ImpactCategoryProperties is ResourceProperties {
   description?: string;
 
   @doc("The workloadImpact properties which are required when reporting with the impact category")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   requiredImpactProperties?: RequiredImpactProperties[];
 }
 
@@ -77,5 +77,5 @@ model CustomParameters {
   @query
   @minLength(1)
   @doc("Filter by resource type")
-  resourceType?: string;
+  resourceType: string;
 }

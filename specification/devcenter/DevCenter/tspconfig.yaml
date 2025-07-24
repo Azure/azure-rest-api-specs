@@ -18,9 +18,12 @@ options:
     clear-output-folder: true
     flavor: azure
     api-version: "2023-04-01"
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Developer.DevCenter
+    api-version: "2023-04-01"
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-devcenter"
-    package-name: "{package-dir}"
+    namespace: "azure.developer.devcenter"
     package-version: 1.0.0
     flavor: azure
     api-version: "2023-04-01"
@@ -29,8 +32,8 @@ options:
   "@azure-tools/typespec-ts":
     title: "Azure Developer DevCenter"
     package-dir: "developer-devcenter-rest"
-    generateMetadata: true
-    packageDetails:
+    generate-metadata: true
+    package-details:
       name: "@azure-rest/developer-devcenter"
       description: "Azure Developer DevCenter Client"
       version: "1.0.0"

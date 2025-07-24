@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.ResourceManager;
 
@@ -28,8 +29,9 @@ model DataflowProfileResource is ProxyResource<DataflowProfileProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("DataflowProfile Resource properties")
@@ -42,7 +44,7 @@ model DataflowProfileProperties {
   @maxValue(20)
   instanceCount?: int32 = 1;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

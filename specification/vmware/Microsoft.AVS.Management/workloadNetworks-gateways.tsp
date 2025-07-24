@@ -1,11 +1,9 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworkGateways {
@@ -36,13 +34,13 @@ model WorkloadNetworkGateway
 @doc("Properties of a NSX Gateway.")
 model WorkloadNetworkGatewayProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkProvisioningState;
 
   @doc("Display name of the DHCP entity.")
   displayName?: string;
 
   @doc("NSX Gateway Path.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   path?: string;
 }

@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
   ]>
 )
 @versioned(Easm.Versions)
-@service({
-  title: "Defender EASM",
-})
+@service(#{ title: "Defender EASM" })
 @server(
   "{endpoint}",
   "",

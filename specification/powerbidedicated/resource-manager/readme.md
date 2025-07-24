@@ -36,8 +36,7 @@ These settings apply only when `--tag=package-2021-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-- Microsoft.PowerBIdedicated/stable/2021-01-01/powerbidedicated.json
-- Microsoft.PowerBIdedicated/stable/2021-01-01/autoScaleVCores.json
+- Microsoft.PowerBIdedicated/stable/2021-01-01/openapi.json
 ```
 
 ### Tag: package-2017-10-01
@@ -60,7 +59,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

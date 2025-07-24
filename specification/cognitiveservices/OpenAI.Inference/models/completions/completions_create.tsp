@@ -192,7 +192,7 @@ model Completions {
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  usage: CompletionsUsage;
+  usage?: CompletionsUsage;
 
   /**
    * This fingerprint represents the backend configuration that the model runs with.

@@ -5,7 +5,7 @@
 
 import "../common/common.tsp";
 
-import "./cost-estimates.tsp";
+import "../common/cost-estimates.tsp";
 import "./items.tsp";
 import "./jobs.tsp";
 import "./providers.tsp";

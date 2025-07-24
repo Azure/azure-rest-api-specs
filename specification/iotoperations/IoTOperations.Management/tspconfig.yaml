@@ -11,13 +11,12 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.IoTOperations"
+    package-dir: "Azure.ResourceManager.IotOperations"
     clear-output-folder: true
-    model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-iotoperations"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.iotoperations"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -27,16 +26,10 @@ options:
     service-name: "IoT Operations"
     flavor: "azure"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    experimental-extensible-enums: true
     package-dir: "arm-iotoperations"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-iotoperations"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/iotoperations"
@@ -44,7 +37,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

@@ -8,9 +8,10 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
-
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -18,7 +19,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
-  @operationId("PrivateAccesses_GetAPrivateEndpointConnection")
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -26,14 +26,12 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
-  @operationId("PrivateAccesses_DeleteAPrivateEndpointConnection")
   deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * List information about private endpoint connections under a private access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
-  @operationId("PrivateAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = PrivateEndpointConnectionListResult

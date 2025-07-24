@@ -18,20 +18,14 @@ options:
     new-line: lf
     omit-unreachable-types: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    clear-output-folder: true
+    experimental-extensible-enums: true
     package-dir: "arm-monitor"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-monitor"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-monitor"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.monitor"
     flavor: "azure"
     generate-test: true
     generate-sample: true

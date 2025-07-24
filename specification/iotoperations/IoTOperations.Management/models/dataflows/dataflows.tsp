@@ -1,10 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -28,20 +29,25 @@ model DataflowResource is ProxyResource<DataflowProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("Dataflow Resource properties")
 model DataflowProperties {
   @doc("Mode for Dataflow. Optional; defaults to Enabled.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
+
+  @doc("Disk persistence mode.")
+  @added(Versions.`2025-07-01-preview`)
+  requestDiskPersistence?: OperationalMode;
 
   @doc("List of operations including source and destination references as well as transformation.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   operations: DataflowOperation[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -70,13 +76,13 @@ union OperationType {
   string,
 
   @doc("Dataflow Source Operation")
-  Source: "Source",
+  Source: Source,
 
   @doc("Dataflow Destination Operation")
-  Destination: "Destination",
+  Destination: Destination,
 
   @doc("Dataflow BuiltIn Transformation Operation")
-  BuiltInTransformation: "BuiltInTransformation",
+  BuiltInTransformation: BuiltInTransformation,
 }
 
 @doc("Dataflow BuiltIn Transformation properties")
@@ -89,15 +95,15 @@ model DataflowBuiltInTransformationSettings {
 
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
   @maxItems(1)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   datasets?: DataflowBuiltInTransformationDataset[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   filter?: DataflowBuiltInTransformationFilter[] = #[];
 
   @doc("Maps input to output message.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   map?: DataflowBuiltInTransformationMap[] = #[];
 }
 

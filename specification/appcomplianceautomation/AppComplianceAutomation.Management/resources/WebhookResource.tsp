@@ -24,7 +24,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(WebhookProperties)
 model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -33,7 +33,7 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
   @key("webhookName")
   @segment("webhooks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -66,7 +66,7 @@ interface Webhook {
    * Update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
     WebhookResource,

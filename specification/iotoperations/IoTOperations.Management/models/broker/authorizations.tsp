@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -28,8 +29,9 @@ model BrokerAuthorizationResource
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("BrokerAuthorization Resource properties")
@@ -37,7 +39,7 @@ model BrokerAuthorizationProperties {
   @doc("The list of authorization policies supported by the Authorization Resource.")
   authorizationPolicies: AuthorizationConfig;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -45,24 +47,24 @@ model BrokerAuthorizationProperties {
 @doc("Broker AuthorizationConfig properties")
 model AuthorizationConfig {
   @doc("Enable caching of the authorization rules.")
-  cache?: OperationalMode = OperationalMode.Enabled;
+  cache?: OperationalMode = Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   rules?: AuthorizationRule[];
 }
 
 @doc("AuthorizationConfig Rule Properties")
 model AuthorizationRule {
   @doc("Give access to Broker methods and topics.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   brokerResources: BrokerResourceRule[];
 
   @doc("Give access to clients based on the following properties.")
   principals: PrincipalDefinition;
 
   @doc("Give access to state store resources.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   stateStoreResources?: StateStoreResourceRule[];
 }
 
@@ -70,7 +72,7 @@ model AuthorizationRule {
 model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   attributes?: Record<string>[] = #[];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")

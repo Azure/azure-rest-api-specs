@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/appconfiguration"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,7 +13,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.AppConfiguration/{version-status}/{version}/appconfiguration.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-appconfiguration"
-    package-name: "{package-dir}"
+    namespace: "azure.appconfiguration"
     package-pprint-name: "App Configuration Data"
     package-mode: dataplane
     flavor: azure
@@ -26,12 +25,14 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Data.AppConfiguration
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "azure-appconfiguration-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
-      name: "@azure-rest/azure-appconfiguration-rest"
+    generate-metadata: true
+    package-details:
+      name: "@azure-rest/azure-appconfiguration"
       description: "Azure App Configuration"
     flavor: azure
   "@azure-tools/typespec-java":

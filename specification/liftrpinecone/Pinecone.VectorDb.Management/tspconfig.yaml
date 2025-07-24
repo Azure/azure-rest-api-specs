@@ -2,7 +2,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
-    default: "sdk/liftrpinecone"
+    default: "sdk/pineconevectordb"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -14,8 +14,34 @@ options:
     package-dir: "Azure.ResourceManager.PineconeVectorDB"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    package-dir: "arm-pineconevectordb"
+    package-details:
+      name: "@azure/arm-pineconevectordb"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-pineconevectordb"
+    namespace: "azure.mgmt.pineconevectordb"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-pineconevectordb"
+    namespace: "com.azure.resourcemanager.pineconevectordb"
+    flavor: "azure"
+    service-name: "Pinecone Vector Db"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/pineconevectordb"
+    package-dir: "armpineconevectordb"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

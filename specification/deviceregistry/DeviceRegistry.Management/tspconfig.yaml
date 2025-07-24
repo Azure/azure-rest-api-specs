@@ -13,30 +13,39 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/deviceregistry.json"
     use-read-only-status-schema: true
     omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.DeviceRegistry"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+    api-version: "2024-11-01"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-deviceregistry"
+    namespace: "com.azure.resourcemanager.deviceregistry"
     flavor: "azure"
     service-name: "Device Registry"
-    api-version: "2024-09-01-preview"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    experimental-extensible-enums: true
     package-dir: "arm-deviceregistry"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-deviceregistry"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-deviceregistry"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.deviceregistry"
     flavor: "azure"
     generate-test: true
     generate-sample: true
-    api-version: "2024-09-01-preview"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/deviceregistry"
+    package-dir: "armdeviceregistry"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

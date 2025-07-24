@@ -26,20 +26,14 @@ options:
   #     emitter-output-dir: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/generated"
   #     code-kind: model
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    experimental-extensible-enums: true
     package-dir: "arm-playwrighttesting"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-playwrighttesting"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-playwrighttesting"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.playwrighttesting"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -47,9 +41,9 @@ options:
     package-dir: "Azure.ResourceManager.PlaywrightTesting"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-playwrighttesting"
+    namespace: "com.azure.resourcemanager.playwrighttesting"
     flavor: azure
     service-name: Playwright Testing

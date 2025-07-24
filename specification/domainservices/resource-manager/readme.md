@@ -26,7 +26,27 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-12
+tag: package-preview-2025-06-01
+```
+
+### Tag: package-preview-2025-06-01
+
+These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01'
+input-file:
+  - Microsoft.AAD/preview/2025-06-01/domainservices.json
+  - Microsoft.AAD/preview/2025-06-01/oucontainer.json
+```
+
+### Tag: package-preview-2025-05-01
+
+These settings apply only when `--tag=package-preview-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01'
+input-file:
+  - Microsoft.AAD/preview/2025-05-01/domainservices.json
+  - Microsoft.AAD/preview/2025-05-01/oucontainer.json
 ```
 
 ### Tag: package-2022-12
@@ -99,6 +119,19 @@ input-file:
 ```
 
 ---
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend"]
+    reason: Microsoft.AAD is the correct provider name for legacy reasons.
+  - suppress: PatchBodyParametersSchema
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}"].patch.parameters[4].schema.properties.properties
+    reason: Properties of a PATCH request body can have default value.
+```
+
 # Code Generation
 
 
@@ -236,6 +269,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-

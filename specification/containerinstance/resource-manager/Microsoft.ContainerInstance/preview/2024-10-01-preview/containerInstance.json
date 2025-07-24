@@ -1606,6 +1606,193 @@
         }
       }
     },
+    "ListResultContainerGroup": {
+      "description": "A container group part of the list result.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/ListResultContainerGroupProperties"
+        }
+      ]
+    },
+    "ListResultContainerGroupProperties": {
+      "description": "Properties of container group part of list result",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ContainerGroupIdentity",
+          "description": "The identity of the container group, if configured."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "The container group properties",
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The provisioning state of the container group. This only appears in the response.",
+              "enum": [
+                "NotSpecified",
+                "Accepted",
+                "Pending",
+                "Updating",
+                "Creating",
+                "Repairing",
+                "Unhealthy",
+                "Failed",
+                "Canceled",
+                "Succeeded",
+                "Deleting",
+                "NotAccessible",
+                "PreProvisioned"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "secretReferences": {
+              "type": "array",
+              "description": "The secret references that will be referenced within the container group.",
+              "items": {
+                "$ref": "#/definitions/SecretReference"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "containers": {
+              "type": "array",
+              "description": "The containers within the container group.",
+              "items": {
+                "$ref": "#/definitions/Container"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "imageRegistryCredentials": {
+              "type": "array",
+              "description": "The image registry credentials by which the container group is created from.",
+              "items": {
+                "$ref": "#/definitions/ImageRegistryCredential"
+              },
+              "x-ms-identifiers": [
+                "username"
+              ]
+            },
+            "restartPolicy": {
+              "type": "string",
+              "description": "Restart policy for all containers within the container group. \n- `Always` Always restart\n- `OnFailure` Restart on failure\n- `Never` Never restart\n",
+              "enum": [
+                "Always",
+                "OnFailure",
+                "Never"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupRestartPolicy",
+                "modelAsString": true
+              }
+            },
+            "ipAddress": {
+              "description": "The IP address type of the container group.",
+              "$ref": "#/definitions/IpAddress"
+            },
+            "osType": {
+              "type": "string",
+              "description": "The operating system type required by the containers in the container group.",
+              "enum": [
+                "Windows",
+                "Linux"
+              ],
+              "x-ms-enum": {
+                "name": "OperatingSystemTypes",
+                "modelAsString": true
+              }
+            },
+            "volumes": {
+              "type": "array",
+              "description": "The list of volumes that can be mounted by containers in this container group.",
+              "items": {
+                "$ref": "#/definitions/Volume"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "diagnostics": {
+              "description": "The diagnostic information for a container group.",
+              "$ref": "#/definitions/ContainerGroupDiagnostics"
+            },
+            "subnetIds": {
+              "type": "array",
+              "description": "The subnet resource IDs for a container group.",
+              "items": {
+                "$ref": "#/definitions/ContainerGroupSubnetId"
+              }
+            },
+            "dnsConfig": {
+              "description": "The DNS config information for a container group.",
+              "$ref": "#/definitions/DnsConfiguration"
+            },
+            "sku": {
+              "description": "The SKU for a container group.",
+              "$ref": "#/definitions/ContainerGroupSku"
+            },
+            "encryptionProperties": {
+              "description": "The encryption properties for a container group.",
+              "$ref": "#/definitions/EncryptionProperties"
+            },
+            "initContainers": {
+              "type": "array",
+              "description": "The init containers for a container group.",
+              "items": {
+                "$ref": "#/definitions/InitContainerDefinition"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "extensions": {
+              "type": "array",
+              "description": "extensions used by virtual kubelet",
+              "items": {
+                "$ref": "#/definitions/DeploymentExtensionSpec"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "confidentialComputeProperties": {
+              "description": "The properties for confidential container group",
+              "$ref": "#/definitions/ConfidentialComputeProperties"
+            },
+            "priority": {
+              "type": "string",
+              "description": "The priority of the container group.",
+              "enum": [
+                "Regular",
+                "Spot"
+              ],
+              "x-ms-enum": {
+                "name": "ContainerGroupPriority",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "containers",
+            "osType"
+          ]
+        }
+      }
+    },
     "DeploymentExtensionSpec": {
       "description": "Extension sidecars to be added to the deployment.",
       "type": "object",
@@ -2084,7 +2271,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerGroup"
+            "$ref": "#/definitions/ListResultContainerGroup"
           },
           "description": "The list of container groups."
         },

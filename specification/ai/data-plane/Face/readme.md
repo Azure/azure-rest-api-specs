@@ -4,11 +4,11 @@
 
 Configuration for generating Face SDK.
 
-The current release is `v1.2-preview.1`.
+The current release is `v1.2`.
 
 ``` yaml
 
-tag: v1.2-preview.1
+tag: v1.2
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -58,6 +58,17 @@ suppressions:
   - code: LroExtension
     from: Face.json
     reason: Our LRO behavior does not fit the default generated poller
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
+```
+
+### Release v1.2
+These settings apply only when `--tag=v1.2` is specified on the command line.
+``` yaml $(tag) == 'v1.2'
+input-file:
+  - stable/v1.2/Face.json
+suppressions:
   - code: AvoidAnonymousParameter
     from: Face.json
     reason: Use anonymous parameter to provide interface with flatten parameters

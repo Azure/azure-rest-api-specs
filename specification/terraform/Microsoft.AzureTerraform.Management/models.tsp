@@ -2,13 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-using TypeSpec.Rest;
-using TypeSpec.Http;
+import "@typespec/versioning";
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureTerraform;
 
@@ -33,6 +31,23 @@ union targetProvider {
   azapi: "azapi",
 }
 
+@doc("The Azure Resource Graph Authorization Scope Filter parameter")
+union authorizationScopeFilter {
+  string,
+
+  @doc("Returns assignments for the given scope and all child scopes.")
+  AtScopeAndBelow: "AtScopeAndBelow",
+
+  @doc("Returns assignments for the given scope and all parent scopes, but not child scopes.")
+  AtScopeAndAbove: "AtScopeAndAbove",
+
+  @doc("Returns assignments for the given scope, all parent scopes, and all child scopes.")
+  AtScopeAboveAndBelow: "AtScopeAboveAndBelow",
+
+  @doc("Returns assignments only for the given scope; no parent or child scopes are included.")
+  AtScopeExact: "AtScopeExact",
+}
+
 @doc("The base export parameter")
 @discriminator("type")
 model BaseExportModel {
@@ -47,6 +62,14 @@ model BaseExportModel {
 
   @doc("Mask sensitive attributes in the Terraform configuration")
   maskSensitive?: boolean = true;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Exclude resources from being exported based on the Azure resource ID pattern (case-insensitive regexp)")
+  excludeAzureResource?: string[];
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Exclude resources from being exported based on the Terraform resource type")
+  excludeTerraformResource?: string[];
 }
 
 @doc("Export parameter for resources queried by ARG (Azure Resource Graph)")
@@ -62,6 +85,12 @@ model ExportQuery extends BaseExportModel {
 
   @doc("The parameter type")
   type: "ExportQuery";
+
+  @doc("The ARG table name")
+  table?: string = "Resources";
+
+  @doc("The ARG Scope Filter parameter")
+  authorizationScopeFilter?: authorizationScopeFilter;
 }
 
 @doc("Export parameter for individual resources.")
@@ -102,10 +131,13 @@ model ExportResult {
   @doc("The Terraform configuration content")
   configuration?: string;
 
+  @doc("The Terraform import blocks for the current export, which users can use to run \"terraform plan\" with to import the resources")
+  `import`?: string;
+
   @doc("A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform")
   skippedResources?: armResourceIdentifier[];
 
   @doc("A list of errors derived during exporting each resource")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   errors?: ErrorDetail[];
 }

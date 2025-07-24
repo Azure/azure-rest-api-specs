@@ -13,8 +13,6 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to avoid breaking SDK change"
-@@operationId(Operations.list, "Operations_ListAll");
-
 alias ParentResourceParameters = {
   /**
    * The parent resource provider namespace.
@@ -84,13 +82,13 @@ model OperationStatus extends ErrorResponse {
   /**
    * The start time of the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   /**
    * The end time of the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   /**
