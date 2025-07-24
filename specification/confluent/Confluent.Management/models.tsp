@@ -2037,6 +2037,12 @@ model AzureCosmosDBSinkConnectorServiceInfo
   cosmosIdStrategy?: string;
 
   /**
+   * Azure Cosmos write config details
+   */
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  cosmosWriteDetails?: string;
+
+  /**
    * The connector service type.
    */
   connectorServiceType: "AzureCosmosDBSinkConnector";
