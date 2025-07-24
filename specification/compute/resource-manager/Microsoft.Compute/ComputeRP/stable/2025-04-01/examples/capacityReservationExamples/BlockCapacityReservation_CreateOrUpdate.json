@@ -2,85 +2,81 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "capacityReservationGroupName": "blockCapacityReservationGroup",
-    "capacityReservationName": "blockCapacityReservation",
     "api-version": "2025-04-01",
     "parameters": {
-      "location": "East US",
+      "location": "westus",
+      "tags": {
+        "department": "HR"
+      },
       "sku": {
-        "name": "Standard_E4s_v3",
+        "name": "Standard_ND96isr_H100_v5",
         "capacity": 1
       },
-      "zones": [
-        "1"
-      ],
       "properties": {
         "scheduleProfile": {
           "start": "2025-08-01",
           "end": "2025-08-02"
         }
       },
-      "tags": {
-        "environment": "production"
-      }
-    }
+      "zones": [
+        "1"
+      ]
+    },
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "capacityReservationName": "blockCapacityReservation"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
-        "type": "Microsoft.Compute/capacityReservations",
-        "location": "eastus",
         "name": "blockCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
         "sku": {
-          "name": "Standard_E4s_v3",
+          "name": "Standard_ND96isr_H100_v5",
           "capacity": 1
         },
         "zones": [
           "1"
         ],
-        "tags": {
-          "environment": "production"
-        },
         "properties": {
-          "reservationId": "11111111-1111-1111-1111-111111111111",
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
           "scheduleProfile": {
             "start": "2025-08-01T12:00:00Z",
             "end": "2025-08-02T11:30:00Z"
           },
-          "provisioningState": "Succeeded",
-          "timeCreated": "2025-07-30T15:45:30.9876543Z",
-          "platformFaultDomainCount": 2,
-          "virtualMachinesAssociated": []
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
-        "type": "Microsoft.Compute/capacityReservations",
-        "location": "eastus",
         "name": "blockCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
         "sku": {
-          "name": "Standard_E4s_v3",
+          "name": "Standard_ND96isr_H100_v5",
           "capacity": 1
         },
         "zones": [
           "1"
         ],
-        "tags": {
-          "environment": "production"
-        },
         "properties": {
-          "reservationId": "11111111-1111-1111-1111-111111111111",
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
           "scheduleProfile": {
             "start": "2025-08-01T12:00:00Z",
             "end": "2025-08-02T11:30:00Z"
           },
-          "provisioningState": "Creating",
-          "timeCreated": "2025-07-30T15:45:30.9876543Z",
-          "platformFaultDomainCount": 2,
-          "virtualMachinesAssociated": []
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
         }
       }
     }

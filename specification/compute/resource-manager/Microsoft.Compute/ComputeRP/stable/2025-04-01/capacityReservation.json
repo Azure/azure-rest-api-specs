@@ -481,7 +481,7 @@
           "Create or update a capacity reservation .": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_CreateOrUpdate.json"
           },
-          "Create a block capacity reservation .": {
+          "Create or update a block capacity reservation .": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_CreateOrUpdate.json"
           }
         },
@@ -563,7 +563,7 @@
           "CapacityReservations"
         ],
         "operationId": "CapacityReservations_Delete",
-        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details.",
+        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted during their scheduled active period (between the schedule start and end times).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -740,7 +740,7 @@
           "List capacity reservations in reservation group.": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_ListByReservationGroup.json"
           },
-          "List block capacity reservations in reservation group.": {
+          "List capacity reservations in block reservation group.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_ListByReservationGroup.json"
           }
         },
@@ -783,7 +783,7 @@
       "properties": {
         "subscriptionIds": {
           "type": "array",
-          "description": "Specifies an array of subscription resource IDs that capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.",
+          "description": "Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.",
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
@@ -816,7 +816,7 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/ResourceSharingProfile",
-          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource generally can be shared across subscriptions belonging to a single Azure AAD tenant or cross AAD tenant if there is a trust relationship established between the AAD tenants. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
+            "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
         },
         "reservationType": {
           "type": "string",
@@ -828,8 +828,8 @@
           "x-ms-enum": {
             "name": "ReservationType",
             "modelAsString": true
+            }
           }
-        }
       },
       "description": "capacity reservation group Properties."
     },
@@ -1006,7 +1006,7 @@
               "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
             }
           },
-          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. See documentation for details. Minimum API version: 2025-04-01."
+          "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. See documentation for details https://aka.ms/BlockCapacityReservation."
         }
       },
       "description": "Properties of the Capacity reservation."
@@ -1020,7 +1020,7 @@
         },
         "sku": {
           "$ref": "./computeRPCommon.json#/definitions/Sku",
-          "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. For Block capacity reservations, sku.capacity can only accept values 1, 2, 4, 8, 16, 32, 64. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
+          "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set.  For Block capacity reservations, sku.capacity can only accept values 1, 2, 4, 8, 16, 32, 64. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         },
         "zones": {
           "type": "array",
@@ -1049,7 +1049,7 @@
         },
         "sku": {
           "$ref": "./computeRPCommon.json#/definitions/Sku",
-          "description": "The SKU of the resource for which capacity needs to be reserved. The SKU name and capacity must be specified. Only VM SKUs with the 'CapacityReservationSupported' capability set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. For supported values, refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list)."
+            "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations."
         }
       },
       "allOf": [
@@ -1057,7 +1057,7 @@
           "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
         }
       ],
-      "description": "Specifies information about the capacity reservation. Only tags and sku.capacity can be updated."
+      "description": "Specifies information about the capacity reservation. Only tags and sku.capacity can be updated. Only tags can be updated for Block Capacity Reservation."
     },
     "CapacityReservationListResult": {
       "type": "object",
