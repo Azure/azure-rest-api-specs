@@ -23,13 +23,8 @@ op listCriticalDataElements is Foundations.Operation<
     @query
     keyword?: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("Field to sort by.")
     @query
@@ -332,13 +327,8 @@ op listDataAssets is Foundations.Operation<
     @query
     orderby?: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
   },
   DataAssetsResponse
 >;
@@ -1154,4 +1144,142 @@ op createOrReplaceOkrKeyResults is Foundations.Operation<
     @bodyRoot
     body: ModelKeyResult;
   }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves a specific key result (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@get
+op getOkrObjectiveIdKeyResultsKeyResultId is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+
+    @doc("The unique identifier of the key result (OKR).")
+    @path
+    keyResultId: uuid;
+  },
+  CatalogModelKeyResult
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Updates an existing key result (OKR) by its ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@put
+op createOrUpdateOkr is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+
+    @doc("The unique identifier of the key result (OKR).")
+    @path
+    keyResultId: uuid;
+
+    @doc("The body associated with the key result output.")
+    @bodyRoot
+    body: CatalogModelKeyResult;
+  },
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the key result output.")
+    @bodyRoot
+    body: CatalogModelKeyResultResponse;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Deletes an existing key result (OKR) by ID.")
+@route("/objectives/{objectiveId}/keyResults/{keyResultId}")
+@delete
+op deleteOkrWithKeyResult is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: uuid;
+
+    @doc("The unique identifier of the key result (OKR).")
+    @path
+    keyResultId: uuid;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Creates or replaces relationships for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/relationships")
+@post
+op createOrReplaceOkrObjectiveIdRelationships is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: string;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+
+    @doc("The relationships to create or replace.")
+    @bodyRoot
+    body: Record<RelationshipWrapper>;
+  },
+  {
+    @statusCode
+    statusCode: 201;
+
+    @doc("The body associated with the key result output.")
+    @bodyRoot
+    body: RelationshipWrapper;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Deletes an existing relationship for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/relationships")
+@delete
+op deleteOkrObjectiveIdRelationships is Foundations.Operation<
+  {
+    @doc("The unique identifier of the objective (OKR).")
+    @path
+    objectiveId: string;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType?: string;
+
+    @doc("The unique identifier of the entity.")
+    @query
+    entityId?: EntityCategory;
+
+    @doc("The type of relationship to delete.")
+    @query
+    relationshipType?: string;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@tag("OKR")
+@doc("Retrieves all relationships for a specific objective (OKR) by its ID.")
+@route("/objectives/{objectiveId}/relationships")
+@get
+op listOkrRelationships is Foundations.Operation<
+  {
+    @doc("Retrieves all relationships for a specific objective (OKR) by its ID.")
+    @path
+    objectiveId: string;
+
+    @doc("The type of entity to retrieve relationships for.")
+    @query
+    entityType: EntityCategory;
+  },
+  RelationshipWrappersResponse
 >;

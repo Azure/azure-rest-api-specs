@@ -960,20 +960,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -1769,20 +1759,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           }
         ],
         "responses": {
@@ -3658,6 +3638,622 @@
         "x-ms-examples": {
           "CreateOrReplaceOkrKeyResults_MaximumSet": {
             "$ref": "./examples/CreateOrReplaceOkrKeyResults_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/objectives/{objectiveId}/keyResults/{keyResultId}": {
+      "get": {
+        "operationId": "GetOkrObjectiveIdKeyResultsKeyResultId",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves a specific key result (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keyResultId",
+            "in": "path",
+            "description": "The unique identifier of the key result (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelKeyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOkrObjectiveIdKeyResultsKeyResultId_MaximumSet": {
+            "$ref": "./examples/GetOkrObjectiveIdKeyResultsKeyResultId_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateOkr",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Updates an existing key result (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keyResultId",
+            "in": "path",
+            "description": "The unique identifier of the key result (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The body associated with the key result output.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogModelKeyResult"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CatalogModelKeyResultResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateOkr_MaximumSet": {
+            "$ref": "./examples/CreateOrUpdateOkr_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteOkrWithKeyResult",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Deletes an existing key result (OKR) by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keyResultId",
+            "in": "path",
+            "description": "The unique identifier of the key result (OKR).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteOkrWithKeyResult_MaximumSet": {
+            "$ref": "./examples/DeleteOkrWithKeyResult_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/objectives/{objectiveId}/relationships": {
+      "get": {
+        "operationId": "ListOkrRelationships",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Retrieves all relationships for a specific objective (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "Retrieves all relationships for a specific objective (OKR) by its ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "The DOMAIN associated with the critical data element."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "The DATAPRODUCT associated with the critical data element."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "The TERM associated with the critical data element."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "The DATAASSET associated with the critical data element."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "The OBJECTIVE associated with the critical data element."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "The KEYRESULT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "The CRITICALDATAELEMENT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "The CRITICALDATACOLUMN associated with the critical data element."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "The CUSTOMMETADATA associated with the critical data element."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "The ATTRIBUTE associated with the critical data element."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "The ATTRIBUTEINSTANCE associated with the critical data element."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "The WORKFLOW associated with the critical data element."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "The CATALOGSNAPSHOT associated with the critical data element."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "The WORKFLOWRUN associated with the critical data element."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RelationshipWrappersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOkrRelationships_MaximumSet": {
+            "$ref": "./examples/ListOkrRelationships_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateOrReplaceOkrObjectiveIdRelationships",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Creates or replaces relationships for a specific objective (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "The DOMAIN associated with the critical data element."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "The DATAPRODUCT associated with the critical data element."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "The TERM associated with the critical data element."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "The DATAASSET associated with the critical data element."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "The OBJECTIVE associated with the critical data element."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "The KEYRESULT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "The CRITICALDATAELEMENT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "The CRITICALDATACOLUMN associated with the critical data element."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "The CUSTOMMETADATA associated with the critical data element."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "The ATTRIBUTE associated with the critical data element."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "The ATTRIBUTEINSTANCE associated with the critical data element."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "The WORKFLOW associated with the critical data element."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "The CATALOGSNAPSHOT associated with the critical data element."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "The WORKFLOWRUN associated with the critical data element."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The relationships to create or replace.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RelationshipWrapper"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RelationshipWrapper"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteOkrObjectiveIdRelationships",
+        "tags": [
+          "OKR"
+        ],
+        "description": "Deletes an existing relationship for a specific objective (OKR) by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "objectiveId",
+            "in": "path",
+            "description": "The unique identifier of the objective (OKR).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "The type of entity to retrieve relationships for.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "entityId",
+            "in": "query",
+            "description": "The unique identifier of the entity.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "The DOMAIN associated with the critical data element."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "The DATAPRODUCT associated with the critical data element."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "The TERM associated with the critical data element."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "The DATAASSET associated with the critical data element."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "The OBJECTIVE associated with the critical data element."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "The KEYRESULT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "The CRITICALDATAELEMENT associated with the critical data element."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "The CRITICALDATACOLUMN associated with the critical data element."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "The CUSTOMMETADATA associated with the critical data element."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "The ATTRIBUTE associated with the critical data element."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "The ATTRIBUTEINSTANCE associated with the critical data element."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "The WORKFLOW associated with the critical data element."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "The CATALOGSNAPSHOT associated with the critical data element."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "The WORKFLOWRUN associated with the critical data element."
+                }
+              ]
+            }
+          },
+          {
+            "name": "relationshipType",
+            "in": "query",
+            "description": "The type of relationship to delete.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteOkrObjectiveIdRelationships_MaximumSet": {
+            "$ref": "./examples/DeleteOkrObjectiveIdRelationships_MaximumSet_Gen.json"
           }
         }
       }
@@ -5747,6 +6343,67 @@
           "description": "The data asset identifier associated with the link."
         }
       }
+    },
+    "CatalogModelKeyResult": {
+      "type": "object",
+      "description": "Catalog model key result.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OverallStatusEnum",
+          "description": "The status of the key result."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "The system data associated with the key result."
+        },
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the key result."
+        },
+        "definition": {
+          "type": "string",
+          "description": "The definition of the key result."
+        },
+        "domainId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the domain."
+        },
+        "progress": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress of the key result."
+        },
+        "goal": {
+          "type": "number",
+          "format": "double",
+          "description": "The goal value for the key result."
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum value for the key result."
+        }
+      }
+    },
+    "CatalogModelKeyResultResponse": {
+      "type": "object",
+      "description": "Response containing a list of key results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of key results.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelKeyResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CatalogModelManagedAttribute": {
       "type": "object",

@@ -1303,3 +1303,40 @@ model ModelKeyResultResponse {
   @doc("The link to the next page of results.")
   nextLink?: string;
 }
+
+@doc("Catalog model key result.")
+model CatalogModelKeyResult {
+  @doc("The status of the key result.")
+  status?: OverallStatusEnum;
+
+  @doc("The system data associated with the key result.")
+  systemData?: SystemData;
+
+  @doc("The unique identifier of the key result.")
+  id?: uuid;
+
+  @doc("The definition of the key result.")
+  definition?: string;
+
+  @doc("The unique identifier of the domain.")
+  domainId?: uuid;
+
+  @doc("The progress of the key result.")
+  progress?: float64;
+
+  @doc("The goal value for the key result.")
+  goal?: float64;
+
+  @doc("The maximum value for the key result.")
+  max?: float64;
+}
+
+@doc("Response containing a list of key results.")
+@pagedResult
+model CatalogModelKeyResultResponse {
+  @doc("The list of key results.")
+  value: CatalogModelKeyResult[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
+}
