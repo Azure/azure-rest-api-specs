@@ -45,6 +45,7 @@ jobs:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
           NODE_OPTIONS: "--max-old-space-size=8192"
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}

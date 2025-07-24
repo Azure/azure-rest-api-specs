@@ -95,7 +95,7 @@ export async function main() {
   const repo = opts.repo as string;
   const owner = opts.owner as string;
   const prNumber = opts.number as string;
-  const isDraft = opts.prStaisDrafttus as boolean;
+  const isDraft = opts.isDraft as boolean;
 
   // create github client (use token if available, otherwise unauthenticated. we will throw if unhandled)
   const github = new Octokit({
