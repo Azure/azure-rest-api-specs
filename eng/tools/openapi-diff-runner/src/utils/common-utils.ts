@@ -1,5 +1,5 @@
-import { FilePosition } from "../types/message.js";
 import { Context } from "../types/breaking-change.js";
+import { FilePosition } from "../types/message.js";
 
 export function blobHref(repo: string, sha: string, file: string): string {
   return `https://github.com/${repo}/blob/${sha}/${file}`;

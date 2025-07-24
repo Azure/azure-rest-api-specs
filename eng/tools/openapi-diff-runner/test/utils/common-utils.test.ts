@@ -1,21 +1,21 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { Context } from "../../src/types/breaking-change.js";
 import {
   blobHref,
-  targetHref,
   branchHref,
+  convertRawErrorToUnifiedMsg,
+  cutoffMsg,
+  getArgumentValue,
   getGithubStyleFilePath,
   getRelativeSwaggerPathToRepo,
-  sourceBranchHref,
-  targetBranchHref,
-  specificBranchHref,
   getVersionFromInputFile,
-  getArgumentValue,
-  cutoffMsg,
   processOadRuntimeErrorMessage,
+  sourceBranchHref,
+  specificBranchHref,
   specIsPreview,
-  convertRawErrorToUnifiedMsg,
+  targetBranchHref,
+  targetHref,
 } from "../../src/utils/common-utils.js";
-import { Context } from "../../src/types/breaking-change.js";
 
 describe("common-utils", () => {
   let originalEnv: NodeJS.ProcessEnv;
