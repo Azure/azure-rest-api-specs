@@ -425,6 +425,7 @@ model Encryption {
   /**
    * Properties of KeyVault
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   keyVaultProperties?: KeyVaultProperties[];
 
   /**
@@ -486,6 +487,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: EndPointProvisioningState;
 }
 
@@ -573,12 +575,14 @@ model ErrorResponseError {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   details?: ErrorResponse[];
 
   /**
    * The error additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -920,11 +924,13 @@ model NetworkRuleSetProperties {
   /**
    * List VirtualNetwork Rules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   virtualNetworkRules?: NWRuleSetVirtualNetworkRules[];
 
   /**
    * List of IpRules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   ipRules?: NWRuleSetIpRules[];
 
   /**

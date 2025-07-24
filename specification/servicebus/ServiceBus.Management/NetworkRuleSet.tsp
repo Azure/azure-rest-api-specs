@@ -26,6 +26,7 @@ model NetworkRuleSet
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface NetworkRuleSets {
   /**
