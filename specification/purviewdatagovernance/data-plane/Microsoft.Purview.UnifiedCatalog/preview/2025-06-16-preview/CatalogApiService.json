@@ -79,7 +79,7 @@
   "paths": {
     "/businessdomains": {
       "get": {
-        "operationId": "GetDomain",
+        "operationId": "ListDomains",
         "tags": [
           "BusinessDomain"
         ],
@@ -124,8 +124,8 @@
           }
         },
         "x-ms-examples": {
-          "GetDomain_MaximumSet": {
-            "$ref": "./examples/GetDomain_MaximumSet_Gen.json"
+          "ListDomains_MaximumSet": {
+            "$ref": "./examples/ListDomains_MaximumSet_Gen.json"
           }
         }
       },
@@ -243,7 +243,7 @@
             "name": "body",
             "in": "body",
             "description": "The updated business domain.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelDomain"
             }
@@ -320,7 +320,7 @@
     },
     "/criticalDataColumns": {
       "get": {
-        "operationId": "GetCriticalDataColumns",
+        "operationId": "ListCriticalDataColumns",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -346,20 +346,10 @@
             "format": "uuid"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to top.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -390,8 +380,8 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataColumns_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataColumns_MaximumSet_Gen.json"
+          "ListCriticalDataColumns_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataColumns_MaximumSet_Gen.json"
           }
         }
       },
@@ -491,7 +481,7 @@
     },
     "/criticalDataColumns/{criticalDataColumnId}/relationships": {
       "get": {
-        "operationId": "GetCriticalDataColumnRelationships",
+        "operationId": "ListCriticalDataColumnRelationships",
         "tags": [
           "CriticalDataColumns"
         ],
@@ -629,8 +619,8 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataColumnRelationships_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataColumnRelationships_MaximumSet_Gen.json"
+          "ListCriticalDataColumnRelationships_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataColumnRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -754,10 +744,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "InputbodyProperties",
-            "required": false,
+            "description": "CriticalDataColumnProperties",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/InputbodyProperties"
+              "$ref": "#/definitions/CriticalDataColumnProperties"
             }
           }
         ],
@@ -946,7 +936,7 @@
     },
     "/criticalDataElements": {
       "get": {
-        "operationId": "GetCriticalDataElements",
+        "operationId": "ListCriticalDataElements",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1014,13 +1004,13 @@
           }
         },
         "x-ms-examples": {
-          "GetCriticalDataElements_MaximumSet": {
-            "$ref": "./examples/GetCriticalDataElements_MaximumSet_Gen.json"
+          "ListCriticalDataElements_MaximumSet": {
+            "$ref": "./examples/ListCriticalDataElements_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "PostCriticalDataElement",
+        "operationId": "CreateCriticalDataElement",
         "tags": [
           "CriticalDataElements"
         ],
@@ -1060,8 +1050,8 @@
           }
         },
         "x-ms-examples": {
-          "PostCriticalDataElement_MaximumSet": {
-            "$ref": "./examples/PostCriticalDataElement_MaximumSet_Gen.json"
+          "CreateCriticalDataElement_MaximumSet": {
+            "$ref": "./examples/CreateCriticalDataElement_MaximumSet_Gen.json"
           }
         }
       }
@@ -1134,7 +1124,7 @@
             "name": "body",
             "in": "body",
             "description": "The body associated with the critical data element output.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelCriticalDataElement"
             }
@@ -1475,7 +1465,7 @@
             "name": "body",
             "in": "body",
             "description": "CatalogModelCriticalDataElementRequest",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/InputProperties"
             }
@@ -1724,27 +1714,10 @@
             "format": "int32"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of result items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CriticalDataElementQueryRequest"
             }
@@ -1779,7 +1752,7 @@
     },
     "/dataAssets": {
       "get": {
-        "operationId": "GetDataAssets",
+        "operationId": "ListDataAssets",
         "tags": [
           "DataAsset"
         ],
@@ -1833,13 +1806,13 @@
           }
         },
         "x-ms-examples": {
-          "GetDataAssets_MaximumSet": {
-            "$ref": "./examples/GetDataAssets_MaximumSet_Gen.json"
+          "ListDataAssets_MaximumSet": {
+            "$ref": "./examples/ListDataAssets_MaximumSet_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "PostDataAsset",
+        "operationId": "CreateOrReplaceDataAsset",
         "tags": [
           "DataAsset"
         ],
@@ -1878,8 +1851,8 @@
           }
         },
         "x-ms-examples": {
-          "PostDataAsset_MaximumSet": {
-            "$ref": "./examples/PostDataAsset_MaximumSet_Gen.json"
+          "CreateOrReplaceDataAsset_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceDataAsset_MaximumSet_Gen.json"
           }
         }
       }
@@ -1952,7 +1925,7 @@
             "name": "body",
             "in": "body",
             "description": "CatalogModelDataAsset.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelDataAsset"
             }
@@ -2029,7 +2002,7 @@
     },
     "/dataAssets/{dataAssetId}/relationships": {
       "get": {
-        "operationId": "GetDataAssetRelationships",
+        "operationId": "ListDataAssetRelationships",
         "tags": [
           "DataAsset"
         ],
@@ -2167,8 +2140,8 @@
           }
         },
         "x-ms-examples": {
-          "GetDataAssetRelationships_MaximumSet": {
-            "$ref": "./examples/GetDataAssetRelationships_MaximumSet_Gen.json"
+          "ListDataAssetRelationships_MaximumSet": {
+            "$ref": "./examples/ListDataAssetRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -2297,7 +2270,7 @@
             "schema": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/InputbodyProperties"
+                "$ref": "#/definitions/CriticalDataColumnProperties"
               }
             }
           }
@@ -2480,7 +2453,7 @@
     },
     "/dataAssets/query": {
       "post": {
-        "operationId": "PostDataAssetQuery",
+        "operationId": "CreateOrReplaceDataAssetQuery",
         "tags": [
           "DataAsset"
         ],
@@ -2488,23 +2461,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of result items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "body",
@@ -2536,15 +2492,15 @@
           }
         },
         "x-ms-examples": {
-          "PostDataAssetQuery_MaximumSet": {
-            "$ref": "./examples/PostDataAssetQuery_MaximumSet_Gen.json"
+          "CreateOrReplaceDataAssetQuery_MaximumSet": {
+            "$ref": "./examples/CreateOrReplaceDataAssetQuery_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/dataProducts": {
       "get": {
-        "operationId": "GetDataProduct",
+        "operationId": "ListDataProduct",
         "tags": [
           "DataProduct"
         ],
@@ -2562,20 +2518,10 @@
             "format": "uuid"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -2606,8 +2552,8 @@
           }
         },
         "x-ms-examples": {
-          "GetDataProduct_MaximumSet": {
-            "$ref": "./examples/GetDataProduct_MaximumSet_Gen.json"
+          "ListDataProduct_MaximumSet": {
+            "$ref": "./examples/ListDataProduct_MaximumSet_Gen.json"
           }
         }
       },
@@ -2725,7 +2671,7 @@
             "name": "body",
             "in": "body",
             "description": "The updated data product.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelDataProduct"
             }
@@ -2802,7 +2748,7 @@
     },
     "/dataProducts/{dataProductId}/relationships": {
       "get": {
-        "operationId": "GetDataProductDataProductIdRelationships",
+        "operationId": "ListDataProductDataProductIdRelationships",
         "tags": [
           "DataProduct"
         ],
@@ -2940,8 +2886,8 @@
           }
         },
         "x-ms-examples": {
-          "GetDataProductDataProductIdRelationships_MaximumSet": {
-            "$ref": "./examples/GetDataProductDataProductIdRelationships_MaximumSet_Gen.json"
+          "ListDataProductDataProductIdRelationships_MaximumSet": {
+            "$ref": "./examples/ListDataProductDataProductIdRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -3070,7 +3016,7 @@
             "schema": {
               "type": "object",
               "additionalProperties": {
-                "$ref": "#/definitions/InputbodyProperties"
+                "$ref": "#/definitions/CriticalDataColumnProperties"
               }
             }
           }
@@ -3325,27 +3271,10 @@
             "type": "boolean"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of result items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The request body for the query.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataProductQueryRequest"
             }
@@ -3380,7 +3309,7 @@
     },
     "/objectives": {
       "get": {
-        "operationId": "GetOkr",
+        "operationId": "ListOkr",
         "tags": [
           "OKR"
         ],
@@ -3411,20 +3340,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           }
         ],
         "responses": {
@@ -3448,8 +3367,8 @@
           }
         },
         "x-ms-examples": {
-          "GetOkr_MaximumSet": {
-            "$ref": "./examples/GetOkr_MaximumSet_Gen.json"
+          "ListOkr_MaximumSet": {
+            "$ref": "./examples/ListOkr_MaximumSet_Gen.json"
           }
         }
       },
@@ -3567,7 +3486,7 @@
             "name": "body",
             "in": "body",
             "description": "The additional properties for the objective query.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveQueryAdditionalProperties"
             }
@@ -3644,7 +3563,7 @@
     },
     "/objectives/{objectiveId}/keyResults": {
       "get": {
-        "operationId": "GetOkrObjectiveIdKeyResults",
+        "operationId": "ListOkrObjectiveIdKeyResults",
         "tags": [
           "OKR"
         ],
@@ -3683,8 +3602,8 @@
           }
         },
         "x-ms-examples": {
-          "GetOkrObjectiveIdKeyResults_MaximumSet": {
-            "$ref": "./examples/GetOkrObjectiveIdKeyResults_MaximumSet_Gen.json"
+          "ListOkrObjectiveIdKeyResults_MaximumSet": {
+            "$ref": "./examples/ListOkrObjectiveIdKeyResults_MaximumSet_Gen.json"
           }
         }
       },
@@ -3710,7 +3629,7 @@
             "name": "body",
             "in": "body",
             "description": "The body associated with the key result.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ModelKeyResult"
             }
@@ -3810,27 +3729,10 @@
             "format": "int32"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of result items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The request body for querying OKRs.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ObjectiveQueryRequest"
             }
@@ -3952,7 +3854,7 @@
     },
     "/terms": {
       "get": {
-        "operationId": "GetTerm",
+        "operationId": "ListTerms",
         "tags": [
           "Term"
         ],
@@ -3985,20 +3887,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "depth",
@@ -4037,8 +3929,8 @@
           }
         },
         "x-ms-examples": {
-          "GetTerm_MaximumSet": {
-            "$ref": "./examples/GetTerm_MaximumSet_Gen.json"
+          "ListTerms_MaximumSet": {
+            "$ref": "./examples/ListTerms_MaximumSet_Gen.json"
           }
         }
       },
@@ -4156,7 +4048,7 @@
             "name": "body",
             "in": "body",
             "description": "The body associated with the term output.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogModelTerm"
             }
@@ -4233,7 +4125,7 @@
     },
     "/terms/{termId}/hierarchies": {
       "get": {
-        "operationId": "GetTermIdHierarchies",
+        "operationId": "ListTermIdHierarchies",
         "tags": [
           "Term"
         ],
@@ -4272,15 +4164,15 @@
           }
         },
         "x-ms-examples": {
-          "GetTermIdHierarchies_MaximumSet": {
-            "$ref": "./examples/GetTermIdHierarchies_MaximumSet_Gen.json"
+          "ListTermIdHierarchies_MaximumSet": {
+            "$ref": "./examples/ListTermIdHierarchies_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/terms/{termId}/relationships": {
       "get": {
-        "operationId": "GetTermRelationships",
+        "operationId": "ListTermRelationships",
         "tags": [
           "Term"
         ],
@@ -4451,8 +4343,8 @@
           }
         },
         "x-ms-examples": {
-          "GetTermRelationships_MaximumSet": {
-            "$ref": "./examples/GetTermRelationships_MaximumSet_Gen.json"
+          "ListTermRelationships_MaximumSet": {
+            "$ref": "./examples/ListTermRelationships_MaximumSet_Gen.json"
           }
         }
       },
@@ -4577,7 +4469,7 @@
             "name": "body",
             "in": "body",
             "description": "The type of relationship to retrieve.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TermRelationship"
             }
@@ -5024,27 +4916,10 @@
             "format": "int32"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of result items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of result items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "the body associated with the term output.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TermTermQueryRequest"
             }
@@ -5198,14 +5073,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "Azure.Core.SkipQueryParameter": {
-      "type": "object",
-      "description": "Provides the standard 'skip' query parameter for list operations."
-    },
-    "Azure.Core.TopQueryParameter": {
-      "type": "object",
-      "description": "Provides the standard 'top' query parameter for list operations."
     },
     "Azure.Core.uuid": {
       "type": "string",
@@ -5446,6 +5313,7 @@
         },
         "openInUrl": {
           "type": "string",
+          "format": "uri",
           "description": "URL to open the asset in the catalog."
         },
         "typeProperties": {
@@ -5867,6 +5735,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the external link."
         },
         "name": {
@@ -6084,6 +5953,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the resource."
         }
       }
@@ -6115,6 +5985,31 @@
         "userObjectId": {
           "type": "string",
           "description": "userObjectId"
+        }
+      }
+    },
+    "CriticalDataColumnProperties": {
+      "type": "object",
+      "description": "InputbodyProperties.",
+      "properties": {
+        "systemData": {
+          "type": "array",
+          "description": "systemData.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "description."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "description."
+        },
+        "assetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the asset."
         }
       }
     },
@@ -6192,12 +6087,14 @@
       "description": "CriticalDataElementQueryRequest.",
       "properties": {
         "skip": {
-          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
-          "description": "To Skip how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
         },
         "top": {
-          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
-          "description": "To return how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
         },
         "orderby": {
           "type": "array",
@@ -6276,12 +6173,14 @@
       "description": "DataAssetDataAssetQueryRequest.",
       "properties": {
         "skip": {
-          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
-          "description": "To Skip how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
         },
         "top": {
-          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
-          "description": "To return how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
         },
         "orderby": {
           "type": "array",
@@ -6409,12 +6308,14 @@
       "description": "DataProductQueryRequest.",
       "properties": {
         "skip": {
-          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
-          "description": "To Skip how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
         },
         "top": {
-          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
-          "description": "To return how many records."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
         },
         "orderby": {
           "type": "array",
@@ -6540,6 +6441,10 @@
             },
             "type": "array"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
         }
       },
       "required": [
@@ -6570,31 +6475,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "InputbodyProperties": {
-      "type": "object",
-      "description": "InputbodyProperties.",
-      "properties": {
-        "systemData": {
-          "type": "array",
-          "description": "systemData.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "description."
-        },
-        "relationshipType": {
-          "type": "string",
-          "description": "description."
-        },
-        "assetId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the asset."
         }
       }
     },
@@ -6798,12 +6678,14 @@
       "description": "ObjectiveQueryRequest.",
       "properties": {
         "skip": {
-          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
-          "description": "Number of records to skip."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
         },
         "top": {
-          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
-          "description": "Number of records to return."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
         },
         "orderby": {
           "type": "array",
@@ -7309,12 +7191,14 @@
       "description": "Term query request model.",
       "properties": {
         "skip": {
-          "$ref": "#/definitions/Azure.Core.SkipQueryParameter",
-          "description": "Number of records to skip."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
         },
         "top": {
-          "$ref": "#/definitions/Azure.Core.TopQueryParameter",
-          "description": "Number of records to return."
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
         },
         "orderby": {
           "type": "array",
@@ -7451,6 +7335,25 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }
