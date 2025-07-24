@@ -9162,11 +9162,6 @@
           "readOnly": true,
           "description": "Overall indexer status."
         },
-        "runtime": {
-          "$ref": "#/definitions/IndexerRuntime",
-          "readOnly": true,
-          "description": "Snapshot of the indexer’s cumulative runtime consumption for the service over the current UTC period."
-        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "readOnly": true,
@@ -9194,7 +9189,6 @@
       "required": [
         "name",
         "status",
-        "runtime",
         "executionHistory",
         "limits"
       ],
@@ -9230,41 +9224,6 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
-    },
-    "IndexerRuntime": {
-      "type": "object",
-      "properties": {
-        "usedSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": false,
-          "description": "Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds."
-        },
-        "remainingSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true,
-          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
-        },
-        "beginningTime": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": false,
-          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
-        },
-        "endingTime": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": false,
-          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
-        }
-      },
-      "required": [
-        "usedSeconds",
-        "beginningTime",
-        "endingTime"
-      ],
-      "description": "Represents the indexer's cumulative runtime consumption in the service."
     },
     "IndexerExecutionStatusDetail": {
       "type": "string",
@@ -14459,10 +14418,6 @@
           "$ref": "#/definitions/ServiceCounters",
           "description": "Service level resource counters."
         },
-        "indexersRuntime": {
-          "$ref": "#/definitions/ServiceIndexersRuntime",
-          "description": "Service level indexers runtime information."
-        },
         "limits": {
           "$ref": "#/definitions/ServiceLimits",
           "description": "Service level general limits."
@@ -14470,10 +14425,9 @@
       },
       "required": [
         "counters",
-        "indexersRuntime",
         "limits"
       ],
-      "description": "Response from a get service statistics request. If successful, it includes service level counters, indexer runtime information, and limits."
+      "description": "Response from a get service statistics request. If successful, it includes service level counters and limits."
     },
     "ServiceCounters": {
       "type": "object",
@@ -14537,41 +14491,6 @@
       ],
       "description": "Represents service-level resource counters and quotas."
     },
-    "ServiceIndexersRuntime": {
-      "type": "object",
-      "properties": {
-        "usedSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": false,
-          "description": "Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds."
-        },
-        "remainingSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true,
-          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
-        },
-        "beginningTime": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": false,
-          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
-        },
-        "endingTime": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": false,
-          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
-        }
-      },
-      "required": [
-        "usedSeconds",
-        "beginningTime",
-        "endingTime"
-      ],
-      "description": "Represents service level indexers runtime information."
-    },
     "ServiceLimits": {
       "type": "object",
       "properties": {
@@ -14605,12 +14524,6 @@
           "format": "int64",
           "x-nullable": true,
           "description": "The maximum amount of storage in bytes allowed per index."
-        },
-        "maxCumulativeIndexerRuntimeSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "x-nullable": true,
-          "description": "The maximum cumulative runtime in seconds allowed for all indexers in the service over the current UTC period."
         }
       },
       "description": "Represents various service level limits."
