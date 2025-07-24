@@ -14,6 +14,8 @@ namespace ClientCustomizations;
   "java"
 );
 
+@@clientNamespace(MonitorQueryMetrics.MetricUnit, "com.azure.monitor.query.metrics", "java");
+
 using MonitorQueryMetrics;
 
 @@clientName(MetricResultsResponse, "MetricResults", "go");
