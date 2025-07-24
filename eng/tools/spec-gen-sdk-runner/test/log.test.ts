@@ -1,11 +1,11 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import {
-  logMessage,
-  LogLevel,
   LogIssueType,
+  LogLevel,
+  logMessage,
+  setVsoVariable,
   vsoAddAttachment,
   vsoLogIssue,
-  setVsoVariable,
 } from "../src/log.js";
 
 const logSpy = vi.spyOn(console, "log").mockImplementation(() => {
