@@ -43,6 +43,10 @@ namespace Language.Conversations.Authoring;
  * The available API versions.
  */
 enum Versions {
+  /** Version 2022-05-01 */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2022_05_01: "2022-05-01",
+
   /** Version 2023-04-01 */
   v2023_04_01: "2023-04-01",
 
