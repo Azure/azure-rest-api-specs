@@ -3,8 +3,6 @@ import { LabelContext } from "./labelling-types.js";
 export type ImpactAssessment = {
   resourceManagerRequired: boolean;
   suppressionReviewRequired: boolean;
-  versioningReviewRequired: boolean;
-  breakingChangeReviewRequired: boolean;
   isNewApiVersion: boolean;
   rpaasExceptionRequired: boolean;
   rpaasRpNotInPrivateRepo: boolean;
