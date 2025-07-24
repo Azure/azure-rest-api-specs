@@ -8,7 +8,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedIdentity;
 
@@ -57,6 +56,7 @@ model SystemAssignedIdentityProperties {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @error
 @extension("x-ms-external", true)
 model CloudError {
@@ -69,6 +69,7 @@ model CloudError {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @extension("x-ms-external", true)
 model CloudErrorBody {
   /**

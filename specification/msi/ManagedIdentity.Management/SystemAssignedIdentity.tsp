@@ -4,11 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
-using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedIdentity;
 /**
@@ -24,9 +20,14 @@ model SystemAssignedIdentity
     NamePattern = ""
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: string;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
