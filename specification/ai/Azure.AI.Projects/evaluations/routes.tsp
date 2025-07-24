@@ -3,6 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "@typespec/http";
 
 using TypeSpec.Http;
 using Azure.Core;
@@ -30,7 +31,7 @@ alias DisplayPreferencesTypeParameterTrait = {
   filter?: string;
 };
 
-alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias EvaluationsOperations = ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
 @added(Versions.v2025_05_15_preview)
@@ -92,6 +93,28 @@ interface Evaluations {
       evaluation: Evaluation;
     },
     ResourceCreatedResponse<Evaluation>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Independent API operation to perform a single evaluation and immediately get a result.")
+  @added(Versions.v2025_07_31_preview)
+  @route(":evaluateOne")
+  @post
+  createOneEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @header("Repeatability-Request-ID")
+      @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
+      repeatabilityRequestId?: string;
+
+      @doc("Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.")
+      @header("Repeatability-First-Sent")
+      repeatabilityFirstSent?: utcDateTime;
+
+      @doc("Complete evaluation configuration including data source, evaluators, and result settings")
+      @body
+      oneEvaluation: OneEvaluation;
+    },
+    ResourceCreatedResponse<EvaluationResult>
   >;
 
   @doc("Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.")

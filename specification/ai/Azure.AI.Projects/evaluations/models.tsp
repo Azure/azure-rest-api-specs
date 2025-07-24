@@ -421,6 +421,19 @@ model EvaluationResultSettings {
   additionalDestinations?: Array<EvaluationDestinationConfiguration>;
 }
 
+@doc("One Evaluation Definition")
+@added(Versions.v2025_07_31_preview)
+model OneEvaluation {
+  @doc("Input data to evaluate. Single row support only.")
+  dataSource: InlineDataSource;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
