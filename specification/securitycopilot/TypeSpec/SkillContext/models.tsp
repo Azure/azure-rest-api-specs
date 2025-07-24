@@ -1543,4 +1543,9 @@ namespace SkillContext
 		dataType: SkillUtilityCacheDataType;
 	}
 
+	model CachedEntity<T> {
+		@doc("The cached entity.")
+		cachedEntity: T;
+	}
+
 }
