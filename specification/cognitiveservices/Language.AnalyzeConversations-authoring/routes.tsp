@@ -768,7 +768,6 @@ interface ConversationAuthoringTrainedModel {
   /**
    * Restores the snapshot of this trained model to be the current working directory of the project.
    */
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
