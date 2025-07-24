@@ -408,7 +408,7 @@ op CreateDataAssetAsync is Foundations.Operation<
 @doc("Creates a new data asset with fileted query inputs.")
 @route("/dataAssets/query")
 @post
-op CueryDataAssetsAsync is Foundations.Operation<
+op QueryDataAssetsAsync is Foundations.Operation<
   DataAssetDataAssetQueryRequest,
   DataAssetsResponse
 >;
