@@ -18,12 +18,11 @@ namespace Microsoft.Devices;
 model PrivateEndpointConnectionsList is PrivateEndpointConnection[];
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@pagedResult
 model OperationListResult {
   /**
    * [Placeholder] Description for value property
    */
-  @items
+  @pageItems
   @visibility(Lifecycle.Read)
   value: Operation[];
 
@@ -651,6 +650,7 @@ model CertificateListDescription {
   /**
    * The array of Certificate objects.
    */
+  @pageItems
   value?: CertificateResponse[];
 }
 
@@ -832,6 +832,7 @@ model PrivateLinkResources {
   /**
    * The list of available private link resources for a provisioning service
    */
+  @pageItems
   value?: GroupIdInformation[];
 }
 

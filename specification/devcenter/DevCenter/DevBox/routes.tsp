@@ -39,12 +39,14 @@ interface DevBoxes {
   @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
   @route("/devboxes")
   @get
+  @list
   listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
   @doc("Lists Dev Boxes in the Dev Center for a particular user.")
   @route("/users/{userId}/devboxes")
   @get
+  @list
   listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       ...UserIdParameter;
@@ -57,6 +59,7 @@ interface DevBoxes {
   @doc("Lists all schedules within a pool that are configured by your project administrator.")
   @route("/projects/{projectName}/pools/{poolName}/schedules")
   @get
+  @list
   listSchedulesByPool is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -79,6 +82,7 @@ interface DevBoxes {
   @doc("Lists all schedules within a project that are configured by your project administrator.")
   @route("/projects/{projectName}/schedules")
   @added(APIVersions.v2024_02_01)
+  @list
   listSchedulesByProject is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -93,6 +97,7 @@ interface DevBoxes {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
+  @list
   listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -347,6 +352,7 @@ interface DevBoxes {
   @route("/projects/{projectName}/customizationTasks")
   @get
   @added(APIVersions.v2024_05_01_preview)
+  @list
   listCustomizationTaskDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -428,6 +434,7 @@ interface DevBoxes {
 
   @doc("Delays all actions.")
   @action("delay")
+  @list
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
