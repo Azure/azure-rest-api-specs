@@ -15155,7 +15155,7 @@
       "description": "The updatable properties of the HypervSite.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "$ref": "#/definitions/SiteSpnProperties",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -17726,7 +17726,7 @@
       "description": "The updatable properties of the ServerSiteResource.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "$ref": "#/definitions/SiteSpnProperties",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -18207,7 +18207,7 @@
           "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "$ref": "#/definitions/SiteSpnProperties",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -18272,36 +18272,6 @@
         "rawCertData": {
           "type": "string",
           "description": "Gets or sets the raw certificate data for building certificate expiry flows."
-        }
-      }
-    },
-    "SiteSpnPropertiesFabricSites": {
-      "type": "object",
-      "description": "Class for site properties.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "Gets or sets the tenant Id for the service principal with which the\non-premise\n            management/data plane components would communicate with\nour Azure services."
-        },
-        "applicationId": {
-          "type": "string",
-          "description": "Gets or sets the application/client Id for the service principal with which\nthe\n            on-premise management/data plane components would communicate\nwith our Azure \n            services."
-        },
-        "objectId": {
-          "type": "string",
-          "description": "Gets or sets the object Id of the service principal with which the on-premise\n\n           management/data plane components would communicate with our Azure\nservices."
-        },
-        "audience": {
-          "type": "string",
-          "description": "Gets or sets the intended audience for the service principal."
-        },
-        "aadAuthority": {
-          "type": "string",
-          "description": "Gets or sets the AAD Authority URL which was used to request the token for\nthe\n            service principal."
-        },
-        "rawCertData": {
-          "type": "string",
-          "description": "Gets or sets the raw certificate data for building certificate expiry flows."
         },
         "machineResourceId": {
           "$ref": "#/definitions/MachineResourceId",
@@ -18319,7 +18289,7 @@
           "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "$ref": "#/definitions/SiteSpnProperties",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
@@ -18346,6 +18316,10 @@
             "$ref": "#/definitions/SiteApplianceProperties"
           },
           "x-ms-identifiers": []
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -21492,7 +21466,7 @@
       "description": "The updatable properties of the VmwareSite.",
       "properties": {
         "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnPropertiesFabricSites",
+          "$ref": "#/definitions/SiteSpnProperties",
           "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
