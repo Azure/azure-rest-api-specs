@@ -293,15 +293,15 @@ model CatalogModelCriticalDataColumn {
   assetName?: string;
 }
 
-@doc("InputbodyProperties.")
+@doc("Critical data column properties.")
 model CriticalDataColumnProperties {
-  @doc("systemData.")
+  @doc("System data for the relationship.")
   systemData?: string[];
 
-  @doc("description.")
+  @doc("Description of the relationship.")
   description?: string;
 
-  @doc("description.")
+  @doc("Type of the relationship.")
   relationshipType?: string;
 
   @doc("Unique identifier of the asset.")
