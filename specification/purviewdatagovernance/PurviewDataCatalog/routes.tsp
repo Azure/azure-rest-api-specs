@@ -840,10 +840,7 @@ op ListPolicies is Foundations.Operation<
     @query
     skipToken?: string;
   },
-  {
-    @statusCode
-    statusCode: 200;
-  }
+  Record<unknown>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
