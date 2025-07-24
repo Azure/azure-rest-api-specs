@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { processFilesToSpecificationList } from "../src/runner.js";
 import path from "path";
+import { describe, expect, it } from "vitest";
+import { processFilesToSpecificationList } from "../src/runner.js";
 
 const ROOT = path.resolve(__dirname, "..", "test", "fixtures");
 
@@ -42,7 +42,7 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
     ];
     const expected = [
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json"
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);

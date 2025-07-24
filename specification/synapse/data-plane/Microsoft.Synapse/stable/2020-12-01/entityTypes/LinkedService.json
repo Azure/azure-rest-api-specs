@@ -8097,6 +8097,26 @@
         "endpoint"
       ]
     },
+    "ServiceNowV2LinkedService": {
+      "x-ms-discriminator-value": "ServiceNowV2",
+      "description": "ServiceNowV2 server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ServiceNowV2 server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceNowV2LinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "ServiceNowV2LinkedServiceTypeProperties": {
       "description": "ServiceNowV2 server linked service properties.",
       "type": "object",

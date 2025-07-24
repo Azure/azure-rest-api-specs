@@ -252,3 +252,5 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
+
+@@clientName(ContainerRegistryEventSource.instanceID, "instanceID", "csharp");
