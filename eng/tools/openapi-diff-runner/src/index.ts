@@ -1,17 +1,17 @@
-import { exit } from "node:process";
-import { parseArgs, type ParseArgsConfig } from "node:util";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { existsSync, mkdirSync } from "node:fs";
-import { validateBreakingChange } from "./commands.js";
+import path from "node:path";
+import { exit } from "node:process";
+import { fileURLToPath } from "node:url";
+import { parseArgs, type ParseArgsConfig } from "node:util";
 import {
   buildPrInfo,
   createContextFromParsedArgs,
   type ParsedCliArguments,
 } from "./command-helpers.js";
+import { validateBreakingChange } from "./commands.js";
 import { logError, logMessage } from "./log.js";
 import { BreakingChangesCheckType } from "./types/breaking-change.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = path.dirname(__filename);
