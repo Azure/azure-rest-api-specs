@@ -264,7 +264,7 @@ interface DocumentModels {
       @doc("Analyze request parameters.")
       @bodyRoot
       @clientName("body", "python")
-      analyzeRequest: AnalyzeDocumentRequest;
+      analyzeDocumentRequest: AnalyzeDocumentRequest;
     },
     AnalyzeOperation
   >;
