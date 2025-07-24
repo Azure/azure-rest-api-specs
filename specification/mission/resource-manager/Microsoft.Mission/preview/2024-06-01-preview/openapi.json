@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Mission",
+    "title": "Microsoft.Mission",
     "version": "2024-06-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
@@ -77,7 +77,7 @@
         "description": "List ApprovalResource resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -93,7 +93,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -116,7 +116,7 @@
         "description": "Get a ApprovalResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -140,7 +140,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -158,7 +158,7 @@
         "description": "Create a ApprovalResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -208,7 +208,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -230,7 +230,7 @@
         "description": "Update a ApprovalResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -249,7 +249,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApprovalPatchResource"
+              "$ref": "#/definitions/ApprovalPatchModel"
             }
           }
         ],
@@ -277,7 +277,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -299,7 +299,7 @@
         "description": "Delete a ApprovalResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -334,7 +334,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -358,7 +358,7 @@
         "description": "Upon receiving approval or rejection from approver, this facilitates actions on approval resource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -377,7 +377,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackRequest"
+              "$ref": "#/definitions/ApprovalActionRequest"
             }
           }
         ],
@@ -385,7 +385,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -405,7 +405,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -429,20 +429,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -465,10 +465,10 @@
         "description": "List CommunityResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -481,7 +481,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -504,10 +504,10 @@
         "description": "List CommunityEndpointResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "communityName",
@@ -528,7 +528,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -551,10 +551,10 @@
         "description": "List TransitHubResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "communityName",
@@ -575,7 +575,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -598,10 +598,10 @@
         "description": "List EnclaveConnectionResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -614,7 +614,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -637,10 +637,10 @@
         "description": "List EnclaveResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -653,7 +653,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -676,10 +676,10 @@
         "description": "List EnclaveEndpointResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -700,7 +700,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -723,10 +723,10 @@
         "description": "List WorkloadResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -747,7 +747,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -770,13 +770,13 @@
         "description": "List CommunityResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -789,7 +789,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -812,13 +812,13 @@
         "description": "Get a CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -839,7 +839,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -857,13 +857,13 @@
         "description": "Create a CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -910,7 +910,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -932,13 +932,13 @@
         "description": "Update a CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -954,7 +954,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityPatchResource"
+              "$ref": "#/definitions/CommunityPatchModel"
             }
           }
         ],
@@ -982,7 +982,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1004,13 +1004,13 @@
         "description": "Delete a CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1042,7 +1042,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1066,13 +1066,13 @@
         "description": "Checks that the IP Address Space to be allocated for this Community is available.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1102,7 +1102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1122,13 +1122,13 @@
         "description": "List CommunityEndpointResource resources by CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1149,7 +1149,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1172,13 +1172,13 @@
         "description": "Get a CommunityEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1207,7 +1207,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1225,13 +1225,13 @@
         "description": "Create a CommunityEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1286,7 +1286,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1308,13 +1308,13 @@
         "description": "Update a CommunityEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1338,7 +1338,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunityEndpointPatchResource"
+              "$ref": "#/definitions/CommunityEndpointPatchModel"
             }
           }
         ],
@@ -1366,7 +1366,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1388,13 +1388,13 @@
         "description": "Delete a CommunityEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1434,7 +1434,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1458,13 +1458,13 @@
         "description": "List TransitHubResource resources by CommunityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1485,7 +1485,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1508,13 +1508,13 @@
         "description": "Get a TransitHubResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1543,7 +1543,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1561,13 +1561,13 @@
         "description": "Create a TransitHubResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1622,7 +1622,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1644,13 +1644,13 @@
         "description": "Update a TransitHubResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1674,7 +1674,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransitHubPatchResource"
+              "$ref": "#/definitions/TransitHubPatchModel"
             }
           }
         ],
@@ -1702,7 +1702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1724,13 +1724,13 @@
         "description": "Delete a TransitHubResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "communityName",
@@ -1770,7 +1770,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1794,13 +1794,13 @@
         "description": "List EnclaveConnectionResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -1813,7 +1813,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1836,13 +1836,13 @@
         "description": "Get a EnclaveConnectionResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -1863,7 +1863,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1881,13 +1881,13 @@
         "description": "Create a EnclaveConnectionResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -1934,7 +1934,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1956,13 +1956,13 @@
         "description": "Update a EnclaveConnectionResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -1978,7 +1978,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveConnectionPatchResource"
+              "$ref": "#/definitions/EnclaveConnectionPatchModel"
             }
           }
         ],
@@ -2006,7 +2006,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2028,13 +2028,13 @@
         "description": "Delete a EnclaveConnectionResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -2066,7 +2066,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2090,13 +2090,13 @@
         "description": "Callback that triggers on approval state change.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -2120,7 +2120,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2140,7 +2140,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2164,13 +2164,13 @@
         "description": "Callback that triggers on approval deletion state change.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "enclaveConnectionName",
@@ -2194,7 +2194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2214,7 +2214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2238,13 +2238,13 @@
         "description": "List EnclaveResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -2257,7 +2257,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2280,13 +2280,13 @@
         "description": "Get a EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2307,7 +2307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2325,13 +2325,13 @@
         "description": "Create a EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2378,7 +2378,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2400,13 +2400,13 @@
         "description": "Update a EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2422,7 +2422,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEnclavePatchResource"
+              "$ref": "#/definitions/VirtualEnclavePatchModel"
             }
           }
         ],
@@ -2450,7 +2450,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2472,13 +2472,13 @@
         "description": "Delete a EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2510,7 +2510,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2534,13 +2534,13 @@
         "description": "List EnclaveEndpointResource resources by EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2561,7 +2561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2584,13 +2584,13 @@
         "description": "Get a EnclaveEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2619,7 +2619,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2637,13 +2637,13 @@
         "description": "Create a EnclaveEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2698,7 +2698,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2720,13 +2720,13 @@
         "description": "Update a EnclaveEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2750,7 +2750,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnclaveEndpointPatchResource"
+              "$ref": "#/definitions/EnclaveEndpointPatchModel"
             }
           }
         ],
@@ -2778,7 +2778,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2800,13 +2800,13 @@
         "description": "Delete a EnclaveEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2846,7 +2846,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2870,13 +2870,13 @@
         "description": "List WorkloadResource resources by EnclaveResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2897,7 +2897,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2920,13 +2920,13 @@
         "description": "Get a WorkloadResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -2955,7 +2955,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2973,13 +2973,13 @@
         "description": "Create a WorkloadResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -3034,7 +3034,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3056,13 +3056,13 @@
         "description": "Update a WorkloadResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -3086,7 +3086,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadPatchResource"
+              "$ref": "#/definitions/WorkloadPatchModel"
             }
           }
         ],
@@ -3114,7 +3114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3136,13 +3136,13 @@
         "description": "Delete a WorkloadResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualEnclaveName",
@@ -3182,7 +3182,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3199,6 +3199,39 @@
     }
   },
   "definitions": {
+    "ApprovalActionRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "approvalStatus": {
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "approvalStatus"
+      ]
+    },
+    "ApprovalActionResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "ApprovalCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3239,19 +3272,6 @@
         "approvalStatus"
       ]
     },
-    "ApprovalCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
-    },
     "ApprovalDeletionCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3273,32 +3293,37 @@
         "resourceRequestAction"
       ]
     },
-    "ApprovalDeletionCallbackResponse": {
+    "ApprovalPatchModel": {
       "type": "object",
-      "description": "Response body after handling of approvalDeletionCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
-    },
-    "ApprovalPatchResource": {
-      "type": "object",
-      "description": "Approvals properties for patching",
+      "description": "Approvals patch model.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateApprovalProperties",
+          "$ref": "#/definitions/ApprovalPatchProperties",
           "description": "Approval Patch properties"
+        }
+      }
+    },
+    "ApprovalPatchProperties": {
+      "type": "object",
+      "description": "Approvals patch properties.",
+      "properties": {
+        "parent1": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "parent2": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadataUpdatableProperties",
+          "description": "Request metadata for the approval request."
         }
       }
     },
     "ApprovalProperties": {
       "type": "object",
-      "description": "Approvals Resource Properties",
+      "description": "Approval Base model.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3334,7 +3359,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3361,7 +3386,7 @@
     },
     "ApprovalStatus": {
       "type": "string",
-      "description": "Approval Status Enum",
+      "description": "Approval Status. It can be Approved, Rejected, Pending, Deleted or Expired.",
       "enum": [
         "Approved",
         "Rejected",
@@ -3398,19 +3423,14 @@
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "properties": {
         "type": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
@@ -3425,7 +3445,7 @@
           "description": "Resource Id of the Community"
         },
         "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetwork",
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
           "description": "Information about the enclave virtual network"
         }
       },
@@ -3451,18 +3471,6 @@
       "type": "object",
       "description": "Base type for destination rules.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Endpoint Rule Name."
-        },
-        "destination": {
-          "type": "string",
-          "description": "Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas."
-        },
-        "port": {
-          "type": "string",
-          "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
-        },
         "destinationType": {
           "$ref": "#/definitions/DestinationType",
           "description": "Destination Type."
@@ -3477,15 +3485,27 @@
         "transitHubResourceId": {
           "$ref": "#/definitions/TransitHubResourceId",
           "description": "Transit Hub Resource Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Endpoint Rule Name."
+        },
+        "destination": {
+          "type": "string",
+          "description": "Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas."
+        },
+        "port": {
+          "type": "string",
+          "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
         }
       }
     },
-    "CommunityEndpointPatchResource": {
+    "CommunityEndpointPatchModel": {
       "type": "object",
       "description": "Community Endpoint Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateCommunityEndpointPatchProperties",
+          "$ref": "#/definitions/CommunityEndpointPatchProperties",
           "description": "Community Endpoint Patch properties"
         },
         "tags": {
@@ -3494,6 +3514,24 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "CommunityEndpointPatchProperties": {
+      "type": "object",
+      "description": "Community Endpoint patchable Properties",
+      "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "description": "Community Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/CommunityEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },
@@ -3514,7 +3552,8 @@
           "description": "List of resource ids created by community endpoint.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3602,7 +3641,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3627,12 +3666,12 @@
         "value"
       ]
     },
-    "CommunityPatchResource": {
+    "CommunityPatchModel": {
       "type": "object",
       "description": "Community Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateCommunityPatchProperties",
+          "$ref": "#/definitions/CommunityPatchProperties",
           "description": "Community Patch properties"
         },
         "tags": {
@@ -3648,17 +3687,42 @@
         }
       }
     },
+    "CommunityPatchProperties": {
+      "type": "object",
+      "description": "Community Resource Properties without default values",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "List of services governed by a community.",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "CommunityProperties": {
       "type": "object",
       "description": "Community Resource Properties",
       "properties": {
         "addressSpace": {
           "type": "string",
-          "description": "Address Space."
+          "description": "Address Space.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dnsServers": {
           "type": "array",
-          "description": "Dns Servers.",
+          "description": "DNS Servers.",
           "items": {
             "type": "string"
           }
@@ -3678,14 +3742,16 @@
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
+          "description": "Managed resource group name.",
+          "readOnly": true
         },
         "governedServiceList": {
           "type": "array",
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3699,13 +3765,13 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -3823,7 +3889,7 @@
         ]
       }
     },
-    "EnclaveAddressSpaces": {
+    "EnclaveAddressSpacesModel": {
       "type": "object",
       "description": "Enclave Address Spaces",
       "properties": {
@@ -3837,12 +3903,12 @@
         }
       }
     },
-    "EnclaveConnectionPatchResource": {
+    "EnclaveConnectionPatchModel": {
       "type": "object",
       "description": "Enclave Connection Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateEnclaveConnectionPatchProperties",
+          "$ref": "#/definitions/EnclaveConnectionPatchProperties",
           "description": "Enclave Connection Patch properties"
         },
         "tags": {
@@ -3854,21 +3920,40 @@
         }
       }
     },
+    "EnclaveConnectionPatchProperties": {
+      "type": "object",
+      "description": "Enclave Connection patchable Properties",
+      "properties": {
+        "sourceCidr": {
+          "type": "string",
+          "description": "Source CIDR."
+        }
+      }
+    },
     "EnclaveConnectionProperties": {
       "type": "object",
       "description": "Enclave Connection Resource properties",
       "properties": {
         "state": {
           "$ref": "#/definitions/EnclaveConnectionState",
-          "description": "The state of the enclaveConnection."
+          "description": "The state of the enclaveConnection.",
+          "readOnly": true
         },
         "communityResourceId": {
           "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
+          "description": "Community Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sourceResourceId": {
           "$ref": "#/definitions/EnclaveConnectionSourceResourceId",
-          "description": "Source Resource Id."
+          "description": "Source Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sourceCidr": {
           "type": "string",
@@ -3876,11 +3961,19 @@
         },
         "ipGroup": {
           "$ref": "#/definitions/IPGroupResourceId",
-          "description": "Source IP group Resource Id."
+          "description": "Source IP group Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "destinationEndpointId": {
           "$ref": "#/definitions/DestinationEndpointResourceId",
-          "description": "Destination Endpoint Resource Id."
+          "description": "Destination Endpoint Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3892,7 +3985,8 @@
           "description": "List of resource ids modified by enclave Connections.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -3913,7 +4007,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4007,25 +4101,65 @@
         ]
       }
     },
-    "EnclaveDefaultSettings": {
+    "EnclaveDefaultSettingsModel": {
       "type": "object",
       "description": "Virtual Enclave Default Settings",
       "properties": {
         "keyVaultResourceId": {
           "$ref": "#/definitions/KeyVaultResourceId",
-          "description": "Key Vault Resource Id."
+          "description": "Key Vault Resource Id.",
+          "readOnly": true
         },
         "storageAccountResourceId": {
           "$ref": "#/definitions/StorageAccountResourceId",
-          "description": "Storage Account Resource Id."
+          "description": "Storage Account Resource Id.",
+          "readOnly": true
         },
         "logAnalyticsResourceIdCollection": {
           "type": "array",
           "description": "Log Analytics Resource Ids.",
           "items": {
             "$ref": "#/definitions/LogAnalyticsResourceId"
-          }
+          },
+          "readOnly": true
         },
+        "diagnosticDestination": {
+          "type": "string",
+          "description": "Diagnostic Destination.",
+          "default": "EnclaveOnly",
+          "enum": [
+            "CommunityOnly",
+            "EnclaveOnly",
+            "Both"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticDestination",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CommunityOnly",
+                "value": "CommunityOnly",
+                "description": "DiagnosticDestination Type CommunityOnly"
+              },
+              {
+                "name": "EnclaveOnly",
+                "value": "EnclaveOnly",
+                "description": "DiagnosticDestination Type EnclaveOnly"
+              },
+              {
+                "name": "Both",
+                "value": "Both",
+                "description": "DiagnosticDestination Type Both"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "EnclaveDefaultSettingsPatchModel": {
+      "type": "object",
+      "description": "Virtual Enclave Default Settings",
+      "properties": {
         "diagnosticDestination": {
           "$ref": "#/definitions/DiagnosticDestination",
           "description": "Diagnostic Destination."
@@ -4036,6 +4170,13 @@
       "type": "object",
       "description": "Enclave Endpoint Rule Properties",
       "properties": {
+        "protocols": {
+          "type": "array",
+          "description": "Protocols. Options specified by Endpoint Protocol Enum.",
+          "items": {
+            "$ref": "#/definitions/EnclaveEndpointProtocol"
+          }
+        },
         "name": {
           "type": "string",
           "description": "Endpoint Rule Name."
@@ -4047,22 +4188,15 @@
         "port": {
           "type": "string",
           "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
-        },
-        "protocols": {
-          "type": "array",
-          "description": "Protocols. Options specified by Endpoint Protocol Enum.",
-          "items": {
-            "$ref": "#/definitions/EnclaveEndpointProtocol"
-          }
         }
       }
     },
-    "EnclaveEndpointPatchResource": {
+    "EnclaveEndpointPatchModel": {
       "type": "object",
       "description": "Enclave Endpoint Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateEnclaveEndpointPatchProperties",
+          "$ref": "#/definitions/EnclaveEndpointPatchProperties",
           "description": "Enclave Endpoint Patch properties"
         },
         "tags": {
@@ -4071,6 +4205,24 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "EnclaveEndpointPatchProperties": {
+      "type": "object",
+      "description": "Enclave Endpoint patchable Properties",
+      "properties": {
+        "ruleCollection": {
+          "type": "array",
+          "description": "Enclave Endpoint Rule Collection.",
+          "items": {
+            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },
@@ -4091,7 +4243,8 @@
           "description": "List of resource ids created by community endpoint.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4167,7 +4320,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4202,13 +4355,13 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4233,7 +4386,7 @@
         "value"
       ]
     },
-    "EnclaveVirtualNetwork": {
+    "EnclaveVirtualNetworkModel": {
       "type": "object",
       "description": "Enclave Virtual Network Properties",
       "properties": {
@@ -4243,26 +4396,45 @@
         },
         "networkSize": {
           "type": "string",
-          "description": "Network Size."
+          "description": "Network Size.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "customCidrRange": {
           "type": "string",
-          "description": "Custom CIDR Range."
+          "description": "Custom CIDR Range.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "subnetConfigurations": {
           "type": "array",
           "description": "Subnet Configurations.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "allowSubnetCommunication": {
           "type": "boolean",
-          "description": "Allow Subnet Communication."
+          "description": "Allow Subnet Communication.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "connectToAzureServices": {
           "type": "boolean",
-          "description": "Connect to Azure Services (True or False)."
+          "description": "Connect to Azure Services (True or False).",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -4272,16 +4444,16 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/ServiceIdentifier",
-          "description": "service id"
+          "description": "Service ID"
         },
         "name": {
           "type": "string",
-          "description": "service name",
+          "description": "Service name.",
           "readOnly": true
         },
         "option": {
           "type": "string",
-          "description": "governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).",
+          "description": "Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).",
           "enum": [
             "Allow",
             "Deny",
@@ -4294,7 +4466,7 @@
         },
         "enforcement": {
           "type": "string",
-          "description": "initiative enforcement (Enabled or Disabled).",
+          "description": "Initiative enforcement (Enabled or Disabled).",
           "enum": [
             "Enabled",
             "Disabled"
@@ -4305,11 +4477,11 @@
         },
         "auditOnly": {
           "type": "boolean",
-          "description": "policies set to auditOnly (True or False)."
+          "description": "Policies set to auditOnly (True or False)."
         },
         "initiatives": {
           "type": "array",
-          "description": "initiatives associated with this service",
+          "description": "Initiatives associated with this service.",
           "items": {
             "type": "string"
           },
@@ -4331,39 +4503,6 @@
           }
         ]
       }
-    },
-    "InitiatorCallbackRequest": {
-      "type": "object",
-      "description": "Request body for calling post-action",
-      "properties": {
-        "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "approvalStatus"
-      ]
-    },
-    "InitiatorCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
     },
     "KeyVaultResourceId": {
       "type": "string",
@@ -4389,17 +4528,20 @@
         ]
       }
     },
-    "MaintenanceModeConfiguration": {
+    "MaintenanceModeConfigurationModel": {
       "type": "object",
       "description": "Maintenance Mode",
       "properties": {
         "mode": {
           "type": "string",
           "description": "Current mode of Maintenance Mode Configuration",
+          "default": "Off",
           "enum": [
             "On",
             "CanNotDelete",
-            "Off"
+            "Off",
+            "General",
+            "Advanced"
           ],
           "x-ms-enum": {
             "modelAsString": true
@@ -4408,6 +4550,7 @@
         "principals": {
           "type": "array",
           "description": "The user, group or service principal object affected by Maintenance Mode",
+          "default": [],
           "items": {
             "$ref": "#/definitions/Principal"
           }
@@ -4415,6 +4558,7 @@
         "justification": {
           "type": "string",
           "description": "Justification for entering or exiting Maintenance Mode",
+          "default": "Off",
           "enum": [
             "Networking",
             "Governance",
@@ -4429,9 +4573,9 @@
         "mode"
       ]
     },
-    "MaintenanceModeConfigurationUpdate": {
+    "MaintenanceModeConfigurationPatchModel": {
       "type": "object",
-      "description": "Maintenance Mode",
+      "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
           "type": "string",
@@ -4439,7 +4583,9 @@
           "enum": [
             "On",
             "CanNotDelete",
-            "Off"
+            "Off",
+            "General",
+            "Advanced"
           ],
           "x-ms-enum": {
             "modelAsString": true
@@ -4530,12 +4676,9 @@
         "Failed",
         "Canceled",
         "Accepted",
-        "Created",
         "Creating",
-        "Deleted",
         "Deleting",
         "NotSpecified",
-        "Ready",
         "Running",
         "Updating"
       ],
@@ -4564,19 +4707,9 @@
             "description": "Provisioning State Type Accepted"
           },
           {
-            "name": "Created",
-            "value": "Created",
-            "description": "Provisioning State Type Created"
-          },
-          {
             "name": "Creating",
             "value": "Creating",
             "description": "Provisioning State Type Creating"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Provisioning State Type Deleted"
           },
           {
             "name": "Deleting",
@@ -4587,11 +4720,6 @@
             "name": "NotSpecified",
             "value": "NotSpecified",
             "description": "Provisioning State Type NotSpecified"
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Provisioning State Type Ready"
           },
           {
             "name": "Running",
@@ -4616,17 +4744,44 @@
           "description": "Resource Action of the item being approved or declined."
         },
         "approvalStatus": {
-          "$ref": "#/definitions/ApprovalStatus",
-          "description": "Approval status."
+          "type": "string",
+          "description": "Status of the approval. Uses ApprovalStatus enum.",
+          "default": "Pending",
+          "enum": [
+            "Approved",
+            "Rejected",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Approved",
+                "value": "Approved",
+                "description": "ApprovalStatus Type Approved"
+              },
+              {
+                "name": "Rejected",
+                "value": "Rejected",
+                "description": "ApprovalStatus Type Rejected"
+              },
+              {
+                "name": "Pending",
+                "value": "Pending",
+                "description": "ApprovalStatus Type Pending"
+              }
+            ]
+          }
         }
       },
       "required": [
         "resourceAction"
       ]
     },
-    "RequestMetadataUpdate": {
+    "RequestMetadataUpdatableProperties": {
       "type": "object",
-      "description": "Request Metadata for approvals request.",
+      "description": "Request Metadata patch properties.",
       "properties": {
         "resourceAction": {
           "type": "string",
@@ -4634,7 +4789,7 @@
         },
         "approvalStatus": {
           "$ref": "#/definitions/ApprovalStatus",
-          "description": "Approval status."
+          "description": "Status of the approval. Uses ApprovalStatus enum."
         }
       }
     },
@@ -4762,7 +4917,7 @@
         },
         "id": {
           "$ref": "#/definitions/SubnetResourceId",
-          "description": "Subnet ID.",
+          "description": "Subnet Resource ID.",
           "readOnly": true
         },
         "networkPrefixSize": {
@@ -4802,12 +4957,12 @@
         ]
       }
     },
-    "TransitHubPatchResource": {
+    "TransitHubPatchModel": {
       "type": "object",
       "description": "TH Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateTransitHubPatchProperties",
+          "$ref": "#/definitions/TransitHubPatchProperties",
           "description": "The TransitHub resource."
         },
         "tags": {
@@ -4816,6 +4971,20 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "TransitHubPatchProperties": {
+      "type": "object",
+      "description": "Transit Hub patchable Properties",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/TransitHubState",
+          "description": "The state of the transitHub."
+        },
+        "transitOption": {
+          "$ref": "#/definitions/TransitOption",
+          "description": "The TransitOption of the transitHub."
         }
       }
     },
@@ -4841,7 +5010,8 @@
           "description": "List of resource ids modified by transitHubs.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -4857,7 +5027,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4995,241 +5165,12 @@
         ]
       }
     },
-    "UpdateApprovalProperties": {
+    "VirtualEnclavePatchModel": {
       "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "parent1": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "parent2": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadataUpdate",
-          "description": "Request metadata for the approval request."
-        }
-      }
-    },
-    "UpdateCommunityEndpointPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "ruleCollection": {
-          "type": "array",
-          "description": "Community Endpoint Rule Collection.",
-          "items": {
-            "$ref": "#/definitions/CommunityEndpointDestinationRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by community endpoint.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
-        }
-      }
-    },
-    "UpdateCommunityPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "addressSpace": {
-          "type": "string",
-          "description": "Address Space."
-        },
-        "dnsServers": {
-          "type": "array",
-          "description": "Dns Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by communities.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "List of services governed by a community.",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        }
-      }
-    },
-    "UpdateEnclaveConnectionPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/EnclaveConnectionState",
-          "description": "The state of the enclaveConnection."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "sourceResourceId": {
-          "$ref": "#/definitions/EnclaveConnectionSourceResourceId",
-          "description": "Source Resource Id."
-        },
-        "sourceCidr": {
-          "type": "string",
-          "description": "Source CIDR."
-        },
-        "ipGroup": {
-          "$ref": "#/definitions/IPGroupResourceId",
-          "description": "Source IP group Resource Id."
-        },
-        "destinationEndpointId": {
-          "$ref": "#/definitions/DestinationEndpointResourceId",
-          "description": "Destination Endpoint Resource Id."
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by enclave Connections.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateEnclaveEndpointPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "ruleCollection": {
-          "type": "array",
-          "description": "Enclave Endpoint Rule Collection.",
-          "items": {
-            "$ref": "#/definitions/EnclaveEndpointDestinationRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by community endpoint.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
-        }
-      }
-    },
-    "UpdateTransitHubPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/TransitHubState",
-          "description": "The state of the transitHub."
-        },
-        "transitOption": {
-          "$ref": "#/definitions/TransitOption",
-          "description": "The TransitOption of the transitHub."
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids modified by transitHubs.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateVirtualEnclavePatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetwork",
-          "description": "Virtual Network."
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettings",
-          "description": "Default Settings"
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
-          "description": "Maintenance Mode configuration."
-        },
-        "bastionEnabled": {
-          "type": "boolean",
-          "description": "Deploy Bastion service (True or False)."
-        }
-      }
-    },
-    "UpdateWorkloadPatchProperties": {
-      "type": "object",
-      "description": "A copy of the input model `T` with only the properties that are visible during the\n\"Update\" resource lifecycle phase.\n\nThe \"Update\" lifecycle phase is used for properties passed as parameters to operations\nthat update data, like HTTP PATCH operations.\n\nThis transformation will include only the properties that have the `Lifecycle.Update`\nvisibility modifier, and the types of all properties will be replaced with the\nequivalent `CreateOrUpdate` transformation.\n\nIf a `NameTemplate` is provided, the new model will be named according to the template.\nThe template uses the same syntax as the `@friendlyName` decorator.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "resourceGroupCollection": {
-          "type": "array",
-          "description": "List of resource group ids.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "VirtualEnclavePatchResource": {
-      "type": "object",
-      "description": "Virtual Enclave Patch Resource",
+      "description": "Virtual Enclave Patch Model",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateVirtualEnclavePatchProperties",
+          "$ref": "#/definitions/VirtualEnclavePatchProperties",
           "description": "Virtual Enclave Patch properties"
         },
         "identity": {
@@ -5245,6 +5186,28 @@
         }
       }
     },
+    "VirtualEnclavePatchProperties": {
+      "type": "object",
+      "description": "Virtual Enclave Patchable Properties",
+      "properties": {
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
+          "description": "Virtual Network."
+        },
+        "bastionEnabled": {
+          "type": "boolean",
+          "description": "Deploy Bastion service (True or False)."
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
+          "description": "Maintenance Mode configuration."
+        }
+      }
+    },
     "VirtualEnclaveProperties": {
       "type": "object",
       "description": "Virtual Enclave Resource properties",
@@ -5255,21 +5218,21 @@
           "readOnly": true
         },
         "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetwork",
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
           "description": "Virtual Network."
         },
         "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpaces",
+          "$ref": "#/definitions/EnclaveAddressSpacesModel",
           "description": "Enclave Address Spaces",
           "readOnly": true
         },
         "communityResourceId": {
           "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettings",
-          "description": "Default Settings"
+          "description": "Community Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "resourceCollection": {
           "type": "array",
@@ -5278,19 +5241,26 @@
             "type": "string",
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
+          },
+          "readOnly": true
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfiguration",
-          "description": "Maintenance Mode configuration."
+          "description": "Managed resource group name.",
+          "readOnly": true
         },
         "bastionEnabled": {
           "type": "boolean",
-          "description": "Deploy Bastion service (True or False)."
+          "description": "Deploy Bastion service (True or False).",
+          "default": false
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
+          "description": "Maintenance Mode configuration."
         }
       },
       "required": [
@@ -5310,18 +5280,31 @@
         ]
       }
     },
-    "WorkloadPatchResource": {
+    "WorkloadPatchModel": {
       "type": "object",
       "description": "Workload Patch Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateWorkloadPatchProperties",
+          "$ref": "#/definitions/WorkloadPatchProperties",
           "description": "Workload Patch properties"
         },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorkloadPatchProperties": {
+      "type": "object",
+      "description": "Workload patchable Properties",
+      "properties": {
+        "resourceGroupCollection": {
+          "type": "array",
+          "description": "List of resource group ids.",
+          "items": {
             "type": "string"
           }
         }
@@ -5357,7 +5340,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },

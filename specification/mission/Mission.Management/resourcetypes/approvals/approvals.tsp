@@ -1,22 +1,17 @@
+import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "../shared/resourceid.tsp";
-import "../shared/provisioningstate.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-@doc("Approval Status Enum")
+@doc("Approval Status. It can be Approved, Rejected, Pending, Deleted or Expired.")
 union ApprovalStatus {
+  string,
+
   @doc("ApprovalStatus Type Approved")
   Approved: "Approved",
 
@@ -33,28 +28,23 @@ union ApprovalStatus {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("ApprovalStatus Type Expired")
   Expired: "Expired",
-
-  string,
 }
 
 @doc("Specifies the action performed by the approver")
 union ActionPerformed {
-  @doc("ActionPerformed Type Approved")
+  string,
+
+  @doc("Action was Approved")
   Approved: "Approved",
 
-  @doc("ActionPerformed Type Rejected")
+  @doc("Action was Rejected")
   Rejected: "Rejected",
-
-  string,
 }
 
 @doc("Request Metadata for approvals request.")
 model RequestMetadata {
   @doc("Resource Action of the item being approved or declined.")
   resourceAction: string;
-
-  @doc("Approval status.")
-  approvalStatus?: ApprovalStatus;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Route name for the approval callback")
@@ -63,35 +53,39 @@ model RequestMetadata {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload to be sent upon any action on approval request")
   approvalCallbackPayload?: string;
+
+  @doc("Status of the approval. Uses ApprovalStatus enum.")
+  approvalStatus?: ApprovalStatus = ApprovalStatus.Pending;
 }
 
 @renamedFrom(Microsoft.Mission.Versions.v2024_12_01_preview, "Approvers")
 @doc("Approver Metadata for approvals request.")
 model Approver {
-  @doc("EntraId of the approver")
+  @doc("Entra ObjectID of the approver")
   approverEntraId: string;
 
   @doc("Action Performed by approver")
-  actionPerformed: ActionPerformed;
+  actionPerformed?: ActionPerformed;
 
   @doc("approval request last updated at")
   lastUpdatedAt: utcDateTime;
 }
 
-@doc("Approvals Resource Properties")
-model ApprovalProperties {
+@doc("Approval Base model.")
+model ApprovalBaseModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Parameter for optimizing query results")
-  parent1?: string;
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "parent1")
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string)
+  parentResourceId?: armResourceIdentifier;
 
   @doc("Parameter for optimizing query results")
-  parent2?: string;
-
-  @doc("Request metadata for the approval request.")
-  requestMetadata: RequestMetadata;
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "parent2")
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string)
+  grandparentResourceId?: armResourceIdentifier;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
@@ -111,8 +105,24 @@ model ApprovalProperties {
   stateChangedAt?: utcDateTime;
 }
 
-@doc("Approvals properties for patching")
-model ApprovalPatchResource {
+model ApprovalProperties is ApprovalBaseModel {
+  @doc("Request metadata for the approval request.")
+  requestMetadata: RequestMetadata;
+}
+
+@doc("Request Metadata patch properties.")
+model RequestMetadataUpdatableProperties
+  is UpdateableProperties<OmitDefaults<RequestMetadata>>;
+
+@doc("Approvals patch properties.")
+model ApprovalPatchProperties
+  is UpdateableProperties<OmitDefaults<ApprovalBaseModel>> {
+  @doc("Request metadata for the approval request.")
+  requestMetadata: RequestMetadataUpdatableProperties;
+}
+
+@doc("Approvals patch model.")
+model ApprovalPatchModel {
   @doc("Approval Patch properties")
-  properties?: Update<ApprovalProperties>;
+  properties?: ApprovalPatchProperties;
 }

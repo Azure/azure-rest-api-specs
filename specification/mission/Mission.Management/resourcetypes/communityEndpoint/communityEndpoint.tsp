@@ -1,24 +1,19 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../shared/endpointrulebase.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
+using OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ResourceManager;
-using OpenAPI;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
 @doc("Community Endpoint Protocol Enum")
 union CommunityEndpointProtocol {
+  string,
+
   @doc("CommunityEndpointProtocol Type ANY")
   ANY: "ANY",
 
@@ -42,12 +37,12 @@ union CommunityEndpointProtocol {
 
   @doc("CommunityEndpointProtocol Type HTTP")
   HTTP: "HTTP",
-
-  string,
 }
 
 @doc("Destination Type Enum")
 union DestinationType {
+  string,
+
   @doc("DestinationType Type FQDN")
   FQDN: "FQDN",
 
@@ -59,12 +54,10 @@ union DestinationType {
 
   @doc("DestinationType Type PrivateNetwork")
   PrivateNetwork: "PrivateNetwork",
-
-  string,
 }
 
 @doc("Base type for destination rules.")
-model CommunityEndpointDestinationRule is EndpointRuleBase {
+model CommunityEndpointDestinationRule {
   @doc("Destination Type.")
   destinationType?: DestinationType;
 
@@ -73,37 +66,38 @@ model CommunityEndpointDestinationRule is EndpointRuleBase {
 
   @doc("Transit Hub Resource Id.")
   transitHubResourceId?: TransitHubResourceId;
+
+  ...EndpointRuleBase;
 }
 
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @extension("x-ms-identifiers", #[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource ids created by community endpoint.")
-  resourceCollection?: string[];
+  @visibility(Lifecycle.Read)
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
+  resourceCollection?: armResourceIdentifier[];
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
 }
 
-@doc("Community Endpoint Patch properties")
-model CommunityEndpointPatchProperties is CommunityEndpointProperties;
+@doc("Community Endpoint patchable Properties")
+model CommunityEndpointPatchProperties
+  is UpdateableProperties<OmitDefaults<CommunityEndpointProperties>>;
 
 @doc("Community Endpoint Patch Resource")
-model CommunityEndpointPatchResource {
+model CommunityEndpointPatchModel {
   @doc("Community Endpoint Patch properties")
-  properties?: Update<CommunityEndpointPatchProperties>;
+  properties?: CommunityEndpointPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

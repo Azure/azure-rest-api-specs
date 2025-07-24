@@ -1,32 +1,34 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
 
+import "./resourcetypes/approvals/approvals.tsp";
 import "./resourcetypes/community/community.tsp";
-import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
-import "./resourcetypes/workload/workload.tsp";
-import "./resourcetypes/catalog/catalog.tsp";
+import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
+import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
+import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
+import "./resourcetypes/postActions/approvalspostactions.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
-import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
-import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
-import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
-import "./resourcetypes/postActions/approvalcallback.tsp";
-import "./resourcetypes/approvals/approvals.tsp";
-import "./resourcetypes/postActions/initiatorcallback.tsp";
-import "./resourcetypes/postActions/approvaldeletioncallback.tsp";
+import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
+import "./resourcetypes/workload/workload.tsp";
 
-using Azure.ClientGenerator.Core;
-using Azure.Core;
-using Azure.Core.Traits;
+import "./resourcetypes/shared/endpointrulebase.tsp";
+import "./resourcetypes/shared/governedserviceitem.tsp";
+import "./resourcetypes/shared/maintenancemodeconfiguration.tsp";
+import "./resourcetypes/shared/managedresourcegroupconfiguration.tsp";
+import "./resourcetypes/shared/principal.tsp";
+import "./resourcetypes/shared/provisioningstate.tsp";
+import "./resourcetypes/shared/resourceid.tsp";
+import "./resourcetypes/shared/roleassignmentitem.tsp";
+
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -82,7 +84,6 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("TransitHub Model Resource")
 @parentResource(CommunityResource)
 model TransitHubResource is TrackedResource<TransitHubProperties> {
@@ -94,7 +95,6 @@ model TransitHubResource is TrackedResource<TransitHubProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveConnection Model Resource")
 model EnclaveConnectionResource
   is TrackedResource<EnclaveConnectionProperties> {
@@ -106,7 +106,6 @@ model EnclaveConnectionResource
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("EnclaveEndpoint Model Resource")
 @parentResource(EnclaveResource)
 model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
@@ -118,7 +117,6 @@ model EnclaveEndpointResource is TrackedResource<EnclaveEndpointProperties> {
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("CommunityEndpoint Model Resource")
 @parentResource(CommunityResource)
 model CommunityEndpointResource
@@ -131,7 +129,6 @@ model CommunityEndpointResource
   name: string;
 }
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Approval Model Resource")
 model ApprovalResource is ExtensionResource<ApprovalProperties> {
   @key("approvalName")

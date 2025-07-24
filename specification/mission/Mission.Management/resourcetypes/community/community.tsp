@@ -1,92 +1,30 @@
+// cspell:enableCompoundWords
+// cspell:words managedonbehalfofconfiguration
+
+import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-resource-manager";
+import "../shared/maintenancemodeconfiguration.tsp";
 
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../shared/managedresourcegroupconfiguration.tsp";
-import "../shared/roleassignmentitem.tsp";
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using Azure.Core;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
-@doc("Identifier for governed services.")
-union ServiceIdentifier {
-  @doc("Service identifier for AKS")
-  AKS: "AKS",
-
-  @doc("Service identifier for App Service")
-  AppService: "AppService",
-
-  @doc("Service identifier for Azure Firewalls")
-  AzureFirewalls: "AzureFirewalls",
-
-  @doc("Service identifier for Container Registry")
-  ContainerRegistry: "ContainerRegistry",
-
-  @doc("Service identifier for CosmosDB")
-  CosmosDB: "CosmosDB",
-
-  @doc("Service identifier for Data Connectors")
-  DataConnectors: "DataConnectors",
-
-  @doc("Service identifier for Insights")
-  Insights: "Insights",
-
-  @doc("Service identifier for Key Vault")
-  KeyVault: "KeyVault",
-
-  @doc("Service identifier for Logic")
-  Logic: "Logic",
-
-  @doc("Service identifier for Microsoft SQL")
-  MicrosoftSql: "MicrosoftSQL",
-
-  @doc("Service identifier for Monitoring")
-  Monitoring: "Monitoring",
-
-  @doc("Service identifier for PostgreSQL")
-  PostgreSql: "PostgreSQL",
-
-  @doc("Service identifier for Private DNS Zones")
-  PrivateDNSZones: "PrivateDNSZones",
-
-  @doc("Service identifier for Service Bus")
-  ServiceBus: "ServiceBus",
-
-  @doc("Service identifier for Storage")
-  Storage: "Storage",
-
+@doc("Azure Firewall SKU")
+union FirewallSKU {
   string,
-}
 
-@added(Microsoft.Mission.Versions.v2024_06_01_preview)
-@doc("GovernedServiceItem Properties")
-model GovernedServiceItem {
-  @doc("service id")
-  id: ServiceIdentifier;
+  @doc("FirewallSKU Basic")
+  Basic: "Basic",
 
-  @doc("service name")
-  @visibility(Lifecycle.Read)
-  name?: string;
+  @doc("FirwallSKU Standard")
+  Standard: "Standard",
 
-  @doc("governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
-  option?: "Allow" | "Deny" | "ExceptionOnly" | "NotApplicable" | string;
-
-  @doc("initiative enforcement (Enabled or Disabled).")
-  enforcement?: "Enabled" | "Disabled" | string;
-
-  @doc("policies set to auditOnly (True or False).")
-  auditOnly?: boolean;
-
-  @doc("initiatives associated with this service")
-  @visibility(Lifecycle.Read)
-  initiatives?: string[];
+  @doc("FirewallSKU Premium")
+  Premium: "Premium",
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -112,48 +50,58 @@ model MandatoryApprover {
 @doc("ApprovalSettings Properties")
 model ApprovalSettings {
   @doc("Approval required for endpoint creation (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointCreation?: ApprovalPolicy;
 
   @doc("Approval required for endpoint update (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointUpdate?: ApprovalPolicy;
 
   @doc("Approval required for endpoint deletion (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointDeletion?: ApprovalPolicy;
 
   @doc("Approval required for enclave connection creation (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   connectionCreation?: ApprovalPolicy;
 
   @doc("Approval required for enclave connection update (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   connectionUpdate?: ApprovalPolicy;
 
-  @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
-  connectionUpdateMode?: "Automatic" | "Manual" | string;
-
   @doc("Approval required for enclave connection deletion (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   connectionDeletion?: ApprovalPolicy;
 
   @doc("Approval required for virtual enclave creation (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enclaveCreation?: ApprovalPolicy;
 
   @doc("Approval required for virtual enclave deletion (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   enclaveDeletion?: ApprovalPolicy;
 
   @doc("Approval required for toggling maintenance mode (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   maintenanceMode?: ApprovalPolicy;
 
   @doc("Approval required for deploying service catalog templates (Required or NotRequired).")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   serviceCatalogDeployment?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Notification will be sent on creation of an Approval Request")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   notificationOnApprovalCreation?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Notification will be sent on any action taken (Approve/Reject) on an Approval Request")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   notificationOnApprovalAction?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Notification will be sent on deletion of an Approval Request")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   notificationOnApprovalDeletion?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -163,15 +111,22 @@ model ApprovalSettings {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Minimum number of approvers required for the approval request")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   minimumApproversRequired?: int64;
 }
 
+@added(Microsoft.Mission.Versions.v2024_12_01_preview)
+@doc("ApprovalSettings Properties")
+model ApprovalSettingsPatchProperties
+  is UpdateableProperties<OmitDefaults<ApprovalSettings>>;
+
 @doc("Community Resource Properties")
-model CommunityProperties {
+model CommunityBaseModel {
   @doc("Address Space.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   addressSpace?: string;
 
-  @doc("Dns Servers.")
+  @doc("DNS Servers.")
   dnsServers?: string[];
 
   @doc("Provisioning State.")
@@ -180,38 +135,71 @@ model CommunityProperties {
 
   @doc("List of resource ids created by communities.")
   @visibility(Lifecycle.Read)
-  resourceCollection?: string[];
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
+  resourceCollection?: armResourceIdentifier[];
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("Managed resource group configuration.")
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+  @doc("Managed resource group name.")
+  @visibility(Lifecycle.Read)
+  @renamedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    "managedResourceGroupConfiguration"
+  )
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    ManagedResourceGroupConfiguration
+  )
+  managedResourceGroupName?: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Managed On Behalf Of Configuration.")
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
+
   @doc("List of services governed by a community.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   governedServiceList?: GovernedServiceItem[];
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
+  policyOverride?: "Enclave" | "None" | string;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   communityRoleAssignments?: RoleAssignmentItem[];
 
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
+  firewallSku?: FirewallSKU = FirewallSKU.Standard;
+}
+
+@doc("Community Resource Properties")
+model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfiguration;
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 }
 
-@doc("Community Patch Properties")
-model CommunityPatchProperties is CommunityProperties;
+@doc("Community Resource Properties without default values")
+model CommunityPatchProperties
+  is UpdateableProperties<OmitDefaults<CommunityBaseModel>> {
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @doc("Approval requirements for various actions on the community's resources.")
+  approvalSettings?: ApprovalSettingsPatchProperties;
+
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
+}
 
 @doc("Community Patch Resource")
-model CommunityPatchResource {
+model CommunityPatchModel {
   @doc("Community Patch properties")
-  properties?: Update<CommunityPatchProperties>;
+  properties?: CommunityPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedServiceIdentityProperty;

@@ -20,15 +20,22 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-### Basic Information
-
 These are the global settings for the mission.
 
 ```yaml
 title: missionClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-01-preview
+tag: package-2025-05-01-preview
+```
+
+### Tag: package-2025-05-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+  - Microsoft.Mission/preview/2025-05-01-preview/openapi.json
 ```
 
 ### Tag: package-2024-12-01-preview
@@ -38,11 +45,6 @@ These settings apply only when `--tag=package-2024-12-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
   - Microsoft.Mission/preview/2024-12-01-preview/openapi.json
-suppressions:
-  - code: AvoidAnonymousTypes
-    from: openapi.json
-    where: $.definitions['Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate'].properties.userAssignedIdentities.additionalProperties
-    reason: This is an incorrect failure due to a bug in the tool (https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
 ### Tag: package-2024-06-01-preview
@@ -52,11 +54,6 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
   - Microsoft.Mission/preview/2024-06-01-preview/openapi.json
-suppressions:
-  - code: AvoidAnonymousTypes
-    from: openapi.json
-    where: $.definitions['Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate'].properties.userAssignedIdentities.additionalProperties
-    reason: This is an incorrect failure due to a bug in the tool (https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
 ---

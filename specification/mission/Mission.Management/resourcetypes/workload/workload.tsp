@@ -1,16 +1,13 @@
-import "@typespec/rest";
-import "@typespec/versioning";
+// cspell:enableCompoundWords
+// cspell:words managedonbehalfofconfiguration
+
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
 
-import "../shared/provisioningstate.tsp";
-import "../shared/resourceid.tsp";
-import "../virtualEnclave/virtualenclave.tsp";
-
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -21,25 +18,23 @@ model WorkloadProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("Managed resource group configuration.")
-  managedResourceGroupConfiguration: ManagedResourceGroupConfiguration;
-
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of resource group ids.")
   resourceGroupCollection?: string[];
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Managed On Behalf Of Configuration.")
+  @visibility(Lifecycle.Read)
+  managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 }
 
-@doc("Workload Patch properties")
-model WorkloadPatchProperties is WorkloadProperties;
+@doc("Workload patchable Properties")
+model WorkloadPatchProperties
+  is UpdateableProperties<OmitDefaults<WorkloadProperties>>;
 
 @doc("Workload Patch Resource")
-model WorkloadPatchResource {
+model WorkloadPatchModel {
   @doc("Workload Patch properties")
-  properties?: Update<WorkloadPatchProperties>;
+  properties?: WorkloadPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
