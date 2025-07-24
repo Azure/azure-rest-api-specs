@@ -1886,6 +1886,105 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/lots/{lotId}/contingencies/{contingencyId}": {
+      "get": {
+        "tags": [
+          "Contingency"
+        ],
+        "description": "Gets a contingency by its ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Contingency_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/lotId"
+          },
+          {
+            "$ref": "#/parameters/contingencyId"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response will have contingency details.",
+            "schema": {
+              "$ref": "#/definitions/Contingency"
+            }
+          },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContingencyGet": {
+            "$ref": "./examples/contingencyGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/lots/{lotId}/contingencies": {
+      "get": {
+        "tags": [
+          "Contingency"
+        ],
+        "description": "Lists the contingencies that a user has access to.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Contingency_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/lotId"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of contingencies.",
+            "schema": {
+              "$ref": "#/definitions/ContingencyListResult"
+            }
+          },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ContingencyList": {
+            "$ref": "./examples/contingencyList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5709,6 +5808,95 @@
           "readOnly": true
         }
       }
+    },
+    "Contingency": {
+      "description": "A contingency.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContingencyProperties"
+        },
+        "kind": {
+          "$ref": "#/definitions/ContingencyResourceInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ContingencyListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contingency"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "ContingencyResourceInnerKind": {
+      "description": "The kind of the entity.",
+      "type": "string"
+    },
+    "ContingencyProperties": {
+      "description": "The properties of a contingency.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "format": "date-time",
+          "description": "The start date of the enrollment.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The end date of the enrollment.",
+          "type": "string"
+        },
+        "status": {
+          "description": "This represent the status of a contingency.",
+          "enum": [
+            "Created",
+            "Active",
+            "Cancelled",
+            "PendingSettlement",
+            "Completed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "subState": {
+          "description": "This represent the subState of a contingency.",
+          "type": "string"
+        },
+        "targetAmount": {
+          "description": "The target amount for contingency.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        },
+        "progressAmount": {
+          "description": "The progress amount for contingency",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        }
+      }
     }
   },
   "parameters": {
@@ -6121,6 +6309,22 @@
       "required": false,
       "type": "number",
       "format": "decimal",
+      "x-ms-parameter-location": "method"
+    },
+    "lotId": {
+      "in": "path",
+      "name": "lotId",
+      "description": "The ID that uniquely identifies a lot.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "contingencyId": {
+      "in": "path",
+      "name": "contingencyId",
+      "description": "The ID that uniquely identifies a contingency.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
