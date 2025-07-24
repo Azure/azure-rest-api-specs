@@ -38,7 +38,7 @@ jobs:
             --sourceBranch "$HEAD_REF" \
             --targetBranch "${{ github.event.pull_request.base.ref }}" \
             --sha "${{ github.event.pull_request.head.sha }}" \
-            --repo "${{ github.repository }}" \
+            --repo "${{ github.event.repository.name }}" \
             --owner "${{ github.repository_owner }}" \
             --isDraft ${{ github.event.pull_request.draft }}
         env:
