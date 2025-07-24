@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.SignalRService,
   "WebPubSubManagementClient",
-  "javascript"
+  "javascript,python"
 );
 
 @@clientDoc(Microsoft.SignalRService.EventHandler.urlTemplate, """
