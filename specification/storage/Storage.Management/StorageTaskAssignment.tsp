@@ -55,19 +55,35 @@ interface StorageTaskAssignments {
    * Update storage task assignment properties
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    StorageTaskAssignment,
-    PatchModel = StorageTaskAssignmentUpdateParameters,
-    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>,
-    Error = ErrorResponse
+  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
+    ResourceInstanceParameters<
+      StorageTaskAssignment,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>
+    >,
+    StorageTaskAssignmentUpdateParameters,
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 
   /**
    * Delete the storage task assignment sub-resource
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
+  @armResourceDelete(StorageTaskAssignment)
+  @Azure.ResourceManager.Private.enforceConstraint(
     StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse,
+    Foundations.Resource
+  )
+  @delete
+  delete is Azure.ResourceManager.ArmResourceDeleteAsyncBase<
+    Resource = StorageTaskAssignment,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
     Error = ErrorResponse
   >;
 
