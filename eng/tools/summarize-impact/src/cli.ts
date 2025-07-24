@@ -10,6 +10,7 @@ import { parseArgs, ParseArgsConfig } from "node:util";
 import { join, resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
+import { Octokit } from "@octokit/rest";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
@@ -72,11 +73,6 @@ export async function main() {
         short: "o",
         multiple: false,
       },
-      labels: {
-        type: "string",
-        short: "l",
-        multiple: false,
-      },
       isDraft: {
         type: "boolean",
         multiple: false,
@@ -99,11 +95,24 @@ export async function main() {
   const repo = opts.repo as string;
   const owner = opts.owner as string;
   const prNumber = opts.number as string;
-  const existingLabels = (opts.labels as string).split(",").map((l) => l.trim());
-  const isDraft = opts.prStaisDrafttus as boolean;
+  const isDraft = opts.isDraft as boolean;
+
+  // create github client (use token if available, otherwise unauthenticated. we will throw if unhandled)
+  const github = new Octokit({
+    ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
+  });
+
+  const labels = (
+    await github.paginate(github.rest.issues.listLabelsOnIssue, {
+      owner,
+      repo,
+      issue_number: Number(prNumber),
+      per_page: 100,
+    })
+  ).map((label: any) => label.name);
 
   const labelContext: LabelContext = {
-    present: new Set(existingLabels),
+    present: new Set(labels),
     toAdd: new Set(),
     toRemove: new Set(),
   };
