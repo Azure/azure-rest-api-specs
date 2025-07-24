@@ -1511,7 +1511,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.EventHub/Namespaces\" or \"Microsoft.EventHub/Namespaces/EventHubs\""
+          "description": "The type of the resource. E.g. \"Microsoft.ServiceBus/Namespaces\" or \"Microsoft.ServiceBus/Namespaces/ServiceBus\""
         },
         "location": {
           "type": "string",
@@ -1751,7 +1751,14 @@
       "properties": {
         "id": {
           "description": "Fully qualified identifier of the resource",
-          "type": "string"
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
         },
         "perimeterGuid": {
           "description": "Guid of the resource",
