@@ -238,6 +238,10 @@ directive:
     suppress:
       - BodyTopLevelProperties
   - where:
+      - $.definitions.VirtualMachineScaleSet
+    suppress:
+      - BodyTopLevelProperties
+  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
