@@ -2,7 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
+<<<<<<< HEAD
     "version": "2024-11-15-preview",
+=======
+    "version": "2025-05-15-preview",
+>>>>>>> 0d5af1c32d (Add generated files)
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
     "x-typespec-generated": [
       {
@@ -3429,11 +3433,19 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
+<<<<<<< HEAD
         "assignedResourceIds": {
           "type": "array",
           "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
             "type": "string"
+=======
+        "assignedResources": {
+          "type": "array",
+          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResource"
+>>>>>>> 0d5af1c32d (Add generated files)
           }
         }
       },
@@ -3824,6 +3836,13 @@
         "region": {
           "type": "string",
           "description": "Represents the resource region."
+<<<<<<< HEAD
+=======
+        },
+        "assignedAoaiResource": {
+          "$ref": "#/definitions/TextAnalysisAuthoringDataGenerationConnectionInfo",
+          "description": "Represents the AOAI resource assigned for data generation."
+>>>>>>> 0d5af1c32d (Add generated files)
         }
       },
       "required": [
@@ -5379,6 +5398,13 @@
           "$ref": "#/definitions/ProjectKind",
           "description": "The project kind."
         },
+<<<<<<< HEAD
+=======
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "The project storage account resource ID."
+        },
+>>>>>>> 0d5af1c32d (Add generated files)
         "storageInputContainerName": {
           "type": "string",
           "description": "The storage container name."
