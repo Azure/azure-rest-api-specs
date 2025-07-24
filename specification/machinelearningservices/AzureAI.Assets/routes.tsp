@@ -14,6 +14,98 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.MachineLearningServices;
 
+@server(
+  "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}",
+  "Machinelearning Services Asset APIs",
+  {
+    @doc("""
+      Supported Azure-AI asset endpoints.
+      """)
+    endpoint: url,
+
+    @doc("The ID of the target subscription.")
+    subscriptionId: string,
+
+    @doc("The name of the Resource Group.")
+    resourceGroupName: string,
+
+    @doc("The name of the AzureML registry.")
+    registryName: string,
+  }
+)
+interface DeploymentTemplates {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get a specific version of a deployment template.")
+  @route("/deploymenttemplates/{name}/versions/{version}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the deployment template.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the deployment template.")
+      @path
+      version: string;
+
+      @doc("Asset resource tenant ID.")
+      @query
+      assetResourceTenantId?: string;
+    },
+    DeploymentTemplate
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  @doc("Creates a deployment template version.")
+  @route("/{name}/versions/{version}")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the deployment template.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the deployment template.")
+      @path
+      version: string;
+
+      @doc("Properties of a Deployment Template Version.")
+      @bodyRoot
+      body: DeploymentTemplate;
+    },
+    TypeSpec.Http.Response<202>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Delete a specific version of a deployment template.")
+  @route("/{type}/{name}/versions/{version}")
+  @delete
+  deleteGenericAsset is Azure.Core.Foundations.Operation<
+    {
+      @doc("The type of the deployment template.")
+      @path
+      type: string;
+
+      @doc("Name of the deployment template.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the deployment template.")
+      @path
+      version: string;
+    },
+    TypeSpec.Http.Response<200> | TypeSpec.Http.Response<204>
+  >;
+
+}
+
 interface Indexes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get a specific version of an Index.")
