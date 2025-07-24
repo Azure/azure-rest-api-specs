@@ -357,9 +357,9 @@ export async function summarizeChecksImpl(
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
-      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
-      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
-      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}] \n` +
+      `Removing labels: [${Array.from(labelContext.toRemove).join(", ")}] \n` +
+      `Adding labels: [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
   // for (const label of labelContext.toRemove) {
