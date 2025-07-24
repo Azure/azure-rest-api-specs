@@ -25,7 +25,7 @@ model Configuration
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Configurations {
   /**
@@ -36,7 +36,7 @@ interface Configurations {
   /**
    * Updates a configuration of a server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
     Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse,
@@ -85,7 +85,7 @@ interface Configurations {
   /**
    * Update a list of configurations in a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("updateConfigurations")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("Configurations_BatchUpdate")

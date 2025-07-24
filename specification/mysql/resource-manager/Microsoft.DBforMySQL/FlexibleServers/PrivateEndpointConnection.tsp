@@ -38,7 +38,7 @@ interface PrivateEndpointConnections {
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,7 +49,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -58,6 +58,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a server.
    */
+  #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByServer is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>

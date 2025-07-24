@@ -3,54 +3,54 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DBforMySQL;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupAndExportResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidateBackupResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConfigurationForBatchUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ServerForUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AdvancedThreatProtectionForUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(LogFile.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MaintenanceUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Provisioning.properties);
 
 @@clientName(AzureADAdministrators.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AzureADAdministrator.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ServerBackup.properties);
 
 @@clientName(ServerBackupV2s.create::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ServerBackupV2.properties);
 
 @@clientName(Configurations.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Configurations.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Configuration.properties);
 
 @@clientName(Databases.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Database.properties);
 
 @@clientName(FirewallRules.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FirewallRule.properties);
 
 @@clientName(Servers.create::parameters.resource, "parameters");
@@ -63,13 +63,13 @@ using Microsoft.DBforMySQL;
 @@clientName(Servers.restart::parameters.body, "parameters");
 @@clientName(Servers.resetGtid::parameters.body, "parameters");
 @@clientName(Servers.detachVNet::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Server.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
@@ -78,17 +78,17 @@ using Microsoft.DBforMySQL;
 @@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AdvancedThreatProtection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Capability.properties);
 
 @@clientName(Maintenances.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Maintenance.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(CheckNameAvailabilityWithoutLocation.execute::parameters.body,

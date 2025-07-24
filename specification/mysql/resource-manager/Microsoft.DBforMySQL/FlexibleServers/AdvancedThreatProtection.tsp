@@ -26,21 +26,21 @@ model AdvancedThreatProtection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AdvancedThreatProtectionSettings {
   /**
    * Get a server's Advanced Threat Protection state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdvancedThreatProtectionSettings_Get")
   get is ArmResourceRead<AdvancedThreatProtection>;
 
   /**
    * Updates a server's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdvancedThreatProtectionSettings_UpdatePut")
   updatePut is ArmResourceCreateOrReplaceAsync<
     AdvancedThreatProtection,
@@ -53,7 +53,7 @@ interface AdvancedThreatProtectionSettings {
   /**
    * Updates a server's Advanced Threat Protection state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("AdvancedThreatProtectionSettings_Update")
   update is ArmCustomPatchAsync<
@@ -64,7 +64,7 @@ interface AdvancedThreatProtectionSettings {
   /**
    * Gets a list of server's Advanced Threat Protection states.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdvancedThreatProtectionSettings_List")
   list is ArmResourceListByParent<
     AdvancedThreatProtection,

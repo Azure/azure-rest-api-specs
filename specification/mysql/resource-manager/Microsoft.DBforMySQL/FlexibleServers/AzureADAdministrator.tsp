@@ -14,7 +14,7 @@ namespace Microsoft.DBforMySQL;
 /**
  * Represents a Administrator.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 model AzureADAdministrator
   is Azure.ResourceManager.ProxyResource<AdministratorProperties> {
@@ -27,21 +27,21 @@ model AzureADAdministrator
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AzureADAdministrators {
   /**
    * Gets information about an azure ad administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureADAdministrators_Get")
   get is ArmResourceRead<AzureADAdministrator>;
 
   /**
    * Creates or updates an existing Azure Active Directory administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureADAdministrators_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureADAdministrator,
@@ -54,8 +54,8 @@ interface AzureADAdministrators {
   /**
    * Deletes an Azure AD Administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureADAdministrators_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureADAdministrator,
@@ -65,7 +65,7 @@ interface AzureADAdministrators {
   /**
    * List all the AAD administrators in a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureADAdministrators_ListByServer")
   listByServer is ArmResourceListByParent<
     AzureADAdministrator,

@@ -28,13 +28,13 @@ model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   /**
    * The cmk identity for the server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: MySQLServerIdentity;
 
   /**
    * The SKU (pricing tier) of the server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: MySQLServerSku;
 }
 
@@ -48,7 +48,7 @@ interface Servers {
   /**
    * Creates a new server or updates an existing server. The update action will overwrite the existing server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
@@ -66,8 +66,8 @@ interface Servers {
   /**
    * Deletes a server.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -93,7 +93,7 @@ interface Servers {
   /**
    * Exports the backup of the given server by creating a backup if not existing.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("backupAndExport")
   @operationId("BackupAndExport_Create")
   backupAndExportCreate is ArmResourceActionAsync<
@@ -105,7 +105,7 @@ interface Servers {
   /**
    * Validates if backup can be performed for given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BackupAndExport_ValidateBackup")
   validateBackup is ArmResourceActionSync<
     Server,
@@ -181,7 +181,7 @@ interface Servers {
   /**
    * Detach VNet on a server.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   detachVNet is ArmResourceActionAsync<
     Server,
@@ -193,7 +193,7 @@ interface Servers {
   /**
    * List all the replicas for a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("replicas")
   @operationId("Replicas_ListByServer")
@@ -206,7 +206,7 @@ interface Servers {
   /**
    * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ServersMigration_CutoverMigration")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   cutoverMigration is ArmResourceActionAsync<
@@ -219,7 +219,7 @@ interface Servers {
   /**
    * List all the server log files in a given server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("logFiles")
   @operationId("LogFiles_ListByServer")

@@ -64,14 +64,14 @@ interface LocationBasedCapabilitySet {
   /**
    * Get capabilities at specified location in a given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocationBasedCapabilitySet_Get")
   get is LocationBasedCapabilityOperationOps.Read<Capability>;
 
   /**
    * Get capabilities at specified location in a given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("capabilitySets")
   @operationId("LocationBasedCapabilitySet_List")
   list is LocationBasedCapabilityOps.Read<
