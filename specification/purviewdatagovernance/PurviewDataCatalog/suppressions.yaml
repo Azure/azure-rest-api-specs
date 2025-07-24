@@ -22,3 +22,9 @@
     - options.@azure-tools/typespec-csharp.namespace
     - options.@azure-tools/typespec-csharp.clear-output-folder
   reason: 'See above comments for details'
+- tool: TypeSpecValidation
+  paths:
+    - "**/*.tsp"
+  rules:
+    - AvoidAnonymousParameter
+  reason: 'Suppressing AvoidAnonymousParameter rule for Purview Data Catalog specification'

@@ -3,10 +3,8 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/http";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using Azure.Core.Foundations;
 
 namespace PurviewDataCatalog;
 
@@ -15,7 +13,7 @@ namespace PurviewDataCatalog;
 @doc("Searches and retrieves critical data elements based on domain, keyword, and other filters.")
 @route("/criticalDataElements")
 @get
-op getCriticalDataElements is Foundations.Operation<
+op listCriticalDataElements is Foundations.Operation<
   {
     @doc("Whether to return minimal information for referred Domains.")
     @query
@@ -37,8 +35,7 @@ op getCriticalDataElements is Foundations.Operation<
     @query
     orderby?: string;
   },
-  CriticalDataElementsResponse,
-  {}
+  CriticalDataElementsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -46,7 +43,7 @@ op getCriticalDataElements is Foundations.Operation<
 @doc("Creates a new critical data element in the catalog.")
 @route("/criticalDataElements")
 @post
-op postCriticalDataElement is Foundations.Operation<
+op createCriticalDataElement is Foundations.Operation<
   {
     @doc("The resource associated with the critical data element.")
     @bodyRoot
@@ -73,8 +70,7 @@ op getCriticalDataElementCriticalDataElementId is Foundations.Operation<
     @path
     criticalDataElementId: uuid;
   },
-  CatalogModelCriticalDataElement,
-  {}
+  CatalogModelCriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -90,10 +86,9 @@ op replaceCriticalDataElement is Foundations.Operation<
 
     @doc("The body associated with the critical data element output.")
     @bodyRoot
-    body?: CatalogModelCriticalDataElement;
+    body: CatalogModelCriticalDataElement;
   },
-  CatalogModelCriticalDataElement,
-  {}
+  CatalogModelCriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -125,8 +120,7 @@ op getsCriticalDataElement is Foundations.Operation<
     @query
     entityType: EntityCategory;
   },
-  CatalogModelCriticalDataElement,
-  {}
+  CatalogModelCriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -146,10 +140,9 @@ op criticalDataElementCriticalDataElementIdRelationships is Foundations.Operatio
 
     @doc("CatalogModelCriticalDataElementRequest")
     @bodyRoot
-    body?: InputProperties;
+    body: InputProperties;
   },
-  CatalogModelCriticalDataElement,
-  {}
+  CatalogModelCriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -187,10 +180,9 @@ op criticalDataElementQuery is Foundations.Operation<
 
     @doc("body")
     @bodyRoot
-    body?: CriticalDataElementQueryRequest;
+    body: CriticalDataElementQueryRequest;
   },
-  CatalogModelCriticalDataElement,
-  {}
+  CatalogModelCriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -200,8 +192,7 @@ op criticalDataElementQuery is Foundations.Operation<
 @post
 op criticalDataElementFacets is Foundations.Operation<
   CriticalDataElementFacetRequest,
-  FacetsResponse,
-  {}
+  FacetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -230,7 +221,7 @@ op createCriticalDataColumn is Foundations.Operation<
 @doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
 @route("/criticalDataColumns")
 @get
-op getCriticalDataColumns is Foundations.Operation<
+op listCriticalDataColumns is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @query
@@ -240,20 +231,14 @@ op getCriticalDataColumns is Foundations.Operation<
     @query
     assetId?: uuid;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to top.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("Field to sort by.")
     @query
     orderby?: string;
   },
-  CriticalDataColumnsResponse,
-  {}
+  CriticalDataColumnsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -267,8 +252,7 @@ op getCriticalDataColumnCriticalDataColumnId is Foundations.Operation<
     @path
     criticalDataColumnId: uuid;
   },
-  CatalogModelCriticalDataColumn,
-  {}
+  CatalogModelCriticalDataColumn
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -286,12 +270,11 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Foundations.Operation<
     @query
     entityType: EntityCategory;
 
-    @doc("InputbodyProperties")
+    @doc("CriticalDataColumnProperties")
     @bodyRoot
-    body?: InputbodyProperties;
+    body: CriticalDataColumnProperties;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -299,7 +282,7 @@ op criticalDataColumnCriticalDataColumnIdRelationships is Foundations.Operation<
 @doc("Retrieves relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
-op getCriticalDataColumnRelationships is Foundations.Operation<
+op listCriticalDataColumnRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data column.")
     @path
@@ -309,8 +292,7 @@ op getCriticalDataColumnRelationships is Foundations.Operation<
     @query
     entityType: EntityCategory;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -344,7 +326,7 @@ op deleteCriticalDataColumn is Foundations.Operation<
 @doc("Retrieves a list of data assets.")
 @route("/dataAssets")
 @get
-op getDataAssets is Foundations.Operation<
+op listDataAssets is Foundations.Operation<
   {
     @doc("Field to sort by.")
     @query
@@ -358,8 +340,7 @@ op getDataAssets is Foundations.Operation<
     @query
     top?: int32;
   },
-  DataAssetsResponse,
-  {}
+  DataAssetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -367,7 +348,7 @@ op getDataAssets is Foundations.Operation<
 @doc("Creates a new data asset.")
 @route("/dataAssets")
 @post
-op postDataAsset is Foundations.Operation<
+op createOrReplaceDataAsset is Foundations.Operation<
   CatalogModelDataAsset,
   {
     @statusCode
@@ -384,11 +365,11 @@ op postDataAsset is Foundations.Operation<
 @doc("Creates a new data asset with fileted query inputs.")
 @route("/dataAssets/query")
 @post
-op postDataAssetQuery is Foundations.Operation<
+op createOrReplaceDataAssetQuery is Foundations.Operation<
   DataAssetDataAssetQueryRequest,
-  DataAssetsResponse,
-  {}
+  DataAssetsResponse
 >;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Retrieves a data asset by its unique identifier.")
@@ -400,8 +381,7 @@ op getDataAssetDataAssetId is Foundations.Operation<
     @path
     dataAssetId: uuid;
   },
-  CatalogModelDataAsset,
-  {}
+  CatalogModelDataAsset
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -417,10 +397,9 @@ op replaceDataAsset is Foundations.Operation<
 
     @doc("CatalogModelDataAsset.")
     @bodyRoot
-    body?: CatalogModelDataAsset;
+    body: CatalogModelDataAsset;
   },
-  CatalogModelDataAsset,
-  {}
+  CatalogModelDataAsset
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -442,7 +421,7 @@ op deleteDataAsset is Foundations.Operation<
 @doc("Retrieves relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @get
-op getDataAssetRelationships is Foundations.Operation<
+op listDataAssetRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the critical data asset.")
     @path
@@ -452,8 +431,7 @@ op getDataAssetRelationships is Foundations.Operation<
     @query
     entityType: EntityCategory;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -473,10 +451,9 @@ op createDataAssetRelationships is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    body: Record<InputbodyProperties>;
+    body: Record<CriticalDataColumnProperties>;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("DataAsset")
@@ -505,26 +482,20 @@ op deleteDataAssetRelationships is Foundations.Operation<
 @doc("Retrieves a list of data products.")
 @route("/dataProducts")
 @get
-op getDataProduct is Foundations.Operation<
+op listDataProduct is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
     @query
     domainId?: uuid;
 
-    @doc("The number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("The number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("The field to order by.")
     @query
     orderby?: string;
   },
-  DataProductResponse,
-  {}
+  DataProductResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -561,10 +532,9 @@ op createDataProductQuery is Foundations.Operation<
 
     @doc("The request body for the query.")
     @bodyRoot
-    body?: DataProductQueryRequest;
+    body: DataProductQueryRequest;
   },
-  DataProductResponse,
-  {}
+  DataProductResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -574,8 +544,7 @@ op createDataProductQuery is Foundations.Operation<
 @post
 op dataProductFacets is Foundations.Operation<
   DataProductFacetRequest,
-  FacetsResponse,
-  {}
+  FacetsResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -589,8 +558,7 @@ op getDataProductDataProductId is Foundations.Operation<
     @path
     dataProductId: uuid;
   },
-  CatalogModelDataProduct,
-  {}
+  CatalogModelDataProduct
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -606,10 +574,9 @@ op replaceDataProductDataProductId is Foundations.Operation<
 
     @doc("The updated data product.")
     @bodyRoot
-    body?: CatalogModelDataProduct;
+    body: CatalogModelDataProduct;
   },
-  CatalogModelDataProduct,
-  {}
+  CatalogModelDataProduct
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -631,7 +598,7 @@ op deleteDataProduct is Foundations.Operation<
 @doc("Retrieves relationships for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @get
-op getDataProductDataProductIdRelationships is Foundations.Operation<
+op listDataProductDataProductIdRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the data product.")
     @path
@@ -641,8 +608,7 @@ op getDataProductDataProductIdRelationships is Foundations.Operation<
     @query
     entityType: EntityCategory;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -662,10 +628,9 @@ op replaceDataProductRelationships is Foundations.Operation<
 
     @doc("The properties of the relationship to create.")
     @bodyRoot
-    body: Record<InputbodyProperties>;
+    body: Record<CriticalDataColumnProperties>;
   },
-  RelationshipWrappersResponse,
-  {}
+  RelationshipWrappersResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -695,7 +660,7 @@ op deleteDataProductRelationship is Foundations.Operation<
 @doc("Retrieves a list of business domains.")
 @route("/businessdomains")
 @get
-op getDomain is Foundations.Operation<
+op listDomains is Foundations.Operation<
   {
     @doc("skiptoken")
     @query
@@ -705,8 +670,7 @@ op getDomain is Foundations.Operation<
     @query
     writeOnly?: boolean;
   },
-  CatalogModelDomainResponse,
-  {}
+  CatalogModelDomainResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -739,10 +703,9 @@ op replaceDomainDomainId is Foundations.Operation<
 
     @doc("The updated business domain.")
     @bodyRoot
-    body?: CatalogModelDomain;
+    body: CatalogModelDomain;
   },
-  CatalogModelDomain,
-  {}
+  CatalogModelDomain
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -756,8 +719,7 @@ op getDomainDomainId is Foundations.Operation<
     @path
     domainId: uuid;
   },
-  CatalogModelDomain,
-  {}
+  CatalogModelDomain
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -826,7 +788,7 @@ op createTerm is Foundations.Operation<
 @doc("Retrieves a list of terms based on domain, parentId, keyword, and other filters.")
 @route("/terms")
 @get
-op getTerm is Foundations.Operation<
+op listTerms is Foundations.Operation<
   {
     @doc("The unique identifier of the domain.")
     @query
@@ -840,13 +802,8 @@ op getTerm is Foundations.Operation<
     @query
     keyword?: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("The depth of the term.")
     @query
@@ -856,8 +813,7 @@ op getTerm is Foundations.Operation<
     @query
     orderby?: string;
   },
-  CatalogModelTermResponse,
-  {}
+  CatalogModelTermResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -873,10 +829,9 @@ op createOrReplaceTermId is Foundations.Operation<
 
     @doc("The body associated with the term output.")
     @bodyRoot
-    body?: CatalogModelTerm;
+    body: CatalogModelTerm;
   },
-  CatalogModelTerm,
-  {}
+  CatalogModelTerm
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -890,8 +845,7 @@ op getTermWithId is Foundations.Operation<
     @path
     termId: uuid;
   },
-  CatalogModelTerm,
-  {}
+  CatalogModelTerm
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -921,35 +875,29 @@ op termQuery is Foundations.Operation<
 
     @doc("the body associated with the term output.")
     @bodyRoot
-    body?: TermTermQueryRequest;
+    body: TermTermQueryRequest;
   },
-  CatalogModelTermResponse,
-  {}
+  CatalogModelTermResponse
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves facets for terms.")
 @route("/terms/facets")
 @post
-op replaceTermFacets is Foundations.Operation<
-  TermFacetRequest,
-  FacetsResponse,
-  {}
->;
+op replaceTermFacets is Foundations.Operation<TermFacetRequest, FacetsResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("Term")
 @doc("Retrieves hierarchies for a term by its unique identifier.")
 @route("/terms/{termId}/hierarchies")
 @get
-op getTermIdHierarchies is Foundations.Operation<
+op listTermIdHierarchies is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
     termId: uuid;
   },
-  CatalogModelTermResponse,
-  {}
+  CatalogModelTermResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -969,10 +917,9 @@ op createOrReplaceTermIdRelationships is Foundations.Operation<
 
     @doc("The type of relationship to retrieve.")
     @bodyRoot
-    body?: TermRelationship;
+    body: TermRelationship;
   },
-  TermRelationshipResponse,
-  {}
+  TermRelationshipResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1006,7 +953,7 @@ op deletesTerm is Foundations.Operation<
 @doc("Retrieves relationships for a term by its unique identifier and specified entity type and relationship type.")
 @route("/terms/{termId}/relationships")
 @get
-op getTermRelationships is Foundations.Operation<
+op listTermRelationships is Foundations.Operation<
   {
     @doc("The unique identifier of the term.")
     @path
@@ -1020,8 +967,7 @@ op getTermRelationships is Foundations.Operation<
     @query
     relationshipType?: TermRelationshipType;
   },
-  TermRelationshipResponse,
-  {}
+  TermRelationshipResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1056,18 +1002,14 @@ op termMigrationStart is Foundations.Operation<
 @doc("Moves terms from the old glossary to the new glossary.")
 @route("/terms/migration/moveterms")
 @post
-op termMigrationMoveterms is Foundations.Operation<
-  TermsMoveRequest,
-  string,
-  {}
->;
+op termMigrationMoveterms is Foundations.Operation<TermsMoveRequest, string>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves a list of objectives (OKRs) based on keyword, domainId, and other filters.")
 @route("/objectives")
 @get
-op getOkr is Foundations.Operation<
+op listOkr is Foundations.Operation<
   {
     @doc("Search keyword for OKRs.")
     @query
@@ -1081,16 +1023,10 @@ op getOkr is Foundations.Operation<
     @query
     orderby?: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
   },
-  ObjectiveWithAdditionalPropertiesResponse,
-  {}
+  ObjectiveWithAdditionalPropertiesResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1123,10 +1059,9 @@ op createOrReplaceOkrQuery is Foundations.Operation<
 
     @doc("The request body for querying OKRs.")
     @bodyRoot
-    body?: ObjectiveQueryRequest;
+    body: ObjectiveQueryRequest;
   },
-  ObjectiveWithAdditionalPropertiesResponse,
-  {}
+  ObjectiveWithAdditionalPropertiesResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1134,11 +1069,7 @@ op createOrReplaceOkrQuery is Foundations.Operation<
 @doc("Retrieves the facets for objectives (OKRs).")
 @route("/objectives/facets")
 @post
-op okrFacets is Foundations.Operation<
-  ObjectiveFacetRequest,
-  FacetsResponse,
-  {}
->;
+op okrFacets is Foundations.Operation<ObjectiveFacetRequest, FacetsResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @tag("OKR")
@@ -1153,10 +1084,9 @@ op createOrReplaceOkrObjectiveId is Foundations.Operation<
 
     @doc("The additional properties for the objective query.")
     @bodyRoot
-    body?: ObjectiveQueryAdditionalProperties;
+    body: ObjectiveQueryAdditionalProperties;
   },
-  ObjectiveWithAdditionalProperties,
-  {}
+  ObjectiveWithAdditionalProperties
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1184,8 +1114,7 @@ op getOkrObjective is Foundations.Operation<
     @path
     objectiveId: uuid;
   },
-  ObjectiveWithAdditionalProperties,
-  {}
+  ObjectiveWithAdditionalProperties
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1193,14 +1122,13 @@ op getOkrObjective is Foundations.Operation<
 @doc("Retrieves key results for a specific objective (OKR) by its ID.")
 @route("/objectives/{objectiveId}/keyResults")
 @get
-op getOkrObjectiveIdKeyResults is Foundations.Operation<
+op listOkrObjectiveIdKeyResults is Foundations.Operation<
   {
     @doc("The unique identifier of the objective (OKR).")
     @path
     objectiveId: uuid;
   },
-  ModelKeyResultResponse,
-  {}
+  ModelKeyResultResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -1216,7 +1144,7 @@ op createOrReplaceOkrKeyResults is Foundations.Operation<
 
     @doc("The body associated with the key result.")
     @bodyRoot
-    body?: ModelKeyResult;
+    body: ModelKeyResult;
   },
   {
     @statusCode

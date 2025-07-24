@@ -190,11 +190,11 @@ model SharedSearchManageAttributeSearchFilter {
 
 @doc("CriticalDataElementQueryRequest.")
 model CriticalDataElementQueryRequest {
-  @doc("To Skip how many records.")
-  skip?: SkipQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
 
-  @doc("To return how many records.")
-  top?: TopQueryParameter;
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -294,7 +294,7 @@ model CatalogModelCriticalDataColumn {
 }
 
 @doc("InputbodyProperties.")
-model InputbodyProperties {
+model CriticalDataColumnProperties {
   @doc("systemData.")
   systemData?: string[];
 
@@ -422,7 +422,7 @@ model CatalogModelDataAsset {
   dataQualityScore?: float64;
 
   @doc("URL to open the asset in the catalog.")
-  openInUrl?: string;
+  openInUrl?: url;
 
   @doc("Type properties of the asset.")
   typeProperties?: string[];
@@ -430,11 +430,11 @@ model CatalogModelDataAsset {
 
 @doc("DataAssetDataAssetQueryRequest.")
 model DataAssetDataAssetQueryRequest {
-  @doc("To Skip how many records.")
-  skip?: SkipQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
 
-  @doc("To return how many records.")
-  top?: TopQueryParameter;
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -465,12 +465,17 @@ model FacetValue {
 }
 
 @doc("FacetsResponse.")
+@pagedResult
 model FacetsResponse {
   @doc("The list of facets.")
   facets: Record<FacetValue[]>;
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
 }
 
 @doc("Response containing a list of critical data columns.")
+@pagedResult
 model CriticalDataColumnsResponse {
   @doc("The list of critical data columns.")
   value: CatalogModelCriticalDataColumn[];
@@ -480,6 +485,7 @@ model CriticalDataColumnsResponse {
 }
 
 @doc("Response containing a list of critical data elements.")
+@pagedResult
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
   value: CatalogModelCriticalDataElement[];
@@ -489,6 +495,7 @@ model CriticalDataElementsResponse {
 }
 
 @doc("Response containing a list of data assets.")
+@pagedResult
 model DataAssetsResponse {
   @doc("The list of data assets.")
   value: CatalogModelDataAsset[];
@@ -498,6 +505,7 @@ model DataAssetsResponse {
 }
 
 @doc("Response containing a list of relationship wrappers.")
+@pagedResult
 model RelationshipWrappersResponse {
   @doc("The list of relationships.")
   value: RelationshipWrapper[];
@@ -639,7 +647,7 @@ model CatalogModelDataProduct {
 @doc("External link model for data product.")
 model CatalogModelExternalLink {
   @doc("The URL of the external link.")
-  url?: string;
+  url?: url;
 
   @doc("The name of the external link.")
   name?: string;
@@ -684,6 +692,7 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 }
 
 @doc("Response containing a list of data products.")
+@pagedResult
 model DataProductResponse {
   @doc("The list of data products.")
   value: CatalogModelDataProduct[];
@@ -694,11 +703,11 @@ model DataProductResponse {
 
 @doc("DataProductQueryRequest.")
 model DataProductQueryRequest {
-  @doc("To Skip how many records.")
-  skip?: SkipQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
 
-  @doc("To return how many records.")
-  top?: TopQueryParameter;
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -865,6 +874,7 @@ union RelatedCollectionParentCollectionTypeEnum {
 }
 
 @doc("Response containing a list of domains.")
+@pagedResult
 model CatalogModelDomainResponse {
   @doc("The list of domains.")
   value: CatalogModelDomain[];
@@ -924,10 +934,11 @@ model CatalogModelTermResource {
   name?: string;
 
   @doc("The URL of the resource.")
-  url?: string;
+  url?: url;
 }
 
 @doc("Response containing a list of terms.")
+@pagedResult
 model CatalogModelTermResponse {
   @doc("The list of terms.")
   value: CatalogModelTerm[];
@@ -938,11 +949,11 @@ model CatalogModelTermResponse {
 
 @doc("Term query request model.")
 model TermTermQueryRequest {
-  @doc("Number of records to skip.")
-  skip?: SkipQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
 
-  @doc("Number of records to return.")
-  top?: TopQueryParameter;
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -1012,6 +1023,7 @@ model TermRelationship {
 }
 
 @doc("Response containing a list of term relationships.")
+@pagedResult
 model TermRelationshipResponse {
   @doc("The list of term relationships.")
   value: TermRelationship[];
@@ -1159,6 +1171,7 @@ union OverallStatusEnum {
 }
 
 @doc("Response containing a list of objectives with additional properties.")
+@pagedResult
 model ObjectiveWithAdditionalPropertiesResponse {
   @doc("The list of objectives with additional properties.")
   value: ObjectiveWithAdditionalProperties[];
@@ -1169,11 +1182,11 @@ model ObjectiveWithAdditionalPropertiesResponse {
 
 @doc("ObjectiveQueryRequest.")
 model ObjectiveQueryRequest {
-  @doc("Number of records to skip.")
-  skip?: SkipQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
 
-  @doc("Number of records to return.")
-  top?: TopQueryParameter;
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -1282,6 +1295,7 @@ model ModelKeyResult {
 }
 
 @doc("Response containing a list of key results.")
+@pagedResult
 model ModelKeyResultResponse {
   @doc("The list of key results.")
   value: ModelKeyResult[];
