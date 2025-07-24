@@ -1,5 +1,5 @@
-import { parse as yamlParse } from "yaml";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { parse as yamlParse } from "yaml";
 
 /**
  * @returns {string[]}
