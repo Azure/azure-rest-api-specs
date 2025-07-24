@@ -13,11 +13,12 @@ using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
-@doc("An AzureFleet's virtual machine.")
+@added(Versions.v2025_07_01_preview)
+@doc("An instant Fleet's virtual machine.")
 model VirtualMachine {
   @doc("The name of the virtual machine.")
   @key("virtualMachineName")
-  @segment("virtualMachine")
+  @segment("virtualMachines")
   @visibility(Lifecycle.Read)
   @path
   name: string;
@@ -29,17 +30,16 @@ model VirtualMachine {
   @visibility(Lifecycle.Read)
   id: armResourceIdentifier;
 
-  @added(Versions.v2024_05_01_preview)
   @doc("This represents the operationStatus of the virtual machine in response to the last operation that was performed on it by Azure Fleet resource.")
   @visibility(Lifecycle.Read)
   operationStatus: VMOperationStatus;
 
-  @added(Versions.v2024_05_01_preview)
   @doc("Error Information when `operationStatus` is `Failed`")
   @visibility(Lifecycle.Read)
   error?: ApiError;
 }
 
+@added(Versions.v2025_07_01_preview)
 @doc("Virtual Machine operation status values.")
 union VMOperationStatus {
   string,
@@ -70,6 +70,7 @@ union VMOperationStatus {
   Succeeded: "Succeeded",
 }
 
+@added(Versions.v2025_07_01_preview)
 @doc("The response of a virtual machine list operation.")
 @pagedResult
 model VirtualMachineListResult {

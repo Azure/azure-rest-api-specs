@@ -435,72 +435,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachine/virtualMachines": {
-      "get": {
-        "operationId": "Fleets_ListVirtualMachines",
-        "tags": [
-          "Fleets"
-        ],
-        "description": "List VirtualMachine resources by Fleet.\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}/virtualMachines",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the Fleet",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filter expression to filter the virtual machines",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "in": "query",
-            "description": "Skip token for pagination. Uses the token from a previous response to fetch the next page of results.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
       "get": {
         "operationId": "Fleets_ListVirtualMachineScaleSets",
         "tags": [
           "Fleets"
         ],
-        "description": "List VirtualMachineScaleSet resources by Fleet",
+        "description": "List VirtualMachineScaleSet resources of a Managed Fleet.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -525,6 +466,65 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachines": {
+      "get": {
+        "operationId": "Fleets_ListVirtualMachines",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "List VirtualMachine resources of an instance Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter expression to filter the virtual machines.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Skip token for pagination. Uses the token from a previous response to fetch the next page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
             }
           },
           "default": {
@@ -2909,7 +2909,7 @@
     },
     "VirtualMachine": {
       "type": "object",
-      "description": "An AzureFleet's virtual machine.",
+      "description": "An instant Fleet's virtual machine.",
       "properties": {
         "name": {
           "type": "string",

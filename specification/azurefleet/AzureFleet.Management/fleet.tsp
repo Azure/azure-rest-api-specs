@@ -624,7 +624,7 @@ interface Fleets {
   @listsResource(VirtualMachineScaleSet)
   @armResourceList(VirtualMachineScaleSet)
   @get
-  @doc("List VirtualMachineScaleSet resources by Fleet")
+  @doc("List VirtualMachineScaleSet resources of a Managed Fleet.")
   listVirtualMachineScaleSets(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -638,14 +638,10 @@ interface Fleets {
 
   @added(Versions.v2025_07_01_preview)
   @autoRoute
-  @action("virtualMachines")
   @listsResource(VirtualMachine)
   @armResourceList(VirtualMachine)
   @get
-  @doc("""
-  List VirtualMachine resources by Fleet.
-  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}/virtualMachines
-  """)
+  @doc("List VirtualMachine resources of an instance Fleet.")
   listVirtualMachines(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -655,9 +651,9 @@ interface Fleets {
       Fleet,
       NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
-    /** Filter expression to filter the virtual machines */
+    @doc("Filter expression to filter the virtual machines.")
     @query $filter?: string,
-    /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
+    @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
     @query $skiptoken?: string,
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
 
