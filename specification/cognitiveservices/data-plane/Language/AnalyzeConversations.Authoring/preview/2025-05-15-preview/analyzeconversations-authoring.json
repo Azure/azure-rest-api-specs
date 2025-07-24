@@ -2,7 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
+<<<<<<< HEAD
     "version": "2024-11-15-preview",
+=======
+    "version": "2025-05-15-preview",
+>>>>>>> 0d5af1c32d (Add generated files)
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
     "x-typespec-generated": [
       {
@@ -2891,6 +2895,13 @@
           "type": "string",
           "description": "The category of the entity."
         },
+<<<<<<< HEAD
+=======
+        "description": {
+          "type": "string",
+          "description": "The entity description."
+        },
+>>>>>>> 0d5af1c32d (Add generated files)
         "compositionSetting": {
           "$ref": "#/definitions/CompositionSetting",
           "description": "The behavior to follow when the entity's components overlap with each other."
@@ -2929,6 +2940,20 @@
         "category": {
           "type": "string",
           "description": "The intent category."
+<<<<<<< HEAD
+=======
+        },
+        "description": {
+          "type": "string",
+          "description": "The intent description."
+        },
+        "associatedEntities": {
+          "type": "array",
+          "description": "The list of associated entities.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationExportedAssociatedEntityLabel"
+          }
+>>>>>>> 0d5af1c32d (Add generated files)
         }
       },
       "required": [
@@ -3119,11 +3144,19 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
+<<<<<<< HEAD
         "assignedResourceIds": {
           "type": "array",
           "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
             "type": "string"
+=======
+        "assignedResources": {
+          "type": "array",
+          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResource"
+>>>>>>> 0d5af1c32d (Add generated files)
           }
         }
       },
@@ -3170,6 +3203,66 @@
         "language"
       ]
     },
+<<<<<<< HEAD
+=======
+    "AnalyzeConversationAuthoringDataGenerationConnectionInfo": {
+      "type": "object",
+      "description": "Represents the connection info for the Azure resource to use during data generation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionKind",
+          "description": "Connection type for data generation settings. Currently only supports Azure OpenAI."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "Deployment name of model to be used for synthetic data generation."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID for the data generation resource. Looks something like\n\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}\"."
+        }
+      },
+      "required": [
+        "kind",
+        "deploymentName"
+      ]
+    },
+    "AnalyzeConversationAuthoringDataGenerationConnectionKind": {
+      "type": "string",
+      "description": "Represents the connection kind for Azure OpenAI deployment.",
+      "enum": [
+        "AzureOpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationAuthoringDataGenerationConnectionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI"
+          }
+        ]
+      }
+    },
+    "AnalyzeConversationAuthoringDataGenerationSettings": {
+      "type": "object",
+      "description": "Settings to enable data generation for training augmentation.",
+      "properties": {
+        "enableDataGeneration": {
+          "type": "boolean",
+          "description": "Must be explicitly set to True to enable data generation to augment training data."
+        },
+        "dataGenerationConnectionInfo": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
+          "description": "Must be filled out to enable data generation to augment training data."
+        }
+      },
+      "required": [
+        "enableDataGeneration",
+        "dataGenerationConnectionInfo"
+      ]
+    },
+>>>>>>> 0d5af1c32d (Add generated files)
     "AnalyzeConversationAuthoringDeleteDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for deleting a project deployment.",
@@ -3294,6 +3387,13 @@
         "region": {
           "type": "string",
           "description": "Represents the resource region."
+<<<<<<< HEAD
+=======
+        },
+        "assignedAoaiResource": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
+          "description": "Represents the AOAI resource assigned for data generation."
+>>>>>>> 0d5af1c32d (Add generated files)
         }
       },
       "required": [
@@ -4232,6 +4332,13 @@
         "category": {
           "type": "string",
           "description": "The intent category."
+<<<<<<< HEAD
+=======
+        },
+        "description": {
+          "type": "string",
+          "description": "The intent description."
+>>>>>>> 0d5af1c32d (Add generated files)
         }
       },
       "required": [
@@ -4743,6 +4850,13 @@
         "evaluationOptions": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
+<<<<<<< HEAD
+=======
+        },
+        "dataGenerationSettings": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationSettings",
+          "description": "For customers to populate if they wish to use data generation for their model training job."
+>>>>>>> 0d5af1c32d (Add generated files)
         }
       },
       "required": [
@@ -4770,6 +4884,13 @@
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents the model training status."
         },
+<<<<<<< HEAD
+=======
+        "dataGenerationStatus": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
+          "description": "Represents the model data generation status."
+        },
+>>>>>>> 0d5af1c32d (Add generated files)
         "evaluationStatus": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents model evaluation status."
@@ -4783,7 +4904,12 @@
       "required": [
         "modelLabel",
         "trainingConfigVersion",
+<<<<<<< HEAD
         "trainingStatus"
+=======
+        "trainingStatus",
+        "dataGenerationStatus"
+>>>>>>> 0d5af1c32d (Add generated files)
       ]
     },
     "AnalyzeConversationAuthoringTrainingJobState": {
@@ -4953,6 +5079,22 @@
         "predictedIntent"
       ]
     },
+<<<<<<< HEAD
+=======
+    "AnalyzeConversationExportedAssociatedEntityLabel": {
+      "type": "object",
+      "description": "Represents an associated entity label for an intent.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the entity label."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+>>>>>>> 0d5af1c32d (Add generated files)
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
