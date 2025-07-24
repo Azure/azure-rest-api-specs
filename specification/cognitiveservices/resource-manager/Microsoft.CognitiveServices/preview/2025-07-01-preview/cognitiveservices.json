@@ -5157,14 +5157,16 @@
             "$ref": "./examples/GetQuotaTier.json"
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers/{default}/changeTierUpgradePolicy": {
+      "get": {
         "tags": [
           "QuotaTier"
         ],
-        "operationId": "QuotaTiers_Update",
-        "summary": "Updates the Quota Tier resource for a subscription. The only properties that can be updated are  \"tierUpgradePolicy\"",
-        "description": "Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "operationId": "QuotaTiers_ChangeUpgradePolicy",
+        "summary": "Change the upgrade policy for a subscription's quota tier",
+        "description": "Changes the upgrade policy for the given subscription's quota tier.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -5176,32 +5178,29 @@
             "$ref": "#/parameters/defaultParameter"
           },
           {
-            "name": "tier",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QuotaTier"
-            },
-            "description": "The parameters to provide for the quota tier resource."
+            "$ref": "#/parameters/defaultParameter"
+          },
+          {
+            "$ref": "#/parameters/changeQuotaTierUpgradePolicyParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/QuotaTier"
+              "$ref": "#/definitions/ChangeQuotaTierUpgradePolicyParameterResponse"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Update the quota tier resource for a subscription": {
-            "$ref": "./examples/UpdateQuotaTier.json"
+          "Gets Tier Upgrade Policy for the given subscription's quota tier": {
+            "$ref": "./examples/ChangeTierUpgradePolicy.json"
           }
         }
       }
@@ -9519,6 +9518,48 @@
           "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
         }
       }
+    },
+    "ChangeQuotaTierUpgradePolicyParameterRequest": {
+      "type": "object",
+      "description": "Changes the upgrade policy for the given subscription's quota tier.",
+      "properties": {
+        "tierUpgradePolicy": {
+          "type": "string",
+          "description": "The new tier upgrade policy for the subscription.",
+          "enum": [
+            "OnceUpgradeIsAvailable",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "TierUpgradePolicy",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "tierUpgradePolicy"
+      ]
+    },
+    "ChangeQuotaTierUpgradePolicyParameterResponse": {
+      "type": "object",
+      "description": "Response of change tier upgrade policy request for the given subscription's quota tier.",
+      "properties": {
+        "tierUpgradePolicy": {
+          "type": "string",
+          "description": "The new tier upgrade policy for the subscription.",
+          "enum": [
+            "OnceUpgradeIsAvailable",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "TierUpgradePolicy",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "tierUpgradePolicy"
+      ]
     }
   },
   "parameters": {
@@ -9739,6 +9780,16 @@
       "required": true,
       "type": "string",
       "description": "Default parameter. Leave the value as \"default\".",
+      "x-ms-parameter-location": "method"
+    },
+    "changeQuotaTierUpgradePolicyParameter": {
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "The details for ChangeQuotaTierUpgradePolicyParameter request.",
+      "schema": {
+        "$ref": "#/definitions/ChangeQuotaTierUpgradePolicyParameterRequest"
+      },
       "x-ms-parameter-location": "method"
     }
   }
