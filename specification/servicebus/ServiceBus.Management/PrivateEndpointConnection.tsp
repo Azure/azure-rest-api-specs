@@ -39,6 +39,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,

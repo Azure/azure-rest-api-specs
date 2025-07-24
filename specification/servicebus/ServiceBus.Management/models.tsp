@@ -232,6 +232,7 @@ enum UnavailableReason {
 /**
  * SKU of the namespace.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBSku {
   /**
    * Name of this SKU.
@@ -334,6 +335,7 @@ model SystemData {
 /**
  * Properties of the namespace.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBNamespaceProperties {
   /**
    * The minimum TLS version for the cluster to support, e.g. '1.2'
@@ -602,6 +604,7 @@ model ErrorAdditionalInfo {
  * Description of a namespace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBNamespaceUpdateParameters extends ResourceNamespacePatch {
   /**
    * Properties of SKU
@@ -624,6 +627,7 @@ model SBNamespaceUpdateParameters extends ResourceNamespacePatch {
 /**
  * Properties of the namespace.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBNamespaceUpdateProperties {
   /**
    * Provisioning state of the namespace.
@@ -860,6 +864,7 @@ model FailoverPropertiesProperties {
   /**
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   IsSafeFailover?: boolean;
 }
 
@@ -931,6 +936,7 @@ model NetworkRuleSetProperties {
 /**
  * Description of VirtualNetworkRules - NetworkRules resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NWRuleSetVirtualNetworkRules {
   /**
    * Subnet properties
@@ -956,6 +962,7 @@ model Subnet {
 /**
  * Description of NetWorkRuleSet - IpRules resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NWRuleSetIpRules {
   /**
    * IP Mask
@@ -972,6 +979,7 @@ model NWRuleSetIpRules {
  * AuthorizationRule properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBAuthorizationRuleProperties {
   /**
    * The rights associated with the rule.
@@ -1045,6 +1053,7 @@ model RegenerateAccessKeyParameters {
  * The Queue Properties definition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBQueueProperties {
   /**
    * Message Count Details.
@@ -1205,6 +1214,7 @@ model MessageCountDetails {
  * The Topic Properties definition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBTopicProperties {
   /**
    * Size of the topic, in bytes.
@@ -1427,6 +1437,7 @@ model CorrelationFilter {
  * Description of Subscription Resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBSubscriptionProperties {
   /**
    * Number of messages.
@@ -1535,6 +1546,7 @@ model SBSubscriptionProperties {
 /**
  * Properties specific to client affine subscriptions.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBClientAffineProperties {
   /**
    * Indicates the Client ID of the application that created the client-affine subscription.

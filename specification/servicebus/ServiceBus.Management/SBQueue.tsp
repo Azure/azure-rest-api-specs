@@ -14,6 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of queue Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @parentResource(SBNamespace)
 model SBQueue is Azure.ResourceManager.ProxyResource<SBQueueProperties> {
   ...ResourceNameParameter<
@@ -24,6 +25,7 @@ model SBQueue is Azure.ResourceManager.ProxyResource<SBQueueProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBQueues {
   /**

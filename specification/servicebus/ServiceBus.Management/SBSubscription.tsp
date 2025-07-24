@@ -14,6 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of subscription resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @parentResource(SBTopic)
 model SBSubscription
   is Azure.ResourceManager.ProxyResource<SBSubscriptionProperties> {
@@ -25,6 +26,7 @@ model SBSubscription
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBSubscriptions {
   /**

@@ -14,6 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of topic resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @parentResource(SBNamespace)
 model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   ...ResourceNameParameter<
@@ -24,6 +25,7 @@ model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBTopics {
   /**

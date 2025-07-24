@@ -13,6 +13,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of a namespace resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SBNamespace
   is Azure.ResourceManager.TrackedResource<SBNamespaceProperties> {
   ...ResourceNameParameter<
@@ -35,6 +36,7 @@ model SBNamespace
   identity?: Identity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBNamespaces {
   /**

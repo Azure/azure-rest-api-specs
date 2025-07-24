@@ -14,6 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of a namespace authorization rule.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @parentResource(SBNamespace)
 model SBAuthorizationRule
   is Azure.ResourceManager.ProxyResource<SBAuthorizationRuleProperties> {
@@ -25,6 +26,7 @@ model SBAuthorizationRule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBAuthorizationRuleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -55,6 +57,7 @@ interface SBAuthorizationRuleOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface SBAuthorizationRules {
   /**
