@@ -53,6 +53,11 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
     package-dir: "azlogs"
-    emitter-output-dir: "{project-root}"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azlogs"
+    module-version: "0.0.1"
+    single-client: true
     generate-fakes: true
     inject-spans: true
+    slice-elements-byval: true
+    rawjson-as-bytes: true
+    go-generate: "build.go"
