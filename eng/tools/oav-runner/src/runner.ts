@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
-import * as fs from "fs";
 
 import { example, getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { Swagger } from "@azure-tools/specs-shared/swagger";

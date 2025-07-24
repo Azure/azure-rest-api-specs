@@ -1,9 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { runSpecGenSdkCommand, resetGitRepo, SpecConfigs } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
-import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
 import {
   generateArtifact,
   getBreakingChangeInfo,
@@ -15,6 +11,10 @@ import {
   prepareSpecGenSdkCommand,
   setPipelineVariables,
 } from "./command-helpers.js";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
+import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
+import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
  * Generate SDK for a single spec.
