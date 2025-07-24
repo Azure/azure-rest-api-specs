@@ -28,7 +28,6 @@ alias languageOperations = ResourceOperations<
  * Lists the deployments belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listDeployments", "csharp")
 op conversationAuthoringListDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -38,7 +37,6 @@ op conversationAuthoringListDeployments is languageOperations.ResourceList<
  * Lists the existing projects.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listProjects", "csharp")
 op conversationAuthoringListProjects is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -48,7 +46,6 @@ op conversationAuthoringListProjects is languageOperations.ResourceList<
  * Lists the supported languages for the given project type.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listSupportedLanguages", "csharp")
 op conversationAuthoringListSupportedLanguages is languageOperations.ResourceList<
   AnalyzeConversationAuthoringSupportedLanguage,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -59,7 +56,6 @@ op conversationAuthoringListSupportedLanguages is languageOperations.ResourceLis
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listAssignedResourceDeployments", "csharp")
 @added(Versions.v2023_04_15_preview)
 op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
@@ -70,7 +66,6 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  * Lists the deployments resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listDeploymentResources", "csharp")
 @added(Versions.v2023_04_15_preview)
 op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
@@ -81,7 +76,6 @@ op conversationAuthoringListDeploymentResources is languageOperations.ResourceLi
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listSupportedPrebuiltEntities", "csharp")
 op conversationAuthoringListSupportedPrebuiltEntities is languageOperations.ResourceList<
   AnalyzeConversationAuthoringPrebuiltEntity,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -92,7 +86,6 @@ op conversationAuthoringListSupportedPrebuiltEntities is languageOperations.Reso
  * Lists the support training config version for a given project type.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainingConfigVersions", "csharp")
 op conversationAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<StandardListQueryParameters &
@@ -103,7 +96,6 @@ op conversationAuthoringListTrainingConfigVersions is languageOperations.Resourc
  * Lists the non-expired training jobs created for a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainingJobs", "csharp")
 op conversationAuthoringListTrainingJobs is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -113,7 +105,6 @@ op conversationAuthoringListTrainingJobs is languageOperations.ResourceList<
  * Lists the trained models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listTrainedModels", "csharp")
 op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -123,7 +114,6 @@ op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
  * Lists the exported models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@clientName("listExportedModels", "csharp")
 @added(Versions.v2024_11_15_preview)
 op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
@@ -541,7 +531,6 @@ interface ConversationAuthoringProject {
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
-  @clientName("AuthorizeProjectCopy", "csharp")
   copyProjectAuthorization is languageOperations.ResourceAction<
     AnalyzeConversationAuthoringProjectMetadata,
     AnalyzeConversationAuthoringCopyAuthorizationOptions,
