@@ -1,11 +1,11 @@
-import { describe, it, expect } from "vitest"; //vi
+import { describe, expect, it } from "vitest"; //vi
 
 import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { PRContext } from "../src/PRContext.js";
-import { LabelContext } from "../src/labelling-types.js";
 import { evaluateImpact } from "../src/impact.js";
+import { LabelContext } from "../src/labelling-types.js";
 
 describe("Check Changes", () => {
   it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
