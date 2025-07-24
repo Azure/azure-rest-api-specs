@@ -73,18 +73,13 @@
         "managedVirtualNetwork": {
           "description": "Managed Virtual Network reference.",
           "$ref": "../datafactory.json#/definitions/ManagedVirtualNetworkReference"
-        },
-        "interactiveQuery": {
-          "description": "Interactive authoring capability reference.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InteractiveQueryReference"
         }
       },
       "required": [
         "typeProperties"
       ]
     },
-    "InteractiveQueryReference": {
+    "InteractiveQueryProperties": {
       "description": "Interactive authoring capability type properties.",
       "type": "object",
       "properties": {
@@ -125,6 +120,11 @@
         "customerVirtualNetwork": {
           "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
           "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
+        },
+        "interactiveQuery": {
+          "description": "Interactive authoring capability reference.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InteractiveQueryProperties"
         }
       }
     },
