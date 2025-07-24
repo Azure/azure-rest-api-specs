@@ -98,6 +98,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful List Projects": {
+            "$ref": "./examples/SuccessfulListProjects.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -138,6 +143,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Project": {
+            "$ref": "./examples/SuccessfulGetProject.json"
           }
         }
       },
@@ -194,6 +204,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Create Project": {
+            "$ref": "./examples/SuccessfulCreateProject.json"
+          }
         }
       },
       "delete": {
@@ -234,6 +249,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Project": {
+            "$ref": "./examples/SuccessfulDeleteProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -353,6 +373,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Export Project": {
+            "$ref": "./examples/SuccessfulExportProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -434,6 +459,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Import Project": {
+            "$ref": "./examples/SuccessfulImportProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -487,6 +517,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Train Project": {
+            "$ref": "./examples/SuccessfulTrainProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -536,6 +571,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful List Deployments": {
+            "$ref": "./examples/SuccessfulListDeployments.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -583,6 +623,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment": {
+            "$ref": "./examples/SuccessfulGetDeployment.json"
           }
         }
       },
@@ -642,6 +687,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Deploy Project": {
+            "$ref": "./examples/SuccessfulDeployProject.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -689,6 +739,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Deployment": {
+            "$ref": "./examples/SuccessfulDeleteDeployment.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -744,6 +799,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/SuccessfulGetDeploymentStatus.json"
+          }
         }
       }
     },
@@ -797,6 +857,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Swap Deployments": {
+            "$ref": "./examples/SuccessfulSwapDeployments.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -842,6 +907,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Swap Deployments Status": {
+            "$ref": "./examples/SuccessfulGetSwapDeploymentsStatus.json"
           }
         }
       }
@@ -889,6 +959,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Get Export Status": {
+            "$ref": "./examples/SuccessfulGetExportStatus.json"
+          }
         }
       }
     },
@@ -934,6 +1009,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Import Status": {
+            "$ref": "./examples/SuccessfulGetImportStatus.json"
           }
         }
       }
@@ -984,6 +1064,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful List Models": {
+            "$ref": "./examples/SuccessfulListModels.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1032,6 +1117,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Get Model": {
+            "$ref": "./examples/SuccessfulGetModel.json"
+          }
         }
       },
       "delete": {
@@ -1073,58 +1163,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
-      "post": {
-        "operationId": "ConversationAuthoringTrainedModel_LoadSnapshot",
-        "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Successful Delete Model": {
+            "$ref": "./examples/SuccessfulDeleteModel.json"
+          }
+        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -1183,6 +1227,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Get Model Evaluation": {
+            "$ref": "./examples/SuccessfulGetModelEvaluation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1230,6 +1279,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Model Evaluation Summary": {
+            "$ref": "./examples/SuccessfulGetModelEvaluationSummary.json"
           }
         }
       }
@@ -1333,6 +1387,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful List Training Jobs": {
+            "$ref": "./examples/SuccessfulListTrainingJobs.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1380,6 +1439,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Train Status": {
+            "$ref": "./examples/SuccessfulGetTrainStatus.json"
           }
         }
       }
@@ -1432,6 +1496,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Cancel Training Job": {
+            "$ref": "./examples/SuccessfulCancelTrainingJob.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1469,6 +1538,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Project Deletion Status": {
+            "$ref": "./examples/SuccessfulGetProjectDeletionStatus.json"
           }
         }
       }
@@ -1512,6 +1586,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Languages": {
+            "$ref": "./examples/SuccessfulGetSupportedLanguages.json"
           }
         },
         "x-ms-pageable": {
@@ -1607,6 +1686,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Supported Training Config Versions": {
+            "$ref": "./examples/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         },
         "x-ms-pageable": {
