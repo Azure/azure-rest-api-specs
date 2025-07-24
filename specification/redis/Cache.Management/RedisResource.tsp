@@ -84,7 +84,7 @@ interface RedisResources {
   update is RedisResourcesOps.CustomPatchAsync<
     RedisResource,
     PatchModel = RedisUpdateParameters,
-    Response = ArmResponse<RedisResource> | (ArmAcceptedLroResponse & {
+    Response = RedisResource | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: RedisResource;
     })
@@ -104,7 +104,7 @@ interface RedisResources {
    */
   listByResourceGroup is ArmResourceListByParent<
     RedisResource,
-    Response = ArmResponse<RedisListResult>
+    Response = RedisListResult
   >;
 
   /**
@@ -112,7 +112,7 @@ interface RedisResources {
    */
   listBySubscription is ArmListBySubscription<
     RedisResource,
-    Response = ArmResponse<RedisListResult>
+    Response = RedisListResult
   >;
 
   /**
@@ -122,7 +122,7 @@ interface RedisResources {
   listUpgradeNotifications is RedisResourcesOps.ActionSync<
     RedisResource,
     void,
-    ArmResponse<NotificationListResponse>,
+    Response = NotificationListResponse,
     Parameters = {
       /**
        * how many minutes in past to look for upgrade notifications
@@ -138,7 +138,7 @@ interface RedisResources {
   listKeys is RedisResourcesOps.ActionSync<
     RedisResource,
     void,
-    ArmResponse<RedisAccessKeys>
+    Response = RedisAccessKeys
   >;
 
   /**
@@ -147,7 +147,7 @@ interface RedisResources {
   regenerateKey is RedisResourcesOps.ActionSync<
     RedisResource,
     RedisRegenerateKeyParameters,
-    ArmResponse<RedisAccessKeys>
+    Response = RedisAccessKeys
   >;
 
   /**
@@ -156,7 +156,7 @@ interface RedisResources {
   forceReboot is RedisResourcesOps.ActionSync<
     RedisResource,
     RedisRebootParameters,
-    ArmResponse<RedisForceRebootResponse>
+    Response = RedisForceRebootResponse
   >;
 
   /**
@@ -201,7 +201,7 @@ interface RedisResources {
   listByRedisCache is ArmResourceActionSync<
     RedisResource,
     void,
-    Response = ArmResponse<ResourceListResult<Azure.ResourceManager.CommonTypes.PrivateLinkResource>>
+    Response = ResourceListResult<Azure.ResourceManager.CommonTypes.PrivateLinkResource>
   >;
 }
 

@@ -51,5 +51,5 @@ interface AsyncOperationStatusOperationGroup {
     operationId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  ): OperationStatus | ErrorResponse;
 }

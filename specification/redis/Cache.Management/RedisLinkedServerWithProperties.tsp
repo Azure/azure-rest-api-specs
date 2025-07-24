@@ -14,6 +14,7 @@ namespace Microsoft.Cache;
 /**
  * Response to put/get linked server (with properties) for Redis cache.
  */
+@parentResource(RedisResource)
 model RedisLinkedServerWithProperties
   is Azure.ResourceManager.ProxyResource<RedisLinkedServerProperties> {
   ...ResourceNameParameter<
@@ -98,7 +99,7 @@ interface LinkedServer {
    */
   list is LinkedServerOps.List<
     RedisLinkedServerWithProperties,
-    Response = ArmResponse<RedisLinkedServerWithPropertiesList>
+    Response = RedisLinkedServerWithPropertiesList
   >;
 }
 

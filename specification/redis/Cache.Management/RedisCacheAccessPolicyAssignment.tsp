@@ -36,7 +36,8 @@ interface RedisCacheAccessPolicyAssignments {
    */
   createUpdate is ArmResourceCreateOrReplaceAsync<
     RedisCacheAccessPolicyAssignment,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = RedisCacheAccessPolicyAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -53,7 +54,7 @@ interface RedisCacheAccessPolicyAssignments {
    */
   list is ArmResourceListByParent<
     RedisCacheAccessPolicyAssignment,
-    Response = ArmResponse<RedisCacheAccessPolicyAssignmentList>
+    Response = RedisCacheAccessPolicyAssignmentList
   >;
 }
 

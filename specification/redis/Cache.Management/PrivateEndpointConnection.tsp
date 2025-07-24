@@ -36,7 +36,7 @@ interface PrivateEndpointConnections {
    */
   get is ArmResourceRead<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
+    Response = Azure.ResourceManager.CommonTypes.PrivateEndpointConnection
   >;
 
   /**
@@ -44,7 +44,8 @@ interface PrivateEndpointConnections {
    */
   put is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -57,7 +58,7 @@ interface PrivateEndpointConnections {
    */
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<ResourceListResult<PrivateEndpointConnection>>
+    Response = ResourceListResult<PrivateEndpointConnection>
   >;
 }
 
