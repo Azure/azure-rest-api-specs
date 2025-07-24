@@ -66,7 +66,7 @@ interface BackupVaultResources {
     },
     LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -83,7 +83,7 @@ interface BackupVaultResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -139,7 +139,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     ValidateForBackupRequest,
     ArmResponse<OperationJobExtendedInfo>,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -152,7 +152,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     void,
     NoContentResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**

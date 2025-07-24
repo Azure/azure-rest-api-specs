@@ -10,7 +10,7 @@ on:
   workflow_run:
     types: completed
     workflows:
-      - "\\[TEST-IGNORE\\] Swagger BreakingChange - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger BreakingChange - Set Status"
 
 permissions:
   checks: read
@@ -22,4 +22,4 @@ jobs:
     uses: ./.github/workflows/_reusable-verify-run-status.yaml
     with:
       check_run_name: "Swagger BreakingChange"
-      workflow_name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+      commit_status_name: "[TEST-IGNORE] Swagger BreakingChange"

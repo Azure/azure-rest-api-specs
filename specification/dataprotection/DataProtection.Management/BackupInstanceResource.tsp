@@ -81,7 +81,7 @@ interface BackupInstanceResources {
       BackupInstanceResource,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -111,7 +111,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     TriggerBackupRequest,
     ArmResponse<OperationJobExtendedInfo>,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -135,7 +135,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupRehydrationRequest,
     NoContentResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -153,7 +153,7 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -165,7 +165,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     void,
     OkResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -177,7 +177,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     void,
     OkResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -200,7 +200,7 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -223,7 +223,7 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -237,7 +237,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     SyncBackupInstanceRequest,
     OkResponse,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -250,7 +250,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateRestoreRequestObject,
     ArmResponse<OperationJobExtendedInfo>,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
@@ -260,7 +260,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupFindRestorableTimeRangesRequest,
     ArmResponse<AzureBackupFindRestorableTimeRangesResponseResource>,
-    OverrideErrortype = CloudError
+    OverrideErrorType = CloudError
   >;
 }
 @armResourceOperations

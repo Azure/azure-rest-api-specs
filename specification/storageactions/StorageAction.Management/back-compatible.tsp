@@ -16,7 +16,7 @@ using Microsoft.StorageActions;
 @@clientName(StorageTasksOperationGroup.previewActions::parameters.body,
   "parameters"
 );
-@@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
+@@clientName(StorageTasks.storageTaskAssignmentList, "List");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageTask.properties, "!csharp,!java,!python");
 

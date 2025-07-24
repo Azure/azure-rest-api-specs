@@ -1,0 +1,89 @@
+parameters:
+  "service-dir":
+    default: "sdk/storagediscovery"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json"
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.StorageDiscovery"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-storagediscovery"
+    namespace: "com.azure.resourcemanager.storagediscovery"
+    flavor: "azure"
+    service-name: "Storage Discovery"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-storagediscovery"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-storagediscovery"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-storagediscovery"
+    namespace: "azure.mgmt.storagediscovery"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/storagediscovery"
+    package-dir: "armstoragediscovery"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
+    clear-output-folder: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "StorageDiscovery"
+    service-name: StorageDiscovery
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+    exclude-tableview-properties:
+      - Id
+      - Type
+    directive:
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
+      # Add model
+      - model-cmdlet:
+          - model-name: StorageDiscoveryScope
+            cmdlet-name: New-AzStorageDiscoveryScopeObject
+      # hide report APIs
+      - where:
+          subject: ^Report$|^ReportStorageDiscoveryWorkspace$
+        remove: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
