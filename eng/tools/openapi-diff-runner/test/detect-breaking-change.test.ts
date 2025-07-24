@@ -110,6 +110,8 @@ describe("detect-breaking-change", () => {
       tempRepo: "/test/working/dir",
       specRepo: "/test/repo",
       mockFolder: "/mock/folder",
+      // Cross-platform test repo path (avoids leading slash issues on Windows)
+      testRepoPath: path.resolve("path", "to", "repo"),
     },
     OPERATIONS: {
       operation1: { id: "operation1", path: "/api/test1", httpMethod: "GET" },
@@ -205,7 +207,7 @@ describe("detect-breaking-change", () => {
 
     createTestContext: (overrides = {}) =>
       ({
-        localSpecRepoPath: "/path/to/spec/repo",
+        localSpecRepoPath: path.resolve("path", "to", "spec", "repo"),
         ...overrides,
       }) as Context,
 
@@ -382,15 +384,15 @@ describe("detect-breaking-change", () => {
     // Helper function to create consistent folder existence mocks
     const createFolderExistenceMock = (existingFolders: string[], readmeFolders: string[] = []) => {
       return vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        const pathStr = pathArg.toString();
+        const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize to forward slashes for comparison
 
         // Check for readme.md files (used by getReadmeFolder)
         if (pathStr.endsWith("readme.md")) {
           return readmeFolders.some((folder) => pathStr.includes(`${folder}/readme.md`));
         }
 
-        // Check for folder existence (used by getSpecModel)
-        return existingFolders.some((folder) => pathStr.endsWith(folder));
+        // Check for folder existence (used by getSpecModel) - normalize both paths for comparison
+        return existingFolders.some((folder) => pathStr.endsWith(folder.replace(/\\/g, "/")));
       });
     };
 
@@ -398,13 +400,24 @@ describe("detect-breaking-change", () => {
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
-      createFolderExistenceMock(["specification/network/resource-manager"], ["resource-manager"]);
+      createFolderExistenceMock(
+        [path.join("specification", "network", "resource-manager")],
+        ["resource-manager"],
+      );
 
-      const result = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.network,
+      );
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "network",
+          "resource-manager",
+        ),
       );
     });
 
@@ -413,30 +426,56 @@ describe("detect-breaking-change", () => {
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       // Microsoft.Network folder doesn't exist, but resource-manager does with readme.md
-      createFolderExistenceMock(["specification/network/resource-manager"], ["resource-manager"]);
+      createFolderExistenceMock(
+        [path.join("specification", "network", "resource-manager")],
+        ["resource-manager"],
+      );
 
-      const result = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.network,
+      );
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "network",
+          "resource-manager",
+        ),
       );
     });
 
     it("should handle data-plane boundary correctly", () => {
-      const testPath =
-        "specification/cognitiveservices/data-plane/TextAnalytics/preview/v3.1/textanalytics.json";
+      const testPath = path.join(
+        "specification",
+        "cognitiveservices",
+        "data-plane",
+        "TextAnalytics",
+        "preview",
+        "v3.1",
+        "textanalytics.json",
+      );
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       // TextAnalytics folder doesn't exist, but data-plane does with readme.md
-      createFolderExistenceMock(["specification/cognitiveservices/data-plane"], ["data-plane"]);
+      createFolderExistenceMock(
+        [path.join("specification", "cognitiveservices", "data-plane")],
+        ["data-plane"],
+      );
 
-      const result = getSpecModel("/path/to/repo", testPath);
+      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/cognitiveservices/data-plane",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "cognitiveservices",
+          "data-plane",
+        ),
       );
     });
 
@@ -447,7 +486,10 @@ describe("detect-breaking-change", () => {
       // No folders exist, not even boundary folders
       createFolderExistenceMock([], []);
 
-      const result = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.network,
+      );
 
       expect(result).toBeUndefined();
       expect(vi.mocked(SpecModel)).not.toHaveBeenCalled();
@@ -458,7 +500,7 @@ describe("detect-breaking-change", () => {
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        const pathStr = pathArg.toString();
+        const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds readme.md at resource-manager level (boundary fallback)
         if (pathStr.includes("resource-manager/readme.md")) return true;
@@ -469,25 +511,40 @@ describe("detect-breaking-change", () => {
         return false;
       });
 
-      const result = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
+      const result = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.network,
+      );
 
       // Should create SpecModel for the boundary folder since it exists
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "network",
+          "resource-manager",
+        ),
       );
     });
 
     it("should find readme.md in intermediate folder during upward search", () => {
-      const testPath =
-        "specification/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
+      const testPath = path.join(
+        "specification",
+        "network",
+        "resource-manager",
+        "Microsoft.Network",
+        "stable",
+        "2019-11-01",
+        "network.json",
+      );
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       // getReadmeFolder returns Microsoft.Network level, but that folder doesn't exist
       // However, resource-manager level has readme.md during upward search
       vi.mocked(existsSync).mockImplementation((pathArg: any) => {
-        const pathStr = pathArg.toString();
+        const pathStr = pathArg.toString().replace(/\\/g, "/"); // Normalize path separators
 
         // getReadmeFolder finds Microsoft.Network level
         if (pathStr.includes("Microsoft.Network/readme.md")) return true;
@@ -503,12 +560,17 @@ describe("detect-breaking-change", () => {
         return false;
       });
 
-      const result = getSpecModel("/path/to/repo", testPath);
+      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       // Should use resource-manager folder because that's where readme.md was found during upward search
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "network",
+          "resource-manager",
+        ),
       );
     });
 
@@ -517,12 +579,21 @@ describe("detect-breaking-change", () => {
 
       // Both services have their folders and readme.md files
       createFolderExistenceMock(
-        ["specification/network/resource-manager", "specification/storage/resource-manager"],
+        [
+          path.join("specification", "network", "resource-manager"),
+          path.join("specification", "storage", "resource-manager"),
+        ],
         ["resource-manager"],
       );
 
-      const result1 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.network);
-      const result2 = getSpecModel("/path/to/repo", TEST_CONSTANTS.PATHS.storage);
+      const result1 = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.network,
+      );
+      const result2 = getSpecModel(
+        TEST_CONSTANTS.FOLDERS.testRepoPath,
+        TEST_CONSTANTS.PATHS.storage,
+      );
 
       expect(result1).not.toBe(result2);
       expect(result1).toBeDefined();
@@ -530,19 +601,34 @@ describe("detect-breaking-change", () => {
     });
 
     it("should handle dev folder conversion in upward search", () => {
-      const testPath =
-        "dev/network/resource-manager/Microsoft.Network/stable/2019-11-01/network.json";
+      const testPath = path.join(
+        "dev",
+        "network",
+        "resource-manager",
+        "Microsoft.Network",
+        "stable",
+        "2019-11-01",
+        "network.json",
+      );
       const mockSpecModelInstance = TestFixtures.createMockSpecModel();
       MockSetup.setupSpecModelMock(mockSpecModelInstance);
 
       // After dev->specification conversion, resource-manager folder exists with readme.md
-      createFolderExistenceMock(["specification/network/resource-manager"], ["resource-manager"]);
+      createFolderExistenceMock(
+        [path.join("specification", "network", "resource-manager")],
+        ["resource-manager"],
+      );
 
-      const result = getSpecModel("/path/to/repo", testPath);
+      const result = getSpecModel(TEST_CONSTANTS.FOLDERS.testRepoPath, testPath);
 
       expect(result).toBeDefined();
       expect(vi.mocked(SpecModel)).toHaveBeenCalledWith(
-        "/path/to/repo/specification/network/resource-manager",
+        path.join(
+          TEST_CONSTANTS.FOLDERS.testRepoPath,
+          "specification",
+          "network",
+          "resource-manager",
+        ),
       );
     });
   });
@@ -711,7 +797,7 @@ describe("detect-breaking-change", () => {
       mockDetectionContext.existingVersionSwaggers = [];
       mockDetectionContext.context = {
         ...mockContext,
-        localSpecRepoPath: "/path/to/repo",
+        localSpecRepoPath: TEST_CONSTANTS.FOLDERS.testRepoPath,
         prInfo: {
           ...mockContext.prInfo,
           tempRepoFolder: "/test/working/dir",
