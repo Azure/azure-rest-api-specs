@@ -104,12 +104,7 @@ describe("changedFiles", () => {
       "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
       "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
-      "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
-      "specification/contosowidgetmanager/resource-manager/readme.md",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
-      "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
-      "specification/compute/quickstart-templates/swagger.json",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
     expect(files.filter(typespec)).toEqual(expected);
   });

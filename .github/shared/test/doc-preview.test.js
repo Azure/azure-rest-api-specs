@@ -1,11 +1,11 @@
 // @ts-check
 
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 import {
-  parseSwaggerFilePath,
   getSwaggersToProcess,
   indexMd,
   mappingJSONTemplate,
+  parseSwaggerFilePath,
   repoJSONTemplate,
 } from "../src/doc-preview.js";
 

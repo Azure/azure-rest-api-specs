@@ -220,12 +220,7 @@ export function typespec(file) {
  * @returns {boolean}
  */
 export function quickstartTemplate(file) {
-  return (
-    typeof file === "string" &&
-    json(file) &&
-    specification(file) &&
-    file.includes("/quickstart-templates/")
-  );
+  return typeof file === "string" && json(file) && file.includes("/quickstart-templates/");
 }
 
 /**

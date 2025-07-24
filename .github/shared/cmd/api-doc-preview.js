@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 // @ts-check
 
-import { join, resolve, dirname } from "path";
+import { mkdir, writeFile } from "fs/promises";
+import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
-import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, getChangedFilesStatuses } from "../src/changed-files.js";
+import { getChangedFilesStatuses, swagger } from "../src/changed-files.js";
 
 import {
+  getSwaggersToProcess,
+  indexMd,
   mappingJSONTemplate,
   repoJSONTemplate,
-  indexMd,
-  getSwaggersToProcess,
 } from "../src/doc-preview.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -93,7 +93,10 @@ if (!validArgs) {
 
 // Get selected version and swaggers to process
 
-const changedFileStatuses = await getChangedFilesStatuses({ cwd: specRepoRoot });
+const changedFileStatuses = await getChangedFilesStatuses({
+  cwd: specRepoRoot,
+  paths: ["specification"],
+});
 
 // Exclude deleted files as they are not relevant for generating documentation.
 const changedFiles = [
