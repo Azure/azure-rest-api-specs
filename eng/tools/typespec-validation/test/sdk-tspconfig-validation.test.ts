@@ -1,41 +1,42 @@
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
+import { strictEqual } from "node:assert";
+import { join } from "path";
+import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularPackageDirectorySubRule,
-  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
-  TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-  TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtPackageDirectorySubRule,
-  TspConfigGoMgmtModuleEqualStringSubRule,
-  TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateSamplesTrueSubRule,
-  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigCsharpAzClearOutputFolderTrueSubRule,
+  TspConfigCsharpAzNamespaceEqualStringSubRule,
+  TspConfigCsharpAzPackageDirectorySubRule,
+  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtFixConstStutteringTrueSubRule,
+  TspConfigGoMgmtGenerateSamplesTrueSubRule,
+  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigGoMgmtModuleEqualStringSubRule,
+  TspConfigGoMgmtPackageDirectorySubRule,
+  TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
-  TspConfigPythonMgmtPackageDirectorySubRule,
+  TspConfigJavaMgmtNamespaceFormatSubRule,
+  TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
+  TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtPackageGenerateSampleTrueSubRule,
   TspConfigPythonMgmtPackageGenerateTestTrueSubRule,
-  TspConfigCsharpAzPackageDirectorySubRule,
-  TspConfigCsharpAzNamespaceEqualStringSubRule,
-  TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
-  TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsDpPackageDirectorySubRule,
+  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
+  TspConfigTsMgmtModularPackageDirectorySubRule,
+  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
-import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
-import { join } from "path";
-import { strictEqual } from "node:assert";
-import { stringify } from "yaml";
 
 import * as utils from "../src/utils.js";
 
@@ -386,6 +387,79 @@ const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigJavaAzPackageDirectorySubRule()],
 );
 
+const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-java",
+  managementTspconfigFolder,
+  "namespace",
+  "com.azure.resourcemanager.compute",
+  "com.azure.compute", // Invalid: missing "resourcemanager"
+  [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+);
+
+const javaMgmtNamespaceExtendedTestCases: Case[] = [
+  {
+    description: "Validate Java management namespace with numbers",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.storage2024",
+    }),
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description: "Validate Java management namespace with underscores",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.storage_v2",
+    }),
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description: "Validate Java management namespace with 5 segments",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.storage.blob",
+    }),
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description: "Validate Java management namespace with 6 segments",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.network.security.rules",
+    }),
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description:
+      "Validate Java management namespace with numbers and underscores in multiple segments",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.storage_v2.blob_2024",
+    }),
+    success: true,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+  {
+    description: "Validate Java management namespace with invalid special characters",
+    folder: managementTspconfigFolder,
+    tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
+      key: "namespace",
+      value: "com.azure.resourcemanager.storage@blob",
+    }),
+    success: false,
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
+  },
+];
+
 const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
@@ -599,6 +673,8 @@ describe("tspconfig", function () {
     ...goDpServiceDirTestCases,
     // java
     ...javaManagementPackageDirTestCases,
+    ...javaMgmtNamespaceTestCases,
+    ...javaMgmtNamespaceExtendedTestCases,
     // python
     ...pythonManagementPackageDirTestCases,
     ...pythonManagementNamespaceTestCases,
