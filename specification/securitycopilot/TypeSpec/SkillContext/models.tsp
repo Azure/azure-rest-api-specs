@@ -1526,7 +1526,7 @@ namespace SkillContext
 	}
 	
 	@doc("Request model for setting cached entity")
-	model SetCachedEntityRequest{
+	model SetCachedEntityRequest {
 		@doc("Entity to cache")
 		entity: string;
 
@@ -1534,10 +1534,10 @@ namespace SkillContext
 		cacheKeySuffix?: string;
 
 		@doc("Scopes to limit the cache entry to (scoped to user already by default)")
-		scopes?: HashSet<SkillUtilityCacheScope>;
+		scopes?: Array<SkillUtilityCacheScope>;
 
 		@doc("Time to live for the cache entry")
-		ttl?: timespan;
+		ttl?: duration;
 
 		@doc("Type of data to be stored in the cache")
 		dataType: SkillUtilityCacheDataType;

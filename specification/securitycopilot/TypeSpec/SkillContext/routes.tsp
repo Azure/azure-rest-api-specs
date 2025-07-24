@@ -181,7 +181,7 @@ op setFinalResponseSettings(
 op getCachedEntity(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 @query cacheKeySuffix? : string,
-@query scopes? : HashSet<SkillUtilityCacheScope>,
+@query scopes? : Array<SkillUtilityCacheScope>,
 @query dataType? : SkillUtilityCacheDataType,
 ): CachedEntity;
 
