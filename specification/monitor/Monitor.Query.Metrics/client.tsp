@@ -9,6 +9,11 @@ namespace ClientCustomizations;
 
 @@clientName(MonitorQueryMetrics.batch, "queryResources");
 
+@@clientNamespace(MonitorQueryMetrics,
+  "com.azure.monitor.query.metrics.implementation",
+  "java"
+);
+
 using MonitorQueryMetrics;
 
 @@clientName(MetricResultsResponse, "MetricResults", "go");
