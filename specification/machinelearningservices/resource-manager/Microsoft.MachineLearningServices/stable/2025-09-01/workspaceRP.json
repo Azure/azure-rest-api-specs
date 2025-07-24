@@ -1776,7 +1776,8 @@
         },
         "discoveryUrl": {
           "description": "Url for the discovery service to identify regional endpoints for machine learning experimentation services",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "provisioningState": {
           "type": "string",
@@ -1920,6 +1921,7 @@
           "$ref": "#/definitions/FeatureStoreSettings"
         },
         "associatedWorkspaces": {
+          "description": "The list of associated project workspaces to a hub workspace.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3204,7 +3206,8 @@
           "type": "string"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "securityToken": {
           "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
@@ -3363,6 +3366,7 @@
       "x-ms-discriminator-value": "None"
     },
     "WorkspaceConnectionManagedIdentity": {
+      "description": "Represents credentials for Azure Managed Identity authentication, including the managed identity's resource ID and client ID.",
       "type": "object",
       "properties": {
         "resourceId": {
@@ -3542,7 +3546,8 @@
           "type": "string"
         },
         "secretAccessKey": {
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
