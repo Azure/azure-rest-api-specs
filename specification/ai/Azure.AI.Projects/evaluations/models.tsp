@@ -422,15 +422,8 @@ model EvaluationResultSettings {
 }
 
 @doc("One Evaluation Definition")
-@resource("singleEvaluation")
 @added(Versions.v2025_07_31_preview)
 model OneEvaluation {
-  @doc("Identifier of the single evaluation.")
-  @key("name")
-  @encodedName("application/json", "id")
-  @visibility(Lifecycle.Read)
-  name: string;
-
   @doc("Input data to evaluate. Single row support only.")
   dataSource: InlineDataSource;
 
