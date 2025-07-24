@@ -43,7 +43,6 @@ namespace Language.Conversations.Authoring;
  * The available API versions.
  */
 enum Versions {
-
   /** Version 2023-04-01 */
   v2023_04_01: "2023-04-01",
 
