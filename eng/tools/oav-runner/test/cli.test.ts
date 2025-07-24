@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { getRootFolder } from "../src/cli.js";
 import path from "path";
+import { describe, expect, it, vi } from "vitest";
+import { getRootFolder } from "../src/cli.js";
 
 const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
 

@@ -1,8 +1,8 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  getAzurePipelineArtifact,
-  getAdoBuildInfoFromUrl,
   fetchFailedArtifact,
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
 } from "../src/artifacts.js";
 import { createMockCore } from "./mocks.js";
 
