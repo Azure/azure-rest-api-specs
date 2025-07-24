@@ -1887,7 +1887,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/lots/{lotId}/contingencies/{contingencyId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/lots/{lotId}/contingencies/{contingencyId}": {
       "get": {
         "tags": [
           "Contingency"
@@ -1921,9 +1921,6 @@
               "$ref": "#/definitions/Contingency"
             }
           },
-          "204": {
-            "description": "No Content. The request has succeeded but returned no results."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1938,7 +1935,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/lots/{lotId}/contingencies": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/lots/{lotId}/contingencies": {
       "get": {
         "tags": [
           "Contingency"
@@ -1969,15 +1966,15 @@
               "$ref": "#/definitions/ContingencyListResult"
             }
           },
-          "204": {
-            "description": "No Content. The request has succeeded but returned no results."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ContingencyList": {
@@ -5878,7 +5875,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "Status",
+            "name": "StatusTypes",
             "modelAsString": true
           }
         },
