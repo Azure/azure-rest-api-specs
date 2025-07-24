@@ -79,6 +79,29 @@
         "typeProperties"
       ]
     },
+    "ManagedIntegrationRuntimeTypeProperties": {
+      "description": "Managed integration runtime type properties.",
+      "type": "object",
+      "properties": {
+        "computeProperties": {
+          "description": "The compute resource for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeComputeProperties"
+        },
+        "ssisProperties": {
+          "description": "SSIS properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
+        },
+        "customerVirtualNetwork": {
+          "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
+          "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
+        },
+        "interactiveQuery": {
+          "description": "Interactive authoring capability reference.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InteractiveQueryProperties"
+        }
+      }
+    },
     "InteractiveQueryProperties": {
       "description": "Interactive authoring capability type properties.",
       "type": "object",
@@ -102,29 +125,6 @@
           "description": "The allowed idle time for interactive authoring.",
           "type": "integer",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedIntegrationRuntimeTypeProperties": {
-      "description": "Managed integration runtime type properties.",
-      "type": "object",
-      "properties": {
-        "computeProperties": {
-          "description": "The compute resource for managed integration runtime.",
-          "$ref": "#/definitions/IntegrationRuntimeComputeProperties"
-        },
-        "ssisProperties": {
-          "description": "SSIS properties for managed integration runtime.",
-          "$ref": "#/definitions/IntegrationRuntimeSsisProperties"
-        },
-        "customerVirtualNetwork": {
-          "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
-          "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
-        },
-        "interactiveQuery": {
-          "description": "Interactive authoring capability reference.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InteractiveQueryProperties"
         }
       }
     },
