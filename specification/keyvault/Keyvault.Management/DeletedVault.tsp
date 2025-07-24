@@ -44,10 +44,11 @@ interface DeletedVaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("purge")
   @operationId("Vaults_PurgeDeleted")
-  purgeDeleted is ArmResourceActionAsync<
+  purgeDeleted is ArmResourceActionAsyncBase<
     DeletedVault,
     void,
-    OkResponse,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Error = CloudError
   >;

@@ -442,21 +442,6 @@ union ManagedHsmSkuFamily {
 }
 
 /**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
-union ManagedServiceIdentityType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
-}
-
-/**
  * SKU name to specify whether the key vault is a standard vault or a premium vault.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1493,7 +1478,7 @@ model ManagedHsmResource {
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
-  identity?: ManagedServiceIdentity;
+  identity?: CommonTypes.ManagedServiceIdentity;
 }
 
 /**
@@ -1509,34 +1494,6 @@ model ManagedHsmSku {
    * SKU of the managed HSM Pool
    */
   name: ManagedHsmSkuName;
-}
-
-/**
- * Managed service identity (system assigned and/or user assigned identities)
- */
-model ManagedServiceIdentity {
-  /**
-   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
-   */
-  type: ManagedServiceIdentityType;
-
-  /**
-   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**
