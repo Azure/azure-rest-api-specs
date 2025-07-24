@@ -201,7 +201,8 @@ export class SpecModel {
     const readmes = [...(await this.getReadmes()).values()];
     const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
     const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
-    return swaggers;
+    const refs = await flatMapAsync(swaggers, async (s) => [...(await s.getRefs()).values()]);
+    return [...swaggers, ...refs];
   }
 
   /**
