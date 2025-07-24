@@ -417,7 +417,7 @@
             "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatasetVersionUpdate"
+              "$ref": "#/definitions/DatasetVersion"
             }
           }
         ],
@@ -1018,63 +1018,6 @@
         }
       }
     },
-    "/evaluations:evaluateOne": {
-      "post": {
-        "operationId": "Evaluations_CreateOneEvaluation",
-        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "repeatabilityRequestId"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "repeatabilityFirstSent"
-          },
-          {
-            "name": "oneEvaluation",
-            "in": "body",
-            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OneEvaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/evaluations:runs": {
       "post": {
         "operationId": "Evaluations_CreateEvaluation",
@@ -1281,7 +1224,7 @@
             "description": "The Index to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndexUpdate"
+              "$ref": "#/definitions/Index"
             }
           }
         ],
@@ -1531,8 +1474,7 @@
           "description": "The agent evaluation result.",
           "items": {
             "$ref": "#/definitions/AgentEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1937,8 +1879,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1965,7 +1906,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -2056,16 +1997,6 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
-    "AzureAISearchIndexUpdate": {
-      "type": "object",
-      "description": "Azure AI Search Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureSearch"
-    },
     "AzureOpenAIModelConfiguration": {
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
@@ -2132,24 +2063,21 @@
           "description": "Array of messages representing representing queries",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "response": {
           "type": "array",
           "description": "Array of messages representing responses",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "toolDefinitions": {
           "type": "array",
           "description": "Array of tool definitions that are used in the conversation",
           "items": {
             "$ref": "#/definitions/AgentToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2173,24 +2101,21 @@
           "description": "Array of messages representing representing queries",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "response": {
           "type": "array",
           "description": "Array of messages representing responses",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "toolDefinitions": {
           "type": "array",
           "description": "Array of tool definitions that are used in the conversation",
           "items": {
             "$ref": "#/definitions/AgentToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -2373,16 +2298,6 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
-    "CosmosDBIndexUpdate": {
-      "type": "object",
-      "description": "CosmosDB Vector Store Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
-    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -2548,39 +2463,6 @@
         "type",
         "name",
         "version"
-      ]
-    },
-    "DatasetVersionUpdate": {
-      "type": "object",
-      "description": "DatasetVersion Definition",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DatasetType",
-          "description": "Dataset type"
-        },
-        "description": {
-          "type": "string",
-          "description": "The asset description text.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
       ]
     },
     "Deployment": {
@@ -2903,8 +2785,7 @@
           "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2996,8 +2877,7 @@
           "description": "List of external storage destinations where evaluation results should be exported in addition to the default AI Foundry storage",
           "items": {
             "$ref": "#/definitions/EvaluationDestinationConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -3420,32 +3300,12 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
-    "FileDatasetVersionUpdate": {
-      "type": "object",
-      "description": "FileDatasetVersion Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetVersionUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "uri_file"
-    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
       "allOf": [
         {
           "$ref": "#/definitions/DatasetVersion"
-        }
-      ],
-      "x-ms-discriminator-value": "uri_folder"
-    },
-    "FolderDatasetVersionUpdate": {
-      "type": "object",
-      "description": "FileDatasetVersion Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatasetVersionUpdate"
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
@@ -3498,8 +3358,7 @@
           "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "datasetId": {
           "$ref": "#/definitions/DatasetId",
@@ -3536,8 +3395,7 @@
           "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "datasetId": {
           "$ref": "#/definitions/DatasetId",
@@ -3568,8 +3426,7 @@
           "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "queries": {
           "type": "array",
@@ -3604,8 +3461,7 @@
           "description": "A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.",
           "items": {
             "$ref": "#/definitions/Message"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "queries": {
           "type": "array",
@@ -3719,39 +3575,6 @@
           }
         ]
       }
-    },
-    "IndexUpdate": {
-      "type": "object",
-      "description": "Index resource Definition",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IndexType",
-          "description": "Type of index"
-        },
-        "description": {
-          "type": "string",
-          "description": "The asset description text.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
     },
     "InlineData": {
       "type": "object",
@@ -3974,16 +3797,6 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
-    "ManagedAzureAISearchIndexUpdate": {
-      "type": "object",
-      "description": "Managed Azure AI Search Index Definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IndexUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "ManagedAzureSearch"
-    },
     "Message": {
       "type": "object",
       "description": "Abstract base model representing a single message in a conversation.",
@@ -4073,45 +3886,6 @@
       ],
       "x-ms-discriminator-value": "None"
     },
-    "OneEvaluation": {
-      "type": "object",
-      "description": "One Evaluation Definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the single evaluation.",
-          "readOnly": true,
-          "x-ms-client-name": "name"
-        },
-        "dataSource": {
-          "$ref": "#/definitions/InlineDataSource",
-          "description": "Input data to evaluate. Single row support only."
-        },
-        "evaluators": {
-          "type": "object",
-          "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorConfiguration"
-          }
-        },
-        "additionalDestinations": {
-          "$ref": "#/definitions/EvaluationDestinationConfiguration",
-          "description": "External storage destinations where evaluation results can be exported."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "dataSource",
-        "evaluators"
-      ]
-    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -4163,8 +3937,7 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -4185,8 +3958,7 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -4249,8 +4021,7 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -4373,8 +4144,7 @@
           "description": "Array of query-response pairs with optional context and ground truth",
           "items": {
             "$ref": "#/definitions/QueryResponseMessage"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -4396,8 +4166,7 @@
           "description": "Array of query-response pairs with optional context and ground truth",
           "items": {
             "$ref": "#/definitions/QueryResponseMessage"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
