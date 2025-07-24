@@ -770,7 +770,6 @@ interface ConversationAuthoringTrainedModel {
    */
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @added(Versions.v2023_04_01)
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getLoadSnapshotStatus)
