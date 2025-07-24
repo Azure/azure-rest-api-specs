@@ -29,6 +29,17 @@ union HibernateSupport {
   string,
 }
 
+@doc("Indicates whether single sign on is enabled or disabled on the dev box.")
+union SingleSignOnStatus {
+  @doc("The dev box is configured for single sign on.")
+  Enabled: "Enabled",
+
+  @doc("The dev box is not configured for single sign on.")
+  Disabled: "Disabled",
+
+  string,
+}
+
 @doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
 union LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
@@ -194,6 +205,14 @@ union PoolHealthStatus {
 union PoolAlignTarget {
   @doc("Network properties.")
   NetworkProperties: "NetworkProperties",
+
+  @added(APIVersions.v2025_07_01_preview)
+  @doc("Hibernate support.")
+  HibernateSupport: "HibernateSupport",
+
+  @added(APIVersions.v2025_07_01_preview)
+  @doc("Single sign on status.")
+  SingleSignOnStatus: "SingleSignOnStatus",
 
   string,
 }
@@ -500,6 +519,10 @@ model Pool {
   @doc("The default active hours configuration for Dev Boxes created in this pool.")
   @added(APIVersions.v2025_04_01_preview)
   activeHoursConfiguration?: PoolActiveHoursConfiguration;
+
+  @doc("Indicates whether single sign on is enabled/disabled or unknown.")
+  @added(APIVersions.v2025_07_01_preview)
+  singleSignOnStatus?: SingleSignOnStatus;
 }
 
 @doc("Hardware specifications for the Dev Box.")
@@ -600,6 +623,14 @@ model PoolActiveHoursConfiguration {
 
   @doc("The default end time of the active hours.")
   defaultEndTimeHour?: int32;
+
+  @doc("The days of the week that active hours features will be enabled.")
+  @added(APIVersions.v2025_07_01_preview)
+  defaultDaysOfWeek?: DayOfWeek[];
+
+  @doc("The maximum amount of days per week that a user can enable active hours related features.")
+  @added(APIVersions.v2025_07_01_preview)
+  daysOfWeekLimit?: int32;
 }
 
 @doc("The active hours configuration for a Dev Box.")
@@ -649,6 +680,36 @@ model UserActiveHoursConfiguration {
 
   @doc("The end time of the active hours.")
   endTimeHour?: int32;
+
+  @doc("The days of the week.")
+  @added(APIVersions.v2025_07_01_preview)
+  daysOfWeek?: DayOfWeek[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Days of week will never change."
+@doc("Days of the week.")
+@added(APIVersions.v2025_07_01_preview)
+union DayOfWeek {
+  @doc("Monday")
+  Monday: "Monday",
+
+  @doc("Tuesday")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday")
+  Thursday: "Thursday",
+
+  @doc("Friday")
+  Friday: "Friday",
+
+  @doc("Saturday")
+  Saturday: "Saturday",
+
+  @doc("Sunday")
+  Sunday: "Sunday",
 }
 
 alias ScheduleListResult = Azure.Core.Page<Schedule>;
@@ -795,6 +856,11 @@ model DevBox {
   @added(APIVersions.v2025_04_01_preview)
   @visibility(Lifecycle.Read)
   activeHoursConfiguration?: ActiveHoursConfiguration;
+
+  @doc("Indicates whether single sign on is enabled/disabled or unknown.")
+  @added(APIVersions.v2025_07_01_preview)
+  @visibility(Lifecycle.Read)
+  singleSignOnStatus?: SingleSignOnStatus;
 }
 
 @doc("Provides remote connection information for a Dev Box.")
@@ -1230,7 +1296,7 @@ model DevBoxTunnel extends DevBoxAddOn {
   codeTunnelUrl: url;
 
   @doc("""
-    The hosting resource name, either a DevBox or HyperV. 
+    The hosting resource name, either a DevBox or HyperV.
     Leaving it empty or `Default` if it's for DevBox.
     """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
