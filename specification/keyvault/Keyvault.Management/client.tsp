@@ -185,3 +185,4 @@ using Azure.Core;
   KeyVaultNameUnavailableReason,
   "csharp"
 );
+@@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
