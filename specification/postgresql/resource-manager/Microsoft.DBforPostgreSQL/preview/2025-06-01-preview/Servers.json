@@ -921,7 +921,7 @@
           "description": "Storage properties of a server."
         },
         "backup": {
-          "$ref": "#/definitions/Backup",
+          "$ref": "#/definitions/BackupForPatch",
           "default": null,
           "description": "Backup properties of a server."
         },
@@ -931,7 +931,7 @@
           "description": "High availability properties of a server."
         },
         "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindow",
+          "$ref": "#/definitions/MaintenanceWindowForPatch",
           "default": null,
           "description": "Maintenance window properties of a server.",
           "x-ms-mutability": [
@@ -940,7 +940,7 @@
           ]
         },
         "authConfig": {
-          "$ref": "#/definitions/AuthConfig",
+          "$ref": "#/definitions/AuthConfigForPatch",
           "default": null,
           "description": "Authentication configuration properties of a server."
         },
@@ -997,7 +997,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/SkuForPatch",
           "description": "Compute tier and size of a server."
         },
         "identity": {
@@ -1062,6 +1062,29 @@
         "name",
         "tier"
       ],
+      "description": "Compute information of a server."
+    },
+    "SkuForPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name by which is known a given compute size assigned to a server."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of the compute assigned to a server.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
       "description": "Compute information of a server."
     },
     "Storage": {
@@ -1165,6 +1188,40 @@
         "tenantId": {
           "type": "string",
           "default": "",
+          "description": "Identifier of the tenant of the delegated resource."
+        }
+      },
+      "description": "Authentication configuration properties of a server."
+    },
+    "AuthConfigForPatch": {
+      "type": "object",
+      "properties": {
+        "activeDirectoryAuth": {
+          "type": "string",
+          "description": "Indicates if the server supports Microsoft Entra authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MicrosoftEntraAuth",
+            "modelAsString": true
+          }
+        },
+        "passwordAuth": {
+          "type": "string",
+          "description": "Indicates if the server supports password based authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordBasedAuth",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
           "description": "Identifier of the tenant of the delegated resource."
         }
       },
@@ -1340,6 +1397,39 @@
       },
       "description": "Backup properties of a server."
     },
+    "BackupForPatch": {
+      "type": "object",
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "description": "Indicates if the server is configured to create geographically redundant backups.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeographicallyRedundantBackup",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore point time (ISO8601 format) for a server.",
+          "readOnly": true
+        }
+      },
+      "description": "Backup properties of a server."
+    },
     "Network": {
       "type": "object",
       "properties": {
@@ -1447,6 +1537,31 @@
           "type": "integer",
           "format": "int32",
           "default": 0,
+          "description": "Day of the week to be used for maintenance window."
+        }
+      }
+    },
+    "MaintenanceWindowForPatch": {
+      "type": "object",
+      "description": "Maintenance window properties of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "Indicates whether custom window is enabled or disabled."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour to be used for maintenance window."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start minute to be used for maintenance window."
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
           "description": "Day of the week to be used for maintenance window."
         }
       }
