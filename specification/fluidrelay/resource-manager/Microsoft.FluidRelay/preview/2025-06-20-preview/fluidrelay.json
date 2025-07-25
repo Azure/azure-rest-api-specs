@@ -634,14 +634,14 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -675,7 +675,7 @@
             "$ref": "#/parameters/FluidRelayServerName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -685,13 +685,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Location": {
@@ -735,7 +735,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -847,7 +847,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1059,7 +1059,7 @@
           ]
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "System meta data for this resource, including creation and modification information.",
           "readOnly": true
         },
@@ -1071,7 +1071,7 @@
       "description": "A FluidRelay Server.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1085,7 +1085,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "System meta data for this resource, including creation and modification information.",
           "readOnly": true
         }
@@ -1093,7 +1093,7 @@
       "description": "A FluidRelay Container.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1434,7 +1434,7 @@
           "type": "array",
           "description": "The array of all private link resources",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -1451,7 +1451,7 @@
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
@@ -1462,7 +1462,6 @@
     },
     "PublicNetworkAccessProperty": {
       "description": "Indicates if public network access is enabled for this resource.",
-      "default": "Enabled",
       "enum": [
         "Enabled",
         "Disabled"
