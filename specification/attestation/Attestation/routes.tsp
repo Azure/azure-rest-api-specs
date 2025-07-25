@@ -13,6 +13,7 @@ interface PolicyOperationGroup {
   /**
    * Retrieves the current policy for an attestation type.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Retrieves the current policy for an attestation type.")
   @route("/policies/{attestationType}")
   @get
@@ -30,6 +31,8 @@ interface PolicyOperationGroup {
   /**
    * Sets the policy for a given attestation type.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Sets the policy for a given attestation type.")
   @route("/policies/{attestationType}")
   @put
@@ -54,6 +57,7 @@ interface PolicyOperationGroup {
    * Resets the attestation policy for the specified tenant and reverts to the
    * default policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("""
     Resets the attestation policy for the specified tenant and reverts to the
     default policy.
@@ -94,6 +98,7 @@ interface PolicyCertificatesOperationGroup {
   /**
    * Retrieves the set of certificates used to express policy for the current tenant.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Retrieves the set of certificates used to express policy for the current tenant.")
   @route("/certificates")
   @get
@@ -103,6 +108,7 @@ interface PolicyCertificatesOperationGroup {
    * Adds a new attestation policy certificate to the set of policy management
    * certificates.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("""
     Adds a new attestation policy certificate to the set of policy management
     certificates.
@@ -118,6 +124,7 @@ interface PolicyCertificatesOperationGroup {
    * Removes the specified policy management certificate. Note that the final policy
    * management certificate cannot be removed.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("""
     Removes the specified policy management certificate. Note that the final policy
     management certificate cannot be removed.
@@ -135,6 +142,7 @@ interface AttestationOperationGroup {
    * Processes an OpenEnclave report , producing an artifact. The type of artifact
    * produced is dependent upon attestation policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest to an SGX enclave.")
   @route("/attest/OpenEnclave")
   @post
@@ -147,6 +155,7 @@ interface AttestationOperationGroup {
    * Processes an SGX enclave quote, producing an artifact. The type of artifact
    * produced is dependent upon attestation policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest to an SGX enclave.")
   @route("/attest/SgxEnclave")
   @post
@@ -159,6 +168,7 @@ interface AttestationOperationGroup {
    * Processes an Azure Guest TCG Log, producing an artifact. The type of artifact
    * produced is dependent upon attestation policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest to an Azure Guest VM.")
   @route("/attest/AzureGuest")
   @post
@@ -172,6 +182,7 @@ interface AttestationOperationGroup {
    * result. The attestation result produced is dependent upon the attestation
    * policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest a Virtualization-based Security (VBS) enclave.")
   @route("/attest/Tpm")
   @post
@@ -184,6 +195,7 @@ interface AttestationOperationGroup {
    * Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon
    * attestation policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest to an SEV SNP Virtual Machine.")
   @route("/attest/SevSnpVm")
   @post
@@ -196,6 +208,7 @@ interface AttestationOperationGroup {
    * Processes an TDX quote, producing an artifact. The type of artifact produced is
    * dependent upon attestation policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Attest to a TDX Virtual Machine.")
   @route("/attest/TdxVm")
   @post
@@ -211,6 +224,7 @@ interface TcbBaselinesOperationGroup {
    * along with an indication of which one is in enforced for the attestation
    * provider.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("""
     Retrieves a list of all Azure supported baseline details for the a TEE type
     along with an indication of which one is in enforced for the attestation
@@ -234,6 +248,7 @@ interface SigningCertificatesOperationGroup {
   /**
    * Retrieves metadata signing certificates in use by the attestation service
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Retrieves the attestation signing keys in use by the attestation service")
   @route("/certs")
   @get
@@ -251,6 +266,7 @@ interface MetadataConfigurationOperationGroup {
    * Retrieves metadata about the attestation signing keys in use by the attestation
    * service
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Retrieves the OpenID Configuration data for the Azure Attestation Service")
   @route("/.well-known/openid-configuration")
   @get
