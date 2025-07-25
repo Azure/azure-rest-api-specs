@@ -470,15 +470,9 @@ model FacetValue {
 }
 
 @doc("FacetsResponse.")
-@pagedResult
 model FacetsResponse {
   @doc("The list of facets.")
-  @items
   facets: Record<FacetValue[]>;
-
-  @doc("The link to the next page of results.")
-  @nextLink
-  nextLink?: string;
 }
 
 @doc("Response containing a list of critical data columns.")
