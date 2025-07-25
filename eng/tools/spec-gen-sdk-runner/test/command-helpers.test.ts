@@ -1,22 +1,22 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
-import * as log from "../src/log.js";
-import * as utils from "../src/utils.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  generateArtifact,
   getBreakingChangeInfo,
   getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  generateArtifact,
   setPipelineVariables,
 } from "../src/command-helpers.js";
+import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
+import * as specHelpers from "../src/spec-helpers.js";
 import { APIViewRequestData } from "../src/types.js";
+import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -368,22 +368,22 @@ describe("commands.ts", () => {
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
       const mockExecutionReport = {
-        packages: [{ shouldLabelBreakingChange: true, breakingChangeLabel: "breaking-change" }],
+        packages: [{ shouldLabelBreakingChange: true }],
       };
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([true, "breaking-change"]);
+      expect(result).toBe(true);
     });
 
     test("should return no breaking change info if not applicable", () => {
       const mockExecutionReport = {
-        packages: [{ shouldLabelBreakingChange: false, breakingChangeLabel: "" }],
+        packages: [{ shouldLabelBreakingChange: false }],
       };
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([false, ""]);
+      expect(result).toBe(false);
     });
 
     test("should return no breaking change info if not executionReport", () => {
@@ -393,7 +393,7 @@ describe("commands.ts", () => {
 
       const result = getBreakingChangeInfo(mockExecutionReport);
 
-      expect(result).toEqual([false, ""]);
+      expect(result).toBe(false);
     });
   });
 
@@ -426,7 +426,6 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
@@ -434,7 +433,6 @@ describe("commands.ts", () => {
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
         mockStagedArtifactsFolder,
@@ -478,8 +476,6 @@ describe("commands.ts", () => {
         "StagedArtifactsFolder",
         "mockStagedArtifactsFolder",
       );
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "remove");
-      expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
       expect(log.setVsoVariable).toHaveBeenCalledWith("HasAPIViewArtifact", "false");
     });
 
@@ -507,7 +503,6 @@ describe("commands.ts", () => {
       };
 
       const mockResult = "failed";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
       const mockStagedArtifactsFolder = "";
@@ -515,7 +510,6 @@ describe("commands.ts", () => {
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
         mockStagedArtifactsFolder,
@@ -553,7 +547,6 @@ describe("commands.ts", () => {
         specRepoHttpsUrl: "",
       };
       const mockResult = "succeeded";
-      const mockBreakingchangeLabel = "breaking-change";
       const mockhasBreakingChange = false;
       // Using true for hasManagementPlaneSpecs, which would normally make isSpecGenSdkCheckRequired=true
       // for Go SDK (as tested in the getRequiredSettingValue tests)
@@ -565,7 +558,6 @@ describe("commands.ts", () => {
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
-        mockBreakingchangeLabel,
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
         mockStagedArtifactsFolder,
@@ -605,8 +597,8 @@ describe("commands.ts", () => {
       // Based on the constants in types.ts, Go SDK requires check for management plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for management plane
+      const result2 = getRequiredSettingValue(true, "azure-sdk-for-net");
+      // Based on the constants in types.ts, .NET SDK does not require check for management plane
       expect(result2).toBe(false);
     });
 

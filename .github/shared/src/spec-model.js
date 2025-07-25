@@ -2,8 +2,12 @@
 
 import { readdir } from "fs/promises";
 import { resolve } from "path";
-import { mapAsync } from "./array.js";
+import { flatMapAsync, mapAsync } from "./array.js";
+import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
+
+/** @type {Map<string, SpecModel>} */
+const specModelCache = new Map();
 
 /**
  * @typedef {Object} ToJSONOptions
@@ -16,6 +20,7 @@ import { Readme } from "./readme.js";
 
 export class SpecModel {
   /** @type {string} absolute path */
+  // @ts-expect-error Ignore error that value may not be set in ctor (since we may returned cached value)
   #folder;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -30,8 +35,17 @@ export class SpecModel {
    * @param {import('./logger.js').ILogger} [options.logger]
    */
   constructor(folder, options) {
-    this.#folder = resolve(folder);
+    const resolvedFolder = resolve(folder);
+
+    const cachedSpecModel = specModelCache.get(resolvedFolder);
+    if (cachedSpecModel !== undefined) {
+      return cachedSpecModel;
+    }
+
+    this.#folder = resolvedFolder;
     this.#logger = options?.logger;
+
+    specModelCache.set(resolvedFolder, this);
   }
 
   /**
@@ -122,10 +136,7 @@ export class SpecModel {
             const refRefToSwaggerPath = refRefs.get(swaggerPathResolved);
             if (refRefToSwaggerPath) {
               // Add the Swagger object for swaggerPath
-              affectedSwaggers.set(
-                refRefToSwaggerPath.path,
-                refRefToSwaggerPath,
-              );
+              affectedSwaggers.set(refRefToSwaggerPath.path, refRefToSwaggerPath);
 
               // Add the Swagger object that references swaggerPath
               //
@@ -150,9 +161,7 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(
-        `No affected swaggers found in specModel for ${swaggerPath}`,
-      );
+      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
     }
 
     return affectedSwaggers;
@@ -188,15 +197,21 @@ export class SpecModel {
     return this.#readmes;
   }
 
+  async getSwaggers() {
+    const readmes = [...(await this.getReadmes()).values()];
+    const tags = await flatMapAsync(readmes, async (r) => [...(await r.getTags()).values()]);
+    const swaggers = tags.flatMap((t) => [...t.inputFiles.values()]);
+    const refs = await flatMapAsync(swaggers, async (s) => [...(await s.getRefs()).values()]);
+    return [...swaggers, ...refs];
+  }
+
   /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) =>
-        a.path.localeCompare(b.path),
-      ),
+      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
       async (r) => await r.toJSONAsync(options),
     );
 
@@ -212,15 +227,4 @@ export class SpecModel {
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
   }
-}
-
-// TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
-function readme(file) {
-  // Filename "readme.md" with any case is a valid README file
-  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
 }
