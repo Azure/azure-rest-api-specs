@@ -100,10 +100,22 @@ suppressions:
   - code: PatchResponseCodes
     from: Configurations.json
     reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
+  - code: ProvisioningStateSpecifiedForLROPut
     from: Databases.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutGetPatchResponseSchema
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
     from: FirewallRules.json
     reason: The existing API contract is like this and not be able to change.
   - code: DeleteResponseBodyEmpty
