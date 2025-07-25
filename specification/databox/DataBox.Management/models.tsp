@@ -2738,6 +2738,7 @@ model AvailableSkusResult {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @Azure.Core.items
   value: SkuInformation[];
 
   /**
