@@ -2708,14 +2708,10 @@
           "description": "Allocation details including currency and amount for this breakdown item"
         },
         "startAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start date specific to this breakdown item"
+          "$ref": "#/definitions/StartAt"
         },
         "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End date specific to this breakdown item"
+          "$ref": "#/definitions/EndAt"
         },
         "dimensions": {
           "type": "array",
@@ -2861,8 +2857,19 @@
       "type": "object",
       "description": "Credit patch properties",
       "properties": {
-        "displayName": {
-          "$ref": "#/definitions/DisplayName"
+        "credit": {
+          "description": "The entire investment amount for the credit contract, including currency and amount. Only amount can be modified.",
+          "$ref": "#/definitions/Commitment"
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt"
+        },
+        "breakdown": {
+          "type": "array",
+          "description": "Credit line-items/milestones/no-charge services breakdown. Entire breakdown will be replaced in a PATCH operation.",
+          "items": {
+            "$ref": "#/definitions/CreditBreakdownItem"
+          }
         }
       }
     },
