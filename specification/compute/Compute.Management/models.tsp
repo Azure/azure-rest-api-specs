@@ -2877,6 +2877,11 @@ model ProxyAgentSettings {
   mode?: Mode;
 
   /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux OS.
+   */
+  addProxyAgentExtension?: boolean;
+
+  /**
    * Increase the value of this property allows users to reset the key used for securing communication channel between guest and host.
    */
   keyIncarnationId?: int32;
