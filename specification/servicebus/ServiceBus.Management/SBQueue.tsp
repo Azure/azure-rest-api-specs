@@ -14,7 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of queue Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SBNamespace)
 model SBQueue is Azure.ResourceManager.ProxyResource<SBQueueProperties> {
   ...ResourceNameParameter<
@@ -25,13 +25,13 @@ model SBQueue is Azure.ResourceManager.ProxyResource<SBQueueProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SBQueues {
   /**
    * Returns a description for the specified queue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queues_Get")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx")
   get is ArmResourceRead<SBQueue>;
@@ -39,8 +39,8 @@ interface SBQueues {
   /**
    * Creates or updates a Service Bus queue. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queues_CreateOrUpdate")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -51,7 +51,7 @@ interface SBQueues {
   /**
    * Deletes a queue from the specified namespace in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queues_Delete")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx")
   delete is ArmResourceDeleteSync<SBQueue>;
@@ -59,7 +59,7 @@ interface SBQueues {
   /**
    * Gets the queues within a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queues_ListByNamespace")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx")
   listByNamespace is ArmResourceListByParent<

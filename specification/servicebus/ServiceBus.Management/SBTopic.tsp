@@ -14,7 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of topic resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SBNamespace)
 model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   ...ResourceNameParameter<
@@ -25,13 +25,13 @@ model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SBTopics {
   /**
    * Returns a description for the specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Topics_Get")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx")
   get is ArmResourceRead<SBTopic>;
@@ -39,8 +39,8 @@ interface SBTopics {
   /**
    * Creates a topic in the specified namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Topics_CreateOrUpdate")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -51,7 +51,7 @@ interface SBTopics {
   /**
    * Deletes a topic from the specified namespace and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Topics_Delete")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx")
   delete is ArmResourceDeleteSync<SBTopic>;
@@ -59,7 +59,7 @@ interface SBTopics {
   /**
    * Gets all the topics in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Topics_ListByNamespace")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx")
   listByNamespace is ArmResourceListByParent<

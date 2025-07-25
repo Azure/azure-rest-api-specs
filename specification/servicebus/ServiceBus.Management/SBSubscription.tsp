@@ -14,7 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of subscription resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SBTopic)
 model SBSubscription
   is Azure.ResourceManager.ProxyResource<SBSubscriptionProperties> {
@@ -26,13 +26,13 @@ model SBSubscription
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SBSubscriptions {
   /**
    * Returns a subscription description for the specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Subscriptions_Get")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx")
   get is ArmResourceRead<SBSubscription>;
@@ -40,8 +40,8 @@ interface SBSubscriptions {
   /**
    * Creates a topic subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Subscriptions_CreateOrUpdate")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -52,7 +52,7 @@ interface SBSubscriptions {
   /**
    * Deletes a subscription from the specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Subscriptions_Delete")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx")
   delete is ArmResourceDeleteSync<SBSubscription>;
@@ -60,7 +60,7 @@ interface SBSubscriptions {
   /**
    * List all the subscriptions under a specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Subscriptions_ListByTopic")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx")
   listByTopic is ArmResourceListByParent<

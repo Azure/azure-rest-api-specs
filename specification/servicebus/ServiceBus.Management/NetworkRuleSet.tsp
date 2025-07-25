@@ -26,21 +26,21 @@ model NetworkRuleSet
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_GetNetworkRuleSet")
   getNetworkRuleSet is ArmResourceRead<NetworkRuleSet>;
 
   /**
    * Create or update NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_CreateOrUpdateNetworkRuleSet")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<
     NetworkRuleSet,
@@ -50,7 +50,7 @@ interface NetworkRuleSets {
   /**
    * Gets list of NetworkRuleSet for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_ListNetworkRuleSets")
   listNetworkRuleSets is ArmResourceListByParent<NetworkRuleSet>;
 }
