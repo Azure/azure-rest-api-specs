@@ -165,7 +165,7 @@ export class SpecModel {
       throw new SpecModelError(
         `Swagger file ${swaggerPath} not found in specModel.\n` +
           `It must be referenced in the "input-file" section of a tag in a readme.md file ` +
-          `or in a swagger JSON file using $ref.`,
+          `or in a swagger JSON file using $ref.`, {source: swaggerPath }
       );
     }
 
