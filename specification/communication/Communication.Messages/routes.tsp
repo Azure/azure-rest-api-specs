@@ -38,6 +38,14 @@ interface NotificationMessagesOperations {
     NotificationMessagesSendRequestBody,
     AcceptedResponse & SendMessageResult
   >;
+  
+  @added(Versions.c2025_09_01_Preview)
+  @doc("Sends a status update from Business to User.")
+  sendStatusUpdate is Operations.ResourceCollectionAction<
+    Notifications,
+    StatusSendRequestBody,
+    AcceptedResponse & SendMessageResult
+  >;
 }
 
 interface StreamOperations {
