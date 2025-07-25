@@ -76,7 +76,7 @@ interface PolicyOperationGroup {
        * JSON Web Signature with an empty policy document
        */
       @bodyRoot
-      PolicyJws: string;
+      policyJws: string;
     },
     PolicyResponse
   >;
@@ -256,7 +256,7 @@ interface SigningCertificatesOperationGroup {
     {},
     JsonWebKeySet & {
       @header
-      contentType: "application/jwk+json" | "application/json";
+      contentType: SigningCertificatesContentType;
     }
   >;
 }
