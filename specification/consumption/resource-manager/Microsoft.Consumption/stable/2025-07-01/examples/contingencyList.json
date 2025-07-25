@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "billingAccountId": "1234:5678",
+    "lotId": "lot1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/providers/Microsoft.Consumption/lots/lot1/contingencies/contingency1",
+            "name": "lot1/contingency1",
+            "type": "Microsoft.Consumption/lots/contingencies",
+            "kind": "MACC contingency",
+            "properties": {
+              "targetAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "progressAmount": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "status": "Active",
+              "subState": "Active",
+              "startDate": "2025-05-01T00:00:00.0000000Z",
+              "endDate": "2025-09-01T00:00:00.0000000Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/providers/Microsoft.Consumption/lots/lot2/contingencies/contingency2",
+            "name": "lot2/contingency2",
+            "type": "Microsoft.Consumption/lots/contingencies",
+            "kind": "MACC contingency",
+            "properties": {
+              "targetAmount": {
+                "currency": "USD",
+                "value": 6000.00
+              },
+              "progressAmount": {
+                "currency": "USD",
+                "value": 80.90
+              },
+              "status": "Completed",
+              "subState": "ShortfallWaived",
+              "startDate": "2025-03-01T00:00:00.0000000Z",
+              "endDate": "2025-04-30T00:00:00.0000000Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
