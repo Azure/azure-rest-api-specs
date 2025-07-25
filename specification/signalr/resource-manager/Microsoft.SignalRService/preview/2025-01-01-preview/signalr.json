@@ -79,9 +79,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -2828,6 +2828,28 @@
         "customCertificate"
       ]
     },
+    "Dimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The public facing name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Name of the dimension as it appears in MDM."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario."
+        }
+      }
+    },
     "FeatureFlags": {
       "type": "string",
       "description": "FeatureFlags is the supported features of Azure SignalR service.\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n- EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\n- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.",
@@ -2936,6 +2958,20 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Logs for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log."
+        }
+      }
+    },
     "ManagedIdentity": {
       "type": "object",
       "description": "A class represent managed identities used for request and response",
@@ -3000,6 +3036,50 @@
         ]
       }
     },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that makes sense for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "fillGapWithZero": {
+          "type": "string",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.\nEx. a metric that returns the number of times a particular error code was emitted. The error code may not appear\noften, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted."
+        },
+        "category": {
+          "type": "string",
+          "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of the metrics.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "NameAvailability": {
       "type": "object",
       "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
@@ -3055,6 +3135,85 @@
             "$ref": "#/definitions/SignalRRequestType"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "REST API operation supported by resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation with format: {provider}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "If the operation is a data action. (for data plane rbac)"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that describes a operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Extra Operation properties."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that describes a operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Friendly name of the resource provider"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized friendly description for the operation"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "An object that describes a specification."
         }
       }
     },
@@ -3580,6 +3739,33 @@
             "value": "RawWebSockets"
           }
         ]
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "An object that describes a specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Logs for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
       }
     },
     "ShareablePrivateLinkResourceProperties": {
