@@ -77,7 +77,7 @@ interface Replicas {
       contentType: "application/json" | "text/json";
     },
     PatchModel = Replica,
-    Response = Replica | (ArmAcceptedLroResponse & {
+    Response = Replica | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica>> & {
       @bodyRoot
       _: Replica;
     })

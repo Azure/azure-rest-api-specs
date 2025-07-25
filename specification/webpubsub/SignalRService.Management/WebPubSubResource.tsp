@@ -126,7 +126,7 @@ interface WebPubSubResources {
   regenerateKey is ArmResourceActionSync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    Response = WebPubSubKeys | (ArmAcceptedLroResponse & {
+    Response = WebPubSubKeys | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
       @bodyRoot
       _: WebPubSubKeys;
     })
