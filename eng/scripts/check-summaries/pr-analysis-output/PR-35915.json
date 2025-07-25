@@ -1,0 +1,736 @@
+{
+  "prNumber": 35915,
+  "currentSHA": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+  "PRCommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered shipped to Azure customers. Any further attempts at in-place modifications to the APIs will be subject to Azure's versioning and breaking change policies. <b>Additionally, for control plane APIs, you must acknowledge that you are following all the best practices documented by ARM at <a href=\"https://aka.ms/armapibestpractices\">aka.ms/armapibestpractices</a>.</b> If you do intend to release the APIs to your customers by merging this PR, add the <code>PublishToCustomers</code> label to your PR in acknowledgement of the above. Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> (see <a href=\"https://aka.ms/azsdk/api-versions#release--branches\">aka.ms/azsdk/api-versions#release--branches</a>).</li><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR is awaiting ARM reviewer feedback (label: <code>WaitForARMFeedback</code>).<br/>To learn when this PR will get reviewed, see ARM review queue at <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li><li>❌ The required check named <code>Automated merging requirements met</code> has failed. This is the final check that must pass. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide. In addition, refer to step 4 in the <a href=\"https://aka.ms/azsdk/pr-diagram\">PR workflow diagram</a></li></ul>",
+  "PRLabels": [
+    "WaitForARMFeedback",
+    "ARMReview",
+    "resource-manager",
+    "new-api-version",
+    "brownfield"
+  ],
+  "WorkflowOutputs": [
+    {
+      "runId": 16506797019,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506797019",
+      "createdAt": "2025-07-24T20:08:25Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506792656,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:35.2952574Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:35.3111538Z Post job cleanup.\n2025-07-24T20:08:35.4032534Z [command]/usr/bin/git version\n2025-07-24T20:08:35.4067672Z git version 2.50.1\n2025-07-24T20:08:35.4111252Z Temporarily overriding HOME='/home/runner/work/_temp/95f2a899-9189-42af-84a0-df78179f5980' before making global git config changes\n2025-07-24T20:08:35.4112618Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:35.4124320Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:35.4158652Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:35.4192602Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:35.4637745Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:35.4661678Z http.https://github.com/.extraheader\n2025-07-24T20:08:35.4674426Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:35.4706787Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:35.5385803Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506796953,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506796953",
+      "createdAt": "2025-07-24T20:08:24Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506790491,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:34.3582726Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:34.3742376Z Post job cleanup.\n2025-07-24T20:08:34.4658117Z [command]/usr/bin/git version\n2025-07-24T20:08:34.4693593Z git version 2.50.1\n2025-07-24T20:08:34.4737068Z Temporarily overriding HOME='/home/runner/work/_temp/a43bc45a-056f-4d46-8e34-0083e31e89b2' before making global git config changes\n2025-07-24T20:08:34.4738377Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:34.4750099Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:34.4783583Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:34.4816274Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:34.5320685Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:34.5347112Z http.https://github.com/.extraheader\n2025-07-24T20:08:34.5360795Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:34.5395476Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:34.5959185Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506789372,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506789372",
+      "createdAt": "2025-07-24T20:08:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780771,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.3731997Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.3879159Z Post job cleanup.\n2025-07-24T20:08:16.4792823Z [command]/usr/bin/git version\n2025-07-24T20:08:16.4827700Z git version 2.50.1\n2025-07-24T20:08:16.4868949Z Temporarily overriding HOME='/home/runner/work/_temp/4ff1bac2-a170-41e8-a804-0f745a0e9100' before making global git config changes\n2025-07-24T20:08:16.4869947Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.4880947Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.4912826Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.4944511Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.5387474Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.5411208Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.5423473Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.5454606Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:16.5997669Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506789315,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506789315",
+      "createdAt": "2025-07-24T20:08:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780744,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.7747615Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.7900089Z Post job cleanup.\n2025-07-24T20:08:16.8827072Z [command]/usr/bin/git version\n2025-07-24T20:08:16.8864001Z git version 2.50.1\n2025-07-24T20:08:16.8908266Z Temporarily overriding HOME='/home/runner/work/_temp/ae10a37e-d279-46ac-9582-99faa48893a6' before making global git config changes\n2025-07-24T20:08:16.8909624Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.8922032Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.8955817Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.8988346Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.9462838Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.9488347Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.9500391Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.9531994Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:17.0111825Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506788226,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506788226",
+      "createdAt": "2025-07-24T20:07:59Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780763,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:14.6861283Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:14.7014398Z Post job cleanup.\n2025-07-24T20:08:14.7940622Z [command]/usr/bin/git version\n2025-07-24T20:08:14.7976334Z git version 2.50.1\n2025-07-24T20:08:14.8018922Z Temporarily overriding HOME='/home/runner/work/_temp/7f5d84b5-c52f-4609-9703-fbdd4fe9d7c3' before making global git config changes\n2025-07-24T20:08:14.8019997Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:14.8031859Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:14.8065978Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:14.8097723Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:14.8564844Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:14.8589509Z http.https://github.com/.extraheader\n2025-07-24T20:08:14.8601943Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:14.8634323Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:14.9214384Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506787301,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506787301",
+      "createdAt": "2025-07-24T20:07:56Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780745,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.5812247Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.5969291Z Post job cleanup.\n2025-07-24T20:08:16.6880788Z [command]/usr/bin/git version\n2025-07-24T20:08:16.6916008Z git version 2.50.1\n2025-07-24T20:08:16.6961766Z Temporarily overriding HOME='/home/runner/work/_temp/ab6f083a-bab7-44ba-9e42-715041cefa3a' before making global git config changes\n2025-07-24T20:08:16.6967697Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.6984516Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.7018914Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.7051269Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.7502036Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.7525432Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.7537721Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.7569018Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:16.8122817Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506782152,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506782152",
+      "createdAt": "2025-07-24T20:07:38Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506773868,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:54.1830450Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:54.2000607Z Post job cleanup.\n2025-07-24T20:07:54.2922655Z [command]/usr/bin/git version\n2025-07-24T20:07:54.2958592Z git version 2.50.1\n2025-07-24T20:07:54.3002120Z Temporarily overriding HOME='/home/runner/work/_temp/68fe870c-a903-4602-9328-c58c7e3a9782' before making global git config changes\n2025-07-24T20:07:54.3003592Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:54.3015518Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:54.3050142Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:54.3083124Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:54.3540156Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:54.3565504Z http.https://github.com/.extraheader\n2025-07-24T20:07:54.3578613Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:54.3612914Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:54.4194777Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506782051,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506782051",
+      "createdAt": "2025-07-24T20:07:38Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506775772,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:56.2142315Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:56.2287148Z Post job cleanup.\n2025-07-24T20:07:56.3205536Z [command]/usr/bin/git version\n2025-07-24T20:07:56.3240659Z git version 2.50.1\n2025-07-24T20:07:56.3290814Z Temporarily overriding HOME='/home/runner/work/_temp/e275955c-eca1-48b1-9516-c6409cd60020' before making global git config changes\n2025-07-24T20:07:56.3292286Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:56.3297367Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:56.3331790Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:56.3363938Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:56.3816913Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:56.3841551Z http.https://github.com/.extraheader\n2025-07-24T20:07:56.3854948Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:56.3886579Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:56.4509337Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506777197,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506777197",
+      "createdAt": "2025-07-24T20:07:21Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766542,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:32.0235703Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:32.0396794Z Post job cleanup.\n2025-07-24T20:07:32.1320350Z [command]/usr/bin/git version\n2025-07-24T20:07:32.1356618Z git version 2.50.1\n2025-07-24T20:07:32.1405703Z Temporarily overriding HOME='/home/runner/work/_temp/dc27d327-e675-4709-b443-fc326203c306' before making global git config changes\n2025-07-24T20:07:32.1406639Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:32.1411031Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:32.1443880Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:32.1476768Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:32.1927398Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:32.1951797Z http.https://github.com/.extraheader\n2025-07-24T20:07:32.1964825Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:32.1997575Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:32.2582008Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506776013,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506776013",
+      "createdAt": "2025-07-24T20:07:18Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766539,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:32.2828471Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:32.2963039Z Post job cleanup.\n2025-07-24T20:07:32.3889730Z [command]/usr/bin/git version\n2025-07-24T20:07:32.3925661Z git version 2.50.1\n2025-07-24T20:07:32.3970412Z Temporarily overriding HOME='/home/runner/work/_temp/6fa80819-916f-4d04-a4b7-4d65353b14f0' before making global git config changes\n2025-07-24T20:07:32.3971774Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:32.3985429Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:32.4019434Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:32.4051924Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:32.4507843Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:32.4531885Z http.https://github.com/.extraheader\n2025-07-24T20:07:32.4543896Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:32.4575532Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:32.5130408Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506775934,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506775934",
+      "createdAt": "2025-07-24T20:07:18Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766524,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:31.1945806Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:31.2094670Z Post job cleanup.\n2025-07-24T20:07:31.3037289Z [command]/usr/bin/git version\n2025-07-24T20:07:31.3074015Z git version 2.50.1\n2025-07-24T20:07:31.3118680Z Temporarily overriding HOME='/home/runner/work/_temp/d0d43477-ed85-4e82-a492-1d58fc0c69ec' before making global git config changes\n2025-07-24T20:07:31.3120070Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:31.3132459Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:31.3167049Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:31.3200656Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:31.3654441Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:31.3682426Z http.https://github.com/.extraheader\n2025-07-24T20:07:31.3695995Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:31.3731660Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:31.4304113Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506775696,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506775696",
+      "createdAt": "2025-07-24T20:07:17Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766522,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:33.2744535Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:33.2892440Z Post job cleanup.\n2025-07-24T20:07:33.3807311Z [command]/usr/bin/git version\n2025-07-24T20:07:33.3841966Z git version 2.50.1\n2025-07-24T20:07:33.3883166Z Temporarily overriding HOME='/home/runner/work/_temp/d5334979-eddb-4f24-b8de-241a816c1e36' before making global git config changes\n2025-07-24T20:07:33.3884092Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:33.3894662Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:33.3926994Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:33.3958709Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:33.4399743Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:33.4422798Z http.https://github.com/.extraheader\n2025-07-24T20:07:33.4434776Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:33.4465644Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:33.5017450Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506770777,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506770777",
+      "createdAt": "2025-07-24T20:07:05Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506741671,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:13.3544563Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:13.3713882Z Post job cleanup.\n2025-07-24T20:07:13.4658810Z [command]/usr/bin/git version\n2025-07-24T20:07:13.4696181Z git version 2.50.1\n2025-07-24T20:07:13.4748619Z Temporarily overriding HOME='/home/runner/work/_temp/7ffac93d-32ad-49f9-8a88-f83878db778d' before making global git config changes\n2025-07-24T20:07:13.4750021Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:13.4762802Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:13.4799943Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:13.4833820Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:13.5287429Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:13.5312328Z http.https://github.com/.extraheader\n2025-07-24T20:07:13.5325526Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:13.5359089Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:13.5914001Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506769780,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506769780",
+      "createdAt": "2025-07-24T20:07:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506764912,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:11.9653733Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:11.9864227Z Post job cleanup.\n2025-07-24T20:07:12.0834024Z [command]/usr/bin/git version\n2025-07-24T20:07:12.0871477Z git version 2.50.1\n2025-07-24T20:07:12.0924856Z Temporarily overriding HOME='/home/runner/work/_temp/989a63da-97e4-4c0f-8387-d08996197c7e' before making global git config changes\n2025-07-24T20:07:12.0926159Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:12.0931352Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:12.0965366Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:12.0997836Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:12.1827584Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:12.1851707Z http.https://github.com/.extraheader\n2025-07-24T20:07:12.1864307Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:12.1895846Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:12.2444447Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506769625,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506769625",
+      "createdAt": "2025-07-24T20:07:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506765118,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:12.2118990Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:12.2278495Z Post job cleanup.\n2025-07-24T20:07:12.3207382Z [command]/usr/bin/git version\n2025-07-24T20:07:12.3242595Z git version 2.50.1\n2025-07-24T20:07:12.3294917Z Temporarily overriding HOME='/home/runner/work/_temp/32494f1b-422f-4c05-8738-9775f88f36cf' before making global git config changes\n2025-07-24T20:07:12.3296463Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:12.3308358Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:12.3342246Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:12.3374441Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:12.3829995Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:12.3854450Z http.https://github.com/.extraheader\n2025-07-24T20:07:12.3867061Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:12.3899459Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:12.4451990Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506749067,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506749067",
+      "createdAt": "2025-07-24T20:05:55Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506740932,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:06:04.3277577Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:06:04.3443124Z Post job cleanup.\n2025-07-24T20:06:04.4366556Z [command]/usr/bin/git version\n2025-07-24T20:06:04.4402566Z git version 2.50.1\n2025-07-24T20:06:04.4446925Z Temporarily overriding HOME='/home/runner/work/_temp/3b5aa7ed-8f15-41c6-a29f-0a7ba7ed1718' before making global git config changes\n2025-07-24T20:06:04.4448642Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:06:04.4460509Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:06:04.4494684Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:06:04.4527816Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:06:04.4983704Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:06:04.5008151Z http.https://github.com/.extraheader\n2025-07-24T20:06:04.5021207Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:06:04.5053637Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:06:04.5628769Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506749013,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506749013",
+      "createdAt": "2025-07-24T20:05:55Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506740906,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:06:04.0068588Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:06:04.0222143Z Post job cleanup.\n2025-07-24T20:06:04.1199603Z [command]/usr/bin/git version\n2025-07-24T20:06:04.1237532Z git version 2.50.1\n2025-07-24T20:06:04.1290108Z Temporarily overriding HOME='/home/runner/work/_temp/6e845c77-0f6c-4f98-b34d-86a8f0f49faa' before making global git config changes\n2025-07-24T20:06:04.1295407Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:06:04.1296571Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:06:04.1332030Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:06:04.1364744Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:06:04.1822902Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:06:04.1847270Z http.https://github.com/.extraheader\n2025-07-24T20:06:04.1860451Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:06:04.1893385Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:06:04.2483936Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506747960,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506747960",
+      "createdAt": "2025-07-24T20:05:51Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506740916,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:06:03.5821537Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:06:03.5970750Z Post job cleanup.\n2025-07-24T20:06:03.6890815Z [command]/usr/bin/git version\n2025-07-24T20:06:03.6927391Z git version 2.50.1\n2025-07-24T20:06:03.6969939Z Temporarily overriding HOME='/home/runner/work/_temp/0d5c7a2a-661d-4ca7-92d2-cf5cba994ade' before making global git config changes\n2025-07-24T20:06:03.6970865Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:06:03.6982079Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:06:03.7014891Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:06:03.7046364Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:06:03.7493198Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:06:03.7517207Z http.https://github.com/.extraheader\n2025-07-24T20:06:03.7529011Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:06:03.7560562Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:06:03.8132902Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506747827,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506747827",
+      "createdAt": "2025-07-24T20:05:50Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506740944,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:06:02.7765778Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:06:02.7922684Z Post job cleanup.\n2025-07-24T20:06:02.8856095Z [command]/usr/bin/git version\n2025-07-24T20:06:02.8893192Z git version 2.50.1\n2025-07-24T20:06:02.8941777Z Temporarily overriding HOME='/home/runner/work/_temp/062cffe6-cfc0-461b-b6c9-31d0ce97a0ff' before making global git config changes\n2025-07-24T20:06:02.8942787Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:06:02.8947057Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:06:02.8982097Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:06:02.9014127Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:06:02.9464204Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:06:02.9489194Z http.https://github.com/.extraheader\n2025-07-24T20:06:02.9502247Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:06:02.9535306Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:06:03.0111542Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506810127,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506810127",
+      "createdAt": "2025-07-24T20:09:05Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506805078,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:09:16.4219796Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:09:16.4383084Z Post job cleanup.\n2025-07-24T20:09:16.5314279Z [command]/usr/bin/git version\n2025-07-24T20:09:16.5350495Z git version 2.50.1\n2025-07-24T20:09:16.5395375Z Temporarily overriding HOME='/home/runner/work/_temp/67d97919-897c-4977-b22f-3c2acb7a4c3c' before making global git config changes\n2025-07-24T20:09:16.5396729Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:09:16.5408936Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:09:16.5443971Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:09:16.5476933Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:09:16.5930768Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:09:16.5956390Z http.https://github.com/.extraheader\n2025-07-24T20:09:16.5969379Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:09:16.6000699Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:09:16.6557998Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506809683,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506809683",
+      "createdAt": "2025-07-24T20:09:03Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506803827,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:09:19.0145945Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:09:19.0282642Z Post job cleanup.\n2025-07-24T20:09:19.1211624Z [command]/usr/bin/git version\n2025-07-24T20:09:19.1247376Z git version 2.50.1\n2025-07-24T20:09:19.1292151Z Temporarily overriding HOME='/home/runner/work/_temp/c79b1159-cb7c-4a5a-985a-2af22491e0b4' before making global git config changes\n2025-07-24T20:09:19.1293442Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:09:19.1306145Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:09:19.1340989Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:09:19.1373741Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:09:19.1829017Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:09:19.1853435Z http.https://github.com/.extraheader\n2025-07-24T20:09:19.1866445Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:09:19.1899036Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:09:19.2481856Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506809078,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506809078",
+      "createdAt": "2025-07-24T20:09:01Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506801798,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:09:15.7007040Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:09:15.7166114Z Post job cleanup.\n2025-07-24T20:09:15.8082779Z [command]/usr/bin/git version\n2025-07-24T20:09:15.8117707Z git version 2.50.1\n2025-07-24T20:09:15.8165247Z Temporarily overriding HOME='/home/runner/work/_temp/358254bb-d36d-4e21-b15a-14d3fe67db36' before making global git config changes\n2025-07-24T20:09:15.8166112Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:09:15.8177798Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:09:15.8210106Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:09:15.8241864Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:09:15.8700232Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:09:15.8726225Z http.https://github.com/.extraheader\n2025-07-24T20:09:15.8742208Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:09:15.8778285Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:09:15.9399459Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506798675,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506798675",
+      "createdAt": "2025-07-24T20:08:32Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766715,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:57.2166827Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:57.2311004Z Post job cleanup.\n2025-07-24T20:08:57.3276315Z [command]/usr/bin/git version\n2025-07-24T20:08:57.3314630Z git version 2.50.1\n2025-07-24T20:08:57.3367084Z Temporarily overriding HOME='/home/runner/work/_temp/0194a6eb-5708-4c79-a2eb-db4347641d2c' before making global git config changes\n2025-07-24T20:08:57.3368439Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:57.3372937Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:57.3409567Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:57.3445108Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:57.3913048Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:57.3939039Z http.https://github.com/.extraheader\n2025-07-24T20:08:57.3952694Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:57.3988826Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:57.4599813Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506797019,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506797019",
+      "createdAt": "2025-07-24T20:08:25Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506792656,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:35.2952574Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:35.3111538Z Post job cleanup.\n2025-07-24T20:08:35.4032534Z [command]/usr/bin/git version\n2025-07-24T20:08:35.4067672Z git version 2.50.1\n2025-07-24T20:08:35.4111252Z Temporarily overriding HOME='/home/runner/work/_temp/95f2a899-9189-42af-84a0-df78179f5980' before making global git config changes\n2025-07-24T20:08:35.4112618Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:35.4124320Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:35.4158652Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:35.4192602Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:35.4637745Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:35.4661678Z http.https://github.com/.extraheader\n2025-07-24T20:08:35.4674426Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:35.4706787Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:35.5385803Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506796953,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506796953",
+      "createdAt": "2025-07-24T20:08:24Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506790491,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:34.3582726Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:34.3742376Z Post job cleanup.\n2025-07-24T20:08:34.4658117Z [command]/usr/bin/git version\n2025-07-24T20:08:34.4693593Z git version 2.50.1\n2025-07-24T20:08:34.4737068Z Temporarily overriding HOME='/home/runner/work/_temp/a43bc45a-056f-4d46-8e34-0083e31e89b2' before making global git config changes\n2025-07-24T20:08:34.4738377Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:34.4750099Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:34.4783583Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:34.4816274Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:34.5320685Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:34.5347112Z http.https://github.com/.extraheader\n2025-07-24T20:08:34.5360795Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:34.5395476Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:34.5959185Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506789372,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506789372",
+      "createdAt": "2025-07-24T20:08:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780771,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.3731997Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.3879159Z Post job cleanup.\n2025-07-24T20:08:16.4792823Z [command]/usr/bin/git version\n2025-07-24T20:08:16.4827700Z git version 2.50.1\n2025-07-24T20:08:16.4868949Z Temporarily overriding HOME='/home/runner/work/_temp/4ff1bac2-a170-41e8-a804-0f745a0e9100' before making global git config changes\n2025-07-24T20:08:16.4869947Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.4880947Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.4912826Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.4944511Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.5387474Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.5411208Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.5423473Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.5454606Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:16.5997669Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506789315,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506789315",
+      "createdAt": "2025-07-24T20:08:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780744,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.7747615Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.7900089Z Post job cleanup.\n2025-07-24T20:08:16.8827072Z [command]/usr/bin/git version\n2025-07-24T20:08:16.8864001Z git version 2.50.1\n2025-07-24T20:08:16.8908266Z Temporarily overriding HOME='/home/runner/work/_temp/ae10a37e-d279-46ac-9582-99faa48893a6' before making global git config changes\n2025-07-24T20:08:16.8909624Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.8922032Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.8955817Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.8988346Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.9462838Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.9488347Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.9500391Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.9531994Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:17.0111825Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506788226,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506788226",
+      "createdAt": "2025-07-24T20:07:59Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780763,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:14.6861283Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:14.7014398Z Post job cleanup.\n2025-07-24T20:08:14.7940622Z [command]/usr/bin/git version\n2025-07-24T20:08:14.7976334Z git version 2.50.1\n2025-07-24T20:08:14.8018922Z Temporarily overriding HOME='/home/runner/work/_temp/7f5d84b5-c52f-4609-9703-fbdd4fe9d7c3' before making global git config changes\n2025-07-24T20:08:14.8019997Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:14.8031859Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:14.8065978Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:14.8097723Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:14.8564844Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:14.8589509Z http.https://github.com/.extraheader\n2025-07-24T20:08:14.8601943Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:14.8634323Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:14.9214384Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506787301,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506787301",
+      "createdAt": "2025-07-24T20:07:56Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "cd3b8da3e15364656c352d05c57dc0f29db31445",
+      "triggeringRunId": 16506780745,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:08:16.5812247Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:08:16.5969291Z Post job cleanup.\n2025-07-24T20:08:16.6880788Z [command]/usr/bin/git version\n2025-07-24T20:08:16.6916008Z git version 2.50.1\n2025-07-24T20:08:16.6961766Z Temporarily overriding HOME='/home/runner/work/_temp/ab6f083a-bab7-44ba-9e42-715041cefa3a' before making global git config changes\n2025-07-24T20:08:16.6967697Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:08:16.6984516Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:08:16.7018914Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:08:16.7051269Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:08:16.7502036Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:08:16.7525432Z http.https://github.com/.extraheader\n2025-07-24T20:08:16.7537721Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:08:16.7569018Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:08:16.8122817Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506782152,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506782152",
+      "createdAt": "2025-07-24T20:07:38Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506773868,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:54.1830450Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:54.2000607Z Post job cleanup.\n2025-07-24T20:07:54.2922655Z [command]/usr/bin/git version\n2025-07-24T20:07:54.2958592Z git version 2.50.1\n2025-07-24T20:07:54.3002120Z Temporarily overriding HOME='/home/runner/work/_temp/68fe870c-a903-4602-9328-c58c7e3a9782' before making global git config changes\n2025-07-24T20:07:54.3003592Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:54.3015518Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:54.3050142Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:54.3083124Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:54.3540156Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:54.3565504Z http.https://github.com/.extraheader\n2025-07-24T20:07:54.3578613Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:54.3612914Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:54.4194777Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506782051,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506782051",
+      "createdAt": "2025-07-24T20:07:38Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506775772,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:56.2142315Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:56.2287148Z Post job cleanup.\n2025-07-24T20:07:56.3205536Z [command]/usr/bin/git version\n2025-07-24T20:07:56.3240659Z git version 2.50.1\n2025-07-24T20:07:56.3290814Z Temporarily overriding HOME='/home/runner/work/_temp/e275955c-eca1-48b1-9516-c6409cd60020' before making global git config changes\n2025-07-24T20:07:56.3292286Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:56.3297367Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:56.3331790Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:56.3363938Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:56.3816913Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:56.3841551Z http.https://github.com/.extraheader\n2025-07-24T20:07:56.3854948Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:56.3886579Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:56.4509337Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506777197,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506777197",
+      "createdAt": "2025-07-24T20:07:21Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766542,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:32.0235703Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:32.0396794Z Post job cleanup.\n2025-07-24T20:07:32.1320350Z [command]/usr/bin/git version\n2025-07-24T20:07:32.1356618Z git version 2.50.1\n2025-07-24T20:07:32.1405703Z Temporarily overriding HOME='/home/runner/work/_temp/dc27d327-e675-4709-b443-fc326203c306' before making global git config changes\n2025-07-24T20:07:32.1406639Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:32.1411031Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:32.1443880Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:32.1476768Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:32.1927398Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:32.1951797Z http.https://github.com/.extraheader\n2025-07-24T20:07:32.1964825Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:32.1997575Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:32.2582008Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506776013,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506776013",
+      "createdAt": "2025-07-24T20:07:18Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766539,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:32.2828471Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:32.2963039Z Post job cleanup.\n2025-07-24T20:07:32.3889730Z [command]/usr/bin/git version\n2025-07-24T20:07:32.3925661Z git version 2.50.1\n2025-07-24T20:07:32.3970412Z Temporarily overriding HOME='/home/runner/work/_temp/6fa80819-916f-4d04-a4b7-4d65353b14f0' before making global git config changes\n2025-07-24T20:07:32.3971774Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:32.3985429Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:32.4019434Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:32.4051924Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:32.4507843Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:32.4531885Z http.https://github.com/.extraheader\n2025-07-24T20:07:32.4543896Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:32.4575532Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:32.5130408Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506775934,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506775934",
+      "createdAt": "2025-07-24T20:07:18Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766524,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:31.1945806Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:31.2094670Z Post job cleanup.\n2025-07-24T20:07:31.3037289Z [command]/usr/bin/git version\n2025-07-24T20:07:31.3074015Z git version 2.50.1\n2025-07-24T20:07:31.3118680Z Temporarily overriding HOME='/home/runner/work/_temp/d0d43477-ed85-4e82-a492-1d58fc0c69ec' before making global git config changes\n2025-07-24T20:07:31.3120070Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:31.3132459Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:31.3167049Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:31.3200656Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:31.3654441Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:31.3682426Z http.https://github.com/.extraheader\n2025-07-24T20:07:31.3695995Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:31.3731660Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:31.4304113Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506775696,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506775696",
+      "createdAt": "2025-07-24T20:07:17Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "fe5083322879aba5fed41117cd9fbb2cf3a33b37",
+      "triggeringRunId": 16506766522,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:33.2744535Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:33.2892440Z Post job cleanup.\n2025-07-24T20:07:33.3807311Z [command]/usr/bin/git version\n2025-07-24T20:07:33.3841966Z git version 2.50.1\n2025-07-24T20:07:33.3883166Z Temporarily overriding HOME='/home/runner/work/_temp/d5334979-eddb-4f24-b8de-241a816c1e36' before making global git config changes\n2025-07-24T20:07:33.3884092Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:33.3894662Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:33.3926994Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:33.3958709Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:33.4399743Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:33.4422798Z http.https://github.com/.extraheader\n2025-07-24T20:07:33.4434776Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:33.4465644Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:33.5017450Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506770777,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506770777",
+      "createdAt": "2025-07-24T20:07:05Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a6d46e6fe30a6add1c15f82cc1f0937da4afa37f",
+      "triggeringRunId": 16506741671,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:13.3544563Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:13.3713882Z Post job cleanup.\n2025-07-24T20:07:13.4658810Z [command]/usr/bin/git version\n2025-07-24T20:07:13.4696181Z git version 2.50.1\n2025-07-24T20:07:13.4748619Z Temporarily overriding HOME='/home/runner/work/_temp/7ffac93d-32ad-49f9-8a88-f83878db778d' before making global git config changes\n2025-07-24T20:07:13.4750021Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:13.4762802Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:13.4799943Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:13.4833820Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:13.5287429Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:13.5312328Z http.https://github.com/.extraheader\n2025-07-24T20:07:13.5325526Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:13.5359089Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:13.5914001Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506769780,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506769780",
+      "createdAt": "2025-07-24T20:07:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506764912,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:11.9653733Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:11.9864227Z Post job cleanup.\n2025-07-24T20:07:12.0834024Z [command]/usr/bin/git version\n2025-07-24T20:07:12.0871477Z git version 2.50.1\n2025-07-24T20:07:12.0924856Z Temporarily overriding HOME='/home/runner/work/_temp/989a63da-97e4-4c0f-8387-d08996197c7e' before making global git config changes\n2025-07-24T20:07:12.0926159Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:12.0931352Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:12.0965366Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:12.0997836Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:12.1827584Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:12.1851707Z http.https://github.com/.extraheader\n2025-07-24T20:07:12.1864307Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:12.1895846Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:12.2444447Z Cleaning up orphan processes"
+    },
+    {
+      "runId": 16506769625,
+      "runUrl": "https://github.com/Azure/azure-rest-api-specs/actions/runs/16506769625",
+      "createdAt": "2025-07-24T20:07:02Z",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "a92cf78be4c88de89a6ec58ce52b21f097522ee8",
+      "triggeringRunId": 16506765118,
+      "AddedLabels": [],
+      "RemovedLabels": [],
+      "PresentLabels": [
+        "ARMChangesRequested",
+        "ARMReview",
+        "resource-manager",
+        "new-api-version",
+        "brownfield"
+      ],
+      "CommentBody": "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>Automation should then add <code>WaitForARMFeedback</code> label. <br/>❗If you don't have permissions to remove the label, request <code>write access</code> per <a href=\"https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories\">aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories</a>.<br/>For details of the ARM review, see <a href=\"https://aka.ms/azsdk/pr-arm-review\">aka.ms/azsdk/pr-arm-review</a><br/></li></ul>\n2025-07-24T20:07:12.2118990Z Summarize checks has identified that status of \"Automated merging requirements met\" check should be updated to: blocked.\n2025-07-24T20:07:12.2278495Z Post job cleanup.\n2025-07-24T20:07:12.3207382Z [command]/usr/bin/git version\n2025-07-24T20:07:12.3242595Z git version 2.50.1\n2025-07-24T20:07:12.3294917Z Temporarily overriding HOME='/home/runner/work/_temp/32494f1b-422f-4c05-8738-9775f88f36cf' before making global git config changes\n2025-07-24T20:07:12.3296463Z Adding repository directory to the temporary git global config as a safe directory\n2025-07-24T20:07:12.3308358Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/azure-rest-api-specs/azure-rest-api-specs\n2025-07-24T20:07:12.3342246Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2025-07-24T20:07:12.3374441Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2025-07-24T20:07:12.3829995Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2025-07-24T20:07:12.3854450Z http.https://github.com/.extraheader\n2025-07-24T20:07:12.3867061Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2025-07-24T20:07:12.3899459Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2025-07-24T20:07:12.4451990Z Cleaning up orphan processes"
+    }
+  ]
+}
