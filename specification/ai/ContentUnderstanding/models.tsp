@@ -36,6 +36,16 @@ model ContentAnalyzer {
   @visibility(Lifecycle.Read)
   lastModifiedAt: utcDateTime;
 
+  @doc("Warnings encountered while creating the analyzer.")
+  @visibility(Lifecycle.Read)
+  warnings?: Azure.Core.Foundations.Error[];
+
+  @doc("The analyzer to incrementally train from.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[a-zA-Z0-9._-]{1,64}$")
+  baseAnalyzerId?: string;
+
+  @removed(Versions.v2025_05_01_preview)
   @doc("The scenario for which the analyzer is optimized.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   scenario?: string;
@@ -52,9 +62,24 @@ model ContentAnalyzer {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   trainingData?: DataSource;
 
-  @doc("Warnings encountered while creating the analyzer.")
-  @visibility(Lifecycle.Read)
-  warnings?: Azure.Core.Foundations.Error[];
+  @added(Versions.v2025_05_01_preview)
+  @doc("The location where the data may be processed.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  processingLocation?: ProcessingLocation = ProcessingLocation.geography;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("The analysis mode: standard, pro.  Default is standard.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  mode?: AnalysisMode = AnalysisMode.standard;
+
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("The processing priority: normal, low.  Default is normal.")
+  // @visibility(Lifecycle.Create, Lifecycle.Read)
+  // priority?: ProcessingPriority = ProcessingPriority.normal;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Additional knowledge sources used to enhance the analyzer.")
+  knowledgeSources?: KnowledgeSource[];
 }
 
 @doc("Status of a resource.")
@@ -72,6 +97,80 @@ union ResourceStatus {
 
   @doc("The resource failed during creation.")
   failed: "failed",
+}
+
+@doc("The location where the data may be processed.")
+union ProcessingLocation {
+  string,
+
+  @doc("Data may be processed in the same geography as the resource.")
+  geography: "geography",
+
+  @doc("Data may be processed in the same data zone as the resource.")
+  dataZone: "dataZone",
+
+  @doc("Data may be processed in any Azure data center globally.")
+  global: "global",
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Analysis mode.")
+union AnalysisMode {
+  string,
+
+  // @doc("Lite analysis mode.")
+  // lite: "lite",
+
+  @doc("Standard analysis mode.")
+  standard: "standard",
+
+  @doc("Pro analysis mode.")
+  pro: "pro",
+}
+
+// @added(Versions.v2025_05_01_preview)
+// @doc("Processing priority.")
+// union ProcessingPriority {
+//   string,
+
+//   @doc("Normal processing priority.")
+//   normal: "normal",
+
+//   @doc("Low processing priority.  Allow processing of larger inputs.")
+//   low: "low",
+// }
+
+@added(Versions.v2025_05_01_preview)
+@doc("Knowledge source kind.")
+union KnowledgeSourceKind {
+  string,
+
+  @doc("A reference knowledge source.")
+  reference: "reference",
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Knowledge source.")
+@discriminator("kind")
+model KnowledgeSource {
+  @doc("The kind of knowledge source.")
+  kind: KnowledgeSourceKind;
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("File knowledge source.")
+model ReferenceKnowledgeSource extends KnowledgeSource {
+  @doc("Indicates that the knowledge source is a reference knowledge source.")
+  kind: KnowledgeSourceKind.reference;
+
+  @doc("The URL of the blob container.")
+  containerUrl: url;
+
+  @doc("An optional prefix to filter blobs within the container.")
+  prefix?: string;
+
+  @doc("Path to a file listing specific blobs to include.")
+  fileListPath: string;
 }
 
 @doc("Schema of fields to be extracted from documents.")
@@ -95,11 +194,18 @@ model FieldSchema {
 
 @doc("Configuration settings for an analyzer.")
 model ContentAnalyzerConfig {
+  @doc("Return all content details.")
+  returnDetails?: boolean;
+
   @doc("List of locale hints for speech transcription.")
   locales?: string[];
 
   @doc("Enable face detection.")
   enableFace?: boolean;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Specify the person directory used for identifying detected faces.")
+  personDirectoryId?: string;
 
   @doc("Enable optical character recognition (OCR).")
   enableOcr?: boolean;
@@ -107,14 +213,63 @@ model ContentAnalyzerConfig {
   @doc("Enable layout analysis.")
   enableLayout?: boolean;
 
+  @added(Versions.v2025_05_01_preview)
+  @doc("Representation format of tables in analyze result markdown.")
+  tableFormat?: TableFormat = TableFormat.html;
+
+  @removed(Versions.v2025_05_01_preview)
   @doc("Enable barcode detection.")
   enableBarcode?: boolean;
 
   @doc("Enable mathematical formula detection.")
   enableFormula?: boolean;
 
-  @doc("Return all content details.")
-  returnDetails?: boolean;
+  @added(Versions.v2025_05_01_preview)
+  @doc("Disable the default blurring of faces for privacy while processing the content.")
+  disableFaceBlurring?: boolean;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Disable content filtering that detects and prevents the output of harmful content.")
+  disableContentFiltering?: boolean;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Return grounding source and confidence for extracted fields.")
+  estimateFieldSourceAndConfidence?: boolean;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Segmentation mode used to split audio/visual content.")
+  segmentationMode?: SegmentationMode = SegmentationMode.noSegmentation;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Segmentation definition for use with custom segmentation mode.")
+  segmentationDefinition?: string;
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Representation format of tables in analyze result markdown.")
+union TableFormat {
+  string,
+
+  @doc("Represent tables using HTML table elements: \\<table>, \\<th>, \\<tr>, \\<td>.")
+  html: "html",
+
+  // @doc("Represent tables using GitHub Flavored Markdown table syntax, which does not support merged cells or rich headers.")
+  // markdown: "markdown",
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Segmentation mode used to split audio/visual content.")
+union SegmentationMode {
+  string,
+
+  @doc("No segmentation.")
+  noSegmentation: "noSegmentation",
+
+  @doc("Automatic segmentation.")
+  auto: "auto",
+
+  @doc("Segment according to custom segmentation definition.")
+  custom: "custom",
 }
 
 @doc("Data source kind.")
@@ -122,7 +277,7 @@ union DataSourceKind {
   string,
 
   @doc("A blob storage data source.")
-  "blob",
+  blob: "blob",
 }
 
 @doc("Data source specifying a set of documents.")
@@ -220,52 +375,92 @@ union FieldType {
   object: "object",
 }
 
-// @doc("String encoding format.")
-// union StringEncoding {
-//   string,
+@added(Versions.v2025_05_01_preview)
+@doc("String encoding format.")
+union StringEncoding {
+  string,
 
-//   @doc("Unicode code point (UTF-32) encoding, used by languages such as Python, etc.")
-//   codePoint: "codePoint",
+  @doc("Unicode code point (UTF-32) encoding, used by languages such as Python, etc.")
+  codePoint: "codePoint",
 
-//   @doc("UTF-16 encoding, used by languages such as C#, JavaScript, Java, etc.")
-//   utf16: "utf16",
+  @doc("UTF-16 encoding, used by languages such as C#, JavaScript, Java, etc.")
+  utf16: "utf16",
 
-//   @doc("UTF-8 encoding, used by languages such as Go, Rust, Ruby, PHP, etc.")
-//   utf8: "utf8",
-// }
+  @doc("UTF-8 encoding, used by languages such as Go, Rust, Ruby, PHP, etc.")
+  utf8: "utf8",
+}
 
 @doc("Analyze operation parameters.")
-model AnalyzeParams {}
+model AnalyzeParameters {
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("Range of the input to analyze (ex. `1-3;5;9-`).  Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.")
+  // @query
+  // range?: RangeExpression;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("The encoding format for content spans in the response.")
+  @query
+  stringEncoding?: StringEncoding = StringEncoding.codePoint;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("The location where the data may be processed.")
+  @query
+  processingLocation?: ProcessingLocation;
+
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("The processing priority: normal, low.  Default is normal.")
+  // @query
+  // priority?: ProcessingPriority = ProcessingPriority.normal;
+}
 
 @doc("Analyze operation request.")
 model AnalyzeRequest {
-  ...AnalyzeParams;
+  ...AnalyzeParameters;
 
-  @doc("The URL of the document to analyze.")
+  @doc("The URL of the primary input to analyze.  Only one of url or data should be specified.")
   url?: url;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Base64-encoded binary content of the primary input to analyze.  Only one of url or data should be specified.")
+  data?: bytes;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Additional inputs to analyze.  Only supported in analyzers with mode=pro.")
+  inputs?: AnalyzeInput[];
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Additional input to analyze.")
+model AnalyzeInput {
+  @doc("The URL of the input to analyze.  Only one of url or data should be specified.")
+  url: url;
+
+  @doc("Base64-encoded binary content of the input to analyze.  Only one of url or data should be specified.")
+  data?: bytes;
+
+  @doc("Name of the input.")
+  name?: string;
 }
 
 @doc("Analyze operation request directly from binary content.")
 model AnalyzeBinaryRequest {
-  ...AnalyzeParams;
+  ...AnalyzeParameters;
 
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
   @doc("Request content type.")
   @header
-  contentType:
-    | "application/pdf"
-    | "image/jpeg"
-    | "image/png"
-    | "image/tiff"
-    | "image/bmp"
-    | "image/heif"
-    | "text/html"
-    | "audio/*"
-    | "video/*";
+  contentType: string = "application/octet-stream";
 
   @doc("The binary content of the document to analyze.")
   @bodyRoot
   input: bytes;
+}
+
+@doc("Get result operation parameters.")
+model GetResultParameters {
+  // @doc("Embed images as base64 data URIs in Markdown.")
+  // @query
+  // embedImages?: boolean;
 }
 
 @doc("Analyze operation result.")
@@ -282,6 +477,10 @@ model AnalyzeResult {
 
   @doc("Warnings encountered while analyzing the document.")
   warnings?: Azure.Core.Foundations.Error[];
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("The string encoding used for content spans.")
+  stringEncoding?: StringEncoding = StringEncoding.codePoint;
 
   @doc("The extracted content.")
   contents: MediaContent[];
@@ -304,6 +503,19 @@ model MediaContent {
   @doc("Content kind.")
   kind: MediaContentKind;
 
+  // TODO: Should be required.
+  @added(Versions.v2025_05_01_preview)
+  @doc("Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc.")
+  mimeType?: string;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Classified content category.")
+  category?: string;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("The path of the content in the input.")
+  path?: url;
+
   @doc("Markdown representation of the content.")
   markdown?: string;
 
@@ -320,6 +532,9 @@ model ContentSpan {
   length: int32;
 }
 
+@doc("Encoded string expression that describes positions in the content.")
+scalar SourceExpression extends string;
+
 @doc("Field extracted from the content.")
 @discriminator("type")
 model ContentField {
@@ -335,7 +550,7 @@ model ContentField {
   confidence?: float32;
 
   @doc("Encoded source that identifies the position of the field value in the content.")
-  source?: string;
+  source?: SourceExpression;
 }
 
 @doc("String field extracted from the content.")

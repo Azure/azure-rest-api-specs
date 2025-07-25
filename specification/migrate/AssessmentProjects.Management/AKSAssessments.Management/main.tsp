@@ -7,6 +7,7 @@ import "@typespec/openapi";
 
 import "./aksroutes.tsp";
 import "./AKSApiVersions.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

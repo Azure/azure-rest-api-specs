@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "Configurations_ListByServer",
         "x-ms-examples": {
-          "ConfigurationList": {
+          "List all server parameters (also known as configurations) of a flexible server.": {
             "$ref": "./examples/ConfigurationListByServer.json"
           }
         },
-        "description": "List all the configurations in a given server.",
+        "description": "Lists all server parameters (also known as configurations) of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -86,11 +86,11 @@
         ],
         "operationId": "Configurations_Get",
         "x-ms-examples": {
-          "ConfigurationGet": {
+          "Get information about a specific server parameter of a flexible server.": {
             "$ref": "./examples/ConfigurationGet.json"
           }
         },
-        "description": "Gets information about a configuration of server.",
+        "description": "Gets information about a specific server parameter of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -129,11 +129,11 @@
         ],
         "operationId": "Configurations_Update",
         "x-ms-examples": {
-          "Update a user configuration": {
-            "$ref": "./examples/ConfigurationUpdate.json"
+          "Update, using Patch verb, the value assigned to a specific modifiable server parameter of a flexible server.": {
+            "$ref": "./examples/ConfigurationUpdateUsingPatch.json"
           }
         },
-        "description": "Updates a configuration of a server.",
+        "description": "Updates, using Patch verb, the value assigned to a specific modifiable server parameter of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -157,7 +157,7 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationForUpdate"
             },
-            "description": "The required parameters for updating a server configuration."
+            "description": "Parameters required to update the value of a specific modifiable server parameter."
           }
         ],
         "responses": {
@@ -199,11 +199,11 @@
         ],
         "operationId": "Configurations_Put",
         "x-ms-examples": {
-          "Update a user configuration": {
-            "$ref": "./examples/ConfigurationUpdate.json"
+          "Update, using Put verb, the value assigned to a specific modifiable server parameter of a flexible server.": {
+            "$ref": "./examples/ConfigurationUpdateUsingPut.json"
           }
         },
-        "description": "Updates a configuration of a server.",
+        "description": "Updates, using Put verb, the value assigned to a specific modifiable server parameter of a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -227,7 +227,7 @@
             "schema": {
               "$ref": "#/definitions/Configuration"
             },
-            "description": "The required parameters for updating a server configuration."
+            "description": "Parameters required to update the value of a specific modifiable server parameter."
           }
         ],
         "responses": {
@@ -271,22 +271,22 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Value of the configuration. Required to update the configuration."
+          "description": "Value of the server parameter (also known as configuration). Required to update the value assigned to a specific modifiable server parameter."
         },
         "description": {
           "type": "string",
           "readOnly": true,
-          "description": "Description of the configuration."
+          "description": "Description of the server parameter."
         },
         "defaultValue": {
           "type": "string",
           "readOnly": true,
-          "description": "Default value of the configuration."
+          "description": "Value assigned by default to the server parameter."
         },
         "dataType": {
           "type": "string",
           "readOnly": true,
-          "description": "Data type of the configuration.",
+          "description": "Data type of the server parameter.",
           "enum": [
             "Boolean",
             "Numeric",
@@ -301,39 +301,39 @@
         "allowedValues": {
           "type": "string",
           "readOnly": true,
-          "description": "Allowed values of the configuration."
+          "description": "Allowed values of the server parameter."
         },
         "source": {
           "type": "string",
-          "description": "Source of the configuration. Required to update the configuration."
+          "description": "Source of the value assigned to the server parameter. Required to update the value assigned to a specific modifiable server parameter."
         },
         "isDynamicConfig": {
           "type": "boolean",
           "readOnly": true,
-          "description": "Configuration dynamic or static."
+          "description": "Indicates if it's a dynamic (true) or static (false) server parameter. Static server parameters require a server restart after changing the value assigned to it, for the change to take effect. Dynamic server parameters do not require a server restart after changing the value assigned to it, for the change to take effect."
         },
         "isReadOnly": {
           "type": "boolean",
           "readOnly": true,
-          "description": "Configuration read-only or not."
+          "description": "Indicates if it's a read-only (true) or modifiable (false) server parameter."
         },
         "isConfigPendingRestart": {
           "type": "boolean",
           "readOnly": true,
-          "description": "Configuration is pending restart or not."
+          "description": "Indicates if the value assigned to the server parameter is pending a server restart for the value to take effect."
         },
         "unit": {
           "type": "string",
           "readOnly": true,
-          "description": "Configuration unit."
+          "description": "Units in which the server parameter value is expressed."
         },
         "documentationLink": {
           "type": "string",
           "readOnly": true,
-          "description": "Configuration documentation link."
+          "description": "Link pointing to the documentation of the server parameter."
         }
       },
-      "description": "The properties of a configuration."
+      "description": "Properties of a server parameter."
     },
     "Configuration": {
       "type": "object",
@@ -341,7 +341,7 @@
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a configuration."
+          "description": "Properties of a server parameter."
         }
       },
       "allOf": [
@@ -349,7 +349,7 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a Configuration."
+      "description": "Server parameter."
     },
     "ConfigurationForUpdate": {
       "type": "object",
@@ -357,10 +357,10 @@
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a configuration."
+          "description": "Properties of a server parameter."
         }
       },
-      "description": "Represents a Configuration."
+      "description": "Server parameter."
     },
     "ConfigurationListResult": {
       "type": "object",
@@ -370,14 +370,14 @@
           "items": {
             "$ref": "#/definitions/Configuration"
           },
-          "description": "The list of server configurations."
+          "description": "List of server parameters."
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       },
-      "description": "A list of server configurations."
+      "description": "List of server parameters."
     }
   },
   "parameters": {
@@ -386,7 +386,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the server configuration.",
+      "description": "Name of the server parameter.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"

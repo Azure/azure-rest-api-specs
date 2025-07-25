@@ -815,7 +815,7 @@ interface Tasks {
       ...CommonJsonParameters;
       ...CreateTaskCollectionRequiredParameters;
     },
-    BatchTaskAddCollectionResult
+    BatchCreateTaskCollectionResult
   >;
 
   @summary("Deletes a Task from the specified Job.")

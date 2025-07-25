@@ -28,7 +28,9 @@ options:
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
     flavor: azure
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.AnomalyDetector
+    model-namespace: false
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
