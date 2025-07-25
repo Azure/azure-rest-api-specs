@@ -1,14 +1,14 @@
-# AzureMonitorPipelinesClient
+# AzureMonitorAccountsClient
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for AzureMonitorOperationsClient.
+This is the AutoRest configuration file for AzureMonitorAccountsClient.
 
 ---
 
 ## Getting Started
 
-To build the SDK for AzureMonitorOperationsClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for AzureMonitorAccountsClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,14 +22,14 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the AzureMonitorOperationsClient API.
+These are the global settings for the AzureMonitorAccountsClient API.
 
 ``` yaml !$(python) || !$(track2)
-title: AzureMonitorOperationsClient
+title: AzureMonitorAccountsClient
 ```
 
 ``` yaml
-description: Azure Monitor Operations Management Client
+description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-05-03-preview
@@ -41,17 +41,7 @@ These settings apply only when `--tag=package-2025-05-03-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-05-03-preview'
 input-file:
-- preview/2025-05-03-preview/operations.json
-```
-
-### Tag: package-2024-10-01-preview
-
-These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line
-
-``` yaml $(tag) == 'package-2024-10-01-preview'
-input-file:
-- preview/2024-10-01-preview/operations.json
-
+- preview/2025-05-03-preview/azuremonitorworkspace.json
 ```
 
 ---
@@ -66,14 +56,10 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor_pipelinegroups']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
@@ -89,3 +75,12 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operations API is defined in a separate swagger spec for Microsoft.Monitor namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Monitor/Operations)
+    from: azuremonitorworkspace.json
+```
