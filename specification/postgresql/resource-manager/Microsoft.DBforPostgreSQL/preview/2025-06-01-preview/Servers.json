@@ -926,7 +926,7 @@
           "description": "Backup properties of a server."
         },
         "highAvailability": {
-          "$ref": "#/definitions/HighAvailability",
+          "$ref": "#/definitions/HighAvailabilityForPatch",
           "default": null,
           "description": "High availability properties of a server."
         },
@@ -1476,6 +1476,47 @@
         "mode": {
           "type": "string",
           "default": "Disabled",
+          "description": "High availability mode for a server.",
+          "enum": [
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityMode",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "default": "",
+          "description": "Availability zone associated to the standby server created when high availability is set to SameZone or ZoneRedundant."
+        }
+      },
+      "description": "High availability properties of a server."
+    },
+    "HighAvailabilityForPatch": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
           "description": "High availability mode for a server.",
           "enum": [
             "Disabled",
