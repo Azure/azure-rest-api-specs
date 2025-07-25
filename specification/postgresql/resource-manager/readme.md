@@ -72,6 +72,9 @@ suppressions:
   - code: PutResponseCodes
     from: AdministratorsMicrosoftEntra.json
     reason: The existing API contract is like this and not be able to change.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdvancedThreatProtectionSettings.json
     reason: The existing API contract is like this and not be able to change.
