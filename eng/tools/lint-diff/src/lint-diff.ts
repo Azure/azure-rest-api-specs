@@ -6,6 +6,8 @@ import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateR
 import { getRunList } from "./processChanges.js";
 import { getAutorestErrors, runChecks } from "./runChecks.js";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
+import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { resolve } from "node:path";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -22,10 +24,6 @@ export async function main() {
       after: {
         type: "string",
         short: "a",
-      },
-      "changed-files-path": {
-        type: "string",
-        short: "c",
       },
       "out-file": {
         type: "string",
@@ -56,7 +54,6 @@ export async function main() {
     values: {
       before: beforeArg,
       after: afterArg,
-      "changed-files-path": changedFilesPath,
       "out-file": outFile,
       "base-branch": baseBranch,
       "compare-sha": compareSha,
@@ -76,11 +73,6 @@ export async function main() {
     console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
   }
 
-  if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
-    validArgs = false;
-    console.log("--changed-files-path missing");
-  }
-
   if (!validArgs) {
     usage();
     process.exit(1);
@@ -94,7 +86,6 @@ export async function main() {
   await runLintDiff(
     beforeArg as string,
     afterArg as string,
-    changedFilesPath as string,
     outFile as string,
     baseBranch as string,
     compareSha as string,
@@ -105,18 +96,18 @@ export async function main() {
 async function runLintDiff(
   beforePath: string,
   afterPath: string,
-  changedFilesPath: string,
   outFile: string,
   baseBranch: string,
   compareSha: string,
   githubRepoPath: string,
 ) {
+  const changedFiles = await getChangedFiles({ cwd: resolve(afterPath), paths: ['specification'] });
   let beforeList, afterList, affectedSwaggers;
   try {
     [beforeList, afterList, affectedSwaggers] = await getRunList(
       beforePath,
       afterPath,
-      changedFilesPath,
+      changedFiles,
     );
   } catch (error) {
     if (error instanceof SpecModelError) {

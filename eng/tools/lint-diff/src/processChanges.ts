@@ -12,7 +12,7 @@ import { deduplicateTags } from "./markdown-utils.js";
 export async function getRunList(
   beforePath: string,
   afterPath: string,
-  changedFilesPath: string,
+  changedFiles: string[],
 ): Promise<[Map<string, ReadmeAffectedTags>, Map<string, ReadmeAffectedTags>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
   // always uses forward slashes as path separators
@@ -21,7 +21,7 @@ export async function getRunList(
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
 
   // Changed files should already be filtered to the top-level "specification" folder (see lintdiff-code.yaml)
-  const changedSpecFiles = (await readFileList(changedFilesPath)).filter((file) => {
+  const changedSpecFiles = changedFiles.filter((file) => {
     // File is not ignored
     for (const ignore of ignoreFilesWith) {
       if (file.includes(ignore)) {
@@ -206,21 +206,6 @@ export function reconcileChangedFilesAndTags(
   }
 
   return [beforeFinal, afterFinal];
-}
-
-/**
- * Given the path to a file return an array of strings where each entry in the
- * array is a line in the file
- *
- * @param changedFilesPath Path to the file containing the list of changed files with one on each line
- * @returns
- */
-export async function readFileList(changedFilesPath: string): Promise<string[]> {
-  const data = await readFile(changedFilesPath, { encoding: "utf-8" });
-  return data
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
 }
 
 /**
