@@ -6,6 +6,9 @@ using TypeSpec.Http;
 
 namespace AttestationClient;
 
+/**
+ * AttestationType
+ */
 union AttestationType {
   string,
 
@@ -440,6 +443,9 @@ model TcbBaseline {
   isSelectedTcb?: boolean;
 }
 
+/**
+ * JsonWebKeySet
+ */
 model JsonWebKeySet {
   /**
    * The value of the "keys" parameter is an array of JWK values.  By
@@ -452,6 +458,9 @@ model JsonWebKeySet {
   keys?: JsonWebKey[];
 }
 
+/**
+ * JsonWebKey
+ */
 model JsonWebKey {
   /**
    * The "alg" (algorithm) parameter identifies the algorithm intended for
@@ -635,6 +644,9 @@ model PolicyCertificatesModificationResult {
   `x-ms-policycertificates-result`?: CertificateModification;
 }
 
+/**
+ * StoredAttestationPolicy
+ */
 model StoredAttestationPolicy {
   /**
    * Policy text to set as a sequence of UTF-8 encoded octets.
