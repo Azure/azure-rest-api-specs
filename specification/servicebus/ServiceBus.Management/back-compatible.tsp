@@ -86,3 +86,6 @@ using Microsoft.ServiceBus;
 );
 
 @@clientName(Encryption.keyVaultProperties, "KeyVaultProperties");
+
+@@clientName(UserAssignedIdentity.principalId, "PrincipalId");
+@@clientName(UserAssignedIdentity.clientId, "ClientId");
