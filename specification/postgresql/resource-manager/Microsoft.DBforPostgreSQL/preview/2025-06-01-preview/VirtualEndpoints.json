@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,11 +41,11 @@
         ],
         "operationId": "VirtualEndpoints_Create",
         "x-ms-examples": {
-          "Create a pair of virtual endpoints for a flexible server.": {
+          "Create a pair of virtual endpoints for a server.": {
             "$ref": "./examples/VirtualEndpointCreate.json"
           }
         },
-        "description": "Creates a pair of virtual endpoints for a flexible server.",
+        "description": "Creates a pair of virtual endpoints for a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -67,28 +67,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
+              "$ref": "#/definitions/VirtualEndpoint"
             },
             "description": "Parameters required to create or update a pair of virtual endpoints."
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -111,11 +102,11 @@
         ],
         "operationId": "VirtualEndpoints_Update",
         "x-ms-examples": {
-          "Update a pair of virtual endpoints for a flexible server.": {
+          "Update a pair of virtual endpoints for a server.": {
             "$ref": "./examples/VirtualEndpointUpdate.json"
           }
         },
-        "description": "Updates a pair of virtual endpoints for a flexible server.",
+        "description": "Updates a pair of virtual endpoints for a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -143,16 +134,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -199,15 +187,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -251,9 +242,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointResource"
+              "$ref": "#/definitions/VirtualEndpoint"
             }
           },
           "default": {
@@ -272,11 +263,11 @@
         ],
         "operationId": "VirtualEndpoints_ListByServer",
         "x-ms-examples": {
-          "List pair of virtual endpoints associated to a flexible server.": {
+          "List pair of virtual endpoints associated to a server.": {
             "$ref": "./examples/VirtualEndpointsListByServer.json"
           }
         },
-        "description": "Lists pair of virtual endpoints associated to a flexible server.",
+        "description": "Lists pair of virtual endpoints associated to a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -293,9 +284,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointsListResult"
+              "$ref": "#/definitions/VirtualEndpointsList"
             }
           },
           "default": {
@@ -330,23 +321,23 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Flexible server that one of the virtual endpoints can refer to."
+            "description": "Server that one of the virtual endpoints can refer to."
           },
-          "description": "List of flexible servers that one of the virtual endpoints can refer to."
+          "description": "List of servers that one of the virtual endpoints can refer to."
         },
         "virtualEndpoints": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Virtual endpoints for a flexible server."
+            "description": "Virtual endpoints for a server."
           },
-          "description": "List of virtual endpoints for a flexible server.",
+          "description": "List of virtual endpoints for a server.",
           "readOnly": true
         }
       },
       "description": "Properties of a pair of virtual endpoints."
     },
-    "VirtualEndpointResource": {
+    "VirtualEndpoint": {
       "type": "object",
       "allOf": [
         {
@@ -356,7 +347,7 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
-      "description": "Pair of virtual endpoints for a flexible server."
+      "description": "Pair of virtual endpoints for a server."
     },
     "VirtualEndpointResourceForPatch": {
       "type": "object",
@@ -367,21 +358,22 @@
           "description": "Properties of the pair of virtual endpoints."
         }
       },
-      "description": "Pair of virtual endpoints for a flexible server."
+      "description": "Pair of virtual endpoints for a server."
     },
-    "VirtualEndpointsListResult": {
+    "VirtualEndpointsList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualEndpointResource"
+            "$ref": "#/definitions/VirtualEndpoint"
           },
           "description": "List of virtual endpoints."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "List of virtual endpoints."

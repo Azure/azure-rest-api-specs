@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,7 +41,7 @@
         ],
         "operationId": "QuotaUsages_List",
         "x-ms-examples": {
-          "List of quota usages for flexible servers": {
+          "List of quota usages for servers": {
             "$ref": "./examples/QuotaUsagesForFlexibleServers.json"
           }
         },
@@ -59,9 +59,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/QuotaUsagesListResult"
+              "$ref": "#/definitions/QuotaUsageList"
             }
           },
           "default": {
@@ -83,7 +83,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/NameProperty",
-          "description": "Name of quota usage for flexible servers"
+          "description": "Name of quota usage for servers"
         },
         "limit": {
           "type": "integer",
@@ -105,7 +105,7 @@
           "description": "Fully qualified ARM resource Id"
         }
       },
-      "description": "Quota usage for flexible servers"
+      "description": "Quota usage for servers"
     },
     "NameProperty": {
       "type": "object",
@@ -121,7 +121,7 @@
       },
       "description": "Name property for quota usage"
     },
-    "QuotaUsagesListResult": {
+    "QuotaUsageList": {
       "type": "object",
       "properties": {
         "value": {
@@ -138,7 +138,7 @@
         "nextLink": {
           "description": "Link to retrieve next page of results.",
           "type": "string",
-          "readOnly": true
+          "format": "uri"
         }
       },
       "description": "Capability for the PostgreSQL server"

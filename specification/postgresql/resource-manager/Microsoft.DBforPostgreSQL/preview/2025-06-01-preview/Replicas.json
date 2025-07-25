@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,11 +41,11 @@
         ],
         "operationId": "Replicas_ListByServer",
         "x-ms-examples": {
-          "List all read replicas of a flexible server.": {
+          "List all read replicas of a server.": {
             "$ref": "./examples/ReplicasListByServer.json"
           }
         },
-        "description": "Lists all read replicas of a flexible server.",
+        "description": "Lists all read replicas of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -62,9 +62,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "./FlexibleServers.json#/definitions/ServerListResult"
+              "$ref": "./Servers.json#/definitions/ServerList"
             }
           },
           "default": {

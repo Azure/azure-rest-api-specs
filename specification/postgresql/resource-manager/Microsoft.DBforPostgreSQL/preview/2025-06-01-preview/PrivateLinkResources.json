@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -57,9 +57,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private link resources.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceList"
             }
           },
           "default": {
@@ -110,9 +110,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private link resources.",
+            "description": "OK.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -131,7 +131,7 @@
     }
   },
   "definitions": {
-    "PrivateLinkResourceListResult": {
+    "PrivateLinkResourceList": {
       "description": "A list of private link resources",
       "type": "object",
       "properties": {
@@ -139,14 +139,14 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           },
           "readOnly": true
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
           "type": "string",
-          "readOnly": true
+          "format": "uri"
         }
       }
     }

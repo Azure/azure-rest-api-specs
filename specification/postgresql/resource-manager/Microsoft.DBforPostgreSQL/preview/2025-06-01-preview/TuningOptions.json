@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -41,11 +41,11 @@
         ],
         "operationId": "TuningOptions_Get",
         "x-ms-examples": {
-          "Get the tuning options of a flexible server.": {
-            "$ref": "./examples/Tuning_GetTuningOption.json"
+          "Get the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsGet.json"
           }
         },
-        "description": "Gets the tuning options of a flexible server.",
+        "description": "Gets the tuning options of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -65,9 +65,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TuningOptionsResource"
+              "$ref": "#/definitions/TuningOptions"
             }
           },
           "default": {
@@ -84,16 +84,22 @@
         "tags": [
           "TuningOptions"
         ],
-        "operationId": "TuningIndex_ListRecommendations",
+        "operationId": "TuningOptions_ListRecommendations",
         "x-ms-examples": {
-          "List available recommendations produced by index tuning.": {
-            "$ref": "./examples/TuningIndex_GetRecommendations.json"
+          "List available index recommendations.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendations.json"
           },
-          "List available recommendations produced by index tuning, exclusively those of create index type.": {
-            "$ref": "./examples/TuningIndex_GetFilteredRecommendations.json"
+          "List available table recommendations.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendations.json"
+          },
+          "List available index recommendations, filtered to exclusively get those of CREATE INDEX type.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendationsFilteredForCreateIndex.json"
+          },
+          "List available table recommendations, filtered to exclusively get those of ANALYZE TABLE type.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendationsFilteredForAnalyzeTable.json"
           }
         },
-        "description": "Lists available recommendations produced by index tuning.",
+        "description": "Lists available object recommendations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -116,321 +122,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/enable": {
-      "post": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_Enable",
-        "x-ms-examples": {
-          "TuningConfiguration_Enable": {
-            "$ref": "./examples/TuningConfiguration_Enable.json"
-          }
-        },
-        "description": "Enables the config tuning.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/disable": {
-      "post": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_Disable",
-        "x-ms-examples": {
-          "TuningConfiguration_Disable": {
-            "$ref": "./examples/TuningConfiguration_Disable.json"
-          }
-        },
-        "description": "Disables the config tuning.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/startSession": {
-      "post": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_StartSession",
-        "x-ms-examples": {
-          "TuningConfiguration_StartSession": {
-            "$ref": "./examples/TuningConfiguration_StartSession.json"
-          }
-        },
-        "description": "Starts up the config tuning session.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          },
-          {
-            "name": "configTuningRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigTuningRequestParameter"
-            },
-            "description": "The parameters for tuning request."
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/stopSession": {
-      "post": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_StopSession",
-        "x-ms-examples": {
-          "TuningConfiguration_StopSession": {
-            "$ref": "./examples/TuningConfiguration_StopSession.json"
-          }
-        },
-        "description": "Stops the config tuning session.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/sessions": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_ListSessions",
-        "x-ms-examples": {
-          "TuningConfiguration_ListSessions": {
-            "$ref": "./examples/TuningConfiguration_ListSessions.json"
-          }
-        },
-        "description": "Gets up the config tuning session status.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SessionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/sessionDetails": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningConfiguration_ListSessionDetails",
-        "x-ms-examples": {
-          "TuningConfiguration_ListSessionDetails": {
-            "$ref": "./examples/TuningConfiguration_ListSessionDetails.json"
-          }
-        },
-        "description": "Gets the session details of a config tuning session.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          },
-          {
-            "$ref": "#/parameters/SessionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SessionDetailsListResult"
+              "$ref": "#/definitions/ObjectRecommendationList"
             }
           },
           "default": {
@@ -452,11 +146,11 @@
         ],
         "operationId": "TuningOptions_ListByServer",
         "x-ms-examples": {
-          "List the tuning options of a flexible server.": {
-            "$ref": "./examples/Tuning_ListTuningOptions.json"
+          "List the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsListByServer.json"
           }
         },
-        "description": "Lists the tuning options of a flexible server.",
+        "description": "Lists the tuning options of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -473,9 +167,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TuningOptionsListResult"
+              "$ref": "#/definitions/TuningOptionsList"
             }
           },
           "default": {
@@ -516,7 +210,7 @@
       },
       "description": "Impact on some metric if this recommended action is applied."
     },
-    "IndexRecommendationDetails": {
+    "ObjectRecommendationDetails": {
       "type": "object",
       "properties": {
         "databaseName": {
@@ -557,7 +251,7 @@
       "description": "Recommendation details for the recommended action.",
       "readOnly": true
     },
-    "IndexRecommendationResourceProperties": {
+    "ObjectRecommendationProperties": {
       "type": "object",
       "properties": {
         "initialRecommendedTime": {
@@ -587,15 +281,20 @@
           "type": "string",
           "description": "Reason for this recommendation."
         },
+        "currentState": {
+          "type": "string",
+          "description": "Current state."
+        },
         "recommendationType": {
           "type": "string",
           "enum": [
             "CreateIndex",
             "DropIndex",
-            "ReIndex"
+            "ReIndex",
+            "AnalyzeTable"
           ],
           "x-ms-enum": {
-            "name": "RecommendationTypeEnum",
+            "name": "RecommendationType",
             "modelAsString": true
           },
           "description": "Type for this recommendation."
@@ -647,20 +346,25 @@
           "description": "Estimated impact of this recommended action."
         },
         "details": {
-          "$ref": "#/definitions/IndexRecommendationDetails",
+          "$ref": "#/definitions/ObjectRecommendationDetails",
           "description": "Recommendation details for the recommended action."
         }
       },
-      "description": "Index recommendation properties.",
+      "description": "Object recommendation properties.",
       "readOnly": true
     },
-    "IndexRecommendationResource": {
+    "ObjectRecommendation": {
       "type": "object",
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Always empty.",
+          "x-ms-visibility": "internal"
+        },
         "properties": {
-          "$ref": "#/definitions/IndexRecommendationResourceProperties",
+          "$ref": "#/definitions/ObjectRecommendationProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of IndexRecommendationResource."
+          "description": "Properties of an object recommendation."
         }
       },
       "allOf": [
@@ -668,18 +372,18 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Index recommendation properties."
+      "description": "Object recommendation properties."
     },
-    "IndexRecommendationListResult": {
-      "description": "List of available index recommendations.",
+    "ObjectRecommendationList": {
+      "description": "List of available object recommendations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of available index recommendations.",
+          "description": "List of available object recommendations.",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IndexRecommendationResource"
+            "$ref": "#/definitions/ObjectRecommendation"
           },
           "x-ms-identifiers": [
             "name"
@@ -687,11 +391,12 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
     },
-    "TuningOptionsResource": {
+    "TuningOptions": {
       "type": "object",
       "allOf": [
         {
@@ -700,7 +405,7 @@
       ],
       "description": "Impact on some metric if this recommended action is applied."
     },
-    "TuningOptionsListResult": {
+    "TuningOptionsList": {
       "description": "List of server tuning options.",
       "type": "object",
       "properties": {
@@ -709,7 +414,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TuningOptionsResource"
+            "$ref": "#/definitions/TuningOptions"
           },
           "x-ms-identifiers": [
             "name"
@@ -717,137 +422,10 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
-    },
-    "SessionResource": {
-      "type": "object",
-      "properties": {
-        "sessionStartTime": {
-          "type": "string",
-          "description": "Start time of the tuning session."
-        },
-        "sessionId": {
-          "type": "string",
-          "description": "Identifier of the tuning session."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the tuning session."
-        },
-        "preTuningAqr": {
-          "type": "string",
-          "description": "Average query runtime before tuning starts."
-        },
-        "postTuningAqr": {
-          "type": "string",
-          "description": "Average query runtime after tuning completes."
-        },
-        "preTuningTps": {
-          "type": "string",
-          "description": "Transactions per second before tuning starts."
-        },
-        "postTuningTps": {
-          "type": "string",
-          "description": "Transactions per second after tuning completes."
-        }
-      },
-      "description": "Session resource properties."
-    },
-    "SessionsListResult": {
-      "description": "List of tuning configuration sessions.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of tuning configuration sessions.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SessionResource"
-          },
-          "x-ms-identifiers": [
-            "sessionId"
-          ]
-        },
-        "nextLink": {
-          "description": "Link used to get the next page of results.",
-          "type": "string"
-        }
-      }
-    },
-    "SessionDetailsResource": {
-      "type": "object",
-      "properties": {
-        "iterationId": {
-          "type": "string",
-          "description": "Iteration id."
-        },
-        "sessionId": {
-          "type": "string",
-          "description": "Session id."
-        },
-        "appliedConfiguration": {
-          "type": "string",
-          "description": "Applied configuration for the iteration."
-        },
-        "iterationStartTime": {
-          "type": "string",
-          "description": "Iteration start time."
-        },
-        "averageQueryRuntimeMs": {
-          "type": "string",
-          "description": "The aqr for the iteration."
-        },
-        "transactionsPerSecond": {
-          "type": "string",
-          "description": "The tps for the iteration."
-        }
-      },
-      "description": "Session details properties."
-    },
-    "SessionDetailsListResult": {
-      "description": "A list of tuning configuration sessions.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of details of the session.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SessionDetailsResource"
-          },
-          "x-ms-identifiers": [
-            "iterationId"
-          ]
-        },
-        "nextLink": {
-          "description": "Link used to get the next page of results.",
-          "type": "string"
-        }
-      }
-    },
-    "ConfigTuningRequestParameter": {
-      "type": "object",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "The name of server."
-        },
-        "allowServerRestarts": {
-          "type": "boolean",
-          "description": "Indicates whether PG should be restarted during a tuning session."
-        },
-        "targetImprovementMetric": {
-          "type": "string",
-          "description": "The target metric the tuning session is trying to improve."
-        },
-        "configTuningUsageMode": {
-          "type": "boolean",
-          "description": "The mode with which the feature will be enabled."
-        }
-      },
-      "description": "Config tuning request parameters."
     }
   },
   "parameters": {
@@ -858,11 +436,11 @@
       "type": "string",
       "enum": [
         "index",
-        "configuration"
+        "table"
       ],
-      "description": "Name of the tuning option.",
+      "description": "The name of the tuning option.",
       "x-ms-enum": {
-        "name": "TuningOptionEnum",
+        "name": "TuningOption",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
@@ -874,21 +452,14 @@
       "type": "string",
       "enum": [
         "CreateIndex",
-        "DropIndex"
+        "DropIndex",
+        "AnalyzeTable"
       ],
       "description": "Recommendations list filter. Retrieves recommendations based on type.",
       "x-ms-enum": {
         "name": "RecommendationType",
         "modelAsString": true
       },
-      "x-ms-parameter-location": "method"
-    },
-    "SessionIdParameter": {
-      "name": "sessionId",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Guid of the objectId for the session.",
       "x-ms-parameter-location": "method"
     }
   }

@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -36,14 +36,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup": {
       "post": {
-        "description": "Performs all checks required so that a subsequent long term retention backup operation succeeds.",
+        "description": "Performs all checks required for a long term retention backup operation to succeed.",
         "tags": [
-          "LongTermRetentionBackup"
+          "BackupsLongTermRetention"
         ],
-        "operationId": "FlexibleServer_TriggerLtrPreBackup",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "BackupsLongTermRetention_CheckPrerequisites",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -69,7 +66,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok. API finished synchronously with Success.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/LtrPreBackupResponse"
             },
@@ -81,7 +78,7 @@
             }
           },
           "default": {
-            "description": "Error Scenario 4xx/5xx",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
@@ -98,8 +95,8 @@
           }
         },
         "x-ms-examples": {
-          "Sample_Prebackup": {
-            "$ref": "./examples/LongTermRetentionPreBackup.json"
+          "Perform all checks required for a long term retention backup operation to succeed.": {
+            "$ref": "./examples/BackupsLongTermRetentionCheckPrerequisites.json"
           }
         },
         "deprecated": false
@@ -107,14 +104,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup": {
       "post": {
-        "description": "Start the Long Term Retention Backup operation",
+        "description": "Initiates a long term retention backup.",
         "tags": [
-          "LongTermRetentionBackup"
+          "BackupsLongTermRetention"
         ],
-        "operationId": "FlexibleServer_StartLtrBackup",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "BackupsLongTermRetention_Start",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -134,15 +128,15 @@
             "description": "Request body for operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LtrBackupRequest"
+              "$ref": "#/definitions/BackupsLongTermRetentionRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok. API finished synchronously with Success.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/LtrBackupResponse"
+              "$ref": "#/definitions/BackupsLongTermRetentionResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -174,7 +168,7 @@
             }
           },
           "default": {
-            "description": "Error Scenario 4xx/5xx",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
@@ -191,8 +185,8 @@
           }
         },
         "x-ms-examples": {
-          "Sample_ExecuteBackup": {
-            "$ref": "./examples/LongTermRetentionBackup.json"
+          "Initiate a long term retention backup.": {
+            "$ref": "./examples/BackupsLongTermRetentionStart.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -204,15 +198,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}": {
       "get": {
         "tags": [
-          "LongTermRetentionBackup"
+          "BackupsLongTermRetention"
         ],
-        "operationId": "ltrBackupOperations_Get",
+        "operationId": "BackupsLongTermRetention_Get",
         "x-ms-examples": {
-          "Sample": {
-            "$ref": "./examples/LongTermRetentionOperationGet.json"
+          "Get the results of a long retention backup operation for a server.": {
+            "$ref": "./examples/BackupsLongTermRetentionGet.json"
           }
         },
-        "description": "Gets the result of the give long term retention backup operation for the flexible server.",
+        "description": "Gets the results of a long retention backup operation for a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -232,9 +226,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/LtrServerBackupOperation"
+              "$ref": "#/definitions/BackupsLongTermRetentionOperation"
             }
           },
           "default": {
@@ -249,15 +243,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations": {
       "get": {
         "tags": [
-          "LongTermRetentionBackup"
+          "BackupsLongTermRetention"
         ],
-        "operationId": "ltrBackupOperations_ListByServer",
+        "operationId": "BackupsLongTermRetention_ListByServer",
         "x-ms-examples": {
-          "Sample List of Long Tern Retention Operations by Flexible Server": {
-            "$ref": "./examples/LongTermRetentionOperationListByServer.json"
+          "List the results of the long term retention backup operations for a server.": {
+            "$ref": "./examples/BackupsLongTermRetentionListByServer.json"
           }
         },
-        "description": "Gets the result of the give long term retention backup operations for the flexible server.",
+        "description": "Lists the results of the long term retention backup operations for a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -274,7 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/LtrServerBackupOperationList"
             }
@@ -306,7 +300,7 @@
         }
       }
     },
-    "LtrBackupRequest": {
+    "BackupsLongTermRetentionRequest": {
       "description": "The request that is made for a long term retention backup.",
       "type": "object",
       "properties": {
@@ -364,7 +358,7 @@
         }
       }
     },
-    "LtrPreBackupResponseProperties": {
+    "BackupsLongTermRetentionResponseProperties": {
       "description": "Response for the pre-backup request.",
       "type": "object",
       "required": [
@@ -447,7 +441,7 @@
         }
       }
     },
-    "LtrBackupResponse": {
+    "BackupsLongTermRetentionResponse": {
       "description": "Response for the LTR backup API call",
       "type": "object",
       "properties": {
@@ -458,7 +452,7 @@
         }
       }
     },
-    "LtrServerBackupOperation": {
+    "BackupsLongTermRetentionOperation": {
       "description": "Response for the LTR backup Operation API call",
       "type": "object",
       "required": [
@@ -484,13 +478,14 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LtrServerBackupOperation"
+            "$ref": "#/definitions/BackupsLongTermRetentionOperation"
           },
           "description": "The list of long term retention server backup operations"
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "A list of long term retention backup operations for server."
@@ -505,7 +500,7 @@
         "properties": {
           "description": "Additional Properties for the pre backup response",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/LtrPreBackupResponseProperties"
+          "$ref": "#/definitions/BackupsLongTermRetentionResponseProperties"
         }
       }
     }

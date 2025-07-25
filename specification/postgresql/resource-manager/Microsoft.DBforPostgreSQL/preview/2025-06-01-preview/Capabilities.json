@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,12 +37,12 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
       "get": {
         "tags": [
-          "LocationBasedCapabilities"
+          "CapabilitiesByLocation"
         ],
-        "operationId": "LocationBasedCapabilities_Execute",
+        "operationId": "CapabilitiesByLocation_List",
         "x-ms-examples": {
           "List the capabilities available in a given location for a specific subscription.": {
-            "$ref": "./examples/CapabilitiesByLocation.json"
+            "$ref": "./examples/CapabilitiesByLocationList.json"
           }
         },
         "description": "Lists the capabilities available in a given location for a specific subscription.",
@@ -59,9 +59,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CapabilitiesListResult"
+              "$ref": "#/definitions/CapabilityList"
             }
           },
           "default": {
@@ -79,15 +79,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities": {
       "get": {
         "tags": [
-          "FlexibleServerCapabilities"
+          "CapabilitiesByServer"
         ],
-        "operationId": "ServerCapabilities_List",
+        "operationId": "CapabilitiesByServer_List",
         "x-ms-examples": {
-          "List the capabilities available for a given flexible server.": {
-            "$ref": "./examples/ServerCapabilities.json"
+          "List the capabilities available for a given server.": {
+            "$ref": "./examples/CapabilitiesByServerList.json"
           }
         },
-        "description": "Lists the capabilities available for a given flexible server.",
+        "description": "Lists the capabilities available for a given server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -104,9 +104,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/CapabilitiesListResult"
+              "$ref": "#/definitions/CapabilityList"
             }
           },
           "default": {
@@ -236,7 +236,7 @@
         },
         "supportedZones": {
           "type": "array",
-          "description": "List of supported availability zones. E.g. \"1\", \"2\", \"3\"",
+          "description": "List of supported availability zones. E.g. '1', '2', '3'",
           "items": {
             "type": "string"
           },
@@ -252,7 +252,7 @@
               "ZoneRedundant"
             ],
             "x-ms-enum": {
-              "name": "HaMode",
+              "name": "HighAvailabilityMode",
               "modelAsString": true
             }
           },
@@ -296,7 +296,7 @@
         "11"
       ],
       "x-ms-enum": {
-        "name": "ServerVersion",
+        "name": "PostgresMajorVersion",
         "modelAsString": true
       }
     },
@@ -386,7 +386,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "supportedFeatureStatusEnum",
+            "name": "FeatureStatus",
             "modelAsString": true
           }
         }
@@ -430,7 +430,7 @@
         }
       ]
     },
-    "FlexibleServerEditionCapability": {
+    "ServerEditionCapability": {
       "type": "object",
       "allOf": [
         {
@@ -473,7 +473,7 @@
       },
       "description": "Capabilities in terms of compute tier."
     },
-    "FlexibleServerCapability": {
+    "Capability": {
       "type": "object",
       "allOf": [
         {
@@ -488,7 +488,7 @@
         "supportedServerEditions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlexibleServerEditionCapability"
+            "$ref": "#/definitions/ServerEditionCapability"
           },
           "x-ms-identifiers": [
             "name"
@@ -520,14 +520,14 @@
         },
         "fastProvisioningSupported": {
           "type": "string",
-          "description": "Indicates if fast provisioning is supported. \"Enabled\" means fast provisioning is supported. \"Disabled\" stands for fast provisioning is not supported. Will be deprecated in the future. Look to Supported Features for \"FastProvisioning\".",
+          "description": "Indicates if fast provisioning is supported. 'Enabled' means fast provisioning is supported. 'Disabled' stands for fast provisioning is not supported. Will be deprecated in the future. Look to Supported Features for 'FastProvisioning'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "fastProvisioningSupportedEnum",
+            "name": "FastProvisioningSupport",
             "modelAsString": true
           }
         },
@@ -544,93 +544,93 @@
         },
         "geoBackupSupported": {
           "type": "string",
-          "description": "Indicates if geographically redundant backups are supported in this location. \"Enabled\" means geographically redundant backups are supported. \"Disabled\" stands for geographically redundant backup is not supported. Will be deprecated in the future. Look to Supported Features for \"GeoBackup\".",
+          "description": "Indicates if geographically redundant backups are supported in this location. 'Enabled' means geographically redundant backups are supported. 'Disabled' stands for geographically redundant backup is not supported. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "geoBackupSupportedEnum",
+            "name": "GeographicallyRedundantBackupSupport",
             "modelAsString": true
           }
         },
         "zoneRedundantHaSupported": {
           "type": "string",
-          "description": "Indicates if high availability with zone redundancy is supported in this location. \"Enabled\" means high availability with zone redundancy is supported. \"Disabled\" stands for high availability with zone redundancy is not supported. Will be deprecated in the future. Look to Supported Features for  \"ZoneRedundantHa\".",
+          "description": "Indicates if high availability with zone redundancy is supported in this location. 'Enabled' means high availability with zone redundancy is supported. 'Disabled' stands for high availability with zone redundancy is not supported. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "zoneRedundantHaSupportedEnum",
+            "name": "ZoneRedundantHighAvailabilitySupport",
             "modelAsString": true
           }
         },
         "zoneRedundantHaAndGeoBackupSupported": {
           "type": "string",
-          "description": "Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. \"Enabled\" means high availability with zone redundancy is supported in conjunction with geographically redundant backups is supported. \"Disabled\" stands for high availability with zone redundancy is supported in conjunction with geographically redundant backups is not supported. Will be deprecated in the future. Look to Supported Features for \"ZoneRedundantHaAndGeoBackup\".",
+          "description": "Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. 'Enabled' means high availability with zone redundancy is supported in conjunction with geographically redundant backups is supported. 'Disabled' stands for high availability with zone redundancy is supported in conjunction with geographically redundant backups is not supported. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "zoneRedundantHaAndGeoBackupSupportedEnum",
+            "name": "ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport",
             "modelAsString": true
           }
         },
         "storageAutoGrowthSupported": {
           "type": "string",
-          "description": "Indicates if storage autogrow is supported in this location. \"Enabled\" means storage autogrow is supported. \"Disabled\" stands for storage autogrow is not supported. Will be deprecated in the future. Look to Supported Features for \"StorageAutoGrowth\".",
+          "description": "Indicates if storage autogrow is supported in this location. 'Enabled' means storage autogrow is supported. 'Disabled' stands for storage autogrow is not supported. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "storageAutoGrowthSupportedEnum",
+            "name": "StorageAutoGrowthSupport",
             "modelAsString": true
           }
         },
         "onlineResizeSupported": {
           "type": "string",
-          "description": "Indicates if resizing the storage without interrupting the operation of the database engine is supported in this location for the given subscription. \"Enabled\" means resizing the storage without interrupting the operation of the database engine is supported. \"Disabled\" means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for \"OnlineResize\".",
+          "description": "Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. 'Enabled' means resizing the storage without interrupting the operation of the database engine is supported. 'Disabled' means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "onlineResizeSupportedEnum",
+            "name": "OnlineStorageResizeSupport",
             "modelAsString": true
           }
         },
         "restricted": {
           "type": "string",
-          "description": "Indicates if this location is restricted. \"Enabled\" means location is restricted. \"Disabled\" stands for location is not restricted. Will be deprecated in the future. Look to Supported Features for \"Restricted\".",
+          "description": "Indicates if this location is restricted. 'Enabled' means location is restricted. 'Disabled' stands for location is not restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.",
           "readOnly": true,
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "restrictedEnum",
+            "name": "LocationRestricted",
             "modelAsString": true
           }
         }
       },
       "description": "Capability for the Azure Database for PostgreSQL flexible server."
     },
-    "CapabilitiesListResult": {
+    "CapabilityList": {
       "type": "object",
       "properties": {
         "value": {
           "description": "List of supported capabilities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlexibleServerCapability"
+            "$ref": "#/definitions/Capability"
           },
           "x-ms-identifiers": [
             "name"
@@ -640,10 +640,10 @@
         "nextLink": {
           "description": "Link to retrieve next page of results.",
           "type": "string",
-          "readOnly": true
+          "format": "uri"
         }
       },
-      "description": "Capability for the Azure Database for PostgreSQL flexible server."
+      "description": "List of capabilities for the Azure Database for PostgreSQL flexible server."
     }
   },
   "parameters": {}

@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,13 +39,13 @@
         "tags": [
           "VirtualNetworkSubnetUsage"
         ],
-        "operationId": "VirtualNetworkSubnetUsage_Execute",
+        "operationId": "VirtualNetworkSubnetUsage_List",
         "x-ms-examples": {
-          "VirtualNetworkSubnetUsageList": {
-            "$ref": "./examples/VirtualNetworkSubnetUsage.json"
+          "List the virtual network subnet usage for a given virtual network.": {
+            "$ref": "./examples/VirtualNetworkSubnetUsageList.json"
           }
         },
-        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "description": "Lists the virtual network subnet usage for a given virtual network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -68,9 +68,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageModel"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
       },
       "description": "Virtual network subnet usage parameter"
     },
-    "VirtualNetworkSubnetUsageResult": {
+    "VirtualNetworkSubnetUsageModel": {
       "type": "object",
       "properties": {
         "delegatedSubnetsUsage": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,15 +37,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
       "put": {
         "tags": [
-          "Backups"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Backups_Create",
+        "operationId": "BackupsAutomaticAndOnDemand_Create",
         "x-ms-examples": {
-          "Create an on demand backup of a flexible server.": {
-            "$ref": "./examples/BackupCreate.json"
+          "Create an on demand backup of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandCreate.json"
           }
         },
-        "description": "Creates an on demand backup of a flexible server.",
+        "description": "Creates an on demand backup of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -64,22 +64,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerBackup"
-            }
-          },
-          "201": {
-            "description": "Successfully created backup",
-            "schema": {
-              "$ref": "#/definitions/ServerBackup"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -98,12 +89,12 @@
       },
       "delete": {
         "tags": [
-          "Backups"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Backups_Delete",
+        "operationId": "BackupsAutomaticAndOnDemand_Delete",
         "x-ms-examples": {
           "Delete an on demand backup, given its name.": {
-            "$ref": "./examples/BackupDelete.json"
+            "$ref": "./examples/BackupsAutomaticAndOnDemandDelete.json"
           }
         },
         "description": "Deletes a specific backup, given its name.",
@@ -126,15 +117,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -150,12 +144,12 @@
       },
       "get": {
         "tags": [
-          "Backups"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Backups_Get",
+        "operationId": "BackupsAutomaticAndOnDemand_Get",
         "x-ms-examples": {
           "Get an on demand backup, given its name.": {
-            "$ref": "./examples/BackupGet.json"
+            "$ref": "./examples/BackupsAutomaticAndOnDemandGet.json"
           }
         },
         "description": "Gets information of an on demand backup, given its name.",
@@ -178,9 +172,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerBackup"
+              "$ref": "#/definitions/BackupAutomaticAndOnDemand"
             }
           },
           "default": {
@@ -195,15 +189,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups": {
       "get": {
         "tags": [
-          "Backups"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Backups_ListByServer",
+        "operationId": "BackupsAutomaticAndOnDemand_ListByServer",
         "x-ms-examples": {
-          "List all available backups of a flexible server.": {
-            "$ref": "./examples/BackupListByServer.json"
+          "List all available backups of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandListByServer.json"
           }
         },
-        "description": "Lists all available backups of a flexible server.",
+        "description": "Lists all available backups of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -220,9 +214,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerBackupListResult"
+              "$ref": "#/definitions/BackupAutomaticAndOnDemandList"
             }
           },
           "default": {
@@ -239,7 +233,7 @@
     }
   },
   "definitions": {
-    "ServerBackupProperties": {
+    "BackupAutomaticAndOnDemandProperties": {
       "type": "object",
       "properties": {
         "backupType": {
@@ -250,7 +244,7 @@
             "Customer On-Demand"
           ],
           "x-ms-enum": {
-            "name": "Origin",
+            "name": "BackupType",
             "modelAsString": true
           }
         },
@@ -266,11 +260,11 @@
       },
       "description": "Properties of a backup."
     },
-    "ServerBackup": {
+    "BackupAutomaticAndOnDemand": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServerBackupProperties",
+          "$ref": "#/definitions/BackupAutomaticAndOnDemandProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of a backup."
         }
@@ -282,19 +276,20 @@
       ],
       "description": "Properties of a backup."
     },
-    "ServerBackupListResult": {
+    "BackupAutomaticAndOnDemandList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerBackup"
+            "$ref": "#/definitions/BackupAutomaticAndOnDemand"
           },
           "description": "List of available backups."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "List of backups."
@@ -309,6 +304,7 @@
       "description": "Name of the backup.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
+      "maxLength": 128,
       "x-ms-parameter-location": "method"
     }
   }

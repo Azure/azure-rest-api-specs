@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, administrators, log files, configurations, migrations, advanced threat protection settings with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -39,8 +39,8 @@
         "tags": [
           "AdvancedThreatProtectionSettings"
         ],
-        "description": "Lists state of advanced threat protection settings for a flexible server.",
-        "operationId": "ServerThreatProtectionSettings_ListByServer",
+        "description": "Lists state of advanced threat protection settings for a server.",
+        "operationId": "AdvancedThreatProtectionSettings_ListByServer",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -57,21 +57,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the server threat detection policy.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionListResult"
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation of advanced threat protection on the flexible server failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List state of advanced threat protection settings for a flexible server.": {
-            "$ref": "./examples/ServerThreatProtectionSettingsListByServer.json"
+          "List state of advanced threat protection settings for a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -84,8 +84,8 @@
         "tags": [
           "AdvancedThreatProtectionSettings"
         ],
-        "description": "Gets state of advanced threat protection settings for a flexible server.",
-        "operationId": "ServerThreatProtectionSettings_Get",
+        "description": "Gets state of advanced threat protection settings for a server.",
+        "operationId": "AdvancedThreatProtectionSettings_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -105,21 +105,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the server advanced threat protection settings.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
             }
           },
           "default": {
-            "description": "Error response describing why the operation of threat protection on the flexible server failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get state of advanced threat protection settings for a flexible server.": {
-            "$ref": "./examples/ServerThreatProtectionSettingsGet.json"
+          "Get state of advanced threat protection settings for a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsGet.json"
           }
         }
       },
@@ -148,38 +148,29 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The Advanced Threat Protection state for the flexible server.",
+            "description": "The Advanced Threat Protection state for the server.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully set or update the server Threat Protection settings.",
-            "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation of setting Threat Protection failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "201": {
-            "description": "Successfully created the server Threat Protection settings.",
-            "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -188,23 +179,23 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Update a server's Threat Protection settings": {
-            "$ref": "./examples/ServerThreatProtectionSettingsCreateOrUpdate.json"
+          "Update the advanced threat protection settings of a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsCreateOrUpdate.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ServerThreatProtectionProperties": {
-      "description": "Properties of advanced threat protection state for a flexible server.",
+    "AdvancedThreatProtectionSettingsProperties": {
+      "description": "Properties of advanced threat protection state for a server.",
       "required": [
         "state"
       ],
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the flexible server.",
+          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the server.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -223,8 +214,8 @@
         }
       }
     },
-    "ServerThreatProtectionSettingsModel": {
-      "description": "Advanced threat protection settings of the flexible server.",
+    "AdvancedThreatProtectionSettingsModel": {
+      "description": "Advanced threat protection settings of the server.",
       "type": "object",
       "allOf": [
         {
@@ -233,28 +224,28 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServerThreatProtectionProperties",
+          "$ref": "#/definitions/AdvancedThreatProtectionSettingsProperties",
           "description": "Advanced threat protection properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ServerThreatProtectionListResult": {
-      "description": "List of advanced threat protection settings for a flexible server.",
+    "AdvancedThreatProtectionSettingsList": {
+      "description": "List of advanced threat protection settings for a server.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
+            "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
           },
           "readOnly": true
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
           "type": "string",
-          "readOnly": true
+          "format": "uri"
         }
       }
     }

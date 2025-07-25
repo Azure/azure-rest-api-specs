@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,12 +37,12 @@
     "/providers/Microsoft.DBforPostgreSQL/getPrivateDnsZoneSuffix": {
       "post": {
         "tags": [
-          "GetPrivateDnsZoneSuffix"
+          "PrivateDnsZoneSuffix"
         ],
-        "operationId": "GetPrivateDnsZoneSuffix_Execute",
+        "operationId": "PrivateDnsZoneSuffix_Get",
         "x-ms-examples": {
           "Get the private DNS suffix.": {
-            "$ref": "./examples/GetPrivateDnsZoneSuffix.json"
+            "$ref": "./examples/PrivateDnsZoneSuffixGet.json"
           }
         },
         "description": "Gets the private DNS zone suffix.",
@@ -53,7 +53,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/PrivateDnsZoneSuffix"
             }

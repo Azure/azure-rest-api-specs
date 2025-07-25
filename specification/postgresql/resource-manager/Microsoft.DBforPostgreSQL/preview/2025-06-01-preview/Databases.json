@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-01-01-preview"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -42,7 +42,7 @@
         "operationId": "Databases_Create",
         "x-ms-examples": {
           "Create a database.": {
-            "$ref": "./examples/DatabaseCreate.json"
+            "$ref": "./examples/DatabasesCreate.json"
           }
         },
         "description": "Creates a new database.",
@@ -73,22 +73,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -112,7 +103,7 @@
         "operationId": "Databases_Delete",
         "x-ms-examples": {
           "Delete an existing database": {
-            "$ref": "./examples/DatabaseDelete.json"
+            "$ref": "./examples/DatabasesDelete.json"
           }
         },
         "description": "Deletes an existing database.",
@@ -134,19 +125,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -167,7 +158,7 @@
         "operationId": "Databases_Get",
         "x-ms-examples": {
           "Get information about an existing database.": {
-            "$ref": "./examples/DatabaseGet.json"
+            "$ref": "./examples/DatabasesGet.json"
           }
         },
         "description": "Gets information about an existing database.",
@@ -190,7 +181,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -211,11 +202,11 @@
         ],
         "operationId": "Databases_ListByServer",
         "x-ms-examples": {
-          "List all databases in a flexible server.": {
+          "List all databases in a server.": {
             "$ref": "./examples/DatabasesListByServer.json"
           }
         },
-        "description": "Lists all databases in a flexible server.",
+        "description": "Lists all databases in a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -232,9 +223,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/DatabaseListResult"
+              "$ref": "#/definitions/DatabaseList"
             }
           },
           "default": {
@@ -281,9 +272,9 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a Database."
+      "description": "Represents a database."
     },
-    "DatabaseListResult": {
+    "DatabaseList": {
       "type": "object",
       "properties": {
         "value": {
@@ -291,7 +282,7 @@
           "items": {
             "$ref": "#/definitions/Database"
           },
-          "description": "List of all databases in a flexible server."
+          "description": "List of all databases in a server."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
@@ -299,7 +290,7 @@
           "format": "uri"
         }
       },
-      "description": "List of all databases in a flexible server."
+      "description": "List of all databases in a server."
     }
   },
   "parameters": {
@@ -308,9 +299,10 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the database.",
+      "description": "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server.",
       "minLength": 1,
-      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]{0,30}$",
+      "pattern": "^[a-zA-Z_][\\w\\-]{0,62}$",
+      "maxLength": 63,
       "x-ms-parameter-location": "method"
     }
   }
