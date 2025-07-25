@@ -135,15 +135,19 @@ union PrivateLinkServiceConnectionStatus {
 }
 
 /**
- * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+ * Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned.
  */
-union IotHubAuthenticationType {
+union DeviceRegistryNamespaceAuthenticationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  KeyBased: "KeyBased",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * User assigned authentication type.
+   */
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * System assigned authentication type.
+   */
   SystemAssigned: "SystemAssigned",
 }
 
@@ -352,6 +356,11 @@ model IotDpsPropertiesDescription {
   iotHubs?: IotHubDefinitionDescription[];
 
   /**
+   * The Device Registry namespace that is linked to the provisioning service.
+   */
+  deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
+
+  /**
    * Allocation policy to be used by this provisioning service.
    */
   allocationPolicy?: AllocationPolicy;
@@ -487,20 +496,34 @@ model IotHubDefinitionDescription {
   /**
    * Connection string of the IoT hub.
    */
-  connectionString?: string;
+  connectionString: string;
 
   /**
    * ARM region of the IoT hub.
    */
   location: string;
+}
 
+/**
+ * Description of the Device Registry namespace that is linked to the provisioning service.
+ */
+model DeviceRegistryNamespaceDescription {
   /**
-   * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+   * The ARM resource ID of the Device Registry namespace.
    */
-  authenticationType?: IotHubAuthenticationType;
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces";
+    }
+  ]>;
 
   /**
-   * The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.
+   * Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned.
+   */
+  authenticationType: DeviceRegistryNamespaceAuthenticationType;
+
+  /**
+   * The selected user-assigned identity resource Id associated with Device Registry namespace. This is required when authenticationType is UserAssigned.
    */
   selectedUserAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
     {
