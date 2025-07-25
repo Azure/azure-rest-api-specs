@@ -15147,7 +15147,7 @@
           }
         },
         "scopeType": {
-          "$ref": "#/definitions/ArcScopeType",
+          "$ref": "#/definitions/ArcSiteScopeType",
           "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
         },
         "subscriptionOrResourceGroupIds": {
@@ -15156,6 +15156,16 @@
           "items": {
             "type": "string",
             "format": "arm-id"
+          },
+          "syncType": {
+            "$ref": "#/definitions/ArcSyncType",
+            "description": "The type of sync, currently supporting Manual and Periodic."
+          },
+          "lastSyncTime ": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Gets the last successful sync time of arc site in UTC.",
+            "readOnly": true
           }
         }
       },
@@ -15175,7 +15185,7 @@
           }
         },
         "scopeType": {
-          "$ref": "#/definitions/ArcScopeType",
+          "$ref": "#/definitions/ArcSiteScopeType",
           "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
         },
         "subscriptionOrResourceGroupIds": {
@@ -15186,23 +15196,57 @@
             "format": "arm-id",
             "description": "An array of ARM resource IDs for subscriptions or resource groups."
           }
+        },
+        "syncType": {
+          "$ref": "#/definitions/ArcSyncType",
+          "description": "The type of sync, currently supporting Manual and Periodic."
+        },
+        "lastSyncTime ": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last successful sync time of arc site in UTC.",
+          "readOnly": true
         }
       }
     },
-    "ArcScopeType": {
+    "ArcSiteScopeType": {
       "type": "string",
-      "description": "Arc scope type.",
+      "description": "Arc site scope type.",
       "enum": [
         "SubscriptionOrResourceGroupIds"
       ],
       "x-ms-enum": {
-        "name": "ArcScopeType",
+        "name": "ArcSiteScopeType",
         "modelAsString": true,
         "values": [
           {
             "name": "SubscriptionOrResourceGroupIds",
             "value": "SubscriptionOrResourceGroupIds",
             "description": "Scope is based on Subscription or Resource Group IDs."
+          }
+        ]
+      }
+    },
+    "ArcSyncType": {
+      "type": "string",
+      "description": "Arc sync type.",
+      "enum": [
+        "Manual",
+        "Periodic"
+      ],
+      "x-ms-enum": {
+        "name": "ArcSyncType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "On-demand sync of arc resources."
+          },
+          {
+            "name": "Periodic",
+            "value": "Periodic",
+            "description": "Periodic sync of arc resources."
           }
         ]
       }
