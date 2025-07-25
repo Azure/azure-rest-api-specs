@@ -283,6 +283,13 @@ export default async function summarizeChecks({ github, context, core }) {
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
+  if (!issue_number) {
+    core.info(
+      "This summarize-checks was triggered off a workflow that doesn't provide the issue-number artifact, early exiting.",
+    );
+    return;
+  }
+
   await summarizeChecksImpl(
     github,
     context,
@@ -319,7 +326,9 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
+  core.info(
+    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}@${head_sha}.`,
+  );
 
   // retrieve latest labels state
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
@@ -347,9 +356,9 @@ export async function summarizeChecksImpl(
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
-      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
-      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
-      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}] \n` +
+      `Removing labels: [${Array.from(labelContext.toRemove).join(", ")}] \n` +
+      `Adding labels: [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
   // for (const label of labelContext.toRemove) {
