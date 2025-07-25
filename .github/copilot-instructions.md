@@ -209,10 +209,10 @@ Do not skip the step that choose SDK generation method to ensure the user select
 3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
 4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
 5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
-6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
-7. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
-8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Validate Label and Codeowners**: Validate the common-labels and codeowners for the created SDK service.
+6. **Validate Label and Codeowners**: Validate the common-labels and codeowners for the created SDK service.
+7. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
+8. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
+9. **Show generated SDK PR**: Display the generated SDK pull request links for review.
 10. **Create a release plan**: To create a release plan refer to #file:.\prompts\create-release-plan.prompt.md
 11. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
 12. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.

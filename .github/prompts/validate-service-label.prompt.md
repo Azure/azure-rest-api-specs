@@ -4,7 +4,7 @@ tools: [CheckServiceLabel', 'CreateServiceLabel']
 ---
 
 # Goal
-- After INSERT_STEP_HERE, validate the service label for the corresponding API spec and create a pull request if necessary. 
+- Validate the service label for the corresponding API spec and create a pull request if necessary. 
 
 ## Step 1: Prompt for Service Label
 - Ask user if they have a label to their service.
