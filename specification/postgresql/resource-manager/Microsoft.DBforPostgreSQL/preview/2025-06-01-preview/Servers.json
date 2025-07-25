@@ -655,14 +655,24 @@
         },
         "promoteOption": {
           "type": "string",
-          "description": "Data synchronization option to use when processing the operation specified in the promoteMode property. This property is write only. 'Planned' means that the operation will wait for data in the read replica to be fully synchronized with its source server, before it initiates the operation. 'Forced' means that the operation will not wait for data in the read replica to be synchronized with its source server, before it initiates the operation.",
+          "description": "Data synchronization option to use when processing the operation specified in the promoteMode property. This property is write only.",
           "enum": [
-            "planned",
-            "forced"
+            "Planned",
+            "Forced"
           ],
           "x-ms-enum": {
             "name": "ReadReplicaPromoteOption",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Planned",
+                "description": "The operation will wait for data in the read replica to be fully synchronized with its source server, before it initiates the operation."
+              },
+              {
+                "value": "Forced",
+                "description": "The operation will not wait for data in the read replica to be synchronized with its source server, before it initiates the operation."
+              }
+            ]
           },
           "x-ms-mutability": [
             "update"
