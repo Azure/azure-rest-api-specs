@@ -666,6 +666,20 @@ model PrivateLinkResource {
 }
 
 /**
+ * Result of the List private link resources operation.
+ */
+model PrivateLinkResourcesListResult {
+  /**
+   * A collection of private link resources
+   */
+  value?: PrivateLinkResource[];
+
+  /**
+   * A link for the next page of private link resources.
+   */
+  nextLink?: string;
+}
+/**
  * Properties of PrivateLinkResource
  */
 model PrivateLinkResourceProperties {

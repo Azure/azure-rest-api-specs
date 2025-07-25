@@ -114,7 +114,7 @@ interface SBNamespaces {
   privateLinkResourcesGet is ArmResourceActionSync<
     SBNamespace,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<PrivateLinkResourcesListResult>
   >;
 
   /**
