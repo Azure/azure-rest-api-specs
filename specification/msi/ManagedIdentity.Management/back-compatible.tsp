@@ -6,14 +6,11 @@ using Microsoft.ManagedIdentity;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IdentityUpdate.properties);
 
-// @@flattenProperty(SystemAssignedIdentity.properties);
-
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Identities.update,
   "Identities.update::parameters.properties",
   "parameters"
 );
-// @@flattenProperty(Identity.properties);
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FederatedIdentityCredential.properties);

@@ -38,8 +38,6 @@ interface SystemAssignedIdentities {
   /**
    * Gets the systemAssignedIdentity available under the specified RP scope.
    */
-  // TODO: original "x-ms-identifiers", #["code"], but common type v4 is  ["message", "target"]
-  // @OpenAPI.extension("x-ms-identifiers", #["code"])
   getByScope is Extension.Read<
     Extension.ScopeParameter,
     SystemAssignedIdentity,

@@ -47,7 +47,6 @@ interface Identities {
    * Update an identity in the specified subscription and resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  // @parameterVisibility
   @operationId("UserAssignedIdentities_Update")
   update is ArmCustomPatchSync<Identity, IdentityUpdate, Error = CloudError>;
 

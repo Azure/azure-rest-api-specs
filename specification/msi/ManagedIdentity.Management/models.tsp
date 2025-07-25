@@ -180,8 +180,6 @@ model FederatedIdentityCredentialsListResult
   #["id"]
 );
 
-// @@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
-
 /**
  * The properties associated with a federated identity credential.
  */

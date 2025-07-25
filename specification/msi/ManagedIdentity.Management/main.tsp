@@ -33,8 +33,6 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(CommonTypes.Versions.v4)
 namespace Microsoft.ManagedIdentity;
 
-// interface Operations2 extends Azure.ResourceManager.Operations {}
-
 /**
  * This is the interface that implements the standard Azure Resource Manager operation that returns
  * all supported RP operations. You should have exactly one declaration for each
