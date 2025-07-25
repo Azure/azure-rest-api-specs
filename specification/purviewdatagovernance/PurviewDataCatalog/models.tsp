@@ -190,8 +190,11 @@ model SharedSearchManageAttributeSearchFilter {
 
 @doc("Request parameters for querying critical data elements.")
 model CriticalDataElementQueryRequest {
-  ...SkipQueryParameter;
-  ...TopQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
+
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("Ordering criteria for the results.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -714,8 +717,11 @@ model DataProductResponse {
 
 @doc("DataProductQueryRequest.")
 model DataProductQueryRequest {
-  ...SkipQueryParameter;
-  ...TopQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
+
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -961,8 +967,11 @@ model CatalogModelTermResponse {
 
 @doc("Term query request model.")
 model TermTermQueryRequest {
-  ...SkipQueryParameter;
-  ...TopQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
+
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -1195,8 +1204,11 @@ model ObjectiveWithAdditionalPropertiesResponse {
 
 @doc("ObjectiveQueryRequest.")
 model ObjectiveQueryRequest {
-  ...SkipQueryParameter;
-  ...TopQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
+
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];

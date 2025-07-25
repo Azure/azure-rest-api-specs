@@ -346,20 +346,10 @@
             "format": "uuid"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -981,20 +971,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -1742,12 +1722,6 @@
             "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The request body containing query criteria.",
@@ -1803,20 +1777,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           }
         ],
         "responses": {
@@ -2567,20 +2531,10 @@
             "format": "uuid"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "orderby",
@@ -3340,12 +3294,6 @@
             "type": "boolean"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
             "name": "request",
             "in": "body",
             "description": "The request body for the query.",
@@ -3418,20 +3366,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           }
         ],
         "responses": {
@@ -4299,12 +4237,6 @@
             "format": "int32"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The request body for querying OKRs.",
@@ -4379,20 +4311,10 @@
             "type": "string"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Number of items to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "depth",
@@ -5267,12 +5189,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
             "name": "request",
@@ -6506,6 +6422,16 @@
       "type": "object",
       "description": "Request parameters for querying critical data elements.",
       "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
         "orderby": {
           "type": "array",
           "description": "Ordering criteria for the results.",
@@ -6707,6 +6633,16 @@
       "type": "object",
       "description": "DataProductQueryRequest.",
       "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
         "orderby": {
           "type": "array",
           "description": "To order the records.",
@@ -7067,6 +7003,16 @@
       "type": "object",
       "description": "ObjectiveQueryRequest.",
       "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
         "orderby": {
           "type": "array",
           "description": "Order by specifications for the query.",
@@ -7539,6 +7485,16 @@
       "type": "object",
       "description": "Term query request model.",
       "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
         "orderby": {
           "type": "array",
           "description": "Order by specifications for the query.",

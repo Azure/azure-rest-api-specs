@@ -25,13 +25,8 @@ op ListCriticalDataElementAsync is Foundations.Operation<
     @query
     keyword?: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("Field to sort by.")
     @query
@@ -255,13 +250,8 @@ op ListCriticalDataColumnAsync is Foundations.Operation<
     @query
     assetId?: uuid;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("Field to sort by.")
     @query
@@ -371,13 +361,8 @@ op ListDataAssetsAsync is Foundations.Operation<
     @query
     orderby: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
   },
   DataAssetsResponse
 >;
@@ -546,13 +531,8 @@ op ListDataProductsAsync is Foundations.Operation<
     @query
     domainId?: uuid;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("The field to order by.")
     @query
@@ -867,13 +847,8 @@ op ListTermAsync is Foundations.Operation<
     @query
     keyword: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
 
     @doc("The depth of the term.")
     @query
@@ -1082,13 +1057,8 @@ op ListObjectivesAsync is Foundations.Operation<
     @query
     orderby: string;
 
-    @doc("Number of items to skip.")
-    @query
-    skip?: int32;
-
-    @doc("Number of items to return.")
-    @query
-    top?: int32;
+    ...SkipQueryParameter;
+    ...TopQueryParameter;
   },
   ObjectiveWithAdditionalPropertiesResponse
 >;
