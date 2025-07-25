@@ -124,6 +124,48 @@ input-file:
   - stable/2025-07-01/LogicAppsExtension.json
 ```
 
+### Tag: package-preview-2025-05-01-preview
+
+These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01-preview'
+input-file:
+  - Microsoft.App/preview/2025-05-01-preview/AppResiliency.json
+  - Microsoft.App/preview/2025-05-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2025-05-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2025-05-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2025-05-01-preview/Builders.json
+  - Microsoft.App/preview/2025-05-01-preview/Builds.json
+  - Microsoft.App/preview/2025-05-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2025-05-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2025-05-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2025-05-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-05-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-05-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2025-05-01-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2025-05-01-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/preview/2025-05-01-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2025-05-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2025-05-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2025-05-01-preview/DotNetComponents.json
+  - Microsoft.App/preview/2025-05-01-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2025-05-01-preview/Global.json
+  - Microsoft.App/preview/2025-05-01-preview/JavaComponents.json
+  - Microsoft.App/preview/2025-05-01-preview/Jobs.json
+  - Microsoft.App/preview/2025-05-01-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/preview/2025-05-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-05-01-preview/SessionPools.json
+  - Microsoft.App/preview/2025-05-01-preview/SourceControls.json
+  - Microsoft.App/preview/2025-05-01-preview/Subscriptions.json
+  - Microsoft.App/preview/2025-05-01-preview/Usages.json
+```
+
 ### Tag: package-2025-01-01
 
 These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
