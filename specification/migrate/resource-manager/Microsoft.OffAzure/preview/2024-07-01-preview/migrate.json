@@ -18236,7 +18236,7 @@
           "x-ms-identifiers": []
         },
         "discoveryScenario": {
-          "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
+          "$ref": "#/definitions/DiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
@@ -18318,7 +18318,7 @@
           "x-ms-identifiers": []
         },
         "discoveryScenario": {
-          "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
+          "$ref": "#/definitions/DiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
         },
         "provisioningState": {
@@ -22460,6 +22460,30 @@
             "name": "Extended",
             "value": "Extended",
             "description": "Extended value."
+          }
+        ]
+      }
+    },
+    "DiscoveryScenario": {
+      "type": "string",
+      "description": "DiscoveryScenario",
+      "enum": [
+        "Migrate",
+        "DR"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryScenario",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Migrate value."
+          },
+          {
+            "name": "DR",
+            "value": "DR",
+            "description": "DR value."
           }
         ]
       }
