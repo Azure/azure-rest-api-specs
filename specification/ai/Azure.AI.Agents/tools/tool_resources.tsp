@@ -30,6 +30,10 @@ model ToolResources {
   /** Resources to be used by the `azure_ai_search` tool consisting of index IDs and names. */
   @encodedName("application/json", "azure_ai_search")
   azureAISearch?: AzureAISearchToolResource;
+
+  /** Resources to be used by the `mcp` tool consisting of a server label and headers. */
+  @added(Versions.v2025_05_15_preview)
+  mcp?: MCPToolResource[];
 }
 
 /**
@@ -135,6 +139,23 @@ model AISearchIndexResource {
    */
   @encodedName("application/json", "index_asset_id")
   indexAssetId?: string;
+}
+
+/**
+ * A set of resources that are used by the `mcp` tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model MCPToolResource {
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The headers for the MCP server updates")
+  headers: Record<string>;
+
+  @doc("Does MCP server require approval")
+  @encodedName("application/json", "require_approval")
+  requireApproval?: "never" | "always" | string;
 }
 
 /** Available query types for Azure AI Search tool. */

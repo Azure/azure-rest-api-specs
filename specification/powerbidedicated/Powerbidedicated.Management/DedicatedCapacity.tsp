@@ -51,7 +51,7 @@ interface Capacities {
    */
   create is ArmResourceCreateOrReplaceAsync<
     DedicatedCapacity,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorResponse
   >;
@@ -64,7 +64,8 @@ interface Capacities {
   update is ArmCustomPatchAsync<
     DedicatedCapacity,
     PatchModel = DedicatedCapacityUpdateParameters,
-    Response = ArmResponse<DedicatedCapacity> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<DedicatedCapacity> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: DedicatedCapacity;
     }),
