@@ -11,3 +11,4 @@ using Microsoft.DataBox;
   "go"
 );
 @@clientName(Microsoft.DataBox, "DataBoxManagementClient", "javascript");
+@@clientName(Microsoft.DataBox, "DataBoxManagementClient", "python");
