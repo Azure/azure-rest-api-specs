@@ -712,7 +712,7 @@
             }
           },
           {
-            "name": "PolicyJws",
+            "name": "policyJws",
             "in": "body",
             "description": "JSON Web Signature with an empty policy document",
             "required": true,
@@ -1616,6 +1616,30 @@
           "type": "string",
           "description": "A sealed RFC 7519 JSON Web Token, the body of which is an AttestationResult\nobject."
         }
+      }
+    },
+    "SigningCertificatesContentType": {
+      "type": "string",
+      "description": "Content type for upload",
+      "enum": [
+        "application/jwk+json",
+        "application/json"
+      ],
+      "x-ms-enum": {
+        "name": "SigningCertificatesContentType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "application/jwk+json",
+            "value": "application/jwk+json",
+            "description": "Content Type 'application/jwk+json'"
+          },
+          {
+            "name": "application/json",
+            "value": "application/json",
+            "description": "Content Type 'application/json'"
+          }
+        ]
       }
     },
     "StoredAttestationPolicy": {
