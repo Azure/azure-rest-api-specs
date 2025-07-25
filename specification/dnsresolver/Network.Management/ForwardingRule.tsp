@@ -31,7 +31,7 @@ interface ForwardingRules {
   /**
    * Gets properties of a forwarding rule in a DNS forwarding ruleset.
    */
-  get is ArmResourceRead<ForwardingRule>;
+  get is ArmResourceRead<ForwardingRule, Error = CloudError>;
 
   /**
    * Creates or updates a forwarding rule in a DNS forwarding ruleset.
@@ -50,7 +50,8 @@ interface ForwardingRules {
        */
       @header
       ifNoneMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +67,8 @@ interface ForwardingRules {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -80,7 +82,8 @@ interface ForwardingRules {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -94,7 +97,8 @@ interface ForwardingRules {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -31,7 +31,7 @@ interface InboundEndpoints {
   /**
    * Gets properties of an inbound endpoint for a DNS resolver.
    */
-  get is ArmResourceRead<InboundEndpoint>;
+  get is ArmResourceRead<InboundEndpoint, Error = CloudError>;
 
   /**
    * Creates or updates an inbound endpoint for a DNS resolver.
@@ -55,7 +55,8 @@ interface InboundEndpoints {
     Response = ArmResourceUpdatedResponse<InboundEndpoint> | ArmResourceCreatedResponse<
       InboundEndpoint,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +72,8 @@ interface InboundEndpoints {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -87,7 +89,8 @@ interface InboundEndpoints {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -101,7 +104,8 @@ interface InboundEndpoints {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

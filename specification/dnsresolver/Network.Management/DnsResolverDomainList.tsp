@@ -29,7 +29,7 @@ interface DnsResolverDomainLists {
   /**
    * Gets properties of a DNS resolver domain list.
    */
-  get is ArmResourceRead<DnsResolverDomainList>;
+  get is ArmResourceRead<DnsResolverDomainList, Error = CloudError>;
 
   /**
    * Creates or updates a DNS resolver domain list.
@@ -49,7 +49,9 @@ interface DnsResolverDomainLists {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +67,8 @@ interface DnsResolverDomainLists {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -79,7 +82,8 @@ interface DnsResolverDomainLists {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -93,7 +97,8 @@ interface DnsResolverDomainLists {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -107,7 +112,8 @@ interface DnsResolverDomainLists {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -129,7 +135,8 @@ interface DnsResolverDomainLists {
        */
       @header
       ifNoneMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -31,7 +31,7 @@ interface VirtualNetworkLinks {
   /**
    * Gets properties of a virtual network link to a DNS forwarding ruleset.
    */
-  get is ArmResourceRead<VirtualNetworkLink>;
+  get is ArmResourceRead<VirtualNetworkLink, Error = CloudError>;
 
   /**
    * Creates or updates a virtual network link to a DNS forwarding ruleset.
@@ -55,7 +55,8 @@ interface VirtualNetworkLinks {
     Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
       VirtualNetworkLink,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +72,8 @@ interface VirtualNetworkLinks {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -87,7 +89,8 @@ interface VirtualNetworkLinks {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -101,7 +104,8 @@ interface VirtualNetworkLinks {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -29,7 +29,7 @@ interface DnsResolvers {
   /**
    * Gets properties of a DNS resolver.
    */
-  get is ArmResourceRead<DnsResolver>;
+  get is ArmResourceRead<DnsResolver, Error = CloudError>;
 
   /**
    * Creates or updates a DNS resolver.
@@ -53,7 +53,8 @@ interface DnsResolvers {
     Response = ArmResourceUpdatedResponse<DnsResolver> | ArmResourceCreatedResponse<
       DnsResolver,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -69,7 +70,8 @@ interface DnsResolvers {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -85,7 +87,8 @@ interface DnsResolvers {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -99,7 +102,8 @@ interface DnsResolvers {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -113,7 +117,8 @@ interface DnsResolvers {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -31,7 +31,7 @@ interface DnsSecurityRules {
   /**
    * Gets properties of a DNS security rule for a DNS resolver policy.
    */
-  get is ArmResourceRead<DnsSecurityRule>;
+  get is ArmResourceRead<DnsSecurityRule, Error = CloudError>;
 
   /**
    * Creates or updates a DNS security rule for a DNS resolver policy.
@@ -51,7 +51,9 @@ interface DnsSecurityRules {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -67,7 +69,8 @@ interface DnsSecurityRules {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -81,7 +84,8 @@ interface DnsSecurityRules {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -95,7 +99,8 @@ interface DnsSecurityRules {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

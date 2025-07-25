@@ -29,7 +29,7 @@ interface DnsResolverPolicies {
   /**
    * Gets properties of a DNS resolver policy.
    */
-  get is ArmResourceRead<DnsResolverPolicy>;
+  get is ArmResourceRead<DnsResolverPolicy, Error = CloudError>;
 
   /**
    * Creates or updates a DNS resolver policy.
@@ -49,7 +49,9 @@ interface DnsResolverPolicies {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -65,7 +67,8 @@ interface DnsResolverPolicies {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -79,7 +82,8 @@ interface DnsResolverPolicies {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -93,7 +97,8 @@ interface DnsResolverPolicies {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -107,7 +112,8 @@ interface DnsResolverPolicies {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

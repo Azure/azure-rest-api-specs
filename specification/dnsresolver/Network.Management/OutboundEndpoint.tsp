@@ -31,7 +31,7 @@ interface OutboundEndpoints {
   /**
    * Gets properties of an outbound endpoint for a DNS resolver.
    */
-  get is ArmResourceRead<OutboundEndpoint>;
+  get is ArmResourceRead<OutboundEndpoint, Error = CloudError>;
 
   /**
    * Creates or updates an outbound endpoint for a DNS resolver.
@@ -55,7 +55,8 @@ interface OutboundEndpoints {
     Response = ArmResourceUpdatedResponse<OutboundEndpoint> | ArmResourceCreatedResponse<
       OutboundEndpoint,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +72,8 @@ interface OutboundEndpoints {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -87,7 +89,8 @@ interface OutboundEndpoints {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -101,7 +104,8 @@ interface OutboundEndpoints {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

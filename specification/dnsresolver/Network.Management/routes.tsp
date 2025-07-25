@@ -38,7 +38,7 @@ interface DnsResolversOperationGroup {
      */
     @query("$top")
     $top?: int32,
-  ): ArmResponse<SubResourceListResult> | ErrorResponse;
+  ): ArmResponse<SubResourceListResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -66,7 +66,7 @@ interface DnsForwardingRulesetsOperationGroup {
      */
     @query("$top")
     $top?: int32,
-  ): ArmResponse<VirtualNetworkDnsForwardingRulesetListResult> | ErrorResponse;
+  ): ArmResponse<VirtualNetworkDnsForwardingRulesetListResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -86,9 +86,7 @@ interface DnsResolverPoliciesOperationGroup {
     /**
      * The name of the virtual network.
      */
-    @minLength(1)
-    @pattern("^.+$")
     @path
     virtualNetworkName: string,
-  ): ArmResponse<SubResourceListResult> | ErrorResponse;
+  ): ArmResponse<SubResourceListResult> | CloudError;
 }

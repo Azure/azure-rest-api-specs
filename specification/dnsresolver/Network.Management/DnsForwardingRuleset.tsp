@@ -32,7 +32,7 @@ interface DnsForwardingRulesets {
   /**
    * Gets a DNS forwarding ruleset properties.
    */
-  get is ArmResourceRead<DnsForwardingRuleset>;
+  get is ArmResourceRead<DnsForwardingRuleset, Error = CloudError>;
 
   /**
    * Creates or updates a DNS forwarding ruleset.
@@ -56,7 +56,8 @@ interface DnsForwardingRulesets {
     Response = ArmResourceUpdatedResponse<DnsForwardingRuleset> | ArmResourceCreatedResponse<
       DnsForwardingRuleset,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -72,7 +73,8 @@ interface DnsForwardingRulesets {
        */
       @header
       ifMatch?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -88,7 +90,8 @@ interface DnsForwardingRulesets {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -102,7 +105,8 @@ interface DnsForwardingRulesets {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -116,7 +120,8 @@ interface DnsForwardingRulesets {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

@@ -184,7 +184,6 @@ model CloudErrorBody {
   /**
    * Extra error information
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   details?: CloudErrorBody[];
 }
 
