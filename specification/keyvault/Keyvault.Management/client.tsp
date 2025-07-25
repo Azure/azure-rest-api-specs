@@ -41,7 +41,7 @@ using Azure.Core;
 @@clientName(MhsmipRule, "ManagedHsmIPRule", "csharp");
 @@clientName(DeletedVaultProperties, "DeletedKeyVaultProperties", "csharp");
 @@clientName(DeletedVault, "DeletedKeyVault", "csharp");
-@@clientName(MhsmipRule.value, "AddressRange");
+@@clientName(MhsmipRule.value, "AddressRange", "csharp");
 @@clientName(PrivateLinkResource, "KeyVaultPrivateLinkResourceData", "csharp");
 @@clientName(AccessPolicyEntry, "KeyVaultAccessPolicy", "csharp");
 @@clientName(NetworkRuleSet, "KeyVaultNetworkRuleSet", "csharp");
