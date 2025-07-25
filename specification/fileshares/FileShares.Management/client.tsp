@@ -11,4 +11,19 @@ using Azure.ResourceManager.Foundations;
   "csharp"
 );
 
+@@clientName(FileShareLimitsResponse,
+  "FileShareLimitsResult",
+  "csharp"
+);
+
+@@clientName(FileShareProvisioningRecommendationResponse,
+  "FileShareProvisioningRecommendationResult",
+  "csharp"
+);
+
+@@clientName(FileShareUsageDataResponse,
+  "FileShareUsageDataResult",
+  "csharp"
+);
+
 @@clientName(Azure.ResourceManager.CommonTypes.Operation, "Info", "csharp");
