@@ -2660,7 +2660,8 @@
       },
       "required": [
         "name",
-        "models"
+        "models",
+        "knowledgeSources"
       ]
     },
     "KnowledgeSourceReference": {
@@ -2684,10 +2685,12 @@
         },
         "maxSubQueries": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum number of queries that can be issued at a time when retrieving data from this source."
         },
         "rerankerThreshold": {
           "type": "number",
+          "format": "float",
           "description": "The reranker threshold all retrieved documents must meet to be included in the response."
         }
       },
@@ -2726,12 +2729,9 @@
           "type": "string",
           "description": "Instructions considered by the knowledge agent when generating answers"
         },
-        "optimizations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentOutputOptimization"
-          },
-          "description": "Indicates what procedural optimizations the system should perform."
+        "attemptFastPath": {
+          "type": "boolean",
+          "description": "Indicates whether the agent should attempt to issue the most recent chat message as a direct query to the knowledge sources, bypassing the model calls."
         },
         "includeActivity": {
           "type": "boolean",
@@ -2936,6 +2936,15 @@
     "WebKnowledgeSourceParameters": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/KnowledgeSourceIdentity",
+          "x-nullable": true,
+          "description": "An explicit identity to use for this knowledge source. "
+        },
+        "bingResourceId": {
+          "type": "string",
+          "description": "The ResourceId of the Bing Search resource to use for web results."
+        },
         "language": {
           "type": "string",
           "description": "The language of the web results."
@@ -2951,21 +2960,21 @@
         "allowedDomains": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+            "$ref": "#/definitions/WebKnowledgeSourceAllowedDomain"
           },
           "description": "Domains that are allowed for web results"
         },
         "blockedDomains": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceDomain"
+            "$ref": "#/definitions/WebKnowledgeSourceBlockedDomain"
           },
           "description": "Domains that are blocked from web results"
         }
       },
       "description": "Parameters for web knowledge source."
     },
-    "WebKnowledgeSourceDomain": {
+    "WebKnowledgeSourceAllowedDomain": {
       "type": "object",
       "properties": {
         "address": {
@@ -2978,6 +2987,23 @@
         },
         "rankingAdjustment": {
           "$ref": "#/definitions/WebKnowledgeSourceDomainRankingAdjustmentKind"
+        }
+      },
+      "required": [
+        "address"
+      ],
+      "description": "Configuration for web knowledge source domain."
+    },
+    "WebKnowledgeSourceBlockedDomain": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "whether or not to include subpages from this domain."
         }
       },
       "required": [
@@ -2999,17 +3025,17 @@
           {
             "value": "boost",
             "name": "boost",
-            "description": "Boost ranking."
+            "description": "Raises the ranking of the chosen domain or subpage so it appears higher in the search results."
           },
           {
             "value": "superBoost",
             "name": "superBoost",
-            "description": "Super boost ranking."
+            "description": "Applies a stronger positive weight than Boost, pushing the selected domain or subpage towards the very top of the results."
           },
           {
             "value": "demote",
             "name": "demote",
-            "description": "Demote ranking."
+            "description": "Lowers the ranking of the specified domain or subpage so it shows up further down the results list."
           }
         ]
       },
@@ -3038,9 +3064,9 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "$ref": "#/definitions/KnowledgeSourceIdentity",
           "x-nullable": true,
-          "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
+          "description": "An explicit identity to use for this knowledge source. "
         },
         "connectionString": {
           "type": "string",
@@ -3073,6 +3099,10 @@
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
           "readOnly": true
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "Indicates whether image verbalization should be disabled."
         }
       },
       "required": [
@@ -3080,6 +3110,74 @@
         "containerName"
       ],
       "description": "Parameters for Azure Blob Storage knowledge source."
+    },
+    "KnowledgeSourceIdentity": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/KnowledgeSourceIdentityKind",
+          "x-nullable": false,
+          "description": "The type of the identity"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Abstract base type for data identities."
+    },
+    "KnowledgeSourceSystemAssignedIdentity": {
+      "type": "object",
+      "x-ms-discriminator-value": "systemAssigned",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceIdentity"
+        }
+      ],
+      "description": "Use the system assigned identity."
+    },
+    "KnowledgeSourceUserAssignedIdentity": {
+      "type": "object",
+      "x-ms-discriminator-value": "userAssigned",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceIdentity"
+        }
+      ],
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The ResourceId of the user assigned identity to use."
+        }
+      },
+      "required": [
+        "userAssignedIdentity"
+      ],
+      "description": "Use the user assigned identity."
+    },
+    "KnowledgeSourceIdentityKind": {
+      "type": "string",
+      "enum": [
+        "serviceManaged",
+        "userManaged"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceIdentityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "serviceManaged",
+            "name": "ServiceManaged",
+            "description": "The identity managed by the service."
+          },
+          {
+            "value": "userManaged",
+            "name": "UserManaged",
+            "description": "An identity managed by the user."
+          }
+        ]
+      },
+      "description": "The kind of identity used for knowledge sources."
     },
     "KnowledgeSourceKind": {
       "type": "string",

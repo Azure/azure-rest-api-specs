@@ -12,7 +12,7 @@
     "KnowledgeSource": {
       "azureBlobParameters": {
         "identity": {
-          "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+          "kind": "systemAssigned"
         },
         "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
         "containerName": "test-container",
@@ -39,7 +39,8 @@
         "ingestionSchedule": {
           "interval": "P1D",
           "startTime": "2025-01-07T19:30:00Z"
-        }
+        },
+        "disableImageVerbalization": false
       },
       "name": "ks-preview-test",
       "description": "Description of the knowledge source.",
@@ -76,8 +77,9 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
           "containerName": "test-container",
           "folderPath": "test-path",
+          "disableImageVerbalization": false,
           "identity": {
-            "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+            "kind": "systemAssigned"
           },
           "embeddingModel": {
             "name": "openai",
@@ -124,8 +126,9 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
           "containerName": "test-container",
           "folderPath": "test-path",
+          "disableImageVerbalization": false,
           "identity": {
-            "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
+            "kind": "systemAssigned"
           },
           "embeddingModel": {
             "name": "openai",

@@ -46,7 +46,8 @@
             "type": "modelQueryPlanning",
             "id": 0,
             "inputTokens": 11,
-            "outputTokens": 22
+            "outputTokens": 22,
+            "elapsedMs": 10
           },
           {
             "type": "searchIndex",
@@ -55,7 +56,7 @@
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234,
-            "query": {
+            "searchIndexArguments": {
               "search": "hello world",
               "filter": "foo eq bar"
             }
@@ -67,15 +68,16 @@
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234,
-            "query": {
+            "searchIndexArguments": {
               "search": "hello world two",
               "filter": "foo eq bar"
             }
           },
           {
-            "type": "searchSemanticReranker",
+            "type": "semanticReranker",
             "id": 3,
-            "inputTokens": 74
+            "inputTokens": 74,
+            "elapsedMs": 0
           }
         ],
         "references": [
