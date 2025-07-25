@@ -10,3 +10,4 @@ using Microsoft.DataBox;
   "CommonScheduleAvailabilityRequest",
   "go"
 );
+@@clientName(Microsoft.DataBox, "DataBoxManagementClient", "javascript");
