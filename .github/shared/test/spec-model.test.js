@@ -448,15 +448,26 @@ describe("getSwaggers", () => {
 
     const specModel = new SpecModel(folder, options);
     const swaggers = await specModel.getSwaggers();
+    const expectedSwaggerPaths = [
+      "/specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+      "/specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+      "/specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+      "/specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+      "/specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/test.json",
+      "/specification/common-types/resource-management/v2/types.json",
+      "/specification/common-types/resource-management/v3/types.json",
+    ];
     // Should return an array (may be empty if no valid readmes in this fixture)
     expect(swaggers.length).toBe(9);
 
     // If swaggers are found, they should have the expected structure
     for (const swagger of swaggers) {
-      expect(swagger.path).toBeDefined();
+      const actualPath = swagger.path.replace(/\\/g, "/");
+      const containsExpectedPath = expectedSwaggerPaths.some((expectedPath) =>
+        actualPath.includes(expectedPath),
+      );
+      expect(containsExpectedPath).toBe(true);
       expect(swagger.versionKind).toBeDefined();
     }
-    expect(swaggers[0].path).contains(folder);
-    expect(swaggers[0].versionKind).toBe("stable");
   });
 });
