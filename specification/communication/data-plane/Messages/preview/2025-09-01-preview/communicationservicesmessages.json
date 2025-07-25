@@ -936,6 +936,80 @@
         }
       }
     },
+    "/messages/notifications:sendStatusUpdate": {
+      "post": {
+        "operationId": "NotificationMessagesOperations_SendStatusUpdate",
+        "description": "Sends a status update from Business to User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/StatusSendRequestBody"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SendMessageResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/messages/streams/{id}": {
       "get": {
         "operationId": "StreamOperations_GetMedia",
@@ -2500,6 +2574,22 @@
       ],
       "x-ms-discriminator-value": "reaction"
     },
+    "ReadStatusContent": {
+      "type": "object",
+      "description": "A request to send a read receipt status update.",
+      "properties": {
+        "typingIndicator": {
+          "type": "boolean",
+          "description": "Whether this status update includes a typing indicator."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StatusContent"
+        }
+      ],
+      "x-ms-discriminator-value": "read"
+    },
     "RemoveParticipantsOptions": {
       "type": "object",
       "description": "Request payload for removing participants from a conversation.",
@@ -2583,18 +2673,12 @@
       "type": "string",
       "description": "The status of a message.",
       "enum": [
-        "sent",
         "read"
       ],
       "x-ms-enum": {
         "name": "Status",
         "modelAsString": true,
         "values": [
-          {
-            "name": "sent",
-            "value": "sent",
-            "description": "Message has been sent."
-          },
           {
             "name": "read",
             "value": "read",
@@ -2605,7 +2689,7 @@
     },
     "StatusContent": {
       "type": "object",
-      "description": "Content describing the status of a message.",
+      "description": "A request to send a status update.",
       "properties": {
         "status": {
           "$ref": "#/definitions/Status",
@@ -2615,37 +2699,65 @@
           "type": "string",
           "description": "The id of the message this status refers to."
         },
-        "statusDetails": {
-          "$ref": "#/definitions/StatusDetails",
-          "description": "Optional additional details about the status."
+        "kind": {
+          "$ref": "#/definitions/StatusKind",
+          "description": "Kind of StatusContent."
         }
       },
+      "discriminator": "kind",
       "required": [
         "status",
-        "messageId"
+        "messageId",
+        "kind"
       ]
     },
-    "StatusDetails": {
-      "type": "object",
-      "description": "Additional status details.",
-      "properties": {
-        "typingIndicator": {
-          "$ref": "#/definitions/TypingIndicator",
-          "description": "Typing indicator status."
-        }
+    "StatusKind": {
+      "type": "string",
+      "description": "The status of a message.",
+      "enum": [
+        "read",
+        "delivered",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "StatusKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "read",
+            "value": "read"
+          },
+          {
+            "name": "delivered",
+            "value": "delivered"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          }
+        ]
       }
     },
     "StatusNotificationContent": {
       "type": "object",
       "description": "A request to send a status notification.",
       "properties": {
-        "statusContent": {
-          "$ref": "#/definitions/StatusContent",
-          "description": "Status information of the message."
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status value of the message."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The id of the message this status refers to."
+        },
+        "typingIndicator": {
+          "type": "boolean",
+          "description": "Whether this status update includes a typing indicator."
         }
       },
       "required": [
-        "statusContent"
+        "status",
+        "messageId"
       ],
       "allOf": [
         {
@@ -2768,37 +2880,6 @@
         }
       ],
       "x-ms-discriminator-value": "text"
-    },
-    "TypingIndicator": {
-      "type": "object",
-      "description": "Typing indicator content.",
-      "properties": {
-        "typingType": {
-          "$ref": "#/definitions/TypingType",
-          "description": "Type of typing indicator."
-        }
-      },
-      "required": [
-        "typingType"
-      ]
-    },
-    "TypingType": {
-      "type": "string",
-      "description": "Typing status type.",
-      "enum": [
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "TypingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "User is typing a text."
-          }
-        ]
-      }
     },
     "UpdateParticipantsResult": {
       "type": "object",
@@ -3144,6 +3225,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/RemoveParticipantsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "StatusSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the status update to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StatusContent"
       },
       "x-ms-parameter-location": "method"
     }

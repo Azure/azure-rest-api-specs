@@ -301,35 +301,14 @@ model StatusNotificationContent extends NotificationContent {
   @doc("Message notification type is status.")
   kind: CommunicationMessageKind.status;
 
-  @doc("Status information of the message.")
-  statusContent: StatusContent;
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("Content describing the status of a message.")
-model StatusContent {
   @doc("The status value of the message.")
   status: Status;
 
   @doc("The id of the message this status refers to.")
   messageId: string;
 
-  @doc("Optional additional details about the status.")
-  statusDetails?: StatusDetails;
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("Additional status details.")
-model StatusDetails {
-  @doc("Typing indicator status.")
-  typingIndicator?: TypingIndicator;
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("Typing indicator content.")
-model TypingIndicator {
-  @doc("Type of typing indicator.")
-  typingType: TypingType;
+  @doc("Whether this status update includes a typing indicator.")
+  typingIndicator?: boolean;
 }
 
 @added(Versions.c2025_09_01_Preview)
@@ -341,13 +320,38 @@ union Status {
   read: "read",
 }
 
-@added(Versions.c2025_09_01_Preview)
-@doc("Typing status type.")
-union TypingType {
-  string,
 
-  @doc("User is typing a text.")
-  text: "text",
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a status update.")
+@discriminator("kind")
+model StatusContent {
+
+  @doc("The status value of the message.")
+  status: Status;
+
+  @doc("The id of the message this status refers to.")
+  messageId: string;
+
+  @doc("Kind of StatusContent.")
+  kind: StatusKind;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("The status of a message.")
+union StatusKind {
+  string,
+  read: "read",
+  delivered: "delivered",
+  failed: "failed",
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("A request to send a read receipt status update.")
+model ReadStatusContent extends StatusContent {
+  kind: StatusKind.read;
+
+  @doc("Whether this status update includes a typing indicator.")
+  typingIndicator?: boolean;
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -794,6 +798,13 @@ model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+@added(Versions.c2025_09_01_Preview)
+@doc("Status Update  send request body.")
+model StatusSendRequestBody {
+  @doc("Details of the status update to send.")
+  @bodyRoot
+  body: StatusContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
