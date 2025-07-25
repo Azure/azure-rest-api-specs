@@ -781,7 +781,12 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Azure operation completed successfully.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -829,7 +834,12 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Azure operation completed successfully.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -880,6 +890,11 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestartTroubleshooterResponse"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              }
             }
           },
           "default": {

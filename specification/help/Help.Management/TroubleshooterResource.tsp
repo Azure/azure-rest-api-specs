@@ -60,7 +60,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     ContinueRequestBody,
-    NoContentResponse,
+    NoContentResponse & {
+      @header location?: string;
+    },
     OptionalRequestBody = true
   >;
 
@@ -71,7 +73,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     void,
-    NoContentResponse
+    NoContentResponse & {
+      @header location?: string;
+    }
   >;
 
   /**
@@ -81,7 +85,9 @@ interface TroubleshooterResources {
     Extension.ScopeParameter,
     TroubleshooterResource,
     void,
-    ArmResponse<RestartTroubleshooterResponse>
+    ArmResponse<RestartTroubleshooterResponse> & {
+      @header location?: string;
+    }
   >;
 }
 
