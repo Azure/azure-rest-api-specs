@@ -179,7 +179,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerForUpdate"
+              "$ref": "#/definitions/ServerForPatch"
             },
             "description": "Parameters required to update a server."
           }
@@ -891,7 +891,7 @@
       ],
       "description": "Properties of a server."
     },
-    "ServerPropertiesForUpdate": {
+    "ServerPropertiesForPatch": {
       "type": "object",
       "properties": {
         "administratorLogin": {
@@ -957,7 +957,7 @@
             "Update"
           ],
           "x-ms-enum": {
-            "name": "CreateModeForUpdate",
+            "name": "CreateModeForPatch",
             "modelAsString": true
           },
           "x-ms-mutability": [
@@ -993,7 +993,7 @@
       },
       "description": "Properties of a server."
     },
-    "ServerForUpdate": {
+    "ServerForPatch": {
       "type": "object",
       "properties": {
         "sku": {
@@ -1005,7 +1005,7 @@
           "description": "Describes the identity of the application."
         },
         "properties": {
-          "$ref": "#/definitions/ServerPropertiesForUpdate",
+          "$ref": "#/definitions/ServerPropertiesForPatch",
           "x-ms-client-flatten": true,
           "description": "Properties of the server."
         },

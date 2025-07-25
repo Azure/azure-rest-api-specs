@@ -118,8 +118,17 @@ suppressions:
   - code: PutResponseCodes
     from: FirewallRules.json
     reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Migrations.json
+    reason: The existing API contract is like this and not be able to change.
   - code: DeleteResponseBodyEmpty
     from: Migrations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Operations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: Operations.json
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: Operations.json
@@ -137,6 +146,9 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: QuotaUsages.json
     where: $.definitions.QuotaUsageList
+    reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Servers.json
     reason: The existing API contract is like this and not be able to change.
   - code: PatchResponseCodes
     from: Servers.json
