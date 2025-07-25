@@ -1518,11 +1518,11 @@ namespace SkillContext
 	@doc("Scoping options for skill cache. All cached entries are default scope to User ID. Tenant Id is not supported as User ID is already tenant-scoped")
 	enum SkillUtilityCacheDataType {
 		@doc("Default unknown to catch places where this enum isn't set.")
-		Unknown = 0,
+		Unknown = 0;
 		@doc("Normal data type: anything can be stored, including customer content.")
-		Normal = 1,
+		Normal = 1;
 		@doc("Internal metadata type: only internal metadata that doesn't contain customer content.")
-		InternalMetadata = 2
+		InternalMetadata = 2;
 	}
 	
 	@doc("Request model for setting cached entity")
