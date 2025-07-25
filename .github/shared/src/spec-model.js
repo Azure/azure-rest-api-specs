@@ -163,8 +163,8 @@ export class SpecModel {
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
       throw new SpecModelError(
-        `Swagger file ${swaggerPath} not found in specModel. It must be ` +
-          `referenced in the "input-file" section of a tag in a readme.md file ` +
+        `Swagger file ${swaggerPath} not found in specModel.\n` +
+          `It must be referenced in the "input-file" section of a tag in a readme.md file ` +
           `or in a swagger JSON file using $ref.`,
       );
     }
