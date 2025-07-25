@@ -100,6 +100,18 @@ suppressions:
   - code: PatchResponseCodes
     from: Configurations.json
     reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
     from: Databases.json
     reason: The existing API contract is like this and not be able to change.
@@ -164,6 +176,10 @@ suppressions:
     reason: The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
     from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: TrackedResourcesMustHavePut
+    from: Servers.json
+    where: $.definitions.Server
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
     from: TuningOptions.json
