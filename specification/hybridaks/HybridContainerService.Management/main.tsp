@@ -10,6 +10,7 @@ import "./AgentPool.tsp";
 import "./KubernetesVersionProfile.tsp";
 import "./VmSkuProfile.tsp";
 import "./VirtualNetwork.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
