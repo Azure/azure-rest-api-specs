@@ -42,19 +42,19 @@
         "operationId": "Databases_Create",
         "x-ms-examples": {
           "Create a database.": {
-            "$ref": "./examples/DatabaseCreate.json"
+            "$ref": "./examples/DatabasesCreate.json"
           }
         },
         "description": "Creates a new database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -73,22 +73,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -96,7 +87,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -112,19 +103,19 @@
         "operationId": "Databases_Delete",
         "x-ms-examples": {
           "Delete an existing database": {
-            "$ref": "./examples/DatabaseDelete.json"
+            "$ref": "./examples/DatabasesDelete.json"
           }
         },
         "description": "Deletes an existing database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -134,24 +125,24 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -167,19 +158,19 @@
         "operationId": "Databases_Get",
         "x-ms-examples": {
           "Get information about an existing database.": {
-            "$ref": "./examples/DatabaseGet.json"
+            "$ref": "./examples/DatabasesGet.json"
           }
         },
         "description": "Gets information about an existing database.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -190,7 +181,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -198,7 +189,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -211,20 +202,20 @@
         ],
         "operationId": "Databases_ListByServer",
         "x-ms-examples": {
-          "List all databases in a flexible server.": {
+          "List all databases in a server.": {
             "$ref": "./examples/DatabasesListByServer.json"
           }
         },
-        "description": "Lists all databases in a flexible server.",
+        "description": "Lists all databases in a server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -232,15 +223,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/DatabaseListResult"
+              "$ref": "#/definitions/DatabaseList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -278,12 +269,12 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a Database."
+      "description": "Represents a database."
     },
-    "DatabaseListResult": {
+    "DatabaseList": {
       "type": "object",
       "properties": {
         "value": {
@@ -291,7 +282,7 @@
           "items": {
             "$ref": "#/definitions/Database"
           },
-          "description": "List of all databases in a flexible server."
+          "description": "List of all databases in a server."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
@@ -299,7 +290,7 @@
           "format": "uri"
         }
       },
-      "description": "List of all databases in a flexible server."
+      "description": "List of all databases in a server."
     }
   },
   "parameters": {
@@ -308,9 +299,10 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the database.",
+      "description": "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server.",
       "minLength": 1,
-      "pattern": "^[-\\w\\._]+$",
+      "pattern": "^[a-zA-Z_][\\w\\-]{0,62}$",
+      "maxLength": 63,
       "x-ms-parameter-location": "method"
     }
   }

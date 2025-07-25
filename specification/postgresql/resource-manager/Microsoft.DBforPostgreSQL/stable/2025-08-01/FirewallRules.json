@@ -42,19 +42,19 @@
         "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "Create a new firewall rule or update an existing firewall rule.": {
-            "$ref": "./examples/FirewallRuleCreate.json"
+            "$ref": "./examples/FirewallRulesCreateOrUpdate.json"
           }
         },
         "description": "Creates a new firewall rule or updates an existing firewall rule.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -73,22 +73,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -96,7 +87,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -112,19 +103,19 @@
         "operationId": "FirewallRules_Delete",
         "x-ms-examples": {
           "Delete an existing firewall rule.": {
-            "$ref": "./examples/FirewallRuleDelete.json"
+            "$ref": "./examples/FirewallRulesDelete.json"
           }
         },
         "description": "Deletes an existing firewall rule.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -134,24 +125,24 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -166,20 +157,20 @@
         ],
         "operationId": "FirewallRules_Get",
         "x-ms-examples": {
-          "Get information about a firewall rule in a flexible server.": {
-            "$ref": "./examples/FirewallRuleGet.json"
+          "Get information about a firewall rule in a server.": {
+            "$ref": "./examples/FirewallRulesGet.json"
           }
         },
-        "description": "Gets information about a firewall rule in a flexible server.",
+        "description": "Gets information about a firewall rule in a server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -190,7 +181,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
@@ -198,7 +189,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -211,20 +202,20 @@
         ],
         "operationId": "FirewallRules_ListByServer",
         "x-ms-examples": {
-          "List information about all firewall rules in a flexible server.": {
-            "$ref": "./examples/FirewallRuleListByServer.json"
+          "List information about all firewall rules in a server.": {
+            "$ref": "./examples/FirewallRulesListByServer.json"
           }
         },
-        "description": "Lists information about all firewall rules in a flexible server.",
+        "description": "Lists information about all firewall rules in a server.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -232,15 +223,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/FirewallRuleListResult"
+              "$ref": "#/definitions/FirewallRuleList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -282,7 +273,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -290,7 +281,7 @@
       ],
       "description": "Firewall rule."
     },
-    "FirewallRuleListResult": {
+    "FirewallRuleList": {
       "type": "object",
       "properties": {
         "value": {
@@ -298,11 +289,12 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           },
-          "description": "List of firewall rules in a flexible server."
+          "description": "List of firewall rules in a server."
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "List of firewall rules."
@@ -316,7 +308,8 @@
       "type": "string",
       "description": "Name of the firewall rule.",
       "minLength": 1,
-      "pattern": "^[-\\w\\._]+$",
+      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,79}(?<!-)$",
+      "maxLength": 80,
       "x-ms-parameter-location": "method"
     }
   }

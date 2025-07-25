@@ -42,28 +42,31 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List all available REST API operations.": {
-            "$ref": "./examples/OperationList.json"
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "description": "Lists all available REST API operations.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -138,7 +141,7 @@
       },
       "description": "REST API operation definition."
     },
-    "OperationListResult": {
+    "OperationList": {
       "description": "List of resource provider operations.",
       "type": "object",
       "properties": {

@@ -43,13 +43,13 @@
         "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -60,21 +60,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved a specified private endpoint connection.",
+            "description": "OK.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Get a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
           }
         }
       },
@@ -83,16 +83,16 @@
           "PrivateEndpointConnections"
         ],
         "description": "Approves or rejects a private endpoint connection.",
-        "operationId": "PrivateEndpointConnection_Update",
+        "operationId": "PrivateEndpointConnections_Update",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -105,28 +105,19 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "Parameters required to update a private endpoint connection."
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully approved or rejected private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Successfully approved or rejected private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -134,14 +125,14 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Approve or reject a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+            "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
           }
         }
       },
@@ -150,16 +141,16 @@
           "PrivateEndpointConnections"
         ],
         "description": "Deletes a private endpoint connection.",
-        "operationId": "PrivateEndpointConnection_Delete",
+        "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -170,20 +161,23 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
+            "description": "Accepted.",
             "headers": {
               "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
           },
           "204": {
-            "description": "Private endpoint connection does not exist."
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -193,7 +187,7 @@
         },
         "x-ms-examples": {
           "Delete a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
           }
         }
       }
@@ -203,17 +197,17 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Lists all private endpoint connections on a flexible server.",
+        "description": "Lists all private endpoint connections on a server.",
         "operationId": "PrivateEndpointConnections_ListByServer",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
@@ -221,15 +215,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private endpoint connections.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -237,15 +231,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all private endpoint connections on a flexible server.": {
-            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          "List all private endpoint connections on a server.": {
+            "$ref": "./examples/PrivateEndpointConnectionsList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionListResult": {
+    "PrivateEndpointConnectionList": {
       "description": "List of private endpoint connections.",
       "type": "object",
       "properties": {
@@ -253,15 +247,14 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
           "type": "string",
-          "format": "uri",
-          "readOnly": true
+          "format": "uri"
         }
       }
     }
