@@ -16,6 +16,7 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
+  quickstartTemplate,
   readme,
   resourceManager,
   scenario,
@@ -62,6 +63,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+    "specification/compute/quickstart-templates/swagger.json",
   ];
 
   const filesResolved = files.map((f) => resolve(f));
@@ -77,6 +79,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+      "specification/compute/quickstart-templates/swagger.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -138,6 +141,12 @@ describe("changedFiles", () => {
 
     expect(files.filter(example)).toEqual(expected);
     expect(filesResolved.filter(example)).toEqual(expected.map((f) => resolve(f)));
+  });
+
+  it("filter:quickstartTemplate", () => {
+    const expected = ["specification/compute/quickstart-templates/swagger.json"];
+
+    expect(files.filter(quickstartTemplate)).toEqual(expected);
   });
 
   it("filter:scenarios", () => {

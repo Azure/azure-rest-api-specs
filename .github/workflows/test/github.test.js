@@ -191,7 +191,7 @@ describe("writeToActionsSummary function", () => {
     const result = await writeToActionsSummary("Test content", mockCore);
 
     // Verify result
-    expect(result).undefined;
+    expect(result).toBeUndefined();
 
     // Verify summary methods were called
     expect(mockCore.summary.addRaw).toHaveBeenCalledWith("Test content");
