@@ -53,15 +53,6 @@ union PrivateLinkConnectionStatus {
 }
 
 /**
- * Enumerates the possible value of keySource for Encryption
- */
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union keySource {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  "Microsoft.KeyVault",
-}
-
-/**
  * Provisioning state of the Private Endpoint Connection.
  */
 union EndPointProvisioningState {
@@ -436,7 +427,7 @@ model Encryption {
   /**
    * Enumerates the possible value of keySource for Encryption
    */
-  keySource?: keySource = "Microsoft.KeyVault";
+  keySource?: "Microsoft.KeyVault" = "Microsoft.KeyVault";
 
   /**
    * Enable Infrastructure Encryption (Double Encryption)
