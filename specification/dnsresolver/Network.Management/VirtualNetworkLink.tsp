@@ -36,7 +36,7 @@ interface VirtualNetworkLinks {
   /**
    * Creates or updates a virtual network link to a DNS forwarding ruleset.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkLink,
     Parameters = {
@@ -79,7 +79,7 @@ interface VirtualNetworkLinks {
   /**
    * Deletes a virtual network link to a DNS forwarding ruleset. WARNING: This operation cannot be undone.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkLink,
     Parameters = {

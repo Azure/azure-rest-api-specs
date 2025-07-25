@@ -34,7 +34,7 @@ interface DnsResolvers {
   /**
    * Creates or updates a DNS resolver.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DnsResolver,
     Parameters = {
@@ -77,7 +77,7 @@ interface DnsResolvers {
   /**
    * Deletes a DNS resolver. WARNING: This operation cannot be undone.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DnsResolver,
     Parameters = {

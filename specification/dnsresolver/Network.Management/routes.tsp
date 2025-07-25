@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DnsResolversOperationGroup {
   /**
    * Lists DNS resolver resource IDs linked to a virtual network.
@@ -41,7 +41,7 @@ interface DnsResolversOperationGroup {
   ): ArmResponse<SubResourceListResult> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DnsForwardingRulesetsOperationGroup {
   /**
    * Lists DNS forwarding ruleset resource IDs attached to a virtual network.
@@ -69,7 +69,7 @@ interface DnsForwardingRulesetsOperationGroup {
   ): ArmResponse<VirtualNetworkDnsForwardingRulesetListResult> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DnsResolverPoliciesOperationGroup {
   /**
    * Lists DNS resolver policy resource IDs linked to a virtual network.
@@ -88,5 +88,5 @@ interface DnsResolverPoliciesOperationGroup {
      */
     @path
     virtualNetworkName: string,
-  ): ArmResponse<SubResourceListResult> | CloudError;
+  ): ArmResponse<SubResourceListResult>;
 }

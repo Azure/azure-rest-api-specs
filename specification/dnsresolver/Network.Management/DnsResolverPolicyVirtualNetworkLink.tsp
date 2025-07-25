@@ -34,10 +34,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
   /**
    * Gets properties of a DNS resolver policy virtual network link.
    */
-  get is ArmResourceRead<
-    DnsResolverPolicyVirtualNetworkLink,
-    Error = CloudError
-  >;
+  get is ArmResourceRead<DnsResolverPolicyVirtualNetworkLink>;
 
   /**
    * Creates or updates a DNS resolver policy virtual network link.
@@ -57,9 +54,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
       @header
       ifNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -75,8 +70,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        */
       @header
       ifMatch?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
@@ -90,8 +84,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        */
       @header
       ifMatch?: string;
-    },
-    Error = CloudError
+    }
   >;
 
   /**
@@ -105,8 +98,7 @@ interface DnsResolverPolicyVirtualNetworkLinks {
        */
       @query("$top")
       $top?: int32;
-    },
-    Error = CloudError
+    }
   >;
 }
 
