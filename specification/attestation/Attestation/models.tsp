@@ -717,7 +717,7 @@ model AttestationResult {
   /**
    * An RFC 7800 Proof of Possession Key
    */
-  cnf?: Record<unknown>;
+  cnf?: Record<string>;
 
   /**
    * The Nonce input to the attestation request, if provided.
@@ -732,17 +732,17 @@ model AttestationResult {
   /**
    * Runtime Claims
    */
-  `x-ms-runtime`?: Record<unknown>;
+  `x-ms-runtime`?: Record<string>;
 
   /**
    * Inittime Claims
    */
-  `x-ms-inittime`?: Record<unknown>;
+  `x-ms-inittime`?: Record<string>;
 
   /**
    * Policy Generated Claims
    */
-  `x-ms-policy`?: Record<unknown>;
+  `x-ms-policy`?: Record<string>;
 
   /**
    * The Attestation type being attested.
@@ -792,7 +792,7 @@ model AttestationResult {
   /**
    * The SGX SVN value for the enclave.
    */
-  `x-ms-sgx-collateral`?: Record<unknown>;
+  `x-ms-sgx-collateral`?: Record<string>;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-ver claim.
@@ -807,7 +807,7 @@ model AttestationResult {
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-collateral claim.
    */
-  `maa-attestationcollateral`?: Record<unknown>;
+  `maa-attestationcollateral`?: Record<string>;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
