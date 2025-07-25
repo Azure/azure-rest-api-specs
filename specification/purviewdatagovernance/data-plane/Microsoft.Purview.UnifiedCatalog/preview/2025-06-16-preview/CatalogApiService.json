@@ -352,11 +352,7 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "Field to sort by.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -977,11 +973,7 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "Field to sort by.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1770,11 +1762,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "Field to sort by.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -2531,11 +2519,7 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "The field to order by.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -3353,11 +3337,7 @@
             "type": "string"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "Field to sort by.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -4319,11 +4299,7 @@
             "format": "int32"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "Field to sort by.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -7617,6 +7593,18 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.OrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Expressions that specify the order of returned results.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
     },
     "Azure.Core.SkipQueryParameter": {
       "name": "skip",

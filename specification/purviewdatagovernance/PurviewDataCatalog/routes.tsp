@@ -27,10 +27,7 @@ op ListCriticalDataElementAsync is Foundations.Operation<
 
     ...SkipQueryParameter;
     ...TopQueryParameter;
-
-    @doc("Field to sort by.")
-    @query
-    orderby?: string;
+    ...OrderByQueryParameter;
   },
   CriticalDataElementsResponse
 >;
@@ -252,10 +249,7 @@ op ListCriticalDataColumnAsync is Foundations.Operation<
 
     ...SkipQueryParameter;
     ...TopQueryParameter;
-
-    @doc("Field to sort by.")
-    @query
-    orderby: string;
+    ...OrderByQueryParameter;
   },
   CriticalDataColumnsResponse
 >;
@@ -357,10 +351,7 @@ op DeleteCriticalDataColumnRelationshipAsync is Foundations.Operation<
 @get
 op ListDataAssetsAsync is Foundations.Operation<
   {
-    @doc("Field to sort by.")
-    @query
-    orderby: string;
-
+    ...OrderByQueryParameter;
     ...SkipQueryParameter;
     ...TopQueryParameter;
   },
@@ -533,10 +524,7 @@ op ListDataProductsAsync is Foundations.Operation<
 
     ...SkipQueryParameter;
     ...TopQueryParameter;
-
-    @doc("The field to order by.")
-    @query
-    orderby: string;
+    ...OrderByQueryParameter;
   },
   DataProductResponse
 >;
@@ -854,9 +842,7 @@ op ListTermAsync is Foundations.Operation<
     @query
     depth?: int32;
 
-    @doc("Field to sort by.")
-    @query
-    orderby: string;
+    ...OrderByQueryParameter;
   },
   CatalogModelTermResponse
 >;
@@ -1053,10 +1039,7 @@ op ListObjectivesAsync is Foundations.Operation<
     @query
     domainId: string;
 
-    @doc("Field to sort by.")
-    @query
-    orderby: string;
-
+    ...OrderByQueryParameter;
     ...SkipQueryParameter;
     ...TopQueryParameter;
   },
