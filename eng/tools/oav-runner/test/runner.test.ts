@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { processFilesToSpecificationList } from "../src/runner.js";
 import path from "path";
+import { describe, expect, it } from "vitest";
+import { processFilesToSpecificationList } from "../src/runner.js";
 
 const ROOT = path.resolve(__dirname, "..", "test", "fixtures");
 
