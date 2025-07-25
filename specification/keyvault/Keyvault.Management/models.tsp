@@ -164,11 +164,6 @@ union StoragePermissions {
   deletesas: "deletesas",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ResourceManagerApiVersions {
-  `2015-11-01`,
-}
-
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
@@ -535,10 +530,6 @@ enum ManagedHsmSkuName {
   Custom_C10,
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum VaultListFilterTypes {
-  `resourceType eq 'Microsoft.KeyVault/vaults'`,
-}
 /**
  * Parameters for creating or updating a vault
  */
@@ -1094,14 +1085,6 @@ model Resource {
 }
 
 /**
- * The type of resource, Microsoft.KeyVault/vaults
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum Type {
-  `Microsoft.KeyVault/vaults`,
-}
-
-/**
  * The parameters used to check the availability of the vault name.
  */
 model VaultCheckNameAvailabilityParameters {
@@ -1113,7 +1096,7 @@ model VaultCheckNameAvailabilityParameters {
   /**
    * The type of resource, Microsoft.KeyVault/vaults
    */
-  type: Type;
+  type: "Microsoft.KeyVault/vaults";
 }
 
 /**

@@ -24,8 +24,8 @@ using Azure.Core;
 @@clientName(Vaults.updateAccessPolicy::parameters.resource, "parameters");
 @@clientLocation(Vaults.listByVault, "PrivateLinkResources");
 
-@@clientLocation(DeletedVaults.getDeleted, "Vaults");
-@@clientLocation(DeletedVaults.purgeDeleted, "Vaults");
+@@clientLocation(DeletedVaults.getDeleted, Vaults);
+@@clientLocation(DeletedVaults.purgeDeleted, Vaults);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -54,19 +54,19 @@ using Azure.Core;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateEndpointConnection.properties);
 
-@@clientLocation(DeletedManagedHsms.getDeleted, "ManagedHsms");
-@@clientLocation(DeletedManagedHsms.purgeDeleted, "ManagedHsms");
+@@clientLocation(DeletedManagedHsms.getDeleted, ManagedHsms);
+@@clientLocation(DeletedManagedHsms.purgeDeleted, ManagedHsms);
 
 @@clientName(Secrets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Secrets.update::parameters.properties, "parameters");
 
-@@clientLocation(VaultsOperationGroup.listDeleted, "Vaults");
-@@clientLocation(VaultsOperationGroup.list, "Vaults");
-@@clientLocation(VaultsOperationGroup.checkNameAvailability, "Vaults");
+@@clientLocation(VaultsOperationGroup.listDeleted, Vaults);
+@@clientLocation(VaultsOperationGroup.list, Vaults);
+@@clientLocation(VaultsOperationGroup.checkNameAvailability, Vaults);
 
-@@clientLocation(ManagedHsmsOperationGroup.listDeleted, "ManagedHsms");
+@@clientLocation(ManagedHsmsOperationGroup.listDeleted, ManagedHsms);
 @@clientLocation(ManagedHsmsOperationGroup.checkMhsmNameAvailability,
-  "ManagedHsms"
+  ManagedHsms
 );
 @@clientName(ManagedHsmsOperationGroup.checkMhsmNameAvailability::parameters.body,
   "mhsmName"

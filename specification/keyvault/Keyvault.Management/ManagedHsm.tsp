@@ -70,7 +70,7 @@ interface ManagedHsms {
       @bodyRoot
       _: ManagedHsm;
     }),
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ManagedHsmError
   >;
@@ -87,6 +87,8 @@ interface ManagedHsms {
       @bodyRoot
       _: ManagedHsm;
     }),
+    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = ManagedHsmError
   >;
 

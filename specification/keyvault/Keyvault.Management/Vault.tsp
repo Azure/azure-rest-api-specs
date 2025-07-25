@@ -41,7 +41,7 @@ interface Vaults {
     VaultCreateOrUpdateParameters,
     Vault | ArmResourceCreatedResponse<
       Vault,
-      LroHeaders = ArmLroLocationHeader &
+      LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     CloudError

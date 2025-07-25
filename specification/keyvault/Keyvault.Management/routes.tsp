@@ -40,7 +40,7 @@ interface VaultsOperationGroup {
      * The filter to apply on the operation.
      */
     @query("$filter")
-    $filter: VaultListFilterTypes,
+    $filter: "resourceType eq 'Microsoft.KeyVault/vaults'",
 
     /**
      * Maximum number of results to return.
@@ -56,7 +56,7 @@ interface VaultsOperationGroup {
     @apiVersion(false)
     @query("api-version")
     @OpenAPI.extension("x-ms-api-version", false)
-    `api-version`: ResourceManagerApiVersions,
+    `api-version`: "2015-11-01",
 
     ...SubscriptionIdParameter,
   ): ArmResponse<ResourceListResult<Resource>> | CloudError;
