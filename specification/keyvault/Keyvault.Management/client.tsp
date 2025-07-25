@@ -186,3 +186,4 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "javascript");
+@@clientName(Microsoft.KeyVault, "KeyVaultManagementClient", "python");
