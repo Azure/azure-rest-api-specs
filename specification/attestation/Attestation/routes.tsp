@@ -81,6 +81,18 @@ interface PolicyOperationGroup {
   >;
 }
 
+/** Request model for adding a policy certificate */
+model AddPolicyCertificateRequest {
+  /** The certificate to add, as a string (e.g., PEM or JWK) */
+  certificate: string;
+}
+
+/** Request model for removing a policy certificate */
+model RemovePolicyCertificateRequest {
+  /** The certificate to remove, as a string (e.g., PEM or JWK) */
+  certificate: string;
+}
+
 interface PolicyCertificatesOperationGroup {
   /**
    * Retrieves the set of certificates used to express policy for the current tenant.
@@ -103,7 +115,7 @@ interface PolicyCertificatesOperationGroup {
   @route("/certificates:add")
   @post
   add is Azure.Core.Foundations.Operation<
-    string,
+    AddPolicyCertificateRequest,
     PolicyCertificatesModifyResponse
   >;
 
@@ -119,7 +131,7 @@ interface PolicyCertificatesOperationGroup {
   @route("/certificates:remove")
   @post
   remove is Azure.Core.Foundations.Operation<
-    string,
+    RemovePolicyCertificateRequest,
     PolicyCertificatesModifyResponse
   >;
 }
