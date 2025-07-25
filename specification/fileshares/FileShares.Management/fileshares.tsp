@@ -301,9 +301,7 @@ interface FileShareSnapshots {
   createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceAsync<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @operationId("FileShareSnapshot_Update")
@@ -311,10 +309,7 @@ interface FileShareSnapshots {
   updateFileShareSnapshot is ArmCustomPatchAsync<
     FileShareSnapshot,
     ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotProperties>,
-    BaseParameters<FileShareSnapshot>,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    BaseParameters<FileShare>
   >;
 
   @operationId("FileShareSnapshot_Delete")
