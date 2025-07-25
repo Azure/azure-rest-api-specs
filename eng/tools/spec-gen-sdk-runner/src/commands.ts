@@ -148,13 +148,13 @@ export async function generateSdkForSpecPr(): Promise<number> {
       // Read the execution report to aggreate the generation results
       executionReport = getExecutionReport(commandInput);
       currentExecutionResult = executionReport.executionResult;
+      if (executionReport.generateFromTypeSpec) {
+        hasTypeSpecProjects = true;
+      }
 
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
         for (const pkg of executionReport.packages) {
-          if (pkg.typespecProject) {
-            hasTypeSpecProjects = true;
-          }
           if (pkg.apiViewArtifact) {
             apiViewRequestData.push({
               packageName: pkg.packageName,
