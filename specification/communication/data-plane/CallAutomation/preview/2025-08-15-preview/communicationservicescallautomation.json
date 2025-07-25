@@ -674,12 +674,12 @@
       }
     },
     "/calling/callConnections/{callConnectionId}:summarizeCall": {
-      "get": {
+      "post": {
         "tags": [
           "MidConnections"
         ],
-        "summary": "API to get a summary of the call so far.",
-        "description": "API to get a summary of the call so far.",
+        "summary": "API to trigger a summary of the call so far.",
+        "description": "API to trigger a summary of the call so far.",
         "operationId": "CallMedia_SummarizeCall",
         "parameters": [
           {
@@ -690,32 +690,13 @@
             "type": "string"
           },
           {
-            "name": "summarizeCallRequest.operationContext",
-            "in": "query",
-            "description": "The value to identify context of the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "summarizeCallRequest.operationCallbackUri",
-            "in": "query",
-            "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "summarizeCallRequest.summarizationOptions.enableEndCallSummary",
-            "in": "query",
-            "description": "Indicating whether end call summary should be enabled.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "summarizeCallRequest.summarizationOptions.locale",
-            "in": "query",
-            "description": "Locale for summarization (e.g., en-US).",
-            "required": false,
-            "type": "string"
+            "name": "summarizeCallRequest",
+            "in": "body",
+            "description": "The SummarizeCall request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummarizeCallRequest"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -729,7 +710,7 @@
             }
           },
           "202": {
-            "description": "Returns the update transcription response"
+            "description": "The service has accepted the summarize call request and will begin processing it. You will receive either the CallSummarySuccess or the CallSummaryFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -1786,46 +1767,6 @@
         "x-ms-examples": {
           "CallRecording_ResumeRecording": {
             "$ref": "./examples/CallRecording_ResumeRecording.json"
-          }
-        }
-      }
-    },
-    "/calling/recordings/{recordingId}/result": {
-      "get": {
-        "tags": [
-          "Recording"
-        ],
-        "summary": "Get recording result. This includes the download URLs for the recording chunks.",
-        "operationId": "CallRecording_GetRecordingResult",
-        "parameters": [
-          {
-            "name": "recordingId",
-            "in": "path",
-            "description": "The recording id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Returns the recording result.",
-            "schema": {
-              "$ref": "#/definitions/RecordingResultResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CallRecording_GetRecordingResult": {
-            "$ref": "./examples/CallRecording_GetRecordingResult.json"
           }
         }
       }
@@ -3603,157 +3544,6 @@
         }
       }
     },
-    "CallSessionEndReason": {
-      "enum": [
-        "sessionStillOngoing",
-        "callEnded",
-        "initiatorLeft",
-        "handedOverOrTransfered",
-        "maximumSessionTimeReached",
-        "callStartTimeout",
-        "mediaTimeout",
-        "audioStreamFailure",
-        "allInstancesBusy",
-        "teamsTokenConversionFailed",
-        "reportCallStateFailed",
-        "reportCallStateFailedAndSessionMustBeDiscarded",
-        "couldNotRejoinCall",
-        "invalidBotData",
-        "couldNotStart",
-        "appHostedMediaFailureOutcomeWithError",
-        "appHostedMediaFailureOutcomeGracefully",
-        "handedOverDueToMediaTimeout",
-        "handedOverDueToAudioStreamFailure",
-        "speechRecognitionSessionNonRetriableError",
-        "speechRecognitionSessionRetriableErrorMaxRetryCountReached",
-        "handedOverDueToChunkCreationFailure",
-        "chunkCreationFailed",
-        "handedOverDueToProcessingTimeout",
-        "processingTimeout",
-        "transcriptObjectCreationFailed"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "CallSessionEndReason",
-        "modelAsString": true
-      }
-    },
-    "RecordingResultResponse": {
-      "description": "Recording result data",
-      "type": "object",
-      "properties": {
-        "recordingId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "recordingStorageInfo": {
-          "$ref": "#/definitions/RecordingStorageInfo",
-          "readOnly": true
-        },
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "readOnly": true
-        },
-        "recordingStartTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "recordingDurationMs": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "sessionEndReason": {
-          "$ref": "#/definitions/CallSessionEndReason"
-        },
-        "recordingExpirationTime": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RecordingStorageInfo": {
-      "description": "Container for chunks",
-      "type": "object",
-      "properties": {
-        "recordingChunks": {
-          "description": "Collection of {Microsoft.Skype.Platform.ExecutionAgent.Azure.Communication.Service.ServerCalling.Content.Contracts.BETA7_2025_08_15_preview.Models.RecordingChunkStorageInfo}",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecordingChunkStorageInfo"
-          }
-        }
-      }
-    },
-    "Error": {
-      "description": "Error details",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message",
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/Error",
-          "description": "Inner error details"
-        }
-      }
-    },
-    "ChunkEndReason": {
-      "description": "Reason this chunk ended",
-      "enum": [
-        "chunkIsBeingRecorded",
-        "sessionEnded",
-        "chunkMaximumSizeExceeded",
-        "chunkMaximumTimeExceeded",
-        "chunkUploadFailure"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ChunkEndReason",
-        "modelAsString": true
-      }
-    },
-    "RecordingChunkStorageInfo": {
-      "description": "Recording chunk data",
-      "type": "object",
-      "properties": {
-        "documentId": {
-          "description": "Chunk document id",
-          "type": "string"
-        },
-        "index": {
-          "format": "int32",
-          "description": "Chunks order in a multi chunk recording",
-          "type": "integer"
-        },
-        "endReason": {
-          "$ref": "#/definitions/ChunkEndReason"
-        },
-        "contentLocation": {
-          "description": "Location of the chunk",
-          "type": "string"
-        },
-        "metadataLocation": {
-          "description": "Location of chunk metadata",
-          "type": "string"
-        },
-        "deleteLocation": {
-          "description": "Callback for deleting chunk",
-          "type": "string"
-        }
-      }
-    },
     "AddParticipantFailed": {
       "description": "The failed to add participants event.",
       "type": "object",
@@ -4955,6 +4745,7 @@
         "transcriptionResumed",
         "transcriptionUpdated",
         "transcriptionStopped",
+        "callSummaryUpdate",
         "unspecifiedError"
       ],
       "type": "string",
@@ -4979,7 +4770,9 @@
         "tooManyRequests",
         "forbidden",
         "serviceTimeout",
-        "transcriptionLocaleUpdated"
+        "transcriptionLocaleUpdated",
+        "callSummarySuccess",
+        "callSummaryFailure"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4995,6 +4788,9 @@
         },
         "transcriptionStatusDetails": {
           "$ref": "#/definitions/TranscriptionStatusDetails"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -5059,6 +4855,36 @@
       }
     },
     "TranscriptionUpdated": {
+      "type": "object",
+      "properties": {
+        "transcriptionUpdate": {
+          "$ref": "#/definitions/TranscriptionUpdate",
+          "description": "Defines the result for TranscriptionUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "TranscriptionCallSummaryUpdate": {
       "type": "object",
       "properties": {
         "transcriptionUpdate": {
