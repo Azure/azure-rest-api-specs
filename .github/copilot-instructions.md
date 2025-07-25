@@ -201,7 +201,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
 ## Steps to generate SDK from TypeSpec API specification
-Follow `/typespec-to-sdk` prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+Follow #file:./prompts/typespec-to-sdk.prompt.md prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
 Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
 
 1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
@@ -212,9 +212,10 @@ Do not skip the step that choose SDK generation method to ensure the user select
 6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
 7. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: To create a release plan refer to #file:.\prompts\create-release-plan.prompt.md
-10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
-11. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
+9. **Validate Label and Codeowners**: Validate the common-labels and codeowners for the created SDK service.
+10. **Create a release plan**: To create a release plan refer to #file:.\prompts\create-release-plan.prompt.md
+11. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
+12. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
 
 
 ## Release readiness of SDK and information about the release pipeline

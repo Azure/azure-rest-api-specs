@@ -94,19 +94,26 @@ This step should not check package readiness to verify namespace approval for ma
 **Actions**:
 1. Run `GetSDKPullRequestDetails` to fetch generated SDK PR info.
 
-## Step 9: Create release plan
+## Step 9: Validate Label and Codeowners
+**Goal**: Validate the label and all codeowners for a service. Create new label and codeowner entry if none exist.
+**Actions**:
+1. To validate a service label refer to #file:./validate-service-label.prompt.md
+2. After service label is validated or created refer to #file:./validate-codeowners.prompt.md
+3. If both were already valid, continue, if you had to create a label or codeowner entry, display the PR(s) created.
+
+## Step 10: Create release plan
 **Goal**: Create a release plan for the generated SDKs
 **Actions**:
 1. Run `/create-release-plan` to create a release plan using the spec pull request.
 2. If the release plan already exists, display the existing plan details.
 
-## Step 10: Mark Spec PR as Ready for Review
+## Step 11: Mark Spec PR as Ready for Review
 **Goal**: Update spec PR to ready for review status
 **Actions**:
 1. Prompt user to change spec PR to ready for review: "Please change the spec pull request to ready for review status"
 2. Get approval and merge the spec PR
 
-## Step 11: Release SDK Package
+## Step 12: Release SDK Package
 **Goal**: Release the SDK package using the release plan
 **Actions**:
 1. Run `ReleaseSdkPackage` to release the SDK package.
