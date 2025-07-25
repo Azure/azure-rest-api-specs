@@ -15,9 +15,9 @@ namespace Microsoft.ManagedIdentity;
  * Enum to configure regional restrictions on identity assignment, as necessary.
  */
 union IsolationScope {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   Regional: "Regional",
   string,
 }
@@ -25,7 +25,7 @@ union IsolationScope {
 /**
  * The properties associated with the system assigned identity.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @summary("System Assigned Identity properties.")
 model SystemAssignedIdentityProperties {
   /**
@@ -56,7 +56,7 @@ model SystemAssignedIdentityProperties {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @error
 @extension("x-ms-external", true)
 model CloudError {
@@ -69,7 +69,7 @@ model CloudError {
 /**
  * An error response from the ManagedServiceIdentity service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @extension("x-ms-external", true)
 model CloudErrorBody {
   /**
@@ -115,7 +115,7 @@ model UserAssignedIdentitiesListResult is Page<Identity>;
 /**
  * The properties associated with the user assigned identity.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @summary("User Assigned Identity properties.")
 model UserAssignedIdentityProperties {
   /**
@@ -146,7 +146,7 @@ model UserAssignedIdentityProperties {
 /**
  * Describes an identity resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The geo-location where the resource lives
@@ -157,14 +157,14 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
    * The properties associated with the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserAssignedIdentityProperties;
@@ -183,7 +183,7 @@ model FederatedIdentityCredentialsListResult
 /**
  * The properties associated with a federated identity credential.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @summary("Federated identity credential properties.")
 model FederatedIdentityCredentialProperties {
   /**
@@ -207,7 +207,7 @@ model FederatedIdentityCredentialProperties {
  */
 @doc("The default resourceUri parameter type.")
 model ScopeParameter {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   @path(#{ allowReserved: true })
   @doc("The fully qualified Azure Resource manager identifier of the resource.")
   @Azure.ResourceManager.Private.resourceParameterBaseFor(

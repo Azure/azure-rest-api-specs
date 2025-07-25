@@ -3,16 +3,16 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ManagedIdentity;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IdentityUpdate.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Identities.update,
   "Identities.update::parameters.properties",
   "parameters"
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FederatedIdentityCredential.properties);
 
 @@clientLocation(Identities.get, "UserAssignedIdentities");
@@ -26,5 +26,5 @@ using Microsoft.ManagedIdentity;
 @@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "deprecated" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FederatedIdentityCredential.properties);

@@ -44,7 +44,7 @@ interface FederatedIdentityCredentials {
   /**
    * Deletes the federated identity credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     FederatedIdentityCredential,
     Error = CloudError
