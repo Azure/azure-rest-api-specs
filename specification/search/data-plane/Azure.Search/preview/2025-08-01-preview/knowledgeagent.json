@@ -292,6 +292,11 @@
         "type": {
           "type": "string",
           "description": "The type of the activity record."
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The elapsed time in milliseconds for the retrieval activity."
         }
       },
       "required": [
@@ -321,11 +326,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The elapsed time in milliseconds for the retrieval activity."
         }
       },
       "description": "Represents a retrieval activity record."
@@ -339,22 +339,26 @@
         }
       ],
       "properties": {
-        "query": {
-          "type": "object",
-          "properties": {
-            "search": {
-              "type": "string",
-              "description": "The search string."
-            },
-            "filter": {
-              "type": "string",
-              "description": "The filter string."
-            }
-          },
-          "description": "The query details for the retrieval activity."
+        "searchIndexArguments": {
+          "$ref": "#/definitions/KnowledgeAgentSearchIndexActivityArguments",
+          "description": "The search index arguments for the retrieval activity."
         }
       },
       "description": "Represents a search index retrieval activity record."
+    },
+    "KnowledgeAgentSearchIndexActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the search index."
+        },
+        "filter": {
+          "type": "string",
+          "description": "The filter string."
+        }
+      },
+      "description": "Represents the arguments the search index retrieval activity was run with."
     },
     "KnowledgeAgentAzureBlobActivityRecord": {
       "type": "object",
@@ -365,12 +369,22 @@
         }
       ],
       "properties": {
-        "searchTerm": {
-          "type": "string",
-          "description": "The search term for the retrieval activity."
+        "azureBlobArguments": {
+          "$ref": "#/definitions/KnowledgeAgentAzureBlobActivityArguments",
+          "description": "The azure blob arguments for the retrieval activity."
         }
       },
       "description": "Represents a azure blob retrieval activity record."
+    },
+    "KnowledgeAgentAzureBlobActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query blob contents."
+        }
+      },
+      "description": "Represents the arguments the azure blob retrieval activity was run with."
     },
     "KnowledgeAgentWebActivityRecord": {
       "type": "object",
@@ -381,16 +395,26 @@
         }
       ],
       "properties": {
-        "searchTerm": {
+        "webArguments": {
+          "$ref": "#/definitions/KnowledgeAgentWebActivityArguments",
+          "description": "The web arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a web retrieval activity record."
+    },
+    "KnowledgeAgentWebActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
           "type": "string",
-          "description": "The search term for the retrieval activity."
+          "description": "The search string used to query the web."
         },
         "freshness": {
           "type": "string",
           "description": "The freshness for the retrieval activity."
         }
       },
-      "description": "Represents a web retrieval activity record."
+      "description": "Represents the arguments the web retrieval activity was run with."
     },
     "KnowledgeAgentModelQueryPlanningActivityRecord": {
       "type": "object",
@@ -410,11 +434,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of output tokens for the LLM query planning activity."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The elapsed time in milliseconds for the model activity."
         }
       },
       "description": "Represents an LLM query planning activity record."
@@ -431,24 +450,19 @@
         "inputTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of input tokens for the LLM query planning activity."
+          "description": "The number of input tokens for the LLM answer synthesis activity."
         },
         "outputTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of output tokens for the LLM query planning activity."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The elapsed time in milliseconds for the model activity."
+          "description": "The number of output tokens for the LLM answer synthesis activity."
         }
       },
-      "description": "Represents an LLM query planning activity record."
+      "description": "Represents an LLM answer synthesis activity record."
     },
-    "KnowledgeAgentSemanticRankerActivityRecord": {
+    "KnowledgeAgentSemanticRerankerActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "searchSemanticReranker",
+      "x-ms-discriminator-value": "semanticReranker",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -459,11 +473,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of input tokens for the semantic ranker activity."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The elapsed time in milliseconds for the model activity."
         }
       },
       "description": "Represents a semantic ranker activity record."
@@ -527,9 +536,9 @@
         }
       ],
       "properties": {
-        "fileName": {
+        "blobUrl": {
           "type": "string",
-          "description": "The file name for the reference."
+          "description": "The blob URL for the reference."
         }
       },
       "description": "Represents an Azure Blob Storage document reference."
@@ -545,6 +554,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The url the reference data originated from."
         }
       },
