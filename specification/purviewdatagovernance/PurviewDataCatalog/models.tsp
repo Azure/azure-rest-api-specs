@@ -435,8 +435,11 @@ model CatalogModelDataAsset {
 
 @doc("DataAssetDataAssetQueryRequest.")
 model DataAssetDataAssetQueryRequest {
-  ...SkipQueryParameter;
-  ...TopQueryParameter;
+  @doc("Number of items to skip.")
+  skip?: int32;
+
+  @doc("Number of items to return.")
+  top?: int32;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];

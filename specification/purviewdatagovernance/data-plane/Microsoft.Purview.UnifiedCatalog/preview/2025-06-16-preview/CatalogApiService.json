@@ -2467,12 +2467,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -6508,6 +6502,16 @@
       "type": "object",
       "description": "DataAssetDataAssetQueryRequest.",
       "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
         "orderby": {
           "type": "array",
           "description": "To order the records.",
