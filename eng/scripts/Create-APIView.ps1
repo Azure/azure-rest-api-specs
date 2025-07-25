@@ -464,7 +464,7 @@ function New-TypeSpecAPIViewTokens {
     LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
-      if (!(Test-Path -Path $typeSpecProject)) {
+      if (!(Test-Path -Path (Join-Path $typeSpecProject "tspconfig.yaml"))) {
         Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
