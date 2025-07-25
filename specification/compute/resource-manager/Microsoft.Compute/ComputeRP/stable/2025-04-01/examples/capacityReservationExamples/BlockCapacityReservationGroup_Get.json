@@ -3,36 +3,26 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2025-04-01",
-    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
     "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/blockCapacityReservationGroup",
         "properties": {
           "capacityReservations": [
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation1"
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation1"
             },
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation2"
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation2"
             }
           ],
-          "sharingProfile": {
-            "subscriptionIds": [
-              {
-                "id": "/subscriptions/{subscription-id1}"
-              },
-              {
-                "id": "/subscriptions/{subscription-id2}"
-              }
-            ]
-          },
           "instanceView": {
             "capacityReservations": [
               {
-                "name": "myCapacityReservation1",
+                "name": "blockCapacityReservation1",
                 "utilizationInfo": {
                   "currentCapacity": 5,
                   "virtualMachinesAllocated": [
@@ -53,7 +43,7 @@
                 ]
               },
               {
-                "name": "myCapacityReservation2",
+                "name": "blockCapacityReservation2",
                 "utilizationInfo": {
                   "currentCapacity": 5,
                   "virtualMachinesAllocated": [
@@ -73,22 +63,15 @@
                   }
                 ]
               }
-            ],
-            "sharedSubscriptionIds": [
-              {
-                "id": "/subscriptions/{subscription-id1}"
-              },
-              {
-                "id": "/subscriptions/{subscription-id2}"
-              }
             ]
-          }
+          },
+          "reservationType": "Block"
         },
         "location": "westus",
         "tags": {
           "{tagName}": "{tagValue}"
         },
-        "name": "myCapacityReservationGroup",
+        "name": "blockCapacityReservationGroup",
         "zones": [
           "3",
           "1"

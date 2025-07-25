@@ -3,7 +3,7 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2025-04-01",
-    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationGroupName": "targetedCapacityReservationGroup",
     "parameters": {
       "location": "westus",
       "tags": {
@@ -23,16 +23,17 @@
               "id": "/subscriptions/{subscription-id2}"
             }
           ]
-        }
+        },
+        "reservationType": "Targeted"
       }
     }
   },
   "responses": {
     "201": {
       "body": {
-        "name": "myCapacityReservationGroup",
+        "name": "targetedCapacityReservationGroup",
         "location": "westus",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/targetedCapacityReservationGroup",
         "tags": {
           "department": "finance"
         },
@@ -50,7 +51,8 @@
                 "id": "/subscriptions/{subscription-id2}"
               }
             ]
-          }
+          },
+          "reservationType": "Targeted"
         }
       }
     },
@@ -61,8 +63,8 @@
           "department": "finance",
           "owner": "myCompany"
         },
-        "name": "myCapacityReservationGroup",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "name": "targetedCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/targetedCapacityReservationGroup",
         "zones": [
           "1",
           "2"
@@ -77,7 +79,8 @@
                 "id": "/subscriptions/{subscription-id2}"
               }
             ]
-          }
+          },
+          "reservationType": "Targeted"
         }
       }
     }

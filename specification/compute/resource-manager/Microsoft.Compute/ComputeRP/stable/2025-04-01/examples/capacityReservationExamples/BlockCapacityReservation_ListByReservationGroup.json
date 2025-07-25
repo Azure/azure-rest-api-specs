@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
     "api-version": "2025-04-01",
     "$expand": "virtualMachines/$ref"
   },
@@ -30,14 +30,18 @@
                   "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
                 }
               ],
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "scheduleProfile": {
+                "start": "2025-08-01T12:00:00Z",
+                "end": "2025-08-02T11:30:00Z"
+              }
             },
             "tags": {
               "department": "HR"
             },
             "sku": {
-              "name": "Standard_DS1_v2",
-              "capacity": 4
+              "name": "Standard_ND96isr_H100_v5",
+              "capacity": 1
             },
             "zones": [
               "1"
@@ -57,14 +61,18 @@
                   "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM4"
                 }
               ],
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "scheduleProfile": {
+                "start": "2025-08-01T12:00:00Z",
+                "end": "2025-08-02T11:30:00Z"
+              }
             },
             "tags": {
               "department": "HR"
             },
             "sku": {
-              "name": "Standard_A1_v2",
-              "capacity": 4
+              "name": "Standard_ND96isr_H100_v5",
+              "capacity": 1
             },
             "zones": [
               "1"

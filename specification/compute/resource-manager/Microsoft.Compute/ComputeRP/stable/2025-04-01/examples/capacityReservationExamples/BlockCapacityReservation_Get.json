@@ -3,14 +3,14 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2025-04-01",
-    "capacityReservationGroupName": "myCapacityReservationGroup",
-    "capacityReservationName": "myCapacityReservation",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "capacityReservationName": "blockCapacityReservation",
     "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
         "properties": {
           "platformFaultDomainCount": 3,
           "reservationId": "{GUID}",
@@ -47,6 +47,10 @@
               }
             ]
           },
+          "scheduleProfile": {
+            "start": "2025-08-01T12:00:00Z",
+            "end": "2025-08-02T11:30:00Z"
+          },
           "timeCreated": "2021-06-27T01:02:38.3138469+00:00"
         },
         "location": "westus",
@@ -54,13 +58,13 @@
           "department": "HR"
         },
         "sku": {
-          "name": "Standard_DS1_v2",
-          "capacity": 4
+          "name": "Standard_ND96isr_H100_v5",
+          "capacity": 1
         },
         "zones": [
           "1"
         ],
-        "name": "myCapacityReservation"
+        "name": "blockCapacityReservation"
       }
     }
   }

@@ -3,20 +3,20 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2025-04-01",
-    "capacityReservationGroupName": "myCapacityReservationGroup",
+    "capacityReservationGroupName": "targetedCapacityReservationGroup",
     "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/targetedCapacityReservationGroup",
         "properties": {
           "capacityReservations": [
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation1"
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/targetedCapacityReservationGroup/capacityReservations/targetedCapacityReservation1"
             },
             {
-              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation2"
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/targetedCapacityReservationGroup/capacityReservations/targetedCapacityReservation2"
             }
           ],
           "sharingProfile": {
@@ -32,7 +32,7 @@
           "instanceView": {
             "capacityReservations": [
               {
-                "name": "myCapacityReservation1",
+                "name": "targetedCapacityReservation1",
                 "utilizationInfo": {
                   "currentCapacity": 5,
                   "virtualMachinesAllocated": [
@@ -53,7 +53,7 @@
                 ]
               },
               {
-                "name": "myCapacityReservation2",
+                "name": "targetedCapacityReservation2",
                 "utilizationInfo": {
                   "currentCapacity": 5,
                   "virtualMachinesAllocated": [
@@ -82,13 +82,14 @@
                 "id": "/subscriptions/{subscription-id2}"
               }
             ]
-          }
+          },
+          "reservationType": "Targeted"
         },
         "location": "westus",
         "tags": {
           "{tagName}": "{tagValue}"
         },
-        "name": "myCapacityReservationGroup",
+        "name": "targetedCapacityReservationGroup",
         "zones": [
           "3",
           "1"
