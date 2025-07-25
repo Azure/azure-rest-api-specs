@@ -190,11 +190,8 @@ model SharedSearchManageAttributeSearchFilter {
 
 @doc("Request parameters for querying critical data elements.")
 model CriticalDataElementQueryRequest {
-  @doc("Number of items to skip for pagination.")
-  skip?: int32;
-
-  @doc("Maximum number of items to return.")
-  top?: int32;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
 
   @doc("Ordering criteria for the results.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -435,11 +432,8 @@ model CatalogModelDataAsset {
 
 @doc("DataAssetDataAssetQueryRequest.")
 model DataAssetDataAssetQueryRequest {
-  @doc("Number of items to skip.")
-  skip?: int32;
-
-  @doc("Number of items to return.")
-  top?: int32;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -473,9 +467,11 @@ model FacetValue {
 @pagedResult
 model FacetsResponse {
   @doc("The list of facets.")
+  @items
   facets: Record<FacetValue[]>;
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -483,9 +479,11 @@ model FacetsResponse {
 @pagedResult
 model CriticalDataColumnsResponse {
   @doc("The list of critical data columns.")
+  @items
   value: CatalogModelCriticalDataColumn[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -493,9 +491,11 @@ model CriticalDataColumnsResponse {
 @pagedResult
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
+  @items
   value: CatalogModelCriticalDataElement[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -503,9 +503,11 @@ model CriticalDataElementsResponse {
 @pagedResult
 model DataAssetsResponse {
   @doc("The list of data assets.")
+  @items
   value: CatalogModelDataAsset[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -513,9 +515,11 @@ model DataAssetsResponse {
 @pagedResult
 model RelationshipWrappersResponse {
   @doc("The list of relationships.")
+  @items
   value: RelationshipWrapper[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -700,19 +704,18 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 @pagedResult
 model DataProductResponse {
   @doc("The list of data products.")
+  @items
   value: CatalogModelDataProduct[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
 @doc("DataProductQueryRequest.")
 model DataProductQueryRequest {
-  @doc("Number of items to skip.")
-  skip?: int32;
-
-  @doc("Number of items to return.")
-  top?: int32;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
 
   @doc("To order the records.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -882,9 +885,11 @@ union RelatedCollectionParentCollectionTypeEnum {
 @pagedResult
 model CatalogModelDomainResponse {
   @doc("The list of domains.")
+  @items
   value: CatalogModelDomain[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -946,19 +951,18 @@ model CatalogModelTermResource {
 @pagedResult
 model CatalogModelTermResponse {
   @doc("The list of terms.")
+  @items
   value: CatalogModelTerm[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
 @doc("Term query request model.")
 model TermTermQueryRequest {
-  @doc("Number of items to skip.")
-  skip?: int32;
-
-  @doc("Number of items to return.")
-  top?: int32;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -1031,9 +1035,11 @@ model TermRelationship {
 @pagedResult
 model TermRelationshipResponse {
   @doc("The list of term relationships.")
+  @items
   value: TermRelationship[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -1179,19 +1185,18 @@ union OverallStatusEnum {
 @pagedResult
 model ObjectiveWithAdditionalPropertiesResponse {
   @doc("The list of objectives with additional properties.")
+  @items
   value: ObjectiveWithAdditionalProperties[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
 @doc("ObjectiveQueryRequest.")
 model ObjectiveQueryRequest {
-  @doc("Number of items to skip.")
-  skip?: int32;
-
-  @doc("Number of items to return.")
-  top?: int32;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
 
   @doc("Order by specifications for the query.")
   orderby?: CatalogApiServiceOrderBy[];
@@ -1303,9 +1308,11 @@ model ModelKeyResult {
 @pagedResult
 model ModelKeyResultResponse {
   @doc("The list of key results.")
+  @items
   value: ModelKeyResult[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
 
@@ -1340,8 +1347,10 @@ model CatalogModelKeyResult {
 @pagedResult
 model CatalogModelKeyResultResponse {
   @doc("The list of key results.")
+  @items
   value: CatalogModelKeyResult[];
 
   @doc("The link to the next page of results.")
+  @nextLink
   nextLink?: string;
 }
