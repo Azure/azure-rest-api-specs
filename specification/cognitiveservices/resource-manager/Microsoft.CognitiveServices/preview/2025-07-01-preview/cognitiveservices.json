@@ -5119,6 +5119,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers": {
+      "get": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "description": "Returns all the resources of a quotaTiers type in a subscription.",
+        "operationId": "QuotaTier_List",
+        "x-ms-examples": {
+          "List Quota Tiers": {
+            "$ref": "./examples/ListQuotaTiers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers/{default}": {
       "get": {
         "tags": [
@@ -9580,6 +9619,27 @@
           "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
         }
       }
+    },
+    "QuotaTierListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Quota Tiers.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTier"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "description": "Gets the list of Quota Tiers and their properties."
+        }
+      },
+      "description": "The list of Quota Tiers response."
     }
   },
   "parameters": {
