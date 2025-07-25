@@ -34,10 +34,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the redis cache.
    */
-  get is ArmResourceRead<
-    PrivateEndpointConnection,
-    Response = Azure.ResourceManager.CommonTypes.PrivateEndpointConnection
-  >;
+  get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Update the state of specified private endpoint connection associated with the redis cache.
