@@ -117,7 +117,7 @@ describe("SpecModel", () => {
 
     const tag = globalConfig["tag"];
 
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(tag).not.toBeTypeOf(Date);
 
     expect(tag).toBeTypeOf("string");
@@ -449,7 +449,7 @@ describe("getSwaggers", () => {
     const specModel = new SpecModel(folder, options);
     const swaggers = await specModel.getSwaggers();
     // Should return an array (may be empty if no valid readmes in this fixture)
-    expect(swaggers.length).toBe(5);
+    expect(swaggers.length).toBe(9);
 
     // If swaggers are found, they should have the expected structure
     for (const swagger of swaggers) {

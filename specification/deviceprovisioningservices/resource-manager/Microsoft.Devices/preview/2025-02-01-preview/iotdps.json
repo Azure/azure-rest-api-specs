@@ -329,6 +329,9 @@
           "DPSCreate": {
             "$ref": "./examples/DPSCreate.json"
           },
+          "DPSCreateWithNamespace": {
+            "$ref": "./examples/DPSCreateWithNamespace.json"
+          },
           "DPSUpdate": {
             "$ref": "./examples/DPSUpdate.json"
           }
@@ -1808,6 +1811,68 @@
         }
       ]
     },
+    "DeviceRegistryNamespaceAuthenticationType": {
+      "type": "string",
+      "description": "Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned.",
+      "enum": [
+        "UserAssigned",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceRegistryNamespaceAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned authentication type."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned authentication type."
+          }
+        ]
+      }
+    },
+    "DeviceRegistryNamespaceDescription": {
+      "type": "object",
+      "description": "Description of the Device Registry namespace that is linked to the provisioning service.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the Device Registry namespace.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceRegistry/namespaces"
+              }
+            ]
+          }
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceAuthenticationType",
+          "description": "Device Registry Namespace MI authentication type: UserAssigned, SystemAssigned."
+        },
+        "selectedUserAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The selected user-assigned identity resource Id associated with Device Registry namespace. This is required when authenticationType is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "resourceId",
+        "authenticationType"
+      ]
+    },
     "ErrorDetails": {
       "type": "object",
       "description": "Error details.",
@@ -1932,6 +1997,10 @@
             "$ref": "#/definitions/IotHubDefinitionDescription"
           }
         },
+        "deviceRegistryNamespace": {
+          "$ref": "#/definitions/DeviceRegistryNamespaceDescription",
+          "description": "The Device Registry namespace that is linked to the provisioning service."
+        },
         "allocationPolicy": {
           "$ref": "#/definitions/AllocationPolicy",
           "description": "Allocation policy to be used by this provisioning service."
@@ -2036,33 +2105,6 @@
         }
       }
     },
-    "IotHubAuthenticationType": {
-      "type": "string",
-      "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
-      "enum": [
-        "KeyBased",
-        "UserAssigned",
-        "SystemAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "IotHubAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "KeyBased",
-            "value": "KeyBased"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned"
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned"
-          }
-        ]
-      }
-    },
     "IotHubDefinitionDescription": {
       "type": "object",
       "description": "Description of the IoT hub.",
@@ -2088,25 +2130,10 @@
         "location": {
           "type": "string",
           "description": "ARM region of the IoT hub."
-        },
-        "authenticationType": {
-          "$ref": "#/definitions/IotHubAuthenticationType",
-          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned."
-        },
-        "selectedUserAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
         }
       },
       "required": [
+        "connectionString",
         "location"
       ]
     },
