@@ -109,7 +109,7 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: Configurations.json
     reason: The existing API contract is like this and not be able to change.
-  - code: PatchResponseCodes
+  - code: PutResponseCodes
     from: Configurations.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPut
