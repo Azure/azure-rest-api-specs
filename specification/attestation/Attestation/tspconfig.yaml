@@ -1,5 +1,11 @@
+parameters:
+   "service-dir":
+      default: "sdk/attestation"
 emit:
   - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 
 options:
   "@azure-tools/typespec-autorest":
@@ -7,12 +13,15 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  # "@azure-tools/typespec-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
+  "@azure-tools/typespec-python":
+    package-dir: "azure-security-attestation"
+    package-name: "azure-attestation"
+    package-pprint-name: "Attestation"
+    namespace: "azure.security.attestation"
+    package-version: "1.1.0"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   # "@azure-tools/typespec-java": true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
