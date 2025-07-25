@@ -269,6 +269,9 @@ directive:
   - suppress: PutResponseCodes
     from: AuthorizationRules.json
     reason: Breaking change in order to change the API response code.
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: API is deprecated and not required in default tag
+    where: specification/servicebus/resource-manager/readme.md
 ```
 
 
