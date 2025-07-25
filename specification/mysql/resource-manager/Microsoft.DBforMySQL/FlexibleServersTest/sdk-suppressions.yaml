@@ -1,0 +1,12 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/mysql/armmysqlflexibleservers
+      breaking-changes:
+        - Enum `SKUTier` has been removed
+        - Field `AdditionalInfo`, `Code`, `Details`, `Message`, `Target` of struct `ErrorResponse` has been removed
+        - Struct `Identity` has been removed
+        - Struct `SKU` has been removed
+        - Type of `Server.Identity` has been changed from `*Identity` to `*MySQLServerIdentity`
+        - Type of `Server.SKU` has been changed from `*SKU` to `*MySQLServerSKU`
+        - Type of `ServerForUpdate.Identity` has been changed from `*Identity` to `*MySQLServerIdentity`
+        - Type of `ServerForUpdate.SKU` has been changed from `*SKU` to `*MySQLServerSKU`

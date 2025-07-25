@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "maintenanceName": "_T9Q-TS8",
+    "serverName": "testserver",
+    "resourceGroupName": "TestGroup",
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "maintenanceStartTime": "2024-01-20T00:00:00"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/testserver/maintenances/_T9Q-TS8",
+        "name": "_T9Q-TS8",
+        "type": "Microsoft.DBforMySQL/flexibleServers/maintenances",
+        "properties": {
+          "maintenanceType": "RoutineMaintenance",
+          "maintenanceState": "ReScheduled",
+          "maintenanceStartTime": "2024-01-20T00:00:00",
+          "maintenanceEndTime": "2024-01-20T01:00:00",
+          "maintenanceAvailableScheduleMinTime": "2024-01-05T01:23:45",
+          "maintenanceAvailableScheduleMaxTime": "2024-01-31T00:00:00",
+          "maintenanceTitle": "Routine Maintenance: Rescheduled to Sat, 20 Jan 2024 00:00:00 GMT",
+          "maintenanceDescription": "Your Azure Database For MySQL routine maintenance will be performed on the scheduled maintenance window between Sat, 20 Jan 2024 00:00:00 GMT and Sat, 20 Jan 2024 01:00:00 GMT. During the maintenance window, your instance may experience temporary service interruption. Our team will minimize any impact and ensure a smooth transition"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-12-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-12-01-preview"
+      }
+    }
+  }
+}
