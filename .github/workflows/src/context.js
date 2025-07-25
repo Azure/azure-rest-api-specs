@@ -25,7 +25,9 @@ export async function extractInputs(github, context, core) {
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
-  core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
+  if (core.isDebug()) {
+    core.debug(`context: ${JSON.stringify(context)}`);
+  }
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
