@@ -2721,6 +2721,7 @@ model PrivateEndpointConnectionListResult {
   /**
    * List of private endpoint connections associated with the specified resource.
    */
+  @items
   value?: PrivateEndpointConnection[];
 
   /**
