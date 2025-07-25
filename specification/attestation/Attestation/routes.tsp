@@ -14,7 +14,6 @@ interface PolicyOperationGroup {
    * Retrieves the current policy for an attestation type.
    */
   @summary("Retrieves the current policy for an attestation type.")
-  @operationId("Policy_Get")
   @route("/policies/{attestationType}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -32,7 +31,6 @@ interface PolicyOperationGroup {
    * Sets the policy for a given attestation type.
    */
   @summary("Sets the policy for a given attestation type.")
-  @operationId("Policy_Set")
   @route("/policies/{attestationType}")
   @put
   set is Azure.Core.Foundations.Operation<
@@ -60,7 +58,6 @@ interface PolicyOperationGroup {
     Resets the attestation policy for the specified tenant and reverts to the
     default policy.
     """)
-  @operationId("Policy_Reset")
   @route("/policies/{attestationType}:reset")
   @post
   reset is Azure.Core.Foundations.Operation<
@@ -98,7 +95,6 @@ interface PolicyCertificatesOperationGroup {
    * Retrieves the set of certificates used to express policy for the current tenant.
    */
   @summary("Retrieves the set of certificates used to express policy for the current tenant.")
-  @operationId("PolicyCertificates_Get")
   @route("/certificates")
   @get
   get is Azure.Core.Foundations.Operation<{}, PolicyCertificatesResponse>;
@@ -111,7 +107,6 @@ interface PolicyCertificatesOperationGroup {
     Adds a new attestation policy certificate to the set of policy management
     certificates.
     """)
-  @operationId("PolicyCertificates_Add")
   @route("/certificates:add")
   @post
   add is Azure.Core.Foundations.Operation<
@@ -127,7 +122,6 @@ interface PolicyCertificatesOperationGroup {
     Removes the specified policy management certificate. Note that the final policy
     management certificate cannot be removed.
     """)
-  @operationId("PolicyCertificates_Remove")
   @route("/certificates:remove")
   @post
   remove is Azure.Core.Foundations.Operation<
@@ -142,7 +136,6 @@ interface AttestationOperationGroup {
    * produced is dependent upon attestation policy.
    */
   @summary("Attest to an SGX enclave.")
-  @operationId("Attestation_AttestOpenEnclave")
   @route("/attest/OpenEnclave")
   @post
   attestOpenEnclave is Azure.Core.Foundations.Operation<
@@ -155,7 +148,6 @@ interface AttestationOperationGroup {
    * produced is dependent upon attestation policy.
    */
   @summary("Attest to an SGX enclave.")
-  @operationId("Attestation_AttestSgxEnclave")
   @route("/attest/SgxEnclave")
   @post
   attestSgxEnclave is Azure.Core.Foundations.Operation<
@@ -168,7 +160,6 @@ interface AttestationOperationGroup {
    * produced is dependent upon attestation policy.
    */
   @summary("Attest to an Azure Guest VM.")
-  @operationId("Attestation_AttestAzureGuest")
   @route("/attest/AzureGuest")
   @post
   attestAzureGuest is Azure.Core.Foundations.Operation<
@@ -182,7 +173,6 @@ interface AttestationOperationGroup {
    * policy.
    */
   @summary("Attest a Virtualization-based Security (VBS) enclave.")
-  @operationId("Attestation_AttestTpm")
   @route("/attest/Tpm")
   @post
   attestTpm is Azure.Core.Foundations.Operation<
@@ -195,7 +185,6 @@ interface AttestationOperationGroup {
    * attestation policy.
    */
   @summary("Attest to an SEV SNP Virtual Machine.")
-  @operationId("Attestation_AttestSevSnpVm")
   @route("/attest/SevSnpVm")
   @post
   attestSevSnpVm is Azure.Core.Foundations.Operation<
@@ -208,7 +197,6 @@ interface AttestationOperationGroup {
    * dependent upon attestation policy.
    */
   @summary("Attest to a TDX Virtual Machine.")
-  @operationId("Attestation_AttestTdxVm")
   @route("/attest/TdxVm")
   @post
   attestTdxVm is Azure.Core.Foundations.Operation<
@@ -228,7 +216,6 @@ interface TcbBaselinesOperationGroup {
     along with an indication of which one is in enforced for the attestation
     provider.
     """)
-  @operationId("TcbBaselines_Get")
   @route("/tcbbaselines/{attestationType}")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -248,7 +235,6 @@ interface SigningCertificatesOperationGroup {
    * Retrieves metadata signing certificates in use by the attestation service
    */
   @summary("Retrieves the attestation signing keys in use by the attestation service")
-  @operationId("SigningCertificates_Get")
   @route("/certs")
   @get
   get is Azure.Core.Foundations.Operation<
@@ -266,7 +252,6 @@ interface MetadataConfigurationOperationGroup {
    * service
    */
   @summary("Retrieves the OpenID Configuration data for the Azure Attestation Service")
-  @operationId("MetadataConfiguration_Get")
   @route("/.well-known/openid-configuration")
   @get
   get is Azure.Core.Foundations.Operation<{}, OpenIDConfigurationResponse>;

@@ -54,7 +54,7 @@
   "paths": {
     "/.well-known/openid-configuration": {
       "get": {
-        "operationId": "MetadataConfiguration_Get",
+        "operationId": "MetadataConfigurationOperationGroup_Get",
         "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
         "description": "Retrieves metadata about the attestation signing keys in use by the attestation\nservice",
         "parameters": [
@@ -81,17 +81,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get OpenID Metadata": {
-            "$ref": "./examples/Get_MetadataConfiguration.json"
-          }
         }
       }
     },
     "/attest/AzureGuest": {
       "post": {
-        "operationId": "Attestation_AttestAzureGuest",
+        "operationId": "AttestationOperationGroup_AttestAzureGuest",
         "summary": "Attest to an Azure Guest VM.",
         "description": "Processes an Azure Guest TCG Log, producing an artifact. The type of artifact\nproduced is dependent upon attestation policy.",
         "parameters": [
@@ -126,17 +121,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest Azure Guest VM": {
-            "$ref": "./examples/AttestAzureGuestVm.json"
-          }
         }
       }
     },
     "/attest/OpenEnclave": {
       "post": {
-        "operationId": "Attestation_AttestOpenEnclave",
+        "operationId": "AttestationOperationGroup_AttestOpenEnclave",
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an OpenEnclave report , producing an artifact. The type of artifact\nproduced is dependent upon attestation policy.",
         "parameters": [
@@ -171,17 +161,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest OpenEnclave": {
-            "$ref": "./examples/AttestOpenEnclave.json"
-          }
         }
       }
     },
     "/attest/SevSnpVm": {
       "post": {
-        "operationId": "Attestation_AttestSevSnpVm",
+        "operationId": "AttestationOperationGroup_AttestSevSnpVm",
         "summary": "Attest to an SEV SNP Virtual Machine.",
         "description": "Processes a SEV SNP Boot chain. The type of artifact produced is dependent upon\nattestation policy.",
         "parameters": [
@@ -216,17 +201,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest SevSnpVm": {
-            "$ref": "./examples/AttestSevSnpVm.json"
-          }
         }
       }
     },
     "/attest/SgxEnclave": {
       "post": {
-        "operationId": "Attestation_AttestSgxEnclave",
+        "operationId": "AttestationOperationGroup_AttestSgxEnclave",
         "summary": "Attest to an SGX enclave.",
         "description": "Processes an SGX enclave quote, producing an artifact. The type of artifact\nproduced is dependent upon attestation policy.",
         "parameters": [
@@ -261,17 +241,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest SgxEnclave": {
-            "$ref": "./examples/AttestSgxEnclave.json"
-          }
         }
       }
     },
     "/attest/TdxVm": {
       "post": {
-        "operationId": "Attestation_AttestTdxVm",
+        "operationId": "AttestationOperationGroup_AttestTdxVm",
         "summary": "Attest to a TDX Virtual Machine.",
         "description": "Processes an TDX quote, producing an artifact. The type of artifact produced is\ndependent upon attestation policy.",
         "parameters": [
@@ -306,17 +281,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest SgxEnclave": {
-            "$ref": "./examples/AttestTdxVm.json"
-          }
         }
       }
     },
     "/attest/Tpm": {
       "post": {
-        "operationId": "Attestation_AttestTpm",
+        "operationId": "AttestationOperationGroup_AttestTpm",
         "summary": "Attest a Virtualization-based Security (VBS) enclave.",
         "description": "Processes attestation evidence from a VBS enclave, producing an attestation\nresult. The attestation result produced is dependent upon the attestation\npolicy.",
         "parameters": [
@@ -351,17 +321,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Attest EdgeTpm": {
-            "$ref": "./examples/AttestVbsEnclave.json"
-          }
         }
       }
     },
     "/certificates": {
       "get": {
-        "operationId": "PolicyCertificates_Get",
+        "operationId": "PolicyCertificatesOperationGroup_Get",
         "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
         "description": "Retrieves the set of certificates used to express policy for the current tenant.",
         "parameters": [
@@ -388,17 +353,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get PolicyCertificates": {
-            "$ref": "./examples/Get_PolicyCertificates.json"
-          }
         }
       }
     },
     "/certificates:add": {
       "post": {
-        "operationId": "PolicyCertificates_Add",
+        "operationId": "PolicyCertificatesOperationGroup_Add",
         "summary": "Adds a new attestation policy certificate to the set of policy management\ncertificates.",
         "description": "Adds a new attestation policy certificate to the set of policy management\ncertificates.",
         "parameters": [
@@ -433,17 +393,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Add PolicyCertificate": {
-            "$ref": "./examples/Add_PolicyCertificate.json"
-          }
         }
       }
     },
     "/certificates:remove": {
       "post": {
-        "operationId": "PolicyCertificates_Remove",
+        "operationId": "PolicyCertificatesOperationGroup_Remove",
         "summary": "Removes the specified policy management certificate. Note that the final policy\nmanagement certificate cannot be removed.",
         "description": "Removes the specified policy management certificate. Note that the final policy\nmanagement certificate cannot be removed.",
         "parameters": [
@@ -478,17 +433,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Remove PolicyCertificate": {
-            "$ref": "./examples/Remove_PolicyCertificate.json"
-          }
         }
       }
     },
     "/certs": {
       "get": {
-        "operationId": "SigningCertificates_Get",
+        "operationId": "SigningCertificatesOperationGroup_Get",
         "summary": "Retrieves the attestation signing keys in use by the attestation service",
         "description": "Retrieves metadata signing certificates in use by the attestation service",
         "produces": [
@@ -519,17 +469,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Token Signing Certificates": {
-            "$ref": "./examples/Get_Certs.json"
-          }
         }
       }
     },
     "/policies/{attestationType}": {
       "get": {
-        "operationId": "Policy_Get",
+        "operationId": "PolicyOperationGroup_Get",
         "summary": "Retrieves the current policy for an attestation type.",
         "description": "Retrieves the current policy for an attestation type.",
         "parameters": [
@@ -607,15 +552,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Policy": {
-            "$ref": "./examples/Get_Policy.json"
-          }
         }
       },
       "put": {
-        "operationId": "Policy_Set",
+        "operationId": "PolicyOperationGroup_Set",
         "summary": "Sets the policy for a given attestation type.",
         "description": "Sets the policy for a given attestation type.",
         "consumes": [
@@ -705,17 +645,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Set Policy": {
-            "$ref": "./examples/Set_Policy.json"
-          }
         }
       }
     },
     "/policies/{attestationType}:reset": {
       "post": {
-        "operationId": "Policy_Reset",
+        "operationId": "PolicyOperationGroup_Reset",
         "summary": "Resets the attestation policy for the specified tenant and reverts to the\ndefault policy.",
         "description": "Resets the attestation policy for the specified tenant and reverts to the\ndefault policy.",
         "consumes": [
@@ -805,17 +740,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Reset Policy": {
-            "$ref": "./examples/Reset_Policy.json"
-          }
         }
       }
     },
     "/tcbbaselines/{attestationType}": {
       "get": {
-        "operationId": "TcbBaselines_Get",
+        "operationId": "TcbBaselinesOperationGroup_Get",
         "summary": "Retrieves a list of all Azure supported baseline details for the a TEE type\nalong with an indication of which one is in enforced for the attestation\nprovider.",
         "description": "Retrieves a list of all Azure supported baseline details for the a TEE type\nalong with an indication of which one is in enforced for the attestation\nprovider.",
         "parameters": [
@@ -892,11 +822,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get TcbBaselines": {
-            "$ref": "./examples/Get_TcbBaselines.json"
           }
         }
       }
