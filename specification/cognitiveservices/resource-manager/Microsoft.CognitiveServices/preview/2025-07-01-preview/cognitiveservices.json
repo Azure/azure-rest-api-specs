@@ -9603,9 +9603,17 @@
           "x-nullable": true,
           "description": "Name of the next quota tier for the subscription."
         },
-        "isUpgradeAvailable": {
-          "type": "boolean",
-          "description": "Is the subscription eligible to be upgraded to the next quota tier."
+        "upgradeAvailabilityStatus": {
+          "type": "string",
+          "description": "Specifies whether an upgrade to the next quota tier is available.",
+          "enum": [
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeAvailabilityStatus",
+            "modelAsString": true
+          }
         },
         "upgradeApplicableDate": {
           "type": "string",
