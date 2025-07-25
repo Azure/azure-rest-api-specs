@@ -613,7 +613,7 @@
           "description": "Fully qualified domain name (FQDN) or IP address of the target server. This property is optional. When provided, the migration service will always use it to connect to the target server."
         },
         "secretParameters": {
-          "$ref": "#/definitions/MigrationSecretParameters",
+          "$ref": "#/definitions/MigrationSecretParametersForPatch",
           "description": "Migration secret parameters."
         },
         "dbsToMigrate": {
@@ -779,6 +779,56 @@
           "x-ms-external": true,
           "x-ms-mutability": [
             "create",
+            "update"
+          ],
+          "description": "Password for the user of the target server."
+        }
+      },
+      "description": "Credentials of administrator users for source and target servers."
+    },
+    "MigrationSecretParametersForPatch": {
+      "type": "object",
+      "properties": {
+        "adminCredentials": {
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "$ref": "#/definitions/AdminCredentialsForPatch",
+          "description": "Credentials of administrator users for source and target servers."
+        },
+        "sourceServerUsername": {
+          "type": "string",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "description": "Gets or sets the name of the user for the source server. This user doesn't need to be an administrator."
+        },
+        "targetServerUsername": {
+          "type": "string",
+          "x-ms-mutability": [
+            "update"
+          ],
+          "description": "Gets or sets the name of the user for the target server. This user doesn't need to be an administrator."
+        }
+      },
+      "description": "Migration secret parameters."
+    },
+    "AdminCredentialsForPatch": {
+      "type": "object",
+      "properties": {
+        "sourceServerPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
+            "update"
+          ],
+          "description": "Password for the user of the source server."
+        },
+        "targetServerPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-external": true,
+          "x-ms-mutability": [
             "update"
           ],
           "description": "Password for the user of the target server."
