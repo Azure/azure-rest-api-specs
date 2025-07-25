@@ -258,7 +258,7 @@
       "properties": {
         "principalType": {
           "type": "string",
-          "description": "The type of Microsoft Entra principal to which the server administrator is associated.",
+          "description": "Type of Microsoft Entra principal to which the server administrator is associated.",
           "enum": [
             "Unknown",
             "User",
@@ -267,7 +267,25 @@
           ],
           "x-ms-enum": {
             "name": "PrincipalType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "The principal type is not known or not specified."
+              },
+              {
+                "value": "User",
+                "description": "A Microsoft Entra user."
+              },
+              {
+                "value": "Group",
+                "description": "A Microsoft Entra group."
+              },
+              {
+                "value": "ServicePrincipal",
+                "description": "A Microsoft Entra service principal, typically representing an application or service identity"
+              }
+            ]
           },
           "x-ms-mutability": [
             "create",
