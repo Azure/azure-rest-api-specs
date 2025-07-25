@@ -84,3 +84,5 @@ using Microsoft.ServiceBus;
 @@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
+
+@@clientName(Encryption.keyVaultProperties, "KeyVaultProperties");
