@@ -12,3 +12,4 @@ csharp:
   client-side-validation: false
   namespace: Microsoft.FileShares
   output-folder: $(csharp-sdks-folder)/fileshares/management/Microsoft.FileShares/GeneratedProtocol
+```
