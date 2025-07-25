@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "endpoint": "https://resourcename.communication.azure.com",
+    "countryCode": "US",
+    "phoneNumbersBrowseRequest": {
+      "phoneNumberType": "geographic",
+      "capabilities": {
+        "calling": "outbound",
+        "sms": "none"
+      },
+      "assignmentType": "person",
+      "phoneNumberPrefixes": [
+        "1425",
+        "1626"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "phoneNumbers": [
+          {
+            "id": "14254567890",
+            "countryCode": "US",
+            "phoneNumber": "+14254567890",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "available",
+            "isAgreementToNotResellRequired": false
+          },
+          {
+            "id": "16264567890",
+            "countryCode": "US",
+            "phoneNumber": "+16264567890",
+            "capabilities": {
+              "calling": "outbound",
+              "sms": "none"
+            },
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "cost": {
+              "amount": 1,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            },
+            "status": "available",
+            "isAgreementToNotResellRequired": false
+          }
+        ]
+      }
+    }
+  }
+}

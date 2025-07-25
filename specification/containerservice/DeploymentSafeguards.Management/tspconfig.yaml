@@ -22,18 +22,19 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-containerservicesafeguards"
     namespace: "azure.mgmt.containerservicesafeguards"
+    service-dir: "sdk/containerservice"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerservicesafeguards"
     namespace: "com.azure.resourcemanager.containerservicesafeguards"
-    service-name: "Container Service Deployment Safeguards"
-    service-dir: "sdk/containerservice"
+    service-name: "Container Service Safeguards"
+    service-dir: "sdk/containerservicesafeguards"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/containerservicesafeguards"
-    package-dir: "armcontainerservicesafeguards"
+    service-dir: "sdk/resourcemanager/containerservice"
+    package-dir: "armdeploymentsafeguards"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"

@@ -13,8 +13,10 @@ on:
       - "\\[TEST-IGNORE\\] Swagger ModelValidation"
 
 permissions:
+  actions: read
   checks: read
   contents: read
+  statuses: read
 
 jobs:
   ModelValidationWatch:
@@ -23,4 +25,3 @@ jobs:
     with:
       check_run_name: "Swagger ModelValidation"
       workflow_name: "[TEST-IGNORE] Swagger ModelValidation"
-

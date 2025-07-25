@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-01-02",
+    "diskName": "myDisk",
+    "disk": {
+      "properties": {
+        "burstingEnabled": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2025-01-02"
+      },
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  },
+  "operationId": "Disks_Update",
+  "title": "update a managed disk to disable bursting."
+}
