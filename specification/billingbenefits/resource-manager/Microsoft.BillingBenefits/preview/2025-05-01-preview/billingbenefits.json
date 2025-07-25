@@ -2656,6 +2656,63 @@
         },
         "remainingAmount": {
           "$ref": "#/definitions/Price"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product UPN for the credit type (e.g., ECIF UPN)"
+        },
+        "credit": {
+          "description": "The entire investment amount for the credit contract, including currency and amount",
+          "$ref": "#/definitions/Commitment"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date for the entire credit contract"
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date for the entire credit contract"
+        },
+        "breakdown": {
+          "type": "array",
+          "description": "Credit line-items/milestones/no-charge services breakdown (applicable for ECIF type credits)",
+          "items": {
+            "$ref": "#/definitions/CreditBreakdownItem"
+          }
+        },
+        "systemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "System identifier (e.g., OneAsk Reference ID for ECIF)"
+        },
+        "billingAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts"
+              }
+            ]
+          },
+          "description": "Fully-qualified identifier of the billing account where the credit is applied"
+        },
+        "billingProfileResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
+              }
+            ]
+          },
+          "description": "Fully-qualified identifier of the billing profile where the credit is applied"
+        },
+        "status": {
+          "$ref": "#/definitions/CreditStatus"
         }
       }
     },
@@ -2675,6 +2732,119 @@
           "type": "string",
           "description": "The URL to get the next set of results"
         }
+      }
+    },
+    "CreditBreakdownItem": {
+      "type": "object",
+      "description": "Credit breakdown item representing a milestone, line-item, or no-charge service",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the breakdown item"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of breakdown item (e.g., Milestone, LineItem, NoChargeService)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the breakdown item"
+        },
+        "allocation": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Allocation details including currency and amount for this breakdown item"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date specific to this breakdown item"
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date specific to this breakdown item"
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Key-value pairs for additional parameters and metadata",
+          "items": {
+            "$ref": "#/definitions/CreditDimension"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the breakdown item (e.g., Pending, Active, Completed, Cancelled)"
+        }
+      }
+    },
+    "CreditDimension": {
+      "type": "object",
+      "description": "Key-value pair for additional credit parameters and metadata",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The dimension key (e.g., productFamily, description, creditType)"
+        },
+        "value": {
+          "type": "string",
+          "description": "The dimension value"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "CreditStatus": {
+      "type": "string",
+      "description": "Status of the credit",
+      "enum": [
+        "Unknown",
+        "Pending", 
+        "Active",
+        "Succeeded",
+        "Canceled",
+        "Failed",
+        "Expired",
+        "Exhausted"
+      ],
+      "x-ms-enum": {
+        "name": "CreditStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "Credit status is unknown"
+          },
+          {
+            "value": "Pending",
+            "description": "Credit is pending activation"
+          },
+          {
+            "value": "Active",
+            "description": "Credit is active and available for use"
+          },
+          {
+            "value": "Succeeded",
+            "description": "Credit operation succeeded"
+          },
+          {
+            "value": "Canceled",
+            "description": "Credit has been cancelled"
+          },
+          {
+            "value": "Failed",
+            "description": "Credit operation failed"
+          },
+          {
+            "value": "Expired",
+            "description": "Credit has expired"
+          },
+          {
+            "value": "Exhausted",
+            "description": "Credit has been fully consumed"
+          }
+        ]
       }
     },
     "CreditSource": {
