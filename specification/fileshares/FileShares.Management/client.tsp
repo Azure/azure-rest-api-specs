@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
+
 @@clientName(Microsoft.FileShares, "FileSharesManagementClient", "java");
 
 @@clientName(CheckNameAvailabilityResponse,
@@ -11,17 +12,17 @@ using Azure.ResourceManager.Foundations;
   "csharp"
 );
 
-@@clientName(FileShareLimitsResponse,
+@@clientName(Microsoft.FileShares.FileShareLimitsResponse,
   "FileShareLimitsResult",
   "csharp"
 );
 
-@@clientName(FileShareProvisioningRecommendationResponse,
+@@clientName(Microsoft.FileShares.FileShareProvisioningRecommendationResponse,
   "FileShareProvisioningRecommendationResult",
   "csharp"
 );
 
-@@clientName(FileShareUsageDataResponse,
+@@clientName(Microsoft.FileShares.FileShareUsageDataResponse,
   "FileShareUsageDataResult",
   "csharp"
 );
