@@ -2624,10 +2624,6 @@
         }
       ],
       "properties": {
-        "sku": {
-          "description": "Credit SKU",
-          "$ref": "#/definitions/ResourceSku"
-        },
         "properties": {
           "description": "Credit properties",
           "x-ms-client-flatten": true,
@@ -2639,41 +2635,31 @@
       "type": "object",
       "description": "Properties of a credit",
       "properties": {
-        "displayName": {
-          "$ref": "#/definitions/DisplayName"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "effectiveDateTime": {
-          "$ref": "#/definitions/EffectiveDateTime"
-        },
-        "expiryDateTime": {
-          "$ref": "#/definitions/ExpiryDateTime"
-        },
-        "creditAmount": {
-          "$ref": "#/definitions/Price"
-        },
-        "remainingAmount": {
-          "$ref": "#/definitions/Price"
+        "status": {
+          "$ref": "#/definitions/CreditStatus"
         },
         "productCode": {
           "type": "string",
           "description": "Product UPN for the credit type (e.g., ECIF UPN)"
+        },
+        "reason": {
+          "$ref": "#/definitions/CreditReason"
         },
         "credit": {
           "description": "The entire investment amount for the credit contract, including currency and amount",
           "$ref": "#/definitions/Commitment"
         },
         "startAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start date for the entire credit contract"
+          "$ref": "#/definitions/StartAt"
         },
         "endAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End date for the entire credit contract"
+          "$ref": "#/definitions/EndAt"
+        },
+        "billingAccountResourceId": {
+          "$ref": "#/definitions/BillingAccountResourceId"
+        },
+        "billingProfileResourceId": {
+          "$ref": "#/definitions/BillingProfileResourceId"
         },
         "breakdown": {
           "type": "array",
@@ -2687,32 +2673,11 @@
           "format": "uuid",
           "description": "System identifier (e.g., OneAsk Reference ID for ECIF)"
         },
-        "billingAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Billing/billingAccounts"
-              }
-            ]
-          },
-          "description": "Fully-qualified identifier of the billing account where the credit is applied"
+        "customerId": {
+          "$ref": "#/definitions/CustomerId"
         },
-        "billingProfileResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles"
-              }
-            ]
-          },
-          "description": "Fully-qualified identifier of the billing profile where the credit is applied"
-        },
-        "status": {
-          "$ref": "#/definitions/CreditStatus"
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId"
         }
       }
     },
@@ -2738,18 +2703,6 @@
       "type": "object",
       "description": "Credit breakdown item representing a milestone, line-item, or no-charge service",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the breakdown item"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of breakdown item (e.g., Milestone, LineItem, NoChargeService)"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the breakdown item"
-        },
         "allocation": {
           "$ref": "#/definitions/Commitment",
           "description": "Allocation details including currency and amount for this breakdown item"
@@ -2770,10 +2723,6 @@
           "items": {
             "$ref": "#/definitions/CreditDimension"
           }
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the breakdown item (e.g., Pending, Active, Completed, Cancelled)"
         }
       }
     },
@@ -2868,35 +2817,27 @@
       "type": "object",
       "description": "Properties of a credit source",
       "properties": {
-        "displayName": {
-          "$ref": "#/definitions/DisplayName"
+        "status": {
+          "$ref": "#/definitions/CreditStatus"
         },
-        "sourceAmount": {
-          "$ref": "#/definitions/Price"
+        "sourceResourceId": {
+          "$ref": "#/definitions/SourceResourceId"
         },
-        "sourceType": {
-          "type": "string",
-          "description": "Type of the credit source"
+        "impactedBillingPeriod": {
+          "$ref": "#/definitions/ImpactedBillingPeriod"
+        },
+        "credit": {
+          "$ref": "#/definitions/Commitment"
         }
       }
     },
-    "CreditSourcesList": {
-      "type": "object",
-      "description": "List of credit sources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of credit sources",
-          "items": {
-            "$ref": "#/definitions/CreditSource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results"
-        }
-      }
+    "SourceResourceId": {
+      "type": "string",
+      "description": "The uri of the resource impacted which lead to the grant of the credit."
+    },
+    "ImpactedBillingPeriod": {
+      "type": "string",
+      "description": "The billing period of the impact for the resource. Format YYYYMM"
     },
     "CreditPatchRequest": {
       "type": "object",
@@ -2925,30 +2866,39 @@
         }
       }
     },
-    "CreditSourcePatchRequest": {
+    "CreditSourcesList": {
       "type": "object",
-      "description": "Credit source patch request",
+      "description": "List of credit sources",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "value": {
+          "type": "array",
+          "description": "The list of credit sources",
+          "items": {
+            "$ref": "#/definitions/CreditSource"
+          },
+          "x-ms-identifiers": []
         },
-        "properties": {
-          "description": "Credit source patch properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CreditSourcePatchProperties"
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results"
         }
       }
     },
-    "CreditSourcePatchProperties": {
+    "CreditSourcePatchRequest": {
       "type": "object",
-      "description": "Credit source patch properties",
+      "description": "Credit patch request",
       "properties": {
-        "displayName": {
-          "$ref": "#/definitions/DisplayName"
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource Tags"
         }
       }
     },
