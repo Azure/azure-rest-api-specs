@@ -1530,7 +1530,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MigrationConfigPropertiesListResult"
+              "$ref": "#/definitions/MigrationConfigListResult"
             }
           },
           "default": {
@@ -4820,25 +4820,9 @@
         }
       }
     },
-    "MigrationConfigProperties": {
+    "MigrationConfigListResult": {
       "type": "object",
-      "description": "Single item in List or Get Migration Config operation",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MigrationConfigPropertiesProperties",
-          "description": "Properties required to the Create Migration Configuration",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MigrationConfigPropertiesListResult": {
-      "type": "object",
-      "description": "The response of a MigrationConfigProperties list operation.",
+      "description": "MigrationConfig Resource Collection",
       "properties": {
         "value": {
           "type": "array",
@@ -4855,6 +4839,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "MigrationConfigProperties": {
+      "type": "object",
+      "description": "Single item in List or Get Migration Config operation",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MigrationConfigPropertiesProperties",
+          "description": "Properties required to the Create Migration Configuration",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "MigrationConfigPropertiesProperties": {

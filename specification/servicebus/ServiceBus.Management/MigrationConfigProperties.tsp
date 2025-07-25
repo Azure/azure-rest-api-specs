@@ -26,6 +26,11 @@ model MigrationConfigProperties
   >;
 }
 
+/**
+ * MigrationConfig Resource Collection
+ */
+model MigrationConfigListResult is Azure.Core.Page<MigrationConfigProperties>;
+
 @armResourceOperations
 interface MigrationConfigs {
   /**
@@ -49,7 +54,10 @@ interface MigrationConfigs {
   /**
    * Gets all migrationConfigurations
    */
-  list is ArmResourceListByParent<MigrationConfigProperties>;
+  list is ArmResourceListByParent<
+    MigrationConfigProperties,
+    Response = ArmResponse<MigrationConfigListResult>
+  >;
 
   /**
    * This operation Completes Migration of entities by pointing the connection strings to Premium namespace and any entities created after the operation will be under Premium Namespace. CompleteMigration operation will fail when entity migration is in-progress.
