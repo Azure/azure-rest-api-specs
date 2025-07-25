@@ -2,30 +2,38 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { includesFolder } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
 /**
+ * Get a list of changed files in a git repository
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
+ * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
+ * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+
+  if (paths.length > 0) {
+    // Use "--" to separate paths from revisions
+    paths.unshift("--");
+  }
 
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
+  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
 
   const files = result.trim().split("\n");
-
   logger?.info("Changed Files:");
   for (const file of files) {
     logger?.info(`  ${file}`);
@@ -36,16 +44,32 @@ export async function getChangedFiles(options = {}) {
 }
 
 /**
+ * Get a list of changed files in a git repository with statuses for additions,
+ * modifications, deletions, and renames. Warning: rename behavior can vary
+ * based on the git client's configuration of diff.renames.
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
+ * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
 export async function getChangedFilesStatuses(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
-  const result = await simpleGit(cwd).diff(["--name-status", baseCommitish, headCommitish]);
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+
+  if (paths.length > 0) {
+    // Use "--" to separate paths from revisions
+    paths.unshift("--");
+  }
+
+  const result = await simpleGit(cwd).diff([
+    "--name-status",
+    baseCommitish,
+    headCommitish,
+    ...paths,
+  ]);
 
   const categorizedFiles = {
     additions: /** @type {string[]} */ ([]),
@@ -133,6 +157,7 @@ export async function getChangedFilesStatuses(options = {}) {
 }
 
 // Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
+// Functions accept both relative and absolute paths, since paths are resolve()'d before searching (when needed)
 
 /**
  * @param {string} [file]
@@ -156,18 +181,9 @@ export function readme(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
-export function specification(file) {
-  // Folder name "specification" should match case, since it already exists in repo
-  return typeof file === "string" && file.startsWith("specification/");
-}
-
-/**
- * @param {string} [file]
- * @returns {boolean}
- */
 export function dataPlane(file) {
   // Folder name "data-plane" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/data-plane/");
+  return typeof file === "string" && includesFolder(file, "data-plane");
 }
 
 /**
@@ -176,7 +192,7 @@ export function dataPlane(file) {
  */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return typeof file === "string" && specification(file) && file.includes("/resource-manager/");
+  return typeof file === "string" && includesFolder(file, "resource-manager");
 }
 
 /**
@@ -185,9 +201,7 @@ export function resourceManager(file) {
  */
 export function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/examples/")
-  );
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
 }
 
 /**
@@ -197,9 +211,16 @@ export function example(file) {
 export function typespec(file) {
   return (
     typeof file === "string" &&
-    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml")) &&
-    specification(file)
+    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml"))
   );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function quickstartTemplate(file) {
+  return typeof file === "string" && json(file) && file.includes("/quickstart-templates/");
 }
 
 /**
@@ -212,6 +233,7 @@ export function swagger(file) {
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
+    !quickstartTemplate(file) &&
     !scenario(file)
   );
 }
@@ -221,7 +243,5 @@ export function swagger(file) {
  * @returns {boolean}
  */
 export function scenario(file) {
-  return (
-    typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
-  );
+  return typeof file === "string" && json(file) && includesFolder(file, "scenarios");
 }
