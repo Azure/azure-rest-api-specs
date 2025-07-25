@@ -5119,6 +5119,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers": {
+      "get": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "operationId": "QuotaTiers_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Quota Tier for a subscription": {
+            "$ref": "./examples/ListQuotaTiers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers/{default}": {
       "get": {
         "tags": [
@@ -5164,7 +5203,7 @@
         ],
         "operationId": "QuotaTiers_Update",
         "summary": "Updates the Quota Tier resource for a subscription. The only properties that can be updated are  \"tierUpgradePolicy\"",
-        "description": "Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "description": "Update the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -5202,6 +5241,59 @@
         "x-ms-examples": {
           "Update the quota tier resource for a subscription": {
             "$ref": "./examples/UpdateQuotaTier.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "operationId": "QuotaTiers_CreateOrUpdate",
+        "summary": "Updates the Quota Tier resource for a subscription.",
+        "description": "Update the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
+          },
+          {
+            "name": "tier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            },
+            "description": "The parameters to provide for the quota tier resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            }
+          },
+          "201": {
+            "description": "Create the QuotaTier successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the quota tier resource for a subscription": {
+            "$ref": "./examples/CreateOrUpdateQuotaTier.json"
           }
         }
       }
@@ -9511,15 +9603,23 @@
           "x-nullable": true,
           "description": "Name of the next quota tier for the subscription."
         },
-        "isUpgradeAvailable": {
-          "type": "boolean",
-          "description": "Is the subscription eligible to be upgraded to the next quota tier."
+        "upgradeAvailabilityStatus": {
+          "type": "string",
+          "description": "Specifies whether an upgrade to the next quota tier is available.",
+          "enum": [
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeAvailabilityStatus",
+            "modelAsString": true
+          }
         },
         "upgradeApplicableDate": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
-          "description": "The date on which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
+          "description": "The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
         },
         "upgradeUnavailabilityReason": {
           "type": "string",
@@ -9527,6 +9627,27 @@
           "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
         }
       }
+    },
+    "QuotaTierListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of quota tiers.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTier"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "description": "Gets the list of Quota Tiers and their properties."
+        }
+      },
+      "description": "The list of Quota Tiers response."
     }
   },
   "parameters": {
