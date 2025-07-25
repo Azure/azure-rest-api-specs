@@ -23,8 +23,8 @@ namespace Microsoft.AzureResilienceManagement;
 @parentResource(DrillRun)
 @doc("ChaosJob a AzureResilienceProviderHub resource")
 model ChaosJob is ProxyResource<ChaosJobProperties> {
-  @doc("The unique name of the chaos job.")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @doc("The unique name of the chaos job (GUID).")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("chaosJobName")
   @segment("chaosJobs")
   @path

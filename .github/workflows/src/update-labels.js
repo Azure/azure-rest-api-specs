@@ -7,19 +7,7 @@ import { PER_PAGE_MAX } from "./github.js";
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function updateLabels({ github, context, core }) {
-  let owner = process.env.OWNER;
-  let repo = process.env.REPO;
-  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
-  let run_id = parseInt(process.env.RUN_ID || "");
-
-  if (!owner || !repo || !(issue_number || run_id)) {
-    let inputs = await extractInputs(github, context, core);
-    owner = owner || inputs.owner;
-    repo = repo || inputs.repo;
-    issue_number = issue_number || inputs.issue_number;
-    run_id = run_id || inputs.run_id;
-  }
-
+  const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
 }
 

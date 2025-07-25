@@ -1,7 +1,12 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -43,6 +48,10 @@ union ConfigurationState {
 
   @doc("PendingCommit Configuration State")
   PendingCommit: "PendingCommit",
+
+  @added(Versions.v2025_07_15)
+  @doc("PendingAdministrativeUpdate State")
+  PendingAdministrativeUpdate: "PendingAdministrativeUpdate",
 
   string,
 }
@@ -86,6 +95,10 @@ union AdministrativeState {
 
   @doc("UnderMaintenance Administrative State")
   UnderMaintenance: "UnderMaintenance",
+
+  @added(Versions.v2025_07_15)
+  @doc("EnabledDegraded Administrative State.")
+  EnabledDegraded: "EnabledDegraded",
 
   string,
 }
@@ -304,6 +317,12 @@ model CommonMatchConditions {
 model CommonMatchConditionsPatch {
   @doc("List of the protocols that need to be matched.")
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "protocolTypes")
+  protocolTypesDeprecated?: string[];
+
+  @doc("List of the protocols that need to be matched.")
+  @added(Versions.v2025_07_15)
   protocolTypes?: string[];
 
   @doc("Vlan match condition that needs to be matched.")
@@ -329,7 +348,37 @@ model VlanMatchCondition {
 }
 
 @doc("The vlan match conditions that need to be matched.")
-model VlanMatchConditionPatch is VlanMatchCondition;
+model VlanMatchConditionPatch {
+  @doc("List of vlans that need to be matched. Inputs can be single vlan or the range of vlans.")
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "vlans")
+  vlansDeprecated?: string[];
+
+  @doc("List of vlans that need to be matched. Inputs can be single vlan or the range of vlans.")
+  @added(Versions.v2025_07_15)
+  vlans?: string[];
+
+  @doc("List of inner vlans that need to be matched.Inputs can be single vlan or the range of vlans.")
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "innerVlans")
+  innerVlansDeprecated?: string[];
+
+  @doc("List of inner vlans that need to be matched.Inputs can be single vlan or the range of vlans.")
+  @added(Versions.v2025_07_15)
+  innerVlans?: string[];
+
+  @doc("List of vlan group names that need to be matched.")
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "vlanGroupNames")
+  vlanGroupNamesDeprecated?: string[];
+
+  @doc("List of vlan group names that need to be matched.")
+  @added(Versions.v2025_07_15)
+  vlanGroupNames?: string[];
+}
 
 @doc("Defines the condition that can be filtered using the selected IPs.")
 model IpMatchCondition {
@@ -349,7 +398,33 @@ model IpMatchCondition {
 }
 
 @doc("Defines the condition that can be filtered using the selected IPs.")
-model IpMatchConditionPatch is IpMatchCondition;
+model IpMatchConditionPatch {
+  @doc("IP Address type that needs to be matched.")
+  type?: SourceDestinationType;
+
+  @doc("IP Prefix Type that needs to be matched.")
+  prefixType?: PrefixType;
+
+  @doc("The list of IP Prefixes that need to be matched.")
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipPrefixValues")
+  ipPrefixValuesDeprecated?: string[];
+
+  @doc("The list of IP Prefixes that need to be matched.")
+  @added(Versions.v2025_07_15)
+  ipPrefixValues?: string[];
+
+  @doc("The List of IP Group Names that need to be matched.")
+  @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipGroupNames")
+  ipGroupNamesDeprecated?: string[];
+
+  @doc("The List of IP Group Names that need to be matched.")
+  @added(Versions.v2025_07_15)
+  ipGroupNames?: string[];
+}
 
 @doc("Dynamic match configuration object.")
 model CommonDynamicMatchConfiguration {
@@ -578,6 +653,10 @@ model CommonPostActionResponseForDeviceROCommands {
 model DeviceRwCommand {
   @doc("Specify the command.")
   command?: string;
+
+  @doc("Specify the commands file URL.")
+  @added(Versions.v2025_07_15)
+  commandUrl?: url;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -1000,6 +1079,13 @@ model NativeIpv4PrefixLimitPatchProperties {
   @doc("Prefix limits")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "prefixLimits")
+  prefixLimitsDeprecated?: PrefixLimitPatchProperties[];
+
+  @doc("Prefix limits")
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_07_15)
   prefixLimits?: PrefixLimitPatchProperties[];
 }
 
@@ -1018,6 +1104,13 @@ model NativeIpv6PrefixLimitPatchProperties {
   @doc("Prefix limits")
   @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "prefixLimits")
+  prefixLimitsDeprecated?: PrefixLimitPatchProperties[];
+
+  @doc("Prefix limits")
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2025_07_15)
   prefixLimits?: PrefixLimitPatchProperties[];
 }
 
@@ -1069,4 +1162,170 @@ union V6OverV4BgpSessionState {
   Disabled: "Disabled",
 
   string,
+}
+
+// Note: This model is intended to be consistent with status reporting in the Network Cloud API
+@doc("Status of a secret rotation for a device (Network Device or Terminal Server).")
+@added(Versions.v2025_07_15)
+model SecretRotationStatus {
+  @doc("The date and time when the secret was last changed.")
+  @visibility(Lifecycle.Read)
+  lastRotationTime?: utcDateTime;
+
+  @doc("Whether the device has been configured with the latest version of the secret.")
+  @visibility(Lifecycle.Read)
+  synchronizationStatus?: SynchronizationStatus;
+
+  @doc("Reference to the currently configured version of the secret in a key vault.")
+  @visibility(Lifecycle.Read)
+  secretArchiveReference?: SecretArchiveReference;
+
+  @doc("Identifies the secret according to its purpose.")
+  @visibility(Lifecycle.Read)
+  secretType?: string;
+}
+
+@doc("Synchronization status of a secret or certificate for a device (Network Device or Terminal Server). Whether the device has been configured with the latest version of the secret or certificate.")
+@added(Versions.v2025_07_15)
+union SynchronizationStatus {
+  /**
+   * The device has been configured with the latest version of the secret.
+   */
+  InSync: "InSync",
+
+  /**
+   * The device is being reconfigured with the latest version of the secret.
+   *
+   * While in this state, the secret archive reference may not match the secret configured on the device.
+   */
+  Synchronizing: "Synchronizing",
+
+  /**
+   * The device has not been configured with the latest version of the secret.
+   */
+  OutOfSync: "OutOfSync",
+
+  string,
+}
+
+@doc("A reference to a version of a secret in a key vault.")
+model SecretArchiveReference {
+  @doc("A Uniform Resource Identifier (URI) for the secret in the key vault.")
+  @visibility(Lifecycle.Read)
+  keyVaultUri?: url;
+
+  @doc("The resource ID of the key vault containing the secret.")
+  @visibility(Lifecycle.Read)
+  keyVaultId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  @doc("The name of the secret in the key vault.")
+  @visibility(Lifecycle.Read)
+  secretName?: string;
+
+  @doc("The version of the secret in the key vault.")
+  @visibility(Lifecycle.Read)
+  secretVersion?: string;
+}
+
+@doc("Status of a certificate rotation for a device (Network Device or Terminal Server).")
+@added(Versions.v2025_07_15)
+model CertificateRotationStatus {
+  @doc("Time at which the certificate will expire, for certificates with a limited validity period.")
+  @visibility(Lifecycle.Read)
+  expireTime?: utcDateTime;
+
+  @doc("The date and time when the certificate was last changed.")
+  @visibility(Lifecycle.Read)
+  lastRotationTime?: utcDateTime;
+
+  @doc("Whether the device has been configured with the latest version of the certificate.")
+  @visibility(Lifecycle.Read)
+  synchronizationStatus?: SynchronizationStatus;
+
+  @doc("Reference to the currently configured version of the certificate in a key vault.")
+  @visibility(Lifecycle.Read)
+  certificateArchiveReference?: CertificateArchiveReference;
+
+  @doc("Identifies the certificate according to its purpose.")
+  @visibility(Lifecycle.Read)
+  certificateType?: string;
+}
+
+@doc("A reference to a version of a certificate in a key vault.")
+model CertificateArchiveReference {
+  @doc("A Uniform Resource Identifier (URI) for the certificate in the key vault.")
+  @visibility(Lifecycle.Read)
+  keyVaultUri?: url;
+
+  @doc("The resource ID of the key vault containing the certificate.")
+  @visibility(Lifecycle.Read)
+  keyVaultId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
+
+  @doc("The name of the certificate in the key vault.")
+  @visibility(Lifecycle.Read)
+  certificateName?: string;
+
+  @doc("The version of the certificate in the key vault.")
+  @visibility(Lifecycle.Read)
+  certificateVersion?: string;
+}
+
+@doc("Export Policy for the BGP Monitoring Protocol (BMP) Configuration.")
+union BmpExportPolicy {
+  @doc("BMP ExportPolicy Pre-Policy")
+  PrePolicy: "Pre-Policy",
+
+  @doc("BMP ExportPolicy Post-Policy")
+  PostPolicy: "Post-Policy",
+
+  @doc("BMP ExportPolicy All")
+  All: "All",
+
+  @doc("BMP ExportPolicy LocalRib")
+  @added(Versions.v2025_07_15)
+  LocalRib: "LocalRib",
+
+  string,
+}
+
+@doc("BMP Export Policy Configuration properties.")
+@added(Versions.v2025_07_15)
+model BmpExportPolicyProperties {
+  @doc("Export Policy for the BGP Monitoring Protocol (BMP) Configuration.")
+  @minItems(1)
+  exportPolicies?: BmpExportPolicy[];
+}
+
+@doc("BMP Export Policy Configuration properties.")
+@added(Versions.v2025_07_15)
+model BmpExportPolicyPatchProperties {
+  @doc("Export Policy for the BGP Monitoring Protocol (BMP) Configuration.")
+  exportPolicies?: BmpExportPolicy[];
+}
+
+@doc("Update Administrative State Response.")
+@added(Versions.v2025_07_15)
+model UpdateAdministrativeStateResponse {
+  ...OperationStatusResult;
+
+  @doc("Response properties in case of successful administrative state update.")
+  properties?: UpdateAdministrativeStateResponseProperties;
+}
+
+@doc("Update Administrative State Response Properties.")
+@added(Versions.v2025_07_15)
+model UpdateAdministrativeStateResponseProperties {
+  @doc("List of ARM Resource IDs for which the given action applied successfully.")
+  successfulResources?: Azure.Core.armResourceIdentifier<[]>[];
+
+  @doc("List of ARM Resource IDs for which the given action failed to apply.")
+  failedResources?: Azure.Core.armResourceIdentifier<[]>[];
 }

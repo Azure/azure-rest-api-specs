@@ -29,7 +29,7 @@ model DataShareProperties {
   @visibility(Lifecycle.Read)
   @doc("The DataShare URI to be shared with the consumer. URI Format - 'azds://<location>:<dataShareName>:<dataShareIdentifier>'.")
   @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  dataShareUri: string;
+  dataShareUri?: string;
 
   @doc("List of access policies that specify the permission allowed to a managed identity.")
   @Azure.ResourceManager.identifiers(#[])
