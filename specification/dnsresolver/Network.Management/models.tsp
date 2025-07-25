@@ -184,7 +184,7 @@ model CloudErrorBody {
   /**
    * Extra error information
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   details?: CloudErrorBody[];
 }
 
