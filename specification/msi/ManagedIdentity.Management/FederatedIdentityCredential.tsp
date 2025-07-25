@@ -36,13 +36,19 @@ interface FederatedIdentityCredentials {
   /**
    * Create or update a federated identity credential under the specified user assigned identity.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FederatedIdentityCredential, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    FederatedIdentityCredential,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the federated identity credential.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteSync<FederatedIdentityCredential, Error = CloudError>;
+  delete is ArmResourceDeleteSync<
+    FederatedIdentityCredential,
+    Error = CloudError
+  >;
 
   /**
    * Lists all the federated identity credentials under the specified user assigned identity.
@@ -68,7 +74,9 @@ interface FederatedIdentityCredentials {
   >;
 }
 
-@@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource, "parameters");
+@@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource,
+  "parameters"
+);
 
 @@doc(FederatedIdentityCredential.name,
   "The name of the federated identity credential resource."

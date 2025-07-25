@@ -175,7 +175,10 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
  */
 model FederatedIdentityCredentialsListResult
   is Page<FederatedIdentityCredential>;
-@@extension(FederatedIdentityCredentialsListResult.value, "x-ms-identifiers", #["id"]);
+@@extension(FederatedIdentityCredentialsListResult.value,
+  "x-ms-identifiers",
+  #["id"]
+);
 
 // @@visibility(FederatedIdentityCredentialsListResult.value, Lifecycle.Read);
 

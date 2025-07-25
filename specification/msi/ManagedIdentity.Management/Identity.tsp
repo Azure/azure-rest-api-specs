@@ -38,7 +38,10 @@ interface Identities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UserAssignedIdentities_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Identity, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Identity,
+    Error = CloudError
+  >;
 
   /**
    * Update an identity in the specified subscription and resource group.
@@ -64,7 +67,7 @@ interface Identities {
   listByResourceGroup is ArmResourceListByParent<
     Identity,
     Response = UserAssignedIdentitiesListResult,
-    Error = CloudError,
+    Error = CloudError
   >;
 
   /**
@@ -75,7 +78,7 @@ interface Identities {
   listBySubscription is ArmListBySubscription<
     Identity,
     Response = UserAssignedIdentitiesListResult,
-    Error = CloudError,
+    Error = CloudError
   >;
 }
 

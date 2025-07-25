@@ -42,10 +42,10 @@ namespace Microsoft.ManagedIdentity;
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  @tag("Operations")
-  @autoRoute
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: due to TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operations")
+  @autoRoute
   @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
