@@ -23,7 +23,13 @@ model ForwardingRule
     SegmentName = "forwardingRules",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the forwarding rule.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -103,7 +109,6 @@ interface ForwardingRules {
 }
 
 @@doc(ForwardingRule.name, "The name of the forwarding rule.");
-@@encodedName(ForwardingRule.eTag, "application/json", "etag");
 @@doc(ForwardingRule.properties, "Properties of the forwarding rule.");
 @@doc(ForwardingRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."

@@ -21,7 +21,13 @@ model DnsResolverDomainList
     SegmentName = "dnsResolverDomainLists",
     NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the DNS resolver domain list.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -136,7 +142,6 @@ interface DnsResolverDomainLists {
 @@maxLength(DnsResolverDomainList.name, 80);
 @@minLength(DnsResolverDomainList.name, 1);
 @@doc(DnsResolverDomainList.name, "The name of the DNS resolver domain list.");
-@@encodedName(DnsResolverDomainList.eTag, "application/json", "etag");
 @@doc(DnsResolverDomainList.properties,
   "Properties of the DNS resolver domain list."
 );

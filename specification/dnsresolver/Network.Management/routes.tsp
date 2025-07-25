@@ -88,5 +88,5 @@ interface DnsResolverPoliciesOperationGroup {
      */
     @path
     virtualNetworkName: string,
-  ): ArmResponse<SubResourceListResult>;
+  ): ArmResponse<SubResourceListResult> | ErrorResponse;
 }

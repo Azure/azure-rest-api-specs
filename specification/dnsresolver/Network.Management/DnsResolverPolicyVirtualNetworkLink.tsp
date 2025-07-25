@@ -26,7 +26,13 @@ model DnsResolverPolicyVirtualNetworkLink
     SegmentName = "virtualNetworkLinks",
     NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the DNS resolver policy virtual network link.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -106,10 +112,6 @@ interface DnsResolverPolicyVirtualNetworkLinks {
 @@minLength(DnsResolverPolicyVirtualNetworkLink.name, 1);
 @@doc(DnsResolverPolicyVirtualNetworkLink.name,
   "The name of the DNS resolver policy virtual network link for the DNS resolver policy."
-);
-@@encodedName(DnsResolverPolicyVirtualNetworkLink.eTag,
-  "application/json",
-  "etag"
 );
 @@doc(DnsResolverPolicyVirtualNetworkLink.properties,
   "Properties of the DNS resolver policy virtual network link."

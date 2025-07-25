@@ -23,7 +23,13 @@ model OutboundEndpoint
     SegmentName = "outboundEndpoints",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the outbound endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -112,7 +118,6 @@ interface OutboundEndpoints {
 @@doc(OutboundEndpoint.name,
   "The name of the outbound endpoint for the DNS resolver."
 );
-@@encodedName(OutboundEndpoint.eTag, "application/json", "etag");
 @@doc(OutboundEndpoint.properties, "Properties of the outbound endpoint.");
 @@doc(OutboundEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."

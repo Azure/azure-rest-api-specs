@@ -23,7 +23,13 @@ model VirtualNetworkLink
     SegmentName = "virtualNetworkLinks",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the virtual network link.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -110,7 +116,6 @@ interface VirtualNetworkLinks {
 }
 
 @@doc(VirtualNetworkLink.name, "The name of the virtual network link.");
-@@encodedName(VirtualNetworkLink.eTag, "application/json", "etag");
 @@doc(VirtualNetworkLink.properties, "Properties of the virtual network link.");
 @@doc(VirtualNetworkLinks.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."

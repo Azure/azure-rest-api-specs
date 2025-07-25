@@ -21,7 +21,13 @@ model DnsResolver
     SegmentName = "dnsResolvers",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the DNS resolver..
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -123,7 +129,6 @@ interface DnsResolvers {
 }
 
 @@doc(DnsResolver.name, "The name of the DNS resolver.");
-@@encodedName(DnsResolver.eTag, "application/json", "etag");
 @@doc(DnsResolver.properties, "Properties of the DNS resolver.");
 @@doc(DnsResolvers.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."

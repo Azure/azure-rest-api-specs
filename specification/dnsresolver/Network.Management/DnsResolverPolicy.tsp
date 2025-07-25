@@ -21,7 +21,13 @@ model DnsResolverPolicy
     SegmentName = "dnsResolverPolicies",
     NamePattern = "^[a-zA-Z0-9]([a-zA-Z0-9_\\-]*[a-zA-Z0-9])?$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the DNS resolver policy.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -114,7 +120,6 @@ interface DnsResolverPolicies {
 @@maxLength(DnsResolverPolicy.name, 80);
 @@minLength(DnsResolverPolicy.name, 1);
 @@doc(DnsResolverPolicy.name, "The name of the DNS resolver policy.");
-@@encodedName(DnsResolverPolicy.eTag, "application/json", "etag");
 @@doc(DnsResolverPolicy.properties, "Properties of the DNS resolver policy.");
 @@doc(DnsResolverPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
