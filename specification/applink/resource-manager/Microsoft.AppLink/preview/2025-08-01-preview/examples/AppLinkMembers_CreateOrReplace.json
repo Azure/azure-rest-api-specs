@@ -1,0 +1,92 @@
+{
+  "title": "AppLinkMembers_CreateOrReplace",
+  "operationId": "AppLinkMembers_CreateOrReplace",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "test_rg",
+    "appLinkName": "applink-test-01",
+    "appLinkMemberName": "member-01",
+    "resource": {
+      "properties": {
+        "upgradeProfile": {
+          "releaseChannel": "Stable",
+          "mode": "AutoUpgrade"
+        },
+        "clusterType": "AKS",
+        "metadata": {
+          "resourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourcegroups/applink-rg/providers/Microsoft.ContainerService/managedClusters/applink-member1"
+        }
+      },
+      "tags": {
+        "key2913": "test_tag"
+      },
+      "location": "westus2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "upgradeProfile": {
+            "releaseChannel": "Stable",
+            "mode": "AutoUpgrade"
+          },
+          "clusterType": "AKS",
+          "metadata": {
+            "resourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourcegroups/applink-rg/providers/Microsoft.ContainerService/managedClusters/applink-member1"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key2913": "test_tag"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/AppLinkMembers/le-8MU--J3W6q8D386p3-iT3",
+        "name": "applinkMember01",
+        "type": "Microsoft.AppLink/AppLinks/AppLinkMembers",
+        "systemData": {
+          "createdBy": "user01",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user02",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://rp.applink.azure.netoperationstatus"
+      },
+      "body": {
+        "properties": {
+          "upgradeProfile": {
+            "releaseChannel": "Stable",
+            "mode": "AutoUpgrade"
+          },
+          "clusterType": "AKS",
+          "metadata": {
+            "resourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourcegroups/applink-rg/providers/Microsoft.ContainerService/managedClusters/applink-member1"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key2913": "test_tag"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/AppLinkMembers/9KF-f-8b",
+        "name": "applinkMember01",
+        "type": "Microsoft.AppLink/AppLinks/AppLinkMembers",
+        "systemData": {
+          "createdBy": "user01",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user02",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    }
+  }
+}
