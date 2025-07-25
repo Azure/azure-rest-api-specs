@@ -9,15 +9,15 @@ import yaml from "js-yaml";
 import * as _ from "lodash";
 
 import {
-  DiffResult,
-  ReadmeTag,
-  FileTypes,
-  ChangeTypes,
-  PRChange,
   ChangeHandler,
+  ChangeTypes,
+  DiffResult,
+  FileTypes,
+  PRChange,
+  ReadmeTag,
 } from "./diff-types.js";
 
-import { PRType, Label, LabelContext } from "./labelling-types.js";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 
 import { ImpactAssessment } from "./ImpactAssessment.js";
 import { PRContext } from "./PRContext.js";
