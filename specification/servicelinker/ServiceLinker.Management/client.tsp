@@ -9,3 +9,6 @@ using Microsoft.ServiceLinker;
   "ServiceLinkerManagementClient",
   "javascript"
 );
+
+// Go SDK Breaking Changes Resolution for TypeSpec conversion
+@@clientName(DatabaseAadAuthInfo, "DatabaseAADAuthInfo", "go");
