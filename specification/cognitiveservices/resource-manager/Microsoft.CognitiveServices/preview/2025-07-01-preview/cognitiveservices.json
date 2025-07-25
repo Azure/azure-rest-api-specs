@@ -5119,24 +5119,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers1": {
       "get": {
         "tags": [
           "QuotaTier"
         ],
-        "description": "Returns all the resources of a quotaTiers type in a subscription.",
-        "operationId": "QuotaTier_List",
-        "x-ms-examples": {
-          "List Quota Tiers": {
-            "$ref": "./examples/ListQuotaTiers.json"
-          }
-        },
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "operationId": "QuotaTiers_ListBySubscription",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -5147,7 +5142,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
