@@ -7,6 +7,22 @@ using TypeSpec.Http;
 namespace AttestationClient;
 
 /**
+ * Content type for upload
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
+union SigningCertificatesContentType {
+  /**
+   * Content Type 'application/jwk+json'
+   */
+  "application/jwk+json",
+
+  /**
+   * Content Type 'application/json'
+   */
+  "application/json",
+}
+
+/**
  * AttestationType
  */
 union AttestationType {
@@ -576,20 +592,24 @@ model JsonWebKey {
 /**
  * The response to the OpenID metadata description document API
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "backwards compatibility"
 model OpenIDConfigurationResponse {
   /**
    * Types supported in the OpenID metadata API
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   response_types_supported?: string[];
 
   /**
    * List of the supported signing algorithms
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   id_token_signing_alg_values_supported?: string[];
 
   /**
    * Revocation endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   revocation_endpoint?: string;
 
   /**
@@ -600,11 +620,13 @@ model OpenIDConfigurationResponse {
   /**
    * The URI to retrieve the signing keys
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   jwks_uri?: string;
 
   /**
    * Set of claims supported by the OpenID metadata endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   claims_supported?: string[];
 }
 
@@ -625,6 +647,7 @@ model PolicyCertificatesResult {
   /**
    * SHA256 Hash of the binary representation certificate which was added or removed
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-certificates`?: JsonWebKeySet;
 }
 
@@ -636,11 +659,13 @@ model PolicyCertificatesModificationResult {
    * Hex encoded SHA1 Hash of the binary representation certificate which was added
    * or removed
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-certificate-thumbprint`?: string;
 
   /**
    * The result of the operation
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policycertificates-result`?: CertificateModification;
 }
 
@@ -651,6 +676,7 @@ model StoredAttestationPolicy {
   /**
    * Policy text to set as a sequence of UTF-8 encoded octets.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   AttestationPolicy?: bytes;
 }
 
@@ -661,22 +687,26 @@ model PolicyResult {
   /**
    * The result of the operation
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-result`?: PolicyModification;
 
   /**
    * The SHA256 hash of the policy object modified
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-token-hash`?: bytes;
 
   /**
    * The certificate used to sign the policy object, if specified
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-signer`?: JsonWebKey;
 
   /**
    * A JSON Web Token containing a StoredAttestationPolicy object with the
    * attestation policy
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   @pattern("[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]*\\.[A-Za-z0-9_-]*")
   `x-ms-policy`?: string;
 }
@@ -727,71 +757,85 @@ model AttestationResult {
   /**
    * The Schema version of this structure. Current Value: 1.0
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-ver`?: string;
 
   /**
    * Runtime Claims
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-runtime`?: Record<string>;
 
   /**
    * Inittime Claims
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-inittime`?: Record<string>;
 
   /**
    * Policy Generated Claims
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy`?: Record<string>;
 
   /**
    * The Attestation type being attested.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-attestation-type`?: string;
 
   /**
    * The certificate used to sign the policy object, if specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-signer`?: JsonWebKey;
 
   /**
    * The SHA256 hash of the BASE64URL encoded policy text used for attestation
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-policy-hash`?: bytes;
 
   /**
    * True if the enclave is debuggable, false otherwise
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-is-debuggable`?: boolean;
 
   /**
    * The SGX Product ID for the enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-product-id`?: float32;
 
   /**
    * The HEX encoded SGX MRENCLAVE value for the enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-mrenclave`?: string;
 
   /**
    * The HEX encoded SGX MRSIGNER value for the enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-mrsigner`?: string;
 
   /**
    * The SGX SVN value for the enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-svn`?: float32;
 
   /**
    * A copy of the RuntimeData specified as an input to the attest call.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-ehd`?: bytes;
 
   /**
    * The SGX SVN value for the enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `x-ms-sgx-collateral`?: Record<string>;
 
   /**
@@ -802,36 +846,43 @@ model AttestationResult {
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-is-debuggable claim.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `is-debuggable`?: boolean;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-collateral claim.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `maa-attestationcollateral`?: Record<string>;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `aas-ehd`?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `maa-ehd`?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-product-id
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `product-id`?: float32;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-mrenclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `sgx-mrenclave`?: string;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-mrsigner.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   `sgx-mrsigner`?: string;
 
   /**
@@ -847,15 +898,18 @@ model AttestationResult {
   /**
    * DEPRECATED: Private Preview version of x-ms-policy-signer
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   policy_signer?: JsonWebKey;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-policy-hash
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   policy_hash?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of nonce
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Renamed in client.tsp for SDK casing"
   rp_data?: string;
 }
