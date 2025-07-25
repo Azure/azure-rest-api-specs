@@ -19,15 +19,27 @@
               "displayName": "Contoso Provider Account 1",
               "description": "Contoso Provider Account 1 description",
               "companyName": "Contoso",
-              "allowedSubscriptions": [
-                "00000000-1111-2222-3333-444444444444",
-                "00000000-1111-2222-3333-555555555555"
-              ],
-              "targets": [
+              "subscriptions": [
                 {
-                  "id": "provider1.target1",
-                  "name": "Contoso Provider 1 - Target 1",
-                  "description": "Contoso Provider 1 - Target 1 description"
+                  "id": "00000000-1111-2222-3333-444444444444",
+                  "name": "Fabrikam Subscription 1"
+                },
+                {
+                  "id": "00000000-1111-2222-3333-555555555555",
+                  "name": "Fabrikam Subscription 2"
+                }
+              ],
+              "queues": [
+                {
+                  "id": "contoso-queue-1",
+                  "name": "Contoso Queue 1",
+                  "targets": [
+                    {
+                      "id": "provider1.target1",
+                      "name": "Contoso Provider 1 - Target 1",
+                      "description": "Contoso Provider 1 - Target 1 description"
+                    }
+                  ]
                 }
               ],
               "managedOnBehalfOfConfiguration": {

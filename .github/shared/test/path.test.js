@@ -1,11 +1,11 @@
 // @ts-check
 
-import { describe, it, beforeEach, afterEach } from "vitest";
-import { includesFolder } from "../src/path.js";
 import { strict as assert } from "assert";
-import { join, dirname } from "path";
+import { existsSync, mkdirSync, rmSync } from "fs";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { mkdirSync, rmSync, existsSync } from "fs";
+import { afterEach, beforeEach, describe, it } from "vitest";
+import { includesFolder } from "../src/path.js";
 
 // Get the directory of this test file
 const __filename = fileURLToPath(import.meta.url);
@@ -36,6 +36,7 @@ describe("Path utilities", () => {
   describe("includesFolder", () => {
     it("should return true when path contains the specified folder", () => {
       assert.equal(includesFolder("/path/to/examples/file.json", "examples"), true);
+      assert.equal(includesFolder("/path/to/examples", "examples"), true);
     });
 
     it("should return false when path does not contain the specified folder", () => {
