@@ -2384,6 +2384,48 @@ model HostInventoryItem extends InventoryItemProperties {
   inventoryType: "Host";
 }
 
+/**
+ * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model operationsList is Azure.Core.Page<operation>;
+
+/**
+ * Details of a REST API operation, returned from the Resource Provider Operations API
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model operation {
+  /** 
+    The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"
+     */
+  name?: string;
+
+  /** 
+    Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane operations.
+     */
+  isDataAction?: boolean;
+
+  /** Localized display information for this particular operation. */
+  display?: OperationDisplay;
+}
+
+/**
+ * Localized display information for and operation.
+ */
+model OperationDisplay {
+  /** Provider name */
+  provider?: string;
+
+  /** Resource name */
+  resource?: string;
+
+  /** Operation name */
+  operation?: string;
+
+  /** Description of the operation */
+  description?: string;
+}
+
 @@secret(GuestCredential.password);
 @@secret(GuestCredential.privateKey);
 @@secret(OsProfileForVMInstance.adminPassword);

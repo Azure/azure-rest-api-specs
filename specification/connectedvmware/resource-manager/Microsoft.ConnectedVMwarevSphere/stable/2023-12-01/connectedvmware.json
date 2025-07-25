@@ -787,7 +787,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/operationsList"
             }
           },
           "default": {
@@ -4540,6 +4540,28 @@
         }
       }
     },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Localized display information for and operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation"
+        }
+      }
+    },
     "OsProfileForVMInstance": {
       "type": "object",
       "description": "Specifies the operating system settings for the virtual machine.",
@@ -6155,6 +6177,45 @@
           }
         }
       }
+    },
+    "operation": {
+      "type": "object",
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\""
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Localized display information for this particular operation."
+        }
+      }
+    },
+    "operationsList": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The operation items on this page",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {
