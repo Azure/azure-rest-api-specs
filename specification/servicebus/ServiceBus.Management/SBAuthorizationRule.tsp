@@ -21,7 +21,7 @@ model SBAuthorizationRule
   ...ResourceNameParameter<
     Resource = SBAuthorizationRule,
     KeyName = "authorizationRuleName",
-    SegmentName = "AuthorizationRules",
+    SegmentName = "authorizationRules",
     NamePattern = ""
   >;
 }

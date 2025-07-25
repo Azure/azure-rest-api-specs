@@ -523,60 +523,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
-      "get": {
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "tags": [
-          "SBAuthorizationRules"
-        ],
-        "description": "Gets the authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SBAuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleListAll": {
-            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
       "get": {
         "operationId": "Namespaces_GetAuthorizationRule",
@@ -891,6 +837,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/authorizationRules": {
+      "get": {
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "tags": [
+          "SBAuthorizationRules"
+        ],
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs": {
       "get": {
         "operationId": "DisasterRecoveryConfigs_List",
@@ -1124,7 +1124,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules": {
       "get": {
         "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
         "tags": [
@@ -2636,7 +2636,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules": {
       "get": {
         "operationId": "Queues_ListAuthorizationRules",
         "tags": [
@@ -3304,7 +3304,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/AuthorizationRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules": {
       "get": {
         "operationId": "Topics_ListAuthorizationRules",
         "tags": [

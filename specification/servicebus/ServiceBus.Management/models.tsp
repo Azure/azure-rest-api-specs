@@ -312,7 +312,6 @@ model SystemData {
   /**
    * The timestamp of resource creation (UTC).
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
@@ -328,7 +327,6 @@ model SystemData {
   /**
    * The type of identity that last modified the resource.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -359,14 +357,12 @@ model SBNamespaceProperties {
    * The time the namespace was created
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The time the namespace was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -584,14 +580,12 @@ model SBNamespaceUpdateProperties {
    * The time the namespace was created
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The time the namespace was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -1007,21 +1001,18 @@ model SBQueueProperties {
    * The exact time the message was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
    * Last time a message was sent, or the last time there was a receive request to this queue.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
@@ -1168,21 +1159,18 @@ model SBTopicProperties {
    * Exact time the message was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
    * Last time the message was sent, or a request was received, for this topic.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
@@ -1391,21 +1379,18 @@ model SBSubscriptionProperties {
    * Exact time the message was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * Last time there was a receive request to this subscription.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   accessedAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
