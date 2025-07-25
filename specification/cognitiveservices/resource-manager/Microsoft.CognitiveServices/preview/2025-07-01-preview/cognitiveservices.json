@@ -5119,6 +5119,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers": {
+      "get": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "description": "Returns all the resources of a particular type belonging to a subscription.",
+        "operationId": "QuotaTiers_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Quota Tier for a subscription": {
+            "$ref": "./examples/ListQuotaTiers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers/{default}": {
       "get": {
         "tags": [
@@ -9499,9 +9538,17 @@
           "x-nullable": true,
           "description": "Name of the next quota tier for the subscription."
         },
-        "isUpgradeAvailable": {
-          "type": "boolean",
-          "description": "Is the subscription eligible to be upgraded to the next quota tier."
+        "upgradeAvailabilityStatus": {
+          "type": "string",
+          "description": "Specifies whether an upgrade to the next quota tier is available.",
+          "enum": [
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeAvailabilityStatus",
+            "modelAsString": true
+          }
         },
         "upgradeApplicableDate": {
           "type": "string",
@@ -9554,6 +9601,27 @@
           }
         }
       }
+    },
+    "QuotaTierListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of quota tiers.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaTier"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "description": "Gets the list of Quota Tiers and their properties."
+        }
+      },
+      "description": "The list of Quota Tiers response."
     }
   },
   "parameters": {
