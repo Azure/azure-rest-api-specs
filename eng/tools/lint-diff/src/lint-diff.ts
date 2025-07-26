@@ -102,13 +102,18 @@ async function runLintDiff(
   compareSha: string,
   githubRepoPath: string,
 ) {
-  // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
-  const changedFiles = await getChangedFiles({ cwd: resolve(afterPath), paths: ['specification'] });
   const baseBranchTest = await getBranchName(resolve(beforePath));
   const compareShaTest = await getSha(resolve(afterPath));
 
   console.log(`Base Branch: ${baseBranchTest} (should be ${baseBranch})`);
   console.log(`Compare SHA: ${compareShaTest} (should be ${compareSha})`);
+
+  // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
+  const changedFiles = await getChangedFiles({ 
+    cwd: resolve(afterPath), 
+    baseCommitish: baseBranch, 
+    paths: ['specification'] 
+  });
 
   let beforeList, afterList, affectedSwaggers;
   try {
