@@ -232,7 +232,7 @@ describe("SpecModel", () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
       await expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        /no affected swaggers/i,
+        /not found in specModel/i,
       );
     });
 
