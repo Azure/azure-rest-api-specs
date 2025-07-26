@@ -1,17 +1,12 @@
 {
-  "title": "GoalTemplates_CreateOrUpdate_MaximumSet",
+  "title": "GoalTemplates_CreateOrUpdate_MinimumSet",
   "operationId": "GoalTemplates_CreateOrUpdate",
   "parameters": {
-    "serviceGroupName": "zumt",
+    "serviceGroupName": "sg1",
     "api-version": "2025-02-01-preview",
     "goalTemplateName": "gt1",
     "resource": {
       "properties": {
-        "description": "Goal template for high resiliency requirements",
-        "requireHighAvailability": "Required",
-        "requireDisasterRecovery": "NotRequired",
-        "regionalRecoveryPointObjective": "PT15M",
-        "regionalRecoveryTimeObjective": "PT30M",
         "goalType": "Resiliency"
       }
     }
@@ -20,14 +15,8 @@
     "200": {
       "body": {
         "properties": {
-          "description": "Goal template for high resiliency requirements",
-          "requireHighAvailability": "Required",
-          "requireDisasterRecovery": "NotRequired",
-          "regionalRecoveryPointObjective": "PT15M",
-          "regionalRecoveryTimeObjective": "PT30M",
           "goalType": "Resiliency",
-          "provisioningState": "Succeeded",
-          "errorDetails": null
+          "provisioningState": "Succeeded"
         },
         "id": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
         "name": "gt1",
@@ -45,14 +34,8 @@
     "201": {
       "body": {
         "properties": {
-          "description": "Goal template for high resiliency requirements",
-          "requireHighAvailability": "Required",
-          "requireDisasterRecovery": "NotRequired",
-          "regionalRecoveryPointObjective": "PT15M",
-          "regionalRecoveryTimeObjective": "PT30M",
           "goalType": "Resiliency",
-          "provisioningState": "Creating",
-          "errorDetails": null
+          "provisioningState": "Creating"
         },
         "id": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
         "name": "gt1",
@@ -67,7 +50,7 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/zumt/providers/Microsoft.AzureResilienceManagement/operationStatuses/12345678-1234-1234-1234-123456789012*abcdef01-2345-6789-abcd-ef0123456789",
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/operationStatuses/12345678-1234-1234-1234-123456789012*abcdef01-2345-6789-abcd-ef0123456789",
         "Retry-After": "30"
       }
     }
