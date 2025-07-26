@@ -289,18 +289,18 @@ interface FileShares {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
 @armResourceOperations
 interface FileShareSnapshots {
-  @operationId("FileShareSnapshot_Get")
+  @operationId("FileShareSnapshots_Get")
   getFileShareSnapshot is ArmResourceRead<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
-  @operationId("FileShareSnapshot_CreateOrUpdate")
+  @operationId("FileShareSnapshots_CreateOrUpdate")
   @doc("Create a FileShareSnapshot.")
   createOrUpdateFileShareSnapshot is ArmResourceCreateOrReplaceSync<FileShareSnapshot>;
 
-  @operationId("FileShareSnapshot_Update")
+  @operationId("FileShareSnapshots_Update")
   @doc("Update a FileShareSnapshot.")
   updateFileShareSnapshot is ArmCustomPatchAsync<
     FileShareSnapshot,
@@ -308,14 +308,14 @@ interface FileShareSnapshots {
     BaseParameters<FileShareSnapshot>
   >;
 
-  @operationId("FileShareSnapshot_Delete")
+  @operationId("FileShareSnapshots_Delete")
   @doc("Delete a FileShareSnapshot.")
   deleteFileShareSnapshot is ArmResourceDeleteWithoutOkAsync<
     FileShareSnapshot,
     BaseParameters<FileShareSnapshot>
   >;
 
-  @operationId("FileShareSnapshot_List")
+  @operationId("FileShareSnapshots_List")
   @doc("List FileShareSnapshot by FileShare.")
   listByFileShare is ArmResourceListByParent<
     FileShareSnapshot,
@@ -506,7 +506,7 @@ model FileShareProvisioningRecommendationOutput {
 @armResourceOperations
 interface InformationalOperations {
   @doc("Get file shares usage data.")
-  @operationId("FileShare_GetUsageData")
+  @operationId("FileShares_GetUsageData")
   getUsageData is ArmProviderActionSync<
     Response = FileShareUsageDataResponse,
     Scope = SubscriptionActionScope,
@@ -514,7 +514,7 @@ interface InformationalOperations {
   >;
 
   @doc("Get file shares limits.")
-  @operationId("FileShare_GetLimits")
+  @operationId("FileShares_GetLimits")
   getLimits is ArmProviderActionSync<
     Response = FileShareLimitsResponse,
     Scope = SubscriptionActionScope,
@@ -522,7 +522,7 @@ interface InformationalOperations {
   >;
 
   @doc("Get file shares provisioning parameters recommendation.")
-  @operationId("FileShare_GetProvisioningRecommendation")
+  @operationId("FileShares_GetProvisioningRecommendation")
   getProvisioningRecommendation is ArmProviderActionSync<
     Request = FileShareProvisioningRecommendationRequest,
     Response = FileShareProvisioningRecommendationResponse,
