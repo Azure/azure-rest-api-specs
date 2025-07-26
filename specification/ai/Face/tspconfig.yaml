@@ -45,6 +45,14 @@ options:
     generate-samples: false
     generate-tests: false
     flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/ai/face"
+    package-dir: "azface"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    slice-elements-byval: true
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
