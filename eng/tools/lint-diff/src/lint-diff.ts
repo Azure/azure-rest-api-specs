@@ -8,6 +8,7 @@ import { getAutorestErrors, runChecks } from "./runChecks.js";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { resolve } from "node:path";
+import { getBranchName, getSha } from "@azure-tools/specs-shared/simple-git";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -101,7 +102,14 @@ async function runLintDiff(
   compareSha: string,
   githubRepoPath: string,
 ) {
+  // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
   const changedFiles = await getChangedFiles({ cwd: resolve(afterPath), paths: ['specification'] });
+  const baseBranchTest = await getBranchName(resolve(beforePath));
+  const compareShaTest = await getSha(resolve(afterPath));
+
+  console.log(`Base Branch: ${baseBranchTest} (should be ${baseBranch})`);
+  console.log(`Compare SHA: ${compareShaTest} (should be ${compareSha})`);
+
   let beforeList, afterList, affectedSwaggers;
   try {
     [beforeList, afterList, affectedSwaggers] = await getRunList(
