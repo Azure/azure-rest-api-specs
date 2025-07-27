@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, administrators, log files, configurations, migrations, advanced threat protection settings with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings": {
+      "get": {
+        "tags": [
+          "AdvancedThreatProtectionSettings"
+        ],
+        "description": "Lists state of advanced threat protection settings for a server.",
+        "operationId": "AdvancedThreatProtectionSettings_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List state of advanced threat protection settings for a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsListByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{threatProtectionName}": {
+      "get": {
+        "tags": [
+          "AdvancedThreatProtectionSettings"
+        ],
+        "description": "Gets state of advanced threat protection settings for a server.",
+        "operationId": "AdvancedThreatProtectionSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ThreatProtectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get state of advanced threat protection settings for a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AdvancedThreatProtectionSettings"
+        ],
+        "description": "Creates or updates a server's Advanced Threat Protection settings.",
+        "operationId": "ServerThreatProtectionSettings_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ThreatProtectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Advanced Threat Protection state for the server.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update the advanced threat protection settings of a server.": {
+            "$ref": "./examples/AdvancedThreatProtectionSettingsCreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdvancedThreatProtectionSettingsProperties": {
+      "description": "Properties of advanced threat protection state for a server.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThreatProtectionState",
+            "modelAsString": false
+          }
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "Specifies the creation time (UTC) of the policy.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AdvancedThreatProtectionSettingsModel": {
+      "description": "Advanced threat protection settings of the server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvancedThreatProtectionSettingsProperties",
+          "description": "Advanced threat protection properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AdvancedThreatProtectionSettingsList": {
+      "description": "List of advanced threat protection settings for a server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvancedThreatProtectionSettingsModel"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ThreatProtectionNameParameter": {
+      "name": "threatProtectionName",
+      "in": "path",
+      "description": "Name of the advanced threat protection settings.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatProtectionName",
+        "modelAsString": true
+      },
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
