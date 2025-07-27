@@ -5,8 +5,8 @@
  * i.e. it is invoked by files with depth 2.
  */
 import * as oad from "@azure/oad";
-import { OadMessage } from "./types/oad-types.js";
 import { logMessage, logMessageSafe } from "./log.js";
+import { OadMessage } from "./types/oad-types.js";
 
 /**
  * The runOad() function is a wrapper around the "@azure/oad" library whose source is https://github.com/Azure/openapi-diff.

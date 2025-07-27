@@ -3,30 +3,30 @@
  * i.e. it is invoked by files with depth 0 and invokes files with depth 2.
  */
 
-import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { existsSync } from "node:fs";
 import * as path from "node:path";
-import { createOadTrace, setOadBaseBranch, generateOadMarkdown } from "./types/oad-types.js";
 import {
-  createBreakingChangeDetectionContext,
-  checkBreakingChangeOnSameVersion,
-  checkCrossVersionBreakingChange,
-} from "./detect-breaking-change.js";
-import { Context } from "./types/breaking-change.js";
-import {
-  getSwaggerDiffs,
   changeBaseBranch,
-  logFullOadMessagesList,
-  createDummySwagger,
   cleanDummySwagger,
-  isSameVersionBreakingType,
+  createDummySwagger,
   getCreatedDummySwaggerCount,
+  getSwaggerDiffs,
+  isSameVersionBreakingType,
+  logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
 } from "./command-helpers.js";
+import {
+  checkBreakingChangeOnSameVersion,
+  checkCrossVersionBreakingChange,
+  createBreakingChangeDetectionContext,
+} from "./detect-breaking-change.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
 import { LOG_PREFIX, logMessage } from "./log.js";
+import { Context } from "./types/breaking-change.js";
+import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import { createOadTrace, generateOadMarkdown, setOadBaseBranch } from "./types/oad-types.js";
 import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * The function validateBreakingChange() is executed with type SameVersion or CrossVersion

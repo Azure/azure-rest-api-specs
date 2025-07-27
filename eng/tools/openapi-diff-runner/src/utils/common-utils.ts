@@ -1,5 +1,6 @@
-import { FilePosition } from "../types/message.js";
+import { existsSync, readFileSync } from "node:fs";
 import { Context } from "../types/breaking-change.js";
+import { FilePosition } from "../types/message.js";
 
 export function blobHref(repo: string, sha: string, file: string): string {
   return `https://github.com/${repo}/blob/${sha}/${file}`;
@@ -111,13 +112,11 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
     }
   }
 
-  // If no regex match found, return the immediate folder name (parent directory of the file)
-  if (segments && segments.length > 1) {
-    // Get the folder name that contains the file (last segment before filename)
-    const folderName = segments[segments.length - 2];
-    if (folderName) {
-      return folderName;
-    }
+  // If no regex match found, try to read version from file content
+  if (existsSync(filePath)) {
+    const fileContent = readFileSync(filePath, "utf8");
+    const parsedContent = JSON.parse(fileContent);
+    return parsedContent?.info?.version || "";
   }
 
   return "";

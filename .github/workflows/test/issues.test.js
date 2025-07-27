@@ -1,6 +1,6 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getIssueNumber } from "../src/issues.js";
-import { createMockGithub, createMockCore } from "./mocks.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 const mockGithub = createMockGithub();
 const mockCore = createMockCore();

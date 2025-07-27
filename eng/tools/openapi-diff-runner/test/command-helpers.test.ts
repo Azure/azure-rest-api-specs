@@ -1,30 +1,29 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
-import path from "node:path";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  createContextFromParsedArgs,
   BreakingChangeLabelsToBeAdded,
-  getSwaggerDiffs,
   buildPrInfo,
   changeBaseBranch,
-  logFullOadMessagesList,
-  createDummySwagger,
   cleanDummySwagger,
-  isSameVersionBreakingType,
+  createContextFromParsedArgs,
+  createDummySwagger,
   getCreatedDummySwaggerCount,
+  getSwaggerDiffs,
+  isSameVersionBreakingType,
+  logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
   type ParsedCliArguments,
 } from "../src/command-helpers.js";
+import { LogLevel } from "../src/log.js";
 import {
-  Context,
   BreakingChangeReviewRequiredLabel,
+  Context,
   VersioningReviewRequiredLabel,
 } from "../src/types/breaking-change.js";
 import { ResultMessageRecord } from "../src/types/message.js";
-import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { LogLevel } from "../src/log.js";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -186,7 +185,6 @@ function setupCommonMocks() {
 
 // Mock dependencies
 vi.mock("node:fs");
-vi.mock("node:path");
 vi.mock("node:url");
 vi.mock("../src/utils/common-utils.js");
 vi.mock("../src/utils/oad-message-processor.js");
@@ -206,7 +204,6 @@ describe("command-helpers", () => {
   const mockReadFileSync = vi.mocked(readFileSync);
   const mockWriteFileSync = vi.mocked(writeFileSync);
   const mockRmSync = vi.mocked(rmSync);
-  const mockPath = vi.mocked(path);
   const mockFileURLToPath = vi.mocked(fileURLToPath);
   const mockGetChangedFilesStatuses = vi.mocked(getChangedFilesStatuses);
 
@@ -214,9 +211,6 @@ describe("command-helpers", () => {
     vi.clearAllMocks();
 
     // Setup default mocks
-    mockPath.resolve.mockImplementation((...paths) => paths.join("/"));
-    mockPath.join.mockImplementation((...paths) => paths.join("/"));
-    mockPath.dirname.mockImplementation((p) => p.split("/").slice(0, -1).join("/"));
     mockFileURLToPath.mockReturnValue("/path/to/file.js");
 
     // Mock console methods to avoid test output noise
@@ -370,6 +364,7 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
+        paths: ["specification"],
       });
     });
 
@@ -451,6 +446,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+        paths: ["specification"],
       });
     });
 
