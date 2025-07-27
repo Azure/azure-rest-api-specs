@@ -43,30 +43,30 @@ model VirtualMachine {
 @doc("Virtual Machine operation status values.")
 union VMOperationStatus {
   string,
- 
+
   @doc("""
-  Indicates that the virtual machine is either in the process of being created or is scheduled to be created.
-  """)
+    Indicates that the virtual machine is either in the process of being created or is scheduled to be created.
+    """)
   Creating: "Creating",
 
   @doc("""
-  Indicates that the cancellation request was successful because the virtual machine had not been created yet.
-  """)
+    Indicates that the cancellation request was successful because the virtual machine had not been created yet.
+    """)
   Canceled: "Canceled",
 
   @doc("""
-  Indicates that the cancellation request could not be applied because the virtual machine had already been created.
-  """)
+    Indicates that the cancellation request could not be applied because the virtual machine had already been created.
+    """)
   CancelFailedStatusUnknown: "CancelFailedStatusUnknown",
 
   @doc("""
-  Indicates that the virtual machine operation failed.
-  """)
+    Indicates that the virtual machine operation failed.
+    """)
   Failed: "Failed",
 
   @doc("""
-  Indicates that the virtual machine operation completed successfully.
-  """)
+    Indicates that the virtual machine operation completed successfully.
+    """)
   Succeeded: "Succeeded",
 }
 

@@ -563,24 +563,23 @@ model ZoneAllocationPolicy {
   @identifiers(#[])
   @doc("Zone preferences when zone distribution strategy is Prioritized.")
   zonePreferences: Array<ZonePreference>;
-
 }
 
 @added(Versions.v2025_07_01_preview)
 @doc("Distribution strategies for Compute Fleet zone allocation policy.")
 union ZoneDistributionStrategy {
   string,
- 
+
   @doc("""
-  Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.
-  If capacity is not available, Compute Fleet can allocate capacity in different zones.
-  """)
+    Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.
+    If capacity is not available, Compute Fleet can allocate capacity in different zones.
+    """)
   BestEffortSingleZone: "BestEffortSingleZone",
 
   @doc("""
-  Compute Fleet allocates capacity based on zone preferences.
-  Higher priority zones are filled first before allocating to lower priority zones.
-  """)
+    Compute Fleet allocates capacity based on zone preferences.
+    Higher priority zones are filled first before allocating to lower priority zones.
+    """)
   Prioritized: "Prioritized",
 }
 
@@ -651,17 +650,17 @@ interface Fleets {
       Fleet,
       NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
+
     @doc("Filter expression to filter the virtual machines.")
-    @query $filter?: string,
+    @query
+    $filter?: string,
+
     @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
-    @query $skiptoken?: string,
+    @query
+    $skiptoken?: string,
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
 
   @added(Versions.v2025_07_01_preview)
   @doc("Cancels an instance Fleet creation that is in progress.")
-  cancel is ArmResourceActionAsync<
-    Fleet,
-    void,
-    Response = OkResponse
-  >;
+  cancel is ArmResourceActionAsync<Fleet, void, Response = OkResponse>;
 }
