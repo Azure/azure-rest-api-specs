@@ -125,17 +125,13 @@ directive:
 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].patch.operationId
 
-  - suppress: ProvisioningStateSpecifiedForLROPut
-
-    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
-
   - suppress: PutResponseCodes
 
     reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
 
     where:
 
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put
 
 ```
 
