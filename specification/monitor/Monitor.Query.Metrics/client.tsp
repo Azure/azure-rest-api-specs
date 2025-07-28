@@ -21,6 +21,11 @@ using MonitorQueryMetrics;
   "java"
 );
 
+@@clientNamespace(MonitorQueryMetrics.MetricUnit,
+  "com.azure.monitor.query.metrics",
+  "java"
+);
+
 @@clientName(MetricResultsResponse, "MetricResults", "go");
 
 @@clientName(ResourceIdList.resourceids, "ResourceIDs", "go");
