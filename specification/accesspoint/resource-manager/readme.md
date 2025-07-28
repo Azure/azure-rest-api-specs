@@ -45,6 +45,9 @@ input-file:
 
 ``` yaml
 suppressions:
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    reason: AdditionalProperties is required for our user-defined accountTags field.
   - code: BodyTopLevelProperties
     from: openapi.json
     reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
