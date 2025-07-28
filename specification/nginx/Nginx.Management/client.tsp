@@ -6,6 +6,9 @@ using NGINX.NGINXPLUS;
 
 @@clientName(NGINX.NGINXPLUS, "NginxManagementClient", "javascript");
 
+// Method name overrides
+@@clientName(Configurations.analyze, "analysis", "!csharp");
+
 // Model name overrides
 @@clientName(Certificate, "NginxCertificate", "!csharp");
 @@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
