@@ -1231,6 +1231,9 @@
         "x-ms-examples": {
           "Pools_Get": {
             "$ref": "examples/Pools_Get.json"
+          },
+          "Pools_Get_CustomThroughput": {
+            "$ref": "examples/Pools_Get_CustomThroughput.json"
           }
         }
       },
@@ -1294,6 +1297,9 @@
         "x-ms-examples": {
           "Pools_CreateOrUpdate": {
             "$ref": "examples/Pools_CreateOrUpdate.json"
+          },
+          "Pools_CreateOrUpdate_CustomThroughput": {
+            "$ref": "examples/Pools_CreateOrUpdate_CustomThroughput.json"
           }
         }
       },
@@ -1354,6 +1360,9 @@
         "x-ms-examples": {
           "Pools_Update": {
             "$ref": "examples/Pools_Update.json"
+          },
+          "Pools_Update_CustomThroughput": {
+            "$ref": "examples/Pools_Update_CustomThroughput.json"
           }
         }
       },
@@ -1865,6 +1874,61 @@
         "x-ms-examples": {
           "Volumes_ResetCifsPassword": {
             "$ref": "examples/Volumes_ResetCifsPassword.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent": {
+      "post": {
+        "tags": [
+          "Split clone volume"
+        ],
+        "summary": "Split clone from parent volume",
+        "description": " Split operation to convert clone volume to an independent volume.",
+        "operationId": "Volumes_SplitCloneFromParent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_SplitClone": {
+            "$ref": "examples/Volumes_SplitClone.json"
           }
         }
       }
@@ -6687,6 +6751,12 @@
           "example": 164.221,
           "readOnly": true
         },
+        "customThroughputMibps": {
+          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "type": "number",
+          "x-nullable": true,
+          "example": 128
+        },
         "qosType": {
           "title": "qosType",
           "type": "string",
@@ -6825,6 +6895,12 @@
           "type": "boolean",
           "example": false,
           "description": "If enabled (true) the pool can contain cool Access enabled volumes."
+        },
+        "customThroughputMibps": {
+          "title": "Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level",
+          "type": "number",
+          "x-nullable": true,
+          "example": 128
         }
       }
     },
@@ -7153,6 +7229,34 @@
             }
           }
         },
+        "acceptGrowCapacityPoolForShortTermCloneSplit": {
+          "title": "acceptGrowCapacityPoolForShortTermCloneSplit",
+          "type": "string",
+          "description": "While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as accepted.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "Accepted",
+            "Declined"
+          ],
+          "x-ms-enum": {
+            "name": "acceptGrowCapacityPoolForShortTermCloneSplit",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "Auto grow capacity pool for short term clone split is accepted."
+              },
+              {
+                "value": "Declined",
+                "description": "Auto grow capacity pool for short term clone split is declined. Short term clone volume creation will not be allowed, to create short term clone volume accept auto grow capacity pool."
+              }
+            ]
+          },
+          "example": "Accepted"
+        },
         "isRestoring": {
           "type": "boolean",
           "description": "Restoring",
@@ -7472,6 +7576,14 @@
           "type": "string",
           "description": "Id of the snapshot or backup that the volume is restored from.",
           "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "inheritedSizeInBytes": {
+          "title": "inheritedSizeInBytes",
+          "type": "integer",
+          "format": "int64",
+          "description": "Space shared by short term clone volume with parent volume in bytes.",
           "readOnly": true,
           "x-nullable": true
         }
@@ -8799,7 +8911,8 @@
         "Standard",
         "Premium",
         "Ultra",
-        "StandardZRS"
+        "StandardZRS",
+        "Flexible"
       ],
       "default": "Premium",
       "x-ms-enum": {
@@ -8821,6 +8934,10 @@
           {
             "value": "StandardZRS",
             "description": "Zone redundant storage service level. This will be deprecated soon."
+          },
+          {
+            "value": "Flexible",
+            "description": "Flexible service level"
           }
         ]
       }
