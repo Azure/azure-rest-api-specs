@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for ServiceLinker test.
+This is the AutoRest configuration file for ServiceLinker test2.
 
 ## Getting Started
 
