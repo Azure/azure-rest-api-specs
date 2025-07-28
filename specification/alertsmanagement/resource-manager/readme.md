@@ -71,9 +71,6 @@ directive:
     reason: The alertsMetaData endpoint returns structured metadata with properties field, not a standard collection. This maintains compatibility with existing AlertsManagement response structures and the 2019-03-01 API version.
     from: AlertsManagement.json
     where:
-      - $.definitions.alertsList
-      - $.definitions.operationsList
-      - $.definitions.alertEnrichmentsList
       - $.definitions.alertsMetaData
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
