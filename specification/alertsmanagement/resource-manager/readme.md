@@ -66,12 +66,12 @@ directive:
     reason: The alertsMetaData endpoint returns metadata information, not a pageable collection. This maintains compatibility with the 2019-03-01 API version.
     from: Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
     where:
-      - $.definitions.alertsMetaData
+      - $.paths..get[?(@.operationId=='Alerts_MetaData')]
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: The alertsMetaData endpoint returns structured metadata with properties field, not a standard collection. This maintains compatibility with existing AlertsManagement response structures and the 2019-03-01 API version.
     from: Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
     where:
-      - $.definitions.alertsMetaData
+      - $.definitions.alertsMetaData.properties
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
