@@ -2,7 +2,7 @@
 
 import { randomUUID } from "crypto";
 import { readdir } from "fs/promises";
-import { dirname, isAbsolute, join, normalize, resolve } from "path";
+import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
@@ -441,39 +441,27 @@ describe("getSwaggers", () => {
   });
 
   it("should work with swagger fixtures", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/swagger/specification/servicelinker/resource-manager",
-    );
+    const folder = resolve(__dirname, "fixtures/swagger");
 
     const specModel = new SpecModel(folder, options);
     const swaggers = await specModel.getSwaggers();
 
     // Expected paths as complete normalized paths
     const expectedSwaggerPaths = [
+      "specification/common-types/resource-management/v2/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
       "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
       "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
       "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
       "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
       "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/test.json",
-      "specification/common-types/resource-management/v2/types.json",
-      "specification/common-types/resource-management/v3/types.json",
-      "specification/common-types/resource-management/v3/types.json",
-      "specification/common-types/resource-management/v3/types.json",
-    ].map((p) => normalize(p));
+    ];
 
-    // Should return an array (may be empty if no valid readmes in this fixture)
-    expect(swaggers.length).toBe(expectedSwaggerPaths.length);
-
-    // Check if swagger paths match expected normalized paths
-    for (const swagger of swaggers) {
-      const actualPath = normalize(swagger.path);
-      const containsExpectedPath = expectedSwaggerPaths.some((expectedPath) => {
-        // Check if the normalized actual path ends with the normalized expected path
-        return actualPath.endsWith(expectedPath);
-      });
-      expect(containsExpectedPath).toBe(true);
-      expect(swagger.versionKind).toBeDefined();
-    }
+    // Sort swaggers by path to ensure consistent order
+    expect(swaggers.sort((a, b) => a.path.localeCompare(b.path)).map((s) => s.path)).toEqual(
+      expectedSwaggerPaths.map((p) => resolve(folder, p)),
+    );
   });
 });
