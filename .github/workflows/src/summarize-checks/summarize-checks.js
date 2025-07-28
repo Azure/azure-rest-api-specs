@@ -534,8 +534,8 @@ export function updateLabels(existingLabels, impactAssessment) {
     processImpactAssessment(
       impactAssessment.targetBranch,
       labelContext,
-      impactAssessment.dataPlaneRequired,
       impactAssessment.resourceManagerRequired,
+      impactAssessment.dataPlaneRequired,
       impactAssessment.rpaasRPMissing,
       impactAssessment.rpaasExceptionRequired,
       impactAssessment.rpaasRpNotInPrivateRepo,
