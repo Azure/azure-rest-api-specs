@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
+import * as fs from "fs";
 import * as oav from "oav";
 import * as path from "path";
-import * as fs from "fs";
 
+import { example, getChangedFiles, swagger } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { Swagger } from "@azure-tools/specs-shared/swagger";
-import { includesFolder } from "@azure-tools/specs-shared/path";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
 export async function preCheckFiltering(
   rootDirectory: string,
   fileList?: string[],
 ): Promise<string[]> {
-  const changedFiles = fileList ?? (await getChangedFiles({ cwd: rootDirectory }));
+  const changedFiles =
+    fileList ?? (await getChangedFiles({ cwd: rootDirectory, paths: ["specification"] }));
 
   const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
@@ -125,24 +125,6 @@ async function getFiles(rootDirectory: string, directory: string): Promise<strin
     .filter((d) => d.includes("specification" + path.sep));
 }
 
-function example(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    includesFolder(file, "examples")
-  );
-}
-
-function swagger(file: string): boolean {
-  return (
-    typeof file === "string" &&
-    file.toLowerCase().endsWith(".json") &&
-    (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
-    includesFolder(file, "specification") &&
-    !includesFolder(file, "examples")
-  );
-}
-
 export async function processFilesToSpecificationList(
   rootDirectory: string,
   files: string[],
@@ -154,10 +136,6 @@ export async function processFilesToSpecificationList(
   // files from get-changed-files are relative to the root of the repo,
   // though that context is passed into this from cli arguments.
   for (const file of files) {
-    if (!file.startsWith("specification/")) {
-      continue;
-    }
-
     const absoluteFilePath = path.join(rootDirectory, file);
 
     // if the file is an example, we need to find the swagger file that references it

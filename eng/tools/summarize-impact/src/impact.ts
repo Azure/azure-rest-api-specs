@@ -8,26 +8,21 @@ import * as commonmark from "commonmark";
 import yaml from "js-yaml";
 import * as _ from "lodash";
 
-import { breakingChangesCheckType } from "@azure-tools/specs-shared/breaking-change";
-
 import {
-  DiffResult,
-  ReadmeTag,
-  FileTypes,
-  ChangeTypes,
-  PRChange,
   ChangeHandler,
+  ChangeTypes,
+  DiffResult,
+  FileTypes,
+  PRChange,
+  ReadmeTag,
 } from "./diff-types.js";
 
-import { PRType, Label, LabelContext } from "./labelling-types.js";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 
 import { ImpactAssessment } from "./ImpactAssessment.js";
 import { PRContext } from "./PRContext.js";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
-
-export const breakingChangeLabelVarName = "breakingChangeVar";
-export const crossVersionBreakingChangeLabelVarName = "crossVersionBreakingChangeVar";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
@@ -105,18 +100,6 @@ export async function evaluateImpact(
   const suppressionRequired = await processSuppression(context, labelContext);
   console.log(`suppressionRequired: ${suppressionRequired}`);
 
-  // Calculates whether or not BreakingChangeReviewRequired and VersioningReviewRequired labels should be present
-  let versioningReviewRequiredLabelShouldBePresent: boolean = false;
-  let breakingChangeReviewRequiredLabelShouldBePresent: boolean = false;
-  try {
-    ({
-      versioningReviewRequiredLabelShouldBePresent,
-      breakingChangeReviewRequiredLabelShouldBePresent,
-    } = await processBreakingChangeLabels(context, labelContext));
-  } catch (error) {
-    console.error("Error processing breaking change labels:", error);
-  }
-
   // needs to examine "after" context to understand if a readme that was changed is RPaaS or not
   const { rpaasLabelShouldBePresent } = await processRPaaS(context, labelContext);
 
@@ -152,8 +135,6 @@ export async function evaluateImpact(
 
   return {
     suppressionReviewRequired: labelContext.toAdd.has("suppressionsReviewRequired"),
-    versioningReviewRequired: versioningReviewRequiredLabelShouldBePresent,
-    breakingChangeReviewRequired: breakingChangeReviewRequiredLabelShouldBePresent,
     rpaasChange: rpaasLabelShouldBePresent,
     newRP: newRPNamespaceLabelShouldBePresent,
     rpaasRPMissing: ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -247,167 +228,6 @@ export const getResourceProviderFromFilePath = (filePath: string): string | unde
 
   return undefined;
 };
-
-// todo: download the labels from the breaking change check run
-// right now this logic is coded to parse the ADO build variables that are set
-// by the breakingchange run in an earlier job.
-async function processBreakingChangeLabels(
-  prContext: PRContext,
-  labelContext: LabelContext,
-): Promise<{
-  versioningReviewRequiredLabelShouldBePresent: boolean;
-  breakingChangeReviewRequiredLabelShouldBePresent: boolean;
-}> {
-  console.log("ENTER definition processBreakingChangeLabels");
-
-  // Debug the breakingChangesCheckType import
-  console.log("breakingChangesCheckType:", breakingChangesCheckType);
-  console.log("breakingChangesCheckType.SameVersion:", breakingChangesCheckType?.SameVersion);
-  console.log("breakingChangesCheckType.CrossVersion:", breakingChangesCheckType?.CrossVersion);
-
-  const prTargetsProductionBranch: boolean = checkPrTargetsProductionBranch(prContext);
-  const breakingChangesLabelsFromOad = getBreakingChangesLabelsFromOad();
-
-  const versioningReviewRequiredLabel = new Label(
-    breakingChangesCheckType.SameVersion.reviewRequiredLabel,
-    labelContext.present,
-  );
-
-  const breakingChangeReviewRequiredLabel = new Label(
-    breakingChangesCheckType.CrossVersion.reviewRequiredLabel,
-    labelContext.present,
-  );
-
-  const versioningApprovalLabels = breakingChangesCheckType.SameVersion.approvalLabels.map(
-    (label: string) => new Label(label, labelContext.present),
-  );
-  const breakingChangeApprovalLabels = breakingChangesCheckType.CrossVersion.approvalLabels.map(
-    (label: string) => new Label(label, labelContext.present),
-  );
-
-  // ----- Breaking changes label processing logic -----
-  // These lines implement the set of rules determining which of the breaking change
-  // labels should be present on given PR.
-  // The doc describing breaking change review rules can be found here:
-  // https://aka.ms/brch-dev
-
-  // ❗ IMPORTANT ❗: this MUST be set BEFORE versioningReviewRequiredLabel.shouldBePresent
-  // due to logical dependency
-  breakingChangeReviewRequiredLabel.shouldBePresent =
-    // "BreakingChangeReviewRequired" label should be present if
-    // 1. The PR targets a production branch
-    prTargetsProductionBranch &&
-    // 2. AND given OAD run determined it is still applicable.
-    breakingChangesLabelsFromOad.includes(breakingChangeReviewRequiredLabel.name);
-
-  // ❗ IMPORTANT ❗: this MUST be set AFTER breakingChangeReviewRequiredLabel.shouldBePresent
-  // due to logical dependency
-  versioningReviewRequiredLabel.shouldBePresent =
-    // "VersioningReviewRequired" label should be unconditionally removed if
-    // the label "BreakingChangeReviewRequired" should be present.
-    !breakingChangeReviewRequiredLabel.shouldBePresent &&
-    // AND "VersioningReviewRequired" label should be present if
-    // 1. The PR targets a production branch
-    prTargetsProductionBranch &&
-    // 2. AND given OAD run determined it is still applicable.
-    breakingChangesLabelsFromOad.includes(versioningReviewRequiredLabel.name);
-
-  versioningApprovalLabels.forEach((approvalLabel) => {
-    approvalLabel.shouldBePresent =
-      approvalLabel.present && versioningReviewRequiredLabel.shouldBePresent;
-  });
-
-  breakingChangeApprovalLabels.forEach((approvalLabel) => {
-    approvalLabel.shouldBePresent =
-      approvalLabel.present && breakingChangeReviewRequiredLabel.shouldBePresent;
-  });
-
-  // ----------
-
-  applyLabelsStateChanges(labelContext.toAdd, labelContext.toRemove);
-
-  logDiagInfo();
-
-  return {
-    versioningReviewRequiredLabelShouldBePresent: versioningReviewRequiredLabel.shouldBePresent,
-    breakingChangeReviewRequiredLabelShouldBePresent:
-      breakingChangeReviewRequiredLabel.shouldBePresent,
-  };
-
-  /**
-   * Get labels denoting required breaking change or versioning review.
-   * The labels are read from ADO pipeline environment variables.
-   * These variables are set to appropriate value by BreakingChangesRuleManager.addBreakingChangeLabels().
-   * Read that function's comment for details.
-   */
-  function getBreakingChangesLabelsFromOad(): string[] {
-    const oadLabelsEnvVars = [
-      breakingChangeLabelVarName.toUpperCase(),
-      crossVersionBreakingChangeLabelVarName.toUpperCase(),
-    ];
-    let breakingChangeLabelsFromOad: string[] = _.uniq(
-      oadLabelsEnvVars
-        .map((labelSenderEnvVar) => process.env[labelSenderEnvVar])
-        .filter((envVarValue) => envVarValue !== undefined)
-        .map((envVarValue) => envVarValue?.split(",") || [])
-        .reduce(
-          (accumulatedLabels, currentEnvVarLabels) => accumulatedLabels.concat(currentEnvVarLabels),
-          [],
-        ),
-    ).filter((label) => label);
-    return breakingChangeLabelsFromOad;
-  }
-
-  function applyLabelsStateChanges(labelsToAdd: Set<string>, labelsToRemove: Set<string>) {
-    breakingChangeReviewRequiredLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    versioningReviewRequiredLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    versioningApprovalLabels.forEach((approvalLabel) => {
-      approvalLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    });
-    breakingChangeApprovalLabels.forEach((approvalLabel) => {
-      approvalLabel.applyStateChange(labelsToAdd, labelsToRemove);
-    });
-  }
-
-  function logDiagInfo() {
-    if (
-      !prTargetsProductionBranch &&
-      (breakingChangesLabelsFromOad.includes(breakingChangeReviewRequiredLabel.name) ||
-        breakingChangesLabelsFromOad.includes(versioningReviewRequiredLabel.name))
-    ) {
-      // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 11/29/2023.
-      // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
-      // Note it duplicates the label "shouldBePresent" ruleset logic.
-      console.log(
-        `processBreakingChangeLabels: PR: ${`https://github.com/${prContext.owner}/${prContext.repo}/pull/${prContext.prNumber}`}, targetBranch: ${prContext.targetBranch}. ` +
-          `The addition of 'BreakingChangesReviewRequired' or 'VersioningReviewRequired' labels has been prevented ` +
-          `because we checked that the PR is not targeting a production branch.`,
-      );
-    }
-
-    console.log(
-      `processBreakingChangeLabels returned. ` +
-        `prTargetsProductionBranch: ${prTargetsProductionBranch}, ` +
-        breakingChangeReviewRequiredLabel.logString() +
-        versioningReviewRequiredLabel.logString(),
-    );
-  }
-}
-
-/**
- * The "production" branches are defined at https://aka.ms/azsdk/pr-brch-deep
- */
-function checkPrTargetsProductionBranch(prContext: PRContext): boolean {
-  const targetsPublicProductionBranch =
-    prContext.repo.includes("azure-rest-api-specs") &&
-    prContext.repo !== "azure-rest-api-specs-pr" &&
-    prContext.targetBranch === "main";
-
-  const targetsPrivateProductionBranch =
-    prContext.repo === "azure-rest-api-specs-pr" && prContext.targetBranch === "RPSaaSMaster";
-
-  return targetsPublicProductionBranch || targetsPrivateProductionBranch;
-}
 
 async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Promise<boolean> {
   console.log("ENTER definition processTypeSpec");
