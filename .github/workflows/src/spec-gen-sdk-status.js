@@ -199,7 +199,9 @@ async function processResult({ checkRuns, core }) {
   if (state === CommitStatusState.FAILURE) {
     summaryContent +=
       "\n### Next Steps\n\n" +
-      `Please fix any issues in the the SDK Validation CI checks for languages: ${specGenSdkFailedRequiredLanguages}.`;
+      `Address the issues reported in the the SDK Validation CI checks for language(s): ${specGenSdkFailedRequiredLanguages}.` +
+      `\n### More Information\n\n` +
+      `Refer to the [SDK Validation Wiki](https://github.com/Azure/azure-rest-api-specs/wiki/SDK-Validation).`;
   }
 
   // Write to the summary page
