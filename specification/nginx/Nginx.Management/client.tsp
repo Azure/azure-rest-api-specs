@@ -36,6 +36,11 @@ using NGINX.NGINXPLUS;
   "NginxConfigurationProtectedFileRequest",
   "!csharp"
 );
+@@clientName(NGINX.NGINXPLUS.AnalysisConfig, "AnalysisCreateConfig", "!csharp");
+@@clientName(NGINX.NGINXPLUS.AnalysisResultContent,
+  "AnalysisResultData",
+  "!csharp"
+);
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "IdentityProperties",
   "!csharp"
@@ -51,6 +56,10 @@ using NGINX.NGINXPLUS;
 // Anonymous model named by m4
 @@clientName(NGINX.NGINXPLUS.NginxAppProtect,
   "NginxDeploymentPropertiesNginxAppProtect",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.AutoScaleSettings,
+  "NginxDeploymentScalingPropertiesAutoScaleSettings",
   "!csharp"
 );
 
