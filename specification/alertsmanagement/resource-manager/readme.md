@@ -66,9 +66,12 @@ directive:
     reason: List operations follow existing AlertsManagement pagination patterns.
     from: AlertsManagement.json
     where:
-      - $.paths['/providers/Microsoft.AlertsManagement/alerts'].get
-      - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts'].get
-      - $.paths['/providers/Microsoft.AlertsManagement/operations'].get
+      - $.paths["/providers/Microsoft.AlertsManagement/alerts"].get
+      - $.paths["/{scope}/providers/Microsoft.AlertsManagement/alerts"].get
+      - $.paths["/providers/Microsoft.AlertsManagement/operations"].get
+      - $.paths["/providers/Microsoft.AlertsManagement/alertsMetaData"].get
+      - $.paths["/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
+      - $.paths["/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
     from: AlertsManagement.json
@@ -76,6 +79,8 @@ directive:
       - $.definitions.alertsList
       - $.definitions.operationsList
       - $.definitions.alertEnrichmentsList
+      - $.definitions.alertsMetaData
+      - $.definitions.alertModification
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
