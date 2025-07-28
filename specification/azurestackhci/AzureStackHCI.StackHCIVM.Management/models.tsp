@@ -451,33 +451,6 @@ union PublicIPAddressType {
   string,
 }
 
-@added(Versions.v2025_09_01_preview)
-@doc("Type of session persistence [Default, SourceIP, SourceIPProtocol]")
-union LoadBalancerRuleSessionPersistenceType {
-  @doc("Default - 5-tuple hashing")
-  Default: "Default",
-
-  @doc("Source IP - 2-tuple hashing looking at src-dst ip")
-  SourceIP: "SourceIP",
-
-  @doc("SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol")
-  SourceIPProtocol: "SourceIPProtocol",
-
-  string,
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Protocol for health probes")
-union LoadBalancerProbeProtocol {
-  @doc("TCP - TCP port checking")
-  TCP: "TCP",
-
-  @doc("HTTP - HTTP request")
-  HTTP: "HTTP",
-
-  string,
-}
-
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
@@ -505,9 +478,6 @@ model VirtualNetworkSubnetIpConfigurationReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
-    },
-    {
-      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfiguration";
     }
   ]>;
 }
@@ -518,17 +488,6 @@ model NetworkSecurityGroupArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkSecurityGroups";
-    }
-  ]>;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("The ARM ID for a Network Security Group.")
-model NatGatewayArmReference {
-  @doc("The ARM ID for a Network Security Group.")
-  id?: armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/natGateways";
     }
   ]>;
 }
@@ -606,40 +565,6 @@ model IPConfigurationArmReference {
     },
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
-    }
-  ]>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@added(Versions.v2025_09_01_preview)
-@doc("The ARM ID of a FrontendIPConfiguration resource")
-model FrontendIPConfigurationArmReference {
-  @doc("The ARM ID of a FrontendIPConfiguration resource")
-  id?: armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
-    }
-  ]>;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("The ARM ID of a BackendAddressPool resource")
-model BackendAddressPoolArmReference {
-  @doc("The ARM ID of a BackendAddressPool resource")
-  id?: armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/loadBalancer/backendAddressPools";
-    }
-  ]>;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("The ARM ID of a Probe resource")
-model HealthProbeArmReference {
-  @doc("The ARM ID of a Probe resource")
-  id?: armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/loadBalancer/probes";
     }
   ]>;
 }
@@ -1360,9 +1285,6 @@ model VirtualNetworkSubnetProperties {
   @doc("Network Security Group attached to the subnet.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
-  @doc("Nat Gateway attached to the subnet for non-vnet traffic.")
-  natGateway?: NatGatewayArmReference;
-
   @doc("RouteTable defining custom routes for the subnet.")
   routeTable?: RouteTable;
 
@@ -1418,213 +1340,9 @@ model PublicIPAddressProperties {
 
   @doc("nat gateway using this public IP")
   @visibility(Lifecycle.Read)
-  natGateway?: NatGatewayArmReference;
-
-  @doc("nat gateway using this public IP")
-  @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
 
   @doc("Provisioning state of the public IP")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Nat Gateway resource properties")
-model NatGatewayProperties {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("List of public ip addresses that the gateway can use for NAT.")
-  publicIPAddresses?: PublicIPAddressArmReference[];
-
-  @visibility(Lifecycle.Read)
-  @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
-  subnets?: VirtualNetworkSubnetArmReference[];
-
-  @doc("Provisioning state of the public IP")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-
-  @doc("The observed state of Nat Gateway")
-  @visibility(Lifecycle.Read)
-  status?: NatGatewayStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Nat Gateway resource status")
-model NatGatewayStatus {
-  @doc("NatGateway provisioning error code")
-  errorCode?: string;
-
-  @doc("Descriptive error message")
-  errorMessage?: string;
-
-  @doc("NatGateway provisioning status")
-  provisioningStatus?: NatGatewayStatusProvisioningStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Provisioning status of Nat Gateway ")
-model NatGatewayStatusProvisioningStatus {
-  @doc("The ID of the operation performed on the nat gateway")
-  operationId?: string;
-
-  @doc("The status of the operation performed on the nat gateway [Succeeded, Failed, InProgress]")
-  status?: Status;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Load Balancer resource properties")
-model LoadBalancerProperties {
-  @doc("Provisioning state of the Load Balancer")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@added(Versions.v2025_09_01_preview)
-@doc("FrontendIP Configuration object for a load balancer.")
-model FrontendIPConfigurationProperties {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet.")
-  privateIPAddress?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("privateIPAllocationMethod - set to Static for requesting a specific IP")
-  privateIPAllocationMethod?: IpAllocationMethodEnum;
-
-  @doc("subnet - the subnet from which to allocate the private IP")
-  subnet?: VirtualNetworkSubnetArmReference;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("Public IP ")
-  publicIPAddress?: PublicIPAddressArmReference;
-
-  @doc("Provisioning state of the FrontendIP configuration.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Backend address pool for the load balancer.")
-model BackendAddressPoolProperties {
-  @doc("List of backend addresses for the backend pool")
-  @extension("x-ms-identifiers", #[])
-  loadBalancerBackendAddresses: LoadBalancerBackendAddress[];
-
-  @doc("Provisioning state of the backend ip pool configuration.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("LoadBalancer Backend Address")
-model LoadBalancerBackendAddress {
-  @doc("admin state - if set to false, the address is removed from the pool")
-  adminState?: boolean;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("Nic Based backend-ip association")
-  networkInterfaceIPConfiguration: SubnetIpConfigurationReference;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Properties for LoadBalancerRules")
-model LoadBalancerRuleProperties {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("arm reference to frontend IP being used by this LB")
-  frontendIPConfiguration: FrontendIPConfigurationArmReference;
-
-  @doc("arm reference to backend pool being used by ths pool")
-  backendAddressPool: BackendAddressPoolArmReference;
-
-  @doc("Frontend port to accept connections")
-  frontendPort: int32;
-
-  @doc("backendPort to forward connections")
-  backendPort: int32;
-
-  @doc("Reference for the health probe for this connection")
-  probe?: HealthProbeArmReference;
-
-  @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
-  sessionPersistence?: LoadBalancerRuleSessionPersistenceType;
-
-  @doc("Time for which connections are preserved before being torn down.")
-  idleTimeoutInMinutes?: int32;
-
-  @doc("Provisioning state of the backend ip pool configuration.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-
-  @doc("The observed state of backend pool status")
-  status?: LoadBalancerRuleStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("Load Balancer rule resource status")
-model LoadBalancerRuleStatus {
-  @doc("Load Balancer rule provisioning error code")
-  errorCode?: string;
-
-  @doc("Descriptive error message")
-  errorMessage?: string;
-
-  @doc("Load Balancer rule provisioning status")
-  provisioningStatus?: LoadBalancerRuleStatusProvisioningStatus;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("LoadBalancerRule provisioning status")
-model LoadBalancerRuleStatusProvisioningStatus {
-  @doc("The ID of the operation performed on the load balancer rule")
-  operationId?: string;
-
-  @doc("The status of the operation performed on the load balancer rule [Succeeded, Failed, InProgress]")
-  status?: Status;
-}
-
-@added(Versions.v2025_09_01_preview)
-@doc("properties for LoadBalancer health probes")
-model ProbeProperties {
-  @doc("Protocol for this probe: Can be Tcp or Http - Diverges from Azure where Https is also an option")
-  protocol: LoadBalancerProbeProtocol;
-
-  @doc("Port on the backend address to probe")
-  port: int32;
-
-  @doc("For http probes, specify the request path e.g. /health")
-  requestPath?: string;
-
-  @doc("Probe interval in seconds (5-300) default 15")
-  intervalInSeconds: int32;
-
-  @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
-  numberOfProbes: int32;
-
-  @doc("Provisioning state of the probe.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
-@added(Versions.v2025_09_01_preview)
-@doc("Inbound nat rule")
-model InboundNATRuleProperties {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("Arm Reference to the frontendIP used for this inbound nat rule")
-  frontendIPConfiguration: FrontendIPConfigurationArmReference;
-
-  @doc("Frontend Port for the inbound rule")
-  frontendPort: int32;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-  @doc("IP configuration for the target backend.")
-  backendIPConfiguration: SubnetIpConfigurationReference;
-
-  @doc("backend Port for the inbound rule")
-  backendPort: int32;
-
-  @doc("Provisioning state of the inbound nat rule.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 }
@@ -1641,9 +1359,6 @@ model VirtualNetworkSubnetUpdateRequest {
 model VirtualNetworkSubnetUpdateProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the subnet.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
-
-  @doc("NatGateway - Nat Gateway attached to the subnet")
-  natGateway?: NatGatewayArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
