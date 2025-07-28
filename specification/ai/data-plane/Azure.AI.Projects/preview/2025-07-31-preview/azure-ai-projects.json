@@ -1692,21 +1692,33 @@
         "parameters"
       ]
     },
-    "AggregatedScore": {
+    "AggregatedMetric": {
       "type": "object",
-      "description": "Represents an aggregated score calculated using a specific statistical method across all rows of data.",
+      "description": "Aggregated metric that summarizes evaluation results across multiple data rows.",
       "properties": {
-        "value": {
-          "type": "number",
-          "format": "float",
-          "description": "The calculated aggregated value based on the specified method. This value is undefined in case aggregation is not applicable or the method does not produce a numeric result."
+        "name": {
+          "type": "string",
+          "description": "Name of the metric"
         },
-        "metadata": {
+        "evaluatorAlias": {
+          "type": "string",
+          "description": "Alias provided for the evaluator in the input request."
+        },
+        "statistics": {
+          "$ref": "#/definitions/EvaluationSummaryStatistics",
+          "description": "Statistical summary of evaluation results including aggregated scores and pass/fail rates."
+        },
+        "additionalDetails": {
           "type": "object",
-          "description": "Additional metadata about the aggregation calculation",
+          "description": "Additional metadata about the aggregated metric, such as processing details or custom fields",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "name",
+        "evaluatorAlias",
+        "statistics"
+      ]
     },
     "ApiKeyCredentials": {
       "type": "object",
@@ -2147,7 +2159,7 @@
           "$ref": "#/definitions/InlineData"
         }
       ],
-      "x-ms-discriminator-value": "chatMessages"
+      "x-ms-discriminator-value": "chatMessagesFormat"
     },
     "ChatMessagesUpdate": {
       "type": "object",
@@ -2180,7 +2192,7 @@
           "$ref": "#/definitions/InlineDataUpdate"
         }
       ],
-      "x-ms-discriminator-value": "chatMessages"
+      "x-ms-discriminator-value": "chatMessagesFormat"
     },
     "Connection": {
       "type": "object",
@@ -2656,11 +2668,8 @@
           }
         },
         "summary": {
-          "type": "object",
-          "description": "Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows and is available once the evaluation completes.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorSummaryResult"
-          },
+          "$ref": "#/definitions/EvaluationSummaryResult",
+          "description": "Aggregated summary of evaluation results for each configured evaluator. This provides a high-level overview of performance across all data rows.",
           "readOnly": true
         },
         "resultDatasetId": {
@@ -2796,6 +2805,49 @@
         ]
       }
     },
+    "EvaluationMetric": {
+      "type": "object",
+      "description": "Metric representing the evaluation result for a specific evaluator.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation metric"
+        },
+        "evaluatorAlias": {
+          "type": "string",
+          "description": "Alias provided for the evaluator in the input request."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "Score assigned by the evaluator to the specific data row"
+        },
+        "outcome": {
+          "$ref": "#/definitions/EvaluationResultOutcome",
+          "description": "Outcome of the evaluation"
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "Reasoning or explanation provided by the evaluator for the score assigned to this data row"
+        },
+        "metadata": {
+          "$ref": "#/definitions/EvaluationResultMetadata",
+          "description": "Metadata about the evaluation result"
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "Additional metadata about the evaluation result, such as processing details or custom fields",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name",
+        "evaluatorAlias",
+        "score",
+        "outcome",
+        "metadata"
+      ]
+    },
     "EvaluationModelConfiguration": {
       "type": "object",
       "description": "Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.",
@@ -2871,18 +2923,44 @@
           "type": "string",
           "description": "Original input data for this row in JSON string format. This preserves the exact data that was evaluated for reference and debugging."
         },
-        "evaluatorResults": {
-          "type": "object",
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Usage statistics for the evaluation"
+        },
+        "metrics": {
+          "type": "array",
           "description": "Evaluation results from all the configured evaluators for this data row.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorResult"
+          "items": {
+            "$ref": "#/definitions/EvaluationMetric"
           }
         }
       },
       "required": [
         "id",
-        "state",
-        "evaluatorResults"
+        "state"
+      ]
+    },
+    "EvaluationResultMetadata": {
+      "type": "object",
+      "description": "Metadata about the evaluation result",
+      "properties": {
+        "evaluatorId": {
+          "type": "string",
+          "description": "Unique identifier of the evaluator that produced this result"
+        },
+        "desiredDirection": {
+          "$ref": "#/definitions/EvaluatorDesirableDirection",
+          "description": "Desired direction for the evaluation score."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Threshold value that this score is compared against to determine the evaluation outcome"
+        }
+      },
+      "required": [
+        "evaluatorId",
+        "desiredDirection"
       ]
     },
     "EvaluationResultOutcome": {
@@ -2925,10 +3003,6 @@
       "type": "object",
       "description": "Configuration settings that control how evaluation results are processed, stored, and exported. These settings affect data privacy, retention, and integration with external systems.",
       "properties": {
-        "redactionLevel": {
-          "$ref": "#/definitions/RedactionLevel",
-          "description": "Level of data redaction to apply to evaluation results. Defaults to 'sensitive' in production environments to protect confidential information."
-        },
         "additionalDestinations": {
           "type": "array",
           "description": "List of external storage destinations where evaluation results should be exported in addition to the default AI Foundry storage",
@@ -2938,42 +3012,27 @@
         }
       }
     },
-    "EvaluationScore": {
+    "EvaluationSummaryResult": {
       "type": "object",
-      "description": "Score assigned by the evaluator to a specific data row",
+      "description": "Summary of evaluation results, including aggregated metrics and evaluator statuses.",
       "properties": {
-        "label": {
-          "description": "Score of the evaluation."
-        },
-        "justification": {
-          "type": "string",
-          "description": "Justification for the score, providing context on how it was derived or what it represents"
-        },
-        "threshold": {
-          "type": "number",
-          "format": "float",
-          "description": "Threshold value that this score is compared against to determine the evaluation outcome"
-        },
-        "desirableDirection": {
-          "$ref": "#/definitions/EvaluatorDesirableDirection",
-          "description": "Direction of the score that indicates whether a higher or lower score is desirable for this evaluator"
-        },
-        "scoreType": {
-          "$ref": "#/definitions/EvaluatorScoreType",
-          "description": "Type of the score that indicates whether it is a boolean, continuous, or ordinal score"
-        },
-        "outcome": {
-          "$ref": "#/definitions/EvaluationResultOutcome",
-          "description": "Outcome of the evaluation based on the score and threshold. Indicates whether the score meets, exceeds, or falls below expectations"
-        },
-        "additionalDetails": {
+        "evaluatorStatus": {
           "type": "object",
-          "description": "Optional additional details that may include metadata or other relevant information about the score",
-          "additionalProperties": {}
+          "description": "Status of each evaluator from the input request.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorStatusResult"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "description": "Aggregated metrics that summarize evaluation results across multiple data rows. This provides a high-level overview of performance across all data rows.",
+          "items": {
+            "$ref": "#/definitions/AggregatedMetric"
+          }
         }
       },
       "required": [
-        "justification"
+        "evaluatorStatus"
       ]
     },
     "EvaluationSummaryStatistics": {
@@ -2990,35 +3049,25 @@
           "format": "float",
           "description": "Proportion of evaluation results that failed to meet the specified criteria or threshold, expressed as a value between 0 and 1."
         },
-        "minScore": {
+        "passRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Proportion of evaluation results that passed the specified criteria or threshold, expressed as a value between 0 and 1."
+        },
+        "min": {
           "type": "number",
           "format": "float",
           "description": "Lowest score value observed across all evaluation results."
         },
-        "maxScore": {
+        "max": {
           "type": "number",
           "format": "float",
           "description": "Highest score value observed across all evaluation results."
         },
-        "averageScore": {
+        "average": {
           "type": "number",
           "format": "float",
           "description": "Arithmetic mean of all score values in the evaluation results."
-        },
-        "standardDeviation": {
-          "type": "number",
-          "format": "float",
-          "description": "Standard deviation of score values, measuring the variability or spread of the evaluation results."
-        },
-        "confidenceIntervalLower": {
-          "type": "number",
-          "format": "float",
-          "description": "Lower bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results."
-        },
-        "confidenceIntervalUpper": {
-          "type": "number",
-          "format": "float",
-          "description": "Upper bound of the 90% confidence interval for the evaluation scores, indicating statistical reliability of the results."
         }
       },
       "required": [
@@ -3145,146 +3194,22 @@
         ]
       }
     },
-    "EvaluatorResult": {
+    "EvaluatorStatusResult": {
       "type": "object",
-      "description": "Detailed result of a specific evaluator's assessment on a single data row. Contains the evaluation outcome, score, reasoning, and additional metrics.",
+      "description": "Status of evaluator across all data rows.",
       "properties": {
-        "evaluatorId": {
-          "type": "string",
-          "description": "Unique identifier of the evaluator that produced this result"
-        },
-        "systemData": {
-          "$ref": "#/definitions/EvaluatorResultSystemData",
-          "description": "Metadata about the evaluation execution environment and resource usage."
-        },
         "state": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
+          "description": "State of the evaluation for this evaluator."
         },
-        "score": {
-          "type": "object",
-          "description": "Score for the evaluation result",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluationScore"
-          }
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Usage statistics for the evaluation"
         }
       },
       "required": [
-        "evaluatorId",
-        "state"
-      ]
-    },
-    "EvaluatorResultCommon": {
-      "type": "object",
-      "description": "Common properties shared across all evaluator results, including metadata about the evaluation execution and resource consumption.",
-      "properties": {
-        "evaluatorId": {
-          "type": "string",
-          "description": "Unique identifier of the evaluator that produced this result"
-        },
-        "systemData": {
-          "$ref": "#/definitions/EvaluatorResultSystemData",
-          "description": "Metadata about the evaluation execution environment and resource usage."
-        },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
-        }
-      },
-      "required": [
-        "evaluatorId",
-        "state"
-      ]
-    },
-    "EvaluatorResultSystemData": {
-      "type": "object",
-      "description": "Represents system Metadata about the evaluation execution environment and resource usage.",
-      "properties": {
-        "inputTokenCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total number of input tokens consumed during the evaluation process. This helps track resource usage and costs."
-        },
-        "outputTokenCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total number of output tokens generated during the evaluation process. This helps track resource usage and costs."
-        },
-        "duration": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total time taken to complete the evaluation, measured in milliseconds. This includes processing time and any network latency."
-        },
-        "additionalDetails": {
-          "type": "object",
-          "description": "Additional details about the evaluator result",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "inputTokenCount",
-        "outputTokenCount",
-        "duration",
-        "additionalDetails"
-      ]
-    },
-    "EvaluatorScoreType": {
-      "type": "string",
-      "description": "Type of score assigned by the evaluator. This indicates whether the score is boolean, continuous, or ordinal.",
-      "enum": [
-        "boolean",
-        "continuous",
-        "ordinal"
-      ],
-      "x-ms-enum": {
-        "name": "EvaluatorScoreType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "boolean",
-            "value": "boolean",
-            "description": "Boolean score type, where the score is either true or false"
-          },
-          {
-            "name": "continuous",
-            "value": "continuous",
-            "description": "Continuous score type, where the score is a floating-point number representing a continuous value"
-          },
-          {
-            "name": "ordinal",
-            "value": "ordinal",
-            "description": "Ordinal score type, where the score represents an ordered category or rank"
-          }
-        ]
-      }
-    },
-    "EvaluatorSummaryResult": {
-      "type": "object",
-      "description": "Aggregated summary of evaluation results for a specific evaluator across all data rows. This provides a high-level overview of the evaluator's performance.",
-      "properties": {
-        "evaluatorId": {
-          "type": "string",
-          "description": "Unique identifier of the evaluator that produced this result"
-        },
-        "systemData": {
-          "$ref": "#/definitions/EvaluatorResultSystemData",
-          "description": "Metadata about the evaluation execution environment and resource usage."
-        },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Current state of the evaluation execution. Tracks progress from initiation to completion or failure."
-        },
-        "statistics": {
-          "type": "object",
-          "description": "Statistical summary of evaluation results where key is the metric id.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluationSummaryStatistics"
-          }
-        }
-      },
-      "required": [
-        "evaluatorId",
-        "state"
+        "state",
+        "usage"
       ]
     },
     "FieldMapping": {
@@ -3651,27 +3576,27 @@
       "type": "string",
       "description": "Available formats for structuring inline evaluation data.",
       "enum": [
-        "queryResponseMessage",
-        "chatMessages",
-        "inlineJson"
+        "queryResponseMessageFormat",
+        "chatMessagesFormat",
+        "inlineJsonFormat"
       ],
       "x-ms-enum": {
         "name": "InlineDataFormat",
         "modelAsString": true,
         "values": [
           {
-            "name": "queryResponseMessage",
-            "value": "queryResponseMessage",
+            "name": "queryResponseMessageFormat",
+            "value": "queryResponseMessageFormat",
             "description": "Query-response pairs for Q&A and chatbot evaluations"
           },
           {
-            "name": "chatMessages",
-            "value": "chatMessages",
+            "name": "chatMessagesFormat",
+            "value": "chatMessagesFormat",
             "description": "Multi-turn conversations with role-based messages and tool definitions"
           },
           {
-            "name": "inlineJson",
-            "value": "inlineJson",
+            "name": "inlineJsonFormat",
+            "value": "inlineJsonFormat",
             "description": "Flexible JSON format for custom data structures"
           }
         ]
@@ -3754,7 +3679,7 @@
           "$ref": "#/definitions/InlineData"
         }
       ],
-      "x-ms-discriminator-value": "inlineJson"
+      "x-ms-discriminator-value": "inlineJsonFormat"
     },
     "InlineJsonUpdate": {
       "type": "object",
@@ -3773,31 +3698,7 @@
           "$ref": "#/definitions/InlineDataUpdate"
         }
       ],
-      "x-ms-discriminator-value": "inlineJson"
-    },
-    "InlineMessagesType": {
-      "type": "string",
-      "description": "The type of inline messages used for evaluation. This union allows for different inline message formats to be specified.",
-      "enum": [
-        "queryResponseMessage",
-        "roleContentType"
-      ],
-      "x-ms-enum": {
-        "name": "InlineMessagesType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "queryResponseMessage",
-            "value": "queryResponseMessage",
-            "description": "Inline messages that consist of query-response pairs for evaluation. Each pair includes a query string and the corresponding response generated by the model."
-          },
-          {
-            "name": "roleContentType",
-            "value": "roleContentType",
-            "description": "role content type message"
-          }
-        ]
-      }
+      "x-ms-discriminator-value": "inlineJsonFormat"
     },
     "InputData": {
       "type": "object",
@@ -4240,7 +4141,7 @@
           "$ref": "#/definitions/InlineData"
         }
       ],
-      "x-ms-discriminator-value": "queryResponseMessage"
+      "x-ms-discriminator-value": "queryResponseMessageFormat"
     },
     "QueryResponseInlineMessagesUpdate": {
       "type": "object",
@@ -4259,7 +4160,7 @@
           "$ref": "#/definitions/InlineDataUpdate"
         }
       ],
-      "x-ms-discriminator-value": "queryResponseMessage"
+      "x-ms-discriminator-value": "queryResponseMessageFormat"
     },
     "QueryResponseMessage": {
       "type": "object",
@@ -4356,30 +4257,6 @@
         "id",
         "target"
       ]
-    },
-    "RedactionLevel": {
-      "type": "string",
-      "description": "Controls the level of data redaction applied to evaluation results to protect sensitive information and ensure compliance with privacy requirements.",
-      "enum": [
-        "sensitive",
-        "none"
-      ],
-      "x-ms-enum": {
-        "name": "RedactionLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sensitive",
-            "value": "sensitive",
-            "description": "Apply redaction to sensitive data in evaluation results. This is the recommended setting for production environments to ensure data privacy."
-          },
-          {
-            "name": "None",
-            "value": "none",
-            "description": "Do not apply any data redaction to evaluation results. Use this setting only in development or testing environments where data privacy is not a concern."
-          }
-        ]
-      }
     },
     "RiskCategory": {
       "type": "string",
@@ -4606,6 +4483,26 @@
         }
       ],
       "x-ms-discriminator-value": "tool_result"
+    },
+    "Usage": {
+      "type": "object",
+      "description": "Usage statistics for the evaluation",
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of input tokens consumed during the evaluation process"
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of output tokens generated during the evaluation process"
+        }
+      },
+      "required": [
+        "inputTokens",
+        "outputTokens"
+      ]
     },
     "UserMessage": {
       "type": "object",
