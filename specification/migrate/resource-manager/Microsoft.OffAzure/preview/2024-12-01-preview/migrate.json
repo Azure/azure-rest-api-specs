@@ -15198,17 +15198,17 @@
           "items": {
             "type": "string",
             "format": "arm-id"
-          },
-          "syncType": {
-            "$ref": "#/definitions/ArcSyncType",
-            "description": "The type of sync, currently supporting Manual and Periodic."
-          },
-          "lastSyncTime ": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Gets the last successful sync time of arc site in UTC.",
-            "readOnly": true
           }
+        },
+        "syncType": {
+          "$ref": "#/definitions/ArcSyncType",
+          "description": "The type of sync, currently supporting Manual and Periodic only."
+        },
+        "lastSuccessfulSyncTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last successful sync time of Arc resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15241,13 +15241,7 @@
         },
         "syncType": {
           "$ref": "#/definitions/ArcSyncType",
-          "description": "The type of sync, currently supporting Manual and Periodic."
-        },
-        "lastSyncTime ": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the last successful sync time of arc site in UTC.",
-          "readOnly": true
+          "description": "The type of sync, currently supporting Manual and Periodic only."
         }
       }
     },
