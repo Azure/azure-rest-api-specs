@@ -70,16 +70,7 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
     from: AlertsManagement.json
-    where:
-      - $.definitions.alertsList
-      - $.definitions.operationsList
-      - $.definitions.alertEnrichmentsList
-      - $.definitions.alertsMetaData
-      - $.definitions.alertModification
-      - $.paths["/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
-      - $.paths["/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
-      - $.paths["/providers/Microsoft.AlertsManagement/alerts/{alertId}/history"].get
-  - suppress: MULTIPLE_API_VERSION
+     - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
 
