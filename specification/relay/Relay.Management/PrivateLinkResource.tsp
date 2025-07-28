@@ -25,7 +25,6 @@ model PrivateLinkResource
   >;
 }
 
-@armResourceOperations
 interface PrivateLinkResources {
   /**
    * Gets a description for the specified Private Endpoint Connection name.

@@ -1,8 +1,8 @@
 {
   "parameters": {
+    "api-version": "2024-01-01",
     "namespaceName": "example-RelayNamespace-01",
     "resourceGroupName": "resourcegroup",
-    "api-version": "2024-01-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
@@ -10,21 +10,23 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/RG1-eg/providers/Microsoft.Relay/namespaces/example-RelayNamespace-01/WcfRelays/example-Relay-Wcf-01",
             "name": "example-Relay-Wcf-01",
             "type": "Microsoft.Relay/Namespaces/WcfRelays",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/RG1-eg/providers/Microsoft.Relay/namespaces/example-RelayNamespace-01/WcfRelays/example-Relay-Wcf-01",
             "properties": {
               "createdAt": "2017-01-24T00:46:27.0049983Z",
-              "updatedAt": "2017-01-24T00:46:27.0049983Z",
+              "isDynamic": false,
               "relayType": "NetTcp",
               "requiresClientAuthorization": true,
               "requiresTransportSecurity": true,
-              "isDynamic": false,
+              "updatedAt": "2017-01-24T00:46:27.0049983Z",
               "userMetadata": "usermetadata is a placeholder to store user-defined string data for the HybridConnection endpoint.e.g. it can be used to store  descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "WCFRelays_ListByNamespace",
+  "title": "RelayListAll"
 }

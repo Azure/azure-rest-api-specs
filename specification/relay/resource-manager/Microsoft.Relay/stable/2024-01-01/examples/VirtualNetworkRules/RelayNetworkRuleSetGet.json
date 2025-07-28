@@ -1,43 +1,45 @@
 {
   "parameters": {
+    "api-version": "2024-01-01",
     "namespaceName": "example-RelayNamespace-6019",
     "resourceGroupName": "ResourceGroup",
-    "api-version": "2024-01-01",
     "subscriptionId": "Subscription"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/resourcegroupid/providers/Microsoft.Relay/namespaces/example-RelayNamespace-9659/networkruleset/default",
         "name": "default",
         "type": "Microsoft.Relay/Namespaces/NetworkRuleSet",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/resourcegroupid/providers/Microsoft.Relay/namespaces/example-RelayNamespace-9659/networkruleset/default",
         "properties": {
-          "trustedServiceAccessEnabled": false,
           "defaultAction": "Deny",
           "ipRules": [
             {
-              "ipMask": "1.1.1.1",
-              "action": "Allow"
+              "action": "Allow",
+              "ipMask": "1.1.1.1"
             },
             {
-              "ipMask": "1.1.1.2",
-              "action": "Allow"
+              "action": "Allow",
+              "ipMask": "1.1.1.2"
             },
             {
-              "ipMask": "1.1.1.3",
-              "action": "Allow"
+              "action": "Allow",
+              "ipMask": "1.1.1.3"
             },
             {
-              "ipMask": "1.1.1.4",
-              "action": "Allow"
+              "action": "Allow",
+              "ipMask": "1.1.1.4"
             },
             {
-              "ipMask": "1.1.1.5",
-              "action": "Allow"
+              "action": "Allow",
+              "ipMask": "1.1.1.5"
             }
-          ]
+          ],
+          "trustedServiceAccessEnabled": false
         }
       }
     }
-  }
+  },
+  "operationId": "Namespaces_GetNetworkRuleSet",
+  "title": "NameSpaceNetworkRuleSetGet"
 }
