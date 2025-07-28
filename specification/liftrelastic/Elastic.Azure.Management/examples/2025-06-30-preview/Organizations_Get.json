@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myElasticOrg",
+    "api-version": "2025-06-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Elastic/organizations/myElasticOrg",
+        "name": "myElasticOrg",
+        "type": "Elastic/organizations",
+        "location": "West US 2",
+        "tags": {
+          "Environment": "Production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "marketplaceDetails": {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "subscriptionStatus": "Active"
+          },
+          "userDetails": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com"
+          },
+          "elasticProperties": {
+            "description": "Elastic monitoring for production workloads",
+            "elasticVersion": "8.5.0",
+            "elasticEndpoint": "https://myorg.elastic.azure.com",
+            "deploymentSettings": {
+              "deploymentSize": "Medium",
+              "dataRetentionDays": 30,
+              "enableLogShipping": true,
+              "enableMetrics": true
+            }
+          },
+          "singleSignOnProperties": {
+            "singleSignOnState": "Enable",
+            "enterpriseAppId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "systemData": {
+          "createdBy": "john.doe@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "john.doe@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
