@@ -42,7 +42,6 @@ using MonitorQueryMetrics;
   "go"
 );
 
-
 @@clientName(Metric.timeseries, "TimeSeries", "go,java");
 
 @@clientName(MonitorQueryMetrics, "MetricsClient", "python");
