@@ -17,7 +17,7 @@ using MonitorQueryMetrics;
 );
 
 @@clientNamespace(MonitorQueryMetrics.MetricValue,
-  "com.azure.monitor.query.metrics.models",
+  "com.azure.monitor.query.metrics",
   "java"
 );
 
