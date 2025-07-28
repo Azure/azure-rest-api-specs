@@ -125,6 +125,38 @@ directive:
 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].patch.operationId
 
+  - suppress: ProvisioningStateSpecifiedForLROPut
+
+    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put
+
+  - suppress: ProvisioningStateSpecifiedForLROPatch
+
+    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].patch
+
+  - suppress: PutResponseCodes
+
+    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put
+
+  - suppress: PutGetPatchResponseSchema
+
+    reason: "Cannot support same schema object for PUT/GET/PATCH for proxy object due to 202 response"
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"]
+
 ```
 
 
