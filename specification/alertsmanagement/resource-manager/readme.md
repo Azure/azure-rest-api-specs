@@ -66,10 +66,6 @@ directive:
     reason: List operations follow existing AlertsManagement pagination patterns.
     from: AlertsManagement.json
     where:
-      - $.paths['/providers/Microsoft.AlertsManagement/alerts'].get
-      - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts'].get
-      - $.paths['/providers/Microsoft.AlertsManagement/operations'].get
-      - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/enrichments'].get
       - $.paths['/providers/Microsoft.AlertsManagement/alertsMetaData'].get
   - suppress: GetCollectionOnlyHasValueAndNextLink
     reason: Response models maintain compatibility with existing AlertsManagement response structures.
