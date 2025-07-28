@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -2779,18 +2780,25 @@ model BackupParameters {
 /**
  * Azure backup recoveryPoint based restore request
  */
-@discriminator("objectType")
 model AzureBackupRecoveryPointBasedRestoreRequest
   extends AzureBackupRestoreRequest {
+  ...AzureBackupRestoreCommon;
+  objectType: "AzureBackupRecoveryPointBasedRestoreRequest";
+}
+/**
+ * AzureBackup Restore common properties
+ */
+model AzureBackupRestoreCommon {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   recoveryPointId: string;
 }
-
 /**
  * AzureBackup Restore with Rehydration Request
  */
 model AzureBackupRestoreWithRehydrationRequest
-  extends AzureBackupRecoveryPointBasedRestoreRequest {
+  extends AzureBackupRestoreRequest {
+  ...AzureBackupRestoreCommon;
+
   /**
    * Priority to be used for rehydration. Values High or Standard
    */
@@ -2955,8 +2963,16 @@ model NamespacedNameResource {
 /**
  * Parameters to be used during configuration of backup of blobs
  */
-@discriminator("objectType")
 model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParameters;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "BlobBackupDatasourceParameters";
+}
+
+model BlobBackupDatasourceCommonParameters {
   /**
    * List of containers to be backed up during configuration of backup of blobs
    */
@@ -2966,8 +2982,9 @@ model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
 /**
  * Parameters to be used during configuration of backup of azure data lake storage account blobs
  */
-model AdlsBlobBackupDatasourceParameters
-  extends BlobBackupDatasourceParameters {
+model AdlsBlobBackupDatasourceParameters extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParameters;
+
   /**
    * Type of the specific object - used for deserializing
    */

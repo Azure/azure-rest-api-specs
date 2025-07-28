@@ -122,7 +122,8 @@ interface BackupInstanceResources {
   validateForModifyBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
-    void
+    ArmResponse<OperationJobExtendedInfo>,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse
   >;
 
   /**

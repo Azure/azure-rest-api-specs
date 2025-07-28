@@ -1965,16 +1965,8 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4513,9 +4505,21 @@
     "AdlsBlobBackupDatasourceParameters": {
       "type": "object",
       "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs",
+      "properties": {
+        "containersList": {
+          "type": "array",
+          "description": "List of containers to be backed up during configuration of backup of blobs",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "containersList"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/BlobBackupDatasourceParameters"
+          "$ref": "#/definitions/BackupDatasourceParameters"
         }
       ],
       "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParameters"
@@ -4910,24 +4914,19 @@
       "type": "object",
       "description": "Azure backup recoveryPoint based restore request",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for AzureBackupRecoveryPointBasedRestoreRequest."
-        },
         "recoveryPointId": {
           "type": "string"
         }
       },
-      "discriminator": "objectType",
       "required": [
-        "objectType",
         "recoveryPointId"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/AzureBackupRestoreRequest"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureBackupRecoveryPointBasedRestoreRequest"
     },
     "AzureBackupRecoveryPointResource": {
       "type": "object",
@@ -5046,6 +5045,9 @@
       "type": "object",
       "description": "AzureBackup Restore with Rehydration Request",
       "properties": {
+        "recoveryPointId": {
+          "type": "string"
+        },
         "rehydrationPriority": {
           "$ref": "#/definitions/RehydrationPriority",
           "description": "Priority to be used for rehydration. Values High or Standard"
@@ -5056,12 +5058,13 @@
         }
       },
       "required": [
+        "recoveryPointId",
         "rehydrationPriority",
         "rehydrationRetentionDuration"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AzureBackupRecoveryPointBasedRestoreRequest"
+          "$ref": "#/definitions/AzureBackupRestoreRequest"
         }
       ],
       "x-ms-discriminator-value": "AzureBackupRestoreWithRehydrationRequest"
@@ -5569,10 +5572,6 @@
       "type": "object",
       "description": "Parameters to be used during configuration of backup of blobs",
       "properties": {
-        "objectType": {
-          "type": "string",
-          "description": "Discriminator property for BlobBackupDatasourceParameters."
-        },
         "containersList": {
           "type": "array",
           "description": "List of containers to be backed up during configuration of backup of blobs",
@@ -5581,16 +5580,15 @@
           }
         }
       },
-      "discriminator": "objectType",
       "required": [
-        "objectType",
         "containersList"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/BackupDatasourceParameters"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
     },
     "CheckNameAvailabilityRequest": {
       "type": "object",
