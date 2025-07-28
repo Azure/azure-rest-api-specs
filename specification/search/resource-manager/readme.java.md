@@ -2,10 +2,10 @@
 
 These settings apply only when `--java` is specified on the command line.
 
-``` yaml $(java)
+```yaml $(java)
 enable-sync-stack: false
 remove-inner: CheckNameAvailabilityOutput
-directive: 
+directive:
   - from: search.json
     where-operation: Services_Update
     transform: >
@@ -15,7 +15,8 @@ directive:
     where: $.definitions.SearchServiceProperties.properties.publicNetworkAccess
     transform: >
       $['x-ms-enum']['modelAsString'] = false;
-    reason: Handle breaking change.
+    reason: Handle breaking change. Also, service will return "Disabled"/"Enabled",
+    instead of "disabled"/"enabled" defined in Swagger. Making it sealed enum will mitigate this.
   - from: search.json
     where: $.definitions.SharedPrivateLinkResourceProperties.properties.status
     transform: >
