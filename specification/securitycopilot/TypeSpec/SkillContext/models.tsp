@@ -1515,14 +1515,14 @@ namespace SkillContext
 		Workspace
 	}
 
-	@doc("Scoping options for skill cache. All cached entries are default scope to User ID. Tenant Id is not supported as User ID is already tenant-scoped")
+	@doc("Data type for what's being stored in skill utility cache.")
 	enum SkillUtilityCacheDataType {
 		@doc("Default unknown to catch places where this enum isn't set.")
-		Unknown,
+		Unknown: 0,
 		@doc("Normal data type: anything can be stored, including customer content.")
-		Normal,
+		Normal: 1,
 		@doc("Internal metadata type: only internal metadata that doesn't contain customer content.")
-		InternalMetadata
+		InternalMetadata: 2
 	}
 	
 	@doc("Request model for setting cached entity")
