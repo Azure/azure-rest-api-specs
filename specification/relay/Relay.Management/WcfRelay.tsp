@@ -35,7 +35,7 @@ model WcfRelayNameParameter
   >;
 
 @armResourceOperations
-interface WcfRelays {
+interface WcfRelaysOps {
   /**
    * Returns the description for the specified WCF relay.
    */
@@ -75,6 +75,6 @@ interface WcfRelays {
 @@minLength(WcfRelay.name, 1);
 @@doc(WcfRelay.name, "The relay name.");
 @@doc(WcfRelay.properties, "Properties of the WCF relay.");
-@@doc(WcfRelays.createOrUpdate::parameters.resource,
+@@doc(WcfRelaysOps.createOrUpdate::parameters.resource,
   "Parameters supplied to create a WCF relay."
 );
