@@ -52,7 +52,7 @@ interface PrivateEndpointConnections {
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,

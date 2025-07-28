@@ -681,10 +681,10 @@ model WcfRelayProperties {
 /**
  * Result of the List private link resources operation.
  */
-model PrivateLinkResourcesListResult{
+model PrivateLinkResourcesListResult {
   @doc("A collection of private link resources")
   value: PrivateLinkResource[];
 
   @doc("A link for the next page of private link resources.")
   nextLink?: ResourceLocation<PrivateLinkResource>;
-};
+}

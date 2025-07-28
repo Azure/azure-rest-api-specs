@@ -34,7 +34,7 @@ interface PrivateLinkResources {
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   get is ArmResourceRead<PrivateLinkResource>;
 
-    /**
+  /**
    * Gets lists of resources that supports Privatelinks.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
@@ -42,11 +42,12 @@ interface PrivateLinkResources {
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources")
   @get
-  op list(
+  list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
-    ...KeysOf<RelayNamespaceNameParameter>): ArmResponse<PrivateLinkResourcesListResult> | ErrorResponse;
+    ...KeysOf<RelayNamespaceNameParameter>,
+  ): ArmResponse<PrivateLinkResourcesListResult> | ErrorResponse;
 }
 
 @@doc(PrivateLinkResource.name, "The PrivateLinkResource name");
