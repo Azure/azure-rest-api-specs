@@ -15,7 +15,7 @@ using LiftrBase;
 
 /** ElasticAzure Resource Provider management API. */
 @armProviderNamespace
-@service(#{title: "ElasticAzure"})
+@service(#{ title: "ElasticAzure" })
 @versioned(ElasticAzure.Versions)
 namespace ElasticAzure;
 
