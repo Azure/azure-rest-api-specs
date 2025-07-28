@@ -7,40 +7,28 @@ using NGINX.NGINXPLUS;
 @@clientName(NGINX.NGINXPLUS, "NginxManagementClient", "javascript");
 
 // Model name overrides
-@@clientName(NGINX.NGINXPLUS.Certificate, "NginxCertificate", "!csharp");
-@@clientName(NGINX.NGINXPLUS.ApiKey,
-  "NginxDeploymentApiKeyResponse",
-  "!csharp"
-);
-@@clientName(NGINX.NGINXPLUS.ApiKeyResponseProperties,
+@@clientName(Certificate, "NginxCertificate", "!csharp");
+@@clientName(ApiKey, "NginxDeploymentApiKeyResponse", "!csharp");
+@@clientName(ApiKeyResponseProperties,
   "NginxDeploymentApiKeyResponseProperties",
   "!csharp"
 );
-@@clientName(NGINX.NGINXPLUS.ApiKeyRequest,
-  "NginxDeploymentApiKeyRequest",
-  "!csharp"
-);
-@@clientName(NGINX.NGINXPLUS.ApiKeyRequestProperties,
+@@clientName(ApiKeyRequest, "NginxDeploymentApiKeyRequest", "!csharp");
+@@clientName(ApiKeyRequestProperties,
   "NginxDeploymentApiKeyRequestProperties",
   "!csharp"
 );
-@@clientName(NGINX.NGINXPLUS.Configuration,
-  "NginxConfigurationResponse",
-  "!csharp"
-);
-@@clientName(NGINX.NGINXPLUS.NginxConfigurationProtectedFileResult,
+@@clientName(Configuration, "NginxConfigurationResponse", "!csharp");
+@@clientName(NginxConfigurationProtectedFileResult,
   "NginxConfigurationProtectedFileResponse",
   "!csharp"
 );
-@@clientName(NGINX.NGINXPLUS.NginxConfigurationProtectedFileContent,
+@@clientName(NginxConfigurationProtectedFileContent,
   "NginxConfigurationProtectedFileRequest",
   "!csharp"
 );
-@@clientName(NGINX.NGINXPLUS.AnalysisConfig, "AnalysisCreateConfig", "!csharp");
-@@clientName(NGINX.NGINXPLUS.AnalysisResultContent,
-  "AnalysisResultData",
-  "!csharp"
-);
+@@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
+@@clientName(AnalysisResultContent, "AnalysisResultData", "!csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "IdentityProperties",
   "!csharp"
@@ -54,81 +42,60 @@ using NGINX.NGINXPLUS;
 @@clientName(Azure.ResourceManager.CommonTypes.Sku, "ResourceSku", "!csharp");
 
 // Anonymous model named by m4
-@@clientName(NGINX.NGINXPLUS.NginxAppProtect,
+@@clientName(NginxAppProtect,
   "NginxDeploymentPropertiesNginxAppProtect",
   "!csharp"
 );
-@@clientName(NGINX.NGINXPLUS.AutoScaleSettings,
+@@clientName(AutoScaleSettings,
   "NginxDeploymentScalingPropertiesAutoScaleSettings",
   "!csharp"
 );
 
 // Client location overrides for NginxDeployments operations
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.get,
+@@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.createOrUpdate, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.update, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.delete, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.listByResourceGroup,
   "Deployments",
   "!csharp"
 );
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.createOrUpdate,
-  "Deployments",
-  "!csharp"
-);
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.update,
-  "Deployments",
-  "!csharp"
-);
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.delete,
-  "Deployments",
-  "!csharp"
-);
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.listByResourceGroup,
-  "Deployments",
-  "!csharp"
-);
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.listBySubscription,
-  "Deployments",
-  "!csharp"
-);
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.listDefaultWafPolicies,
+@@clientLocation(NginxDeployments.listBySubscription, "Deployments", "!csharp");
+@@clientLocation(NginxDeployments.listDefaultWafPolicies,
   "Deployments",
   "!csharp"
 );
 
 // Java client name overrides to maintain consistent casing
-@@clientName(NGINX.NGINXPLUS.NginxPublicIPAddress,
-  "NginxPublicIpAddress",
-  "java"
-);
-@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAddress,
-  "NginxPrivateIpAddress",
-  "java"
-);
-@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAllocationMethod,
+@@clientName(NginxPublicIPAddress, "NginxPublicIpAddress", "java");
+@@clientName(NginxPrivateIPAddress, "NginxPrivateIpAddress", "java");
+@@clientName(NginxPrivateIPAllocationMethod,
   "NginxPrivateIpAllocationMethod",
   "java"
 );
-@@clientName(NGINX.NGINXPLUS.NginxFrontendIPConfiguration,
+@@clientName(NginxFrontendIPConfiguration,
   "NginxFrontendIpConfiguration",
   "java"
 );
 
 // Java property name overrides to maintain consistent casing
-@@clientName(NGINX.NGINXPLUS.NginxNetworkProfile.frontEndIPConfiguration,
+@@clientName(NginxNetworkProfile.frontEndIPConfiguration,
   "frontEndIpConfiguration",
   "java"
 );
-@@clientName(NGINX.NGINXPLUS.NginxFrontendIPConfiguration.publicIPAddresses,
+@@clientName(NginxFrontendIPConfiguration.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
-@@clientName(NGINX.NGINXPLUS.NginxFrontendIPConfiguration.privateIPAddresses,
+@@clientName(NginxFrontendIPConfiguration.privateIPAddresses,
   "privateIpAddresses",
   "java"
 );
-@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAddress.privateIPAddress,
+@@clientName(NginxPrivateIPAddress.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAddress.privateIPAllocationMethod,
+@@clientName(NginxPrivateIPAddress.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
