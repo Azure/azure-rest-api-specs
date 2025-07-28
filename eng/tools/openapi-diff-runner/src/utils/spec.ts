@@ -1,3 +1,4 @@
+import { mapAsync } from "@azure-tools/specs-shared/array";
 import { basename } from "node:path";
 import { logError } from "../log.js";
 import { ApiVersionLifecycleStage } from "../types/breaking-change.js";
@@ -32,20 +33,18 @@ async function getPrecedingSwaggerByType(
   const fileName = getBaseNameForSwagger(targetSwaggerPath, currentVersion);
 
   // Load version info for all swaggers to enable filtering
-  const swaggersWithVersions = await Promise.all(
-    availableSwaggers.map(async (swagger) => {
-      const version = await getVersionFromInputFile(swagger.path);
-      const versionWithPreview = await getVersionFromInputFile(swagger.path, true);
-      return {
-        swagger,
-        version,
-        fileName: getBaseNameForSwagger(swagger.path, version),
-        versionKind: versionWithPreview.includes("preview")
-          ? ApiVersionLifecycleStage.PREVIEW
-          : ApiVersionLifecycleStage.STABLE,
-      };
-    }),
-  );
+  const swaggersWithVersions = await mapAsync(availableSwaggers, async (swagger) => {
+    const version = await getVersionFromInputFile(swagger.path);
+    const versionWithPreview = await getVersionFromInputFile(swagger.path, true);
+    return {
+      swagger,
+      version,
+      fileName: getBaseNameForSwagger(swagger.path, version),
+      versionKind: versionWithPreview.includes("preview")
+        ? ApiVersionLifecycleStage.PREVIEW
+        : ApiVersionLifecycleStage.STABLE,
+    };
+  });
 
   const versionsOfType = swaggersWithVersions.filter(
     (item) =>

@@ -122,9 +122,11 @@ export async function getVersionFromInputFile(
     const parsedContent = JSON.parse(fileContent);
     version = parsedContent?.info?.version;
   } catch (error) {
-    throw new Error(`Failed to read version from file:${filePath}`);
+    throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
   }
-  if (!version) throw new Error(`Version not found in file: ${filePath}`);
+  if (!version) {
+    throw new Error(`Version not found in file: ${filePath}`);
+  }
   return version;
 }
 
