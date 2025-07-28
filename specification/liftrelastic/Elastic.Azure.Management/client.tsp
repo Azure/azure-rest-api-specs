@@ -4,40 +4,25 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Elastic;
 
-@@clientName(Elastic,
-  "ElasticAzureMgmt",
-  "python"
-);
+@@clientName(Elastic, "ElasticAzureMgmt", "python");
 
-@@clientName(Elastic,
-  "ElasticAzureMgmtClient",
-  "java"
-);
+@@clientName(Elastic, "ElasticAzureMgmtClient", "java");
 
-@@clientName(OrganizationResource,
-  "ElasticAzureOrganization",
-  "csharp"
-);
+@@clientName(OrganizationResource, "ElasticAzureOrganization", "csharp");
 
 @@clientName(OrganizationProperties,
   "ElasticAzureOrganizationProperties",
   "csharp"
 );
 
-@@clientName(ElasticProperties,
-  "ElasticAzureElasticProperties",
-  "csharp"
-);
+@@clientName(ElasticProperties, "ElasticAzureElasticProperties", "csharp");
 
 @@clientName(ElasticDeploymentSettings,
   "ElasticAzureDeploymentSettings",
   "csharp"
 );
 
-@@clientName(ElasticDeploymentSize,
-  "ElasticAzureDeploymentSize",
-  "csharp"
-);
+@@clientName(ElasticDeploymentSize, "ElasticAzureDeploymentSize", "csharp");
 
 @@clientName(LiftrBase.MarketplaceDetails,
   "ElasticAzureMarketplaceDetails",
@@ -49,10 +34,7 @@ using Elastic;
   "csharp"
 );
 
-@@clientName(LiftrBase.OfferDetails,
-  "ElasticAzureOfferDetails",
-  "csharp"
-);
+@@clientName(LiftrBase.OfferDetails, "ElasticAzureOfferDetails", "csharp");
 
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "ElasticAzureProvisioningState",
@@ -74,7 +56,4 @@ using Elastic;
   "csharp"
 );
 
-@@clientName(LiftrBase.UserDetails,
-  "ElasticAzureUserDetails",
-  "csharp"
-);
+@@clientName(LiftrBase.UserDetails, "ElasticAzureUserDetails", "csharp");

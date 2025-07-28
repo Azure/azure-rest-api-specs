@@ -68,16 +68,16 @@ model ElasticDeploymentSettings {
 @doc("Elastic deployment size tiers")
 union ElasticDeploymentSize {
   string,
-  
+
   /** Small deployment size */
   Small: "Small",
-  
+
   /** Medium deployment size */
   Medium: "Medium",
-  
+
   /** Large deployment size */
   Large: "Large",
-  
+
   /** Extra large deployment size */
   ExtraLarge: "ExtraLarge",
 }
