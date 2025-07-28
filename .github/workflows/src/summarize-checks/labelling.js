@@ -496,7 +496,9 @@ export async function processImpactAssessment(
 
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
   const resourceManagerLabel = new Label("resource-manager", labelContext.present);
+  resourceManagerLabel.shouldBePresent = resourceManagerLabelShouldBePresent;
   const dataplaneLabel = new Label("data-plane", labelContext.present);
+  dataplaneLabel.shouldBePresent = dataPlaneLabelShouldBePresent;
 
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   newApiVersionLabel.shouldBePresent = false;
@@ -530,18 +532,6 @@ export async function processImpactAssessment(
       rpaasExceptionLabelShouldBePresent,
       ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
     );
-  }
-
-  if (resourceManagerLabelShouldBePresent) {
-    resourceManagerLabel.shouldBePresent = true;
-  } else {
-    resourceManagerLabel.shouldBePresent = false;
-  }
-
-  if (dataPlaneLabelShouldBePresent) {
-    dataplaneLabel.shouldBePresent = true;
-  } else {
-    dataplaneLabel.shouldBePresent = false;
   }
 
   dataplaneLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
