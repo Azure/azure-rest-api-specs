@@ -1,10 +1,10 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using AzureAppConfiguration;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace SdkCustomizations;
 
 // Python specific customizations
