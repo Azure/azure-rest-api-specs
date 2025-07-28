@@ -19,3 +19,8 @@ using Microsoft.StorageDiscovery;
   "StorageDiscoveryMgmtClient",
   "python"
 );
+
+@@clientName(Microsoft.StorageDiscovery,
+  "StorageDiscoveryManagementClient",
+  "java"
+);
