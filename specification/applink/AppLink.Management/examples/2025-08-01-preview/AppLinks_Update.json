@@ -1,0 +1,46 @@
+{
+  "title": "AppLinks_Update",
+  "operationId": "AppLinks_Update",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "test_rg",
+    "appLinkName": "applink-test-01",
+    "properties": {
+      "tags": {
+        "key7952": "no"
+      },
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key2913": "test_tag"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/AppLinks/test",
+        "name": "applink01",
+        "type": "Microsoft.AppLink/AppLinks",
+        "systemData": {
+          "createdBy": "user01",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "user02",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 30,
+        "location": "https://rp.applink.azure.netoperationstatus"
+      }
+    }
+  }
+}

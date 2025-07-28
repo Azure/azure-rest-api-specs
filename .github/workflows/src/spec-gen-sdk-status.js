@@ -11,6 +11,7 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
   const details_url = inputs.details_url;
+  const issue_number = inputs.issue_number;
   if (!details_url || !head_sha) {
     throw new Error(
       `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
@@ -30,6 +31,7 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
     target_url,
     github,
     core,
+    issue_number,
   });
 }
 
@@ -39,18 +41,29 @@ export default async function setSpecGenSdkStatus({ github, context, core }) {
  * @param {string} params.repo
  * @param {string} params.head_sha
  * @param {string} params.target_url
+ * @param {number} params.issue_number
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<void>}
  */
-export async function setSpecGenSdkStatusImpl({ owner, repo, head_sha, target_url, github, core }) {
+export async function setSpecGenSdkStatusImpl({
+  owner,
+  repo,
+  head_sha,
+  target_url,
+  github,
+  core,
+  issue_number,
+}) {
   const statusName = "SDK Validation Status";
+  core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
+
   // Filter sdk generation check runs
   const specGenSdkChecks = checks.filter(
     (check) => check.app?.name === "Azure Pipelines" && check.name.includes("SDK Validation"),

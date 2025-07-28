@@ -331,6 +331,11 @@ model VerifyChangeValidityRequest {
   @doc("The stage progression Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageProgressionId?: armResourceIdentifier;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The stage progression resource Id.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  stageProgressionResourceId?: armResourceIdentifier;
 }
 
 @added(Versions.v2025_03_01_preview)

@@ -45,7 +45,7 @@ export function parseExistingComments(comments, commentGroupName) {
  * Creates a new issue comment or updates an existing one.
  *
  *
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
