@@ -52,7 +52,7 @@ interface Endpoints {
   update is ArmCustomPatchAsync<
     Endpoint,
     PatchModel = EndpointUpdateParameters,
-    Response = ArmResponse<Endpoint> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Endpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
       @bodyRoot
       _: Endpoint;
     })
@@ -64,7 +64,7 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Endpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> | ArmDeletedNoContentResponse
   >;
 
   /**

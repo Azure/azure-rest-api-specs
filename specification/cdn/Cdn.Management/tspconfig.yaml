@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/cdn"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,35 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
     emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-cdn"
+    namespace: "azure.mgmt.cdn"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-cdn"
+    namespace: "com.microsoft.azure.management.cdn"
+    service-name: "Cdn" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/cdn
+    package-dir: "arm-cdn"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-cdn"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/cdn"
+    package-dir: "armhealthbot"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -69,7 +69,7 @@ interface CdnWebApplicationFirewallPolicies {
   update is ArmCustomPatchAsync<
     CdnWebApplicationFirewallPolicy,
     PatchModel = CdnWebApplicationFirewallPolicyPatchParameters,
-    Response = ArmResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
       @bodyRoot
       _: CdnWebApplicationFirewallPolicy;
     })

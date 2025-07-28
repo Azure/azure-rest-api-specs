@@ -83,7 +83,7 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     canMigrateParameters: CanMigrateParameters,
-  ): ArmResponse<CanMigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> &
+  ): ArmResponse<CanMigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> &
     Azure.Core.Foundations.RetryAfterHeader) | ErrorResponse;
 
   /**
@@ -104,7 +104,7 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     migrationParameters: MigrationParameters,
-  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> & {
+  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> & {
     @bodyRoot _: MigrateResult;
   }) | ErrorResponse;
 }

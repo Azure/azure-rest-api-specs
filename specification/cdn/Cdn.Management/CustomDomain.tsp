@@ -41,8 +41,9 @@ interface CustomDomains {
     CustomDomain,
     Response = ArmResourceUpdatedResponse<CustomDomain> | ArmResourceCreatedResponse<
       CustomDomain,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+      ArmLroLocationHeader<FinalResult = CustomDomain> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
       @bodyRoot
       _: CustomDomain;
     })
@@ -55,7 +56,7 @@ interface CustomDomains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomDomain,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
       @bodyRoot
       _: CustomDomain;
     }) | ArmDeletedNoContentResponse

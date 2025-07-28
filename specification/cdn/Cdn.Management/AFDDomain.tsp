@@ -49,8 +49,7 @@ interface AFDDomains {
       AFDDomain,
       LroHeaders = ArmLroLocationHeader<FinalResult = AFDDomain>
     > | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
-      ArmLroLocationHeader<FinalResult = AFDDomain> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+      ArmLroLocationHeader<FinalResult = AFDDomain>> & {
       @bodyRoot
       _: AFDDomain;
     })

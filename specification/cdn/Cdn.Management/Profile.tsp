@@ -51,7 +51,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Profile,
-    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<Profile> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
       @bodyRoot
       _: Profile;
     })
@@ -65,7 +65,7 @@ interface Profiles {
   update is ArmCustomPatchAsync<
     Profile,
     PatchModel = ProfileUpdateParameters,
-    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
       @bodyRoot
       _: Profile;
     })
@@ -77,7 +77,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = Profile>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -418,7 +418,7 @@ interface Profiles {
   migrationAbort is ArmResourceActionAsyncBase<
     Profile,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
 }

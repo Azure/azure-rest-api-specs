@@ -41,8 +41,9 @@ interface OriginGroups {
     OriginGroup,
     Response = ArmResourceUpdatedResponse<OriginGroup> | ArmResourceCreatedResponse<
       OriginGroup,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+      ArmLroLocationHeader<FinalResult = OriginGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OriginGroup>> & {
       @bodyRoot
       _: OriginGroup;
     })
@@ -56,7 +57,7 @@ interface OriginGroups {
   update is ArmCustomPatchAsync<
     OriginGroup,
     PatchModel = OriginGroupUpdateParameters,
-    Response = ArmResponse<OriginGroup> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<OriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OriginGroup>> & {
       @bodyRoot
       _: OriginGroup;
     })
@@ -68,7 +69,7 @@ interface OriginGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     OriginGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OriginGroup>> | ArmDeletedNoContentResponse
   >;
 
   /**
