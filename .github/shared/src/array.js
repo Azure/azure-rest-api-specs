@@ -23,6 +23,8 @@ export async function flatMapAsync(array, asyncMapper) {
 }
 
 /**
+ *  Returns true if `array` includes no elements from `values`
+ *
  * @template T,U
  * @param {T[]} array
  * @param {(item: T, index: number, array: T[]) => Promise<U>} asyncMapper
@@ -30,4 +32,26 @@ export async function flatMapAsync(array, asyncMapper) {
  */
 export async function mapAsync(array, asyncMapper) {
   return Promise.all(array.map(asyncMapper));
+}
+
+/**
+ *  Returns true if `array` includes every element from `values`
+ *
+ * @template T
+ * @param {T[]} array
+ * @param {T[]} values
+ * @returns {boolean}
+ */
+export function includesEvery(array, values) {
+  return values.every((value) => array.includes(value));
+}
+
+/**
+ * @template T
+ * @param {T[]} array
+ * @param {T[]} values
+ * @returns {boolean}
+ */
+export function includesNone(array, values) {
+  return values.every((value) => !array.includes(value));
 }

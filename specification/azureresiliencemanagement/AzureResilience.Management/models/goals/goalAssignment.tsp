@@ -32,7 +32,7 @@ model GoalAssignmentProperties {
 
   @doc("List of service level resources.")
   @OpenAPI.extension("x-ms-identifiers", #[])
-  serviceLevelResources: ServiceLevelResource[];
+  serviceLevelResources?: ServiceLevelResource[];
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)

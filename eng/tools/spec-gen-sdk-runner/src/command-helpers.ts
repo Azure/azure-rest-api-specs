@@ -1,14 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  findReadmeFiles,
-  getArgumentValue,
-  getAllTypeSpecPaths,
-  objectToMap,
-  SpecConfigs,
-} from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
   APIViewRequestData,
   SdkName,
@@ -17,7 +11,13 @@ import {
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
-import { groupSpecConfigPaths } from "./spec-helpers.js";
+import {
+  findReadmeFiles,
+  getAllTypeSpecPaths,
+  getArgumentValue,
+  objectToMap,
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Load execution-report.json.

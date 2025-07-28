@@ -122,6 +122,11 @@ union SupportStatus {
   string,
 
   /**
+   * Unknown support status.
+   */
+  Unknown: "Unknown",
+
+  /**
    * OutOfSupport support status.
    */
   OutOfSupport: "OutOfSupport",

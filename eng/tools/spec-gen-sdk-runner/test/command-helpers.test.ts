@@ -1,22 +1,22 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
-import * as log from "../src/log.js";
-import * as utils from "../src/utils.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  generateArtifact,
   getBreakingChangeInfo,
   getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  generateArtifact,
   setPipelineVariables,
 } from "../src/command-helpers.js";
+import * as log from "../src/log.js";
 import { LogLevel } from "../src/log.js";
+import * as specHelpers from "../src/spec-helpers.js";
 import { APIViewRequestData } from "../src/types.js";
+import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);

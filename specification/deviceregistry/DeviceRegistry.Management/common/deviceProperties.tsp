@@ -7,6 +7,7 @@ import "./provisioningState.tsp";
 import "./status.tsp";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -109,8 +110,22 @@ model NamespaceDeviceProperties extends DeviceBaseProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_01_preview)
   lastTransitionTime?: utcDateTime;
+
+  @added(Versions.v2025_08_01_preview)
+  @doc("Policy used to issue device certificates.")
+  policy?: DeviceCredentialPolicy;
 }
 
+@added(Versions.v2025_08_01_preview)
+@doc("Defines the Policy used to issue device certificates if any.")
+model DeviceCredentialPolicy {
+  @doc("Resource Id of the Policy.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/credentials/policies";
+    }
+  ]>;
+}
 @added(Versions.v2024_10_01_preview)
 @doc("Connection endpoint URL a device can use to connect to a service.")
 model MessagingEndpoints {
