@@ -324,7 +324,7 @@ namespace Storage.Blob {
       },
       {
         /** Signed identifiers */
-        @body body: SignedIdentifiers;
+        @body body: SignedIdentifier;
 
         ...BlobPublicAccess;
         ...EtagResponseHeader;
@@ -346,7 +346,7 @@ namespace Storage.Blob {
         /** The access control list for the container. */
         #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
         @body
-        containerAcl: SignedIdentifiers;
+        containerAcl: SignedIdentifier;
 
         ...TimeoutParameter;
         ...LeaseIdOptionalParameter;
