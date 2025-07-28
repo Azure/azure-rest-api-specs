@@ -20,6 +20,7 @@ interface NotificationMessagesClient
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
+  sendReadReceipt is Azure.Communication.MessagesService.ReadReceiptsOperations.send;
 }
 
 @client({

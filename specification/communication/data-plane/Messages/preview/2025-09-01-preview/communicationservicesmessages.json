@@ -69,6 +69,9 @@
       "name": "Notifications"
     },
     {
+      "name": "ReadReceipts"
+    },
+    {
       "name": "Stream"
     },
     {
@@ -936,10 +939,13 @@
         }
       }
     },
-    "/messages/notifications:sendStatusUpdate": {
+    "/messages/readreceipts:send": {
       "post": {
-        "operationId": "NotificationMessagesOperations_SendStatusUpdate",
-        "description": "Sends a status update from Business to User.",
+        "operationId": "ReadReceiptsOperations_Send",
+        "tags": [
+          "ReadReceipts"
+        ],
+        "description": "Sends a read receipt update from Business to User.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -954,15 +960,12 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "$ref": "#/parameters/StatusSendRequestBody"
+            "$ref": "#/parameters/ReadReceiptSendRequestBody"
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/SendMessageResult"
-            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -1409,8 +1412,7 @@
         "template",
         "sticker",
         "reaction",
-        "interactive",
-        "status"
+        "interactive"
       ],
       "x-ms-enum": {
         "name": "CommunicationMessageKind",
@@ -1465,11 +1467,6 @@
             "name": "interactive",
             "value": "interactive",
             "description": "Interactive Actionable message type."
-          },
-          {
-            "name": "status",
-            "value": "status",
-            "description": "Status message type."
           }
         ]
       }
@@ -2574,21 +2571,27 @@
       ],
       "x-ms-discriminator-value": "reaction"
     },
-    "ReadStatusContent": {
+    "ReadReceiptContent": {
       "type": "object",
-      "description": "A request to send a read receipt status update.",
+      "description": "A request to send a status update.",
       "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The id of the message this status refers to."
+        },
+        "channelRegistrationId": {
+          "type": "string",
+          "description": "The Channel Registration ID for the Business Identifier."
+        },
         "typingIndicator": {
           "type": "boolean",
           "description": "Whether this status update includes a typing indicator."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StatusContent"
-        }
-      ],
-      "x-ms-discriminator-value": "read"
+      "required": [
+        "messageId",
+        "channelRegistrationId"
+      ]
     },
     "RemoveParticipantsOptions": {
       "type": "object",
@@ -2668,103 +2671,6 @@
       "required": [
         "receipts"
       ]
-    },
-    "Status": {
-      "type": "string",
-      "description": "The status of a message.",
-      "enum": [
-        "read"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "read",
-            "value": "read",
-            "description": "Message has been read."
-          }
-        ]
-      }
-    },
-    "StatusContent": {
-      "type": "object",
-      "description": "A request to send a status update.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "The status value of the message."
-        },
-        "messageId": {
-          "type": "string",
-          "description": "The id of the message this status refers to."
-        },
-        "kind": {
-          "$ref": "#/definitions/StatusKind",
-          "description": "Kind of StatusContent."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "status",
-        "messageId",
-        "kind"
-      ]
-    },
-    "StatusKind": {
-      "type": "string",
-      "description": "The status of a message.",
-      "enum": [
-        "read",
-        "delivered",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "StatusKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "read",
-            "value": "read"
-          },
-          {
-            "name": "delivered",
-            "value": "delivered"
-          },
-          {
-            "name": "failed",
-            "value": "failed"
-          }
-        ]
-      }
-    },
-    "StatusNotificationContent": {
-      "type": "object",
-      "description": "A request to send a status notification.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "The status value of the message."
-        },
-        "messageId": {
-          "type": "string",
-          "description": "The id of the message this status refers to."
-        },
-        "typingIndicator": {
-          "type": "boolean",
-          "description": "Whether this status update includes a typing indicator."
-        }
-      },
-      "required": [
-        "status",
-        "messageId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/NotificationContent"
-        }
-      ],
-      "x-ms-discriminator-value": "status"
     },
     "StickerNotificationContent": {
       "type": "object",
@@ -3218,6 +3124,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "ReadReceiptSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the read receipt update to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ReadReceiptContent"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "RemoveParticipantsRequestBody": {
       "name": "options",
       "in": "body",
@@ -3225,16 +3141,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/RemoveParticipantsOptions"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "StatusSendRequestBody": {
-      "name": "body",
-      "in": "body",
-      "description": "Details of the status update to send.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/StatusContent"
       },
       "x-ms-parameter-location": "method"
     }
