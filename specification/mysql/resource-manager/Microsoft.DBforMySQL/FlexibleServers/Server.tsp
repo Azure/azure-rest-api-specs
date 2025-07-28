@@ -191,19 +191,6 @@ interface Servers {
   >;
 
   /**
-   * List all the replicas for a given server.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @get
-  @action("replicas")
-  @operationId("Replicas_ListByServer")
-  listByServer is ArmResourceActionSync<
-    Server,
-    void,
-    Response = ArmResponse<ServerListResult>
-  >;
-
-  /**
    * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

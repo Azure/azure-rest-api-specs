@@ -128,3 +128,19 @@ interface GetPrivateDnsZoneSuffix {
   @action("getPrivateDnsZoneSuffix")
   execute is ArmProviderActionSync<Response = GetPrivateDnsZoneSuffixResponse>;
 }
+
+@armResourceOperations
+interface Replicas {
+  /**
+   * List all the replicas for a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @get
+  @action("replicas")
+  @operationId("Replicas_ListByServer")
+  listByServer is ArmResourceActionSync<
+    Server,
+    void,
+    Response = ArmResponse<ServerListResult>
+  >;
+}
