@@ -38,15 +38,19 @@ interface NotificationMessagesOperations {
     NotificationMessagesSendRequestBody,
     AcceptedResponse & SendMessageResult
   >;
-  
+}
+
+interface ReadReceiptsOperations {
+  @tag("ReadReceipts")
   @added(Versions.c2025_09_01_Preview)
-  @doc("Sends a status update from Business to User.")
-  sendStatusUpdate is Operations.ResourceCollectionAction<
-    Notifications,
-    StatusSendRequestBody,
-    AcceptedResponse & SendMessageResult
+  @doc("Sends a read receipt update from Business to User.")
+  send is Operations.ResourceCollectionAction<
+    ReadReceipts,
+    ReadReceiptSendRequestBody,
+    AcceptedResponse
   >;
 }
+
 
 interface StreamOperations {
   @tag("Stream")

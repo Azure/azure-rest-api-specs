@@ -53,11 +53,7 @@ union CommunicationMessageKind {
 
   @added(Versions.c2025_01_15_Preview)
   @doc("Interactive Actionable message type.")
-  interactive: "interactive",
-
-  @added(Versions.c2025_09_01_Preview)
-  @doc("Status message type.")
-  status: "status",
+  interactive: "interactive"
 }
 
 @added(Versions.c2025_01_15_Preview)
@@ -296,16 +292,13 @@ model InteractiveNotificationContent extends NotificationContent {
 }
 
 @added(Versions.c2025_09_01_Preview)
-@doc("A request to send a status notification.")
-model StatusNotificationContent extends NotificationContent {
-  @doc("Message notification type is status.")
-  kind: CommunicationMessageKind.status;
-
-  @doc("The status value of the message.")
-  status: Status;
-
+@doc("A request to send a status update.")
+model ReadReceiptContent {
   @doc("The id of the message this status refers to.")
   messageId: string;
+
+  @doc("The Channel Registration ID for the Business Identifier.")
+  channelRegistrationId: string;
 
   @doc("Whether this status update includes a typing indicator.")
   typingIndicator?: boolean;
@@ -319,7 +312,6 @@ union Status {
   @doc("Message has been read.")
   read: "read",
 }
-
 
 @added(Versions.c2025_09_01_Preview)
 @doc("A request to send a status update.")
@@ -714,6 +706,16 @@ model Notifications {
   id: string;
 }
 
+@resource("messages/readreceipts")
+@doc("A notification.")
+model ReadReceipts {
+  @key
+  @visibility(Lifecycle.Read) 
+  @invisible(Lifecycle) // The ID is only used as a key parameter.
+  @doc("The ID is only used as a key parameter.")
+  id: string;
+}
+
 @resource("messages/channels")
 @doc("A communication channel.")
 model CommunicationChannel {
@@ -799,8 +801,17 @@ model NotificationMessagesSendRequestBody {
   @bodyRoot
   body: NotificationContent;
 }
+
 @added(Versions.c2025_09_01_Preview)
-@doc("Status Update  send request body.")
+@doc("Read Receipt send request body.")
+model ReadReceiptSendRequestBody {
+  @doc("Details of the read receipt update to send.")
+  @bodyRoot
+  body: ReadReceiptContent;
+}
+
+@added(Versions.c2025_09_01_Preview)
+@doc("Status Update send request body.")
 model StatusSendRequestBody {
   @doc("Details of the status update to send.")
   @bodyRoot
