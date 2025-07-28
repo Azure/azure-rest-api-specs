@@ -46,7 +46,7 @@
   },
   "tags": [],
   "paths": {
-    "/bark/{level}": {
+    "/bark/{level}/{pitch}": {
       "post": {
         "operationId": "DogOperations_Bark",
         "description": "Make the dog bark at a specified level",
@@ -54,10 +54,18 @@
           {
             "name": "level",
             "in": "path",
-            "description": "The level at which the dog should bark",
+            "description": "Bark volume level in dB",
             "required": true,
             "type": "number",
-            "format": "double"
+            "format": "float"
+          },
+          {
+            "name": "pitch",
+            "in": "path",
+            "description": "Pitch in Hz",
+            "required": true,
+            "type": "number",
+            "format": "float"
           },
           {
             "name": "api-version",

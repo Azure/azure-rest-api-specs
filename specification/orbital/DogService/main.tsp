@@ -19,12 +19,9 @@ using Azure.Core;
   ]>
 )
 @server("https://westus2.dog.azure.com")
-@service(#{
-  title: "Dog Service",
-})
+@service(#{ title: "Dog Service" })
 @versioned(Versions)
 namespace Microsoft.Orbital.DogService;
-
 
 /** Service API versions */
 enum Versions {
@@ -118,9 +115,18 @@ interface DogOperations {
   @post
   @route("/bark/{level}")
   bark(
-    /** The level at which the dog should bark */
-    @path level: float64,
-    
+    /**
+     * Bark volume level in dB
+     */
+    @path
+    level: float32,
+
+    /**
+     * Pitch in Hz
+     */
+    @path
+    pitch: float32,
+
     /** The API version to use for this operation */
     @query("api-version") apiVersion: string,
   ): BarkResponse | ErrorResponse;
@@ -132,7 +138,7 @@ interface DogOperations {
   run(
     /** The speed at which the dog should run (in km/h) */
     @path speed: float64,
-    
+
     /** The API version to use for this operation */
     @query("api-version") apiVersion: string,
   ): RunResponse | ErrorResponse;
@@ -145,7 +151,7 @@ interface DogOperations {
   uploadPicture(
     /** The API version to use for this operation */
     @query("api-version") apiVersion: string,
-    
+
     /** The multipart form data containing the image to upload */
     @multipartBody body: PictureUploadForm,
   ): UploadPictureResponse | ErrorResponse;
@@ -158,7 +164,7 @@ interface DogOperations {
   uploadMedicalRecord(
     /** The API version to use for this operation */
     @query("api-version") apiVersion: string,
-    
+
     /** The multipart form data containing the medical record PDF and metadata */
     @multipartBody body: MedicalRecordUploadForm,
   ): UploadMedicalRecordResponse | ErrorResponse;
