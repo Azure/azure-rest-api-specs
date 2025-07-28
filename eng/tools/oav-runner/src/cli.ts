@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-import { checkSpecs, checkExamples } from "./runner.js";
 import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
   ReportableOavError,
 } from "./formatting.js";
+import { checkExamples, checkSpecs } from "./runner.js";
 
-import { resolve } from "path";
-import { parseArgs, ParseArgsConfig } from "node:util";
 import fs from "node:fs/promises";
+import { parseArgs, ParseArgsConfig } from "node:util";
+import { resolve } from "path";
 import { simpleGit } from "simple-git";
 
 export async function getRootFolder(inputPath: string): Promise<string> {
