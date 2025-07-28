@@ -117,7 +117,7 @@ describe("SpecModel", () => {
 
     const tag = globalConfig["tag"];
 
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(tag).not.toBeTypeOf(Date);
 
     expect(tag).toBeTypeOf("string");
@@ -232,7 +232,7 @@ describe("SpecModel", () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
       await expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        /no affected swaggers/i,
+        /not found in specModel/i,
       );
     });
 
