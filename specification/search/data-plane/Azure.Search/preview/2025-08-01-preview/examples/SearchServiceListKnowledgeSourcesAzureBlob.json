@@ -29,7 +29,8 @@
               "containerName": "test-container",
               "folderPath": "test-path",
               "identity": {
-                "kind": "systemAssigned"
+                "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+                "userAssignedIdentity": "/my/userassigned/id"
               },
               "embeddingModel": {
                 "name": "openai",
@@ -37,7 +38,7 @@
                 "azureOpenAIParameters": {
                   "resourceUri": "https://test-sample.openai.azure.com",
                   "deploymentId": "model",
-                  "apiKey": "api-key",
+                  "apiKey": "<redacted>",
                   "modelName": "text-embedding-3-large"
                 }
               },
@@ -46,7 +47,7 @@
                 "azureOpenAIParameters": {
                   "resourceUri": "https://test-sample.openai.azure.com",
                   "deploymentId": "myDeployment",
-                  "apiKey": "api-key",
+                  "apiKey": "<redacted>",
                   "modelName": "gpt-4o-mini"
                 }
               },

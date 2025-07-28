@@ -12,7 +12,8 @@
     "KnowledgeSource": {
       "azureBlobParameters": {
         "identity": {
-          "kind": "systemAssigned"
+          "userAssignedIdentity": "/my/userassigned/id",
+          "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
         },
         "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
         "containerName": "test-container",
@@ -79,7 +80,8 @@
           "folderPath": "test-path",
           "disableImageVerbalization": false,
           "identity": {
-            "kind": "systemAssigned"
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/my/userassigned/id"
           },
           "embeddingModel": {
             "name": "openai",
@@ -128,7 +130,8 @@
           "folderPath": "test-path",
           "disableImageVerbalization": false,
           "identity": {
-            "kind": "systemAssigned"
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/my/userassigned/id"
           },
           "embeddingModel": {
             "name": "openai",

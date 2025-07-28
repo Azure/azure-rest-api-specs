@@ -2967,7 +2967,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/KnowledgeSourceIdentity",
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
           "description": "An explicit identity to use for this knowledge source. "
         },
@@ -3094,7 +3094,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/KnowledgeSourceIdentity",
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
           "description": "An explicit identity to use for this knowledge source. "
         },
@@ -3140,74 +3140,6 @@
         "containerName"
       ],
       "description": "Parameters for Azure Blob Storage knowledge source."
-    },
-    "KnowledgeSourceIdentity": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/KnowledgeSourceIdentityKind",
-          "x-nullable": false,
-          "description": "The type of the identity"
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "description": "Abstract base type for data identities."
-    },
-    "KnowledgeSourceSystemAssignedIdentity": {
-      "type": "object",
-      "x-ms-discriminator-value": "systemAssigned",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceIdentity"
-        }
-      ],
-      "description": "Use the system assigned identity."
-    },
-    "KnowledgeSourceUserAssignedIdentity": {
-      "type": "object",
-      "x-ms-discriminator-value": "userAssigned",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceIdentity"
-        }
-      ],
-      "properties": {
-        "userAssignedIdentity": {
-          "type": "string",
-          "description": "The ResourceId of the user assigned identity to use."
-        }
-      },
-      "required": [
-        "userAssignedIdentity"
-      ],
-      "description": "Use the user assigned identity."
-    },
-    "KnowledgeSourceIdentityKind": {
-      "type": "string",
-      "enum": [
-        "systemAssigned",
-        "userAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeSourceIdentityKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "systemAssigned",
-            "name": "SystemAssigned",
-            "description": "The identity managed by the service."
-          },
-          {
-            "value": "userAssigned",
-            "name": "UserAssigned",
-            "description": "An identity managed by the user."
-          }
-        ]
-      },
-      "description": "The kind of identity used for knowledge sources."
     },
     "KnowledgeSourceKind": {
       "type": "string",
