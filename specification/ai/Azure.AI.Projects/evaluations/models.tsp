@@ -223,7 +223,7 @@ model FoundryModelDatasetSource extends EvaluationDataSource {
   @doc("Unique identifier of the dataset containing prompts that will be processed by the model deployment")
   datasetId: DatasetId;
 
-  @doc("Name of the column in the dataset that contains the queries to be processed by the model deployment. This allows specifying which column should be used as input for evaluation. eg.. queryField: '{{item.messages}}'")
+  @doc("Name of the column in the dataset that contains the queries to be processed by the model deployment. This allows specifying which column should be used as input for evaluation. eg.. queryField: '\${data.query}'")
   queryField: string;
 }
 
