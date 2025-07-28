@@ -856,7 +856,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1443,7 +1443,7 @@
           "type": "array",
           "description": "The array of all private link resources",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+            "$ref": "#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -1452,6 +1452,52 @@
         }
       },
       "description": "List of all private link resources"
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Private link resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState"
+        },
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource private link DNS zone names."
+        }
+      },
+      "description": "Properties of a private link resource."
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
