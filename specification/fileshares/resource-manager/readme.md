@@ -149,6 +149,14 @@ directive:
 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"].put
 
+  - suppress: PutGetPatchResponseSchema
+
+    reason: "Cannot support same schema object for PUT/GET/PATCH for proxy object due to 202 response"
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"]
+
 ```
 
 
