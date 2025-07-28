@@ -16,4 +16,24 @@ directive:
     transform: >
       $['x-ms-enum']['modelAsString'] = false;
     reason: Handle breaking change.
+  - from: search.json
+    where: $.definitions.SharedPrivateLinkResourceProperties.properties.status
+    transform: >
+      $['x-ms-enum']['modelAsString'] = false;
+    reason: Handle breaking change.
+  - from: search.json
+    where: $.definitions.SharedPrivateLinkResourceProperties.properties.provisioningState
+    transform: >
+      $['x-ms-enum']['modelAsString'] = false;
+    reason: Handle breaking change.
+  - from: search.json
+    where: $.definitions.Identity.properties.type
+    transform: >
+      $['x-ms-enum']['modelAsString'] = false;
+    reason: Handle breaking change.
+  - from: search.json
+    where: $.definitions.Sku.properties.name
+    transform: >
+      $['x-ms-enum']['modelAsString'] = false;
+    reason: Handle breaking change.
 ```
