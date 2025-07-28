@@ -304,48 +304,6 @@ model ReadReceiptContent {
   typingIndicator?: boolean;
 }
 
-@added(Versions.c2025_09_01_Preview)
-@doc("The status of a message.")
-union Status {
-  string,
-
-  @doc("Message has been read.")
-  read: "read",
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("A request to send a status update.")
-@discriminator("kind")
-model StatusContent {
-
-  @doc("The status value of the message.")
-  status: Status;
-
-  @doc("The id of the message this status refers to.")
-  messageId: string;
-
-  @doc("Kind of StatusContent.")
-  kind: StatusKind;
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("The status of a message.")
-union StatusKind {
-  string,
-  read: "read",
-  delivered: "delivered",
-  failed: "failed",
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("A request to send a read receipt status update.")
-model ReadStatusContent extends StatusContent {
-  kind: StatusKind.read;
-
-  @doc("Whether this status update includes a typing indicator.")
-  typingIndicator?: boolean;
-}
-
 @added(Versions.c2025_01_15_Preview)
 @doc("The Interactive message content to which user can read and respond.")
 model InteractiveMessage {
@@ -808,14 +766,6 @@ model ReadReceiptSendRequestBody {
   @doc("Details of the read receipt update to send.")
   @bodyRoot
   body: ReadReceiptContent;
-}
-
-@added(Versions.c2025_09_01_Preview)
-@doc("Status Update send request body.")
-model StatusSendRequestBody {
-  @doc("Details of the status update to send.")
-  @bodyRoot
-  body: StatusContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
