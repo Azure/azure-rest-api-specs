@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-06-01-preview",
+    "version": "2025-05-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -5126,6 +5126,9 @@
     },
     "ExportPipelineTargetProperties": {
       "description": "The properties of the export pipeline target.",
+      "required": [
+        "keyVaultUri"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -5133,25 +5136,12 @@
           "type": "string"
         },
         "uri": {
-          "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
+          "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
           "type": "string"
         },
         "keyVaultUri": {
           "description": "They key vault secret uri to obtain the target storage SAS token.",
           "type": "string"
-        },
-        "storageAccessMode": {
-          "description": "The storage access mode used for the customer storage account.",
-          "default": "SasToken",
-          "enum": [
-            "ManagedIdentity",
-            "SasToken"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageAccessMode",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -5328,6 +5318,9 @@
     },
     "ImportPipelineSourceProperties": {
       "description": "The properties of the import pipeline source.",
+      "required": [
+        "keyVaultUri"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -5343,30 +5336,16 @@
           }
         },
         "uri": {
-          "description": "The source uri of the import pipeline.\r\nWhen 'AzureStorageBlobContainer': \"https://accountName.blob.core.windows.net/containerName\"",
+          "description": "The source uri of the import pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer': \"https://accountName.blob.core.windows.net/containerName\"",
           "type": "string"
         },
         "keyVaultUri": {
           "description": "They key vault secret uri to obtain the source storage SAS token.",
           "type": "string"
-        },
-        "storageAccessMode": {
-          "description": "The storage access mode used for the customer storage account.",
-          "default": "SasToken",
-          "enum": [
-            "ManagedIdentity",
-            "SasToken"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageAccessMode",
-            "modelAsString": true
-          }
         }
       }
     },
     "PipelineTriggerProperties": {
-      "description": "The trigger properties of the import pipeline",
       "type": "object",
       "properties": {
         "sourceTrigger": {
@@ -5379,7 +5358,6 @@
       "required": [
         "status"
       ],
-      "description": "The source trigger properties of the import pipeline",
       "type": "object",
       "properties": {
         "status": {
@@ -5772,7 +5750,6 @@
       }
     },
     "PipelineRunSourceProperties": {
-      "description": "The pipeline run source properties",
       "type": "object",
       "properties": {
         "type": {
@@ -5794,7 +5771,6 @@
       }
     },
     "PipelineRunTargetProperties": {
-      "description": "The pipeline run target properties",
       "type": "object",
       "properties": {
         "type": {
@@ -5816,7 +5792,6 @@
       }
     },
     "ProgressProperties": {
-      "description": "The progress properties.",
       "type": "object",
       "properties": {
         "percentage": {
@@ -5826,7 +5801,6 @@
       }
     },
     "PipelineTriggerDescriptor": {
-      "description": "The pipeline trigger descriptor",
       "type": "object",
       "properties": {
         "sourceTrigger": {
@@ -5836,7 +5810,6 @@
       }
     },
     "PipelineSourceTriggerDescriptor": {
-      "description": "The pipeline source trigger descriptor.",
       "type": "object",
       "properties": {
         "timestamp": {
