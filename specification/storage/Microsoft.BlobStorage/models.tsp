@@ -88,6 +88,10 @@ model BlockLookupList {
   latest?: base64Bytes[];
 }
 
+/** Represents an array of signed identifiers */
+@Xml.name("SignedIdentifiers")
+model SignedIdentifiers is Array<SignedIdentifier>;
+
 /** The signed identifier. */
 @Xml.name("SignedIdentifier")
 model SignedIdentifier {
