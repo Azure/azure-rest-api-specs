@@ -2,25 +2,14 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.SignalRService;
 
 // Client name mappings to match the existing Java SDK naming conventions
-@@clientName(Microsoft.SignalRService.NetworkACL, "NetworkAcl", "java");
-@@clientName(Microsoft.SignalRService.PrivateEndpointACL,
-  "PrivateEndpointAcl",
-  "java"
-);
-@@clientName(Microsoft.SignalRService.ACLAction, "AclAction", "java");
+@@clientName(NetworkACL, "NetworkAcl", "java");
+@@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
+@@clientName(ACLAction, "AclAction", "java");
 
 // Property name mappings to maintain backward compatibility
-@@clientName(Microsoft.SignalRService.SignalRProperties.externalIP,
-  "externalIp",
-  "java"
-);
-@@clientName(Microsoft.SignalRService.SignalRProperties.hostName,
-  "hostname",
-  "java"
-);
-@@clientName(Microsoft.SignalRService.SignalRProperties.hostNamePrefix,
-  "hostnamePrefix",
-  "java"
-);
+@@clientName(SignalRProperties.externalIP, "externalIp", "java");
+@@clientName(SignalRProperties.hostName, "hostname", "java");
+@@clientName(SignalRProperties.hostNamePrefix, "hostnamePrefix", "java");
