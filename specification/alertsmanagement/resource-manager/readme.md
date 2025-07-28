@@ -63,17 +63,18 @@ directive:
      - $.paths['/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
      - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
   - suppress: XmsPageableForListCalls
-    reason: List operations follow existing AlertsManagement pagination patterns.
+    reason: The alertsMetaData endpoint returns metadata information, not a pageable collection. This maintains compatibility with the 2019-03-01 API version.
     from: AlertsManagement.json
     where:
       - $.paths['/providers/Microsoft.AlertsManagement/alertsMetaData'].get
   - suppress: GetCollectionOnlyHasValueAndNextLink
-    reason: Response models maintain compatibility with existing AlertsManagement response structures.
+    reason: The alertsMetaData endpoint returns structured metadata with properties field, not a standard collection. This maintains compatibility with existing AlertsManagement response structures and the 2019-03-01 API version.
     from: AlertsManagement.json
     where:
       - $.definitions.alertsList
       - $.definitions.operationsList
       - $.definitions.alertEnrichmentsList
+      - $.definitions.alertsMetaData
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
 ```
