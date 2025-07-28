@@ -1,3 +1,7 @@
+
+---
+applyTo: "**/*.json"
+---
 # Copilot Review Instructions for reviewing OpenAPI v2
 
 Please review OpenAPI v2 (Swagger) definition files with the following in mind:
