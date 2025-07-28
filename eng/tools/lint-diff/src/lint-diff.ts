@@ -110,9 +110,8 @@ async function runLintDiff(
 
   // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
   const changedFiles = await getChangedFiles({ 
-    cwd: resolve(afterPath), 
-    baseCommitish: baseBranch, 
-    paths: ['specification'] 
+    cwd: resolve(afterPath),
+    paths: ['specification']
   });
 
   let beforeList, afterList, affectedSwaggers;
