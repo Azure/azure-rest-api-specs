@@ -404,20 +404,22 @@ These settings apply only when `--tag=package-python-sdk` is specified on the co
 ```yaml $(tag) == 'package-python-sdk'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json
   - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
   - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
   - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
@@ -429,7 +431,6 @@ input-file:
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
 ```
 
 ### Tag: package-2024-11-04
