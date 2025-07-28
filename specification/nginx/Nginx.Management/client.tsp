@@ -6,6 +6,54 @@ using NGINX.NGINXPLUS;
 
 @@clientName(NGINX.NGINXPLUS, "NginxManagementClient", "javascript");
 
+// Model name overrides
+@@clientName(NGINX.NGINXPLUS.Certificate, "NginxCertificate", "!csharp");
+@@clientName(NGINX.NGINXPLUS.ApiKey,
+  "NginxDeploymentApiKeyResponse",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.ApiKeyResponseProperties,
+  "NginxDeploymentApiKeyResponseProperties",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.ApiKeyRequest,
+  "NginxDeploymentApiKeyRequest",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.ApiKeyRequestProperties,
+  "NginxDeploymentApiKeyRequestProperties",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.Configuration,
+  "NginxConfigurationResponse",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.NginxConfigurationProtectedFileResult,
+  "NginxConfigurationProtectedFileResponse",
+  "!csharp"
+);
+@@clientName(NGINX.NGINXPLUS.NginxConfigurationProtectedFileContent,
+  "NginxConfigurationProtectedFileRequest",
+  "!csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "IdentityProperties",
+  "!csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "UserIdentityProperties",
+  "!csharp"
+);
+
+// Sku has many more properties than ResourceSku
+@@clientName(Azure.ResourceManager.CommonTypes.Sku, "ResourceSku", "!csharp");
+
+// Anonymous model named by m4
+@@clientName(NGINX.NGINXPLUS.NginxAppProtect,
+  "NginxDeploymentPropertiesNginxAppProtect",
+  "!csharp"
+);
+
 // Client location overrides for NginxDeployments operations
 @@clientLocation(NGINX.NGINXPLUS.NginxDeployments.get,
   "Deployments",
