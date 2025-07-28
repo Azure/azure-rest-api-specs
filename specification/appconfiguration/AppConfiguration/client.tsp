@@ -22,6 +22,7 @@ namespace SdkCustomizations;
 @@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
 @@clientName(putLock, "CreateReadOnlyLock", "csharp");
 @@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
+@@clientName(Error, "AppConfigurationError", "csharp");
 
 @@access(putKeyValue, Access.internal, "csharp");
 
