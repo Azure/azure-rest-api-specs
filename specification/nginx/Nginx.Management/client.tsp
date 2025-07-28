@@ -29,6 +29,9 @@ using NGINX.NGINXPLUS;
 );
 @@clientName(AnalysisConfig, "AnalysisCreateConfig", "!csharp");
 @@clientName(AnalysisResultContent, "AnalysisResultData", "!csharp");
+@@clientName(DiagnosticLevel, "Level", "!csharp");
+
+// CommonTypes
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "IdentityProperties",
   "!csharp"
@@ -37,7 +40,10 @@ using NGINX.NGINXPLUS;
   "UserIdentityProperties",
   "!csharp"
 );
-
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "IdentityType",
+  "!csharp"
+);
 // Sku has many more properties than ResourceSku
 @@clientName(Azure.ResourceManager.CommonTypes.Sku, "ResourceSku", "!csharp");
 
@@ -46,10 +52,10 @@ using NGINX.NGINXPLUS;
   "NginxDeploymentPropertiesNginxAppProtect",
   "!csharp"
 );
-@@clientName(AutoScaleSettings,
-  "NginxDeploymentScalingPropertiesAutoScaleSettings",
-  "!csharp"
-);
+// @@clientName(AutoScaleSettings,
+//   "NginxDeploymentScalingPropertiesAutoScaleSettings",
+//   "!csharp"
+// );
 
 // Client location overrides for NginxDeployments operations
 @@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
