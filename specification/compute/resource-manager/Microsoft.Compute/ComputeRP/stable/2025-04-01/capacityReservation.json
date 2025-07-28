@@ -489,6 +489,9 @@
           },
           "Create or update a block capacity reservation .": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_CreateOrUpdate.json"
+          },
+          "Create or update a targeted capacity reservation .": {
+            "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -695,6 +698,9 @@
           },
           "Get a block capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_Get.json"
+          },
+          "Get a targeted capacity reservation.": {
+            "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_Get.json"
           }
         }
       }
@@ -748,6 +754,9 @@
           },
           "List capacity reservations in block reservation group.": {
             "$ref": "./examples/capacityReservationExamples/BlockCapacityReservation_ListByReservationGroup.json"
+          },
+          "List capacity reservations in targeted reservation group.": {
+            "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_ListByReservationGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -830,7 +839,7 @@
             "Targeted",
             "Block"
           ],
-          "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided.",
+            "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
           "x-ms-enum": {
             "name": "ReservationType",
             "modelAsString": true
