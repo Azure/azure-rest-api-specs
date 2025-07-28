@@ -2620,7 +2620,7 @@
       "description": "Credit resource definition",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2628,17 +2628,6 @@
           "description": "Credit properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CreditProperties"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure Region where the reserved resource lives."
         }
       }
     },
