@@ -87,7 +87,7 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?restype=service&comp=stats")
-  op getStatistics is StorageOperation<
+  op getServiceStats is StorageOperation<
     TimeoutParameter,
     {
       ...DateResponseHeader;

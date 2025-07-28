@@ -1760,7 +1760,7 @@ alias LegalHoldOptionalParameter = {
 alias ImmutabilityPolicyModeParameter = {
   /** Specifies the immutability policy mode to set on the blob. */
   @header("x-ms-immutability-policy-mode")
-  immutabilityPolicyMode?: ImmutabilityPolicyMode;
+  immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
 };
 
 /** The immutability policy expiration parameter. */
