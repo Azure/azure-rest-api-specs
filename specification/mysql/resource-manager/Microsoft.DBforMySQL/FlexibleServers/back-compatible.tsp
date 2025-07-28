@@ -36,7 +36,7 @@ using Microsoft.DBforMySQL;
 #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ServerBackup.properties);
 
-@@clientName(ServerBackupV2s.create::parameters.resource, "parameters");
+@@clientName(LongRunningBackup.create::parameters.resource, "parameters");
 #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ServerBackupV2.properties);
 
@@ -55,7 +55,9 @@ using Microsoft.DBforMySQL;
 
 @@clientName(Servers.create::parameters.resource, "parameters");
 @@clientName(Servers.update::parameters.properties, "parameters");
-@@clientName(Servers.backupAndExportCreate::parameters.body, "parameters");
+@@clientName(BackupAndExportImpl.backupAndExportCreate::parameters.body,
+  "parameters"
+);
 @@clientName(Configurations.batchUpdate::parameters.body, "parameters");
 @@clientName(Servers.validateEstimateHighAvailability::parameters.body,
   "parameters"

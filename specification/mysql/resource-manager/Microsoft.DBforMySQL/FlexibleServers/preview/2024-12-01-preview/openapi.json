@@ -49,10 +49,22 @@
       "name": "Servers"
     },
     {
+      "name": "BackupAndExportImpl"
+    },
+    {
+      "name": "LogFiles"
+    },
+    {
+      "name": "ServersMigration"
+    },
+    {
       "name": "Backups"
     },
     {
-      "name": "ServerBackupV2s"
+      "name": "LongRunningBackups"
+    },
+    {
+      "name": "LongRunningBackup"
     },
     {
       "name": "Configurations"
@@ -1851,7 +1863,7 @@
       "post": {
         "operationId": "BackupAndExport_Create",
         "tags": [
-          "Servers"
+          "BackupAndExportImpl"
         ],
         "description": "Exports the backup of the given server by creating a backup if not existing.",
         "parameters": [
@@ -2091,7 +2103,7 @@
       "get": {
         "operationId": "LongRunningBackups_List",
         "tags": [
-          "ServerBackupV2s"
+          "LongRunningBackups"
         ],
         "description": "List all the backups for a given server.",
         "parameters": [
@@ -2143,7 +2155,7 @@
       "get": {
         "operationId": "LongRunningBackups_Get",
         "tags": [
-          "ServerBackupV2s"
+          "LongRunningBackups"
         ],
         "description": "Get backup for a given server.",
         "parameters": [
@@ -2198,7 +2210,7 @@
       "put": {
         "operationId": "LongRunningBackup_Create",
         "tags": [
-          "ServerBackupV2s"
+          "LongRunningBackup"
         ],
         "description": "Create backup for a given server with specified backup name.",
         "parameters": [
@@ -2595,7 +2607,7 @@
       "post": {
         "operationId": "ServersMigration_CutoverMigration",
         "tags": [
-          "Servers"
+          "ServersMigration"
         ],
         "description": "Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.",
         "parameters": [
@@ -3295,7 +3307,7 @@
       "get": {
         "operationId": "LogFiles_ListByServer",
         "tags": [
-          "Servers"
+          "LogFiles"
         ],
         "description": "List all the server log files in a given server.",
         "parameters": [
@@ -4045,7 +4057,7 @@
       "post": {
         "operationId": "BackupAndExport_ValidateBackup",
         "tags": [
-          "Servers"
+          "BackupAndExportImpl"
         ],
         "description": "Validates if backup can be performed for given server.",
         "parameters": [

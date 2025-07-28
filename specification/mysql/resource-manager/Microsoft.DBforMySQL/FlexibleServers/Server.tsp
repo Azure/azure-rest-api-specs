@@ -91,29 +91,6 @@ interface Servers {
   >;
 
   /**
-   * Exports the backup of the given server by creating a backup if not existing.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @action("backupAndExport")
-  @operationId("BackupAndExport_Create")
-  backupAndExportCreate is ArmResourceActionAsync<
-    Server,
-    BackupAndExportRequest,
-    BackupAndExportResponse
-  >;
-
-  /**
-   * Validates if backup can be performed for given server.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BackupAndExport_ValidateBackup")
-  validateBackup is ArmResourceActionSync<
-    Server,
-    void,
-    ArmResponse<ValidateBackupResponse>
-  >;
-
-  /**
    * Manual failover a server.
    */
   failover is ArmResourceActionAsyncBase<
@@ -189,20 +166,36 @@ interface Servers {
     ArmResponse<Server>,
     LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
+}
 
+@armResourceOperations
+interface BackupAndExportImpl {
   /**
-   * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
+   * Exports the backup of the given server by creating a backup if not existing.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServersMigration_CutoverMigration")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  cutoverMigration is ArmResourceActionAsync<
+  @action("backupAndExport")
+  @operationId("BackupAndExport_Create")
+  backupAndExportCreate is ArmResourceActionAsync<
     Server,
-    void,
-    ArmResponse<Server>,
-    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+    BackupAndExportRequest,
+    BackupAndExportResponse
   >;
 
+  /**
+   * Validates if backup can be performed for given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("BackupAndExport_ValidateBackup")
+  validateBackup is ArmResourceActionSync<
+    Server,
+    void,
+    ArmResponse<ValidateBackupResponse>
+  >;
+}
+
+@armResourceOperations
+interface LogFiles {
   /**
    * List all the server log files in a given server.
    */
@@ -217,6 +210,22 @@ interface Servers {
   >;
 }
 
+@armResourceOperations
+interface ServersMigration {
+  /**
+   * Cutover migration for MySQL import, it will switch source elastic server DNS to flexible server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ServersMigration_CutoverMigration")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  cutoverMigration is ArmResourceActionAsync<
+    Server,
+    void,
+    ArmResponse<Server>,
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
+  >;
+}
+
 @@doc(Server.name, "The name of the server.");
 @@doc(Server.properties, "Properties of the server.");
 @@doc(Servers.create::parameters.resource,
@@ -225,7 +234,7 @@ interface Servers {
 @@doc(Servers.update::parameters.properties,
   "The required parameters for updating a server."
 );
-@@doc(Servers.backupAndExportCreate::parameters.body,
+@@doc(BackupAndExportImpl.backupAndExportCreate::parameters.body,
   "The required parameters for creating and exporting backup of the given server."
 );
 @@doc(Servers.validateEstimateHighAvailability::parameters.body,

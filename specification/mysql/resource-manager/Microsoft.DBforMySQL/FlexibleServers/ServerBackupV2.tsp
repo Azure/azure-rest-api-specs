@@ -57,7 +57,7 @@ interface ServerBackupV2sOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-interface ServerBackupV2s {
+interface LongRunningBackups {
   /**
    * Get backup for a given server.
    */
@@ -65,6 +65,20 @@ interface ServerBackupV2s {
   @operationId("LongRunningBackups_Get")
   get is ArmResourceRead<ServerBackupV2>;
 
+  /**
+   * List all the backups for a given server.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("LongRunningBackups_List")
+  list is ArmResourceListByParent<
+    ServerBackupV2,
+    Response = ArmResponse<ServerBackupV2ListResult>
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
+interface LongRunningBackup {
   /**
    * Create backup for a given server with specified backup name.
    */
@@ -78,20 +92,10 @@ interface ServerBackupV2s {
     Response = ArmResourceUpdatedResponse<ServerBackupV2> | ArmResourceCreatedResponse<ServerBackupV2> | ArmAcceptedLroResponse,
     OptionalRequestBody = true
   >;
-
-  /**
-   * List all the backups for a given server.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LongRunningBackups_List")
-  list is ArmResourceListByParent<
-    ServerBackupV2,
-    Response = ArmResponse<ServerBackupV2ListResult>
-  >;
 }
 
 @@doc(ServerBackupV2.name, "The name of the backup.");
 @@doc(ServerBackupV2.properties, "The properties of a server backup.");
-@@doc(ServerBackupV2s.create::parameters.resource,
+@@doc(LongRunningBackup.create::parameters.resource,
   "The required parameters for creating and exporting backup of the given server."
 );
