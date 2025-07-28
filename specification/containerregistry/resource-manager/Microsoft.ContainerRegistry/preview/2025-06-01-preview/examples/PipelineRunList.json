@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry"
@@ -31,7 +31,8 @@
                 "target": {
                   "type": "AzureStorageBlob",
                   "uri": "https://accountname.blob.core.windows.net/containername/myblob.tar.gz",
-                  "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrexportsas"
+                  "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrexportsas",
+                  "storageAccessMode": "SasToken"
                 }
               },
               "provisioningState": "Succeeded"
@@ -58,7 +59,8 @@
                 "source": {
                   "type": "AzureStorageBlob",
                   "uri": "https://accountname.blob.core.windows.net/containername/myblob.tar.gz",
-                  "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas"
+                  "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas",
+                  "storageAccessMode": "SasToken"
                 },
                 "catalogDigest": "sha256@"
               },

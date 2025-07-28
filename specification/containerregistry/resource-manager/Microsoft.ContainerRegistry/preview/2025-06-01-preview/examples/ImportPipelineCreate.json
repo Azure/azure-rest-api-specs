@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
@@ -17,7 +17,8 @@
         "source": {
           "type": "AzureStorageBlobContainer",
           "uri": "https://accountname.blob.core.windows.net/containername",
-          "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas"
+          "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas",
+          "storageAccessMode": "SasToken"
         },
         "options": [
           "OverwriteTags",
@@ -37,7 +38,8 @@
           "source": {
             "type": "AzureStorageBlobContainer",
             "uri": "https://accountname.blob.core.windows.net/containername",
-            "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas"
+            "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas",
+            "storageAccessMode": "SasToken"
           },
           "trigger": {
             "sourceTrigger": {
@@ -75,7 +77,8 @@
           "source": {
             "type": "AzureStorageBlobContainer",
             "uri": "https://accountname.blob.core.windows.net/containername",
-            "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas"
+            "keyVaultUri": "https://myvault.vault.azure.net/secrets/acrimportsas",
+            "storageAccessMode": "SasToken"
           },
           "trigger": {
             "sourceTrigger": {
