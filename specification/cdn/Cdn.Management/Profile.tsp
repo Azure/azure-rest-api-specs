@@ -24,13 +24,13 @@ model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
   /**
    * The pricing tier (defines Azure Front Door Standard or Premium or a CDN provider, feature list and rate) of the profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 
   /**
    * Kind of the profile. Used by portal to differentiate traditional CDN profile and new AFD profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   kind?: string;
 
@@ -47,8 +47,8 @@ interface Profiles {
   /**
    * Creates a new Azure Front Door Standard or Azure Front Door Premium or CDN profile with a profile name under the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Profile,
     Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
@@ -60,7 +60,7 @@ interface Profiles {
   /**
    * Updates an existing Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified profile name under the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Profile,
@@ -74,7 +74,7 @@ interface Profiles {
   /**
    * Deletes an existing  Azure Front Door Standard or Azure Front Door Premium or CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = Profile>> | ArmDeletedNoContentResponse
@@ -93,7 +93,7 @@ interface Profiles {
   /**
    * Check the availability of an afdx endpoint name, and return the globally unique endpoint host name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDProfiles_CheckEndpointNameAvailability")
   checkEndpointNameAvailability is ArmResourceActionSync<
     Profile,
@@ -104,7 +104,7 @@ interface Profiles {
   /**
    * Checks the quota and actual usage of endpoints under the given Azure Front Door profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("usages")
   @operationId("AFDProfiles_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<
@@ -116,7 +116,7 @@ interface Profiles {
   /**
    * Validates the custom domain mapping to ensure it maps to the correct Azure Front Door endpoint in DNS.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDProfiles_CheckHostNameAvailability")
   checkHostNameAvailability is ArmResourceActionSync<
     Profile,
@@ -127,7 +127,7 @@ interface Profiles {
   /**
    * Validate a Secret in the profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDProfiles_ValidateSecret")
   validateSecret is ArmResourceActionSync<
     Profile,
@@ -138,7 +138,7 @@ interface Profiles {
   /**
    * Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDProfiles_Upgrade")
   upgrade is ArmResourceActionAsync<
     Profile,
@@ -149,7 +149,7 @@ interface Profiles {
   /**
    * Get log report for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetLogAnalyticsMetrics")
   getLogAnalyticsMetrics is ArmResourceActionSync<
@@ -157,45 +157,45 @@ interface Profiles {
     void,
     ArmResponse<MetricsResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "metrics", explode: true })
       metrics: LogMetric[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("granularity")
       granularity: LogMetricsGranularity;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "groupBy", explode: true })
       groupBy?: LogMetricsGroupBy[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "continents", explode: true })
       continents?: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "countryOrRegions", explode: true })
       countryOrRegions?: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "customDomains", explode: true })
       customDomains: string[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "protocols", explode: true })
       protocols: string[];
     }
@@ -204,7 +204,7 @@ interface Profiles {
   /**
    * Get log analytics ranking report for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetLogAnalyticsRankings")
   getLogAnalyticsRankings is ArmResourceActionSync<
@@ -212,30 +212,30 @@ interface Profiles {
     void,
     ArmResponse<RankingsResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "rankings", explode: true })
       rankings: LogRanking[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "metrics", explode: true })
       metrics: LogRankingMetric[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("maxRanking")
       maxRanking: int32;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "customDomains", explode: true })
       customDomains?: string[];
     }
@@ -244,7 +244,7 @@ interface Profiles {
   /**
    * Get all available location names for AFD log analytics report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetLogAnalyticsLocations")
   getLogAnalyticsLocations is ArmResourceActionSync<
@@ -256,7 +256,7 @@ interface Profiles {
   /**
    * Get all endpoints and custom domains available for AFD log report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetLogAnalyticsResources")
   getLogAnalyticsResources is ArmResourceActionSync<
@@ -268,7 +268,7 @@ interface Profiles {
   /**
    * Get Waf related log analytics report for AFD profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetWafLogAnalyticsMetrics")
   getWafLogAnalyticsMetrics is ArmResourceActionSync<
@@ -276,35 +276,35 @@ interface Profiles {
     void,
     ArmResponse<WafMetricsResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("granularity")
       granularity: WafGranularity;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "groupBy", explode: true })
       groupBy?: WafRankingGroupBy[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }
@@ -313,7 +313,7 @@ interface Profiles {
   /**
    * Get WAF log analytics charts for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("LogAnalytics_GetWafLogAnalyticsRankings")
   getWafLogAnalyticsRankings is ArmResourceActionSync<
@@ -321,35 +321,35 @@ interface Profiles {
     void,
     ArmResponse<WafRankingsResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "metrics", explode: true })
       metrics: WafMetric[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeBegin")
       dateTimeBegin: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("dateTimeEnd")
       dateTimeEnd: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("maxRanking")
       maxRanking: int32;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "rankings", explode: true })
       rankings: WafRankingType[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "actions", explode: true })
       actions?: WafAction[];
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query(#{ name: "ruleTypes", explode: true })
       ruleTypes?: WafRuleType[];
     }
@@ -385,7 +385,7 @@ interface Profiles {
   /**
    * Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("checkResourceUsage")
   @operationId("Profiles_ListResourceUsage")
   profilesListResourceUsage is ArmResourceActionSync<

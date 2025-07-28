@@ -3,65 +3,65 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Cdn;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDDomainUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDEndpointUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDOriginGroupUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDOriginUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RouteUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RuleUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SecurityPolicyUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProfileUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CanMigrateResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateResult.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeepCreatedOrigin.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeepCreatedOriginGroup.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeepCreatedCustomDomain.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EndpointUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OriginUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OriginGroupUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDomainParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "operationProperties");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EdgeNode.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagedRuleSetDefinition.properties);
 
 @@clientName(Profiles.create::parameters.resource, "profile");
@@ -75,14 +75,14 @@ using Microsoft.Cdn;
 @@clientName(Profiles.validateSecret::parameters.body, "validateSecretInput");
 @@clientName(Profiles.upgrade::parameters.body, "profileUpgradeParameters");
 @@clientName(Profiles.cdnMigrateToAfd::parameters.body, "migrationParameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Profile.properties);
 
 @@clientName(AFDDomains.create::parameters.resource, "customDomain");
 @@clientName(AFDDomains.update::parameters.properties,
   "customDomainUpdateProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDDomain.properties);
 
 @@clientName(AFDEndpoints.create::parameters.resource, "endpoint");
@@ -93,45 +93,45 @@ using Microsoft.Cdn;
 @@clientName(AFDEndpoints.validateCustomDomain::parameters.body,
   "customDomainProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDEndpoint.properties);
 
 @@clientName(AFDOriginGroups.create::parameters.resource, "originGroup");
 @@clientName(AFDOriginGroups.update::parameters.properties,
   "originGroupUpdateProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDOriginGroup.properties);
 
 @@clientName(AFDOrigins.create::parameters.resource, "origin");
 @@clientName(AFDOrigins.update::parameters.properties,
   "originUpdateProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDOrigin.properties);
 
 @@clientName(Routes.create::parameters.resource, "route");
 @@clientName(Routes.update::parameters.properties, "routeUpdateProperties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Route.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RuleSet.properties);
 
 @@clientName(Rules.create::parameters.resource, "rule");
 @@clientName(Rules.update::parameters.properties, "ruleUpdateProperties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Rule.properties);
 
 @@clientName(SecurityPolicies.create::parameters.resource, "securityPolicy");
 @@clientName(SecurityPolicies.patch::parameters.properties,
   "securityPolicyUpdateProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SecurityPolicy.properties);
 
 @@clientName(Secrets.create::parameters.resource, "secret");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Secret.properties);
 
 @@clientName(Endpoints.create::parameters.resource, "endpoint");
@@ -143,19 +143,19 @@ using Microsoft.Cdn;
 @@clientName(Endpoints.validateCustomDomain::parameters.body,
   "customDomainProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Endpoint.properties);
 
 @@clientName(Origins.create::parameters.resource, "origin");
 @@clientName(Origins.update::parameters.properties, "originUpdateProperties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Origin.properties);
 
 @@clientName(OriginGroups.create::parameters.resource, "originGroup");
 @@clientName(OriginGroups.update::parameters.properties,
   "originGroupUpdateProperties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OriginGroup.properties);
 
 @@clientName(CustomDomains.create::parameters.resource,
@@ -164,7 +164,7 @@ using Microsoft.Cdn;
 @@clientName(CustomDomains.enableCustomHttps::parameters.body,
   "customDomainHttpsParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDomain.properties);
 
 @@clientName(CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
@@ -173,7 +173,7 @@ using Microsoft.Cdn;
 @@clientName(CdnWebApplicationFirewallPolicies.update::parameters.properties,
   "cdnWebApplicationFirewallPolicyPatchParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CdnWebApplicationFirewallPolicy.properties);
 @@clientName(checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"

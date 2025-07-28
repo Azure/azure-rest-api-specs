@@ -14,7 +14,7 @@ namespace Microsoft.Cdn;
 /**
  * AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from Azure Front Door.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Profile)
 model AFDOriginGroup
   is Azure.ResourceManager.ProxyResource<AFDOriginGroupProperties> {
@@ -26,22 +26,22 @@ model AFDOriginGroup
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AFDOriginGroups {
   /**
    * Gets an existing origin group within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDOriginGroups_Get")
   get is ArmResourceRead<AFDOriginGroup>;
 
   /**
    * Creates a new origin group within the specified profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("AFDOriginGroups_Create")
   create is ArmResourceCreateOrReplaceAsync<
@@ -56,8 +56,8 @@ interface AFDOriginGroups {
   /**
    * Updates an existing origin group within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("AFDOriginGroups_Update")
   update is ArmCustomPatchAsync<
@@ -74,9 +74,9 @@ interface AFDOriginGroups {
   /**
    * Deletes an existing origin group within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDOriginGroups_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOriginGroup,
@@ -87,14 +87,14 @@ interface AFDOriginGroups {
   /**
    * Lists all of the existing origin groups within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDOriginGroups_ListByProfile")
   listByProfile is ArmResourceListByParent<AFDOriginGroup>;
 
   /**
    * Checks the quota and actual usage of endpoints under the given Azure Front Door profile..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("usages")
   @operationId("AFDOriginGroups_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<
