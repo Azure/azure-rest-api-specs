@@ -14,6 +14,7 @@ namespace Microsoft.Cdn;
 /**
  * Azure Front Door endpoint is the entity within a Azure Front Door profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(Profile)
 model AFDEndpoint
   is Azure.ResourceManager.TrackedResource<AFDEndpointProperties> {
@@ -25,6 +26,7 @@ model AFDEndpoint
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AFDEndpoints {
   /**
@@ -41,10 +43,11 @@ interface AFDEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("AFDEndpoints_Create")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDEndpoint,
-    Response = ArmResourceUpdatedResponse<AFDEndpoint> | ArmResourceCreatedResponse<AFDEndpoint> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<AFDEndpoint> | ArmResourceCreatedResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+      ArmLroLocationHeader<FinalResult = AFDEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AFDEndpoint;
     })
@@ -60,7 +63,8 @@ interface AFDEndpoints {
   update is ArmCustomPatchAsync<
     AFDEndpoint,
     PatchModel = AFDEndpointUpdateParameters,
-    Response = ArmResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint>> & {
+    Response = ArmResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+      ArmLroLocationHeader<FinalResult = AFDEndpoint>> & {
       @bodyRoot
       _: AFDEndpoint;
     })
@@ -76,7 +80,8 @@ interface AFDEndpoints {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -96,7 +101,8 @@ interface AFDEndpoints {
     AFDEndpoint,
     AfdPurgeParameters,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+      ArmLroLocationHeader<FinalResult = AFDEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

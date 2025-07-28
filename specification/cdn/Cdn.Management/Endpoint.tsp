@@ -38,10 +38,7 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     Endpoint,
-    Response = ArmResourceUpdatedResponse<Endpoint> | ArmResourceCreatedResponse<
-      Endpoint,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Endpoint> | ArmResourceCreatedResponse<Endpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
       @bodyRoot
       _: Endpoint;
     })
@@ -78,12 +75,30 @@ interface Endpoints {
   /**
    * Starts an existing CDN endpoint that is on a stopped state.
    */
-  start is ArmResourceActionAsync<Endpoint, void, ArmResponse<Endpoint>>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  start is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Endpoint,
+    void,
+    (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+      @bodyRoot
+      _: Endpoint;
+    }) | ArmResponse<Endpoint>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
+  >;
 
   /**
    * Stops an existing running CDN endpoint.
    */
-  stop is ArmResourceActionAsync<Endpoint, void, ArmResponse<Endpoint>>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  stop is Azure.ResourceManager.ArmResourceActionAsyncBase<
+    Endpoint,
+    void,
+    (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+      @bodyRoot
+      _: Endpoint;
+    }) | ArmResponse<Endpoint>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
+  >;
 
   /**
    * Removes a content from CDN.

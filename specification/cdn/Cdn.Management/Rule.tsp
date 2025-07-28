@@ -36,9 +36,11 @@ interface Rules {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Rule,
-    Response = ArmResourceUpdatedResponse<Rule> | ArmResourceCreatedResponse<Rule> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Rule> | ArmResourceCreatedResponse<Rule> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
+      ArmLroLocationHeader<FinalResult = Rule>> & {
       @bodyRoot
       _: Rule;
     })
@@ -52,8 +54,8 @@ interface Rules {
   update is ArmCustomPatchAsync<
     Rule,
     PatchModel = RuleUpdateParameters,
-    Response = ArmResponse<Rule> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = ArmResponse<Rule> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
+      ArmLroLocationHeader<FinalResult = Rule>> & {
       @bodyRoot
       _: Rule;
     })
@@ -66,7 +68,8 @@ interface Rules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Rule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
+      ArmLroLocationHeader<FinalResult = Rule> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

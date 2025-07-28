@@ -36,13 +36,13 @@ interface Routes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Route,
-    Response = ArmResourceUpdatedResponse<Route> | ArmResourceCreatedResponse<Route> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Route;
-    })
+    Response = ArmResourceUpdatedResponse<Route> | ArmResourceCreatedResponse<Route> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route>> &
+      ArmLroLocationHeader<FinalResult = Route> & {
+        @bodyRoot
+        _: Route;
+      })
   >;
 
   /**
@@ -53,7 +53,8 @@ interface Routes {
   update is ArmCustomPatchAsync<
     Route,
     PatchModel = RouteUpdateParameters,
-    Response = ArmResponse<Route> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    Response = ArmResponse<Route> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route> &
+      ArmLroLocationHeader<FinalResult = Route> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Route;
@@ -63,11 +64,11 @@ interface Routes {
   /**
    * Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Route,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = Route> &
+      ArmLroLocationHeader<FinalResult = Route> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

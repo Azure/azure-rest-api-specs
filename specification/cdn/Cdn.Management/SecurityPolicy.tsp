@@ -37,9 +37,11 @@ interface SecurityPolicies {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SecurityPolicy,
-    Response = ArmResourceUpdatedResponse<SecurityPolicy> | ArmResourceCreatedResponse<SecurityPolicy> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<SecurityPolicy> | ArmResourceCreatedResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
       @bodyRoot
       _: SecurityPolicy;
     })
@@ -53,8 +55,8 @@ interface SecurityPolicies {
   patch is ArmCustomPatchAsync<
     SecurityPolicy,
     PatchModel = SecurityPolicyUpdateParameters,
-    Response = ArmResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = ArmResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
       @bodyRoot
       _: SecurityPolicy;
     })
@@ -63,11 +65,11 @@ interface SecurityPolicies {
   /**
    * Deletes an existing security policy within profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SecurityPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+      ArmLroLocationHeader<FinalResult = SecurityPolicy> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

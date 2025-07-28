@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.CustomLegacy;
  * @template Response Optional. The success response for the createOrUpdate operation
  * @template Error Optional. The error response, if non-standard.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
 @autoRoute
 @doc("Create a {name}", Resource)
 @armResourceCreateOrUpdate(Resource)

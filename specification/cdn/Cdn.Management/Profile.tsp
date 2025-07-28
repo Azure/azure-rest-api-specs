@@ -362,7 +362,8 @@ interface Profiles {
     Profile,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Profile> &
+      ArmLroLocationHeader<FinalResult = Profile> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

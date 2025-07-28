@@ -14,6 +14,7 @@ namespace Microsoft.Cdn;
 /**
  * Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(Profile)
 model AFDDomain is Azure.ResourceManager.ProxyResource<AFDDomainProperties> {
   ...ResourceNameParameter<
@@ -24,6 +25,7 @@ model AFDDomain is Azure.ResourceManager.ProxyResource<AFDDomainProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AFDDomains {
   /**
@@ -40,9 +42,15 @@ interface AFDDomains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("AFDCustomDomains_Create")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDDomain,
-    Response = ArmResourceUpdatedResponse<AFDDomain> | ArmResourceCreatedResponse<AFDDomain> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<AFDDomain> | ArmResourceCreatedResponse<
+      AFDDomain,
+      LroHeaders = ArmLroLocationHeader<FinalResult = AFDDomain>
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+      ArmLroLocationHeader<FinalResult = AFDDomain> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AFDDomain;
     })
@@ -58,7 +66,8 @@ interface AFDDomains {
   update is ArmCustomPatchAsync<
     AFDDomain,
     PatchModel = AFDDomainUpdateParameters,
-    Response = ArmResponse<AFDDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    Response = ArmResponse<AFDDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+      ArmLroLocationHeader<FinalResult = AFDDomain> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AFDDomain;
@@ -69,12 +78,12 @@ interface AFDDomains {
    * Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("AFDCustomDomains_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDDomain,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+      ArmLroLocationHeader<FinalResult = AFDDomain> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -94,7 +103,8 @@ interface AFDDomains {
     AFDDomain,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+      ArmLroLocationHeader<FinalResult = AFDDomain> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

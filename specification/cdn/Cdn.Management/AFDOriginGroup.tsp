@@ -14,6 +14,7 @@ namespace Microsoft.Cdn;
 /**
  * AFDOrigin group comprising of origins is used for load balancing to origins when the content cannot be served from Azure Front Door.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(Profile)
 model AFDOriginGroup
   is Azure.ResourceManager.ProxyResource<AFDOriginGroupProperties> {
@@ -25,6 +26,7 @@ model AFDOriginGroup
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AFDOriginGroups {
   /**
@@ -40,10 +42,12 @@ interface AFDOriginGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("AFDOriginGroups_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AFDOriginGroup,
-    Response = ArmResourceUpdatedResponse<AFDOriginGroup> | ArmResourceCreatedResponse<AFDOriginGroup> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<AFDOriginGroup> | ArmResourceCreatedResponse<AFDOriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
+      ArmLroLocationHeader<FinalResult = AFDOriginGroup>> & {
       @bodyRoot
       _: AFDOriginGroup;
     })
@@ -59,7 +63,8 @@ interface AFDOriginGroups {
   update is ArmCustomPatchAsync<
     AFDOriginGroup,
     PatchModel = AFDOriginGroupUpdateParameters,
-    Response = ArmResponse<AFDOriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    Response = ArmResponse<AFDOriginGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
+      ArmLroLocationHeader<FinalResult = AFDOriginGroup> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: AFDOriginGroup;

@@ -14,6 +14,7 @@ namespace Microsoft.Cdn;
 /**
  * Azure Front Door origin is the source of the content being delivered via Azure Front Door. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @parentResource(AFDOriginGroup)
 model AFDOrigin is Azure.ResourceManager.ProxyResource<AFDOriginProperties> {
   ...ResourceNameParameter<
@@ -23,7 +24,7 @@ model AFDOrigin is Azure.ResourceManager.ProxyResource<AFDOriginProperties> {
     NamePattern = ""
   >;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface AFDOrigins {
   /**
@@ -42,7 +43,7 @@ interface AFDOrigins {
   @operationId("AFDOrigins_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AFDOrigin,
-    Response = ArmResourceUpdatedResponse<AFDOrigin> | ArmResourceCreatedResponse<AFDOrigin> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<AFDOrigin> | ArmResourceCreatedResponse<AFDOrigin> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
       @bodyRoot
       _: AFDOrigin;
     })
@@ -58,8 +59,8 @@ interface AFDOrigins {
   update is ArmCustomPatchAsync<
     AFDOrigin,
     PatchModel = AFDOriginUpdateParameters,
-    Response = ArmResponse<AFDOrigin> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = ArmResponse<AFDOrigin> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOrigin> &
+      ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
       @bodyRoot
       _: AFDOrigin;
     })

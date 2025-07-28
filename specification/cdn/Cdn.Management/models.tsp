@@ -2207,6 +2207,7 @@ model ProfileScrubbingRules {
  * The JSON object that contains the properties of the domain to create.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDDomainProperties {
   ...AFDDomainUpdatePropertiesParameters;
   ...AFDStateProperties;
@@ -2255,6 +2256,7 @@ model DomainValidationProperties {
 /**
  * The JSON object that contains the properties of the domain to create.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDDomainUpdatePropertiesParameters {
   /**
    * The name of the profile which holds the domain.
@@ -2281,6 +2283,8 @@ model AFDDomainUpdatePropertiesParameters {
 /**
  * The JSON object that contains the properties to secure a domain.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDDomainHttpsParameters {
   /**
    * Defines the source of the SSL certificate.
@@ -2311,6 +2315,7 @@ model AFDDomainHttpsParameters {
 /**
  * Customized cipher suite set object that will be used for Https when cipherSuiteSetType is Customized.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDDomainHttpsCustomizedCipherSuiteSet {
   /**
    * Cipher suites for TLS 1.2. Required at least one in minimumTlsVersion TLS 1.2.
@@ -2326,6 +2331,7 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
 /**
  * The tracking states for afd resources.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDStateProperties {
   /**
    * Provisioning status
@@ -2341,6 +2347,7 @@ model AFDStateProperties {
 /**
  * The domain JSON object required for domain creation or update.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDDomainUpdateParameters {
   /**
    * The JSON object that contains the properties of the domain to create.
@@ -2354,6 +2361,7 @@ model AFDDomainUpdateParameters {
  * The JSON object that contains the properties required to create an endpoint.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDEndpointProperties {
   ...AFDEndpointPropertiesUpdateParameters;
   ...AFDStateProperties;
@@ -2373,6 +2381,7 @@ model AFDEndpointProperties {
 /**
  * The JSON object containing endpoint update parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDEndpointPropertiesUpdateParameters {
   /**
    * The name of the profile which holds the endpoint.
@@ -2389,6 +2398,7 @@ model AFDEndpointPropertiesUpdateParameters {
 /**
  * Properties required to create or update an endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDEndpointUpdateParameters {
   /**
    * Endpoint tags.
@@ -2456,6 +2466,7 @@ model ValidateCustomDomainOutput {
  * The JSON object that contains the properties of the origin group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDOriginGroupProperties {
   ...AFDOriginGroupUpdatePropertiesParameters;
   ...AFDStateProperties;
@@ -2464,6 +2475,7 @@ model AFDOriginGroupProperties {
 /**
  * The JSON object that contains the properties of the origin group.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDOriginGroupUpdatePropertiesParameters {
   /**
    * The name of the profile which holds the origin group.
@@ -2569,6 +2581,7 @@ model OriginAuthenticationProperties {
 /**
  * AFDOrigin group properties needed for origin group creation or update.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDOriginGroupUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin group.
@@ -2581,6 +2594,7 @@ model AFDOriginGroupUpdateParameters {
 /**
  * The JSON object that contains the properties of the origin.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model AFDOriginProperties {
   ...AFDOriginUpdatePropertiesParameters;
@@ -2590,6 +2604,7 @@ model AFDOriginProperties {
 /**
  * The JSON object that contains the properties of the origin.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDOriginUpdatePropertiesParameters {
   /**
    * The name of the origin group which contains this origin.
@@ -2689,6 +2704,7 @@ model SharedPrivateLinkResourceProperties {
 /**
  * AFDOrigin properties needed for origin update.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model AFDOriginUpdateParameters {
   /**
    * The JSON object that contains the properties of the origin.
@@ -3276,6 +3292,7 @@ model ComponentsKpo1PjSchemasWafrankingsresponsePropertiesDataItemsPropertiesMet
 /**
  * Properties required to update a profile.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model ProfileUpdateParameters {
   /**
    * Profile tags
@@ -4271,6 +4288,7 @@ model CheckNameAvailabilityInput {
 /**
  * Input of the validate probe API.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateProbeInput {
   /**
    * The probe URL to validate.
@@ -4903,6 +4921,7 @@ model CdnEndpoint {
 /**
  * Properties required to update a CdnWebApplicationFirewallPolicy.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model CdnWebApplicationFirewallPolicyPatchParameters {
   /**
    * CdnWebApplicationFirewallPolicy tags
@@ -5031,6 +5050,7 @@ model Certificate {
 /**
  * Managed Certificate used for https
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ManagedCertificate extends Certificate {}
 
@@ -5075,6 +5095,7 @@ model CustomerCertificate extends Certificate {
 /**
  * Azure FirstParty Managed Certificate provided by other first party resource providers to enable HTTPS.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AzureFirstPartyManagedCertificate extends Certificate {}
 
@@ -6372,6 +6393,7 @@ model CacheExpirationActionParameters extends DeliveryRuleActionParameters {
   /**
    * The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   cacheDuration?: string | null;
 
   typeName: "DeliveryRuleCacheExpirationActionParameters";
@@ -6404,6 +6426,7 @@ model CacheKeyQueryStringActionParameters extends DeliveryRuleActionParameters {
   /**
    * query parameters to include or exclude (comma separated).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   queryParameters?: string | null;
 
   typeName: "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters";

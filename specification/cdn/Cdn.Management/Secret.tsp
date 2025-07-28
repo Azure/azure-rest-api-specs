@@ -36,9 +36,11 @@ interface Secrets {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Secret,
-    Response = ArmResourceUpdatedResponse<Secret> | ArmResourceCreatedResponse<Secret> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Secret> | ArmResourceCreatedResponse<Secret> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
+      ArmLroLocationHeader<FinalResult = Secret>> & {
       @bodyRoot
       _: Secret;
     })
@@ -47,11 +49,11 @@ interface Secrets {
   /**
    * Deletes an existing Secret within profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Secret,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
+      ArmLroLocationHeader<FinalResult = Secret> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

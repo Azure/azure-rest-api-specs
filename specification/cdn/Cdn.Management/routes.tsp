@@ -16,6 +16,7 @@ namespace Microsoft.Cdn;
 /**
  * Check the availability of a resource name. This is needed for resources where name is globally unique, such as a afdx endpoint.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/checkEndpointNameAvailability")
 @post
@@ -88,6 +89,7 @@ interface ProfilesOperationGroup {
   /**
    * Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Profiles_Migrate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/migrate")
