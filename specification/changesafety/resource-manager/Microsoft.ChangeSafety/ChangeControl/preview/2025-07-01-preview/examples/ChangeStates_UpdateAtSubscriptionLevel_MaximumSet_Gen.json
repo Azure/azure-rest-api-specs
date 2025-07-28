@@ -1,0 +1,170 @@
+{
+  "title": "ChangeStates_UpdateAtSubscriptionLevel_MaximumSet",
+  "operationId": "ChangeStates_UpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionSecurityChangeState",
+    "properties": {
+      "properties": {
+        "state": "InProgress",
+        "comments": "Subscription security framework deployment updated with enhanced compliance validation and multi-region coordination enabled.",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/SecurityProject/_workitems/edit/12374",
+            "description": "Work item for subscription security framework deployment with compliance validation"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/67917",
+            "description": "Subscription security framework deployment approval with executive review"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC001261",
+            "description": "Support incident for subscription security deployment coordination"
+          },
+          "accessElevationRequest": {
+            "uri": "https://access.contoso.com/requests/AER-5705",
+            "description": "Access elevation request for subscription security deployment with highest privileges"
+          },
+          "relatedChangeState": {
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/complianceFrameworkState",
+            "description": "Related compliance framework change state for security coordination"
+          },
+          "testResults": {
+            "uri": "https://testresults.contoso.com/runs/TR-9903",
+            "description": "Subscription security deployment test results with compliance validation"
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/subscription-security-framework",
+            "description": "Subscription security framework service catalog entry with compliance specifications"
+          }
+        },
+        "additionalData": {
+          "securityLevel": "enterprise",
+          "complianceValidation": "enhanced",
+          "multiRegionEnabled": true,
+          "auditTrailEnabled": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Subscription security framework deployment across subscription with multi-region coordination and enterprise compliance validation. This deployment includes security policies, threat detection, compliance controls, and audit frameworks for enterprise-scale security.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionSecurityStageMap"
+          },
+          "parameters": {
+            "securityFrameworkVersion": {
+              "type": "string",
+              "metadata": {
+                "description": "Version of the security framework to deploy"
+              }
+            }
+          },
+          "state": "InProgress",
+          "comments": "Subscription security framework deployment updated with enhanced compliance validation and multi-region coordination enabled.",
+          "changeDefinitions": [
+            {
+              "name": "subscriptionSecurityDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "templateUri": "https://templates.contoso.com/subscription-security.json",
+                "parameters": {
+                  "version": "2.5.0",
+                  "subscriptionScope": true,
+                  "enableCompliance": true
+                }
+              }
+            }
+          ],
+          "releaseLabel": "Release-2.5.0-SecurityFramework",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T14:30:17.815Z",
+          "orchestrationTool": "Azure Resource Manager",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/SecurityProject/_workitems/edit/12374",
+              "description": "Work item for subscription security framework deployment with compliance validation",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/67917",
+              "description": "Subscription security framework deployment approval with executive review",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC001261",
+              "description": "Support incident for subscription security deployment coordination",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/requests/AER-5705",
+              "description": "Access elevation request for subscription security deployment with highest privileges",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/complianceFrameworkState",
+              "description": "Related compliance framework change state for security coordination",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/TR-9903",
+              "description": "Subscription security deployment test results with compliance validation",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/subscription-security-framework",
+              "description": "Subscription security framework service catalog entry with compliance specifications",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "securityLevel": "enterprise",
+            "complianceValidation": "enhanced",
+            "multiRegionEnabled": true,
+            "auditTrailEnabled": true,
+            "threatDetection": "advanced"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "securityValidation",
+              "status": "completed"
+            },
+            {
+              "stageName": "complianceCheck",
+              "status": "completed"
+            },
+            {
+              "stageName": "deployment",
+              "status": "in-progress"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionSecurityChangeState",
+        "name": "subscriptionSecurityChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "security@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "security@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}
