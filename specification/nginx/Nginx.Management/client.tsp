@@ -7,7 +7,10 @@ using NGINX.NGINXPLUS;
 @@clientName(NGINX.NGINXPLUS, "NginxManagementClient", "javascript");
 
 // Client location overrides for NginxDeployments operations
-@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.get, "Deployments", "!csharp");
+@@clientLocation(NGINX.NGINXPLUS.NginxDeployments.get,
+  "Deployments",
+  "!csharp"
+);
 @@clientLocation(NGINX.NGINXPLUS.NginxDeployments.createOrUpdate,
   "Deployments",
   "!csharp"
