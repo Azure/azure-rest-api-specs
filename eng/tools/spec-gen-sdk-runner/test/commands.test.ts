@@ -241,6 +241,7 @@ describe("generateSdkForSpecPr", () => {
       "succeeded", // overallExecutionResult
       false, // overallRunHasBreakingChange
       true, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
@@ -283,6 +284,7 @@ describe("generateSdkForSpecPr", () => {
       "succeeded", // overallExecutionResult should be set to "succeeded"
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       false, // sdkGenerationExecuted should be set to false
@@ -321,6 +323,7 @@ describe("generateSdkForSpecPr", () => {
       "", // overallExecutionResult is empty because no spec was actually processed
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config
