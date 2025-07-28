@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "testrg",
-    "targetDbServerName": "testtarget",
+    "resourceGroupName": "exampleresourcegroup",
+    "targetDbServerName": "exampletarget",
     "migrationListFilter": "All"
   },
   "responses": {
@@ -38,24 +38,24 @@
                   "name": "Standard_D4ds_v5"
                 }
               },
-              "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
-              "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+              "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/servers/examplesource",
+              "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
               "dbsToMigrate": [
-                "db1",
-                "db2",
-                "db3",
-                "db4"
+                "exampledatabase1",
+                "exampledatabase2",
+                "exampledatabase3",
+                "exampledatabase4"
               ],
               "setupLogicalReplicationOnSourceDbIfNeeded": "False",
               "overwriteDbsInTarget": "False",
-              "migrationWindowStartTimeInUtc": "2024-12-06T16:05:58.895Z",
+              "migrationWindowStartTimeInUtc": "2025-01-01T20:30:22.123456Z",
               "startDataMigration": "False",
               "triggerCutover": "False",
               "migrateRoles": "False"
             },
             "location": "westus",
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
-            "name": "testmigration",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+            "name": "examplemigration",
             "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
           }
         ]

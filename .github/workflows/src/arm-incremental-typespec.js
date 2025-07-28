@@ -18,12 +18,13 @@ import { CoreLogger } from "./core-logger.js";
 debug.enable("simple-git");
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ core }) {
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
+    paths: ["specification"],
     logger: new CoreLogger(core),
   };
 
@@ -97,9 +98,8 @@ export default async function incrementalTypeSpec({ core }) {
       logger: options.logger,
     });
     const tags = await readme.getTags();
-    const swaggers = [...tags].flatMap((t) => [...t.inputFiles]);
-    const inputFiles = swaggers.map((s) =>
-      relative(dirname(readme.path), s.path),
+    const inputFiles = [...tags.values()].flatMap((t) =>
+      [...t.inputFiles.keys()].map((p) => relative(dirname(readme.path), p)),
     );
 
     inputFiles.forEach((f) => {
@@ -109,9 +109,7 @@ export default async function incrementalTypeSpec({ core }) {
 
   const changedSpecDirs = new Set([
     ...changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
-    ...changedRmFiles
-      .filter(example)
-      .map((f) => dirname(dirname(dirname(dirname(f))))),
+    ...changedRmFiles.filter(example).map((f) => dirname(dirname(dirname(dirname(f))))),
     // Readme input files should use the same path format as changed swagger files
     ...[...changedReadmeInputFiles].map((f) => dirname(dirname(dirname(f)))),
   ]);
@@ -165,8 +163,6 @@ export default async function incrementalTypeSpec({ core }) {
     }
   }
 
-  core.info(
-    "Appears to contain only incremental changes to existing TypeSpec RP(s)",
-  );
+  core.info("Appears to contain only incremental changes to existing TypeSpec RP(s)");
   return true;
 }

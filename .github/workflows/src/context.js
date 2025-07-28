@@ -4,27 +4,32 @@ import { PER_PAGE_MAX } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
+ * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * @typedef {RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["response"]["data"][number]} PullRequest
+ */
+
+/**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
  *
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }>}
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }>}
  */
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
   core.info(`  payload.action: ${context.eventName}`);
-  core.info(
-    `  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`,
-  );
+  core.info(`  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
-  core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
+  if (core.isDebug()) {
+    core.debug(`context: ${JSON.stringify(context)}`);
+  }
 
-  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }} */
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
 
   // Add support for more event types as needed
@@ -40,10 +45,9 @@ export async function extractInputs(github, context, core) {
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target
 
-    const payload =
-      /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+      context.payload
+    );
 
     inputs = {
       owner: payload.repository.owner.login,
@@ -52,14 +56,10 @@ export async function extractInputs(github, context, core) {
       issue_number: payload.pull_request.number,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "issue_comment" &&
-    context.payload.action === "edited"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "issue_comment" && context.payload.action === "edited") {
+    const payload = /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
+      context.payload
+    );
 
     const owner = payload.repository.owner.login;
     const repo = payload.repository.name;
@@ -79,10 +79,9 @@ export async function extractInputs(github, context, core) {
       run_id: NaN,
     };
   } else if (context.eventName === "workflow_dispatch") {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
+      context.payload
+    );
     inputs = {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
@@ -90,14 +89,10 @@ export async function extractInputs(github, context, core) {
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "workflow_run" &&
-    context.payload.action === "completed"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "workflow_run" && context.payload.action === "completed") {
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
+      context.payload
+    );
 
     let issue_number = NaN;
 
@@ -130,26 +125,34 @@ export async function extractInputs(github, context, core) {
         const head_repo = payload.workflow_run.head_repository.name;
         const head_sha = payload.workflow_run.head_sha;
 
-        core.info(
-          `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
-        );
-        const pullRequests = (
-          await github.paginate(
-            github.rest.repos.listPullRequestsAssociatedWithCommit,
-            {
+        /** @type {PullRequest[]} */
+        let pullRequests = [];
+
+        try {
+          core.info(
+            `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
+          );
+          pullRequests = (
+            await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
               owner: head_owner,
               repo: head_repo,
               commit_sha: head_sha,
               per_page: PER_PAGE_MAX,
-            },
-          )
-        ).filter(
-          // Only include PRs to the same repo as the triggering workflow.
-          //
-          // Other unique keys like "full_name" should also work, but "id" is the safest since it's
-          // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
-          (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
-        );
+            })
+          ).filter(
+            // Only include PRs to the same repo as the triggering workflow.
+            //
+            // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+            // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+            (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
+          );
+        } catch (error) {
+          // Short message always
+          core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
+
+          // Long message only in debug
+          core.debug(`Error: ${error}`);
+        }
 
         if (pullRequests.length === 0) {
           // There are three cases where the "commits" REST API called above can return
@@ -162,8 +165,7 @@ export async function extractInputs(github, context, core) {
           //
           // In any case, the solution is to fall back to the (lower-rate-limit) search API.
           // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (await getIssueNumber({ head_sha, github, core }))
-            .issueNumber;
+          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
         } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
@@ -184,15 +186,12 @@ export async function extractInputs(github, context, core) {
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
-      const artifacts = await github.paginate(
-        github.rest.actions.listWorkflowRunArtifacts,
-        {
-          owner: payload.workflow_run.repository.owner.login,
-          repo: payload.workflow_run.repository.name,
-          run_id: payload.workflow_run.id,
-          per_page: PER_PAGE_MAX,
-        },
-      );
+      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner: payload.workflow_run.repository.owner.login,
+        repo: payload.workflow_run.repository.name,
+        run_id: payload.workflow_run.id,
+        per_page: PER_PAGE_MAX,
+      });
 
       const artifactNames = artifacts.map((a) => a.name);
 
@@ -213,9 +212,7 @@ export async function extractInputs(github, context, core) {
               issue_number = parsedValue;
               continue;
             } else {
-              throw new Error(
-                `Invalid issue-number: '${value}' parsed to '${parsedValue}'`,
-              );
+              throw new Error(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
             }
           }
         }
@@ -240,38 +237,22 @@ export async function extractInputs(github, context, core) {
     };
   } else if (context.eventName === "check_run") {
     let checkRun = context.payload.check_run;
-
-    // Extract the ADO build ID and project URL from the check run details URL
-    const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
-    const match = checkRun.details_url.match(buildUrlRegex);
-    if (!match) {
-      throw new Error(
-        `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
-      );
-    }
-
-    const payload =
-      /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+      context.payload
+    );
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
       owner: repositoryInfo.owner,
       repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
-      ado_build_id: match[2],
-      ado_project_url: match[1],
+      details_url: checkRun.details_url,
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "check_suite" &&
-    context.payload.action === "completed"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "check_suite" && context.payload.action === "completed") {
+    const payload = /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
+      context.payload
+    );
 
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
@@ -299,12 +280,7 @@ export async function extractInputs(github, context, core) {
  * @returns {{ owner: string, repo: string }}
  */
 function getRepositoryInfo(repository) {
-  if (
-    !repository ||
-    !repository.owner ||
-    !repository.owner.login ||
-    !repository.name
-  ) {
+  if (!repository || !repository.owner || !repository.owner.login || !repository.name) {
     throw new Error(
       `Could not extract repository owner or name from context payload: ${JSON.stringify(repository)}`,
     );

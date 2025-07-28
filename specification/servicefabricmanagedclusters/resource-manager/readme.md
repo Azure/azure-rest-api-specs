@@ -395,6 +395,8 @@ suppressions:
       - $.definitions.NodeTypeProperties.properties.capacities
       - $.definitions.ServiceTypeHealthPolicyMap
       - $.definitions.UserAssignedIdentityMap
+      - $.definitions.VMSSExtensionProperties.properties.settings
+      - $.definitions.VMSSExtensionProperties.properties.protectedSettings
       
   - code: BodyTopLevelProperties
     reason: Backwards compatability with previously approved specs. Model did not change.
@@ -413,6 +415,24 @@ suppressions:
       - $.definitions.ManagedClusterCodeVersionResult
       - $.definitions.LongRunningOperationResult
       - $.definitions.NodeTypeListSkuResult
+  
+  - code: ValidFormats
+    reason: duration-constant is an expected format to the .NET SDK generator
+    where:
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.ClusterMonitoringPolicy.properties.upgradeDomainTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeDomainTimeout.format
+      - $.definitions.StatefulServiceProperties.properties.replicaRestartWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.quorumLossWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.standByReplicaKeepDuration.format
+      - $.definitions.StatefulServiceProperties.properties.servicePlacementTimeLimit.format
 ```
 
 ---

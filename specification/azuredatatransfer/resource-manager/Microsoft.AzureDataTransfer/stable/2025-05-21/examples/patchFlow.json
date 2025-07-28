@@ -1,0 +1,56 @@
+{
+  "operationId": "Flows_Update",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "flow": {},
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "tags": {
+      "tag": "value"
+    }
+  },
+  "title": "Updates the flow resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US",
+        "properties": {
+          "connection": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
+          },
+          "flowType": "Standard",
+          "storageAccountName": "testsa",
+          "storageContainerName": "testcontainer"
+        },
+        "tags": {
+          "tag": "value"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US",
+        "properties": {
+          "connection": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
+          },
+          "flowType": "Standard",
+          "storageAccountName": "testsa",
+          "storageContainerName": "testcontainer"
+        },
+        "tags": {
+          "tag": "value"
+        }
+      },
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-21"
+      }
+    }
+  }
+}

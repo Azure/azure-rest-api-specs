@@ -17,3 +17,8 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 input-file:
   - data-plane/swagger.json
 ```
+
+```yaml $(tag) == 'package-2022-12-01-preview'
+input-file:
+  - data-plane/swagger-preview.json
+```

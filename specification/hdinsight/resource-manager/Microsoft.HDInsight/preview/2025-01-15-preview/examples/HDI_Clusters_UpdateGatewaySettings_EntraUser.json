@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-01-15-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "restAuthCredential.isEnabled": false,
+      "restAuthEntraUsers": [
+        {
+          "objectId": "00000000-0000-0000-0000-000000000000",
+          "displayName": "displayName",
+          "upn": "user@microsoft.com"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2025-01-15-preview"
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/operationresults/operationid?api-version=2025-01-15-preview"
+      }
+    }
+  }
+}
