@@ -157,6 +157,7 @@ interface HybridConnections {
     ArmResponse<AccessKeys>
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface WCFRelayOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -170,7 +171,7 @@ interface WCFRelayOps
       },
       KeysOf<AuthorizationRuleNameParameter>
     > {}
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface WCFRelays {
   /**

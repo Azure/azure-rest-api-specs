@@ -398,6 +398,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
   provisioningState?: EndPointProvisioningState;
 }
 
@@ -548,6 +549,7 @@ model NetworkRuleSetProperties {
 /**
  * The response from the List namespace operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model NWRuleSetIpRules {
   /**
    * IP Mask
@@ -592,6 +594,7 @@ model Operation {
    * Properties of the operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }

@@ -25,6 +25,7 @@ model PrivateLinkResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
 interface PrivateLinkResources {
   /**
    * Gets a description for the specified Private Endpoint Connection name.
