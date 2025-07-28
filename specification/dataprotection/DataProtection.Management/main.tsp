@@ -51,4 +51,4 @@ enum Versions {
   v2025_07_01: "2025-07-01",
 }
 
-interface DataProtectionOperations extends Azure.ResourceManager.Operations {}
+interface Operations extends Azure.ResourceManager.Operations {}

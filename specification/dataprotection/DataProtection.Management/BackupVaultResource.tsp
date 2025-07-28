@@ -61,6 +61,7 @@ interface BackupVaultResources {
     BackupVaultResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -73,6 +74,7 @@ interface BackupVaultResources {
    * Updates a BackupVault resource belonging to a resource group. For example, updating tags for a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("BackupVaults_Update")
   update is BackupVaultResourceOps.CustomPatchAsync<
@@ -80,6 +82,7 @@ interface BackupVaultResources {
     PatchModel = PatchResourceRequestInput,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -146,6 +149,7 @@ interface BackupVaultResources {
    * Triggers export of jobs and returns an OperationID to track.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("exportBackupJobs")
   @operationId("ExportJobs_Trigger")
   trigger is BackupVaultResourceOps.ActionAsync<
@@ -159,6 +163,7 @@ interface BackupVaultResources {
    * Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also contains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("ExportJobsOperationResult_Get")
   exportJobsOperationResultGet is BackupVaultResourceOps.Read<
@@ -200,6 +205,7 @@ interface BackupVaultOperationResultOps
 
 @armResourceOperations
 interface BackupVaultOperationResults {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupVaultOperationResultOps.Read<
     BackupVaultResource,
     Response = ArmResponse<BackupVaultResource> | AcceptedResponse,

@@ -50,3 +50,4 @@ using Microsoft.DataProtection;
 @@clientName(DataProtectionOperationGroup.checkFeatureSupport::parameters.body,
   "parameters"
 );
+@@clientName(Operations, "DataProtectionOperations");

@@ -74,6 +74,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -94,6 +95,7 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -123,13 +125,14 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
     ArmResponse<OperationJobExtendedInfo>,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationJobExtendedInfo>> | ErrorResponse
   >;
 
   /**
    * rehydrate recovery point for restore for a BackupInstance
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("rehydrate")
   @operationId("BackupInstances_TriggerRehydrate")
   triggerRehydrate is BackupInstanceResourceOps.ActionAsync<
@@ -151,6 +154,7 @@ interface BackupInstanceResources {
     ArmResponse<OperationJobExtendedInfo>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -198,6 +202,7 @@ interface BackupInstanceResources {
     OkResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -221,6 +226,7 @@ interface BackupInstanceResources {
     OkResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -255,6 +261,7 @@ interface BackupInstanceResources {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("findRestorableTimeRanges")
   @operationId("RestorableTimeRanges_Find")
   find is BackupInstanceResourceOps.ActionSync<
@@ -298,6 +305,7 @@ interface BackupInstances {
   /**
    * Get result of backup instance creation operation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getBackupInstanceOperationResult is BackupInstanceOps.Read<
     BackupInstanceResource,
     Response = ArmResponse<BackupInstanceResource> | AcceptedResponse,

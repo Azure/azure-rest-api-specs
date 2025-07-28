@@ -998,6 +998,7 @@ model OperationExtendedInfo {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1131,6 +1132,7 @@ model FeatureValidationRequestBase {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1142,6 +1144,7 @@ model FeatureValidationResponseBase {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1265,6 +1268,7 @@ model BaseBackupPolicy {
   datasourceTypes: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1400,6 +1404,7 @@ model Datasource {
   /**
    * Full ARM ID of the resource. For azure resources, this is ARM ID. For non azure resources, this will be the ID created by backup service via Fabric/Vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceID: string;
 
   /**
@@ -1456,6 +1461,7 @@ model DatasourceSet {
   /**
    * Full ARM ID of the resource. For azure resources, this is ARM ID. For non azure resources, this will be the ID created by backup service via Fabric/Vault.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceID: string;
 
   /**
@@ -1526,6 +1532,7 @@ model DataStoreParameters {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 
   /**
@@ -1542,6 +1549,7 @@ model BackupDatasourceParameters {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1639,6 +1647,7 @@ model AuthCredentials {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1758,6 +1767,7 @@ model AzureBackupRecoveryPointResourceList extends DppResourceList {
 @discriminator("objectType")
 model AzureBackupRecoveryPoint {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -1766,6 +1776,7 @@ model AzureBackupRecoveryPoint {
  * Source region and
  * BI ARM path
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FetchSecondaryRPsRequestParameters {
   /**
    * Source region in which BackupInstance is located
@@ -1799,6 +1810,7 @@ model CrossRegionRestoreRequestObject {
 @discriminator("objectType")
 model AzureBackupRestoreRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 
   /**
@@ -1836,6 +1848,7 @@ model RestoreTargetInfoBase {
   /**
    * Type of Datasource object, used to initialize the right inherited type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 
   /**
@@ -1894,6 +1907,7 @@ model AzureBackupJob {
   /**
    * Job Activity Id
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   activityID: string;
 
   /**
@@ -2015,6 +2029,7 @@ model AzureBackupJob {
   /**
    * SubscriptionId corresponding to the DataSource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceSubscriptionID: string;
 
   /**
@@ -2109,6 +2124,7 @@ model JobExtendedInfo {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model RestoreJobRecoveryPointDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryPointID?: string;
 
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -2385,6 +2401,7 @@ model DeletionInfo {
   /**
    * Delete activity ID for troubleshooting purpose
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   deleteActivityID?: string;
 }
@@ -2562,6 +2579,7 @@ model DeleteOption {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -2636,6 +2654,7 @@ model TriggerContext {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -2774,6 +2793,7 @@ model BackupParameters {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -2870,6 +2890,7 @@ model BasePolicyRule {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -2969,9 +2990,11 @@ model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: "BlobBackupDatasourceParameters";
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model BlobBackupDatasourceCommonParameters {
   /**
    * List of containers to be backed up during configuration of backup of blobs
@@ -3047,6 +3070,7 @@ model CopyOption {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -3058,6 +3082,7 @@ model BackupCriteria {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -3218,6 +3243,7 @@ model ItemLevelRestoreCriteria {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
 }
 
@@ -3319,12 +3345,14 @@ model KubernetesStorageClassRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: "KubernetesStorageClassRestoreCriteria";
 }
 
 /**
  * Item Level kubernetes persistent volume target info for restore operation
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KubernetesPVRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Selected persistent volume claim name

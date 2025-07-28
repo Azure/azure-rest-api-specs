@@ -82,6 +82,7 @@ interface ResourceGuardProxyBaseResources {
     ArmResponse<UnlockDeleteResponse>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },

@@ -14,6 +14,8 @@ namespace Microsoft.DataProtection;
 /**
  * Base resource under Microsoft.DataProtection provider namespace
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGuardResource)
 model DppBaseResource is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -89,6 +91,7 @@ interface ResourceGuards {
     OverrideErrorType = CloudError
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DppBaseResourceGetBackupSecurityPINOperationGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -274,6 +277,7 @@ interface DppBaseResourceOperationGroup {
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ResourceGuards_GetDefaultBackupSecurityPINRequestsObject")
   getDefaultBackupSecurityPINRequestsObject is DppBaseResourceGetBackupSecurityPINOperationGroupOps.Read<
     Resource = DppBaseResource,
@@ -284,6 +288,7 @@ interface DppBaseResourceOperationGroup {
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("getBackupSecurityPINRequests")
   @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
   getBackupSecurityPINRequestsObjects is DppBaseResourceGetBackupSecurityPINOperationGroupOps.List<
