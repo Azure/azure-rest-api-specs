@@ -53,3 +53,25 @@ using NGINX.NGINXPLUS;
   "NginxFrontendIpConfiguration",
   "java"
 );
+
+// Java property name overrides to maintain consistent casing
+@@clientName(NGINX.NGINXPLUS.NginxNetworkProfile.frontEndIPConfiguration,
+  "frontEndIpConfiguration",
+  "java"
+);
+@@clientName(NGINX.NGINXPLUS.NginxFrontendIPConfiguration.publicIPAddresses,
+  "publicIpAddresses",
+  "java"
+);
+@@clientName(NGINX.NGINXPLUS.NginxFrontendIPConfiguration.privateIPAddresses,
+  "privateIpAddresses",
+  "java"
+);
+@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAddress.privateIPAddress,
+  "privateIpAddress",
+  "java"
+);
+@@clientName(NGINX.NGINXPLUS.NginxPrivateIPAddress.privateIPAllocationMethod,
+  "privateIpAllocationMethod",
+  "java"
+);
