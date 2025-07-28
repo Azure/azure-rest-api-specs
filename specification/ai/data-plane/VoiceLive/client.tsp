@@ -4,6 +4,7 @@ import "./servers/websocket.tsp";
 using Azure.ClientGenerator.Core;
 
 @@access(VoiceLive.force_models, Access.internal, "python");
+@@access(VoiceLive.force_models, Access.internal, "csharp");
 
 @@access(VoiceLive.VoiceLiveServerEventSessionCreated, Access.public, "python");
 @@access(VoiceLive.VoiceLiveServerEventResponseAudioDelta, Access.public, "python");

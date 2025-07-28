@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace VoiceLive;
 
 @doc("Error object returned in case of API failure.")
-model Error {
+model ErrorDetails {
   @doc("Error code, or null if unspecified.")
   code?: string;
 
@@ -28,7 +28,7 @@ model Error {
 @doc("Standard error response envelope.")
 model ErrorResponse {
   @doc("Error object returned in case of API failure.")
-  error: Error;
+  error: ErrorDetails;
 }
 
 @doc("A single log probability entry for a token.")

@@ -709,7 +709,7 @@ model VoiceLiveServerEventConversationItemInputAudioTranscriptionFailed
   content_index: int32;
 
   /** Details of the transcription error. */
-  error: Error;
+  error: ErrorDetails;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
