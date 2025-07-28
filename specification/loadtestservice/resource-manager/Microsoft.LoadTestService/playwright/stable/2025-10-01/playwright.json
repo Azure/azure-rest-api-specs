@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service Management API",
-    "version": "2025-07-01-preview",
+    "version": "2025-10-01",
     "description": "Playwright service provides access to Playwright workspace resource and it's operations.",
     "x-typespec-generated": [
       {
@@ -703,7 +703,10 @@
       "properties": {
         "workspaceId": {
           "type": "string",
-          "description": "Playwright workspace-id that has free-trial in the subscription.",
+          "description": "The workspace id in GUID format that has free-trial enabled in the subscription.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "state": {
@@ -894,7 +897,7 @@
         "dataplaneUri": {
           "type": "string",
           "format": "uri",
-          "description": "The workspace data plane URI.",
+          "description": "The workspace data plane service API URI.",
           "readOnly": true
         },
         "regionalAffinity": {
@@ -946,6 +949,14 @@
               }
             ]
           }
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace id in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
         }
       }
     },

@@ -22,7 +22,7 @@ model PlaywrightWorkspaceProperties {
   provisioningState?: ProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The workspace data plane URI.")
+  @doc("The workspace data plane service API URI.")
   dataplaneUri?: url;
 
   @doc("This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
@@ -30,6 +30,13 @@ model PlaywrightWorkspaceProperties {
 
   @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("The workspace id in GUID format.")
+  @maxLength(36)
+  @minLength(3)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  workspaceId?: string;
 }
 
 @doc("The status of the last resource operation.")
@@ -80,7 +87,10 @@ model PlaywrightQuotaProperties {
 @doc("Subscription-level location-based Playwright quota resource free-trial properties.")
 model FreeTrialProperties {
   @visibility(Lifecycle.Read)
-  @doc("Playwright workspace-id that has free-trial in the subscription.")
+  @doc("The workspace id in GUID format that has free-trial enabled in the subscription.")
+  @maxLength(36)
+  @minLength(3)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   workspaceId: string;
 
   @visibility(Lifecycle.Read)
