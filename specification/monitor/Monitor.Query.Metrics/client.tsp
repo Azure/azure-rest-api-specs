@@ -49,7 +49,7 @@ using MonitorQueryMetrics;
 
 @@clientName(MonitorQueryMetrics, "MetricsClient", "javascript");
 @@clientName(MetricResultsResponseValuesItem.resourceid, "resourceId", "javascript");
-@@clientName(MetricResultsResponseValuesItem.resourceid, "resourceRegion", "javascript");
+@@clientName(MetricResultsResponseValuesItem.resourceregion, "resourceRegion", "javascript");
 @@clientName(MetricResultsResponseValuesItem.starttime, "startTime", "javascript");
 @@clientName(MetricResultsResponseValuesItem.endtime, "endTime", "javascript");
 @@clientName(MetricResultsResponseValuesItem.value, "metrics", "javascript");
