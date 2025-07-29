@@ -9,7 +9,7 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
-import "./common.tsp";
+import "../Common/common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

@@ -1,5 +1,5 @@
 import "./main.tsp";
-import "./identity.tsp";
+import "../Certificate/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
