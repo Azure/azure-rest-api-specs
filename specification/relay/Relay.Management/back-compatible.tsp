@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Relay;
@@ -131,3 +132,5 @@ using Microsoft.Relay;
 // PrivateLinkResources operations (no @operationId, using interface name)
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResources");
 @@clientLocation(PrivateLinkResources.list, "PrivateLinkResources");
+
+@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "python");
