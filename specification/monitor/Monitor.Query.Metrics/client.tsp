@@ -12,7 +12,7 @@ namespace ClientCustomizations;
 using MonitorQueryMetrics;
 
 @@clientNamespace(MonitorQueryMetrics,
-  "com.azure.monitor.query.metrics.implementation.generated",
+  "com.azure.monitor.query.metrics.implementation",
   "java"
 );
 
