@@ -18,9 +18,10 @@ tools: [CheckServiceLabel', 'CreateServiceLabel']
         - If the user confirms, use that existing label. Skip remaining label validation steps and proceed with the SDK release process
     - If user wants to create an entirely new service label instead, suggest a label name to the user and have them confirm the recommended label name
         - Service label naming guidance:
-            - Fetch common-labels.csv file from the azure-sdk-tools repository and look at the service's API spec to find a suitable and relevant name 
-            - Avoid special characters (unless it's a hyphen to denote a sub-service)
-            - If multiple words, use spaces to separate them and each word should start with a capital letter
+            - Fetch common-labels.csv file from the azure-sdk-tools repository and look at the service's API spec to find a suitable and relevant name
+            - Label text should not include the following words: Microsoft, Azure
+            - Label text should be in Title Case. Title case means capitalize the first letter of each word, except short prepositions (in, for, of) unless they are the first or last word
+            - If multiple words, use spaces to separate them. Avoid using underscores or hyphens
 - Make note of the corresponding service label name the user has confirmed or provided
 
 ## Step 3: Create Pull Request (only if new service label is created)
