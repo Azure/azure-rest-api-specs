@@ -107,7 +107,6 @@ jobs:
           (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
            fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-issue-number-artifact
         with:
-          name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"

@@ -64,7 +64,6 @@ jobs:
           steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '') &&
           github.event.pull_request.number > 0
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-issue-number-artifact
         with:
-          name: "issue-number"
           value: "${{ github.event.pull_request.number }}"
