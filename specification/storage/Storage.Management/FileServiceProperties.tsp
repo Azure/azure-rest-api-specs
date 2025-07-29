@@ -67,10 +67,8 @@ interface FileServices {
   /**
    * Lists all shares.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("shares")
-  @operationId("FileShares_List")
   fileSharesList is ArmResourceActionSync<
     FileServiceProperties,
     void,

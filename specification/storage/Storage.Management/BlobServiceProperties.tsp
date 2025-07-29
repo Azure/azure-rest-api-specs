@@ -66,10 +66,8 @@ interface BlobServices {
   /**
    * Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("containers")
-  @operationId("BlobContainers_List")
   blobContainersList is ArmResourceActionSync<
     BlobServiceProperties,
     void,

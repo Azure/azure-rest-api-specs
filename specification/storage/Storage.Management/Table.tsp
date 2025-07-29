@@ -68,16 +68,12 @@ interface Tables {
   /**
    * Gets the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Table_Get")
   get is ArmResourceRead<Table, Error = CloudError>;
 
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Table_Create")
   create is TablesCreateOps.CreateOrUpdateSync<
     Table,
     Response = ArmResourceUpdatedResponse<Table>,
@@ -87,9 +83,7 @@ interface Tables {
   /**
    * Creates a new table with the specified table name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Table_Update")
   update is TablesCreateOps.CustomPatchSync<
     Table,
     PatchModel = Table,
@@ -101,9 +95,7 @@ interface Tables {
   /**
    * Deletes the table with the specified table name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<
     Table,
     Response = ArmDeletedNoContentResponse,
@@ -113,8 +105,6 @@ interface Tables {
   /**
    * Gets a list of all the tables under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Table_List")
   list is ArmResourceListByParent<
     Table,
     Response = ArmResponse<ListTableResource>,

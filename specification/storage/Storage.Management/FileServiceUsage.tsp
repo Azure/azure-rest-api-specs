@@ -42,15 +42,11 @@ interface FileServiceUsageOperationGroup {
   /**
    * Gets the usage of file service in storage account including account limits, file share limits and constants used in recommendations and bursting formula.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FileServices_GetServiceUsage")
   getServiceUsage is ArmResourceRead<FileServiceUsage, Error = CloudError>;
 
   /**
    * Gets the usages of file service in storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FileServices_ListServiceUsages")
   listServiceUsages is ArmResourceListByParent<
     FileServiceUsage,
     Parameters = {

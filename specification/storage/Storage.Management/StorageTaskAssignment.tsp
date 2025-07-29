@@ -106,10 +106,8 @@ interface StorageTaskAssignments {
   /**
    * Fetch the report summary of a single storage task assignment's instances
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  @operationId("StorageTaskAssignmentInstancesReport_List")
   storageTaskAssignmentInstancesReportList is ArmResourceActionSync<
     StorageTaskAssignment,
     void,

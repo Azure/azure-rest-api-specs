@@ -62,8 +62,6 @@ interface StorageAccounts {
   /**
    * Checks that the storage account name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("StorageAccounts_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = StorageAccountCheckNameAvailabilityParameters,
@@ -162,10 +160,8 @@ interface StorageAccounts {
   /**
    * List SAS credentials of a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("ListAccountSas")
-  @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
     StorageAccount,
     AccountSasParameters,
@@ -176,10 +172,8 @@ interface StorageAccounts {
   /**
    * List service SAS credentials of a specific resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("ListServiceSas")
-  @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
     StorageAccount,
     ServiceSasParameters,
@@ -272,10 +266,8 @@ interface StorageAccounts {
   /**
    * Gets the private link resources that need to be created for a storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByStorageAccount")
   listByStorageAccount is ArmResourceActionSync<
     StorageAccount,
     void,
@@ -286,10 +278,8 @@ interface StorageAccounts {
   /**
    * Fetch the report summary of all the storage task assignments and instances in an account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  @operationId("StorageTaskAssignmentsInstancesReport_List")
   storageTaskAssignmentsInstancesReportList is ArmResourceActionSync<
     StorageAccount,
     void,

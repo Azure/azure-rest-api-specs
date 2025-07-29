@@ -59,10 +59,8 @@ interface QueueServices {
   /**
    * Gets a list of all the queues under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("queues")
-  @operationId("Queue_List")
   queueList is ArmResourceActionSync<
     QueueServiceProperties,
     void,

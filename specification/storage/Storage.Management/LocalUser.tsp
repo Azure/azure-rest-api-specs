@@ -29,16 +29,12 @@ interface LocalUserOperationGroup {
   /**
    * Get the local user of the storage account by username.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocalUsers_Get")
   get is ArmResourceRead<LocalUser, Error = ErrorResponse>;
 
   /**
    * Create or update the properties of a local user associated with the storage account. Properties for NFSv3 enablement and extended groups cannot be set with other properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("LocalUsers_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LocalUser,
     Response = ArmResourceUpdatedResponse<LocalUser>,
@@ -48,15 +44,11 @@ interface LocalUserOperationGroup {
   /**
    * Deletes the local user associated with the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocalUsers_Delete")
   delete is ArmResourceDeleteSync<LocalUser, Error = ErrorResponse>;
 
   /**
    * List the local users associated with the storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocalUsers_List")
   list is ArmResourceListByParent<
     LocalUser,
     Parameters = {
@@ -87,8 +79,6 @@ interface LocalUserOperationGroup {
   /**
    * List SSH authorized keys and shared key of the local user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocalUsers_ListKeys")
   listKeys is ArmResourceActionSync<
     LocalUser,
     void,
@@ -99,8 +89,6 @@ interface LocalUserOperationGroup {
   /**
    * Regenerate the local user SSH password.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LocalUsers_RegeneratePassword")
   regeneratePassword is ArmResourceActionSync<
     LocalUser,
     void,
