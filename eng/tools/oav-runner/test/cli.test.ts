@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
-import { getRootFolder } from "../src/cli.js";
 import path from "path";
+import { describe, expect, it, vi } from "vitest";
+import { getRootFolder } from "../src/cli.js";
 
 const REPOROOT = path.resolve(__dirname, "..", "..", "..", "..");
 
@@ -20,7 +20,7 @@ describe("invocation directory checks", () => {
 
     const exitMock = vi
       .spyOn(process, "exit")
-      .mockImplementation((code?: number) => {
+      .mockImplementation((code?: string | number | null | undefined) => {
         throw new Error(`Exit ${code}`);
       });
 
