@@ -45,7 +45,6 @@ interface WcfRelaysOps {
    * Returns the description for the specified WCF relay.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_Get")
   get is ArmResourceRead<
     WcfRelay,
     Response = ArmResponse<WcfRelay> | ArmNoContentResponse
@@ -56,7 +55,6 @@ interface WcfRelaysOps {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("WCFRelays_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     WcfRelay,
     Response = ArmResourceUpdatedResponse<WcfRelay>
@@ -66,14 +64,12 @@ interface WcfRelaysOps {
    * Deletes a WCF relay.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_Delete")
   delete is ArmResourceDeleteSync<WcfRelay>;
 
   /**
    * Lists the WCF relays within the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_ListByNamespace")
   listByNamespace is ArmResourceListByParent<
     WcfRelay,
     Response = WcfRelaysListResult

@@ -33,7 +33,6 @@ interface NetworkRuleSets {
    * Gets NetworkRuleSet for a Namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_GetNetworkRuleSet")
   getNetworkRuleSet is ArmResourceRead<NetworkRuleSet>;
 
   /**
@@ -41,7 +40,6 @@ interface NetworkRuleSets {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Namespaces_CreateOrUpdateNetworkRuleSet")
   createOrUpdateNetworkRuleSet is ArmResourceCreateOrReplaceSync<
     NetworkRuleSet,
     Response = ArmResourceUpdatedResponse<NetworkRuleSet>

@@ -54,7 +54,6 @@ interface AuthorizationRules {
    * Authorization rule for a namespace by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_GetAuthorizationRule")
   getAuthorizationRule is AuthorizationRuleOps.Read<AuthorizationRule>;
 
   /**
@@ -62,7 +61,6 @@ interface AuthorizationRules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Namespaces_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>
@@ -72,21 +70,18 @@ interface AuthorizationRules {
    * Deletes a namespace authorization rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_DeleteAuthorizationRule")
   deleteAuthorizationRule is AuthorizationRuleOps.DeleteSync<AuthorizationRule>;
 
   /**
    * Authorization rules for a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_ListAuthorizationRules")
   listAuthorizationRules is AuthorizationRuleOps.List<AuthorizationRule>;
 
   /**
    * Primary and secondary connection strings to the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_ListKeys")
   listKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     void,
@@ -97,7 +92,6 @@ interface AuthorizationRules {
    * Regenerates the primary or secondary connection strings to the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_RegenerateKeys")
   regenerateKeys is AuthorizationRuleOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,
@@ -183,7 +177,6 @@ interface WCFRelays {
    * Get authorizationRule for a WCF relay by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_GetAuthorizationRule")
   getAuthorizationRule is WCFRelayOps.Read<AuthorizationRule>;
 
   /**
@@ -191,7 +184,6 @@ interface WCFRelays {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("WCFRelays_CreateOrUpdateAuthorizationRule")
   createOrUpdateAuthorizationRule is WCFRelayOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>
@@ -201,21 +193,18 @@ interface WCFRelays {
    * Deletes a WCF relay authorization rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_DeleteAuthorizationRule")
   deleteAuthorizationRule is WCFRelayOps.DeleteSync<AuthorizationRule>;
 
   /**
    * Authorization rules for a WCF relay.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_ListAuthorizationRules")
   listAuthorizationRules is WCFRelayOps.List<AuthorizationRule>;
 
   /**
    * Primary and secondary connection strings to the WCF relay.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_ListKeys")
   listKeys is WCFRelayOps.ActionSync<
     AuthorizationRule,
     void,
@@ -226,7 +215,6 @@ interface WCFRelays {
    * Regenerates the primary or secondary connection strings to the WCF relay.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WCFRelays_RegenerateKeys")
   regenerateKeys is WCFRelayOps.ActionSync<
     AuthorizationRule,
     RegenerateAccessKeyParameters,

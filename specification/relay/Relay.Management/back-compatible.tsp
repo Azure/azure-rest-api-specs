@@ -68,34 +68,14 @@ using Microsoft.Relay;
 @@clientLocation(AuthorizationRules.listKeys, "Namespaces");
 @@clientLocation(AuthorizationRules.regenerateKeys, "Namespaces");
 
-// HybridConnections authorization operations (no @operationId specified, so use interface name)
-@@clientLocation(HybridConnections.getAuthorizationRule, "HybridConnections");
-@@clientLocation(HybridConnections.createOrUpdateAuthorizationRule,
-  "HybridConnections"
-);
-@@clientLocation(HybridConnections.deleteAuthorizationRule,
-  "HybridConnections"
-);
-@@clientLocation(HybridConnections.listAuthorizationRules, "HybridConnections");
-@@clientLocation(HybridConnections.listKeys, "HybridConnections");
-@@clientLocation(HybridConnections.regenerateKeys, "HybridConnections");
-
-// WCFRelays authorization operations
-@@clientLocation(WCFRelays.getAuthorizationRule, "WCFRelays");
-@@clientLocation(WCFRelays.createOrUpdateAuthorizationRule, "WCFRelays");
-@@clientLocation(WCFRelays.deleteAuthorizationRule, "WCFRelays");
-@@clientLocation(WCFRelays.listAuthorizationRules, "WCFRelays");
-@@clientLocation(WCFRelays.listKeys, "WCFRelays");
-@@clientLocation(WCFRelays.regenerateKeys, "WCFRelays");
-
 // HybridConnectionOperationGroup operations
-@@clientLocation(HybridConnectionOperationGroup.get, "HybridConnections");
+@@clientLocation(HybridConnectionOperationGroup.get, HybridConnections);
 @@clientLocation(HybridConnectionOperationGroup.createOrUpdate,
-  "HybridConnections"
+  HybridConnections
 );
-@@clientLocation(HybridConnectionOperationGroup.delete, "HybridConnections");
+@@clientLocation(HybridConnectionOperationGroup.delete, HybridConnections);
 @@clientLocation(HybridConnectionOperationGroup.listByNamespace,
-  "HybridConnections"
+  HybridConnections
 );
 
 // RelayNamespaces operations
@@ -111,27 +91,13 @@ using Microsoft.Relay;
 @@clientLocation(NetworkRuleSets.createOrUpdateNetworkRuleSet, "Namespaces");
 
 // WCFRelays operations
-@@clientLocation(WcfRelaysOps.get, "WCFRelays");
-@@clientLocation(WcfRelaysOps.createOrUpdate, "WCFRelays");
-@@clientLocation(WcfRelaysOps.delete, "WCFRelays");
-@@clientLocation(WcfRelaysOps.listByNamespace, "WCFRelays");
+@@clientLocation(WcfRelaysOps.get, WCFRelays);
+@@clientLocation(WcfRelaysOps.createOrUpdate, WCFRelays);
+@@clientLocation(WcfRelaysOps.delete, WCFRelays);
+@@clientLocation(WcfRelaysOps.listByNamespace, WCFRelays);
 
 // NamespacesOperationGroup operations
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
-
-// PrivateEndpointConnections operations (no @operationId, using interface name)
-@@clientLocation(PrivateEndpointConnections.get, "PrivateEndpointConnections");
-@@clientLocation(PrivateEndpointConnections.createOrUpdate,
-  "PrivateEndpointConnections"
-);
-@@clientLocation(PrivateEndpointConnections.delete,
-  "PrivateEndpointConnections"
-);
-@@clientLocation(PrivateEndpointConnections.list, "PrivateEndpointConnections");
-
-// PrivateLinkResources operations (no @operationId, using interface name)
-@@clientLocation(PrivateLinkResources.get, "PrivateLinkResources");
-@@clientLocation(PrivateLinkResources.list, "PrivateLinkResources");
 
 @@clientName(Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",

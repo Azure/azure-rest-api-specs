@@ -14,17 +14,6 @@ namespace Microsoft.Relay;
 /**
  * Information of the private link resource.
  */
-// #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-// @parentResource(RelayNamespace)
-// @Azure.ResourceManager.Private.armResourceInternal(
-//   PrivateLinkResourceProperties
-// )
-// @Azure.ResourceManager.Legacy.customAzureResource
-// @Http.Private.includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource {
   /**
    * Resource ID.
@@ -53,9 +42,6 @@ interface PrivateLinkResources {
   /**
    * Gets a description for the specified Private Endpoint Connection name.
    */
-  // #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
-  // @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  // get is ArmResourceRead<PrivateLinkResource>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")

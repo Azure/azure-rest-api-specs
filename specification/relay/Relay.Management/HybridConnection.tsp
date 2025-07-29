@@ -46,7 +46,6 @@ interface HybridConnectionOperationGroup {
    * Returns the description for the specified hybrid connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HybridConnections_Get")
   get is ArmResourceRead<HybridConnection>;
 
   /**
@@ -54,7 +53,6 @@ interface HybridConnectionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("HybridConnections_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     HybridConnection,
     Response = ArmResourceUpdatedResponse<HybridConnection>
@@ -64,14 +62,12 @@ interface HybridConnectionOperationGroup {
    * Deletes a hybrid connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HybridConnections_Delete")
   delete is ArmResourceDeleteSync<HybridConnection>;
 
   /**
    * Lists the hybrid connection within the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("HybridConnections_ListByNamespace")
   listByNamespace is ArmResourceListByParent<HybridConnection>;
 }
 

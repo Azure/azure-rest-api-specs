@@ -19,7 +19,6 @@ interface NamespacesOperationGroup {
    * Check the specified namespace name availability.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailability,
