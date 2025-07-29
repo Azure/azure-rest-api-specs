@@ -146,7 +146,7 @@ interface Profiles {
     ProfileUpgradeParameters,
     ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
       @bodyRoot
-      _: CustomDomain;
+      _: Profile;
     }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
