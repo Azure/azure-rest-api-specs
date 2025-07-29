@@ -26,7 +26,6 @@ import { PER_PAGE_MAX } from "../github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
-  processArmReviewLabels,
   processImpactAssessment,
   verRevApproval,
 } from "./labelling.js";
@@ -280,6 +279,12 @@ const EXCLUDED_CHECK_NAMES = [];
  */
 export default async function summarizeChecks({ github, context, core }) {
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+
+  if (!issue_number) {
+    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
+    return;
+  }
+
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -319,17 +324,9 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  core.info(
-    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
-  );
+  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
-  // retrieve latest labels state
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
@@ -342,34 +339,36 @@ export async function summarizeChecksImpl(
     EXCLUDED_CHECK_NAMES,
   );
 
-  /** @type {string[]} */
-  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
-
-  // todo: how important is it that we know if we're in draft? I don't want to have to pull the PR details unless we actually need to
-  // do we need to pull this from the PR? if triggered from a workflow_run we won't have payload.pullrequest populated
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
-  for (const label of labelContext.toRemove) {
-    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-    // await github.rest.issues.removeLabel({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   name: label,
-    // });
-  }
+  core.info(
+    `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
+      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
+      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
+  );
 
-  if (labelContext.toAdd.size > 0) {
-    core.info(
-      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-    );
-    // await github.rest.issues.addLabels({
-    //   owner: owner,
-    //   repo: repo,
-    //   issue_number: issue_number,
-    //   labels: Array.from(labelsToAdd),
-    // });
-  }
+  // for (const label of labelContext.toRemove) {
+  //   core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+  //   await github.rest.issues.removeLabel({
+  //     owner: owner,
+  //     repo: repo,
+  //     issue_number: issue_number,
+  //     name: label,
+  //   });
+  // }
+
+  // if (labelContext.toAdd.size > 0) {
+  //   core.info(
+  //     `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+  //   );
+  //   await github.rest.issues.addLabels({
+  //     owner: owner,
+  //     repo: repo,
+  //     issue_number: issue_number,
+  //     labels: Array.from(labelContext.toAdd),
+  //   });
+  // }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
   labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
@@ -379,7 +378,7 @@ export async function summarizeChecksImpl(
     }
   }
 
-  const commentBody = await createNextStepsComment(
+  const [commentBody, automatedChecksMet] = await createNextStepsComment(
     core,
     repo,
     labelNames,
@@ -400,75 +399,31 @@ export async function summarizeChecksImpl(
   //   commentName,
   //   commentBody
   // )
+
+  core.info(
+    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${automatedChecksMet}.`,
+  );
 }
 
 /**
- * A GraphQL query to GitHub API that returns all check runs for given commit, with "isRequired" field for given PR.
- *
- * If you want to see example response, copy the query body into this:
- * https://docs.github.com/en/graphql/overview/explorer
- * Example inputs:
- * resourceUrl: "https://github.com/test-repo-billy/azure-rest-api-specs/commit/c2789c5bde1b3f4fa34f76a8eeaaed479df23c4d"
- * prNumber: 2996
- *
- * Reference:
- * https://docs.github.com/en/graphql/reference/queries#resource
- * https://docs.github.com/en/graphql/guides/using-global-node-ids#3-do-a-direct-node-lookup-in-graphql
- * https://docs.github.com/en/graphql/reference/objects#checkrun
- * Rate limit:
- * https://docs.github.com/en/graphql/overview/resource-limitations#rate-limit
- * https://docs.github.com/en/graphql/reference/objects#ratelimit
- *
- * Note: here, for "checkRuns(first: ..)", maybe we should add a filter that filters to LATEST, per:
- * https://docs.github.com/en/graphql/reference/input-objects#checkrunfilter
- * https://docs.github.com/en/graphql/reference/enums#checkruntype
- **/
-/**
- * Returns a GraphQL query string for the given resource URL and PR number.
- *
- * @param {string} owner - The URL of the GitHub resource (commit).
- * @param {string} repo - The URL of the GitHub resource (commit).
- * @param {string} sha - targeted commit. context.pr!.headInfo.sha
- * @param {number} prNumber - The pull request number.
- * @returns {string} The GraphQL query string.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @param {*} owner
+ * @param {*} repo
+ * @param {*} issue_number
+ * @return {Promise<string[]>}
  */
-function getGraphQLQuery(owner, repo, sha, prNumber) {
-  const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
-
-  return `
-    {
-      resource(url: "${resourceUrl}") {
-        ... on Commit {
-          checkSuites(first: 20) {
-            nodes {
-              workflowRun {
-                id
-                databaseId
-                workflow {
-                  name
-                }
-              }
-              checkRuns(first: 30) {
-                nodes {
-                  name
-                  status
-                  conclusion
-                  isRequired(pullRequestNumber: ${prNumber})
-                }
-              }
-            }
-          }
-        }
-      }
-      rateLimit {
-        limit
-        cost
-        used
-        remaining
-        resetAt
-      }
-    }
-  `;
+export async function getExistingLabels(github, owner, repo, issue_number) {
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  /** @type {string[]} */
+  return labels.map((/** @type {{ name: string; }} */ label) => label.name);
 }
 
 // #endregion
@@ -511,32 +466,9 @@ export function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-    // Merge impact assessment labels into the main labelContext
-    impactAssessment.labelContext.toAdd.forEach((label) => {
-      labelContext.toAdd.add(label);
-    });
-    impactAssessment.labelContext.toRemove.forEach((label) => {
-      labelContext.toRemove.add(label);
-    });
-  }
 
-  // this is the only labelling that was part of original pipelinebot logic
-  processArmReviewLabels(labelContext, existingLabels);
-
-  if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(
-      impactAssessment.targetBranch,
-      labelContext,
-      impactAssessment.resourceManagerRequired,
-      impactAssessment.versioningReviewRequired,
-      impactAssessment.breakingChangeReviewRequired,
-      impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
-      impactAssessment.rpaasRpNotInPrivateRepo,
-      impactAssessment.isNewApiVersion,
-      impactAssessment.isDraft,
-    );
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
@@ -545,6 +477,111 @@ export function updateLabels(existingLabels, impactAssessment) {
 
 // #endregion
 // #region checks
+
+/**
+ * A GraphQL query to GitHub API that returns all check runs for given commit, with "isRequired" field for given PR.
+ *
+ * If you want to see example response, copy the query body into this:
+ * https://docs.github.com/en/graphql/overview/explorer
+ * Example inputs:
+ * resourceUrl: "https://github.com/test-repo-billy/azure-rest-api-specs/commit/c2789c5bde1b3f4fa34f76a8eeaaed479df23c4d"
+ * prNumber: 2996
+ *
+ * Reference:
+ * https://docs.github.com/en/graphql/reference/queries#resource
+ * https://docs.github.com/en/graphql/guides/using-global-node-ids#3-do-a-direct-node-lookup-in-graphql
+ * https://docs.github.com/en/graphql/reference/objects#checkrun
+ * Rate limit:
+ * https://docs.github.com/en/graphql/overview/resource-limitations#rate-limit
+ * https://docs.github.com/en/graphql/reference/objects#ratelimit
+ *
+ * Note: here, for "checkRuns(first: ..)", maybe we should add a filter that filters to LATEST, per:
+ * https://docs.github.com/en/graphql/reference/input-objects#checkrunfilter
+ * https://docs.github.com/en/graphql/reference/enums#checkruntype
+ **/
+/**
+ * Fetch all check suites for a commit with pagination
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} sha
+ * @param {number} prNumber
+ * @returns {Promise<any>} Complete GraphQL response with all check suites
+ */
+async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
+  const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
+  let allCheckSuites = [];
+  let hasNextPage = true;
+  let cursor = null;
+  let lastResponse = null;
+
+  while (hasNextPage) {
+    /** @type {string} */
+    const query = `
+      {
+        resource(url: "${resourceUrl}") {
+          ... on Commit {
+            checkSuites(first: 100${cursor ? `, after: "${cursor}"` : ""}) {
+              pageInfo {
+                hasNextPage
+                endCursor
+              }
+              nodes {
+                workflowRun {
+                  id
+                  databaseId
+                  workflow {
+                    name
+                  }
+                }
+                checkRuns(first: 100) {
+                  nodes {
+                    name
+                    status
+                    conclusion
+                    isRequired(pullRequestNumber: ${prNumber})
+                  }
+                }
+              }
+            }
+          }
+        }
+        rateLimit {
+          limit
+          cost
+          used
+          remaining
+          resetAt
+        }
+      }
+    `;
+
+    /** @type {any} */
+    const response = await github.graphql(query);
+    lastResponse = response;
+    core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
+
+    if (response.resource?.checkSuites?.nodes) {
+      allCheckSuites.push(...response.resource.checkSuites.nodes);
+      hasNextPage = response.resource.checkSuites.pageInfo.hasNextPage;
+      cursor = response.resource.checkSuites.pageInfo.endCursor;
+    } else {
+      hasNextPage = false;
+    }
+  }
+
+  // Return a response object that matches the original structure
+  return {
+    resource: {
+      checkSuites: {
+        nodes: allCheckSuites,
+      },
+    },
+    rateLimit: lastResponse?.rateLimit,
+  };
+}
+
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
@@ -577,7 +614,7 @@ export async function getCheckRunTuple(
   /** @type { import("./labelling.js").ImpactAssessment | undefined } */
   let impactAssessment = undefined;
 
-  const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
+  const response = await getAllCheckSuites(github, core, owner, repo, head_sha, prNumber);
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
   [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] =
@@ -716,7 +753,6 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-
   return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
 // #endregion
@@ -729,7 +765,7 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @returns {Promise<string>}
+ * @returns {Promise<[string, string]>}
  */
 export async function createNextStepsComment(
   core,
@@ -743,6 +779,8 @@ export async function createNextStepsComment(
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
+
+  // determine if required runs have any successful runs.
   const requiredCheckInfosPresent = requiredRuns.some((run) => {
     const status = run.status.toLowerCase();
     return status !== "queued" && status !== "in_progress";
@@ -751,7 +789,7 @@ export async function createNextStepsComment(
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  const commentBody = await buildNextStepsToMergeCommentBody(
+  const [commentBody, automatedChecksMet] = await buildNextStepsToMergeCommentBody(
     core,
     labels,
     `${repo}/${targetBranch}`,
@@ -760,7 +798,7 @@ export async function createNextStepsComment(
     fyiCheckInfos,
   );
 
-  return commentBody;
+  return [commentBody, automatedChecksMet];
 }
 
 /**
@@ -770,7 +808,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @returns {Promise<string>}
+ * @returns {Promise<[string, string]>}
  */
 async function buildNextStepsToMergeCommentBody(
   core,
@@ -796,7 +834,7 @@ async function buildNextStepsToMergeCommentBody(
   const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
 
   // Compose the body based on the current state
-  const commentBody = getCommentBody(
+  const [commentBody, automatedChecksMet] = getCommentBody(
     requirementsMet,
     anyBlockerPresent,
     anyFyiPresent,
@@ -805,7 +843,7 @@ async function buildNextStepsToMergeCommentBody(
     violatedReqLabelsRules,
   );
 
-  return commentTitle + commentBody;
+  return [commentTitle + commentBody, automatedChecksMet];
 }
 
 /**
@@ -816,7 +854,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
- * @returns {string} The body content HTML
+ * @returns {[string, string]} The body content HTML and the status that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet,
@@ -827,10 +865,12 @@ function getCommentBody(
   violatedRequiredLabelsRules,
 ) {
   let bodyProper = "";
+  let automatedChecksMet = "pending";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
+      automatedChecksMet = "blocked";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -844,6 +884,7 @@ function getCommentBody(
       }
     }
   } else if (requirementsMet) {
+    automatedChecksMet = "success";
     bodyProper =
       `✅ All automated merging requirements have been met! ` +
       `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
@@ -851,7 +892,7 @@ function getCommentBody(
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
   }
-  return bodyProper;
+  return [bodyProper, automatedChecksMet];
 }
 
 /**
