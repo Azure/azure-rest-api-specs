@@ -1,0 +1,107 @@
+{
+  "title": "AkriConnectorTemplate_Get_Managed_Rest",
+  "operationId": "AkriConnectorTemplate_Get",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "akriConnectorTemplateName": "resource-name123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runtimeConfiguration": {
+            "runtimeConfigurationType": "ManagedConfiguration",
+            "managedConfigurationSettings": {
+              "allocation": {
+                "policy": "Bucketized",
+                "bucketSize": 1
+              },
+              "persistentVolumeClaims": [
+                {
+                  "claimName": "test-pvc",
+                  "mountPath": "/data/connector"
+                }
+              ],
+              "secrets": [
+                {
+                  "secretAlias": "username",
+                  "secretRef": "secret-a",
+                  "secretKey": "username"
+                },
+                {
+                  "secretAlias": "password",
+                  "secretRef": "secret-a",
+                  "secretKey": "password"
+                }
+              ],
+              "trustSettings": {
+                "trustListSecretRef": "trust-list-secret"
+              },
+              "managedConfigurationType": "ImageConfiguration",
+              "imageConfigurationSettings": {
+                "imageName": "samples/akri-connector-minimalist",
+                "tagDigestSettings": {
+                  "tagDigestType": "Tag",
+                  "tag": "0.0.1"
+                },
+                "registrySettings": {
+                  "registrySettingsType": "ContainerRegistry",
+                  "containerRegistrySettings": {
+                    "registry": "mycr.azurecr.io"
+                  }
+                }
+              }
+            }
+          },
+          "diagnostics": {
+            "logs": {
+              "level": "info"
+            }
+          },
+          "deviceInboundEndpointTypes": [
+            {
+              "endpointType": "Microsoft.Rest",
+              "version": "0.0.1"
+            }
+          ],
+          "mqttConnectionConfiguration": {
+            "authentication": {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audience": "MQ-SAT"
+              }
+            },
+            "host": "aio-broker:18883",
+            "protocol": "Mqtt",
+            "keepAliveSeconds": 10,
+            "maxInflightMessages": 10,
+            "sessionExpirySeconds": 60,
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
+            }
+          }
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/akriConnectorTemplates/resource-name123",
+        "name": "bfimycofjtzxduufwanuxwoudsh",
+        "type": "wnabnudmydrgpccqusxkmsmgcwzwh",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}
