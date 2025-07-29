@@ -6,7 +6,8 @@ import * as path from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import { isEqual } from "lodash";
+import pkg from "lodash";
+const { isEqual } = pkg;
 
 import {
   ChangeHandler,
