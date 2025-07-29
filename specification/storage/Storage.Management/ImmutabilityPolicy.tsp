@@ -53,7 +53,7 @@ interface CreateOrUpdateImmutabilityPolicyOps
         #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("blobServices")
-        default: "default",
+        blobServicesDefault: "default",
 
         @doc("The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.")
         @path
@@ -66,7 +66,7 @@ interface CreateOrUpdateImmutabilityPolicyOps
         #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("immutabilityPolicies")
-        default: "default",
+        immutabilityPoliciesDefault: "default",
       },
       ErrorType = ErrorResponse
     > {}
