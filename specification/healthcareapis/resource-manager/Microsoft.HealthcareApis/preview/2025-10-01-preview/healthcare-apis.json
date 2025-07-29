@@ -1185,6 +1185,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/dicomservices/{dicomServiceName}/computeMigration": {
+      "post": {
+        "tags": [
+          "DicomServices"
+        ],
+        "description": "Initiates a live migration of the DICOM service to the specified compute model.",
+        "operationId": "DicomServices_ComputeMigration",
+        "x-ms-examples": {
+          "ComputeMigrationDICOM": {
+            "$ref": "./examples/dicomservices/DicomServices_ComputeMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/dicomServiceName"
+          },
+          {
+            "name": "computeConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComputeConfiguration"
+            },
+            "description": "Specifies the compute configuration to apply to the DICOM service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the compute migration is completed."
+          },
+          "202": {
+            "description": "Accepted -- Compute migration request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors": {
       "get": {
         "tags": [
@@ -1919,6 +1974,61 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/fhirservices/{fhirServiceName}/computeMigration": {
+      "post": {
+        "tags": [
+          "FhirServices"
+        ],
+        "description": "Initiates a live migration of the FHIR service to the specified compute model.",
+        "operationId": "FhirServices_ComputeMigration",
+        "x-ms-examples": {
+          "ComputeMigrationFHIR": {
+            "$ref": "./examples/fhirservices/FhirServices_ComputeMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/fhirServiceName"
+          },
+          {
+            "name": "computeMigrationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComputeConfiguration"
+            },
+            "description": "Specifies the compute configuration to apply to the FHIR service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the compute migration is completed."
+          },
+          "202": {
+            "description": "Accepted -- Compute migration request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/privateEndpointConnections": {
@@ -3447,6 +3557,12 @@
         "enableDataPartitions": {
           "description": "If data partitions is enabled or not.",
           "$ref": "#/definitions/EnableDataPartitions"
+        },
+        "computeConfiguration": {
+          "description": "The configuration of the compute model used for the DICOM service. See dicomservices/{dicomServiceName}/computeMigration for more information on how to update the compute model.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/ComputeConfiguration"
         }
       }
     },
@@ -3826,6 +3942,12 @@
         "encryption": {
           "description": "The encryption settings of the FHIR service",
           "$ref": "#/definitions/Encryption"
+        },
+        "computeConfiguration": {
+          "description": "The configuration of the compute model used for the FHIR service. See fhirservices/{fhirServiceName}/computeMigration for more information on how to update the compute model.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/ComputeConfiguration"
         }
       }
     },
@@ -4192,6 +4314,33 @@
           "type": "string",
           "description": "The name of the queue that contains storage cloud events.",
           "readOnly": false
+        }
+      }
+    },
+    "ComputeConfiguration": {
+      "description": "The configuration for the compute model used for the service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the compute model used for the resource.",
+          "enum": [
+            "OnDemand",
+            "Dedicated"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeModel",
+            "modelAsString": true
+          }
+        },
+        "dbComputeUnits": {
+          "type": "integer",
+          "description": "The number of database compute units used for the resource. Only applicable for Dedicated compute model.",
+          "minimum": 2
+        },
+        "appComputeUnits": {
+          "type": "integer",
+          "description": "The number of application compute units used for the resource. Only applicable for Dedicated compute model.",
+          "minimum": 2
         }
       }
     },
