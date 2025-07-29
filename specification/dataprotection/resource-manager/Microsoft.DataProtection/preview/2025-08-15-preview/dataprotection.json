@@ -5680,7 +5680,16 @@
         },
         "crossRegionBackupSettings": {
           "description": "Setting to support cross region backup at a vault",
-          "$ref": "#/definitions/FeatureStateEnum"
+          "enum": [
+            "NotApplicable",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureState",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -6090,18 +6099,6 @@
             "modelAsString": true
           }
         }
-      }
-    },
-    "FeatureStateEnum": {
-      "enum": [
-        "NotApplicable",
-        "Enabled",
-        "Disabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeatureState",
-        "modelAsString": true
       }
     },
     "CustomCopyOption": {
@@ -7313,7 +7310,16 @@
         },
         "crossRegionBackupSettings": {
           "description": "Setting to support cross region backup at a vault",
-          "$ref": "#/definitions/FeatureStateEnum"
+          "enum": [
+            "NotApplicable",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureState",
+            "modelAsString": true
+          }
         }
       }
     },
