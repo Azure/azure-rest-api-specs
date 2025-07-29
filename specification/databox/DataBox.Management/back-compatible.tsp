@@ -84,3 +84,5 @@ using Microsoft.DataBox;
 @@clientName(ServiceOperationGroup.validateInputs::parameters.body,
   "validationRequest"
 );
+
+@@clientLocation(mitigate, "Management", "go");

@@ -1375,9 +1375,9 @@ model JobStages {
   /**
    * Job Stage Details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  jobStageDetails?: Record<unknown>;
+  jobStageDetails?: unknown;
 
   /**
    * Delay information for the job stages.
@@ -1781,18 +1781,7 @@ model Preferences {
   /**
    * Preferences related to the Access Tier of storage accounts.
    */
-  storageAccountAccessTierPreferences?: StorageAccountAccessTier[];
-}
-
-/**
- * Storage account access tier.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum StorageAccountAccessTier {
-  /**
-   * Archive access tier.
-   */
-  Archive: "Archive",
+  storageAccountAccessTierPreferences?: "Archive"[]; // FIXME: `modelAsExtensible` is not supported anymore.
 }
 
 /**
@@ -2369,14 +2358,6 @@ model ValidationInputResponse {
   error?: CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ValidationCategory {
-  /**
-   * Identify request of pre-job creation validations.
-   */
-  JobCreationValidation,
-}
-
 /**
  * Minimum request requirement of any validation category.
  */
@@ -2386,7 +2367,7 @@ model ValidationRequest {
    * Identify the nature of validation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  validationCategory: ValidationCategory;
+  validationCategory: "JobCreationValidation"; // FIXME: `modelAsExtensible` is not supported anymore.
 
   /**
    * List of request details contain validationType and its request as key and value respectively.
@@ -3105,7 +3086,7 @@ model CreateJobValidations extends ValidationRequest {
   /**
    * Identify the nature of validation.
    */
-  validationCategory: ValidationCategory.JobCreationValidation;
+  validationCategory: "JobCreationValidation"; // FIXME: `modelAsExtensible` is not supported anymore.
 }
 
 /**
