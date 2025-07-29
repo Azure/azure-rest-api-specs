@@ -109,15 +109,26 @@ union RiskCategory {
   SelfHarm: "SelfHarm",
 }
 
-@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@doc("Azure OpenAI model target. The API version would be selected by the service for querying the model.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model AzureOpenAIModelConfiguration extends TargetConfig {
+model AzureOpenAIModelTarget extends TargetConfig {
   @visibility(Lifecycle.Read)
   type: "AzureOpenAIModel";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
   modelDeploymentName: string;
+}
+
+@doc("Azure AI Agent target. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model AzureAIAgentTarget extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureAIAgent";
+
+  @doc("Azure AI Agent ID to be used for the red team run. Example: `agent-12345`.")
+  agentId: string;
 }
 
 @doc("Abstract class for target configuration.")
@@ -127,6 +138,16 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
 model TargetConfig {
   @doc("Type of the model configuration.")
   type: string;
+}
+
+@doc("Seed prompts dataset for redteam.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model SeedPromptsDataset extends InputData {
+  type: "SeedPromptsDataset";
+
+  @doc("Seed prompts dataset asset id")
+  id: string;
 }
 
 @doc("Red team details.")
@@ -145,6 +166,9 @@ model RedTeam {
 
   @doc("Number of simulation rounds.")
   numTurns?: int32;
+
+  @doc("Data for red teaming. For eg: seed prompts, policy taxonomy, etc to be used for red teaming.")
+  inputData: InputData;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];

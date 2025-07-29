@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -114,4 +115,14 @@ model BlobReference {
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract data class.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputData {
+  @doc("Type of the data")
+  type: string;
 }
