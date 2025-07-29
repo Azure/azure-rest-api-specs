@@ -496,9 +496,9 @@ export async function processImpactAssessment(
 
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
   const resourceManagerLabel = new Label("resource-manager", labelContext.present);
-  resourceManagerLabel.shouldBePresent = resourceManagerLabelShouldBePresent;
+  resourceManagerLabel.shouldBePresent = resourceManagerLabelShouldBePresent || false;
   const dataplaneLabel = new Label("data-plane", labelContext.present);
-  dataplaneLabel.shouldBePresent = dataPlaneLabelShouldBePresent;
+  dataplaneLabel.shouldBePresent = dataPlaneLabelShouldBePresent || false;
 
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   newApiVersionLabel.shouldBePresent = false;
@@ -548,6 +548,7 @@ export async function processImpactAssessment(
   console.log(
     `RETURN definition processARMReview. ` +
       `isReleaseBranch: ${isReleaseBranchVal}, ` +
+      `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
       `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
       `isNewApiVersion: ${isNewApiVersion}, ` +
       `isDraft: ${isDraft}, ` +

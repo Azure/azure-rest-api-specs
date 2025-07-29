@@ -5,7 +5,7 @@ import {
   createNextStepsComment,
   getCheckRunTuple,
   getExistingLabels,
-  updateLabels
+  updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 
@@ -19,12 +19,12 @@ async function getNextStepsComment(github, owner, repo, prNumber) {
     const { data: comments } = await github.rest.issues.listComments({
       owner: owner,
       repo: repo,
-      issue_number: prNumber
+      issue_number: prNumber,
     });
 
     // Find comment containing "Next Steps to Merge"
-    const nextStepsComment = comments.find(comment =>
-      comment.body.includes('<h2>Next Steps to Merge</h2>')
+    const nextStepsComment = comments.find((comment) =>
+      comment.body.includes("<h2>Next Steps to Merge</h2>"),
     );
 
     return nextStepsComment ? nextStepsComment.body : null;
@@ -500,25 +500,38 @@ describe("Summarize Checks Tests", () => {
   });
 
   describe("integration test", () => {
-    it(
+    it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
       async () => {
         const issue_number = 36226;
         const owner = "Azure";
         const repo = "azure-rest-api-specs";
 
+        const ignorableLabels = [
+          "VersioningReviewRequired",
+          "BreakingChangeReviewRequired",
+          "customer-reported",
+          "dependencies",
+          "javascript",
+        ];
+
         const github = new Octokit({
           auth: process.env.GITHUB_TOKEN,
         });
 
         const { data: pr } = await github.rest.pulls.get({
-            owner: owner,
-            repo: repo,
-            pull_number: issue_number
+          owner: owner,
+          repo: repo,
+          pull_number: issue_number,
         });
 
         // Get current PR labels and Next Steps comment
-        const expectedNextStepsComment = await getNextStepsComment(github, owner, repo, issue_number);
+        const expectedNextStepsComment = await getNextStepsComment(
+          github,
+          owner,
+          repo,
+          issue_number,
+        );
 
         const head_sha = pr.head.sha;
         const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
@@ -533,10 +546,12 @@ describe("Summarize Checks Tests", () => {
           [],
         );
 
-        let adjustedStartLabels = expectedLabels.filter((x) => x === "VersioningReviewRequired" || x === "BreakingChangeReviewRequired");
+        let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
         let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
 
-        adjustedStartLabels = adjustedStartLabels.filter((name) => !labelContext.toRemove.has(name));
+        adjustedStartLabels = adjustedStartLabels.filter(
+          (name) => !labelContext.toRemove.has(name),
+        );
         for (const label of labelContext.toAdd) {
           if (!adjustedStartLabels.includes(label)) {
             adjustedStartLabels.push(label);
@@ -552,8 +567,8 @@ describe("Summarize Checks Tests", () => {
           fyiCheckRuns,
         );
 
-        // const actualLabels = [...labelContext.toAdd, ...labelContext.present];
-        // expect(actualLabels.sort()).toEqual(expectedLabels.sort());
+        const actualLabels = [...labelContext.toAdd, ...labelContext.present];
+        expect(actualLabels.sort()).toEqual(expectedLabels.sort());
         expect(commentBody).toEqual(expectedNextStepsComment);
         expect(automatedChecksMet).toBe("blocked");
       },

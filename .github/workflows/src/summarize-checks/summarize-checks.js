@@ -526,7 +526,7 @@ async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
       {
         resource(url: "${resourceUrl}") {
           ... on Commit {
-            checkSuites(first: 100${cursor ? `, after: "${cursor}"` : ''}) {
+            checkSuites(first: 100${cursor ? `, after: "${cursor}"` : ""}) {
               pageInfo {
                 hasNextPage
                 endCursor
@@ -579,10 +579,10 @@ async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
   return {
     resource: {
       checkSuites: {
-        nodes: allCheckSuites
-      }
+        nodes: allCheckSuites,
+      },
     },
-    rateLimit: lastResponse?.rateLimit
+    rateLimit: lastResponse?.rateLimit,
   };
 }
 
