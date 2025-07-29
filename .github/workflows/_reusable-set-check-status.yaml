@@ -68,7 +68,7 @@ jobs:
               '${{ inputs.overriding_label }}'
             );
 
-      - if: ${{ always() && steps.set-status.outputs.issue_number }}
+      - if: ${{ always() && fromJson(steps.set-status.outputs.issue_number) > 0 }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-issue-number-artifact
         with:
