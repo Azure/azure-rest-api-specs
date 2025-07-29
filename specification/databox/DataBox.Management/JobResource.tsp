@@ -21,6 +21,16 @@ model JobResource
     SegmentName = "jobs",
     NamePattern = "^[-\\w\\.]+$"
   >;
+
+  /**
+   * The sku type.
+   */
+  sku?: Sku;
+
+  /**
+   * Msi identity of the resource
+   */
+  identity?: ResourceIdentity;
 }
 
 @armResourceOperations
@@ -47,7 +57,7 @@ interface JobResources {
   create is ArmResourceCreateOrReplaceAsync<
     JobResource,
     Response = ArmResourceUpdatedResponse<JobResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = JobResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ApiError
   >;

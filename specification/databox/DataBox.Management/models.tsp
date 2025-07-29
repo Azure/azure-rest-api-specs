@@ -1130,7 +1130,6 @@ model JobProperties {
    * Time at which the job was started in UTC ISO 8601 format.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
@@ -1371,7 +1370,6 @@ model JobStages {
    * Time for the job stage in UTC ISO 8601 format.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stageTime?: utcDateTime;
 
   /**
@@ -1415,14 +1413,12 @@ model JobDelayDetails {
    * Timestamp when the delay notification was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Timestamp when the delay notification was resolved.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resolutionTime?: utcDateTime;
 }
 
@@ -1966,7 +1962,6 @@ model LastMitigationActionOnJob {
   /**
    * Action performed date time
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   actionDateTimeInUtc?: utcDateTime;
 
   /**
@@ -2012,7 +2007,6 @@ model JobDeliveryInfo {
   /**
    * Scheduled date time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledDateTime?: utcDateTime;
 }
 
@@ -2556,13 +2550,11 @@ model ShipmentPickUpRequest {
   /**
    * Minimum date after which the pick up should commence, this must be in local time of pick up area.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
   /**
    * Maximum date before which the pick up should commence, this must be in local time of pick up area.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime: utcDateTime;
 
   /**
@@ -2585,7 +2577,6 @@ model ShipmentPickUpResponse {
    * Time by which shipment should be ready for pick up, this is in local time of pick up area.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   readyByTime?: utcDateTime;
 }
 
