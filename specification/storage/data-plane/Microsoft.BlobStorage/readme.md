@@ -158,9 +158,6 @@ suppressions:
   - code: LroExtension
     from: generated_blob.json
     reason: Legacy operations not defined as lro
-  - code: MULTIPLE_BODY_PARAMETERS
-    from: generated_blob.json
-    reason: These are multipart requests defined in typespec, the swagger is generated through typespec-autorest. FormData parameters aren't supported by autorest.
 ```
 
 ```yaml
@@ -170,4 +167,32 @@ directive:
     reason: Service uses XML, not JSON, so cannot validate.
   - suppress: ValidFormats
     reason: Properly specifying parameter format.
+  - suppress: MULTIPLE_BODY_PARAMETERS
+    from: generated_blob.json
+    reason: These are multipart requests defined in typespec, the swagger is generated through typespec-autorest. FormData parameters aren't supported by autorest.
+  - suppress: EnumInsteadOfBoolean
+    from: generated_blob.json
+    reason: Existing API contract
+  - suppress: ErrorResponse
+    from: generated_blob.json
+    reason: Existing API contract
+  - suppress: MsPaths
+    from: generated_blob.json
+    reason: Auto-generated swagger based on typespec
+  - suppress: SuccessResponseBody
+    from: generated_blob.json
+    reason: Existing API contract
+  - suppress: LroHeaders
+    from: generated_blob.json
+    reason: Existing API contract
+  - suppress: VersionPolicy
+    from: generated_blob.json
+    reason: Existing API with api version header
+  - suppress: PutInOperationName
+    from: generated_blob.json
+    reason: Existing API with sdk usage
+  - suppress: OperationId
+    from: generated_blob.json
+  - suppress: GetInOperationName
+    from: generated_blob.json
 ```
