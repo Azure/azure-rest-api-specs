@@ -4320,19 +4320,19 @@ model ValidateProbeOutput {
 }
 
 /**
- * [Placeholder] Discription for page model
+ * Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.
  */
 @pagedResult
 model OperationsListResult {
   /**
-   * [Placeholder] Discription for value property
+   * List of CDN operations supported by the CDN resource provider.
    */
   @items
   @OpenAPI.extension("x-ms-identifiers", #[])
   value: Operation[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * URL to get the next set of operation list results if there are any.
    */
   @nextLink
   nextLink?: string;
