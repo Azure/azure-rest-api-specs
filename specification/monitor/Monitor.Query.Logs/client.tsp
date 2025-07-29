@@ -64,7 +64,7 @@ interface Client {
   queryBatch is MonitorQueryLogs.Query.batch;
 }
 
-@@access(Versions, Access.internal, "go,python");
+@@access(Versions, Access.internal, "go,python,js");
 
 @@clientName(BatchQueryRequest.workspace, "WorkspaceID", "go");
 
@@ -89,3 +89,7 @@ interface Client {
   Access.internal,
   "python"
 );
+
+@@clientName(MonitorQueryLogsClientOptionalParams.endpointParam, "endpoint", "js");
+@@clientName(BatchQueryResults.render, "visualization", "go");
+@@clientName(QueryResults.render, "visualization", "go");
