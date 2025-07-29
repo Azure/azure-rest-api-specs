@@ -4238,7 +4238,7 @@
           "readOnly": true
         },
         "display": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationDisplay",
+          "$ref": "#/definitions/OperationDisplay",
           "description": "Operation display values.",
           "readOnly": true
         },
@@ -4255,6 +4255,28 @@
         "isDataAction": {
           "type": "boolean",
           "description": "Indicates whether the operation is a data action"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized name of the operation for display purpose."
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized description of the operation for display purpose."
         }
       }
     },

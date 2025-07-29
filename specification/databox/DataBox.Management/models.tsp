@@ -4204,6 +4204,31 @@ model SubscriptionIsAllowedToCreateJobValidationResponseProperties
 model OperationProperties {}
 
 /**
+ * Operation display
+ */
+model OperationDisplay {
+  /**
+   * Provider name.
+   */
+  provider?: string;
+
+  /**
+   * Resource name.
+   */
+  resource?: string;
+
+  /**
+   * Localized name of the operation for display purpose.
+   */
+  operation?: string;
+
+  /**
+   * Localized description of the operation for display purpose.
+   */
+  description?: string;
+}
+
+/**
  * Operation entity.
  */
 model Operation {
