@@ -2429,6 +2429,7 @@ model ValidationResponseProperties {
 /**
  * The JobResourceUpdateParameter.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobResourceUpdateParameter {
   /**
    * Properties of a job to be updated.
