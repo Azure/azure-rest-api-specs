@@ -22,9 +22,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-/**
- * // FIXME: (missing-service-description) Add service description
- */
+
 @armProviderNamespace
 @service(#{ title: "DataBoxManagementClient" })
 @versioned(Versions)

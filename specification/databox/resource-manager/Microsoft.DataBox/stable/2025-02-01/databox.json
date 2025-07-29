@@ -3,7 +3,6 @@
   "info": {
     "title": "DataBoxManagementClient",
     "version": "2025-02-01",
-    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1242,7 +1241,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "[Placeholder] Discription for page model",
+          "description": "[Placeholder] Description for page model",
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
@@ -1250,7 +1249,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "[Placeholder] Discription for nextLink property"
+          "description": "[Placeholder] Description for nextLink property"
         }
       },
       "required": [
@@ -3865,7 +3864,8 @@
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "sku"
       ],
       "allOf": [
         {
@@ -4228,6 +4228,58 @@
         ]
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Operation entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Operation display values.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Operation properties.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation. Can be : user|system|user,system",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Operation display",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider name."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized name of the operation for display purpose."
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized description of the operation for display purpose."
+        }
+      }
+    },
     "OperationList": {
       "type": "object",
       "description": "The paginated list of connected cluster API operations.",
@@ -4236,7 +4288,7 @@
           "type": "array",
           "description": "The list of connected cluster API operations.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+            "$ref": "#/definitions/Operation"
           },
           "readOnly": true
         },
@@ -4245,6 +4297,10 @@
           "description": "The link to fetch the next page of connected cluster API operations."
         }
       }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Operation properties."
     },
     "OverallValidationStatus": {
       "type": "string",

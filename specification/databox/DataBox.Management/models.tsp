@@ -2707,7 +2707,7 @@ model AvailableSkuRequest {
 @Azure.Core.pagedResult
 model AvailableSkusResult {
   /**
-   * [Placeholder] Discription for page model
+   * [Placeholder] Description for page model
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
@@ -2715,7 +2715,7 @@ model AvailableSkusResult {
   value: SkuInformation[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * [Placeholder] Description for nextLink property
    */
   @nextLink
   nextLink?: string;
@@ -4177,6 +4177,70 @@ model SubscriptionIsAllowedToCreateJobValidationResponseProperties
    * Identifies the type of validation response.
    */
   validationType: ValidationInputDiscriminator.ValidateSubscriptionIsAllowedToCreateJob;
+}
+/**
+ * Operation properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model OperationProperties {}
+
+/**
+ * Operation display
+ */
+model OperationDisplay {
+  /**
+   * Provider name.
+   */
+  provider?: string;
+
+  /**
+   * Resource name.
+   */
+  resource?: string;
+
+  /**
+   * Localized name of the operation for display purpose.
+   */
+  operation?: string;
+
+  /**
+   * Localized description of the operation for display purpose.
+   */
+  description?: string;
+}
+
+/**
+ * Operation entity.
+ */
+model Operation {
+  /** 
+    Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}
+  */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Operation display values.
+   */
+  @visibility(Lifecycle.Read)
+  display?: OperationDisplay;
+
+  /**
+   * Operation properties.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: OperationProperties;
+
+  /**
+   * Origin of the operation. Can be : user|system|user,system
+   */
+  @visibility(Lifecycle.Read)
+  origin?: string;
+
+  /**
+   * Indicates whether the operation is a data action
+   */
+  isDataAction?: boolean;
 }
 
 /**
