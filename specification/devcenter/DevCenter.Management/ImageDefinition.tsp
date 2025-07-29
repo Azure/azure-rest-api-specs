@@ -39,6 +39,8 @@ interface ImageDefinitionOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
 
         /** The name of the Catalog. */
@@ -46,6 +48,8 @@ interface ImageDefinitionOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       },
       {
@@ -54,6 +58,8 @@ interface ImageDefinitionOps
         @segment("imageDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         imageDefinitionName: string,
       }
     > {}
@@ -121,6 +127,8 @@ interface ProjectCatalogImageDefinitionOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
 
         /** The name of the Catalog. */
@@ -128,6 +136,8 @@ interface ProjectCatalogImageDefinitionOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       },
       {
@@ -136,6 +146,8 @@ interface ProjectCatalogImageDefinitionOps
         @segment("imageDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         imageDefinitionName: string,
       }
     > {}

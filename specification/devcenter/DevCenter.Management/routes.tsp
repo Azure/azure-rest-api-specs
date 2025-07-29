@@ -56,7 +56,10 @@ interface OperationStatusesOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  ): ArmResponse<OperationStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> & {
+    @bodyRoot
+    _: OperationStatus;
+  }) | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

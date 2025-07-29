@@ -39,6 +39,8 @@ interface ImageVersionOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
 
         /** The name of the gallery. */
@@ -46,6 +48,8 @@ interface ImageVersionOps
         @segment("galleries")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         galleryName: string,
 
         /** The name of the image. */
@@ -53,6 +57,8 @@ interface ImageVersionOps
         @segment("images")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]{0,78}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(80)
         imageName: string,
       },
       {
@@ -61,6 +67,8 @@ interface ImageVersionOps
         @segment("versions")
         @key
         @pattern("^[0-9]{1,10}[.][0-9]{1,10}[.][0-9]{1,10}$")
+        @minLength(5)
+        @maxLength(32)
         versionName: string,
       }
     > {}
@@ -91,6 +99,8 @@ interface ImageVersionOperationGroupOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
 
         /** The name of the image. */
@@ -98,6 +108,8 @@ interface ImageVersionOperationGroupOps
         @segment("images")
         @key
         @pattern("^[a-zA-Z0-9~][a-zA-Z0-9-.~]{0,151}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(153)
         imageName: string,
       },
       {
@@ -106,6 +118,8 @@ interface ImageVersionOperationGroupOps
         @segment("versions")
         @key
         @pattern("^[0-9]{1,10}[.][0-9]{1,10}[.][0-9]{1,10}$")
+        @minLength(5)
+        @maxLength(32)
         versionName: string,
       }
     > {}

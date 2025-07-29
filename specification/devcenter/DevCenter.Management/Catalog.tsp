@@ -38,6 +38,8 @@ interface CatalogOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
       },
       {
@@ -46,6 +48,8 @@ interface CatalogOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       }
     > {}
@@ -76,7 +80,11 @@ interface Catalogs {
     Catalog,
     PatchModel = CatalogUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = Catalog | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = Catalog>
+    >
   >;
 
   /**
@@ -158,6 +166,8 @@ interface CatalogOperationGroupOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
       },
       {
@@ -166,6 +176,8 @@ interface CatalogOperationGroupOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       }
     > {}
@@ -196,7 +208,11 @@ interface CatalogOperationGroup {
     Catalog,
     PatchModel = CatalogUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = Catalog | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = Catalog>
+    >
   >;
 
   /**

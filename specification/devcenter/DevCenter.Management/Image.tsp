@@ -38,6 +38,8 @@ interface ImageOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
 
         /** The name of the gallery. */
@@ -45,6 +47,8 @@ interface ImageOps
         @segment("galleries")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         galleryName: string,
       },
       {
@@ -53,6 +57,8 @@ interface ImageOps
         @segment("images")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]{0,78}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(80)
         imageName: string,
       }
     > {}
@@ -92,6 +98,8 @@ interface ImageOperationGroupOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
       },
       {
@@ -100,6 +108,8 @@ interface ImageOperationGroupOps
         @segment("images")
         @key
         @pattern("^[a-zA-Z0-9~][a-zA-Z0-9-.~]{0,151}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(153)
         imageName: string,
       }
     > {}

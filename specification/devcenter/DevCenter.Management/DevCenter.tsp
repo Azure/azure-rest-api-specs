@@ -48,7 +48,11 @@ interface DevCenters {
     DevCenter,
     PatchModel = DevCenterUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = DevCenter | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = DevCenter>
+    >
   >;
 
   /**

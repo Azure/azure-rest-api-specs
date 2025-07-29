@@ -846,6 +846,8 @@ model DevCenterEncryptionSetProperties
   provisioningState?: ProvisioningState;
 }
 
+model EncryptionSetListResult is Azure.Core.Page<DevCenterEncryptionSet>;
+
 /**
  * Properties of the devcenter encryption set. These properties can be updated after the resource has been created.
  */
@@ -1212,6 +1214,8 @@ model AttachedNetworkConnectionProperties {
   @visibility(Lifecycle.Read)
   domainJoinType?: DomainJoinType;
 }
+
+model AttachedNetworkListResult is Azure.Core.Page<AttachedNetworkConnection>;
 
 /**
  * Properties of a catalog.
@@ -1762,6 +1766,9 @@ model AllowedEnvironmentTypeProperties {
   @visibility(Lifecycle.Read)
   displayName?: string;
 }
+
+model AllowedEnvironmentTypeListResult
+  is Azure.Core.Page<AllowedEnvironmentType>;
 
 /**
  * Properties of a project environment type.
@@ -2973,3 +2980,5 @@ model EndpointDetail {
   @visibility(Lifecycle.Read)
   port?: int32;
 }
+@@visibility(AllowedEnvironmentTypeListResult.value, Lifecycle.Read);
+@@visibility(AttachedNetworkListResult.value, Lifecycle.Read);

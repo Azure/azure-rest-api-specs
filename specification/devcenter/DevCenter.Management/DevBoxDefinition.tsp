@@ -39,6 +39,8 @@ interface DevBoxDefinitionOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
       },
       {
@@ -47,6 +49,8 @@ interface DevBoxDefinitionOps
         @segment("devboxdefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         devBoxDefinitionName: string,
       }
     > {}
@@ -71,7 +75,11 @@ interface DevBoxDefinitions {
     DevBoxDefinition,
     PatchModel = DevBoxDefinitionUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = DevBoxDefinition | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = DevBoxDefinition>
+    >
   >;
 
   /**
@@ -112,6 +120,8 @@ interface DevBoxDefinitionOperationGroupOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
       },
       {
@@ -120,6 +130,8 @@ interface DevBoxDefinitionOperationGroupOps
         @segment("devboxdefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         devBoxDefinitionName: string,
       }
     > {}

@@ -1,0 +1,4592 @@
+{
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "operationId": "CustomizationTasks_ListByCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_ListByCatalog": {
+            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CustomizationTaskNameParameter"
+        }
+      ],
+      "get": {
+        "operationId": "CustomizationTasks_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTask"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_Get": {
+            "$ref": "./examples/CustomizationTasks_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__deleted": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CustomizationTaskNameParameter"
+        }
+      ],
+      "post": {
+        "operationId": "CustomizationTasks_GetErrorDetails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_GetErrorDetails": {
+            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks__added": {
+      "get": {
+        "operationId": "CustomizationTasks_ListByCatalog",
+        "parameters": [
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_ListByCatalog": {
+            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}__added": {
+      "get": {
+        "operationId": "CustomizationTasks_Get",
+        "parameters": [
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTask"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_Get": {
+            "$ref": "./examples/CustomizationTasks_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__added": {
+      "post": {
+        "operationId": "CustomizationTasks_GetErrorDetails",
+        "parameters": [
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_GetErrorDetails": {
+            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.DevCenter/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/checkNameAvailability": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest",
+                  "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityRequest"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/checkScopedNameAvailability": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/devcenters": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/locations/{location}/usages": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/networkConnections": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/projects": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/skus": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevCenter"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevCenter"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/attachednetworks": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/attachednetworks/{attachedNetworkConnectionName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/AttachedNetworkConnection"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Catalog"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Catalog"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "environmentDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "environmentDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/CatalogResourceValidationErrorDetails",
+                "__new": "#/definitions/CatalogResourceValidationErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/getSyncErrorDetails": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "buildName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "buildName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/CatalogResourceValidationErrorDetails",
+                "__new": "#/definitions/CatalogResourceValidationErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevBoxDefinitionName"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "devBoxDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "devBoxDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevBoxDefinition"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "devBoxDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevBoxDefinition"
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "devBoxDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/DevCenterEncryptionSet"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CDevCenterEncryptionSet%3E",
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/environmentTypes": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/galleries": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/galleries/{galleryName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Gallery"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/galleries/{galleryName}/images": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/images": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ProjectPolicy"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CProjectPolicy%3E",
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections/{networkConnectionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/NetworkConnection"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/NetworkConnection"
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections/{networkConnectionName}/outboundNetworkDependenciesEndpoints": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Project"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CProject%3E",
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/allowedEnvironmentTypes": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/attachednetworks": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}": {
+      "put": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Catalog"
+        }
+      },
+      "patch": {
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Catalog"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/CatalogResourceValidationErrorDetails",
+                "__new": "#/definitions/CatalogResourceValidationErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "buildName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "imageDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "buildName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/CatalogResourceValidationErrorDetails",
+                "__new": "#/definitions/CatalogResourceValidationErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/devboxdefinitions": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/devboxdefinitions/{devBoxDefinitionName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevBoxDefinitionName"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "devBoxDefinitionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/environmentTypes": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/TopParameter",
+              "name__added": "$top",
+              "in__added": "query",
+              "type__added": "integer",
+              "format__added": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/images": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "commonDefinitions.json#/parameters/ProjectNameParameter",
+              "name__added": "projectName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 3,
+              "maxLength__added": 63,
+              "pattern__added": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/images/{imageName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/images/{imageName}/versions": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/images/{imageName}/versions/{versionName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/listSkus": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/SkuListResult",
+                "__new": "#/definitions/SkuListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Pool"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CPool%3E",
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/runHealthChecks": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ScheduleNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scheduleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[-\\w]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scheduleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[-\\w]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Schedule"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scheduleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[-\\w]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CSchedule%3E",
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "projectName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "poolName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scheduleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[-\\w]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DefinitionParameters__deleted": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      }
+    },
+    "DevCenterUri__deleted": {
+      "type": "string",
+      "readOnly": true
+    },
+    "Tags__deleted": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ]
+    },
+    "UserRoleAssignment__deleted": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      },
+      "x-ms-client-name": "userRoleAssignmentValue"
+    },
+    "Azure.ResourceManager.ArmResponse<DevCenterEncryptionSet>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/DevCenterEncryptionSet"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<Pool>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Pool"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<Project>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Project"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<ProjectPolicy>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/ProjectPolicy"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<Schedule>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Schedule"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "DefinitionParametersItem__added": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity__added": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "CmkIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageDefinitionBuildTaskParametersItem__added": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment__added": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      }
+    },
+    "UserRoleAssignmentValue__added": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      }
+    },
+    "AllowedEnvironmentType": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "AllowedEnvironmentTypeListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "AllowedEnvironmentTypeProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AttachedNetworkConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "AttachedNetworkConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "healthCheckStatus": {
+          "$ref__deleted": "vdi.json#/definitions/HealthCheckStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Running",
+            "Passed",
+            "Warning",
+            "Failed",
+            "Informational"
+          ],
+          "x-ms-enum__added": {
+            "name": "HealthCheckStatus",
+            "modelAsString": true
+          }
+        },
+        "domainJoinType": {
+          "$ref__deleted": "vdi.json#/definitions/DomainJoinType",
+          "type__added": "string",
+          "enum__added": [
+            "HybridAzureADJoin",
+            "AzureADJoin",
+            "None"
+          ],
+          "x-ms-enum__added": {
+            "name": "DomainJoinType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AttachedNetworkListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "Catalog": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "CatalogListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "CatalogProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CatalogSyncError": {
+      "properties": {
+        "errorDetails": {
+          "items": {
+            "$ref": {
+              "__old": "vdi.json#/definitions/CatalogErrorDetails",
+              "__new": "#/definitions/CatalogErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "CustomizationTaskInstance": {
+      "properties": {
+        "parameters": {
+          "$ref__deleted": "#/definitions/DefinitionParameters",
+          "type__added": "array",
+          "items__added": {
+            "$ref": "#/definitions/DefinitionParametersItem"
+          }
+        }
+      }
+    },
+    "CustomizationTaskListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "CustomizationTaskProperties": {
+      "properties": {
+        "validationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/CatalogResourceValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum__added": {
+            "name": "CatalogResourceValidationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DevBoxDefinitionListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "DevBoxDefinitionProperties": {
+      "required__deleted": [
+        "imageReference",
+        "sku"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "imageValidationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/ImageValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed",
+            "TimedOut"
+          ],
+          "x-ms-enum__added": {
+            "name": "ImageValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "imageValidationErrorDetails": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageValidationErrorDetails",
+            "__new": "#/definitions/ImageValidationErrorDetails"
+          }
+        },
+        "validationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/CatalogResourceValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum__added": {
+            "name": "CatalogResourceValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "activeImageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "DevBoxDefinitionUpdate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "DevBoxDefinitionUpdateProperties": {
+      "properties": {
+        "imageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "DevCenter": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "DevCenterEncryptionSet": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "DevCenterEncryptionSetProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DevCenterEncryptionSetUpdateProperties": {
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "type": {
+              "$ref": "#/definitions/CmkIdentityType",
+              "description": "The type of managed identity to use for key vault access."
+            },
+            "userAssignedIdentityResourceId": {
+              "type": "string",
+              "description": "For system assigned identity, this will be null. For user assigned identity, this should be the resource ID of the identity."
+            }
+          },
+          "$ref__added": "#/definitions/DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity"
+        }
+      }
+    },
+    "DevCenterListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "DevCenterProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DevCenterSku": {
+      "required__deleted": [
+        "name"
+      ]
+    },
+    "DevCenterUpdate": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "Encryption": {
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/customermanagedkeys.json#/definitions/customerManagedKeyEncryption",
+            "__new": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/customerManagedKeyEncryption"
+          }
+        }
+      }
+    },
+    "EncryptionSetListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "EncryptionSetUpdate": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "EnvironmentDefinitionListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "EnvironmentDefinitionProperties": {
+      "properties": {
+        "validationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/CatalogResourceValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum__added": {
+            "name": "CatalogResourceValidationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EnvironmentType": {
+      "properties": {
+        "tags": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/Tags",
+          "type__added": "object",
+          "additionalProperties__added": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "EnvironmentTypeListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "EnvironmentTypeProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EnvironmentTypeUpdate": {
+      "properties": {
+        "tags": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/Tags",
+          "type__added": "object",
+          "additionalProperties__added": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Gallery": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "GalleryListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "GalleryProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "HealthCheckStatusDetails": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "HealthCheckStatusDetailsListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ImageDefinitionBuildDetails": {
+      "properties": {
+        "imageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "ImageDefinitionBuildListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ImageDefinitionBuildProperties": {
+      "properties": {
+        "imageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "ImageDefinitionBuildTask": {
+      "properties": {
+        "parameters": {
+          "items": {
+            "type__deleted": "object",
+            "properties__deleted": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required__deleted": [
+              "key",
+              "value"
+            ],
+            "$ref__added": "#/definitions/ImageDefinitionBuildTaskParametersItem"
+          }
+        }
+      }
+    },
+    "ImageDefinitionListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ImageDefinitionProperties": {
+      "properties": {
+        "imageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        },
+        "imageValidationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/ImageValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed",
+            "TimedOut"
+          ],
+          "x-ms-enum__added": {
+            "name": "ImageValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "imageValidationErrorDetails": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageValidationErrorDetails",
+            "__new": "#/definitions/ImageValidationErrorDetails"
+          }
+        },
+        "validationStatus": {
+          "$ref__deleted": "vdi.json#/definitions/CatalogResourceValidationStatus",
+          "type__added": "string",
+          "enum__added": [
+            "Unknown",
+            "Pending",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum__added": {
+            "name": "CatalogResourceValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "activeImageReference": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/ImageReference",
+            "__new": "#/definitions/ImageReference"
+          }
+        }
+      }
+    },
+    "ImageDefinitionReference": {
+      "properties": {
+        "parameters": {
+          "$ref__deleted": "#/definitions/DefinitionParameters",
+          "type__added": "array",
+          "items__added": {
+            "$ref": "#/definitions/DefinitionParametersItem"
+          }
+        }
+      }
+    },
+    "ImageListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ImageProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ImageVersionListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ImageVersionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ListUsagesResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "NetworkConnectionListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "NetworkConnectionUpdate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkConnectionUpdateProperties": {
+      "properties": {
+        "domainPassword": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "NetworkProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        [
+          " "
+        ],
+        [
+          "-",
+          "subnetId"
+        ]
+      ]
+    },
+    "OperationStatus": {
+      "properties": {
+        "properties": {
+          "additionalProperties__added": {}
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true,
+          "x-ms-identifiers__deleted": [
+            "category"
+          ]
+        }
+      }
+    },
+    "PoolListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PoolProperties": {
+      "required__deleted": [
+        "devBoxDefinitionName",
+        "licenseType",
+        "localAdministrator",
+        "networkConnectionName"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PoolUpdate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "Project": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "ProjectEnvironmentType": {
+      "properties": {
+        "tags__deleted": {
+          "$ref": "commonDefinitions.json#/definitions/Tags"
+        },
+        "location__deleted": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ProjectEnvironmentTypeListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ProjectEnvironmentTypeProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "environmentCount": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "ProjectEnvironmentTypeUpdate": {
+      "properties": {
+        "tags": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/Tags",
+          "type__added": "object",
+          "additionalProperties__added": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "ProjectEnvironmentTypeUpdateProperties": {
+      "properties": {
+        "creatorRoleAssignment": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "roles": {
+              "type": "object",
+              "description": "A map of roles to assign to the environment creator.",
+              "additionalProperties": {
+                "$ref": "#/definitions/EnvironmentRole"
+              }
+            }
+          },
+          "$ref__added": "#/definitions/ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment"
+        },
+        "userRoleAssignments": {
+          "additionalProperties": {
+            "$ref": {
+              "__old": "#/definitions/UserRoleAssignment",
+              "__new": "#/definitions/UserRoleAssignmentValue"
+            }
+          }
+        }
+      }
+    },
+    "ProjectListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ProjectPolicy": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ProjectPolicyListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ProjectPolicyProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProjectProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProjectUpdate": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "ProjectUpdateProperties": {
+      "properties": {
+        "maxDevBoxesPerUser": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "Schedule": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource",
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ScheduleListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "ScheduleProperties": {
+      "required__deleted": [
+        "frequency",
+        "time",
+        "timeZone",
+        "type"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
+          "type__added": "string",
+          "enum__added": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "MovingResources",
+            "TransientFailure",
+            "RolloutInProgress",
+            "StorageProvisioningFailed"
+          ],
+          "x-ms-enum__added": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ScheduleUpdateProperties": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/TrackedResourceUpdate",
+              "__new": "#/definitions/TrackedResourceUpdate"
+            }
+          }
+        ]
+      ]
+    },
+    "SkuListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true,
+          "items": {
+            "$ref": {
+              "__old": "commonDefinitions.json#/definitions/DevCenterSku",
+              "__new": "#/definitions/DevCenterSku"
+            }
+          }
+        }
+      }
+    },
+    "SyncErrorDetails": {
+      "properties": {
+        "operationError": {
+          "$ref": {
+            "__old": "vdi.json#/definitions/CatalogErrorDetails",
+            "__new": "#/definitions/CatalogErrorDetails"
+          }
+        }
+      }
+    },
+    "SyncStats": {
+      "properties": {
+        "added": {
+          "minimum__deleted": 0
+        },
+        "updated": {
+          "minimum__deleted": 0
+        },
+        "unchanged": {
+          "minimum__deleted": 0
+        },
+        "removed": {
+          "minimum__deleted": 0
+        },
+        "validationErrors": {
+          "minimum__deleted": 0
+        },
+        "synchronizationErrors": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "TrackedResourceUpdate": {
+      "properties": {
+        "tags": {
+          "$ref__deleted": "#/definitions/Tags",
+          "type__added": "object",
+          "additionalProperties__added": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

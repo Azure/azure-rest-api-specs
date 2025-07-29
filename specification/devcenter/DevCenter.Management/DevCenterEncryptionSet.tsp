@@ -85,7 +85,8 @@ interface DevCenterEncryptionSets {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = EncryptionSetListResult
   >;
 }
 

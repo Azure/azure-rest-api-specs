@@ -39,6 +39,8 @@ interface AttachedNetworkConnectionOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
       },
       {
@@ -47,6 +49,8 @@ interface AttachedNetworkConnectionOps
         @segment("attachednetworks")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         attachedNetworkConnectionName: string,
       }
     > {}
@@ -73,7 +77,8 @@ interface AttachedNetworkConnections {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = AttachedNetworkListResult
   >;
 }
 @armResourceOperations
@@ -90,6 +95,8 @@ interface AttachedNetworkOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
       },
       {
@@ -98,6 +105,8 @@ interface AttachedNetworkOps
         @segment("attachednetworks")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         attachedNetworkConnectionName: string,
       }
     > {}
@@ -135,7 +144,8 @@ interface AttachedNetworks {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = AttachedNetworkListResult
   >;
 }
 

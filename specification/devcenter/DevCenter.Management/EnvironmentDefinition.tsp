@@ -39,6 +39,8 @@ interface EnvironmentDefinitionOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
 
         /** The name of the Catalog. */
@@ -46,6 +48,8 @@ interface EnvironmentDefinitionOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       },
       {
@@ -54,6 +58,8 @@ interface EnvironmentDefinitionOps
         @segment("environmentDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         environmentDefinitionName: string,
       }
     > {}
@@ -95,6 +101,8 @@ interface EnvironmentDefinitionOperationGroupOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
 
         /** The name of the Catalog. */
@@ -102,6 +110,8 @@ interface EnvironmentDefinitionOperationGroupOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
       },
       {

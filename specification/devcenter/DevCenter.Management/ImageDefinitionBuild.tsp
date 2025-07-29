@@ -39,6 +39,8 @@ interface ImageDefinitionBuildOps
         @segment("devcenters")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
         devCenterName: string,
 
         /** The name of the Catalog. */
@@ -46,6 +48,8 @@ interface ImageDefinitionBuildOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
 
         /** The name of the Image Definition. */
@@ -53,6 +57,8 @@ interface ImageDefinitionBuildOps
         @segment("imageDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         imageDefinitionName: string,
       },
       {
@@ -61,6 +67,8 @@ interface ImageDefinitionBuildOps
         @segment("builds")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         buildName: string,
       }
     > {}
@@ -119,6 +127,8 @@ interface ProjectCatalogImageDefinitionBuildOps
         @segment("projects")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         projectName: string,
 
         /** The name of the Catalog. */
@@ -126,6 +136,8 @@ interface ProjectCatalogImageDefinitionBuildOps
         @segment("catalogs")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         catalogName: string,
 
         /** The name of the Image Definition. */
@@ -133,6 +145,8 @@ interface ProjectCatalogImageDefinitionBuildOps
         @segment("imageDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         imageDefinitionName: string,
       },
       {
@@ -141,6 +155,8 @@ interface ProjectCatalogImageDefinitionBuildOps
         @segment("builds")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         buildName: string,
       }
     > {}

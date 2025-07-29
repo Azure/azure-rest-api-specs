@@ -43,7 +43,11 @@ interface NetworkConnections {
     NetworkConnection,
     PatchModel = NetworkConnectionUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = NetworkConnection | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = NetworkConnection>
+    >
   >;
 
   /**

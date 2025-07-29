@@ -226,3 +226,9 @@ using Microsoft.DevCenter;
 @@clientLocation(CheckScopedNameAvailabilityOperationGroup.execute,
   "CheckScopedNameAvailability"
 );
+@@clientName(CheckNameAvailabilityOperationGroup.execute::parameters.body,
+  "nameAvailabilityRequest"
+);
+@@clientName(CheckScopedNameAvailabilityOperationGroup.execute::parameters.body,
+  "nameAvailabilityRequest"
+);
