@@ -50,13 +50,11 @@ interface SignalRResources {
   /**
    * Get the resource and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<SignalRResource>;
 
   /**
    * Create or update a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -68,14 +66,12 @@ interface SignalRResources {
   /**
    * Operation to update an exiting resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<SignalRResource, PatchModel = SignalRResource>;
 
   /**
    * Operation to delete a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SignalRResource,
@@ -85,7 +81,6 @@ interface SignalRResources {
   /**
    * Handles requests to list all resources in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByResourceGroup is ArmResourceListByParent<
     SignalRResource,
     Response = ArmResponse<SignalRResourceList>
@@ -94,7 +89,6 @@ interface SignalRResources {
   /**
    * Handles requests to list all resources in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBySubscription is ArmListBySubscription<
     SignalRResource,
     Response = ArmResponse<SignalRResourceList>
@@ -103,7 +97,6 @@ interface SignalRResources {
   /**
    * Get the access keys of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listKeys is ArmResourceActionSync<
     SignalRResource,
     void,
@@ -113,7 +106,6 @@ interface SignalRResources {
   /**
    * Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
@@ -127,14 +119,12 @@ interface SignalRResources {
   /**
    * Operation to restart a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   restart is ArmResourceActionAsync<SignalRResource, void, void>;
 
   /**
    * List all available skus of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("skus")
   listSkus is ArmResourceActionSync<
@@ -146,7 +136,6 @@ interface SignalRResources {
   /**
    * Get the private link resources that need to be created for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("privateLinkResources")
   list is ArmResourceActionSync<

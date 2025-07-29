@@ -19,7 +19,6 @@ interface SignalROperationGroup {
   /**
    * Checks that the resource name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = NameAvailabilityParameters,
@@ -34,7 +33,6 @@ interface UsagesOperationGroup {
   /**
    * List resource usage quotas by location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @action("usages")

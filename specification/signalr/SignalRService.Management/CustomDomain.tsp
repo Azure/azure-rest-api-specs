@@ -30,13 +30,11 @@ interface CustomDomains {
   /**
    * Get a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<CustomDomain>;
 
   /**
    * Create or update a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -48,7 +46,6 @@ interface CustomDomains {
   /**
    * Delete a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomDomain,
@@ -58,7 +55,6 @@ interface CustomDomains {
   /**
    * List all custom domains.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmResourceListByParent<
     CustomDomain,
     Response = ArmResponse<CustomDomainList>

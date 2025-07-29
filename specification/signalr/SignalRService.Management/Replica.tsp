@@ -35,19 +35,16 @@ interface Replicas {
   /**
    * Get the replica and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Replica>;
 
   /**
    * Create or update a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Replica>;
 
   /**
    * Operation to update an exiting replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -62,19 +59,16 @@ interface Replicas {
   /**
    * Operation to delete a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<Replica>;
 
   /**
    * List all replicas belong to this resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmResourceListByParent<Replica, Response = ArmResponse<ReplicaList>>;
 
   /**
    * List all available skus of the replica resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("skus")
   listReplicaSkus is ArmResourceActionSync<Replica, void, ArmResponse<SkuList>>;
@@ -82,7 +76,6 @@ interface Replicas {
   /**
    * Operation to restart a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   restart is ArmResourceActionAsync<Replica, void, void>;
 }

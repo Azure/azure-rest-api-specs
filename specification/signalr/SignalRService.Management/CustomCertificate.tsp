@@ -30,25 +30,21 @@ interface CustomCertificates {
   /**
    * Get a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<CustomCertificate>;
 
   /**
    * Create or update a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CustomCertificate>;
 
   /**
    * Delete a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   delete is ArmResourceDeleteSync<CustomCertificate>;
 
   /**
    * List all custom certificates.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   list is ArmResourceListByParent<
     CustomCertificate,
     Response = ArmResponse<CustomCertificateList>
