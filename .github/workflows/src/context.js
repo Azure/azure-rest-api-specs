@@ -208,12 +208,13 @@ export async function extractInputs(github, context, core) {
 
           if (key === "issue-number") {
             const parsedValue = Number.parseInt(value);
-            if (parsedValue) {
+            if (parsedValue > 0) {
               issue_number = parsedValue;
-              continue;
             } else {
-              throw new Error(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
+              core.info(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
+              issue_number = NaN;
             }
+            continue;
           }
         }
       }
