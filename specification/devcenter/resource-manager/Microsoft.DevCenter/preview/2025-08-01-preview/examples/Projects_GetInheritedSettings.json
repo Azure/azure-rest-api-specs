@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "projectName": "Contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "projectCatalogSettings": {
+          "catalogItemSyncEnableStatus": "Enabled",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": {
+            "EnvironmentDefinitionCatalogItemSync": "Enabled",
+            "ImageDefinitionCatalogItemSync": "Enabled",
+            "DataPlatformFileCatalogItemSync": "Disabled"
+          }
+        },
+        "networkSettings": {
+          "microsoftHostedNetworkEnableStatus": "Enabled"
+        },
+        "azureAiServicesSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "AutoDeploy"
+        },
+        "devBoxAutoDeleteSettings": {
+          "statusModifiable": "NotModifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultStatus": "Enabled",
+          "defaultValues": {
+            "deleteMode": "Manual",
+            "inactiveThreshold": "P30D",
+            "gracePeriod": "P3D"
+          }
+        },
+        "devBoxLimitsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": {
+            "maxDevBoxesPerUser": "10"
+          },
+          "defaultStatus": "Enabled"
+        },
+        "displayNameSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        },
+        "devBoxTunnelSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Disabled"
+        },
+        "serverlessGpuSessionsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "NotModifiable",
+          "defaultValues": {
+            "maxConcurrentSessionsPerProject": "3"
+          },
+          "defaultStatus": "AutoDeploy"
+        },
+        "stopOnDisconnectSettings": {
+          "statusModifiable": "NotModifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": {
+            "status": "Enabled",
+            "gracePeriodMinutes": "60"
+          },
+          "defaultStatus": "Enabled"
+        },
+        "stopOnNoConnectSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "NotModifiable",
+          "defaultValues": {
+            "status": "Enabled",
+            "gracePeriodMinutes": "60"
+          },
+          "defaultStatus": "Enabled"
+        },
+        "userCustomizationsSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Enabled"
+        },
+        "workspaceStorageSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        }
+      }
+    }
+  }
+}

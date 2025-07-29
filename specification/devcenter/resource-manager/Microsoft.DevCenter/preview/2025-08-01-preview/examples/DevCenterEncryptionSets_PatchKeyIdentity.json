@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "encryptionSetName": "EncryptionWestUs",
+    "body": {
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/encryptionSets/EncryptionWestUs",
+        "name": "EncryptionWestUs",
+        "type": "Microsoft.DevCenter/devcenters/encryptionSets",
+        "properties": {
+          "devboxDisksEncryptionEnableStatus": "Enabled",
+          "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokekwestus",
+          "keyEncryptionKeyIdentity": {
+            "type": "SystemAssigned"
+          },
+          "provisioningState": "Accepted"
+        },
+        "location": "westus",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "2111b8fc-e123-485a-b408-bf1153189494",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2025-07-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2025-07-01-preview"
+      }
+    }
+  }
+}

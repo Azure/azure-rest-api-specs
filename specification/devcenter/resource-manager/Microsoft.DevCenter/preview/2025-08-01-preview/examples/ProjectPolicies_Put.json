@@ -1,0 +1,239 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff1",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
+    "projectPolicyName": "DevOnlyResources",
+    "body": {
+      "properties": {
+        "resourcePolicies": [
+          {
+            "resources": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/attachednetworks/network-westus3"
+          },
+          {
+            "resourceType": "Images",
+            "action": "Deny"
+          },
+          {
+            "resourceType": "Skus",
+            "action": "Allow"
+          }
+        ],
+        "scopes": [
+          "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject"
+        ],
+        "configurationPolicies": {
+          "azureAiServicesFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "defaultStatus": "AutoDeploy"
+          },
+          "devBoxAutoDeleteFeatureStatus": {
+            "statusModifiable": "NotModifiable",
+            "valuesModifiable": "Modifiable",
+            "defaultStatus": "Enabled",
+            "defaultValues": {
+              "deleteMode": "Manual",
+              "inactiveThreshold": "P30D",
+              "gracePeriod": "P3D"
+            }
+          },
+          "devBoxLimitsFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "valuesModifiable": "Modifiable",
+            "defaultStatus": "Enabled",
+            "defaultValues": {
+              "maxDevBoxesPerUser": "10"
+            }
+          },
+          "displayNameFeatureStatus": {
+            "statusModifiable": "NotModifiable",
+            "defaultStatus": "Disabled"
+          },
+          "devBoxTunnelFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "defaultStatus": "Disabled"
+          },
+          "projectCatalogFeatureStatus": {
+            "valuesModifiable": "Modifiable",
+            "defaultValues": {
+              "EnvironmentDefinitionCatalogItemSync": "Enabled",
+              "ImageDefinitionCatalogItemSync": "Enabled",
+              "DataPlatformFileCatalogItemSync": "Disabled"
+            }
+          },
+          "serverlessGpuSessionsFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "valuesModifiable": "NotModifiable",
+            "defaultStatus": "AutoDeploy",
+            "defaultValues": {
+              "maxConcurrentSessionsPerProject": "3"
+            }
+          },
+          "stopOnDisconnectFeatureStatus": {
+            "statusModifiable": "NotModifiable",
+            "valuesModifiable": "Modifiable",
+            "defaultStatus": "Enabled",
+            "defaultValues": {
+              "status": "Enabled",
+              "gracePeriodMinutes": "60"
+            }
+          },
+          "stopOnNoConnectFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "valuesModifiable": "NotModifiable",
+            "defaultStatus": "Enabled",
+            "defaultValues": {
+              "status": "Enabled",
+              "gracePeriodMinutes": "60"
+            }
+          },
+          "userCustomizationsFeatureStatus": {
+            "statusModifiable": "Modifiable",
+            "defaultStatus": "Enabled"
+          },
+          "workspaceStorageFeatureStatus": {
+            "statusModifiable": "NotModifiable",
+            "defaultStatus": "AutoDeploy"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/projectPolicies/DevOnlyResources",
+        "name": "DevOnlyResources",
+        "type": "Microsoft.DevCenter/devcenters/projectpolicies",
+        "properties": {
+          "resourcePolicies": [
+            {
+              "resources": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/attachednetworks/network-westus3"
+            },
+            {
+              "resourceType": "Images",
+              "action": "Deny"
+            },
+            {
+              "resourceType": "Skus",
+              "action": "Allow"
+            }
+          ],
+          "scopes": [
+            "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject"
+          ],
+          "configurationPolicies": {
+            "azureAiServicesFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "defaultStatus": "AutoDeploy"
+            },
+            "devBoxAutoDeleteFeatureStatus": {
+              "statusModifiable": "NotModifiable",
+              "valuesModifiable": "Modifiable",
+              "defaultStatus": "Enabled",
+              "defaultValues": {
+                "deleteMode": "Manual",
+                "inactiveThreshold": "P30D",
+                "gracePeriod": "P3D"
+              }
+            },
+            "devBoxLimitsFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "valuesModifiable": "Modifiable",
+              "defaultStatus": "Enabled",
+              "defaultValues": {
+                "maxDevBoxesPerUser": "10"
+              }
+            },
+            "displayNameFeatureStatus": {
+              "statusModifiable": "NotModifiable",
+              "defaultStatus": "Disabled"
+            },
+            "devBoxTunnelFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "defaultStatus": "Disabled"
+            },
+            "projectCatalogFeatureStatus": {
+              "valuesModifiable": "Modifiable",
+              "defaultValues": {
+                "EnvironmentDefinitionCatalogItemSync": "Enabled",
+                "ImageDefinitionCatalogItemSync": "Enabled",
+                "DataPlatformFileCatalogItemSync": "Disabled"
+              }
+            },
+            "serverlessGpuSessionsFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "valuesModifiable": "NotModifiable",
+              "defaultStatus": "AutoDeploy",
+              "defaultValues": {
+                "maxConcurrentSessionsPerProject": "3"
+              }
+            },
+            "stopOnDisconnectFeatureStatus": {
+              "statusModifiable": "NotModifiable",
+              "valuesModifiable": "Modifiable",
+              "defaultStatus": "Enabled",
+              "defaultValues": {
+                "status": "Enabled",
+                "gracePeriodMinutes": "60"
+              }
+            },
+            "stopOnNoConnectFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "valuesModifiable": "NotModifiable",
+              "defaultStatus": "Enabled",
+              "defaultValues": {
+                "status": "Enabled",
+                "gracePeriodMinutes": "60"
+              }
+            },
+            "userCustomizationsFeatureStatus": {
+              "statusModifiable": "Modifiable",
+              "defaultStatus": "Enabled"
+            },
+            "workspaceStorageFeatureStatus": {
+              "statusModifiable": "NotModifiable",
+              "defaultStatus": "AutoDeploy"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/projectPolicies/DevOnlyResources",
+        "name": "DevOnlyResources",
+        "type": "Microsoft.DevCenter/devcenters/projectpolicies",
+        "properties": {
+          "resourcePolicies": [
+            {
+              "resources": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/attachednetworks/network-westus3"
+            }
+          ],
+          "scopes": [
+            "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "User1",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        }
+      }
+    }
+  }
+}
