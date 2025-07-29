@@ -28,7 +28,7 @@ These are the global settings for the adp.
 title: FluidRelayManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-14-preview
+tag: package-2025-06-20-preview
 ```
 
 ### Tag: package-2025-02-07-preview
@@ -180,6 +180,22 @@ These settings apply only when `--tag=package-2025-05-14-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-14-preview'
 input-file:
   - Microsoft.FluidRelay/preview/2025-05-14-preview/fluidrelay.json
+suppressions:
+  - code: PathContainsResourceGroup
+    from: fluidrelay.json
+    reason: Keep the `resourceGroup` parameter as `{resourceGroup}`
+  - code: ResourceNameRestriction
+    from: fluidrelay.json
+    reason: Keep existing fluidRelayServerName in the APIs the same (this was not changed with this version)
+```
+
+### Tag: package-2025-06-20-preview
+
+These settings apply only when `--tag=package-2025-06-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-20-preview'
+input-file:
+  - Microsoft.FluidRelay/preview/2025-06-20-preview/fluidrelay.json
 suppressions:
   - code: PathContainsResourceGroup
     from: fluidrelay.json
