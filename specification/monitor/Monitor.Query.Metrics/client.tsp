@@ -47,4 +47,4 @@ using MonitorQueryMetrics;
 @@clientName(MonitorQueryMetrics, "MetricsClient", "python");
 @@access(batch, Access.internal, "python");
 
-@@clientName(MonitorQueryMetrics, "MetricsClient", "js");
+@@clientName(MonitorQueryMetrics, "MetricsClient", "javascript");
