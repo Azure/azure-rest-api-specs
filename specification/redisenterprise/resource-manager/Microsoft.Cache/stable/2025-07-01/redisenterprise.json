@@ -2114,10 +2114,11 @@
       "properties": {
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Whether or not public endpoint access is allowed for this Redis Enterprise cluster.",
+          "description": "Whether or not public endpoint access is allowed for this Redis Enterprise cluster. Only 'Enabled' or 'Disabled' can be set. 'Unknown' is returned only for clusters created using an old API version which do not have this property and cannot be set.",
           "enum": [
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
