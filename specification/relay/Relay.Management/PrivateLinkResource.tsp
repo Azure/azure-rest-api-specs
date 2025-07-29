@@ -14,36 +14,33 @@ namespace Microsoft.Relay;
 /**
  * Information of the private link resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(RelayNamespace)
-@Azure.ResourceManager.Private.armResourceInternal(
-  PrivateLinkResourceProperties
-)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
+// #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+// @parentResource(RelayNamespace)
+// @Azure.ResourceManager.Private.armResourceInternal(
+//   PrivateLinkResourceProperties
+// )
+// @Azure.ResourceManager.Legacy.customAzureResource
+// @Http.Private.includeInapplicableMetadataInPayload(false)
 model PrivateLinkResource {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "privateLinkResourceName",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
-
   /**
    * Resource ID.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   id?: string;
 
   /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
    * Resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -56,9 +53,26 @@ interface PrivateLinkResources {
   /**
    * Gets a description for the specified Private Endpoint Connection name.
    */
+  // #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
+  // @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
+  // get is ArmResourceRead<PrivateLinkResource>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from legacy"
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
-  get is ArmResourceRead<PrivateLinkResource>;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/privateLinkResources/{privateLinkResourceName}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...KeysOf<RelayNamespaceNameParameter>,
+    ...KeysOf<ResourceNameParameter<
+      Resource = PrivateLinkResource,
+      KeyName = "privateLinkResourceName",
+      SegmentName = "privateLinkResources",
+      NamePattern = ""
+    >>,
+  ): ArmResponse<PrivateLinkResource> | ErrorResponse;
 
   /**
    * Gets lists of resources that supports Privatelinks.
