@@ -23,7 +23,7 @@ op ListCriticalDataElementAsync is Foundations.Operation<
 
     @doc("Search keyword.")
     @query
-    keyword?: string;
+    keyword: string;
 
     ...SkipQueryParameter;
     ...TopQueryParameter;
@@ -43,7 +43,7 @@ op CreateCriticalDataElementAsync is Foundations.Operation<
   {
     @doc("The critical data element to create.")
     @bodyRoot
-    body: CatalogModelCriticalDataElement;
+    body: CriticalDataElement;
   },
   {
     @statusCode
@@ -51,7 +51,7 @@ op CreateCriticalDataElementAsync is Foundations.Operation<
 
     @doc("The created critical data element.")
     @bodyRoot
-    body: CatalogModelCriticalDataElement;
+    body: CriticalDataElement;
   }
 >;
 
@@ -68,7 +68,7 @@ op GetCriticalDataElementByIdAsync is Foundations.Operation<
     @path
     criticalDataElementId: uuid;
   },
-  CatalogModelCriticalDataElement
+  CriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -86,9 +86,9 @@ op UpdateCriticalDataElementAsync is Foundations.Operation<
 
     @doc("The updated critical data element data.")
     @bodyRoot
-    body: CatalogModelCriticalDataElement;
+    body: CriticalDataElement;
   },
-  CatalogModelCriticalDataElement
+  CriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -124,7 +124,7 @@ op ListCriticalDataElementRelationshipsAsync is Foundations.Operation<
     @query
     entityType: EntityCategory;
   },
-  CatalogModelCriticalDataElement
+  CriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -148,7 +148,7 @@ op CreateCriticalDataElementRelationshipAsync is Foundations.Operation<
     @bodyRoot
     body: InputProperties;
   },
-  CatalogModelCriticalDataElement
+  CriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -192,7 +192,7 @@ op QueryCriticalDataElementsAsync is Foundations.Operation<
     @bodyRoot
     body: CriticalDataElementQueryRequest;
   },
-  CatalogModelCriticalDataElement
+  CriticalDataElement
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -537,14 +537,14 @@ op ListDataProductsAsync is Foundations.Operation<
 @route("/dataProducts")
 @post
 op CreateDataProductAsync is Foundations.Operation<
-  CatalogModelDataProduct,
+  DataProduct,
   {
     @statusCode
     statusCode: 201;
 
     @doc("The created data product.")
     @bodyRoot
-    body: CatalogModelDataProduct;
+    body: DataProduct;
   }
 >;
 
@@ -597,7 +597,7 @@ op GetDataProductByIdAsync is Foundations.Operation<
     @path
     dataProductId: uuid;
   },
-  CatalogModelDataProduct
+  DataProduct
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -615,9 +615,9 @@ op UpdateDataProductAsync is Foundations.Operation<
 
     @doc("The updated data product.")
     @bodyRoot
-    body: CatalogModelDataProduct;
+    body: DataProduct;
   },
-  CatalogModelDataProduct
+  DataProduct
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -721,7 +721,7 @@ op EnumerateDomainsAsync is Foundations.Operation<
     @query
     writeOnly: boolean;
   },
-  CatalogModelDomainResponse
+  DomainResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -732,14 +732,14 @@ op EnumerateDomainsAsync is Foundations.Operation<
 @route("/businessdomains")
 @post
 op CreateDomainAsync is Foundations.Operation<
-  CatalogModelDomain,
+  Domain,
   {
     @statusCode
     statusCode: 201;
 
     @doc("The created business domain.")
     @bodyRoot
-    body: CatalogModelDomain;
+    body: Domain;
   }
 >;
 
@@ -758,9 +758,9 @@ op UpdateDomainAsync is Foundations.Operation<
 
     @doc("The updated business domain.")
     @bodyRoot
-    body: CatalogModelDomain;
+    body: Domain;
   },
-  CatalogModelDomain
+  Domain
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -776,7 +776,7 @@ op GetDomainByIdAsync is Foundations.Operation<
     @path
     domainId: uuid;
   },
-  CatalogModelDomain
+  Domain
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -803,14 +803,14 @@ op DeleteDomainByIdAsync is Foundations.Operation<
 @route("/terms")
 @post
 op CreateTermAsync is Foundations.Operation<
-  CatalogModelTerm,
+  Term,
   {
     @statusCode
     statusCode: 201;
 
     @doc("The created term.")
     @bodyRoot
-    body: CatalogModelTerm;
+    body: Term;
   }
 >;
 
@@ -844,7 +844,7 @@ op ListTermAsync is Foundations.Operation<
 
     ...OrderByQueryParameter;
   },
-  CatalogModelTermResponse
+  TermResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -862,9 +862,9 @@ op UpdateTermAsync is Foundations.Operation<
 
     @doc("The updated term data.")
     @bodyRoot
-    term: CatalogModelTerm;
+    term: Term;
   },
-  CatalogModelTerm
+  Term
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -880,7 +880,7 @@ op GetTermAsync is Foundations.Operation<
     @path
     termId: uuid;
   },
-  CatalogModelTerm
+  Term
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -914,9 +914,9 @@ op QueryTermsAsync is Foundations.Operation<
 
     @doc("The request body containing query criteria.")
     @bodyRoot
-    request: TermTermQueryRequest;
+    request: TermQueryRequest;
   },
-  CatalogModelTermResponse
+  TermResponse
 >;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -943,7 +943,7 @@ op ListHierarchyTermsAsync is Foundations.Operation<
     @path
     termId: uuid;
   },
-  CatalogModelTermResponse
+  TermResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

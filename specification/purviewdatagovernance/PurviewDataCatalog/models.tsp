@@ -88,7 +88,7 @@ model CatalogModelManagedAttribute {
 }
 
 @doc("Represents a critical data element in the catalog with metadata and relationships.")
-model CatalogModelCriticalDataElement {
+model CriticalDataElement {
   @doc("The current status of the critical data element.")
   status?: CatalogModelStatus;
 
@@ -492,7 +492,7 @@ model CriticalDataColumnsResponse {
 model CriticalDataElementsResponse {
   @doc("The list of critical data elements.")
   @items
-  value: CatalogModelCriticalDataElement[];
+  value: CriticalDataElement[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -594,7 +594,7 @@ union UpdateFrequencyEnum {
 }
 
 @doc("Microsoft Purview Data Governance Catalog Model Data Product.")
-model CatalogModelDataProduct {
+model DataProduct {
   @doc("The status of the data product.")
   status?: CatalogModelStatus;
 
@@ -705,7 +705,7 @@ model CatalogModelDataProductAllOfAdditionalProperties {
 model DataProductResponse {
   @doc("The list of data products.")
   @items
-  value: CatalogModelDataProduct[];
+  value: DataProduct[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -782,7 +782,7 @@ model DataProductFacetRequest {
 }
 
 @doc("Catalog model domain.")
-model CatalogModelDomain {
+model Domain {
   @doc("The status of the domain.")
   status?: CatalogModelStatus;
 
@@ -886,10 +886,10 @@ union RelatedCollectionParentCollectionTypeEnum {
 
 @doc("Response containing a list of domains.")
 @pagedResult
-model CatalogModelDomainResponse {
+model DomainResponse {
   @doc("The list of domains.")
   @items
-  value: CatalogModelDomain[];
+  value: Domain[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -903,7 +903,7 @@ model ControllersModelsPolicyAddAdminRequest {
 }
 
 @doc("Microsoft Purview Data Governance Catalog Model Term.")
-model CatalogModelTerm {
+model Term {
   @doc("The status of the term.")
   status?: CatalogModelStatus;
 
@@ -952,10 +952,10 @@ model CatalogModelTermResource {
 
 @doc("Response containing a list of terms.")
 @pagedResult
-model CatalogModelTermResponse {
+model TermResponse {
   @doc("The list of terms.")
   @items
-  value: CatalogModelTerm[];
+  value: Term[];
 
   @doc("The link to the next page of results.")
   @nextLink
@@ -963,7 +963,7 @@ model CatalogModelTermResponse {
 }
 
 @doc("Term query request model.")
-model TermTermQueryRequest {
+model TermQueryRequest {
   @doc("Number of items to skip.")
   skip?: int32;
 
@@ -1061,33 +1061,6 @@ union TermRelationshipType {
   Parent: "Parent",
 
   string,
-}
-
-@doc("TermMigrationState.")
-model TermMigrationState {
-  @doc("Indicates whether the term has been migrated.")
-  hasBeenMigrated?: boolean;
-}
-
-@doc("TermMigrationCounts.")
-model TermMigrationCounts {
-  @doc("TermTemplateCount")
-  termTemplateCount?: int32;
-
-  @doc("GlossaryCount")
-  glossaryCount?: int32;
-
-  @doc("TermCount")
-  termCount?: int32;
-}
-
-@doc("TermsMoveRequest.")
-model TermsMoveRequest {
-  @doc("The unique identifier of the destination domain.")
-  destinationDomainId?: uuid;
-
-  @doc("List of term IDs to be moved.")
-  termIds?: string[];
 }
 
 @doc("Objective with additional properties model.")
