@@ -27,7 +27,21 @@ These are the global settings for the fist.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-04-01-preview
+tag: package-2025-08-02
+```
+
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
+### Tag: package-2025-08-02
+
+These settings apply only when `--tag=package-2025-08-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-02'
+input-file:
+  - Microsoft.IoTFirmwareDefense/stable/2025-08-02/iotfirmwaredefense.json
 ```
 
 ### Tag: package-2025-04-01-preview
