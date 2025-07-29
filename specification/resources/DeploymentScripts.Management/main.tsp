@@ -22,8 +22,8 @@ using TypeSpec.Versioning;
  * DeploymentScripts Client
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
-@armProviderNamespace
-@service(#{ title: "DeploymentScriptsClient" })
+@armProviderNamespace("Microsoft.Resources")
+@service(#{ title: "DeploymentScripts Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace DeploymentScriptsClient;
