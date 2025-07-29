@@ -1,9 +1,9 @@
 import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
+import { processArmReviewLabels } from "../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
-  updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 
@@ -523,7 +523,7 @@ describe("Summarize Checks Tests", () => {
   describe("label add and remove", () => {
     const testCases = [
       {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
@@ -538,17 +538,18 @@ describe("Summarize Checks Tests", () => {
           "ARMSignedOff",
           "ARMChangesRequested",
           "other-label",
+          "ARMReview",
         ],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
       },
       {
-        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
-        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
+        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["ARMChangesRequested"],
       },
@@ -558,22 +559,22 @@ describe("Summarize Checks Tests", () => {
         expectedLabelsToRemove: [],
       },
       {
-        existingLabels: ["WaitForARMFeedback", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "other-label", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: [],
       },
       {
-        existingLabels: ["other-label"],
+        existingLabels: ["other-label", "ARMReview"],
         expectedLabelsToAdd: ["WaitForARMFeedback"],
         expectedLabelsToRemove: [],
       },
       {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
       {
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"],
       },
@@ -582,7 +583,13 @@ describe("Summarize Checks Tests", () => {
     it.each(testCases)(
       "$description",
       async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
-        const labelContext = await updateLabels(existingLabels, undefined);
+        /** @type {import("./labelling.js").LabelContext} */
+        const labelContext = {
+          present: new Set(),
+          toAdd: new Set(),
+          toRemove: new Set(),
+        };
+        await processArmReviewLabels(labelContext, existingLabels);
 
         expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
         expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
