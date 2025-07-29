@@ -312,7 +312,7 @@ interface FileShareSnapshots {
     FileShareSnapshot,
     ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotProperties>,
     BaseParameters<FileShareSnapshot>,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    Response = ArmResponse<FileShareSnapshot> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
