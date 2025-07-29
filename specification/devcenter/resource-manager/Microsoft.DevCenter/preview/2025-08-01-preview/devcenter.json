@@ -5847,6 +5847,18 @@
         }
       }
     },
+    "InheritedProjectCatalogSettings": {
+      "type": "object",
+      "description": "Inherited project catalog settings that combine feature state with catalog settings.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureState"
+        },
+        {
+          "$ref": "#/definitions/DevCenterProjectCatalogSettings"
+        }
+      ]
+    },
     "DevCenterResourceType": {
       "description": "Indicates dev center resource types.",
       "enum": [
@@ -6354,15 +6366,8 @@
       "type": "object",
       "properties": {
         "projectCatalogSettings": {
+          "$ref": "#/definitions/InheritedProjectCatalogSettings",
           "description": "Dev Center settings to be used when associating a project with a catalog.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FeatureState"
-            },
-            {
-              "$ref": "#/definitions/DevCenterProjectCatalogSettings"
-            }
-          ],
           "readOnly": true
         },
         "networkSettings": {
