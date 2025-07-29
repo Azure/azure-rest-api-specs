@@ -91,5 +91,5 @@ interface Client {
 );
 
 @@clientName(MonitorQueryLogsClientOptionalParams.endpointParam, "endpoint", "js");
-@@clientName(BatchQueryResults.render, "visualization", "go");
-@@clientName(QueryResults.render, "visualization", "go");
+@@clientName(BatchQueryResults.render, "visualization", "js");
+@@clientName(QueryResults.render, "visualization", "js");
