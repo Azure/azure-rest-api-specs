@@ -41,31 +41,25 @@ So, this script needs to do the following:
 Here is the complete output of a summarize-checks workflow `Summarize Checks`
 
 ```
-inputs: {"owner":"Azure","repo":"azure-rest-api-specs","head_sha":"b68b4f74dd631babc372ad428409c88f28d71d89","issue_number":36180,"run_id":16504849870}
+inputs: {"owner":"scbedd","repo":"azure-rest-api-specs","head_sha":"4603bf5ca924046dbebc81de39f2da157b42653a","issue_number":6,"run_id":16577385097}
 PR target branch: undefined
-Handling workflow_run event for PR #36180 in Azure/azure-rest-api-specs.
-GraphQL Rate Limit Information: {"limit":5000,"cost":1,"used":337,"remaining":5000,"resetAt":"2025-07-24T18:33:41Z"}
-RequiredCheckRuns: [{"name":"Swagger PrettierCheck","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":1,"name":"Swagger PrettierCheck","suppressionLabels":[],"troubleshootingGuide":"Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide"}},{"name":"Swagger BreakingChange","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":4,"name":"Swagger BreakingChange","suppressionLabels":["Versioning-Approved-*","BreakingChange-Approved-*"],"troubleshootingGuide":"To unblock this PR, follow the process at <a href=\"https://aka.ms/brch\">aka.ms/brch</a>."}},{"name":"Breaking Change(Cross-Version)","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":4,"name":"Breaking Change(Cross-Version)","suppressionLabels":["Versioning-Approved-*","BreakingChange-Approved-*"],"troubleshootingGuide":"To unblock this PR, follow the process at <a href=\"https://aka.ms/brch\">aka.ms/brch</a>."}},{"name":"Swagger ModelValidation","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":3,"name":"Swagger ModelValidation","suppressionLabels":[],"troubleshootingGuide":"Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide"}},{"name":"Swagger SemanticValidation","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":2,"name":"Swagger SemanticValidation","suppressionLabels":[],"troubleshootingGuide":"Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide"}},{"name":"Automated merging requirements met","status":"COMPLETED","conclusion":"FAILURE","checkInfo":{"precedence":10,"name":"Automated merging requirements met","suppressionLabels":[],"troubleshootingGuide":"This is the final check that must pass. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide. In addition, refer to step 4 in the <a href=\"https://aka.ms/azsdk/pr-diagram\">PR workflow diagram</a>"}},{"name":"license/cla","status":"COMPLETED","conclusion":"SUCCESS","checkInfo":{"precedence":0,"name":"license/cla","suppressionLabels":[],"troubleshootingGuide":"Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide"}}], FyiCheckRuns: [], ImpactAssessment: undefined
-Summarize checks label actions against Azure/azure-rest-api-specs#36180:
-The following labels were present: [resource-manager, RPaaS, TypeSpec]Removing labels [] then
-Adding labels [WaitForARMFeedback]
-Updating comment 'NextStepsToMerge' on Azure/azure-rest-api-specs#36180 with body: <h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label from an ARM reviewer.<br/>This PR is awaiting ARM reviewer feedback (label: <code>WaitForARMFeedback</code>).<br/>To learn when this PR will get reviewed, see ARM review queue at <a href="https://aka.ms/azsdk/pr-arm-review">aka.ms/azsdk/pr-arm-review</a><br/>For details of the ARM review, see <a href="https://aka.ms/azsdk/pr-arm-review">aka.ms/azsdk/pr-arm-review</a><br/></li><li>❌ The required check named <code>Automated merging requirements met</code> has failed. This is the final check that must pass. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide. In addition, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a></li></ul>
-Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: blocked.
-```
-
-- I need the content after `Updating comment 'NextStepsToMerge' on Azure/azure-rest-api-specs#36180 with body` (make this work for multiple different PRs)
-- I need the content of "the following labels were present" as "present"
-- I need the content of "Removing labels: []"
-- I need the content of "Adding labels: []"
-
-So for a workflow run that is added to the workflow runs array would look like:
-```json
-{
-  "AddedLabels": []
-  "Removed Labels": []
-  "Present Labels": []
-  "Comment Body": "<content"
-}
+Handling workflow_run event for PR #6 in scbedd/azure-rest-api-specs.
+GraphQL Rate Limit Information: {"limit":5000,"cost":1,"used":22,"remaining":4978,"resetAt":"2025-07-28T19:10:01Z"}
+Impact Assessment Workflow Run ID is present: 16577385097. Downloading job summary artifact
+Successfully downloaded job-summary artifact ID: 3632350175
+RequiredCheckRuns: [], FyiCheckRuns: [], ImpactAssessment: {"suppressionReviewRequired":false,"rpaasChange":false,"newRP":false,"rpaasRPMissing":false,"rpaasRpNotInPrivateRepo":false,"resourceManagerRequired":true,"dataPlaneRequired":false,"rpaasExceptionRequired":false,"typeSpecChanged":true,"isNewApiVersion":false,"isDraft":true,"targetBranch":"tag-update-fixes"}
+Downloaded impact assessment: {"suppressionReviewRequired":false,"rpaasChange":false,"newRP":false,"rpaasRPMissing":false,"rpaasRpNotInPrivateRepo":false,"resourceManagerRequired":true,"dataPlaneRequired":false,"rpaasExceptionRequired":false,"typeSpecChanged":true,"isNewApiVersion":false,"isDraft":true,"targetBranch":"tag-update-fixes"}
+ENTER definition processARMReview
+Label.applyStateChange: 'data-plane' is not present. This is the desired state.
+Label.applyStateChange: 'resource-manager' was not present and should be present. Scheduling addition.
+Label.applyStateChange: 'new-api-version' is not present. This is the desired state.
+Label.applyStateChange: 'ARMReview' is not present. This is the desired state.
+RETURN definition processARMReview. isReleaseBranch: false, isBranchInScopeOfArmReview: false, isNewApiVersion: false, isDraft: true, newApiVersionLabel.shouldBePresent: false, armReviewLabel.shouldBePresent: false.
+Summarize checks label actions against scbedd/azure-rest-api-specs#6:
+The following labels were present: []Removing labels [] then
+Adding labels [resource-manager]
+Updating comment 'NextStepsToMerge' on scbedd/azure-rest-api-specs#6 with body: <h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛
+Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: pending.
 ```
 You should generate one of each of those for each workflow run of `summarize-checks` for the current SHA on the PR.
 
@@ -85,7 +79,7 @@ const client = new Octokit({
 })
 
 // Starting PR number - all PRs after this will be evaluated
-const STARTING_PR_NUMBER = 35346
+const STARTING_PR_NUMBER = 36226
 
 // Repository configuration
 const OWNER = 'Azure'
@@ -480,12 +474,14 @@ function parseWorkflowLogs(logText) {
         AddedLabels: [],
         RemovedLabels: [],
         PresentLabels: [],
-        CommentBody: null
+        CommentBody: null,
+        MergeRequirementsMet: null,
+        ImpactAssessment: null
     }
 
     try {
-        // Extract present labels - look for the exact pattern from the example
-        const presentLabelsMatch = logText.match(/The following labels were present: \[(.*?)\](?:Removing|Adding)/s)
+        // Extract present labels - looking for the pattern "The following labels were present: [...]Removing"
+        const presentLabelsMatch = logText.match(/The following labels were present: \[(.*?)\]Removing/s)
         if (presentLabelsMatch) {
             const labelsStr = presentLabelsMatch[1].trim()
             if (labelsStr) {
@@ -496,8 +492,8 @@ function parseWorkflowLogs(logText) {
             }
         }
 
-        // Extract removed labels - match the pattern "Removing labels [...]"
-        const removedLabelsMatch = logText.match(/Removing labels \[(.*?)\]/s)
+        // Extract removed labels - match the pattern "Removing labels [...] then"
+        const removedLabelsMatch = logText.match(/Removing labels \[(.*?)\] then/s)
         if (removedLabelsMatch) {
             const labelsStr = removedLabelsMatch[1].trim()
             if (labelsStr) {
@@ -519,9 +515,26 @@ function parseWorkflowLogs(logText) {
         }
 
         // Extract comment body
-        const commentMatch = logText.match(/Updating comment 'NextStepsToMerge' on .*? with body: (.*?)(?=\n(?:[A-Z]|$))/s)
+        const commentMatch = logText.match(/Updating comment 'NextStepsToMerge' on .*? with body: (.*?)(?=\nSummarize checks has identified|$)/s)
         if (commentMatch) {
             output.CommentBody = commentMatch[1].trim()
+        }
+
+        // Extract merge requirements met status
+        const mergeRequirementsMatch = logText.match(/Summarize checks has identified that (?:status of "Automated merging requirements met" check should be updated to|the status of "Automated merging requirements met" check should be updated to): (.*?)\./s)
+        if (mergeRequirementsMatch) {
+            output.MergeRequirementsMet = mergeRequirementsMatch[1].trim()
+        }
+
+        // Extract impact assessment JSON
+        const impactAssessmentMatch = logText.match(/Downloaded impact assessment: ({.*?})/s)
+        if (impactAssessmentMatch) {
+            try {
+                output.ImpactAssessment = JSON.parse(impactAssessmentMatch[1])
+            } catch (parseError) {
+                console.error('Error parsing impact assessment JSON:', parseError.message)
+                output.ImpactAssessment = impactAssessmentMatch[1] // Store as string if parsing fails
+            }
         }
 
     } catch (error) {
@@ -631,6 +644,8 @@ async function testSpecificPR(prNumber) {
             console.log(`  - Added Labels: ${output.AddedLabels.join(', ')}`)
             console.log(`  - Removed Labels: ${output.RemovedLabels.join(', ')}`)
             console.log(`  - Has Comment Body: ${output.CommentBody ? 'Yes' : 'No'}`)
+            console.log(`  - Merge Requirements Met: ${output.MergeRequirementsMet || 'Not found'}`)
+            console.log(`  - Has Impact Assessment: ${output.ImpactAssessment ? 'Yes' : 'No'}`)
         }
 
         await savePRData(prData)
