@@ -57,10 +57,18 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2023-03
+tag: package-preview-2025-07-01
 ```
 
 =======
+### Tag: package-preview-2025-07-01
+
+These settings apply only when `--tag=package-preview-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07-01'
+input-file:
+```
+
 ### Tag: package-preview-2025-05-01-preview
 
 These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
