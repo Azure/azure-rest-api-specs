@@ -250,6 +250,12 @@ model EvaluationSummaryStatistics {
 
   @doc("Standard deviation of score values, indicating the variability or spread of scores around the average.")
   standardDeviation?: float32;
+
+  @doc("Lower bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile).")
+  confidenceIntervalLowerBound?: float32;
+
+  @doc("Upper bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile).")
+  confidenceIntervalUpperBound?: float32;
 }
 
 @doc("Status of evaluator across all data rows.")
