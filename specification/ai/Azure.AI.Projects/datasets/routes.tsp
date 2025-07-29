@@ -31,7 +31,7 @@ interface Datasets
     {
       @doc("The pending upload request parameters")
       @Http.bodyRoot
-      @clientName("configuration")
+      @clientName("configuration", "csharp")
       pendingUploadRequest: PendingUploadRequest;
 
       @doc("The specific version id of the DatasetVersion to operate on.")
