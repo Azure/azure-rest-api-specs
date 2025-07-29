@@ -24,27 +24,102 @@ model QuotaAllocationRequestStatus
   >;
 }
 
+alias QuotaAllocationRequestStatusesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /**
+     * The management group ID.
+     */
+    @path
+    @segment("managementGroups")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    managementGroupId: string;
+
+    ...SubscriptionIdParameter;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+
+    /**
+     * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+     */
+    @path
+    @key
+    @segment("resourceProviders")
+    @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+    resourceProviderName: string;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface QuotaAllocationRequestStatuses {
   /**
    * Get the quota allocation request status for the subscriptionId by allocationId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptionAllocationRequest_Get")
-  get is ArmResourceRead<
+  get is QuotaAllocationRequestStatusesOps.Read<
     QuotaAllocationRequestStatus,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    Parameters = {
+      /**
+       * Request Id.
+       */
+      @path
+      @segment("quotaAllocationRequests")
+      allocationId: string;
+    }
   >;
 
   /**
    * Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaSubscriptionAllocationRequest_List")
-  list is ArmResourceListByParent<
+  list is QuotaAllocationRequestStatusesOps.List<
     QuotaAllocationRequestStatus,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
+      /**
+       * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+       */
+      @path
+      @segment("groupQuotas")
+      @minLength(3)
+      @maxLength(63)
+      @pattern("^[a-z][a-z0-9]*$")
+      groupQuotaName: string;
+
+      /**
+       * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+       */
+      @path
+      @segment("resourceProviders")
+      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+      resourceProviderName: string;
+
       /**
        * | Field | Supported operators
        * |---------------------|------------------------

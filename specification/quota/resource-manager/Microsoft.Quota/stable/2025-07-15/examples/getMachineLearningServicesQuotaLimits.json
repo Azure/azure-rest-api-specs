@@ -1,48 +1,50 @@
 {
   "parameters": {
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus",
-    "api-version": "2025-07-15"
+    "api-version": "2025-07-15",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/standardDv2Family",
-            "type": "Microsoft.Quota/Quotas",
             "name": "standardDv2Family",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/standardDv2Family",
             "properties": {
+              "name": {
+                "localizedValue": "Standard Dv2 Family vCPUs",
+                "value": "standardDv2Family"
+              },
               "limit": {
                 "limitObjectType": "LimitValue",
                 "value": 10
               },
-              "unit": "Count",
-              "name": {
-                "value": "standardDv2Family",
-                "localizedValue": "Standard Dv2 Family vCPUs"
-              },
-              "resourceType": "dedicated"
+              "resourceType": "dedicated",
+              "unit": "Count"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/totalLowPriorityCores",
-            "type": "Microsoft.Quota/Quotas",
             "name": "totalLowPriorityCores",
+            "type": "Microsoft.Quota/Quotas",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MachineLearningServices/locations/eastus/providers/Microsoft.Quota/Quotas/totalLowPriorityCores",
             "properties": {
+              "name": {
+                "localizedValue": "Total Regional Low-priority vCPUs",
+                "value": "totalLowPriorityCores"
+              },
               "limit": {
                 "limitObjectType": "LimitValue",
                 "value": 10
               },
-              "unit": "Count",
-              "name": {
-                "value": "totalLowPriorityCores",
-                "localizedValue": "Total Regional Low-priority vCPUs"
-              },
-              "resourceType": "lowPriority"
+              "resourceType": "lowPriority",
+              "unit": "Count"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Quota_List",
+  "title": "Quotas_listQuotaLimitsMachineLearningServices"
 }

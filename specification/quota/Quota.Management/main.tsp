@@ -24,6 +24,7 @@ import "./GroupQuotasEnforcementStatus.tsp";
 import "./CurrentUsagesBase.tsp";
 import "./CurrentQuotaLimitBase.tsp";
 import "./QuotaRequestDetails.tsp";
+import "./Legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -32,8 +33,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity.
+ * Microsoft Azure Quota Resource Provider
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "Azure Quota Extension API" })
 @versioned(Versions)
@@ -52,4 +54,9 @@ enum Versions {
   v2025_07_15: "2025-07-15",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@armResourceOperations
+interface QuotaOperation
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = ArmResponse<OperationList>,
+      Error = ExceptionResponse
+    > {}

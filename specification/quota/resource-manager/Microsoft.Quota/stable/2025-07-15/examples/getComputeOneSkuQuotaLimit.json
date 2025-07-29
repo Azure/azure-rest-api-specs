@@ -1,29 +1,31 @@
 {
   "parameters": {
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus",
+    "api-version": "2025-07-15",
     "resourceName": "standardNDSFamily",
-    "api-version": "2025-07-15"
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNDSFamily",
-        "type": "Microsoft.Quota/Quotas",
         "name": "standardNDSFamily",
+        "type": "Microsoft.Quota/Quotas",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/Quotas/standardNDSFamily",
         "properties": {
+          "name": {
+            "localizedValue": "Standard NDS Family vCPUs",
+            "value": "standardNDSFamily"
+          },
+          "isQuotaApplicable": true,
           "limit": {
             "limitObjectType": "LimitValue",
-            "value": 100,
-            "limitType": "Independent"
+            "limitType": "Independent",
+            "value": 100
           },
-          "unit": "Count",
-          "name": {
-            "value": "standardNDSFamily",
-            "localizedValue": "Standard NDS Family vCPUs"
-          },
-          "isQuotaApplicable": true
+          "unit": "Count"
         }
       }
     }
-  }
+  },
+  "operationId": "Quota_Get",
+  "title": "Quotas_Get_Request_ForCompute"
 }

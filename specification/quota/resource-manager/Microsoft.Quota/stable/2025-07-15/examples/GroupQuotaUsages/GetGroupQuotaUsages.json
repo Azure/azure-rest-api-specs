@@ -1,47 +1,48 @@
 {
   "operationId": "GroupQuotaUsages_List",
   "parameters": {
-    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "api-version": "2025-07-15",
     "groupQuotaName": "groupquota1",
-    "resourceProviderName": "Microsoft.Compute",
     "location": "westus",
-    "api-version": "2025-07-15"
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderName": "Microsoft.Compute"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://yourLinkHere.com",
         "value": [
           {
-            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardddv4family",
-            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
             "name": "standardddv4family",
+            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardddv4family",
             "properties": {
-              "limit": 100,
-              "usages": 30,
-              "unit": "count",
               "name": {
-                "value": "standardddv4family",
-                "localizedValue": "standard DDv4 Family vCPUs"
-              }
+                "localizedValue": "standard DDv4 Family vCPUs",
+                "value": "standardddv4family"
+              },
+              "limit": 100,
+              "unit": "count",
+              "usages": 30
             }
           },
           {
-            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardav2family",
-            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
             "name": "standardav2family",
+            "type": "Microsoft.Quota/groupQuotas/locationSUsages",
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/locationSUsages/eastus/resources/standardav2family",
             "properties": {
-              "limit": 150,
-              "usages": 70,
-              "unit": "count",
               "name": {
-                "value": "standardav2family",
-                "localizedValue": "standard Av2 Family vCPUs"
-              }
+                "localizedValue": "standard Av2 Family vCPUs",
+                "value": "standardav2family"
+              },
+              "limit": 150,
+              "unit": "count",
+              "usages": 70
             }
           }
-        ],
-        "nextLink": "https://yourLinkHere.com"
+        ]
       }
     }
-  }
+  },
+  "title": "GroupQuotasUsages_List"
 }

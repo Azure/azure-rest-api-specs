@@ -24,96 +24,132 @@ model GroupQuotasEntity
   >;
 }
 
+alias GroupQuotasEntitiesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /**
+     * The management group ID.
+     */
+    @path
+    @segment("managementGroups")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    managementGroupId: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+  }
+>;
+
 @armResourceOperations
 interface GroupQuotasEntities {
   /**
    * Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotas_Get")
-  get is ArmResourceRead<
-    GroupQuotasEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  get is Extension.Read<
+    Extension.ManagementGroup<"managementGroupId">,
+    GroupQuotasEntity
   >;
 
   /**
    * Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotas_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is GroupQuotasEntitiesOps.CreateOrUpdateAsync<
     GroupQuotasEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
       LROResponse,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OptionalRequestBody = true
   >;
 
   /**
    * Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
    *  Any change in the filters will be applicable to the future quota assignments, existing quota allocated to subscriptions from the GroupQuotas remains unchanged.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("GroupQuotas_Update")
-  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  update is GroupQuotasEntitiesOps.CustomPatchAsync<
     GroupQuotasEntity,
     PatchModel = GroupQuotasEntityPatch,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     OptionalRequestBody = true
   >;
 
   /**
    * Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotas_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    GroupQuotasEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  delete is Extension.DeleteWithoutOkAsync<
+    Extension.ManagementGroup<"managementGroupId">,
+    GroupQuotasEntity
   >;
 
   /**
    * Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on group quota can be access from the group quota APIs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotas_List")
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<GroupQuotaList>
   >;
 
   /**
    * Get API to check the status of a GroupQuota request by requestId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("groupQuotaRequests")
   @operationId("GroupQuotaLimitsRequest_List")
-  groupQuotaLimitsRequestList is ArmResourceActionSync<
+  groupQuotaLimitsRequestList is Extension.ActionSync<
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
     void,
     ArmResponse<SubmittedResourceRequestStatusList>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
        */
-      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
       @path
+      @segment("resourceProviders")
+      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
       resourceProviderName: string;
 
       /**
-       * | Field | Supported operators
-       * |---------------------|------------------------
-       *
-       *  location eq {location} and resource eq {resourceName}
-       *  Example: $filter=location eq eastus and resourceName eq cores
+       * | Field | Supported operators  \r\n|---------------------|------------------------\n\r\n location eq {location} and resource eq {resourceName}\n Example: $filter=location eq eastus and resourceName eq cores
        */
+      @query
       @minLength(12)
-      @query("$filter")
       $filter: string;
     }
   >;
@@ -121,25 +157,30 @@ interface GroupQuotasEntities {
   /**
    * Gets the GroupQuotas usages and limits(quota). Location is required paramter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @action("{location}")
   @operationId("GroupQuotaUsages_List")
-  groupQuotaUsagesList is ArmResourceActionSync<
+  groupQuotaUsagesList is Extension.Read<
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
-    void,
-    ArmResponse<ResourceUsageList>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
       /**
        * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
        */
       @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
       @path
+      @segment("resourceProviders")
       resourceProviderName: string;
 
-      ...LocationResourceParameter;
-    }
+      /**
+       * The name of the Azure region.
+       */
+      @path
+      @segment("locationUsages")
+      @minLength(1)
+      location: string;
+    },
+    Response = ArmResponse<ResourceUsageList>
   >;
 }
 

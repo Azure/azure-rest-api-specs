@@ -25,23 +25,96 @@ model GroupQuotaLimitList
   >;
 }
 
+/**
+ * Virtual resource representing a resource provider scope within a group quota.
+ */
+@parentResource(GroupQuotasEntity)
+@armVirtualResource
+model Virtual {
+  /**
+   * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+   */
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @key
+  @path
+  @segment("resourceProviders")
+  @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+  resourceProviderName: string;
+}
+
+alias GroupQuotaLimitListsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /**
+     * The management group ID.
+     */
+    @path
+    @segment("managementGroups")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    managementGroupId: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+
+    /**
+     * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+     */
+    @path
+    @key
+    @segment("resourceProviders")
+    @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+    resourceProviderName: string;
+
+    /**
+     * The name of the Azure region.
+     */
+    @path
+    @minLength(1)
+    @segment("groupQuotaLimits")
+    location: string;
+  }
+>;
+
 @armResourceOperations
 interface GroupQuotaLimitLists {
   /**
    * Gets the GroupQuotaLimits for the specified resource provider and location for resource names passed in $filter=resourceName eq {SKU}.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaLimits_List")
-  list is ArmResourceRead<GroupQuotaLimitList>;
+  list is GroupQuotaLimitListsOps.Read<GroupQuotaLimitList>;
 
   /**
    * Create the GroupQuota requests for a specific ResourceProvider/Location/Resource. The resourceName properties are specified in the request body. Only 1 resource quota can be requested. Please note that patch request creates a new groupQuota request.
    * Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("GroupQuotaLimitsRequest_Update")
-  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  update is GroupQuotaLimitListsOps.CustomPatchAsync<
     GroupQuotaLimitList,
     PatchModel = GroupQuotaLimitList,
     OptionalRequestBody = true

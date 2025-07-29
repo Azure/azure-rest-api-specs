@@ -25,14 +25,71 @@ model GroupQuotasEnforcementStatus
   >;
 }
 
+alias GroupQuotasEnforcementStatusesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Management";
+
+    /**
+     * The management group ID.
+     */
+    @path
+    @segment("managementGroups")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    managementGroupId: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
+
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+
+    /**
+     * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+     */
+    @path
+    @key
+    @segment("resourceProviders")
+    @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+    resourceProviderName: string;
+
+    /**
+     * The name of the Azure region.
+     */
+    @path
+    @minLength(1)
+    @segment("locationSettings")
+    location: string;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface GroupQuotasEnforcementStatuses {
   /**
    * Gets the GroupQuotas enforcement settings for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaLocationSettings_Get")
-  get is ArmResourceRead<GroupQuotasEnforcementStatus>;
+  get is GroupQuotasEnforcementStatusesOps.Read<GroupQuotasEnforcementStatus>;
 
   /**
    * Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level since it is now part of an enforced group.
@@ -41,14 +98,16 @@ interface GroupQuotasEnforcementStatuses {
    *  1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).
    *  2. Then delete the GroupQuota (Check the example - GroupQuotas_Delete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaLocationSettings_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is GroupQuotasEnforcementStatusesOps.CreateOrUpdateAsync<
     GroupQuotasEnforcementStatus,
     Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
       LROResponse,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -58,10 +117,10 @@ interface GroupQuotasEnforcementStatuses {
    *  1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).
    *  2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("GroupQuotaLocationSettings_Update")
-  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  update is GroupQuotasEnforcementStatusesOps.CustomPatchAsync<
     GroupQuotasEnforcementStatus,
     PatchModel = GroupQuotasEnforcementStatus,
     OptionalRequestBody = true
@@ -70,10 +129,29 @@ interface GroupQuotasEnforcementStatuses {
   /**
    * Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GroupQuotaLocationSettings_List")
-  list is ArmResourceListByParent<
+  list is GroupQuotasEnforcementStatusesOps.List<
     GroupQuotasEnforcementStatus,
+    Parameters = {
+      /**
+       * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+       */
+      @path
+      @segment("groupQuotas")
+      @minLength(3)
+      @maxLength(63)
+      @pattern("^[a-z][a-z0-9]*$")
+      groupQuotaName: string;
+
+      /**
+       * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
+       */
+      @path
+      @segment("resourceProviders")
+      @pattern("^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}$")
+      resourceProviderName: string;
+    },
     Response = ArmResponse<GroupQuotasEnforcementListResponse>
   >;
 }

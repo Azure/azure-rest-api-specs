@@ -1,70 +1,71 @@
 {
   "operationId": "GroupQuotaLimits_List",
   "parameters": {
-    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "groupQuotaName": "groupquota1",
+    "$filter": "resourceName eq cores",
     "api-version": "2025-07-15",
-    "resourceProviderName": "Microsoft.Compute",
+    "groupQuotaName": "groupquota1",
     "location": "westus",
-    "$filter": "resourceName eq cores"
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderName": "Microsoft.Compute"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimits/westus",
         "name": "westus",
         "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimits/westus",
         "properties": {
+          "nextLink": "https://yourLinkHere.com",
           "provisioningState": "Succeeded",
           "value": [
             {
               "properties": {
-                "limit": 100,
-                "resourceName": "standardddv4family",
                 "name": {
-                  "value": "standardddv4family",
-                  "localizedValue": "standard DDv4 Family vCPUs"
+                  "localizedValue": "standard DDv4 Family vCPUs",
+                  "value": "standardddv4family"
                 },
-                "unit": "count",
-                "availableLimit": 50,
                 "allocatedToSubscriptions": {
                   "value": [
                     {
-                      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-                      "quotaAllocated": 20
+                      "quotaAllocated": 20,
+                      "subscriptionId": "00000000-0000-0000-0000-000000000000"
                     },
                     {
-                      "subscriptionId": "A000000-0000-0000-0000-000000000000",
-                      "quotaAllocated": 30
+                      "quotaAllocated": 30,
+                      "subscriptionId": "A000000-0000-0000-0000-000000000000"
                     }
                   ]
-                }
+                },
+                "availableLimit": 50,
+                "limit": 100,
+                "resourceName": "standardddv4family",
+                "unit": "count"
               }
             },
             {
               "properties": {
-                "limit": 100,
-                "resourceName": "standardav2family",
                 "name": {
-                  "value": "standardav2family",
-                  "localizedValue": "Standard AV2 Family vCPUs"
+                  "localizedValue": "Standard AV2 Family vCPUs",
+                  "value": "standardav2family"
                 },
-                "unit": "count",
-                "availableLimit": 80,
                 "allocatedToSubscriptions": {
                   "value": [
                     {
-                      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-                      "quotaAllocated": 20
+                      "quotaAllocated": 20,
+                      "subscriptionId": "00000000-0000-0000-0000-000000000000"
                     }
                   ]
-                }
+                },
+                "availableLimit": 80,
+                "limit": 100,
+                "resourceName": "standardav2family",
+                "unit": "count"
               }
             }
-          ],
-          "nextLink": "https://yourLinkHere.com"
+          ]
         }
       }
     }
-  }
+  },
+  "title": "GroupQuotaLimits_Get_Request_ForCompute"
 }

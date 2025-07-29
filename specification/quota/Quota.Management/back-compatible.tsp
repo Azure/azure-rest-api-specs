@@ -3,31 +3,31 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Quota;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GroupQuotaDetails.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GroupQuotaRequestBase.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GroupQuotaRequestBaseProperties.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SubscriptionQuotaDetails.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaAllocationRequestBase.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaAllocationRequestBaseProperties.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GroupQuotaUsagesBase.name);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaRequestOneResourceSubmitResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaRequestSubmitResponse202.properties);
 
 @@clientName(GroupQuotasEntities.createOrUpdate::parameters.resource,
@@ -45,7 +45,7 @@ using Microsoft.Quota;
   "allocateQuotaRequest"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaAllocationRequestStatus.properties);
 
 @@clientName(GroupQuotasEnforcementStatuses.createOrUpdate::parameters.resource,
@@ -62,5 +62,8 @@ using Microsoft.Quota;
   "createQuotaRequest"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QuotaRequestDetails.properties);
+
+@@maxLength(Azure.ResourceManager.Extension.ManagementGroup.name, 63);
+@@minLength(Azure.ResourceManager.Extension.ManagementGroup.name, 3);
