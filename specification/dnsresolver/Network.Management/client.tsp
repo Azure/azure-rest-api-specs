@@ -4,3 +4,4 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Network.ActionType, "DnsSecurityRuleActionType");
+@@clientName(Microsoft.Network, "DnsResolverManagementClient", "javascript");
