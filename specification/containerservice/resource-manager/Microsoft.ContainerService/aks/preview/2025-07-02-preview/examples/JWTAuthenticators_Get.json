@@ -32,8 +32,12 @@
             }
           ],
           "claimMappings": {
-            "username": "'aks:jwt:' + claims.sub",
-            "groups": "claims.groups.split(',').map(group, 'aks:jwt:' + group)",
+            "username": {
+              "expression": "'aks:jwt:' + claims.sub"
+            },
+            "groups": {
+              "expression": "claims.groups.split(',').map(group, 'aks:jwt:' + group)"
+            },
             "extra": [
               {
                 "key": "example.com/extrakey",
