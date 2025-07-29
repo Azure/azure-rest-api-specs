@@ -42,7 +42,11 @@ interface EncryptionScopes {
    * Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.
    */
   @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<EncryptionScope, PatchModel = EncryptionScope, Error = ErrorResponse>;
+  patch is ArmCustomPatchSync<
+    EncryptionScope,
+    PatchModel = EncryptionScope,
+    Error = ErrorResponse
+  >;
 
   /**
    * Lists all the encryption scopes available under the specified storage account.

@@ -51,7 +51,10 @@ interface ObjectReplicationPolicyOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ObjectReplicationPolicies_Delete")
-  delete is ArmResourceDeleteSync<ObjectReplicationPolicy, Error = ErrorResponse>;
+  delete is ArmResourceDeleteSync<
+    ObjectReplicationPolicy,
+    Error = ErrorResponse
+  >;
 
   /**
    * List the object replication policies associated with the storage account.

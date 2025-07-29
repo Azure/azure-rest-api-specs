@@ -42,13 +42,20 @@ interface BlobContainers {
   /**
    * Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container.
    */
-  create is ArmResourceCreateOrReplaceSync<BlobContainer, Error = ErrorResponse>;
+  create is ArmResourceCreateOrReplaceSync<
+    BlobContainer,
+    Error = ErrorResponse
+  >;
 
   /**
    * Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn't already exist.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<BlobContainer, PatchModel = BlobContainer, Error = ErrorResponse>;
+  update is ArmCustomPatchSync<
+    BlobContainer,
+    PatchModel = BlobContainer,
+    Error = ErrorResponse
+  >;
 
   /**
    * Deletes specified container under its account.

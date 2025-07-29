@@ -30,7 +30,10 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets effective NetworkSecurityPerimeterConfiguration for association
    */
-  get is ArmResourceRead<NetworkSecurityPerimeterConfiguration, Error = ErrorResponse>;
+  get is ArmResourceRead<
+    NetworkSecurityPerimeterConfiguration,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets list of effective NetworkSecurityPerimeterConfiguration for storage account

@@ -45,7 +45,10 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the storage account.
    */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnection, Error = ErrorResponse>;
+  delete is ArmResourceDeleteSync<
+    PrivateEndpointConnection,
+    Error = ErrorResponse
+  >;
 
   /**
    * List all the private endpoint connections associated with the storage account.

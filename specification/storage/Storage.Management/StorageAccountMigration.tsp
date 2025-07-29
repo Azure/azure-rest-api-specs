@@ -36,7 +36,10 @@ interface StorageAccountMigrations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("StorageAccounts_GetCustomerInitiatedMigration")
-  getCustomerInitiatedMigration is ArmResourceRead<StorageAccountMigration, Error = ErrorResponse>;
+  getCustomerInitiatedMigration is ArmResourceRead<
+    StorageAccountMigration,
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(StorageAccountMigration.name,
