@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 
-namespace PurviewDataCatalog;
+namespace PurviewUnifiedCatalog;
 
 @doc("Status of a catalog model entity indicating its lifecycle state.")
 union CatalogModelStatus {

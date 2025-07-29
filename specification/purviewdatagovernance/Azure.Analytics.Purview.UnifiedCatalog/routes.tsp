@@ -6,7 +6,7 @@ import "@typespec/http";
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace PurviewDataCatalog;
+namespace PurviewUnifiedCatalog;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."

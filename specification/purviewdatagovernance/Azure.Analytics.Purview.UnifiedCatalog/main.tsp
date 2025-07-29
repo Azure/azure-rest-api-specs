@@ -12,30 +12,29 @@ import "@typespec/http";
 import "./routes.tsp";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * Creates a data plane client for Purview Data Catalog.
+ * Creates a data plane client for Purview Unified Catalog.
  */
-@service(#{ title: "PurviewDataCatalog" })
+@service(#{ title: "PurviewUnifiedCatalog" })
 @server(
-  "{endpoint}/purviewdatacatalog/api",
-  "PurviewDataCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
+  "{endpoint}/purviewunifiedcatalog/api",
+  "PurviewUnifiedCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
     endpoint: url,
   }
 )
 @doc("""
-  Purview Data Catalog Service is a fully managed cloud service whose users can
+  Purview Unified Catalog Service is a fully managed cloud service whose users can
   discover the data sources they need and understand the data sources they find.
   At the same time, Data Catalog helps organizations get more value from their
-  existing investments. This spec defines REST API of Purview Data Catalog Service.
+  existing investments. This spec defines REST API of Purview Unified Catalog Service.
   """)
 @useAuth(AuthToken)
 @versioned(ApiVersions)
-namespace PurviewDataCatalog;
+namespace PurviewUnifiedCatalog;
 
 @doc("Service API versions")
 enum ApiVersions {
