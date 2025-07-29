@@ -54,14 +54,7 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
     - Run `git push -u origin <current-branch-name>`
 **Success Criteria**: Changes committed and pushed to remote branch
 
-## Step 5: Validate Label and Codeowners
-**Goal**: Validate the label and all codeowners for a service. Create new label and codeowner entry if none exist.
-**Actions**:
-1. To validate a service label refer to #file:./validate-service-label.prompt.md
-2. After service label is validated or created refer to #file:./validate-codeowners.prompt.md
-3. If both were already valid, continue, if you had to create a label or codeowner entry, display the PR(s) created.
-
-## Step 6: Choose SDK Generation Method
+## Step 5: Choose SDK Generation Method
 **Goal**: Determine how to generate SDKs
 **Actions**:
 1. Present options: "How would you like to generate SDKs?"
@@ -72,7 +65,7 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
     - If Option B: Continue to Step 6
 **Success Criteria**: SDK generation method selected
 
-## Step 7: Create Specification Pull Request
+## Step 6: Create Specification Pull Request
 **Goal**: Create PR for TypeSpec changes if not already created
 **Actions**:
 1. Check if spec PR already exists using `GetPullRequestForCurrentBranch`
@@ -83,7 +76,7 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
     - Display created PR details
 **Success Criteria**: Specification pull request exists
 
-## Step 8: Generate SDKs via Pipeline
+## Step 7: Generate SDKs via Pipeline
 **Goal**: Create release plan and generate SDKs
 **Actions**:
 1. Run `/create-release-plan`
@@ -96,11 +89,17 @@ This step should not check package readiness to verify namespace approval for ma
 7. Display generated SDK PR links when available
 **Success Criteria**: SDK generation pipeline initiated and SDKs generated
 
-## Step 9: Show Generated SDK PRs
+## Step 8: Show Generated SDK PRs
 **Goal**: Display all created SDK pull requests
 **Actions**:
 1. Run `GetSDKPullRequestDetails` to fetch generated SDK PR info.
 
+## Step 9: Validate Label and Codeowners
+**Goal**: Validate the label and all codeowners for a service. Create new label and codeowner entry if none exist.
+**Actions**:
+1. To validate a service label refer to #file:./validate-service-label.prompt.md
+2. After service label is validated or created refer to #file:./validate-codeowners.prompt.md
+3. If both were already valid, continue, if you had to create a label or codeowner entry, display the PR(s) created.
 
 ## Step 10: Create release plan
 **Goal**: Create a release plan for the generated SDKs
