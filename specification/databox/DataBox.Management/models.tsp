@@ -4197,6 +4197,44 @@ model SubscriptionIsAllowedToCreateJobValidationResponseProperties
    */
   validationType: ValidationInputDiscriminator.ValidateSubscriptionIsAllowedToCreateJob;
 }
+/**
+ * Operation properties.
+ */
+model OperationProperties {}
+
+/**
+ * Operation entity.
+ */
+model Operation {
+  /** 
+    Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}
+  */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Operation display values.
+   */
+  @visibility(Lifecycle.Read)
+  display?: OperationDisplay;
+
+  /**
+   * Operation properties.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: OperationProperties;
+
+  /**
+   * Origin of the operation. Can be : user|system|user,system
+   */
+  @visibility(Lifecycle.Read)
+  origin?: string;
+
+  /**
+   * Indicates whether the operation is a data action
+   */
+  isDataAction?: boolean;
+}
 
 /**
  * The paginated list of connected cluster API operations.

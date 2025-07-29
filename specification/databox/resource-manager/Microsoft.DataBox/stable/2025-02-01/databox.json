@@ -4227,6 +4227,36 @@
         ]
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Operation entity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationDisplay",
+          "description": "Operation display values.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Operation properties.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation. Can be : user|system|user,system",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        }
+      }
+    },
     "OperationList": {
       "type": "object",
       "description": "The paginated list of connected cluster API operations.",
@@ -4235,7 +4265,7 @@
           "type": "array",
           "description": "The list of connected cluster API operations.",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+            "$ref": "#/definitions/Operation"
           },
           "readOnly": true
         },
@@ -4244,6 +4274,10 @@
           "description": "The link to fetch the next page of connected cluster API operations."
         }
       }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Operation properties."
     },
     "OverallValidationStatus": {
       "type": "string",
