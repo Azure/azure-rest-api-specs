@@ -278,7 +278,20 @@ const EXCLUDED_CHECK_NAMES = [];
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+  let owner = undefined;
+  let repo = undefined;
+  let issue_number = undefined;
+  let head_sha = undefined;
+
+  try {
+    ({ owner, repo, issue_number, head_sha } = await extractInputs(github, context, core));
+  } catch (/** @type {any} */ error) {
+    core.info(
+      "We ran into an error while extracting inputs, exiting early. \n Error:" +
+        (error?.message || String(error)),
+    );
+    return;
+  }
 
   if (!issue_number) {
     core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
@@ -1033,7 +1046,7 @@ export async function getImpactAssessment(github, core, owner, repo, runId) {
     const impact = JSON.parse(jsonContent);
     return impact;
   } catch (/** @type {any} */ error) {
-    core.error(`Failed to download job summary artifact: ${error.message}`);
+    core.error(`Failed to download job summary artifact: ${error?.message || String(error)}`);
     return undefined;
   }
 }
