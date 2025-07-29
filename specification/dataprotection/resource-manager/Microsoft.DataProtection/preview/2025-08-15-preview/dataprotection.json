@@ -2003,7 +2003,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceId"
@@ -2790,6 +2790,122 @@
         "x-ms-examples": {
           "Get Job": {
             "$ref": "./examples/JobCRUD/GetJob.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/triggerCancel": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Triggers cancellation of Job and returns an OperationID to track.",
+        "operationId": "Jobs_TriggerCancel",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestrictedVaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Trigger Cancel": {
+            "$ref": "./examples/JobCRUD/TriggerCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupJobs/{jobId}/generateProgressUrl": {
+      "post": {
+        "tags": [
+          "AzureBackupJob"
+        ],
+        "description": "Generates read SAS URL for a blob from which current job progress can be read.",
+        "operationId": "Jobs_GenerateProgressUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestrictedVaultName"
+          },
+          {
+            "name": "jobId",
+            "description": "The Job ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBackupJobProgressUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Progress URL": {
+            "$ref": "./examples/JobCRUD/GenerateProgressURL.json"
           }
         }
       }
@@ -4640,6 +4756,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "sourceDataStoreType": {
+          "description": "The type of the source data store.",
+          "readOnly": true,
+          "type": "string"
+        },
         "sourceResourceGroup": {
           "description": "Resource Group Name of the Datasource",
           "type": "string"
@@ -4654,7 +4775,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Status of the job like InProgress/Completed/Failed/Cancelled/CompletedWithWarnings/Cancelling/Paused",
+          "description": "Status of the job like InProgress/Success/Failed/Cancelled/SuccessWithWarning",
           "type": "string"
         },
         "subscriptionId": {
@@ -4738,6 +4859,17 @@
           "type": "string"
         }
       }
+    },
+    "AzureBackupJobProgressUrl": {
+      "description": "Job Progress URL class.",
+      "properties": {
+        "progressUrl": {
+          "description": "Read SAS URI for a blob from which current job progress can be read.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      },
+      "type": "object"
     },
     "AzureBackupJobResource": {
       "allOf": [
@@ -5161,6 +5293,28 @@
       },
       "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
     },
+    "GenericBackupDatasourceParameters": {
+      "description": "Generic parameters to be used during configuration of backup",
+      "required": [
+        "resourceSelectors"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "properties": {
+        "resourceSelectors": {
+          "description": "List of resource selectors to be backed up during configuration of backup",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "GenericBackupDatasourceParameters"
+    },
     "AdlsBlobBackupDatasourceParameters": {
       "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs",
       "required": [
@@ -5523,6 +5677,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "crossRegionBackupSettings": {
+          "description": "Setting to support cross region backup at a vault",
+          "$ref": "#/definitions/FeatureStateSettings"
         }
       },
       "required": [
@@ -5929,6 +6087,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "CrossSubscriptionRestoreState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FeatureStateSettings": {
+      "description": "Possible state for a feature",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Feature state",
+          "enum": [
+            "NotApplicable",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureStateSettings",
             "modelAsString": true
           }
         }
@@ -6849,6 +7026,53 @@
       },
       "x-ms-discriminator-value": "ItemPathBasedRestoreCriteria"
     },
+    "GenericRestoreDatasourceCriteria": {
+      "description": "Generic criteria to be used during restore",
+      "required": [
+        "resourceSelectors"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "properties": {
+        "resourceSelectors": {
+          "description": "List of resource identifiers that need to be restored",
+          "$ref": "#/definitions/ResourceListSelectionCriteria"
+        }
+      },
+      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+    },
+    "ResourceListSelectionCriteria": {
+      "description": "Specifies the list of resources to be restored",
+      "type": "object",
+      "required": [
+        "objectType",
+        "resourceIdentifiers"
+      ],
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        },
+        "resourceIdentifiers": {
+          "description": "List of resource identifiers to restore from",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNameOverrides": {
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "JobExtendedInfo": {
       "description": "Extended Information about the job",
       "properties": {
@@ -7093,6 +7317,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "crossRegionBackupSettings": {
+          "description": "Setting to support cross region backup at a vault",
+          "$ref": "#/definitions/FeatureStateSettings"
         }
       }
     },
