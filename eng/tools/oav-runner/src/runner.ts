@@ -114,9 +114,20 @@ export async function checkSpecs(
 
 async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
   const target = path.join(rootDirectory, directory);
-  const items = await fs.promises.readdir(target, {
-    withFileTypes: true,
-  });
+
+  let items: fs.Dirent[];
+  try {
+    items = await fs.promises.readdir(target, {
+      withFileTypes: true,
+    });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException)?.code === "ENOENT") {
+      console.log(`Skipping deleted directory '${target}'`);
+      return [];
+    } else {
+      throw error;
+    }
+  }
 
   return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
