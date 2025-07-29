@@ -195,4 +195,16 @@ directive:
     from: generated_blob.json
   - suppress: GetInOperationName
     from: generated_blob.json
+  - suppress: XmsEnumValidation
+    from: generated_blob.json
+    reason: Existing API contract and auto-generated enum definitions
+  - suppress: SecurityDefinitionDescription
+    from: generated_blob.json
+    reason: Auto-generated swagger from typespec
+  - suppress: PathParameterSchema
+    from: generated_blob.json
+    reason: Existing API contract
+  - suppress: PutRequestResponseScheme
+    from: generated_blob.json
+    reason: Existing API contract
 ```
