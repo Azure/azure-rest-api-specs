@@ -1,17 +1,17 @@
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
+import { logError, LogLevel, logMessage, setOutput } from "./log.js";
 import {
+  BreakingChangeReviewRequiredLabel,
   BreakingChangesCheckType,
   Context,
-  BreakingChangeReviewRequiredLabel,
   VersioningReviewRequiredLabel,
 } from "./types/breaking-change.js";
 import { ResultMessageRecord } from "./types/message.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
-import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
-import { logError, LogLevel, logMessage, setOutput } from "./log.js";
 
 /**
  * Interface for parsed CLI arguments
@@ -133,6 +133,7 @@ export async function getSwaggerDiffs(
       baseCommitish: options.baseCommitish,
       cwd: options.cwd,
       headCommitish: options.headCommitish,
+      paths: ["specification"],
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
