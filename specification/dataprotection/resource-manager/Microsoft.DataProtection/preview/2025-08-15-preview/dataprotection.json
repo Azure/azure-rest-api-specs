@@ -5680,7 +5680,7 @@
         },
         "crossRegionBackupSettings": {
           "description": "Setting to support cross region backup at a vault",
-          "$ref": "#/definitions/FeatureStateSettings"
+          "$ref": "#/definitions/FeatureStateEnum"
         }
       },
       "required": [
@@ -6092,12 +6092,7 @@
         }
       }
     },
-    "FeatureStateSettings": {
-      "description": "Possible state for a feature",
-      "type": "object",
-      "properties": {
-        "state": {
-          "description": "Feature state",
+    "FeatureStateEnum": {
           "enum": [
             "NotApplicable",
             "Enabled",
@@ -6108,8 +6103,6 @@
             "name": "FeatureState",
             "modelAsString": true
           }
-        }
-      }
     },
     "CustomCopyOption": {
       "allOf": [
@@ -7320,7 +7313,7 @@
         },
         "crossRegionBackupSettings": {
           "description": "Setting to support cross region backup at a vault",
-          "$ref": "#/definitions/FeatureStateSettings"
+          "$ref": "#/definitions/FeatureStateEnum"
         }
       }
     },
