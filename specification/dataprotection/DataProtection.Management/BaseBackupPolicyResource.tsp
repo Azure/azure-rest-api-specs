@@ -54,7 +54,10 @@ interface BaseBackupPolicyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupPolicies_Delete")
-  delete is ArmResourceDeleteSync<Resource = BaseBackupPolicyResource, Error = CloudError>;
+  delete is ArmResourceDeleteSync<
+    Resource = BaseBackupPolicyResource,
+    Error = CloudError
+  >;
 
   /**
    * Returns list of backup policies belonging to a backup vault
