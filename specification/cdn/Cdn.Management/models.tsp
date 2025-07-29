@@ -949,7 +949,7 @@ union PolicyMode {
  * If the action type is block, this field defines the default customer overridable http response status code.
  */
 union PolicySettingsDefaultCustomBlockResponseStatusCode {
-  integer,
+  int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `200`: 200,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
