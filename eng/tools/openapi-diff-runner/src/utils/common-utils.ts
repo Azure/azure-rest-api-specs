@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { Context } from "../types/breaking-change.js";
 import { FilePosition } from "../types/message.js";
 
@@ -82,7 +82,10 @@ export function specificBranchHref(
   );
 }
 
-export function getVersionFromInputFile(filePath: string, withPreview = false): string {
+export async function getVersionFromInputFile(
+  filePath: string,
+  withPreview = false,
+): Promise<string> {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
 
   // Normalize path separators to forward slashes for consistent processing
@@ -112,14 +115,19 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
     }
   }
 
+  let version = "";
   // If no regex match found, try to read version from file content
-  if (existsSync(filePath)) {
-    const fileContent = readFileSync(filePath, "utf8");
+  try {
+    const fileContent = await readFile(filePath, "utf8");
     const parsedContent = JSON.parse(fileContent);
-    return parsedContent?.info?.version || "";
+    version = parsedContent?.info?.version;
+  } catch (error) {
+    throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
   }
-
-  return "";
+  if (!version) {
+    throw new Error(`Version not found in file: ${filePath}`);
+  }
+  return version;
 }
 
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
