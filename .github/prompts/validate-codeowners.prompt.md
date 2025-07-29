@@ -1,33 +1,115 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel',  'isValidCodeOwner', 'ValidateCodeOwnersForService', 'AddCodeOwnerEntry'] 
+tools: ['CheckServiceLabel', 'isValidCodeOwner', 'ValidateCodeOwners', 'AddCodeOwnerEntry'] 
 ---
 
-## Links
-- [Joining Microsoft Organization](https://repos.opensource.microsoft.com/orgs/Microsoft)
-- [Joining Azure Organization](https://repos.opensource.microsoft.com/orgs/Azure)
-- [Visibility for Azure Org](https://github.com/orgs/Azure/people)
-- [Visibility for Microsoft Org](https://github.com/orgs/Microsoft/people)
-- [Requesting Write Acess](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
+# Validate Code Owners for SDK Services
 
-# Goal
-- We need to check that a service label is valid and exists within the azure-sdk-tools repository before we can move onto verifying code owners. Once we complete that and a service label is validated, verify that every associated code owner in the specified SDK language repository for that service label is also valid.
+## Goal
+Validate that a service label exists and verify that all associated code owners in the specified SDK language repository for that service are valid GitHub users with proper permissions.
 
 ## Prerequisites
-- Ensure that the user has a valid service label for their service using the `CheckServiceLabel` tool.
+- User must have a valid service label for their service
+- Service must be part of the Azure SDK ecosystem
 
-## Validate Existing Code Owners
-- If `CreateServiceLabel` was not used by the user and a new service label was NOT created (the service already exists within the CODEOWNERS file), use the `ValidateCodeOwnersForService` tool.
-- If any users are invalid direct them to the below links based on their situation.
-- If all code owners are valid, user may skip remaining steps and proceed in the SDK release process.
-    - **For Missing Microsoft Organization Membership**: Direct them to [Joining Microsoft Organization] to join the organization and then [Visibility for Microsoft Org] to change their membership to public.
-    - **For Missing Azure Organization Membership**: Direct them to [Joining Azure Organization] to join the organization and then [Visibility for Azure Org] to change their membership to public.
-    - **For Missing Write Access**: Direct them to [Requesting Write Access] to request repository permissions
-    - Inform the user why the code owner(s) are invalid and provide guidance on how to fix them.
-    - Each code owner MUST be PUBLIC members of the Microsoft and Azure organizations with write access.
+## Process Overview
+This process involves two main phases:
+1. **Service Label Validation**: Verify the service label exists in common-labels.csv
+2. **Code Owner Validation**: Ensure all code owners have proper GitHub permissions
 
-## Modify Code Owners
-- If `CreateServiceLabel` was used by the user and a new service label was created, use `AddCodeOwnerEntry` to add the new service to the CODEOWNERS file for the specified SDK language repository.
-    - The entry in CODEOWNERS file should follow the format: `/<service-path> @<code-owner-username>`. There can be multiple code owners for a service, but user must specify all of them.
-    - Verify that the code owner usernames are all valid using `isValidCodeOwner` and follow the required format.
-    - After changing the CODEOWNERS file, give the user a link to the pull request for review and merging. If they want to add additional fields for their service, they can do so in the pull request.
+---
+
+## Step 1: Validate Service Label
+- Use `CheckServiceLabel` tool to verify the service label exists in the azure-sdk-tools repository
+- If the service label is **DoesNotExist**:
+  - Inform the user that the service label doesn't exist
+  - Direct them to create a new service label first before proceeding
+  - Stop the validation process until service label is created
+- If the service label is **NotAServiceLabel**:
+  - Inform the user that the service label exists, but it is not a 'service' label.
+  - Direct them to create a new service label first, but it can't be the one they just checked.
+  - Stop the validation process until service label is created.
+- If the service label is **Exists**:
+  - Display the service label details to the user
+  - Proceed to Step 2
+- If the service label is **InReview**:
+  - Inform the user that the service label is currently waiting for a PR approval.
+  - Proceed to Step 2
+
+## Step 2: Determine Repository and Validate Code Owners
+- Ask the user to specify which SDK language repository they want to validate (e.g., "python", "net", "java", "js", "rest-api-specs")
+or, if the user is in a SDK language repository, use that one instead. Ensure they provide either the serviceLabel or repoPath.
+- Use `ValidateCodeOwners` tool with:
+  - `repoName`: The specified SDK repository name.
+  - `serviceLabel`: The validated service label from Step 1
+  - `repoPath`: The service path (e.g., "/sdk/contoso/" or "/sdk/contoso_service/contoso_subservice/").This should be the path generated in step 7 within `typespec-to-sdk`.
+
+## Step 3: Handle Validation Results
+Based on the validation results:
+
+### If ALL code owners are valid:
+- Display success message: "All code owners for service '[service-label]' in repository '[repo-name]' are valid"
+- Inform user they can proceed with the SDK release process
+- End validation process
+
+### If ANY code owners are invalid:
+- Display which code owners are invalid and why
+- Provide specific guidance based on the type of issue:
+
+#### For Missing Microsoft Organization Membership:
+- **Issue**: User is not a member of the Microsoft organization
+- **Action**: Direct them to [Joining Microsoft Organization](https://repos.opensource.microsoft.com/orgs/Microsoft)
+- **Follow-up**: After joining, visit [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people) to change membership to public
+
+#### For Missing Azure Organization Membership:
+- **Issue**: User is not a member of the Azure organization  
+- **Action**: Direct them to [Joining Azure Organization](https://repos.opensource.microsoft.com/orgs/Azure)
+- **Follow-up**: After joining, visit [Azure Org Visibility](https://github.com/orgs/Azure/people) to change membership to public
+
+#### For Missing Write Access:
+- **Issue**: User lacks write permissions to the repository
+- **Action**: Direct them to [Request Write Access](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
+
+#### Requirements Summary:
+Each code owner MUST:
+- Be a PUBLIC member of both Microsoft and Azure organizations on GitHub
+- Have write access to the specific SDK repository
+- Have their GitHub profile visibility set to public in both organizations
+
+## Step 4: Adding New Code Owners (If Applicable)
+**Note**: This step only applies when a NEW service label was created and needs to be added to CODEOWNERS files.
+
+If the user needs to add code owners for a new service:
+- Use `AddCodeOwnerEntry` tool with:
+  - `repo`: The target SDK repository.
+  - `path`: The service path (e.g., "/sdk/contoso/" or "/sdk/contoso_service/contoso_subservice/").
+  - `serviceLabel`: The created service label.
+  - `serviceOwners`: Array of GitHub usernames.
+  - `sourceOwners`: Array of GitHub usernames.
+
+### Code Owner Types:
+- **Service Owner**: Responsible for service-related issues and questions
+- **Source Owner**: Responsible for generated SDK code and pull requests
+
+### Multiple Code Owners:
+- A service can have multiple code owners
+- User must specify all code owners and their roles
+- All code owners must meet the validation requirements from Step 3
+
+## Step 5: Completion
+- If adding new code owners, provide the user with the pull request link for review and merging
+- Inform user that additional service fields can be added directly in the pull request if needed
+- Confirm that code owner validation is complete
+
+---
+
+## Error Handling
+- If `CheckServiceLabel` fails: Ask user to verify the service label spelling and try again
+- If `ValidateCodeOwners` fails: Check repository name spelling and service label validity
+- If `AddCodeOwnerEntry` fails: Verify all parameters are correct and user has necessary permissions
+
+## Success Criteria
+- Service label exists and is valid
+- All code owners are valid GitHub users
+- All code owners have proper organization memberships and permissions
+- CODEOWNERS file is updated (if new service was added)
