@@ -279,6 +279,12 @@ const EXCLUDED_CHECK_NAMES = [];
  */
 export default async function summarizeChecks({ github, context, core }) {
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+
+  if (!issue_number) {
+    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
+    return;
+  }
+
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
