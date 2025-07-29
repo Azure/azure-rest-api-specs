@@ -170,7 +170,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
         await checkCrossVersionBreakingChange(detectionContext));
     }
-    const comparedSpecsTableContent = generateOadMarkdown(detectionContext.oadTracer);
+    const comparedSpecsTableContent = await generateOadMarkdown(detectionContext.oadTracer);
 
     // Log the markdown content to the pipeline log file
     if (comparedSpecsTableContent) {
