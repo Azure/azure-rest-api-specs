@@ -79,13 +79,7 @@ interface SharedPrivateLinkResources {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<
-    SharedPrivateLinkResource,
-    Parameters = {
-      @header
-      contentType: "application/json" | "text/json";
-    }
-  >;
+  createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<SharedPrivateLinkResource>;
 
   /**
    * List shared private link resources

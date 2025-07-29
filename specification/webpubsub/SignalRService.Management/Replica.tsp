@@ -54,13 +54,7 @@ interface Replicas {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Replica,
-    Parameters = {
-      @header
-      contentType: "application/json" | "text/json";
-    }
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Replica>;
 
   /**
    * Operation to update an exiting replica.
@@ -72,10 +66,6 @@ interface Replicas {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Replica,
-    Parameters = {
-      @header
-      contentType: "application/json" | "text/json";
-    },
     PatchModel = Replica,
     Response = Replica | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica>> & {
       @bodyRoot

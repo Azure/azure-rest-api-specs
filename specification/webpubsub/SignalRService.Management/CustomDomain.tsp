@@ -41,10 +41,6 @@ interface CustomDomains {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
-    Parameters = {
-      @header
-      contentType: "application/json" | "text/json";
-    },
     Response = ArmResourceCreatedResponse<
       CustomDomain,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>
