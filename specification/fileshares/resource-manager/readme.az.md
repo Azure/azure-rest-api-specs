@@ -2,7 +2,7 @@
 
 These settings apply only when `--az` is specified on the command line.
 
-For new Resource Provider. It is highly recommended to onboard Azure CLI extensions. There's no differences in terms of customer usage. 
+For new Resource Provider. It is highly recommended that new resource providers integrate with Azure CLI extensions. From the customer's perspective, there is no difference in usage experience. 
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
