@@ -8,6 +8,7 @@ using Http;
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("Returns a subset of Product attributes")
 model ProductSummary {
   @doc("Product display name")
@@ -66,8 +67,9 @@ model ProductSummary {
   @doc("Product summary")
   summary?: string;
 
-  //  @doc("Linked add-in types")
-  //  linkedAddInsTypes?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Linked add-in types")
+  linkedAddInsTypes?: Record<string>;
 
   @doc("URI to the small product icon")
   smallIconUri?: string;
@@ -445,29 +447,9 @@ model Attribute {
   value?: string;
 }
 
-@doc("Retail price of the product's cheapest plan")
-model MarketStartPrice {
-  @doc("The market for which the starting price is calculated")
-  market?: string;
-
-  @doc("The terms pricing model units")
-  termUnits?: string;
-
-  @doc("The meters pricing model units")
-  meterUnits?: string;
-
-  @doc("Starting (minimal) terms price")
-  minTermPrice?: float32;
-
-  @doc("Starting (minimal) meters price")
-  minMeterPrice?: float32;
-
-  @doc("Currency for price")
-  currency?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("Summary description of the product")
 model ProductDetails extends ProductSummary {
   @doc("List of product videos")
@@ -484,8 +466,9 @@ model ProductDetails extends ProductSummary {
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
 
-  //  @doc("Dictionary of additional properties provided for the item")
-  //  additionalProductProperties?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Dictionary of additional properties provided for the item")
+  additionalProductProperties?: Record<string>;
 
   @doc("The product language")
   language?: string;
@@ -799,7 +782,7 @@ model IncludedQuantityProperty {
   @doc("Term id")
   termId?: string;
 
-  @doc("Quantity")
+  @doc("Included quantity")
   quantity?: string;
 }
 
@@ -845,10 +828,10 @@ model BillingPlan {
   @doc("Billing period")
   billingPeriod?: string;
 
-  @doc("Title")
+  @doc("Title of the billing plan")
   title?: string;
 
-  @doc("Description")
+  @doc("Description of the billing plan")
   description?: string;
 
   @doc("Retail price with currency")
@@ -860,8 +843,9 @@ model BillingComponent {
   @doc("Billing Tag")
   billingTag?: string;
 
-  //  @doc("Custom Meter Ids")
-  //  customMeterIds?: Record<int32[]>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Custom Meter Ids")
+  customMeterIds?: Record<int32[]>;
 }
 
 @doc("Applicable term")
@@ -946,7 +930,7 @@ model Price {
 
 @doc("Product Video")
 model ProductVideo {
-  @doc("Caption")
+  @doc("Video Caption")
   caption?: string;
 
   @doc("Video uri")
@@ -961,19 +945,19 @@ model ProductVideo {
 
 @doc("Video preview image")
 model PreviewImage {
-  @doc("caption")
+  @doc("Image caption")
   caption?: string;
 
-  @doc("uri")
+  @doc("Image uri")
   uri?: string;
 
-  @doc("imagePurpose")
+  @doc("Purpose of the image")
   imagePurpose?: string;
 }
 
 @doc("List of image objects")
 model ImageGroup {
-  @doc("context")
+  @doc("Context of the image group")
   context?: string;
 
   @doc("List of images")

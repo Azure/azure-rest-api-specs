@@ -799,6 +799,17 @@
         "billingTag": {
           "type": "string",
           "description": "Billing Tag"
+        },
+        "customMeterIds": {
+          "type": "object",
+          "description": "Custom Meter Ids",
+          "additionalProperties": {
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "type": "array"
+          }
         }
       }
     },
@@ -812,11 +823,11 @@
         },
         "title": {
           "type": "string",
-          "description": "Title"
+          "description": "Title of the billing plan"
         },
         "description": {
           "type": "string",
-          "description": "Description"
+          "description": "Description of the billing plan"
         },
         "price": {
           "$ref": "#/definitions/Price",
@@ -928,7 +939,7 @@
       "properties": {
         "context": {
           "type": "string",
-          "description": "context"
+          "description": "Context of the image group"
         },
         "items": {
           "type": "array",
@@ -971,7 +982,7 @@
         },
         "quantity": {
           "type": "string",
-          "description": "Quantity"
+          "description": "Included quantity"
         }
       }
     },
@@ -1053,38 +1064,6 @@
       "required": [
         "market"
       ]
-    },
-    "MarketStartPrice": {
-      "type": "object",
-      "description": "Retail price of the product's cheapest plan",
-      "properties": {
-        "market": {
-          "type": "string",
-          "description": "The market for which the starting price is calculated"
-        },
-        "termUnits": {
-          "type": "string",
-          "description": "The terms pricing model units"
-        },
-        "meterUnits": {
-          "type": "string",
-          "description": "The meters pricing model units"
-        },
-        "minTermPrice": {
-          "type": "number",
-          "format": "float",
-          "description": "Starting (minimal) terms price"
-        },
-        "minMeterPrice": {
-          "type": "number",
-          "format": "float",
-          "description": "Starting (minimal) meters price"
-        },
-        "currency": {
-          "type": "string",
-          "description": "Currency for price"
-        }
-      }
     },
     "MarketingMaterial": {
       "type": "object",
@@ -1493,15 +1472,15 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "caption"
+          "description": "Image caption"
         },
         "uri": {
           "type": "string",
-          "description": "uri"
+          "description": "Image uri"
         },
         "imagePurpose": {
           "type": "string",
-          "description": "imagePurpose"
+          "description": "Purpose of the image"
         }
       }
     },
@@ -1636,6 +1615,13 @@
           "description": "List of Links provided for the item",
           "items": {
             "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "additionalProductProperties": {
+          "type": "object",
+          "description": "Dictionary of additional properties provided for the item",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "language": {
@@ -1867,6 +1853,13 @@
         "summary": {
           "type": "string",
           "description": "Product summary"
+        },
+        "linkedAddInsTypes": {
+          "type": "object",
+          "description": "Linked add-in types",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "smallIconUri": {
           "type": "string",
@@ -2165,7 +2158,7 @@
       "properties": {
         "caption": {
           "type": "string",
-          "description": "Caption"
+          "description": "Video Caption"
         },
         "uri": {
           "type": "string",
