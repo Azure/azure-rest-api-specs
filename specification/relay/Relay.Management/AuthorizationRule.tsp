@@ -18,6 +18,11 @@ namespace Microsoft.Relay;
 model AuthorizationRule
   is Azure.ResourceManager.ProxyResource<AuthorizationRuleProperties> {
   ...AuthorizationRuleNameParameter;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @@minLength(AuthorizationRuleNameParameter.name, 1);

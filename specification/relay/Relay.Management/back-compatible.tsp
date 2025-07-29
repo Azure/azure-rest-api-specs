@@ -133,4 +133,7 @@ using Microsoft.Relay;
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResources");
 @@clientLocation(PrivateLinkResources.list, "PrivateLinkResources");
 
-@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
+);

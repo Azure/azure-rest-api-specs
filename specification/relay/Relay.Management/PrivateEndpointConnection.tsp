@@ -23,6 +23,11 @@ model PrivateEndpointConnection
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

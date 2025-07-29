@@ -2589,6 +2589,11 @@
           "$ref": "#/definitions/AuthorizationRuleProperties",
           "description": "Properties supplied to create or update AuthorizationRule",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2752,6 +2757,11 @@
           "$ref": "#/definitions/HybridConnectionProperties",
           "description": "Properties of the HybridConnection.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2927,6 +2937,11 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the PrivateEndpointConnection.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -3010,17 +3025,22 @@
       "type": "object",
       "description": "Information of the private link resource.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Properties of the private link resource.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -3426,6 +3446,11 @@
           "$ref": "#/definitions/WcfRelayProperties",
           "description": "Properties of the WCF relay.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
         }
       },
       "allOf": [

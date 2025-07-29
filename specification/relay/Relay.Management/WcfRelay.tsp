@@ -22,6 +22,11 @@ model WcfRelay is Azure.ResourceManager.ProxyResource<WcfRelayProperties> {
     SegmentName = "wcfRelays",
     NamePattern = ""
   >;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  location?: string;
 }
 
 @@minLength(WcfRelayNameParameter.name, 1);
