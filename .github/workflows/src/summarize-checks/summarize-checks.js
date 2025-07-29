@@ -462,17 +462,7 @@ export function updateLabels(existingLabels, impactAssessment) {
     console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
 
     // will further update the label context if necessary
-    processImpactAssessment(
-      impactAssessment.targetBranch,
-      labelContext,
-      impactAssessment.resourceManagerRequired,
-      impactAssessment.dataPlaneRequired,
-      impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
-      impactAssessment.rpaasRpNotInPrivateRepo,
-      impactAssessment.isNewApiVersion,
-      impactAssessment.isDraft,
-    );
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);

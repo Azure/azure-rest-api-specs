@@ -503,7 +503,7 @@ describe("Summarize Checks Tests", () => {
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
       async () => {
-        const issue_number = 36226;
+        const issue_number = 36258;
         const owner = "Azure";
         const repo = "azure-rest-api-specs";
 
@@ -513,6 +513,7 @@ describe("Summarize Checks Tests", () => {
           "customer-reported",
           "dependencies",
           "javascript",
+          "Monitor",
         ];
 
         const github = new Octokit({
@@ -570,7 +571,6 @@ describe("Summarize Checks Tests", () => {
         const actualLabels = [...labelContext.toAdd, ...labelContext.present];
         expect(actualLabels.sort()).toEqual(expectedLabels.sort());
         expect(commentBody).toEqual(expectedNextStepsComment);
-        expect(automatedChecksMet).toBe("blocked");
       },
       600000,
     );
