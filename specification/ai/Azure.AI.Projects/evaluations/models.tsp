@@ -247,6 +247,9 @@ model EvaluationSummaryStatistics {
 
   @doc("Arithmetic mean of all score values in the evaluation results.")
   average?: float32;
+
+  @doc("Standard deviation of score values, indicating the variability or spread of scores around the average.")
+  standardDeviation?: float32;
 }
 
 @doc("Status of evaluator across all data rows.")
