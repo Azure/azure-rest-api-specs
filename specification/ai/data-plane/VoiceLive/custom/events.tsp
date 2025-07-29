@@ -3,7 +3,7 @@ using TypeSpec.OpenAPI;
 namespace VoiceLive;
 
 @doc("Client event types used in VoiceLive protocol.")
-union VoiceLiveClientEventType {
+union ClientEventType {
   string,
   session_update: "session.update",
   input_audio_buffer_append: "input_audio_buffer.append",
@@ -24,7 +24,7 @@ union VoiceLiveClientEventType {
 }
 
 @doc("Server event types used in VoiceLive protocol.")
-union VoiceLiveServerEventType {
+union ServerEventType {
   string,
   error: "error",
   session_avatar_connecting: "session.avatar.connecting",

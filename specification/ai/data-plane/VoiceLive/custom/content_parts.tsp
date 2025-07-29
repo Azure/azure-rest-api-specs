@@ -2,7 +2,7 @@ using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
-union VoiceLiveContentPartType {
+union ContentPartType {
   string,
   input_text: "input_text",
   input_audio: "input_audio",
@@ -11,26 +11,26 @@ union VoiceLiveContentPartType {
 }
 
 @discriminator("type")
-model VoiceLiveContentPart {
-  type: VoiceLiveContentPartType;
+model ContentPart {
+  type: ContentPartType;
 }
 
-model VoiceLiveRequestTextContentPart extends VoiceLiveContentPart {
-  type: VoiceLiveContentPartType.input_text;
+model RequestTextContentPart extends ContentPart {
+  type: ContentPartType.input_text;
   text?: string;
 }
 
-model VoiceLiveRequestAudioContentPart extends VoiceLiveContentPart {
-  type: VoiceLiveContentPartType.input_audio;
+model RequestAudioContentPart extends ContentPart {
+  type: ContentPartType.input_audio;
   transcript?: string;
 }
 
-model VoiceLiveResponseTextContentPart extends VoiceLiveContentPart {
-  type: VoiceLiveContentPartType.text;
+model ResponseTextContentPart extends ContentPart {
+  type: ContentPartType.text;
   text?: string;
 }
 
-model VoiceLiveResponseAudioContentPart extends VoiceLiveContentPart {
-  type: VoiceLiveContentPartType.audio;
+model ResponseAudioContentPart extends ContentPart {
+  type: ContentPartType.audio;
   transcript?: string;
 }

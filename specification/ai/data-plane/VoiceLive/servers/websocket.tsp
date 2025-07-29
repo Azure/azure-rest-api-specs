@@ -29,30 +29,30 @@ using Azure.Core;
 
 
 namespace VoiceLive;
-op force_models(session: VoiceLiveClientEventSessionUpdate):
-  VoiceLiveServerEventSessionUpdated
-  | VoiceLiveServerEventSessionCreated
-  | VoiceLiveServerEventError
-  | VoiceLiveServerEventResponseTextDelta
-  | VoiceLiveServerEventResponseAudioDelta
-  | VoiceLiveServerEventConversationItemCreated
-  | VoiceLiveServerEventConversationItemDeleted
-  | VoiceLiveServerEventConversationItemRetrieved
-  | VoiceLiveServerEventConversationItemTruncated
-  | VoiceLiveServerEventConversationItemInputAudioTranscriptionCompleted
-  | VoiceLiveServerEventConversationItemInputAudioTranscriptionDelta
-  | VoiceLiveServerEventConversationItemInputAudioTranscriptionFailed
-  | VoiceLiveServerEventInputAudioBufferCommitted
-  | VoiceLiveServerEventInputAudioBufferCleared
-  | VoiceLiveServerEventInputAudioBufferSpeechStarted
-  | VoiceLiveServerEventInputAudioBufferSpeechStopped
-  | VoiceLiveServerEventResponseCreated
-  | VoiceLiveServerEventResponseDone
-  | VoiceLiveServerEventResponseOutputItemAdded
-  | VoiceLiveServerEventResponseOutputItemDone
-  | VoiceLiveServerEventResponseContentPartAdded
-  | VoiceLiveServerEventResponseContentPartDone
-  | VoiceLiveServerEventResponseTextDone
-  | VoiceLiveServerEventResponseAudioTranscriptDelta
-  | VoiceLiveServerEventResponseAudioTranscriptDone
-  | VoiceLiveServerEventResponseAudioDone;
+op force_models(session: ClientEventSessionUpdate):
+  ServerEventSessionUpdated
+  | ServerEventSessionCreated
+  | ServerEventError
+  | ServerEventResponseTextDelta
+  | ServerEventResponseAudioDelta
+  | ServerEventConversationItemCreated
+  | ServerEventConversationItemDeleted
+  | ServerEventConversationItemRetrieved
+  | ServerEventConversationItemTruncated
+  | ServerEventConversationItemInputAudioTranscriptionCompleted
+  | ServerEventConversationItemInputAudioTranscriptionDelta
+  | ServerEventConversationItemInputAudioTranscriptionFailed
+  | ServerEventInputAudioBufferCommitted
+  | ServerEventInputAudioBufferCleared
+  | ServerEventInputAudioBufferSpeechStarted
+  | ServerEventInputAudioBufferSpeechStopped
+  | ServerEventResponseCreated
+  | ServerEventResponseDone
+  | ServerEventResponseOutputItemAdded
+  | ServerEventResponseOutputItemDone
+  | ServerEventResponseContentPartAdded
+  | ServerEventResponseContentPartDone
+  | ServerEventResponseTextDone
+  | ServerEventResponseAudioTranscriptDelta
+  | ServerEventResponseAudioTranscriptDone
+  | ServerEventResponseAudioDone;

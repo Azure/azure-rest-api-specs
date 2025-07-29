@@ -5,45 +5,45 @@ using TypeSpec.OpenAPI;
 namespace VoiceLive;
 
 @discriminator("type")
-model VoiceLiveConversationRequestItem {
-  ...VoiceLiveConversationItemBase;
-  type: VoiceLiveItemType;
+model ConversationRequestItem {
+  ...ConversationItemBase;
+  type: ItemType;
   id?: string;
 }
 
 @discriminator("role")
-model VoiceLiveRequestMessageItem extends VoiceLiveConversationRequestItem {
-  type: VoiceLiveItemType.message;
-  role: VoiceLiveMessageRole;
-  status?: VoiceLiveItemStatus;
+model RequestMessageItem extends ConversationRequestItem {
+  type: ItemType.message;
+  role: MessageRole;
+  status?: ItemStatus;
 }
 
-model VoiceLiveRequestSystemMessageItem extends VoiceLiveRequestMessageItem {
-  role: VoiceLiveMessageRole.system;
-  content: VoiceLiveRequestTextContentPart[];
+model RequestSystemMessageItem extends RequestMessageItem {
+  role: MessageRole.system;
+  content: RequestTextContentPart[];
 }
 
-model VoiceLiveRequestUserMessageItem extends VoiceLiveRequestMessageItem {
-  role: VoiceLiveMessageRole.user;
-  content: (VoiceLiveRequestTextContentPart | VoiceLiveRequestAudioContentPart)[];
+model RequestUserMessageItem extends RequestMessageItem {
+  role: MessageRole.user;
+  content: (RequestTextContentPart | RequestAudioContentPart)[];
 }
 
-model VoiceLiveRequestAssistantMessageItem extends VoiceLiveRequestMessageItem {
-  role: VoiceLiveMessageRole.assistant;
-  content: VoiceLiveRequestTextContentPart[];
+model RequestAssistantMessageItem extends RequestMessageItem {
+  role: MessageRole.assistant;
+  content: RequestTextContentPart[];
 }
 
-model VoiceLiveRequestFunctionCallItem extends VoiceLiveConversationRequestItem {
-  type: VoiceLiveItemType.function_call;
+model RequestFunctionCallItem extends ConversationRequestItem {
+  type: ItemType.function_call;
   name: string;
   call_id: string;
   arguments: string;
-  status?: VoiceLiveItemStatus;
+  status?: ItemStatus;
 }
 
-model VoiceLiveRequestFunctionCallOutputItem
-  extends VoiceLiveConversationRequestItem {
-  type: VoiceLiveItemType.function_call_output;
+model RequestFunctionCallOutputItem
+  extends ConversationRequestItem {
+  type: ItemType.function_call_output;
   call_id: string;
   output: string;
 }
@@ -51,65 +51,65 @@ model VoiceLiveRequestFunctionCallOutputItem
 // TODO: representation of a doubly-discriminated type with an absent second discriminator
 //   (first discriminator: type = message; second discriminator: no role present)
 
-model VoiceLiveRequestMessageReferenceItem { // extends VoiceLiveConversationRequestItem {
-  type: VoiceLiveItemType.message;
+model RequestMessageReferenceItem { // extends ConversationRequestItem {
+  type: ItemType.message;
   id: string;
 }
 
 @discriminator("type")
-model VoiceLiveConversationResponseItem {
-  ...VoiceLiveConversationItemBase;
+model ConversationResponseItem {
+  ...ConversationItemBase;
   object?: "realtime.item";
-  type?: VoiceLiveItemType;
+  type?: ItemType;
   id?: string;
 }
 
-model VoiceLiveResponseMessageItem extends VoiceLiveConversationResponseItem {
-  type: VoiceLiveItemType.message;
-  role: VoiceLiveMessageRole;
-  content: VoiceLiveContentPart[];
-  status: VoiceLiveItemStatus;
+model ResponseMessageItem extends ConversationResponseItem {
+  type: ItemType.message;
+  role: MessageRole;
+  content: ContentPart[];
+  status: ItemStatus;
 }
 
-model VoiceLiveResponseFunctionCallItem
-  extends VoiceLiveConversationResponseItem {
-  type: VoiceLiveItemType.function_call;
+model ResponseFunctionCallItem
+  extends ConversationResponseItem {
+  type: ItemType.function_call;
   name: string;
   call_id: string;
   arguments: string;
-  status: VoiceLiveItemStatus;
+  status: ItemStatus;
 }
 
-model VoiceLiveResponseFunctionCallOutputItem
-  extends VoiceLiveConversationResponseItem {
-  type: VoiceLiveItemType.function_call_output;
+model ResponseFunctionCallOutputItem
+  extends ConversationResponseItem {
+  type: ItemType.function_call_output;
   call_id: string;
   output: string;
 }
 
-union VoiceLiveItemType {
+union ItemType {
   string,
   message: "message",
   function_call: "function_call",
   function_call_output: "function_call_output",
 }
 
-union VoiceLiveItemStatus {
+union ItemStatus {
   string,
   in_progress: "in_progress",
   completed: "completed",
   incomplete: "incomplete",
 }
 
-union VoiceLiveMessageRole {
+union MessageRole {
   string,
   system: "system",
   user: "user",
   assistant: "assistant",
 }
 
-// Tool generated type. Extracts from VoiceLiveConversationItemWithReference.content
-alias VoiceLiveConversationItemWithReferenceContent = {
+// Tool generated type. Extracts from ConversationItemWithReference.content
+alias ConversationItemWithReferenceContent = {
   @doc("""
     The content type (`input_text`, `input_audio`, `item_reference`, `text`).
     """)
