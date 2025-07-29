@@ -45,7 +45,14 @@
             "definition": "select * from ROOT"
           }
         },
-        "options": {}
+        "options": {
+          "throughputBucketConfig": [
+            {
+              "feature": "MaterializedView",
+              "bucket": "2"
+            }
+          ]
+        }
       }
     }
   },
@@ -93,6 +100,14 @@
               "sourceCollectionRid": "vb0sn6nEu9A=",
               "sourceCollectionId": "sourceContainerName",
               "definition": "select * from ROOT"
+            },
+            "options": {
+              "throughputBucketConfig": [
+                {
+                  "feature": "MaterializedView",
+                  "bucket": "2"
+                }
+              ]
             },
             "_rid": "vb0sn8MDxLw=",
             "_ts": 1671427656,
