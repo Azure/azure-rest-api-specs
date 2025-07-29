@@ -45,11 +45,24 @@ interface DevicePools {
   @doc("Update a devicePool")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DevicePool, DevicePoolPatch>;
+
   @doc("List all device pools in a resource group.")
   listByResourceGroup is ArmResourceListByParent<DevicePool>;
 
   @doc("List all device pools in a subscription.")
   listBySubscription is ArmListBySubscription<DevicePool>;
+
+  @doc("Add Devices to the pool.")
+  addDevices is ArmResourceActionNoResponseContentAsync<
+    DevicePool,
+    ListOfDevicesRequest
+  >;
+
+  @doc("Remove Devices to the pool.")
+  removeDevices is ArmResourceActionNoResponseContentAsync<
+    DevicePool,
+    ListOfDevicesRequest
+  >;
 
   @doc("Claiming devices of the pool.")
   claimDevices is ArmResourceActionNoResponseContentAsync<
@@ -75,7 +88,7 @@ model ClaimDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
   devices: Azure.Core.armResourceIdentifier[];
 
-  @doc("Unique ID of the group to which the device belongs.")
+  @doc("Resource Id of group device belongs to.")
   claimedBy?: string;
 }
 
@@ -106,6 +119,9 @@ model DevicePoolProperties {
   @doc("Custom Location Name for the pool, default: <DevicePoolName>-CL")
   customLocationName?: string;
 
+  @doc("Managed resource group name for the pool")
+  managedResourceGroup?: string;
+
   @doc("operation status details for device pool.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
@@ -123,7 +139,7 @@ model DeviceDetail {
   @doc("Resource Id of the device.")
   deviceResourceId?: Azure.Core.armResourceIdentifier;
 
-  @doc("Unique ID of the group to which the device belongs.")
+  @doc("Resource Id of group device belongs to.")
   @visibility(Lifecycle.Read)
   claimedBy?: string;
 }

@@ -24,8 +24,8 @@ model EdgeMachine
   ...ManagedServiceIdentityProperty;
 }
 
-@doc("Edge Machine Type.")
-union EdgeMachineType {
+@doc("Edge Machine Kind.")
+union EdgeMachineKind {
   string,
 
   @doc("EdgeMachine resource created using Zero-touch provisioning flow")
@@ -63,7 +63,16 @@ interface EdgeMachines {
   update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
 
   /**
-   * Set failure state for edge machine.
+   * A long-running resource action.
+   */
+  validate is ArmResourceActionAsync<
+    EdgeMachine,
+    EdgeMachineValidateRequest,
+    EdgeMachineValidateResponse
+  >;
+
+  /**
+   * A long-running resource action.
    */
   setFailedMachineState is ArmResourceActionAsync<
     EdgeMachine,
@@ -72,7 +81,7 @@ interface EdgeMachines {
   >;
 
   /**
-   * Reset failure state for edge machine.
+   * A long-running resource action.
    */
   resetFailedMachineState is ArmResourceActionAsync<
     EdgeMachine,
@@ -89,7 +98,7 @@ interface EdgeMachines {
 model EdgeMachineProperties {
   @doc("Edge Machine type.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  edgeMachineType?: EdgeMachineType;
+  kind?: EdgeMachineKind;
 
   @doc("The provisioning state of a resource.")
   @visibility(Lifecycle.Read)
@@ -98,6 +107,9 @@ model EdgeMachineProperties {
   @doc("Unique, immutable resource id.")
   @visibility(Lifecycle.Read)
   cloudId?: string;
+
+  @doc("Resource group where the onboarding arc machine instance created. Will be deprecated before pub preview")
+  onboardingMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
 
   @doc("Optional property to create arc machine in custom resource group.")
   arcMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
@@ -122,6 +134,10 @@ model EdgeMachineProperties {
   @doc("machine connectivity status")
   @visibility(Lifecycle.Read)
   connectivityStatus?: EdgeMachineConnectivityStatus;
+
+  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
+  @Azure.ResourceManager.identifiers(#["labelName"])
+  labels?: Labels[];
 
   @doc("Tracks the ID of the consuming resource, Settingthe machine as in-use.")
   @visibility(Lifecycle.Read)
@@ -172,6 +188,21 @@ model OperationDetail {
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
+/**
+ * The validate request for Edge Machine.
+ */
+model EdgeMachineValidateRequest {
+  /**
+   * Machine Ids against which, current machine has to be validated.
+   */
+  edgeMachineIds: string[];
+
+  /**
+   * Additional info required for validation.
+   */
+  additionalInfo?: string;
+}
+
 @doc("The Set Failed request for Edge Machine..")
 model SetFailedMachineStateRequest {
   @doc("Failure details to set why edge machine set to Failed state.")
@@ -185,6 +216,17 @@ model FailureDetails {
 
   @doc("description of failure why edge machine set to Failed state.")
   description?: string;
+}
+
+/**
+ * An Accepted response with an Operation-Location header.
+ */
+model EdgeMachineValidateResponse {
+  /**
+   * edge device validation status
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
 }
 
 @doc("Overall connectivity status for the machine resource.")
@@ -214,6 +256,28 @@ model SiteDetails {
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  @doc("Properties for patching edge machine.")
+  properties?: EdgeMachinePatchProperties;
+}
+
+@doc("Properties for patching edge machine.")
+model EdgeMachinePatchProperties {
+  @doc("Service fetches common configuration from site.")
+  siteDetails?: SiteDetails;
+
+  @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
+  @Azure.ResourceManager.identifiers(#["labelName"])
+  labels?: Labels[];
+}
+
+@doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
+model Labels {
+  @doc("Name of label")
+  labelName?: string;
+
+  @doc("Value of label")
+  labelValue?: string;
 }
 
 @doc("OS State")
@@ -246,6 +310,17 @@ union EdgeMachineState {
 
   @doc("Preparing EdgeMachine")
   Preparing: "Preparing",
+}
+
+@doc("Order Item Details")
+model OrderDetails {
+  @visibility(Lifecycle.Read)
+  @doc("Details for voucher ownership")
+  deviceIdentity?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("TPM endorsement key")
+  tpmEndorsementKey?: string;
 }
 
 @doc("The provisioning state of a resource.")
