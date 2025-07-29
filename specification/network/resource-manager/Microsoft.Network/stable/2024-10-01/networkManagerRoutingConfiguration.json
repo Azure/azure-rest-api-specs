@@ -642,6 +642,18 @@
           "type": "string",
           "readOnly": true,
           "description": "Unique identifier for this resource."
+        },
+        "routeTableUsageMode": {
+          "type": "string",
+          "enum": [
+            "ManagedOnly",
+            "UseExisting"
+          ],
+          "x-ms-enum": {
+            "name": "RouteTableUsageMode",
+            "modelAsString": true
+          },
+          "description": "Route table usage mode."
         }
       },
       "description": "Defines the routing configuration properties."
