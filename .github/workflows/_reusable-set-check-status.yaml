@@ -70,7 +70,6 @@ jobs:
 
       - if: ${{ always() && steps.set-status.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: ./.github/actions/add-issue-number-artifact
         with:
-          name: issue-number
-          value: ${{ steps.set-status.outputs.issue_number }}
+          issue-number: ${{ steps.set-status.outputs.issue_number }}

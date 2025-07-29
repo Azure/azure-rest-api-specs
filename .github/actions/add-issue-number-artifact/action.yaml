@@ -1,0 +1,22 @@
+name: Add IssueNumber Artifact
+description: Uploads an empty artifact named `issue-number=${value}`, to make the issue number available for downstream consumers
+
+inputs:
+  issue-number:
+    description: Issue number
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - if: ${{ !(inputs.issue-number =~ '^[0-9]+$') || !(fromJson(inputs.issue-number) > 0) }}
+      run: |
+        echo "::error::issue-number must be a positive integer: '${{ inputs.issue-number }}'"
+        exit 1
+      shell: bash
+
+    - uses: ./.github/actions/add-empty-artifact
+      with:
+        name: issue-number
+        value: ${{ inputs.issue-number }}
