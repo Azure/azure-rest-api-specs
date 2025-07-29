@@ -139,11 +139,16 @@ interface Profiles {
    * Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDProfiles_Upgrade")
-  upgrade is ArmResourceActionAsync<
+  upgrade is ArmResourceActionAsyncBase<
     Profile,
     ProfileUpgradeParameters,
-    ArmResponse<Profile>
+    ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
+      @bodyRoot
+      _: CustomDomain;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
 
   /**

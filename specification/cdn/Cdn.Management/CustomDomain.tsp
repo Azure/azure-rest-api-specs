@@ -70,19 +70,29 @@ interface CustomDomains {
   /**
    * Disable https delivery of the custom domain.
    */
-  disableCustomHttps is ArmResourceActionAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  disableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     void,
-    ArmResponse<CustomDomain>
+    ArmResponse<CustomDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+      @bodyRoot
+      _: CustomDomain;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>
   >;
 
   /**
    * Enable https delivery of the custom domain.
    */
-  enableCustomHttps is ArmResourceActionAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  enableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     CustomDomainHttpsParameters,
-    ArmResponse<CustomDomain>,
+    ArmResponse<CustomDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+      @bodyRoot
+      _: CustomDomain;
+    }),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>,
     OptionalRequestBody = true
   >;
 }
