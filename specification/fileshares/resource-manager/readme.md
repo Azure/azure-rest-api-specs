@@ -64,8 +64,6 @@ These are the global settings for the Azure API Center.
 
 openapi-type: arm
 
-openapi-subtype: providerHub
-
 tag: package-2025-06-01-preview
 
 ```
