@@ -18,6 +18,7 @@ interface ConfidentialLedgerClient
   extends ConfidentialLedger.Ledger.Operations {}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@clientNamespace("ConfidentialLedger.Certificate", "python")
 @client({
   service: ConfidentialLedger.Certificate,
   name: "ConfidentialLedgerCertificateClient",
