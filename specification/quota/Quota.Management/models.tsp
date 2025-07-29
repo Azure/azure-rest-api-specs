@@ -226,7 +226,6 @@ model GroupQuotaSubscriptionRequestStatusProperties {
   /**
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -373,7 +372,6 @@ model SubmittedResourceRequestStatusProperties {
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -540,7 +538,6 @@ model QuotaAllocationRequestStatusProperties {
    * The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -922,7 +919,6 @@ model QuotaRequestProperties {
    * The quota request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
@@ -1201,7 +1197,6 @@ model QuotaRequestOneResourceProperties {
    * Quota request submission time. The date conforms to the following ISO 8601 standard format: yyyy-MM-ddTHH:mm:ssZ.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   requestSubmitTime?: utcDateTime;
 
   /**
