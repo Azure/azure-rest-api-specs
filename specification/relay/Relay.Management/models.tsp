@@ -691,3 +691,5 @@ model PrivateLinkResourcesListResult {
   @doc("A link for the next page of private link resources.")
   nextLink?: ResourceLocation<PrivateLinkResource>;
 }
+/** The response of the list WCF relay operation. */
+model WcfRelaysListResult is Azure.Core.Page<WcfRelay>;

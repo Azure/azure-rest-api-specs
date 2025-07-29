@@ -1936,9 +1936,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/WcfRelayListResult"
+              "$ref": "#/definitions/WcfRelaysListResult"
             }
           },
           "default": {
@@ -3459,27 +3459,6 @@
         }
       ]
     },
-    "WcfRelayListResult": {
-      "type": "object",
-      "description": "The response of a WcfRelay list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WcfRelay items on this page",
-          "items": {
-            "$ref": "#/definitions/WcfRelay"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "WcfRelayProperties": {
       "type": "object",
       "description": "Properties of the WCF relay.",
@@ -3525,6 +3504,27 @@
           "description": "The usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored."
         }
       }
+    },
+    "WcfRelaysListResult": {
+      "type": "object",
+      "description": "The response of the list WCF relay operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WcfRelay items on this page",
+          "items": {
+            "$ref": "#/definitions/WcfRelay"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {}

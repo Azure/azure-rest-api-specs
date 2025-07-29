@@ -74,7 +74,10 @@ interface WcfRelaysOps {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WCFRelays_ListByNamespace")
-  listByNamespace is ArmResourceListByParent<WcfRelay>;
+  listByNamespace is ArmResourceListByParent<
+    WcfRelay,
+    Response = WcfRelaysListResult
+  >;
 }
 
 @@minLength(WcfRelay.name, 1);
