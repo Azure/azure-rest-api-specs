@@ -132,6 +132,7 @@ export async function evaluateImpact(
       labelContext,
       resourceManagerLabelShouldBePresent,
       rpaasLabelShouldBePresent,
+      githubClient,
     );
 
   const newApiVersion = await isNewApiVersion(context);
@@ -664,12 +665,42 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   };
 }
 
+export type RPaaSRPFolder = {
+  name: string;
+  path: string;
+};
+
+export const getRPaaSFolderList = async (
+  githubClient: any,
+  owner: string,
+  repoName: string
+): Promise<RPaaSRPFolder[]> => {
+  const branch = "main";
+  const folder = "specification";
+
+  const res = await githubClient.rest.repos.getContent({
+    owner,
+    repo: repoName,
+    path: folder,
+    ref: branch,
+  });
+
+  console.log(
+    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`
+  );
+
+  const folders: RPaaSRPFolder[] = res.data;
+
+  return folders;
+};
+
 // CODESYNC: see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
 async function processRpaasRpNotInPrivateRepoLabel(
   context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
+  githubClient: any,
 ): Promise<{ ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRpaasRpNotInPrivateRepoLabel");
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
@@ -694,44 +725,44 @@ async function processRpaasRpNotInPrivateRepoLabel(
     }
   }
 
-  // todo: retrieve the list and populate this value properly.
-  // if (!skip) {
-  //   // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder
-  //   // names
-  //   const rpaasRPFolderList = await getRPaaSFolderList();
-  //   const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
 
-  //   console.log(`RPaaS RP folder list: ${rpFolderNames}`);
+  if (!skip) {
+    // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder
+    // names
+    const rpaasRPFolderList = await getRPaaSFolderList(githubClient, "Azure", "azure-rest-api-specs-pr");
+    const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
 
-  //   const handlers: ChangeHandler[] = [];
+    console.log(`RPaaS RP folder list: ${rpFolderNames}`);
 
-  //   const processPrChange = () => {
-  //     return (e: PRChange) => {
-  //       if (e.changeType === "Addition") {
-  //         const rpFolderName = getRPRootFolderName(e.filePath);
-  //         console.log(
-  //           `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
-  //         );
+    const handlers: ChangeHandler[] = [];
 
-  //         if (rpFolderName === undefined) {
-  //           console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
-  //           return;
-  //         }
+    const processPrChange = () => {
+      return (e: PRChange) => {
+        if (e.changeType === "Addition") {
+          const rpFolderName = getRPRootFolderName(e.filePath);
+          console.log(
+            `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
+          );
 
-  //         if (!rpFolderNames.includes(rpFolderName)) {
-  //           console.log(
-  //             `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
-  //             + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
-  //           );
-  //           ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
-  //         }
-  //       }
-  //     };
-  //   };
+          if (rpFolderName === undefined) {
+            console.log(`RP folder is undefined for changed file path '${e.filePath}'.`);
+            return;
+          }
 
-  //   handlers.push({ SwaggerFile: processPrChange() });
-  //   await processPrChanges(context, handlers);
-  // }
+          if (!rpFolderNames.includes(rpFolderName)) {
+            console.log(
+              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
+              + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
+            );
+            ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
+          }
+        }
+      };
+    };
+
+    handlers.push({ SwaggerFile: processPrChange() });
+    await processPrChanges(context, handlers);
+  }
 
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processRpaasRpNotInPrivateRepoLabel");
