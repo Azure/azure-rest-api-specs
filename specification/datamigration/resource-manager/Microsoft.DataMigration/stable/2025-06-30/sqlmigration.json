@@ -693,10 +693,17 @@
             "name": "sqlDbInstanceName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
           },
           {
-            "$ref": "#/parameters/TargetDbNameParameter"
+            "name": "targetDbName",
+            "in": "path",
+            "description": "The name of the target database.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
           },
           {
             "name": "migrationOperationInput",
