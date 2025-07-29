@@ -562,7 +562,7 @@ model ZoneAllocationPolicy {
 
   @identifiers(#[])
   @doc("Zone preferences when zone distribution strategy is Prioritized.")
-  zonePreferences: Array<ZonePreference>;
+  zonePreferences?: Array<ZonePreference>;
 }
 
 @added(Versions.v2025_07_01_preview)
@@ -660,6 +660,7 @@ interface Fleets {
     $skiptoken?: string,
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2025_07_01_preview)
   @doc("Cancels an instance Fleet creation that is in progress.")
   cancel is ArmResourceActionAsync<Fleet, void, Response = OkResponse>;

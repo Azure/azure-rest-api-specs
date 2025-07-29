@@ -342,11 +342,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Fleets_Update": {
-            "$ref": "./examples/Fleets_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -440,6 +435,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2969,6 +2967,11 @@
           "description": "The compute RP resource id of the virtual machine.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\"",
           "readOnly": true
         },
+        "type": {
+          "type": "string",
+          "description": "Type of the virtual machine",
+          "readOnly": true
+        },
         "operationStatus": {
           "$ref": "#/definitions/VMOperationStatus",
           "description": "This represents the operationStatus of the virtual machine in response to the last operation that was performed on it by Azure Fleet resource.",
@@ -3874,8 +3877,7 @@
         }
       },
       "required": [
-        "distributionStrategy",
-        "zonePreferences"
+        "distributionStrategy"
       ]
     },
     "ZoneDistributionStrategy": {

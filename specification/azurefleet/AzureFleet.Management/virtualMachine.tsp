@@ -30,6 +30,10 @@ model VirtualMachine {
   @visibility(Lifecycle.Read)
   id: armResourceIdentifier;
 
+  @doc("Type of the virtual machine")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   @doc("This represents the operationStatus of the virtual machine in response to the last operation that was performed on it by Azure Fleet resource.")
   @visibility(Lifecycle.Read)
   operationStatus: VMOperationStatus;
