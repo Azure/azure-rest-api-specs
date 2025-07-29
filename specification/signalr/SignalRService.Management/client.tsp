@@ -116,13 +116,117 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
 
 @@override(PrivateEndpointConnections.get,
   SignalRPrivateEndpointConnectionsGetCustomized,
-  "python,go"
+  "python,java,go"
 );
 @@override(PrivateEndpointConnections.update,
   SignalRPrivateEndpointConnectionsUpdateCustomized,
-  "python,go"
+  "python,java,go"
 );
 @@override(PrivateEndpointConnections.delete,
   SignalRPrivateEndpointConnectionsDeleteCustomized,
-  "python,go"
+  "python,java,go"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  subscriptionId: uuid,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  sharedPrivateLinkResourceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceGroupName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  parameters: SharedPrivateLinkResource,
+): SharedPrivateLinkResource;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op SignalRSharedPrivateLinkResourcesGetCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  subscriptionId: uuid,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  sharedPrivateLinkResourceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceGroupName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceName: string,
+): SharedPrivateLinkResource;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op SignalRSharedPrivateLinkResourcesDeleteCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  subscriptionId: uuid,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  sharedPrivateLinkResourceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceGroupName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  resourceName: string,
+): void;
+
+@@override(SignalRSharedPrivateLinkResources.createOrUpdate,
+  SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized,
+  "python,java,go"
+);
+@@override(SignalRSharedPrivateLinkResources.get,
+  SignalRSharedPrivateLinkResourcesGetCustomized,
+  "python,java,go"
+);
+@@override(SignalRSharedPrivateLinkResources.delete,
+  SignalRSharedPrivateLinkResourcesDeleteCustomized,
+  "python,java,go"
 );
