@@ -26,7 +26,6 @@ import { PER_PAGE_MAX } from "../github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
-  processArmReviewLabels,
   processImpactAssessment,
   verRevApproval,
 } from "./labelling.js";
@@ -283,13 +282,6 @@ export default async function summarizeChecks({ github, context, core }) {
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
-  if (!issue_number) {
-    core.info(
-      "This summarize-checks was triggered off a workflow that doesn't provide the issue-number artifact, early exiting.",
-    );
-    return;
-  }
-
   await summarizeChecksImpl(
     github,
     context,
@@ -326,17 +318,9 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  core.info(
-    `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}@${head_sha}.`,
-  );
+  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
-  // retrieve latest labels state
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
@@ -349,16 +333,13 @@ export async function summarizeChecksImpl(
     EXCLUDED_CHECK_NAMES,
   );
 
-  /** @type {string[]} */
-  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
-
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
   core.info(
     `Summarize checks label actions against ${owner}/${repo}#${issue_number}: \n` +
-      `The following labels were present: [${Array.from(labelContext.present).join(", ")}] \n` +
-      `Removing labels: [${Array.from(labelContext.toRemove).join(", ")}] \n` +
-      `Adding labels: [${Array.from(labelContext.toAdd).join(", ")}]`,
+      `The following labels were present: [${Array.from(labelContext.present).join(", ")}]` +
+      `Removing labels [${Array.from(labelContext.toRemove).join(", ")}] then \n` +
+      `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
   // for (const label of labelContext.toRemove) {
@@ -416,6 +397,27 @@ export async function summarizeChecksImpl(
   core.info(
     `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${automatedChecksMet}.`,
   );
+}
+
+/**
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @param {*} owner
+ * @param {*} repo
+ * @param {*} issue_number
+ * @return {Promise<string[]>}
+ */
+export async function getExistingLabels(github, owner, repo, issue_number) {
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  /** @type {string[]} */
+  return labels.map((/** @type {{ name: string; }} */ label) => label.name);
 }
 
 /**
@@ -527,24 +529,13 @@ export function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-    // Merge impact assessment labels into the main labelContext
-    impactAssessment.labelContext.toAdd.forEach((label) => {
-      labelContext.toAdd.add(label);
-    });
-    impactAssessment.labelContext.toRemove.forEach((label) => {
-      labelContext.toRemove.add(label);
-    });
-  }
 
-  // this is the only labelling that was part of original pipelinebot logic
-  processArmReviewLabels(labelContext, existingLabels);
-
-  if (impactAssessment) {
     // will further update the label context if necessary
     processImpactAssessment(
       impactAssessment.targetBranch,
       labelContext,
       impactAssessment.resourceManagerRequired,
+      impactAssessment.dataPlaneRequired,
       impactAssessment.rpaasRPMissing,
       impactAssessment.rpaasExceptionRequired,
       impactAssessment.rpaasRpNotInPrivateRepo,
@@ -730,7 +721,6 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-
   return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
 // #endregion

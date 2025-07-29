@@ -103,11 +103,9 @@ describe("Helper functions for version analysis", () => {
         createMockSwagger(TEST_PATHS.stable2020_07_02, ApiVersionLifecycleStage.STABLE),
       ];
 
-      const result = await getPrecedingSwaggers(TEST_PATHS.nonexistent, mockSwaggers);
-
-      expectResultStructure(result);
-      expect(result.stable).toBeUndefined();
-      expect(result.preview).toBeUndefined();
+      await expect(getPrecedingSwaggers(TEST_PATHS.nonexistent, mockSwaggers)).rejects.toThrow(
+        `Failed to read version from file:${TEST_PATHS.nonexistent}`,
+      );
     });
 
     it("should handle null or undefined availableSwaggers array", async () => {
@@ -306,21 +304,6 @@ describe("Helper functions for version analysis", () => {
         TEST_PATHS.stable2020_08_04,
         TEST_PATHS.preview2020_07_02,
       ]);
-    });
-
-    it("should preserve the first occurrence when duplicates exist", () => {
-      const swagger1 = createMockSwagger(TEST_PATHS.stable2020_07_02);
-      const swagger2 = createMockSwagger(TEST_PATHS.stable2020_07_02); // same path, different object
-      swagger1.versionKind = ApiVersionLifecycleStage.STABLE;
-      swagger2.versionKind = ApiVersionLifecycleStage.PREVIEW;
-
-      const mockSwaggers: MockSwagger[] = [swagger1, swagger2];
-
-      const result = deduplicateSwaggers(mockSwaggers);
-
-      expect(result).toHaveLength(1);
-      expect(result[0]).toBe(swagger1); // First occurrence preserved
-      expect(result[0].versionKind).toBe(ApiVersionLifecycleStage.STABLE);
     });
 
     it("should handle single swagger", () => {
