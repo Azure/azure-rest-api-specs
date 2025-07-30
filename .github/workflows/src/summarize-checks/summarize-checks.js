@@ -22,7 +22,7 @@
 import { extractInputs } from "../context.js";
 // import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
-import { CheckConclusion, PER_PAGE_MAX } from "../github.js";
+import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
