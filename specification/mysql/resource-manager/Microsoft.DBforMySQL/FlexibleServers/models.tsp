@@ -546,6 +546,8 @@ model BackupSettings {
  */
 model BackupAndExportResponse
   is Azure.ResourceManager.ProxyResource<BackupAndExportResponseProperties> {
+  ...ErrorResponse;
+
   /**
    * The name of the backup and export response.
    */
@@ -1904,57 +1906,6 @@ model GetPrivateDnsZoneSuffixResponse {
 }
 
 /**
- * REST API operation definition.
- */
-model Operation {
-  /**
-   * The name of the operation being performed on this particular object.
-   */
-  name?: string;
-
-  /**
-   * The localized display information for this particular operation or action.
-   */
-  display?: OperationDisplay;
-
-  /**
-   * The intended executor of the operation.
-   */
-  origin?: string;
-
-  /**
-   * Additional descriptions for the operation.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: Record<Record<unknown>>;
-}
-
-/**
- * Display metadata associated with the operation.
- */
-model OperationDisplay {
-  /**
-   * Operation resource provider name.
-   */
-  provider?: string;
-
-  /**
-   * Resource on which the operation is performed.
-   */
-  resource?: string;
-
-  /**
-   * Localized friendly name for the operation.
-   */
-  operation?: string;
-
-  /**
-   * Operation description.
-   */
-  description?: string;
-}
-
-/**
  * The properties of a maintenance resource.
  */
 model MaintenanceProperties {
@@ -2221,20 +2172,20 @@ model AdvancedThreatProtectionListResult {
 /**
  * The response of a Configuration list operation.
  */
-@pagedResult
 model ConfigurationListResult {
   /**
    * Array of Configuration
    */
   @doc("The Configuration items on this page")
   @items
+  @TypeSpec.pageItems
   value?: Configuration[];
 
   /**
    * Link to the next page of results, if applicable
    */
   @doc("The link to the next page of items")
-  @nextLink
+  @TypeSpec.nextLink
   nextLink?: url;
 }
 
@@ -2391,4 +2342,93 @@ model SubscriptionBaseParameters {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
   ...LocationNameParameter;
+}
+
+/**
+ * The static parameters for a resource group based resource
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * The list of operations supported by the Microsoft.DBforMySQL FlexibleServers resource provider.
+   */
+  @doc("The Operation items on this page")
+  @items
+  value?: Operation[];
+
+  /**
+   * The link used to get the next page of operations.
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Details of a REST API operation, returned from the Resource Provider Operations API
+ */
+model Operation {
+  /** 
+    The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"
+     */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Localized display information for this particular operation. */
+  display?: OperationDisplay;
+
+  /** 
+    The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+     */
+  @visibility(Lifecycle.Read)
+  origin?: Origin;
+
+  /**
+   * Additional descriptions for the operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required for backward compatibility"
+  properties?: Record<unknown>;
+}
+
+/**
+ * Display metadata associated with the operation.
+ */
+model OperationDisplay {
+  /** 
+  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /** 
+    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+     */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+}
+
+/**
+ * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+ */
+union Origin {
+  /** Indicates the operation is initiated by a user. */
+  user: "user",
+
+  /** Indicates the operation is initiated by a system. */
+  system: "system",
+
+  /** Indicates the operation is initiated by a user or system. */
+  `user,system`: "user,system",
+
+  string,
 }

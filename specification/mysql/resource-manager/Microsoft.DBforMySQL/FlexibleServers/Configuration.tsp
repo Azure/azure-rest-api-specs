@@ -52,6 +52,7 @@ interface Configurations {
   /**
    * List all the configurations in a given server.
    */
+  @TypeSpec.list
   listByServer is ArmResourceListByParent<
     Configuration,
     Parameters = {
@@ -92,7 +93,7 @@ interface Configurations {
   batchUpdate is ArmResourceActionAsync<
     Server,
     ConfigurationListForBatchUpdate,
-    ArmResponse<Configuration>,
+    ArmResponse<ConfigurationListResult>,
     LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
 }
