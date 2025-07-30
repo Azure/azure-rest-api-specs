@@ -22,13 +22,6 @@ using Microsoft.Storage;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountCreateParameters.properties);
-
-@@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
-  "networkRuleSet"
-);
-@@clientName(StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
-  "enableHttpsTrafficOnly"
-);
 @@clientName(StorageAccountPropertiesCreateParameters.isSftpEnabled,
   "IsSftpEnabled"
 );
@@ -37,9 +30,6 @@ using Microsoft.Storage;
 );
 @@clientName(StorageAccountPropertiesCreateParameters.isHnsEnabled,
   "IsHnsEnabled"
-);
-@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
-  "enableNfsV3"
 );
 
 @@clientName(Encryption.keyvaultproperties, "KeyVaultProperties");
@@ -322,33 +312,27 @@ using Microsoft.Storage;
 );
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
 
-@@clientLocation(BlobServices.blobContainersList, "BlobContainers");
+@@clientLocation(BlobServices.blobContainersList, BlobContainers);
 @@clientName(BlobServices.blobContainersList, "List");
 @@clientName(BlobContainers.lease::parameters.body, "parameters");
-@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
-  "BlobContainers"
+  BlobContainers
 );
 @@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
 );
-@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy,
-  "BlobContainers"
-);
-@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, "BlobContainers");
-@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy,
-  "BlobContainers"
-);
+@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy, BlobContainers);
+@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, BlobContainers);
+@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy, BlobContainers);
 @@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
-@@clientLocation(FileServices.fileSharesList, "FileShares");
+@@clientLocation(FileServices.fileSharesList, FileShares);
 @@clientName(FileServices.fileSharesList, "List");
-@@clientLocation(FileServiceUsageOperationGroup.getServiceUsage,
-  "FileServices"
-);
+@@clientLocation(FileServiceUsageOperationGroup.getServiceUsage, FileServices);
 @@clientLocation(FileServiceUsageOperationGroup.listServiceUsages,
-  "FileServices"
+  FileServices
 );
 @@clientName(FileShares.lease::parameters.body, "parameters");
 @@clientLocation(QueueServices.queueList, "Queue");
@@ -363,7 +347,7 @@ using Microsoft.Storage;
 );
 @@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
 @@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
-  "StorageAccounts"
+  StorageAccounts
 );
 @@clientLocation(ObjectReplicationPolicyOperationGroup.get,
   "ObjectReplicationPolicies"
@@ -395,5 +379,5 @@ using Microsoft.Storage;
   "List"
 );
 @@clientLocation(SkusOperationGroup.list, "Skus");
-@@clientLocation(DeletedAccountsOperationGroup.list, "DeletedAccounts");
+@@clientLocation(DeletedAccountsOperationGroup.list, DeletedAccounts);
 @@clientLocation(UsagesOperationGroup.listByLocation, "Usages");
