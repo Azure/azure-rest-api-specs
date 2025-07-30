@@ -6275,7 +6275,7 @@
             "url": "https://learn.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
+          "description": "The connection string for the datasource. For Azure SQL, Azure Blob, ADLS Gen 2 and Azure Table, this would be the connection string or resource ID if using managed identity. For CosmosDB this would be a formatted connection string specifying ApiKind or resource ID for managed identity. For Onelake files, connection string would be either the workspace guid or workspace FQDN; Onelake only supports managed identity connections. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -6285,11 +6285,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed."
+          "description": "The name of the table or view (for Azure SQL datasource), collection (for CosmosDB datasource), container (for Azure Blob and ADLS Gen 2 datasources), Azure Table (for Azure Table datasource), or lakehouse (for Onelake datasource) that will be indexed."
         },
         "query": {
           "type": "string",
-          "description": "A query that is applied to this data container. The syntax and meaning of this parameter is datasource-specific. Not supported by Azure SQL datasources."
+          "description": "A query that is applied to this data container. For CosmosDB datasource query can flatten and filter data. For Azure Blob and ADLS Gen 2 query can filter by folders. For Azure Table query can filter by row data. For Onelake query can filter by folder or shortcut. Not supported by Azure SQL datasources."
         }
       },
       "required": [
@@ -6425,7 +6425,8 @@
         "azureblob",
         "azuretable",
         "mysql",
-        "adlsgen2"
+        "adlsgen2",
+        "onelake"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -6434,32 +6435,37 @@
           {
             "value": "azuresql",
             "name": "AzureSql",
-            "description": "Indicates an Azure SQL datasource."
+            "description": "Definition of an Azure SQL datasource whose credentials can either be a standard SQL connection string or the ResourceId of the SQL resource. The container property refers to the table or view to be indexed. Query parameter is not supported for this datasource."
           },
           {
             "value": "cosmosdb",
             "name": "CosmosDb",
-            "description": "Indicates a CosmosDB datasource."
+            "description": "Definition of an CosmosDB datasource whose credentials can either be a formatted connection string containing details for AccountEndpoint, AccountKey, and Database for a key based connection or details for ResourceID and ApiKind for keyless connection. The container property refers to cosmosdb collection to be indexed and the optional query property refers to a SQL query on the collection."
           },
           {
             "value": "azureblob",
             "name": "AzureBlob",
-            "description": "Indicates an Azure Blob datasource."
+            "description": "Definition of an Azure Blob datasource whose credentials can either be a storage connection string or the ResourceId of the storage account. The container property refers to the blob container to be indexed and the optional query property refers to a specific sub-folder in the container."
           },
           {
             "value": "azuretable",
             "name": "AzureTable",
-            "description": "Indicates an Azure Table datasource."
+            "description": "Definition of an Azure Table datasource whose credentials can either be a table connection string or the ResourceId of the storage account. The container property refers to the blob container to be indexed and the optional query property can be used to filter rows."
           },
           {
             "value": "mysql",
             "name": "MySql",
-            "description": "Indicates a MySql datasource."
+            "description": "Definition of an Azure SQL datasource whose credentials can either be a standard ADO.NET formatted SQL connection string or the ResourceId of the SQL resource. The container property refers to the table or view to be indexed. Query parameter is not supported for this datasource."
           },
           {
             "value": "adlsgen2",
             "name": "AdlsGen2",
-            "description": "Indicates an ADLS Gen2 datasource."
+            "description": "Definition of an Azure ADLS Gen 2 datasource whose credentials can either be a storage connection string or the ResourceId of the storage account. The container property refers to the blob container to be indexed and the optional query property refers to a specific sub-folder in the container."
+          },
+          {
+            "value": "onelake",
+            "name": "OneLake",
+            "description": "Definition of an Microsoft Fabric Onelake datasource whose credentials can either be the Fabric workspace GUID or a workspace FQDN. The container property refers to the lakehouse GUID and the optional query property refers to folders or shortcuts in the lakehouse."
           }
         ]
       },
