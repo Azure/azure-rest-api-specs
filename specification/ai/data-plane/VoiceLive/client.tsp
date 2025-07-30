@@ -36,3 +36,8 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
+@@access(VoiceLive.ServerEvent, Access.public, "csharp");
+@@access(VoiceLive.ClientEvent, Access.public, "csharp");
+@@clientName(VoiceLive.Modality, "InputModality", "csharp");
+@@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
+@@clientName(VoiceLive.Tool, "ToolCall", "csharp");
