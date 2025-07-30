@@ -19,9 +19,6 @@ jobs:
   update-labels:
     name: Update Labels
 
-    # Only process labels from successful workflows
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     runs-on: ubuntu-24.04
 
     steps:
