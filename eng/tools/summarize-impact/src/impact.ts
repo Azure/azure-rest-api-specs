@@ -28,7 +28,7 @@ import { Readme } from "@azure-tools/specs-shared/readme";
 import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
-// TODO: share code
+// TODO: move to .github/shared
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
   const handlers: ChangeHandler[] = [];
   let isAddingNewApiVersion = false;
@@ -373,11 +373,11 @@ async function processPRType(
   const types: PRType[] = await getPRType(context);
 
   const resourceManagerLabelShouldBePresent = processPRTypeLabel(
-    "resource-manager",
+    PRType.ResourceManager,
     types,
     labelContext,
   );
-  const dataPlaneShouldBePresent = processPRTypeLabel("data-plane", types, labelContext);
+  const dataPlaneShouldBePresent = processPRTypeLabel(PRType.DataPlane, types, labelContext);
 
   console.log("RETURN definition processPRType");
   return { resourceManagerLabelShouldBePresent, dataPlaneShouldBePresent };
@@ -394,10 +394,10 @@ async function getPRType(context: PRContext): Promise<PRType[]> {
   const prTypes: PRType[] = [];
   if (changedFilePaths.length > 0) {
     if (isDataPlanePR(changedFilePaths)) {
-      prTypes.push("data-plane");
+      prTypes.push(PRType.DataPlane);
     }
     if (isManagementPR(changedFilePaths)) {
-      prTypes.push("resource-manager");
+      prTypes.push(PRType.ResourceManager);
     }
   }
   console.log("RETURN definition getPRType");
