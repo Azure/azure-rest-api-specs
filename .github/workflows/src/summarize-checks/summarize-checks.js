@@ -309,6 +309,28 @@ export default async function summarizeChecks({ github, context, core }) {
 }
 
 /**
+ * @param {typeof import("@actions/core")} core
+ * @param {CheckRunData[]} requiredCheckRuns
+ * @param {CheckRunData[]} fyiCheckRuns
+ */
+export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
+  core.info(
+    `Observed ${requiredCheckRuns.length} required check runs ${requiredCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  requiredCheckRuns.forEach((x) => {
+    core.info(
+      `Required check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`,
+    );
+  });
+  core.info(
+    `Observed ${fyiCheckRuns.length} FYI check runs ${fyiCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  fyiCheckRuns.forEach((x) => {
+    core.info(`FYI check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`);
+  });
+}
+
+/**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
@@ -346,6 +368,8 @@ export async function summarizeChecksImpl(
     EXCLUDED_CHECK_NAMES,
   );
 
+  outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
+
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
   core.info(
@@ -355,27 +379,27 @@ export async function summarizeChecksImpl(
       `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
-  // for (const label of labelContext.toRemove) {
-  //   core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-  //   await github.rest.issues.removeLabel({
-  //     owner: owner,
-  //     repo: repo,
-  //     issue_number: issue_number,
-  //     name: label,
-  //   });
-  // }
+  for (const label of labelContext.toRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    // await github.rest.issues.removeLabel({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   name: label,
+    // });
+  }
 
-  // if (labelContext.toAdd.size > 0) {
-  //   core.info(
-  //     `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-  //   );
-  //   await github.rest.issues.addLabels({
-  //     owner: owner,
-  //     repo: repo,
-  //     issue_number: issue_number,
-  //     labels: Array.from(labelContext.toAdd),
-  //   });
-  // }
+  if (labelContext.toAdd.size > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    // await github.rest.issues.addLabels({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   labels: Array.from(labelContext.toAdd),
+    // });
+  }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
   labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
