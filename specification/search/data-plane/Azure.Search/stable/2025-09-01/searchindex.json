@@ -1070,6 +1070,7 @@
   },
   "definitions": {
     "SuggestDocumentsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1094,6 +1095,7 @@
       "description": "Response containing suggestion query results from an index."
     },
     "SuggestResult": {
+      "type": "object",
       "properties": {
         "@search.text": {
           "type": "string",
@@ -1109,6 +1111,7 @@
       "description": "A result containing a document found by a suggestion query, plus associated metadata."
     },
     "FacetResult": {
+      "type": "object",
       "properties": {
         "count": {
           "type": "integer",
@@ -1121,6 +1124,7 @@
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
     },
     "SearchDocumentsResult": {
+      "type": "object",
       "properties": {
         "@odata.count": {
           "type": "integer",
@@ -1198,6 +1202,7 @@
       "description": "Response containing search results from an index."
     },
     "SearchResult": {
+      "type": "object",
       "properties": {
         "@search.score": {
           "type": "number",
@@ -1250,6 +1255,7 @@
       "description": "A document retrieved via a document lookup operation."
     },
     "IndexBatch": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1266,6 +1272,7 @@
       "description": "Contains a batch of document write actions to send to the index."
     },
     "IndexAction": {
+      "type": "object",
       "properties": {
         "@search.action": {
           "type": "string",
@@ -1310,6 +1317,7 @@
       "description": "Represents an index action that operates on a document."
     },
     "IndexingResult": {
+      "type": "object",
       "properties": {
         "key": {
           "type": "string",
@@ -1344,6 +1352,7 @@
       "description": "Status of an indexing operation for a single document."
     },
     "IndexDocumentsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "Results",
@@ -1598,6 +1607,7 @@
       "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms."
     },
     "SearchRequest": {
+      "type": "object",
       "properties": {
         "count": {
           "type": "boolean",
@@ -1736,6 +1746,7 @@
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
     },
     "SuggestRequest": {
+      "type": "object",
       "properties": {
         "filter": {
           "externalDocs": {
@@ -1797,6 +1808,7 @@
       "description": "Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors."
     },
     "AutocompleteRequest": {
+      "type": "object",
       "properties": {
         "search": {
           "type": "string",
@@ -1877,6 +1889,7 @@
       "description": "The result of Autocomplete query."
     },
     "AutocompleteItem": {
+      "type": "object",
       "properties": {
         "text": {
           "type": "string",
@@ -1896,6 +1909,7 @@
       "description": "The result of Autocomplete requests."
     },
     "AnswerResult": {
+      "type": "object",
       "x-ms-client-name": "QueryAnswerResult",
       "properties": {
         "score": {
@@ -1925,6 +1939,7 @@
       "description": "An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected."
     },
     "CaptionResult": {
+      "type": "object",
       "x-ms-client-name": "QueryCaptionResult",
       "properties": {
         "text": {

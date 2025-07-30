@@ -1,47 +1,59 @@
 {
+  "operationId": "Documents_SearchPost",
+  "title": "SearchIndexSearchDocumentsPost",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "indexName": "myindex",
+    "endpoint": "https://stableexampleservice.search.windows.net",
+    "indexName": "stable-test",
     "api-version": "2025-09-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "searchRequest": {
       "count": true,
       "facets": [
-        "category,count:10,sort:count"
+        "ownerId"
       ],
-      "filter": "rating gt 4.0",
-      "highlight": "description",
+      "filter": "category eq 'purple' or category eq 'pink'",
+      "highlight": "category",
       "highlightPostTag": "</em>",
-      "highlightPreTag": "<em>",
-      "minimumCoverage": null,
-      "orderby": "rating desc",
-      "queryType": "simple",
-      "scoringParameters": [
-        "currentLocation--122.123,44.77233"
-      ],
-      "scoringProfile": "sp",
-      "search": "nice hotels",
-      "searchFields": "category,description",
-      "searchMode": "any",
-      "sessionId": "mysessionid",
+      "highlightPreTag": "</em>",
+      "minimumCoverage": 100,
+      "queryType": "semantic",
       "scoringStatistics": "global",
-      "select": "hotelId,category,description",
+      "sessionId": "mysessionid",
+      "scoringParameters": [
+        "categoryTag:desiredCategoryValue"
+      ],
+      "scoringProfile": "stringFieldBoost",
+      "search": "purple",
+      "searchFields": "id,name,description,category,ownerId",
+      "searchMode": "any",
+      "select": "id,name,description,category,ownerId",
       "skip": 0,
       "top": 10,
+      "semanticConfiguration": "testconfig",
+      "semanticErrorHandling": "partial",
+      "semanticMaxWaitInMilliseconds": 5000,
+      "semanticQuery": "find all purple",
+      "answers": "extractive",
+      "captions": "extractive",
       "vectorQueries": [
         {
-          "kind": "vector",
           "vector": [
-            0.103,
-            0.0712,
-            0.0852,
-            0.1547,
-            0.1183
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
           ],
-          "fields": "descriptionEmbedding",
-          "k": 5,
+          "kind": "vector",
+          "k": 50,
+          "fields": "vector22, vector1b",
           "exhaustive": true,
-          "oversampling": 20.0,
-          "weight": 2.0
+          "weight": 1
         }
       ],
       "vectorFilterMode": "preFilter"
@@ -50,69 +62,227 @@
   "responses": {
     "200": {
       "body": {
-        "@odata.count": 25,
+        "@odata.count": 42,
+        "@search.coverage": 100.0,
         "@search.facets": {
-          "category": [
+          "ownerId": [
             {
-              "count": 1,
-              "value": "Economy"
+              "count": 26,
+              "value": "sam"
             },
             {
-              "count": 1,
-              "value": "Luxury"
+              "count": 12,
+              "value": "ryan"
+            },
+            {
+              "count": 4,
+              "value": "benny"
             }
           ]
         },
-        "@search.nextPageParameters": {
-          "count": true,
-          "facets": [
-            "category,count:10,sort:count"
-          ],
-          "filter": "rating gt 4.0",
-          "highlight": "title",
-          "highlightPostTag": "</em>",
-          "highlightPreTag": "<em>",
-          "minimumCoverage": null,
-          "orderby": "search.score() desc,rating desc",
-          "queryType": "simple",
-          "sessionId": "mysessionid",
-          "scoringStatistics": "global",
-          "scoringParameters": [
-            "currentLocation--122.123,44.77233"
-          ],
-          "scoringProfile": "sp",
-          "search": "nice hotels",
-          "searchFields": "title,description",
-          "searchMode": "any",
-          "select": "docId,title,description",
-          "skip": 2,
-          "top": 8
-        },
+        "@search.answers": [],
         "value": [
           {
-            "@search.score": 1.50,
+            "@search.score": 0.04419642686843872,
             "@search.highlights": {
-              "title": [
-                "<em>Nice</em> <em>Hotel</em>"
+              "category": [
+                "</em>purple</em>"
               ]
             },
-            "description": "Cheapest hotel in town",
-            "docId": "1",
-            "title": "Nice Hotel"
+            "@search.rerankerScore": 1.7178425788879395,
+            "@search.captions": [
+              {
+                "text": "test10 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "10",
+            "name": "test",
+            "description": "test10 hello",
+            "category": "purple",
+            "ownerId": "benny"
           },
           {
-            "@search.score": 0.70,
+            "@search.score": 0.012820512987673283,
             "@search.highlights": {
-              "title": [
-                "Fancy <em>Hotel</em>"
+              "category": [
+                "</em>purple</em>"
               ]
             },
-            "description": "Best hotel in town",
-            "docId": "2",
-            "title": "Fancy Hotel"
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "id": "empty-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.011627906933426857,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7079174518585205,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "id": "no-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.0431547611951828,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6994102001190186,
+            "@search.captions": [
+              {
+                "text": "test4 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "4",
+            "name": "test",
+            "description": "test4 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04460374265909195,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6937386989593506,
+            "@search.captions": [
+              {
+                "text": "test2 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "2",
+            "name": "test",
+            "description": "test2 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.042533937841653824,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6923208236694336,
+            "@search.captions": [
+              {
+                "text": "test5 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "5",
+            "name": "test",
+            "description": "test5 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04651741310954094,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.691611886024475,
+            "@search.captions": [
+              {
+                "text": "test7 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "7",
+            "name": "test",
+            "description": "test7 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04703196510672569,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6781420707702637,
+            "@search.captions": [
+              {
+                "text": "test0 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "0",
+            "name": "test",
+            "description": "test0 hello",
+            "category": "purple",
+            "ownerId": "benny"
+          },
+          {
+            "@search.score": 0.043300654739141464,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6653810739517212,
+            "@search.captions": [
+              {
+                "text": "test8 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "8",
+            "name": "test",
+            "description": "test8 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.04082724079489708,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6618363857269287,
+            "@search.captions": [
+              {
+                "text": "test11 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "11",
+            "name": "test",
+            "description": "test11 hello",
+            "category": "purple",
+            "ownerId": "sam"
           }
-        ],
-        "@odata.nextLink": "https://myservice.search.windows.net/indexes('myindex')/docs/search.post.search?api-version=2025-09-01"
+        ]
       }
     }
   }
