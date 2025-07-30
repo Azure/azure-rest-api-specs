@@ -370,6 +370,11 @@ export async function summarizeChecksImpl(
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
+  if (!impactAssessment) {
+    core.info("Bailing out early without taking any further action, PR impact assessment is not yet complete.")
+    return;
+  }
+
   core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
 
   let labelContext = await updateLabels(labelNames, impactAssessment);
