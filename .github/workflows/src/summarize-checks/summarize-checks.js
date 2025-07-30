@@ -26,7 +26,6 @@ import { PER_PAGE_MAX } from "../github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
-  processArmReviewLabels,
   processImpactAssessment,
   verRevApproval,
 } from "./labelling.js";
@@ -280,6 +279,12 @@ const EXCLUDED_CHECK_NAMES = [];
  */
 export default async function summarizeChecks({ github, context, core }) {
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+
+  if (!issue_number) {
+    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
+    return;
+  }
+
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -321,13 +326,7 @@ export async function summarizeChecksImpl(
 ) {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
-  // retrieve latest labels state
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  let labelNames = await getExistingLabels(github, owner, repo, issue_number);
 
   /** @type {[CheckRunData[], CheckRunData[], import("./labelling.js").ImpactAssessment | undefined]} */
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
@@ -339,9 +338,6 @@ export async function summarizeChecksImpl(
     issue_number,
     EXCLUDED_CHECK_NAMES,
   );
-
-  /** @type {string[]} */
-  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
@@ -410,72 +406,24 @@ export async function summarizeChecksImpl(
 }
 
 /**
- * A GraphQL query to GitHub API that returns all check runs for given commit, with "isRequired" field for given PR.
- *
- * If you want to see example response, copy the query body into this:
- * https://docs.github.com/en/graphql/overview/explorer
- * Example inputs:
- * resourceUrl: "https://github.com/test-repo-billy/azure-rest-api-specs/commit/c2789c5bde1b3f4fa34f76a8eeaaed479df23c4d"
- * prNumber: 2996
- *
- * Reference:
- * https://docs.github.com/en/graphql/reference/queries#resource
- * https://docs.github.com/en/graphql/guides/using-global-node-ids#3-do-a-direct-node-lookup-in-graphql
- * https://docs.github.com/en/graphql/reference/objects#checkrun
- * Rate limit:
- * https://docs.github.com/en/graphql/overview/resource-limitations#rate-limit
- * https://docs.github.com/en/graphql/reference/objects#ratelimit
- *
- * Note: here, for "checkRuns(first: ..)", maybe we should add a filter that filters to LATEST, per:
- * https://docs.github.com/en/graphql/reference/input-objects#checkrunfilter
- * https://docs.github.com/en/graphql/reference/enums#checkruntype
- **/
-/**
- * Returns a GraphQL query string for the given resource URL and PR number.
- *
- * @param {string} owner - The URL of the GitHub resource (commit).
- * @param {string} repo - The URL of the GitHub resource (commit).
- * @param {string} sha - targeted commit. context.pr!.headInfo.sha
- * @param {number} prNumber - The pull request number.
- * @returns {string} The GraphQL query string.
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @param {*} owner
+ * @param {*} repo
+ * @param {*} issue_number
+ * @return {Promise<string[]>}
  */
-function getGraphQLQuery(owner, repo, sha, prNumber) {
-  const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
-
-  return `
-    {
-      resource(url: "${resourceUrl}") {
-        ... on Commit {
-          checkSuites(first: 20) {
-            nodes {
-              workflowRun {
-                id
-                databaseId
-                workflow {
-                  name
-                }
-              }
-              checkRuns(first: 30) {
-                nodes {
-                  name
-                  status
-                  conclusion
-                  isRequired(pullRequestNumber: ${prNumber})
-                }
-              }
-            }
-          }
-        }
-      }
-      rateLimit {
-        limit
-        cost
-        used
-        remaining
-        resetAt
-      }
-    }
-  `;
+export async function getExistingLabels(github, owner, repo, issue_number) {
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner,
+    repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  /** @type {string[]} */
+  return labels.map((/** @type {{ name: string; }} */ label) => label.name);
 }
 
 // #endregion
@@ -518,30 +466,9 @@ export function updateLabels(existingLabels, impactAssessment) {
 
   if (impactAssessment) {
     console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-    // Merge impact assessment labels into the main labelContext
-    impactAssessment.labelContext.toAdd.forEach((label) => {
-      labelContext.toAdd.add(label);
-    });
-    impactAssessment.labelContext.toRemove.forEach((label) => {
-      labelContext.toRemove.add(label);
-    });
-  }
 
-  // this is the only labelling that was part of original pipelinebot logic
-  processArmReviewLabels(labelContext, existingLabels);
-
-  if (impactAssessment) {
     // will further update the label context if necessary
-    processImpactAssessment(
-      impactAssessment.targetBranch,
-      labelContext,
-      impactAssessment.resourceManagerRequired,
-      impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
-      impactAssessment.rpaasRpNotInPrivateRepo,
-      impactAssessment.isNewApiVersion,
-      impactAssessment.isDraft,
-    );
+    processImpactAssessment(labelContext, impactAssessment);
   }
 
   warnIfLabelSetsIntersect(labelContext.toAdd, labelContext.toRemove);
@@ -550,6 +477,111 @@ export function updateLabels(existingLabels, impactAssessment) {
 
 // #endregion
 // #region checks
+
+/**
+ * A GraphQL query to GitHub API that returns all check runs for given commit, with "isRequired" field for given PR.
+ *
+ * If you want to see example response, copy the query body into this:
+ * https://docs.github.com/en/graphql/overview/explorer
+ * Example inputs:
+ * resourceUrl: "https://github.com/test-repo-billy/azure-rest-api-specs/commit/c2789c5bde1b3f4fa34f76a8eeaaed479df23c4d"
+ * prNumber: 2996
+ *
+ * Reference:
+ * https://docs.github.com/en/graphql/reference/queries#resource
+ * https://docs.github.com/en/graphql/guides/using-global-node-ids#3-do-a-direct-node-lookup-in-graphql
+ * https://docs.github.com/en/graphql/reference/objects#checkrun
+ * Rate limit:
+ * https://docs.github.com/en/graphql/overview/resource-limitations#rate-limit
+ * https://docs.github.com/en/graphql/reference/objects#ratelimit
+ *
+ * Note: here, for "checkRuns(first: ..)", maybe we should add a filter that filters to LATEST, per:
+ * https://docs.github.com/en/graphql/reference/input-objects#checkrunfilter
+ * https://docs.github.com/en/graphql/reference/enums#checkruntype
+ **/
+/**
+ * Fetch all check suites for a commit with pagination
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} sha
+ * @param {number} prNumber
+ * @returns {Promise<any>} Complete GraphQL response with all check suites
+ */
+async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
+  const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
+  let allCheckSuites = [];
+  let hasNextPage = true;
+  let cursor = null;
+  let lastResponse = null;
+
+  while (hasNextPage) {
+    /** @type {string} */
+    const query = `
+      {
+        resource(url: "${resourceUrl}") {
+          ... on Commit {
+            checkSuites(first: 100${cursor ? `, after: "${cursor}"` : ""}) {
+              pageInfo {
+                hasNextPage
+                endCursor
+              }
+              nodes {
+                workflowRun {
+                  id
+                  databaseId
+                  workflow {
+                    name
+                  }
+                }
+                checkRuns(first: 100) {
+                  nodes {
+                    name
+                    status
+                    conclusion
+                    isRequired(pullRequestNumber: ${prNumber})
+                  }
+                }
+              }
+            }
+          }
+        }
+        rateLimit {
+          limit
+          cost
+          used
+          remaining
+          resetAt
+        }
+      }
+    `;
+
+    /** @type {any} */
+    const response = await github.graphql(query);
+    lastResponse = response;
+    core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
+
+    if (response.resource?.checkSuites?.nodes) {
+      allCheckSuites.push(...response.resource.checkSuites.nodes);
+      hasNextPage = response.resource.checkSuites.pageInfo.hasNextPage;
+      cursor = response.resource.checkSuites.pageInfo.endCursor;
+    } else {
+      hasNextPage = false;
+    }
+  }
+
+  // Return a response object that matches the original structure
+  return {
+    resource: {
+      checkSuites: {
+        nodes: allCheckSuites,
+      },
+    },
+    rateLimit: lastResponse?.rateLimit,
+  };
+}
+
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
@@ -582,7 +614,7 @@ export async function getCheckRunTuple(
   /** @type { import("./labelling.js").ImpactAssessment | undefined } */
   let impactAssessment = undefined;
 
-  const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
+  const response = await getAllCheckSuites(github, core, owner, repo, head_sha, prNumber);
   core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
   [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun] =
@@ -721,7 +753,6 @@ function extractRunsFromGraphQLResponse(response) {
       },
     );
   }
-
   return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
 // #endregion
