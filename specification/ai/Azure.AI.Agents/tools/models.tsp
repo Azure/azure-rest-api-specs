@@ -173,6 +173,17 @@ model MCPToolDefinition extends ToolDefinition {
   allowedTools?: string[];
 }
 
+@doc("The input definition information for a Computer Use tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'computer_use_preview'.")
+  type: "computer_use_preview";
+
+  @doc("The computer use tool parameters.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: ComputerUseToolParameters;
+}
+
 // Definition details: File Search
 
 /**
@@ -827,6 +838,10 @@ union AgentsNamedToolChoiceType {
   /** Tool type `mcp` */
   @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
+
+  /** Tool type `computer_use_preview` */
+  @added(Versions.v2025_05_15_preview)
+  computerUsePreview: "computer_use_preview",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -987,4 +1002,38 @@ model AzureFunctionStorageQueue {
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "queue_name")
   queueName: string;
+}
+
+@doc("The computer use tool parameters.")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseToolParameters {
+  @doc("The display width for the computer use tool.")
+  @encodedName("application/json", "display_width")
+  @minValue(1)
+  displayWidth: int32;
+
+  @doc("The display height for the computer use tool.")
+  @encodedName("application/json", "display_height")
+  @minValue(1)
+  displayHeight: int32;
+
+  @doc("The environment for the computer use tool.")
+  environment: ComputerUseEnvironment;
+}
+
+@doc("The environment types supported by the computer use tool.")
+union ComputerUseEnvironment {
+  string,
+
+  /** Windows environment */
+  windows: "windows",
+
+  /** Mac environment */
+  mac: "mac",
+
+  /** Linux environment */
+  linux: "linux",
+
+  /** Browser environment */
+  browser: "browser",
 }
