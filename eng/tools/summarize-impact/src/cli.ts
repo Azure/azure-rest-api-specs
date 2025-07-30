@@ -8,14 +8,13 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { join, resolve } from "path";
+import { join } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
-    const gitRoot = await getRootFolder(inputPath);
-    return resolve(gitRoot.trim());
+    return await getRootFolder(inputPath);
   } catch (error) {
     console.error(
       `Error: Unable to determine the root folder of the git repository.`,
@@ -133,19 +132,10 @@ export async function main() {
 
   let impact = await evaluateImpact(prContext, labelContext, mainSpecFolders);
 
-  // sets by default are not serializable, so we need to convert them to arrays
-  // before we can write them to the output file.
-  function setReplacer(_key: string, value: any) {
-    if (value instanceof Set) {
-      return [...value];
-    }
-    return value;
-  }
-
-  console.log("Evaluated impact: ", JSON.stringify(impact, setReplacer, 2));
+  console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 
   // Write to a temp file that can get picked up later.
   const summaryFile = join(process.cwd(), "summary.json");
-  fs.writeFileSync(summaryFile, JSON.stringify(impact, setReplacer, 2));
+  fs.writeFileSync(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
