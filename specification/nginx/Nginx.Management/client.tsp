@@ -8,6 +8,8 @@ using NGINX.NGINXPLUS;
 
 // Method name overrides
 @@clientName(Configurations.analyze, "analysis", "!csharp");
+@@clientName(Certificates.listByDeployment, "list", "!csharp");
+@@clientName(Configurations.listByDeployment, "list", "!csharp");
 
 // Model name overrides
 @@clientName(Certificate, "NginxCertificate", "!csharp");
@@ -55,10 +57,10 @@ using NGINX.NGINXPLUS;
   "NginxDeploymentPropertiesNginxAppProtect",
   "!csharp"
 );
-// @@clientName(AutoScaleSettings,
-//   "NginxDeploymentScalingPropertiesAutoScaleSettings",
-//   "!csharp"
-// );
+@@clientName(AutoScaleSettings,
+  "NginxDeploymentScalingPropertiesAutoScaleSettings",
+  "!csharp"
+);
 
 // Client location overrides for NginxDeployments operations
 @@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
