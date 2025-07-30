@@ -13,11 +13,8 @@ namespace Microsoft.HealthBot;
 /**
  * Azure Health Bot resource definition
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(HealthBotProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
-model HealthBot extends Foundations.TrackedResource {
+model HealthBot
+  is Azure.ResourceManager.TrackedResource<HealthBotProperties, true> {
   ...ResourceNameParameter<
     Resource = HealthBot,
     KeyName = "botName",
@@ -35,16 +32,7 @@ model HealthBot extends Foundations.TrackedResource {
    * The identity of the Azure Health Bot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   identity?: Identity;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The set of properties specific to Azure Health Bot resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: HealthBotProperties;
 }
 
 @armResourceOperations

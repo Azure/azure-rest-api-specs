@@ -641,6 +641,10 @@
       "type": "object",
       "description": "Azure Health Bot resource definition",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/HealthBotProperties",
+          "description": "The set of properties specific to Azure Health Bot resource."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the Azure Health Bot."
@@ -648,10 +652,6 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the Azure Health Bot."
-        },
-        "properties": {
-          "$ref": "#/definitions/HealthBotProperties",
-          "description": "The set of properties specific to Azure Health Bot resource."
         }
       },
       "required": [
