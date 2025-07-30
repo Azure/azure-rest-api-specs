@@ -320,6 +320,80 @@ using Microsoft.Storage;
 @@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
   "EnableNfsV3"
 );
-
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
-@@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
+
+@@clientLocation(BlobServices.blobContainersList, "BlobContainers");
+@@clientName(BlobServices.blobContainersList, "List");
+@@clientName(BlobContainers.lease::parameters.body, "parameters");
+@@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
+  "BlobContainers"
+);
+@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "parameters"
+);
+@@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy,
+  "BlobContainers"
+);
+@@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, "BlobContainers");
+@@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy,
+  "BlobContainers"
+);
+@@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+  "parameters"
+);
+@@clientLocation(FileServices.fileSharesList, "FileShares");
+@@clientName(FileServices.fileSharesList, "List");
+@@clientLocation(FileServiceUsageOperationGroup.getServiceUsage,
+  "FileServices"
+);
+@@clientLocation(FileServiceUsageOperationGroup.listServiceUsages,
+  "FileServices"
+);
+@@clientName(FileShares.lease::parameters.body, "parameters");
+@@clientLocation(QueueServices.queueList, "Queue");
+@@clientName(QueueServices.queueList, "List");
+@@clientLocation(StorageQueues.get, "Queue");
+@@clientLocation(StorageQueues.create, "Queue");
+@@clientLocation(StorageQueues.update, "Queue");
+@@clientLocation(StorageQueues.delete, "Queue");
+@@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
+@@clientLocation(StorageAccounts.storageTaskAssignmentsInstancesReportList,
+  "StorageTaskAssignmentsInstancesReport"
+);
+@@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
+@@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
+  "StorageAccounts"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.get,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.createOrUpdate,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.delete,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(ObjectReplicationPolicyOperationGroup.list,
+  "ObjectReplicationPolicies"
+);
+@@clientLocation(LocalUserOperationGroup.get, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.createOrUpdate, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.delete, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.list, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.listKeys, "LocalUsers");
+@@clientLocation(LocalUserOperationGroup.regeneratePassword, "LocalUsers");
+@@clientLocation(Tables.get, "Table");
+@@clientLocation(Tables.create, "Table");
+@@clientLocation(Tables.update, "Table");
+@@clientLocation(Tables.delete, "Table");
+@@clientLocation(Tables.list, "Table");
+@@clientLocation(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+  "StorageTaskAssignmentInstancesReport"
+);
+@@clientName(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+  "List"
+);
+@@clientLocation(SkusOperationGroup.list, "Skus");
+@@clientLocation(DeletedAccountsOperationGroup.list, "DeletedAccounts");
+@@clientLocation(UsagesOperationGroup.listByLocation, "Usages");
