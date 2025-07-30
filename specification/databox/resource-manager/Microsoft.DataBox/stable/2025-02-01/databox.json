@@ -3966,9 +3966,7 @@
           "readOnly": true
         },
         "jobStageDetails": {
-          "type": "object",
           "description": "Job Stage Details",
-          "additionalProperties": {},
           "readOnly": true
         },
         "delayInformation": {
@@ -4450,7 +4448,13 @@
           "type": "array",
           "description": "Preferences related to the Access Tier of storage accounts.",
           "items": {
-            "$ref": "#/definitions/StorageAccountAccessTier"
+            "type": "string",
+            "enum": [
+              "Archive"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         }
       }
@@ -5420,24 +5424,6 @@
       },
       "readOnly": true
     },
-    "StorageAccountAccessTier": {
-      "type": "string",
-      "description": "Storage account access tier.",
-      "enum": [
-        "Archive"
-      ],
-      "x-ms-enum": {
-        "name": "StorageAccountAccessTier",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Archive",
-            "value": "Archive",
-            "description": "Archive access tier."
-          }
-        ]
-      }
-    },
     "StorageAccountDetails": {
       "type": "object",
       "description": "Details for the storage account.",
@@ -5864,23 +5850,6 @@
       ],
       "x-ms-discriminator-value": "ValidateAddress"
     },
-    "ValidationCategory": {
-      "type": "string",
-      "enum": [
-        "JobCreationValidation"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationCategory",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "JobCreationValidation",
-            "value": "JobCreationValidation",
-            "description": "Identify request of pre-job creation validations."
-          }
-        ]
-      }
-    },
     "ValidationInputDiscriminator": {
       "type": "string",
       "description": "Identifies the type of validation request.",
@@ -5967,8 +5936,14 @@
       "description": "Minimum request requirement of any validation category.",
       "properties": {
         "validationCategory": {
-          "$ref": "#/definitions/ValidationCategory",
-          "description": "Identify the nature of validation."
+          "type": "string",
+          "description": "Identify the nature of validation.",
+          "enum": [
+            "JobCreationValidation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         },
         "individualRequestDetails": {
           "type": "array",
