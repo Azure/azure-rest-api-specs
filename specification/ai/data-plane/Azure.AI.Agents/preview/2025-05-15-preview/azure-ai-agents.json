@@ -6656,6 +6656,51 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "RunStepDeltaMCPObject": {
+      "type": "object",
+      "description": "Represents an invocation of mcp as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaMcpToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "RunStepDeltaMcpToolCall": {
+      "type": "object",
+      "description": "Represents the function data in a streaming run step MCP call.*",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of a response. *"
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for MCP call. *"
+        }
+      },
+      "required": [
+        "index",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
     "RunStepDeltaMessageCreation": {
       "type": "object",
       "description": "Represents a message creation within a streaming run step delta.",

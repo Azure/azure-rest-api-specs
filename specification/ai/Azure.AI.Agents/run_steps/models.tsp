@@ -266,6 +266,17 @@ model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
   toolCalls?: RunStepDeltaToolCall[];
 }
 
+/** Represents an invocation of mcp as part of a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaMCPObject extends RunStepDeltaDetail {
+  /** The object type, which is always "mcp". */
+  type: "mcp";
+
+  /** The collection of tool calls for the tool call detail item. */
+  @encodedName("application/json", "tool_calls")
+  toolCalls?: RunStepDeltaMcpToolCall[];
+}
+
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
@@ -311,6 +322,19 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   /** The Code Interpreter data for the tool call. */
   @encodedName("application/json", "code_interpreter")
   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
+}
+
+/** Represents the function data in a streaming run step MCP call.* */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "mcp".* */
+  type: "mcp";
+
+  /** The index of a response. * */
+  index: int32;
+
+  /** The arguments for MCP call. * */
+  arguments: string;
 }
 
 /** Represents the function data in a streaming run step delta's function tool call. */
