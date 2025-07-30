@@ -22,7 +22,7 @@
 import { extractInputs } from "../context.js";
 // import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
-import { PER_PAGE_MAX } from "../github.js";
+import { CheckConclusion, CheckStatus, PER_PAGE_MAX } from "../github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
@@ -125,14 +125,10 @@ import path from "path";
  */
 
 /**
- * @typedef {"pending" | "success" | "failure" | "neutral" | "cancelled" | "timed_out" | "action_required"} CheckRunStatus
- */
-
-/**
  * @typedef {Object} CheckRunResult
  * @property {string} name
  * @property {string} summary
- * @property {CheckRunStatus} result
+ * @property {"pending" | keyof typeof CheckConclusion} result
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -449,8 +445,9 @@ async function updateCheckRunStatus(github, core, owner, repo, head_sha, checkNa
   });
 
   // Determine status and conclusion based on the result
-  const status = checkResult.result === "pending" ? "in_progress" : "completed";
-  const conclusion = checkResult.result === "pending" ? undefined : checkResult.result;
+  const status = checkResult.result === "pending" ? CheckStatus.IN_PROGRESS : CheckStatus.COMPLETED;
+  const conclusion =
+    checkResult.result === "pending" ? undefined : CheckConclusion[checkResult.result];
 
   if (existingChecks.data.check_runs.length > 0) {
     // Update the existing check run
@@ -951,7 +948,7 @@ function getCommentBody(
   violatedRequiredLabelsRules,
 ) {
   let title = "Automated merging requirements are being evaluated";
-  /** @type {CheckRunStatus} */
+  /** @type {"pending" | keyof typeof CheckConclusion} */
   let status = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
 
@@ -964,7 +961,7 @@ function getCommentBody(
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
       title = "Some automated merging requirements are not met";
-      status = "failure";
+      status = "FAILURE";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -983,7 +980,7 @@ function getCommentBody(
           `<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.` +
           `<br/>If you want to proceed with merging this PR without fixing them, refer to ` +
           `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
-        status = "success";
+        status = "SUCCESS";
       }
     }
   } else if (requirementsMet) {
@@ -996,7 +993,7 @@ function getCommentBody(
       `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
       "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
     title = "Automated merging requirements are met";
-    status = "success";
+    status = "SUCCESS";
   } else {
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
