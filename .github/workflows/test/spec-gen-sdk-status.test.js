@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
 // @ts-check
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
+import fs from "fs";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import * as artifacts from "../src/artifacts.js";
 import * as github from "../src/github.js";
-import { createMockGithub, createMockCore } from "./mocks.js";
-import fs from "fs";
+import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("spec-gen-sdk-status", () => {
   let mockGithub;
@@ -22,6 +21,7 @@ describe("spec-gen-sdk-status", () => {
     // Setup specific mocks
     getAzurePipelineArtifactMock = vi
       .spyOn(artifacts, "getAzurePipelineArtifact")
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
         return {
           artifactData: JSON.stringify({
@@ -34,6 +34,7 @@ describe("spec-gen-sdk-status", () => {
 
     writeToActionsSummaryMock = vi
       .spyOn(github, "writeToActionsSummary")
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async (content, core) => {
         // Implementation that just returns
         return;
