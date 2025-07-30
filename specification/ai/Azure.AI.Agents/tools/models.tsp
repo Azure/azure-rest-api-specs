@@ -406,6 +406,28 @@ model RequiredMcpToolCall extends RequiredToolCall {
   server_label: string;
 }
 
+@doc("A representation of a requested call to a Computer Use tool, needed by the model to continue evaluation of a run.")
+@added(Versions.v2025_05_15_preview)
+model RequiredComputerUseToolCall extends RequiredToolCall {
+  @doc("The object type of the required tool call. Always 'computer_use_preview' for Computer Use tools.")
+  type: "computer_use_preview";
+
+  @doc("Detailed information about the computer use action to be executed.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: RequiredComputerUseToolCallDetails;
+}
+
+@doc("The detailed information for a computer use tool invocation.")
+@added(Versions.v2025_05_15_preview)
+model RequiredComputerUseToolCallDetails {
+  @doc("The action to be performed by the computer use tool.")
+  action: ComputerUseAction;
+
+  @doc("Safety checks that are pending acknowledgment by the developer.")
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks?: SafetyCheck[];
+}
+
 //
 // Tool calls -- present in run steps and provide information about tool execution
 //
@@ -1036,4 +1058,166 @@ union ComputerUseEnvironment {
 
   /** Browser environment */
   browser: "browser",
+}
+
+// specific actions for computer use tool
+
+@doc("An abstract representation of a computer use action.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model ComputerUseAction {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The type of computer use action.")
+  type: string;
+}
+
+@doc("A click action.")
+@added(Versions.v2025_05_15_preview)
+model ClickAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a click action, this property is always set to click.")
+  type: "click";
+
+  @doc("The x-coordinate where the click occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the click occurred.")
+  y: int32;
+
+  @doc("Indicates which mouse button was pressed during the click.")
+  button: MouseButton;
+}
+
+@doc("The mouse button types supported by click actions.")
+@added(Versions.v2025_05_15_preview)
+union MouseButton {
+  string,
+
+  /** Left mouse button */
+  left: "left",
+
+  /** Right mouse button */
+  right: "right",
+
+  /** Mouse wheel button */
+  wheel: "wheel",
+
+  /** Back mouse button */
+  back: "back",
+
+  /** Forward mouse button */
+  forward: "forward",
+}
+
+@doc("A double click action.")
+@added(Versions.v2025_05_15_preview)
+model DoubleClickAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a double click action, this property is always set to double_click.")
+  type: "double_click";
+
+  @doc("The x-coordinate where the double click occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the double click occurred.")
+  y: int32;
+}
+
+@doc("A drag action.")
+@added(Versions.v2025_05_15_preview)
+model DragAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a drag action, this property is always set to drag.")
+  type: "drag";
+
+  @doc("An array of coordinates representing the path of the drag action.")
+  path: CoordinatePoint[];
+}
+
+@doc("A coordinate point with x and y values.")
+@added(Versions.v2025_05_15_preview)
+model CoordinatePoint {
+  @doc("The x-coordinate.")
+  x: int32;
+
+  @doc("The y-coordinate.")
+  y: int32;
+}
+
+@doc("A collection of keypresses the model would like to perform.")
+@added(Versions.v2025_05_15_preview)
+model KeyPressAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a keypress action, this property is always set to keypress.")
+  type: "keypress";
+
+  @doc("The combination of keys the model is requesting to be pressed. This is an array of strings, each representing a key.")
+  keys: string[];
+}
+
+@doc("A mouse move action.")
+@added(Versions.v2025_05_15_preview)
+model MoveAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a move action, this property is always set to move.")
+  type: "move";
+
+  @doc("The x-coordinate to move to.")
+  x: int32;
+
+  @doc("The y-coordinate to move to.")
+  y: int32;
+}
+
+@doc("A screenshot action.")
+@added(Versions.v2025_05_15_preview)
+model ScreenshotAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a screenshot action, this property is always set to screenshot.")
+  type: "screenshot";
+}
+
+@doc("A scroll action.")
+@added(Versions.v2025_05_15_preview)
+model ScrollAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a scroll action, this property is always set to scroll.")
+  type: "scroll";
+
+  @doc("The x-coordinate where the scroll occurred.")
+  x: int32;
+
+  @doc("The y-coordinate where the scroll occurred.")
+  y: int32;
+
+  @doc("The horizontal scroll distance.")
+  @encodedName("application/json", "scroll_x")
+  scrollX: int32;
+
+  @doc("The vertical scroll distance.")
+  @encodedName("application/json", "scroll_y")
+  scrollY: int32;
+}
+
+@doc("An action to type in text.")
+@added(Versions.v2025_05_15_preview)
+model TypeAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a type action, this property is always set to type.")
+  type: "type";
+
+  @doc("The text to type.")
+  text: string;
+}
+
+@doc("A wait action.")
+@added(Versions.v2025_05_15_preview)
+model WaitAction extends ComputerUseAction {
+  @doc("Specifies the event type. For a wait action, this property is always set to wait.")
+  type: "wait";
+}
+
+@doc("Safety check that has been acknowledged by the developer.")
+@added(Versions.v2025_05_15_preview)
+model SafetyCheck {
+  @doc("The ID of the pending safety check.")
+  id: string;
+
+  @doc("The type of the pending safety check.")
+  code: string;
+
+  @doc("Details about the pending safety check.")
+  message: string;
 }
