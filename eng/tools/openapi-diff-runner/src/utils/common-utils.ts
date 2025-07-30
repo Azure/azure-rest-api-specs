@@ -1,5 +1,6 @@
-import { FilePosition } from "../types/message.js";
+import { readFile } from "node:fs/promises";
 import { Context } from "../types/breaking-change.js";
+import { FilePosition } from "../types/message.js";
 
 export function blobHref(repo: string, sha: string, file: string): string {
   return `https://github.com/${repo}/blob/${sha}/${file}`;
@@ -81,7 +82,10 @@ export function specificBranchHref(
   );
 }
 
-export function getVersionFromInputFile(filePath: string, withPreview = false): string {
+export async function getVersionFromInputFile(
+  filePath: string,
+  withPreview = false,
+): Promise<string> {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
 
   // Normalize path separators to forward slashes for consistent processing
@@ -111,16 +115,19 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
     }
   }
 
-  // If no regex match found, return the immediate folder name (parent directory of the file)
-  if (segments && segments.length > 1) {
-    // Get the folder name that contains the file (last segment before filename)
-    const folderName = segments[segments.length - 2];
-    if (folderName) {
-      return folderName;
-    }
+  let version = "";
+  // If no regex match found, try to read version from file content
+  try {
+    const fileContent = await readFile(filePath, "utf8");
+    const parsedContent = JSON.parse(fileContent);
+    version = parsedContent?.info?.version;
+  } catch (error) {
+    throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
   }
-
-  return "";
+  if (!version) {
+    throw new Error(`Version not found in file: ${filePath}`);
+  }
+  return version;
 }
 
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
