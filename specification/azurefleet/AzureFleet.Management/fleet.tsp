@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./operations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -664,5 +663,5 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2025_07_01_preview)
   @doc("Cancels an instance Fleet creation that is in progress.")
-  cancel is FleetResourceActionAsync<Fleet, void, Response = OkResponse>;
+  cancel is ArmResourceActionAsync<Fleet, void, Response = OkResponse>;
 }

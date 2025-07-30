@@ -42,11 +42,3 @@ model InnerError {
   @doc("The internal error message or exception dump.")
   errorDetail?: string;
 }
-
-@added(Versions.v2025_07_01_preview)
-@error
-@doc("Cloud error.")
-model CloudError {
-  @doc("Api error.")
-  error?: ApiError;
-}
