@@ -60,7 +60,15 @@ describe("Summarize Checks Tests", () => {
         'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
         "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
         'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>';
-      const expectedOutput = [expectedComment, "blocked"];
+      const expectedOutput = [
+        expectedComment,
+        {
+          name: "Some automated merging requirements are not met",
+          result: "FAILURE",
+          summary:
+            "❌ This PR cannot be merged because some requirements are not met. See the details.",
+        },
+      ];
 
       const requiredCheckRuns = [
         {
@@ -241,7 +249,11 @@ describe("Summarize Checks Tests", () => {
       const requiredCheckRuns = [];
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
-        "pending",
+        {
+          name: "Automated merging requirements are being evaluated",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
       ];
 
       const output = await createNextStepsComment(
@@ -263,7 +275,11 @@ describe("Summarize Checks Tests", () => {
       const fyiCheckRuns = [];
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
-        "success",
+        {
+          name: "Automated merging requirements are met",
+          result: "SUCCESS",
+          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
+        },
       ];
 
       const requiredCheckRuns = [
@@ -444,7 +460,11 @@ describe("Summarize Checks Tests", () => {
       const fyiCheckRuns = [];
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
-        "pending",
+        {
+          name: "Automated merging requirements are being evaluated",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
       ];
 
       const requiredCheckRuns = [
