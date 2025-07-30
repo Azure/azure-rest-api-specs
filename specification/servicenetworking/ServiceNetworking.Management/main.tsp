@@ -65,7 +65,7 @@ model FrontendProperties {
   mode?: Mode;
 }
 
-/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within Azure virtual network */
+/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within an Azure virtual network. */
 union Mode {
   string,
 
