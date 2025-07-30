@@ -8,6 +8,11 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
+@@clientName(Microsoft.ContainerService,
+  "ContainerServiceFleetMgmtClient",
+  "python"
+);
+
 @@clientName(Microsoft.ContainerService.APIServerAccessProfile,
   "ApiServerAccessProfile",
   "java"
