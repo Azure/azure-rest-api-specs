@@ -9,7 +9,7 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Defines visualization parameters for rendering data on a map.
  */
-model RenderOption {
+model RenderOptionModel {
   /**
    * Unique identifier for the render option.
    */
@@ -252,7 +252,7 @@ model MosaicInfo {
   /**
    * Available render options for visualizing the data.
    */
-  renderOptions: RenderOption[];
+  renderOptions: RenderOptionModel[];
 
   /**
    * Default map location when displaying this collection.

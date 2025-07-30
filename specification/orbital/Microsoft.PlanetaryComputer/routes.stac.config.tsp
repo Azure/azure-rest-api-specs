@@ -55,8 +55,8 @@ interface StacCollectionAssets {
       ...CreatedResponse;
 
       @body
-      body: StacCollection;
-    } | StacCollection
+      body: StacCollectionModel;
+    } | StacCollectionModel
   >;
   /**
    * Update an existing asset in a given collection.
@@ -112,8 +112,8 @@ interface StacCollectionAssets {
       ...CreatedResponse;
 
       @body
-      body: StacCollection;
-    } | StacCollection
+      body: StacCollectionModel;
+    } | StacCollectionModel
   >;
   /**
    * Delete an asset from a given collection.
@@ -382,7 +382,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       collectionId: string;
     },
-    RenderOption[] | NoContentResponse
+    RenderOptionModel[] | NoContentResponse
   >;
   /**
    * Add a render option for a given collection
@@ -406,14 +406,14 @@ interface StacCollectionRenderOptions {
        * Render option configuration to be created or updated.
        */
       @body
-      body: RenderOption;
+      body: RenderOptionModel;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: RenderOption;
-    } | RenderOption
+      body: RenderOptionModel;
+    } | RenderOptionModel
   >;
   /**
    * Get a render option for a given collection
@@ -441,7 +441,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       renderOptionId: string;
     },
-    RenderOption[]
+    RenderOptionModel[]
   >;
   /**
    * Update a render option for a given collection
@@ -473,14 +473,14 @@ interface StacCollectionRenderOptions {
        * Render option configuration to be created or updated.
        */
       @body
-      body: RenderOption;
+      body: RenderOptionModel;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: RenderOption;
-    } | RenderOption
+      body: RenderOptionModel;
+    } | RenderOptionModel
   >;
   /**
    * Delete a render option for a given collection

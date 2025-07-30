@@ -337,7 +337,7 @@ namespace StacItems {
      */
     @query
     datetime?: string,
-  ): ItemCollection | ErrorResponse;
+  ): ItemCollectionModel | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Fetch a single STAC Item")
@@ -349,7 +349,7 @@ namespace StacItems {
     @maxLength(500)
     @pattern(".*")
     itemId: string,
-  ): StacItem | ErrorResponse;
+  ): StacItemModel | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new STAC item or a set of items in a collection")
@@ -360,13 +360,13 @@ namespace StacItems {
     /**
      * STAC Item or ItemCollection
      *
-     * Represents a STAC Item or ItemCollection as defined by the STAC 1.0.0 standard.
+     * Represents a STAC Item or ItemCollectionModel as defined by the STAC 1.0.0 standard.
      *
      * **Item**: A GeoJSON Feature that represents a single spatiotemporal asset.
      * It includes metadata such as geometry, datetime, and links to related assets.
      * Example: A satellite image with its metadata.
      *
-     * **ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.
+     * **ItemCollectionModel**: A GeoJSON FeatureCollection that contains multiple Items.
      * It is used to group multiple related Items together, such as a collection of satellite images.
      *
      * This union allows the request body to accept either a single Item or a collection of Items.
@@ -406,7 +406,7 @@ namespace StacItems {
 
     @doc("STAC Item")
     @body
-    body: StacItem,
+    body: StacItemModel,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
@@ -443,7 +443,7 @@ namespace StacItems {
 
     @doc("STAC Item")
     @body
-    body: StacItem,
+    body: StacItemModel,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
@@ -886,7 +886,7 @@ interface StacCollectionOperations {
 
     @doc("Request collection body")
     @body
-    body: StacCollection,
+    body: StacCollectionModel,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
@@ -908,7 +908,7 @@ interface StacCollectionOperations {
   @summary("Get Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   get is StandardOperations.ResourceRead<
-    StacCollection,
+    StacCollectionModel,
     QueryParametersTrait<{
       /**
        * Whether to sign asset URLs in the response.
@@ -936,7 +936,7 @@ interface StacCollectionOperations {
 
     @doc("Request collection body")
     @body
-    body: StacCollection,
+    body: StacCollectionModel,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")

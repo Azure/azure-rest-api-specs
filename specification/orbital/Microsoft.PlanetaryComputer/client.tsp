@@ -75,19 +75,12 @@ namespace Customizations;
 @@clientName(ImageRequest, "ImageContent", "csharp");
 @@clientName(SearchPostRequest, "SearchPostContent", "csharp");
 
-// Models ending with "Collection" - rename to "Group"
-@@clientName(ItemCollection, "ItemGroup", "csharp");
-@@clientName(StacCollection, "StacGroup", "csharp");
-
 // Models ending with "Definition" - rename appropriately
 @@clientName(QueryableDefinition, "QueryableProperty", "csharp");
 @@clientName(Ingestions.IngestionDefinition,
   "IngestionConfiguration",
   "csharp"
 );
-
-// Models ending with "Option" - rename to "Config"
-@@clientName(RenderOption, "RenderConfig", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(Operation, "OperationInfo", "csharp");
