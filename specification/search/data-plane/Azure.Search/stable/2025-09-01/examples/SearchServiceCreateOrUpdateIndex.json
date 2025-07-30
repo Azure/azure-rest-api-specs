@@ -88,7 +88,8 @@
           "filterable": true,
           "sortable": true,
           "facetable": true,
-          "analyzer": "en.lucene"
+          "analyzer": "en.lucene",
+          "normalizer": "standard"
         },
         {
           "name": "ownerId",
@@ -176,6 +177,18 @@
           ],
           "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
           "name": "my_mapping"
+        }
+      ],
+      "normalizers": [
+        {
+          "tokenFilters": [
+            "asciifolding"
+          ],
+          "charFilters": [
+            "my_mapping"
+          ],
+          "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+          "name": "tagsNormalizer"
         }
       ],
       "similarity": {
@@ -424,6 +437,7 @@
             "facetable": true,
             "key": false,
             "analyzer": "en.lucene",
+            "normalizer": "standard",
             "synonymMaps": []
           },
           {
@@ -491,6 +505,18 @@
             ],
             "charFilters": [
               "html_strip"
+            ]
+          }
+        ],
+        "normalizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+            "name": "tagsNormalizer",
+            "tokenFilters": [
+              "asciifolding"
+            ],
+            "charFilters": [
+              "my_mapping"
             ]
           }
         ],
@@ -775,6 +801,7 @@
             "facetable": true,
             "key": false,
             "analyzer": "en.lucene",
+            "normalizer": "standard",
             "synonymMaps": []
           },
           {
@@ -842,6 +869,18 @@
             ],
             "charFilters": [
               "html_strip"
+            ]
+          }
+        ],
+        "normalizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+            "name": "tagsNormalizer",
+            "tokenFilters": [
+              "asciifolding"
+            ],
+            "charFilters": [
+              "my_mapping"
             ]
           }
         ],

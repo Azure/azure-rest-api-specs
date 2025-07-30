@@ -136,6 +136,7 @@
                 "facetable": true,
                 "key": false,
                 "analyzer": "en.lucene",
+                "normalizer": "standard",
                 "synonymMaps": []
               },
               {
@@ -203,6 +204,18 @@
                 ],
                 "charFilters": [
                   "html_strip"
+                ]
+              }
+            ],
+            "normalizers": [
+              {
+                "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+                "name": "tagsNormalizer",
+                "tokenFilters": [
+                  "asciifolding"
+                ],
+                "charFilters": [
+                  "my_mapping"
                 ]
               }
             ],
