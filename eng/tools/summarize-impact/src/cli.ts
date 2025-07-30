@@ -112,7 +112,7 @@ export async function main() {
   ).map((label: any) => label.name);
 
   // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
-  const mainSpecFolders = await getRPaaSFolderList(github, "Azure", "azure-rest-api-specs");
+  const mainSpecFolders = await getRPaaSFolderList(github, owner, repo);
 
   const labelContext: LabelContext = {
     present: new Set(labels),
