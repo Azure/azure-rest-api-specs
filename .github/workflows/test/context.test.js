@@ -333,9 +333,24 @@ describe("extractInputs", () => {
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [{ name: "issue-number=not-a-number" }] },
     });
-    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
-      /invalid issue-number/i,
-    );
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: NaN,
+      run_id: 456,
+    });
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=null" }] },
+    });
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: NaN,
+      run_id: 456,
+    });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
