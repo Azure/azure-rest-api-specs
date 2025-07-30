@@ -318,7 +318,7 @@ union ProductType {
   @doc("Azure Application")
   AzureApplication: "AzureApplication",
 
-  @doc("Container")
+  @doc("Enum Container")
   Container: "Container",
 
   @doc("Software as a Service")
@@ -1018,10 +1018,10 @@ model Meter {
 
 @doc("Term description parameters")
 model TermDescriptionParameter {
-  @doc("Parameter")
+  @doc("Description parameter")
   parameter?: string;
 
-  @doc("Value")
+  @doc("Parameter's value")
   value?: string;
 }
 

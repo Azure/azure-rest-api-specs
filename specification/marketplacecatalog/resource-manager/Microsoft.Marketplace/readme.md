@@ -53,6 +53,15 @@ suppressions:
 - code: ParametersInPointGet
   from: openapi.json
   reason: Required query parameters for proxy 
+- code: GetCollectionResponseSchema
+  from: openapi.json
+  reason: We returned a more detailed response that can't be aggregated in the listing API
+- code: AvoidAdditionalProperties
+  from: openapi.json
+  reason: Using records that generate this automatically
+- code: RequiredPropertiesMissingInResourceModel
+  from: openapi.json
+  reason: false positive on paging 
 ```
 
 
