@@ -40,6 +40,11 @@ model GoalResourceProperties {
   @visibility(Lifecycle.Read)
   exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
 
+  @doc("List of service groups of which this resource is memberof.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["serviceGroupId"])
+  serviceGroupMemberships?: ServiceGroupMembership[];
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
