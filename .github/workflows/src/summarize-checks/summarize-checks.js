@@ -460,7 +460,15 @@ export async function summarizeChecksImpl(
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
-export async function updateCommitStatus(github, core, owner, repo, head_sha, statusContext, checkResult) {
+export async function updateCommitStatus(
+  github,
+  core,
+  owner,
+  repo,
+  head_sha,
+  statusContext,
+  checkResult,
+) {
   // Map CheckRunResult status to commit status state
   /** @type {"pending" | "success" | "failure" | "error"} */
   let state;
@@ -478,7 +486,10 @@ export async function updateCommitStatus(github, core, owner, repo, head_sha, st
     repo,
     sha: head_sha,
     state: state,
-    description: checkResult.summary.length > 140 ? checkResult.summary.substring(0, 137) + "..." : checkResult.summary,
+    description:
+      checkResult.summary.length > 140
+        ? checkResult.summary.substring(0, 137) + "..."
+        : checkResult.summary,
     context: statusContext,
     // target_url: undefined, // Optional: add a URL if you want to link to more details
   });
@@ -486,46 +497,6 @@ export async function updateCommitStatus(github, core, owner, repo, head_sha, st
   core.info(
     `Created commit status for ${statusContext} with state: ${state} and description: ${checkResult.summary}`,
   );
-
-  // if (existingChecks.data.check_runs.length > 0) {
-  //   // Update the existing check run
-  //   const checkRunId = existingChecks.data.check_runs[0].id;
-
-  //   await github.rest.checks.update({
-  //     owner,
-  //     repo,
-  //     check_run_id: checkRunId,
-  //     name: checkName,
-  //     status,
-  //     conclusion,
-  //     output: {
-  //       title: checkResult.name,
-  //       summary: checkResult.summary,
-  //     },
-  //   });
-
-  //   core.info(
-  //     `Updated existing check run ID ${checkRunId} for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
-  //   );
-  // } else {
-  //   // Create a new check run
-  //   await github.rest.checks.create({
-  //     owner,
-  //     repo,
-  //     name: checkName,
-  //     head_sha,
-  //     status,
-  //     conclusion,
-  //     output: {
-  //       title: checkResult.name,
-  //       summary: checkResult.summary,
-  //     },
-  //   });
-
-  //   core.info(
-  //     `Created new check run for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
-  //   );
-  // }
 }
 
 /**
