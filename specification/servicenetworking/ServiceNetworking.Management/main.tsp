@@ -60,6 +60,20 @@ model FrontendProperties {
   /** Provisioning State of Traffic Controller Frontend Resource */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** Frontend Mode */
+  mode?: Mode;
+}
+
+/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within Azure virtual network */
+union Mode {
+  string,
+
+  /** Mode of Type Public */
+  Public: "Public",
+
+  /** Mode of Type Private */
+  Private: "Private",
 }
 
 //----------------------- Associations -----------------------
@@ -237,6 +251,218 @@ model IpAccessRulesSecurityPolicy {
   id: string;
 }
 
+//----------------------- PrivateEndpointConnection -----------------------
+/** PrivateEndpointConnection Subresource of Traffic Controller. */
+@parentResource(TrafficController)
+model PrivateEndpointConnection
+  is TrackedResource<PrivateEndpointConnectionProperties> {
+  /** Name of PrivateEndpointConnectionsName */
+  @key("PrivateEndpointConnectionName")
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateEndpointConnections")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Private Endpoint Connection Properties. */
+model PrivateEndpointConnectionProperties {
+  /** The resource of private end point. */
+  privateEndpoint?: PrivateEndpoint;
+
+  /** A collection of information about the state of the connection between service consumer and provider. */
+  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+
+  /** The provisioning state of the private endpoint connection resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** * Group ids */
+  groupIds?: string[];
+}
+
+/** * The Private Endpoint resource. */
+model PrivateEndpoint {
+  /** * The ARM identifier for Private Endpoint */
+  @visibility(Lifecycle.Read)
+  id?: string;
+}
+
+/** * A collection of information about the state of the connection between service consumer and provider. */
+model PrivateLinkServiceConnectionState {
+  /** * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
+  status?: PrivateEndpointServiceConnectionStatus;
+
+  /** * The reason for approval/rejection of the connection. */
+  description?: string;
+
+  /** * A message indicating if changes on the service provider require any updates on the consumer. */
+  actionsRequired?: string;
+}
+
+/** The private endpoint connection status. */
+union PrivateEndpointServiceConnectionStatus {
+  string,
+
+  /** Resource in Pending State */
+  Pending: "Pending",
+
+  /** Resource in Approved State */
+  Approved: "Approved",
+
+  /** Resource in Rejected State */
+  Rejected: "Rejected",
+}
+
+//----------------------- PrivateEndpointConnectionProxy -----------------------
+/** PrivateEndpointConnectionProxy Subresource of Traffic Controller. */
+@parentResource(TrafficController)
+model PrivateEndpointConnectionProxy
+  is TrackedResource<PrivateEndpointConnectionProxyProperties> {
+  /** Name of PrivateEndpointConnectionProxy */
+  @key("PrivateEndpointConnectionProxyName")
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateEndpointConnectionProxies")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Private Endpoint Connection Proxy Properties. */
+model PrivateEndpointConnectionProxyProperties {
+  /** Gets or sets the provisioning state of the private endpoint connection proxy. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Represent remote private endpoint information for the private endpoint connection proxy. */
+  remotePrivateEndpoint?: RemotePrivateEndpoint;
+}
+
+/** Represent remote private endpoint information for the private endpoint connection proxy. */
+model RemotePrivateEndpoint {
+  /** Gets or sets private link service proxy id. */
+  @minLength(1)
+  id: string;
+
+  /** Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow. */
+  @identifiers(#[])
+  privateLinkServiceConnections?: PrivateLinkServiceConnection[];
+
+  /** Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow. */
+  @identifiers(#[])
+  manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
+
+  /** Gets or sets the list of private link service proxies. */
+  @identifiers(#[])
+  privateLinkServiceProxies?: PrivateLinkServiceProxy[];
+
+  /** Gets or sets the list of Connection Details. This is the connection details for private endpoint. */
+  @identifiers(#[])
+  connectionDetails?: ConnectionDetails[];
+}
+
+/** Represents of an NRP private link service connection. */
+model PrivateLinkServiceConnection {
+  /** Gets or sets private link service connection name. */
+  name?: string;
+
+  /** Gets or sets group ids. */
+  groupIds?: string[];
+
+  /** Gets or sets the request message for the private link service connection. */
+  requestMessage?: string;
+}
+
+/** Represents NRP private link service proxy. */
+model PrivateLinkServiceProxy {
+  /** Gets or sets private link service proxy id. */
+  id?: string;
+
+  /** Represents Private link service connection state. */
+  remotePrivateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+
+  /** Represent remote private endpoint connection. */
+  remotePrivateEndpointConnection?: RemotePrivateEndpointConnection;
+
+  /** Gets or sets group connectivity information. */
+  @identifiers(#[])
+  groupConnectivityInformation?: GroupConnectivityInformation[];
+}
+
+/** Represent remote private endpoint connection. */
+model RemotePrivateEndpointConnection {
+  /** Gets or sets the remote private endpoint connection id. */
+  id?: string;
+}
+
+/** Represents of a connection's group information. */
+model GroupConnectivityInformation {
+  /** Gets or sets group id. */
+  groupId?: string;
+
+  /** Gets or sets member name. */
+  memberName?: string;
+
+  /** Gets or sets customer visible FQDNs. */
+  customerVisibleFqdns?: string[];
+
+  /** Gets or sets Internal Fqdn. */
+  internalFqdn?: string;
+
+  /** Gets or sets the redirect map id. */
+  redirectMapId?: string;
+
+  /** Gets or sets the private link service arm region. */
+  privateLinkServiceArmRegion?: string;
+}
+
+/** Private endpoint connection details at member level. */
+model ConnectionDetails {
+  /** Gets or sets id. */
+  id?: string;
+
+  /** Gets or sets private IP address. */
+  privateIpAddress?: string;
+
+  /** Gets or sets link identifier. */
+  linkIdentifier?: string;
+
+  /** Gets or sets group id. */
+  groupId?: string;
+
+  /** Gets or sets member name. */
+  memberName?: string;
+}
+
+//----------------------- PrivateLinkResource -----------------------
+/** PrivateLinkResource Subresource of Traffic Controller */
+@parentResource(TrafficController)
+model PrivateLinkResource is TrackedResource<PrivateLinkResourceProperties> {
+  /** Name of PrivateLinkResource */
+  @key("privateLinkResourceName")
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateLinkResources")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Represents private link resource properties. */
+model PrivateLinkResourceProperties {
+  /** Gets or sets the group id. */
+  groupId?: string;
+
+  /** Gets or sets the required member. This translates to how many Private IPs should be created for each privately linkable resource. */
+  requiredMembers?: string[];
+
+  /** Gets or sets the private DNS zone names. */
+  requiredZoneNames?: string[];
+
+  /** Gets or sets the provisioning state of the private link resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
 //----------------------- Traffic Controller -----------------------
 @resource("trafficControllers")
 model TrafficController is TrackedResource<TrafficControllerProperties> {
@@ -384,6 +610,46 @@ interface TrafficControllerInterface {
   delete is ArmResourceDeleteWithoutOkAsync<TrafficController>;
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
   listBySubscription is ArmListBySubscription<TrafficController>;
+}
+
+@armResourceOperations
+interface PrivateEndpointConnectionInterface {
+  get is ArmResourceRead<PrivateEndpointConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  listByTrafficController is ArmResourceListByParent<PrivateEndpointConnection>;
+}
+
+@armResourceOperations
+interface PrivateEndpointConnectionProxyInterface {
+  get is ArmResourceRead<PrivateEndpointConnectionProxy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnectionProxy,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    PrivateEndpointConnectionProxy,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PrivateEndpointConnectionProxy,
+      PrivateEndpointConnectionProxyProperties
+    >
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionProxy>;
+  listByTrafficController is ArmResourceListByParent<PrivateEndpointConnectionProxy>;
+  validate is ArmResourceActionSync<
+    PrivateEndpointConnectionProxy,
+    PrivateEndpointConnectionProxy,
+    PrivateEndpointConnectionProxy
+  >;
+}
+
+@armResourceOperations
+interface PrivateLinkResourceInterface {
+  get is ArmResourceRead<PrivateLinkResource>;
+  listByTrafficController is ArmResourceListByParent<PrivateLinkResource>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
