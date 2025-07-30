@@ -44,7 +44,6 @@ enum Versions {
   v2023_10_20: "2023-10-20",
 }
 
-// interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * This is the interface that implements the standard Azure Resource Manager operation that returns
  * all supported RP operations. You should have exactly one declaration for each
