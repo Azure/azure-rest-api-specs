@@ -6372,6 +6372,52 @@
         }
       }
     },
+    "RunStepDeltaAzureAISearchToolCall": {
+      "type": "object",
+      "description": "Represents the Azure AI Search in a streaming run step.",
+      "properties": {
+        "azure_ai_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "azureAISearch"
+        }
+      },
+      "required": [
+        "azure_ai_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "RunStepDeltaBingGroundingToolCall": {
+      "type": "object",
+      "description": "Represents the bing grounding tool call in a streaming run step.",
+      "properties": {
+        "bing_grounding": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingGrounding"
+        }
+      },
+      "required": [
+        "bing_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding"
+    },
     "RunStepDeltaChunk": {
       "type": "object",
       "description": "Represents a run step delta i.e. any changed fields on a run step during streaming.",
@@ -6497,6 +6543,26 @@
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
+    },
+    "RunStepDeltaDeepResearchToolCall": {
+      "type": "object",
+      "description": "Represents the Deep research in a streaming run step.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/RunStepDeepResearchToolCallDetails",
+          "description": "The details of DeepResearch tool call.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
     },
     "RunStepDeltaDetail": {
       "type": "object",
@@ -6636,6 +6702,49 @@
           "x-ms-client-name": "messageId"
         }
       }
+    },
+    "RunStepDeltaOpenAPIToolCall": {
+      "type": "object",
+      "description": "Represents the openapi tool call in a streaming run step. *",
+      "properties": {
+        "openapi": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "openAPI"
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
+    },
+    "RunStepDeltaOpenapiObject": {
+      "type": "object",
+      "description": "Represents an invocation of openapi as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaOpenAPIToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "RunStepDeltaToolCall": {
       "type": "object",
