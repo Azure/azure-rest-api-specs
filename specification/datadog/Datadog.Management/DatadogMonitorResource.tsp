@@ -11,12 +11,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Datadog;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(IdentityProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DatadogMonitorResource
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<MonitorProperties, true> {
   ...ResourceNameParameter<
     Resource = DatadogMonitorResource,
     KeyName = "monitorName",
@@ -26,11 +22,6 @@ model DatadogMonitorResource
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: MonitorProperties;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;

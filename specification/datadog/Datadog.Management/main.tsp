@@ -25,7 +25,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Azure.ResourceManager.Private;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.Datadog" })
@@ -52,21 +51,8 @@ enum Versions {
  * Azure Resource Manager service. It implements
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @armUpdateProviderNamespace
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationListResult> | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}

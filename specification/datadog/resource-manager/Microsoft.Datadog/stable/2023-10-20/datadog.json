@@ -1955,13 +1955,14 @@
     },
     "DatadogMonitorResource": {
       "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/ResourceSku"
-        },
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
           "description": "Properties specific to the monitor resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties"
