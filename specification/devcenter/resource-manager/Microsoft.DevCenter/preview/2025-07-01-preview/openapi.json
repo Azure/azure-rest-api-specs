@@ -2556,7 +2556,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CustomizationTaskListResult"
             }
@@ -2754,7 +2754,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevBoxDefinitionListResult"
             }
@@ -7242,7 +7242,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevBoxDefinitionListResult"
             }
@@ -9579,7 +9579,7 @@
           "type": "array",
           "description": "Parameters for the task.",
           "items": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         },
         "displayName": {
@@ -9602,14 +9602,15 @@
     },
     "CustomizationTaskListResult": {
       "type": "object",
-      "description": "The response of a CustomizationTask list operation.",
+      "description": "Paged collection of CustomizationTask items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The CustomizationTask items on this page",
           "items": {
             "$ref": "#/definitions/CustomizationTask"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9663,7 +9664,7 @@
         "modelAsString": false
       }
     },
-    "DefinitionParametersItem": {
+    "DefinitionParameters": {
       "type": "object",
       "properties": {
         "name": {
@@ -9714,14 +9715,15 @@
     },
     "DevBoxDefinitionListResult": {
       "type": "object",
-      "description": "The response of a DevBoxDefinition list operation.",
+      "description": "Paged collection of DevBoxDefinition items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The DevBoxDefinition items on this page",
           "items": {
             "$ref": "#/definitions/DevBoxDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9933,22 +9935,8 @@
           "description": "Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
         },
         "keyEncryptionKeyIdentity": {
-          "$ref": "#/definitions/DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity",
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
           "description": "The managed identity configuration used for key vault access."
-        }
-      }
-    },
-    "DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity": {
-      "type": "object",
-      "description": "The managed identity configuration used for key vault access.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CmkIdentityType",
-          "description": "The type of managed identity to use for key vault access."
-        },
-        "userAssignedIdentityResourceId": {
-          "type": "string",
-          "description": "For system assigned identity, this will be null. For user assigned identity, this should be the resource ID of the identity."
         }
       }
     },
@@ -10187,7 +10175,8 @@
           "description": "The DevCenterEncryptionSet items on this page",
           "items": {
             "$ref": "#/definitions/DevCenterEncryptionSet"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11198,7 +11187,7 @@
           "type": "array",
           "description": "Parameters for the referenced Image Definition.",
           "items": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         }
       },
@@ -11462,6 +11451,20 @@
             "value": "Disabled"
           }
         ]
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "The managed identity configuration used for key vault access.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CmkIdentityType",
+          "description": "The type of managed identity to use for key vault access."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "For system assigned identity, this will be null. For user assigned identity, this should be the resource ID of the identity."
+        }
       }
     },
     "LatestImageBuild": {

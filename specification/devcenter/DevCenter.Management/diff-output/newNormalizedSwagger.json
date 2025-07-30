@@ -6863,7 +6863,7 @@
         "parameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         },
         "displayName": {
@@ -6890,7 +6890,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/CustomizationTask"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -6933,7 +6934,7 @@
         }
       }
     },
-    "DefinitionParametersItem": {
+    "DefinitionParameters": {
       "type": "object",
       "properties": {
         "name": {
@@ -6993,7 +6994,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/DevBoxDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7222,26 +7224,7 @@
           "format": "uri"
         },
         "keyEncryptionKeyIdentity": {
-          "$ref": "#/definitions/DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity"
-        }
-      }
-    },
-    "DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "CmkIdentityType",
-            "modelAsString": true
-          }
-        },
-        "userAssignedIdentityResourceId": {
-          "type": "string"
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity"
         }
       }
     },
@@ -7420,7 +7403,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/DevCenterEncryptionSet"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8294,7 +8278,7 @@
         "parameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         }
       },
@@ -8503,6 +8487,25 @@
         "networkSettings": {
           "$ref": "#/definitions/ProjectNetworkSettings",
           "readOnly": true
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "CmkIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
         }
       }
     },

@@ -15,7 +15,7 @@
 | `definitions.DevBoxDefinitionProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.DevBoxDefinitionProperties.properties.validationStatus.$ref__deleted` | deleted | `vdi.json#/definitions/CatalogResourceValidationStatus` |
 | `definitions.DevCenterEncryptionSetProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
-| `definitions.DevCenterEncryptionSetUpdateProperties.properties.keyEncryptionKeyIdentity.$ref__added` | added | `#/definitions/DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity` |
+| `definitions.DevCenterEncryptionSetUpdateProperties.properties.keyEncryptionKeyIdentity.$ref__added` | added | `#/definitions/KeyEncryptionKeyIdentity` |
 | `definitions.DevCenterProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.EnvironmentDefinitionProperties.properties.validationStatus.$ref__deleted` | deleted | `vdi.json#/definitions/CatalogResourceValidationStatus` |
 | `definitions.EnvironmentType.properties.tags.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/Tags` |
@@ -196,6 +196,7 @@
 | `definitions.AttachedNetworkListResult.required__added` | added | `["value"]` |
 | `definitions.CatalogListResult.required__added` | added | `["value"]` |
 | `definitions.CustomizationTaskListResult.required__added` | added | `["value"]` |
+| `definitions.DefinitionParameters.required__added` | added | `["name","value"]` |
 | `definitions.DevBoxDefinitionListResult.required__added` | added | `["value"]` |
 | `definitions.DevBoxDefinitionProperties.required__deleted` | deleted | `["imageReference","sku"]` |
 | `definitions.DevCenterListResult.required__added` | added | `["value"]` |
@@ -307,12 +308,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/images'].get.parameters[0].pattern__added` | added | `^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$` |
 
-### Changes for `DefinitionParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DefinitionParameters__deleted` | deleted | `{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"str...` |
-
 ### Changes for `DevCenterUri`
 
 | Path | Change Type | Value |
@@ -331,23 +326,17 @@
 |------|------------|-------|
 | `definitions.UserRoleAssignment__deleted` | deleted | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
 
-### Changes for `DefinitionParametersItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DefinitionParametersItem__added` | added | `{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name...` |
-
-### Changes for `DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity__added` | added | `{"type":"object","properties":{"type":{"type":"string","enum":["SystemAssigned","UserAssigned"],"x-m...` |
-
 ### Changes for `ImageDefinitionBuildTaskParametersItem`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ImageDefinitionBuildTaskParametersItem__added` | added | `{"type":"object","properties":{"key":{"type":"string"},"value":{"type":"string"}},"required":["key",...` |
+
+### Changes for `KeyEncryptionKeyIdentity`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.KeyEncryptionKeyIdentity__added` | added | `{"type":"object","properties":{"type":{"type":"string","enum":["SystemAssigned","UserAssigned"],"x-m...` |
 
 ### Changes for `ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment`
 
@@ -424,10 +413,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CatalogListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.CustomizationTaskListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.DevBoxDefinitionListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.DevCenterListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.EncryptionSetListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.EnvironmentDefinitionListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.EnvironmentTypeListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.GalleryListResult.properties.value.readOnly__deleted` | deleted | `true` |
@@ -450,13 +436,15 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CustomizationTaskInstance.properties.parameters.items__added` | added | `{"$ref":"#/definitions/DefinitionParametersItem"}` |
-| `definitions.ImageDefinitionReference.properties.parameters.items__added` | added | `{"$ref":"#/definitions/DefinitionParametersItem"}` |
+| `definitions.CustomizationTaskInstance.properties.parameters.items__added` | added | `{"$ref":"#/definitions/DefinitionParameters"}` |
+| `definitions.DefinitionParameters.items__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}},"required":["name...` |
+| `definitions.ImageDefinitionReference.properties.parameters.items__added` | added | `{"$ref":"#/definitions/DefinitionParameters"}` |
 
 ### Changes for `properties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.DefinitionParameters.properties__added` | added | `{"name":{"type":"string"},"value":{"type":"string"}}` |
 | `definitions.DevCenterEncryptionSetUpdateProperties.properties.keyEncryptionKeyIdentity.properties__deleted` | deleted | `{"type":{"$ref":"#/definitions/CmkIdentityType","description":"The type of managed identity to use f...` |
 | `definitions.ImageDefinitionBuildTask.properties.parameters.items.properties__deleted` | deleted | `{"key":{"type":"string"},"value":{"type":"string"}}` |
 | `definitions.ProjectEnvironmentTypeUpdateProperties.properties.creatorRoleAssignment.properties__deleted` | deleted | `{"roles":{"type":"object","description":"A map of roles to assign to the environment creator.","addi...` |
@@ -516,6 +504,7 @@
 | `definitions.AttachedNetworkConnection.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.Catalog.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.CatalogSyncError.properties.errorDetails.items.$ref` | `vdi.json#/definitions/CatalogErrorDetails` | `#/definitions/CatalogErrorDetails` |
+| `definitions.DefinitionParameters.type` | `array` | `object` |
 | `definitions.DevBoxDefinitionProperties.properties.activeImageReference.$ref` | `vdi.json#/definitions/ImageReference` | `#/definitions/ImageReference` |
 | `definitions.DevBoxDefinitionProperties.properties.imageValidationErrorDetails.$ref` | `vdi.json#/definitions/ImageValidationErrorDetails` | `#/definitions/ImageValidationErrorDetails` |
 | `definitions.DevBoxDefinitionUpdate.allOf[0].$ref` | `commonDefinitions.json#/definitions/TrackedResourceUpdate` | `#/definitions/TrackedResourceUpdate` |

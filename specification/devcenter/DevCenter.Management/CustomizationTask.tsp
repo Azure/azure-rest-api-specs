@@ -82,7 +82,8 @@ interface CustomizationTasks {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = CustomizationTaskListResult
   >;
 
   /**

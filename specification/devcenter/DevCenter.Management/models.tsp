@@ -690,6 +690,8 @@ enum DaysOfWeek {
   Sunday,
 }
 
+model DevCenterListResult is Azure.Core.Page<DevCenter>;
+
 /**
  * Properties of the devcenter.
  */
@@ -865,13 +867,13 @@ model DevCenterEncryptionSetUpdateProperties {
   /**
    * The managed identity configuration used for key vault access.
    */
-  keyEncryptionKeyIdentity?: DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity;
+  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
 }
 
 /**
  * The managed identity configuration used for key vault access.
  */
-model DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity {
+model KeyEncryptionKeyIdentity {
   /**
    * The type of managed identity to use for key vault access.
    */
@@ -1882,6 +1884,8 @@ model ProjectEnvironmentTypeUpdate {
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
+model DevBoxDefinitionListResult is Azure.Core.Page<DevBoxDefinition>;
+
 /**
  * Properties of a Dev Box definition.
  */
@@ -2099,6 +2103,8 @@ model CheckScopedNameAvailabilityRequest {
   scope?: string;
 }
 
+model CustomizationTaskListResult is Azure.Core.Page<CustomizationTask>;
+
 /**
  * Properties of a Task.
  */
@@ -2257,7 +2263,7 @@ model CustomizationTaskInstance {
   /**
    * Parameters for the task.
    */
-  parameters?: DefinitionParametersItem[];
+  parameters?: DefinitionParameters[];
 
   /**
    * Display name to help differentiate multiple instances of the same task.
@@ -2276,7 +2282,7 @@ model CustomizationTaskInstance {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model DefinitionParametersItem {
+model DefinitionParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   name: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2295,7 +2301,7 @@ model ImageDefinitionReference {
   /**
    * Parameters for the referenced Image Definition.
    */
-  parameters?: DefinitionParametersItem[];
+  parameters?: DefinitionParameters[];
 }
 
 /**
@@ -2982,3 +2988,7 @@ model EndpointDetail {
 }
 @@visibility(AllowedEnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(AttachedNetworkListResult.value, Lifecycle.Read);
+@@visibility(CustomizationTaskListResult.value, Lifecycle.Read);
+@@visibility(DevBoxDefinitionListResult.value, Lifecycle.Read);
+@@visibility(DevCenterListResult.value, Lifecycle.Read);
+@@visibility(EncryptionSetListResult.value, Lifecycle.Read);

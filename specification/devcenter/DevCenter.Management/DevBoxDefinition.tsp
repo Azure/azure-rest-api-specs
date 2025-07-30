@@ -103,7 +103,8 @@ interface DevBoxDefinitions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DevBoxDefinitionListResult
   >;
 }
 @armResourceOperations
@@ -158,7 +159,8 @@ interface DevBoxDefinitionOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DevBoxDefinitionListResult
   >;
 }
 

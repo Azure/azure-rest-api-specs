@@ -2877,24 +2877,6 @@
     }
   },
   "definitions": {
-    "DefinitionParameters__deleted": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "value"
-        ]
-      }
-    },
     "DevCenterUri__deleted": {
       "type": "string",
       "readOnly": true
@@ -2922,10 +2904,10 @@
       },
       "x-ms-client-name": "userRoleAssignmentValue"
     },
-    "DefinitionParametersItem__added": {
+    "ImageDefinitionBuildTaskParametersItem__added": {
       "type": "object",
       "properties": {
-        "name": {
+        "key": {
           "type": "string"
         },
         "value": {
@@ -2933,11 +2915,11 @@
         }
       },
       "required": [
-        "name",
+        "key",
         "value"
       ]
     },
-    "DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity__added": {
+    "KeyEncryptionKeyIdentity__added": {
       "type": "object",
       "properties": {
         "type": {
@@ -2955,21 +2937,6 @@
           "type": "string"
         }
       }
-    },
-    "ImageDefinitionBuildTaskParametersItem__added": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
     },
     "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment__added": {
       "type": "object",
@@ -3190,7 +3157,7 @@
           "$ref__deleted": "#/definitions/DefinitionParameters",
           "type__added": "array",
           "items__added": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         }
       }
@@ -3198,12 +3165,7 @@
     "CustomizationTaskListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "CustomizationTaskProperties": {
       "properties": {
@@ -3223,15 +3185,43 @@
         }
       }
     },
+    "DefinitionParameters": {
+      "items__deleted": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "properties__added": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required__added": [
+        "name",
+        "value"
+      ],
+      "type": {
+        "__old": "array",
+        "__new": "object"
+      }
+    },
     "DevBoxDefinitionListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "DevBoxDefinitionProperties": {
       "required__deleted": [
@@ -3395,7 +3385,7 @@
               "description": "For system assigned identity, this will be null. For user assigned identity, this should be the resource ID of the identity."
             }
           },
-          "$ref__added": "#/definitions/DevCenterEncryptionSetUpdatePropertiesKeyEncryptionKeyIdentity"
+          "$ref__added": "#/definitions/KeyEncryptionKeyIdentity"
         }
       }
     },
@@ -3478,12 +3468,7 @@
     "EncryptionSetListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "EncryptionSetUpdate": {
       "properties": {
@@ -3802,7 +3787,7 @@
           "$ref__deleted": "#/definitions/DefinitionParameters",
           "type__added": "array",
           "items__added": {
-            "$ref": "#/definitions/DefinitionParametersItem"
+            "$ref": "#/definitions/DefinitionParameters"
           }
         }
       }
