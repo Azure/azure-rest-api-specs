@@ -668,25 +668,25 @@ model CatalogModelExternalLink {
 @doc("Audience enumeration for data products.")
 union AudienceEnum {
   @doc("Data Engineer audience.")
-  DataEngineer: "Data Engineer",
+  DataEngineer: "DataEngineer",
 
   @doc("BI Engineer audience.")
-  BIEngineer: "BI Engineer",
+  BIEngineer: "BIEngineer",
 
   @doc("Data Analyst audience.")
-  DataAnalyst: "Data Analyst",
+  DataAnalyst: "DataAnalyst",
 
   @doc("Data Scientist audience.")
-  DataScientist: "Data Scientist",
+  DataScientist: "DataScientist",
 
   @doc("Business Analyst audience.")
-  BusinessAnalyst: "Business Analyst",
+  BusinessAnalyst: "BusinessAnalyst",
 
   @doc("Software Engineer audience.")
-  SoftwareEngineer: "Software Engineer",
+  SoftwareEngineer: "SoftwareEngineer",
 
   @doc("Business User audience.")
-  BusinessUser: "Business User",
+  BusinessUser: "BusinessUser",
 
   @doc("Executive audience.")
   Executive: "Executive",

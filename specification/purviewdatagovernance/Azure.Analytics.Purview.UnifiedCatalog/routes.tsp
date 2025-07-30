@@ -967,7 +967,7 @@ op AddRelatedEntityAsync is Foundations.Operation<
     @bodyRoot
     termRelation: TermRelationship;
   },
-  TermRelationshipResponse
+  TermRelationship
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
