@@ -1,6 +1,6 @@
 // @ts-check
 
-import { PER_PAGE_MAX } from "./github.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -12,9 +12,9 @@ import { getIssueNumber } from "./issues.js";
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
  *
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
- * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }>}
  */
 export async function extractInputs(github, context, core) {
@@ -25,7 +25,9 @@ export async function extractInputs(github, context, core) {
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
-  core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
+  if (core.isDebug()) {
+    core.debug(`context: ${JSON.stringify(context)}`);
+  }
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
@@ -196,22 +198,23 @@ export async function extractInputs(github, context, core) {
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
       for (const artifactName of artifactNames) {
-        // If artifactName has format "issue-number=number", set issue_number
-        // Else, if artifactName has format "issue-number=other-string", throw an error
+        // If artifactName has format "issue-number=positive-integer", set issue_number=value
+        // Else, if artifactName has format "issue-number=other-string", warn and set issue_number=NaN
+        // - Workflows should probably only set "issue-number" to positive integers, but sometimes set it to "null"
         // Else, if artifactName does not start with "issue-number=", ignore it
         const firstEquals = artifactName.indexOf("=");
         if (firstEquals !== -1) {
           const key = artifactName.substring(0, firstEquals);
-          const value = artifactName.substring(firstEquals + 1);
-
           if (key === "issue-number") {
+            const value = artifactName.substring(firstEquals + 1);
             const parsedValue = Number.parseInt(value);
-            if (parsedValue) {
+            if (parsedValue > 0) {
               issue_number = parsedValue;
-              continue;
             } else {
-              throw new Error(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
+              core.info(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
+              issue_number = NaN;
             }
+            continue;
           }
         }
       }
