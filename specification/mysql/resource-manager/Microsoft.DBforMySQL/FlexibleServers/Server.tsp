@@ -98,7 +98,7 @@ interface Servers {
     void,
     OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader>,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -118,7 +118,7 @@ interface Servers {
     ServerRestartParameter,
     OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader>,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -129,7 +129,7 @@ interface Servers {
     void,
     OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader>,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -140,7 +140,7 @@ interface Servers {
     void,
     OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader>,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -152,7 +152,7 @@ interface Servers {
     ServerGtidSetParameter,
     OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader>,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
