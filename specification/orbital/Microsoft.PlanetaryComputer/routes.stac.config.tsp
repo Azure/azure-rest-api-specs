@@ -49,7 +49,7 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: FormContent;
     },
     {
       ...CreatedResponse;
@@ -106,7 +106,7 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: FormContent;
     },
     {
       ...CreatedResponse;

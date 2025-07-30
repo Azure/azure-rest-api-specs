@@ -304,16 +304,16 @@ model BoundsResponse {
 /**
  * GeoJSON Feature object containing rio-tiler model information
  */
-model FeaturePolygonDictStrRioTilerModelsInfo {
+model TilerInfoGeoJsonFeature {
   /**
    * GeoJSON type identifier
    */
-  type: FeaturePolygonDictStrRioTilerModelsInfoType;
+  type: FeatureType;
 
   /**
    * Geometry object defining the feature's shape
    */
-  geometry: GeoJson;
+  geometry: Geometry;
 
   /**
    * Properties
@@ -460,8 +460,8 @@ model AssetQueryParameters {
    * Per asset band indexes (coma separated indexes)
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query(#{ explode: true })
   @query("asset_bidx")
+  @query(#{ explode: true })
   assetBidx?: string[];
 
   /**

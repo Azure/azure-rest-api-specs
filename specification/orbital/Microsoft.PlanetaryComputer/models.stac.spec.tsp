@@ -1,10 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.common.geojson.tsp";
-import "./models.common.cql.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -96,6 +94,10 @@ union QueryableDefinitionDataType {
   string,
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "JSON Schema requires union types."
+@doc("JSON Schema structure for STAC Queryables")
+model JsonSchema is Record<unknown>;
+
 /**
  * Represents the GeoJSON feature collection type for STAC item collections.
  */
@@ -172,6 +174,22 @@ model ConformanceClasses {
 }
 
 /**
+ * Represent a CQL2 query
+ *
+ * https://github.com/stac-api-extensions/filter
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+model CqlFilter is Record<unknown>;
+
+/**
+ * Represent a STAC query
+ *
+ * https://github.com/stac-api-extensions/query
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+model StacQuery is Record<unknown>;
+
+/**
  * Search model.
  *
  * Overrides the validation for datetime from the base request model.
@@ -197,7 +215,7 @@ model SearchPostRequest {
   /**
    * GeoJSON geometry for spatial filtering.
    */
-  intersects?: GeoJson;
+  intersects?: Geometry;
 
   /**
    * Temporal filter in RFC 3339 format, can be a single time or range.
@@ -213,8 +231,11 @@ model SearchPostRequest {
 
   /**
    * Conf
+   *
+   * Overrides datetime validation from the base request model.
    */
-  conf?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC conf requires union types."
+  conf?: Record<unknown>;
 
   /**
    * Whether to sign asset URLs in the response.
@@ -227,32 +248,35 @@ model SearchPostRequest {
   duration?: int32;
 
   /**
-   * https://github.com/stac-api-extensions/query
+   * STAC Query
    *
-   * Query
+   * See the [STAC Query Extension](https://github.com/stac-api-extensions/query).
    */
-  query?: Record<StringRecord>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
+  query?: StacQuery;
 
   /**
-   * https://github.com/stac-api-extensions/sort
-   *
    * Sort criteria for the search results.
+   *
+   * See the [STAC Sort Extension](https://github.com/stac-api-extensions/sort).
    */
-  sortby?: SortExtension[];
+  @encodedName("application/json", "sortby")
+  sortBy?: SortExtension[];
 
   /**
-   * https://github.com/stac-api-extensions/fields
+   * Specifies which fields to include or exclude in the STAC search results.
    *
-   * Specifies which fields to include or exclude in the response.
+   * See the [STAC Fields Extension](https://github.com/stac-api-extensions/fields).
    */
   fields?: SearchPostRequestFields[];
 
   /**
-   * https://github.com/stac-api-extensions/filter
+   * CQL2 Filter
    *
-   * Filter
+   * See the [STAC Filter Extension](https://github.com/stac-api-extensions/filter).
    */
-  filter?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  filter?: CqlFilter;
 
   /**
    * Coordinate reference system for the filter.
@@ -332,6 +356,12 @@ model FeatureCollections {
 }
 
 /**
+ * Represents a collection summary
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacCollectionSummaries is Record<unknown>;
+
+/**
  *
  * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md
  *
@@ -408,11 +438,12 @@ model StacCollection {
   providers?: Provider[];
 
   /**
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#summaries
-   *
    * Summaries
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  summaries?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  summaries?: StacCollectionSummaries;
 }
 
 /**
@@ -490,18 +521,16 @@ model Provider {
  */
 model Extent {
   /**
-   *
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object
-   *
    * Spatial extent defined by bounding boxes.
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
   spatial: SpatialExtent;
 
   /**
-   *
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#temporal-extent-object
-   *
    * Temporal extent defined by time intervals.
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
   temporal: TimeInterval;
 }
@@ -535,24 +564,8 @@ model TimeInterval {
 /**
  * QueryableDefinitionType
  */
-model QueryableDefinitionType {
-  /**
-   * Whether to create a database index for this property.
-   */
-  @encodedName("application/json", "create_index")
-  createIndex?: boolean;
-
-  /**
-   * Data type of the queryable property.
-   */
-  @encodedName("application/json", "data_type")
-  dataType?: QueryableDefinitionDataType = QueryableDefinitionDataType.string;
-
-  /**
-   * Description
-   */
-  description?: string;
-}
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model QueryableDefinitionType is Record<unknown>;
 
 /**
  * Definition of a queryable field for STAC API filtering.
@@ -567,6 +580,7 @@ model QueryableDefinition {
   /**
    * Metadata for the queryable field.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
   definition: QueryableDefinitionType;
 
   /**
@@ -606,14 +620,55 @@ model ContextExtension {
 }
 
 /**
+ * Enum discriminator for STAC item and collection types.
+ */
+union StacModelType {
+  string,
+
+  /**
+   * GeoJSON Feature type.
+   */
+  Feature: "Feature",
+
+  /**
+   * GeoJSON FeatureCollection type.
+   */
+  FeatureCollection: "FeatureCollection",
+}
+
+/**
+ * Base type for STAC items and collections with discriminator.
+ */
+@discriminator("type")
+model StacItemOrItemCollection {
+  /**
+   * The type discriminator for STAC resources.
+   */
+  type: StacModelType;
+
+  /**
+   * Stac Version
+   */
+  @minLength(1)
+  @encodedName("application/json", "stac_version")
+  stacVersion?: string = "1.0.0";
+
+  /**
+   * Links to related resources and endpoints.
+   */
+  links?: Link[];
+
+  ...MicrosoftStacProperties;
+  ...StacExtensionsList;
+}
+
+/**
  * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
  */
 @resource("items")
 @parentResource(StacCollection)
-model StacItem {
+model StacItem extends StacItemOrItemCollection {
   ...FeatureBase;
-  ...MicrosoftStacProperties;
-  ...StacExtensionsList;
 
   /**
    * Unique identifier for the feature
@@ -623,11 +678,9 @@ model StacItem {
   id: string;
 
   /**
-   * Stac Version
+   * GeoJSON type identifier for Feature
    */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
+  type: StacModelType.Feature;
 
   /**
    * ID of the STAC collection this item belongs to.
@@ -639,11 +692,6 @@ model StacItem {
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
   properties: ItemProperties;
-
-  /**
-   * Links to related resources and endpoints.
-   */
-  links: Link[];
 
   /**
    * Assets
@@ -707,14 +755,11 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollection {
-  ...MicrosoftStacProperties;
-  ...StacExtensionsList;
-
+model ItemCollection extends StacItemOrItemCollection {
   /**
    * GeoJSON FeatureCollection type.
    */
-  type: ItemCollectionType;
+  type: StacModelType.FeatureCollection;
 
   /**
    * Array of STAC Items in the collection.
@@ -725,18 +770,6 @@ model ItemCollection {
    * Bounding box of all items in format [west, south, east, north].
    */
   bbox?: float64[];
-
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * Links to related resources and endpoints.
-   */
-  links?: Link[];
 
   /**
    * Context information for the search response.
@@ -879,7 +912,8 @@ model Link {
   /**
    * For POST requests, the resource can specify the HTTP body as a JSON object.
    */
-  body?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  body?: Record<unknown>;
 
   /**
    * Indicates whether the client is expected to merge the body value into the current request body before following the link.
@@ -888,12 +922,6 @@ model Link {
    */
   merge?: boolean = false;
 }
-
-/**
- * Represents a string record.
- */
-@doc("String record.")
-model StringRecord is Record<string>;
 
 /**
  * MIME types for links.

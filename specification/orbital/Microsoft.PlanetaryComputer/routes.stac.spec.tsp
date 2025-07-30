@@ -5,7 +5,6 @@ import "./models.stac.spec.tsp";
 import "./routes.common.tsp";
 
 using TypeSpec.Http;
-using Azure.Core.Traits;
 namespace Microsoft.PlanetaryComputer;
 
 interface StacLandingPages {
@@ -47,19 +46,22 @@ interface StacSearchOperations {
        * List of Collection IDs to include in the search. Only items in these collections will be searched.
        */
       @query("collections")
-      collections?: string;
+      @query(#{ explode: true })
+      collections?: string[];
 
       /**
        * Array of Item IDs to return specific items.
        */
       @query("ids")
-      ids?: string;
+      @query(#{ explode: true })
+      ids?: string[];
 
       /**
        * Bounding box for spatial filtering in format [west, south, east, north].
        */
       @query("bbox")
-      bbox?: string[];
+      @query(#{ explode: true })
+      bbox?: float64[];
 
       /**
        * GeoJSON geometry for spatial filtering.
@@ -101,7 +103,7 @@ interface StacSearchOperations {
        * Sort order for items. Format is property name prefixed with "+" for ascending or "-" for descending.
        */
       @query("sortby")
-      sortby?: string;
+      sortBy?: string;
 
       /**
        * Determines which fields to include in the response. Format is comma-separated field names with "-" prefix to exclude fields.
@@ -154,7 +156,7 @@ interface StacQueryables {
   @get
   getAll is Azure.Core.Foundations.Operation<
     {},
-    QueryableDefinition[] | NoContentResponse
+    JsonSchema | NoContentResponse
   >;
   /**
    * Delete queryables by name for specified collection.
@@ -202,7 +204,7 @@ interface StacQueryables {
       @pattern(".*")
       collectionId: string;
     },
-    QueryableDefinition[] | NoContentResponse
+    JsonSchema | NoContentResponse
   >;
   /**
    * Set queryables for a collection given a list of queryable definitions

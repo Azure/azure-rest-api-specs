@@ -566,10 +566,9 @@ model GeoJsonStatisticsItemCollectionResponse {
   links?: Link[];
 
   /**
-   *
-   * https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification
-   *
    * Pagination context for the response
+   *
+   * See the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)
    */
   context?: ContextExtension;
 }

@@ -77,9 +77,9 @@ model TileMatrixSet {
 model TileMatrixSetBoundingBox is TmsBoundingBox;
 
 /**
- * https://github.com/opengeospatial/2D-Tile-Matrix-Set/blob/master/schemas/tms/2.0/json/2DBoundingBox.json
- *
  * Bounding box defining the spatial extent in a specific coordinate reference system
+
+ * See the [2D Bounding Box Schema](https://github.com/opengeospatial/2D-Tile-Matrix-Set/blob/master/schemas/tms/2.0/json/2DBoundingBox.json).
  */
 model TmsBoundingBox {
   /**
@@ -93,7 +93,7 @@ model TmsBoundingBox {
   upperRight: string[];
 
   /**
-   * Coordinate reference system identifier (e.g., 'http://www.opengis.net/def/crs/EPSG/0/3857')
+   * Coordinate reference system identifier
    */
   crs?: string;
 
