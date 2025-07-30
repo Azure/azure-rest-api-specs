@@ -130,19 +130,10 @@ export async function main() {
 
   let impact = await evaluateImpact(prContext, labelContext);
 
-  // sets by default are not serializable, so we need to convert them to arrays
-  // before we can write them to the output file.
-  function setReplacer(_key: string, value: any) {
-    if (value instanceof Set) {
-      return [...value];
-    }
-    return value;
-  }
-
-  console.log("Evaluated impact: ", JSON.stringify(impact, setReplacer, 2));
+  console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 
   // Write to a temp file that can get picked up later.
   const summaryFile = join(process.cwd(), "summary.json");
-  fs.writeFileSync(summaryFile, JSON.stringify(impact, setReplacer, 2));
+  fs.writeFileSync(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
