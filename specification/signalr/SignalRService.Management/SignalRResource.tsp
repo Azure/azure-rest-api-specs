@@ -60,7 +60,8 @@ interface SignalRResources {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SignalRResource,
-    Response = ArmResourceUpdatedResponse<SignalRResource> | ArmResourceCreatedResponse<SignalRResource> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SignalRResource> | ArmResourceCreatedResponse<SignalRResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -110,7 +111,8 @@ interface SignalRResources {
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
-    ArmResponse<SignalRKeys> | (ArmAcceptedLroResponse & {
+    ArmResponse<SignalRKeys> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot body: SignalRKeys;
     }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SignalRResource>

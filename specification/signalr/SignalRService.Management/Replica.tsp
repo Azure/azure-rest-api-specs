@@ -50,7 +50,8 @@ interface Replicas {
   update is ArmCustomPatchAsync<
     Replica,
     PatchModel = Replica,
-    Response = ArmResponse<Replica> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Replica> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Replica;
     })
