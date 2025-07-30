@@ -370,6 +370,8 @@ export async function summarizeChecksImpl(
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
+  core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
   core.info(
@@ -481,7 +483,7 @@ async function updateCheckRunStatus(github, core, owner, repo, head_sha, checkNa
       owner,
       repo,
       check_run_id: checkRunId,
-      name: checkResult.name,
+      name: checkName,
       status,
       conclusion,
       output: {
@@ -742,11 +744,6 @@ export async function getCheckRunTuple(
     );
   }
 
-  core.info(
-    `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
-      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`,
-  );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
      * @param {CheckRunData} checkRun
