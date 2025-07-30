@@ -215,7 +215,7 @@ union SecureScoreLevel {
 /**
  * Security Level of Backup Vault
  */
-union BcdrSecurityLevel {
+union BCDRSecurityLevel {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Poor: "Poor",
@@ -634,7 +634,7 @@ model BackupVault {
    * Security Level of Backup Vault
    */
   @visibility(Lifecycle.Read)
-  bcdrSecurityLevel?: BcdrSecurityLevel;
+  bcdrSecurityLevel?: BCDRSecurityLevel;
 
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed

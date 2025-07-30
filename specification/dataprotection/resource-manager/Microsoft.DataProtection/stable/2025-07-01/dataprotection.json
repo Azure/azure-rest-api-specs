@@ -5147,6 +5147,43 @@
       ],
       "x-ms-discriminator-value": "AzureRetentionRule"
     },
+    "BCDRSecurityLevel": {
+      "type": "string",
+      "description": "Security Level of Backup Vault",
+      "enum": [
+        "Poor",
+        "Fair",
+        "Good",
+        "Excellent",
+        "NotSupported"
+      ],
+      "x-ms-enum": {
+        "name": "BCDRSecurityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Poor",
+            "value": "Poor"
+          },
+          {
+            "name": "Fair",
+            "value": "Fair"
+          },
+          {
+            "name": "Good",
+            "value": "Good"
+          },
+          {
+            "name": "Excellent",
+            "value": "Excellent"
+          },
+          {
+            "name": "NotSupported",
+            "value": "NotSupported"
+          }
+        ]
+      }
+    },
     "BackupCriteria": {
       "type": "object",
       "description": "BackupCriteria base class",
@@ -5385,7 +5422,7 @@
           "readOnly": true
         },
         "bcdrSecurityLevel": {
-          "$ref": "#/definitions/BcdrSecurityLevel",
+          "$ref": "#/definitions/BCDRSecurityLevel",
           "description": "Security Level of Backup Vault",
           "readOnly": true
         },
@@ -5530,43 +5567,6 @@
       "required": [
         "objectType"
       ]
-    },
-    "BcdrSecurityLevel": {
-      "type": "string",
-      "description": "Security Level of Backup Vault",
-      "enum": [
-        "Poor",
-        "Fair",
-        "Good",
-        "Excellent",
-        "NotSupported"
-      ],
-      "x-ms-enum": {
-        "name": "BcdrSecurityLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Poor",
-            "value": "Poor"
-          },
-          {
-            "name": "Fair",
-            "value": "Fair"
-          },
-          {
-            "name": "Good",
-            "value": "Good"
-          },
-          {
-            "name": "Excellent",
-            "value": "Excellent"
-          },
-          {
-            "name": "NotSupported",
-            "value": "NotSupported"
-          }
-        ]
-      }
     },
     "BlobBackupDatasourceParameters": {
       "type": "object",
@@ -6324,28 +6324,6 @@
         "nextLink": {
           "type": "string",
           "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources."
-        }
-      }
-    },
-    "EncryptionSettings": {
-      "type": "object",
-      "description": "Customer Managed Key details of the resource.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/EncryptionState",
-          "description": "Encryption state of the Backup Vault."
-        },
-        "keyVaultProperties": {
-          "$ref": "#/definitions/CmkKeyVaultProperties",
-          "description": "The properties of the Key Vault which hosts CMK"
-        },
-        "kekIdentity": {
-          "$ref": "#/definitions/CmkKekIdentity",
-          "description": "The details of the managed identity used for CMK"
-        },
-        "infrastructureEncryption": {
-          "$ref": "#/definitions/InfrastructureEncryptionState",
-          "description": "Enabling/Disabling the Double Encryption state"
         }
       }
     },
@@ -8349,7 +8327,7 @@
           "description": "Immutability Settings at vault level"
         },
         "encryptionSettings": {
-          "$ref": "#/definitions/EncryptionSettings",
+          "$ref": "#/definitions/encryptionSettings",
           "description": "Customer Managed Key details of the resource."
         }
       }
@@ -8964,6 +8942,28 @@
             "value": "Third"
           }
         ]
+      }
+    },
+    "encryptionSettings": {
+      "type": "object",
+      "description": "Customer Managed Key details of the resource.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/EncryptionState",
+          "description": "Encryption state of the Backup Vault."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties",
+          "description": "The properties of the Key Vault which hosts CMK"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity",
+          "description": "The details of the managed identity used for CMK"
+        },
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/InfrastructureEncryptionState",
+          "description": "Enabling/Disabling the Double Encryption state"
+        }
       }
     }
   },

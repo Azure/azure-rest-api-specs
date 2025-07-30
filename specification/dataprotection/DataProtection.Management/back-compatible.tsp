@@ -51,3 +51,4 @@ using Microsoft.DataProtection;
   "parameters"
 );
 @@clientName(Operations, "DataProtectionOperations");
+@@clientName(EncryptionSettings, "encryptionSettings");
