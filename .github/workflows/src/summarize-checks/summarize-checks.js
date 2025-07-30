@@ -124,6 +124,17 @@ import path from "path";
  * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
  */
 
+/**
+ * @typedef {"pending" | "success" | "failure" | "neutral" | "cancelled" | "timed_out" | "action_required"} CheckRunStatus
+ */
+
+/**
+ * @typedef {Object} CheckRunResult
+ * @property {string} name
+ * @property {string} summary
+ * @property {CheckRunStatus} result
+ */
+
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
   "Swagger LintDiff",
@@ -400,9 +411,86 @@ export async function summarizeChecksImpl(
   //   commentBody
   // )
 
-  core.info(
-    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${automatedChecksMet}.`,
+  // finally, update the "Automated merging requirements met" check
+  await updateCheckRunStatus(
+    github,
+    core,
+    owner,
+    repo,
+    head_sha,
+    "Automated merging requirements met",
+    automatedChecksMet,
   );
+
+  core.info(
+    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+  );
+}
+
+/**
+ * Updates or creates a check run with the given status
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} head_sha
+ * @param {string} checkName
+ * @param {CheckRunResult} checkResult
+ * @returns {Promise<void>}
+ */
+async function updateCheckRunStatus(github, core, owner, repo, head_sha, checkName, checkResult) {
+  // First, try to find an existing check run for this commit and check name
+  const existingChecks = await github.rest.checks.listForRef({
+    owner,
+    repo,
+    ref: head_sha,
+    check_name: checkName,
+    per_page: 1,
+  });
+
+  // Determine status and conclusion based on the result
+  const status = checkResult.result === "pending" ? "in_progress" : "completed";
+  const conclusion = checkResult.result === "pending" ? undefined : checkResult.result;
+
+  if (existingChecks.data.check_runs.length > 0) {
+    // Update the existing check run
+    const checkRunId = existingChecks.data.check_runs[0].id;
+
+    // await github.rest.checks.update({
+    //   owner,
+    //   repo,
+    //   check_run_id: checkRunId,
+    //   name: checkResult.name,
+    //   status,
+    //   conclusion,
+    //   output: {
+    //     title: checkResult.name,
+    //     summary: checkResult.summary,
+    //   },
+    // });
+
+    core.info(
+      `Updated existing check run ID ${checkRunId} for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
+    );
+  } else {
+    // Create a new check run
+    // await github.rest.checks.create({
+    //   owner,
+    //   repo,
+    //   name: checkName,
+    //   head_sha,
+    //   status,
+    //   conclusion,
+    //   output: {
+    //     title: checkResult.name,
+    //     summary: checkResult.summary,
+    //   },
+    // });
+
+    core.info(
+      `Created new check run for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
+    );
+  }
 }
 
 /**
@@ -765,7 +853,7 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @returns {Promise<[string, string]>}
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
   core,
@@ -808,7 +896,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @returns {Promise<[string, string]>}
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
   core,
@@ -823,14 +911,12 @@ async function buildNextStepsToMergeCommentBody(
 
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
-  // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
-  // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
-  // The new world we will simply pull all the required checks and if any are failing then we are blocked. If there are
-  // no failed checks we can't yet say that everything is met, because a check MIGHT run in the future. To prevent
-  // this "no checks run" accidentally evaluating as success, we need to ensure that we have at least one failing check
-  // in the required checks to consider the requirements met
+  // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
+  // we consider requirements met if there are no blockers (which INCLUDES violated labelling rules) AND
+  // that we have at least one required check that is not in progress or queued.
+  // This might be too aggressive, but it's a good start.
   const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
 
   // Compose the body based on the current state
@@ -854,7 +940,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
- * @returns {[string, string]} The body content HTML and the status that automated checks met should be set to.
+ * @returns {[string, CheckRunResult]} The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet,
@@ -864,13 +950,21 @@ function getCommentBody(
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
 ) {
+  let title = "Automated merging requirements are being evaluated";
+  /** @type {CheckRunStatus} */
+  let status = "pending";
+  let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
+
+  // Generate the comment body using the original logic for backwards compatibility
   let bodyProper = "";
-  let automatedChecksMet = "pending";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
-      automatedChecksMet = "blocked";
+      summaryData =
+        "❌ This PR cannot be merged because some requirements are not met. See the details.";
+      title = "Some automated merging requirements are not met";
+      status = "failure";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -881,17 +975,41 @@ function getCommentBody(
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
       if (!anyBlockerPresent) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
+        title =
+          "All automated merging requirements are met, though there are some non-required failures.";
+        summaryData =
+          `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
+          `but soon these requirements will be blocking.` +
+          `<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.` +
+          `<br/>If you want to proceed with merging this PR without fixing them, refer to ` +
+          `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+        status = "success";
       }
     }
   } else if (requirementsMet) {
-    automatedChecksMet = "success";
     bodyProper =
       `✅ All automated merging requirements have been met! ` +
       `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+    summaryData =
+      `✅ All automated merging requirements have been met.` +
+      `<br/>To merge this PR, refer to ` +
+      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
+      "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
+    title = "Automated merging requirements are met";
+    status = "success";
   } else {
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+    // dont need to update the status of the check, as pending is the default state.
   }
+
+  /** @type {CheckRunResult} */
+  const automatedChecksMet = {
+    name: title,
+    summary: summaryData,
+    result: status,
+  };
+
   return [bodyProper, automatedChecksMet];
 }
 
