@@ -368,6 +368,53 @@
       },
       "readOnly": true
     },
+    "Baseline": {
+      "type": "object",
+      "description": "Defines the target parameters for a Slo baseline.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The user-defined or Azure-defined target value used for comparison against the SLI value.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evaluationPeriodDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time frame (in days) used for SLI evaluation.",
+          "minimum": 1,
+          "maximum": 90
+        },
+        "evaluationCalculationType": {
+          "$ref": "#/definitions/EvaluationCalculationType",
+          "description": "Specifies how evaluation is calculated, either based on calendar days or a rolling window."
+        },
+        "enableAlert": {
+          "type": "boolean",
+          "description": "A flag to determine whether alert is enabled."
+        }
+      },
+      "required": [
+        "value",
+        "evaluationPeriodDays",
+        "evaluationCalculationType",
+        "enableAlert"
+      ]
+    },
+    "BaselineProperties": {
+      "type": "object",
+      "description": "Defines the properties of a baseline.",
+      "properties": {
+        "baseline": {
+          "$ref": "#/definitions/Baseline",
+          "description": "Defines the baseline target, which is compared against the SLI value to determine compliance."
+        }
+      },
+      "required": [
+        "baseline"
+      ]
+    },
     "Category": {
       "type": "string",
       "description": "Defines the category of an SLI",
@@ -388,30 +435,6 @@
             "name": "Latency",
             "value": "Latency",
             "description": "Indicates latency-related metrics."
-          }
-        ]
-      }
-    },
-    "ComplianceCalculationType": {
-      "type": "string",
-      "description": "Specifies the method for compliance calculation.",
-      "enum": [
-        "CalendarDays",
-        "RollingDays"
-      ],
-      "x-ms-enum": {
-        "name": "ComplianceCalculationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CalendarDays",
-            "value": "CalendarDays",
-            "description": "Calculates compliance based on a fixed calendar period."
-          },
-          {
-            "name": "RollingDays",
-            "value": "RollingDays",
-            "description": "Calculates compliance using a rolling time window."
           }
         ]
       }
@@ -526,6 +549,30 @@
             "name": "!contains",
             "value": "notcontains",
             "description": "Does not contain the value."
+          }
+        ]
+      }
+    },
+    "EvaluationCalculationType": {
+      "type": "string",
+      "description": "Specifies the method for evaluation calculation.",
+      "enum": [
+        "CalendarDays",
+        "RollingDays"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationCalculationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CalendarDays",
+            "value": "CalendarDays",
+            "description": "Calculates evaluation based on a fixed calendar period."
+          },
+          {
+            "name": "RollingDays",
+            "value": "RollingDays",
+            "description": "Calculates evaluation using a rolling time window."
           }
         ]
       }
@@ -878,13 +925,21 @@
             "metricName"
           ]
         },
-        "sloProperties": {
-          "$ref": "#/definitions/SloProperties",
-          "description": "Defines the SLO properties associated with the SLI."
+        "baselineProperties": {
+          "$ref": "#/definitions/BaselineProperties",
+          "description": "Defines the SLO baseline associated with the SLI."
         },
         "sliProperties": {
           "$ref": "#/definitions/SliProperties",
           "description": "Defines the SLI properties associated with the SLI."
+        },
+        "streamingRuleId": {
+          "type": "string",
+          "description": "The streaming rule Id associated with the Sli resource."
+        },
+        "streamingRuleLastUpdatedTimestamp": {
+          "type": "string",
+          "description": "The streaming rule last updated timestamp associated with the Sli resource."
         }
       },
       "required": [
@@ -894,55 +949,10 @@
         "executionState",
         "destinationAmwAccounts",
         "destinationMetrics",
-        "sloProperties",
-        "sliProperties"
-      ]
-    },
-    "SloProperties": {
-      "type": "object",
-      "description": "Defines the properties of an SLO.",
-      "properties": {
-        "target": {
-          "$ref": "#/definitions/SloTarget",
-          "description": "Defines the SLO target, which is compared against the SLI value to determine compliance."
-        }
-      },
-      "required": [
-        "target"
-      ]
-    },
-    "SloTarget": {
-      "type": "object",
-      "description": "Defines the target parameters for an SLO.",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "float",
-          "description": "The user-defined or Azure-defined target value used for comparison against the SLI value.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "compliancePeriodDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time frame (in days) used for SLI evaluation.",
-          "minimum": 1,
-          "maximum": 90
-        },
-        "complianceCalculationType": {
-          "$ref": "#/definitions/ComplianceCalculationType",
-          "description": "Specifies how compliance is calculated, either based on calendar days or a rolling window."
-        },
-        "comparator": {
-          "$ref": "#/definitions/TargetComparator",
-          "description": "Defines the operator used to compare the SLI value against the target."
-        }
-      },
-      "required": [
-        "value",
-        "compliancePeriodDays",
-        "complianceCalculationType",
-        "comparator"
+        "baselineProperties",
+        "sliProperties",
+        "streamingRuleId",
+        "streamingRuleLastUpdatedTimestamp"
       ]
     },
     "SpatialAggregation": {
@@ -965,42 +975,6 @@
         "type",
         "dimensions"
       ]
-    },
-    "TargetComparator": {
-      "type": "string",
-      "description": "Defines comparison operators for evaluating an SLI against an SLO target.",
-      "enum": [
-        "lt",
-        "gt",
-        "lte",
-        "gte"
-      ],
-      "x-ms-enum": {
-        "name": "TargetComparator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "<",
-            "value": "lt",
-            "description": "Less than the target value."
-          },
-          {
-            "name": ">",
-            "value": "gt",
-            "description": "Greater than the target value."
-          },
-          {
-            "name": "<=",
-            "value": "lte",
-            "description": "Less than or equal to the target value."
-          },
-          {
-            "name": ">=",
-            "value": "gte",
-            "description": "Greater than or equal to the target value."
-          }
-        ]
-      }
     },
     "TemporalAggregation": {
       "type": "object",

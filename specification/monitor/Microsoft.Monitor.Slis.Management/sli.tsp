@@ -51,11 +51,17 @@ model SliResource {
   @OpenAPI.extension("x-ms-identifiers", #["metricNamespace", "metricName"])
   destinationMetrics: Metric[];
 
-  @doc("Defines the SLO properties associated with the SLI.")
-  sloProperties: SloProperties;
+  @doc("Defines the SLO baseline associated with the SLI.")
+  baselineProperties: BaselineProperties;
 
   @doc("Defines the SLI properties associated with the SLI.")
   sliProperties: SliProperties;
+
+  @doc("The streaming rule Id associated with the Sli resource.")
+  streamingRuleId: string;
+
+  @doc("The streaming rule last updated timestamp associated with the Sli resource.")
+  streamingRuleLastUpdatedTimestamp: string;
 }
 
 @doc("Represents the current execution state of an SLI.")
