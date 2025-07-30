@@ -12,6 +12,8 @@ using Microsoft.SignalRService;
 )
 namespace Customization;
 
+@@clientName(Microsoft.SignalRService, "SignalRManagementClient", "javascript");
+
 // Client name mappings to match the existing Java SDK naming conventions
 @@clientName(NetworkACL, "NetworkAcl", "java");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
