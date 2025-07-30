@@ -232,3 +232,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   SignalRSharedPrivateLinkResourcesDeleteCustomized,
   "python,java,go"
 );
+
+// Resolve model naming breaking changes from Swagger directive migration
+@@clientName(SignalRResource, "ResourceInfo", "go");
+@@clientName(SignalRResourceList, "ResourceInfoList", "go");
