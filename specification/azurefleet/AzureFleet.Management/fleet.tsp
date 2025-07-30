@@ -663,5 +663,5 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2025_07_01_preview)
   @doc("Cancels an instance Fleet creation that is in progress.")
-  cancel is ArmResourceActionAsync<Fleet, void, Response = OkResponse>;
+  cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
