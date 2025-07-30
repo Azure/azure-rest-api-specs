@@ -561,7 +561,7 @@ model ZoneAllocationPolicy {
   distributionStrategy: ZoneDistributionStrategy;
 
   @identifiers(#[])
-  @doc("Zone preferences when zone distribution strategy is Prioritized.")
+  @doc("Zone preferences, required when zone distribution strategy is Prioritized.")
   zonePreferences?: Array<ZonePreference>;
 }
 
