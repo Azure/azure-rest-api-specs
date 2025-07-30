@@ -54,18 +54,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiManagementGatewayResource"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate API Management gateway operation."
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -75,12 +63,6 @@
         "responses": {
           "200": {
             "description": "The gateway was successfully set up.",
-            "schema": {
-              "$ref": "#/definitions/ApiManagementGatewayResource"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ApiManagementGatewayResource"
             }
