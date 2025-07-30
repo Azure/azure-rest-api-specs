@@ -158,6 +158,9 @@ suppressions:
   - code: LroExtension
     from: generated_blob.json
     reason: Legacy operations not defined as lro
+  - code: MULTIPLE_BODY_PARAMETERS
+    from: generated_blob.json
+    reason: The form data definition is valid
 ```
 
 ```yaml
