@@ -1587,6 +1587,188 @@
       "type": "object",
       "description": "Summary description of the product",
       "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Product display name"
+        },
+        "popularity": {
+          "type": "number",
+          "format": "double",
+          "description": "Popularity of the product"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Array of product categories",
+          "items": {
+            "type": "string"
+          }
+        },
+        "industryIds": {
+          "type": "array",
+          "description": "List of industry IDs the item belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher id"
+        },
+        "azureBenefit": {
+          "$ref": "#/definitions/AzureBenefit",
+          "description": "Eligibility for Azure consumption commitment benefit"
+        },
+        "badges": {
+          "type": "array",
+          "description": "The product badges",
+          "items": {
+            "$ref": "#/definitions/Badge"
+          }
+        },
+        "publisherType": {
+          "$ref": "#/definitions/PublisherType",
+          "description": "Publisher type"
+        },
+        "publishingStage": {
+          "$ref": "#/definitions/PublishingStage",
+          "description": "Product publishing stage"
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique product identifier",
+          "readOnly": true
+        },
+        "productType": {
+          "$ref": "#/definitions/ProductType",
+          "description": "The delivery method or deployment model"
+        },
+        "productSubType": {
+          "type": "string",
+          "description": "Product sub type"
+        },
+        "productFamily": {
+          "type": "string",
+          "description": "Product Family"
+        },
+        "operatingSystems": {
+          "type": "array",
+          "description": "Operating system info for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The pricing types for this offer",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "Publisher display name"
+        },
+        "longSummary": {
+          "type": "string",
+          "description": "Product long summary"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Product summary"
+        },
+        "linkedAddInsTypes": {
+          "type": "object",
+          "description": "Linked add-in types",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "smallIconUri": {
+          "type": "string",
+          "description": "URI to the small product icon"
+        },
+        "description": {
+          "type": "string",
+          "description": "The product description text"
+        },
+        "cspLegalTermsUri": {
+          "type": "string",
+          "description": "The legal terms of the product for the CSP"
+        },
+        "privacyPolicyUri": {
+          "type": "string",
+          "description": "The privacy policy of the product"
+        },
+        "ratingBuckets": {
+          "type": "array",
+          "description": "Rating buckets",
+          "items": {
+            "$ref": "#/definitions/RatingBucket"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "format": "double",
+          "description": "Average rating for the offer"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of ratings for the offer"
+        },
+        "supportedProducts": {
+          "type": "array",
+          "description": "Maps to the list of compatible products",
+          "items": {
+            "type": "string"
+          }
+        },
+        "applicableProducts": {
+          "type": "array",
+          "description": "Product categories the offer belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Latest update date of the product"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of locations which are available on the SKUs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceFamily": {
+          "type": "string",
+          "description": "The service family of the product, such as 'Compute'"
+        },
+        "service": {
+          "type": "string",
+          "description": "The service name of the product, such as 'Virtual Machines'"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
+        },
+        "hasRiPlans": {
+          "type": "boolean",
+          "description": "Indication whether the product has plans with reservations"
+        },
+        "hasMarketplaceFootprint": {
+          "type": "boolean",
+          "description": "Indication if product has a representation in the marketplace"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Set of products attributes",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
         "videos": {
           "type": "array",
           "description": "List of product videos",
@@ -1729,21 +1911,13 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
-        },
-        "productId": {
-          "type": "string",
-          "description": "The unique id of the product"
         }
       },
       "required": [
+        "uniqueProductId",
+        "productType",
         "isPrivate",
-        "isStopSell",
-        "productId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProductSummary"
-        }
+        "isStopSell"
       ]
     },
     "ProductSingle": {
