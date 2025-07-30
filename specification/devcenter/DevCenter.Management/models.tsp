@@ -826,6 +826,7 @@ model TrackedResourceUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
@@ -1002,6 +1003,7 @@ model ProjectUpdateProperties {
   /**
    * When specified, limits the maximum number of Dev Boxes a single user can create across all pools in the project. This will have no effect on existing Dev Boxes when reduced.
    */
+  @minValue(0)
   maxDevBoxesPerUser?: int32;
 
   /**
@@ -1271,36 +1273,42 @@ model SyncStats {
    * Count of catalog items added during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   added?: int32;
 
   /**
    * Count of catalog items updated during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   updated?: int32;
 
   /**
    * Count of catalog items that were unchanged during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   unchanged?: int32;
 
   /**
    * Count of catalog items removed during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   removed?: int32;
 
   /**
    * Count of catalog items that had validation errors during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   validationErrors?: int32;
 
   /**
    * Count of synchronization errors that occured during synchronization.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   synchronizationErrors?: int32;
 
   /**
@@ -1749,6 +1757,7 @@ model EnvironmentTypeUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
@@ -1788,6 +1797,7 @@ model ProjectEnvironmentTypeProperties
    * The number of environments of this type.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   environmentCount?: int32;
 }
 
@@ -1813,19 +1823,19 @@ model ProjectEnvironmentTypeUpdateProperties {
   /**
    * The role definition assigned to the environment creator on backing resources.
    */
-  creatorRoleAssignment?: ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment;
+  creatorRoleAssignment?: CreatorRoleAssignment;
 
   /**
    * Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userRoleAssignments?: Record<UserRoleAssignmentValue>;
+  userRoleAssignments?: Record<UserRoleAssignment>;
 }
 
 /**
  * The role definition assigned to the environment creator on backing resources.
  */
-model ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment {
+model CreatorRoleAssignment {
   /**
    * A map of roles to assign to the environment creator.
    */
@@ -1853,7 +1863,7 @@ model EnvironmentRole {
 /**
  * Mapping of user object ID to role assignments.
  */
-model UserRoleAssignmentValue {
+model UserRoleAssignment {
   /**
    * A map of roles to assign to the parent user.
    */
@@ -1876,6 +1886,7 @@ model ProjectEnvironmentTypeUpdate {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
@@ -2836,6 +2847,7 @@ model NetworkConnectionUpdateProperties {
   /**
    * The password for the account used to join domain
    */
+  @secret
   domainPassword?: string;
 }
 
@@ -2986,9 +2998,27 @@ model EndpointDetail {
   @visibility(Lifecycle.Read)
   port?: int32;
 }
+
+model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
+
+model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
+
+model GalleryListResult is Azure.Core.Page<Gallery>;
+
+model HealthCheckStatusDetailsListResult
+  is Azure.Core.Page<HealthCheckStatusDetails>;
+
 @@visibility(AllowedEnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(AttachedNetworkListResult.value, Lifecycle.Read);
 @@visibility(CustomizationTaskListResult.value, Lifecycle.Read);
 @@visibility(DevBoxDefinitionListResult.value, Lifecycle.Read);
 @@visibility(DevCenterListResult.value, Lifecycle.Read);
 @@visibility(EncryptionSetListResult.value, Lifecycle.Read);
+@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
+  "x-ms-identifiers",
+  #["category"]
+);
+@@visibility(EnvironmentDefinitionListResult.value, Lifecycle.Read);
+@@visibility(EnvironmentTypeListResult.value, Lifecycle.Read);
+@@visibility(GalleryListResult.value, Lifecycle.Read);
+@@visibility(HealthCheckStatusDetailsListResult.value, Lifecycle.Read);

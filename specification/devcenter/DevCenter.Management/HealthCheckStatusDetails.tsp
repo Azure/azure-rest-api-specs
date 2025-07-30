@@ -48,7 +48,8 @@ interface HealthCheckStatusDetailsOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = HealthCheckStatusDetailsListResult
   >;
 }
 

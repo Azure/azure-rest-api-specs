@@ -74,7 +74,10 @@ interface EnvironmentDefinitions {
   /**
    * Lists the environment definitions in this project catalog.
    */
-  listByProjectCatalog is EnvironmentDefinitionOps.List<EnvironmentDefinition>;
+  listByProjectCatalog is EnvironmentDefinitionOps.List<
+    EnvironmentDefinition,
+    Response = EnvironmentDefinitionListResult
+  >;
 
   /**
    * Gets Environment Definition error details
@@ -146,7 +149,8 @@ interface EnvironmentDefinitionOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = EnvironmentDefinitionListResult
   >;
 
   /**

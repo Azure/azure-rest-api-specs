@@ -57,7 +57,8 @@ interface Galleries {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = GalleryListResult
   >;
 }
 

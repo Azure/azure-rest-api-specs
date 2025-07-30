@@ -76,7 +76,8 @@ interface DevCenters {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DevCenterListResult
   >;
 
   /**
@@ -90,7 +91,8 @@ interface DevCenters {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DevCenterListResult
   >;
 
   /**

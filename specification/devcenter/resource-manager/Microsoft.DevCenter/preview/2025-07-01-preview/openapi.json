@@ -279,7 +279,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevCenterListResult"
             }
@@ -562,7 +562,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevCenterListResult"
             }
@@ -1612,7 +1612,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EnvironmentDefinitionListResult"
             }
@@ -3472,7 +3472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EnvironmentTypeListResult"
             }
@@ -3786,7 +3786,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/GalleryListResult"
             }
@@ -5083,7 +5083,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/HealthCheckStatusDetailsListResult"
             }
@@ -6304,7 +6304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EnvironmentDefinitionListResult"
             }
@@ -9503,6 +9503,19 @@
         ]
       }
     },
+    "CreatorRoleAssignment": {
+      "type": "object",
+      "description": "The role definition assigned to the environment creator on backing resources.",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "description": "A map of roles to assign to the environment creator.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      }
+    },
     "CustomizationTask": {
       "type": "object",
       "description": "Represents a Task to be used in customizing a Dev Box.",
@@ -9942,14 +9955,15 @@
     },
     "DevCenterListResult": {
       "type": "object",
-      "description": "The response of a DevCenter list operation.",
+      "description": "Paged collection of DevCenter items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The DevCenter items on this page",
           "items": {
             "$ref": "#/definitions/DevCenter"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10263,14 +10277,15 @@
     },
     "EnvironmentDefinitionListResult": {
       "type": "object",
-      "description": "The response of a EnvironmentDefinition list operation.",
+      "description": "Paged collection of EnvironmentDefinition items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The EnvironmentDefinition items on this page",
           "items": {
             "$ref": "#/definitions/EnvironmentDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10377,7 +10392,12 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -10410,14 +10430,15 @@
     },
     "EnvironmentTypeListResult": {
       "type": "object",
-      "description": "The response of a EnvironmentType list operation.",
+      "description": "Paged collection of EnvironmentType items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The EnvironmentType items on this page",
           "items": {
             "$ref": "#/definitions/EnvironmentType"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10459,7 +10480,12 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -10491,14 +10517,15 @@
     },
     "GalleryListResult": {
       "type": "object",
-      "description": "The response of a Gallery list operation.",
+      "description": "Paged collection of Gallery items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Gallery items on this page",
           "items": {
             "$ref": "#/definitions/Gallery"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10662,14 +10689,15 @@
     },
     "HealthCheckStatusDetailsListResult": {
       "type": "object",
-      "description": "The response of a HealthCheckStatusDetails list operation.",
+      "description": "Paged collection of HealthCheckStatusDetails items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The HealthCheckStatusDetails items on this page",
           "items": {
             "$ref": "#/definitions/HealthCheckStatusDetails"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11652,7 +11680,9 @@
         },
         "domainPassword": {
           "type": "string",
-          "description": "The password for the account used to join domain"
+          "format": "password",
+          "description": "The password for the account used to join domain",
+          "x-ms-secret": true
         }
       }
     },
@@ -11744,7 +11774,10 @@
           "description": "The OutboundEnvironmentEndpoint items on this page",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12164,6 +12197,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of environments of this type.",
+          "minimum": 0,
           "readOnly": true
         }
       },
@@ -12187,7 +12221,12 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -12212,27 +12251,14 @@
           "description": "Defines whether this Environment Type can be used in this Project."
         },
         "creatorRoleAssignment": {
-          "$ref": "#/definitions/ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment",
+          "$ref": "#/definitions/CreatorRoleAssignment",
           "description": "The role definition assigned to the environment creator on backing resources."
         },
         "userRoleAssignments": {
           "type": "object",
           "description": "Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserRoleAssignmentValue"
-          }
-        }
-      }
-    },
-    "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment": {
-      "type": "object",
-      "description": "The role definition assigned to the environment creator on backing resources.",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "description": "A map of roles to assign to the environment creator.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
+            "$ref": "#/definitions/UserRoleAssignment"
           }
         }
       }
@@ -12409,7 +12435,8 @@
         "maxDevBoxesPerUser": {
           "type": "integer",
           "format": "int32",
-          "description": "When specified, limits the maximum number of Dev Boxes a single user can create across all pools in the project. This will have no effect on existing Dev Boxes when reduced."
+          "description": "When specified, limits the maximum number of Dev Boxes a single user can create across all pools in the project. This will have no effect on existing Dev Boxes when reduced.",
+          "minimum": 0
         },
         "displayName": {
           "type": "string",
@@ -12934,36 +12961,42 @@
           "type": "integer",
           "format": "int32",
           "description": "Count of catalog items added during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "updated": {
           "type": "integer",
           "format": "int32",
           "description": "Count of catalog items updated during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "unchanged": {
           "type": "integer",
           "format": "int32",
           "description": "Count of catalog items that were unchanged during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "removed": {
           "type": "integer",
           "format": "int32",
           "description": "Count of catalog items removed during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "validationErrors": {
           "type": "integer",
           "format": "int32",
           "description": "Count of catalog items that had validation errors during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "synchronizationErrors": {
           "type": "integer",
           "format": "int32",
           "description": "Count of synchronization errors that occured during synchronization.",
+          "minimum": 0,
           "readOnly": true
         },
         "syncedCatalogItemTypes": {
@@ -12984,7 +13017,12 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "location": {
           "type": "string",
@@ -13077,7 +13115,7 @@
         ]
       }
     },
-    "UserRoleAssignmentValue": {
+    "UserRoleAssignment": {
       "type": "object",
       "description": "Mapping of user object ID to role assignments.",
       "properties": {

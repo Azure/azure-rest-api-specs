@@ -32,7 +32,7 @@
 | `definitions.PoolProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.ProjectEnvironmentTypeProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.ProjectEnvironmentTypeUpdate.properties.tags.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/Tags` |
-| `definitions.ProjectEnvironmentTypeUpdateProperties.properties.creatorRoleAssignment.$ref__added` | added | `#/definitions/ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment` |
+| `definitions.ProjectEnvironmentTypeUpdateProperties.properties.creatorRoleAssignment.$ref__added` | added | `#/definitions/CreatorRoleAssignment` |
 | `definitions.ProjectPolicyProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.ProjectProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
 | `definitions.ScheduleProperties.properties.provisioningState.$ref__deleted` | deleted | `commonDefinitions.json#/definitions/ProvisioningState` |
@@ -170,6 +170,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.NetworkConnectionUpdateProperties.properties.domainPassword.format__added` | added | `password` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/devcenters'].get.parameters[0].format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/projects'].get.parameters[0].format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters'].get.parameters[0].format__added` | added | `int32` |
@@ -320,11 +321,11 @@
 |------|------------|-------|
 | `definitions.Tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"},"x-ms-mutability":["read","create","update...` |
 
-### Changes for `UserRoleAssignment`
+### Changes for `CreatorRoleAssignment`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.UserRoleAssignment__deleted` | deleted | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
+| `definitions.CreatorRoleAssignment__added` | added | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
 
 ### Changes for `ImageDefinitionBuildTaskParametersItem`
 
@@ -337,18 +338,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.KeyEncryptionKeyIdentity__added` | added | `{"type":"object","properties":{"type":{"type":"string","enum":["SystemAssigned","UserAssigned"],"x-m...` |
-
-### Changes for `ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment__added` | added | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
-
-### Changes for `UserRoleAssignmentValue`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.UserRoleAssignmentValue__added` | added | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
 
 ### Changes for `enum`
 
@@ -413,11 +402,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CatalogListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.DevCenterListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.EnvironmentDefinitionListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.EnvironmentTypeListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.GalleryListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.HealthCheckStatusDetailsListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ImageDefinitionBuildListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ImageDefinitionListResult.properties.value.readOnly__deleted` | deleted | `true` |
 | `definitions.ImageListResult.properties.value.readOnly__deleted` | deleted | `true` |
@@ -459,17 +443,14 @@
 | `definitions.ProjectEnvironmentTypeUpdate.properties.tags.additionalProperties__added` | added | `{"type":"string"}` |
 | `definitions.TrackedResourceUpdate.properties.tags.additionalProperties__added` | added | `{"type":"string"}` |
 
-### Changes for `x-ms-secret`
+### Changes for `x-ms-mutability`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkConnectionUpdateProperties.properties.domainPassword['x-ms-secret__deleted']` | deleted | `true` |
-
-### Changes for `x-ms-identifiers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OutboundEnvironmentEndpointCollection.properties.value['x-ms-identifiers__deleted']` | deleted | `["category"]` |
+| `definitions.EnvironmentType.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
+| `definitions.EnvironmentTypeUpdate.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
+| `definitions.ProjectEnvironmentTypeUpdate.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
+| `definitions.TrackedResourceUpdate.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
 
 ### Changes for `tags`
 
@@ -483,18 +464,11 @@
 |------|------------|-------|
 | `definitions.ProjectEnvironmentType.properties.location__deleted` | deleted | `{"type":"string"}` |
 
-### Changes for `minimum`
+### Changes for `x-ms-client-name`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ProjectEnvironmentTypeProperties.properties.environmentCount.minimum__deleted` | deleted | `0` |
-| `definitions.ProjectUpdateProperties.properties.maxDevBoxesPerUser.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.added.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.removed.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.synchronizationErrors.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.unchanged.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.updated.minimum__deleted` | deleted | `0` |
-| `definitions.SyncStats.properties.validationErrors.minimum__deleted` | deleted | `0` |
+| `definitions.UserRoleAssignment['x-ms-client-name__deleted']` | deleted | `userRoleAssignmentValue` |
 
 ## Modified Values
 
@@ -530,7 +504,6 @@
 | `definitions.ProjectEnvironmentType.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
 | `definitions.ProjectEnvironmentType.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.ProjectEnvironmentTypeUpdate.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity` |
-| `definitions.ProjectEnvironmentTypeUpdateProperties.properties.userRoleAssignments.additionalProperties.$ref` | `#/definitions/UserRoleAssignment` | `#/definitions/UserRoleAssignmentValue` |
 | `definitions.ProjectPolicy.allOf[0].$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ProjectUpdate.allOf[0].$ref` | `commonDefinitions.json#/definitions/TrackedResourceUpdate` | `#/definitions/TrackedResourceUpdate` |
 | `definitions.ProjectUpdate.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity` |

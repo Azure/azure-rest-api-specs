@@ -2892,7 +2892,7 @@
         "update"
       ]
     },
-    "UserRoleAssignment__deleted": {
+    "CreatorRoleAssignment__added": {
       "type": "object",
       "properties": {
         "roles": {
@@ -2901,8 +2901,7 @@
             "$ref": "#/definitions/EnvironmentRole"
           }
         }
-      },
-      "x-ms-client-name": "userRoleAssignmentValue"
+      }
     },
     "ImageDefinitionBuildTaskParametersItem__added": {
       "type": "object",
@@ -2935,28 +2934,6 @@
         },
         "userAssignedIdentityResourceId": {
           "type": "string"
-        }
-      }
-    },
-    "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment__added": {
-      "type": "object",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
-          }
-        }
-      }
-    },
-    "UserRoleAssignmentValue__added": {
-      "type": "object",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
-          }
         }
       }
     },
@@ -3392,12 +3369,7 @@
     "DevCenterListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "DevCenterProperties": {
       "properties": {
@@ -3494,12 +3466,7 @@
     "EnvironmentDefinitionListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "EnvironmentDefinitionProperties": {
       "properties": {
@@ -3526,7 +3493,12 @@
           "type__added": "object",
           "additionalProperties__added": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability__added": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       },
       "allOf": [
@@ -3544,12 +3516,7 @@
     "EnvironmentTypeListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "EnvironmentTypeProperties": {
       "properties": {
@@ -3588,7 +3555,12 @@
           "type__added": "object",
           "additionalProperties__added": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability__added": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -3608,12 +3580,7 @@
     "GalleryListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "GalleryProperties": {
       "properties": {
@@ -3661,12 +3628,7 @@
     "HealthCheckStatusDetailsListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "ImageDefinitionBuildDetails": {
       "properties": {
@@ -3908,7 +3870,7 @@
     "NetworkConnectionUpdateProperties": {
       "properties": {
         "domainPassword": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -3964,10 +3926,7 @@
       ],
       "properties": {
         "value": {
-          "readOnly__deleted": true,
-          "x-ms-identifiers__deleted": [
-            "category"
-          ]
+          "readOnly__deleted": true
         }
       }
     },
@@ -4104,9 +4063,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "environmentCount": {
-          "minimum__deleted": 0
         }
       }
     },
@@ -4117,7 +4073,12 @@
           "type__added": "object",
           "additionalProperties__added": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability__added": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "identity": {
           "$ref": {
@@ -4140,15 +4101,7 @@
               }
             }
           },
-          "$ref__added": "#/definitions/ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment"
-        },
-        "userRoleAssignments": {
-          "additionalProperties": {
-            "$ref": {
-              "__old": "#/definitions/UserRoleAssignment",
-              "__new": "#/definitions/UserRoleAssignmentValue"
-            }
-          }
+          "$ref__added": "#/definitions/CreatorRoleAssignment"
         }
       }
     },
@@ -4266,13 +4219,6 @@
         ]
       ]
     },
-    "ProjectUpdateProperties": {
-      "properties": {
-        "maxDevBoxesPerUser": {
-          "minimum__deleted": 0
-        }
-      }
-    },
     "Schedule": {
       "allOf": [
         [
@@ -4371,28 +4317,6 @@
         }
       }
     },
-    "SyncStats": {
-      "properties": {
-        "added": {
-          "minimum__deleted": 0
-        },
-        "updated": {
-          "minimum__deleted": 0
-        },
-        "unchanged": {
-          "minimum__deleted": 0
-        },
-        "removed": {
-          "minimum__deleted": 0
-        },
-        "validationErrors": {
-          "minimum__deleted": 0
-        },
-        "synchronizationErrors": {
-          "minimum__deleted": 0
-        }
-      }
-    },
     "TrackedResourceUpdate": {
       "properties": {
         "tags": {
@@ -4400,9 +4324,17 @@
           "type__added": "object",
           "additionalProperties__added": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability__added": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
+    },
+    "UserRoleAssignment": {
+      "x-ms-client-name__deleted": "userRoleAssignmentValue"
     }
   }
 }

@@ -28,6 +28,7 @@ model EnvironmentType
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
@@ -68,7 +69,8 @@ interface EnvironmentTypes {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = EnvironmentTypeListResult
   >;
 }
 
