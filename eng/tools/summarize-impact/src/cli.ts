@@ -2,7 +2,7 @@
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { setOutput } from "@azure-tools/specs-shared/error-reporting";
-import { evaluateImpact } from "./impact.js";
+import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
@@ -111,6 +111,9 @@ export async function main() {
     })
   ).map((label: any) => label.name);
 
+  // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
+  const mainSpecFolders = await getRPaaSFolderList(github, "Azure", "azure-rest-api-specs");
+
   const labelContext: LabelContext = {
     present: new Set(labels),
     toAdd: new Set(),
@@ -128,7 +131,7 @@ export async function main() {
     isDraft,
   });
 
-  let impact = await evaluateImpact(prContext, labelContext);
+  let impact = await evaluateImpact(prContext, labelContext, mainSpecFolders);
 
   // sets by default are not serializable, so we need to convert them to arrays
   // before we can write them to the output file.

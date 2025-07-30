@@ -24,6 +24,7 @@ import { ImpactAssessment } from "./ImpactAssessment.js";
 import { PRContext } from "./PRContext.js";
 
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
@@ -88,6 +89,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
 export async function evaluateImpact(
   context: PRContext,
   labelContext: LabelContext,
+  mainSpecFolders: string[],
 ): Promise<ImpactAssessment> {
   const typeSpecLabelShouldBePresent = await processTypeSpec(context, labelContext);
 
@@ -132,7 +134,7 @@ export async function evaluateImpact(
       labelContext,
       resourceManagerLabelShouldBePresent,
       rpaasLabelShouldBePresent,
-      githubClient,
+      mainSpecFolders,
     );
 
   const newApiVersion = await isNewApiVersion(context);
@@ -665,20 +667,15 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   };
 }
 
-export type RPaaSRPFolder = {
-  name: string;
-  path: string;
-};
-
 export const getRPaaSFolderList = async (
-  githubClient: any,
+  client: Octokit,
   owner: string,
-  repoName: string
-): Promise<RPaaSRPFolder[]> => {
+  repoName: string,
+): Promise<string[]> => {
   const branch = "main";
   const folder = "specification";
 
-  const res = await githubClient.rest.repos.getContent({
+  const res = await client.rest.repos.getContent({
     owner,
     repo: repoName,
     path: folder,
@@ -686,21 +683,48 @@ export const getRPaaSFolderList = async (
   });
 
   console.log(
-    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`
+    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
   );
 
-  const folders: RPaaSRPFolder[] = res.data;
+  // Extract folder names from the response
+  if (Array.isArray(res.data)) {
+    const folderNames = res.data
+      .filter((item: any) => item.type === "dir") // Only get directories
+      .map((item: any) => item.name); // Extract the name property
 
-  return folders;
+    console.log(`Found ${folderNames.length} folders: ${folderNames.join(", ")}`);
+    return folderNames;
+  }
+
+  console.log("No folders found or unexpected response format");
+  return [];
 };
 
-// CODESYNC: see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
+export function getRPRootFolderName(swaggerFile: string): string | undefined {
+  const RPFolder = getRPFolderFromSwaggerFile(swaggerFile);
+  const dirList = RPFolder?.split("/");
+  let idx = 0;
+  //find the index of "specification" in the path
+  for (let i = 0; i < dirList!.length; i++) {
+    if (dirList![i] === "specification") {
+      idx = i;
+      break;
+    }
+  }
+  // The RP root folder name is the folder name after "specification"
+  if (idx + 1 < dirList!.length) {
+    return dirList![idx + 1];
+  }
+
+  return undefined;
+}
+
 async function processRpaasRpNotInPrivateRepoLabel(
   context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
-  githubClient: any,
+  rpFolderNames: string[],
 ): Promise<{ ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRpaasRpNotInPrivateRepoLabel");
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
@@ -725,13 +749,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
     }
   }
 
-
   if (!skip) {
-    // this is a request to get the list of RPaaS folders from azure-rest-api-specs-pr -> RPSaasMaster branch -> dump specification folder
-    // names
-    const rpaasRPFolderList = await getRPaaSFolderList(githubClient, "Azure", "azure-rest-api-specs-pr");
-    const rpFolderNames: string[] = rpaasRPFolderList.map((f) => f.name);
-
     console.log(`RPaaS RP folder list: ${rpFolderNames}`);
 
     const handlers: ChangeHandler[] = [];
@@ -741,7 +759,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
         if (e.changeType === "Addition") {
           const rpFolderName = getRPRootFolderName(e.filePath);
           console.log(
-            `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`
+            `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`,
           );
 
           if (rpFolderName === undefined) {
@@ -751,8 +769,8 @@ async function processRpaasRpNotInPrivateRepoLabel(
 
           if (!rpFolderNames.includes(rpFolderName)) {
             console.log(
-              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. `
-              + `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`
+              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. ` +
+                `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`,
             );
             ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;
           }
