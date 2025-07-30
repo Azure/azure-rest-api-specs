@@ -155,7 +155,50 @@ model MCPToolResource {
 
   @doc("Does MCP server require approval")
   @encodedName("application/json", "require_approval")
-  requireApproval?: "never" | "always" | string;
+  requireApproval?: MCPRequiredApproval;
+}
+
+/** The Union of approval types. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+@added(Versions.v2025_05_15_preview)
+union MCPRequiredApproval {
+  string,
+
+  /** The mcp approval requirement: "never" or "always". */
+  MCPApprovalRequirement,
+
+  /** Customized MCP approval object, listing tools requiring and not requiring approvals */
+  MCPApprovalPerTool,
+}
+
+/** The extendable list of MCP approval requirements. */
+@added(Versions.v2025_05_15_preview)
+union MCPApprovalRequirement {
+  string,
+
+  /** The approval is not required for any of the tools. */
+  "never",
+
+  /** The approval is required for all tools. */
+  "always",
+}
+
+/** Customized MCP approval object, listing tools requiring and not requiring approvals */
+@added(Versions.v2025_05_15_preview)
+model MCPApprovalPerTool {
+  /** The list of tools, not requiring approval. */
+  `never`?: MCPToolList;
+
+  /** The list of tools, always requiring approval. */
+  always?: MCPToolList;
+}
+
+/** The object, containing list of tools for approvals. */
+@added(Versions.v2025_05_15_preview)
+model MCPToolList {
+  /** The list of tools for approval. */
+  @encodedName("application/json", "tool_names")
+  toolNames: string[];
 }
 
 /** Available query types for Azure AI Search tool. */
