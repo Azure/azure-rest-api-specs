@@ -460,7 +460,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -985,6 +985,16 @@
             "description": "VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus."
           }
         ]
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Cloud error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "description": "Api error."
+        }
       }
     },
     "ComputeProfile": {
