@@ -418,12 +418,12 @@ export async function summarizeChecksImpl(
     owner,
     repo,
     head_sha,
-    "Automated merging requirements met",
+    "[TEST-IGNORE] Automated merging requirements met",
     automatedChecksMet,
   );
 
   core.info(
-    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" check should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
 }
 
@@ -456,36 +456,36 @@ async function updateCheckRunStatus(github, core, owner, repo, head_sha, checkNa
     // Update the existing check run
     const checkRunId = existingChecks.data.check_runs[0].id;
 
-    // await github.rest.checks.update({
-    //   owner,
-    //   repo,
-    //   check_run_id: checkRunId,
-    //   name: checkResult.name,
-    //   status,
-    //   conclusion,
-    //   output: {
-    //     title: checkResult.name,
-    //     summary: checkResult.summary,
-    //   },
-    // });
+    await github.rest.checks.update({
+      owner,
+      repo,
+      check_run_id: checkRunId,
+      name: checkResult.name,
+      status,
+      conclusion,
+      output: {
+        title: checkResult.name,
+        summary: checkResult.summary,
+      },
+    });
 
     core.info(
       `Updated existing check run ID ${checkRunId} for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
     );
   } else {
     // Create a new check run
-    // await github.rest.checks.create({
-    //   owner,
-    //   repo,
-    //   name: checkName,
-    //   head_sha,
-    //   status,
-    //   conclusion,
-    //   output: {
-    //     title: checkResult.name,
-    //     summary: checkResult.summary,
-    //   },
-    // });
+    await github.rest.checks.create({
+      owner,
+      repo,
+      name: checkName,
+      head_sha,
+      status,
+      conclusion,
+      output: {
+        title: checkResult.name,
+        summary: checkResult.summary,
+      },
+    });
 
     core.info(
       `Created new check run for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
