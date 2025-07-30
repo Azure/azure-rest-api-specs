@@ -7068,6 +7068,11 @@
     "SearchIndexerStatus": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the indexer."
+        },
         "status": {
           "$ref": "#/definitions/IndexerStatus",
           "readOnly": true,
@@ -7093,6 +7098,7 @@
         }
       },
       "required": [
+        "name",
         "status",
         "executionHistory",
         "limits"
