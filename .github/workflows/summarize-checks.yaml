@@ -22,8 +22,8 @@ on:
 permissions:
   actions: read # to inspect workflow_run metadata
   contents: read # for actions/checkout
-  checks: write # for octokit.rest.checks.listForRef and octokit.rest.checks.create/update
-  statuses: read # for octokit.rest.repos.getCombinedStatusForRef
+  checks: read # for octokit.rest.checks.listForRef
+  statuses: write # for octokit.rest.repos.getCombinedStatusForRef and octokit.rest.repos.createCommitStatus
   issues: write # to post comments via the Issues API
   pull-requests: write # to post comments via the Pull Requests API
 
