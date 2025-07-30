@@ -6,7 +6,7 @@ import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
-import fs from "fs";
+import { writeFile } from "fs/promises";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { join } from "path";
 import { LabelContext } from "./labelling-types.js";
@@ -136,6 +136,6 @@ export async function main() {
 
   // Write to a temp file that can get picked up later.
   const summaryFile = join(process.cwd(), "summary.json");
-  fs.writeFileSync(summaryFile, JSON.stringify(impact, null, 2));
+  await writeFile(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
