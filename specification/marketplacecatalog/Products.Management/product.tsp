@@ -8,121 +8,157 @@ using Http;
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("Returns a subset of Product attributes")
 model ProductSummary {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product display name")
   displayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Popularity of the product")
   popularity?: float64;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Array of product categories")
   categoryIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of industry IDs the item belongs to")
   industryIds?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Publisher id")
   publisherId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Eligibility for Azure consumption commitment benefit")
   azureBenefit?: AzureBenefit;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The product badges")
   badges?: Badge[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Publisher type")
   publisherType?: PublisherType;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product publishing stage")
   publishingStage?: PublishingStage;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @key
   @visibility(Lifecycle.Read)
   @doc("Unique product identifier")
   uniqueProductId: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The delivery method or deployment model")
   productType: ProductType;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product sub type")
   productSubType?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product Family")
   productFamily?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Operating system info for this product")
   operatingSystems?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The pricing types for this offer")
   pricingTypes?: PricingType[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Publisher display name")
   publisherDisplayName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product long summary")
   longSummary?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product summary")
   summary?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("Linked add-in types")
   linkedAddInsTypes?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("URI to the small product icon")
   smallIconUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The product description text")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The legal terms of the product for the CSP")
   cspLegalTermsUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The privacy policy of the product")
   privacyPolicyUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Rating buckets")
   ratingBuckets?: RatingBucket[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Average rating for the offer")
   ratingAverage?: float64;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Total number of ratings for the offer")
   ratingCount?: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Full set of plan/SKU attributes")
   @OpenAPI.extension("x-ms-identifiers", #[])
   plans?: PlanSummary[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Maps to the list of compatible products")
   supportedProducts?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product categories the offer belongs to")
   applicableProducts?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Latest update date of the product")
   lastModifiedDateTime?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of locations which are available on the SKUs")
   locations?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The service family of the product, such as 'Compute'")
   serviceFamily?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The service name of the product, such as 'Virtual Machines'")
   service?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The unique id of the product")
   productId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Indication whether the product has plans with reservations")
   hasRiPlans?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Indication if product has a representation in the marketplace")
   hasMarketplaceFootprint?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Set of products attributes")
   @OpenAPI.extension("x-ms-identifiers", #[])
   attributes?: Attribute[];
@@ -452,97 +488,127 @@ model Attribute {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("Summary description of the product")
 model ProductDetails extends ProductSummary {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of product videos")
   @OpenAPI.extension("x-ms-identifiers", #[])
   videos?: ProductVideo[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of Images")
   @OpenAPI.extension("x-ms-identifiers", #[])
   images?: ImageGroup[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of linked Add Ins provided for the item")
   linkedAddIns?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("Dictionary of additional properties provided for the item")
   additionalProductProperties?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The product language")
   language?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("A value indicating whether standard contract amendments are present")
   hasStandardContractAmendments?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The offer id")
   offerId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Standard contract amendments for the product")
   standardContractAmendmentsRevisionId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The universal amendment link for an enterprise contract")
   universalAmendmentUrl?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("A value indicating whether the item is private")
   isPrivate: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("A value indicating whether sale of this item is stopped")
   isStopSell: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Legal terms URI")
   legalTermsUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Legal terms type")
   legalTermsType?: LegalTermsType;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Support uri of the product")
   supportUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("User interface definition uri")
   uiDefinitionUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of screenshot image URIs")
   screenshotUris?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("URI to the medium product icon")
   mediumIconUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("URI to the large product icon")
   largeIconUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("URI to the wide product icon")
   wideIconUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Pricing details uri of the product")
   pricingDetailsUri?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("A value indicating whether microsoft is acting as a reseller")
   isReseller?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Product ownership selling motion")
   productOwnershipSellingMotion?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Indication to disable sending email on purchase")
   disableSendEmailOnPurchase?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Indicates if VM was originally CoreVirtualMachine")
   isCoreVm?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("A StopSellInfo object providing stop sell related data")
   stopSellInfo?: StopSellInfo;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Includes links to the learning and marketing materials as configured by the publisher")
   marketingMaterial?: MarketingMaterial;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("List of artifacts")
   artifacts?: Artifact[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The unique id of the product")
   productId: string;
 }
