@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
-import { PER_PAGE_MAX } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
