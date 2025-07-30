@@ -73,7 +73,7 @@ model ToolDependency extends BaseAgentDependency {
   type: "tool";
 
   @doc("identifier for the tool")
-  id: Record<string>;
+  id: string;
 
   @doc("optional description of how the blueprint will use the tool")
   description?: string;
