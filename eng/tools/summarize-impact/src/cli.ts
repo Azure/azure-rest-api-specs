@@ -8,7 +8,7 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
 import { writeFile } from "fs/promises";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { join } from "path";
+import { resolve } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
 
@@ -135,7 +135,8 @@ export async function main() {
   console.log("Evaluated impact: ", JSON.stringify(impact, null, 2));
 
   // Write to a temp file that can get picked up later.
-  const summaryFile = join(process.cwd(), "summary.json");
+  // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
+  const summaryFile = resolve("summary.json");
   await writeFile(summaryFile, JSON.stringify(impact, null, 2));
   setOutput("summary", summaryFile);
 }
