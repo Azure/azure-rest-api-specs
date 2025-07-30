@@ -65,7 +65,7 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "dimensions": 2,
+            "dimensions": 5,
             "vectorSearchProfile": "config3",
             "synonymMaps": []
           },
@@ -79,7 +79,7 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "dimensions": 2,
+            "dimensions": 5,
             "vectorSearchProfile": "config3",
             "synonymMaps": []
           },
@@ -344,6 +344,7 @@
               "kind": "scalarQuantization",
               "rerankWithOriginalVectors": true,
               "defaultOversampling": 4.0,
+              "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
               }
@@ -352,7 +353,8 @@
               "name": "myBQC",
               "kind": "binaryQuantization",
               "rerankWithOriginalVectors": true,
-              "defaultOversampling": 4.0
+              "defaultOversampling": 4.0,
+              "truncationDimension": 2
             }
           ]
         }
