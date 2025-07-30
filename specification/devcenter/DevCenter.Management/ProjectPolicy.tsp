@@ -45,7 +45,11 @@ interface ProjectPolicies {
     ProjectPolicy,
     PatchModel = ProjectPolicyUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ProjectPolicy | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = ProjectPolicy>
+    >
   >;
 
   /**

@@ -26,16 +26,55 @@ model CustomizationTask
 }
 
 @armResourceOperations
+interface CustomizationTaskOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the devcenter. */
+        @path
+        @segment("devcenters")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$")
+        @minLength(3)
+        @maxLength(26)
+        devCenterName: string,
+
+        /** The name of the Catalog. */
+        @path
+        @segment("catalogs")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
+        catalogName: string,
+      },
+      {
+        /** The name of the Customization Task. */
+        @path
+        @segment("tasks")
+        @key
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
+        taskName: string,
+      }
+    > {}
+
+@armResourceOperations
 interface CustomizationTasks {
   /**
    * Gets a Task from the catalog
    */
-  get is ArmResourceRead<CustomizationTask>;
+  get is CustomizationTaskOps.Read<CustomizationTask>;
 
   /**
    * List Tasks in the catalog.
    */
-  listByCatalog is ArmResourceListByParent<
+  listByCatalog is CustomizationTaskOps.List<
     CustomizationTask,
     Parameters = {
       /**
@@ -49,7 +88,7 @@ interface CustomizationTasks {
   /**
    * Gets Customization Task error details
    */
-  getErrorDetails is ArmResourceActionSync<
+  getErrorDetails is CustomizationTaskOps.ActionSync<
     CustomizationTask,
     void,
     ArmResponse<CatalogResourceValidationErrorDetails>

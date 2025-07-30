@@ -1,60 +1,4 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails
-Change Type: added
-
 ## Swagger Changes
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks__deleted']` | deleted | `{"parameters":[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/Ap...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}__deleted']` | deleted | `{"parameters":[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/Ap...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__deleted']` | deleted | `{"parameters":[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/Ap...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks__added']` | added | `{"get":{"operationId":"CustomizationTasks_ListByCatalog","parameters":[{"name":"projectName","in":"p...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}__added']` | added | `{"get":{"operationId":"CustomizationTasks_Get","parameters":[{"name":"projectName","in":"path","requ...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__added']` | added | `{"post":{"operationId":"CustomizationTasks_GetErrorDetails","parameters":[{"name":"projectName","in"...` |
 
 ### Changes for `$ref`
 
@@ -296,6 +240,9 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections'].parameters__deleted` | deleted | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParame...` |
@@ -326,20 +273,20 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Catalog` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevBoxDefinition` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions/{devBoxDefinitionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevBoxDefinition` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmResponse%3CDevCenterEncryptionSet%3E` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevCenterEncryptionSet` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/DevCenterEncryptionSet` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/galleries/{galleryName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Gallery` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmResponse%3CProjectPolicy%3E` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ProjectPolicy` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ProjectPolicy` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections/{networkConnectionName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NetworkConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/networkConnections/{networkConnectionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/NetworkConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmResponse%3CProject%3E` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Project` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Project` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Catalog` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Catalog` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmResponse%3CPool%3E` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/PoolUpdate` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Pool` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Azure.ResourceManager.ArmResponse%3CSchedule%3E` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Schedule` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Schedule` |
 
 ### Changes for `minLength`
@@ -383,36 +330,6 @@ Change Type: added
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.UserRoleAssignment__deleted` | deleted | `{"type":"object","properties":{"roles":{"type":"object","additionalProperties":{"$ref":"#/definition...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<DevCenterEncryptionSet>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<DevCenterEncryptionSet>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/DevCenterEncryptionSet"}},"required":["...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<Pool>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<Pool>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/Pool"}},"required":["body"]}` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<Project>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<Project>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/Project"}},"required":["body"]}` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ProjectPolicy>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ProjectPolicy>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/ProjectPolicy"}},"required":["body"]}` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<Schedule>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<Schedule>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/Schedule"}},"required":["body"]}` |
 
 ### Changes for `DefinitionParametersItem`
 
@@ -638,12 +555,9 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/checkScopedNameAvailability'].post.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse` | `../../../../../common-types/resource-management/v5/types.json#/definitions/CheckNameAvailabilityResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies/{projectPolicyName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/listSkus'].post.responses.200.schema.$ref` | `vdi.json#/definitions/SkuListResult` | `#/definitions/SkuListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].patch['x-ms-long-running-operation-options']['final-state-via']` | `azure-async-operation` | `original-uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch.responses.200.schema.$ref` | `#/definitions/Pool` | `#/definitions/PoolUpdate` |
 

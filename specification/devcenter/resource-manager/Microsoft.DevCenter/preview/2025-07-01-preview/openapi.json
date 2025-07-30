@@ -2508,6 +2508,214 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks": {
+      "get": {
+        "operationId": "CustomizationTasks_ListByCatalog",
+        "tags": [
+          "CustomizationTasks"
+        ],
+        "description": "List Tasks in the catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "devCenterName",
+            "in": "path",
+            "description": "The name of the devcenter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 26,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Catalog.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTaskListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_ListByCatalog": {
+            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}": {
+      "get": {
+        "operationId": "CustomizationTasks_Get",
+        "tags": [
+          "CustomizationTasks"
+        ],
+        "description": "Gets a Task from the catalog",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "devCenterName",
+            "in": "path",
+            "description": "The name of the devcenter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 26,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Catalog.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the Customization Task.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomizationTask"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_Get": {
+            "$ref": "./examples/CustomizationTasks_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails": {
+      "post": {
+        "operationId": "CustomizationTasks_GetErrorDetails",
+        "tags": [
+          "CustomizationTasks"
+        ],
+        "description": "Gets Customization Task error details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "devCenterName",
+            "in": "path",
+            "description": "The name of the devcenter.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 26,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "The name of the Catalog.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The name of the Customization Task.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomizationTasks_GetErrorDetails": {
+            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions": {
       "get": {
         "operationId": "DevBoxDefinitions_ListByDevCenter",
@@ -3121,7 +3329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DevCenterEncryptionSet"
             }
@@ -3132,11 +3340,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3153,8 +3356,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CDevCenterEncryptionSet%3E"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DevCenterEncryptionSet"
         },
         "x-ms-long-running-operation": true
       },
@@ -4428,7 +4631,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectPolicy"
             }
@@ -4439,11 +4642,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4460,8 +4658,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CProjectPolicy%3E"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ProjectPolicy"
         },
         "x-ms-long-running-operation": true
       },
@@ -5300,7 +5498,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Project"
             }
@@ -5311,11 +5509,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5332,8 +5525,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CProject%3E"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Project"
         },
         "x-ms-long-running-operation": true
       },
@@ -7011,214 +7204,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks": {
-      "get": {
-        "operationId": "CustomizationTasks_ListByCatalog",
-        "tags": [
-          "CustomizationTasks"
-        ],
-        "description": "List Tasks in the catalog.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the Catalog.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_ListByCatalog": {
-            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}": {
-      "get": {
-        "operationId": "CustomizationTasks_Get",
-        "tags": [
-          "CustomizationTasks"
-        ],
-        "description": "Gets a Task from the catalog",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the Catalog.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "taskName",
-            "in": "path",
-            "description": "The name of the Task.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTask"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_Get": {
-            "$ref": "./examples/CustomizationTasks_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails": {
-      "post": {
-        "operationId": "CustomizationTasks_GetErrorDetails",
-        "tags": [
-          "CustomizationTasks"
-        ],
-        "description": "Gets Customization Task error details",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the Catalog.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "taskName",
-            "in": "path",
-            "description": "The name of the Task.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CatalogResourceValidationErrorDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_GetErrorDetails": {
-            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/devboxdefinitions": {
       "get": {
         "operationId": "DevBoxDefinitions_ListByProject",
@@ -8258,9 +8243,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Pool"
+              "$ref": "#/definitions/PoolUpdate"
             }
           },
           "202": {
@@ -8269,11 +8254,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -8290,8 +8270,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPool%3E"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PoolUpdate"
         },
         "x-ms-long-running-operation": true
       },
@@ -8757,7 +8737,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Schedule"
             }
@@ -8768,11 +8748,6 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -8789,8 +8764,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSchedule%3E"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Schedule"
         },
         "x-ms-long-running-operation": true
       },
@@ -9099,71 +9074,6 @@
           }
         ]
       }
-    },
-    "Azure.ResourceManager.ArmResponse<DevCenterEncryptionSet>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DevCenterEncryptionSet",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Pool>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Pool",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Project>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Project",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ProjectPolicy>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ProjectPolicy",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Schedule>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Schedule",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureAiServicesMode": {
       "type": "string",

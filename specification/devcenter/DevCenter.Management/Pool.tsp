@@ -44,7 +44,11 @@ interface Pools {
     Pool,
     PatchModel = PoolUpdate,
     LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = PoolUpdate | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmAsyncOperationHeader<FinalResult = PoolUpdate>
+    >
   >;
 
   /**

@@ -1,302 +1,5 @@
 {
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks__deleted": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "commonDefinitions.json#/parameters/TopParameter"
-        }
-      ],
-      "get": {
-        "operationId": "CustomizationTasks_ListByCatalog",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_ListByCatalog": {
-            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}__deleted": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CustomizationTaskNameParameter"
-        }
-      ],
-      "get": {
-        "operationId": "CustomizationTasks_Get",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTask"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_Get": {
-            "$ref": "./examples/CustomizationTasks_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__deleted": {
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/DevCenterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CatalogNameParameter"
-        },
-        {
-          "$ref": "#/parameters/CustomizationTaskNameParameter"
-        }
-      ],
-      "post": {
-        "operationId": "CustomizationTasks_GetErrorDetails",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_GetErrorDetails": {
-            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks__added": {
-      "get": {
-        "operationId": "CustomizationTasks_ListByCatalog",
-        "parameters": [
-          {
-            "name": "projectName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTaskListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_ListByCatalog": {
-            "$ref": "./examples/CustomizationTasks_ListByCatalog.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}__added": {
-      "get": {
-        "operationId": "CustomizationTasks_Get",
-        "parameters": [
-          {
-            "name": "projectName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "taskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CustomizationTask"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_Get": {
-            "$ref": "./examples/CustomizationTasks_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails__added": {
-      "post": {
-        "operationId": "CustomizationTasks_GetErrorDetails",
-        "parameters": [
-          {
-            "name": "projectName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "taskName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CatalogResourceValidationErrorDetails"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomizationTasks_GetErrorDetails": {
-            "$ref": "./examples/CustomizationTasks_GetErrorDetails.json"
-          }
-        }
-      }
-    },
     "/providers/microsoft.DevCenter/operations": {
       "get": {
         "responses": {
@@ -1168,6 +871,199 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CustomizationTaskNameParameter"
+        }
+      ],
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "taskName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/tasks/{taskName}/getErrorDetails": {
+      "parameters__deleted": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CustomizationTaskNameParameter"
+        }
+      ],
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "devCenterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 26,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "catalogName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "taskName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "vdi.json#/definitions/CatalogResourceValidationErrorDetails",
+                "__new": "#/definitions/CatalogResourceValidationErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/devcenters/{devCenterName}/devboxdefinitions": {
       "parameters__deleted": [
         {
@@ -1382,11 +1278,7 @@
       },
       "patch": {
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CDevCenterEncryptionSet%3E",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/DevCenterEncryptionSet"
         }
       }
     },
@@ -1503,11 +1395,7 @@
       },
       "patch": {
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CProjectPolicy%3E",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/ProjectPolicy"
         }
       }
     },
@@ -1744,11 +1632,7 @@
       },
       "patch": {
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CProject%3E",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/Project"
         }
       }
     },
@@ -2629,12 +2513,18 @@
             " "
           ]
         ],
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CPool%3E",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/Pool",
+                "__new": "#/definitions/PoolUpdate"
+              }
+            }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/PoolUpdate"
         }
       },
       "delete": {
@@ -2932,11 +2822,7 @@
           ]
         ],
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/Azure.ResourceManager.ArmResponse%3CSchedule%3E",
-          "final-state-via": {
-            "__old": "azure-async-operation",
-            "__new": "original-uri"
-          }
+          "final-state-schema__added": "#/definitions/Schedule"
         }
       },
       "delete": {
@@ -3035,61 +2921,6 @@
         }
       },
       "x-ms-client-name": "userRoleAssignmentValue"
-    },
-    "Azure.ResourceManager.ArmResponse<DevCenterEncryptionSet>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DevCenterEncryptionSet"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Pool>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Pool"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Project>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Project"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ProjectPolicy>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ProjectPolicy"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Schedule>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Schedule"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "DefinitionParametersItem__added": {
       "type": "object",
