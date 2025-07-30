@@ -8,14 +8,13 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
 import fs from "fs";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { join, resolve } from "path";
+import { join } from "path";
 import { LabelContext } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
 
 export async function getRoot(inputPath: string): Promise<string> {
   try {
-    const gitRoot = await getRootFolder(inputPath);
-    return resolve(gitRoot.trim());
+    return await getRootFolder(inputPath);
   } catch (error) {
     console.error(
       `Error: Unable to determine the root folder of the git repository.`,
