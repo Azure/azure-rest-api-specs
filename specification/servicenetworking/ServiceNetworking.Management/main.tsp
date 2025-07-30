@@ -26,6 +26,10 @@ enum Versions {
   /** 2025-03-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /** 2025-09-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 using TypeSpec.Http;
@@ -61,18 +65,18 @@ model FrontendProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** Frontend Mode */
-  mode?: Mode;
+  /** Frontend Type */
+  type?: Type;
 }
 
-/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within Azure virtual network */
-union Mode {
+/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within an Azure virtual network */
+union Type {
   string,
 
-  /** Mode of Type Public */
+  /** Type of Type Public */
   Public: "Public",
 
-  /** Mode of Type Private */
+  /** Type of Type Private */
   Private: "Private",
 }
 
