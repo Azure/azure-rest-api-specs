@@ -184,7 +184,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
     - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
 
 6. **Exclusions**:
-    - Exclude changes in `.github` and `.vscode` folders from API spec and SDK pull requests.
+    - Exclude changes to the `.gitignore` file and contents within the `.github` and `.vscode` folders from API spec and SDK pull requests.
 
 7. **Working Branch Rule**:
     - Ensure the TypeSpec project repository and the current working repository are not on the `main` branch:

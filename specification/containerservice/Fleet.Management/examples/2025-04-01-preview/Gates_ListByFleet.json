@@ -1,0 +1,48 @@
+{
+  "operationId": "Gates_ListByFleet",
+  "title": "Lists the Gates of a Fleet.",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/gates/12345678-910a-bcde-f000-000000000000",
+            "name": "12345678-910a-bcde-f000-000000000000",
+            "type": "Microsoft.ContainerService/fleets/gates",
+            "systemData": {
+              "createdBy": "someUser",
+              "createdByType": "User",
+              "createdAt": "2022-03-23T05:40:40.657Z",
+              "lastModifiedBy": "someOtherUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+            },
+            "eTag": "kd30rkdfo49=",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "displayName": "Perform health checks after Group 1",
+              "target": {
+                "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/updateRuns/run1",
+                "updateRunProperties": {
+                  "name": "run1",
+                  "stage": "stage1",
+                  "group": "group1",
+                  "timing": "After"
+                }
+              },
+              "gateType": "Approval",
+              "state": "Pending"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

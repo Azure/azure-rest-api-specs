@@ -44,8 +44,9 @@ describe("Check Changes", () => {
 
         expect(result).toBeDefined();
         expect(result.typeSpecChanged).toBeTruthy();
-        expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("SuppressionReviewRequired")).toBeTruthy();
+        expect(result.dataPlaneRequired).toBeFalsy();
+        expect(result.resourceManagerRequired).toBeTruthy();
+        expect(result.suppressionReviewRequired).toBeTruthy();
         expect(changedFileDetails).toBeDefined();
         expect(changedFileDetails.total).toEqual(293);
       } finally {
@@ -90,12 +91,10 @@ describe("Check Changes", () => {
 
         const result = await evaluateImpact(prContext, labelContext);
         expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.labelContext.toAdd.has("TypeSpec")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
+        expect(result.typeSpecChanged).toBeTruthy();
+        expect(result.resourceManagerRequired).toBeTruthy();
         expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.labelContext.toAdd.has("ARMReview")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("RPaaS")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("WaitForARMFeedback")).toBeTruthy();
+        expect(result.rpaasChange).toBeTruthy();
         expect(result).toBeDefined();
       } finally {
         // Restore original directory
