@@ -1027,13 +1027,16 @@ model TermFacetRequest {
 
 @doc("TermRelationship.")
 model TermRelationship {
+  @doc("System metadata for the term relationship.")
+  systemData?: SystemData;
+
   @doc("description for the term relationship")
   description?: string;
 
   @doc("The unique identifier of the entity.")
   entityId?: uuid;
 
-  @doc("The system data of the term relationship.")
+  @doc("The type of the term relationship.")
   relationshipType?: TermRelationshipType;
 }
 
