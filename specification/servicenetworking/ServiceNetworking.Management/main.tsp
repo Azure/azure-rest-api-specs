@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
-@armCommonTypesVersion("v3")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 @service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
@@ -42,13 +42,12 @@ using Azure.ResourceManager;
 /** Frontend Sub Resource of Traffic Controller. */
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties> {
-  /** Frontends */
-  @key("frontendName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("frontends")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Frontend,
+    KeyName = "frontendName",
+    SegmentName = "frontends",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Frontend Properties. */
@@ -69,7 +68,7 @@ model FrontendProperties {
   type?: Type;
 }
 
-/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within an Azure virtual network */
+/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within an Azure virtual network. */
 union Type {
   string,
 
@@ -84,13 +83,12 @@ union Type {
 /** Association Subresource of Traffic Controller */
 @parentResource(TrafficController)
 model Association is TrackedResource<AssociationProperties> {
-  /** Name of Association */
-  @key("associationName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("associations")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Association,
+    KeyName = "associationName",
+    SegmentName = "associations",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** The type used for update operations of the Association. */
@@ -149,13 +147,12 @@ model AssociationSubnet {
 /** SecurityPolicy Subresource of Traffic Controller. */
 @parentResource(TrafficController)
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
-  /** SecurityPolicy */
-  @key("securityPolicyName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("securityPolicies")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Association,
+    KeyName = "securityPolicyName",
+    SegmentName = "securityPolicies",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** SecurityPolicy Properties. */
@@ -260,13 +257,12 @@ model IpAccessRulesSecurityPolicy {
 @parentResource(TrafficController)
 model PrivateEndpointConnection
   is TrackedResource<PrivateEndpointConnectionProperties> {
-  /** Name of PrivateEndpointConnectionsName */
-  @key("PrivateEndpointConnectionName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("privateEndpointConnections")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "PrivateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Private Endpoint Connection Properties. */
@@ -323,13 +319,12 @@ union PrivateEndpointServiceConnectionStatus {
 @parentResource(TrafficController)
 model PrivateEndpointConnectionProxy
   is TrackedResource<PrivateEndpointConnectionProxyProperties> {
-  /** Name of PrivateEndpointConnectionProxy */
-  @key("PrivateEndpointConnectionProxyName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("privateEndpointConnectionProxies")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnectionProxy,
+    KeyName = "PrivateEndpointConnectionProxyName",
+    SegmentName = "privateEndpointConnectionProxies",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Private Endpoint Connection Proxy Properties. */
@@ -442,13 +437,12 @@ model ConnectionDetails {
 /** PrivateLinkResource Subresource of Traffic Controller */
 @parentResource(TrafficController)
 model PrivateLinkResource is TrackedResource<PrivateLinkResourceProperties> {
-  /** Name of PrivateLinkResource */
-  @key("privateLinkResourceName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("privateLinkResources")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Represents private link resource properties. */
@@ -470,12 +464,12 @@ model PrivateLinkResourceProperties {
 //----------------------- Traffic Controller -----------------------
 @resource("trafficControllers")
 model TrafficController is TrackedResource<TrafficControllerProperties> {
-  /** traffic controller name for path */
-  @key("trafficControllerName")
-  @path
-  @segment("trafficControllers")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = TrafficController,
+    KeyName = "trafficControllerName",
+    SegmentName = "trafficControllers",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Traffic Controller Properties. */
