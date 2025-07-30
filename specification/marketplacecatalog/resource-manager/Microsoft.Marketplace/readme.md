@@ -45,4 +45,14 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/openapi.json
+
+suppressions:
+- code: BodyTopLevelProperties
+  from: openapi.json
+  reason: Existing fields in current APIs
+- code: ParametersInPointGet
+  from: openapi.json
+  reason: Required query parameters for proxy 
 ```
+
+
