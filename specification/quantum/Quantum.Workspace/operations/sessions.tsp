@@ -35,6 +35,15 @@ namespace Quantum.Workspace.Services {
     @removed(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     list is ListOperation<SessionDetails>;
 
+
+    /** Update job properties. */
+    @sharedRoute
+    update is UpdateOperation<{
+      ...UpdateResource;
+      ...CommonParams;
+    }
+    >;
+
     /** List all Sessions. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.

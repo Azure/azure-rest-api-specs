@@ -9,14 +9,17 @@
     "workspaceName": "my-workspace",
     "resource": [
       {
-        "op": "add",
-        "path": "/tags/-",
-        "value": "new_tag"
-      },
-      {
-        "op": "remove",
-        "path": "/tags/0"
+        "itemId": "00000000-0000-0000-0000-000000000002",
+        "updatedResourceFields": {
+          "itemType": "Job",
+          "tags": {
+            "tag1key": "tag1value",
+            "new_tag": "new_value"
+        },
+        "jobPriority": "Normal",
+        "jobId": "00000000-0000-0000-0000-000000000002"
       }
+    }
     ]
   },
   "responses": {
@@ -41,10 +44,11 @@
         "providerId": "microsoft-qc",
         "status": "Waiting",
         "target": "microsoft.estimator",
-        "tags": [
-          "tag1",
-          "new_tag"
-        ]
+        "tags": {
+          "tag1key": "tag1value",
+          "new_tag": "new_value"
+        },
+        "jobPriority": "Normal"
       }
     },
     "204": {}

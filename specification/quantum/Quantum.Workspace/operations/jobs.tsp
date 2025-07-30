@@ -5,8 +5,10 @@
 
 import "./operations.tsp";
 import "../common/models.tsp";
-import "../common/modes-jobs.tsp";
+import "../common/models-jobs.tsp";
+import "../common/models-items.tsp";
 
+using TypeSpec.Http;
 using Quantum.Workspace;
 
 /** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
@@ -19,12 +21,12 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-      There is no support for JsonPatch in Azure.Core.
-      The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-      See https://github.com/Azure/typespec-azure/issues/475
-      """
-    update is PatchOperation<JobDetails>;
+    @sharedRoute
+    update is UpdateOperation<{
+      ...UpdateResource;
+      ...CommonParams;
+    }
+    >;
 
     /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
