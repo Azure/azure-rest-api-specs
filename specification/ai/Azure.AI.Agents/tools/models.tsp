@@ -425,7 +425,10 @@ model RequiredComputerUseToolCallDetails {
 
   @doc("Safety checks that are pending acknowledgment by the developer.")
   @encodedName("application/json", "pending_safety_checks")
-  pendingSafetyChecks?: SafetyCheck[];
+  pendingSafetyChecks: SafetyCheck[];
+
+  @doc("The type of the computer call. Always 'computer_call'.")
+  type: "computer_call";
 }
 
 //
@@ -567,6 +570,41 @@ model RunStepMcpToolCall extends RunStepToolCall {
   @doc("The label for the MCP server")
   @encodedName("application/json", "server_label")
   serverLabel?: string;
+}
+
+@doc("""
+  A record of a call to a Computer Use tool, issued by the model in evaluation of a defined tool, that represents
+  executed computer automation actions.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepComputerUseToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'computer_use_preview'.")
+  type: "computer_use_preview";
+
+  @doc("The detailed information about the computer use tool call.")
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview: RunStepComputerUseToolCallDetails;
+
+  @doc("The output from the computer use tool.")
+  output: ComputerScreenshot;
+
+  @doc("Safety checks that have been acknowledged by the developer.")
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
+}
+
+@doc("The detailed information about a computer use tool call.")
+@added(Versions.v2025_05_15_preview)
+model RunStepComputerUseToolCallDetails {
+  @doc("The action to be performed by the computer use tool.")
+  action: ComputerUseAction;
+
+  @doc("Safety checks that are pending acknowledgment by the developer.")
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks: SafetyCheck[];
+
+  @doc("The type of the computer call. Always 'computer_call'.")
+  type: "computer_call";
 }
 
 @doc("""
@@ -1044,6 +1082,7 @@ model ComputerUseToolParameters {
 }
 
 @doc("The environment types supported by the computer use tool.")
+@added(Versions.v2025_05_15_preview)
 union ComputerUseEnvironment {
   string,
 
@@ -1220,4 +1259,19 @@ model SafetyCheck {
 
   @doc("Details about the pending safety check.")
   message: string;
+}
+
+@doc("The output from a computer use tool representing a screenshot.")
+@added(Versions.v2025_05_15_preview)
+model ComputerScreenshot {
+  @doc("Specifies the event type. For a computer screenshot, this property is always set to computer_screenshot.")
+  type: "computer_screenshot";
+
+  @doc("The identifier of an uploaded file that contains the screenshot.")
+  @encodedName("application/json", "file_id")
+  fileId?: string;
+
+  @doc("The URL of the screenshot image.")
+  @encodedName("application/json", "image_url")
+  imageUrl?: string;
 }
