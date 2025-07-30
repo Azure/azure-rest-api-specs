@@ -77,6 +77,68 @@ union PostgreSqlSnapshotMode {
   string,
 }
 
+@doc("Specifies the criteria for running a snapshot when the connector starts")
+union PostgreSqlSslMode {
+  @doc("Allow attempts to use an unencrypted connection first and, failing that, a secure (encrypted) connection.")
+  Allow: "Allow",
+
+  @doc("Prefer attempts to use a secure (encrypted) connection first and, failing that, an unencrypted connection.")
+  Prefer: "Prefer",
+
+  @doc("Require uses a secure (encrypted) connection, and fails if one cannot be established.")
+  Require: "Require",
+
+  @doc("Verify-ca behaves like require but also verifies the server TLS certificate against the configured Certificate Authority (CA) certificates, or fails if no valid matching CA certificates are found.")
+  VerifyCa: "VerifyCa",
+
+  @doc("Verify-full behaves like verify-ca but also verifies that the server certificate matches the host to which the connector is trying to connect.")
+  VerifyFull: "VerifyFull",
+
+  string,
+}
+
+@doc("Controls whether a tombstone event should be generated after a delete event")
+union PostgreSqlTimePrecisionMode {
+  @doc("Captures the time and timestamp values exactly as in the database using either millisecond, microsecond, or nanosecond precision values based on the database column’s type.")
+  Adaptive: "Adaptive",
+
+  @doc("Captures the date, datetime and timestamp values exactly as in the database using either millisecond, microsecond, or nanosecond precision values based on the database column’s type. An exception is TIME type fields, which are always captured as microseconds.")
+  AdaptiveTimeMicroseconds: "AdaptiveTimeMicroseconds",
+
+  @doc("Always represents time and timestamp values by using Kafka Connect’s built-in representations for Time, Date, and Timestamp, which use millisecond precision regardless of the database columns' precision.")
+  Connect: "Connect",
+
+  string,
+}
+
+@doc("Specifies how schema names should be adjusted for compatibility with the message converter used by the connector")
+union PostgreSqlSchemaNameAdjustmentMode {
+  @doc("Does not apply any adjustment.")
+  None: "None",
+
+  @doc("Replaces the characters that cannot be used in the Avro type name with underscore.")
+  Avro: "Avro",
+
+  @doc("Replaces the underscore or characters that cannot be used in the Avro type name with corresponding Unicode characters.")
+  AvroUnicode: "AvroUnicode",
+
+  string,
+}
+
+@doc("Specifies how field names should be adjusted for compatibility with the message converter used by the connector.")
+union PostgreSqlFieldNameAdjustmentMode {
+  @doc("Does not apply any adjustment.")
+  None: "None",
+
+  @doc("Replaces the characters that cannot be used in the Avro type name with underscore.")
+  Avro: "Avro",
+
+  @doc("Replaces the underscore or characters that cannot be used in the Avro type name with corresponding Unicode characters.")
+  AvroUnicode: "AvroUnicode",
+
+  string,
+}
+
 @doc("Configuration for PostgreSqlSourceConnector")
 model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of PostgreSqlSourceConnector")
@@ -134,4 +196,37 @@ model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Specifies the criteria for running a snapshot when the connector starts.")
   snapshotMode?: PostgreSqlSnapshotMode;
+
+  @doc("Whether to use an encrypted connection to the PostgreSQL server")
+  sslmode?: PostgreSqlSslMode;
+
+  @doc("Fully-qualified name of the data collection that is used to send signals to the connector. Use the following format to specify the collection name:schemaName.tableName")
+  signalDataCollection?: string;
+
+  @doc("Controls how frequently the connector sends heartbeat messages to a Kafka topic. The default behavior is that the connector does not send heartbeat messages.")
+  heartbeatIntervalMs?: int32;
+
+  @doc("Specifies a query that the connector executes on the source database when the connector sends a heartbeat message.")
+  heartbeatActionQuery?: string;
+
+  @doc("Positive integer value that specifies the maximum size of each batch of events that the connector processes.")
+  maxBatchSize?: int32;
+
+  @doc("Positive integer value that specifies the maximum number of records that the blocking queue can hold.")
+  maxQueueSize?: int32;
+
+  @doc("Positive integer value that specifies the number of milliseconds the connector should wait for new change events to appear before it starts processing a batch of events.")
+  pollIntervalMs?: int32;
+
+  @doc("Specifies whether the connector creates a failover slot. If you omit this setting, or if the primary server runs PostgreSQL 16 or earlier, the connector does not create a failover slot.")
+  slotFailover?: boolean;
+
+  @doc("Specifies how schema names should be adjusted for compatibility with the message converter used by the connector. ")
+  schemaNameAdjustmentMode?: PostgreSqlSchemaNameAdjustmentMode;
+
+  @doc("Specifies how field names should be adjusted for compatibility with the message converter used by the connector. ")
+  fieldNameAdjustmentMode?: PostgreSqlFieldNameAdjustmentMode;
+
+  @doc("Time, date, and timestamps can be represented with different kinds of precision.")
+  timePrecisionMode?: PostgreSqlTimePrecisionMode;
 }
