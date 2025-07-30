@@ -358,24 +358,28 @@ model JsRuntimeOptions {
    * Maximum number of cached interpreters.
    */
   @encodedName("application/json", "max_cached_interpreters")
+  @minValue(0)
   maxCachedInterpreters?: int64;
 
   /**
    * Maximum execution time in milliseconds.
    */
   @encodedName("application/json", "max_execution_time_ms")
+  @minValue(0)
   maxExecutionTimeMs?: int64;
 
   /**
    * Maximum heap size in bytes.
    */
   @encodedName("application/json", "max_heap_bytes")
+  @minValue(0)
   maxHeapBytes?: int64;
 
   /**
    * Maximum stack size in bytes.
    */
   @encodedName("application/json", "max_stack_bytes")
+  @minValue(0)
   maxStackBytes?: int64;
 
   /**
