@@ -195,6 +195,44 @@ input-file:
 - stable/2025-09-01/searchindex.json
 ```
 
+### Tag: package-2025-08-01-preview
+
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-01-preview'
+input-file:
+- preview/2025-08-01-preview/knowledgeagent.json
+- preview/2025-08-01-preview/searchservice.json
+- preview/2025-08-01-preview/searchindex.json
+```
+
+### Tag: package-2025-08-knowledgeagent-preview
+
+These settings apply only when `--tag=package-2025-08-knowledgeagent-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-knowledgeagent-preview'
+input-file:
+- preview/2025-08-01-preview/knowledgeagent.json
+```
+
+### Tag: package-2025-08-searchservice-preview
+
+These settings apply only when `--tag=package-2025-08-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-searchservice-preview'
+input-file:
+- preview/2025-08-01-preview/searchservice.json
+```
+
+### Tag: package-2025-08-searchindex-preview
+
+These settings apply only when `--tag=package-2025-08-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-08-searchindex-preview'
+input-file:
+- preview/2025-08-01-preview/searchindex.json
+```
+
 ### Tag: package-2025-05-01-preview
 
 These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
