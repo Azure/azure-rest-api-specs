@@ -69,7 +69,6 @@ interface HealthBots {
   /**
    * Patch a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     HealthBot,
@@ -77,7 +76,8 @@ interface HealthBots {
     Error = Error,
     Response = ArmResponse<HealthBot> | ArmResourceCreatedResponse<
       HealthBot,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = HealthBot> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -87,7 +87,7 @@ interface HealthBots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = HealthBot>> | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
