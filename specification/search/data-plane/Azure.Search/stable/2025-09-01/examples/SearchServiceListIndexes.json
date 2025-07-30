@@ -357,19 +357,25 @@
                 {
                   "name": "mySQ8",
                   "kind": "scalarQuantization",
-                  "rerankWithOriginalVectors": true,
-                  "defaultOversampling": 4.0,
                   "truncationDimension": 2,
                   "scalarQuantizationParameters": {
                     "quantizedDataType": "int8"
+                  },
+                  "rescoringOptions": {
+                    "enableRescoring": true,
+                    "defaultOversampling": 4.0,
+                    "rescoreStorageMethod": "preserveOriginals"
                   }
                 },
                 {
                   "name": "myBQC",
                   "kind": "binaryQuantization",
-                  "rerankWithOriginalVectors": true,
-                  "defaultOversampling": 4.0,
-                  "truncationDimension": 2
+                  "truncationDimension": 2,
+                  "rescoringOptions": {
+                    "enableRescoring": true,
+                    "defaultOversampling": 4.0,
+                    "rescoreStorageMethod": "preserveOriginals"
+                  }
                 }
               ]
             }
