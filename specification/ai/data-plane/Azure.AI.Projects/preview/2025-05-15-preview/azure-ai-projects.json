@@ -1841,9 +1841,9 @@
           "description": "System related metadata",
           "readOnly": true
         },
-        "catalogInfo": {
-          "$ref": "#/definitions/AgentBlueprintCatalogInformation",
-          "description": "Catalog information for the blueprint"
+        "catalogData": {
+          "$ref": "#/definitions/AgentBlueprintCatalogData",
+          "description": "Catalog data for the blueprint"
         },
         "implementation": {
           "$ref": "#/definitions/AgentImplementationDetails",
@@ -1868,13 +1868,13 @@
         "name",
         "version",
         "displayName",
-        "catalogInfo",
+        "catalogData",
         "implementation"
       ]
     },
-    "AgentBlueprintCatalogInformation": {
+    "AgentBlueprintCatalogData": {
       "type": "object",
-      "description": "Catalog information for the agent blueprint",
+      "description": "Catalog data for the agent blueprint",
       "properties": {
         "publisherId": {
           "type": "string",
@@ -3830,7 +3830,7 @@
       "type": "object",
       "description": "Representation of a tool dependency for the agent",
       "properties": {
-        "assetId": {
+        "id": {
           "type": "object",
           "description": "identifier for the tool",
           "additionalProperties": {
@@ -3843,7 +3843,7 @@
         }
       },
       "required": [
-        "assetId"
+        "id"
       ],
       "allOf": [
         {

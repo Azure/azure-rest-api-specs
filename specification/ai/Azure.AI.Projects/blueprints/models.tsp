@@ -26,8 +26,8 @@ model AgentBlueprint {
   @visibility(Lifecycle.Read)
   SystemData?: SystemData;
 
-  @doc("Catalog information for the blueprint")
-  catalogInfo: AgentBlueprintCatalogInformation;
+  @doc("Catalog data for the blueprint")
+  catalogData: AgentBlueprintCatalogData;
 
   @doc("Instructions for deploying an agent using this blueprint")
   implementation: AgentImplementationDetails;
@@ -73,14 +73,14 @@ model ToolDependency extends BaseAgentDependency {
   type: "tool";
 
   @doc("identifier for the tool")
-  assetId: Record<string>;
+  id: Record<string>;
 
   @doc("optional description of how the blueprint will use the tool")
   description?: string;
 }
 
-@doc("Catalog information for the agent blueprint")
-model AgentBlueprintCatalogInformation {
+@doc("Catalog data for the agent blueprint")
+model AgentBlueprintCatalogData {
   ...CatalogInformation;
 }
 
