@@ -476,6 +476,35 @@
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
+          },
+          {
+            "name": "debug",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "disabled",
+              "vector"
+            ],
+            "x-ms-enum": {
+              "name": "QueryDebugMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "disabled",
+                  "name": "Disabled",
+                  "description": "No query debugging information will be returned."
+                },
+                {
+                  "value": "vector",
+                  "name": "Vector",
+                  "description": "Allows the user to further explore their hybrid and vector query results."
+                }
+              ]
+            },
+            "description": "Enables a debugging tool that can be used to further explore your search results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
           }
         ],
         "x-ms-request-id": "request-id",
@@ -1241,6 +1270,13 @@
           "x-ms-client-name": "Captions",
           "x-nullable": true,
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
+        },
+        "@search.documentDebugInfo": {
+          "$ref": "#/definitions/DocumentDebugInfo",
+          "readOnly": true,
+          "x-ms-client-name": "DocumentDebugInfo",
+          "x-nullable": true,
+          "description": "Contains debugging information that can be used to further explore your search results."
         }
       },
       "required": [
@@ -1368,6 +1404,30 @@
         "value"
       ],
       "description": "Response containing the status of operations for all documents in the indexing request."
+    },
+    "QueryDebugMode": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "vector"
+      ],
+      "x-ms-enum": {
+        "name": "QueryDebugMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "disabled",
+            "name": "Disabled",
+            "description": "No query debugging information will be returned."
+          },
+          {
+            "value": "vector",
+            "name": "Vector",
+            "description": "Allows the user to further explore their hybrid and vector query results."
+          }
+        ]
+      },
+      "description": "Enables a debugging tool that can be used to further explore your search results. You can enable multiple debug modes simultaneously by separating them with a | character, for example: semantic|queryRewrites."
     },
     "SearchMode": {
       "type": "string",
@@ -1677,6 +1737,10 @@
           "type": "string",
           "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results."
         },
+        "debug": {
+          "$ref": "#/definitions/QueryDebugMode",
+          "description": "Enables a debugging tool that can be used to further explore your reranked results."
+        },
         "search": {
           "type": "string",
           "description": "A full-text search query expression; Use \"*\" or omit this parameter to match all documents.",
@@ -1865,6 +1929,7 @@
       "description": "Parameters for fuzzy matching, and other autocomplete query behaviors."
     },
     "AutocompleteResult": {
+      "type": "object",
       "properties": {
         "@search.coverage": {
           "type": "number",
@@ -2082,6 +2147,93 @@
         ]
       },
       "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns captions extracted from key passages in the highest ranked documents. When Captions is set to `extractive`, highlighting is enabled by default, and can be configured by appending the pipe character `|` followed by the `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults to `None`."
+    },
+    "DocumentDebugInfo": {
+      "type": "object",
+      "properties": {
+        "vectors": {
+          "$ref": "#/definitions/VectorsDebugInfo",
+          "readOnly": true,
+          "description": "Contains debugging information specific to vector and hybrid search."
+        }
+      },
+      "description": "Contains debugging information that can be used to further explore your search results."
+    },
+    "VectorsDebugInfo": {
+      "type": "object",
+      "properties": {
+        "subscores": {
+          "$ref": "#/definitions/QueryResultDocumentSubscores",
+          "readOnly": true,
+          "description": "The breakdown of subscores of the document prior to the chosen result set fusion/combination method such as RRF."
+        }
+      }
+    },
+    "QueryResultDocumentSubscores": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/TextResult",
+          "readOnly": true,
+          "description": "The BM25 or Classic score for the text portion of the query."
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentVectorSubscores"
+          },
+          "readOnly": true,
+          "description": "The vector similarity and @search.score values for each vector query."
+        },
+        "documentBoost": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The BM25 or Classic score for the text portion of the query."
+        }
+      },
+      "description": "The breakdown of subscores between the text and vector query components of the search query for this document. Each vector query is shown as a separate object in the same order they were received."
+    },
+    "TextResult": {
+      "type": "object",
+      "properties": {
+        "searchScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The BM25 or Classic score for the text portion of the query."
+        }
+      },
+      "readOnly": true,
+      "description": "The BM25 or Classic score for the text portion of the query."
+    },
+    "QueryResultDocumentVectorSubscores": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SingleVectorFieldResult",
+        "readOnly": true
+      },
+      "readOnly": true,
+      "description": "The vector similarity and @search.score values for each vector query. Each cross-field vector query will have separate subscores for each referenced field."
+    },
+    "SingleVectorFieldResult": {
+      "type": "object",
+      "properties": {
+        "searchScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The @search.score value that is calculated from the vector similarity score. This is the score that's visible in a pure single-field single-vector query."
+        },
+        "vectorSimilarity": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The vector similarity score for this document. Note this is the canonical definition of similarity metric, not the 'distance' version. For example, cosine similarity instead of cosine distance."
+        }
+      },
+      "readOnly": true,
+      "description": "A single vector field result. Both @search.score and vector similarity values are returned. Vector similarity is related to @search.score by an equation."
     }
   },
   "parameters": {
