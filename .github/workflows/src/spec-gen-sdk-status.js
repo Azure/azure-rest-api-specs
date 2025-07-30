@@ -1,7 +1,8 @@
 // @ts-check
+import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
-import { CheckStatus, CommitStatusState, PER_PAGE_MAX, writeToActionsSummary } from "./github.js";
+import { writeToActionsSummary } from "./github.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
