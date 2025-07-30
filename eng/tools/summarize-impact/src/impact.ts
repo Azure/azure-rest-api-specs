@@ -36,7 +36,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
 
   const createSwaggerFileHandler = () => {
     return (e: PRChange) => {
-      if (e.changeType === "Addition") {
+      if (e.changeType === ChangeTypes.Addition) {
         const apiVersion = getApiVersionFromSwaggerFile(e.filePath);
         if (apiVersion) {
           apiVersionSet.add(apiVersion);
@@ -46,7 +46,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
           rpFolders.add(rpFolder);
         }
         console.log(`apiVersion: ${apiVersion}, rpFolder: ${rpFolder}`);
-      } else if (e.changeType === "Update") {
+      } else if (e.changeType === ChangeTypes.Update) {
         const rpFolder = getRPFolderFromSwaggerFile(e.filePath);
         if (rpFolder !== undefined) {
           rpFolders.add(rpFolder);
@@ -250,7 +250,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   };
   const swaggerFileHandler = () => {
     return (prChange: PRChange) => {
-      if (prChange.changeType !== "Deletion" && isSwaggerGeneratedByTypeSpec(prChange.filePath)) {
+      if (
+        prChange.changeType !== ChangeTypes.Deletion &&
+        isSwaggerGeneratedByTypeSpec(prChange.filePath)
+      ) {
         typeSpecLabel.shouldBePresent = true;
       }
     };
@@ -329,22 +332,28 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
   }
 
   function genChanges(type: FileTypes, diffs: DiffResult<string>) {
-    newChanges(type, "Addition", diffs.additions);
-    newChanges(type, "Deletion", diffs.deletions);
-    newChanges(type, "Update", diffs.changes);
+    newChanges(type, ChangeTypes.Addition, diffs.additions);
+    newChanges(type, ChangeTypes.Deletion, diffs.deletions);
+    newChanges(type, ChangeTypes.Update, diffs.changes);
   }
 
   function genReadmeChanges(readmeDiffs?: DiffResult<ReadmeTag>) {
     if (readmeDiffs) {
-      readmeDiffs.additions?.forEach((d) => newChange("ReadmeFile", "Addition", d.readme, d.tags));
-      readmeDiffs.changes?.forEach((d) => newChange("ReadmeFile", "Update", d.readme, d.tags));
-      readmeDiffs.deletions?.forEach((d) => newChange("ReadmeFile", "Deletion", d.readme, d.tags));
+      readmeDiffs.additions?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Addition, d.readme, d.tags),
+      );
+      readmeDiffs.changes?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Update, d.readme, d.tags),
+      );
+      readmeDiffs.deletions?.forEach((d) =>
+        newChange(FileTypes.ReadmeFile, ChangeTypes.Deletion, d.readme, d.tags),
+      );
     }
   }
 
-  genChanges("SwaggerFile", ctx.getSwaggerDiffs());
-  genChanges("TypeSpecFile", ctx.getTypeSpecDiffs());
-  genChanges("ExampleFile", ctx.getExampleDiffs());
+  genChanges(FileTypes.SwaggerFile, ctx.getSwaggerDiffs());
+  genChanges(FileTypes.TypeSpecFile, ctx.getTypeSpecDiffs());
+  genChanges(FileTypes.ExampleFile, ctx.getExampleDiffs());
   genReadmeChanges(await ctx.getReadmeDiffs());
 
   console.log("RETURN definition getPRChanges");
@@ -432,8 +441,8 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   const createReadmeFileHandler = () => {
     return (e: PRChange) => {
       if (
-        (e.changeType === "Addition" && getSuppressions(e.filePath).length) ||
-        (e.changeType === "Update" &&
+        (e.changeType === ChangeTypes.Addition && getSuppressions(e.filePath).length) ||
+        (e.changeType === ChangeTypes.Update &&
           diffSuppression(
             path.resolve(context.targetDirectory, e.filePath),
             path.resolve(context.sourceDirectory, e.filePath),
@@ -534,7 +543,7 @@ async function processRPaaS(
   const createReadmeFileHandler = () => {
     return async (e: PRChange) => {
       if (
-        e.changeType !== "Deletion" &&
+        e.changeType !== ChangeTypes.Deletion &&
         (await isRPSaaS(path.join(context.sourceDirectory, e.filePath)))
       ) {
         rpaasLabel.shouldBePresent = true;
@@ -583,7 +592,7 @@ async function processNewRPNamespace(
   if (!skip) {
     const createSwaggerFileHandler = () => {
       return (e: PRChange) => {
-        if (e.changeType === "Addition") {
+        if (e.changeType === ChangeTypes.Addition) {
           const rpFolder = getRPFolderFromSwaggerFile(path.dirname(e.filePath));
           console.log(`Processing newRPNameSpace rpFolder: ${rpFolder}`);
           if (rpFolder !== undefined) {
@@ -756,7 +765,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
 
     const processPrChange = () => {
       return (e: PRChange) => {
-        if (e.changeType === "Addition") {
+        if (e.changeType === ChangeTypes.Addition) {
           const rpFolderName = getRPRootFolderName(e.filePath);
           console.log(
             `Processing processRpaasRpNotInPrivateRepoLabel rpFolderName: ${rpFolderName}`,
