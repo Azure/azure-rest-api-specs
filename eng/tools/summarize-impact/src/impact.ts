@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as fs from "fs";
+import { existsSync, readFileSync } from "fs";
 import { glob } from "glob";
-import * as path from "path";
+import { dirname, join, resolve } from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
@@ -69,7 +69,7 @@ export async function isNewApiVersion(context: PRContext): Promise<boolean> {
     return false;
   }
 
-  const targetBranchRPFolder = path.resolve(context.targetDirectory, firstRPFolder);
+  const targetBranchRPFolder = resolve(context.targetDirectory, firstRPFolder);
 
   console.log(`targetBranchRPFolder: ${targetBranchRPFolder}`);
 
@@ -181,7 +181,7 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 }
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
-  const swagger = fs.readFileSync(swaggerFile).toString();
+  const swagger = readFileSync(swaggerFile).toString();
   const swaggerObject = JSON.parse(swagger);
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
     return swaggerObject["info"]["version"];
@@ -271,7 +271,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return !!JSON.parse(fs.readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
+    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
   } catch {
     return false;
   }
@@ -444,8 +444,8 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
         (e.changeType === ChangeTypes.Addition && getSuppressions(e.filePath).length) ||
         (e.changeType === ChangeTypes.Update &&
           diffSuppression(
-            path.resolve(context.targetDirectory, e.filePath),
-            path.resolve(context.sourceDirectory, e.filePath),
+            resolve(context.targetDirectory, e.filePath),
+            resolve(context.sourceDirectory, e.filePath),
           ).length)
       ) {
         suppressionReviewRequiredLabel.shouldBePresent = true;
@@ -493,7 +493,7 @@ function getSuppressions(readmePath: string) {
   };
   let suppressionResult: any[] = [];
   try {
-    const readme = fs.readFileSync(readmePath).toString();
+    const readme = readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
@@ -544,7 +544,7 @@ async function processRPaaS(
     return async (e: PRChange) => {
       if (
         e.changeType !== ChangeTypes.Deletion &&
-        (await isRPSaaS(path.join(context.sourceDirectory, e.filePath)))
+        (await isRPSaaS(join(context.sourceDirectory, e.filePath)))
       ) {
         rpaasLabel.shouldBePresent = true;
       }
@@ -593,11 +593,11 @@ async function processNewRPNamespace(
     const createSwaggerFileHandler = () => {
       return (e: PRChange) => {
         if (e.changeType === ChangeTypes.Addition) {
-          const rpFolder = getRPFolderFromSwaggerFile(path.dirname(e.filePath));
+          const rpFolder = getRPFolderFromSwaggerFile(dirname(e.filePath));
           console.log(`Processing newRPNameSpace rpFolder: ${rpFolder}`);
           if (rpFolder !== undefined) {
-            const rpFolderFullPath = path.resolve(context.targetDirectory, rpFolder);
-            if (!fs.existsSync(rpFolderFullPath)) {
+            const rpFolderFullPath = resolve(context.targetDirectory, rpFolder);
+            if (!existsSync(rpFolderFullPath)) {
               console.log(`Adding newRPNameSpace rpFolder: ${rpFolder}`);
               newRPNamespaceLabel.shouldBePresent = true;
             }
