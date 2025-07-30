@@ -26,6 +26,7 @@ import { LOG_PREFIX, logMessage } from "./log.js";
 import { Context } from "./types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import { createOadTrace, generateOadMarkdown, setOadBaseBranch } from "./types/oad-types.js";
+import { checkPrTargetsProductionBranch } from "./utils/common-utils.js";
 import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
 
 /**
@@ -177,8 +178,10 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       appendMarkdownToLog(context.oadMessageProcessorContext, comparedSpecsTableContent);
     }
 
-    // process breaking change labels
-    outputBreakingChangeLabelVariables();
+    // output breaking change label variables only when the PR targets a production branch
+    if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo!.targetBranch)) {
+      outputBreakingChangeLabelVariables();
+    }
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
     if (process.exitCode === undefined || process.exitCode === 0) {
