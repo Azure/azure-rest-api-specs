@@ -433,8 +433,8 @@ export async function summarizeChecksImpl(
   //   commentBody
   // )
 
-  // finally, update the "Automated merging requirements met" check
-  await updateCheckRunStatus(
+  // finally, update the "Automated merging requirements met" commit status
+  await updateCommitStatus(
     github,
     core,
     owner,
@@ -445,75 +445,87 @@ export async function summarizeChecksImpl(
   );
 
   core.info(
-    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" check should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
   );
 }
 
 /**
- * Updates or creates a check run with the given status
+ * Updates or creates a commit status with the given status
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
- * @param {string} checkName
+ * @param {string} statusContext
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
-async function updateCheckRunStatus(github, core, owner, repo, head_sha, checkName, checkResult) {
-  // First, try to find an existing check run for this commit and check name
-  const existingChecks = await github.rest.checks.listForRef({
+async function updateCommitStatus(github, core, owner, repo, head_sha, statusContext, checkResult) {
+  // Map CheckRunResult status to commit status state
+  /** @type {"pending" | "success" | "failure" | "error"} */
+  let state;
+
+  const validStates = [CheckConclusion.SUCCESS, CheckConclusion.FAILURE, "pending"];
+  if (validStates.includes(checkResult.result)) {
+    state = /** @type {"pending" | "success" | "failure"} */ (checkResult.result.toLowerCase());
+  } else {
+    state = "error"; // fallback for unexpected values
+  }
+
+  // Create commit status instead of check run
+  await github.rest.repos.createCommitStatus({
     owner,
     repo,
-    ref: head_sha,
-    check_name: checkName,
-    per_page: 1,
+    sha: head_sha,
+    state: state,
+    description: checkResult.summary.length > 140 ? checkResult.summary.substring(0, 137) + "..." : checkResult.summary,
+    context: statusContext,
+    // target_url: undefined, // Optional: add a URL if you want to link to more details
   });
 
-  // Determine status and conclusion based on the result
-  const status = checkResult.result === "pending" ? CheckStatus.IN_PROGRESS : CheckStatus.COMPLETED;
-  const conclusion =
-    checkResult.result === "pending" ? undefined : CheckConclusion[checkResult.result];
+  core.info(
+    `Created commit status for ${statusContext} with state: ${state} and description: ${checkResult.summary}`,
+  );
 
-  if (existingChecks.data.check_runs.length > 0) {
-    // Update the existing check run
-    const checkRunId = existingChecks.data.check_runs[0].id;
+  // if (existingChecks.data.check_runs.length > 0) {
+  //   // Update the existing check run
+  //   const checkRunId = existingChecks.data.check_runs[0].id;
 
-    await github.rest.checks.update({
-      owner,
-      repo,
-      check_run_id: checkRunId,
-      name: checkName,
-      status,
-      conclusion,
-      output: {
-        title: checkResult.name,
-        summary: checkResult.summary,
-      },
-    });
+  //   await github.rest.checks.update({
+  //     owner,
+  //     repo,
+  //     check_run_id: checkRunId,
+  //     name: checkName,
+  //     status,
+  //     conclusion,
+  //     output: {
+  //       title: checkResult.name,
+  //       summary: checkResult.summary,
+  //     },
+  //   });
 
-    core.info(
-      `Updated existing check run ID ${checkRunId} for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
-    );
-  } else {
-    // Create a new check run
-    await github.rest.checks.create({
-      owner,
-      repo,
-      name: checkName,
-      head_sha,
-      status,
-      conclusion,
-      output: {
-        title: checkResult.name,
-        summary: checkResult.summary,
-      },
-    });
+  //   core.info(
+  //     `Updated existing check run ID ${checkRunId} for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
+  //   );
+  // } else {
+  //   // Create a new check run
+  //   await github.rest.checks.create({
+  //     owner,
+  //     repo,
+  //     name: checkName,
+  //     head_sha,
+  //     status,
+  //     conclusion,
+  //     output: {
+  //       title: checkResult.name,
+  //       summary: checkResult.summary,
+  //     },
+  //   });
 
-    core.info(
-      `Created new check run for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
-    );
-  }
+  //   core.info(
+  //     `Created new check run for ${checkName} with status: ${status}${conclusion ? `, conclusion: ${conclusion}` : ""}`,
+  //   );
+  // }
 }
 
 /**
