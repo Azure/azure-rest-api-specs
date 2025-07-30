@@ -41,7 +41,6 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
