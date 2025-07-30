@@ -23,10 +23,12 @@ import { Label, LabelContext, PRType } from "./labelling-types.js";
 import { ImpactAssessment } from "./ImpactAssessment.js";
 import { PRContext } from "./PRContext.js";
 
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
+// TODO: share code
 export async function isNewApiVersion(context: PRContext): Promise<boolean> {
   const handlers: ChangeHandler[] = [];
   let isAddingNewApiVersion = false;
@@ -156,11 +158,11 @@ export async function evaluateImpact(
 }
 
 export function isManagementPR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("resource-manager"));
+  return filePaths.some(resourceManager);
 }
 
 export function isDataPlanePR(filePaths: string[]): boolean {
-  return filePaths.some((it) => it.includes("data-plane"));
+  return filePaths.some(dataPlane);
 }
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
