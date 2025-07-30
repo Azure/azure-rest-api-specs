@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
-import { PER_PAGE_MAX } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
@@ -295,6 +295,10 @@ describe("extractInputs", () => {
         commit_sha: "abc123",
         per_page: PER_PAGE_MAX,
       });
+
+      // For pull_request, do NOT attempt to extract the issue number from an artifact, since this could be modified
+      // in a fork PR.
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(0);
     },
   );
 

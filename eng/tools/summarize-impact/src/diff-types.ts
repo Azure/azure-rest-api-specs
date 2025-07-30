@@ -1,5 +1,15 @@
-export type FileTypes = "SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile";
-export type ChangeTypes = "Addition" | "Deletion" | "Update";
+export enum FileTypes {
+  ExampleFile = "ExampleFile",
+  ReadmeFile = "ReadmeFile",
+  SwaggerFile = "SwaggerFile",
+  TypeSpecFile = "TypeSpecFile",
+}
+
+export enum ChangeTypes {
+  Addition = "Addition",
+  Deletion = "Deletion",
+  Update = "Update",
+}
 
 export type PRChange = {
   fileType: FileTypes;

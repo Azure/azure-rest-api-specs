@@ -1,6 +1,6 @@
 // @ts-check
 
-import { PER_PAGE_MAX } from "./github.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -20,7 +20,7 @@ import { getIssueNumber } from "./issues.js";
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
-  core.info(`  payload.action: ${context.eventName}`);
+  core.info(`  payload.action: ${context.payload.action}`);
   core.info(`  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run

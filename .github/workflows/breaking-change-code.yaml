@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+name: "Swagger BreakingChange - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   validateBreakingChange:
-    name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+    name: "Swagger BreakingChange - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -56,15 +56,3 @@ jobs:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
           # Convert "add/remove" to "true/false"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
-
-      # Upload artifact with issue number if labels are present and PR number is valid
-      - if: |
-          always() &&
-          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
-          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
-          github.event.pull_request.number > 0
-        name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
-        with:
-          name: "issue-number"
-          value: "${{ github.event.pull_request.number }}"
