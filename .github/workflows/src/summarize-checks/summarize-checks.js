@@ -460,13 +460,13 @@ export async function summarizeChecksImpl(
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
-async function updateCommitStatus(github, core, owner, repo, head_sha, statusContext, checkResult) {
+export async function updateCommitStatus(github, core, owner, repo, head_sha, statusContext, checkResult) {
   // Map CheckRunResult status to commit status state
   /** @type {"pending" | "success" | "failure" | "error"} */
   let state;
 
   const validStates = [CheckConclusion.SUCCESS, CheckConclusion.FAILURE, "pending"];
-  if (validStates.includes(checkResult.result)) {
+  if (validStates.includes(checkResult.result.toLowerCase())) {
     state = /** @type {"pending" | "success" | "failure"} */ (checkResult.result.toLowerCase());
   } else {
     state = "error"; // fallback for unexpected values
