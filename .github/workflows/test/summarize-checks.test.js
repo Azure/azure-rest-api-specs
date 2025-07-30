@@ -64,7 +64,7 @@ describe("Summarize Checks Tests", () => {
         expectedComment,
         {
           name: "Some automated merging requirements are not met",
-          result: "failure",
+          result: "FAILURE",
           summary:
             "❌ This PR cannot be merged because some requirements are not met. See the details.",
         },
@@ -277,7 +277,7 @@ describe("Summarize Checks Tests", () => {
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
           name: "Automated merging requirements are met",
-          result: "success",
+          result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
       ];
