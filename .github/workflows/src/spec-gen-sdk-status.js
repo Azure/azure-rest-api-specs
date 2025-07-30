@@ -124,10 +124,10 @@ export async function setSpecGenSdkStatusImpl({
  * @param {Object} params
  * @param {Array<any>} params.checkRuns
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{state: import("./github.js").CommitStatusState, description: string}>}
+ * @returns {Promise<{state: CommitStatusState, description: string}>}
  */
 async function processResult({ checkRuns, core }) {
-  /** @type {import("./github.js").CommitStatusState} */
+  /** @type {CommitStatusState} */
   let state = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
   let description = "SDK Validation CI checks succeeded";
