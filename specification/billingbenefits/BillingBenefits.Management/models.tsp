@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.BillingBenefits;
 
@@ -1706,13 +1708,7 @@ model DiscountTypeProductSku extends DiscountTypeProperties {
   discountType: "Sku";
 }
 
-/**
- * Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.
- */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("discountType")
-model DiscountTypeCustomPrice extends DiscountTypeProperties {
+alias DiscountCommonProperties = {
   /**
    * Product family for which the discount is given. Validation: Optional
    */
@@ -1732,6 +1728,20 @@ model DiscountTypeCustomPrice extends DiscountTypeProperties {
    * Custom price properties for a given discount.
    */
   customPriceProperties?: CustomPriceProperties;
+};
+
+/**
+ * Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DiscountTypeCustomPrice extends DiscountTypeProperties {
+  ...DiscountCommonProperties;
+
+  /**
+   * Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.
+   */
+  discountType: DiscountType.CustomPrice;
 }
 
 /**
@@ -1808,11 +1818,14 @@ model MarketSetPricesItems {
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeCustomPrice {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DiscountTypeCustomPrice)
+model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeProperties {
+  ...DiscountCommonProperties;
+
   /**
    * Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.
    */
-  discountType: "CustomPriceMultiCurrency";
+  discountType: DiscountType.CustomPriceMultiCurrency;
 }
 
 /**
@@ -1825,4 +1838,12 @@ model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DiscountProperties;
+}
+
+model ExpandParameter {
+  /**
+   * The expand query parameter.
+   */
+  @query("$expand")
+  $expand?: string;
 }

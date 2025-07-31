@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.BillingBenefits;
 /**
@@ -95,4 +97,10 @@ interface SavingsPlanModels {
 );
 @@doc(SavingsPlanModels.validateUpdate::parameters.body,
   "Request body for validating a savings plan patch request"
+);
+
+@@clientInitialization(Microsoft.BillingBenefits,
+  {
+    parameters: ExpandParameter,
+  }
 );

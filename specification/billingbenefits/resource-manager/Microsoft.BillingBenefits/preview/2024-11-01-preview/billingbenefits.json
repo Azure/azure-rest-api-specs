@@ -1905,10 +1905,6 @@
       "type": "object",
       "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.",
       "properties": {
-        "discountType": {
-          "type": "string",
-          "description": "Discriminator property for DiscountTypeCustomPrice."
-        },
         "productFamilyName": {
           "type": "string",
           "description": "Product family for which the discount is given. Validation: Optional"
@@ -1926,22 +1922,37 @@
           "description": "Custom price properties for a given discount."
         }
       },
-      "discriminator": "discountType",
-      "required": [
-        "discountType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DiscountTypeProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "CustomPrice"
     },
     "DiscountTypeCustomPriceMultiCurrency": {
       "type": "object",
       "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.",
+      "properties": {
+        "productFamilyName": {
+          "type": "string",
+          "description": "Product family for which the discount is given. Validation: Optional"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "ResourceSku for the given discount. Validation: Optional."
+        },
+        "customPriceProperties": {
+          "$ref": "#/definitions/CustomPriceProperties",
+          "description": "Custom price properties for a given discount."
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/DiscountTypeCustomPrice"
+          "$ref": "#/definitions/DiscountTypeProperties"
         }
       ],
       "x-ms-discriminator-value": "CustomPriceMultiCurrency"
