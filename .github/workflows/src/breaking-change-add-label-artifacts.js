@@ -57,7 +57,7 @@ export default async function getLabelActions({ github, context, core }) {
   // TODO: What if artifacts disagree?
   core.setOutput("breakingChangeReviewLabelName", REVIEW_REQUIRED_LABELS.BREAKING_CHANGE);
   if (
-    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`) &&
+    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`) ||
     crossVersionBreakingChangesArtifactNames.includes(
       `${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`,
     )
@@ -70,7 +70,7 @@ export default async function getLabelActions({ github, context, core }) {
   // TODO: What if artifacts disagree?
   core.setOutput("versioningReviewLabelName", REVIEW_REQUIRED_LABELS.VERSIONING);
   if (
-    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.VERSIONING}=true`) &&
+    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.VERSIONING}=true`) ||
     crossVersionBreakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.VERSIONING}=true`)
   ) {
     core.setOutput("versioningReviewLabelValue", true);
