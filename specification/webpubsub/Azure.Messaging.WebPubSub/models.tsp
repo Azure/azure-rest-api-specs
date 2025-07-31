@@ -110,6 +110,9 @@ union ResponseContentType {
  * Group member
  */
 model GroupMember {
+  /** Connection Id */
+  connectionId: string;
+
   /** User Id */
   userId?: string;
 }
