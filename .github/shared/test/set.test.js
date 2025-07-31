@@ -6,6 +6,7 @@ import { intersect } from "../src/set";
 describe("set", () => {
   it.each([
     [[], [], []],
+    [[1, 2, 3], [], []],
     [
       [1, 2, 3],
       [2, 3, 4],
@@ -25,11 +26,17 @@ describe("set", () => {
   ])(
     "intersect(%o, %o, %o)",
     async (
-      /** @type {(string|number)[]} */ setA,
-      /** @type {(string|number)[]} */ setB,
+      /** @type {(string|number)[]} */ a,
+      /** @type {(string|number)[]} */ b,
       /** @type {(string|number)[]} */ result,
     ) => {
-      expect(intersect(new Set(setA), new Set(setB))).toEqual(new Set(result));
+      const setA = new Set(a);
+      const setB = new Set(b);
+      const setResult = new Set(result);
+
+      // Check both orders, result should be same
+      expect(intersect(setA, setB)).toEqual(setResult);
+      expect(intersect(setB, setA)).toEqual(setResult);
     },
   );
 });
