@@ -11,9 +11,10 @@ tools: [CheckServiceLabel', 'CreateServiceLabel']
 
 ## Step 2: Validate Service Label
 - If a label is provided by the user, use `CheckServiceLabel` to validate the service label for the corresponding API spec
-    - If the service label is valid and exists, skip remaining label validation steps and allow user to proceed with the SDK release process. Service label in the common-labels.csv file MUST have "e99695" as the color code.
+    - If the service label is valid and exists, skip remaining label validation steps and allow user to proceed with the SDK release process.
+    - Service label in the common-labels.csv file MUST have "e99695" as the color code.
 - If the service label is invalid or was not provided by the user:
-    - If it's invalid, inform the user that the service label is invalid. Ask them to double check spelling, punctuation, and space usage. Label may exist in the common-labels.csv file but may not be associated with a service.
+    - If it's invalid, inform the user that the service label is invalid. Ask them to double check spelling, punctuation, and space usage.
     - Fetch common-labels.csv file from the azure-sdk-tools repository and check if any existing label could fit under the service. If a related service label name already exists in the file, ask and confirm if the user wants to use that existing label for their service.
         - If the user confirms, use that existing label. Skip remaining label validation steps and proceed with the SDK release process
     - If user wants to create an entirely new service label instead, suggest a label name to the user and have them confirm the recommended label name
@@ -21,7 +22,8 @@ tools: [CheckServiceLabel', 'CreateServiceLabel']
             - Fetch common-labels.csv file from the azure-sdk-tools repository and look at the service's API spec to find a suitable and relevant name
             - Label text should not include the following words: Microsoft, Azure
             - Label text should be in Title Case. Title case means capitalize the first letter of each word, except short prepositions (in, for, of) unless they are the first or last word
-            - If multiple words, use spaces to separate them. Avoid using underscores or hyphens
+            - Avoid creating new service groups. Ex: Instead of Communication - Rooms, Communication - Email, and Communication - Chat you would do Communication Rooms, Communication Email and Communication Chat
+            - If a service has sub services or multiple libraries, create only one label for the service unless different teams work on the sub services/libraries
 - Make note of the corresponding service label name the user has confirmed or provided
 
 ## Step 3: Create Pull Request (only if new service label is created)
