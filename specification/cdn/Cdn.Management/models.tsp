@@ -4255,8 +4255,6 @@ model CustomDomainParameters {
   /**
    * The JSON object that contains the properties of the custom domain to create.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CustomDomainPropertiesParameters;
 }
 

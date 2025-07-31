@@ -43,6 +43,7 @@ interface AFDEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDEndpoints_Create")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDEndpoint,
     Response = ArmResourceUpdatedResponse<AFDEndpoint> | ArmResourceCreatedResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
@@ -79,7 +80,7 @@ interface AFDEndpoints {
   @operationId("AFDEndpoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -100,8 +101,8 @@ interface AFDEndpoints {
     AFDEndpoint,
     AfdPurgeParameters,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
-      ArmLroLocationHeader<FinalResult = AFDEndpoint> &
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

@@ -77,7 +77,7 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = Profile>> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -367,8 +367,8 @@ interface Profiles {
     Profile,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Profile> &
-      ArmLroLocationHeader<FinalResult = Profile> &
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -414,7 +414,7 @@ interface Profiles {
   cdnMigrateToAfd is ArmResourceActionAsync<
     Profile,
     CdnMigrationToAfdParameters,
-    ArmResponse<MigrateResult>
+    MigrateResult
   >;
 
   /**
@@ -423,7 +423,7 @@ interface Profiles {
   migrationAbort is ArmResourceActionAsyncBase<
     Profile,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
 }

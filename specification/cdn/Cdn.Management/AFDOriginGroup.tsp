@@ -80,7 +80,7 @@ interface AFDOriginGroups {
   @operationId("AFDOriginGroups_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOriginGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOriginGroup> &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

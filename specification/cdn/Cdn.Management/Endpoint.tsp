@@ -64,7 +64,7 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Endpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,13 +104,13 @@ interface Endpoints {
    * Removes a content from CDN.
    */
   @action("purge")
-  purgeContent is ArmResourceActionAsync<Endpoint, PurgeParameters, OkResponse>;
+  purgeContent is ArmResourceActionAsync<Endpoint, PurgeParameters, {}>;
 
   /**
    * Pre-loads a content to CDN. Available for Verizon Profiles.
    */
   @action("load")
-  loadContent is ArmResourceActionAsync<Endpoint, LoadParameters, OkResponse>;
+  loadContent is ArmResourceActionAsync<Endpoint, LoadParameters, {}>;
 
   /**
    * Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.

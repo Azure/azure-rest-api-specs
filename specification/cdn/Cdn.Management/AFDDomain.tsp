@@ -81,8 +81,8 @@ interface AFDDomains {
   @operationId("AFDCustomDomains_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDDomain,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
-      ArmLroLocationHeader<FinalResult = AFDDomain> &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -102,8 +102,8 @@ interface AFDDomains {
     AFDDomain,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
-      ArmLroLocationHeader<FinalResult = AFDDomain> &
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

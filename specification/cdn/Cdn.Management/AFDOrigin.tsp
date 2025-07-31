@@ -74,8 +74,8 @@ interface AFDOrigins {
   @operationId("AFDOrigins_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOrigin,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOrigin> &
-      ArmLroLocationHeader<FinalResult = AFDOrigin> &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

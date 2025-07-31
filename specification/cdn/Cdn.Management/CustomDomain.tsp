@@ -35,10 +35,14 @@ interface CustomDomains {
   /**
    * Creates a new custom domain within an endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is ArmResourceCreateOrReplaceAsync<
-    CustomDomain,
+  @put
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      CustomDomain,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>
+    >,
+    CustomDomainParameters,
     Response = ArmResourceUpdatedResponse<CustomDomain> | ArmResourceCreatedResponse<
       CustomDomain,
       ArmLroLocationHeader<FinalResult = CustomDomain> &
@@ -46,7 +50,8 @@ interface CustomDomains {
     > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
       @bodyRoot
       _: CustomDomain;
-    })
+    }),
+    ErrorResponse = ErrorResponse
   >;
 
   /**
@@ -56,7 +61,7 @@ interface CustomDomains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomDomain,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
       @bodyRoot
       _: CustomDomain;
     }) | ArmDeletedNoContentResponse
