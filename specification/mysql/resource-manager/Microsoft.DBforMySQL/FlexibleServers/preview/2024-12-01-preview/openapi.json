@@ -3370,7 +3370,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the privateEndpointConnection.",
+            "description": "The name of the private endpoint connection.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
@@ -3378,7 +3378,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
@@ -3519,7 +3519,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the privateEndpointConnection.",
+            "description": "The name of the private endpoint connection.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
@@ -6140,6 +6140,22 @@
           }
         ]
       }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
