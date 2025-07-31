@@ -68,9 +68,6 @@ using Microsoft.DBforMySQL;
 #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Server.properties);
 
-#suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
-
 @@clientName(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
   "parameters"
 );
