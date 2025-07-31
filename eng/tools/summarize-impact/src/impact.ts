@@ -6,7 +6,8 @@ import * as path from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import * as _ from "lodash";
+import pkg from "lodash";
+const { isEqual } = pkg;
 
 import {
   ChangeHandler,
@@ -509,7 +510,7 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
     const properties = ["suppress", "from", "where", "code", "reason"];
     if (
       -1 ===
-      beforeSuppressions.findIndex((s) => properties.every((p) => _.isEqual(s[p], suppression[p])))
+      beforeSuppressions.findIndex((s) => properties.every((p) => isEqual(s[p], suppression[p])))
     ) {
       newSuppressions.push(suppression);
     }
