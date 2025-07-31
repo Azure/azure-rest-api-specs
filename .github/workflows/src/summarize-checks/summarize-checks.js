@@ -568,8 +568,6 @@ export function updateLabels(existingLabels, impactAssessment) {
   };
 
   if (impactAssessment) {
-    console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-
     // will further update the label context if necessary
     processImpactAssessment(labelContext, impactAssessment);
   }
