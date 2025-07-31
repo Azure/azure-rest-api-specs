@@ -146,11 +146,6 @@ model Point extends Geometry {
    * The coordinates of the point as [longitude, latitude].
    */
   coordinates: string;
-
-  /**
-   * Optional bounding box of the geometry.
-   */
-  bbox?: float64[];
 }
 
 /**
@@ -166,11 +161,6 @@ model Polygon extends Geometry {
    * The type of the polygon.
    */
   type: GeometryType.Polygon;
-
-  /**
-   * The bounding box of the polygon.
-   */
-  bbox?: float64[];
 }
 
 /**
@@ -186,11 +176,6 @@ model MultiPolygon extends Geometry {
    * The type of the multipolygon.
    */
   type: GeometryType.MultiPolygon;
-
-  /**
-   * The bounding box of the multipolygon.
-   */
-  bbox?: float64[];
 }
 
 /**
@@ -238,11 +223,6 @@ model MultiLineString extends Geometry {
    * The coordinates of the multilinestring.
    */
   coordinates: float64[][];
-
-  /**
-   * The bounding box of the multilinestring.
-   */
-  bbox?: float64[];
 }
 
 /**
@@ -258,11 +238,6 @@ model LineString extends Geometry {
    * The coordinates of the linestring.
    */
   coordinates: float64[];
-
-  /**
-   * The bounding box of the linestring.
-   */
-  bbox?: float64[];
 }
 
 /**
@@ -278,9 +253,4 @@ model MultiPoint extends Geometry {
    * The coordinates of the multipoint.
    */
   coordinates: float64[];
-
-  /**
-   * The bounding box of the multipoint.
-   */
-  bbox?: float64[];
 }
