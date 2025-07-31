@@ -1113,6 +1113,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all public IP addresses": {
+            "$ref": "./examples/PublicIPAddresses_ListALL.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3006,12 +3011,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List public IPs in resource group": {
+            "$ref": "./examples/PublicIPAddresses_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses/{publicIPName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/publicIPAddresses/{publicIPAddressName}": {
       "get": {
         "operationId": "PublicIPAddresses_Get",
         "tags": [
@@ -3029,7 +3039,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "publicIPName",
+            "name": "publicIPAddressName",
             "in": "path",
             "description": "Name of the public IP",
             "required": true,
@@ -3050,6 +3060,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get public IP address": {
+            "$ref": "./examples/PublicIPAddresses_Get.json"
+          }
         }
       },
       "put": {
@@ -3069,7 +3084,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "publicIPName",
+            "name": "publicIPAddressName",
             "in": "path",
             "description": "Name of the public IP",
             "required": true,
@@ -3117,6 +3132,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "CreatePublicIPAddress": {
+            "$ref": "./examples/PublicIPAddresses_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -3139,7 +3159,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "publicIPName",
+            "name": "publicIPAddressName",
             "in": "path",
             "description": "Name of the public IP",
             "required": true,
@@ -3184,6 +3204,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update public IP addresses tags": {
+            "$ref": "./examples/PublicIPAddresses_UpdateTags.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3206,7 +3231,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "publicIPName",
+            "name": "publicIPAddressName",
             "in": "path",
             "description": "Name of the public IP",
             "required": true,
@@ -3237,6 +3262,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete public IP address": {
+            "$ref": "./examples/PublicIPAddresses_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4455,6 +4485,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateVirtualNetworkUpdates": {
+            "$ref": "./examples/VirtualNetworkSubnets_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
