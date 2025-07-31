@@ -1338,7 +1338,7 @@ model PublicIPAddressProperties {
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;
 
-  @doc("nat gateway using this public IP")
+  @doc("network interface or LoadBalancer frontendIPconfiguration using this public IP")
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
 
