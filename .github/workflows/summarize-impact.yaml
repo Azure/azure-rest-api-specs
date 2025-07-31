@@ -55,12 +55,3 @@ jobs:
           path: ${{ steps.summarize-impact.outputs.summary }}
           # If the file doesn't exist, just don't add the artifact
           if-no-files-found: ignore
-
-      - if: |
-          always() &&
-          github.event.pull_request.number > 0
-        name: Upload artifact with issue number
-        uses: ./after/.github/actions/add-empty-artifact
-        with:
-          name: "issue-number"
-          value: "${{ github.event.pull_request.number }}"

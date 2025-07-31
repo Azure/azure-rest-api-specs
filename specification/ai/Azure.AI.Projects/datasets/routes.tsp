@@ -9,6 +9,7 @@ import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -30,6 +31,7 @@ interface Datasets
     {
       @doc("The pending upload request parameters")
       @Http.bodyRoot
+      @clientName("configuration", "csharp")
       pendingUploadRequest: PendingUploadRequest;
 
       @doc("The specific version id of the DatasetVersion to operate on.")

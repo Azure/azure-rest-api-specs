@@ -1,4 +1,7 @@
-export type PRType = "resource-manager" | "data-plane";
+export enum PRType {
+  DataPlane = "data-plane",
+  ResourceManager = "resource-manager",
+}
 
 /**
  * The LabelContext is used by prSummary.ts / summary() and downstream invocations.

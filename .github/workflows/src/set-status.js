@@ -1,7 +1,12 @@
 // @ts-check
 
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+} from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
 // TODO: Add tests
 /* v8 ignore start */

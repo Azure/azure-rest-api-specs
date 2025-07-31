@@ -74,6 +74,7 @@ function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
 /**
  * Output the breaking change labels as GitHub Actions environment variables.
  * This function checks the BreakingChangeLabelsToBeAdded set and sets the appropriate outputs.
+ * The doc describing breaking change review rules can be found here: https://aka.ms/brch-dev
  */
 export function outputBreakingChangeLabelVariables(): void {
   // Output the breaking change labels as GitHub Actions environment variables
@@ -89,19 +90,24 @@ export function outputBreakingChangeLabelVariables(): void {
       logMessage("'BreakingChangeReviewRequired' label needs to be added.");
       setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
       setOutput("breakingChangeReviewLabelValue", "true");
+      logMessage("'VersioningReviewRequired' label needs to be deleted.");
+      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      setOutput("versioningReviewLabelValue", "false");
     } else {
       logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
       setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
       setOutput("breakingChangeReviewLabelValue", "false");
-    }
-    if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
-      logMessage("'VersioningReviewRequired' label needs to be added.");
-      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      setOutput("versioningReviewLabelValue", "true");
-    } else {
-      logMessage("'VersioningReviewRequired' label needs to be deleted.");
-      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      setOutput("versioningReviewLabelValue", "false");
+
+      // versioning review label is only set if the breaking change review label is not set
+      if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
+        logMessage("'VersioningReviewRequired' label needs to be added.");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "true");
+      } else {
+        logMessage("'VersioningReviewRequired' label needs to be deleted.");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "false");
+      }
     }
   }
 }

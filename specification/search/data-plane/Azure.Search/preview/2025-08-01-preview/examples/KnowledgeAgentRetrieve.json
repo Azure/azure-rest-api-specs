@@ -1,0 +1,112 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeAgentRetrieve",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "agentName": "agent-preview-test",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "hello world",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "knowledgeSourceParams": [
+        {
+          "filterAddOn": "foo eq bar",
+          "knowledgeSourceName": "ks-preview-test",
+          "kind": "searchIndex"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world",
+              "filter": "foo eq bar"
+            }
+          },
+          {
+            "type": "searchIndex",
+            "id": 2,
+            "knowledgeSourceName": "ks-preview-test",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234,
+            "searchIndexArguments": {
+              "search": "hello world two",
+              "filter": "foo eq bar"
+            }
+          },
+          {
+            "type": "semanticReranker",
+            "id": 3,
+            "inputTokens": 74,
+            "elapsedMs": 0
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            },
+            "rerankerScore": 3.5,
+            "docKey": "myDocKey1"
+          },
+          {
+            "type": "searchIndex",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            },
+            "rerankerScore": 2.7,
+            "docKey": "myDocKey2"
+          }
+        ]
+      }
+    }
+  }
+}

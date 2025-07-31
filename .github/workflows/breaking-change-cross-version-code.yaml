@@ -56,15 +56,3 @@ jobs:
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
-
-      # Upload artifact with issue number if labels are present and PR number is valid
-      - if: |
-          always() &&
-          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
-          steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '') &&
-          github.event.pull_request.number > 0
-        name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
-        with:
-          name: "issue-number"
-          value: "${{ github.event.pull_request.number }}"
