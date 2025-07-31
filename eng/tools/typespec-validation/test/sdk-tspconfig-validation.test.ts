@@ -342,7 +342,6 @@ const goDpGenerateFakesAnotherTestCases = createEmitterOptionTestCases(
   [new TspConfigGoAzGenerateFakesSubRule()],
 );
 
-
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
