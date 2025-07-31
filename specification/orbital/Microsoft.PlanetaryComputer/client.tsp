@@ -108,7 +108,7 @@ namespace Customizations;
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("StacConfigClientImpl", "csharp")
 interface StacCollectionConfigurationClient {
@@ -168,7 +168,7 @@ interface StacCollectionConfigurationClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("GeocatalogClientImpl", "csharp")
 interface GeocatalogClient {
@@ -184,7 +184,7 @@ interface GeocatalogClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("ImageExportsClientImpl", "csharp")
 interface ImageExportsClient {
@@ -198,7 +198,7 @@ interface ImageExportsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("StacItemTilerClientImpl", "csharp")
 interface StacItemTilerClient {
@@ -249,7 +249,7 @@ interface StacItemTilerClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("MapLegendsClientImpl", "csharp")
 interface MapLegendsClient {
@@ -265,7 +265,7 @@ interface MapLegendsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("MosaicTilerClientImpl", "csharp")
 interface MosaicTilerClient {
@@ -296,7 +296,7 @@ interface MosaicTilerClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("TileMatrixSetsClientImpl", "csharp")
 interface TileMatrixSetsClient {
@@ -310,7 +310,7 @@ interface TileMatrixSetsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("SharedAccessSignatureClientImpl", "csharp")
 interface SharedAccessSignatureClient {
@@ -326,7 +326,7 @@ interface SharedAccessSignatureClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("IngestionClientImpl", "csharp")
 interface IngestionClient {
@@ -372,7 +372,7 @@ interface IngestionClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python"
+  "!python,!java"
 )
 @clientName("StacClientImpl", "csharp")
 interface StacClient {
