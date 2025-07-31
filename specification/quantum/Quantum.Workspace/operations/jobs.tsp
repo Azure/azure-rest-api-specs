@@ -24,7 +24,6 @@ namespace Quantum.Workspace.Services {
     @sharedRoute
     update is UpdateOperation<{
       ...UpdateResource;
-      ...CommonParams;
     }
     >;
 
