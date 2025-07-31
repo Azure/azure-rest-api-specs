@@ -1,8 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitor Data Collection Endpoints API",
-    "description": "Provides operations for working with Azure Monitor data collection endpoints",
+    "title": "Azure Monitor Data Collection Control Plane API",
+    "description": "Provides comprehensive operations for working with Azure Monitor data collection rules, endpoints, and associations. This API enables management of telemetry collection, transformation, and routing configurations.",
+    "contact": {
+      "name": "Azure Monitor Control Service Team",
+      "email": "amcsdev@microsoft.com"
+    },
     "version": "2024-03-11",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
@@ -191,12 +195,6 @@
               "$ref": "#/definitions/DataCollectionEndpointResource"
             }
           },
-          "201": {
-            "description": "Data collection endpoint was successfully created",
-            "schema": {
-              "$ref": "#/definitions/DataCollectionEndpointResource"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -328,147 +326,6 @@
         }
       }
     },
-    "LogsIngestionEndpointSpec": {
-      "description": "Definition of the endpoint used for ingesting logs.",
-      "type": "object",
-      "properties": {
-        "endpoint": {
-          "description": "The endpoint. This property is READ-ONLY.",
-          "type": "string",
-          "readOnly": true,
-          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "MetricsIngestionEndpointSpec": {
-      "description": "Definition of the endpoint used for ingesting metrics.",
-      "type": "object",
-      "properties": {
-        "endpoint": {
-          "description": "The endpoint. This property is READ-ONLY.",
-          "type": "string",
-          "readOnly": true,
-          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "NetworkRuleSet": {
-      "description": "Definition of the network rules.",
-      "type": "object",
-      "properties": {
-        "publicNetworkAccess": {
-          "description": "The configuration to set whether network access from public internet to the endpoints are allowed.",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "KnownPublicNetworkAccessOptions",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "PrivateLinkScopedResource": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "The resourceId of the Azure Monitor Private Link Scope Scoped Resource through which this DCE is associated with a Azure Monitor Private Link Scope.",
-          "type": "string",
-          "example": "/subscriptions/57947cb5-aadd-4b6c-9e8e-2125e5cb7bf5/resourceGroups/testResourceGroup/providers/microsoft.insights/privatelinkscopes/my-scope/scopedResources/my-scoped-resource"
-        },
-        "scopeId": {
-          "description": "The immutableId of the Azure Monitor Private Link Scope Resource to which the association is.",
-          "type": "string",
-          "example": "b74e0d-383fc9415abaa-584ec41-adece3"
-        }
-      }
-    },
-    "LocationSpec": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Name of location.",
-          "type": "string",
-          "example": "East US"
-        },
-        "provisioningStatus": {
-          "description": "The resource provisioning state in this location.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
-          "type": "string",
-          "example": "Creating",
-          "x-ms-enum": {
-            "name": "KnownLocationSpecProvisioningStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "FailoverConfigurationSpec": {
-      "type": "object",
-      "properties": {
-        "activeLocation": {
-          "description": "Active location where data flow will occur.",
-          "type": "string",
-          "example": "East US"
-        },
-        "locations": {
-          "description": "Locations that are configured for failover.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocationSpec"
-          }
-        }
-      }
-    },
-    "Metadata": {
-      "description": "Metadata about the resource",
-      "type": "object",
-      "properties": {
-        "provisionedBy": {
-          "description": "Azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "Azure Security Center",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "provisionedByResourceId": {
-          "description": "Resource Id of azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "provisionedByImmutableId": {
-          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2",
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
     "DataCollectionEndpoint": {
       "description": "Definition of data collection endpoint.",
       "type": "object",
@@ -547,27 +404,19 @@
           ]
         },
         "failoverConfiguration": {
-          "description": "Failover configuration on this endpoint. This property is READ-ONLY.",
+          "description": "Metadata for the resource. This property can only be updated by Log Analytics Control Plane for Data Collection Endpoint with Log Analytics Destination.",
           "allOf": [
             {
               "$ref": "#/definitions/FailoverConfigurationSpec"
             }
-          ],
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
           ]
         },
         "metadata": {
-          "description": "Metadata for the resource. This property is READ-ONLY.",
+          "description": "Metadata for the resource. This property can only be updated by Log Analytics Control Plane for Data Collection Endpoint with Log Analytics Destination.",
           "allOf": [
             {
               "$ref": "#/definitions/Metadata"
             }
-          ],
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
           ]
         }
       }
@@ -580,7 +429,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Resource properties.",
           "allOf": [
             {
               "$ref": "#/definitions/DataCollectionEndpoint"
@@ -615,6 +463,14 @@
             "name": "KnownDataCollectionEndpointResourceKind",
             "modelAsString": true
           }
+        },
+        "sku": {
+          "description": "The SKU of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
+            }
+          ]
         },
         "identity": {
           "description": "Managed service identity of the resource.",
@@ -691,6 +547,135 @@
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string"
+        }
+      }
+    },
+    "FailoverConfigurationSpec": {
+      "type": "object",
+      "properties": {
+        "activeLocation": {
+          "description": "Active location where data flow will occur.",
+          "type": "string",
+          "example": "East US"
+        },
+        "locations": {
+          "description": "Locations that are configured for failover.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationSpec"
+          }
+        }
+      }
+    },
+    "LocationSpec": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Name of location.",
+          "type": "string",
+          "example": "East US"
+        },
+        "provisioningStatus": {
+          "description": "The resource provisioning state in this location.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "example": "Creating",
+          "x-ms-enum": {
+            "name": "KnownLocationSpecProvisioningStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LogsIngestionEndpointSpec": {
+      "description": "Definition of the endpoint used for ingesting logs.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint. This property is READ-ONLY.",
+          "type": "string",
+          "readOnly": true,
+          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "Metadata": {
+      "description": "Metadata about the resource",
+      "type": "object",
+      "properties": {
+        "provisionedBy": {
+          "description": "Azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "Azure Security Center"
+        },
+        "provisionedByResourceId": {
+          "description": "Resource Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1"
+        },
+        "provisionedByImmutableId": {
+          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2"
+        }
+      }
+    },
+    "MetricsIngestionEndpointSpec": {
+      "description": "Definition of the endpoint used for ingesting metrics.",
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint. This property is READ-ONLY.",
+          "type": "string",
+          "readOnly": true,
+          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "NetworkRuleSet": {
+      "description": "Definition of the network rules.",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "The configuration to set whether network access from public internet to the endpoints are allowed.",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KnownPublicNetworkAccessOptions",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateLinkScopedResource": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resourceId of the Azure Monitor Private Link Scope Scoped Resource through which this DCE is associated with a Azure Monitor Private Link Scope.",
+          "type": "string",
+          "example": "/subscriptions/57947cb5-aadd-4b6c-9e8e-2125e5cb7bf5/resourceGroups/testResourceGroup/providers/microsoft.insights/privatelinkscopes/my-scope/scopedResources/my-scoped-resource"
+        },
+        "scopeId": {
+          "description": "The immutableId of the Azure Monitor Private Link Scope Resource to which the association is.",
+          "type": "string",
+          "example": "b74e0d-383fc9415abaa-584ec41-adece3"
         }
       }
     },
