@@ -41,3 +41,4 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Modality, "InputModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
 @@clientName(VoiceLive.Tool, "ToolCall", "csharp");
+@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "csharp");
