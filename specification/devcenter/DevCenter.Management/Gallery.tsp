@@ -39,7 +39,7 @@ interface Galleries {
   /**
    * Deletes a gallery resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Gallery,
     LroHeaders = ArmAsyncOperationHeader &

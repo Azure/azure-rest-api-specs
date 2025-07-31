@@ -24,7 +24,7 @@ model Project is Azure.ResourceManager.TrackedResource<ProjectProperties> {
   /**
    * Managed identity properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
@@ -43,6 +43,7 @@ interface Projects {
   /**
    * Partially updates a project.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Project,
@@ -58,7 +59,7 @@ interface Projects {
   /**
    * Deletes a project resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
     LroHeaders = ArmAsyncOperationHeader &
@@ -107,7 +108,7 @@ interface Projects {
   /**
    * Lists SKUs available to the project
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_ListByProject")
   @action("listSkus")
   listByProject is ArmResourceActionSync<

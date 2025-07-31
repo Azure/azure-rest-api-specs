@@ -82,7 +82,7 @@ interface EnvironmentDefinitions {
   /**
    * Gets Environment Definition error details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ProjectCatalogEnvironmentDefinitions_GetErrorDetails")
   getErrorDetails is EnvironmentDefinitionOps.ActionSync<
     EnvironmentDefinition,
@@ -123,6 +123,8 @@ interface EnvironmentDefinitionOperationGroupOps
         @segment("environmentDefinitions")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+        @minLength(3)
+        @maxLength(63)
         environmentDefinitionName: string,
       }
     > {}
@@ -132,14 +134,14 @@ interface EnvironmentDefinitionOperationGroup {
   /**
    * Gets an environment definition from the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentDefinitions_Get")
   get is EnvironmentDefinitionOperationGroupOps.Read<EnvironmentDefinition>;
 
   /**
    * List environment definitions in the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentDefinitions_ListByCatalog")
   listByCatalog is EnvironmentDefinitionOperationGroupOps.List<
     EnvironmentDefinition,
@@ -156,7 +158,7 @@ interface EnvironmentDefinitionOperationGroup {
   /**
    * Gets Environment Definition error details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EnvironmentDefinitions_GetErrorDetails")
   getErrorDetails is EnvironmentDefinitionOperationGroupOps.ActionSync<
     EnvironmentDefinition,

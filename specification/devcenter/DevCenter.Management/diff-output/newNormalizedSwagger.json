@@ -1117,6 +1117,8 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
@@ -1168,6 +1170,8 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
@@ -5883,7 +5887,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/PoolUpdate"
+              "$ref": "#/definitions/Pool"
             }
           },
           "202": {
@@ -5903,7 +5907,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/PoolUpdate"
+          "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
       },
@@ -6642,7 +6646,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Catalog"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

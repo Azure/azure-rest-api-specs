@@ -120,14 +120,14 @@ interface ImageOperationGroup {
   /**
    * Gets an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Images_GetByProject")
   getByProject is ImageOperationGroupOps.Read<Image>;
 
   /**
    * Lists images for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Images_ListByProject")
   listByProject is ImageOperationGroupOps.List<
     Image,

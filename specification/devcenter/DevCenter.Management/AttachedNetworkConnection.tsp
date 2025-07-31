@@ -60,14 +60,14 @@ interface AttachedNetworkConnections {
   /**
    * Gets an attached NetworkConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AttachedNetworks_GetByProject")
   getByProject is AttachedNetworkConnectionOps.Read<AttachedNetworkConnection>;
 
   /**
    * Lists the attached NetworkConnections for a Project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AttachedNetworks_ListByProject")
   listByProject is AttachedNetworkConnectionOps.List<
     AttachedNetworkConnection,
@@ -126,7 +126,7 @@ interface AttachedNetworks {
   /**
    * Un-attach a NetworkConnection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is AttachedNetworkOps.DeleteWithoutOkAsync<
     AttachedNetworkConnection,
     LroHeaders = ArmAsyncOperationHeader &

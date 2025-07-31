@@ -132,14 +132,14 @@ interface ImageVersionOperationGroup {
   /**
    * Gets an image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ImageVersions_GetByProject")
   getByProject is ImageVersionOperationGroupOps.Read<ImageVersion>;
 
   /**
    * Lists versions for an image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ImageVersions_ListByProject")
   listByProject is ImageVersionOperationGroupOps.List<
     ImageVersion,

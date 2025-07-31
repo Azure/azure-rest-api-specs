@@ -286,7 +286,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Project` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Catalog` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Catalog` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/PoolUpdate` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Pool` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Pool` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Schedule` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Schedule` |
@@ -397,12 +397,6 @@
 | `definitions.ProjectProperties.properties.provisioningState['x-ms-enum__added']` | added | `{"name":"ProvisioningState","modelAsString":true}` |
 | `definitions.ScheduleProperties.properties.provisioningState['x-ms-enum__added']` | added | `{"name":"ProvisioningState","modelAsString":true}` |
 
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CatalogListResult.properties.value.readOnly__deleted` | deleted | `true` |
-
 ### Changes for `items`
 
 | Path | Change Type | Value |
@@ -508,5 +502,4 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{environmentDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails'].post.responses.200.schema.$ref` | `vdi.json#/definitions/CatalogResourceValidationErrorDetails` | `#/definitions/CatalogResourceValidationErrorDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/listSkus'].post.responses.200.schema.$ref` | `vdi.json#/definitions/SkuListResult` | `#/definitions/SkuListResult` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DevCenter/projects/{projectName}/pools/{poolName}'].patch.responses.200.schema.$ref` | `#/definitions/Pool` | `#/definitions/PoolUpdate` |
 

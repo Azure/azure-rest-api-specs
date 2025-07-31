@@ -69,14 +69,14 @@ interface ImageDefinitions {
   /**
    * Gets an Image Definition from the catalog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevCenterCatalogImageDefinitions_GetByDevCenterCatalog")
   getByDevCenterCatalog is ImageDefinitionOps.Read<ImageDefinition>;
 
   /**
    * List Image Definitions in the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevCenterCatalogImageDefinitions_ListByDevCenterCatalog")
   listByDevCenterCatalog is ImageDefinitionOps.List<
     ImageDefinition,
@@ -93,7 +93,7 @@ interface ImageDefinitions {
   /**
    * Gets Image Definition error details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevCenterCatalogImageDefinitions_GetErrorDetails")
   getErrorDetails is ImageDefinitionOps.ActionSync<
     ImageDefinition,
@@ -104,7 +104,8 @@ interface ImageDefinitions {
   /**
    * Builds an image for the specified Image Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevCenterCatalogImageDefinitions_BuildImage")
   buildImage is ImageDefinitionOps.ActionAsync<
     ImageDefinition,
@@ -187,6 +188,7 @@ interface ProjectCatalogImageDefinitions {
   /**
    * Builds an image for the specified Image Definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   buildImage is ProjectCatalogImageDefinitionOps.ActionAsync<
     ImageDefinition,
     void,

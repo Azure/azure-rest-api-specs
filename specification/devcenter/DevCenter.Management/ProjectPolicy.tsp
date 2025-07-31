@@ -40,6 +40,7 @@ interface ProjectPolicies {
   /**
    * Partially updates an project policy.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ProjectPolicy,
@@ -55,7 +56,7 @@ interface ProjectPolicies {
   /**
    * Deletes an project policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ProjectPolicy,
     LroHeaders = ArmAsyncOperationHeader &

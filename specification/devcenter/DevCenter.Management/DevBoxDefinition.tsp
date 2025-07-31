@@ -70,6 +70,7 @@ interface DevBoxDefinitions {
   /**
    * Partially updates a Dev Box definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is DevBoxDefinitionOps.CustomPatchAsync<
     DevBoxDefinition,
@@ -85,7 +86,7 @@ interface DevBoxDefinitions {
   /**
    * Deletes a Dev Box definition
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is DevBoxDefinitionOps.DeleteWithoutOkAsync<
     DevBoxDefinition,
     LroHeaders = ArmAsyncOperationHeader &
@@ -142,14 +143,14 @@ interface DevBoxDefinitionOperationGroup {
   /**
    * Gets a Dev Box definition configured for a project
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevBoxDefinitions_GetByProject")
   getByProject is DevBoxDefinitionOperationGroupOps.Read<DevBoxDefinition>;
 
   /**
    * List Dev Box definitions configured for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DevBoxDefinitions_ListByProject")
   listByProject is DevBoxDefinitionOperationGroupOps.List<
     DevBoxDefinition,

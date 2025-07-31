@@ -38,6 +38,7 @@ interface NetworkConnections {
   /**
    * Partially updates a Network Connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetworkConnection,
@@ -53,7 +54,7 @@ interface NetworkConnections {
   /**
    * Deletes a Network Connections resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkConnection,
     LroHeaders = ArmAsyncOperationHeader &
@@ -93,6 +94,7 @@ interface NetworkConnections {
   /**
    * Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runHealthChecks is ArmResourceActionAsyncBase<
     NetworkConnection,
     void,

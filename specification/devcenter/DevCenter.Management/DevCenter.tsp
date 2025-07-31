@@ -24,7 +24,7 @@ model DevCenter is Azure.ResourceManager.TrackedResource<DevCenterProperties> {
   /**
    * Managed identity properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
@@ -43,6 +43,7 @@ interface DevCenters {
   /**
    * Partially updates a devcenter.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DevCenter,
@@ -58,7 +59,7 @@ interface DevCenters {
   /**
    * Deletes a devcenter
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenter,
     LroHeaders = ArmAsyncOperationHeader &
@@ -98,7 +99,7 @@ interface DevCenters {
   /**
    * Lists images for a devcenter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Images_ListByDevCenter")
   @get
   @action("images")

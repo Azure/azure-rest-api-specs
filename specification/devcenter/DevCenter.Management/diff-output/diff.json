@@ -335,6 +335,8 @@
               "in": "path",
               "required": true,
               "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
             }
           ]
@@ -395,6 +397,8 @@
               "in": "path",
               "required": true,
               "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
             }
           ]
@@ -2513,18 +2517,8 @@
             " "
           ]
         ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/Pool",
-                "__new": "#/definitions/PoolUpdate"
-              }
-            }
-          }
-        },
         "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/PoolUpdate"
+          "final-state-schema__added": "#/definitions/Pool"
         }
       },
       "delete": {
@@ -3079,12 +3073,7 @@
     "CatalogListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "CatalogProperties": {
       "properties": {

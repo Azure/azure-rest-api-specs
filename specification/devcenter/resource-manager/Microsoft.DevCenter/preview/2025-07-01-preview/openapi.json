@@ -1169,7 +1169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CatalogListResult"
             }
@@ -1677,6 +1677,8 @@
             "description": "The name of the Environment Definition.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
@@ -1744,6 +1746,8 @@
             "description": "The name of the Environment Definition.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
@@ -5869,7 +5873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CatalogListResult"
             }
@@ -8245,7 +8249,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PoolUpdate"
+              "$ref": "#/definitions/Pool"
             }
           },
           "202": {
@@ -8271,7 +8275,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/PoolUpdate"
+          "final-state-schema": "#/definitions/Pool"
         },
         "x-ms-long-running-operation": true
       },
@@ -9239,14 +9243,15 @@
     },
     "CatalogListResult": {
       "type": "object",
-      "description": "The response of a Catalog list operation.",
+      "description": "Paged collection of Catalog items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Catalog items on this page",
           "items": {
             "$ref": "#/definitions/Catalog"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12267,7 +12272,7 @@
           "type": "object",
           "description": "Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserRoleAssignment"
+            "$ref": "#/definitions/userRoleAssignmentValue"
           }
         }
       }
@@ -13128,19 +13133,6 @@
         ]
       }
     },
-    "UserRoleAssignment": {
-      "type": "object",
-      "description": "Mapping of user object ID to role assignments.",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "description": "A map of roles to assign to the parent user.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
-          }
-        }
-      }
-    },
     "VirtualNetworkType": {
       "type": "string",
       "description": "Indicates a pool uses a Virtual Network managed by Microsoft (Managed), or a customer provided Network (Unmanaged).",
@@ -13196,6 +13188,20 @@
           "description": "Indicates whether workspace storage is enabled."
         }
       }
+    },
+    "userRoleAssignmentValue": {
+      "type": "object",
+      "description": "Mapping of user object ID to role assignments.",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "description": "A map of roles to assign to the parent user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      },
+      "x-ms-client-name": "userRoleAssignmentValue"
     }
   },
   "parameters": {}

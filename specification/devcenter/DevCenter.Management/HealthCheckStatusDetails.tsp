@@ -31,14 +31,14 @@ interface HealthCheckStatusDetailsOperationGroup {
   /**
    * Gets health check status details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkConnections_GetHealthDetails")
   getHealthDetails is ArmResourceRead<HealthCheckStatusDetails>;
 
   /**
    * Lists health check status details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkConnections_ListHealthDetails")
   listHealthDetails is ArmResourceListByParent<
     HealthCheckStatusDetails,
