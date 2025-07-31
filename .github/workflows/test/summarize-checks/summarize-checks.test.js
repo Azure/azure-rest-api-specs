@@ -3,11 +3,11 @@ import { describe, expect, it } from "vitest";
 import { processArmReviewLabels } from "../../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
+  extractRunsFromGraphQLResponse,
   getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
   updateLabels,
-  extractRunsFromGraphQLResponse
 } from "../../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "../mocks.js";
 
@@ -559,8 +559,11 @@ describe("Summarize Checks Unit Tests", () => {
 
     it("should extract check info from raw check response data", async () => {
       const expectedCheckRunId = "16582733356";
-      const response = await import("./fixtures/RawGraphQLResponse.json", { assert: { type: "json" } });
-      const [requiredCheckRuns, fyiCheckRuns, impactAssessmentWorkflowId] = await extractRunsFromGraphQLResponse(response);
+      const response = await import("./fixtures/RawGraphQLResponse.json", {
+        assert: { type: "json" },
+      });
+      const [requiredCheckRuns, fyiCheckRuns, impactAssessmentWorkflowId] =
+        await extractRunsFromGraphQLResponse(response);
 
       expect(requiredCheckRuns).toBeDefined();
       expect(fyiCheckRuns).toBeDefined();
@@ -579,19 +582,19 @@ describe("Summarize Checks Unit Tests", () => {
         expectedLabelsToAdd: ["ARMReview", "resource-manager", "TypeSpec", "WaitForARMFeedback"],
         expectedLabelsToRemove: [],
         impactAssessment: {
-          "suppressionReviewRequired":false,
-          "rpaasChange":false,
-          "newRP":false,
-          "rpaasRPMissing":false,
-          "rpaasRpNotInPrivateRepo":false,
-          "resourceManagerRequired":true,
-          "dataPlaneRequired":false,
-          "rpaasExceptionRequired":false,
-          "typeSpecChanged":true,
-          "isNewApiVersion":false,
-          "isDraft":false,
-          "targetBranch":"main"
-        }
+          suppressionReviewRequired: false,
+          rpaasChange: false,
+          newRP: false,
+          rpaasRPMissing: false,
+          rpaasRpNotInPrivateRepo: false,
+          resourceManagerRequired: true,
+          dataPlaneRequired: false,
+          rpaasExceptionRequired: false,
+          typeSpecChanged: true,
+          isNewApiVersion: false,
+          isDraft: false,
+          targetBranch: "main",
+        },
       },
       {
         description: "We shouldn't add ARM review if resourceManagerRequired is false",
@@ -599,19 +602,19 @@ describe("Summarize Checks Unit Tests", () => {
         expectedLabelsToAdd: ["TypeSpec"],
         expectedLabelsToRemove: [],
         impactAssessment: {
-          "suppressionReviewRequired":false,
-          "rpaasChange":false,
-          "newRP":false,
-          "rpaasRPMissing":false,
-          "rpaasRpNotInPrivateRepo":false,
-          "resourceManagerRequired":false,
-          "dataPlaneRequired":false,
-          "rpaasExceptionRequired":false,
-          "typeSpecChanged":true,
-          "isNewApiVersion":false,
-          "isDraft":false,
-          "targetBranch":"main"
-        }
+          suppressionReviewRequired: false,
+          rpaasChange: false,
+          newRP: false,
+          rpaasRPMissing: false,
+          rpaasRpNotInPrivateRepo: false,
+          resourceManagerRequired: false,
+          dataPlaneRequired: false,
+          rpaasExceptionRequired: false,
+          typeSpecChanged: true,
+          isNewApiVersion: false,
+          isDraft: false,
+          targetBranch: "main",
+        },
       },
     ];
     it.each(testCases)(

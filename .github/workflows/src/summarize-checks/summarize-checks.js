@@ -919,9 +919,12 @@ async function buildNextStepsToMergeCommentBody(
   // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
-  // we consider requirements met if there are no blockers (which INCLUDES violated labelling rules) AND
-  // that we have at least one required check that is not in progress or queued.
-  // This might be too aggressive, but it's a good start.
+  // we consider requirements met if there are:
+  // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
+  // - that none of the required checks are in_progress or queued (requiredCheckInfosPresent)
+  // - and that the assessment is completed. If it is not, we assume we are still evaluating the requirements. Not having
+  //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
+  //   it is completed.
   const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
 
   // Compose the body based on the current state
