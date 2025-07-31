@@ -1,5 +1,6 @@
 // @ts-check
 
+import { inspect } from "util";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { getIssueNumber } from "./issues.js";
 
@@ -170,7 +171,8 @@ export async function extractInputs(github, context, core) {
           issue_number = pullRequests[0].number;
         } else {
           throw new Error(
-            `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
+            `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
+              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n${inspect(pullRequests)}`,
           );
         }
         if (!issue_number) {
