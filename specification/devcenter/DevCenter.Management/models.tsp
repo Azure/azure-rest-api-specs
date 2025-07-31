@@ -923,7 +923,7 @@ model ProjectPolicyUpdateProperties {
   /**
    * Resource policies that are a part of this project policy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "ResourcePolicy array items have no identifying properties by design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourcePolicies?: ResourcePolicy[];
 
   /**
