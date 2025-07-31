@@ -10,6 +10,11 @@ using Microsoft.PlanetaryComputer;
 @useDependency(Versions.v2025_04_30_Preview)
 namespace Customizations;
 
+@@clientNamespace(Microsoft.PlanetaryComputer,
+  "com.azure.planetarycomputer",
+  "java"
+);
+
 // Client name conflicts
 @@clientName(Ingestions, "IngestionsManagement", "csharp");
 @@clientName(StacItems, "StacItemsManagement", "csharp");
@@ -17,19 +22,19 @@ namespace Customizations;
 @@clientName(IngestionSources, "IngestionSourcesManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
 @@clientName(StacCollectionOperations, "StacCollectionManagement", "csharp");
-@@clientName(StacItemOrItemCollection,
-  "StacItemOrItemCollectionContent",
-  "csharp"
-);
+// @@clientName(StacItemOrItemCollection,
+//   "StacItemOrItemCollectionContent",
+//   "csharp"
+// );
 @@clientName(ItemProperties.datetime, "date_time", "python");
 @@clientName(SearchPostRequest.datetime, "date_time", "python");
 
 // Disable convenient API for JSON-Merge patch operations
-@@convenientAPI(Ingestions.update, false, "csharp");
-@@convenientAPI(StacItems.update, false, "csharp");
+@@convenientAPI(Ingestions.update, false, "csharp,java");
+@@convenientAPI(StacItems.update, false, "csharp,java");
 
 // To use maps instead of binary data for non-primitive union types
-@@alternateType(IntervalLegendsResponse.body, Record<unknown>[], "java,python");
+@@alternateType(IntervalLegendsResponse.body, Record<unknown>[]);
 
 // Use CQL2-TEXT for strongly typed languages
 @@alternateType(SearchPostRequest.filter, string, "csharp,java");
@@ -108,9 +113,9 @@ namespace Customizations;
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
-@clientName("StacConfigClientImpl", "csharp")
+@clientName("StacConfigClientImpl", "csharp,")
 interface StacCollectionConfigurationClient {
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
   createCollectionAsset is StacCollectionAssets.create;
@@ -168,7 +173,7 @@ interface StacCollectionConfigurationClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("GeocatalogClientImpl", "csharp")
 interface GeocatalogClient {
@@ -184,7 +189,7 @@ interface GeocatalogClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("ImageExportsClientImpl", "csharp")
 interface ImageExportsClient {
@@ -198,7 +203,7 @@ interface ImageExportsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("StacItemTilerClientImpl", "csharp")
 interface StacItemTilerClient {
@@ -249,7 +254,7 @@ interface StacItemTilerClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("MapLegendsClientImpl", "csharp")
 interface MapLegendsClient {
@@ -265,7 +270,7 @@ interface MapLegendsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("MosaicTilerClientImpl", "csharp")
 interface MosaicTilerClient {
@@ -296,7 +301,7 @@ interface MosaicTilerClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("TileMatrixSetsClientImpl", "csharp")
 interface TileMatrixSetsClient {
@@ -310,7 +315,7 @@ interface TileMatrixSetsClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("SharedAccessSignatureClientImpl", "csharp")
 interface SharedAccessSignatureClient {
@@ -326,7 +331,7 @@ interface SharedAccessSignatureClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("IngestionClientImpl", "csharp")
 interface IngestionClient {
@@ -372,7 +377,7 @@ interface IngestionClient {
   {
     service: Microsoft.PlanetaryComputer,
   },
-  "!python,!java"
+  "csharp,java"
 )
 @clientName("StacClientImpl", "csharp")
 interface StacClient {

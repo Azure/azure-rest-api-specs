@@ -636,11 +636,40 @@ union StacModelType {
   FeatureCollection: "FeatureCollection",
 }
 
+// /**
+//  * Base type for STAC items and collections with discriminator.
+//  */
+// @discriminator("type")
+// model StacItemOrItemCollection {
+//   /**
+//    * The type discriminator for STAC resources.
+//    */
+//   type: StacModelType;
+
+//   /**
+//    * Stac Version
+//    */
+//   @minLength(1)
+//   @encodedName("application/json", "stac_version")
+//   stacVersion?: string = "1.0.0";
+
+//   /**
+//    * Links to related resources and endpoints.
+//    */
+//   links?: Link[];
+
+//   ...MicrosoftStacProperties;
+//   ...StacExtensionsList;
+// }
+
 /**
- * Base type for STAC items and collections with discriminator.
+ * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
  */
-@discriminator("type")
-model StacItemOrItemCollection {
+@resource("items")
+@parentResource(StacCollectionModel)
+model StacItemModel {
+  ...FeatureBase;
+
   /**
    * The type discriminator for STAC resources.
    */
@@ -660,15 +689,6 @@ model StacItemOrItemCollection {
 
   ...MicrosoftStacProperties;
   ...StacExtensionsList;
-}
-
-/**
- * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
- */
-@resource("items")
-@parentResource(StacCollectionModel)
-model StacItemModel extends StacItemOrItemCollection {
-  ...FeatureBase;
 
   /**
    * Unique identifier for the feature
@@ -676,11 +696,6 @@ model StacItemModel extends StacItemOrItemCollection {
   @key("itemId")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   id: string;
-
-  /**
-   * GeoJSON type identifier for Feature
-   */
-  type: StacModelType.Feature;
 
   /**
    * ID of the STAC collection this item belongs to.
@@ -755,7 +770,22 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollectionModel extends StacItemOrItemCollection {
+model ItemCollectionModel {
+  /**
+   * Stac Version
+   */
+  @minLength(1)
+  @encodedName("application/json", "stac_version")
+  stacVersion?: string = "1.0.0";
+
+  /**
+   * Links to related resources and endpoints.
+   */
+  links?: Link[];
+
+  ...MicrosoftStacProperties;
+  ...StacExtensionsList;
+
   /**
    * GeoJSON FeatureCollection type.
    */
