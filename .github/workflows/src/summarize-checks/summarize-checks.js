@@ -23,6 +23,7 @@ import { extractInputs } from "../context.js";
 // import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { intersect } from "../../../shared/src/set.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
@@ -292,12 +293,13 @@ export default async function summarizeChecks({ github, context, core }) {
     return;
   }
 
+  // TODO: This is triggered by pull_request_target AND workflow_run.  If workflow_run, targetBranch will be undefined.
+  //       Is this OK? If not, we should be able to get the base ref by calling a GH API to fetch the PR metadata.
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
   await summarizeChecksImpl(
     github,
-    context,
     core,
     owner,
     repo,
@@ -332,7 +334,6 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
@@ -344,7 +345,6 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
  */
 export async function summarizeChecksImpl(
   github,
-  context,
   core,
   owner,
   repo,
@@ -507,8 +507,7 @@ export async function getExistingLabels(github, owner, repo, issue_number) {
     issue_number: issue_number,
     per_page: PER_PAGE_MAX,
   });
-  /** @type {string[]} */
-  return labels.map((/** @type {{ name: string; }} */ label) => label.name);
+  return labels.map((label) => label.name);
 }
 
 // #endregion
@@ -518,7 +517,7 @@ export async function getExistingLabels(github, owner, repo, issue_number) {
  * @param {Set<string>} labelsToRemove
  */
 function warnIfLabelSetsIntersect(labelsToAdd, labelsToRemove) {
-  const intersection = Array.from(labelsToAdd).filter((label) => labelsToRemove.has(label));
+  const intersection = [...intersect(labelsToAdd, labelsToRemove)];
   if (intersection.length > 0) {
     console.warn(
       "ASSERTION VIOLATION! The intersection of labelsToRemove and labelsToAdd is non-empty! " +
@@ -550,8 +549,6 @@ export function updateLabels(existingLabels, impactAssessment) {
   };
 
   if (impactAssessment) {
-    console.log(`Downloaded impact assessment: ${JSON.stringify(impactAssessment)}`);
-
     // will further update the label context if necessary
     processImpactAssessment(labelContext, impactAssessment);
   }
@@ -719,15 +716,9 @@ export async function getCheckRunTuple(
   }
 
   const filteredReqCheckRuns = reqCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
   const filteredFyiCheckRuns = fyiCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
