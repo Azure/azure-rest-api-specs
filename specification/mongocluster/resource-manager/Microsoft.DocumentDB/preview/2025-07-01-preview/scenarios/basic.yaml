@@ -1,0 +1,141 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  primaryClusterName:
+    type: string
+    prefix: mongoclu
+  primaryRegion:
+    type: string
+    value: westus
+  replicaClusterName:
+    type: string
+    prefix: replicaclu
+  replicaRegion:
+    type: string
+    value: westus3
+  administratorLoginPassword:
+    type: secureString
+  administratorLoginPassword2:
+    type: secureString
+  firewallRuleName:
+    type: string
+    prefix: firewall
+scenarios:
+  - scenario: basic
+    description: Basic scenario for creating, reading and deleting a Mongo Cluster.
+    steps:
+      - step: Check_NameAvailability
+        exampleFile: ../examples/MongoClusters_NameAvailability.json
+        requestUpdate:
+          - replace: /body/name
+            value: $(primaryClusterName)
+      - step: MongoClusters_CreateOrUpdate
+        variables:
+          location: $(primaryRegion)
+        exampleFile: ../examples/MongoClusters_Create.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+          - replace: /resource/location
+            value: $(primaryRegion)
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword)
+          - add: /resource/properties/previewFeatures
+            value:
+              - GeoReplicas
+      - step: MongoClusters_ListByResourceGroup
+        exampleFile: ../examples/MongoClusters_ListByResourceGroup.json
+      - step: MongoClusters_Get
+        exampleFile: ../examples/MongoClusters_Get.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+        outputVariables:
+          sourceResourceId:
+            type: string
+            fromResponse: /id
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ../examples/MongoClusters_FirewallRuleCreate.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: FirewallRules_ListByMongoCluster
+        exampleFile: ../examples/MongoClusters_FirewallRuleList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: FirewallRules_Get
+        exampleFile: ../examples/MongoClusters_FirewallRuleGet.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_ListConnectionStrings
+        exampleFile: ../examples/MongoClusters_ListConnectionStrings.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_UpdateDiskSize
+        exampleFile: ../examples/MongoClusters_PatchDiskSize.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: FirewallRules_Delete
+        exampleFile: ../examples/MongoClusters_FirewallRuleDelete.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_ResetPassword
+        exampleFile: ../examples/MongoClusters_ResetPassword.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+          - replace: /properties/properties/administratorLoginPassword
+            value: $(administratorLoginPassword2)
+      - step: Check_Replica_NameAvailability
+        exampleFile: ../examples/MongoClusters_NameAvailability.json
+        requestUpdate:
+          - replace: /body/name
+            value: $(replicaClusterName)
+      - step: MongoClusters_CreateGeoReplica
+        variables:
+          location: $(replicaRegion)
+        exampleFile: ../examples/MongoClusters_CreateGeoReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+          - replace: /resource/location
+            value: $(replicaRegion)
+          - replace: /resource/properties/replicaParameters/sourceResourceId
+            value: $(sourceResourceId)
+          - replace: /resource/properties/replicaParameters/sourceLocation
+            value: $(primaryRegion)
+      - step: MongoClusters_ReplicaList
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_ForcePromoteReplica
+        exampleFile: ../examples/MongoClusters_ForcePromoteReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+      - step: MongoClusters_ReplicaList_PostPromote
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+      - step: MongoClusters_ForcePromoteReplica_2
+        exampleFile: ../examples/MongoClusters_ForcePromoteReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_ReplicaList_PostPromote_2
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(primaryClusterName)
+      - step: MongoClusters_Delete_Replica
+        exampleFile: ../examples/MongoClusters_Delete.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)

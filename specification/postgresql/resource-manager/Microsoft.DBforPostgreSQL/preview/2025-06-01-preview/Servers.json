@@ -1,0 +1,1652 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}": {
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create a new server in Microsoft owned virtual network with zone redundant high availability.": {
+            "$ref": "./examples/ServersCreateInMicrosoftOwnedVirtualNetworkWithZoneRedundantHighAvailability.json"
+          },
+          "Create a new server in your own virtual network with same zone high availability.": {
+            "$ref": "./examples/ServersCreateInYourOwnVirtualNetworkWithSameZoneHighAvailability.json"
+          },
+          "Create a new server with Microsoft Entra authentication enabled in your own virtual network and without high availability.": {
+            "$ref": "./examples/ServersCreateWithMicrosoftEntraEnabledInYourOwnVirtualNetworkWithoutHighAvailability.json"
+          },
+          "Create a new server with data encryption based on customer managed key.": {
+            "$ref": "./examples/ServersCreateWithDataEncryptionEnabled.json"
+          },
+          "Create a new server with data encryption based on customer managed key with automatic key version update.": {
+            "$ref": "./examples/ServersCreateWithDataEncryptionEnabledAutoUpdate.json"
+          },
+          "Create a new server using a point in time restore of a backup of an existing server.": {
+            "$ref": "./examples/ServersCreatePointInTimeRestore.json"
+          },
+          "Create a new server using a restore of a geographically redundant backup of an existing server, with data encryption based on customer managed key.": {
+            "$ref": "./examples/ServersCreateGeoRestoreWithDataEncryptionEnabled.json"
+          },
+          "Create a new server using a restore of a geographically redundant backup of an existing server, with data encryption based on customer managed key with automatic key version update.": {
+            "$ref": "./examples/ServersCreateGeoRestoreWithDataEncryptionEnabledAutoUpdate.json"
+          },
+          "Create a read replica of an existing server.": {
+            "$ref": "./examples/ServersCreateReplica.json"
+          },
+          "Create a new server using a backup of a server that was deleted or dropped recently.": {
+            "$ref": "./examples/ServersCreateReviveDropped.json"
+          },
+          "Create a new elastic cluster.": {
+            "$ref": "./examples/ServersClusterCreate.json"
+          }
+        },
+        "description": "Creates a new server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "description": "Parameters required to create a new server or to update an existing server."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Update",
+        "x-ms-examples": {
+          "Update an existing server.": {
+            "$ref": "./examples/ServersUpdate.json"
+          },
+          "Update an existing server with Microsoft Entra authentication enabled.": {
+            "$ref": "./examples/ServersUpdateWithMicrosoftEntraEnabled.json"
+          },
+          "Update an existing server with data encryption based on customer managed key.": {
+            "$ref": "./examples/ServersUpdateWithDataEncryptionEnabled.json"
+          },
+          "Update an existing server with data encryption based on customer managed key with automatic key version update.": {
+            "$ref": "./examples/ServersUpdateWithDataEncryptionEnabledAutoUpdate.json"
+          },
+          "Update an existing server with custom maintenance window.": {
+            "$ref": "./examples/ServersUpdateWithCustomMaintenanceWindow.json"
+          },
+          "Update an existing server to upgrade the major version of PostgreSQL database engine.": {
+            "$ref": "./examples/ServersUpdateWithMajorVersionUpgrade.json"
+          },
+          "Promote a read replica to a standalone server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the promotion to a standalone server.": {
+            "$ref": "./examples/ServersPromoteReplicaAsPlannedStandaloneServer.json"
+          },
+          "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
+            "$ref": "./examples/ServersPromoteReplicaAsForcedStandaloneServer.json"
+          },
+          "Switch over a read replica to primary server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
+            "$ref": "./examples/ServersPromoteReplicaAsPlannedSwitchover.json"
+          },
+          "Switch over a read replica to primary server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
+            "$ref": "./examples/ServersPromoteReplicaAsForcedSwitchover.json"
+          }
+        },
+        "description": "Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerForPatch"
+            },
+            "description": "Parameters required to update a server."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Delete",
+        "x-ms-examples": {
+          "Delete or drop an existing server.": {
+            "$ref": "./examples/ServersDelete.json"
+          }
+        },
+        "description": "Deletes or drops an existing server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Get",
+        "x-ms-examples": {
+          "Get information about an existing server.": {
+            "$ref": "./examples/ServersGet.json"
+          },
+          "Get information about an existing server that is integrated into a virtual network provided by customer.": {
+            "$ref": "./examples/ServersGetWithVnet.json"
+          },
+          "Get information about an existing server that isn't integrated into a virtual network provided by customer and has private endpoint connections.": {
+            "$ref": "./examples/ServersGetWithPrivateEndpoints.json"
+          }
+        },
+        "description": "Gets information about an existing server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all servers in a resource group.": {
+            "$ref": "./examples/ServersListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all servers in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ServerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/flexibleServers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListBySubscription",
+        "x-ms-examples": {
+          "List all servers in a subscription.": {
+            "$ref": "./examples/ServersListBySubscription.json"
+          }
+        },
+        "description": "Lists all servers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ServerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "Restart PostgreSQL database engine in a server.": {
+            "$ref": "./examples/ServersRestart.json"
+          },
+          "Restart PostgreSQL database engine in a server with a forced failover to standby server.": {
+            "$ref": "./examples/ServersRestartWithFailover.json"
+          }
+        },
+        "description": "Restarts PostgreSQL database engine in a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestartParameter"
+            },
+            "description": "Parameters to restart a server."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/start": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Start",
+        "x-ms-examples": {
+          "Start a stopped server.": {
+            "$ref": "./examples/ServersStart.json"
+          }
+        },
+        "description": "Starts a stopped server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/stop": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Stop",
+        "x-ms-examples": {
+          "Stop a server.": {
+            "$ref": "./examples/ServersStop.json"
+          }
+        },
+        "description": "Stops a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerVersion": {
+      "type": "string",
+      "description": "Major version of PostgreSQL database engine.",
+      "enum": [
+        "17",
+        "16",
+        "15",
+        "14",
+        "13",
+        "12",
+        "11"
+      ],
+      "x-ms-enum": {
+        "name": "PostgresMajorVersion",
+        "modelAsString": true
+      }
+    },
+    "Replica": {
+      "type": "object",
+      "description": "Replica properties of a server.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Role of the server in a replication set."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of read replicas allowed for a server.",
+          "readOnly": true
+        },
+        "replicationState": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Catchup",
+            "Provisioning",
+            "Updating",
+            "Broken",
+            "Reconfiguring"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Active",
+                "description": "The read replica server is fully synchronized and actively replicating data from the primary server."
+              },
+              {
+                "value": "Catchup",
+                "description": "The read replica server is behind the primary server and is currently catching up with pending changes."
+              },
+              {
+                "value": "Provisioning",
+                "description": "The read replica server is being created and is in process of getting initialized."
+              },
+              {
+                "value": "Updating",
+                "description": "The read replica server is undergoing some changes it can be changing compute size of promoting it to primary server."
+              },
+              {
+                "value": "Broken",
+                "description": "Replication has failed or been interrupted."
+              },
+              {
+                "value": "Reconfiguring",
+                "description": "The read replica server is being reconfigured, possibly due to changes in source or settings."
+              }
+            ]
+          },
+          "description": "Indicates the replication state of a read replica. This property is returned only when the target server is a read replica. Possible  values are Active, Broken, Catchup, Provisioning, Reconfiguring, and Updating",
+          "readOnly": true
+        },
+        "promoteMode": {
+          "type": "string",
+          "description": "Type of operation to apply on the read replica. This property is write only. Standalone means that the read replica will be promoted to a standalone server, and will become a completely independent entity from the replication set. Switchover means that the read replica will roles with the primary server.",
+          "enum": [
+            "Standalone",
+            "Switchover"
+          ],
+          "x-ms-enum": {
+            "name": "ReadReplicaPromoteMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standalone",
+                "description": "Read replica will become an independent server."
+              },
+              {
+                "value": "Switchover",
+                "description": "Read replica will swap roles with primary server."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "promoteOption": {
+          "type": "string",
+          "description": "Data synchronization option to use when processing the operation specified in the promoteMode property. This property is write only.",
+          "enum": [
+            "Planned",
+            "Forced"
+          ],
+          "x-ms-enum": {
+            "name": "ReadReplicaPromoteOption",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Planned",
+                "description": "The operation will wait for data in the read replica to be fully synchronized with its source server, before it initiates the operation."
+              },
+              {
+                "value": "Forced",
+                "description": "The operation will not wait for data in the read replica to be synchronized with its source server, before it initiates the operation."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
+    "ServerProperties": {
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "Password assigned to the administrator login. As long as password authentication is enabled, this password can be changed at any time.",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "Major version of PostgreSQL database engine."
+        },
+        "minorVersion": {
+          "type": "string",
+          "description": "Minor version of PostgreSQL database engine.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of a server.",
+          "readOnly": true,
+          "enum": [
+            "Ready",
+            "Dropping",
+            "Disabled",
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating",
+            "Restarting",
+            "Inaccessible",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ServerState",
+            "modelAsString": true
+          }
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "Fully qualified domain name of a server.",
+          "readOnly": true
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "default": null,
+          "description": "Storage properties of a server."
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "default": null,
+          "description": "Authentication configuration properties of a server."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "default": null,
+          "description": "Data encryption properties of a server."
+        },
+        "backup": {
+          "$ref": "#/definitions/Backup",
+          "default": null,
+          "description": "Backup properties of a server."
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "default": null,
+          "description": "Network properties of a server. Only required if you want your server to be integrated into a virtual network provided by customer."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/HighAvailability",
+          "default": null,
+          "description": "High availability properties of a server."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "default": null,
+          "description": "Maintenance window properties of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "sourceServerResourceId": {
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+              }
+            ]
+          },
+          "description": "Identifier of the server to be used as the source of the new server. Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', 'Replica', or 'ReviveDropped'. This property is returned only when the target server is a read replica.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time (in ISO8601 format) of the backup which you want to restore in the new server. It's required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', or 'ReviveDropped'.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "availabilityZone": {
+          "type": "string",
+          "default": "",
+          "description": "Availability zone of a server.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Role of the server in a replication set."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of read replicas allowed for a server.",
+          "readOnly": true
+        },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Read replica properties of a server. Required only in case that you want to promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Creation mode of a new server.",
+          "enum": [
+            "Default",
+            "Create",
+            "Update",
+            "PointInTimeRestore",
+            "GeoRestore",
+            "Replica",
+            "ReviveDropped"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connections associated with the specified server.",
+          "readOnly": true
+        },
+        "cluster": {
+          "$ref": "#/definitions/Cluster",
+          "default": null,
+          "description": "Cluster properties of a server.",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Properties of a server."
+    },
+    "Server": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Compute tier and size of a server."
+        },
+        "identity": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "User assigned managed identities assigned to the server."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a server."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Properties of a server."
+    },
+    "ServerPropertiesForPatch": {
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "Password assigned to the administrator login. As long as password authentication is enabled, this password can be changed at any time.",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "Major version of PostgreSQL database engine."
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "default": null,
+          "description": "Storage properties of a server."
+        },
+        "backup": {
+          "$ref": "#/definitions/BackupForPatch",
+          "default": null,
+          "description": "Backup properties of a server."
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/HighAvailabilityForPatch",
+          "default": null,
+          "description": "High availability properties of a server."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindowForPatch",
+          "default": null,
+          "description": "Maintenance window properties of a server.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfigForPatch",
+          "default": null,
+          "description": "Authentication configuration properties of a server."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "default": null,
+          "description": "Data encryption properties of a server."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Update mode of an existing server.",
+          "enum": [
+            "Default",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "CreateModeForPatch",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "replicationRole": {
+          "$ref": "#/definitions/ReplicationRole",
+          "description": "Role of the server in a replication set."
+        },
+        "replica": {
+          "$ref": "#/definitions/Replica",
+          "description": "Read replica properties of a server. Required only in case that you want to promote a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "default": null,
+          "description": "Network properties of a server. Only required if you want your server to be integrated into a virtual network provided by customer."
+        },
+        "cluster": {
+          "$ref": "#/definitions/Cluster",
+          "default": null,
+          "description": "Cluster properties of a server.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Properties of a server."
+    },
+    "ServerForPatch": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuForPatch",
+          "description": "Compute tier and size of a server."
+        },
+        "identity": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "Describes the identity of the application."
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPropertiesForPatch",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      },
+      "description": "Represents a server to be updated."
+    },
+    "ServerList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "description": "The list of servers"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "description": "A list of servers."
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name by which is known a given compute size assigned to a server."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of the compute assigned to a server.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ],
+      "description": "Compute information of a server."
+    },
+    "SkuForPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name by which is known a given compute size assigned to a server."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of the compute assigned to a server.",
+          "enum": [
+            "Burstable",
+            "GeneralPurpose",
+            "MemoryOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Compute information of a server."
+    },
+    "Storage": {
+      "type": "object",
+      "properties": {
+        "storageSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of storage assigned to a server."
+        },
+        "autoGrow": {
+          "type": "string",
+          "description": "Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutoGrow",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Storage tier of a server.",
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P6",
+            "P10",
+            "P15",
+            "P20",
+            "P30",
+            "P40",
+            "P50",
+            "P60",
+            "P70",
+            "P80"
+          ],
+          "x-ms-enum": {
+            "name": "AzureManagedDiskPerformanceTier",
+            "modelAsString": true
+          }
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum IOPS supported for storage. Required when type of storage is PremiumV2_LRS or UltraSSD_LRS."
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum throughput supported for storage. Required when type of storage is PremiumV2_LRS or UltraSSD_LRS."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Premium_LRS",
+            "PremiumV2_LRS",
+            "UltraSSD_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          },
+          "description": "Type of storage assigned to a server. Allowed values are Premium_LRS, PremiumV2_LRS, or UltraSSD_LRS. If not specified, it defaults to Premium_LRS."
+        }
+      },
+      "description": "Storage properties of a server."
+    },
+    "AuthConfig": {
+      "type": "object",
+      "properties": {
+        "activeDirectoryAuth": {
+          "type": "string",
+          "description": "Indicates if the server supports Microsoft Entra authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MicrosoftEntraAuth",
+            "modelAsString": true
+          }
+        },
+        "passwordAuth": {
+          "type": "string",
+          "default": "Enabled",
+          "description": "Indicates if the server supports password based authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordBasedAuth",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "default": "",
+          "description": "Identifier of the tenant of the delegated resource."
+        }
+      },
+      "description": "Authentication configuration properties of a server."
+    },
+    "AuthConfigForPatch": {
+      "type": "object",
+      "properties": {
+        "activeDirectoryAuth": {
+          "type": "string",
+          "description": "Indicates if the server supports Microsoft Entra authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "MicrosoftEntraAuth",
+            "modelAsString": true
+          }
+        },
+        "passwordAuth": {
+          "type": "string",
+          "description": "Indicates if the server supports password based authentication.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordBasedAuth",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identifier of the tenant of the delegated resource."
+        }
+      },
+      "description": "Authentication configuration properties of a server."
+    },
+    "DataEncryption": {
+      "type": "object",
+      "properties": {
+        "primaryKeyURI": {
+          "type": "string",
+          "description": "URI of the key in Azure Key Vault used for data encryption of the primary storage associated to a server."
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the primary storage associated to a server."
+        },
+        "geoBackupKeyURI": {
+          "type": "string",
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a server that is configured to support geographically redundant backups."
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Identifier of the user assigned managed identity used to access the key in Azure Key Vault for data encryption of the geographically redundant storage associated to a server that is configured to support geographically redundant backups."
+        },
+        "type": {
+          "type": "string",
+          "description": "Data encryption type used by a server.",
+          "enum": [
+            "SystemManaged",
+            "AzureKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "DataEncryptionType",
+            "modelAsString": true
+          }
+        },
+        "primaryEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Status of key used by a server configured with data encryption based on customer managed key, to encrypt the primary storage associated to the server.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeyStatus",
+            "modelAsString": true
+          }
+        },
+        "geoBackupEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Status of key used by a server configured with data encryption based on customer managed key, to encrypt the geographically redundant storage associated to the server when it is configured to support geographically redundant backups.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeyStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Data encryption properties of a server."
+    },
+    "UserIdentity": {
+      "description": "User assigned managed identity associated with a server.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Identifier of the object of the service principal associated to the user assigned managed identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Identifier of the client of the service principal associated to the user assigned managed identity."
+        }
+      }
+    },
+    "UserAssignedIdentityMap": {
+      "type": "object",
+      "description": "Map of user assigned managed identities.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserIdentity"
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentityMap",
+          "description": "Map of user assigned managed identities."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Identifier of the object of the service principal associated to the user assigned managed identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "Types of identities associated with a server.",
+          "enum": [
+            "None",
+            "UserAssigned",
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identifier of the tenant of a server.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identities associated with a server."
+    },
+    "ReplicationRole": {
+      "type": "string",
+      "description": "Role of the server in a replication set.",
+      "enum": [
+        "None",
+        "Primary",
+        "AsyncReplica",
+        "GeoAsyncReplica"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationRole",
+        "modelAsString": true
+      }
+    },
+    "Backup": {
+      "type": "object",
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "default": 7,
+          "description": "Backup retention days for the server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "default": "Disabled",
+          "description": "Indicates if the server is configured to create geographically redundant backups.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeographicallyRedundantBackup",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore point time (ISO8601 format) for a server.",
+          "readOnly": true
+        }
+      },
+      "description": "Backup properties of a server."
+    },
+    "BackupForPatch": {
+      "type": "object",
+      "properties": {
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server."
+        },
+        "geoRedundantBackup": {
+          "type": "string",
+          "description": "Indicates if the server is configured to create geographically redundant backups.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeographicallyRedundantBackup",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore point time (ISO8601 format) for a server.",
+          "readOnly": true
+        }
+      },
+      "description": "Backup properties of a server."
+    },
+    "Network": {
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Indicates if public network access is enabled or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServerPublicNetworkAccessState",
+            "modelAsString": true
+          }
+        },
+        "delegatedSubnetResourceId": {
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
+          "description": "Resource identifier of the delegated subnet. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone."
+        },
+        "privateDnsZoneArmResourceId": {
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          },
+          "description": "Identifier of the private DNS zone. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone."
+        }
+      },
+      "description": "Network properties of a server."
+    },
+    "HighAvailability": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "default": "Disabled",
+          "description": "High availability mode for a server.",
+          "enum": [
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityMode",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "default": "",
+          "description": "Availability zone associated to the standby server created when high availability is set to SameZone or ZoneRedundant."
+        }
+      },
+      "description": "High availability properties of a server."
+    },
+    "HighAvailabilityForPatch": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "High availability mode for a server.",
+          "enum": [
+            "Disabled",
+            "ZoneRedundant",
+            "SameZone"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityMode",
+            "modelAsString": true
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of the standby server created when high availability is set to SameZone or ZoneRedundant.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
+          ],
+          "x-ms-enum": {
+            "name": "HighAvailabilityState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "default": "",
+          "description": "Availability zone associated to the standby server created when high availability is set to SameZone or ZoneRedundant."
+        }
+      },
+      "description": "High availability properties of a server."
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window properties of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "default": "Disabled",
+          "description": "Indicates whether custom window is enabled or disabled."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "Start hour to be used for maintenance window."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "Start minute to be used for maintenance window."
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "Day of the week to be used for maintenance window."
+        }
+      }
+    },
+    "MaintenanceWindowForPatch": {
+      "type": "object",
+      "description": "Maintenance window properties of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "Indicates whether custom window is enabled or disabled."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour to be used for maintenance window."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start minute to be used for maintenance window."
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Day of the week to be used for maintenance window."
+        }
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "Cluster properties of a server.",
+      "properties": {
+        "clusterSize": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0,
+          "description": "Number of nodes assigned to the elastic cluster."
+        },
+        "defaultDatabaseName": {
+          "type": "string",
+          "description": "Default database name for the elastic cluster."
+        }
+      }
+    },
+    "RestartParameter": {
+      "type": "object",
+      "properties": {
+        "restartWithFailover": {
+          "type": "boolean",
+          "description": "Indicates if restart the PostgreSQL database engine should failover or switch over from primary to standby. This only works if server has high availability enabled."
+        },
+        "failoverMode": {
+          "type": "string",
+          "description": "Failover mode.",
+          "enum": [
+            "PlannedFailover",
+            "ForcedFailover",
+            "PlannedSwitchover",
+            "ForcedSwitchover"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "PostgreSQL database engine restart parameters."
+    }
+  },
+  "parameters": {}
+}

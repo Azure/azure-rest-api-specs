@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "parameters": {
+      "backupSettings": {
+        "backupName": "exampleltrbackup"
+      },
+      "targetDetails": {
+        "sasUriList": [
+          "sasuri"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "datasourceSizeInBytes": 23,
+          "dataTransferredInBytes": 23,
+          "backupMetadata": "backupmetadata",
+          "status": "Running",
+          "startTime": "2025-06-01T18:30:22.123Z",
+          "endTime": "2025-06-01T18:35:22.123Z",
+          "percentComplete": 100
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/operationResults/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2025-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/azureAsyncOperation/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2025-06-01-preview"
+      }
+    }
+  }
+}

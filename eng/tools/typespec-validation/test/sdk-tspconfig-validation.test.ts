@@ -1,42 +1,42 @@
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
+import { strictEqual } from "node:assert";
+import { join } from "path";
+import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularPackageDirectorySubRule,
-  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
-  TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-  TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtPackageDirectorySubRule,
-  TspConfigGoMgmtModuleEqualStringSubRule,
-  TspConfigGoMgmtFixConstStutteringTrueSubRule,
-  TspConfigGoMgmtGenerateSamplesTrueSubRule,
-  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigCsharpAzClearOutputFolderTrueSubRule,
+  TspConfigCsharpAzNamespaceEqualStringSubRule,
+  TspConfigCsharpAzPackageDirectorySubRule,
+  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspConfigGoAzGenerateFakesTrueSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtFixConstStutteringTrueSubRule,
+  TspConfigGoMgmtGenerateSamplesTrueSubRule,
+  TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigGoMgmtModuleEqualStringSubRule,
+  TspConfigGoMgmtPackageDirectorySubRule,
+  TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
-  TspConfigPythonMgmtPackageDirectorySubRule,
+  TspConfigPythonDpPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
+  TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtPackageGenerateSampleTrueSubRule,
   TspConfigPythonMgmtPackageGenerateTestTrueSubRule,
-  TspConfigCsharpAzPackageDirectorySubRule,
-  TspConfigCsharpAzNamespaceEqualStringSubRule,
-  TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
-  TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsDpPackageDirectorySubRule,
+  TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
+  TspConfigTsMgmtModularPackageDirectorySubRule,
+  TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
-import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
-import { join } from "path";
-import { strictEqual } from "node:assert";
-import { stringify } from "yaml";
 
 import * as utils from "../src/utils.js";
 

@@ -1,0 +1,58 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.Insights/{version-status}/{version}/metricBatch.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-monitor-querymetrics"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    package-version: 1.0.0
+    flavor: azure
+    namespace: azure.monitor.querymetrics
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor.Query.Metrics"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "monitor-query-metrics"
+    is-modular-library: true
+    package-details:
+      name: "@azure/monitor-query-metrics"
+      description: "Azure Monitor Query Metrics library"
+      version: "1.0.0"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-monitor-query-metrics"
+    namespace: com.azure.monitor.query.metrics
+    flavor: azure
+    use-object-for-unknown: true
+    generate-tests: false
+    generate-samples: false
+    partial-update: true
+    service-name: Metrics
+    customization-class: "customization/src/main/java/MetricsQueryCustomization.java"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/query"
+    package-dir: "azmetrics"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azmetrics"
+    module-version: "0.0.1"
+    single-client: true
+    generate-fakes: true
+    inject-spans: true
+    slice-elements-byval: true

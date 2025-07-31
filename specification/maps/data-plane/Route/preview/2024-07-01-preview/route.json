@@ -84,7 +84,7 @@
     "/route/directions": {
       "post": {
         "summary": "Use to get the best route between an origin and destination for automobile, commercial trucks and walking routes.",
-        "description": "\n\nThe `Route Directions` API is an HTTP `POST` request that returns the ideal route between an origin and destination for automobile (driving), commercial trucks and walking routes. The route passes through a series of waypoints if specified. A waypoint is a geographical location defined by longitude and latitude that is used for navigational purposes. The route considers factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. More routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nThe Route Directions considers local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific routes and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads don't allow trucks with flammable or hazardous materials, and there can be height and weight restriction on bridges.\n\nUp to 25 waypoints and 10 viaWaypoints between any two waypoints is supported for driving and walking routes. Each set of waypoints creates a separate route Leg. ViaWaypoints define the route path and can be used for route creation through specific locations, but they don't create route Legs. Truck routes support up to 150 waypoints but don't support viaWaypoints.\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
+        "description": "\n\nThe `Route Directions` API is an HTTP `POST` request that returns the ideal route between an origin and destination for automobile (driving), commercial trucks and walking routes. The route passes through a series of waypoints if specified. A waypoint is a geographical location defined by longitude and latitude that is used for navigational purposes. The route considers factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. More routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nThe Route Directions considers local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific routes and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads don't allow trucks with flammable or hazardous materials, and there can be height and weight restriction on bridges.\n\nUp to 150 waypoints and 10 viaWaypoints between any two waypoints is supported. Each set of waypoints creates a separate route Leg. ViaWaypoints define the route path and can be used for route creation through specific locations, but they don't create route Legs.\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Route_PostRouteDirections",
         "consumes": [
           "application/geo+json"
@@ -205,7 +205,7 @@
     "/route/snapToRoads": {
       "post": {
         "summary": "The Snap to Roads API accepts GPS point data, represented as longitude and latitude coordinates, and generates points that aligns with existing roadways on a map. ",
-        "description": "This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 6 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -767,11 +767,6 @@
                 "description": "Finds the fastest route, without factoring in traffic information."
               },
               {
-                "value": "fastestAvoidClosureWithoutTraffic",
-                "name": "FastestAvoidClosureWithoutTraffic",
-                "description": "The route is calculated to minimize the time and avoid road closures. No traffic information except for road closures is used in the calculation. `Note`: Only supported for driving travelMode."
-              },
-              {
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
                 "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
@@ -780,7 +775,7 @@
           }
         },
         "optimizeWaypointOrder": {
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.\n\n`Note`: Only supported for truck travelMode.",
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.",
           "type": "boolean",
           "default": false
         },
@@ -788,7 +783,7 @@
           "$ref": "#/definitions/AvoidEnum"
         },
         "routeOutputOptions": {
-          "description": "Include the desired route information from the response. By default, the itinerary is included in the response.\n\nSupports multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"]",
+          "description": "Include the desired route information from the response. By default, the itinerary is included in the response.\n\nSupports multiple values such as \"routeOutputOptions\": [\"routePath\", \"itinerary\"]",
           "type": "array",
           "default": [
             "itinerary"
@@ -797,7 +792,6 @@
             "type": "string",
             "enum": [
               "routeSummary",
-              "regionTravelSummary",
               "routePath",
               "itinerary"
             ],
@@ -808,10 +802,6 @@
                 {
                   "value": "routeSummary",
                   "description": "Include only travel time and distance for the route, and do not provide other information."
-                },
-                {
-                  "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g., US, Canada) and administrative division or subregion (e.g., \"state\" in US and \"province\" in Canada). `Note`: Only supported for driving and walking travelMode"
                 },
                 {
                   "value": "routePath",
@@ -826,14 +816,14 @@
           }
         },
         "maxRouteCount": {
-          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nFor driving routes, this parameter supports routes with up to two waypoints in addition to the origin and destination and avoid parameter must not be set.\n\nDefault: \"maxRouteCount\":1\n\nMinimum: \"maxRouteCount\":1\n\nMaximum: \"maxRouteCount\":3",
+          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nDefault: \"maxRouteCount\":1",
           "type": "integer",
           "format": "int64",
           "minimum": 1,
-          "maximum": 3
+          "maximum": 6
         },
         "heading": {
-          "description": "The initial directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+          "description": "The initial directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees.",
           "type": "integer",
           "format": "int64",
           "minimum": 0,
@@ -880,7 +870,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to road network. You can have a maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
+          "description": "A set of points to snap to road network. You can have a minimum of 2 points and maximum of 100 points and the two consecutive points must be within 6 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
           "minimum": 2,
           "maximum": 100,
           "items": {
@@ -893,7 +883,7 @@
           "default": false
         },
         "includeSpeedLimit": {
-          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour. \n\n`Note`: Only supported for driving travelMode.",
+          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour.",
           "type": "boolean",
           "default": false
         },
@@ -903,7 +893,7 @@
           "default": "driving",
           "enum": [
             "driving",
-            "walking"
+            "truck"
           ],
           "x-ms-enum": {
             "name": "SnapToRoadsTravelModeEnum",
@@ -914,8 +904,8 @@
                 "description": "The points are snapped to the road suitable for cars."
               },
               {
-                "value": "walking",
-                "description": "The points are snapped to the pedestrian route including the use of sidewalks."
+                "value": "truck",
+                "description": "The points are snapped to the road suitable for truck."
               }
             ]
           }
@@ -1168,42 +1158,6 @@
         },
         "features": {
           "$ref": "#/definitions/Features"
-        }
-      }
-    },
-    "RegionTravelSummary": {
-      "description": "Travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-      "type": "object",
-      "properties": {
-        "countryRegion": {
-          "description": "Country region name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "adminDistricts": {
-          "description": "adminDistrict array.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/AdminDistrict"
-          }
-        },
-        "distanceInMeters": {
-          "description": "Length In Meters property",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
         }
       }
     },
@@ -1481,11 +1435,6 @@
         "order": {
           "$ref": "#/definitions/Order"
         },
-        "compassDirection": {
-          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest. `Note`: Only supported for driving travelMode.",
-          "type": "string",
-          "readOnly": true
-        },
         "steps": {
           "description": "Steps between two consecutive maneuver points.",
           "type": "array",
@@ -1533,36 +1482,6 @@
         }
       }
     },
-    "ViaWaypointProperties": {
-      "x-ms-discriminator-value": "ViaWaypoint",
-      "type": "object",
-      "description": "Specifies the properties of a `ViaWaypoint` which is a waypoint that must be passed through or visited along a route or trip.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeatureProperties"
-        },
-        {
-          "description": "Specifies the properties of a ViaWaypoint which is a waypoint that must be passed through or visited along a route or trip.",
-          "type": "object",
-          "properties": {
-            "names": {
-              "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "routePathPoint": {
-              "$ref": "#/definitions/RoutePathPoint"
-            },
-            "order": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        }
-      ]
-    },
     "RoutePathProperties": {
       "x-ms-discriminator-value": "RoutePath",
       "type": "object",
@@ -1575,11 +1494,6 @@
           "type": "object",
           "description": "Specifies the properties that describe the route's path in the response.",
           "properties": {
-            "resourceId": {
-              "description": "A unique ID for the resource.",
-              "type": "string",
-              "readOnly": true
-            },
             "distanceInMeters": {
               "description": "The physical distance in meters covered by the entire route.",
               "type": "number",
@@ -1596,9 +1510,6 @@
               "format": "int64",
               "type": "integer",
               "readOnly": true
-            },
-            "trafficDataUsed": {
-              "$ref": "#/definitions/TrafficDataUsedEnum"
             },
             "trafficCongestion": {
               "$ref": "#/definitions/TrafficCongestionEnum"
@@ -1646,7 +1557,6 @@
       "enum": [
         "ManeuverPoint",
         "Waypoint",
-        "ViaWaypoint",
         "RoutePath"
       ],
       "x-ms-enum": {
@@ -1660,10 +1570,6 @@
           {
             "value": "Waypoint",
             "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
-          },
-          {
-            "value": "ViaWaypoint",
-            "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
           },
           {
             "value": "RoutePath",
@@ -1690,37 +1596,9 @@
           },
           {
             "value": "viaWaypoint",
-            "description": "A viaWaypoint is a specific waypoint that must be passed through or visited along a route or trip. `Note`: Only supported for driving travelMode."
+            "description": "A viaWaypoint is a specific waypoint that must be passed through or visited along a route or trip."
           }
         ]
-      }
-    },
-    "AdminDistrict": {
-      "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
-      "type": "object",
-      "properties": {
-        "longName": {
-          "description": "The long name of an address, such as Washington.",
-          "type": "string",
-          "readOnly": true
-        },
-        "distanceInMeters": {
-          "description": "The total distance traveled in meters within the administrative district.",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        }
       }
     },
     "Leg": {
@@ -1728,11 +1606,6 @@
       "description": "Information about a section of a route between two waypoints. More information about the fields contained in a route Leg:",
       "type": "object",
       "properties": {
-        "description": {
-          "description": "A short description of the route.",
-          "type": "string",
-          "readOnly": true
-        },
         "routePathRange": {
           "$ref": "#/definitions/RoutePathRange"
         },
@@ -1763,45 +1636,6 @@
           "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "type": "string",
           "format": "date-time",
-          "readOnly": true
-        },
-        "subLegs": {
-          "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SubLeg"
-          }
-        },
-        "regionTravelSummary": {
-          "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
-          "$ref": "#/definitions/RegionTravelSummary"
-        }
-      }
-    },
-    "SubLeg": {
-      "x-ms-client-name": "RouteSubLeg",
-      "description": "Information about a segments of the route Leg defined by the route Leg waypoints and any intermediate via-waypoints. For example, if the route Leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
-      "type": "object",
-      "properties": {
-        "routePathRange": {
-          "$ref": "#/definitions/RoutePathRange"
-        },
-        "distanceInMeters": {
-          "description": "The physical distance in meters covered by the sub-leg.",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
-          "format": "int64",
-          "type": "integer",
           "readOnly": true
         }
       }
@@ -1847,32 +1681,11 @@
       "format": "int64",
       "type": "integer"
     },
-    "Hint": {
-      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element. `Note`: Only supported for driving travelMode.",
-      "type": "object",
-      "properties": {
-        "hintType": {
-          "description": "hint type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "text": {
-          "description": "hint text.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Step": {
       "x-ms-client-name": "RouteStep",
       "description": "A route Leg contain turn-by-turn instructions. A step refers to a range of a route between two consecutive maneuverPoint.",
       "type": "object",
       "properties": {
-        "compassDegrees": {
-          "description": "The direction in degrees. `Note`: Only supported for driving travelMode.",
-          "readOnly": true,
-          "type": "number"
-        },
         "maneuverType": {
           "readOnly": true,
           "$ref": "#/definitions/ManeuverTypeEnum"
@@ -1887,10 +1700,6 @@
         },
         "routePathRange": {
           "$ref": "#/definitions/RoutePathRange"
-        },
-        "roadType": {
-          "readOnly": true,
-          "$ref": "#/definitions/RoadTypeEnum"
         }
       }
     },
@@ -2345,72 +2154,6 @@
         ]
       }
     },
-    "RoadTypeEnum": {
-      "description": "The type of road. `Note`: Only supported for driving travelMode.",
-      "type": "string",
-      "enum": [
-        "NotApplicable",
-        "LimitedAccessHighway",
-        "Highway",
-        "MajorRoad",
-        "Arterial",
-        "Street",
-        "Ramp",
-        "Ferry",
-        "WalkingPath"
-      ],
-      "x-ms-enum": {
-        "name": "RoadTypeEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "NotApplicable",
-            "name": "NotApplicable",
-            "description": "NotApplicable."
-          },
-          {
-            "value": "LimitedAccessHighway",
-            "name": "LimitedAccessHighway",
-            "description": "LimitedAccessHighway."
-          },
-          {
-            "value": "Highway",
-            "name": "Highway",
-            "description": "Highway."
-          },
-          {
-            "value": "MajorRoad",
-            "name": "MajorRoad",
-            "description": "MajorRoad."
-          },
-          {
-            "value": "Arterial",
-            "name": "Arterial",
-            "description": "Arterial."
-          },
-          {
-            "value": "Street",
-            "name": "Street",
-            "description": "Street."
-          },
-          {
-            "value": "Ramp",
-            "name": "Ramp",
-            "description": "Ramp."
-          },
-          {
-            "value": "Ferry",
-            "name": "Ferry",
-            "description": "Ferry."
-          },
-          {
-            "value": "WalkingPath",
-            "name": "WalkingPath",
-            "description": "WalkingPath."
-          }
-        ]
-      }
-    },
     "SideOfStreetEnum": {
       "description": "The side of the street where the destination is found based on the arrival direction. This field applies to the last maneuverPoint only.",
       "type": "string",
@@ -2438,42 +2181,6 @@
             "value": "Unknown",
             "name": "Unknown",
             "description": "Unknown."
-          }
-        ]
-      }
-    },
-    "TrafficDataUsedEnum": {
-      "description": "The type of real-time traffic data used to generate the route.",
-      "type": "string",
-      "enum": [
-        "None",
-        "Flow",
-        "Closure",
-        "FlowAndClosure"
-      ],
-      "x-ms-enum": {
-        "name": "TrafficDataUsedEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "None",
-            "name": "None",
-            "description": "None."
-          },
-          {
-            "value": "Flow",
-            "name": "Flow",
-            "description": "Real-time traffic speeds used to calculate travel time."
-          },
-          {
-            "value": "Closure",
-            "name": "Closure",
-            "description": "Real-time closure data used, if applicable."
-          },
-          {
-            "value": "FlowAndClosure",
-            "name": "FlowAndClosure",
-            "description": "Flow and Closure."
           }
         ]
       }
@@ -2536,13 +2243,6 @@
           "description": "The formatted text description of the instruction.",
           "type": "string",
           "readOnly": true
-        },
-        "hints": {
-          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint. `Note`: Only supported for driving travelMode",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hint"
-          }
         }
       }
     },
@@ -2798,7 +2498,7 @@
             },
             {
               "value": "tunnels",
-              "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids the use of tunnels in the route."
             },
             {
               "value": "borderCrossings",
@@ -2806,11 +2506,11 @@
             },
             {
               "value": "lowEmissionZones",
-              "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids low-emission zones in the route."
             },
             {
               "value": "unpavedRoads",
-              "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids unpaved roads in the route."
             }
           ]
         }
@@ -2997,16 +2697,16 @@
       }
     },
     "Order": {
-      "description": "Sequence for visiting waypoints and viaWaypoints.",
+      "description": "Sequence for visiting waypoints.",
       "type": "object",
       "properties": {
         "inputIndex": {
-          "description": "User-provided index for waypoint and viaWaypoint inputs.",
+          "description": "User-provided index for waypoint.",
           "type": "integer",
           "format": "int64"
         },
         "optimizedIndex": {
-          "description": "System-optimized waypoint and viaWaypoint index.",
+          "description": "System-optimized waypoint index.",
           "type": "integer",
           "format": "int64"
         }
@@ -3112,6 +2812,11 @@
                 "value": "shortest",
                 "name": "Shortest",
                 "description": "The route is calculated to minimize the distance. Traffic information is not used."
+              },
+              {
+                "value": "short",
+                "name": "Short",
+                "description": "The route is calculated to balance fast travel time and short distance, rather than prioritizing just one. It's optimized for both speed and efficiency. Traffic information is not used."
               },
               {
                 "value": "fastestWithoutTraffic",

@@ -3,13 +3,11 @@
 These settings apply only when `--java` is specified on the command line.
 
 ```yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.appservice
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-appservice
 service-name: AppService
+add-inner: AppServiceCertificate
+remove-inner: CsmDeploymentStatus
+name-for-ungrouped-operations: ResourceProvider
+enable-sync-stack: false
 directive:
   - from: WebApps.json
     where: $.definitions.MSDeploy.properties.properties

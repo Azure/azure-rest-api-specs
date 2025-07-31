@@ -1,11 +1,11 @@
+import {
+  BREAKING_CHANGE_APPROVALS,
+  BREAKING_CHANGES_CHECK_TYPES,
+  REVIEW_REQUIRED_LABELS,
+  VERSIONING_APPROVALS,
+} from "@azure-tools/specs-shared/breaking-change";
 import { OadMessageProcessorContext } from "../utils/oad-message-processor.js";
 import { PullRequestProperties } from "../utils/pull-request.js";
-import {
-  VERSIONING_APPROVALS,
-  BREAKING_CHANGE_APPROVALS,
-  REVIEW_REQUIRED_LABELS,
-  BREAKING_CHANGES_CHECK_TYPES,
-} from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * This file contains types used by the OpenAPI specification breaking change checks
@@ -47,7 +47,10 @@ export type SpecsBreakingChangesLabel =
  * Scheduled to replace type SwaggerVersionType and type ComparedApiVersion.
  * Read more at https://aka.ms/azsdk/spec-dirs
  */
-export type ApiVersionLifecycleStage = "preview" | "stable";
+export enum ApiVersionLifecycleStage {
+  PREVIEW = "preview",
+  STABLE = "stable",
+}
 
 /** The name of the log file used by the openapi-diff-runner utility. */
 export const logFileName = "openapi-diff-runner.log";
@@ -64,7 +67,8 @@ export interface Context {
   headCommit: string;
   runType: BreakingChangesCheckType;
   checkName: string;
-  repo: string; // The format is: "owner/repoName"
+  targetRepo: string; // The format is: "owner/repoName"
+  sourceRepo: string; // The format is: "owner/repoName"
   prNumber: string;
   prSourceBranch: string;
   prTargetBranch: string;

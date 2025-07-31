@@ -1,0 +1,230 @@
+{
+  "title": "Threads_CreateThread_MaximumSet",
+  "operationId": "Threads_CreateThread",
+  "parameters": {
+    "api-version": "v1",
+    "body": {
+      "tool_resources": {
+        "code_interpreter": {
+          "file_ids": [
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa",
+            "mcbwmhrbuwuepomhmupa"
+          ],
+          "data_sources": [
+            {
+              "uri": "ebabvsmrocsomzfimydk",
+              "type": "uri_asset"
+            },
+            {
+              "uri": "ebabvsmrocsomzfimydk",
+              "type": "uri_asset"
+            },
+            {
+              "uri": "ebabvsmrocsomzfimydk",
+              "type": "uri_asset"
+            },
+            {
+              "uri": "ebabvsmrocsomzfimydk",
+              "type": "uri_asset"
+            },
+            {
+              "uri": "ebabvsmrocsomzfimydk",
+              "type": "uri_asset"
+            }
+          ]
+        },
+        "file_search": {
+          "vector_store_ids": [
+            "qrsolbxeyrvpwkmfvxnrwlbptelg"
+          ],
+          "vector_stores": [
+            {
+              "name": "fcn",
+              "configuration": {
+                "data_sources": [
+                  {
+                    "uri": "ebabvsmrocsomzfimydk",
+                    "type": "uri_asset"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "azure_ai_search": {
+          "indexes": [
+            {
+              "index_connection_id": "givdxrraw",
+              "index_name": "khqfbzuyzcdpf",
+              "query_type": "simple",
+              "top_k": 6,
+              "filter": "duddvlojptamyxdavaqbw",
+              "index_asset_id": "xnoschwz"
+            }
+          ]
+        }
+      },
+      "messages": [
+        {
+          "role": "user",
+          "content": {
+            "text": "Example message content",
+            "blocks": [
+              {
+                "type": "text",
+                "text": "Example text block"
+              },
+              {
+                "type": "image_file",
+                "image_file": {
+                  "file_id": "mcbwmhrbuwuepomhmupa",
+                  "detail": "auto"
+                }
+              },
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "https://example.com/image.jpg",
+                  "detail": "auto"
+                }
+              }
+            ]
+          },
+          "attachments": [
+            {
+              "file_id": "mcbwmhrbuwuepomhmupa",
+              "data_source": {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              },
+              "tools": [
+                {
+                  "type": "code_interpreter"
+                },
+                {
+                  "type": "file_search",
+                  "file_search": {
+                    "max_num_results": 50,
+                    "ranking_options": {
+                      "ranker": "default",
+                      "score_threshold": 0.5
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": {
+            "text": "Response message content"
+          }
+        }
+      ]
+    },
+    "metadata": {
+      "key3455": "hnckz"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "rcifhnxeaeyxdtz",
+        "object": "thread",
+        "created_at": 15,
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": [
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa",
+              "mcbwmhrbuwuepomhmupa"
+            ],
+            "data_sources": [
+              {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              },
+              {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              },
+              {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              },
+              {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              },
+              {
+                "uri": "ebabvsmrocsomzfimydk",
+                "type": "uri_asset"
+              }
+            ]
+          },
+          "file_search": {
+            "vector_store_ids": [
+              "qrsolbxeyrvpwkmfvxnrwlbptelg"
+            ],
+            "vector_stores": [
+              {
+                "name": "fcn",
+                "configuration": {
+                  "data_sources": [
+                    {
+                      "uri": "ebabvsmrocsomzfimydk",
+                      "type": "uri_asset"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "azure_ai_search": {
+            "indexes": [
+              {
+                "index_connection_id": "givdxrraw",
+                "index_name": "khqfbzuyzcdpf",
+                "query_type": "simple",
+                "top_k": 6,
+                "filter": "duddvlojptamyxdavaqbw",
+                "index_asset_id": "xnoschwz"
+              }
+            ]
+          }
+        },
+        "metadata": {
+          "key6253": "uxvkei"
+        }
+      }
+    }
+  }
+}

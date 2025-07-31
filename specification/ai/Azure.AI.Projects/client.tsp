@@ -22,11 +22,33 @@ using Azure.ClientGenerator.Core;
 @@clientName(Azure.AI.Projects.Indexes.deleteVersion, "delete");
 @@clientName(Azure.AI.Projects.Indexes.createOrUpdateVersion, "createOrUpdate");
 
+// Less generic names
+@@clientName(Azure.AI.Projects.Sku, "ModelDeploymentSku");
+@@clientName(Azure.AI.Projects.SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
+
+// More accurate naming
+@@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
+
 // In Python, the emitter changes "keys" to "keys_property", since there is already
 // a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
 @@clientName(Azure.AI.Projects.CustomCredential.keys,
   "credential_keys",
   "python"
+);
+
+// Less generic names for C# SDK (avoid one-word class names)
+@@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
+@@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Index, "SearchIndex", "csharp");
+
+// Do not use terms "request" or "response" in C# class names as these are REST API terms
+@@clientName(Azure.AI.Projects.PendingUploadRequest,
+  "PendingUploadConfiguration",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.PendingUploadResponse,
+  "PendingUploadResult",
+  "csharp"
 );
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"

@@ -1,11 +1,11 @@
+import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
+import { writeFile } from "node:fs/promises";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { pathExists, getDependencyVersion, getPathToDependency } from "./util.js";
-import { getRunList } from "./processChanges.js";
-import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
-import { writeFile } from "node:fs/promises";
-import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
+import { getRunList } from "./processChanges.js";
+import { getAutorestErrors, runChecks } from "./runChecks.js";
+import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -120,10 +120,8 @@ async function runLintDiff(
     );
   } catch (error) {
     if (error instanceof SpecModelError) {
-      console.log("\n\n");
-      console.log("❌ Error building Spec Model from changed file list:");
+      console.log("\n❌ Error building Spec Model from changed file list:");
       console.log(`${error}`);
-      console.log("Ensure input files and references are valid.");
 
       process.exitCode = 1;
       return;
@@ -146,7 +144,10 @@ async function runLintDiff(
 
   // It may be possible to run these in parallel as they're running against
   // different directories.
+  console.log("Running checks on before state...");
   const beforeChecks = await runChecks(beforePath, beforeList);
+
+  console.log("Running checks on after state...");
   const afterChecks = await runChecks(afterPath, afterList);
 
   // If afterChecks has AutoRest errors, fail the run.

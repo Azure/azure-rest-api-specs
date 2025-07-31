@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
+      "put": {
+        "tags": [
+          "BackupsAutomaticAndOnDemand"
+        ],
+        "operationId": "BackupsAutomaticAndOnDemand_Create",
+        "x-ms-examples": {
+          "Create an on demand backup of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandCreate.json"
+          }
+        },
+        "description": "Creates an on demand backup of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "BackupsAutomaticAndOnDemand"
+        ],
+        "operationId": "BackupsAutomaticAndOnDemand_Delete",
+        "x-ms-examples": {
+          "Delete an on demand backup, given its name.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandDelete.json"
+          }
+        },
+        "description": "Deletes a specific backup, given its name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "BackupsAutomaticAndOnDemand"
+        ],
+        "operationId": "BackupsAutomaticAndOnDemand_Get",
+        "x-ms-examples": {
+          "Get an on demand backup, given its name.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandGet.json"
+          }
+        },
+        "description": "Gets information of an on demand backup, given its name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/BackupAutomaticAndOnDemand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups": {
+      "get": {
+        "tags": [
+          "BackupsAutomaticAndOnDemand"
+        ],
+        "operationId": "BackupsAutomaticAndOnDemand_ListByServer",
+        "x-ms-examples": {
+          "List all available backups of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandListByServer.json"
+          }
+        },
+        "description": "Lists all available backups of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/BackupAutomaticAndOnDemandList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BackupAutomaticAndOnDemandProperties": {
+      "type": "object",
+      "properties": {
+        "backupType": {
+          "type": "string",
+          "description": "Type of backup.",
+          "enum": [
+            "Full",
+            "Customer On-Demand"
+          ],
+          "x-ms-enum": {
+            "name": "BackupType",
+            "modelAsString": true
+          }
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time(ISO8601 format) at which the backup was completed."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the backup."
+        }
+      },
+      "description": "Properties of a backup."
+    },
+    "BackupAutomaticAndOnDemand": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupAutomaticAndOnDemandProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a backup."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Properties of a backup."
+    },
+    "BackupAutomaticAndOnDemandList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupAutomaticAndOnDemand"
+          },
+          "description": "List of available backups."
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "description": "List of backups."
+    }
+  },
+  "parameters": {
+    "BackupNameParameter": {
+      "name": "backupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the backup.",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$",
+      "maxLength": 128,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

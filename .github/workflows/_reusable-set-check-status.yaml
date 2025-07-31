@@ -56,13 +56,21 @@ jobs:
 
       - name: "Set Status"
         uses: actions/github-script@v7
+        id: set-status
         with:
           script: |
             const { default: setStatus } =
                 await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
             return await setStatus(
-              { github, context, core }, 
+              { github, context, core },
               '${{ inputs.monitored_workflow_name }}',
               '${{ inputs.required_check_name }}',
               '${{ inputs.overriding_label }}'
             );
+
+      - if: ${{ always() && steps.set-status.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.set-status.outputs.issue_number }}

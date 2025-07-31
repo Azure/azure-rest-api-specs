@@ -31,9 +31,9 @@ describe("equality", () => {
     [new Set([1, 2]), new Set([1, 2]), true],
     [new Set([1, 2, 3]), new Set([1, 2, 3]), true],
   ])("setEquals(%s, %s, %s)", (set1, set2, expected) => {
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(setEquals(set1, set2)).toBe(expected);
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(setEquals(set2, set1)).toBe(expected);
   });
 });

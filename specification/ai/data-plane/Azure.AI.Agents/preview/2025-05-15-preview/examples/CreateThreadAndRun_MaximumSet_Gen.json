@@ -1,0 +1,269 @@
+{
+  "title": "CreateThreadAndRun_MaximumSet",
+  "operationId": "CreateThreadAndRun",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "body": {
+      "assistant_id": "asst_abc123",
+      "thread": {
+        "messages": [
+          {
+            "role": "user",
+            "content": {
+              "text": "I need help with data analysis",
+              "blocks": [
+                {
+                  "type": "text",
+                  "text": "Please analyze this dataset and provide insights"
+                },
+                {
+                  "type": "image_file",
+                  "image_file": {
+                    "file_id": "file_abc123",
+                    "detail": "high"
+                  }
+                }
+              ]
+            },
+            "attachments": [
+              {
+                "file_id": "file_abc123",
+                "data_source": {
+                  "uri": "https://example.com/data.xlsx",
+                  "type": "uri_asset"
+                },
+                "tools": [
+                  {
+                    "type": "code_interpreter"
+                  },
+                  {
+                    "type": "file_search"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": [
+              "file_abc123",
+              "file_def456"
+            ],
+            "data_sources": [
+              {
+                "uri": "https://example.com/data1.csv",
+                "type": "uri_asset"
+              },
+              {
+                "uri": "https://example.com/data2.csv",
+                "type": "uri_asset"
+              }
+            ]
+          },
+          "file_search": {
+            "vector_store_ids": [
+              "vs_abc123"
+            ],
+            "vector_stores": [
+              {
+                "name": "research_docs",
+                "configuration": {
+                  "data_sources": [
+                    {
+                      "uri": "https://example.com/research.pdf",
+                      "type": "uri_asset"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "azure_ai_search": {
+            "indexes": [
+              {
+                "index_connection_id": "conn_abc123",
+                "index_name": "product_index",
+                "query_type": "simple",
+                "top_k": 10,
+                "filter": "category eq 'electronics'",
+                "index_asset_id": "idx_abc123"
+              }
+            ]
+          }
+        },
+        "metadata": {
+          "project": "data_analysis",
+          "priority": "high"
+        }
+      },
+      "model": "gpt-4",
+      "instructions": "You are a data analysis expert. Provide detailed insights and recommendations.",
+      "tools": [
+        {
+          "type": "code_interpreter"
+        },
+        {
+          "type": "file_search"
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "analyze_trend",
+            "description": "Analyze data trends",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array"
+                },
+                "timeframe": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "tool_resources": {
+        "code_interpreter": {
+          "file_ids": [
+            "file_abc123",
+            "file_def456"
+          ],
+          "data_sources": [
+            {
+              "uri": "https://example.com/global_data.csv",
+              "type": "uri_asset"
+            }
+          ]
+        },
+        "file_search": {
+          "vector_store_ids": [
+            "vs_abc123"
+          ]
+        }
+      },
+      "stream": false,
+      "truncation_strategy": {
+        "type": "auto"
+      },
+      "tool_choice": "auto",
+      "response_format": {
+        "type": "text"
+      },
+      "parallel_tool_calls": true,
+      "metadata": {
+        "experiment_id": "exp_123",
+        "session": "analysis_session_1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_abc123",
+        "object": "thread.run",
+        "thread_id": "thread_abc123",
+        "assistant_id": "asst_abc123",
+        "status": "in_progress",
+        "required_action": {
+          "type": "submit_tool_outputs",
+          "submit_tool_outputs": {
+            "tool_calls": [
+              {
+                "id": "call_abc123",
+                "type": "function",
+                "function": {
+                  "name": "calculate_metrics",
+                  "arguments": "{\"values\": [1, 2, 3, 4, 5], \"metric_type\": \"mean\"}"
+                }
+              }
+            ]
+          }
+        },
+        "last_error": {
+          "code": "server_error",
+          "message": "jadlgjrkhbhukfc"
+        },
+        "model": "gpt-4",
+        "instructions": "You are a data analysis expert. Provide detailed insights and recommendations.",
+        "tools": [
+          {
+            "type": "code_interpreter"
+          },
+          {
+            "type": "file_search"
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "analyze_trend",
+              "description": "Analyze data trends",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array"
+                  },
+                  "timeframe": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "created_at": 1736869200,
+        "expires_at": 1736872800,
+        "started_at": 1736869201,
+        "completed_at": 12,
+        "cancelled_at": 18,
+        "failed_at": 15,
+        "incomplete_details": {
+          "reason": "content_filter"
+        },
+        "usage": {
+          "completion_tokens": 25,
+          "prompt_tokens": 2,
+          "total_tokens": 10
+        },
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "max_prompt_tokens": 4096,
+        "max_completion_tokens": 2048,
+        "truncation_strategy": {
+          "type": "auto"
+        },
+        "tool_choice": "auto",
+        "response_format": {
+          "type": "text"
+        },
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": [
+              "file_abc123",
+              "file_def456"
+            ],
+            "data_sources": [
+              {
+                "uri": "https://example.com/global_data.csv",
+                "type": "uri_asset"
+              }
+            ]
+          },
+          "file_search": {
+            "vector_store_ids": [
+              "vs_abc123"
+            ]
+          }
+        },
+        "parallel_tool_calls": true,
+        "metadata": {
+          "experiment_id": "exp_123",
+          "session": "analysis_session_1"
+        }
+      }
+    }
+  }
+}

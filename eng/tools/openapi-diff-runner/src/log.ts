@@ -1,4 +1,4 @@
-import { appendFileSync } from "fs";
+import { appendFileSync } from "node:fs";
 
 /**
  * Log prefix for all messages from openapi-diff-runner
@@ -129,4 +129,38 @@ export async function logGroup<T>(title: string, content: () => Promise<T> | T):
   } finally {
     logMessage("", LogLevel.EndGroup);
   }
+}
+
+/**
+ * Maximum safe log line length for GitHub Actions (64KB - some buffer)
+ */
+const MAX_LOG_LINE_LENGTH = 60 * 1024; // 60KB to leave some buffer
+
+/**
+ * Truncates a message if it exceeds the maximum GitHub Actions log line length
+ * @param message The message to potentially truncate
+ * @param prefix Optional prefix to include in the truncation message
+ * @returns The original message if under limit, or truncated message with info
+ */
+export function truncateLogMessage(message: string, prefix?: string): string {
+  if (message.length <= MAX_LOG_LINE_LENGTH) {
+    return message;
+  }
+
+  const prefixText = prefix ? `${prefix}: ` : "";
+  const truncationInfo = `... [TRUNCATED: Original length ${message.length} bytes, showing first ${MAX_LOG_LINE_LENGTH} bytes]`;
+  const availableLength = MAX_LOG_LINE_LENGTH - prefixText.length - truncationInfo.length;
+
+  return prefixText + message.substring(0, availableLength) + truncationInfo;
+}
+
+/**
+ * Logs a message with automatic truncation if it exceeds GitHub Actions limits
+ * @param message The message to log
+ * @param level The log level
+ * @param prefix Optional prefix for truncation message
+ */
+export function logMessageSafe(message: string, level?: LogLevel, prefix?: string): void {
+  const safeMessage = truncateLogMessage(message, prefix);
+  logMessage(safeMessage, level);
 }

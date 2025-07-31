@@ -58,7 +58,7 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-  ...Legacy.ManagedServiceIdentityV4Property;
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations

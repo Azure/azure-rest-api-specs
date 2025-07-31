@@ -1,0 +1,381 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServer",
+        "x-ms-examples": {
+          "List all configurations (also known as server parameters) of a server.": {
+            "$ref": "./examples/ConfigurationsListByServer.json"
+          }
+        },
+        "description": "Lists all configurations (also known as server parameters) of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get information about a specific configuration (also known as server parameter) of a server.": {
+            "$ref": "./examples/ConfigurationsGet.json"
+          }
+        },
+        "description": "Gets information about a specific configuration (also known as server parameter) of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Update",
+        "x-ms-examples": {
+          "Update the value assigned to a specific modifiable configuration (also known as server parameter) of a server.": {
+            "$ref": "./examples/ConfigurationsUpdate.json"
+          }
+        },
+        "description": "Updates the value assigned to a specific modifiable configuration (also known as server parameter) of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationForUpdate"
+            },
+            "description": "Parameters required to update the value of a specific modifiable configuration (also known as server parameter)."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Put",
+        "x-ms-examples": {
+          "Update, using Put verb, the value assigned to a specific modifiable configuration (also known as server parameter) of a server.": {
+            "$ref": "./examples/ConfigurationsUpdateUsingPut.json"
+          }
+        },
+        "description": "Updates, using Put verb, the value assigned to a specific modifiable configuration (also known as server parameter) of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationForUpdate"
+            },
+            "description": "Parameters required to update the value of a specific modifiable configuration (also known as server parameter)."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration (also known as server parameter). Required to update the value assigned to a specific modifiable configuration."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Description of the configuration (also known as server parameter)."
+        },
+        "defaultValue": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Value assigned by default to the configuration (also known as server parameter)."
+        },
+        "dataType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Data type of the configuration (also known as server parameter).",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration",
+            "String",
+            "Set"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          }
+        },
+        "allowedValues": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Allowed values of the configuration (also known as server parameter)."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the value assigned to the configuration (also known as server parameter). Required to update the value assigned to a specific modifiable configuration."
+        },
+        "isDynamicConfig": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates if it's a dynamic (true) or static (false) configuration (also known as server parameter). Static server parameters require a server restart after changing the value assigned to them, for the change to take effect. Dynamic server parameters do not require a server restart after changing the value assigned to them, for the change to take effect."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates if it's a read-only (true) or modifiable (false) configuration (also known as server parameter)."
+        },
+        "isConfigPendingRestart": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates if the value assigned to the configuration (also known as server parameter) is pending a server restart for it to take effect."
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Units in which the configuration (also known as server parameter) value is expressed."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link pointing to the documentation of the configuration (also known as server parameter)."
+        }
+      },
+      "description": "Properties of a configuration (also known as server parameter)."
+    },
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a configuration (also known as server parameter)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Configuration (also known as server parameter)."
+    },
+    "ConfigurationForUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a configuration (also known as server parameter)."
+        }
+      },
+      "description": "Configuration (also known as server parameter)."
+    },
+    "ConfigurationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "description": "List of configurations (also known as server parameters)."
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "description": "List of configurations (also known as server parameters)."
+    }
+  },
+  "parameters": {
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the configuration (also known as server parameter).",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$",
+      "maxLength": 256,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

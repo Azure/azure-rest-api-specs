@@ -16,25 +16,6 @@ on:
   workflow_run:
     workflows: ["ARM Incremental TypeSpec"]
     types: [completed]
-  # For manual testing
-  workflow_dispatch:
-    inputs:
-      owner:
-        description: The account owner of the repository. The name is not case sensitive.
-        required: true
-        type: string
-      repo:
-        description: The name of the repository without the .git extension. The name is not case sensitive.
-        required: true
-        type: string
-      issue_number:
-        description: The number of the pull request.
-        required: true
-        type: string
-      head_sha:
-        description: The SHA of the commit.
-        required: true
-        type: string
 
 permissions:
   actions: read
@@ -51,7 +32,6 @@ jobs:
     # issue_comment:edited - filter to only PR comments containing "next steps to merge",
     #   a signal that checks like "Swagger LintDiff" or "Swagger Avocado" status may have changed
     if: |
-      github.event_name == 'workflow_dispatch' ||
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
        (github.event.action == 'labeled' ||
@@ -96,11 +76,6 @@ jobs:
             const { default: getLabelAction } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff.js');
             return await getLabelAction({ github, context, core });
-        env:
-          OWNER: ${{ inputs.owner }}
-          REPO: ${{ inputs.repo }}
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          HEAD_SHA: ${{ inputs.head_sha }}
 
       - if: |
           fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||

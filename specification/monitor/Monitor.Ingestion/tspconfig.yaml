@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitor"
+  "dependencies":
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-monitor-ingestion"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    flavor: azure
+    namespace: azure.monitor.ingestion
+  "@azure-tools/typespec-java":
+    package-dir: "azure-monitor-ingestion"
+    namespace: com.azure.monitor.ingestion
+    flavor: azure
+    partial-update: true
+    generate-tests: false
+    generate-samples: false
+    customization-class: "customization/src/main/java/MonitorIngestionCustomizations.java"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/ingestion"
+    package-dir: "azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/ingestion/azlogs"
+    module-version: "0.0.1"
+    single-client: true
+    rawjson-as-bytes: true
+    inject-spans: true
+    generate-fakes: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor.Ingestion"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+    output-path: "./src/Generated"
+  "@azure-tools/typespec-ts":
+    package-dir: "monitor-ingestion"
+    is-modular-library: true
+    package-details:
+      name: "@azure/monitor-ingestion"
+      description: "Azure Monitor Ingestion library"
+      version: "1.2.0"
+    flavor: azure

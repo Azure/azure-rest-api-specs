@@ -17,6 +17,7 @@ import "./privateEndpointConnection.tsp";
 import "./target.tsp";
 import "./targetType.tsp";
 import "./operationStatus.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

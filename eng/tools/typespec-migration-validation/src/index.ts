@@ -202,7 +202,7 @@ export async function main() {
   const changedPaths = findChangedPaths(diffForFile);
   if (changedPaths.length > 0) {
     logWarning(
-      `Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`,
+      `Found ${changedPaths.length} changed paths in the diff.`,
     );
     const changedPathsReport = formatChangedPathsReport(changedPaths);
     console.log(changedPathsReport);

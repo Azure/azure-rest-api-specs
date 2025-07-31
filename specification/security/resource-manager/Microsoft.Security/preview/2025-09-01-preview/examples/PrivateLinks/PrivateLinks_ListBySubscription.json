@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg1/providers/Microsoft.Security/privateLinks/pls1",
+            "name": "pls1",
+            "type": "Microsoft.Security/privateLinks",
+            "location": "eastus",
+            "tags": {
+              "environment": "production",
+              "owner": "security-team",
+              "project": "private-links"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg1/providers/Microsoft.Security/privateLinks/pls1/privateEndpointConnections/prod-pe",
+                  "name": "prod-pe",
+                  "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+                  "properties": {
+                    "groupIds": [
+                      "containers"
+                    ],
+                    "privateEndpoint": {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/prod-pe"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Approved for production use",
+                      "actionsRequired": "None"
+                    },
+                    "provisioningState": "Succeeded"
+                  }
+                }
+              ],
+              "privateLinkResources": [
+                {
+                  "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg1/providers/Microsoft.Security/privateLinks/pls1/privateLinkResources/containers",
+                  "name": "containers",
+                  "type": "Microsoft.Security/privateLinks/privateLinkResources",
+                  "properties": {
+                    "groupId": "containers",
+                    "requiredMembers": [
+                      "api",
+                      "data"
+                    ],
+                    "requiredZoneNames": [
+                      "privatelink.cloud.defender.microsoft.com"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg2/providers/Microsoft.Security/privateLinks/pls2",
+            "name": "pls2",
+            "type": "Microsoft.Security/privateLinks",
+            "location": "westus2",
+            "tags": {
+              "environment": "staging",
+              "owner": "dev-team",
+              "project": "private-links"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpointConnections": [],
+              "privateLinkResources": [
+                {
+                  "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg2/providers/Microsoft.Security/privateLinks/pls2/privateLinkResources/containers",
+                  "name": "containers",
+                  "type": "Microsoft.Security/privateLinks/privateLinkResources",
+                  "properties": {
+                    "groupId": "containers",
+                    "requiredMembers": [
+                      "api",
+                      "data"
+                    ],
+                    "requiredZoneNames": [
+                      "privatelink.cloud.defender.microsoft.com"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg3/providers/Microsoft.Security/privateLinks/pls3",
+            "name": "pls3",
+            "type": "Microsoft.Security/privateLinks",
+            "location": "northeurope",
+            "tags": {
+              "environment": "development",
+              "owner": "dev-team",
+              "project": "private-links"
+            },
+            "properties": {
+              "provisioningState": "Creating",
+              "privateEndpointConnections": [],
+              "privateLinkResources": [
+                {
+                  "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg3/providers/Microsoft.Security/privateLinks/pls3/privateLinkResources/containers",
+                  "name": "containers",
+                  "type": "Microsoft.Security/privateLinks/privateLinkResources",
+                  "properties": {
+                    "groupId": "containers",
+                    "requiredMembers": [
+                      "api",
+                      "data"
+                    ],
+                    "requiredZoneNames": [
+                      "privatelink.cloud.defender.microsoft.com"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

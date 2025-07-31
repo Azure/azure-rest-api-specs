@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -29,7 +30,8 @@ model BrokerAuthorizationResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("BrokerAuthorization Resource properties")
@@ -45,7 +47,7 @@ model BrokerAuthorizationProperties {
 @doc("Broker AuthorizationConfig properties")
 model AuthorizationConfig {
   @doc("Enable caching of the authorization rules.")
-  cache?: OperationalMode = OperationalMode.Enabled;
+  cache?: OperationalMode = Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
   @identifiers(#[])

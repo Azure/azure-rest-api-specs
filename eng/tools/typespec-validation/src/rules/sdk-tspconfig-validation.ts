@@ -1,8 +1,8 @@
 import { join } from "path";
-import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
-import { RuleResult } from "../rule-result.js";
 import { Suppression } from "suppressions";
+import { parse as yamlParse } from "yaml";
+import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;

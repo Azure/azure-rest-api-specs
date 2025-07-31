@@ -1,5 +1,5 @@
-import { afterEach, vi, test, describe, expect } from "vitest";
 import { vol } from "memfs";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import { readFileList } from "../src/processChanges.js";
 

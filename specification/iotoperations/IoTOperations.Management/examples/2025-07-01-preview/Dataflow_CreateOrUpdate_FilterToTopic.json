@@ -1,0 +1,210 @@
+{
+  "title": "Dataflow_CreateOrUpdate_FilterToTopic",
+  "operationId": "Dataflow_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "dataflowProfileName": "resource-name123",
+    "dataflowName": "mqtt-filter-to-topic",
+    "resource": {
+      "properties": {
+        "mode": "Enabled",
+        "operations": [
+          {
+            "operationType": "Source",
+            "name": "source1",
+            "sourceSettings": {
+              "endpointRef": "aio-builtin-broker-endpoint",
+              "dataSources": [
+                "azure-iot-operations/data/thermostat"
+              ]
+            }
+          },
+          {
+            "operationType": "BuiltInTransformation",
+            "name": "transformation1",
+            "builtInTransformationSettings": {
+              "filter": [
+                {
+                  "type": "Filter",
+                  "description": "filter-datapoint",
+                  "inputs": [
+                    "temperature.Value",
+                    "\"Tag 10\".Value"
+                  ],
+                  "expression": "$1 > 9000 && $2 >= 8000"
+                }
+              ],
+              "map": [
+                {
+                  "type": "PassThrough",
+                  "inputs": [
+                    "*"
+                  ],
+                  "output": "*"
+                }
+              ]
+            }
+          },
+          {
+            "operationType": "Destination",
+            "name": "destination1",
+            "destinationSettings": {
+              "endpointRef": "aio-builtin-broker-endpoint",
+              "dataDestination": "data/filtered/thermostat"
+            }
+          }
+        ]
+      },
+      "extendedLocation": {
+        "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "mode": "Enabled",
+          "operations": [
+            {
+              "operationType": "Source",
+              "name": "source1",
+              "sourceSettings": {
+                "endpointRef": "aio-builtin-broker-endpoint",
+                "dataSources": [
+                  "azure-iot-operations/data/thermostat"
+                ]
+              }
+            },
+            {
+              "operationType": "BuiltInTransformation",
+              "name": "transformation1",
+              "builtInTransformationSettings": {
+                "filter": [
+                  {
+                    "type": "Filter",
+                    "description": "filter-datapoint",
+                    "inputs": [
+                      "temperature.Value",
+                      "\"Tag 10\".Value"
+                    ],
+                    "expression": "$1 > 9000 && $2 >= 8000"
+                  }
+                ],
+                "map": [
+                  {
+                    "type": "PassThrough",
+                    "inputs": [
+                      "*"
+                    ],
+                    "output": "*"
+                  }
+                ]
+              }
+            },
+            {
+              "operationType": "Destination",
+              "name": "destination1",
+              "destinationSettings": {
+                "endpointRef": "aio-builtin-broker-endpoint",
+                "dataDestination": "data/filtered/thermostat"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123",
+        "name": "jxhcpwgfkxqasbexkookvxk",
+        "type": "Microsoft.IoTOperations/instances/dataflowProfiles/dataflows",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "mode": "Enabled",
+          "operations": [
+            {
+              "operationType": "Source",
+              "name": "source1",
+              "sourceSettings": {
+                "endpointRef": "aio-builtin-broker-endpoint",
+                "dataSources": [
+                  "azure-iot-operations/data/thermostat"
+                ]
+              }
+            },
+            {
+              "operationType": "BuiltInTransformation",
+              "name": "transformation1",
+              "builtInTransformationSettings": {
+                "filter": [
+                  {
+                    "type": "Filter",
+                    "description": "filter-datapoint",
+                    "inputs": [
+                      "temperature.Value",
+                      "\"Tag 10\".Value"
+                    ],
+                    "expression": "$1 > 9000 && $2 >= 8000"
+                  }
+                ],
+                "map": [
+                  {
+                    "type": "PassThrough",
+                    "inputs": [
+                      "*"
+                    ],
+                    "output": "*"
+                  }
+                ]
+              }
+            },
+            {
+              "operationType": "Destination",
+              "name": "destination1",
+              "destinationSettings": {
+                "endpointRef": "aio-builtin-broker-endpoint",
+                "dataDestination": "data/filtered/thermostat"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123",
+        "name": "jxhcpwgfkxqasbexkookvxk",
+        "type": "Microsoft.IoTOperations/instances/dataflowProfiles/dataflows",
+        "systemData": {
+          "createdBy": "contosouser",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "contosouser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

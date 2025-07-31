@@ -1,30 +1,17 @@
 #!/usr/bin/env node
 
-import { checkSpecs, checkExamples } from "./runner.js";
 import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
   ReportableOavError,
 } from "./formatting.js";
+import { checkExamples, checkSpecs } from "./runner.js";
 
-import { resolve } from "path";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
-import { simpleGit } from "simple-git";
-
-export async function getRootFolder(inputPath: string): Promise<string> {
-  try {
-    const gitRoot = await simpleGit(inputPath).revparse("--show-toplevel");
-    return resolve(gitRoot.trim());
-  } catch (error) {
-    console.error(
-      `Error: Unable to determine the root folder of the git repository.`,
-      `Please ensure you are running this command within a git repository OR providing a targeted directory that is within a git repo.`,
-    );
-    process.exit(1);
-  }
-}
+import { parseArgs, ParseArgsConfig } from "node:util";
+import { resolve } from "path";
 
 export async function main() {
   const config: ParseArgsConfig = {

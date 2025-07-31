@@ -1,14 +1,40 @@
+import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
+import { processArmReviewLabels } from "../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
-  summarizeChecksImpl,
+  getCheckRunTuple,
+  getExistingLabels,
+  updateLabels,
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
-import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
 
-describe("summarizeChecksImpl", () => {
+/**
+ * Find and extract the "Next Steps to Merge" comment content
+ */
+async function getNextStepsComment(github, owner, repo, prNumber) {
+  try {
+    const { data: comments } = await github.rest.issues.listComments({
+      owner: owner,
+      repo: repo,
+      issue_number: prNumber,
+    });
+
+    // Find comment containing "Next Steps to Merge"
+    const nextStepsComment = comments.find((comment) =>
+      comment.body.includes("<h2>Next Steps to Merge</h2>"),
+    );
+
+    return nextStepsComment ? nextStepsComment.body : null;
+  } catch (error) {
+    console.error(`Error getting comments for PR #${prNumber}:`, error.message);
+    return null;
+  }
+}
+
+describe("Summarize Checks Tests", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
@@ -20,7 +46,7 @@ describe("summarizeChecksImpl", () => {
         "VersioningReviewRequired",
       ];
       const fyiCheckRuns = [];
-      const expectedOutput =
+      const expectedComment =
         "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul>" +
         "<li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. " +
         "These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered " +
@@ -34,6 +60,15 @@ describe("summarizeChecksImpl", () => {
         'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
         "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
         'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>';
+      const expectedOutput = [
+        expectedComment,
+        {
+          name: "Some automated merging requirements are not met",
+          result: "FAILURE",
+          summary:
+            "❌ This PR cannot be merged because some requirements are not met. See the details.",
+        },
+      ];
 
       const requiredCheckRuns = [
         {
@@ -212,8 +247,14 @@ describe("summarizeChecksImpl", () => {
       const labelNames = [];
       const fyiCheckRuns = [];
       const requiredCheckRuns = [];
-      const expectedOutput =
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "Automated merging requirements are being evaluated",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
 
       const output = await createNextStepsComment(
         mockCore,
@@ -232,8 +273,14 @@ describe("summarizeChecksImpl", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput =
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.';
+      const expectedOutput = [
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
+        {
+          name: "Automated merging requirements are met",
+          result: "SUCCESS",
+          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
+        },
+      ];
 
       const requiredCheckRuns = [
         {
@@ -411,8 +458,14 @@ describe("summarizeChecksImpl", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput =
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "Automated merging requirements are being evaluated",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
 
       const requiredCheckRuns = [
         {
@@ -464,51 +517,160 @@ describe("summarizeChecksImpl", () => {
 
       expect(output).toEqual(expectedOutput);
     });
+  });
 
+  describe("integration test", () => {
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
-      "Should fetch real PR data when GITHUB_TOKEN is available and when integration testing is enabled.",
+      "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
       async () => {
+        const issue_number = 36258;
+        const owner = "Azure";
+        const repo = "azure-rest-api-specs";
+
+        const ignorableLabels = [
+          "VersioningReviewRequired",
+          "BreakingChangeReviewRequired",
+          "customer-reported",
+          "dependencies",
+          "javascript",
+          "Monitor",
+        ];
+
         const github = new Octokit({
           auth: process.env.GITHUB_TOKEN,
         });
 
-        const owner = "Azure";
-        const repo = "azure-rest-api-specs";
-        const issue_number = 35629;
-        const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
-        const event_name = "pull_request";
-        const mockContext = {
-          repo: {
-            owner: owner,
-            repo: repo,
-          },
-          payload: {
-            action: "opened",
-            pull_request: {
-              number: issue_number,
-              head: {
-                sha: head_sha,
-              },
-            },
-          },
-          eventName: event_name,
-        };
+        const { data: pr } = await github.rest.pulls.get({
+          owner: owner,
+          repo: repo,
+          pull_number: issue_number,
+        });
 
-        await expect(
-          summarizeChecksImpl(
-            github,
-            mockContext,
-            mockCore,
-            owner,
-            repo,
-            issue_number,
-            head_sha,
-            event_name,
-            "main",
-          ),
-        ).resolves.not.toThrow();
+        // Get current PR labels and Next Steps comment
+        const expectedNextStepsComment = await getNextStepsComment(
+          github,
+          owner,
+          repo,
+          issue_number,
+        );
+
+        const head_sha = pr.head.sha;
+        const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
+
+        const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
+          github,
+          mockCore,
+          owner,
+          repo,
+          head_sha,
+          issue_number,
+          [],
+        );
+
+        let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
+        let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
+
+        adjustedStartLabels = adjustedStartLabels.filter(
+          (name) => !labelContext.toRemove.has(name),
+        );
+        for (const label of labelContext.toAdd) {
+          if (!adjustedStartLabels.includes(label)) {
+            adjustedStartLabels.push(label);
+          }
+        }
+
+        const [commentBody, automatedChecksMet] = await createNextStepsComment(
+          mockCore,
+          repo,
+          adjustedStartLabels,
+          pr.base.ref,
+          requiredCheckRuns,
+          fyiCheckRuns,
+        );
+
+        const actualLabels = [...labelContext.toAdd, ...labelContext.present];
+        expect(actualLabels.sort()).toEqual(expectedLabels.sort());
+        expect(commentBody).toEqual(expectedNextStepsComment);
+        expect(automatedChecksMet).toBeTruthy();
       },
       600000,
+    );
+  });
+
+  describe("label add and remove", () => {
+    const testCases = [
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["other-label", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: [
+          "WaitForARMFeedback",
+          "ARMSignedOff",
+          "ARMChangesRequested",
+          "other-label",
+          "ARMReview",
+        ],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["ARMChangesRequested"],
+      },
+      {
+        existingLabels: ["other-label", "ARMSignedOff"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "other-label", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["other-label", "ARMReview"],
+        expectedLabelsToAdd: ["WaitForARMFeedback"],
+        expectedLabelsToRemove: [],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+      {
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "ARMReview"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"],
+      },
+    ];
+
+    it.each(testCases)(
+      "$description",
+      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+        /** @type {import("./labelling.js").LabelContext} */
+        const labelContext = {
+          present: new Set(),
+          toAdd: new Set(),
+          toRemove: new Set(),
+        };
+        await processArmReviewLabels(labelContext, existingLabels);
+
+        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
+        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
+      },
     );
   });
 });

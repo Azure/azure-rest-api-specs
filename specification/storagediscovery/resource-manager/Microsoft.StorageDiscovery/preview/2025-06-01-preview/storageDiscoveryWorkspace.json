@@ -1,0 +1,1117 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageDiscoveryClient",
+    "version": "2025-06-01-preview",
+    "description": "The Azure Storage Discovery Management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "StorageDiscoveryWorkspaces"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Report"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.StorageDiscovery/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all provider operations": {
+            "$ref": "./examples/Operation_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces": {
+      "get": {
+        "operationId": "StorageDiscoveryWorkspaces_ListBySubscription",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "List StorageDiscoveryWorkspace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List StorageDiscoveryWorkspaces by Subscription": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports": {
+      "get": {
+        "operationId": "Report_ListBySubscription",
+        "tags": [
+          "Report"
+        ],
+        "description": "List ReportResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ReportResource resources by subscription ID": {
+            "$ref": "./examples/Report_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces": {
+      "get": {
+        "operationId": "StorageDiscoveryWorkspaces_ListByResourceGroup",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "List StorageDiscoveryWorkspace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List StorageDiscoveryWorkspaces by Resource Group": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}": {
+      "get": {
+        "operationId": "StorageDiscoveryWorkspaces_Get",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "Get a StorageDiscoveryWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a StorageDiscoveryWorkspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageDiscoveryWorkspaces_CreateOrUpdate",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "Create a StorageDiscoveryWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageDiscoveryWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'StorageDiscoveryWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a StorageDiscoveryWorkspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StorageDiscoveryWorkspaces_Update",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "Update a StorageDiscoveryWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a StorageDiscoveryWorkspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StorageDiscoveryWorkspaces_Delete",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "Delete a StorageDiscoveryWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a StorageDiscoveryWorkspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/report": {
+      "post": {
+        "operationId": "StorageDiscoveryWorkspaces_Report",
+        "tags": [
+          "StorageDiscoveryWorkspaces"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReportContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetReportResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the StorageDiscoveryWorkspace data from workspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_Report.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports": {
+      "get": {
+        "operationId": "Report_ListByResourceGroup",
+        "tags": [
+          "Report"
+        ],
+        "description": "List ReportResource resources by StorageDiscoveryWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ReportResource resources by StorageDiscoveryWorkspace": {
+            "$ref": "./examples/Report_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}": {
+      "get": {
+        "operationId": "Report_Get",
+        "tags": [
+          "Report"
+        ],
+        "description": "Get a ReportResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "discoveryResourceName",
+            "in": "path",
+            "description": "The name of the ReportResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReportResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a ReportResource": {
+            "$ref": "./examples/Report_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport": {
+      "post": {
+        "operationId": "Report_GenerateReport",
+        "tags": [
+          "Report"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+          },
+          {
+            "name": "discoveryResourceName",
+            "in": "path",
+            "description": "The name of the ReportResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReportContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetReportResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate the StorageDiscoveryWorkspace data query": {
+            "$ref": "./examples/Report_GenerateReport.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "GetReportContent": {
+      "type": "object",
+      "description": "Request to get StorageDiscoveryWorkspace data from ADX",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "description": "The queries to execute against Storage Discovery data.\nFormat: Base64-encoded JSON object with structure:\n{\"queries\":[{\"name\":\"queryName\",\"query\":\"KQL query\"}]}\nFor query syntax and available tables, see: https://aka.ms/storageDiscoveryQuery",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "queries"
+      ]
+    },
+    "GetReportResult": {
+      "type": "object",
+      "description": "The response of the report operation",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "One or more result sets, in the same order as the queries in the request body",
+          "items": {
+            "$ref": "#/definitions/ReportResultSet"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "results"
+      ]
+    },
+    "ReportProperties": {
+      "type": "object",
+      "description": "Properties for the Report resource used only as a proxy for the Report API.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReportResource": {
+      "type": "object",
+      "description": "A report resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReportProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReportResourceListResult": {
+      "type": "object",
+      "description": "The response of a ReportResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReportResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ReportResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReportResultColumn": {
+      "type": "object",
+      "description": "The column of the response result set",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column"
+        },
+        "type": {
+          "type": "string",
+          "description": "ADX type of the column"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ReportResultSet": {
+      "type": "object",
+      "description": "The result set of the report operation",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Array of columns object, present only if the query succeeded",
+          "items": {
+            "$ref": "#/definitions/ReportResultColumn"
+          },
+          "x-ms-identifiers": []
+        },
+        "rows": {
+          "type": "array",
+          "description": "Array of all rows from ADX, present only if the query succeeded",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Provides an error about the query, present only if the query fails"
+        }
+      }
+    },
+    "StorageDiscoveryResourceType": {
+      "type": "string",
+      "description": "Storage Discovery Resource Type",
+      "enum": [
+        "Microsoft.Storage/storageAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDiscoveryResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccounts",
+            "value": "Microsoft.Storage/storageAccounts",
+            "description": "Storage Account Resource Type"
+          }
+        ]
+      }
+    },
+    "StorageDiscoveryScope": {
+      "type": "object",
+      "description": "Storage Discovery Scope. This had added validations",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the collection",
+          "minLength": 4,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9]+([ -][a-zA-Z0-9]+)*$"
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "Resource types for the collection",
+          "items": {
+            "$ref": "#/definitions/StorageDiscoveryResourceType"
+          }
+        },
+        "tagKeysOnly": {
+          "type": "array",
+          "description": "The storage account tags keys to filter",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "resourceTypes"
+      ]
+    },
+    "StorageDiscoverySku": {
+      "type": "string",
+      "description": "Storage Discovery Sku",
+      "enum": [
+        "Standard",
+        "Free"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDiscoverySku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Sku"
+          },
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free Sku"
+          }
+        ]
+      }
+    },
+    "StorageDiscoveryWorkspace": {
+      "type": "object",
+      "description": "A Storage Discovery Workspace resource. This resource configures the collection of storage account metrics.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDiscoveryWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageDiscoveryWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a StorageDiscoveryWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageDiscoveryWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageDiscoveryWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageDiscoveryWorkspaceProperties": {
+      "type": "object",
+      "description": "Storage Discovery Workspace Properties",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The storage discovery sku",
+          "default": "Standard",
+          "enum": [
+            "Standard",
+            "Free"
+          ],
+          "x-ms-enum": {
+            "name": "StorageDiscoverySku",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "Standard Sku"
+              },
+              {
+                "name": "Free",
+                "value": "Free",
+                "description": "Free Sku"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the storage discovery workspace"
+        },
+        "workspaceRoots": {
+          "type": "array",
+          "description": "The view level storage discovery data estate",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts",
+                  "scopes": [
+                    "Tenant",
+                    "Subscription",
+                    "ResourceGroup"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "The scopes of the storage discovery workspace.",
+          "items": {
+            "$ref": "#/definitions/StorageDiscoveryScope"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "workspaceRoots",
+        "scopes"
+      ]
+    },
+    "StorageDiscoveryWorkspacePropertiesUpdate": {
+      "type": "object",
+      "description": "The template for adding updateable properties.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/StorageDiscoverySku",
+          "description": "The storage discovery sku"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the storage discovery workspace"
+        },
+        "workspaceRoots": {
+          "type": "array",
+          "description": "The view level storage discovery data estate",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts",
+                  "scopes": [
+                    "Tenant",
+                    "Subscription",
+                    "ResourceGroup"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "The scopes of the storage discovery workspace.",
+          "items": {
+            "$ref": "#/definitions/StorageDiscoveryScope"
+          },
+          "x-ms-identifiers": [
+            "displayName"
+          ]
+        }
+      }
+    },
+    "StorageDiscoveryWorkspaceUpdate": {
+      "type": "object",
+      "description": "The template for adding updateable properties.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageDiscoveryWorkspacePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,616 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KnowledgeAgentRetrievalClient",
+    "description": "Client that can be used to query an agent.",
+    "version": "2025-08-01-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true,
+      "syncMethods": "None"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/agents('{agentName}')",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/EndpointParameter"
+      },
+      {
+        "$ref": "#/parameters/AgentNameParameter"
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/retrieve": {
+      "post": {
+        "tags": [
+          "KnowledgeRetrieval"
+        ],
+        "operationId": "KnowledgeRetrieval_Retrieve",
+        "x-ms-examples": {
+          "KnowledgeAgentRetrieve": {
+            "$ref": "./examples/KnowledgeAgentRetrieve.json"
+          }
+        },
+        "description": "KnowledgeAgent retrieves relevant data from backing stores.",
+        "parameters": [
+          {
+            "name": "retrievalRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgentRetrievalRequest"
+            },
+            "description": "The retrieval request to process."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/QuerySourceAuthorizationParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "The retrieval response is successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgentRetrievalResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "KnowledgeAgentRetrievalRequest": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentMessage"
+          }
+        },
+        "knowledgeSourceParams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceParams"
+          }
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "description": "The input contract for the retrieval request."
+    },
+    "KnowledgeAgentRetrievalResponse": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentMessage"
+          }
+        },
+        "activity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+          },
+          "description": "The activity records for tracking progress and billing implications."
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentReference"
+          },
+          "description": "The references for the retrieval data used in the response."
+        }
+      },
+      "description": "The output contract for the retrieval response."
+    },
+    "KnowledgeSourceParams": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The name of the index the params apply to."
+        },
+        "kind": {
+          "$ref": "searchservice.json#/definitions/KnowledgeSourceKind",
+          "x-nullable": false,
+          "description": "The type of the knowledge source."
+        }
+      },
+      "required": [
+        "knowledgeSourceName",
+        "kind"
+      ]
+    },
+    "SearchIndexKnowledgeSourceParams": {
+      "type": "object",
+      "x-ms-discriminator-value": "searchIndex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "properties": {
+        "filterAddOn": {
+          "type": "string",
+          "description": "A filter condition applied to the index (e.g., 'State eq VA')."
+        }
+      },
+      "description": "Specifies runtime parameters for a search index knowledge source"
+    },
+    "WebKnowledgeSourceParams": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "properties": {
+        "freshness": {
+          "type": "string",
+          "description": "The freshness of web results."
+        }
+      },
+      "description": "Specifies runtime parameters for a web knowledge source"
+    },
+    "KnowledgeAgentMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the tool response."
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentMessageContent"
+          }
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "description": "The natural language message style object."
+    },
+    "KnowledgeAgentMessageContent": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/KnowledgeAgentMessageContentType",
+          "description": "The type of the message",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Specifies the type of the message content."
+    },
+    "KnowledgeAgentMessageContentType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeAgentMessageContentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Text message content kind."
+          },
+          {
+            "value": "image",
+            "name": "Image",
+            "description": "Image message content kind."
+          }
+        ]
+      },
+      "description": "The type of message content."
+    },
+    "KnowledgeAgentMessageTextContent": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentMessageContent"
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "description": "Text message type."
+    },
+    "KnowledgeAgentMessageImageContent": {
+      "type": "object",
+      "x-ms-discriminator-value": "image",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentMessageContent"
+        }
+      ],
+      "properties": {
+        "image": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "The url of the image."
+            }
+          },
+          "required": [
+            "url"
+          ]
+        }
+      },
+      "required": [
+        "image"
+      ],
+      "description": "Text message type."
+    },
+    "KnowledgeAgentActivityRecord": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ID of the activity record."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the activity record."
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The elapsed time in milliseconds for the retrieval activity."
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ],
+      "description": "Base type for activity records."
+    },
+    "KnowledgeAgentRetrievalActivityRecord": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        }
+      },
+      "description": "Represents a retrieval activity record."
+    },
+    "KnowledgeAgentSearchIndexActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "searchIndex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "searchIndexArguments": {
+          "$ref": "#/definitions/KnowledgeAgentSearchIndexActivityArguments",
+          "description": "The search index arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a search index retrieval activity record."
+    },
+    "KnowledgeAgentSearchIndexActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the search index."
+        },
+        "filter": {
+          "type": "string",
+          "description": "The filter string."
+        }
+      },
+      "description": "Represents the arguments the search index retrieval activity was run with."
+    },
+    "KnowledgeAgentAzureBlobActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureBlob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "azureBlobArguments": {
+          "$ref": "#/definitions/KnowledgeAgentAzureBlobActivityArguments",
+          "description": "The azure blob arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a azure blob retrieval activity record."
+    },
+    "KnowledgeAgentAzureBlobActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query blob contents."
+        }
+      },
+      "description": "Represents the arguments the azure blob retrieval activity was run with."
+    },
+    "KnowledgeAgentWebActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "webArguments": {
+          "$ref": "#/definitions/KnowledgeAgentWebActivityArguments",
+          "description": "The web arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a web retrieval activity record."
+    },
+    "KnowledgeAgentWebActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the web."
+        },
+        "freshness": {
+          "type": "string",
+          "description": "The freshness for the retrieval activity."
+        }
+      },
+      "description": "Represents the arguments the web retrieval activity was run with."
+    },
+    "KnowledgeAgentModelQueryPlanningActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "modelQueryPlanning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the LLM query planning activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of output tokens for the LLM query planning activity."
+        }
+      },
+      "description": "Represents an LLM query planning activity record."
+    },
+    "KnowledgeAgentModelAnswerSynthesisActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "modelAnswerSynthesis",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the LLM answer synthesis activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of output tokens for the LLM answer synthesis activity."
+        }
+      },
+      "description": "Represents an LLM answer synthesis activity record."
+    },
+    "KnowledgeAgentSemanticRerankerActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "semanticReranker",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the semantic ranker activity."
+        }
+      },
+      "description": "Represents a semantic ranker activity record."
+    },
+    "KnowledgeAgentReference": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the reference."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the reference."
+        },
+        "activitySource": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The source activity ID for the reference."
+        },
+        "sourceData": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "rerankerScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The reranker score for the document reference."
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "activitySource"
+      ],
+      "description": "Base type for references."
+    },
+    "KnowledgeAgentSearchIndexReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "searchIndex",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "docKey": {
+          "type": "string",
+          "description": "The document key for the reference."
+        }
+      },
+      "description": "Represents an Azure Search document reference."
+    },
+    "KnowledgeAgentAzureBlobReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureBlob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "blobUrl": {
+          "type": "string",
+          "description": "The blob URL for the reference."
+        }
+      },
+      "description": "Represents an Azure Blob Storage document reference."
+    },
+    "KnowledgeAgentWebReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The url the reference data originated from."
+        }
+      },
+      "description": "Represents a web document reference."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    },
+    "ClientRequestIdParameter": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "description": "The tracking ID sent with the request to help with debugging.",
+      "x-ms-client-request-id": true,
+      "x-ms-parameter-grouping": {
+        "name": "request-options"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "QuerySourceAuthorizationParameter": {
+      "name": "x-ms-query-source-authorization",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+      "x-ms-query-source-authorization": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EndpointParameter": {
+      "name": "endpoint",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "description": "The endpoint URL of the search service.",
+      "x-ms-parameter-location": "client"
+    },
+    "AgentNameParameter": {
+      "name": "agentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": false,
+      "description": "The name of the agent.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

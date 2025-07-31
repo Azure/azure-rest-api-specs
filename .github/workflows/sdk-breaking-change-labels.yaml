@@ -37,7 +37,7 @@ jobs:
         run: |
           # Get token for Azure DevOps resource
           ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
-          echo "ADO_TOKEN=$ADO_TOKEN" >> $GITHUB_ENV
+          echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
 
       - name: Get label and action
         id: get-label-and-action

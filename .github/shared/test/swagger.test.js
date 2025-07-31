@@ -1,14 +1,14 @@
 // @ts-check
 
-import { dirname, resolve, join } from "path";
+import { dirname, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { Swagger } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
-import { Readme } from "../src/readme.js";
-import { Tag } from "../src/tag.js";
-import { SpecModel } from "../src/spec-model.js";
 import { ConsoleLogger } from "../src/logger.js";
+import { Readme } from "../src/readme.js";
+import { SpecModel } from "../src/spec-model.js";
+import { Tag } from "../src/tag.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -45,6 +45,26 @@ describe("Swagger", () => {
           expectedIncludedPath,
           expect.objectContaining({
             path: expect.stringContaining(expectedIncludedPath),
+          }),
+        ],
+      ]),
+    );
+  });
+
+  it("returns examples", async () => {
+    const swagger = new Swagger(resolve(__dirname, "fixtures/swagger/ignoreExamples/swagger.json"));
+    const examples = await swagger.getExamples();
+
+    const expectedExamplePath = resolve(
+      __dirname,
+      "fixtures/swagger/ignoreExamples/examples/example.json",
+    );
+    expect(examples).toMatchObject(
+      new Map([
+        [
+          expectedExamplePath,
+          expect.objectContaining({
+            path: expect.stringContaining(expectedExamplePath),
           }),
         ],
       ]),

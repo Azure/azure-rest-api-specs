@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2025-06-01T18:30:22.123456Z"
+        },
+        "properties": {
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
+          "storage": {
+            "type": "",
+            "iops": 2300,
+            "tier": "P20",
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled",
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleserver.private.postgres.database.azure.com"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+          "version": "17",
+          "minorVersion": "5",
+          "administratorLogin": "exampleadministratorlogin",
+          "state": "Ready",
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z"
+          },
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "2"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
+        },
+        "location": "eastus",
+        "tags": {
+          "VnetServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    }
+  }
+}

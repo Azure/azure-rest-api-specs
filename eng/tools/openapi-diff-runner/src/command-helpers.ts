@@ -1,59 +1,59 @@
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { logError, LogLevel, logMessage, setOutput } from "./log.js";
 import {
+  BreakingChangeReviewRequiredLabel,
   BreakingChangesCheckType,
   Context,
-  BreakingChangeReviewRequiredLabel,
   VersioningReviewRequiredLabel,
 } from "./types/breaking-change.js";
 import { ResultMessageRecord } from "./types/message.js";
-import { getArgumentValue } from "./utils/common-utils.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
-import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
-import { logMessage, setOutput } from "./log.js";
 
 /**
- * Parse the arguments.
- * @returns The runner command input.
+ * Interface for parsed CLI arguments
  */
-export function initContext(): Context {
-  const __filename: string = fileURLToPath(import.meta.url);
-  const __dirname: string = path.dirname(__filename);
+export interface ParsedCliArguments {
+  localSpecRepoPath: string;
+  targetRepo: string;
+  sourceRepo: string;
+  prNumber: string;
+  runType: BreakingChangesCheckType;
+  baseBranch: string;
+  headCommit: string;
+  prSourceBranch: string;
+  prTargetBranch: string;
+}
 
-  // Get the arguments passed to the script
-  const args: string[] = process.argv.slice(2);
-  const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--srp", path.join(__dirname, "..")),
-  );
+/**
+ * Create context from parsed CLI arguments
+ */
+export function createContextFromParsedArgs(
+  parsedArgs: ParsedCliArguments,
+  workingFolder: string,
+  logFileFolder: string,
+): Context {
   const swaggerDirs: string[] = ["specification", "dev"];
-  const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
-  const prNumber: string = getArgumentValue(args, "--number", "");
-  const runType = getArgumentValue(args, "--rt", "SameVersion") as BreakingChangesCheckType;
-  const workingFolder: string = path.join(localSpecRepoPath, "..");
-  const logFileFolder: string = path.join(workingFolder, "out/logs");
-
-  // Create the log file folder if it does not exist
-  if (!existsSync(logFileFolder)) {
-    mkdirSync(logFileFolder, { recursive: true });
-  }
-
-  const prUrl = `https://github.com/${repo}/pull/${prNumber}`;
+  const prUrl = `https://github.com/${parsedArgs.targetRepo}/pull/${parsedArgs.prNumber}`;
   const oadMessageProcessorContext = createOadMessageProcessor(logFileFolder, prUrl);
+
   return {
-    localSpecRepoPath,
+    localSpecRepoPath: parsedArgs.localSpecRepoPath,
     workingFolder,
     swaggerDirs,
     logFileFolder,
-    baseBranch: getArgumentValue(args, "--bb", "main"),
-    runType,
-    checkName: getBreakingChangeCheckName(runType),
-    headCommit: getArgumentValue(args, "--hc", "HEAD"),
-    repo,
-    prNumber,
-    prSourceBranch: getArgumentValue(args, "--sb", ""),
-    prTargetBranch: getArgumentValue(args, "--tb", ""),
+    baseBranch: parsedArgs.baseBranch,
+    runType: parsedArgs.runType,
+    checkName: getBreakingChangeCheckName(parsedArgs.runType),
+    headCommit: parsedArgs.headCommit,
+    targetRepo: parsedArgs.targetRepo,
+    sourceRepo: parsedArgs.sourceRepo,
+    prNumber: parsedArgs.prNumber,
+    prSourceBranch: parsedArgs.prSourceBranch,
+    prTargetBranch: parsedArgs.prTargetBranch,
     oadMessageProcessorContext,
     prUrl,
   };
@@ -65,14 +65,16 @@ export function initContext(): Context {
  * Appropriate labels are added to this set by applyRules() function.
  */
 export const BreakingChangeLabelsToBeAdded = new Set<string>();
-export let defaultBreakingChangeBaseBranch = "main";
 function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
-  return runType === "SameVersion" ? "Swagger BreakingChange" : "BreakingChange(Cross-Version)";
+  return runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION
+    ? "Swagger BreakingChange"
+    : "BreakingChange(Cross-Version)";
 }
 
 /**
  * Output the breaking change labels as GitHub Actions environment variables.
  * This function checks the BreakingChangeLabelsToBeAdded set and sets the appropriate outputs.
+ * The doc describing breaking change review rules can be found here: https://aka.ms/brch-dev
  */
 export function outputBreakingChangeLabelVariables(): void {
   // Output the breaking change labels as GitHub Actions environment variables
@@ -88,19 +90,24 @@ export function outputBreakingChangeLabelVariables(): void {
       logMessage("'BreakingChangeReviewRequired' label needs to be added.");
       setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
       setOutput("breakingChangeReviewLabelValue", "true");
+      logMessage("'VersioningReviewRequired' label needs to be deleted.");
+      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      setOutput("versioningReviewLabelValue", "false");
     } else {
       logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
       setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
       setOutput("breakingChangeReviewLabelValue", "false");
-    }
-    if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
-      logMessage("'VersioningReviewRequired' label needs to be added.");
-      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      setOutput("versioningReviewLabelValue", "true");
-    } else {
-      logMessage("'VersioningReviewRequired' label needs to be deleted.");
-      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
-      setOutput("versioningReviewLabelValue", "false");
+
+      // versioning review label is only set if the breaking change review label is not set
+      if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
+        logMessage("'VersioningReviewRequired' label needs to be added.");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "true");
+      } else {
+        logMessage("'VersioningReviewRequired' label needs to be deleted.");
+        setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+        setOutput("versioningReviewLabelValue", "false");
+      }
     }
   }
 }
@@ -124,7 +131,6 @@ export async function getSwaggerDiffs(
   additions: string[];
   modifications: string[];
   deletions: string[];
-  renames: { from: string; to: string }[];
   total: number;
 }> {
   try {
@@ -133,6 +139,7 @@ export async function getSwaggerDiffs(
       baseCommitish: options.baseCommitish,
       cwd: options.cwd,
       headCommitish: options.headCommitish,
+      paths: ["specification"],
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
@@ -143,25 +150,23 @@ export async function getSwaggerDiffs(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
+    // Add renamed files to the additions array and deletions array
+    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
+    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
+
     return {
       additions: filteredAdditions,
       modifications: filteredModifications,
       deletions: filteredDeletions,
-      renames: filteredRenames,
-      total:
-        filteredAdditions.length +
-        filteredModifications.length +
-        filteredDeletions.length +
-        filteredRenames.length,
+      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
     };
   } catch (error) {
-    console.error("Error getting categorized changed files:", error);
+    logError(`Error getting categorized changed files: ${error}`);
     // Return empty result on error
     return {
       additions: [],
       modifications: [],
       deletions: [],
-      renames: [],
       total: 0,
     };
   }
@@ -172,11 +177,6 @@ export async function getSwaggerDiffs(
  * TargetBranches is a set of branches and treat each of them like a service team master branch.
  */
 export async function buildPrInfo(context: Context): Promise<void> {
-  /**
-   * For PR target branch not in `targetBranches`. prepare for switch to master branch,
-   * if not the switching to master below would failed
-   */
-  defaultBreakingChangeBaseBranch = context.baseBranch;
   const prInfo = await createPullRequestProperties(
     context,
     context.runType === "CrossVersion" ? "cross-version" : "same-version",
@@ -216,7 +216,7 @@ export function changeBaseBranch(context: Context): void {
  * Log the full list of OAD messages to console
  */
 export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
-  logMessage("---- Full list of messages ----");
+  logMessage("---- Full list of messages ----", LogLevel.Group);
   logMessage("[");
   // Printing the messages one by one because the console.log appears to elide the messages with "... X more items"
   // after approximately 292 messages.
@@ -224,7 +224,7 @@ export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
     logMessage(JSON.stringify(msg, null, 4) + ",");
   }
   logMessage("]");
-  logMessage("---- End of full list of messages ----");
+  logMessage("---- End of full list of messages ----", LogLevel.EndGroup);
 }
 
 /**
@@ -265,7 +265,7 @@ export function cleanDummySwagger(): void {
  * Return true if the type indicates the same version breaking change
  */
 export function isSameVersionBreakingType(type: BreakingChangesCheckType): boolean {
-  return type === "SameVersion";
+  return type === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
 }
 
 /**

@@ -4,9 +4,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 namespace Microsoft.IoTOperations;
 
 /**
@@ -28,7 +27,8 @@ model BrokerResource is ProxyResource<BrokerProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("Broker Resource properties")
@@ -56,9 +56,217 @@ model BrokerProperties {
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
 
+  @doc("The persistence settings of the Broker.")
+  @added(Versions.`2025-07-01-preview`)
+  persistence?: BrokerPersistence;
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("""
+  Disk persistence configuration.
+  
+  When persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: 
+  
+  - Retained messages will be stored on disk only. 
+  - WILL messages will be stored on disk only. 
+  - DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.
+  
+  Optional. Everything is in-memory if not set. 
+  Note: if configured, all MQTT session states are written to disk.
+  """)
+@added(Versions.`2025-07-01-preview`)
+model BrokerPersistence {
+  @doc("""
+    Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. 
+    Optionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'.
+    """)
+  dynamicSettings?: BrokerPersistenceDynamicSettings;
+
+  @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  maxSize: string;
+
+  @doc("""
+    Use the specified persistent volume claim template to mount a persistent volume. Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.
+    
+    If unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  persistentVolumeClaimSpec?: VolumeClaimSpec;
+
+  @doc("Controls which topic's retained messages should be persisted to disk.")
+  retain?: BrokerRetainMessagesPolicy;
+
+  @doc("Controls which keys should be persisted to disk for the state store.")
+  stateStore?: BrokerStateStorePolicy;
+
+  @doc("Controls which subscriber message queues should be persisted to disk. Important: to facilitate reconnection, session state metadata are ALWAYS written to disk if any persistence setting is specified, even if this section isn't set.")
+  subscriberQueue?: BrokerSubscriberQueuePolicy;
+
+  @doc("Controls settings related to encryption of the persistence database. Optional, defaults to enabling encryption.")
+  encryption?: BrokerPersistenceEncryption;
+}
+
+@doc("Broker Persistence Encryption properties.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerPersistenceEncryption {
+  @doc("Determines if encryption is enabled.")
+  mode: OperationalMode;
+}
+
+@doc("Broker Persistence Policy Mode values.")
+@added(Versions.`2025-07-01-preview`)
+union BrokerPersistencePolicyMode {
+  string,
+
+  @doc("Policy mode for All.")
+  All,
+
+  @doc("Policy mode for None.")
+  None,
+
+  @doc("Indicates that the policy is a custom policy.")
+  Custom,
+}
+
+@doc("Broker Retain policy properties.")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model BrokerRetainMessagesPolicy {
+  @doc("'All' to persist all retain messages, 'None' to not persist any, 'Custom' to persist only the specified topics.")
+  mode: BrokerPersistencePolicyMode;
+}
+
+@doc("Custom Broker Retain Message Policy.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerRetainMessagesCustomPolicy extends BrokerRetainMessagesPolicy {
+  @doc("The mode of the policy.")
+  mode: Custom;
+
+  @doc("Settings for the policy.")
+  retainSettings: BrokerRetainMessagesSettings;
+}
+
+@doc("Broker Retain Messages properties.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerRetainMessagesSettings {
+  @doc("List of topics under which retained messages would be persisted to disk. Wildcards # and + supported.")
+  topics?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR).")
+  dynamic?: BrokerRetainMessagesDynamic;
+}
+
+@doc("Dynamic settings of {name}.", T)
+@added(Versions.`2025-07-01-preview`)
+model BrokerPersistencePolicyDynamicTpl<T extends {}> {
+  @doc("Mode of the {name}.", T)
+  mode: OperationalMode;
+}
+
+model BrokerRetainMessagesDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerRetainMessagesCustomPolicy>;
+model BrokerSubscriberQueueDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerSubscriberQueueCustomPolicy>;
+model BrokerStateStoreDynamic
+  is BrokerPersistencePolicyDynamicTpl<BrokerStateStoreCustomPolicy>;
+
+@doc("Broker State Store Policy.")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model BrokerStateStorePolicy {
+  @doc("'All' to persist all keys, 'None' to not persist any, 'Custom' to persist only the specified keys.")
+  mode: BrokerPersistencePolicyMode;
+}
+
+@doc("Broker State Store Custom Policy.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerStateStoreCustomPolicy extends BrokerStateStorePolicy {
+  @doc("The mode of the policy.")
+  mode: Custom;
+
+  @doc("Settings for the policy.")
+  stateStoreSettings: BrokerStateStorePolicySettings;
+}
+
+@doc("Broker State Store Custom Policy Settings.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerStateStorePolicySettings {
+  @doc("List of key and key type to persist to disk.")
+  @identifiers(#[])
+  stateStoreResources?: BrokerStateStorePolicyResources[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR).")
+  dynamic?: BrokerStateStoreDynamic;
+}
+
+@doc("Broker State Store Policy Resources properties.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerStateStorePolicyResources {
+  @doc("The key to persist to disk.")
+  keyType: BrokerStateStoreKeyType;
+
+  @doc("List of keys to persist to disk, required.")
+  keys: string[];
+}
+
+@doc("Broker State Store Key Type properties.")
+@added(Versions.`2025-07-01-preview`)
+union BrokerStateStoreKeyType {
+  string,
+
+  @doc("Used for glob-style pattern matching.")
+  Pattern,
+
+  @doc("Used to do exact match, for example, when a key contains characters that might be otherwise matched as a pattern (*, ?, [0-9]).")
+  String,
+
+  @doc("Used to match a binary key.")
+  Binary,
+}
+
+@doc("Dynamic settings of the persistence.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerPersistenceDynamicSettings {
+  @doc("The user property key to enable persistence.")
+  userPropertyKey: string;
+
+  @doc("The user property value to enable persistence.")
+  userPropertyValue: string;
+}
+
+@doc("Broker Subscriber Queue Policy properties.")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model BrokerSubscriberQueuePolicy {
+  @doc("'All' to persist all subscriber queues, 'None' to not persist any, 'Custom' to persist only the specified queues.")
+  mode: BrokerPersistencePolicyMode;
+}
+
+@doc("Custom Subscriber Queue Policy Properties.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerSubscriberQueueCustomPolicy extends BrokerSubscriberQueuePolicy {
+  @doc("The mode of the policy.")
+  mode: Custom;
+
+  @doc("Custom policy, required if mode is Custom. Subscriber queues from all groups are persisted to disk (logical OR).")
+  subscriberQueueSettings: BrokerSubscriberQueueCustomPolicySettings;
+}
+
+@doc("Broker Subscriber Queue Custom Policy properties.")
+@added(Versions.`2025-07-01-preview`)
+model BrokerSubscriberQueueCustomPolicySettings {
+  @doc("List of client IDs of the subscribers, wildcard * supported.")
+  subscriberClientIds?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR).")
+  dynamic?: BrokerSubscriberQueueDynamic;
+
+  @doc("List of topics under which messages would be persisted to disk for each subscriber. Wildcards # and + supported.")
+  topics?: string[];
 }
 
 @doc("Broker Advanced Settings")
@@ -67,7 +275,7 @@ model AdvancedSettings {
   clients?: ClientConfig;
 
   @doc("The setting to enable or disable encryption of internal Traffic.")
-  encryptInternalTraffic?: OperationalMode = OperationalMode.Enabled;
+  encryptInternalTraffic?: OperationalMode = Enabled;
 
   @doc("Certificate rotation and private key configuration.")
   internalCerts?: CertManagerCertOptions;
@@ -127,7 +335,7 @@ model BrokerDiagnostics {
 @doc("Broker Diagnostic Self check properties")
 model SelfCheck {
   @doc("The toggle to enable/disable self check.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("The self check interval.")
   @minValue(30)
@@ -143,7 +351,7 @@ model SelfCheck {
 @doc("Broker Diagnostic Trace properties")
 model Traces {
   @doc("The toggle to enable/disable traces.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("The cache size in megabytes.")
   @minValue(1)
@@ -208,6 +416,24 @@ model VolumeClaimResourceRequirements {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   requests?: Record<string>;
+
+  @doc("""
+    Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
+    
+    This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
+    
+    This field is immutable. It can only be set for containers.
+    """)
+  @identifiers(#[])
+  @added(Versions.`2025-07-01-preview`)
+  claims?: VolumeClaimResourceRequirementsClaims[];
+}
+
+@doc("VolumeClaimResourceRequirementsClaims properties.")
+@added(Versions.`2025-07-01-preview`)
+model VolumeClaimResourceRequirementsClaims {
+  @doc("Name of the resource. This must match the name of a resource in spec.resourceClaims.")
+  name: string;
 }
 
 @doc("VolumeClaimSpecSelector properties")
@@ -253,7 +479,7 @@ union OperatorValues {
 @doc("GenerateResourceLimits properties")
 model GenerateResourceLimits {
   @doc("The toggle to enable/disable cpu resource limits.")
-  cpu?: OperationalMode = OperationalMode.Enabled;
+  cpu?: OperationalMode = Enabled;
 }
 
 @doc("Cert Manager Cert properties")

@@ -45,20 +45,20 @@ jobs:
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD "$GITHUB_PULL_REQUEST_LABELS"
 
-          OUTPUT=$(cat $OUTPUT_FILE)
+          OUTPUT=$(cat "$OUTPUT_FILE")
           echo "Script output labels: $OUTPUT"
 
           labelsToAdd=$(echo "$OUTPUT" | sed -n 's/.*"labelsToAdd":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
           labelsToRemove=$(echo "$OUTPUT" | sed -n 's/.*"labelsToRemove":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
 
-          for label in $(echo $labelsToAdd | tr ',' '\n'); do
+          for label in $(echo "$labelsToAdd" | tr ',' '\n'); do
             echo "Label to add: $label"
-            echo "$label=true" >> $GITHUB_OUTPUT
+            echo "$label=true" >> "$GITHUB_OUTPUT"
           done
 
-          for label in $(echo $labelsToRemove | tr ',' '\n'); do
+          for label in $(echo "$labelsToRemove" | tr ',' '\n'); do
             echo "Label to remove: $label"
-            echo "$label=false" >> $GITHUB_OUTPUT
+            echo "$label=false" >> "$GITHUB_OUTPUT"
           done
 
       # No Action or Add/Remove label ​​according to step run-suppressions-script output

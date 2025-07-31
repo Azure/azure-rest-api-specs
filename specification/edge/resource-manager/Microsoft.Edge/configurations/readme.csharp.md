@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: [[ResourceProviderName]]
-  output-folder: $(csharp-sdks-folder)/configurations/management/[[ResourceProviderName]]/GeneratedProtocol
+  namespace: Azure.ResourceManager.EdgeSiteConfiguration
+  output-folder: $(csharp-sdks-folder)/configurations/management/Azure.ResourceManager.EdgeSiteConfiguration/GeneratedProtocol
 ```

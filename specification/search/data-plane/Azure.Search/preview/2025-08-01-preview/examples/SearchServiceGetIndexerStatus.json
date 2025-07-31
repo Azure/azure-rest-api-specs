@@ -1,0 +1,86 @@
+{
+  "operationId": "Indexers_GetStatus",
+  "title": "SearchServiceGetIndexerStatus",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexerName": "myindexer",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myindexer",
+        "status": "running",
+        "lastResult": {
+          "status": "success",
+          "startTime": "2014-11-26T03:37:18.853Z",
+          "endTime": "2014-11-26T03:37:19.012Z",
+          "itemsProcessed": 11,
+          "itemsFailed": 0,
+          "mode": "indexingAllDocs",
+          "errors": [],
+          "warnings": []
+        },
+        "executionHistory": [
+          {
+            "status": "success",
+            "startTime": "2014-11-26T03:37:18.853Z",
+            "endTime": "2014-11-26T03:37:19.012Z",
+            "itemsProcessed": 11,
+            "itemsFailed": 0,
+            "mode": "indexingAllDocs",
+            "errors": [],
+            "warnings": []
+          },
+          {
+            "status": "transientFailure",
+            "startTime": "2014-11-26T03:28:10.125Z",
+            "endTime": "2014-11-26T03:28:12.007Z",
+            "itemsProcessed": 1,
+            "itemsFailed": 2,
+            "mode": "indexingAllDocs",
+            "errors": [
+              {
+                "key": "",
+                "statusCode": 400,
+                "errorMessage": "Document key cannot be missing or empty."
+              },
+              {
+                "key": "document id 1",
+                "statusCode": 400,
+                "name": "DocumentExtraction.AzureBlob.MyDataSource",
+                "errorMessage": "Could not read the value of column 'foo' at index '0'.",
+                "details": "The file could not be parsed.",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2049388"
+              }
+            ],
+            "warnings": [
+              {
+                "key": "document id",
+                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob."
+              },
+              {
+                "key": "document id 2",
+                "name": "Enrichment.LanguageDetectionSkill.#4",
+                "message": "Document was truncated to 50000 characters.",
+                "details": "The skill did something that didn't break anything, nonetheless something we didn't expect happened, so it might be worth double checking.",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2099692"
+              }
+            ]
+          }
+        ],
+        "limits": {
+          "maxRunTime": "PT22H",
+          "maxDocumentExtractionSize": 256000000,
+          "maxDocumentContentCharactersToExtract": 4000000
+        },
+        "currentState": {
+          "mode": "indexingAllDocs",
+          "resetDocumentKeys": [],
+          "resetDatasourceDocumentIds": []
+        }
+      }
+    }
+  }
+}

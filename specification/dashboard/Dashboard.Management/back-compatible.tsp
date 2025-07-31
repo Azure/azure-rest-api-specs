@@ -52,23 +52,32 @@ using Azure.Core;
   armResourceIdentifier
 );
 
-@@clientLocation(ManagedGrafanas.get, "Grafana");
-@@clientLocation(ManagedGrafanas.create, "Grafana");
-@@clientLocation(ManagedGrafanas.update, "Grafana");
-@@clientLocation(ManagedGrafanas.delete, "Grafana");
-@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana");
-@@clientLocation(ManagedGrafanas.list, "Grafana");
-@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana");
-@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana");
-@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints");
-@@clientLocation(ManagedPrivateEndpointModels.get, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedGrafanas.get, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.create, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.update, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.delete, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.list, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana", "!csharp");
+@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints", "!csharp");
+@@clientLocation(ManagedPrivateEndpointModels.get,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);
 @@clientLocation(ManagedPrivateEndpointModels.create,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
 @@clientLocation(ManagedPrivateEndpointModels.update,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
 @@clientLocation(ManagedPrivateEndpointModels.delete,
-  "ManagedPrivateEndpoints"
+  "ManagedPrivateEndpoints",
+  "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.list, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedPrivateEndpointModels.list,
+  "ManagedPrivateEndpoints",
+  "!csharp"
+);

@@ -1,17 +1,17 @@
-import { beforeEach, test, describe, vi, Mock, expect } from "vitest";
 import { readFile } from "fs/promises";
 import { join } from "node:path";
+import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
 
 import axios from "axios";
 
+import { Readme } from "@azure-tools/specs-shared/readme";
 import {
   deduplicateTags,
-  getDocRawUrl,
   getDefaultTag,
+  getDocRawUrl,
   getOpenapiType,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
-import { Readme } from "@azure-tools/specs-shared/readme";
 
 vi.mock("axios");
 

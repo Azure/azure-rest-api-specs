@@ -2,10 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Confluent;
@@ -126,6 +126,14 @@ union ConnectorClass {
   AZUREBLOBSOURCE: "AZUREBLOBSOURCE",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AZUREBLOBSINK: "AZUREBLOBSINK",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  AZURECOSMOSV2SINK: "AZURECOSMOSV2SINK",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  AZURECOSMOSV2SOURCE: "AZURECOSMOSV2SOURCE",
 }
 
 /**
@@ -2029,6 +2037,12 @@ model AzureCosmosDBSinkConnectorServiceInfo
   cosmosIdStrategy?: string;
 
   /**
+   * Azure Cosmos write config details
+   */
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  cosmosWriteDetails?: string;
+
+  /**
    * The connector service type.
    */
   connectorServiceType: "AzureCosmosDBSinkConnector";
@@ -2074,6 +2088,12 @@ model AzureCosmosDBSourceConnectorServiceInfo
    * The connector service type.
    */
   connectorServiceType: "AzureCosmosDBSourceConnector";
+
+  /**
+   * Azure Cosmos Database Include all the containers in the database.
+   */
+  @added(Microsoft.Confluent.Versions.v2025_07_17_preview)
+  cosmosIncludeAllContainers?: string;
 }
 
 /**

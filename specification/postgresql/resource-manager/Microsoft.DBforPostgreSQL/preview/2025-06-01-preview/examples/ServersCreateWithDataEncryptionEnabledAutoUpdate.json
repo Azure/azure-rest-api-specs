@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "parameters": {
+      "location": "eastus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D4ds_v5"
+      },
+      "identity": {
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {}
+        },
+        "type": "UserAssigned"
+      },
+      "properties": {
+        "administratorLogin": "exampleadministratorlogin",
+        "administratorLoginPassword": "examplepassword",
+        "version": "17",
+        "availabilityZone": "1",
+        "createMode": "Create",
+        "dataEncryption": {
+          "type": "AzureKeyVault",
+          "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity",
+          "geoBackupKeyURI": "",
+          "geoBackupUserAssignedIdentityId": ""
+        },
+        "storage": {
+          "storageSizeGB": 512,
+          "autoGrow": "Disabled",
+          "tier": "P20"
+        },
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "network": {
+          "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
+          "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
+        },
+        "highAvailability": {
+          "mode": "ZoneRedundant"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/azureAsyncOperation/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
+      }
+    }
+  }
+}

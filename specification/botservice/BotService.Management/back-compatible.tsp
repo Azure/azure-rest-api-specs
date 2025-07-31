@@ -31,33 +31,44 @@ using Microsoft.BotService;
 
 // @@clientLocation decorators for @operationId operations
 // Bots interface
-@@clientLocation(Bots.createSignInUrl, "Email");
-@@clientLocation(Bots.listByBotResource, "PrivateLinkResources");
+@@clientLocation(Bots.createSignInUrl, "Email", "!csharp");
+@@clientLocation(Bots.listByBotResource, "PrivateLinkResources", "!csharp");
 
 // BotChannels interface
-@@clientLocation(BotChannels.get, "Channels");
-@@clientLocation(BotChannels.create, "Channels");
-@@clientLocation(BotChannels.update, "Channels");
-@@clientLocation(BotChannels.delete, "Channels");
-@@clientLocation(BotChannels.listByResourceGroup, "Channels");
-@@clientLocation(BotChannels.listWithKeys, "Channels");
-@@clientLocation(BotChannels.regenerateKeys, "DirectLine");
+@@clientLocation(BotChannels.get, "Channels", "!csharp");
+@@clientLocation(BotChannels.create, "Channels", "!csharp");
+@@clientLocation(BotChannels.update, "Channels", "!csharp");
+@@clientLocation(BotChannels.delete, "Channels", "!csharp");
+@@clientLocation(BotChannels.listByResourceGroup, "Channels", "!csharp");
+@@clientLocation(BotChannels.listWithKeys, "Channels", "!csharp");
+@@clientLocation(BotChannels.regenerateKeys, "DirectLine", "!csharp");
 
 // ConnectionSettings interface
-@@clientLocation(ConnectionSettings.get, "BotConnection");
-@@clientLocation(ConnectionSettings.create, "BotConnection");
-@@clientLocation(ConnectionSettings.update, "BotConnection");
-@@clientLocation(ConnectionSettings.delete, "BotConnection");
-@@clientLocation(ConnectionSettings.listByBotService, "BotConnection");
-@@clientLocation(ConnectionSettings.listWithSecrets, "BotConnection");
+@@clientLocation(ConnectionSettings.get, "BotConnection", "!csharp");
+@@clientLocation(ConnectionSettings.create, "BotConnection", "!csharp");
+@@clientLocation(ConnectionSettings.update, "BotConnection", "!csharp");
+@@clientLocation(ConnectionSettings.delete, "BotConnection", "!csharp");
+@@clientLocation(ConnectionSettings.listByBotService,
+  "BotConnection",
+  "!csharp"
+);
+@@clientLocation(ConnectionSettings.listWithSecrets,
+  "BotConnection",
+  "!csharp"
+);
 
 // OperationGroup interfaces from routes.tsp - use interface references to avoid conflicts
-@@clientLocation(BotsOperationGroup.getCheckNameAvailability, Bots);
+@@clientLocation(BotsOperationGroup.getCheckNameAvailability, Bots, "!csharp");
 @@clientLocation(BotConnectionOperationGroup.listServiceProviders,
-  "BotConnection"
+  "BotConnection",
+  "!csharp"
 );
 @@clientLocation(QnAMakerEndpointKeysOperationGroup.get,
-  "QnAMakerEndpointKeys"
+  "QnAMakerEndpointKeys",
+  "!csharp"
 );
-@@clientLocation(HostSettingsOperationGroup.get, "HostSettings");
-@@clientLocation(OperationResultsOperationGroup.get, "OperationResults");
+@@clientLocation(HostSettingsOperationGroup.get, "HostSettings", "!csharp");
+@@clientLocation(OperationResultsOperationGroup.get,
+  "OperationResults",
+  "!csharp"
+);
