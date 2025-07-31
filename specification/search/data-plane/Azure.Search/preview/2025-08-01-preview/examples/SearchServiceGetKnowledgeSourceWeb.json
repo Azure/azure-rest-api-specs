@@ -1,0 +1,53 @@
+{
+  "operationId": "KnowledgeSources_Get",
+  "title": "SearchServiceGetKnowledgeSourceWeb",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "sourceName": "ks-preview-test",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-preview-test",
+        "kind": "web",
+        "description": "Description of the knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "webParameters": {
+          "language": "en",
+          "market": "en-us",
+          "freshness": "day",
+          "allowedDomains": [
+            {
+              "address": "example.com",
+              "includeSubpages": true
+            },
+            {
+              "address": "another-example.com",
+              "rankingAdjustment": "boost"
+            }
+          ],
+          "blockedDomains": [
+            {
+              "address": "blocked.com"
+            },
+            {
+              "address": "spam.com",
+              "includeSubpages": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}
