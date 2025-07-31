@@ -164,23 +164,14 @@ model MCPToolResource {
 union MCPRequiredApproval {
   string,
 
-  /** The mcp approval requirement: "never" or "always". */
-  MCPApprovalRequirement,
+  /** The approval is not required for any of the tools. */
+  `never`: "never",
+
+  /** The approval is required for all tools. */
+  always: "always",
 
   /** Customized MCP approval object, listing tools requiring and not requiring approvals */
   MCPApprovalPerTool,
-}
-
-/** The extendable list of MCP approval requirements. */
-@added(Versions.v2025_05_15_preview)
-union MCPApprovalRequirement {
-  string,
-
-  /** The approval is not required for any of the tools. */
-  "never",
-
-  /** The approval is required for all tools. */
-  "always",
 }
 
 /** Customized MCP approval object, listing tools requiring and not requiring approvals */

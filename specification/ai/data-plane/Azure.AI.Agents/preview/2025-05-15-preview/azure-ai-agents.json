@@ -4596,30 +4596,6 @@
         }
       }
     },
-    "MCPApprovalRequirement": {
-      "type": "string",
-      "description": "The extendable list of MCP approval requirements.",
-      "enum": [
-        "never",
-        "always"
-      ],
-      "x-ms-enum": {
-        "name": "MCPApprovalRequirement",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "never",
-            "value": "never",
-            "description": "The approval is not required for any of the tools."
-          },
-          {
-            "name": "always",
-            "value": "always",
-            "description": "The approval is required for all tools."
-          }
-        ]
-      }
-    },
     "MCPRequiredApproval": {},
     "MCPToolDefinition": {
       "type": "object",
@@ -4664,7 +4640,8 @@
           "description": "The list of tools for approval.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "toolNames"
         }
       },
       "required": [
@@ -6639,11 +6616,11 @@
         "index": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of a response. *"
+          "description": "The index of a response."
         },
         "arguments": {
           "type": "string",
-          "description": "The arguments for MCP call. *"
+          "description": "The arguments for MCP call."
         }
       },
       "required": [
