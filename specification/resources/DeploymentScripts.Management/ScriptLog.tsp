@@ -15,7 +15,7 @@ namespace DeploymentScriptsClient;
  */
 @singleton("default")
 @parentResource(DeploymentScript)
-model ScriptLog is Azure.ResourceManager.ProxyResource<LogProperties> {
+model ScriptLog is ProxyResource<LogProperties> {
   ...ResourceNameParameter<
     Resource = ScriptLog,
     KeyName = "log",

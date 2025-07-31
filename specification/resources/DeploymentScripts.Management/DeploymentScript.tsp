@@ -14,7 +14,7 @@ namespace DeploymentScriptsClient;
  */
 @discriminator("kind")
 model DeploymentScript
-  is Azure.ResourceManager.TrackedResource<DeploymentScriptPropertiesBase> {
+  is TrackedResource<DeploymentScriptPropertiesBase> {
   ...ResourceNameParameter<
     Resource = DeploymentScript,
     KeyName = "scriptName",
@@ -40,10 +40,7 @@ interface DeploymentScripts {
   /**
    * Gets a deployment script with a given name.
    */
-  get is ArmResourceRead<
-    DeploymentScript,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ArmResourceRead<DeploymentScript>;
 
   /**
    * Creates a deployment script.
@@ -68,10 +65,17 @@ interface DeploymentScripts {
   /**
    * Deletes a deployment script. When operation completes, status code 200 returned without content.
    */
-  delete is ArmResourceDeleteSync<
-    DeploymentScript,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  delete is ArmResourceDeleteSync<DeploymentScript>;
+
+  /**
+   * Lists deployments scripts.
+   */
+  listByResourceGroup is ArmResourceListByParent<DeploymentScript>;
+  
+  /**
+   * Lists all deployment scripts for a given subscription.
+   */
+  listBySubscription is ArmListBySubscription<DeploymentScript>;
 }
 
 @@maxLength(DeploymentScript.name, 90);
