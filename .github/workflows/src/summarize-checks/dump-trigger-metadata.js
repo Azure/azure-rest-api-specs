@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
@@ -6,8 +8,16 @@ export default async function dumpTriggerMetadata({ context, core }) {
   core.info(`Event name: ${context.eventName}`);
   core.info(`Action: ${context.payload.action}`);
 
-  if (context.eventName === "workflow_run" && context.payload.workflow_run) {
-    const run = context.payload.workflow_run;
+  if (
+    context.eventName === "workflow_run" &&
+    context.payload.action === "completed" &&
+    context.payload.workflow_run
+  ) {
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
+      context.payload
+    );
+
+    const run = payload.workflow_run;
     core.info(`Triggering workflow: ${run.name}`);
     core.info(`Triggering workflow ID: ${run.id}`);
     core.info(`Triggering run ID: ${run.run_number}`);
@@ -30,7 +40,11 @@ export default async function dumpTriggerMetadata({ context, core }) {
       });
     }
   } else if (context.eventName === "pull_request_target" && context.payload.pull_request) {
-    const pr = context.payload.pull_request;
+    const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+      context.payload
+    );
+
+    const pr = payload.pull_request;
     core.info(`PR number: ${pr.number}`);
     core.info(`PR title: ${pr.title}`);
     core.info(`PR state: ${pr.state}`);
