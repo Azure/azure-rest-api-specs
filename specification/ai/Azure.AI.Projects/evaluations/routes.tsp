@@ -76,7 +76,7 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a new evaluation with the specified configuration.")
   @added(Versions.v2025_07_31_preview)
-  @route(":runs")
+  @route(":run")
   @post
   createEvaluation is Azure.Core.Foundations.Operation<
     {

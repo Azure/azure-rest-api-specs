@@ -20,14 +20,18 @@ model EvaluatorConfiguration {
   @doc("Identifier of the evaluator.")
   id: string;
 
+  @doc("Name of the evaluator. It can be used for identify the evaluator in the evaluation results.")
+  @added(Versions.v2025_07_31_preview)
+  name?: string;
+
   @doc("Initialization parameters of the evaluator.")
   @removed(Versions.v2025_07_31_preview)
   initParams?: Record<unknown>;
 
-  @doc("Initial parameters of the evaluator.")
+  @doc("Initialization parameters of the evaluator.")
   @added(Versions.v2025_07_31_preview)
   @renamedFrom(Versions.v2025_07_31_preview, "initParams")
-  initialParameters?: Record<unknown>;
+  initializationParameters?: Record<unknown>;
 
   @doc("Data parameters of the evaluator.")
   dataMapping?: Record<string>;
@@ -105,7 +109,7 @@ union InlineDataFormat {
   queryResponseMessageFormat: "queryResponseMessageFormat",
 
   @doc("Multi-turn conversations with role-based messages and tool definitions")
-  chatMessagesFormat: "chatMessagesFormat",
+  evaluationMessagesFormat: "evaluationMessagesFormat",
 
   @doc("Flexible JSON format for custom data structures")
   inlineJsonFormat: "inlineJsonFormat",
@@ -133,9 +137,9 @@ model QueryResponseInlineMessages extends InlineData {
 
 @added(Versions.v2025_07_31_preview)
 @doc("Multi-turn conversations for evaluating dialogue systems and context awareness.")
-model ChatMessages extends InlineData {
-  @doc("Specifies chat messages format")
-  dataFormat: InlineDataFormat.chatMessagesFormat;
+model EvaluationMessages extends InlineData {
+  @doc("Specifies evaluation messages format")
+  dataFormat: InlineDataFormat.evaluationMessagesFormat;
 
   @doc("Array of messages representing representing queries")
   query: Message[];
@@ -180,21 +184,11 @@ model FoundryDatasetDataSource extends EvaluationDataSource {
   datasetId: DatasetId;
 }
 
-@doc("Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.")
-@added(Versions.v2025_07_31_preview)
-model EvaluationModelConfiguration {
-  @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'.")
-  modelDeploymentName: string;
-
-  @doc("Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.")
-  modelParameters?: Record<unknown>;
-}
-
 @doc("Common properties shared across model deployment configurations used in evaluations.")
 @added(Versions.v2025_07_31_preview)
 model EvaluationModelSourceCommon {
   @doc("Configuration for the model deployment used in evaluation.")
-  modelConfiguration: EvaluationModelConfiguration;
+  modelTarget: TargetConfig;
 
   @doc("A list of messages comprising the conversation so far. Each message can be a json string with role and content to specify the conversation context.")
   baseMessages: Message[];
@@ -228,13 +222,20 @@ model FoundryModelDatasetSource extends EvaluationDataSource {
 }
 
 @added(Versions.v2025_07_31_preview)
+@doc("Confidence interval for the metric.")
+model ConfidenceInterval {
+  @doc("Lower bound of the confidence interval for the average score, providing a range within which the true average is likely to fall.")
+  lowerBound: float32;
+
+  @doc("Upper bound of the confidence interval for the average score, providing a range within which the true average is likely to fall.")
+  upperBound: float32;
+}
+
+@added(Versions.v2025_07_31_preview)
 @doc("Statistical summary of evaluation results including aggregated scores and pass/fail rates.")
 model EvaluationSummaryStatistics {
   @doc("Total number of rows that were evaluated.")
   sampleCount: int64;
-
-  @doc("Proportion of evaluation results that failed to meet the specified criteria or threshold, expressed as a value between 0 and 1.")
-  defectRate?: float32;
 
   @doc("Proportion of evaluation results that passed the specified criteria or threshold, expressed as a value between 0 and 1.")
   passRate?: float32;
@@ -251,16 +252,22 @@ model EvaluationSummaryStatistics {
   @doc("Standard deviation of score values, indicating the variability or spread of scores around the average.")
   standardDeviation?: float32;
 
-  @doc("Lower bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile).")
-  confidenceIntervalLowerBound?: float32;
+  @doc("Confidence interval for the average score, providing a range within which the pass average is likely to fall (95th percentile).")
+  confidenceInterval95th?: ConfidenceInterval;
 
-  @doc("Upper bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile).")
-  confidenceIntervalUpperBound?: float32;
+  @doc("Label frequency distribution, showing how often each label appears in the evaluation results. This can help identify common themes or issues across evaluated data rows.")
+  labelDistribution?: Record<int64>;
 }
 
 @doc("Status of evaluator across all data rows.")
 @added(Versions.v2025_07_31_preview)
 model EvaluatorStatusResult {
+  @doc("Name of the evaluator from the input request.")
+  name: string;
+
+  @doc("Identifier of the evaluator from the input request.")
+  id: string;
+
   @doc("State of the evaluation for this evaluator.")
   state: OperationState;
 
@@ -329,7 +336,7 @@ model OneEvaluation {
   dataSource: InlineDataSource;
 
   @doc("Evaluators to be used for the evaluation.")
-  evaluators: Record<EvaluatorConfiguration>;
+  evaluators: EvaluatorConfiguration[];
 
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
@@ -341,11 +348,14 @@ model AggregatedMetric {
   @doc("Name of the metric")
   name: string;
 
-  @doc("Alias provided for the evaluator in the input request.")
-  evaluatorAlias: string;
+  @doc("Name provided for the evaluator in the input request.")
+  evaluatorName: string;
 
   @doc("Statistical summary of evaluation results including aggregated scores and pass/fail rates.")
   statistics: EvaluationSummaryStatistics;
+
+  @doc("Metadata about the metric")
+  metadata: EvaluationResultMetadata;
 
   @doc("Additional metadata about the aggregated metric, such as processing details or custom fields")
   additionalDetails?: Record<unknown>;
@@ -355,7 +365,7 @@ model AggregatedMetric {
 @doc("Summary of evaluation results, including aggregated metrics and evaluator statuses.")
 model EvaluationSummaryResult {
   @doc("Status of each evaluator from the input request.")
-  evaluatorStatus: Record<EvaluatorStatusResult>;
+  evaluatorStatus: EvaluatorStatusResult[];
 
   @doc("Aggregated metrics that summarize evaluation results across multiple data rows. This provides a high-level overview of performance across all data rows.")
   metrics?: AggregatedMetric[];
@@ -406,7 +416,8 @@ model Evaluation {
   properties?: Record<string>;
 
   @doc("Evaluators to be used for the evaluation.")
-  evaluators: Record<EvaluatorConfiguration>;
+  @typeChangedFrom(Versions.v2025_07_31_preview, Record<EvaluatorConfiguration>)
+  evaluators: EvaluatorConfiguration[];
 
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   @removed(Versions.v2025_07_31_preview)
@@ -614,6 +625,24 @@ model EvaluationResultMetadata {
 
   @doc("Threshold value that this score is compared against to determine the evaluation outcome")
   threshold?: float32;
+
+  @doc("Type of metric generated")
+  type: MetricType;
+}
+
+@added(Versions.v2025_07_31_preview)
+@doc("Enumeration of the different types of metrics that can be used in evaluations")
+union MetricType {
+  @doc("Continuous metric type, representing a numerical score")
+  continuous: "continuous",
+
+  @doc("Categorical metric type, representing discrete categories or labels")
+  categorical: "categorical",
+
+  @doc("Ordinal metric type, representing ordered categories")
+  ordinal: "ordinal",
+
+  string,
 }
 
 @added(Versions.v2025_07_31_preview)
@@ -622,17 +651,23 @@ model EvaluationMetric {
   @doc("Name of the evaluation metric")
   name: string;
 
-  @doc("Alias provided for the evaluator in the input request.")
-  evaluatorAlias: string;
+  @doc("Name provided for the evaluator in the input request.")
+  evaluatorName: string;
 
   @doc("Score assigned by the evaluator to the specific data row")
-  score: float32;
+  score?: float32;
+
+  @doc("Optional labels associated with the evaluation result.")
+  labels?: string[];
 
   @doc("Outcome of the evaluation")
   outcome: EvaluationResultOutcome;
 
   @doc("Reasoning or explanation provided by the evaluator for the score assigned to this data row")
   reasoning?: string;
+
+  @doc("Error message describing why the evaluation failed for this data row, if applicable")
+  error?: string;
 
   @doc("Metadata about the evaluation result")
   metadata: EvaluationResultMetadata;

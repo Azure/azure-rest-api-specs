@@ -1075,7 +1075,7 @@
         }
       }
     },
-    "/evaluations:runs": {
+    "/evaluations:run": {
       "post": {
         "operationId": "Evaluations_CreateEvaluation",
         "description": "Creates a new evaluation with the specified configuration.",
@@ -1700,13 +1700,17 @@
           "type": "string",
           "description": "Name of the metric"
         },
-        "evaluatorAlias": {
+        "evaluatorName": {
           "type": "string",
-          "description": "Alias provided for the evaluator in the input request."
+          "description": "Name provided for the evaluator in the input request."
         },
         "statistics": {
           "$ref": "#/definitions/EvaluationSummaryStatistics",
           "description": "Statistical summary of evaluation results including aggregated scores and pass/fail rates."
+        },
+        "metadata": {
+          "$ref": "#/definitions/EvaluationResultMetadata",
+          "description": "Metadata about the metric"
         },
         "additionalDetails": {
           "type": "object",
@@ -1716,8 +1720,9 @@
       },
       "required": [
         "name",
-        "evaluatorAlias",
-        "statistics"
+        "evaluatorName",
+        "statistics",
+        "metadata"
       ]
     },
     "ApiKeyCredentials": {
@@ -2073,6 +2078,11 @@
         "modelDeploymentName": {
           "type": "string",
           "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+        },
+        "modelParameters": {
+          "type": "object",
+          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -2081,6 +2091,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/TargetConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureOpenAIModel"
+    },
+    "AzureOpenAIModelConfigurationUpdate": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+        },
+        "modelParameters": {
+          "type": "object",
+          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetConfigUpdate"
         }
       ],
       "x-ms-discriminator-value": "AzureOpenAIModel"
@@ -2123,76 +2154,25 @@
         "credential"
       ]
     },
-    "ChatMessages": {
+    "ConfidenceInterval": {
       "type": "object",
-      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "description": "Confidence interval for the metric.",
       "properties": {
-        "query": {
-          "type": "array",
-          "description": "Array of messages representing representing queries",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
+        "lowerBound": {
+          "type": "number",
+          "format": "float",
+          "description": "Lower bound of the confidence interval for the average score, providing a range within which the true average is likely to fall."
         },
-        "response": {
-          "type": "array",
-          "description": "Array of messages representing responses",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "toolDefinitions": {
-          "type": "array",
-          "description": "Array of tool definitions that are used in the conversation",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          }
+        "upperBound": {
+          "type": "number",
+          "format": "float",
+          "description": "Upper bound of the confidence interval for the average score, providing a range within which the true average is likely to fall."
         }
       },
       "required": [
-        "query",
-        "response",
-        "toolDefinitions"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineData"
-        }
-      ],
-      "x-ms-discriminator-value": "chatMessagesFormat"
-    },
-    "ChatMessagesUpdate": {
-      "type": "object",
-      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
-      "properties": {
-        "query": {
-          "type": "array",
-          "description": "Array of messages representing representing queries",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "response": {
-          "type": "array",
-          "description": "Array of messages representing responses",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "toolDefinitions": {
-          "type": "array",
-          "description": "Array of tool definitions that are used in the conversation",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineDataUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "chatMessagesFormat"
+        "lowerBound",
+        "upperBound"
+      ]
     },
     "Connection": {
       "type": "object",
@@ -2661,9 +2641,9 @@
           }
         },
         "evaluators": {
-          "type": "object",
+          "type": "array",
           "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
         },
@@ -2805,6 +2785,77 @@
         ]
       }
     },
+    "EvaluationMessages": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "response",
+        "toolDefinitions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineData"
+        }
+      ],
+      "x-ms-discriminator-value": "evaluationMessagesFormat"
+    },
+    "EvaluationMessagesUpdate": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineDataUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "evaluationMessagesFormat"
+    },
     "EvaluationMetric": {
       "type": "object",
       "description": "Metric representing the evaluation result for a specific evaluator.",
@@ -2813,14 +2864,21 @@
           "type": "string",
           "description": "Name of the evaluation metric"
         },
-        "evaluatorAlias": {
+        "evaluatorName": {
           "type": "string",
-          "description": "Alias provided for the evaluator in the input request."
+          "description": "Name provided for the evaluator in the input request."
         },
         "score": {
           "type": "number",
           "format": "float",
           "description": "Score assigned by the evaluator to the specific data row"
+        },
+        "labels": {
+          "type": "array",
+          "description": "Optional labels associated with the evaluation result.",
+          "items": {
+            "type": "string"
+          }
         },
         "outcome": {
           "$ref": "#/definitions/EvaluationResultOutcome",
@@ -2829,6 +2887,10 @@
         "reasoning": {
           "type": "string",
           "description": "Reasoning or explanation provided by the evaluator for the score assigned to this data row"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message describing why the evaluation failed for this data row, if applicable"
         },
         "metadata": {
           "$ref": "#/definitions/EvaluationResultMetadata",
@@ -2842,51 +2904,17 @@
       },
       "required": [
         "name",
-        "evaluatorAlias",
-        "score",
+        "evaluatorName",
         "outcome",
         "metadata"
       ]
-    },
-    "EvaluationModelConfiguration": {
-      "type": "object",
-      "description": "Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.",
-      "properties": {
-        "modelDeploymentName": {
-          "type": "string",
-          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-        },
-        "modelParameters": {
-          "type": "object",
-          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "modelDeploymentName"
-      ]
-    },
-    "EvaluationModelConfigurationUpdate": {
-      "type": "object",
-      "description": "Comprehensive configuration for a model deployment used in evaluation scenarios. This defines how the model will process inputs and generate responses for evaluation.",
-      "properties": {
-        "modelDeploymentName": {
-          "type": "string",
-          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-        },
-        "modelParameters": {
-          "type": "object",
-          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
-          "additionalProperties": {}
-        }
-      }
     },
     "EvaluationModelSourceCommon": {
       "type": "object",
       "description": "Common properties shared across model deployment configurations used in evaluations.",
       "properties": {
-        "modelConfiguration": {
-          "$ref": "#/definitions/EvaluationModelConfiguration",
+        "modelTarget": {
+          "$ref": "#/definitions/TargetConfig",
           "description": "Configuration for the model deployment used in evaluation."
         },
         "baseMessages": {
@@ -2898,7 +2926,7 @@
         }
       },
       "required": [
-        "modelConfiguration",
+        "modelTarget",
         "baseMessages"
       ]
     },
@@ -2956,11 +2984,16 @@
           "type": "number",
           "format": "float",
           "description": "Threshold value that this score is compared against to determine the evaluation outcome"
+        },
+        "type": {
+          "$ref": "#/definitions/MetricType",
+          "description": "Type of metric generated"
         }
       },
       "required": [
         "evaluatorId",
-        "desiredDirection"
+        "desiredDirection",
+        "type"
       ]
     },
     "EvaluationResultOutcome": {
@@ -3017,9 +3050,9 @@
       "description": "Summary of evaluation results, including aggregated metrics and evaluator statuses.",
       "properties": {
         "evaluatorStatus": {
-          "type": "object",
+          "type": "array",
           "description": "Status of each evaluator from the input request.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/EvaluatorStatusResult"
           }
         },
@@ -3043,11 +3076,6 @@
           "type": "integer",
           "format": "int64",
           "description": "Total number of rows that were evaluated."
-        },
-        "defectRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Proportion of evaluation results that failed to meet the specified criteria or threshold, expressed as a value between 0 and 1."
         },
         "passRate": {
           "type": "number",
@@ -3074,15 +3102,17 @@
           "format": "float",
           "description": "Standard deviation of score values, indicating the variability or spread of scores around the average."
         },
-        "confidenceIntervalLowerBound": {
-          "type": "number",
-          "format": "float",
-          "description": "Lower bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile)."
+        "confidenceInterval95th": {
+          "$ref": "#/definitions/ConfidenceInterval",
+          "description": "Confidence interval for the average score, providing a range within which the pass average is likely to fall (95th percentile)."
         },
-        "confidenceIntervalUpperBound": {
-          "type": "number",
-          "format": "float",
-          "description": "Upper bound of the confidence interval for the average score, providing a range within which the true average is likely to fall (90th percentile)."
+        "labelDistribution": {
+          "type": "object",
+          "description": "Label frequency distribution, showing how often each label appears in the evaluation results. This can help identify common themes or issues across evaluated data rows.",
+          "additionalProperties": {
+            "format": "int64",
+            "type": "integer"
+          }
         }
       },
       "required": [
@@ -3124,10 +3154,10 @@
           }
         },
         "evaluators": {
-          "type": "object",
+          "type": "array",
           "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorConfigurationUpdate"
+          "items": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
           }
         }
       }
@@ -3140,9 +3170,13 @@
           "type": "string",
           "description": "Identifier of the evaluator."
         },
-        "initialParameters": {
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluator. It can be used for identify the evaluator in the evaluation results."
+        },
+        "initializationParameters": {
           "type": "object",
-          "description": "Initial parameters of the evaluator.",
+          "description": "Initialization parameters of the evaluator.",
           "additionalProperties": {}
         },
         "dataMapping": {
@@ -3156,28 +3190,6 @@
       "required": [
         "id"
       ]
-    },
-    "EvaluatorConfigurationUpdate": {
-      "type": "object",
-      "description": "Evaluator Configuration",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the evaluator."
-        },
-        "initialParameters": {
-          "type": "object",
-          "description": "Initial parameters of the evaluator.",
-          "additionalProperties": {}
-        },
-        "dataMapping": {
-          "type": "object",
-          "description": "Data parameters of the evaluator.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "EvaluatorDesirableDirection": {
       "type": "string",
@@ -3213,6 +3225,14 @@
       "type": "object",
       "description": "Status of evaluator across all data rows.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluator from the input request."
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluator from the input request."
+        },
         "state": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "State of the evaluation for this evaluator."
@@ -3223,6 +3243,8 @@
         }
       },
       "required": [
+        "name",
+        "id",
         "state",
         "usage"
       ]
@@ -3346,8 +3368,8 @@
       "type": "object",
       "description": "Data source that uses a model deployment with a dataset containing prompts. The model processes each prompt from the dataset to generate responses, which are then evaluated against the configured evaluators.",
       "properties": {
-        "modelConfiguration": {
-          "$ref": "#/definitions/EvaluationModelConfiguration",
+        "modelTarget": {
+          "$ref": "#/definitions/TargetConfig",
           "description": "Configuration for the model deployment used in evaluation."
         },
         "baseMessages": {
@@ -3367,7 +3389,7 @@
         }
       },
       "required": [
-        "modelConfiguration",
+        "modelTarget",
         "baseMessages",
         "datasetId",
         "queryField"
@@ -3383,8 +3405,8 @@
       "type": "object",
       "description": "Data source that uses a model deployment with a dataset containing prompts. The model processes each prompt from the dataset to generate responses, which are then evaluated against the configured evaluators.",
       "properties": {
-        "modelConfiguration": {
-          "$ref": "#/definitions/EvaluationModelConfigurationUpdate",
+        "modelTarget": {
+          "$ref": "#/definitions/TargetConfigUpdate",
           "description": "Configuration for the model deployment used in evaluation."
         },
         "baseMessages": {
@@ -3414,8 +3436,8 @@
       "type": "object",
       "description": "Data source that uses a model deployment with inline queries. The specified model processes each query to generate responses, which are then evaluated against the configured evaluators.",
       "properties": {
-        "modelConfiguration": {
-          "$ref": "#/definitions/EvaluationModelConfiguration",
+        "modelTarget": {
+          "$ref": "#/definitions/TargetConfig",
           "description": "Configuration for the model deployment used in evaluation."
         },
         "baseMessages": {
@@ -3434,7 +3456,7 @@
         }
       },
       "required": [
-        "modelConfiguration",
+        "modelTarget",
         "baseMessages",
         "queries"
       ],
@@ -3449,8 +3471,8 @@
       "type": "object",
       "description": "Data source that uses a model deployment with inline queries. The specified model processes each query to generate responses, which are then evaluated against the configured evaluators.",
       "properties": {
-        "modelConfiguration": {
-          "$ref": "#/definitions/EvaluationModelConfigurationUpdate",
+        "modelTarget": {
+          "$ref": "#/definitions/TargetConfigUpdate",
           "description": "Configuration for the model deployment used in evaluation."
         },
         "baseMessages": {
@@ -3592,7 +3614,7 @@
       "description": "Available formats for structuring inline evaluation data.",
       "enum": [
         "queryResponseMessageFormat",
-        "chatMessagesFormat",
+        "evaluationMessagesFormat",
         "inlineJsonFormat"
       ],
       "x-ms-enum": {
@@ -3605,8 +3627,8 @@
             "description": "Query-response pairs for Q&A and chatbot evaluations"
           },
           {
-            "name": "chatMessagesFormat",
-            "value": "chatMessagesFormat",
+            "name": "evaluationMessagesFormat",
+            "value": "evaluationMessagesFormat",
             "description": "Multi-turn conversations with role-based messages and tool definitions"
           },
           {
@@ -3797,6 +3819,36 @@
         "content"
       ]
     },
+    "MetricType": {
+      "type": "string",
+      "description": "Enumeration of the different types of metrics that can be used in evaluations",
+      "enum": [
+        "continuous",
+        "categorical",
+        "ordinal"
+      ],
+      "x-ms-enum": {
+        "name": "MetricType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "continuous",
+            "value": "continuous",
+            "description": "Continuous metric type, representing a numerical score"
+          },
+          {
+            "name": "categorical",
+            "value": "categorical",
+            "description": "Categorical metric type, representing discrete categories or labels"
+          },
+          {
+            "name": "ordinal",
+            "value": "ordinal",
+            "description": "Ordinal metric type, representing ordered categories"
+          }
+        ]
+      }
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -3868,9 +3920,9 @@
           "description": "Input data to evaluate. Single row support only."
         },
         "evaluators": {
-          "type": "object",
+          "type": "array",
           "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
+          "items": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
         },
@@ -4417,6 +4469,20 @@
       "x-ms-discriminator-value": "system"
     },
     "TargetConfig": {
+      "type": "object",
+      "description": "Abstract class for target configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TargetConfigUpdate": {
       "type": "object",
       "description": "Abstract class for target configuration.",
       "properties": {

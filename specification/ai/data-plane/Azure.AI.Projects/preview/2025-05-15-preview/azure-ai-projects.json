@@ -1965,6 +1965,11 @@
         "modelDeploymentName": {
           "type": "string",
           "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+        },
+        "modelParameters": {
+          "type": "object",
+          "description": "Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.",
+          "additionalProperties": {}
         }
       },
       "required": [
