@@ -23,12 +23,13 @@ permissions:
   actions: read # to inspect workflow_run metadata
   contents: read # for actions/checkout
   checks: read # for octokit.rest.checks.listForRef
-  statuses: read # for octokit.rest.repos.getCombinedStatusForRef
+  statuses: write # for octokit.rest.repos.getCombinedStatusForRef and octokit.rest.repos.createCommitStatus
   issues: write # to post comments via the Issues API
   pull-requests: write # to post comments via the Pull Requests API
 
 jobs:
   run-summarize-checks:
+    if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
     name: "[TEST-IGNORE] Summarize Checks"
     runs-on: ubuntu-24.04
 
@@ -54,7 +55,6 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            console.log('=== TRIGGERING EVENT METADATA ===');
             console.log(`Event name: ${context.eventName}`);
             console.log(`Action: ${context.payload.action}`);
 
