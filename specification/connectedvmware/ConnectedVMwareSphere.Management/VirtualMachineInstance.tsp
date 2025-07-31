@@ -126,15 +126,10 @@ interface VirtualMachineInstances {
    */
   stop is ArmResourceActionAsyncBase<
     VirtualMachineInstance,
-    {
-      /**
-       * Virtualmachine stop action payload.
-       */
-      @bodyRoot
-      body?: StopVirtualMachineOptions;
-    },
+    StopVirtualMachineOptions,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    OptionalRequestBody = true
   >;
 
   /**
