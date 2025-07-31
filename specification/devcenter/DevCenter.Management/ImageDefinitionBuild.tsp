@@ -78,15 +78,11 @@ interface ImageDefinitionBuilds {
   /**
    * Gets a build for a specified image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DevCenterCatalogImageDefinitionBuild_Get")
   get is ImageDefinitionBuildOps.Read<ImageDefinitionBuild>;
 
   /**
    * Lists builds for a specified image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DevCenterCatalogImageDefinitionBuilds_ListByImageDefinition")
   listByImageDefinition is ImageDefinitionBuildOps.List<
     ImageDefinitionBuild,
     Response = ImageDefinitionBuildListResult
@@ -95,9 +91,7 @@ interface ImageDefinitionBuilds {
   /**
    * Cancels the specified build for an image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DevCenterCatalogImageDefinitionBuild_Cancel")
   cancel is ImageDefinitionBuildOps.ActionAsync<
     ImageDefinitionBuild,
     void,
@@ -109,8 +103,6 @@ interface ImageDefinitionBuilds {
   /**
    * Gets Build details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DevCenterCatalogImageDefinitionBuild_GetBuildDetails")
   getBuildDetails is ImageDefinitionBuildOps.ActionSync<
     ImageDefinitionBuild,
     void,
@@ -175,8 +167,6 @@ interface ProjectCatalogImageDefinitionBuild {
   /**
    * Lists builds for a specified image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogImageDefinitionBuilds_ListByImageDefinition")
   listByImageDefinition is ProjectCatalogImageDefinitionBuildOps.List<
     ImageDefinitionBuild,
     Response = ImageDefinitionBuildListResult
