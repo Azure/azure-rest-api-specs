@@ -16,7 +16,15 @@ using MonitorQueryMetrics;
   "java"
 );
 
+@@clientNamespace(MonitorQueryMetrics.MetricValue,
+  "com.azure.monitor.query.metrics",
+  "java"
+);
 
+@@clientNamespace(MonitorQueryMetrics.MetricUnit,
+  "com.azure.monitor.query.metrics",
+  "java"
+);
 
 @@clientName(MetricResultsResponse, "MetricResults", "go");
 
