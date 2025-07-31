@@ -106,4 +106,7 @@ using Azure.Core;
 
 @@OpenAPI.extension(MhsmRegionsListResult.value, "x-ms-identifiers", #["name"]);
 
-@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
+);
