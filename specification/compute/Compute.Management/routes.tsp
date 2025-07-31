@@ -493,7 +493,7 @@ interface VirtualMachineImagesOperationGroup {
      * The expand expression to apply on the operation.
      */
     @query("$expand")
-    $expand: Expand,
+    $expand: string,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @query("$top")
@@ -502,7 +502,9 @@ interface VirtualMachineImagesOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @query("$orderby")
     $orderby?: string,
-  ): VirtualMachineImagesWithPropertiesListResult | CloudError;
+  ): {
+    @bodyRoot _: VirtualMachineImage[];
+  } | CloudError;
 
   /**
    * Gets a virtual machine image.

@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
-  interface Operations {
+  interface ComputeOperations {
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     @tag("Operations")
     @autoRoute
