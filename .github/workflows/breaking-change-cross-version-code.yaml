@@ -42,7 +42,7 @@ jobs:
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -52,7 +52,7 @@ jobs:
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
