@@ -52,9 +52,9 @@ directive:
 
 ### Tag: package-stable-2024-04-01
 
-These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
+These settings apply only when `--tag=package-stable-2024-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01'
+```yaml $(tag) == 'package-stable-2024-04-01'
 input-file:
   - stable/2024-04-01/render.json
 ```
