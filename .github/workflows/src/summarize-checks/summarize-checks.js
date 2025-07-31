@@ -792,22 +792,12 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-            // We have some specific guidance for some of the required checks.
-            const checkInfo =
-              CHECK_METADATA.find((metadata) => metadata.name === checkRunNode.name) ||
-              /** @type {CheckMetadata} */ ({
-                precedence: 1000,
-                name: checkRunNode.name,
-                suppressionLabels: [],
-                troubleshootingGuide: defaultTsg,
-              });
-
             if (checkRunNode.isRequired) {
               reqCheckRuns.push({
                 name: checkRunNode.name,
                 status: checkRunNode.status,
                 conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
+                checkInfo: getCheckInfo(checkRunNode.name),
               });
             }
             // Note the "else" here. It means that:
@@ -820,7 +810,7 @@ function extractRunsFromGraphQLResponse(response) {
                 name: checkRunNode.name,
                 status: checkRunNode.status,
                 conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
+                checkInfo: getCheckInfo(checkRunNode.name),
               });
             }
           });
@@ -851,6 +841,21 @@ function extractRunsFromGraphQLResponse(response) {
   }
   return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
+/**
+ * Get metadata for a specific check from our index.
+ * @param {string} checkName
+ * @returns {CheckMetadata}
+ */
+export function getCheckInfo(checkName) {
+  return CHECK_METADATA.find((metadata) => metadata.name === checkName) ||
+    /** @type {CheckMetadata} */ ({
+      precedence: 1000,
+      name: checkName,
+      suppressionLabels: [],
+      troubleshootingGuide: defaultTsg,
+    });
+}
+
 // #endregion
 // #region next steps
 /**

@@ -6,13 +6,15 @@ import {
   getCheckRunTuple,
   getExistingLabels,
   updateLabels,
+  getCheckInfo
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 
 const mockCore = createMockCore();
 
 /**
- * Find and extract the "Next Steps to Merge" comment content
+ * Find and extract the "Next Steps to Merge" existing comment on a PR.
+ * Used in the integration test.
  */
 async function getNextStepsComment(github, owner, repo, prNumber) {
   try {
@@ -34,7 +36,87 @@ async function getNextStepsComment(github, owner, repo, prNumber) {
   }
 }
 
-describe("Summarize Checks Tests", () => {
+describe("Summarize Checks Integration Tests", () => {
+  describe("Repro a PR summarize-checks invocation", () => {
+    it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
+      "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
+      async () => {
+        const issue_number = 36258;
+        const owner = "Azure";
+        const repo = "azure-rest-api-specs";
+
+        const ignorableLabels = [
+          "VersioningReviewRequired",
+          "BreakingChangeReviewRequired",
+          "customer-reported",
+          "dependencies",
+          "javascript",
+          "Monitor",
+        ];
+
+        const github = new Octokit({
+          auth: process.env.GITHUB_TOKEN,
+        });
+
+        const { data: pr } = await github.rest.pulls.get({
+          owner: owner,
+          repo: repo,
+          pull_number: issue_number,
+        });
+
+        // Get current PR labels and Next Steps comment
+        const expectedNextStepsComment = await getNextStepsComment(
+          github,
+          owner,
+          repo,
+          issue_number,
+        );
+
+        const head_sha = pr.head.sha;
+        const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
+
+        const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
+          github,
+          mockCore,
+          owner,
+          repo,
+          head_sha,
+          issue_number,
+          [],
+        );
+
+        let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
+        let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
+
+        adjustedStartLabels = adjustedStartLabels.filter(
+          (name) => !labelContext.toRemove.has(name),
+        );
+        for (const label of labelContext.toAdd) {
+          if (!adjustedStartLabels.includes(label)) {
+            adjustedStartLabels.push(label);
+          }
+        }
+
+        const [commentBody, automatedChecksMet] = await createNextStepsComment(
+          mockCore,
+          repo,
+          adjustedStartLabels,
+          pr.base.ref,
+          requiredCheckRuns,
+          fyiCheckRuns,
+        );
+
+        const actualLabels = [...labelContext.toAdd, ...labelContext.present];
+        expect(actualLabels.sort()).toEqual(expectedLabels.sort());
+        expect(commentBody).toEqual(expectedNextStepsComment);
+        expect(automatedChecksMet).toBeTruthy();
+      },
+      600000,
+    );
+  });
+});
+
+describe("Summarize Checks Unit Tests", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
@@ -75,13 +157,7 @@ describe("Summarize Checks Tests", () => {
           name: "SpellCheck",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "SpellCheck",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("SpellCheck"),
         },
         {
           name: "TypeSpec Requirement",
@@ -517,84 +593,6 @@ describe("Summarize Checks Tests", () => {
 
       expect(output).toEqual(expectedOutput);
     });
-  });
-
-  describe("integration test", () => {
-    it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
-      "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
-      async () => {
-        const issue_number = 36258;
-        const owner = "Azure";
-        const repo = "azure-rest-api-specs";
-
-        const ignorableLabels = [
-          "VersioningReviewRequired",
-          "BreakingChangeReviewRequired",
-          "customer-reported",
-          "dependencies",
-          "javascript",
-          "Monitor",
-        ];
-
-        const github = new Octokit({
-          auth: process.env.GITHUB_TOKEN,
-        });
-
-        const { data: pr } = await github.rest.pulls.get({
-          owner: owner,
-          repo: repo,
-          pull_number: issue_number,
-        });
-
-        // Get current PR labels and Next Steps comment
-        const expectedNextStepsComment = await getNextStepsComment(
-          github,
-          owner,
-          repo,
-          issue_number,
-        );
-
-        const head_sha = pr.head.sha;
-        const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
-
-        const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
-          github,
-          mockCore,
-          owner,
-          repo,
-          head_sha,
-          issue_number,
-          [],
-        );
-
-        let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
-
-        adjustedStartLabels = adjustedStartLabels.filter(
-          (name) => !labelContext.toRemove.has(name),
-        );
-        for (const label of labelContext.toAdd) {
-          if (!adjustedStartLabels.includes(label)) {
-            adjustedStartLabels.push(label);
-          }
-        }
-
-        const [commentBody, automatedChecksMet] = await createNextStepsComment(
-          mockCore,
-          repo,
-          adjustedStartLabels,
-          pr.base.ref,
-          requiredCheckRuns,
-          fyiCheckRuns,
-        );
-
-        const actualLabels = [...labelContext.toAdd, ...labelContext.present];
-        expect(actualLabels.sort()).toEqual(expectedLabels.sort());
-        expect(commentBody).toEqual(expectedNextStepsComment);
-        expect(automatedChecksMet).toBeTruthy();
-      },
-      600000,
-    );
   });
 
   describe("label add and remove", () => {
