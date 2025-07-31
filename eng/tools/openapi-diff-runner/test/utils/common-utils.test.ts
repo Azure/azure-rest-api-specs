@@ -4,6 +4,7 @@ import { Context } from "../../src/types/breaking-change.js";
 import {
   blobHref,
   branchHref,
+  checkPrTargetsProductionBranch,
   convertRawErrorToUnifiedMsg,
   cutoffMsg,
   getArgumentValue,
@@ -635,6 +636,97 @@ describe("common-utils", () => {
       const parsed = JSON.parse(result);
 
       expect(parsed.extra.details).toBe(errorMsg);
+    });
+  });
+
+  describe("checkPrTargetsProductionBranch", () => {
+    it("should return true for public production branch (azure-rest-api-specs + main)", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "main");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for public production branch with extended repo name", () => {
+      const result = checkPrTargetsProductionBranch("owner/azure-rest-api-specs", "main");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for private production branch (azure-rest-api-specs-pr + RPSaaSMaster)", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "RPSaaSMaster");
+      expect(result).toBe(true);
+    });
+
+    it("should return true for private production branch with extended repo name", () => {
+      const result = checkPrTargetsProductionBranch(
+        "owner/azure-rest-api-specs-pr",
+        "RPSaaSMaster",
+      );
+      expect(result).toBe(true);
+    });
+
+    it("should return false for public repo with non-main branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "feature-branch");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for public repo with develop branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "develop");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for private repo with main branch instead of RPSaaSMaster", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for private repo with non-RPSaaSMaster branch", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "feature-branch");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for unrelated repository with main branch", () => {
+      const result = checkPrTargetsProductionBranch("some-other-repo", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for unrelated repository with RPSaaSMaster branch", () => {
+      const result = checkPrTargetsProductionBranch("some-other-repo", "RPSaaSMaster");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for empty repository name", () => {
+      const result = checkPrTargetsProductionBranch("", "main");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for empty branch name", () => {
+      const result = checkPrTargetsProductionBranch("azure-rest-api-specs", "");
+      expect(result).toBe(false);
+    });
+
+    it("should return false for both empty parameters", () => {
+      const result = checkPrTargetsProductionBranch("", "");
+      expect(result).toBe(false);
+    });
+
+    it("should be case sensitive for branch names", () => {
+      const result1 = checkPrTargetsProductionBranch("azure-rest-api-specs", "Main");
+      const result2 = checkPrTargetsProductionBranch("azure-rest-api-specs-pr", "rpsaasmaster");
+
+      expect(result1).toBe(false);
+      expect(result2).toBe(false);
+    });
+
+    it("should handle partial repo name matches correctly", () => {
+      const result1 = checkPrTargetsProductionBranch("azure-rest-api", "main");
+      const result2 = checkPrTargetsProductionBranch("rest-api-specs", "main");
+      const result3 = checkPrTargetsProductionBranch(
+        "azure-rest-api-specs-private",
+        "RPSaaSMaster",
+      );
+
+      expect(result1).toBe(false);
+      expect(result2).toBe(false);
+      expect(result3).toBe(false);
     });
   });
 });
