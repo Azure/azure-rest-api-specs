@@ -79,6 +79,7 @@ interface AFDDomains {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDCustomDomains_Delete")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDDomain,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
@@ -98,6 +99,7 @@ interface AFDDomains {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AFDCustomDomains_RefreshValidationToken")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   refreshValidationToken is ArmResourceActionAsync<
     AFDDomain,
     void,

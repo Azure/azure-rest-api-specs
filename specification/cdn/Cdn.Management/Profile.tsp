@@ -363,6 +363,7 @@ interface Profiles {
   /**
    * Commit the migrated Azure Frontdoor(Standard/Premium) profile.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   migrationCommit is ArmResourceActionAsync<
     Profile,
     void,

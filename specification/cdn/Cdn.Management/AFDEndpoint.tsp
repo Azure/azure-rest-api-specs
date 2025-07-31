@@ -97,6 +97,7 @@ interface AFDEndpoints {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("purge")
   @operationId("AFDEndpoints_PurgeContent")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   purgeContent is ArmResourceActionAsync<
     AFDEndpoint,
     AfdPurgeParameters,
