@@ -387,7 +387,7 @@ export class TspConfigGoMgmtModuleEqualStringSubRule extends TspconfigEmitterOpt
   }
 }
 
-export class TspConfigGoMgmtFixConstStutteringTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoMgmtFixConstStutteringSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "fix-const-stuttering", new RegExp(/^true|false$/));
   }
@@ -424,7 +424,7 @@ export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOpt
 }
 
 // ----- Go az sub rules -----
-export class TspConfigGoAzGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoAzGenerateFakesSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "generate-fakes", new RegExp(/^true|false$/));
   }
@@ -551,9 +551,10 @@ export const defaultRules = [
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
-  new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
+  new TspConfigGoMgmtFixConstStutteringSubRule(),
   new TspConfigGoMgmtGenerateSamplesTrueSubRule(),
-  new TspConfigGoAzGenerateFakesTrueSubRule(),
+  new TspConfigGoMgmtGenerateFakesTrueSubRule(),
+  new TspConfigGoAzGenerateFakesSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoAzInjectSpansTrueSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),

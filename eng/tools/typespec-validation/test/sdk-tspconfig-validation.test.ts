@@ -11,12 +11,12 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
-  TspConfigGoAzGenerateFakesTrueSubRule,
+  TspConfigGoAzGenerateFakesSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtFixConstStutteringTrueSubRule,
+  TspConfigGoMgmtFixConstStutteringSubRule,
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
@@ -294,7 +294,7 @@ const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
   "fix-const-stuttering",
   true,
   "true",
-  [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
+  [new TspConfigGoMgmtFixConstStutteringSubRule()],
 );
 
 const goManagementFixConstStutteringAnotherTestCases = createEmitterOptionTestCases(
@@ -303,7 +303,7 @@ const goManagementFixConstStutteringAnotherTestCases = createEmitterOptionTestCa
   "fix-const-stuttering",
   false,
   "false",
-  [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
+  [new TspConfigGoMgmtFixConstStutteringSubRule()],
 );
 
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
@@ -330,7 +330,7 @@ const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   "true",
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+  [new TspConfigGoAzGenerateFakesSubRule()],
 );
 
 const goDpGenerateFakesAnotherTestCases = createEmitterOptionTestCases(
@@ -339,7 +339,7 @@ const goDpGenerateFakesAnotherTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   false,
   "false",
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+  [new TspConfigGoAzGenerateFakesSubRule()],
 );
 
 
@@ -639,7 +639,7 @@ options:
     subRules: [
       new TspConfigGoMgmtPackageDirectorySubRule(),
       new TspConfigGoMgmtModuleEqualStringSubRule(),
-      new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
+      new TspConfigGoMgmtFixConstStutteringSubRule(),
     ],
     tspconfigContent: `
 options:
