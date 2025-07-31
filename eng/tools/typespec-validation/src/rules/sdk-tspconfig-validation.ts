@@ -387,15 +387,6 @@ export class TspConfigGoMgmtModuleEqualStringSubRule extends TspconfigEmitterOpt
   }
 }
 
-export class TspConfigGoMgmtFixConstStutteringSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "fix-const-stuttering", new RegExp(/^true|false$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
 export class TspConfigGoMgmtGenerateSamplesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "generate-samples", true);
@@ -424,14 +415,6 @@ export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOpt
 }
 
 // ----- Go az sub rules -----
-export class TspConfigGoAzGenerateFakesSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "generate-fakes", new RegExp(/^true|false$/));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
 
 export class TspConfigGoAzInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -551,10 +534,8 @@ export const defaultRules = [
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
-  new TspConfigGoMgmtFixConstStutteringSubRule(),
   new TspConfigGoMgmtGenerateSamplesTrueSubRule(),
   new TspConfigGoMgmtGenerateFakesTrueSubRule(),
-  new TspConfigGoAzGenerateFakesSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoAzInjectSpansTrueSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),

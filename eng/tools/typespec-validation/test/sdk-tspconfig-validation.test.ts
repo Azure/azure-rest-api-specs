@@ -11,12 +11,10 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
-  TspConfigGoAzGenerateFakesSubRule,
   TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
-  TspConfigGoMgmtFixConstStutteringSubRule,
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
@@ -288,24 +286,6 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   [new TspConfigGoMgmtModuleEqualStringSubRule()],
 );
 
-const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  managementTspconfigFolder,
-  "fix-const-stuttering",
-  true,
-  "true",
-  [new TspConfigGoMgmtFixConstStutteringSubRule()],
-);
-
-const goManagementFixConstStutteringAnotherTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  managementTspconfigFolder,
-  "fix-const-stuttering",
-  false,
-  "false",
-  [new TspConfigGoMgmtFixConstStutteringSubRule()],
-);
-
 const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
@@ -322,24 +302,6 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   true,
   false,
   [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
-);
-
-const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  "",
-  "generate-fakes",
-  true,
-  "true",
-  [new TspConfigGoAzGenerateFakesSubRule()],
-);
-
-const goDpGenerateFakesAnotherTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  "",
-  "generate-fakes",
-  false,
-  "false",
-  [new TspConfigGoAzGenerateFakesSubRule()],
 );
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
@@ -638,7 +600,6 @@ options:
     subRules: [
       new TspConfigGoMgmtPackageDirectorySubRule(),
       new TspConfigGoMgmtModuleEqualStringSubRule(),
-      new TspConfigGoMgmtFixConstStutteringSubRule(),
     ],
     tspconfigContent: `
 options:
@@ -680,14 +641,10 @@ describe("tspconfig", function () {
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
-    ...goManagementFixConstStutteringTestCases,
-    ...goManagementFixConstStutteringAnotherTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpGenerateFakesTestCases,
-    ...goDpGenerateFakesAnotherTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpPackageDirTestCases,
