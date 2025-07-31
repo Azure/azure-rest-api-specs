@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
 namespace DeploymentScriptsClient;
 
 /**
@@ -346,6 +348,8 @@ model StorageAccountConfiguration {
   /**
    * The storage account access key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  @extension("x-ms-secret", true)
   storageAccountKey?: string;
 }
 
@@ -369,21 +373,18 @@ model ScriptStatus {
    * Start time of the script execution.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End time of the script execution.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
    * Time the deployment script resource will expire.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -455,6 +456,8 @@ model EnvironmentVariable {
   /**
    * The value of the secure environment variable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  @extension("x-ms-secret", true)
   secureValue?: string;
 }
 

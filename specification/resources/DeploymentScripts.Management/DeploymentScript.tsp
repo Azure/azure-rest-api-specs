@@ -13,8 +13,7 @@ namespace DeploymentScriptsClient;
  * Deployment script object.
  */
 @discriminator("kind")
-model DeploymentScript
-  is TrackedResource<DeploymentScriptPropertiesBase> {
+model DeploymentScript is TrackedResource<DeploymentScriptPropertiesBase> {
   ...ResourceNameParameter<
     Resource = DeploymentScript,
     KeyName = "scriptName",
@@ -71,7 +70,7 @@ interface DeploymentScripts {
    * Lists deployments scripts.
    */
   listByResourceGroup is ArmResourceListByParent<DeploymentScript>;
-  
+
   /**
    * Lists all deployment scripts for a given subscription.
    */
