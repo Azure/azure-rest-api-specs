@@ -51,6 +51,23 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+// Need to explicitly make all get and list methods include the object name for C#
+@@clientName(Azure.AI.Projects.Connections.get, "getConnection");
+@@clientName(Azure.AI.Projects.Connections.getWithCredentials,
+  "getConnectionWithCredentials"
+);
+@@clientName(Azure.AI.Projects.Connections.list, "listConnections");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "getDataset");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "listDatasets");
+@@clientName(Azure.AI.Projects.Datasets.listVersions,
+  "listDatasetVersions"
+);
+@@clientName(Azure.AI.Projects.Deployments.get, "getDeployment");
+@@clientName(Azure.AI.Projects.Deployments.list, "listDeployments");
+@@clientName(Azure.AI.Projects.Indexes.getVersion, "getIndex");
+@@clientName(Azure.AI.Projects.Indexes.listLatest, "listIndexes");
+@@clientName(Azure.AI.Projects.Indexes.listVersions, "listIndexVersions");
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);
