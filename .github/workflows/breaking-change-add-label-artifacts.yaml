@@ -1,9 +1,12 @@
-name: Breaking Change - Add Label Artifacts
+name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
 
 on:
   workflow_run:
     workflows:
-      ["Swagger BreakingChange - Analyze Code", "Breaking Change(Cross-Version) - Analyze Code"]
+      [
+        "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
+      ]
     types: [completed]
 
 permissions:
@@ -15,7 +18,7 @@ permissions:
 
 jobs:
   breaking-change-add-labels:
-    name: Breaking Change - Add Label Artifacts
+    name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
 
     runs-on: ubuntu-24.04
 
@@ -40,8 +43,8 @@ jobs:
         with:
           script: |
             const { default: getLabelActions } =
-              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label.js');
-            return await getLabelAction({ github, context, core });
+              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.js');
+            return await getLabelActions({ github, context, core });
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |

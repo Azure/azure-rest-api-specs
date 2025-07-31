@@ -25,12 +25,12 @@ export default async function getLabelActions({ github, context, core }) {
   });
 
   const latestBreakingChangesRun = workflowRuns
-    .filter((wf) => wf.name === "Swagger BreakingChange - Analyze Code")
+    .filter((wf) => wf.name === "[TEST-IGNORE] Swagger BreakingChange - Analyze Code")
     // Sort by "updated_at" descending
     .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
 
   const latestCrossVersionBreakingChangesRun = workflowRuns
-    .filter((wf) => wf.name === "Breaking Change(Cross-Version) - Analyze Code")
+    .filter((wf) => wf.name === "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code")
     // Sort by "updated_at" descending
     .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
 
