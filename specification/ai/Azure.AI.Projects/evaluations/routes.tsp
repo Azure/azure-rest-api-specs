@@ -76,9 +76,9 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a new evaluation with the specified configuration.")
   @added(Versions.v2025_07_31_preview)
-  @route(":run")
+  @route(":batchRun")
   @post
-  createEvaluation is Azure.Core.Foundations.Operation<
+  createBatchEvaluation is Azure.Core.Foundations.Operation<
     {
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
@@ -98,18 +98,10 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Independent API operation to perform a single evaluation and immediately get a result.")
   @added(Versions.v2025_07_31_preview)
-  @route(":evaluateOne")
+  @route(":run")
   @post
   createOneEvaluation is Azure.Core.Foundations.Operation<
     {
-      @header("Repeatability-Request-ID")
-      @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
-      repeatabilityRequestId?: string;
-
-      @doc("Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.")
-      @header("Repeatability-First-Sent")
-      repeatabilityFirstSent?: utcDateTime;
-
       @doc("Complete evaluation configuration including data source, evaluators, and result settings")
       @body
       oneEvaluation: OneEvaluation;

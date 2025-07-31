@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -346,7 +346,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get the specific version of the DatasetVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -450,7 +450,7 @@
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete the specific version of the DatasetVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1018,66 +1018,9 @@
         }
       }
     },
-    "/evaluations:evaluateOne": {
+    "/evaluations:batchRun": {
       "post": {
-        "operationId": "Evaluations_CreateOneEvaluation",
-        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "repeatabilityRequestId"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "Timestamp indicating when this request was first initiated. Used in conjunction with repeatability-request-id for idempotency control.",
-            "required": false,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "repeatabilityFirstSent"
-          },
-          {
-            "name": "oneEvaluation",
-            "in": "body",
-            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OneEvaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/evaluations:run": {
-      "post": {
-        "operationId": "Evaluations_CreateEvaluation",
+        "operationId": "Evaluations_CreateBatchEvaluation",
         "description": "Creates a new evaluation with the specified configuration.",
         "parameters": [
           {
@@ -1115,6 +1058,46 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations:run": {
+      "post": {
+        "operationId": "Evaluations_CreateOneEvaluation",
+        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "oneEvaluation",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneEvaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
             }
           },
           "default": {
@@ -1210,7 +1193,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_GetVersion",
-        "description": "Get the specific version of the Index",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1314,7 +1297,7 @@
       },
       "delete": {
         "operationId": "Indexes_DeleteVersion",
-        "description": "Delete the specific version of the Index",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3106,7 +3089,7 @@
           "$ref": "#/definitions/ConfidenceInterval",
           "description": "Confidence interval for the average score, providing a range within which the pass average is likely to fall (95th percentile)."
         },
-        "labelDistribution": {
+        "labelFrequency": {
           "type": "object",
           "description": "Label frequency distribution, showing how often each label appears in the evaluation results. This can help identify common themes or issues across evaluated data rows.",
           "additionalProperties": {

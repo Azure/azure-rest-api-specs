@@ -256,7 +256,7 @@ model EvaluationSummaryStatistics {
   confidenceInterval95th?: ConfidenceInterval;
 
   @doc("Label frequency distribution, showing how often each label appears in the evaluation results. This can help identify common themes or issues across evaluated data rows.")
-  labelDistribution?: Record<int64>;
+  labelFrequency?: Record<int64>;
 }
 
 @doc("Status of evaluator across all data rows.")
