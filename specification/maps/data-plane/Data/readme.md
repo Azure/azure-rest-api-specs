@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-retired-2.0-preview` is specified 
 
 ``` yaml $(tag) == 'package-retired-2.0-preview'
 input-file:
-  - preview/2.0/Data.json
+  - preview/2.0/data.json
 ```
 
 ### Tag: package-retired-1.0-preview
@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-retired-1.0-preview` is specified 
 
 ``` yaml $(tag) == 'package-retired-1.0-preview'
 input-file:
-  - preview/1.0/Data.json
+  - preview/1.0/data.json
 ```
 
 # Code Generation
