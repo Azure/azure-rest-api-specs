@@ -18,7 +18,6 @@ on:
       - opened
       - synchronize
       - reopened
-  pull_request:
 
 permissions:
   actions: read # to inspect workflow_run metadata
@@ -60,11 +59,11 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.js');
             return await dumpTriggerMetadata({ context, core });
 
-      # - id: summarize-checks
-      #   name: Summarize Checks
-      #   uses: actions/github-script@v7
-      #   with:
-      #     script: |
-      #       const { default: summarizeChecks } =
-      #         await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
-      #       return await summarizeChecks({ github, context, core });
+      - id: summarize-checks
+        name: Summarize Checks
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { default: summarizeChecks } =
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
+            return await summarizeChecks({ github, context, core });
