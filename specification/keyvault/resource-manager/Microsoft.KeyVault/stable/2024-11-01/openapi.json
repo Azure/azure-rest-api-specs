@@ -2101,7 +2101,6 @@
               "resourceType eq 'Microsoft.KeyVault/vaults'"
             ],
             "x-ms-enum": {
-              "name": "VaultListFilterTypes",
               "modelAsString": false
             }
           },
@@ -2123,7 +2122,6 @@
               "2015-11-01"
             ],
             "x-ms-enum": {
-              "name": "ResourceManagerApiVersions",
               "modelAsString": false
             },
             "x-ms-api-version": false
@@ -4431,17 +4429,6 @@
         ]
       }
     },
-    "Type": {
-      "type": "string",
-      "description": "The type of resource, Microsoft.KeyVault/vaults",
-      "enum": [
-        "Microsoft.KeyVault/vaults"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": false
-      }
-    },
     "Vault": {
       "type": "object",
       "description": "Resource information with extended details.",
@@ -4523,8 +4510,14 @@
           "description": "The vault name."
         },
         "type": {
-          "$ref": "#/definitions/Type",
-          "description": "The type of resource, Microsoft.KeyVault/vaults"
+          "type": "string",
+          "description": "The type of resource, Microsoft.KeyVault/vaults",
+          "enum": [
+            "Microsoft.KeyVault/vaults"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
