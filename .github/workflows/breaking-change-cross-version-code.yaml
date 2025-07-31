@@ -41,7 +41,7 @@ jobs:
       - if: |
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
-        name: Upload artifact with BreakingChangeReviewRequiredLabel label
+        name: Upload artifact with BreakingChangeReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
@@ -51,7 +51,7 @@ jobs:
       - if: |
           always() && 
           (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
-        name: Upload artifact with VersioningReviewRequiredLabel label
+        name: Upload artifact with VersioningReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
