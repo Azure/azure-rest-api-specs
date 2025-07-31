@@ -17,6 +17,7 @@ import {
   TspConfigGoDpPackageDirectoryMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
+  TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -292,7 +293,16 @@ const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
   managementTspconfigFolder,
   "fix-const-stuttering",
   true,
+  "true",
+  [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
+);
+
+const goManagementFixConstStutteringAnotherTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  managementTspconfigFolder,
+  "fix-const-stuttering",
   false,
+  "false",
   [new TspConfigGoMgmtFixConstStutteringTrueSubRule()],
 );
 
@@ -311,7 +321,7 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   false,
-  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+  [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
 );
 
 const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
@@ -319,9 +329,19 @@ const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
   "",
   "generate-fakes",
   true,
-  false,
+  "true",
   [new TspConfigGoAzGenerateFakesTrueSubRule()],
 );
+
+const goDpGenerateFakesAnotherTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "generate-fakes",
+  false,
+  "false",
+  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+);
+
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
@@ -662,11 +682,13 @@ describe("tspconfig", function () {
     ...goManagementPackageDirTestCases,
     ...goManagementModuleTestCases,
     ...goManagementFixConstStutteringTestCases,
+    ...goManagementFixConstStutteringAnotherTestCases,
     ...goManagementGenerateExamplesTestCases,
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
     ...goDpGenerateFakesTestCases,
+    ...goDpGenerateFakesAnotherTestCases,
     ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpPackageDirTestCases,

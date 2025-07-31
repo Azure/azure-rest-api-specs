@@ -389,7 +389,7 @@ export class TspConfigGoMgmtModuleEqualStringSubRule extends TspconfigEmitterOpt
 
 export class TspConfigGoMgmtFixConstStutteringTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "fix-const-stuttering", true);
+    super("@azure-tools/typespec-go", "fix-const-stuttering", new RegExp(/^true|false$/));
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -414,10 +414,22 @@ export class TspConfigGoMgmtHeadAsBooleanTrueSubRule extends TspconfigEmitterOpt
   }
 }
 
+export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "generate-fakes", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 // ----- Go az sub rules -----
 export class TspConfigGoAzGenerateFakesTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-go", "generate-fakes", true);
+    super("@azure-tools/typespec-go", "generate-fakes", new RegExp(/^true|false$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
