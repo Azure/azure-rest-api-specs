@@ -4646,6 +4646,211 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/jwtAuthenticators": {
+      "get": {
+        "tags": [
+          "JWTAuthenticators"
+        ],
+        "operationId": "JWTAuthenticators_ListByManagedCluster",
+        "summary": "Gets a list of JWT authenticators in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JWTAuthenticatorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List JWT authenticators by Managed Cluster": {
+            "$ref": "./examples/JWTAuthenticators_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/jwtAuthenticators/{jwtAuthenticatorName}": {
+      "get": {
+        "tags": [
+          "JWTAuthenticators"
+        ],
+        "operationId": "JWTAuthenticators_Get",
+        "summary": "Gets the specified JWT authenticator of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JWTAuthenticatorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JWTAuthenticator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JWT Authenticator": {
+            "$ref": "./examples/JWTAuthenticators_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JWTAuthenticators"
+        ],
+        "operationId": "JWTAuthenticators_CreateOrUpdate",
+        "summary": "Creates or updates JWT authenticator in the managed cluster and updates the managed cluster to apply the settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JWTAuthenticatorNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JWTAuthenticator"
+            },
+            "description": "The JWT authenticator to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing JWT authenticator was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/JWTAuthenticator"
+            }
+          },
+          "201": {
+            "description": "The new JWT authenticator was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/JWTAuthenticator"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update JWT Authenticator": {
+            "$ref": "./examples/JWTAuthenticators_Create_Or_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JWTAuthenticators"
+        ],
+        "operationId": "JWTAuthenticators_Delete",
+        "summary": "Deletes a JWT authenticator and updates the managed cluster to apply the settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JWTAuthenticatorNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete JWT Authenticator": {
+            "$ref": "./examples/JWTAuthenticators_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -11876,6 +12081,228 @@
         ]
       },
       "readOnly": true
+    },
+    "JWTAuthenticator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JWTAuthenticatorProperties"
+        }
+      },
+      "description": "Configuration for JWT authenticator in the managed cluster.",
+      "required": [
+        "properties"
+      ]
+    },
+    "JWTAuthenticatorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JWTAuthenticator"
+          },
+          "description": "The list of JWT authenticators."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of JWT authenticator results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List JWT authenticator operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "JWTAuthenticatorProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/JWTAuthenticatorProvisioningState",
+          "readOnly": true,
+          "description": "The current provisioning state of the JWT authenticator."
+        },
+        "issuer": {
+          "$ref": "#/definitions/JWTAuthenticatorIssuer",
+          "description": "The JWT OIDC issuer details."
+        },
+        "claimValidationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JWTAuthenticatorValidationRule"
+          },
+          "description": "The rules that are applied to validate token claims to authenticate users. All the expressions must evaluate to true for validation to succeed."
+        },
+        "claimMappings": {
+          "$ref": "#/definitions/JWTAuthenticatorClaimMappings",
+          "description": "The mappings that define how user attributes are extracted from the token claims."
+        },
+        "userValidationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JWTAuthenticatorValidationRule"
+          },
+          "description": "The rules that are applied to the mapped user before completing authentication. All the expressions must evaluate to true for validation to succeed."
+        }
+      },
+      "description": "The properties of JWTAuthenticator. For details on how to configure the properties of a JWT authenticator, please refer to the Kubernetes documentation: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#using-authentication-configuration. Please note that not all fields available in the Kubernetes documentation are supported by AKS. For troubleshooting, please see https://aka.ms/aks-external-issuers-docs.",
+      "required": [
+        "issuer",
+        "claimMappings"
+      ]
+    },
+    "JWTAuthenticatorProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Updating",
+        "Deleting",
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "JWTAuthenticatorProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The JWT authenticator is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The JWT authenticator is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The JWT authenticator is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "JWTAuthenticatorIssuer": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The issuer URL. The URL must begin with the scheme https and cannot contain a query string or fragment. This must match the \"iss\" claim in the presented JWT, and the issuer returned from discovery."
+        },
+        "audiences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of acceptable audiences the JWT must be issued to. At least one is required. When multiple is set, AudienceMatchPolicy is used in API Server configuration."
+        }
+      },
+      "description": "The OIDC issuer details for JWTAuthenticator.",
+      "required": [
+        "url",
+        "audiences"
+      ]
+    },
+    "JWTAuthenticatorClaimMappings": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "$ref": "#/definitions/JWTAuthenticatorClaimMappingExpression",
+          "description": "The expression to extract username attribute from the token claims."
+        },
+        "groups": {
+          "$ref": "#/definitions/JWTAuthenticatorClaimMappingExpression",
+          "description": "The expression to extract groups attribute from the token claims. When not provided, no groups are extracted from the token claims."
+        },
+        "uid": {
+          "$ref": "#/definitions/JWTAuthenticatorClaimMappingExpression",
+          "description": "The expression to extract uid attribute from the token claims. When not provided, no uid is extracted from the token claims."
+        },
+        "extra": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JWTAuthenticatorExtraClaimMappingExpression"
+          },
+          "description": "The expression to extract extra attribute from the token claims. When not provided, no extra attributes are extracted from the token claims."
+        }
+      },
+      "description": "The claim mappings for JWTAuthenticator.",
+      "required": [
+        "username"
+      ]
+    },
+    "JWTAuthenticatorValidationRule": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The CEL expression used to validate the claim or attribute."
+        },
+        "message": {
+          "type": "string",
+          "description": "The validation error message."
+        }
+      },
+      "description": "The validation rule for JWTAuthenticator.",
+      "required": [
+        "expression"
+      ]
+    },
+    "JWTAuthenticatorClaimMappingExpression": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The CEL expression used to access token claims."
+        }
+      },
+      "description": "The claim mapping expression for JWTAuthenticator.",
+      "required": [
+        "expression"
+      ]
+    },
+    "JWTAuthenticatorExtraClaimMappingExpression": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the extra attribute."
+        },
+        "valueExpression": {
+          "type": "string",
+          "description": "The CEL expression used to extract the value of the extra attribute."
+        }
+      },
+      "description": "The extra claim mapping expression for JWTAuthenticator.",
+      "required": [
+        "key",
+        "valueExpression"
+      ]
     }
   },
   "parameters": {
@@ -12023,6 +12450,17 @@
       "minLength": 1,
       "maxLength": 63,
       "description": "The name of the identity binding.",
+      "x-ms-parameter-location": "method"
+    },
+    "JWTAuthenticatorNameParameter": {
+      "description": "The name of the JWT authenticator.",
+      "in": "path",
+      "maxLength": 24,
+      "minLength": 1,
+      "name": "jwtAuthenticatorName",
+      "pattern": "^[a-z][a-z0-9]{0,23}$",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
