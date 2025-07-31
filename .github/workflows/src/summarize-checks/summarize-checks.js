@@ -299,7 +299,6 @@ export default async function summarizeChecks({ github, context, core }) {
 
   await summarizeChecksImpl(
     github,
-    context,
     core,
     owner,
     repo,
@@ -334,7 +333,6 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
- * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
@@ -346,7 +344,6 @@ export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
  */
 export async function summarizeChecksImpl(
   github,
-  context,
   core,
   owner,
   repo,
