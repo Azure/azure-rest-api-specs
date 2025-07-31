@@ -1,14 +1,15 @@
 import { Octokit } from "@octokit/rest";
 import { describe, expect, it } from "vitest";
-import { processArmReviewLabels } from "../src/summarize-checks/labelling.js";
+import { processArmReviewLabels } from "../../src/summarize-checks/labelling.js";
 import {
   createNextStepsComment,
+  getCheckInfo,
   getCheckRunTuple,
   getExistingLabels,
   updateLabels,
-  getCheckInfo
-} from "../src/summarize-checks/summarize-checks.js";
-import { createMockCore } from "./mocks.js";
+  extractRunsFromGraphQLResponse
+} from "../../src/summarize-checks/summarize-checks.js";
+import { createMockCore } from "../mocks.js";
 
 const mockCore = createMockCore();
 
@@ -117,7 +118,7 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
-  describe("next steps comment rendering", () => {
+  describe("check result processing", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
@@ -240,6 +241,7 @@ describe("Summarize Checks Unit Tests", () => {
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
+        true, // assessmentCompleted
       );
 
       expect(output).toEqual(expectedOutput);
@@ -267,6 +269,7 @@ describe("Summarize Checks Unit Tests", () => {
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
+        true, // assessmentCompleted
       );
 
       expect(output).toEqual(expectedOutput);
@@ -374,6 +377,115 @@ describe("Summarize Checks Unit Tests", () => {
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate pending summary when impact assessment is not completed", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "SpellCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("SpellCheck"),
+        },
+        {
+          name: "TypeSpec Requirement",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("TypeSpec Requirement"),
+        },
+        {
+          name: "Protected Files",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Protected Files"),
+        },
+        {
+          name: "TypeSpec Validation",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+        {
+          name: "Breaking Change(Cross-Version)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "Swagger ModelValidation",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger ModelValidation"),
+        },
+        {
+          name: "Swagger SemanticValidation",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger SemanticValidation"),
+        },
+        {
+          name: "Swagger Lint(RPaaS)",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
+        },
+        {
+          name: "Automated merging requirements met",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Automated merging requirements met"),
+        },
+        {
+          name: "license/cla",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("license/cla"),
+        },
+        {
+          name: "Swagger PrettierCheck",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger PrettierCheck"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        false, // assessmentCompleted
       );
 
       expect(output).toEqual(expectedOutput);
@@ -439,13 +551,81 @@ describe("Summarize Checks Unit Tests", () => {
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
+        true, // assessmentCompleted
       );
 
       expect(output).toEqual(expectedOutput);
     });
+
+    it("should extract check info from raw check response data", async () => {
+      const expectedCheckRunId = "16582733356";
+      const response = await import("./fixtures/RawGraphQLResponse.json", { assert: { type: "json" } });
+      const [requiredCheckRuns, fyiCheckRuns, impactAssessmentWorkflowId] = await extractRunsFromGraphQLResponse(response);
+
+      expect(requiredCheckRuns).toBeDefined();
+      expect(fyiCheckRuns).toBeDefined();
+      expect(impactAssessmentWorkflowId).toBeDefined();
+      expect(requiredCheckRuns.length).toEqual(11);
+      expect(fyiCheckRuns.length).toEqual(0);
+      expect(impactAssessmentWorkflowId).toEqual(expectedCheckRunId);
+    });
   });
 
-  describe("label add and remove", () => {
+  describe("update labels", () => {
+    const testCases = [
+      {
+        description: "Add ARMReview and resource-manager labels when existing labels are empty",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: ["ARMReview", "resource-manager", "TypeSpec", "WaitForARMFeedback"],
+        expectedLabelsToRemove: [],
+        impactAssessment: {
+          "suppressionReviewRequired":false,
+          "rpaasChange":false,
+          "newRP":false,
+          "rpaasRPMissing":false,
+          "rpaasRpNotInPrivateRepo":false,
+          "resourceManagerRequired":true,
+          "dataPlaneRequired":false,
+          "rpaasExceptionRequired":false,
+          "typeSpecChanged":true,
+          "isNewApiVersion":false,
+          "isDraft":false,
+          "targetBranch":"main"
+        }
+      },
+      {
+        description: "We shouldn't add ARM review if resourceManagerRequired is false",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: ["TypeSpec"],
+        expectedLabelsToRemove: [],
+        impactAssessment: {
+          "suppressionReviewRequired":false,
+          "rpaasChange":false,
+          "newRP":false,
+          "rpaasRPMissing":false,
+          "rpaasRpNotInPrivateRepo":false,
+          "resourceManagerRequired":false,
+          "dataPlaneRequired":false,
+          "rpaasExceptionRequired":false,
+          "typeSpecChanged":true,
+          "isNewApiVersion":false,
+          "isDraft":false,
+          "targetBranch":"main"
+        }
+      },
+    ];
+    it.each(testCases)(
+      "$description",
+      async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
+        const labelContext = await updateLabels(existingLabels, impactAssessment);
+
+        expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
+        expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
+      },
+    );
+  });
+
+  describe("ARM review process labelling", () => {
     const testCases = [
       {
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label", "ARMReview"],

@@ -370,14 +370,14 @@ export async function summarizeChecksImpl(
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
-  if (!impactAssessment) {
+  if (impactAssessment) {
+    core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+  } else {
     core.info(
-      "Bailing out early without taking any further action, PR impact assessment is not yet complete.",
+      `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
+        `No labels will be added or removed in this run, and only "pending" status check will be set.`,
     );
-    return;
   }
-
-  core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
 
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
@@ -425,6 +425,7 @@ export async function summarizeChecksImpl(
     targetBranch,
     requiredCheckRuns,
     fyiCheckRuns,
+    impactAssessment !== undefined,
   );
 
   core.info(
@@ -441,14 +442,7 @@ export async function summarizeChecksImpl(
   // )
 
   // finally, update the "Automated merging requirements met" commit status
-  await updateCommitStatus(
-    github,
-    core,
-    owner,
-    repo,
-    head_sha,
-    automatedChecksMet,
-  );
+  await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet);
 
   core.info(
     `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
@@ -465,14 +459,7 @@ export async function summarizeChecksImpl(
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
-export async function updateCommitStatus(
-  github,
-  core,
-  owner,
-  repo,
-  head_sha,
-  checkResult,
-) {
+export async function updateCommitStatus(github, core, owner, repo, head_sha, checkResult) {
   // Map CheckRunResult status to commit status state
   /** @type {"pending" | "success" | "failure" | "error"} */
   let state;
@@ -772,7 +759,7 @@ export function checkRunIsSuccessful(checkRun) {
  * @param {any} response - GraphQL response data
  * @returns {[CheckRunData[], CheckRunData[], number | undefined]}
  */
-function extractRunsFromGraphQLResponse(response) {
+export function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = [];
   /** @type {CheckRunData[]} */
@@ -844,13 +831,15 @@ function extractRunsFromGraphQLResponse(response) {
  * @returns {CheckMetadata}
  */
 export function getCheckInfo(checkName) {
-  return CHECK_METADATA.find((metadata) => metadata.name === checkName) ||
+  return (
+    CHECK_METADATA.find((metadata) => metadata.name === checkName) ||
     /** @type {CheckMetadata} */ ({
       precedence: 1000,
       name: checkName,
       suppressionLabels: [],
       troubleshootingGuide: defaultTsg,
-    });
+    })
+  );
 }
 
 // #endregion
@@ -863,6 +852,7 @@ export function getCheckInfo(checkName) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
+ * @param {boolean} assessmentCompleted
  * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
@@ -872,13 +862,15 @@ export async function createNextStepsComment(
   targetBranch,
   requiredRuns,
   fyiRuns,
+  assessmentCompleted,
 ) {
   // select just the metadata that we need about the runs.
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  // determine if required runs have any successful runs.
+  // determine if required runs have any in-progress or queued runs
+  // if there are any, we consider the requirements not met.
   const requiredCheckInfosPresent = requiredRuns.some((run) => {
     const status = run.status.toLowerCase();
     return status !== "queued" && status !== "in_progress";
@@ -894,6 +886,7 @@ export async function createNextStepsComment(
     requiredCheckInfosPresent,
     requiredCheckInfos,
     fyiCheckInfos,
+    assessmentCompleted,
   );
 
   return [commentBody, automatedChecksMet];
@@ -906,6 +899,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
+ * @param {boolean} assessmentCompleted
  * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
@@ -915,6 +909,7 @@ async function buildNextStepsToMergeCommentBody(
   requiredCheckInfosPresent,
   failingReqChecksInfo,
   failingFyiChecksInfo,
+  assessmentCompleted,
 ) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
@@ -927,7 +922,7 @@ async function buildNextStepsToMergeCommentBody(
   // we consider requirements met if there are no blockers (which INCLUDES violated labelling rules) AND
   // that we have at least one required check that is not in progress or queued.
   // This might be too aggressive, but it's a good start.
-  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
+  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
 
   // Compose the body based on the current state
   const [commentBody, automatedChecksMet] = getCommentBody(
