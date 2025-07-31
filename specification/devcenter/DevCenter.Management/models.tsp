@@ -2289,7 +2289,7 @@ model CustomizationTaskInstance {
   /**
    * Parameters for the task.
    */
-  parameters?: DefinitionParameters[];
+  parameters?: DefinitionParametersItem[];
 
   /**
    * Display name to help differentiate multiple instances of the same task.
@@ -2308,7 +2308,7 @@ model CustomizationTaskInstance {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DefinitionParameters {
+model DefinitionParametersItem {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2327,7 +2327,7 @@ model ImageDefinitionReference {
   /**
    * Parameters for the referenced Image Definition.
    */
-  parameters?: DefinitionParameters[];
+  parameters?: DefinitionParametersItem[];
 }
 
 /**
