@@ -36,23 +36,17 @@ interface DevCenterEncryptionSets {
   /**
    * Gets a devcenter encryption set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EncryptionSets_Get")
   get is ArmResourceRead<DevCenterEncryptionSet>;
 
   /**
    * Creates or updates a devcenter encryption set resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EncryptionSets_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DevCenterEncryptionSet>;
 
   /**
    * Partially updates a devcenter encryption set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EncryptionSets_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DevCenterEncryptionSet,
@@ -68,9 +62,7 @@ interface DevCenterEncryptionSets {
   /**
    * Deletes a devcenter encryption set
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EncryptionSets_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DevCenterEncryptionSet,
     LroHeaders = ArmAsyncOperationHeader &
@@ -80,8 +72,6 @@ interface DevCenterEncryptionSets {
   /**
    * Lists all encryption sets in the devcenter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EncryptionSets_List")
   list is ArmResourceListByParent<
     DevCenterEncryptionSet,
     Parameters = {

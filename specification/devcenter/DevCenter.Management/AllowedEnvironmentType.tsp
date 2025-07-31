@@ -30,15 +30,11 @@ interface AllowedEnvironmentTypes {
   /**
    * Gets an allowed environment type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectAllowedEnvironmentTypes_Get")
   get is ArmResourceRead<AllowedEnvironmentType>;
 
   /**
    * Lists allowed environment types for a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectAllowedEnvironmentTypes_List")
   list is ArmResourceListByParent<
     AllowedEnvironmentType,
     Parameters = {

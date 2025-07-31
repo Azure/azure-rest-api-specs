@@ -60,15 +60,11 @@ interface AttachedNetworkConnections {
   /**
    * Gets an attached NetworkConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AttachedNetworks_GetByProject")
   getByProject is AttachedNetworkConnectionOps.Read<AttachedNetworkConnection>;
 
   /**
    * Lists the attached NetworkConnections for a Project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AttachedNetworks_ListByProject")
   listByProject is AttachedNetworkConnectionOps.List<
     AttachedNetworkConnection,
     Parameters = {

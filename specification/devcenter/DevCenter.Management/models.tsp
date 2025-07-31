@@ -2054,9 +2054,9 @@ model OperationStatus
   /**
    * Custom operation properties, populated only for a successful operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  properties?: Record<unknown>;
+  properties?: unknown;
 }
 
 /**

@@ -99,8 +99,6 @@ interface DevCenters {
   /**
    * Lists images for a devcenter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Images_ListByDevCenter")
   @get
   @action("images")
   listByDevCenter is ArmResourceActionSync<

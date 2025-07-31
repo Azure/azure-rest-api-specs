@@ -59,23 +59,17 @@ interface Catalogs {
   /**
    * Gets an associated project catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_Get")
   get is CatalogOps.Read<Catalog>;
 
   /**
    * Creates or updates a project catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_CreateOrUpdate")
   createOrUpdate is CatalogOps.CreateOrUpdateAsync<Catalog>;
 
   /**
    * Partially updates a project catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_Patch")
   @patch(#{ implicitOptionality: false })
   patch is CatalogOps.CustomPatchAsync<
     Catalog,
@@ -91,9 +85,7 @@ interface Catalogs {
   /**
    * Deletes a project catalog resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_Delete")
   delete is CatalogOps.DeleteWithoutOkAsync<
     Catalog,
     LroHeaders = ArmAsyncOperationHeader &
@@ -103,8 +95,6 @@ interface Catalogs {
   /**
    * Lists the catalogs associated with a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_List")
   list is CatalogOps.List<
     Catalog,
     Parameters = {
@@ -120,8 +110,6 @@ interface Catalogs {
   /**
    * Gets project catalog synchronization error details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_GetSyncErrorDetails")
   getSyncErrorDetails is CatalogOps.ActionSync<
     Catalog,
     void,
@@ -131,9 +119,7 @@ interface Catalogs {
   /**
    * Syncs templates for a template source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_Sync")
   sync is CatalogOps.ActionAsync<
     Catalog,
     void,
@@ -145,9 +131,7 @@ interface Catalogs {
   /**
    * Connects a project catalog to enable syncing.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ProjectCatalogs_Connect")
   connect is CatalogOps.ActionAsync<
     Catalog,
     void,
@@ -191,23 +175,17 @@ interface CatalogOperationGroup {
   /**
    * Gets a catalog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_Get")
   get is CatalogOperationGroupOps.Read<Catalog>;
 
   /**
    * Creates or updates a catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_CreateOrUpdate")
   createOrUpdate is CatalogOperationGroupOps.CreateOrUpdateAsync<Catalog>;
 
   /**
    * Partially updates a catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_Update")
   @patch(#{ implicitOptionality: false })
   update is CatalogOperationGroupOps.CustomPatchAsync<
     Catalog,
@@ -223,9 +201,7 @@ interface CatalogOperationGroup {
   /**
    * Deletes a catalog resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_Delete")
   delete is CatalogOperationGroupOps.DeleteWithoutOkAsync<
     Catalog,
     LroHeaders = ArmAsyncOperationHeader &
@@ -235,8 +211,6 @@ interface CatalogOperationGroup {
   /**
    * Lists catalogs for a devcenter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_ListByDevCenter")
   listByDevCenter is CatalogOperationGroupOps.List<
     Catalog,
     Parameters = {
@@ -252,8 +226,6 @@ interface CatalogOperationGroup {
   /**
    * Gets catalog synchronization error details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_GetSyncErrorDetails")
   getSyncErrorDetails is CatalogOperationGroupOps.ActionSync<
     Catalog,
     void,
@@ -263,9 +235,7 @@ interface CatalogOperationGroup {
   /**
    * Syncs templates for a template source.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_Sync")
   sync is CatalogOperationGroupOps.ActionAsync<
     Catalog,
     void,
@@ -277,9 +247,7 @@ interface CatalogOperationGroup {
   /**
    * Connects a catalog to enable syncing.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Catalogs_Connect")
   connect is CatalogOperationGroupOps.ActionAsync<
     Catalog,
     void,
