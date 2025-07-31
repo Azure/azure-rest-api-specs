@@ -58,7 +58,7 @@ interface OperationResultOperationGroup {
     operationId: string,
 
     ...LocationResourceParameter,
-  ): ArmResponse<OperationJobExtendedInfo> | ArmAcceptedResponse | CloudError;
+  ): OperationJobExtendedInfo | ArmAcceptedResponse | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -141,7 +141,7 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: CrossRegionRestoreRequestObject,
-  ): ArmResponse<OperationJobExtendedInfo> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse;
+  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse;
 
   /**
    * Validates whether Cross Region Restore can be triggered for DataSource.
@@ -161,7 +161,7 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: ValidateCrossRegionRestoreRequestObject,
-  ): ArmResponse<OperationJobExtendedInfo> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse;
+  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
