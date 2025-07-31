@@ -108,6 +108,7 @@ namespace Customizations;
 @@clientName(Resampling, "ResamplingMethod", "csharp");
 @@clientName(Tilematrixsetid, "TileMatrixSetId", "csharp");
 
+// === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -115,59 +116,137 @@ namespace Customizations;
   },
   "csharp,java"
 )
-@clientName("StacConfigClientImpl", "csharp,")
-interface StacCollectionConfigurationClient {
-  #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
-  createCollectionAsset is StacCollectionAssets.create;
+@clientName("IngestionManagementClientImpl", "csharp")
+interface IngestionManagementClient {
+  // Ingestion operations
+  getIngestions is Ingestions.listAll;
+  createIngestion is Ingestions.create;
+  getIngestion is Ingestions.get;
+  updateIngestion is Ingestions.update;
+  deleteIngestion is Ingestions.delete;
 
-  #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
-  createOrReplaceCollectionAsset is StacCollectionAssets.createOrReplace;
+  // Ingestion runs operations
+  getIngestionRuns is Ingestions.IngestionRuns.listAll;
+  createIngestionRun is Ingestions.IngestionRuns.create;
+  getIngestionRun is Ingestions.IngestionRuns.get;
 
-  deleteCollectionAsset is StacCollectionAssets.delete;
-
-  getCollectionThumbnail is StacCollectionThumbnails.get;
-
-  getCollectionConfig is StacCollectionConfig.get;
-
-  getAllMosaics is StacCollectionMosaics.getAll;
-
-  addMosaic is StacCollectionMosaics.add;
-
-  getMosaic is StacCollectionMosaics.get;
-
-  createOrReplaceMosaic is StacCollectionMosaics.createOrReplace;
-
-  deleteMosaic is StacCollectionMosaics.delete;
-
-  getAllRenderOptions is StacCollectionRenderOptions.getAll;
-
-  createRenderOption is StacCollectionRenderOptions.create;
-
-  getRenderOption is StacCollectionRenderOptions.get;
-
-  createOrReplaceRenderOption is StacCollectionRenderOptions.createOrReplace;
-
-  deleteRenderOption is StacCollectionRenderOptions.delete;
-
-  getTileSettings is StacCollectionTileSettings.getAll;
-
-  replaceTileSettings is StacCollectionTileSettings.replace;
-
-  getPartitionType is StacCollectionPartitionTypes.get;
-
-  replacePartitionType is StacCollectionPartitionTypes.replace;
-
-  getAllQueryables is StacQueryables.getAll;
-
-  getAllQueryablesByCollection is StacQueryables.getAllByCollection;
-
-  createQueryables is StacQueryables.create;
-
-  createOrReplaceQueryable is StacQueryables.createOrReplace;
-
-  deleteQueryable is StacQueryables.delete;
+  // Ingestion operations management
+  getIngestionOperations is IngestionOperations.listAll;
+  deleteAllIngestionOperations is IngestionOperations.deleteAll;
+  getIngestionOperation is IngestionOperations.get;
+  deleteIngestionOperation is IngestionOperations.delete;
 }
 
+// === Ingestion Sources ===
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
+@clientName("IngestionSourcesClientImpl", "csharp")
+interface IngestionSourcesClient {
+  getIngestionSources is IngestionSources.listAll;
+  createIngestionSource is IngestionSources.create;
+  getIngestionSource is IngestionSources.get;
+  createOrReplaceIngestionSource is IngestionSources.createOrReplace;
+  deleteIngestionSource is IngestionSources.delete;
+  getManagedIdentities is IngestionSources.listManagedIdentities;
+}
+
+// === SpatioTemporal Asset Catalog (STAC) API ===
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
+@clientName("StacApiClientImpl", "csharp")
+interface StacApiClient {
+  // STAC Landing Pages
+  getStacLandingPage is StacLandingPages.get;
+
+  // STAC Collections
+  getAllCollections is StacCollectionOperations.getAll;
+  createCollection is StacCollectionOperations.create;
+  getCollection is StacCollectionOperations.get;
+  createOrReplaceCollection is StacCollectionOperations.createOrReplace;
+  deleteCollection is StacCollectionOperations.delete;
+
+  // STAC Items
+  getItemsAsFeatures is StacItems.getFeatures;
+  createItem is StacItems.create;
+  getItem is StacItems.get;
+  createOrReplaceItem is StacItems.createOrReplace;
+  updateItem is StacItems.update;
+  deleteItem is StacItems.delete;
+
+  // STAC Queryables
+  getAllQueryables is StacQueryables.getAll;
+  getAllQueryablesByCollection is StacQueryables.getAllByCollection;
+  createQueryables is StacQueryables.create;
+
+  // STAC Conformance
+  getConformanceClass is StacConformanceClass.get;
+
+  // STAC Search
+  getSearchOperations is StacSearchOperations.get;
+  createSearchOperations is StacSearchOperations.create;
+}
+
+// === STAC Collection Configuration ===
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
+@clientName("StacCollectionConfigurationClientImpl", "csharp")
+interface StacCollectionConfigurationClient {
+  // Collection Assets
+  #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
+  createCollectionAsset is StacCollectionAssets.create;
+  #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
+  createOrReplaceCollectionAsset is StacCollectionAssets.createOrReplace;
+  deleteCollectionAsset is StacCollectionAssets.delete;
+
+  // Collection Configuration
+  getCollectionConfig is StacCollectionConfig.get;
+
+  // Collection Mosaics
+  getAllMosaics is StacCollectionMosaics.getAll;
+  addMosaic is StacCollectionMosaics.add;
+  getMosaic is StacCollectionMosaics.get;
+  createOrReplaceMosaic is StacCollectionMosaics.createOrReplace;
+  deleteMosaic is StacCollectionMosaics.delete;
+
+  // Collection Partition Types
+  getPartitionType is StacCollectionPartitionTypes.get;
+  replacePartitionType is StacCollectionPartitionTypes.replace;
+
+  // Collection Render Options
+  getAllRenderOptions is StacCollectionRenderOptions.getAll;
+  createRenderOption is StacCollectionRenderOptions.create;
+  getRenderOption is StacCollectionRenderOptions.get;
+  createOrReplaceRenderOption is StacCollectionRenderOptions.createOrReplace;
+  deleteRenderOption is StacCollectionRenderOptions.delete;
+
+  // Collection Tile Settings
+  getTileSettings is StacCollectionTileSettings.getAll;
+  replaceTileSettings is StacCollectionTileSettings.replace;
+
+  // Collection Queryables Configuration
+  createOrReplaceQueryable is StacQueryables.createOrReplace;
+  deleteQueryable is StacQueryables.delete;
+
+  // Collection Thumbnails
+  getCollectionThumbnail is StacCollectionThumbnails.get;
+}
+
+// === GeoCatalog Instance Configuration ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -177,13 +256,12 @@ interface StacCollectionConfigurationClient {
 )
 @clientName("GeocatalogClientImpl", "csharp")
 interface GeocatalogClient {
-  getAzmapsToken is GeoCatalogAzmapsToken.get;
-
-  getAzmapsClientId is GeoCatalogAzmapsClient.getId;
-
   getAuthConfig is GeoCatalogAuthConfigOperations.get;
+  getAzmapsClientId is GeoCatalogAzmapsClient.getId;
+  getAzmapsToken is GeoCatalogAzmapsToken.get;
 }
 
+// === Image Exports for STAC Collections ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -194,10 +272,10 @@ interface GeocatalogClient {
 @clientName("ImageExportsClientImpl", "csharp")
 interface ImageExportsClient {
   createStaticImage is TilerStaticImages.create;
-
   getStaticImage is TilerStaticImages.get;
 }
 
+// === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -207,48 +285,44 @@ interface ImageExportsClient {
 )
 @clientName("StacItemTilerClientImpl", "csharp")
 interface StacItemTilerClient {
-  // requires collectionId and itemId as options
+  // Basic Info and Assets
   getBounds is TilerBound.getAll;
-
   getInfo is TilerInfoOperations.get;
-
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;
-
   getAvailableAssets is TilerAvailableAssets.getAll;
 
+  // Statistics
   getAssetStatistics is TilerAssetStatistics.getAll;
-
   getStatistics is TilerStatistics.getAll;
-
   getGeoJsonStatistics is TilerGeoJsonStatistics.getAll;
 
+  // Tiles
   getTile is TilerTiles.getZxyScalexFormat;
-
   getTileWithMatrixSet is TilerTileMatrixSets.getZxyScalexFormat;
 
+  // Tile JSON
   getTileJson is TilerTileJsonOperations.get;
-
   getTileJsonWithMatrixSet is TilerTileJsonTileMatrixSets.get;
 
+  // WMTS Capabilities
   getWmtsCapabilities is TilerWmts.getCapabilitiesXml;
-
   getWmtsCapabilitiesWithMatrixSet is TilerWmtsTileMatrixSets.getCapabilitiesXml;
 
+  // Points
   getPoint is TilerPoints.getLonLat;
 
+  // Previews
+  getPreview is TilerPreviews.get;
   getPreviewWithFormat is TilerPreviews.getFormat;
 
-  getPreview is TilerPreviews.get;
-
-  getPartWithDimensions is TilerParts.getMinxMinyMaxxMaxyWidthxHeightFormat;
-
+  // Parts/Crops
   getPart is TilerParts.getMinxMinyMaxxMaxyFormat;
-
-  cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthxHeightFormat;
-
+  getPartWithDimensions is TilerParts.getMinxMinyMaxxMaxyWidthxHeightFormat;
   cropGeoJson is TilerGeoJsons.cropFormat;
+  cropGeoJsonWithDimensions is TilerGeoJsons.cropWidthxHeightFormat;
 }
 
+// === Map Legends ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -258,13 +332,12 @@ interface StacItemTilerClient {
 )
 @clientName("MapLegendsClientImpl", "csharp")
 interface MapLegendsClient {
-  getIntervalLegend is MapsIntervalLegends.getByClassmapName;
-
   getClassmapLegend is MapsClassmapLegends.get;
-
   getLegend is MapsLegends.get;
+  getIntervalLegend is MapsIntervalLegends.getByClassmapName;
 }
 
+// === Tiles for STAC Collections Mosaics ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -274,28 +347,29 @@ interface MapLegendsClient {
 )
 @clientName("MosaicTilerClientImpl", "csharp")
 interface MosaicTilerClient {
+  // Tiles
   getTile is MosaicsTiles.getZxyScalexFormat;
-
   getTileWithMatrixSet is MosaicsTileMatrixSets.getZxyScalexFormat;
 
+  // Tile JSON
   getTileJson is MosaicsTileJsonOperations.get;
-
   getTileJsonWithMatrixSet is MosaicsTileMatrixSetsTileJson.get;
 
+  // WMTS Capabilities
   getWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
-
   getWmtsCapabilitiesWithMatrixSet is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
-  registerSearch is MosaicsRegisterSearch.register;
 
+  // Search and Registration
+  registerSearch is MosaicsRegisterSearch.register;
   getSearchInfo is MosaicsInfoSearch.get;
 
+  // Assets
   getAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
-
   getAssetsForTileWithMatrixSet is MosaicsAssetsForTileMatrixSets.getZxyAssets;
-
   getAssetsForPoint is MosaicsAssetsForPoints.getLonLatAssets;
 }
 
+// === Tile Matrix Sets ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -305,11 +379,11 @@ interface MosaicTilerClient {
 )
 @clientName("TileMatrixSetsClientImpl", "csharp")
 interface TileMatrixSetsClient {
-  getMatrixList is TileMatrixList.get;
-
-  getMatrixDefinition is TileMatrixDefinitions.get;
+  getTileMatrixList is TileMatrixList.get;
+  getTileMatrixDefinitions is TileMatrixDefinitions.get;
 }
 
+// === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @client(
   {
@@ -319,95 +393,10 @@ interface TileMatrixSetsClient {
 )
 @clientName("SharedAccessSignatureClientImpl", "csharp")
 interface SharedAccessSignatureClient {
+  // SAS Tokens
   getToken is Sas.getToken;
-
   revokeToken is Sas.revokeToken;
 
+  // Sign HREF for read access
   getSign is Sas.getSign;
-}
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java"
-)
-@clientName("IngestionClientImpl", "csharp")
-interface IngestionClient {
-  getIngestions is Ingestions.listAll;
-
-  getIngestion is Ingestions.get;
-
-  createIngestion is Ingestions.create;
-
-  updateIngestion is Ingestions.update;
-
-  deleteIngestion is Ingestions.delete;
-
-  getIngestionRuns is Ingestions.IngestionRuns.listAll;
-
-  getIngestionRun is Ingestions.IngestionRuns.get;
-
-  createIngestionRun is Ingestions.IngestionRuns.create;
-
-  getIngestionSources is IngestionSources.listAll;
-
-  getIngestionSource is IngestionSources.get;
-
-  createIngestionSource is IngestionSources.create;
-
-  createOrReplaceIngestionSource is IngestionSources.createOrReplace;
-
-  deleteIngestionSource is IngestionSources.delete;
-
-  getManagedIdentities is IngestionSources.listManagedIdentities;
-
-  getOperations is IngestionOperations.listAll;
-
-  getOperation is IngestionOperations.get;
-
-  deleteOperation is IngestionOperations.delete;
-
-  deleteAllOperations is IngestionOperations.deleteAll;
-}
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@client(
-  {
-    service: Microsoft.PlanetaryComputer,
-  },
-  "csharp,java"
-)
-@clientName("StacClientImpl", "csharp")
-interface StacClient {
-  getFeatures is StacItems.getFeatures;
-
-  getItem is StacItems.get;
-
-  createItem is StacItems.create;
-
-  createOrReplaceItem is StacItems.createOrReplace;
-
-  updateItem is StacItems.update;
-
-  deleteItem is StacItems.delete;
-
-  getCollections is StacCollectionOperations.getAll;
-
-  createCollection is StacCollectionOperations.create;
-
-  getCollection is StacCollectionOperations.get;
-
-  createOrReplaceCollection is StacCollectionOperations.createOrReplace;
-
-  deleteCollection is StacCollectionOperations.delete;
-
-  getSearch is StacSearchOperations.get;
-
-  searchPost is StacSearchOperations.create;
-
-  getStacLandingPages is StacLandingPages.get;
-
-  getStacConformanceClass is StacConformanceClass.get;
 }
