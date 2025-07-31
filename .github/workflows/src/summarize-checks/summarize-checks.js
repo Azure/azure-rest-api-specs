@@ -732,15 +732,9 @@ export async function getCheckRunTuple(
   }
 
   const filteredReqCheckRuns = reqCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
   const filteredFyiCheckRuns = fyiCheckRuns.filter(
-    /**
-     * @param {CheckRunData} checkRun
-     */
     (checkRun) => !excludedCheckNames.includes(checkRun.name),
   );
 
