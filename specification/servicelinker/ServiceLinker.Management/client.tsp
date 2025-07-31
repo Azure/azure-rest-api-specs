@@ -12,3 +12,5 @@ using Microsoft.ServiceLinker;
 
 // Go SDK Breaking Changes Resolution for TypeSpec conversion
 @@clientName(DatabaseAadAuthInfo, "DatabaseAADAuthInfo", "go");
+
+@@clientName(ActionType, "ActionTypeFlag");
