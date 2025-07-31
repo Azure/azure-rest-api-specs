@@ -138,7 +138,7 @@ const FYI_CHECK_NAMES = [
   "Swagger BreakingChange",
   "Swagger PrettierCheck",
 ];
-const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
+const AUTOMATED_CHECK_NAME = "[TEST-IGNORE] Automated merging requirements met";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -447,7 +447,6 @@ export async function summarizeChecksImpl(
     owner,
     repo,
     head_sha,
-    "[TEST-IGNORE] Automated merging requirements met",
     automatedChecksMet,
   );
 
@@ -463,7 +462,6 @@ export async function summarizeChecksImpl(
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
- * @param {string} statusContext
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
@@ -473,7 +471,6 @@ export async function updateCommitStatus(
   owner,
   repo,
   head_sha,
-  statusContext,
   checkResult,
 ) {
   // Map CheckRunResult status to commit status state
@@ -497,12 +494,12 @@ export async function updateCommitStatus(
       checkResult.summary.length > 140
         ? checkResult.summary.substring(0, 137) + "..."
         : checkResult.summary,
-    context: statusContext,
+    context: checkResult.name,
     // target_url: undefined, // Optional: add a URL if you want to link to more details
   });
 
   core.info(
-    `Created commit status for ${statusContext} with state: ${state} and description: ${checkResult.summary}`,
+    `Created commit status for ${checkResult.name} with state: ${state} and description: ${checkResult.summary}`,
   );
 }
 
@@ -963,7 +960,6 @@ function getCommentBody(
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
 ) {
-  let title = "Automated merging requirements are being evaluated";
   /** @type {"pending" | keyof typeof CheckConclusion} */
   let status = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
@@ -976,7 +972,6 @@ function getCommentBody(
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
-      title = "Some automated merging requirements are not met";
       status = "FAILURE";
     }
 
@@ -988,8 +983,6 @@ function getCommentBody(
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
       if (!anyBlockerPresent) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
-        title =
-          "All automated merging requirements are met, though there are some non-required failures.";
         summaryData =
           `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
           `but soon these requirements will be blocking.` +
@@ -1008,7 +1001,6 @@ function getCommentBody(
       `<br/>To merge this PR, refer to ` +
       `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
       "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
-    title = "Automated merging requirements are met";
     status = "SUCCESS";
   } else {
     bodyProper =
@@ -1018,7 +1010,7 @@ function getCommentBody(
 
   /** @type {CheckRunResult} */
   const automatedChecksMet = {
-    name: title,
+    name: AUTOMATED_CHECK_NAME,
     summary: summaryData,
     result: status,
   };

@@ -145,7 +145,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         expectedComment,
         {
-          name: "Some automated merging requirements are not met",
+          name: "[TEST-IGNORE] Automated merging requirements met",
           result: "FAILURE",
           summary:
             "❌ This PR cannot be merged because some requirements are not met. See the details.",
@@ -163,145 +163,73 @@ describe("Summarize Checks Unit Tests", () => {
           name: "TypeSpec Requirement",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "TypeSpec Requirement",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Requirement"),
         },
         {
           name: "Protected Files",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "Protected Files",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Protected Files"),
         },
         {
           name: "TypeSpec Validation",
           status: "COMPLETED",
           conclusion: "FAILURE",
-          checkInfo: {
-            precedence: 0,
-            name: "TypeSpec Validation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
         {
           name: "Swagger BreakingChange",
           status: "COMPLETED",
           conclusion: "FAILURE",
-          checkInfo: {
-            precedence: 4,
-            name: "Swagger BreakingChange",
-            suppressionLabels: ["Versioning-Approved-*", "BreakingChange-Approved-*"],
-            troubleshootingGuide:
-              'To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.',
-          },
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
         },
         {
           name: "Breaking Change(Cross-Version)",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 4,
-            name: "Breaking Change(Cross-Version)",
-            suppressionLabels: ["Versioning-Approved-*", "BreakingChange-Approved-*"],
-            troubleshootingGuide:
-              'To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.',
-          },
+          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
         },
         {
           name: "Swagger Avocado",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Avocado"),
         },
         {
           name: "Swagger ModelValidation",
           status: "COMPLETED",
           conclusion: "FAILURE",
-          checkInfo: {
-            precedence: 3,
-            name: "Swagger ModelValidation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger ModelValidation"),
         },
         {
           name: "Swagger SemanticValidation",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 2,
-            name: "Swagger SemanticValidation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger SemanticValidation"),
         },
         {
           name: "Swagger Lint(RPaaS)",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 5,
-            name: "Swagger Lint(RPaaS)",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
         },
         {
           name: "Automated merging requirements met",
           status: "COMPLETED",
           conclusion: "FAILURE",
-          checkInfo: {
-            precedence: 10,
-            name: "Automated merging requirements met",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              'This is the final check that must pass. Refer to the check in the PR\'s \'Checks\' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide. In addition, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a>',
-          },
+          checkInfo: getCheckInfo("Automated merging requirements met"),
         },
         {
           name: "license/cla",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("license/cla"),
         },
         {
           name: "Swagger PrettierCheck",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger PrettierCheck",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger PrettierCheck"),
         },
       ];
 
@@ -326,7 +254,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "Automated merging requirements are being evaluated",
+          name: "[TEST-IGNORE] Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
@@ -352,7 +280,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
-          name: "Automated merging requirements are met",
+          name: "[TEST-IGNORE] Automated merging requirements met",
           result: "SUCCESS",
           summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
@@ -363,157 +291,79 @@ describe("Summarize Checks Unit Tests", () => {
           name: "SpellCheck",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "SpellCheck",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("SpellCheck"),
         },
         {
           name: "TypeSpec Requirement",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "TypeSpec Requirement",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Requirement"),
         },
         {
           name: "Protected Files",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1000,
-            name: "Protected Files",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Protected Files"),
         },
         {
           name: "TypeSpec Validation",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 0,
-            name: "TypeSpec Validation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
         {
           name: "Swagger BreakingChange",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 4,
-            name: "Swagger BreakingChange",
-            suppressionLabels: ["Versioning-Approved-*", "BreakingChange-Approved-*"],
-            troubleshootingGuide:
-              'To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.',
-          },
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
         },
         {
           name: "Breaking Change(Cross-Version)",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 4,
-            name: "Breaking Change(Cross-Version)",
-            suppressionLabels: ["Versioning-Approved-*", "BreakingChange-Approved-*"],
-            troubleshootingGuide:
-              'To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.',
-          },
+          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
         },
         {
           name: "Swagger Avocado",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Avocado"),
         },
         {
           name: "Swagger ModelValidation",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 3,
-            name: "Swagger ModelValidation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger ModelValidation"),
         },
         {
           name: "Swagger SemanticValidation",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 2,
-            name: "Swagger SemanticValidation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger SemanticValidation"),
         },
         {
           name: "Swagger Lint(RPaaS)",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 5,
-            name: "Swagger Lint(RPaaS)",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
         },
         {
           name: "Automated merging requirements met",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 10,
-            name: "Automated merging requirements met",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              'This is the final check that must pass. Refer to the check in the PR\'s \'Checks\' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide. In addition, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a>',
-          },
+          checkInfo: getCheckInfo("Automated merging requirements met"),
         },
         {
           name: "license/cla",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("license/cla"),
         },
         {
           name: "Swagger PrettierCheck",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger PrettierCheck",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger PrettierCheck"),
         },
       ];
 
@@ -537,7 +387,7 @@ describe("Summarize Checks Unit Tests", () => {
       const expectedOutput = [
         "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
         {
-          name: "Automated merging requirements are being evaluated",
+          name: "[TEST-IGNORE] Automated merging requirements met",
           result: "pending",
           summary: "The requirements for merging this PR are still being evaluated. Please wait.",
         },
