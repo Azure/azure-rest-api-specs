@@ -757,7 +757,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RelationshipWrappersResponse"
+              "$ref": "#/definitions/RelationshipWrapper"
             }
           },
           "default": {
@@ -777,9 +777,6 @@
           "CreateCriticalDataColumnRelationshipAsync_MaximumSet": {
             "$ref": "./examples/CreateCriticalDataColumnRelationshipAsync_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -1458,12 +1455,12 @@
             }
           },
           {
-            "name": "body",
+            "name": "relationship",
             "in": "body",
             "description": "The input properties for creating the relationship.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InputProperties"
+              "$ref": "#/definitions/DataElementProperties"
             }
           }
         ],
@@ -2264,7 +2261,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RelationshipWrappersResponse"
+              "$ref": "#/definitions/RelationshipWrapper"
             }
           },
           "default": {
@@ -2284,9 +2281,6 @@
           "CreateDataAssetRelationshipAsync_MaximumSet": {
             "$ref": "./examples/CreateDataAssetRelationshipAsync_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -3015,7 +3009,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RelationshipWrappersResponse"
+              "$ref": "#/definitions/RelationshipWrapper"
             }
           },
           "default": {
@@ -3035,9 +3029,6 @@
           "CreateDataProductRelationshipAsync_MaximumSet": {
             "$ref": "./examples/CreateDataProductRelationshipAsync_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -5961,6 +5952,24 @@
         "value"
       ]
     },
+    "DataElementProperties": {
+      "type": "object",
+      "description": "DataElementProperties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The first additional property."
+        },
+        "entityId": {
+          "type": "string",
+          "description": "The second additional property."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The third additional property."
+        }
+      }
+    },
     "DataProduct": {
       "type": "object",
       "description": "Microsoft Purview Data Governance Catalog Model Data Product.",
@@ -6342,33 +6351,6 @@
       "required": [
         "facets"
       ]
-    },
-    "InputProperties": {
-      "type": "object",
-      "description": "InputProperties.",
-      "properties": {
-        "prop1": {
-          "type": "array",
-          "description": "The first additional property.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "prop2": {
-          "type": "array",
-          "description": "The second additional property.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "prop3": {
-          "type": "array",
-          "description": "The third additional property.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ModelKeyResult": {
       "type": "object",

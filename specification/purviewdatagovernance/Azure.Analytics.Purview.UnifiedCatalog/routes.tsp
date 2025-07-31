@@ -146,7 +146,7 @@ op CreateCriticalDataElementRelationshipAsync is Foundations.Operation<
 
     @doc("The input properties for creating the relationship.")
     @bodyRoot
-    body: InputProperties;
+    relationship: DataElementProperties;
   },
   CriticalDataElement
 >;
@@ -291,7 +291,7 @@ op CreateCriticalDataColumnRelationshipAsync is Foundations.Operation<
     @bodyRoot
     relationship: CriticalDataColumnProperties;
   },
-  RelationshipWrappersResponse
+  RelationshipWrapper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -482,7 +482,7 @@ op CreateDataAssetRelationshipAsync is Foundations.Operation<
     @bodyRoot
     relationship: CriticalDataColumnRelationshipRequest;
   },
-  RelationshipWrappersResponse
+  RelationshipWrapper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -677,7 +677,7 @@ op CreateDataProductRelationshipAsync is Foundations.Operation<
     @bodyRoot
     relationship: CriticalDataColumnRelationshipRequest;
   },
-  RelationshipWrappersResponse
+  RelationshipWrapper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

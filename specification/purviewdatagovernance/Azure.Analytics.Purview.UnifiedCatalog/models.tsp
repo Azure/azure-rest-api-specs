@@ -251,16 +251,16 @@ model CriticalDataElementFacetRequest {
   facets?: ModelsFacetRequestObject[];
 }
 
-@doc("InputProperties.")
-model InputProperties {
+@doc("DataElementProperties.")
+model DataElementProperties {
   @doc("The first additional property.")
-  prop1?: string[];
+  description?: string;
 
   @doc("The second additional property.")
-  prop2?: string[];
+  entityId?: string;
 
   @doc("The third additional property.")
-  prop3?: string[];
+  relationshipType?: string;
 }
 
 @doc("CatalogModelCriticalDataColumn.")
