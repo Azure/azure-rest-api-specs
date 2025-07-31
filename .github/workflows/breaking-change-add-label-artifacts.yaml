@@ -3,10 +3,8 @@ name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
 on:
   workflow_run:
     workflows:
-      [
-        "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
-        "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code",
-      ]
+      - "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+      - "[TEST-IGNORE] Breaking Change(Cross-Version) - Analyze Code"
     types: [completed]
 
 permissions:
