@@ -1,17 +1,17 @@
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 import {
+  buildState,
   getAffectedServices,
+  getChangedSwaggers,
   getService,
   reconcileChangedFilesAndTags,
-  getChangedSwaggers,
-  buildState,
 } from "../src/processChanges.js";
-import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { resolve } from "node:path";
+import { isWindows } from "./test-util.js";
 
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
