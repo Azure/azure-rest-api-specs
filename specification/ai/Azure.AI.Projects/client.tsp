@@ -51,22 +51,33 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+// Less generic names for C# subclients
+@@clientName(Azure.AI.Projects.Connections, "ConnectionsClient", "csharp");
+@@clientName(Azure.AI.Projects.Datasets, "DatasetsClient", "csharp");
+@@clientName(Azure.AI.Projects.Deployments, "DeploymentsClient", "csharp");
+@@clientName(Azure.AI.Projects.Indexes, "IndexesClient", "csharp");
+
 // Need to explicitly make all get and list methods include the object name for C#
-@@clientName(Azure.AI.Projects.Connections.get, "getConnection");
+@@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
 @@clientName(Azure.AI.Projects.Connections.getWithCredentials,
-  "getConnectionWithCredentials"
+  "getConnectionWithCredentials",
+  "csharp"
 );
-@@clientName(Azure.AI.Projects.Connections.list, "listConnections");
-@@clientName(Azure.AI.Projects.Datasets.getVersion, "getDataset");
-@@clientName(Azure.AI.Projects.Datasets.listLatest, "listDatasets");
+@@clientName(Azure.AI.Projects.Connections.list, "listConnections", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "getDataset", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "listDatasets", "csharp");
 @@clientName(Azure.AI.Projects.Datasets.listVersions,
-  "listDatasetVersions"
+  "listDatasetVersions",
+  "csharp"
 );
-@@clientName(Azure.AI.Projects.Deployments.get, "getDeployment");
-@@clientName(Azure.AI.Projects.Deployments.list, "listDeployments");
-@@clientName(Azure.AI.Projects.Indexes.getVersion, "getIndex");
-@@clientName(Azure.AI.Projects.Indexes.listLatest, "listIndexes");
-@@clientName(Azure.AI.Projects.Indexes.listVersions, "listIndexVersions");
+@@clientName(Azure.AI.Projects.Deployments.get, "getDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Deployments.list, "listDeployments", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.getVersion, "getIndex", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listLatest, "listIndexes", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listVersions,
+  "listIndexVersions",
+  "csharp"
+);
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
