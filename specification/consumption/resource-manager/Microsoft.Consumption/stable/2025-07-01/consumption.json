@@ -5871,14 +5871,16 @@
         "status": {
           "description": "This represent the status of a contingency.",
           "enum": [
-            "Scheduled",
+            "Unknown",
             "Active",
-            "Cancelled",
-            "PendingSettlement",
+            "Pending",
+            "Failed",
             "Completed",
-            "Expired",
-            "Conditional",
-            "Unknown"
+            "Canceled",
+            "Removed",
+            "ShortfallPending",
+            "ShortfallCharged",
+            "ShortfallWaived"
           ],
           "type": "string",
           "readOnly": true,
@@ -5886,10 +5888,6 @@
             "name": "StatusTypes",
             "modelAsString": true
           }
-        },
-        "subState": {
-          "description": "This represent the subState of a contingency.",
-          "type": "string"
         },
         "targetAmount": {
           "description": "The target amount for contingency.",
