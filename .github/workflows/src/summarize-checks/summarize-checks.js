@@ -22,7 +22,7 @@
 import { extractInputs } from "../context.js";
 // import { commentOrUpdate } from "../comment.js";
 import { execFile } from "../../../shared/src/exec.js";
-import { PER_PAGE_MAX } from "../github.js";
+import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import {
   brChRevApproval,
   getViolatedRequiredLabelsRules,
@@ -122,6 +122,13 @@ import path from "path";
 
 /**
  * @typedef {import("./labelling.js").RequiredLabelRule} RequiredLabelRule
+ */
+
+/**
+ * @typedef {Object} CheckRunResult
+ * @property {string} name
+ * @property {string} summary
+ * @property {"pending" | keyof typeof CheckConclusion} result
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -302,6 +309,28 @@ export default async function summarizeChecks({ github, context, core }) {
 }
 
 /**
+ * @param {typeof import("@actions/core")} core
+ * @param {CheckRunData[]} requiredCheckRuns
+ * @param {CheckRunData[]} fyiCheckRuns
+ */
+export function outputRunDetails(core, requiredCheckRuns, fyiCheckRuns) {
+  core.info(
+    `Observed ${requiredCheckRuns.length} required check runs ${requiredCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  requiredCheckRuns.forEach((x) => {
+    core.info(
+      `Required check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`,
+    );
+  });
+  core.info(
+    `Observed ${fyiCheckRuns.length} FYI check runs ${fyiCheckRuns.length > 0 ? ":" : "."}`,
+  );
+  fyiCheckRuns.forEach((x) => {
+    core.info(`FYI check "${x.name}" with status "${x.status}" and conclusion "${x.conclusion}"`);
+  });
+}
+
+/**
  * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
@@ -339,6 +368,17 @@ export async function summarizeChecksImpl(
     EXCLUDED_CHECK_NAMES,
   );
 
+  outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
+
+  if (!impactAssessment) {
+    core.info(
+      "Bailing out early without taking any further action, PR impact assessment is not yet complete.",
+    );
+    return;
+  }
+
+  core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
   core.info(
@@ -348,27 +388,27 @@ export async function summarizeChecksImpl(
       `Adding labels [${Array.from(labelContext.toAdd).join(", ")}]`,
   );
 
-  // for (const label of labelContext.toRemove) {
-  //   core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-  //   await github.rest.issues.removeLabel({
-  //     owner: owner,
-  //     repo: repo,
-  //     issue_number: issue_number,
-  //     name: label,
-  //   });
-  // }
+  for (const label of labelContext.toRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    // await github.rest.issues.removeLabel({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   name: label,
+    // });
+  }
 
-  // if (labelContext.toAdd.size > 0) {
-  //   core.info(
-  //     `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-  //   );
-  //   await github.rest.issues.addLabels({
-  //     owner: owner,
-  //     repo: repo,
-  //     issue_number: issue_number,
-  //     labels: Array.from(labelContext.toAdd),
-  //   });
-  // }
+  if (labelContext.toAdd.size > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelContext.toAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    // await github.rest.issues.addLabels({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   labels: Array.from(labelContext.toAdd),
+    // });
+  }
 
   // adjust labelNames based on labelsToAdd/labelsToRemove
   labelNames = labelNames.filter((name) => !labelContext.toRemove.has(name));
@@ -400,8 +440,69 @@ export async function summarizeChecksImpl(
   //   commentBody
   // )
 
+  // finally, update the "Automated merging requirements met" commit status
+  await updateCommitStatus(
+    github,
+    core,
+    owner,
+    repo,
+    head_sha,
+    "[TEST-IGNORE] Automated merging requirements met",
+    automatedChecksMet,
+  );
+
   core.info(
-    `Summarize checks has identified that status of "Automated merging requirements met" check should be updated to: ${automatedChecksMet}.`,
+    `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
+  );
+}
+
+/**
+ * Updates or creates a commit status with the given status
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} head_sha
+ * @param {string} statusContext
+ * @param {CheckRunResult} checkResult
+ * @returns {Promise<void>}
+ */
+export async function updateCommitStatus(
+  github,
+  core,
+  owner,
+  repo,
+  head_sha,
+  statusContext,
+  checkResult,
+) {
+  // Map CheckRunResult status to commit status state
+  /** @type {"pending" | "success" | "failure" | "error"} */
+  let state;
+
+  const validStates = [CheckConclusion.SUCCESS, CheckConclusion.FAILURE, "pending"];
+  if (validStates.includes(checkResult.result.toLowerCase())) {
+    state = /** @type {"pending" | "success" | "failure"} */ (checkResult.result.toLowerCase());
+  } else {
+    state = "error"; // fallback for unexpected values
+  }
+
+  // Create commit status instead of check run
+  await github.rest.repos.createCommitStatus({
+    owner,
+    repo,
+    sha: head_sha,
+    state: state,
+    description:
+      checkResult.summary.length > 140
+        ? checkResult.summary.substring(0, 137) + "..."
+        : checkResult.summary,
+    context: statusContext,
+    // target_url: undefined, // Optional: add a URL if you want to link to more details
+  });
+
+  core.info(
+    `Created commit status for ${statusContext} with state: ${state} and description: ${checkResult.summary}`,
   );
 }
 
@@ -633,11 +734,6 @@ export async function getCheckRunTuple(
     );
   }
 
-  core.info(
-    `RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, ` +
-      `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, ` +
-      `ImpactAssessment: ${JSON.stringify(impactAssessment)}`,
-  );
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
      * @param {CheckRunData} checkRun
@@ -765,7 +861,7 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @returns {Promise<[string, string]>}
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
   core,
@@ -808,7 +904,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @returns {Promise<[string, string]>}
+ * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
   core,
@@ -823,14 +919,12 @@ async function buildNextStepsToMergeCommentBody(
 
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
-  // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
-  // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
-  // The new world we will simply pull all the required checks and if any are failing then we are blocked. If there are
-  // no failed checks we can't yet say that everything is met, because a check MIGHT run in the future. To prevent
-  // this "no checks run" accidentally evaluating as success, we need to ensure that we have at least one failing check
-  // in the required checks to consider the requirements met
+  // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
+  // we consider requirements met if there are no blockers (which INCLUDES violated labelling rules) AND
+  // that we have at least one required check that is not in progress or queued.
+  // This might be too aggressive, but it's a good start.
   const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
 
   // Compose the body based on the current state
@@ -854,7 +948,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
  * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
- * @returns {[string, string]} The body content HTML and the status that automated checks met should be set to.
+ * @returns {[string, CheckRunResult]} The body content HTML and the CheckRunResult that automated checks met should be set to.
  */
 function getCommentBody(
   requirementsMet,
@@ -864,13 +958,21 @@ function getCommentBody(
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
 ) {
+  let title = "Automated merging requirements are being evaluated";
+  /** @type {"pending" | keyof typeof CheckConclusion} */
+  let status = "pending";
+  let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
+
+  // Generate the comment body using the original logic for backwards compatibility
   let bodyProper = "";
-  let automatedChecksMet = "pending";
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
-      automatedChecksMet = "blocked";
+      summaryData =
+        "❌ This PR cannot be merged because some requirements are not met. See the details.";
+      title = "Some automated merging requirements are not met";
+      status = "FAILURE";
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -881,17 +983,41 @@ function getCommentBody(
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
       if (!anyBlockerPresent) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
+        title =
+          "All automated merging requirements are met, though there are some non-required failures.";
+        summaryData =
+          `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
+          `but soon these requirements will be blocking.` +
+          `<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.` +
+          `<br/>If you want to proceed with merging this PR without fixing them, refer to ` +
+          `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+        status = "SUCCESS";
       }
     }
   } else if (requirementsMet) {
-    automatedChecksMet = "success";
     bodyProper =
       `✅ All automated merging requirements have been met! ` +
       `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+    summaryData =
+      `✅ All automated merging requirements have been met.` +
+      `<br/>To merge this PR, refer to ` +
+      `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
+      "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
+    title = "Automated merging requirements are met";
+    status = "SUCCESS";
   } else {
     bodyProper =
       "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+    // dont need to update the status of the check, as pending is the default state.
   }
+
+  /** @type {CheckRunResult} */
+  const automatedChecksMet = {
+    name: title,
+    summary: summaryData,
+    result: status,
+  };
+
   return [bodyProper, automatedChecksMet];
 }
 

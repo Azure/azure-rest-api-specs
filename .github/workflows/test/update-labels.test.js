@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PER_PAGE_MAX } from "../src/github.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.js";
 
