@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "Images"
+    },
+    {
       "name": "DevCenters"
     },
     {
@@ -74,9 +77,6 @@
     },
     {
       "name": "Galleries"
-    },
-    {
-      "name": "Images"
     },
     {
       "name": "ImageOperationGroup"
@@ -9757,6 +9757,14 @@
       "type": "object",
       "description": "Properties of a Dev Box definition.",
       "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image reference information."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU for Dev Boxes created using this definition."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
@@ -9783,6 +9791,10 @@
           "readOnly": true
         }
       },
+      "required": [
+        "imageReference",
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DevBoxDefinitionUpdateProperties"
@@ -11701,6 +11713,10 @@
       "type": "object",
       "description": "Network properties",
       "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The subnet to attach Virtual Machines to"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
@@ -11729,6 +11745,7 @@
         }
       },
       "required": [
+        "subnetId",
         "domainJoinType"
       ],
       "allOf": [
@@ -11954,6 +11971,22 @@
       "type": "object",
       "description": "Properties of a Pool",
       "properties": {
+        "devBoxDefinitionName": {
+          "type": "string",
+          "description": "Name of a Dev Box definition in parent Project of this Pool. Will be ignored if devBoxDefinitionType is Value."
+        },
+        "licenseType": {
+          "$ref": "#/definitions/LicenseType",
+          "description": "Specifies the license type indicating the caller has already acquired licenses for the Dev Boxes that will be created."
+        },
+        "localAdministrator": {
+          "$ref": "#/definitions/LocalAdminStatus",
+          "description": "Indicates whether owners of Dev Boxes in this pool are added as local administrators on the Dev Box."
+        },
+        "networkConnectionName": {
+          "type": "string",
+          "description": "Name of a Network Connection in parent Project of this Pool"
+        },
         "healthStatus": {
           "$ref": "#/definitions/HealthStatus",
           "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
@@ -11982,6 +12015,12 @@
           "readOnly": true
         }
       },
+      "required": [
+        "devBoxDefinitionName",
+        "licenseType",
+        "localAdministrator",
+        "networkConnectionName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PoolUpdateProperties"
@@ -12272,7 +12311,7 @@
           "type": "object",
           "description": "Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.",
           "additionalProperties": {
-            "$ref": "#/definitions/userRoleAssignmentValue"
+            "$ref": "#/definitions/UserRoleAssignment"
           }
         }
       }
@@ -12696,12 +12735,34 @@
       "type": "object",
       "description": "The Schedule properties defining when and what to execute.",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/ScheduledType",
+          "description": "Supported type this scheduled task represents."
+        },
+        "frequency": {
+          "$ref": "#/definitions/ScheduledFrequency",
+          "description": "The frequency of this scheduled task."
+        },
+        "time": {
+          "type": "string",
+          "description": "The target time to trigger the action. The format is HH:MM."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The IANA timezone id at which the schedule should execute."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
       },
+      "required": [
+        "type",
+        "frequency",
+        "time",
+        "timeZone"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ScheduleUpdateProperties"
@@ -13133,6 +13194,19 @@
         ]
       }
     },
+    "UserRoleAssignment": {
+      "type": "object",
+      "description": "Mapping of user object ID to role assignments.",
+      "properties": {
+        "roles": {
+          "type": "object",
+          "description": "A map of roles to assign to the parent user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentRole"
+          }
+        }
+      }
+    },
     "VirtualNetworkType": {
       "type": "string",
       "description": "Indicates a pool uses a Virtual Network managed by Microsoft (Managed), or a customer provided Network (Unmanaged).",
@@ -13188,20 +13262,6 @@
           "description": "Indicates whether workspace storage is enabled."
         }
       }
-    },
-    "userRoleAssignmentValue": {
-      "type": "object",
-      "description": "Mapping of user object ID to role assignments.",
-      "properties": {
-        "roles": {
-          "type": "object",
-          "description": "A map of roles to assign to the parent user.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EnvironmentRole"
-          }
-        }
-      },
-      "x-ms-client-name": "userRoleAssignmentValue"
     }
   },
   "parameters": {}

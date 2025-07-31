@@ -7026,6 +7026,12 @@
     "DevBoxDefinitionProperties": {
       "type": "object",
       "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference"
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -7090,6 +7096,10 @@
           "readOnly": true
         }
       },
+      "required": [
+        "imageReference",
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DevBoxDefinitionUpdateProperties"
@@ -8676,6 +8686,9 @@
     "NetworkProperties": {
       "type": "object",
       "properties": {
+        "subnetId": {
+          "type": "string"
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -8744,7 +8757,8 @@
         }
       },
       "required": [
-        "domainJoinType"
+        "domainJoinType",
+        "subnetId"
       ],
       "allOf": [
         {
@@ -8865,6 +8879,33 @@
     "PoolProperties": {
       "type": "object",
       "properties": {
+        "devBoxDefinitionName": {
+          "type": "string"
+        },
+        "licenseType": {
+          "type": "string",
+          "enum": [
+            "Windows_Client"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "localAdministrator": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LocalAdminStatus",
+            "modelAsString": true
+          }
+        },
+        "networkConnectionName": {
+          "type": "string"
+        },
         "healthStatus": {
           "type": "string",
           "enum": [
@@ -8922,6 +8963,12 @@
           "readOnly": true
         }
       },
+      "required": [
+        "devBoxDefinitionName",
+        "licenseType",
+        "localAdministrator",
+        "networkConnectionName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PoolUpdateProperties"
@@ -9584,6 +9631,32 @@
     "ScheduleProperties": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "StopDevBox"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduledType",
+            "modelAsString": true
+          }
+        },
+        "frequency": {
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduledFrequency",
+            "modelAsString": true
+          }
+        },
+        "time": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -9611,6 +9684,12 @@
           "readOnly": true
         }
       },
+      "required": [
+        "frequency",
+        "time",
+        "timeZone",
+        "type"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ScheduleUpdateProperties"

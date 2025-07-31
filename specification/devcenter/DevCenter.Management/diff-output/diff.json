@@ -3190,11 +3190,13 @@
       ]
     },
     "DevBoxDefinitionProperties": {
-      "required__deleted": [
-        "imageReference",
-        "sku"
-      ],
       "properties": {
+        "imageReference__added": {
+          "$ref": "#/definitions/ImageReference"
+        },
+        "sku__added": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
+        },
         "provisioningState": {
           "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
           "type__added": "string",
@@ -3835,6 +3837,9 @@
     },
     "NetworkProperties": {
       "properties": {
+        "subnetId__added": {
+          "type": "string"
+        },
         "provisioningState": {
           "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
           "type__added": "string",
@@ -3861,16 +3866,7 @@
             "modelAsString": true
           }
         }
-      },
-      "required": [
-        [
-          " "
-        ],
-        [
-          "-",
-          "subnetId"
-        ]
-      ]
+      }
     },
     "OperationStatus": {
       "properties": {
@@ -3890,13 +3886,34 @@
       ]
     },
     "PoolProperties": {
-      "required__deleted": [
-        "devBoxDefinitionName",
-        "licenseType",
-        "localAdministrator",
-        "networkConnectionName"
-      ],
       "properties": {
+        "devBoxDefinitionName__added": {
+          "type": "string"
+        },
+        "licenseType__added": {
+          "type": "string",
+          "enum": [
+            "Windows_Client"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "localAdministrator__added": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LocalAdminStatus",
+            "modelAsString": true
+          }
+        },
+        "networkConnectionName__added": {
+          "type": "string"
+        },
         "provisioningState": {
           "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
           "type__added": "string",
@@ -4172,13 +4189,33 @@
       ]
     },
     "ScheduleProperties": {
-      "required__deleted": [
-        "frequency",
-        "time",
-        "timeZone",
-        "type"
-      ],
       "properties": {
+        "type__added": {
+          "type": "string",
+          "enum": [
+            "StopDevBox"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduledType",
+            "modelAsString": true
+          }
+        },
+        "frequency__added": {
+          "type": "string",
+          "enum": [
+            "Daily"
+          ],
+          "x-ms-enum": {
+            "name": "ScheduledFrequency",
+            "modelAsString": true
+          }
+        },
+        "time__added": {
+          "type": "string"
+        },
+        "timeZone__added": {
+          "type": "string"
+        },
         "provisioningState": {
           "$ref__deleted": "commonDefinitions.json#/definitions/ProvisioningState",
           "type__added": "string",

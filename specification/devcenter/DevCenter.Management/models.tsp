@@ -1907,6 +1907,16 @@ model DevBoxDefinitionListResult is Azure.Core.Page<DevBoxDefinition>;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DevBoxDefinitionProperties extends DevBoxDefinitionUpdateProperties {
   /**
+   * Image reference information.
+   */
+  imageReference: ImageReference;
+
+  /**
+   * The SKU for Dev Boxes created using this definition.
+   */
+  sku: Azure.ResourceManager.CommonTypes.Sku;
+
+  /**
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
@@ -2522,6 +2532,26 @@ model ImageDefinitionBuildTaskParametersItem {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PoolProperties extends PoolUpdateProperties {
   /**
+   * Name of a Dev Box definition in parent Project of this Pool. Will be ignored if devBoxDefinitionType is Value.
+   */
+  devBoxDefinitionName: string;
+
+  /**
+   * Specifies the license type indicating the caller has already acquired licenses for the Dev Boxes that will be created.
+   */
+  licenseType: LicenseType;
+
+  /**
+   * Indicates whether owners of Dev Boxes in this pool are added as local administrators on the Dev Box.
+   */
+  localAdministrator: LocalAdminStatus;
+
+  /**
+   * Name of a Network Connection in parent Project of this Pool
+   */
+  networkConnectionName: string;
+
+  /**
    * Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.
    */
   @visibility(Lifecycle.Read)
@@ -2749,6 +2779,27 @@ model PoolUpdate extends TrackedResourceUpdate {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduleProperties extends ScheduleUpdateProperties {
   /**
+   * Supported type this scheduled task represents.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  type: ScheduledType;
+
+  /**
+   * The frequency of this scheduled task.
+   */
+  frequency: ScheduledFrequency;
+
+  /**
+   * The target time to trigger the action. The format is HH:MM.
+   */
+  time: string;
+
+  /**
+   * The IANA timezone id at which the schedule should execute.
+   */
+  timeZone: string;
+
+  /**
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
@@ -2763,7 +2814,6 @@ model ScheduleUpdateProperties extends TrackedResourceUpdate {
   /**
    * Supported type this scheduled task represents.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: ScheduledType;
 
   /**
@@ -2804,6 +2854,11 @@ model ScheduleUpdate {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkProperties extends NetworkConnectionUpdateProperties {
+  /**
+   * The subnet to attach Virtual Machines to
+   */
+  subnetId: string;
+
   /**
    * The provisioning state of the resource.
    */

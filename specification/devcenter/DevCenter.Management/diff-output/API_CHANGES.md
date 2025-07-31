@@ -144,6 +144,7 @@
 | `definitions.ProjectPolicyProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.ProjectProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.ScheduleProperties.properties.provisioningState.type__added` | added | `string` |
+| `definitions.ScheduleProperties.properties.type__added` | added | `{"type":"string","enum":["StopDevBox"],"x-ms-enum":{"name":"ScheduledType","modelAsString":true}}` |
 | `definitions.TrackedResourceUpdate.properties.tags.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/devcenters'].get.parameters[0].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/locations/{location}/operationStatuses/{operationId}'].get.parameters[0].type__deleted` | deleted | `string` |
@@ -199,7 +200,6 @@
 | `definitions.CustomizationTaskListResult.required__added` | added | `["value"]` |
 | `definitions.DefinitionParameters.required__added` | added | `["name","value"]` |
 | `definitions.DevBoxDefinitionListResult.required__added` | added | `["value"]` |
-| `definitions.DevBoxDefinitionProperties.required__deleted` | deleted | `["imageReference","sku"]` |
 | `definitions.DevCenterListResult.required__added` | added | `["value"]` |
 | `definitions.DevCenterSku.required__deleted` | deleted | `["name"]` |
 | `definitions.EncryptionSetListResult.required__added` | added | `["value"]` |
@@ -216,12 +216,10 @@
 | `definitions.NetworkConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.OutboundEnvironmentEndpointCollection.required__added` | added | `["value"]` |
 | `definitions.PoolListResult.required__added` | added | `["value"]` |
-| `definitions.PoolProperties.required__deleted` | deleted | `["devBoxDefinitionName","licenseType","localAdministrator","networkConnectionName"]` |
 | `definitions.ProjectEnvironmentTypeListResult.required__added` | added | `["value"]` |
 | `definitions.ProjectListResult.required__added` | added | `["value"]` |
 | `definitions.ProjectPolicyListResult.required__added` | added | `["value"]` |
 | `definitions.ScheduleListResult.required__added` | added | `["value"]` |
-| `definitions.ScheduleProperties.required__deleted` | deleted | `["frequency","time","timeZone","type"]` |
 | `definitions.SkuListResult.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/locations/{location}/operationStatuses/{operationId}'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.DevCenter/locations/{location}/usages'].get.parameters[0].required__deleted` | deleted | `true` |
@@ -414,6 +412,18 @@
 | `definitions.ImageDefinitionBuildTask.properties.parameters.items.properties__deleted` | deleted | `{"key":{"type":"string"},"value":{"type":"string"}}` |
 | `definitions.ProjectEnvironmentTypeUpdateProperties.properties.creatorRoleAssignment.properties__deleted` | deleted | `{"roles":{"type":"object","description":"A map of roles to assign to the environment creator.","addi...` |
 
+### Changes for `imageReference`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DevBoxDefinitionProperties.properties.imageReference__added` | added | `{"$ref":"#/definitions/ImageReference"}` |
+
+### Changes for `sku`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.DevBoxDefinitionProperties.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"}` |
+
 ### Changes for `additionalProperties`
 
 | Path | Change Type | Value |
@@ -433,6 +443,36 @@
 | `definitions.ProjectEnvironmentTypeUpdate.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
 | `definitions.TrackedResourceUpdate.properties.tags['x-ms-mutability__added']` | added | `["create","read","update"]` |
 
+### Changes for `subnetId`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.NetworkProperties.properties.subnetId__added` | added | `{"type":"string"}` |
+
+### Changes for `devBoxDefinitionName`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PoolProperties.properties.devBoxDefinitionName__added` | added | `{"type":"string"}` |
+
+### Changes for `licenseType`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PoolProperties.properties.licenseType__added` | added | `{"type":"string","enum":["Windows_Client"],"x-ms-enum":{"name":"LicenseType","modelAsString":true}}` |
+
+### Changes for `localAdministrator`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PoolProperties.properties.localAdministrator__added` | added | `{"type":"string","enum":["Disabled","Enabled"],"x-ms-enum":{"name":"LocalAdminStatus","modelAsString...` |
+
+### Changes for `networkConnectionName`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PoolProperties.properties.networkConnectionName__added` | added | `{"type":"string"}` |
+
 ### Changes for `tags`
 
 | Path | Change Type | Value |
@@ -444,6 +484,24 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ProjectEnvironmentType.properties.location__deleted` | deleted | `{"type":"string"}` |
+
+### Changes for `frequency`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ScheduleProperties.properties.frequency__added` | added | `{"type":"string","enum":["Daily"],"x-ms-enum":{"name":"ScheduledFrequency","modelAsString":true}}` |
+
+### Changes for `time`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ScheduleProperties.properties.time__added` | added | `{"type":"string"}` |
+
+### Changes for `timeZone`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ScheduleProperties.properties.timeZone__added` | added | `{"type":"string"}` |
 
 ### Changes for `x-ms-client-name`
 

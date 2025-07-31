@@ -38,7 +38,7 @@ using Microsoft.DevCenter;
 
 @@clientName(DevCenters.createOrUpdate::parameters.resource, "body");
 @@clientName(DevCenters.update::parameters.properties, "body");
-@@clientLocation(DevCenters.listByDevCenter, "Images");
+@@clientLocation(DevCenters.listByDevCenter, Images);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DevCenter.properties);
 
@@ -65,8 +65,8 @@ using Microsoft.DevCenter;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Project.properties);
 
-@@clientLocation(AttachedNetworkConnections.getByProject, "AttachedNetworks");
-@@clientLocation(AttachedNetworkConnections.listByProject, "AttachedNetworks");
+@@clientLocation(AttachedNetworkConnections.getByProject, AttachedNetworks);
+@@clientLocation(AttachedNetworkConnections.listByProject, AttachedNetworks);
 @@clientName(AttachedNetworks.createOrUpdate::parameters.resource, "body");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AttachedNetworkConnection.properties);
@@ -81,16 +81,16 @@ using Microsoft.DevCenter;
 @@clientLocation(Catalogs.getSyncErrorDetails, "ProjectCatalogs");
 @@clientLocation(Catalogs.sync, "ProjectCatalogs");
 @@clientLocation(Catalogs.connect, "ProjectCatalogs");
-@@clientLocation(CatalogOperationGroup.get, "Catalogs");
-@@clientLocation(CatalogOperationGroup.createOrUpdate, "Catalogs");
+@@clientLocation(CatalogOperationGroup.get, Catalogs);
+@@clientLocation(CatalogOperationGroup.createOrUpdate, Catalogs);
 @@clientName(CatalogOperationGroup.createOrUpdate::parameters.resource, "body");
-@@clientLocation(CatalogOperationGroup.update, "Catalogs");
+@@clientLocation(CatalogOperationGroup.update, Catalogs);
 @@clientName(CatalogOperationGroup.update::parameters.properties, "body");
-@@clientLocation(CatalogOperationGroup.delete, "Catalogs");
-@@clientLocation(CatalogOperationGroup.listByDevCenter, "Catalogs");
-@@clientLocation(CatalogOperationGroup.getSyncErrorDetails, "Catalogs");
-@@clientLocation(CatalogOperationGroup.sync, "Catalogs");
-@@clientLocation(CatalogOperationGroup.connect, "Catalogs");
+@@clientLocation(CatalogOperationGroup.delete, Catalogs);
+@@clientLocation(CatalogOperationGroup.listByDevCenter, Catalogs);
+@@clientLocation(CatalogOperationGroup.getSyncErrorDetails, Catalogs);
+@@clientLocation(CatalogOperationGroup.sync, Catalogs);
+@@clientLocation(CatalogOperationGroup.connect, Catalogs);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Catalog.properties);
 
@@ -98,13 +98,13 @@ using Microsoft.DevCenter;
   "ProjectCatalogEnvironmentDefinitions"
 );
 @@clientLocation(EnvironmentDefinitionOperationGroup.get,
-  "EnvironmentDefinitions"
+  EnvironmentDefinitions
 );
 @@clientLocation(EnvironmentDefinitionOperationGroup.listByCatalog,
-  "EnvironmentDefinitions"
+  EnvironmentDefinitions
 );
 @@clientLocation(EnvironmentDefinitionOperationGroup.getErrorDetails,
-  "EnvironmentDefinitions"
+  EnvironmentDefinitions
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EnvironmentDefinition.properties);
@@ -113,13 +113,13 @@ using Microsoft.DevCenter;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Gallery.properties);
 
-@@clientLocation(ImageOperationGroup.getByProject, "Images");
-@@clientLocation(ImageOperationGroup.listByProject, "Images");
+@@clientLocation(ImageOperationGroup.getByProject, Images);
+@@clientLocation(ImageOperationGroup.listByProject, Images);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Image.properties);
 
-@@clientLocation(ImageVersionOperationGroup.getByProject, "ImageVersions");
-@@clientLocation(ImageVersionOperationGroup.listByProject, "ImageVersions");
+@@clientLocation(ImageVersionOperationGroup.getByProject, ImageVersions);
+@@clientLocation(ImageVersionOperationGroup.listByProject, ImageVersions);
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ImageVersion.properties);
 
@@ -145,10 +145,10 @@ using Microsoft.DevCenter;
 @@clientName(DevBoxDefinitions.createOrUpdate::parameters.resource, "body");
 @@clientName(DevBoxDefinitions.update::parameters.properties, "body");
 @@clientLocation(DevBoxDefinitionOperationGroup.getByProject,
-  "DevBoxDefinitions"
+  DevBoxDefinitions
 );
 @@clientLocation(DevBoxDefinitionOperationGroup.listByProject,
-  "DevBoxDefinitions"
+  DevBoxDefinitions
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DevBoxDefinition.properties);
@@ -205,10 +205,10 @@ using Microsoft.DevCenter;
 @@flattenProperty(NetworkConnection.properties);
 
 @@clientLocation(HealthCheckStatusDetailsOperationGroup.getHealthDetails,
-  "NetworkConnections"
+  NetworkConnections
 );
 @@clientLocation(HealthCheckStatusDetailsOperationGroup.listHealthDetails,
-  "NetworkConnections"
+  NetworkConnections
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HealthCheckStatusDetails.properties);
