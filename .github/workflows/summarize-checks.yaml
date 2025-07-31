@@ -2,7 +2,6 @@ name: "[TEST-IGNORE] Summarize Checks"
 
 on:
   workflow_run:
-    # todo, any others need to be added here?
     workflows:
       - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
       - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
@@ -24,12 +23,13 @@ permissions:
   actions: read # to inspect workflow_run metadata
   contents: read # for actions/checkout
   checks: read # for octokit.rest.checks.listForRef
-  statuses: read # for octokit.rest.repos.getCombinedStatusForRef
+  statuses: write # for octokit.rest.repos.getCombinedStatusForRef and octokit.rest.repos.createCommitStatus
   issues: write # to post comments via the Issues API
   pull-requests: write # to post comments via the Pull Requests API
 
 jobs:
   run-summarize-checks:
+    if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
     name: "[TEST-IGNORE] Summarize Checks"
     runs-on: ubuntu-24.04
 
@@ -49,6 +49,47 @@ jobs:
             .github
 
       # todo: add the npm install ci here for the zod usage in summarize-checks (not currently there)
+
+      - id: dump-trigger-metadata
+        name: Dump Trigger Metadata
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log(`Event name: ${context.eventName}`);
+            console.log(`Action: ${context.payload.action}`);
+
+            if (context.eventName === 'workflow_run' && context.payload.workflow_run) {
+              const run = context.payload.workflow_run;
+              console.log(`Triggering workflow: ${run.name}`);
+              console.log(`Triggering workflow ID: ${run.id}`);
+              console.log(`Triggering run ID: ${run.run_number}`);
+              console.log(`Triggering event: ${run.event}`);
+              console.log(`Triggering status: ${run.status}`);
+              console.log(`Triggering conclusion: ${run.conclusion}`);
+              console.log(`Triggering branch: ${run.head_branch}`);
+              console.log(`Triggering SHA: ${run.head_sha}`);
+              console.log(`Triggering actor: ${run.actor?.login || 'unknown'}`);
+
+              // Create clickable URL to the triggering workflow run
+              const triggeringRunUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${run.id}`;
+              console.log(`🔗 Triggering workflow run URL: ${triggeringRunUrl}`);
+
+              // If there's a pull request associated, show that too
+              if (run.pull_requests && run.pull_requests.length > 0) {
+                run.pull_requests.forEach(pr => {
+                  const prUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${pr.number}`;
+                  console.log(`🔗 Associated PR: ${prUrl}`);
+                });
+              }
+            } else if (context.eventName === 'pull_request_target' && context.payload.pull_request) {
+              const pr = context.payload.pull_request;
+              console.log(`PR number: ${pr.number}`);
+              console.log(`PR title: ${pr.title}`);
+              console.log(`PR state: ${pr.state}`);
+              console.log(`PR head SHA: ${pr.head.sha}`);
+              console.log(`PR base branch: ${pr.base.ref}`);
+              console.log(`🔗 PR URL: ${pr.html_url}`);
+            }
 
       - id: summarize-checks
         name: Summarize Checks

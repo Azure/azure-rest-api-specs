@@ -48,6 +48,7 @@ import {
 /**
  * @typedef {Object} ImpactAssessment
  * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
+ * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
  * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
  * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
  * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
@@ -57,7 +58,6 @@ import {
  * @property {boolean} rpaasRPMissing - Whether the RPaaS RP label is missing.
  * @property {boolean} typeSpecChanged - Whether a TypeSpec file has changed.
  * @property {boolean} isDraft - Whether the PR is a draft.
- * @property {LabelContext} labelContext - The context containing present, to-add, and to-remove labels.
  * @property {string} targetBranch - The name of the target branch for the PR.
  */
 
@@ -411,33 +411,36 @@ export const breakingChangesCheckType = {
  * @returns {void}
  */
 export function processArmReviewLabels(context, existingLabels) {
-  // the important part about how this will work depends how the users use it
-  // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
-  // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
-  // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
-  // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
-  // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
-  if (includesEvery(existingLabels, ["ARMSignedOff"])) {
-    if (existingLabels.includes("ARMChangesRequested")) {
-      context.toRemove.add("ARMChangesRequested");
+  // only kick this off if the ARMReview label is present
+  if (existingLabels.includes("ARMReview")) {
+    // the important part about how this will work depends how the users use it
+    // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
+    // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
+    // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
+    // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
+    // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
+    if (includesEvery(existingLabels, ["ARMSignedOff"])) {
+      if (existingLabels.includes("ARMChangesRequested")) {
+        context.toRemove.add("ARMChangesRequested");
+      }
+      if (existingLabels.includes("WaitForARMFeedback")) {
+        context.toRemove.add("WaitForARMFeedback");
+      }
     }
-    if (existingLabels.includes("WaitForARMFeedback")) {
-      context.toRemove.add("WaitForARMFeedback");
+    // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
+    else if (
+      includesEvery(existingLabels, ["ARMChangesRequested"]) &&
+      includesNone(existingLabels, ["ARMSignedOff"])
+    ) {
+      if (existingLabels.includes("WaitForARMFeedback")) {
+        context.toRemove.add("WaitForARMFeedback");
+      }
     }
-  }
-  // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
-  else if (
-    includesEvery(existingLabels, ["ARMChangesRequested"]) &&
-    includesNone(existingLabels, ["ARMSignedOff"])
-  ) {
-    if (existingLabels.includes("WaitForARMFeedback")) {
-      context.toRemove.add("WaitForARMFeedback");
-    }
-  }
-  // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
-  else if (includesNone(existingLabels, ["ARMChangesRequested"])) {
-    if (!existingLabels.includes("WaitForARMFeedback")) {
-      context.toAdd.add("WaitForARMFeedback");
+    // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
+    else if (includesNone(existingLabels, ["ARMChangesRequested"])) {
+      if (!existingLabels.includes("WaitForARMFeedback")) {
+        context.toAdd.add("WaitForARMFeedback");
+      }
     }
   }
 }
@@ -460,40 +463,59 @@ This function does the following, **among other things**:
 
 - Calls the "processARMReviewWorkflowLabels" function if "ARMReview" label applies.
 */
-// todo: refactor to take context: PRContext as input instead of IValidatorContext.
-// All downstream usage appears to be using "context.contextConfig() as PRContext".
 /**
- * @param {string} targetBranch
  * @param {LabelContext} labelContext
- * @param {boolean} resourceManagerLabelShouldBePresent
- * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
- * @param {boolean} rpaasExceptionLabelShouldBePresent
- * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
- * @param {boolean} isNewApiVersion
- * @param {boolean} isDraft
+ * @param {ImpactAssessment} impactAssessment
  * @returns {Promise<{armReviewLabelShouldBePresent: boolean}>}
  */
-export async function processImpactAssessment(
-  targetBranch,
-  labelContext,
-  resourceManagerLabelShouldBePresent,
-  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
-  rpaasExceptionLabelShouldBePresent,
-  ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
-  isNewApiVersion,
-  isDraft,
-) {
+export async function processImpactAssessment(labelContext, impactAssessment) {
   console.log("ENTER definition processARMReview");
 
+  // By default these two should not be present. We may determine later in this function that they should be present after all.
   const armReviewLabel = new Label("ARMReview", labelContext.present);
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
   armReviewLabel.shouldBePresent = false;
-
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
-  // By default this label should not be present. We may determine later in this function that it should be present after all.
   newApiVersionLabel.shouldBePresent = false;
 
-  const branch = targetBranch;
+  const resourceManagerLabel = new Label("resource-manager", labelContext.present);
+  resourceManagerLabel.shouldBePresent = impactAssessment.resourceManagerRequired || false;
+
+  const dataplaneLabel = new Label("data-plane", labelContext.present);
+  dataplaneLabel.shouldBePresent = impactAssessment.dataPlaneRequired || false;
+
+  const typeSpecLabel = new Label("TypeSpec", labelContext.present);
+  typeSpecLabel.shouldBePresent = impactAssessment.typeSpecChanged || false;
+
+  const suppressionReviewRequiredLabel = new Label(
+    "SuppressionReviewRequired",
+    labelContext.present,
+  );
+  suppressionReviewRequiredLabel.shouldBePresent =
+    impactAssessment.suppressionReviewRequired || false;
+
+  const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
+  rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
+
+  const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
+  newRPNamespaceLabel.shouldBePresent = impactAssessment.newRP || false;
+
+  const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
+    "CI-NewRPNamespaceWithoutRPaaS",
+    labelContext.present,
+  );
+  ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
+
+  const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
+  rpaasExceptionLabel.shouldBePresent = impactAssessment.rpaasExceptionRequired || false;
+
+  const ciRpaasRPNotInPrivateRepoLabel = new Label(
+    "CI-RpaaSRPNotInPrivateRepo",
+    labelContext.present,
+  );
+  ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
+    impactAssessment.rpaasRpNotInPrivateRepo || false;
+
+  const branch = impactAssessment.targetBranch;
   const isReleaseBranchVal = isReleaseBranch(branch);
 
   // we used to also calculate if the branch name was from ShiftLeft, in which case we would or that
@@ -501,38 +523,54 @@ export async function processImpactAssessment(
   // so we only check if the branch is a release branch.
   // const prTitle = await getPrTitle(owner, repo, prNumber)
   // const isShiftLeftPRWithRPSaaSDevVal = isShiftLeftPRWithRPSaaSDev(prTitle, branch)
-  const isBranchInScopeOfSpecReview = isReleaseBranchVal; // || isShiftLeftPRWithRPSaaSDevVal
+  const isBranchInScopeOfSpecReview = isReleaseBranchVal;
 
   // 'specReviewApplies' means that either ARM or data-plane review applies. Downstream logic
   // determines which kind of review exactly we need.
-  let specReviewApplies = !isDraft && isBranchInScopeOfSpecReview;
+  let specReviewApplies = !impactAssessment.isDraft && isBranchInScopeOfSpecReview;
   if (specReviewApplies) {
-    if (isNewApiVersion) {
+    if (impactAssessment.isNewApiVersion) {
       // Note that in case of data-plane PRs, the addition of this label will result
       // in API stewardship board review being required.
       // See requiredLabelsRules.ts.
       newApiVersionLabel.shouldBePresent = true;
     }
 
-    armReviewLabel.shouldBePresent = resourceManagerLabelShouldBePresent;
+    armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
     await processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
-      ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
-      rpaasExceptionLabelShouldBePresent,
-      ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
+      impactAssessment.rpaasRPMissing,
+      impactAssessment.rpaasExceptionRequired,
+      impactAssessment.rpaasRpNotInPrivateRepo,
     );
   }
 
+  dataplaneLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  resourceManagerLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newApiVersionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   armReviewLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  typeSpecLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  suppressionReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+  ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
+
+  // this is the only labelling that was part of original pipelinebot logic, it handles the rotation of
+  // ARMChangesRequested, WaitForArmFeedback, and ARMSignedOff labels. The thing is, we only want to make
+  // these changes if the review is actually an ARM review. So we're going to place this after processing an impactAssessment
+  // which will tell us if a the ARMReview label should be present or not.
+  processArmReviewLabels(labelContext, [...labelContext.present, ...labelContext.toAdd]);
 
   console.log(
     `RETURN definition processARMReview. ` +
       `isReleaseBranch: ${isReleaseBranchVal}, ` +
+      `isArmReview: ${armReviewLabel.shouldBePresent}, ` +
       `isBranchInScopeOfArmReview: ${isBranchInScopeOfSpecReview}, ` +
-      `isNewApiVersion: ${isNewApiVersion}, ` +
-      `isDraft: ${isDraft}, ` +
+      `isNewApiVersion: ${impactAssessment.isNewApiVersion}, ` +
+      `isDraft: ${impactAssessment.isDraft}, ` +
       `newApiVersionLabel.shouldBePresent: ${newApiVersionLabel.shouldBePresent}, ` +
       `armReviewLabel.shouldBePresent: ${armReviewLabel.shouldBePresent}.`,
   );
