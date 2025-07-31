@@ -1,6 +1,6 @@
 ---
 mode: 'agent'
-tools: ['CheckServiceLabel', 'isValidCodeOwner', 'ValidateCodeOwners', 'AddCodeOwnerEntry'] 
+tools: ['CheckServiceLabel', 'CheckServiceExistsInCodeowners', 'ValidateCodeOwnerEntryForService', 'AddCodeownerEntry'] 
 ---
 
 # Validate Code Owners for SDK Services
@@ -13,9 +13,10 @@ Validate that a service label exists and verify that all associated code owners 
 - Service must be part of the Azure SDK ecosystem
 
 ## Process Overview
-This process involves two main phases:
+This process involves three main phases:
 1. **Service Label Validation**: Verify the service label exists in common-labels.csv
-2. **Code Owner Validation**: Ensure all code owners have proper GitHub permissions
+2. **Service Existence Check**: Check if the service exists in the CODEOWNERS file
+3. **Code Owner Validation or Creation**: Either validate existing code owners or create new entry
 
 ---
 
@@ -36,80 +37,139 @@ This process involves two main phases:
   - Inform the user that the service label is currently waiting for a PR approval.
   - Proceed to Step 2
 
-## Step 2: Determine Repository and Validate Code Owners
-- Ask the user to specify which SDK language repository they want to validate (e.g., "python", "net", "java", "js", "rest-api-specs")
-or, if the user is in a SDK language repository, use that one instead. Ensure they provide either the serviceLabel or repoPath.
-- Use `ValidateCodeOwners` tool with:
-  - `repoName`: The specified SDK repository name.
-  - `serviceLabel`: The validated service label from Step 1
-  - `repoPath`: The service path (e.g., "/sdk/contoso/" or "/sdk/contoso_service/contoso_subservice/").This should be the path generated in step 7 within `typespec-to-sdk`.
+## Step 2: Determine Repository and Check Service Existence
+- Ask the user to specify which SDK language repository they want to validate (e.g., "python", "dotnet", "java", "javascript", "rest-api-specs")
+or, if the user is in a SDK language repository, use that one instead.
+- Use `CheckServiceExistsInCodeowners` tool with:
+  - `repoName`: The specified SDK repository name. **Should be one of the following: 'dotnet', 'cpp', 'go', 'java', 'javascript', 'python', 'rest-api-specs', 'rust'.**
+  - `serviceLabel`: The validated service label from Step 1 (optional)
+  - `repoPath`: The service path (e.g., "/sdk/contoso/" or "/sdk/contoso_service/contoso_subservice/"). This should be the path generated in step 7 within `typespec-to-sdk` (optional)
 
-## Step 3: Handle Validation Results
-Based on the validation results:
+**Note**: You must provide either `serviceLabel` OR `repoPath` (or both). The tool will check if matching CODEOWNERS entries exist.
 
-### If ALL code owners are valid:
+## Step 3: Branch Based on Service Existence
+
+### If `CheckServiceExistsInCodeowners` returns `true` (Service EXISTS):
+- Proceed to **Step 4A: Validate Existing Code Owners**
+
+### If `CheckServiceExistsInCodeowners` returns `false` (Service DOES NOT EXIST):
+- Proceed to **Step 4B: Create New Code Owner Entry**
+
+---
+
+## Step 4A: Validate Existing Code Owners
+When the service exists in CODEOWNERS, validate all associated code owners:
+
+- Use `ValidateCodeOwnerEntryForService` tool with:
+  - `repoName`: The same repository name from Step 2
+  - `serviceLabel`: The validated service label from Step 1 (optional)
+  - `repoPath`: The service path (optional)
+
+The tool returns a `ServiceCodeOwnerResult` object with:
+- `Repository`: The full repository name (e.g., "azure-sdk-for-net")
+- `Status`: Status of the validation
+- `Message`: Descriptive message about the results
+- `CodeOwners`: Array of code owner validation results
+
+### Handle Validation Results:
+
+#### If ALL code owners are valid:
 - Display success message: "All code owners for service '[service-label]' in repository '[repo-name]' are valid"
+- Show the list of validated code owners with their details
 - Inform user they can proceed with the SDK release process
 - End validation process
 
-### If ANY code owners are invalid:
+#### If ANY code owners are invalid:
 - Display which code owners are invalid and why
+- Show specific validation details for each code owner
 - Provide specific guidance based on the type of issue:
 
-#### For Missing Microsoft Organization Membership:
+##### For Missing Microsoft Organization Membership:
 - **Issue**: User is not a member of the Microsoft organization
 - **Action**: Direct them to [Joining Microsoft Organization](https://repos.opensource.microsoft.com/orgs/Microsoft)
 - **Follow-up**: After joining, visit [Microsoft Org Visibility](https://github.com/orgs/Microsoft/people) to change membership to public
 
-#### For Missing Azure Organization Membership:
+##### For Missing Azure Organization Membership:
 - **Issue**: User is not a member of the Azure organization  
 - **Action**: Direct them to [Joining Azure Organization](https://repos.opensource.microsoft.com/orgs/Azure)
 - **Follow-up**: After joining, visit [Azure Org Visibility](https://github.com/orgs/Azure/people) to change membership to public
 
-#### For Missing Write Access:
+##### For Missing Write Access:
 - **Issue**: User lacks write permissions to the repository
 - **Action**: Direct them to [Request Write Access](https://coreidentity.microsoft.com/manage/Entitlement/entitlement/azuresdkpart-heqj)
 
-#### Requirements Summary:
+##### Requirements Summary:
 Each code owner MUST:
 - Be a PUBLIC member of both Microsoft and Azure organizations on GitHub
 - Have write access to the specific SDK repository
 - Have their GitHub profile visibility set to public in both organizations
 
-## Step 4: Adding New Code Owners (If Applicable)
-**Note**: This step only applies when a NEW service label was created and needs to be added to CODEOWNERS files.
+---
 
-If the user needs to add code owners for a new service:
-- Use `AddCodeOwnerEntry` tool with:
-  - `repo`: The target SDK repository.
-  - `path`: The service path (e.g., "/sdk/contoso/" or "/sdk/contoso_service/contoso_subservice/").
-  - `serviceLabel`: The created service label.
-  - `serviceOwners`: Array of GitHub usernames.
-  - `sourceOwners`: Array of GitHub usernames.
+## Step 4B: Create New Code Owner Entry
+When the service does NOT exist in CODEOWNERS, create a new entry:
 
-### Code Owner Types:
-- **Service Owner**: Responsible for service-related issues and questions
-- **Source Owner**: Responsible for generated SDK code and pull requests
+- Inform the user: "No existing CODEOWNERS entry found for this service. Creating a new entry."
+- Collect required information from the user:
+  - **Service Owners**: GitHub usernames responsible for service-related issues
+  - **Source Owners**: GitHub usernames responsible for generated SDK code and pull requests
+- Use `AddCodeownerEntry` tool with:
+  - `repo`: The target SDK repository (e.g., "dotnet", "python", etc.)
+  - `path`: The service path (e.g., "/sdk/contosowidgetmanager/")
+  - `serviceLabel`: The validated service label
+  - `serviceOwners`: Array of GitHub usernames for service owners
+  - `sourceOwners`: Array of GitHub usernames for source owners
+  - `workingBranch`: (Optional) Existing branch name if adding to an existing SDK generation branch
+
+### Code Owner Validation Before Adding:
+The tool automatically validates all provided code owners before creating the entry:
+- **Service owners validation**: Checks if users are valid but allows some flexibility
+- **Source owners validation**: Requires at least one valid source owner with proper permissions
+- **Service label validation**: Ensures the service label exists and is valid
 
 ### Multiple Code Owners:
-- A service can have multiple code owners
+- A service can have multiple service owners and source owners
 - User must specify all code owners and their roles
-- All code owners must meet the validation requirements from Step 3
+- At least one source owner must be valid for the entry to be created
+
+---
 
 ## Step 5: Completion
-- If adding new code owners, provide the user with the pull request link for review and merging
+### For Validation (Step 4A):
+- Display validation results summary
+- Inform user they can proceed with the SDK release process (if all valid)
+- Provide remediation steps (if any invalid code owners found)
+
+### For Creation (Step 4B):
+- The tool will:
+  - Create or reuse an existing branch (if `workingBranch` provided)
+  - Add the codeowner entry to the CODEOWNERS file
+  - Create a pull request or update an existing one
+  - Provide the user with the pull request link for review and merging
+- Display the results including:
+  - Branch information
+  - Pull request URL
+  - Any validation messages or warnings
 - Inform user that additional service fields can be added directly in the pull request if needed
-- Confirm that code owner validation is complete
+
+### Final Steps:
+- Confirm that code owner validation/creation is complete
+- User can proceed with the SDK release process
 
 ---
 
 ## Error Handling
 - If `CheckServiceLabel` fails: Ask user to verify the service label spelling and try again
-- If `ValidateCodeOwners` fails: Check repository name spelling and service label validity
-- If `AddCodeOwnerEntry` fails: Verify all parameters are correct and user has necessary permissions
+- If `CheckServiceExistsInCodeowners` fails: Check repository name spelling and service label/path validity
+- If `ValidateCodeOwnerEntryForService` fails: Check repository name spelling and service label/path validity
+- If `AddCodeownerEntry` fails: 
+  - Check that all parameters are correct
+  - Verify user has necessary permissions
+  - Ensure at least one valid source owner is provided
+  - Confirm service label exists and is valid
 
 ## Success Criteria
 - Service label exists and is valid
-- All code owners are valid GitHub users
-- All code owners have proper organization memberships and permissions
-- CODEOWNERS file is updated (if new service was added)
+- Service existence in CODEOWNERS is properly determined
+- For existing services: All code owners are valid GitHub users with proper permissions
+- For new services: CODEOWNERS file is updated with new entry and pull request created successfully
