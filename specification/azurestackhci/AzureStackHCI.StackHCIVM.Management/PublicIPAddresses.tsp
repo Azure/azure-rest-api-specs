@@ -23,7 +23,7 @@ model PublicIPAddress is TrackedResource<PublicIPAddressProperties> {
   @doc("Name of the public IP")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
-  @key("publicIPName")
+  @key("publicIPAddressName")
   @segment("publicIPAddresses")
   @visibility(Lifecycle.Read)
   name: string;
