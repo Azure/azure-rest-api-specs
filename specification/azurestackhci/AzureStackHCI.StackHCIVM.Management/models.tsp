@@ -1332,8 +1332,8 @@ model PublicIPAddressProperties {
   @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
   publicIPAddressVersion?: PublicIPAddressType;
 
-  @doc("ipAllocationScope: Arm Reference to the logical network to allocate this from")
-  ipAllocationScope?: LogicalNetworkArmReference;
+  @doc("ipAllocationScope: Arm Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
+  ipAllocationScope?: string;
 
   @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
   ipAddress?: string;
