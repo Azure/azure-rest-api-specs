@@ -558,7 +558,7 @@ describe("Summarize Checks Unit Tests", () => {
     });
 
     it("should extract check info from raw check response data", async () => {
-      const expectedCheckRunId = "16582733356";
+      const expectedCheckRunId = 16582733356;
       const response = await import("./fixtures/RawGraphQLResponse.json", {
         assert: { type: "json" },
       });
