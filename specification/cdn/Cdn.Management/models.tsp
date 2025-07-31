@@ -2620,7 +2620,7 @@ model AFDOriginUpdatePropertiesParameters {
   /**
    * The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.
    */
-  hostName: string;
+  hostName?: string;
 
   /**
    * The value of the HTTP port. Must be between 1 and 65535.
@@ -3727,6 +3727,7 @@ model ResponseBasedOriginErrorDetectionParameters {
    * The percentage of failed requests in the sample where failover should trigger.
    */
   @maxValue(100)
+  @minValue(0)
   responseBasedFailoverThresholdPercentage?: int32;
 
   /**
@@ -4045,6 +4046,11 @@ model OriginProperties extends OriginUpdatePropertiesParameters {
    */
   @visibility(Lifecycle.Read)
   privateEndpointStatus?: PrivateEndpointStatus;
+
+  /**
+   * The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.
+   */
+  hostName: string;
 }
 
 /**
@@ -4163,6 +4169,7 @@ model OriginGroupUpdatePropertiesParameters {
    * Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.
    */
   @maxValue(50)
+  @minValue(0)
   trafficRestorationTimeToHealedOrNewEndpointsInMinutes?: int32;
 
   /**
@@ -4745,12 +4752,14 @@ model RateLimitRule extends CustomRule {
   /**
    * Defines rate limit threshold.
    */
+  @minValue(0)
   rateLimitThreshold: int32;
 
   /**
    * Defines rate limit duration. Default is 1 minute.
    */
   @maxValue(60)
+  @minValue(0)
   rateLimitDurationInMinutes: int32;
 }
 
@@ -4772,6 +4781,7 @@ model CustomRule {
    * Defines in what order this rule be evaluated in the overall list of custom rules
    */
   @maxValue(1000)
+  @minValue(0)
   priority: int32;
 
   /**
@@ -5221,6 +5231,7 @@ model CustomerCertificateParameters extends SecretParameters {
   /**
    * The list of SANs.
    */
+  @visibility(Lifecycle.Read)
   subjectAlternativeNames?: string[];
 
   /**

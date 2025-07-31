@@ -8778,10 +8778,7 @@
           "$ref": "#/definitions/DeploymentStatus",
           "readOnly": true
         }
-      },
-      "required": [
-        "hostName"
-      ]
+      }
     },
     "AFDOriginUpdateParameters": {
       "type": "object",
@@ -8858,10 +8855,7 @@
           "description": "Whether to enable certificate name check at origin level",
           "default": true
         }
-      },
-      "required": [
-        "hostName"
-      ]
+      }
     },
     "AFDStateProperties": {
       "type": "object",
@@ -10385,6 +10379,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
+          "minimum": 0,
           "maximum": 1000
         },
         "matchConditions": {
@@ -10481,7 +10476,8 @@
           "description": "The list of SANs.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "thumbprint": {
           "type": "string",
@@ -13774,6 +13770,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "minimum": 0,
           "maximum": 50
         },
         "responseBasedOriginErrorDetectionSettings": {
@@ -13821,8 +13818,15 @@
           "$ref": "#/definitions/PrivateEndpointStatus",
           "description": "The approval status for the connection to the Private Link",
           "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint."
         }
       },
+      "required": [
+        "hostName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/OriginUpdatePropertiesParameters"
@@ -14868,12 +14872,14 @@
         "rateLimitThreshold": {
           "type": "integer",
           "format": "int32",
-          "description": "Defines rate limit threshold."
+          "description": "Defines rate limit threshold.",
+          "minimum": 0
         },
         "rateLimitDurationInMinutes": {
           "type": "integer",
           "format": "int32",
           "description": "Defines rate limit duration. Default is 1 minute.",
+          "minimum": 0,
           "maximum": 60
         }
       },
@@ -15676,6 +15682,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The percentage of failed requests in the sample where failover should trigger.",
+          "minimum": 0,
           "maximum": 100
         },
         "httpErrorRanges": {
