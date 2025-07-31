@@ -86,7 +86,8 @@ interface ImageDefinitions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ImageDefinitionListResult
   >;
 
   /**
@@ -170,7 +171,8 @@ interface ProjectCatalogImageDefinitions {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ImageDefinitionListResult
   >;
 
   /**

@@ -104,7 +104,8 @@ interface Schedules {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ScheduleListResult
   >;
 }
 

@@ -73,7 +73,8 @@ interface ProjectPolicies {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ProjectPolicyListResult
   >;
 }
 

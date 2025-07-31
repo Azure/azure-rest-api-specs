@@ -71,7 +71,8 @@ interface NetworkConnections {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = NetworkConnectionListResult
   >;
 
   /**
@@ -85,7 +86,8 @@ interface NetworkConnections {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = NetworkConnectionListResult
   >;
 
   /**

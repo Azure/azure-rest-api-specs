@@ -421,7 +421,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NetworkConnectionListResult"
             }
@@ -468,7 +468,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectListResult"
             }
@@ -1875,7 +1875,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionListResult"
             }
@@ -2097,7 +2097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionBuildListResult"
             }
@@ -4075,7 +4075,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageListResult"
             }
@@ -4216,7 +4216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageVersionListResult"
             }
@@ -4415,7 +4415,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectPolicyListResult"
             }
@@ -4764,7 +4764,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NetworkConnectionListResult"
             }
@@ -5303,7 +5303,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectListResult"
             }
@@ -6571,7 +6571,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionListResult"
             }
@@ -6793,7 +6793,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageDefinitionBuildListResult"
             }
@@ -7361,7 +7361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectEnvironmentTypeListResult"
             }
@@ -7716,7 +7716,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageListResult"
             }
@@ -7837,7 +7837,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ImageVersionListResult"
             }
@@ -8018,7 +8018,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PoolListResult"
             }
@@ -8467,7 +8467,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ScheduleListResult"
             }
@@ -10921,14 +10921,15 @@
     },
     "ImageDefinitionBuildListResult": {
       "type": "object",
-      "description": "The response of a ImageDefinitionBuild list operation.",
+      "description": "Paged collection of ImageDefinitionBuild items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The ImageDefinitionBuild items on this page",
           "items": {
             "$ref": "#/definitions/ImageDefinitionBuild"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11122,14 +11123,15 @@
     },
     "ImageDefinitionListResult": {
       "type": "object",
-      "description": "The response of a ImageDefinition list operation.",
+      "description": "Paged collection of ImageDefinition items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The ImageDefinition items on this page",
           "items": {
             "$ref": "#/definitions/ImageDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11225,14 +11227,15 @@
     },
     "ImageListResult": {
       "type": "object",
-      "description": "The response of a Image list operation.",
+      "description": "Paged collection of Image items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Image items on this page",
           "items": {
             "$ref": "#/definitions/Image"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11369,14 +11372,15 @@
     },
     "ImageVersionListResult": {
       "type": "object",
-      "description": "The response of a ImageVersion list operation.",
+      "description": "Paged collection of ImageVersion items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The ImageVersion items on this page",
           "items": {
             "$ref": "#/definitions/ImageVersion"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11549,7 +11553,8 @@
           "description": "The Usage items on this page",
           "items": {
             "$ref": "#/definitions/Usage"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11623,14 +11628,15 @@
     },
     "NetworkConnectionListResult": {
       "type": "object",
-      "description": "The response of a NetworkConnection list operation.",
+      "description": "Paged collection of NetworkConnection items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The NetworkConnection items on this page",
           "items": {
             "$ref": "#/definitions/NetworkConnection"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -11775,6 +11781,7 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "category"
           ]
@@ -11918,14 +11925,15 @@
     },
     "PoolListResult": {
       "type": "object",
-      "description": "The response of a Pool list operation.",
+      "description": "Paged collection of Pool items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Pool items on this page",
           "items": {
             "$ref": "#/definitions/Pool"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12165,14 +12173,15 @@
     },
     "ProjectEnvironmentTypeListResult": {
       "type": "object",
-      "description": "The response of a ProjectEnvironmentType list operation.",
+      "description": "Paged collection of ProjectEnvironmentType items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The ProjectEnvironmentType items on this page",
           "items": {
             "$ref": "#/definitions/ProjectEnvironmentType"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12265,14 +12274,15 @@
     },
     "ProjectListResult": {
       "type": "object",
-      "description": "The response of a Project list operation.",
+      "description": "Paged collection of Project items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Project items on this page",
           "items": {
             "$ref": "#/definitions/Project"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12313,14 +12323,15 @@
     },
     "ProjectPolicyListResult": {
       "type": "object",
-      "description": "The response of a ProjectPolicy list operation.",
+      "description": "Paged collection of ProjectPolicy items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The ProjectPolicy items on this page",
           "items": {
             "$ref": "#/definitions/ProjectPolicy"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12656,14 +12667,15 @@
     },
     "ScheduleListResult": {
       "type": "object",
-      "description": "The response of a Schedule list operation.",
+      "description": "Paged collection of Schedule items",
       "properties": {
         "value": {
           "type": "array",
           "description": "The Schedule items on this page",
           "items": {
             "$ref": "#/definitions/Schedule"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12838,7 +12850,8 @@
           "description": "The DevCenterSku items on this page",
           "items": {
             "$ref": "#/definitions/DevCenterSku"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

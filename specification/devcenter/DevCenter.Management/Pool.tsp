@@ -72,7 +72,8 @@ interface Pools {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = PoolListResult
   >;
 
   /**

@@ -83,7 +83,10 @@ interface ImageVersions {
   /**
    * Lists versions for an image.
    */
-  listByImage is ImageVersionOps.List<ImageVersion>;
+  listByImage is ImageVersionOps.List<
+    ImageVersion,
+    Response = ImageVersionListResult
+  >;
 }
 @armResourceOperations
 interface ImageVersionOperationGroupOps
@@ -138,7 +141,10 @@ interface ImageVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ImageVersions_ListByProject")
-  listByProject is ImageVersionOperationGroupOps.List<ImageVersion>;
+  listByProject is ImageVersionOperationGroupOps.List<
+    ImageVersion,
+    Response = ImageVersionListResult
+  >;
 }
 
 @@maxLength(ImageVersion.name, 32);

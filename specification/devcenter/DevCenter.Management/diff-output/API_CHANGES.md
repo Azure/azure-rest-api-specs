@@ -402,19 +402,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CatalogListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ImageDefinitionBuildListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ImageDefinitionListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ImageListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ImageVersionListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ListUsagesResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.NetworkConnectionListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.OutboundEnvironmentEndpointCollection.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.PoolListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ProjectEnvironmentTypeListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ProjectListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ProjectPolicyListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.ScheduleListResult.properties.value.readOnly__deleted` | deleted | `true` |
-| `definitions.SkuListResult.properties.value.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `items`
 

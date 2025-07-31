@@ -76,7 +76,8 @@ interface Projects {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ProjectListResult
   >;
 
   /**
@@ -90,7 +91,8 @@ interface Projects {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ProjectListResult
   >;
 
   /**

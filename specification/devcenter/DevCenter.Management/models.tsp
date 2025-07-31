@@ -3008,6 +3008,27 @@ model GalleryListResult is Azure.Core.Page<Gallery>;
 model HealthCheckStatusDetailsListResult
   is Azure.Core.Page<HealthCheckStatusDetails>;
 
+model ImageDefinitionBuildListResult is Azure.Core.Page<ImageDefinitionBuild>;
+
+model ImageDefinitionListResult is Azure.Core.Page<ImageDefinition>;
+
+model ImageListResult is Azure.Core.Page<Image>;
+
+model ImageVersionListResult is Azure.Core.Page<ImageVersion>;
+
+model NetworkConnectionListResult is Azure.Core.Page<NetworkConnection>;
+
+model PoolListResult is Azure.Core.Page<Pool>;
+
+model ProjectEnvironmentTypeListResult
+  is Azure.Core.Page<ProjectEnvironmentType>;
+
+model ProjectListResult is Azure.Core.Page<Project>;
+
+model ProjectPolicyListResult is Azure.Core.Page<ProjectPolicy>;
+
+model ScheduleListResult is Azure.Core.Page<Schedule>;
+
 @@visibility(AllowedEnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(AttachedNetworkListResult.value, Lifecycle.Read);
 @@visibility(CustomizationTaskListResult.value, Lifecycle.Read);
@@ -3022,3 +3043,16 @@ model HealthCheckStatusDetailsListResult
 @@visibility(EnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(GalleryListResult.value, Lifecycle.Read);
 @@visibility(HealthCheckStatusDetailsListResult.value, Lifecycle.Read);
+@@visibility(ImageDefinitionBuildListResult.value, Lifecycle.Read);
+@@visibility(ImageDefinitionListResult.value, Lifecycle.Read);
+@@visibility(ImageListResult.value, Lifecycle.Read);
+@@visibility(ImageVersionListResult.value, Lifecycle.Read);
+@@visibility(ListUsagesResult.value, Lifecycle.Read);
+@@visibility(NetworkConnectionListResult.value, Lifecycle.Read);
+@@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
+@@visibility(PoolListResult.value, Lifecycle.Read);
+@@visibility(ProjectEnvironmentTypeListResult.value, Lifecycle.Read);
+@@visibility(ProjectListResult.value, Lifecycle.Read);
+@@visibility(ProjectPolicyListResult.value, Lifecycle.Read);
+@@visibility(ScheduleListResult.value, Lifecycle.Read);
+@@visibility(SkuListResult.value, Lifecycle.Read);

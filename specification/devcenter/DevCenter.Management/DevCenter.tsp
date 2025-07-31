@@ -105,7 +105,7 @@ interface DevCenters {
   listByDevCenter is ArmResourceActionSync<
     DevCenter,
     void,
-    ArmResponse<ResourceListResult<Image>>,
+    Response = ImageListResult,
     Parameters = {
       /**
        * The maximum number of resources to return from the operation. Example: '$top=10'.

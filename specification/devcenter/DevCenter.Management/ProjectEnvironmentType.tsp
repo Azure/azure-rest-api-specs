@@ -68,7 +68,8 @@ interface ProjectEnvironmentTypes {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ProjectEnvironmentTypeListResult
   >;
 }
 

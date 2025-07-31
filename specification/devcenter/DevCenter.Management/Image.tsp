@@ -81,7 +81,8 @@ interface Images {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = ImageListResult
   >;
 }
 @armResourceOperations
@@ -128,7 +129,10 @@ interface ImageOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Images_ListByProject")
-  listByProject is ImageOperationGroupOps.List<Image>;
+  listByProject is ImageOperationGroupOps.List<
+    Image,
+    Response = ImageListResult
+  >;
 }
 
 @@maxLength(Image.name, 80);

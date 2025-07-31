@@ -87,7 +87,10 @@ interface ImageDefinitionBuilds {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DevCenterCatalogImageDefinitionBuilds_ListByImageDefinition")
-  listByImageDefinition is ImageDefinitionBuildOps.List<ImageDefinitionBuild>;
+  listByImageDefinition is ImageDefinitionBuildOps.List<
+    ImageDefinitionBuild,
+    Response = ImageDefinitionBuildListResult
+  >;
 
   /**
    * Cancels the specified build for an image definition.
@@ -173,7 +176,10 @@ interface ProjectCatalogImageDefinitionBuild {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ProjectCatalogImageDefinitionBuilds_ListByImageDefinition")
-  listByImageDefinition is ProjectCatalogImageDefinitionBuildOps.List<ImageDefinitionBuild>;
+  listByImageDefinition is ProjectCatalogImageDefinitionBuildOps.List<
+    ImageDefinitionBuild,
+    Response = ImageDefinitionBuildListResult
+  >;
 
   /**
    * Cancels the specified build for an image definition.
