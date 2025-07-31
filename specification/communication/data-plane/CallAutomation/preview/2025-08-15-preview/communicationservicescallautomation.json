@@ -710,7 +710,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the summarize call request and will begin processing it. You will receive either the CallSummarySuccess or the CallSummaryFailed event at your specified callback URI to update you on the status of the request."
+            "description": "The service has accepted the summarize call request and will begin processing it. You will receive TranscriptionCallSummaryUpdated event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -4745,7 +4745,7 @@
         "transcriptionResumed",
         "transcriptionUpdated",
         "transcriptionStopped",
-        "callSummaryUpdate",
+        "callSummaryUpdated",
         "unspecifiedError"
       ],
       "type": "string",
@@ -4790,6 +4790,7 @@
           "$ref": "#/definitions/TranscriptionStatusDetails"
         },
         "message": {
+          "description": "Optional message providing additional context about the transcription update.",
           "type": "string"
         }
       }
@@ -4884,7 +4885,7 @@
         }
       }
     },
-    "TranscriptionCallSummaryUpdate": {
+    "TranscriptionCallSummaryUpdated": {
       "type": "object",
       "properties": {
         "transcriptionUpdate": {
