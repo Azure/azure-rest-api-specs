@@ -84,7 +84,7 @@ interface ResourceGuards {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
-  @action("deleteResourceGuardProxyRequests")
+  @segment("deleteResourceGuardProxyRequests")
   getDeleteResourceGuardProxyRequestsObjects is ResourceGuardOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,
@@ -201,7 +201,7 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDisableSoftDeleteRequestsObjects")
-  @action("disableSoftDeleteRequests")
+  @segment("disableSoftDeleteRequests")
   getDisableSoftDeleteRequestsObjects is DppBaseResourceOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,
@@ -221,7 +221,7 @@ interface DppBaseResourceOperationGroup {
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("updateProtectedItemRequests")
+  @segment("updateProtectedItemRequests")
   @operationId("ResourceGuards_GetUpdateProtectedItemRequestsObjects")
   getUpdateProtectedItemRequestsObjects is DppBaseResourceUpdateProtectedItemOperationGroupOps.List<
     DppBaseResource,
@@ -243,7 +243,7 @@ interface DppBaseResourceOperationGroup {
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("updateProtectionPolicyRequests")
+  @segment("updateProtectionPolicyRequests")
   @operationId("ResourceGuards_GetUpdateProtectionPolicyRequestsObjects")
   getUpdateProtectionPolicyRequestsObjects is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.List<
     DppBaseResource,
@@ -266,7 +266,7 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetDeleteProtectedItemRequestsObjects")
-  @action("deleteProtectedItemRequests")
+  @segment("deleteProtectedItemRequests")
   getDeleteProtectedItemRequestsObjects is DppBaseResourceDeleteProtectedItemOperationGroupOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>,
@@ -289,7 +289,7 @@ interface DppBaseResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @action("getBackupSecurityPINRequests")
+  @segment("getBackupSecurityPINRequests")
   @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
   getBackupSecurityPINRequestsObjects is DppBaseResourceGetBackupSecurityPINOperationGroupOps.List<
     DppBaseResource,

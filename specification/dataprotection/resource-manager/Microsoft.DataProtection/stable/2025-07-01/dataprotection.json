@@ -3766,6 +3766,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/deleteProtectedItemRequests": {
+      "get": {
+        "operationId": "ResourceGuards_GetDeleteProtectedItemRequestsObjects",
+        "tags": [
+          "DppBaseResourceOperationGroup"
+        ],
+        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceGuardsName",
+            "in": "path",
+            "description": "The name of the ResourceGuardResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DppBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDeleteProtectedItemRequests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/deleteProtectedItemRequests/{requestName}": {
       "get": {
         "operationId": "ResourceGuards_GetDefaultDeleteProtectedItemRequestsObject",
@@ -3816,6 +3865,55 @@
           "Get DefaultOperationsRequestObject": {
             "$ref": "./examples/ResourceGuardCRUD/GetDefaultDeleteProtectedItemRequests.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/deleteResourceGuardProxyRequests": {
+      "get": {
+        "operationId": "ResourceGuards_GetDeleteResourceGuardProxyRequestsObjects",
+        "tags": [
+          "ResourceGuards"
+        ],
+        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceGuardsName",
+            "in": "path",
+            "description": "The name of the ResourceGuardResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DppBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDeleteResourceGuardProxyRequests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3872,6 +3970,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/disableSoftDeleteRequests": {
+      "get": {
+        "operationId": "ResourceGuards_GetDisableSoftDeleteRequestsObjects",
+        "tags": [
+          "DppBaseResourceOperationGroup"
+        ],
+        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceGuardsName",
+            "in": "path",
+            "description": "The name of the ResourceGuardResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DppBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListDisableSoftDeleteRequests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/disableSoftDeleteRequests/{requestName}": {
       "get": {
         "operationId": "ResourceGuards_GetDefaultDisableSoftDeleteRequestsObject",
@@ -3925,154 +4072,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/deleteProtectedItemRequests": {
-      "get": {
-        "operationId": "ResourceGuards_GetDeleteProtectedItemRequestsObjects",
-        "tags": [
-          "DppBaseResourceOperationGroup"
-        ],
-        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceGuardsName",
-            "in": "path",
-            "description": "The name of the ResourceGuardResource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DppBaseResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OperationsRequestObject": {
-            "$ref": "./examples/ResourceGuardCRUD/ListDeleteProtectedItemRequests.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/deleteResourceGuardProxyRequests": {
-      "get": {
-        "operationId": "ResourceGuards_GetDeleteResourceGuardProxyRequestsObjects",
-        "tags": [
-          "ResourceGuards"
-        ],
-        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceGuardsName",
-            "in": "path",
-            "description": "The name of the ResourceGuardResource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DppBaseResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OperationsRequestObject": {
-            "$ref": "./examples/ResourceGuardCRUD/ListDeleteResourceGuardProxyRequests.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/disableSoftDeleteRequests": {
-      "get": {
-        "operationId": "ResourceGuards_GetDisableSoftDeleteRequestsObjects",
-        "tags": [
-          "DppBaseResourceOperationGroup"
-        ],
-        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceGuardsName",
-            "in": "path",
-            "description": "The name of the ResourceGuardResource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DppBaseResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OperationsRequestObject": {
-            "$ref": "./examples/ResourceGuardCRUD/ListDisableSoftDeleteRequests.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/getBackupSecurityPINRequests": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/getBackupSecurityPINRequests": {
       "get": {
         "operationId": "ResourceGuards_GetBackupSecurityPINRequestsObjects",
         "tags": [
@@ -4114,104 +4114,6 @@
         "x-ms-examples": {
           "List OperationsRequestObject": {
             "$ref": "./examples/ResourceGuardCRUD/ListBackupSecurityPINRequests.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/updateProtectedItemRequests": {
-      "get": {
-        "operationId": "ResourceGuards_GetUpdateProtectedItemRequestsObjects",
-        "tags": [
-          "DppBaseResourceOperationGroup"
-        ],
-        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceGuardsName",
-            "in": "path",
-            "description": "The name of the ResourceGuardResource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DppBaseResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OperationsRequestObject": {
-            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectedItemRequests.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/dppBaseResources/updateProtectionPolicyRequests": {
-      "get": {
-        "operationId": "ResourceGuards_GetUpdateProtectionPolicyRequestsObjects",
-        "tags": [
-          "DppBaseResourceOperationGroup"
-        ],
-        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceGuardsName",
-            "in": "path",
-            "description": "The name of the ResourceGuardResource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DppBaseResourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List OperationsRequestObject": {
-            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectionPolicyRequests.json"
           }
         },
         "x-ms-pageable": {
@@ -4272,6 +4174,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/updateProtectedItemRequests": {
+      "get": {
+        "operationId": "ResourceGuards_GetUpdateProtectedItemRequestsObjects",
+        "tags": [
+          "DppBaseResourceOperationGroup"
+        ],
+        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceGuardsName",
+            "in": "path",
+            "description": "The name of the ResourceGuardResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DppBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectedItemRequests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/updateProtectedItemRequests/{requestName}": {
       "get": {
         "operationId": "ResourceGuards_GetDefaultUpdateProtectedItemRequestsObject",
@@ -4322,6 +4273,55 @@
           "Get DefaultOperationsRequestObject": {
             "$ref": "./examples/ResourceGuardCRUD/GetDefaultUpdateProtectedItemRequests.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/resourceGuards/{resourceGuardsName}/updateProtectionPolicyRequests": {
+      "get": {
+        "operationId": "ResourceGuards_GetUpdateProtectionPolicyRequestsObjects",
+        "tags": [
+          "DppBaseResourceOperationGroup"
+        ],
+        "description": "Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceGuardsName",
+            "in": "path",
+            "description": "The name of the ResourceGuardResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DppBaseResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/ResourceGuardCRUD/ListUpdateProtectionPolicyRequests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
