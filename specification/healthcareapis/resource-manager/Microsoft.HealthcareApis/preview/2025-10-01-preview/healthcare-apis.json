@@ -1218,7 +1218,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComputeConfiguration"
+              "$ref": "#/definitions/ComputeConfigurationParameters"
             },
             "description": "Specifies the compute configuration to apply to the DICOM service."
           }
@@ -2009,7 +2009,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComputeConfiguration"
+              "$ref": "#/definitions/ComputeConfigurationParameters"
             },
             "description": "Specifies the compute configuration to apply to the FHIR service."
           }
@@ -4320,6 +4320,35 @@
     "ComputeConfiguration": {
       "description": "The configuration for the compute model used for the service.",
       "properties": {
+        "allOf":[
+          {
+            "$ref": "#/definitions/ComputeUnits"
+          }
+        ],
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the compute model set for the resource.",
+          "enum": [
+            "OnDemand",
+            "Dedicated",
+            "Legacy"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeModel",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeConfigurationParameters": {
+      "description": "The configuration for the compute model used for the service.",
+      "properties": {
+        "allOf":[
+          {
+            "$ref": "#/definitions/ComputeUnits"
+          }
+        ],
         "name": {
           "type": "string",
           "description": "The name of the compute model used for the resource.",
@@ -4328,10 +4357,13 @@
             "Dedicated"
           ],
           "x-ms-enum": {
-            "name": "ComputeModel",
+            "name": "ComputeModelMigrationType",
             "modelAsString": true
           }
-        },
+        }
+      }
+    },
+    "ComputeUnits": {
         "dbComputeUnits": {
           "type": "integer",
           "description": "The number of database compute units used for the resource. Only applicable for Dedicated compute model.",
@@ -4342,7 +4374,6 @@
           "description": "The number of application compute units used for the resource. Only applicable for Dedicated compute model.",
           "minimum": 2
         }
-      }
     },
     "EnableDataPartitions": {
       "description": "Boolean to indicate if data partitions is enabled or not.",
