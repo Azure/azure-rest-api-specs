@@ -104,16 +104,16 @@ model FleetProperties {
   @visibility(Lifecycle.Read)
   uniqueId?: string;
 
+  /** Mode of the Fleet. */
   @added(Versions.v2025_07_01_preview)
-  @doc("Mode of the Fleet.")
   mode?: FleetMode;
 
+  /** CapacityType of the Fleet. */
   @added(Versions.v2025_07_01_preview)
-  @doc("CapacityType of the Fleet.")
   capacityType?: CapacityType;
 
+  /** Zone Allocation Policy for Fleet. */
   @added(Versions.v2025_07_01_preview)
-  @doc("Zone Allocation Policy for Fleet.")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
@@ -530,70 +530,70 @@ model AdditionalLocationsProfile {
   locationProfiles: Array<LocationProfile>;
 }
 
+/** Modes for Compute Fleet. */
 @added(Versions.v2025_07_01_preview)
-@doc("Modes for Compute Fleet.")
 union FleetMode {
   string,
 
-  @doc("Default. Managed is the default mode for Compute Fleet where VMs are provisioned via VMSS.")
+  /** Default. Managed is the default mode for Compute Fleet where VMs are provisioned via VMSS. */
   managed: "Managed",
 
-  @doc("Instance mode for Compute Fleet will directly provision VM instances.")
+  /** Instance mode for Compute Fleet will directly provision VM instances. */
   instance: "Instance",
 }
 
+/** Capacity types for Compute Fleet. */
 @added(Versions.v2025_07_01_preview)
-@doc("Capacity types for Compute Fleet.")
 union CapacityType {
   string,
 
-  @doc("Default. VM is the default capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VMs.")
+  /** Default. VM is the default capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VMs. */
   VM: "VM",
 
-  @doc("VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus.")
+  /** VCpu is the capacity type for Compute Fleet where Fleet capacity is provisioned in terms of VCpus. */
   VCpu: "VCpu",
 }
 
+/** ZoneAllocationPolicy for Compute Fleet. */
 @added(Versions.v2025_07_01_preview)
-@doc("ZoneAllocationPolicy for Compute Fleet.")
 model ZoneAllocationPolicy {
-  @doc("Distribution strategy used for zone allocation policy.")
+  /** Distribution strategy used for zone allocation policy. */
   distributionStrategy: ZoneDistributionStrategy;
 
+  /** Zone preferences, required when zone distribution strategy is Prioritized. */
   @identifiers(#[])
-  @doc("Zone preferences, required when zone distribution strategy is Prioritized.")
   zonePreferences?: Array<ZonePreference>;
 }
 
+/** Distribution strategies for Compute Fleet zone allocation policy. */
 @added(Versions.v2025_07_01_preview)
-@doc("Distribution strategies for Compute Fleet zone allocation policy.")
 union ZoneDistributionStrategy {
   string,
 
-  @doc("""
-    Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.
-    If capacity is not available, Compute Fleet can allocate capacity in different zones.
-    """)
+  /**
+   * Default. Compute Fleet allocates all Fleet capacity within a single zone based on best effort.
+   * If capacity is not available, Compute Fleet can allocate capacity in different zones.
+   */
   BestEffortSingleZone: "BestEffortSingleZone",
 
-  @doc("""
-    Compute Fleet allocates capacity based on zone preferences.
-    Higher priority zones are filled first before allocating to lower priority zones.
-    """)
+  /**
+   * Compute Fleet allocates capacity based on zone preferences.
+   * Higher priority zones are filled first before allocating to lower priority zones.
+   */
   Prioritized: "Prioritized",
 }
 
+/** Zone preferences for Compute Fleet zone allocation policy. */
 @added(Versions.v2025_07_01_preview)
-@doc("Zone preferences for Compute Fleet zone allocation policy.")
 model ZonePreference {
-  @doc("Name of the zone.)")
+  /** Name of the zone. */
   zone: string;
 
-  @doc("""
-    The rank of the zone. This is used with 'Prioritized' ZoneDistributionStrategy.
-    The lower the number, the higher the priority, starting with 0.
-    0 is the highest rank. If not specified, defaults to lowest rank.
-    """)
+  /**
+   * The rank of the zone. This is used with 'Prioritized' ZoneDistributionStrategy.
+   * The lower the number, the higher the priority, starting with 0.
+   * 0 is the highest rank. If not specified, defaults to lowest rank.
+   */
   @minValue(0)
   @maxValue(65535)
   rank?: int32;
@@ -635,12 +635,12 @@ interface Fleets {
     >,
   ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 
+  /** List VirtualMachine resources of an instance Fleet. */
   @added(Versions.v2025_07_01_preview)
   @autoRoute
   @listsResource(VirtualMachine)
   @armResourceList(VirtualMachine)
   @get
-  @doc("List VirtualMachine resources of an instance Fleet.")
   listVirtualMachines(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -651,17 +651,17 @@ interface Fleets {
       NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
     >,
 
-    @doc("Filter expression to filter the virtual machines.")
+    /** Filter expression to filter the virtual machines. */
     @query
     $filter?: string,
 
-    @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
+    /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
     @query
     $skiptoken?: string,
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
 
+  /** Cancels an instance Fleet creation that is in progress. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2025_07_01_preview)
-  @doc("Cancels an instance Fleet creation that is in progress.")
   cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
