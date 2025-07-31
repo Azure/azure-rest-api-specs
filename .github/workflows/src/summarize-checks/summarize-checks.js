@@ -138,7 +138,7 @@ const FYI_CHECK_NAMES = [
   "Swagger BreakingChange",
   "Swagger PrettierCheck",
 ];
-const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
+const AUTOMATED_CHECK_NAME = "[TEST-IGNORE] Automated merging requirements met";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -370,14 +370,14 @@ export async function summarizeChecksImpl(
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
-  if (!impactAssessment) {
+  if (impactAssessment) {
+    core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
+  } else {
     core.info(
-      "Bailing out early without taking any further action, PR impact assessment is not yet complete.",
+      `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
+        `No labels will be added or removed in this run, and only "pending" status check will be set.`,
     );
-    return;
   }
-
-  core.info(`ImpactAssessment: ${JSON.stringify(impactAssessment)}`);
 
   let labelContext = await updateLabels(labelNames, impactAssessment);
 
@@ -425,6 +425,7 @@ export async function summarizeChecksImpl(
     targetBranch,
     requiredCheckRuns,
     fyiCheckRuns,
+    impactAssessment !== undefined,
   );
 
   core.info(
@@ -441,15 +442,7 @@ export async function summarizeChecksImpl(
   // )
 
   // finally, update the "Automated merging requirements met" commit status
-  await updateCommitStatus(
-    github,
-    core,
-    owner,
-    repo,
-    head_sha,
-    "[TEST-IGNORE] Automated merging requirements met",
-    automatedChecksMet,
-  );
+  await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet);
 
   core.info(
     `Summarize checks has identified that status of "[TEST-IGNORE] Automated merging requirements met" commit status should be updated to: ${JSON.stringify(automatedChecksMet)}.`,
@@ -463,19 +456,10 @@ export async function summarizeChecksImpl(
  * @param {string} owner
  * @param {string} repo
  * @param {string} head_sha
- * @param {string} statusContext
  * @param {CheckRunResult} checkResult
  * @returns {Promise<void>}
  */
-export async function updateCommitStatus(
-  github,
-  core,
-  owner,
-  repo,
-  head_sha,
-  statusContext,
-  checkResult,
-) {
+export async function updateCommitStatus(github, core, owner, repo, head_sha, checkResult) {
   // Map CheckRunResult status to commit status state
   /** @type {"pending" | "success" | "failure" | "error"} */
   let state;
@@ -497,12 +481,12 @@ export async function updateCommitStatus(
       checkResult.summary.length > 140
         ? checkResult.summary.substring(0, 137) + "..."
         : checkResult.summary,
-    context: statusContext,
+    context: checkResult.name,
     // target_url: undefined, // Optional: add a URL if you want to link to more details
   });
 
   core.info(
-    `Created commit status for ${statusContext} with state: ${state} and description: ${checkResult.summary}`,
+    `Created commit status for ${checkResult.name} with state: ${state} and description: ${checkResult.summary}`,
   );
 }
 
@@ -775,7 +759,7 @@ export function checkRunIsSuccessful(checkRun) {
  * @param {any} response - GraphQL response data
  * @returns {[CheckRunData[], CheckRunData[], number | undefined]}
  */
-function extractRunsFromGraphQLResponse(response) {
+export function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = [];
   /** @type {CheckRunData[]} */
@@ -792,22 +776,12 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
         if (checkSuiteNode.checkRuns?.nodes) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-            // We have some specific guidance for some of the required checks.
-            const checkInfo =
-              CHECK_METADATA.find((metadata) => metadata.name === checkRunNode.name) ||
-              /** @type {CheckMetadata} */ ({
-                precedence: 1000,
-                name: checkRunNode.name,
-                suppressionLabels: [],
-                troubleshootingGuide: defaultTsg,
-              });
-
             if (checkRunNode.isRequired) {
               reqCheckRuns.push({
                 name: checkRunNode.name,
                 status: checkRunNode.status,
                 conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
+                checkInfo: getCheckInfo(checkRunNode.name),
               });
             }
             // Note the "else" here. It means that:
@@ -820,7 +794,7 @@ function extractRunsFromGraphQLResponse(response) {
                 name: checkRunNode.name,
                 status: checkRunNode.status,
                 conclusion: checkRunNode.conclusion,
-                checkInfo: checkInfo,
+                checkInfo: getCheckInfo(checkRunNode.name),
               });
             }
           });
@@ -851,6 +825,23 @@ function extractRunsFromGraphQLResponse(response) {
   }
   return [reqCheckRuns, fyiCheckRuns, impactAssessmentWorkflowRun];
 }
+/**
+ * Get metadata for a specific check from our index.
+ * @param {string} checkName
+ * @returns {CheckMetadata}
+ */
+export function getCheckInfo(checkName) {
+  return (
+    CHECK_METADATA.find((metadata) => metadata.name === checkName) ||
+    /** @type {CheckMetadata} */ ({
+      precedence: 1000,
+      name: checkName,
+      suppressionLabels: [],
+      troubleshootingGuide: defaultTsg,
+    })
+  );
+}
+
 // #endregion
 // #region next steps
 /**
@@ -861,6 +852,7 @@ function extractRunsFromGraphQLResponse(response) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
+ * @param {boolean} assessmentCompleted
  * @returns {Promise<[string, CheckRunResult]>}
  */
 export async function createNextStepsComment(
@@ -870,13 +862,15 @@ export async function createNextStepsComment(
   targetBranch,
   requiredRuns,
   fyiRuns,
+  assessmentCompleted,
 ) {
   // select just the metadata that we need about the runs.
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
-  // determine if required runs have any successful runs.
+  // determine if required runs have any in-progress or queued runs
+  // if there are any, we consider the requirements not met.
   const requiredCheckInfosPresent = requiredRuns.some((run) => {
     const status = run.status.toLowerCase();
     return status !== "queued" && status !== "in_progress";
@@ -892,6 +886,7 @@ export async function createNextStepsComment(
     requiredCheckInfosPresent,
     requiredCheckInfos,
     fyiCheckInfos,
+    assessmentCompleted,
   );
 
   return [commentBody, automatedChecksMet];
@@ -904,6 +899,7 @@ export async function createNextStepsComment(
  * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
+ * @param {boolean} assessmentCompleted
  * @returns {Promise<[string, CheckRunResult]>}
  */
 async function buildNextStepsToMergeCommentBody(
@@ -913,6 +909,7 @@ async function buildNextStepsToMergeCommentBody(
   requiredCheckInfosPresent,
   failingReqChecksInfo,
   failingFyiChecksInfo,
+  assessmentCompleted,
 ) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
@@ -922,10 +919,13 @@ async function buildNextStepsToMergeCommentBody(
   // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
-  // we consider requirements met if there are no blockers (which INCLUDES violated labelling rules) AND
-  // that we have at least one required check that is not in progress or queued.
-  // This might be too aggressive, but it's a good start.
-  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
+  // we consider requirements met if there are:
+  // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
+  // - that none of the required checks are in_progress or queued (requiredCheckInfosPresent)
+  // - and that the assessment is completed. If it is not, we assume we are still evaluating the requirements. Not having
+  //   the assessment completed is a blocker, as we may end up having violated labelling rules that would be detected only after
+  //   it is completed.
+  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent && assessmentCompleted;
 
   // Compose the body based on the current state
   const [commentBody, automatedChecksMet] = getCommentBody(
@@ -958,7 +958,6 @@ function getCommentBody(
   failingFyiChecksInfo,
   violatedRequiredLabelsRules,
 ) {
-  let title = "Automated merging requirements are being evaluated";
   /** @type {"pending" | keyof typeof CheckConclusion} */
   let status = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
@@ -971,7 +970,6 @@ function getCommentBody(
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
-      title = "Some automated merging requirements are not met";
       status = "FAILURE";
     }
 
@@ -983,8 +981,6 @@ function getCommentBody(
       bodyProper += getFyiPresentBody(failingFyiChecksInfo);
       if (!anyBlockerPresent) {
         bodyProper += `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`;
-        title =
-          "All automated merging requirements are met, though there are some non-required failures.";
         summaryData =
           `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, ` +
           `but soon these requirements will be blocking.` +
@@ -1003,7 +999,6 @@ function getCommentBody(
       `<br/>To merge this PR, refer to ` +
       `<a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.` +
       "<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).";
-    title = "Automated merging requirements are met";
     status = "SUCCESS";
   } else {
     bodyProper =
@@ -1013,7 +1008,7 @@ function getCommentBody(
 
   /** @type {CheckRunResult} */
   const automatedChecksMet = {
-    name: title,
+    name: AUTOMATED_CHECK_NAME,
     summary: summaryData,
     result: status,
   };
