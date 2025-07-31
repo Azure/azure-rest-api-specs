@@ -2,7 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Monitor Data Collection Control Plane API",
-    "description": "Provides operations for working with Azure Monitor data collection rule associations",
+    "description": "Provides comprehensive operations for working with Azure Monitor data collection rules, endpoints, and associations. This API enables management of telemetry collection, transformation, and routing configurations.",
+    "contact": {
+      "name": "Azure Monitor Control Service Team",
+      "email": "amcsdev@microsoft.com"
+    },
     "version": "2024-03-11",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
@@ -80,6 +84,19 @@
           },
           {
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "(Optional) The continuation token for paginated responses",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "(Optional) The max number of items to return per page",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -301,39 +318,6 @@
     }
   },
   "definitions": {
-    "Metadata": {
-      "description": "Metadata about the resource",
-      "type": "object",
-      "properties": {
-        "provisionedBy": {
-          "description": "Azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "Azure Security Center",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "provisionedByResourceId": {
-          "description": "Resource Id of azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "provisionedByImmutableId": {
-          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
-          "type": "string",
-          "readOnly": true,
-          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2",
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
     "DataCollectionRuleAssociation": {
       "description": "Definition of association of a data collection rule with a monitored Azure resource.",
       "type": "object",
@@ -392,7 +376,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Resource properties.",
           "allOf": [
             {
               "$ref": "#/definitions/DataCollectionRuleAssociation"
@@ -467,6 +450,27 @@
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
           "type": "string"
+        }
+      }
+    },
+    "Metadata": {
+      "description": "Metadata about the resource",
+      "type": "object",
+      "properties": {
+        "provisionedBy": {
+          "description": "Azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "Azure Security Center"
+        },
+        "provisionedByResourceId": {
+          "description": "Resource Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1"
+        },
+        "provisionedByImmutableId": {
+          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2"
         }
       }
     }
