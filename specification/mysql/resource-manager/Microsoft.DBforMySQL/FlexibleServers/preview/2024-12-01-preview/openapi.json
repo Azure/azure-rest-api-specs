@@ -3425,7 +3425,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the privateEndpointConnection.",
+            "description": "The name of the private endpoint connection.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
@@ -3433,10 +3433,10 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The private endpoint connection resource.",
+            "description": "",
             "required": true,
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -3463,13 +3463,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "location": {
+              "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
