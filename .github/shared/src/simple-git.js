@@ -17,7 +17,7 @@ export async function getRootFolder(inputPath) {
  * @param {string} inputPath
  * @returns {Promise<string>}
  */
-export async function getBranchName(inputPath) { 
+export async function getBranchName(inputPath) {
   // expecting users to handle the case where inputPath is not a git repo
   const branchName = await simpleGit(inputPath).revparse(["--abbrev-ref", "HEAD"]);
   return branchName.trim();
