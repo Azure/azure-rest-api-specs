@@ -31,11 +31,6 @@ export async function main() {
         short: "o",
         default: "lint-diff.md",
       },
-      // TODO: Consider using git commands to determine this information
-      "base-ref": { 
-        type: "string",
-        short: "b",
-      },
       "github-repo-path": {
         type: "string",
         short: "r",
@@ -50,7 +45,6 @@ export async function main() {
       before: beforeArg,
       after: afterArg,
       "out-file": outFile,
-      "base-ref": baseRefArg,
       "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
@@ -80,19 +74,10 @@ export async function main() {
   const beforePath = beforeArg as string;
   const afterPath = afterArg as string;
 
-  let baseRef: string;
-  if (baseRefArg) { 
-    baseRef = baseRefArg as string;
-  } else {
-    console.log("No --base-ref provided. Defaulting to the current SHA in before repo.");
-    baseRef = await getSha(resolve(beforePath));
-  }
-
   await runLintDiff(
     beforePath,
     afterPath,
     outFile as string,
-    baseRef,
     githubRepoPath as string,
   );
 }
@@ -101,11 +86,9 @@ async function runLintDiff(
   beforePath: string,
   afterPath: string,
   outFile: string,
-  baseRef: string,
   githubRepoPath: string,
 ) {
-
-  // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
+  const baseRef = await getSha(resolve(beforePath));
   const changedFiles = await getChangedFiles({ 
     cwd: resolve(afterPath),
     baseCommitish: baseRef,
