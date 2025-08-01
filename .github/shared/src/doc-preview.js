@@ -44,12 +44,12 @@ const SPEC_FILE_REGEX =
 /**
  * Extract swagger file metadata from path.
  * @param {string} specPath
- * @returns {SwaggerFileMetadata | null}
+ * @returns {SwaggerFileMetadata}
  */
 export function parseSwaggerFilePath(specPath) {
   const m = specPath.match(SPEC_FILE_REGEX);
   if (!m) {
-    return null;
+    throw new Error(`Path "${specPath}" does not match expected swagger file pattern.`);
   }
   const [path, , serviceName, serviceType, resourceProvider, releaseState, apiVersion, , fileName] =
     m;
@@ -136,9 +136,16 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  const swaggerFileObjs = swaggerFiles
-    .map(parseSwaggerFilePath)
-    .filter((metadata) => metadata !== null);
+  const swaggerFileObjs = []; 
+  for (const file of swaggerFiles) {
+    try { 
+      const parsed = parseSwaggerFilePath(file);
+      swaggerFileObjs.push(parsed);
+    } catch (error) { 
+      console.log(`Skipping file "${file}" due to parsing error: ${error}`);
+      continue;
+    }
+  }
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   if (versions.length === 0) {
@@ -163,7 +170,7 @@ export function getSwaggersToProcess(swaggerFiles) {
   }
 
   const swaggersToProcess = swaggerFileObjs
-    .filter((obj) => obj?.apiVersion === selectedVersion)
+    .filter((obj) => obj.apiVersion === selectedVersion)
     .map((obj) => obj.path);
 
   return { selectedVersion, swaggersToProcess };

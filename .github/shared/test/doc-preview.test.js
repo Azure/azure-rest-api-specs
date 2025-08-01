@@ -10,8 +10,8 @@ import {
 } from "../src/doc-preview.js";
 
 describe("parseSwaggerFilePath", () => {
-  test("returns null when given invalid path", () => {
-    expect(parseSwaggerFilePath("invalid/path/to/swagger.json")).toBeNull();
+  test("throws null when given invalid path", () => {
+    expect(() => parseSwaggerFilePath("invalid/path/to/swagger.json")).toThrow();
   });
 
   test("parses valid swagger file path", () => {
@@ -32,11 +32,25 @@ describe("parseSwaggerFilePath", () => {
 });
 
 describe("getSwaggersToProcess", () => {
-  test("returns empty objects when swagger paths do not properly parse", () => {
-    expect(getSwaggersToProcess(["specification/inscrutable/path/swagger.json"])).toEqual({
-      selectedVersion: null,
-      swaggersToProcess: [],
-    });
+  test("returns empty arrays when no files match the expected pattern", () => {
+    const files = ["invalid/path/to/swagger.json", "another/invalid/path/swagger.json"];
+    const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(files);
+    expect(selectedVersion).toBeNull();
+    expect(swaggersToProcess).toEqual([]);
+  });
+
+  test("skips files that do not match the expected pattern", () => {
+    const files = [
+      "specification/batch/data-plane/Azure.Batch/preview/2024-07-01.20.0/BatchService.json",
+      "invalid/path/to/swagger.json",
+    ];
+
+    const { selectedVersion, swaggersToProcess } = getSwaggersToProcess(files);
+
+    expect(selectedVersion).toEqual("2024-07-01.20.0");
+    expect(swaggersToProcess).toEqual([
+      "specification/batch/data-plane/Azure.Batch/preview/2024-07-01.20.0/BatchService.json",
+    ]);
   });
 
   test("returns swaggers to process for valid files", () => {
