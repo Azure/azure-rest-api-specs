@@ -192,13 +192,7 @@ interface BackupInstanceResources {
   @operationId("BackupInstances_StopProtection")
   stopProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
-    {
-      /**
-       * Request body for operation
-       */
-      @bodyRoot
-      parameters?: StopProtectionRequest;
-    },
+    StopProtectionRequest,
     OkResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -206,7 +200,8 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -216,13 +211,7 @@ interface BackupInstanceResources {
   @operationId("BackupInstances_SuspendBackups")
   suspendBackups is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
-    {
-      /**
-       * Request body for operation
-       */
-      @bodyRoot
-      parameters?: SuspendBackupRequest;
-    },
+    SuspendBackupRequest,
     OkResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -230,7 +219,8 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**

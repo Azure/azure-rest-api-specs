@@ -52,3 +52,9 @@ using Microsoft.DataProtection;
 );
 @@clientName(Operations, "DataProtectionOperations");
 @@clientName(EncryptionSettings, "encryptionSettings");
+@@clientName(BackupInstanceResources.suspendBackups::parameters.body,
+  "parameters"
+);
+@@clientName(BackupInstanceResources.stopProtection::parameters.body,
+  "parameters"
+);
