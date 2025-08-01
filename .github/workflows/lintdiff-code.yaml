@@ -25,6 +25,7 @@ jobs:
           path: after
           sparse-checkout: |
             specification/contosowidgetmanager/
+            common-types/
 
       - name: Checkout 'before' state
         uses: actions/checkout@v4
@@ -33,6 +34,7 @@ jobs:
           path: before
           sparse-checkout: |
             specification/contosowidgetmanager/
+            common-types/
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
