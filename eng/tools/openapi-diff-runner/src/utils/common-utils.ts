@@ -242,13 +242,11 @@ export function convertRawErrorToUnifiedMsg(
  * @returns {boolean} True if the PR targets a production branch, false otherwise.
  */
 export function checkPrTargetsProductionBranch(targetRepo: string, targetBranch: string): boolean {
-  console.log(targetRepo, targetBranch);
-  return true;
-  // const targetsPublicProductionBranch =
-  //   targetRepo.endsWith("azure-rest-api-specs") && targetBranch === "main";
+  const targetsPublicProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs") && targetBranch === "main";
 
-  // const targetsPrivateProductionBranch =
-  //   targetRepo.endsWith("azure-rest-api-specs-pr") && targetBranch === "RPSaaSMaster";
+  const targetsPrivateProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs-pr") && targetBranch === "RPSaaSMaster";
 
-  // return targetsPublicProductionBranch || targetsPrivateProductionBranch;
+  return targetsPublicProductionBranch || targetsPrivateProductionBranch;
 }

@@ -62,10 +62,9 @@ jobs:
         uses: ./.github/actions/add-label-artifact
         with:
           name: "${{ steps.get-label-actions.outputs.versioningReviewLabelName }}"
-          # Convert "add/remove" to "true/false"
           value: "${{ steps.get-label-actions.outputs.versioningReviewLabelValue == 'true' }}"
 
-      - if: ${{ always() && fromJson(steps.get-label-actions.outputs.issue_number) > 0 }}
+      - if: ${{ always() && steps.get-label-actions.outputs.issue_number > 0 }}
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:

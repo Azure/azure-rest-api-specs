@@ -34,6 +34,24 @@ export default async function getLabelActions({ github, context, core }) {
     // Sort by "updated_at" descending
     .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
 
+  // Add null checks before accessing artifacts
+  if (!latestBreakingChangesRun || latestBreakingChangesRun.status !== "completed") {
+    core.info("No completed breaking changes workflow run found");
+    return;
+  }
+
+  if (
+    !latestCrossVersionBreakingChangesRun ||
+    latestCrossVersionBreakingChangesRun.status !== "completed"
+  ) {
+    core.info("No completed cross-version breaking changes workflow run found");
+    return;
+  }
+
+  core.info(`breaking change workflow run: ${latestBreakingChangesRun.url}`);
+  core.info(
+    `cross-version breaking change workflow run: ${latestCrossVersionBreakingChangesRun.url}`,
+  );
   const breakingChangesArtifactNames = (
     await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
       owner: owner,
@@ -54,27 +72,31 @@ export default async function getLabelActions({ github, context, core }) {
 
   core.setOutput("issue_number", issue_number);
 
-  // TODO: What if artifacts disagree?
-  core.setOutput("breakingChangeReviewLabelName", REVIEW_REQUIRED_LABELS.BREAKING_CHANGE);
   if (
-    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`) ||
-    crossVersionBreakingChangesArtifactNames.includes(
-      `${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`,
-    )
+    breakingChangesArtifactNames.length === 0 &&
+    crossVersionBreakingChangesArtifactNames.length === 0
   ) {
-    core.setOutput("breakingChangeReviewLabelValue", true);
-  } else {
-    core.setOutput("breakingChangeReviewLabelValue", false);
+    core.info("No artifacts found for breaking changes or cross-version breaking changes");
+    return;
   }
+  const breakingChangeKey = `${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=true`;
+  const versioningKey = `${REVIEW_REQUIRED_LABELS.VERSIONING}=true`;
 
-  // TODO: What if artifacts disagree?
+  // Check for labels in both artifact collections
+  const hasBreakingChangeReviewLabel =
+    breakingChangesArtifactNames.includes(breakingChangeKey) ||
+    crossVersionBreakingChangesArtifactNames.includes(breakingChangeKey);
+
+  const hasVersioningReviewLabel =
+    breakingChangesArtifactNames.includes(versioningKey) ||
+    crossVersionBreakingChangesArtifactNames.includes(versioningKey);
+
+  // Apply precedence rule: breaking change takes precedence over versioning, only one label should be added
+  const breakingChangeReviewLabelValue = hasBreakingChangeReviewLabel;
+  const versioningReviewLabelValue = hasVersioningReviewLabel && !hasBreakingChangeReviewLabel;
+
+  core.setOutput("breakingChangeReviewLabelName", REVIEW_REQUIRED_LABELS.BREAKING_CHANGE);
+  core.setOutput("breakingChangeReviewLabelValue", breakingChangeReviewLabelValue);
   core.setOutput("versioningReviewLabelName", REVIEW_REQUIRED_LABELS.VERSIONING);
-  if (
-    breakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.VERSIONING}=true`) ||
-    crossVersionBreakingChangesArtifactNames.includes(`${REVIEW_REQUIRED_LABELS.VERSIONING}=true`)
-  ) {
-    core.setOutput("versioningReviewLabelValue", true);
-  } else {
-    core.setOutput("versioningReviewLabelValue", false);
-  }
+  core.setOutput("versioningReviewLabelValue", versioningReviewLabelValue);
 }

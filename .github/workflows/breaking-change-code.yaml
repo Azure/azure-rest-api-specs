@@ -54,5 +54,4 @@ jobs:
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
-          # Convert "add/remove" to "true/false"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
