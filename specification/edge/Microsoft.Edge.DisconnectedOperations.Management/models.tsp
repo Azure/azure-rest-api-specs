@@ -80,6 +80,7 @@ union RegistrationStatus {
   string,
 }
 
+// Utility models 
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
