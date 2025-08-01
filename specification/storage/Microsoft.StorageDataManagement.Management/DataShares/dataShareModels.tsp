@@ -32,11 +32,11 @@ model DataShareProperties {
   dataShareUri: string;
 
   @doc("List of access policies that specify the permission allowed to a managed identity.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   accessPolicies: AccessPolicy[];
 
   @doc("List of assets that specify the properties of the shared resources.")
-   @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   assets: Asset[];
 
   @visibility(Lifecycle.Read)
