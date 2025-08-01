@@ -29,6 +29,8 @@ These are the global settings for the azuredatatransfer.
 ```yaml $(tag) == 'default'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
+  - Microsoft.AzureDataTransfer/stable/2025-05-21/azuredatatransfer.json
+  - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
 ```
 
 ``` yaml
