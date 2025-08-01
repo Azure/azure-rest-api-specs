@@ -9,6 +9,7 @@ on:
       - "Swagger Avocado - Set Status"
       - "Swagger LintDiff - Set Status"
       - "SDK Validation Status"
+      - "RPaaS in Private Check"
     types:
       - completed
   pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
@@ -55,8 +56,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const { default: dumpTriggerMetadata } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.js');
+            const { extractInputs } =
+              await import('${{ github.workspace }}/.github/workflows/src/context.js');
             return await dumpTriggerMetadata({ context, core });
 
       - id: summarize-checks

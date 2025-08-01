@@ -1,0 +1,43 @@
+trigger: none
+pr:
+  paths:
+    include:
+      # Trigger for files that will result in a specification change
+      - specification/**
+
+jobs:
+  - job: PresentInRPaaSCheck
+    name: Check RP Presenence in RPSaaSMaster
+
+    pool:
+      name: $(LINUXPOOL)
+      vmImage: $(LINUXVMIMAGE)
+
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
+      - template: /eng/pipelines/templates/variables/image.yml
+
+      - name: PrivateSpecsDirectory
+        value: $(Pipeline.Workspace)/azure-rest-api-specs-pr
+
+    steps:
+      - checkout: self
+        # Fetch depth required to get list of changed files
+        fetchDepth: 2
+
+      - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+        parameters:
+          SkipCheckoutNone: true
+          # Path does not need to be set because sparse-checkout.yml already
+          # checks out files in the repo root
+          Repositories:
+            - Name: Azure/azure-rest-api-specs-pr
+              Commitish: RPSaaSMaster
+              WorkingDirectory: $(PrivateSpecsDirectory)
+
+      - template: /eng/pipelines/templates/steps/npm-install.yml
+        parameters:
+          WorkingDirectory: .github/shared
+
+      - script: .github/shared/cmd/detect-missing-rpaas-rp.js
+        displayName: Compare RP Folder Usage
