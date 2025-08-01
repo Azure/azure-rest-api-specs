@@ -28,11 +28,182 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2025-01-01-preview
+tag: package-flexibleserver-2025-06-01-preview
 ```
 
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
+```
+
+### Tag: package-flexibleserver-2025-06-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdministratorsMicrosoftEntra.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdvancedThreatProtectionSettings.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsAutomaticAndOnDemand.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/CapturedLogs.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Configurations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsLongTermRetention.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/NameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateDnsZoneSuffix.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/QuotaUsages.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Servers.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/TuningOptions.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualEndpoints.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
+suppressions:
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: AdministratorsMicrosoftEntra.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: AdministratorsMicrosoftEntra.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: AdministratorsMicrosoftEntra.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: BackupsAutomaticAndOnDemand.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: BackupsAutomaticAndOnDemand.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: BackupsAutomaticAndOnDemand.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Capabilities.json
+    where: $.definitions.CapabilityList
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: Configurations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: Databases.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: FirewallRules.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Migrations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: DeleteResponseBodyEmpty
+    from: Migrations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Operations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: Operations.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Operations.json
+    where: $.definitions.OperationList
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: PrivateEndpointConnections.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: PrivateEndpointConnections.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: PrivateEndpointConnections.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: QuotaUsages.json
+    where: $.definitions.QuotaUsageList
+    reason: The existing API contract is like this and not be able to change.
+  - code: AvoidAdditionalProperties
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: Servers.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: TrackedResourcesMustHavePut
+    from: Servers.json
+    where: $.definitions.Server
+    reason: The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: TuningOptions.json
+    where: $.definitions.TuningOptionsList
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PatchResponseCodes
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutGetPatchResponseSchema
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: VirtualEndpoints.json
+    where: $.definitions.VirtualEndpointsList
+    reason: The existing API contract is like this and not be able to change.
+  - code: PutResponseCodes
+    from: VirtualEndpoints.json
+    reason: The existing API contract is like this and not be able to change.
 ```
 
 ### Tag: package-flexibleserver-2025-01-01-preview
