@@ -48,7 +48,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "DevCenter" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.DevCenter;
 
 /**
