@@ -10,8 +10,8 @@ import {
 } from "../src/doc-preview.js";
 
 describe("parseSwaggerFilePath", () => {
-  test("throws null when given invalid path", () => {
-    expect(() => parseSwaggerFilePath("invalid/path/to/swagger.json")).toThrow();
+  test("returns null when given invalid path", () => {
+    expect(parseSwaggerFilePath("invalid/path/to/swagger.json")).toBeNull();
   });
 
   test("parses valid swagger file path", () => {
@@ -32,8 +32,11 @@ describe("parseSwaggerFilePath", () => {
 });
 
 describe("getSwaggersToProcess", () => {
-  test("throws when swagger paths do not properly parse", () => {
-    expect(() => getSwaggersToProcess(["specification/inscrutable/path/swagger.json"])).toThrow();
+  test("returns empty objects when swagger paths do not properly parse", () => {
+    expect(getSwaggersToProcess(["specification/inscrutable/path/swagger.json"])).toEqual({
+      selectedVersion: null,
+      swaggersToProcess: [],
+    });
   });
 
   test("returns swaggers to process for valid files", () => {
