@@ -878,8 +878,6 @@ export async function createNextStepsComment(
     return status !== "completed";
   });
 
-  // IF THERE are no required check runs, but there are no pending fyi runs, we should consider
-  // the requirements met, as there are no checks to block the PR.
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
