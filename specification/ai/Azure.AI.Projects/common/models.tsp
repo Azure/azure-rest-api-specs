@@ -123,7 +123,7 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   @visibility(Lifecycle.Read)
   type: "AzureOpenAIModel";
 
-  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
   modelDeploymentName: string;
 
   @doc("Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.")
