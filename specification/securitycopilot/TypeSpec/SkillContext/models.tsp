@@ -550,28 +550,28 @@ namespace SkillContext
 		category: string;
 
 		@doc("AssociatedFeedbackContent")
-		associatedFeedbackContent: string;
+		associatedFeedbackContent?: string;
 
 		@doc("AssociatedFeedbackProperties")
-		associatedFeedbackProperties: Record<string>;
+		associatedFeedbackProperties?: Record<string>;
 
 		@doc("Properties")
-		properties: Record<string>;
+		properties?: Record<string>;
 
 		@doc("AssociatedFeedbackMetadata")
-		associatedFeedbackMetadata: FeedbackMetadata;
+		associatedFeedbackMetadata?: FeedbackMetadata;
 
 		@doc("Tags")
-		tags: string[];
+		tags?: string[];
 
 		@doc("Metadata")
-		metadata: MemoryMetadataRequestOptions;
+		metadata?: MemoryMetadataRequestOptions;
 
 		@doc("SummarizationOptions")
-		summarizationOptions: MemorySummarizationRequestOptions;
+		summarizationOptions?: MemorySummarizationRequestOptions;
 
 		@doc("EmbeddingOptions")
-		embeddingOptions: MemoryEmbeddingRequestOptions;
+		embeddingOptions?: MemoryEmbeddingRequestOptions;
 
 		@doc("Type")
 		type: MemoryType;
@@ -604,19 +604,19 @@ namespace SkillContext
 		name: string;
 
 		@doc("AssociatedFeedbackContent")
-		associatedFeedbackContent: string;
+		associatedFeedbackContent?: string;
 
 		@doc("Properties")
-		properties: Record<string>;
+		properties?: Record<string>;
 
 		@doc("AssociatedFeedbackProperties")
-		associatedFeedbackProperties: Record<string>;
+		associatedFeedbackProperties?: Record<string>;
 
 		@doc("AssociatedFeedbackMetadata")
-		associatedFeedbackMetadata: FeedbackMetadata;
+		associatedFeedbackMetadata?: FeedbackMetadata;
 
 		@doc("Tags")
-		tags: string[];
+		tags?: string[];
 
 		@doc("State")
 		state?: MemoryState;
@@ -657,7 +657,7 @@ namespace SkillContext
 		type?: MemoryType;
 		name: string;
 		category: string;
-		tags: string[];
+		tags?: string[];
 		includeOnlyActive: boolean;
 	}
 
@@ -751,10 +751,10 @@ namespace SkillContext
 	@doc("MemoryMetadataRequestOptions")
 	model MemoryMetadataRequestOptions {
 		@doc("AdditionalInformation")
-		additionalInformation: Record<string>;
+		additionalInformation?: Record<string>;
 
 		@doc("InternalInformation")
-		internalInformation: Record<string>;
+		internalInformation?: Record<string>;
 	}
 
 	@doc("MemorySummarizationRequestOptions")
