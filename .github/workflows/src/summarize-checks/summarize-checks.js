@@ -601,13 +601,15 @@ async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
   });
 
   const totalCheckSuites = checkSuitesResponse.total_count;
-  core.info(`Found ${totalCheckSuites} total check suites`);
 
   // Bail if too many check suites to avoid burning GraphQL rate limits
   if (totalCheckSuites > 500) {
     throw new Error(
       `Too many check suites (${totalCheckSuites}) for ${owner}/${repo}#${prNumber}@${sha}. Summarize-Checks ending with error to avoid exhausting graphQL resources.`,
     );
+  }
+  else {
+    core.info(`Found ${totalCheckSuites} total check suites`);
   }
 
   // Now proceed with GraphQL pagination
