@@ -52,10 +52,10 @@ using Azure.ClientGenerator.Core;
 );
 
 // Less generic names for C# subclients
-@@clientName(Azure.AI.Projects.Connections, "ConnectionsClient", "csharp");
-@@clientName(Azure.AI.Projects.Datasets, "DatasetsClient", "csharp");
-@@clientName(Azure.AI.Projects.Deployments, "DeploymentsClient", "csharp");
-@@clientName(Azure.AI.Projects.Indexes, "IndexesClient", "csharp");
+@@clientName(Azure.AI.Projects.Connections, "ConnectionsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Datasets, "DatasetsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Deployments, "DeploymentsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Indexes, "IndexesOperations", "csharp");
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
