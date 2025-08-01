@@ -269,12 +269,12 @@ union FilterType {
   string,
 
   /**
-   * Defines an allow filter used for whitelisting.
+   * Defines an allow filter used for allowlist.
    */
   Allow: "Allow",
 
   /**
-   * Defines a denying filter used for blacklisting.
+   * Defines a denying filter used for blocklisting.
    */
   Deny: "Deny",
 }

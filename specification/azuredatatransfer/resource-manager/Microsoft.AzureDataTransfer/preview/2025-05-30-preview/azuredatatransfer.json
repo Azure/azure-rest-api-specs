@@ -2466,6 +2466,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets flows in a connection": {
+            "$ref": "./examples/listFlowProfilesByPipeline.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2521,6 +2526,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets flowprofile resource": {
+            "$ref": "./examples/getFlowProfile.json"
           }
         }
       },
@@ -2601,6 +2611,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates or updates the FlowPRofile resource": {
+            "$ref": "./examples/createOrUpdateFlowProfile.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/FlowProfile"
@@ -2675,6 +2690,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates the flowprofile resource": {
+            "$ref": "./examples/patchFlowProfile.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2740,6 +2760,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the flowprofile resource": {
+            "$ref": "./examples/deleteFlowProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3479,7 +3504,7 @@
           {
             "name": "DevSecOps",
             "value": "DevSecOps",
-            "description": "Represents data related to development, security, and operations workflows such as build artifacts."
+            "description": "Represents data related to development, security, and operations workflows subject to two-person cryptographic integrity validations."
           },
           {
             "name": "Complex",
@@ -3575,12 +3600,12 @@
           {
             "name": "Allow",
             "value": "Allow",
-            "description": "Defines an allow filter used for whitelisting."
+            "description": "Defines an allow filter used for allowlist."
           },
           {
             "name": "Deny",
             "value": "Deny",
-            "description": "Defines a denying filter used for blacklisting."
+            "description": "Defines a denying filter used for blocklisting."
           }
         ]
       }

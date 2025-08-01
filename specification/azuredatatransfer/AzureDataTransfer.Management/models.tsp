@@ -363,7 +363,7 @@ union DataClassType {
   "Files",
 
   /**
-   * Represents data related to development, security, and operations workflows such as build artifacts.
+   * Represents data related to development, security, and operations workflows subject to two-person cryptographic integrity validations.
    */
   "DevSecOps",
 
