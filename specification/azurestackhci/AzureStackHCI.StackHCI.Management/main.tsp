@@ -24,9 +24,9 @@ namespace Microsoft.AzureStackHCI;
 @doc("The available API versions.")
 enum Versions {
   /**
-   * The 2024-11-01-preview API version.
+   * The 2025-08-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_11_01_preview: "2024-11-01-preview",
+  v2025_08_01_preview: "2025-08-01-preview",
 }
