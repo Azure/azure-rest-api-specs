@@ -636,40 +636,11 @@ union StacModelType {
   FeatureCollection: "FeatureCollection",
 }
 
-// /**
-//  * Base type for STAC items and collections with discriminator.
-//  */
-// @discriminator("type")
-// model StacItemOrItemCollection {
-//   /**
-//    * The type discriminator for STAC resources.
-//    */
-//   type: StacModelType;
-
-//   /**
-//    * Stac Version
-//    */
-//   @minLength(1)
-//   @encodedName("application/json", "stac_version")
-//   stacVersion?: string = "1.0.0";
-
-//   /**
-//    * Links to related resources and endpoints.
-//    */
-//   links?: Link[];
-
-//   ...MicrosoftStacProperties;
-//   ...StacExtensionsList;
-// }
-
 /**
- * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
+ * Base type for STAC items and collections with discriminator.
  */
-@resource("items")
-@parentResource(StacCollectionModel)
-model StacItemModel {
-  ...FeatureBase;
-
+@discriminator("type")
+model StacItemOrItemCollection {
   /**
    * The type discriminator for STAC resources.
    */
@@ -689,6 +660,15 @@ model StacItemModel {
 
   ...MicrosoftStacProperties;
   ...StacExtensionsList;
+}
+
+/**
+ * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
+ */
+@resource("items")
+@parentResource(StacCollectionModel)
+model StacItemModel extends StacItemOrItemCollection {
+  ...FeatureBase;
 
   /**
    * Unique identifier for the feature
@@ -696,6 +676,11 @@ model StacItemModel {
   @key("itemId")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   id: string;
+
+  /**
+   * GeoJSON type identifier for Feature
+   */
+  type: StacModelType.Feature;
 
   /**
    * ID of the STAC collection this item belongs to.
@@ -770,22 +755,7 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollectionModel {
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * Links to related resources and endpoints.
-   */
-  links?: Link[];
-
-  ...MicrosoftStacProperties;
-  ...StacExtensionsList;
-
+model ItemCollectionModel extends StacItemOrItemCollection {
   /**
    * GeoJSON FeatureCollection type.
    */

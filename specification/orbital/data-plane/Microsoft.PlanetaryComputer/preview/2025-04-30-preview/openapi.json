@@ -9965,7 +9965,7 @@
             "description": "STAC Item or ItemCollection\n\nRepresents a STAC Item or ItemCollectionModel as defined by the STAC 1.0.0 standard.\n\n**Item**: A GeoJSON Feature that represents a single spatiotemporal asset.\nIt includes metadata such as geometry, datetime, and links to related assets.\nExample: A satellite image with its metadata.\n\n**ItemCollectionModel**: A GeoJSON FeatureCollection that contains multiple Items.\nIt is used to group multiple related Items together, such as a collection of satellite images.\n\nThis union allows the request body to accept either a single Item or a collection of Items.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemModel"
+              "$ref": "#/definitions/StacItemOrItemCollection"
             }
           }
         ],
@@ -12852,6 +12852,27 @@
         "returned"
       ]
     },
+    "ContextExtensionUpdate": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification\n\nContext information for a search response including pagination details.",
+      "properties": {
+        "returned": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items returned in the response."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items requested."
+        },
+        "matched": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of items matching the query."
+        }
+      }
+    },
     "CqlFilter": {
       "type": "object",
       "description": "Represent a CQL2 query\n\nhttps://github.com/stac-api-extensions/filter",
@@ -13976,54 +13997,6 @@
       "type": "object",
       "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
       "properties": {
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "links": {
-          "type": "array",
-          "description": "Links to related resources and endpoints.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "msftCreated"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "msftUpdated"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "msftShortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "URLs to STAC extensions implemented by this STAC resource.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "stacExtensions"
-        },
-        "type": {
-          "type": "string",
-          "description": "GeoJSON FeatureCollection type.",
-          "enum": [
-            "FeatureCollection"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "features": {
           "type": "array",
           "description": "Array of STAC Items in the collection.",
@@ -14045,9 +14018,45 @@
         }
       },
       "required": [
-        "type",
         "features"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StacItemOrItemCollection"
+        }
+      ],
+      "x-ms-discriminator-value": "FeatureCollection"
+    },
+    "ItemCollectionModelUpdate": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
+      "properties": {
+        "features": {
+          "type": "array",
+          "description": "Array of STAC Items in the collection.",
+          "items": {
+            "$ref": "#/definitions/StacItemModel"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box of all items in format [west, south, east, north].",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "context": {
+          "$ref": "#/definitions/ContextExtensionUpdate",
+          "description": "Context information for the search response."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StacItemOrItemCollectionUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "FeatureCollection"
     },
     "ItemCollectionType": {
       "type": "string",
@@ -16297,48 +16306,6 @@
             "format": "double"
           }
         },
-        "type": {
-          "$ref": "#/definitions/StacModelType",
-          "description": "The type discriminator for STAC resources."
-        },
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "links": {
-          "type": "array",
-          "description": "Links to related resources and endpoints.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "msftCreated"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "msftUpdated"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "msftShortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "URLs to STAC extensions implemented by this STAC resource.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "stacExtensions"
-        },
         "id": {
           "type": "string",
           "description": "Unique identifier for the feature",
@@ -16377,11 +16344,16 @@
       "required": [
         "geometry",
         "bbox",
-        "type",
         "id",
         "properties",
         "assets"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StacItemOrItemCollection"
+        }
+      ],
+      "x-ms-discriminator-value": "Feature"
     },
     "StacItemModelUpdate": {
       "type": "object",
@@ -16399,6 +16371,52 @@
             "format": "double"
           }
         },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the feature",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "collection": {
+          "type": "string",
+          "description": "ID of the STAC collection this item belongs to."
+        },
+        "properties": {
+          "$ref": "#/definitions/ItemPropertiesUpdate",
+          "description": "Attributes associated with the feature"
+        },
+        "assets": {
+          "type": "object",
+          "description": "Assets",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssetUpdate"
+          }
+        },
+        "_msft:ts": {
+          "type": "string",
+          "description": "MSFT Timestamp",
+          "x-ms-client-name": "msftTimestamp"
+        },
+        "_msft:etag": {
+          "type": "string",
+          "description": "MSFT ETag",
+          "x-ms-client-name": "msftEtag"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StacItemOrItemCollectionUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Feature"
+    },
+    "StacItemOrItemCollection": {
+      "type": "object",
+      "description": "Base type for STAC items and collections with discriminator.",
+      "properties": {
         "type": {
           "$ref": "#/definitions/StacModelType",
           "description": "The type discriminator for STAC resources."
@@ -16440,42 +16458,64 @@
             "type": "string"
           },
           "x-ms-client-name": "stacExtensions"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StacItemOrItemCollectionUpdate": {
+      "type": "object",
+      "description": "Base type for STAC items and collections with discriminator.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StacModelType",
+          "description": "The type discriminator for STAC resources."
         },
-        "id": {
+        "stac_version": {
           "type": "string",
-          "description": "Unique identifier for the feature",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Stac Version",
+          "default": "1.0.0",
+          "minLength": 1,
+          "x-ms-client-name": "stacVersion"
         },
-        "collection": {
-          "type": "string",
-          "description": "ID of the STAC collection this item belongs to."
-        },
-        "properties": {
-          "$ref": "#/definitions/ItemPropertiesUpdate",
-          "description": "Attributes associated with the feature"
-        },
-        "assets": {
-          "type": "object",
-          "description": "Assets",
-          "additionalProperties": {
-            "$ref": "#/definitions/AssetUpdate"
+        "links": {
+          "type": "array",
+          "description": "Links to related resources and endpoints.",
+          "items": {
+            "$ref": "#/definitions/Link"
           }
         },
-        "_msft:ts": {
+        "msft:_created": {
           "type": "string",
-          "description": "MSFT Timestamp",
-          "x-ms-client-name": "msftTimestamp"
+          "description": "MSFT Created",
+          "x-ms-client-name": "msftCreated"
         },
-        "_msft:etag": {
+        "msft:_updated": {
           "type": "string",
-          "description": "MSFT ETag",
-          "x-ms-client-name": "msftEtag"
+          "description": "MSFT Updated",
+          "x-ms-client-name": "msftUpdated"
+        },
+        "msft:short_description": {
+          "type": "string",
+          "description": "MSFT Short Description",
+          "maxLength": 300,
+          "x-ms-client-name": "msftShortDescription"
+        },
+        "stac_extensions": {
+          "type": "array",
+          "description": "URLs to STAC extensions implemented by this STAC resource.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "stacExtensions"
         }
-      }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "StacModelType": {
       "type": "string",

@@ -373,8 +373,7 @@ namespace StacItems {
      */
     #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
     @body
-    // body: StacItemOrItemCollection,
-    body: StacItemModel,
+    body: StacItemOrItemCollection,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
