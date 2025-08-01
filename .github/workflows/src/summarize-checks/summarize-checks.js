@@ -592,6 +592,26 @@ export function updateLabels(existingLabels, impactAssessment) {
  * @returns {Promise<any>} Complete GraphQL response with all check suites
  */
 async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
+  // First, get the total count using REST API to avoid expensive GraphQL if there are too many suites
+  const { data: checkSuitesResponse } = await github.rest.checks.listSuitesForRef({
+    owner,
+    repo,
+    ref: sha,
+    per_page: 1, // We only need the count, not the actual data
+  });
+
+  const totalCheckSuites = checkSuitesResponse.total_count;
+
+  // Bail if too many check suites to avoid burning GraphQL rate limits
+  if (totalCheckSuites > 500) {
+    throw new Error(
+      `Too many check suites (${totalCheckSuites}) for ${owner}/${repo}#${prNumber}@${sha}. Summarize-Checks ending with error to avoid exhausting graphQL resources.`,
+    );
+  } else {
+    core.info(`Found ${totalCheckSuites} total check suites`);
+  }
+
+  // Now proceed with GraphQL pagination
   const resourceUrl = `https://github.com/${owner}/${repo}/commit/${sha}`;
   let allCheckSuites = [];
   let hasNextPage = true;
