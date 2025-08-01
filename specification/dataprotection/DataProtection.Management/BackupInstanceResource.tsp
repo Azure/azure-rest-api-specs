@@ -112,7 +112,7 @@ interface BackupInstanceResources {
   adhocBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     TriggerBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>,
+    OperationJobExtendedInfo,
     OverrideErrorType = CloudError
   >;
 
@@ -124,7 +124,7 @@ interface BackupInstanceResources {
   validateForModifyBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>,
+    OperationJobExtendedInfo,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationJobExtendedInfo>> | ErrorResponse
   >;
 
@@ -151,7 +151,7 @@ interface BackupInstanceResources {
   triggerRestore is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     AzureBackupRestoreRequest,
-    ArmResponse<OperationJobExtendedInfo>,
+    OperationJobExtendedInfo,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -256,7 +256,7 @@ interface BackupInstanceResources {
   validateForRestore is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateRestoreRequestObject,
-    ArmResponse<OperationJobExtendedInfo>,
+    OperationJobExtendedInfo,
     OverrideErrorType = CloudError
   >;
 

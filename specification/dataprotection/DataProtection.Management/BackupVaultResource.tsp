@@ -141,7 +141,7 @@ interface BackupVaultResources {
   validateForBackup is BackupVaultResourceOps.ActionAsync<
     BackupVaultResource,
     ValidateForBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>,
+    OperationJobExtendedInfo,
     OverrideErrorType = CloudError
   >;
 
