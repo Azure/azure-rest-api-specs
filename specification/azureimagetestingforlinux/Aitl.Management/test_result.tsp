@@ -1,15 +1,5 @@
 namespace Microsoft.AzureImageTestingForLinux;
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Autorest;
-using Azure.Core;
-using Azure.Core.Foundations;
-using OpenAPI;
-
 @doc("Test results for a particular test case")
 model TestResultProperties is ResourceProperties {
   @doc("The test result ID")
@@ -57,6 +47,7 @@ model TestResultProperties is ResourceProperties {
   @doc("Wala Version")
   walaVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "extraFields requires a Record<string> for backward compatibility"
   @doc("Extra fields")
   extraFields?: Record<string>;
 

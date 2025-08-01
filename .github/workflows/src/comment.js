@@ -1,4 +1,4 @@
-import { PER_PAGE_MAX } from "./github.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 
 /**
  * @typedef {Object} IssueComment
