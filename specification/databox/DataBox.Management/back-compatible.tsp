@@ -1,19 +1,18 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-
 using Microsoft.DataBox;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AddressValidationOutput.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ValidationResponse.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(JobResourceUpdateParameter.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SkuInformation.properties);
 
 @@clientLocation(JobResources.get, "Jobs");
@@ -54,7 +53,7 @@ using Microsoft.DataBox;
 
 @@clientName(mitigate::parameters.body, "mitigateJobRequest");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(JobResource.properties);
 
 @@clientLocation(ServiceOperationGroup.regionConfiguration, "Service");
@@ -86,3 +85,5 @@ using Microsoft.DataBox;
 );
 
 @@clientLocation(mitigate, "Management", "go");
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(Operation.properties);

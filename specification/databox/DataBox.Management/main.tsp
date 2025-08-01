@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.10.14
- * Date: 2025-06-26T09:19:52.092Z
+ * Date: 2025-07-30T02:19:46.367Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -26,6 +26,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "DataBoxManagementClient" })
 @versioned(Versions)
+// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.DataBox;
 
@@ -34,11 +35,11 @@ namespace Microsoft.DataBox;
  */
 enum Versions {
   /**
-   * The 2025-02-01 API version.
+   * The 2025-07-01 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_02_01: "2025-02-01",
+  v2025_07_01: "2025-07-01",
 }
 
 interface Operations {

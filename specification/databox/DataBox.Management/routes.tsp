@@ -1,3 +1,5 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -25,6 +27,7 @@ interface ServiceOperationGroup {
     Parameters = LocationParameter,
     Error = ApiError
   >;
+
   /**
    * [DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.
    */
@@ -37,6 +40,7 @@ interface ServiceOperationGroup {
     Parameters = LocationParameter,
     Error = ApiError
   >;
+
   /**
    * This method does all necessary pre-job creation validation under subscription.
    */
@@ -48,6 +52,7 @@ interface ServiceOperationGroup {
     Parameters = LocationParameter,
     Error = ApiError
   >;
+
   /**
    * This method provides the list of available skus for the given subscription, resource group and location.
    */

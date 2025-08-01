@@ -868,12 +868,12 @@ enum ModelName {
   DataBoxCustomerDisk,
 
   /**
-   * Data Box V2 with 125TB usable capacity.
+   * Data Box V2 with 120TB usable capacity.
    */
   AzureDataBox120,
 
   /**
-   * Data Box V2 with 500TB usable capacity.
+   * Data Box V2 with 525TB usable capacity.
    */
   AzureDataBox525,
 }
@@ -1130,6 +1130,7 @@ model JobProperties {
    * Time at which the job was started in UTC ISO 8601 format.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
@@ -1370,6 +1371,7 @@ model JobStages {
    * Time for the job stage in UTC ISO 8601 format.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stageTime?: utcDateTime;
 
   /**
@@ -1413,12 +1415,14 @@ model JobDelayDetails {
    * Timestamp when the delay notification was created.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Timestamp when the delay notification was resolved.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resolutionTime?: utcDateTime;
 }
 
@@ -1877,7 +1881,7 @@ model CopyLogDetails {
 }
 
 /**
- * Device erasure details with erasure completion status and erasureordestructionlog sas key
+ * Device erasure details with erasure completion status, secure erasure sas key and erasureordestructionlog sas key
  */
 model DeviceErasureDetails {
   /**
@@ -1891,6 +1895,12 @@ model DeviceErasureDetails {
    */
   @visibility(Lifecycle.Read)
   erasureOrDestructionCertificateSasKey?: string;
+
+  /**
+   * Shared access key to download secure erasure certificate for the device
+   */
+  @visibility(Lifecycle.Read)
+  secureErasureCertificateSasKey?: string;
 }
 
 /**
@@ -1951,6 +1961,7 @@ model LastMitigationActionOnJob {
   /**
    * Action performed date time
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   actionDateTimeInUtc?: utcDateTime;
 
   /**
@@ -1996,36 +2007,8 @@ model JobDeliveryInfo {
   /**
    * Scheduled date time.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledDateTime?: utcDateTime;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2532,11 +2515,13 @@ model ShipmentPickUpRequest {
   /**
    * Minimum date after which the pick up should commence, this must be in local time of pick up area.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime: utcDateTime;
 
   /**
    * Maximum date before which the pick up should commence, this must be in local time of pick up area.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime: utcDateTime;
 
   /**
@@ -2559,6 +2544,7 @@ model ShipmentPickUpResponse {
    * Time by which shipment should be ready for pick up, this is in local time of pick up area.
    */
   @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   readyByTime?: utcDateTime;
 }
 
@@ -2969,6 +2955,29 @@ model ApplianceNetworkConfiguration {
    */
   @visibility(Lifecycle.Read)
   macAddress?: string;
+}
+
+/**
+ * Base class for all objects under resource.
+ */
+model ArmBaseObject {
+  /**
+   * Name of the object.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Id of the object.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Type of the object.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 }
 
 /**
