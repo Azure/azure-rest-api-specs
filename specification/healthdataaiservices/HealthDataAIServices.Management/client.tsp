@@ -13,7 +13,7 @@ namespace Microsoft.HealthDataAIServices {
   @@access(Operations.list, Access.internal, "csharp");
 
   @@clientName(PrivateEndpointConnectionResource,
-    "HealthDataAIServicesPrivateEndpointConnectionResource",
+    "HealthDataAIServicesPrivateEndpointConnection",
     "csharp"
   );
   @@clientName(PublicNetworkAccess,
@@ -28,4 +28,5 @@ namespace Microsoft.HealthDataAIServices {
     "$DO_NOT_NORMALIZE$V2024_09_20",
     "javascript"
   );
+  @@clientName()
 }
