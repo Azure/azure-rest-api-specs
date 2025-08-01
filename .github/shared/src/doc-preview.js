@@ -49,7 +49,7 @@ const SPEC_FILE_REGEX =
 export function parseSwaggerFilePath(specPath) {
   const m = specPath.match(SPEC_FILE_REGEX);
   if (!m) {
-    throw new Error(`Path "${specPath}" does not match expected swagger file pattern.`);
+    return null;
   }
   const [path, , serviceName, serviceType, resourceProvider, releaseState, apiVersion, , fileName] =
     m;
@@ -136,11 +136,12 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath);
+  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath).filter(Boolean);
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   if (versions.length === 0) {
-    throw new Error("No new API versions found in eligible swagger files.");
+    console.log("No API versions found in eligible swagger files.");
+    return { selectedVersion: null, swaggersToProcess: [] };
   }
   const uniqueVersions = Array.from(new Set(versions));
 
