@@ -165,6 +165,7 @@ input-file:
 - Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
 - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
 - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+- Microsoft.Authorization/stable/2025-03-01/policyTokens.json
 
 # Needed when there is more than one input file
 override-info:
