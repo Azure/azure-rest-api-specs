@@ -366,16 +366,6 @@ union DataClassType {
    * Represents data related to development, security, and operations workflows subject to two-person cryptographic integrity validations.
    */
   "DevSecOps",
-
-  /**
-   * Represents rich content types such as documents (e.g., Word, PDF) and images that require specialized replication handling.
-   */
-  "Complex",
-
-  /**
-   * Represents standard file-based data, including Azure Blob and Table Storage that is subject to inspection pursuant to the approval of the cloud owner.
-   */
-  "Mission",
 }
 
 /**
