@@ -76,7 +76,7 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a new evaluation with the specified configuration.")
   @added(Versions.v2025_07_31_preview)
-  @route(":runBatch")
+  @route("runs:runBatch")
   @post
   createBatchEvaluation is Azure.Core.Foundations.Operation<
     {
@@ -98,7 +98,7 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Independent API operation to perform a single evaluation and immediately get a result.")
   @added(Versions.v2025_07_31_preview)
-  @route(":run")
+  @route("runs:runSingle")
   @post
   createOneEvaluation is Azure.Core.Foundations.Operation<
     {

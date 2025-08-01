@@ -1048,52 +1048,7 @@
         }
       }
     },
-    "/evaluations:run": {
-      "post": {
-        "operationId": "Evaluations_CreateOneEvaluation",
-        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "oneEvaluation",
-            "in": "body",
-            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OneEvaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_CreateOneEvaluation": {
-            "$ref": "./examples/Evaluations_CreateOneEvaluation_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/evaluations:runBatch": {
+    "/evaluations/runs:runBatch": {
       "post": {
         "operationId": "Evaluations_CreateBatchEvaluation",
         "description": "Creates a new evaluation with the specified configuration.",
@@ -1151,6 +1106,51 @@
         "x-ms-examples": {
           "Evaluations_CreateBatchEvaluation": {
             "$ref": "./examples/Evaluations_CreateBatchEvaluation_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluations/runs:runSingle": {
+      "post": {
+        "operationId": "Evaluations_CreateOneEvaluation",
+        "description": "Independent API operation to perform a single evaluation and immediately get a result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "oneEvaluation",
+            "in": "body",
+            "description": "Complete evaluation configuration including data source, evaluators, and result settings",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneEvaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_CreateOneEvaluation": {
+            "$ref": "./examples/Evaluations_CreateOneEvaluation_MaximumSet_Gen.json"
           }
         }
       }
