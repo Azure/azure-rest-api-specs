@@ -127,6 +127,7 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
   modelDeploymentName: string;
 
   @doc("Optional model-specific parameters to fine-tune behavior during evaluation. These may include temperature, max tokens, top-p, frequency penalty, and other model configuration options supported by the deployment.")
+  @added(Versions.v2025_07_31_preview)
   modelParameters?: Record<unknown>;
 }
 
