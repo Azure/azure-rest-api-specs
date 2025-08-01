@@ -132,13 +132,6 @@ import path from "path";
  * @property {"pending" | keyof typeof CheckConclusion} result
  */
 
-// Placing these configuration items here until we decide another way to pull them in.
-const FYI_CHECK_NAMES = [
-  "Swagger LintDiff",
-  "SDK Validation Status",
-  "Swagger BreakingChange",
-  "Swagger PrettierCheck",
-];
 const AUTOMATED_CHECK_NAME = "[TEST-IGNORE] Automated merging requirements met";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
@@ -800,14 +793,12 @@ export function extractRunsFromGraphQLResponse(response) {
             // - It is failing
             // - AND it is is NOT marked as 'required' in GitHub branch policy
             // - AND it is marked as 'FYI' in this file's FYI_CHECK_NAMES array
-            else if (FYI_CHECK_NAMES.includes(checkRunNode.name)) {
-              fyiCheckRuns.push({
-                name: checkRunNode.name,
-                status: checkRunNode.status,
-                conclusion: checkRunNode.conclusion,
-                checkInfo: getCheckInfo(checkRunNode.name),
-              });
-            }
+            fyiCheckRuns.push({
+              name: checkRunNode.name,
+              status: checkRunNode.status,
+              conclusion: checkRunNode.conclusion,
+              checkInfo: getCheckInfo(checkRunNode.name),
+            });
           });
         }
       },
@@ -882,10 +873,13 @@ export async function createNextStepsComment(
 
   // determine if required runs have any in-progress or queued runs
   // if there are any, we consider the requirements not met.
-  const requiredCheckInfosPresent = requiredRuns.some((run) => {
+  const requiredCheckInfosPresent = !requiredRuns.some((run) => {
     const status = run.status.toLowerCase();
-    return status !== "queued" && status !== "in_progress";
+    return status !== "completed";
   });
+
+  // IF THERE are no required check runs, but there are no pending fyi runs, we should consider
+  // the requirements met, as there are no checks to block the PR.
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
