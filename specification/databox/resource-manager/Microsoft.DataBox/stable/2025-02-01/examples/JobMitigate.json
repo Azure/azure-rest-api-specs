@@ -1,31 +1,29 @@
 {
-  "operationId": "Mitigate",
   "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2025-02-01",
     "$expand": "details",
-    "Content-Length": [
-      "60"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
+    "accept-language": [
+      "en-US"
     ],
     "User-Agent": [
       "vscode-restclient"
     ],
-    "accept-language": [
-      "en-US"
+    "Content-Type": [
+      "application/json; charset=utf-8"
     ],
-    "api-version": "2025-02-01",
-    "jobName": "TestJobName1",
+    "Content-Length": [
+      "60"
+    ],
     "mitigateJobRequest": {
       "serialNumberCustomerResolutionMap": {
         "testDISK-1": "MoveToCleanUpDevice",
         "testDISK-2": "Resume"
       }
-    },
-    "resourceGroupName": "YourResourceGroupName",
-    "subscriptionId": "YourSubscriptionId"
+    }
   },
-  "title": "Mitigate",
   "responses": {
     "204": {}
   }

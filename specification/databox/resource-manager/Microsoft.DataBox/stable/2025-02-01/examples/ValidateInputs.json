@@ -1,24 +1,25 @@
 {
-  "operationId": "Service_ValidateInputs",
   "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "location": "westus",
+    "api-version": "2025-02-01",
     "Accept-Language": [
       "en-US"
-    ],
-    "Content-Length": [
-      "1675"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
     ],
     "User-Agent": [
       "vscode-restclient"
     ],
-    "api-version": "2025-02-01",
-    "location": "westus",
-    "subscriptionId": "YourSubscriptionId",
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1675"
+    ],
     "validationRequest": {
+      "validationCategory": "JobCreationValidation",
       "individualRequestDetails": [
         {
+          "validationType": "ValidateDataTransferDetails",
           "dataImportDetails": [
             {
               "accountDetails": {
@@ -28,138 +29,135 @@
             }
           ],
           "deviceType": "DataBox",
-          "model": "DataBox",
           "transferType": "ImportToAzure",
-          "validationType": "ValidateDataTransferDetails"
+          "model": "DataBox"
         },
         {
-          "deviceType": "DataBox",
-          "model": "DataBox",
+          "validationType": "ValidateAddress",
           "shippingAddress": {
-            "addressType": "Commercial",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX",
             "city": "XXXX XXXX",
-            "companyName": "XXXX XXXX",
+            "stateOrProvince": "XX",
             "country": "XX",
             "postalCode": "00000",
-            "stateOrProvince": "XX",
-            "streetAddress1": "XXXX XXXX",
-            "streetAddress2": "XXXX XXXX"
+            "companyName": "XXXX XXXX",
+            "addressType": "Commercial"
           },
+          "deviceType": "DataBox",
           "transportPreferences": {
             "preferredShipmentType": "MicrosoftManaged"
           },
-          "validationType": "ValidateAddress"
+          "model": "DataBox"
         },
         {
           "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
         },
         {
-          "country": "XX",
+          "validationType": "ValidateSkuAvailability",
           "deviceType": "DataBox",
-          "location": "westus",
-          "model": "DataBox",
           "transferType": "ImportToAzure",
-          "validationType": "ValidateSkuAvailability"
+          "country": "XX",
+          "location": "westus",
+          "model": "DataBox"
         },
         {
+          "validationType": "ValidateCreateOrderLimit",
           "deviceType": "DataBox",
-          "model": "DataBox",
-          "validationType": "ValidateCreateOrderLimit"
+          "model": "DataBox"
         },
         {
-          "deviceType": "DataBox",
-          "model": "DataBox",
+          "validationType": "ValidatePreferences",
           "preference": {
             "transportPreferences": {
               "preferredShipmentType": "MicrosoftManaged"
             }
           },
-          "validationType": "ValidatePreferences"
+          "deviceType": "DataBox",
+          "model": "DataBox"
         }
-      ],
-      "validationCategory": "JobCreationValidation"
+      ]
     }
   },
-  "title": "ValidateInputs",
   "responses": {
     "200": {
       "body": {
         "properties": {
+          "status": "AllValidToProceed",
           "individualResponseDetails": [
             {
+              "status": "Valid",
+              "validationType": "ValidateDataTransferDetails",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "status": "Valid",
-              "validationType": "ValidateDataTransferDetails"
+                "details": [],
+                "additionalInfo": []
+              }
             },
             {
+              "validationStatus": "Valid",
               "alternateAddresses": [
                 {
-                  "addressType": "None",
-                  "city": "XXXX XXXX",
-                  "country": "XX",
-                  "postalCode": "00000",
-                  "stateOrProvince": "XX",
                   "streetAddress1": "XXXX XXXX",
                   "streetAddress2": "XXXX XXXX",
-                  "streetAddress3": ""
+                  "streetAddress3": "",
+                  "city": "XXXX XXXX",
+                  "stateOrProvince": "XX",
+                  "country": "XX",
+                  "postalCode": "00000",
+                  "addressType": "None"
                 }
               ],
+              "validationType": "ValidateAddress",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "validationStatus": "Valid",
-              "validationType": "ValidateAddress"
+                "details": [],
+                "additionalInfo": []
+              }
             },
             {
+              "status": "Valid",
+              "validationType": "ValidateSubscriptionIsAllowedToCreateJob",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "status": "Valid",
-              "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
+                "details": [],
+                "additionalInfo": []
+              }
             },
             {
+              "status": "Valid",
+              "validationType": "ValidateSkuAvailability",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "status": "Valid",
-              "validationType": "ValidateSkuAvailability"
+                "details": [],
+                "additionalInfo": []
+              }
             },
             {
+              "status": "Valid",
+              "validationType": "ValidateCreateOrderLimit",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "status": "Valid",
-              "validationType": "ValidateCreateOrderLimit"
+                "details": [],
+                "additionalInfo": []
+              }
             },
             {
+              "status": "Valid",
+              "validationType": "ValidatePreferences",
               "error": {
-                "additionalInfo": [],
                 "code": "Success",
                 "target": "KeyEncryptionKey",
-                "details": []
-              },
-              "status": "Valid",
-              "validationType": "ValidatePreferences"
+                "details": [],
+                "additionalInfo": []
+              }
             }
-          ],
-          "status": "AllValidToProceed"
+          ]
         }
       }
     }

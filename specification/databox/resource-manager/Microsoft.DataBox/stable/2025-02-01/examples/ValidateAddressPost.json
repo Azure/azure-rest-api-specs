@@ -1,55 +1,53 @@
 {
-  "operationId": "Service_ValidateAddress",
   "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "location": "westus",
+    "api-version": "2025-02-01",
     "Accept-Language": [
       "en-US"
-    ],
-    "Content-Length": [
-      "351"
-    ],
-    "Content-Type": [
-      "application/json; charset=utf-8"
     ],
     "User-Agent": [
       "vscode-restclient"
     ],
-    "api-version": "2025-02-01",
-    "location": "westus",
-    "subscriptionId": "YourSubscriptionId",
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "351"
+    ],
     "validateAddress": {
-      "deviceType": "DataBox",
-      "model": "DataBox",
+      "validationType": "ValidateAddress",
       "shippingAddress": {
-        "addressType": "Commercial",
+        "streetAddress1": "XXXX XXXX",
+        "streetAddress2": "XXXX XXXX",
         "city": "XXXX XXXX",
-        "companyName": "XXXX XXXX",
+        "stateOrProvince": "XX",
         "country": "XX",
         "postalCode": "00000",
-        "stateOrProvince": "XX",
-        "streetAddress1": "XXXX XXXX",
-        "streetAddress2": "XXXX XXXX"
+        "companyName": "XXXX XXXX",
+        "addressType": "Commercial"
       },
-      "validationType": "ValidateAddress"
+      "deviceType": "DataBox",
+      "model": "DataBox"
     }
   },
-  "title": "ValidateAddressPost",
   "responses": {
     "200": {
       "body": {
         "properties": {
+          "validationStatus": "Valid",
           "alternateAddresses": [
             {
-              "addressType": "None",
-              "city": "XXXX XXXX",
-              "country": "XX",
-              "postalCode": "00000",
-              "stateOrProvince": "XX",
               "streetAddress1": "XXXX XXXX",
               "streetAddress2": "XXXX XXXX",
-              "streetAddress3": ""
+              "streetAddress3": "",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "addressType": "None"
             }
           ],
-          "validationStatus": "Valid",
           "validationType": "ValidateAddress"
         }
       }
