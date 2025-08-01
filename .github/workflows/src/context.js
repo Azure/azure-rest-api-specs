@@ -1,6 +1,8 @@
 // @ts-check
 
-import { PER_PAGE_MAX } from "./github.js";
+import { inspect } from "util";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -20,7 +22,7 @@ import { getIssueNumber } from "./issues.js";
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
-  core.info(`  payload.action: ${context.eventName}`);
+  core.info(`  payload.action: ${context.payload.action}`);
   core.info(`  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
@@ -28,6 +30,8 @@ export async function extractInputs(github, context, core) {
   if (core.isDebug()) {
     core.debug(`context: ${JSON.stringify(context)}`);
   }
+
+  github.hook.after("request", rateLimitHook);
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
@@ -170,7 +174,8 @@ export async function extractInputs(github, context, core) {
           issue_number = pullRequests[0].number;
         } else {
           throw new Error(
-            `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
+            `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
+              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n${inspect(pullRequests)}`,
           );
         }
         if (!issue_number) {

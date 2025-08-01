@@ -1,7 +1,7 @@
 // @ts-check
 
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
-import { PER_PAGE_MAX } from "./github.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
