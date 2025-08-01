@@ -8,7 +8,7 @@ import { getAutorestErrors, runChecks } from "./runChecks.js";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { resolve } from "node:path";
-import { getBranchName, getSha } from "@azure-tools/specs-shared/simple-git";
+import { getSha } from "@azure-tools/specs-shared/simple-git";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -32,15 +32,9 @@ export async function main() {
         default: "lint-diff.md",
       },
       // TODO: Consider using git commands to determine this information
-      "base-branch": {
+      "base-ref": { 
         type: "string",
         short: "b",
-        default: "main",
-      },
-      "compare-sha": {
-        type: "string",
-        short: "m",
-        default: "main",
       },
       "github-repo-path": {
         type: "string",
@@ -56,8 +50,7 @@ export async function main() {
       before: beforeArg,
       after: afterArg,
       "out-file": outFile,
-      "base-branch": baseBranch,
-      "compare-sha": compareSha,
+      "base-ref": baseRefArg,
       "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
@@ -84,12 +77,22 @@ export async function main() {
   );
   console.log(`Using @microsoft.azure/openapi-validator version: ${validatorVersion}\n`);
 
+  const beforePath = beforeArg as string;
+  const afterPath = afterArg as string;
+
+  let baseRef: string;
+  if (baseRefArg) { 
+    baseRef = baseRefArg as string;
+  } else {
+    console.log("No --base-ref provided. Defaulting to the current SHA in before repo.");
+    baseRef = await getSha(resolve(beforePath));
+  }
+
   await runLintDiff(
-    beforeArg as string,
-    afterArg as string,
+    beforePath,
+    afterPath,
     outFile as string,
-    baseBranch as string,
-    compareSha as string,
+    baseRef,
     githubRepoPath as string,
   );
 }
@@ -98,19 +101,15 @@ async function runLintDiff(
   beforePath: string,
   afterPath: string,
   outFile: string,
-  baseBranch: string,
-  compareSha: string,
+  baseRef: string,
   githubRepoPath: string,
 ) {
-  const baseBranchTest = await getBranchName(resolve(beforePath));
-  const compareShaTest = await getSha(resolve(afterPath));
-
-  console.log(`Base Branch: ${baseBranchTest} (should be ${baseBranch})`);
-  console.log(`Compare SHA: ${compareShaTest} (should be ${compareSha})`);
 
   // TODO: Get SHA for before and after paths, then run git diff against those SHAs.
   const changedFiles = await getChangedFiles({ 
     cwd: resolve(afterPath),
+    baseCommitish: baseRef,
+    headCommitish: "",
     paths: ['specification']
   });
 
@@ -169,12 +168,13 @@ async function runLintDiff(
   }
 
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
+  const compareSha = await getSha(resolve(afterPath));
 
   const pass = await generateLintDiffReport(
     runCorrelations,
     affectedSwaggers,
     outFile,
-    baseBranch,
+    baseRef,
     compareSha,
     githubRepoPath,
   );

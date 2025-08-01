@@ -44,13 +44,12 @@ jobs:
           npm exec --no -- lint-diff \
             --before before \
             --after after \
-            --base-branch ${{ github.event.pull_request.base.ref }} \
-            --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file "$GITHUB_STEP_SUMMARY"
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
           NODE_OPTIONS: "--max-old-space-size=8192"
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

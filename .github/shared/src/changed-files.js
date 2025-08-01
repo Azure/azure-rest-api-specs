@@ -13,7 +13,7 @@ debug.enable("simple-git");
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
- * @param {string} [options.headCommitish] Default: "HEAD".
+ * @param {string} [options.headCommitish] Use empty string to include changes not yet committed. Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
@@ -30,8 +30,14 @@ export async function getChangedFiles(options = {}) {
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
-  // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
+  // filter based on status with a single call to `git diff`.  
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    baseCommitish,
+    // Only use head if it's provided (enables listing files changed but not yet committed)
+    ...(headCommitish ? [headCommitish] : []),
+    ...paths
+  ]);
 
   const files = result.trim().split("\n");
   logger?.info("Changed Files:");
@@ -51,7 +57,7 @@ export async function getChangedFiles(options = {}) {
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
- * @param {string} [options.headCommitish] Default: "HEAD".
+ * @param {string} [options.headCommitish] Use empty string to include changes not yet committed. Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
@@ -67,7 +73,8 @@ export async function getChangedFilesStatuses(options = {}) {
   const result = await simpleGit(cwd).diff([
     "--name-status",
     baseCommitish,
-    headCommitish,
+    // Only use head if it's provided (enables listing files changed but not yet committed)
+    ...(headCommitish ? [headCommitish] : []),
     ...paths,
   ]);
 
