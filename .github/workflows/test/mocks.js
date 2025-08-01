@@ -4,6 +4,9 @@ import { vi } from "vitest";
 // Partial mock of `github` parameter passed into github-script actions
 export function createMockGithub() {
   return {
+    hook: {
+      after: vi.fn(),
+    },
     paginate: async (func, params) => {
       // Assume all test data fits in single page
       const data = (await func(params)).data;
