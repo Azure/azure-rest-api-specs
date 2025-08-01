@@ -2946,26 +2946,17 @@
       "type": "object",
       "description": "Fine-Tuning Job",
       "properties": {
-        "training_file": {
-          "type": "string",
-          "description": "The file ID used for training. You can retrieve the training data with the Files API."
-        },
-        "validation_file": {
-          "type": "string",
-          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
-        },
         "model": {
           "type": "string",
           "description": "The base model that is being fine-tuned."
         },
-        "seed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The seed used for the fine-tuning job."
+        "training_file": {
+          "type": "string",
+          "description": "The file ID used for training. You can retrieve the training data with the Files API."
         },
-        "method": {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod",
-          "description": "The method used for fine-tuning."
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "description": "The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter."
         },
         "integrations": {
           "type": "array",
@@ -2974,16 +2965,29 @@
             "$ref": "#/definitions/FineTuningJobIntegration"
           }
         },
-        "suffix": {
-          "type": "string",
-          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
-        },
         "metadata": {
           "type": "object",
           "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "method": {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod",
+          "description": "The method used for fine-tuning."
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        },
+        "validation_file": {
+          "type": "string",
+          "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
         },
         "TrainingType": {
           "$ref": "#/definitions/TrainingType",
@@ -2995,15 +2999,15 @@
         }
       },
       "required": [
-        "training_file",
         "model",
-        "seed",
-        "method"
+        "training_file",
+        "method",
+        "seed"
       ]
     },
     "FineTuningJobDPOHyperParameters": {
       "type": "object",
-      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "description": "The hyper parameter settings used in Direct Preference Optimization fine-tuning method.",
       "properties": {
         "batch_size": {
           "type": "integer",
@@ -3024,13 +3028,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Other parameters used for training the model.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3038,17 +3035,30 @@
       "type": "object",
       "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
       "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobDPOHyperParameters",
-          "description": "The hyperparameters used for the DPO fine-tuning job."
+        "dpo": {
+          "$ref": "#/definitions/FineTuningJobDPOTrainingMethodConfiguration",
+          "description": "Configuration for the DPO fine-tuning method."
         }
       },
+      "required": [
+        "dpo"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/FineTuningJobTrainingMethod"
         }
       ],
       "x-ms-discriminator-value": "dpo"
+    },
+    "FineTuningJobDPOTrainingMethodConfiguration": {
+      "type": "object",
+      "description": "Configuration for the Direct Preference Optimization fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobDPOHyperParameters",
+          "description": "The hyperparameters used for the DPO fine-tuning job."
+        }
+      }
     },
     "FineTuningJobError": {
       "type": "object",
@@ -3165,13 +3175,6 @@
         "reasoning_effort": {
           "type": "string",
           "description": "Level of reasoning effort."
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Other parameters used for training the model.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3309,6 +3312,25 @@
       "type": "object",
       "description": "Configuration for the Reinforcement fine-tuning method.",
       "properties": {
+        "reinforcement": {
+          "$ref": "#/definitions/FineTuningJobRFTHyperParameters",
+          "description": "Configuration for the reinforcement fine-tuning method."
+        }
+      },
+      "required": [
+        "reinforcement"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "reinforcement"
+    },
+    "FineTuningJobRFTTrainingMethodConfiguration": {
+      "type": "object",
+      "description": "Configuration for the reinforcement fine-tuning method.",
+      "properties": {
         "grader": {
           "$ref": "#/definitions/FineTuningJobRFTGrader",
           "description": "The grader used for the fine-tuning job."
@@ -3320,13 +3342,7 @@
       },
       "required": [
         "grader"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod"
-        }
-      ],
-      "x-ms-discriminator-value": "reinforcement"
+      ]
     },
     "FineTuningJobSFTHyperParameters": {
       "type": "object",
@@ -3346,31 +3362,37 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
-        },
-        "additionalParameters": {
-          "type": "object",
-          "description": "Other parameters used for training the model.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
     "FineTuningJobSFTTrainingMethod": {
       "type": "object",
-      "description": "Configuration for the Supervised Fine-Tuning method.",
+      "description": "Supervised Fine-Tuning method.",
       "properties": {
-        "hyperparameters": {
-          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
-          "description": "The hyperparameters used for the DPO fine-tuning job."
+        "supervised": {
+          "$ref": "#/definitions/FineTuningJobSFTTrainingMethodConfiguration",
+          "description": "Configuration for the supervised fine-tuning method."
         }
       },
+      "required": [
+        "supervised"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/FineTuningJobTrainingMethod"
         }
       ],
       "x-ms-discriminator-value": "supervised"
+    },
+    "FineTuningJobSFTTrainingMethodConfiguration": {
+      "type": "object",
+      "description": "Configuration for the supervised fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "description": "The hyperparameters used for the SFT fine-tuning job."
+        }
+      }
     },
     "FineTuningJobTrainingMethod": {
       "type": "object",

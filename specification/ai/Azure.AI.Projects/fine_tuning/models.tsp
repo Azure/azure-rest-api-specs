@@ -40,26 +40,31 @@ model FineTuningJobSFTHyperParameters {
 
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
   n_epochs?: int32;
-  
-  @doc("Other parameters used for training the model.")
-  additionalParameters?: Record<string>;
 }
 
-@doc("Configuration for the Supervised Fine-Tuning method.")
+@doc("Configuration for the supervised fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobSFTTrainingMethodConfiguration {
+  @doc("The hyperparameters used for the SFT fine-tuning job.")
+  hyperparameters?: FineTuningJobSFTHyperParameters;
+}
+
+@doc("Supervised Fine-Tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobSFTTrainingMethod extends FineTuningJobTrainingMethod {
   type: "supervised";
   
-  @doc("The hyperparameters used for the DPO fine-tuning job.")
-  hyperparameters?: FineTuningJobSFTHyperParameters;
+  @doc("Configuration for the supervised fine-tuning method.")
+  supervised: FineTuningJobSFTTrainingMethodConfiguration;
 }
 
 //
 // DPO fine-tuning
 //
 
-@doc("Configuration for the Direct Preference Optimization fine-tuning method.")
+@doc("The hyper parameter settings used in Direct Preference Optimization fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobDPOHyperParameters { 
@@ -74,9 +79,14 @@ model FineTuningJobDPOHyperParameters {
 
   @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
   n_epochs?: int32;
-  
-  @doc("Other parameters used for training the model.")
-  additionalParameters?: Record<string>;
+}
+
+@doc("Configuration for the Direct Preference Optimization fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobDPOTrainingMethodConfiguration {
+  @doc("The hyperparameters used for the DPO fine-tuning job.")
+  hyperparameters?: FineTuningJobDPOHyperParameters;
 }
 
 @doc("Configuration for the Direct Preference Optimization fine-tuning method.")
@@ -85,42 +95,13 @@ model FineTuningJobDPOHyperParameters {
 model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
   type: "dpo";
 
-  @doc("The hyperparameters used for the DPO fine-tuning job.")
-  hyperparameters?: FineTuningJobDPOHyperParameters;
+  @doc("Configuration for the DPO fine-tuning method.")
+  dpo: FineTuningJobDPOTrainingMethodConfiguration;
 }
 
 //
 // RFT fine-tuning
 //
-
-@doc("Configuration for the Reinforcement fine-tuning method.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
-model FineTuningJobRFTHyperParameters { 
-  @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
-  batch_size?: int32;
-
-  @doc("Multiplier on amount of compute used for exploring search space during training.")
-  compute_multiplier?: float64;
-
-  @doc("The number of training steps between evaluation runs.")
-  eval_interval?: int32;
-
-  @doc("Number of evaluation samples to generate per training step.")
-  eval_samples?: int32;
-
-  @doc("Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.")
-  learning_rate_multiplier?: float64;
-
-  @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
-  n_epochs?: int32;
-
-  @doc("Level of reasoning effort.")
-  reasoning_effort?: string;
-
-  @doc("Other parameters used for training the model.")
-  additionalParameters?: Record<string>;
-}
 
 // RFT graders
 
@@ -221,14 +202,48 @@ model FineTuningJobRFTLabelModelGraderGrader extends FineTuningJobRFTGrader {
 @doc("Configuration for the Reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
-  type: "reinforcement";
-  
+model FineTuningJobRFTHyperParameters { 
+  @doc("Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.")
+  batch_size?: int32;
+
+  @doc("Multiplier on amount of compute used for exploring search space during training.")
+  compute_multiplier?: float64;
+
+  @doc("The number of training steps between evaluation runs.")
+  eval_interval?: int32;
+
+  @doc("Number of evaluation samples to generate per training step.")
+  eval_samples?: int32;
+
+  @doc("Scaling factor for the learning rate. A smaller learning rate may be useful to avoid overfitting.")
+  learning_rate_multiplier?: float64;
+
+  @doc("The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.")
+  n_epochs?: int32;
+
+  @doc("Level of reasoning effort.")
+  reasoning_effort?: string;
+}
+
+@doc("Configuration for the reinforcement fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTTrainingMethodConfiguration { 
   @doc("The grader used for the fine-tuning job.")
   grader: FineTuningJobRFTGrader;
 
   @doc("The hyperparameters used for the reinforcement fine-tuning job.")
   hyperparameters?: FineTuningJobRFTHyperParameters;
+}
+
+@doc("Configuration for the Reinforcement fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
+  type: "reinforcement";
+
+  @doc("Configuration for the reinforcement fine-tuning method.")
+  reinforcement: FineTuningJobRFTHyperParameters;
 }
 
 //////////////////
@@ -405,26 +420,17 @@ model InferenceConfigs {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobCreation {
-  @doc("The file ID used for training. You can retrieve the training data with the Files API.")
-  training_file: string;
-
-  @doc("The file ID used for validation. You can retrieve the validation results with the Files API.")
-  validation_file?: string;
-
   @doc("The base model that is being fine-tuned.")
   `model`: string;
 
-  @doc("The seed used for the fine-tuning job.")
-  seed: int32;
+  @doc("The file ID used for training. You can retrieve the training data with the Files API.")
+  training_file: string;
 
-  @doc("The method used for fine-tuning.")
-  method: FineTuningJobTrainingMethod;
+  @doc("The hyperparameters used for the SFT fine-tuning job. This value is now deprecated in favor of method, and should be passed in under the method parameter.")
+  hyperparameters?: FineTuningJobSFTHyperParameters;
 
   @doc("A list of integrations to enable for this fine-tuning job.")
   integrations?: Array<FineTuningJobIntegration>;
-
-  @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
-  suffix?: string;
 
   /**
   * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
@@ -432,6 +438,18 @@ model FineTuningJobCreation {
   * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
   */
   metadata?: Record<string>;
+
+  @doc("The method used for fine-tuning.")
+  method: FineTuningJobTrainingMethod;
+
+  @doc("The seed used for the fine-tuning job.")
+  seed: int32;
+
+  @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
+  suffix?: string;
+
+  @doc("The file ID used for validation. You can retrieve the validation results with the Files API.")
+  validation_file?: string;
 
   @doc("The SKU used for training. This is Azure AI specific parameter")
   TrainingType? : TrainingType;
