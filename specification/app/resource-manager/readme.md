@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-02-02-preview
+tag: package-preview-2025-10-02-preview
 ```
 
 ### Suppression
@@ -41,6 +41,48 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+```
+
+### Tag: package-preview-2025-10-02-preview
+
+These settings apply only when `--tag=package-preview-2025-10-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10-02-preview'
+input-file:
+  - Microsoft.App/preview/2025-10-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2025-10-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2025-10-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2025-10-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2025-10-02-preview/Builders.json
+  - Microsoft.App/preview/2025-10-02-preview/Builds.json
+  - Microsoft.App/preview/2025-10-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2025-10-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2025-10-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2025-10-02-preview/Global.json
+  - Microsoft.App/preview/2025-10-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/Jobs.json
+  - Microsoft.App/preview/2025-10-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-10-02-preview/SessionPools.json
+  - Microsoft.App/preview/2025-10-02-preview/SourceControls.json
+  - Microsoft.App/preview/2025-10-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2025-10-02-preview/Usages.json
 ```
 
 ### Tag: package-2025-01-01
