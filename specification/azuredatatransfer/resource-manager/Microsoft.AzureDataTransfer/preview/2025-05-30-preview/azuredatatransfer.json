@@ -3562,30 +3562,6 @@
         ]
       }
     },
-    "EnablementStatus": {
-      "type": "string",
-      "description": "Enablement statuses",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "EnablementStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Represents an enabled status."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Represents a disabled status."
-          }
-        ]
-      }
-    },
     "FilterType": {
       "type": "string",
       "description": "Specifies whether the filter applies an allow or deny policy.",
@@ -4273,9 +4249,30 @@
           "$ref": "#/definitions/FlowBillingTier",
           "description": "Billing tier for this messaging flow"
         },
-        "guaranteedDeliveryEnabled": {
-          "$ref": "#/definitions/EnablementStatus",
-          "description": "Field indicating whether to enable guaranteed delivery on the flow or not."
+        "performancePriority": {
+          "type": "string",
+          "description": "Field indicating whether to enable guaranteed delivery on the flow or not. The default disabled option chooses speed over consistency. When enabled, messages are delivered with minimal delay, but delivery is not guaranteed under all conditions",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Represents an enabled status."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Represents a disabled status."
+              }
+            ]
+          }
         }
       }
     },

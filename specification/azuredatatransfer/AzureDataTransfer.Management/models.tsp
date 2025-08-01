@@ -1192,10 +1192,10 @@ model MessagingOptions {
   billingTier?: FlowBillingTier;
 
   /**
-   * Field indicating whether to enable guaranteed delivery on the flow or not.
+   * Field indicating whether to enable guaranteed delivery on the flow or not. The default disabled option chooses speed over consistency. When enabled, messages are delivered with minimal delay, but delivery is not guaranteed under all conditions
    */
   @added(Versions.v2025_05_30_preview)
-  guaranteedDeliveryEnabled?: EnablementStatus;
+  performancePriority?: EnablementStatus = EnablementStatus.Disabled;
 }
 
 /**

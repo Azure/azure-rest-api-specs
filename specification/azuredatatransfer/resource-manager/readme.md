@@ -24,6 +24,16 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the azuredatatransfer.
 
+### Tag: default
+
+```yaml $(tag) == 'default'
+input-file:
+  - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
+  - Microsoft.AzureDataTransfer/stable/2025-05-21/azuredatatransfer.json
+  - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
+
+```
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
@@ -55,6 +65,33 @@ These settings apply only when `--tag=package-preview-2025-04-11-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-04-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
+```
+
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.AzureDataTransfer/preview/2025-03-01-preview/azuredatatransfer.json
+```
+
+### Tag: package-2024-09-11
+
+These settings apply only when `--tag=package-2024-09-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-11'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
+```
+
+### Tag: package-2024-09-27
+
+These settings apply only when `--tag=package-2024-09-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-27'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2024-09-27/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-05
