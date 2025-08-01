@@ -1,0 +1,695 @@
+{
+  "info": {
+    "x-cadl-generated__deleted": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ],
+    "description__added": "// FIXME: (missing-service-description) Add service description"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts__deleted": {
+      "get": {
+        "operationId": "Accounts_List",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AccountsListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_List_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_List_MaximumSet_Gen.json"
+          },
+          "Accounts_List_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations__deleted": {
+      "get": {
+        "operationId": "Organizations_List",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
+          },
+          "Organizations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts__added": {
+      "get": {
+        "operationId": "Accounts_List",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AccountsListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_List_MaximumSet_Gen": {
+            "$ref": "./examples/Accounts_List_MaximumSet_Gen.json"
+          },
+          "Accounts_List_MinimumSet_Gen": {
+            "$ref": "./examples/Accounts_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations__added": {
+      "get": {
+        "operationId": "Organizations_List",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
+          },
+          "Organizations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/activateSaaS": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name": {
+                "__old": "request",
+                "__new": "body"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}": {
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "monitorName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "monitorName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/getBillingInfo": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/latestLinkedSaaS": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/linkSaaS": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
+      "post": {
+        "consumes__added": [
+          "text/plain"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref__deleted": "#/definitions/email",
+                "type__added": "string"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listLinkedResources": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "required__added": true
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/resubscribe": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^.*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AccountIdParameter__deleted": {
+      "type": "object",
+      "properties": {}
+    },
+    "AppServicesGetParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/AppServicesGetRequest"
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "HostsGetParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/HostsGetRequest"
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "LocationParameter__deleted": {
+      "type": "object",
+      "properties": {}
+    },
+    "MetricsRequestParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/MetricsRequest"
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "MetricsStatusRequestParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/MetricsStatusRequest"
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "OrganizationIdParameter__deleted": {
+      "type": "object",
+      "properties": {}
+    },
+    "SecureString__deleted": {
+      "type": "string",
+      "format": "password",
+      "x-ms-secret": true
+    },
+    "SwitchBillingParameter__deleted": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/SwitchBillingRequest"
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "UserEmailParameter__deleted": {
+      "type": "object",
+      "properties": {}
+    },
+    "email__deleted": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+    },
+    "AccountsListResponse": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "AccountResource[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "AppServicesGetRequest": {
+      "properties": {
+        "azureResourceIds": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "AppServicesListResponse": {
+      "properties": {
+        "value": {
+          "x-ms-identifiers__deleted": [
+            "azureResourceId"
+          ],
+          "x-cadl-name__deleted": "AppServiceInfo[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "ConnectedPartnerResourcesListResponse": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "HostsGetRequest": {
+      "properties": {
+        "vmIds": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "LinkedResourceListResponse": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LogRules": {
+      "properties": {
+        "filteringTags": {
+          "x-cadl-name__deleted": "FilteringTag[]"
+        }
+      }
+    },
+    "MetricRules": {
+      "properties": {
+        "filteringTags": {
+          "x-cadl-name__deleted": "FilteringTag[]"
+        }
+      }
+    },
+    "MetricsStatusRequest": {
+      "properties": {
+        "azureResourceIds": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "MetricsStatusResponse": {
+      "properties": {
+        "azureResourceIds": {
+          "x-cadl-name__deleted": "string[]"
+        }
+      }
+    },
+    "MonitoredResourceListResponse": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "MonitoredResource[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "MonitoredSubscription": {
+      "properties": {
+        "subscriptionId": {
+          "required__deleted": [
+            "subscriptionId"
+          ]
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__added": true
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NewRelicMonitorResource": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        },
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "NewRelicMonitorResourceListResult": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "NewRelicMonitorResource[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "NewRelicMonitorResourceUpdate": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        },
+        "tags": {
+          "x-cadl-name__deleted": "Record<string>"
+        }
+      }
+    },
+    "OrganizationsListResponse": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "OrganizationResource[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "PlanDataListResponse": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "PlanDataResource[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "TagRule": {
+      "properties": {
+        "properties": {
+          "x-ms-mutability__deleted": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "TagRuleListResult": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "TagRule[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    },
+    "VMHostsListResponse": {
+      "properties": {
+        "value": {
+          "x-cadl-name__deleted": "VMInfo[]"
+        },
+        "nextLink": {
+          "x-cadl-name__deleted": "Rest.ResourceLocation"
+        }
+      }
+    }
+  }
+}
