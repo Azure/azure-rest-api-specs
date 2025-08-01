@@ -23,18 +23,12 @@ jobs:
         with:
           fetch-depth: 2
           path: after
-          sparse-checkout: |
-            specification/contosowidgetmanager/
-            specification/common-types/
 
       - name: Checkout 'before' state
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           path: before
-          sparse-checkout: |
-            specification/contosowidgetmanager/
-            specification/common-types/
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
