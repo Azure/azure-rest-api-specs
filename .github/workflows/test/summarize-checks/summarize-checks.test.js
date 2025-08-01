@@ -640,7 +640,7 @@ describe("Summarize Checks Unit Tests", () => {
     });
 
     it("should generate completed summary when impact assessment is completed, but no required checks exist", async () => {
-    const repo = "azure-rest-api-specs";
+      const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [];
       const requiredCheckRuns = [];
