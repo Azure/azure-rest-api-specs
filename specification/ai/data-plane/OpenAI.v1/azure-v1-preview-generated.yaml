@@ -14,7 +14,6 @@ tags:
   - name: Responses
   - name: Vector Stores
   - name: Video
-  - name: Webhooks - Mocked as API Routes
 paths:
   /audio/speech:
     post:
@@ -26,7 +25,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -77,7 +76,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -130,7 +129,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -183,7 +182,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -236,7 +235,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -286,7 +285,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -381,13 +380,15 @@ paths:
         parameters. We support several types of graders and datasources.
 
         For more information, see the [Evals guide](/docs/guides/evals).
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -471,13 +472,17 @@ paths:
     get:
       operationId: getEval
       summary: Retrieve an evaluation by its ID.
+      description: |-
+        Retrieves an evaluation by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -525,14 +530,17 @@ paths:
         - Evals
     post:
       operationId: updateEval
-      description: Update select, mutable properties of a specified evaluation.
+      description: |-
+        Update select, mutable properties of a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -591,14 +599,17 @@ paths:
                   $ref: '#/components/schemas/OpenAI.MetadataPropertyForRequest'
     delete:
       operationId: deleteEval
-      description: Delete a specified evaluation.
+      description: |-
+        Delete a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -661,14 +672,17 @@ paths:
     get:
       operationId: getEvalRuns
       summary: ''
-      description: Retrieve a list of runs for a specified evaluation.
+      description: |-
+        Retrieve a list of runs for a specified evaluation.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -752,14 +766,17 @@ paths:
         - Evals
     post:
       operationId: createEvalRun
-      description: Create a new evaluation run, beginning the grading process.
+      description: |-
+        Create a new evaluation run, beginning the grading process.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -814,14 +831,17 @@ paths:
   /evals/{eval_id}/runs/{run_id}:
     get:
       operationId: getEvalRun
-      description: Retrieve a specific evaluation run by its ID.
+      description: |-
+        Retrieve a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -874,14 +894,17 @@ paths:
         - Evals
     post:
       operationId: cancelEvalRun
-      description: Cancel a specific evaluation run by its ID.
+      description: |-
+        Cancel a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -934,14 +957,17 @@ paths:
         - Evals
     delete:
       operationId: deleteEvalRun
-      description: Delete a specific evaluation run by its ID.
+      description: |-
+        Delete a specific evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1008,14 +1034,17 @@ paths:
   /evals/{eval_id}/runs/{run_id}/output_items:
     get:
       operationId: getEvalRunOutputItems
-      description: Get a list of output items for a specified evaluation run.
+      description: |-
+        Get a list of output items for a specified evaluation run.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1102,14 +1131,17 @@ paths:
   /evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}:
     get:
       operationId: getEvalRunOutputItem
-      description: Retrieve a specific output item from an evaluation run by its ID.
+      description: |-
+        Retrieve a specific output item from an evaluation run by its ID.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
       parameters:
         - name: api-version
           in: query
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1174,7 +1206,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1222,7 +1254,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1268,7 +1300,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1313,7 +1345,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1359,7 +1391,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1407,7 +1439,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1448,7 +1480,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1494,7 +1526,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1540,7 +1572,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1600,7 +1632,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1647,7 +1679,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1694,7 +1726,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1747,6 +1779,153 @@ paths:
                 $ref: '#/components/schemas/AzureErrorResponse'
       tags:
         - Fine-tuning
+  /fine_tuning/jobs/{fine_tuning_job_id}/checkpoints/{fine_tuning_checkpoint_id}/copy:
+    post:
+      operationId: FineTuning_CopyCheckpoint
+      description: |-
+        Creates a copy of a fine-tuning checkpoint at the given destination account and region.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copymodel
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Copy model, a preview feature.
+            This feature requires the 'aoai-copymodel' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyModelRequest'
+    get:
+      operationId: FineTuning_GetCheckpoint
+      description: |-
+        Gets the status of a fine-tuning checkpoint copy.
+
+        NOTE: This Azure OpenAI API is in preview and subject to change.
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: aoai-copymodel
+          in: header
+          required: true
+          description: |-
+            Enables access to AOAI Copy model, a preview feature.
+            This feature requires the 'aoai-copymodel' header to be set to 'preview'.
+          schema:
+            type: string
+            enum:
+              - preview
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - application/json
+        - name: fine_tuning_job_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fine_tuning_checkpoint_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyModelResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Fine-tuning
   /fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: listFineTuningEvents
@@ -1757,7 +1936,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1820,7 +1999,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1867,7 +2046,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1913,7 +2092,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -1959,7 +2138,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2011,7 +2190,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2054,7 +2233,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2101,7 +2280,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2154,7 +2333,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2207,7 +2386,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2268,7 +2447,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2357,7 +2536,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2440,7 +2619,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2490,7 +2669,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2536,7 +2715,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2588,7 +2767,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2635,7 +2814,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2688,7 +2867,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2741,7 +2920,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2794,7 +2973,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2897,7 +3076,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -2993,7 +3172,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3046,7 +3225,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3097,7 +3276,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3153,7 +3332,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3205,7 +3384,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3252,7 +3431,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3318,7 +3497,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3356,7 +3535,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3388,7 +3567,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3427,7 +3606,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3476,7 +3655,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3531,7 +3710,7 @@ paths:
           required: false
           description: |-
             The explicit Azure AI Foundry Models API version to use for this request.
-            `latest` if not otherwise specified.
+            `v1` if not otherwise specified.
           schema:
             $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
             default: v1
@@ -3559,216 +3738,6 @@ paths:
                 $ref: '#/components/schemas/AzureOpenAIVideoGenerationErrorResponse'
       tags:
         - Video
-  /webhooks-mock/batch-expired:
-    post:
-      operationId: Webhooks_batch_expired
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventBatchExpired'
-  /webhooks-mock/batch_cancelled:
-    post:
-      operationId: Webhooks_batch_cancelled
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventBatchCancelled'
-  /webhooks-mock/batch_completed:
-    post:
-      operationId: Webhooks_batch_completed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventBatchCompleted'
-  /webhooks-mock/batch_failed:
-    post:
-      operationId: Webhooks_batch_failed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventBatchFailed'
-  /webhooks-mock/eval_run_canceled:
-    post:
-      operationId: Webhooks_eval_run_canceled
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventEvalRunCanceled'
-  /webhooks-mock/eval_run_failed:
-    post:
-      operationId: Webhooks_eval_run_failed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventEvalRunFailed'
-  /webhooks-mock/eval_run_succeeded:
-    post:
-      operationId: Webhooks_eval_run_succeeded
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventEvalRunSucceeded'
-  /webhooks-mock/fine_tuning_job_cancelled:
-    post:
-      operationId: Webhooks_fine_tuning_job_cancelled
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventFineTuningJobCancelled'
-  /webhooks-mock/fine_tuning_job_failed:
-    post:
-      operationId: Webhooks_fine_tuning_job_failed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventFineTuningJobFailed'
-  /webhooks-mock/fine_tuning_job_succeeded:
-    post:
-      operationId: Webhooks_fine_tuning_job_succeeded
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventFineTuningJobSucceeded'
-  /webhooks-mock/response_cancelled:
-    post:
-      operationId: Webhooks_response_cancelled
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventResponseCancelled'
-  /webhooks-mock/response_completed:
-    post:
-      operationId: Webhooks_response_completed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventResponseCompleted'
-  /webhooks-mock/response_failed:
-    post:
-      operationId: Webhooks_response_failed
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventResponseFailed'
-  /webhooks-mock/response_incomplete:
-    post:
-      operationId: Webhooks_response_incomplete
-      parameters: []
-      responses:
-        '200':
-          description: A status code of 200 indicates the Webhook call succeeded. Non-200 codes will be retried.
-      tags:
-        - Webhooks - Mocked as API Routes
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAI.WebhookEventResponseIncomplete'
 security:
   - ApiKeyAuth: []
   - ApiKeyAuth_: []
@@ -6735,6 +6704,56 @@ components:
       items:
         $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
       description: The tool calls generated by the model, such as function calls.
+    CopiedAccountDetails:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+        - status
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination resource where the model was copied to.
+        region:
+          type: string
+          description: The region where the model was copied to.
+        status:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - InProgress
+          description: The status of the copy operation.
+    CopyModelRequest:
+      type: object
+      required:
+        - destinationResourceId
+        - region
+      properties:
+        destinationResourceId:
+          type: string
+          description: The ID of the destination Resource to copy.
+        region:
+          type: string
+          description: The region to copy the model to.
+    CopyModelResponse:
+      type: object
+      required:
+        - checkpointedModelName
+        - fineTuningJobId
+        - copiedAccountDetails
+      properties:
+        checkpointedModelName:
+          type: string
+          description: The ID of the copied model.
+        fineTuningJobId:
+          type: string
+          description: The ID of the fine-tuning job that the checkpoint was copied from.
+        copiedAccountDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/CopiedAccountDetails'
+          description: The ID of the destination resource id where it was copied
     CreateVideoGenerationRequest:
       type: object
       required:
@@ -15865,450 +15884,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: 'Note: web_search is not yet available via Azure OpenAI.'
-    OpenAI.WebhookEvent:
-      type: object
-      required:
-        - object
-        - type
-        - id
-      properties:
-        object:
-          type: string
-          enum:
-            - event
-          description: The JSON object type. Always `event`.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.WebhookEventType'
-          description: The type of the Webhook event.
-        id:
-          type: string
-          description: The unique ID of the Webhook event.
-      discriminator:
-        propertyName: type
-        mapping:
-          batch.completed: '#/components/schemas/OpenAI.WebhookEventBatchCompleted'
-          batch.expired: '#/components/schemas/OpenAI.WebhookEventBatchExpired'
-          batch.failed: '#/components/schemas/OpenAI.WebhookEventBatchFailed'
-          eval.run.canceled: '#/components/schemas/OpenAI.WebhookEventEvalRunCanceled'
-          eval.run.failed: '#/components/schemas/OpenAI.WebhookEventEvalRunFailed'
-          eval.run.succeeded: '#/components/schemas/OpenAI.WebhookEventEvalRunSucceeded'
-          fine_tuning.job.cancelled: '#/components/schemas/OpenAI.WebhookEventFineTuningJobCancelled'
-          fine_tuning.job.failed: '#/components/schemas/OpenAI.WebhookEventFineTuningJobFailed'
-          fine_tuning.job.succeeded: '#/components/schemas/OpenAI.WebhookEventFineTuningJobSucceeded'
-          response.cancelled: '#/components/schemas/OpenAI.WebhookEventResponseCancelled'
-          response.completed: '#/components/schemas/OpenAI.WebhookEventResponseCompleted'
-          response.failed: '#/components/schemas/OpenAI.WebhookEventResponseFailed'
-          response.incomplete: '#/components/schemas/OpenAI.WebhookEventResponseIncomplete'
-    OpenAI.WebhookEventBatchCancelled:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the batch API request was cancelled.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the batch API request.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - batch.cancelled
-          description: The type of the event. Always `batch.cancelled`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a batch API request has been cancelled.
-    OpenAI.WebhookEventBatchCompleted:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the batch API request was completed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the batch API request.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - batch.completed
-          description: The type of the event. Always `batch.completed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a batch API request has been completed.
-    OpenAI.WebhookEventBatchExpired:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the batch API request expired.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the batch API request.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - batch.expired
-          description: The type of the event. Always `batch.expired`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a batch API request has expired.
-    OpenAI.WebhookEventBatchFailed:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the batch API request failed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the batch API request.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - batch.failed
-          description: The type of the event. Always `batch.failed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a batch API request has failed.
-    OpenAI.WebhookEventEvalRunCanceled:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the eval run was canceled.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the eval run.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - eval.run.canceled
-          description: The type of the event. Always `eval.run.canceled`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when an eval run has been canceled.
-    OpenAI.WebhookEventEvalRunFailed:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the eval run failed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the eval run.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - eval.run.failed
-          description: The type of the event. Always `eval.run.failed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when an eval run has failed.
-    OpenAI.WebhookEventEvalRunSucceeded:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the eval run succeeded.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the eval run.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - eval.run.succeeded
-          description: The type of the event. Always `eval.run.succeeded`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when an eval run has succeeded.
-    OpenAI.WebhookEventFineTuningJobCancelled:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the fine-tuning job was cancelled.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the fine-tuning job.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - fine_tuning.job.cancelled
-          description: The type of the event. Always `fine_tuning.job.cancelled`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a fine-tuning job has been cancelled.
-    OpenAI.WebhookEventFineTuningJobFailed:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the fine-tuning job failed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the fine-tuning job.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - fine_tuning.job.failed
-          description: The type of the event. Always `fine_tuning.job.failed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a fine-tuning job has failed.
-    OpenAI.WebhookEventFineTuningJobSucceeded:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the fine-tuning job succeeded.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the fine-tuning job.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - fine_tuning.job.succeeded
-          description: The type of the event. Always `fine_tuning.job.succeeded`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a fine-tuning job has succeeded.
-    OpenAI.WebhookEventResponseCancelled:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the model response was cancelled.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the model response.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - response.cancelled
-          description: The type of the event. Always `response.cancelled`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a background response has been cancelled.
-    OpenAI.WebhookEventResponseCompleted:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the model response was completed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the model response.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - response.completed
-          description: The type of the event. Always `response.completed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a background response has been completed.
-    OpenAI.WebhookEventResponseFailed:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the model response failed.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the model response.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - response.failed
-          description: The type of the event. Always `response.failed`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a background response has failed.
-    OpenAI.WebhookEventResponseIncomplete:
-      type: object
-      required:
-        - created_at
-        - data
-        - type
-      properties:
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp (in seconds) of when the model response was interrupted.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique ID of the model response.
-          required:
-            - id
-          description: Event data payload.
-        type:
-          type: string
-          enum:
-            - response.incomplete
-          description: The type of the event. Always `response.incomplete`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.WebhookEvent'
-      description: Sent when a background response has been interrupted.
-    OpenAI.WebhookEventType:
-      type: string
-      enum:
-        - batch.cancelled
-        - batch.completed
-        - batch.expired
-        - batch.failed
-        - eval.run.canceled
-        - eval.run.failed
-        - eval.run.succeeded
-        - fine_tuning.job.cancelled
-        - fine_tuning.job.failed
-        - fine_tuning.job.succeeded
-        - response.cancelled
-        - response.completed
-        - response.failed
-        - response.incomplete
     PineconeChatDataSource:
       type: object
       required:

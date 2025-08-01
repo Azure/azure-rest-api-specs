@@ -28,7 +28,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -145,13 +145,13 @@
       },
       "post": {
         "operationId": "createEval",
-        "description": "Create the structure of an evaluation that can be used to test a model's\nperformance.\n\nAn evaluation is a set of testing criteria and a datasource. After\ncreating an evaluation, you can run it on different models and model\nparameters. We support several types of graders and datasources.\n\nFor more information, see the [Evals guide](/docs/guides/evals).",
+        "description": "Create the structure of an evaluation that can be used to test a model's\nperformance.\n\nAn evaluation is a set of testing criteria and a datasource. After\ncreating an evaluation, you can run it on different models and model\nparameters. We support several types of graders and datasources.\n\nFor more information, see the [Evals guide](/docs/guides/evals).\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -269,12 +269,13 @@
       "get": {
         "operationId": "getEval",
         "summary": "Retrieve an evaluation by its ID.",
+        "description": "Retrieves an evaluation by its ID.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -347,13 +348,13 @@
       },
       "post": {
         "operationId": "updateEval",
-        "description": "Update select, mutable properties of a specified evaluation.",
+        "description": "Update select, mutable properties of a specified evaluation.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -444,13 +445,13 @@
       },
       "delete": {
         "operationId": "deleteEval",
-        "description": "Delete a specified evaluation.",
+        "description": "Delete a specified evaluation.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -545,13 +546,13 @@
       "get": {
         "operationId": "getEvalRuns",
         "summary": "",
-        "description": "Retrieve a list of runs for a specified evaluation.",
+        "description": "Retrieve a list of runs for a specified evaluation.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -674,13 +675,13 @@
       },
       "post": {
         "operationId": "createEvalRun",
-        "description": "Create a new evaluation run, beginning the grading process.",
+        "description": "Create a new evaluation run, beginning the grading process.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -765,13 +766,13 @@
     "/evals/{eval_id}/runs/{run_id}": {
       "get": {
         "operationId": "getEvalRun",
-        "description": "Retrieve a specific evaluation run by its ID.",
+        "description": "Retrieve a specific evaluation run by its ID.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -852,13 +853,13 @@
       },
       "post": {
         "operationId": "cancelEvalRun",
-        "description": "Cancel a specific evaluation run by its ID.",
+        "description": "Cancel a specific evaluation run by its ID.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -939,13 +940,13 @@
       },
       "delete": {
         "operationId": "deleteEvalRun",
-        "description": "Delete a specific evaluation run by its ID.",
+        "description": "Delete a specific evaluation run by its ID.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1047,13 +1048,13 @@
     "/evals/{eval_id}/runs/{run_id}/output_items": {
       "get": {
         "operationId": "getEvalRunOutputItems",
-        "description": "Get a list of output items for a specified evaluation run.",
+        "description": "Get a list of output items for a specified evaluation run.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1183,13 +1184,13 @@
     "/evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}": {
       "get": {
         "operationId": "getEvalRunOutputItem",
-        "description": "Retrieve a specific output item from an evaluation run by its ID.",
+        "description": "Retrieve a specific output item from an evaluation run by its ID.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
         "parameters": [
           {
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1285,7 +1286,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1358,7 +1359,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1427,7 +1428,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1494,7 +1495,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1563,7 +1564,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1634,7 +1635,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1696,7 +1697,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1758,7 +1759,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1827,7 +1828,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1910,7 +1911,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -1980,7 +1981,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2050,7 +2051,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2133,6 +2134,214 @@
         ]
       }
     },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints/{fine_tuning_checkpoint_id}/copy": {
+      "post": {
+        "operationId": "FineTuning_CopyCheckpoint",
+        "description": "Creates a copy of a fine-tuning checkpoint at the given destination account and region.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
+            "schema": {
+              "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
+              "default": "v1"
+            }
+          },
+          {
+            "name": "aoai-copymodel",
+            "in": "header",
+            "required": true,
+            "description": "Enables access to AOAI Copy model, a preview feature.\nThis feature requires the 'aoai-copymodel' header to be set to 'preview'.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "preview"
+              ]
+            }
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fine_tuning_checkpoint_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CopyModelResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AzureErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fine-tuning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CopyModelRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "FineTuning_GetCheckpoint",
+        "description": "Gets the status of a fine-tuning checkpoint copy.\n\nNOTE: This Azure OpenAI API is in preview and subject to change.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": false,
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
+            "schema": {
+              "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
+              "default": "v1"
+            }
+          },
+          {
+            "name": "aoai-copymodel",
+            "in": "header",
+            "required": true,
+            "description": "Enables access to AOAI Copy model, a preview feature.\nThis feature requires the 'aoai-copymodel' header to be set to 'preview'.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "preview"
+              ]
+            }
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "application/json"
+              ]
+            }
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fine_tuning_checkpoint_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CopyModelResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "apim-request-id": {
+                "required": false,
+                "description": "A request ID used for troubleshooting purposes.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AzureErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Fine-tuning"
+        ]
+      }
+    },
     "/fine_tuning/jobs/{fine_tuning_job_id}/events": {
       "get": {
         "operationId": "listFineTuningEvents",
@@ -2142,7 +2351,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2234,7 +2443,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2304,7 +2513,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2374,7 +2583,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2435,7 +2644,7 @@
             "name": "api-version",
             "in": "query",
             "required": false,
-            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`latest` if not otherwise specified.",
+            "description": "The explicit Azure AI Foundry Models API version to use for this request.\n`v1` if not otherwise specified.",
             "schema": {
               "$ref": "#/components/schemas/AzureAIFoundryModelsApiVersion",
               "default": "v1"
@@ -2814,6 +3023,75 @@
               "deleting",
               "deleted"
             ]
+          }
+        }
+      },
+      "CopiedAccountDetails": {
+        "type": "object",
+        "required": [
+          "destinationResourceId",
+          "region",
+          "status"
+        ],
+        "properties": {
+          "destinationResourceId": {
+            "type": "string",
+            "description": "The ID of the destination resource where the model was copied to."
+          },
+          "region": {
+            "type": "string",
+            "description": "The region where the model was copied to."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Completed",
+              "Failed",
+              "InProgress"
+            ],
+            "description": "The status of the copy operation."
+          }
+        }
+      },
+      "CopyModelRequest": {
+        "type": "object",
+        "required": [
+          "destinationResourceId",
+          "region"
+        ],
+        "properties": {
+          "destinationResourceId": {
+            "type": "string",
+            "description": "The ID of the destination Resource to copy."
+          },
+          "region": {
+            "type": "string",
+            "description": "The region to copy the model to."
+          }
+        }
+      },
+      "CopyModelResponse": {
+        "type": "object",
+        "required": [
+          "checkpointedModelName",
+          "fineTuningJobId",
+          "copiedAccountDetails"
+        ],
+        "properties": {
+          "checkpointedModelName": {
+            "type": "string",
+            "description": "The ID of the copied model."
+          },
+          "fineTuningJobId": {
+            "type": "string",
+            "description": "The ID of the fine-tuning job that the checkpoint was copied from."
+          },
+          "copiedAccountDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CopiedAccountDetails"
+            },
+            "description": "The ID of the destination resource id where it was copied"
           }
         }
       },
