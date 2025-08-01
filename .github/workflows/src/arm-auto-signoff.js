@@ -1,8 +1,8 @@
 // @ts-check
 
 import { setEquals } from "../../shared/src/equality.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
 
 // TODO: Add tests
@@ -12,18 +12,7 @@ import { LabelAction } from "./label.js";
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export default async function getLabelAction({ github, context, core }) {
-  let owner = process.env.OWNER || "";
-  let repo = process.env.REPO || "";
-  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
-  let head_sha = process.env.HEAD_SHA || "";
-
-  if (!owner || !repo || !issue_number || !head_sha) {
-    let inputs = await extractInputs(github, context, core);
-    owner = owner || inputs.owner;
-    repo = repo || inputs.repo;
-    issue_number = issue_number || inputs.issue_number;
-    head_sha = head_sha || inputs.head_sha;
-  }
+  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   return await getLabelActionImpl({
     owner,
