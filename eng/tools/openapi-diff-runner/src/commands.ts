@@ -3,30 +3,31 @@
  * i.e. it is invoked by files with depth 0 and invokes files with depth 2.
  */
 
-import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { existsSync } from "node:fs";
 import * as path from "node:path";
-import { createOadTrace, setOadBaseBranch, generateOadMarkdown } from "./types/oad-types.js";
 import {
-  createBreakingChangeDetectionContext,
-  checkBreakingChangeOnSameVersion,
-  checkCrossVersionBreakingChange,
-} from "./detect-breaking-change.js";
-import { Context } from "./types/breaking-change.js";
-import {
-  getSwaggerDiffs,
   changeBaseBranch,
-  logFullOadMessagesList,
-  createDummySwagger,
   cleanDummySwagger,
-  isSameVersionBreakingType,
+  createDummySwagger,
   getCreatedDummySwaggerCount,
+  getSwaggerDiffs,
+  isSameVersionBreakingType,
+  logFullOadMessagesList,
   outputBreakingChangeLabelVariables,
 } from "./command-helpers.js";
+import {
+  checkBreakingChangeOnSameVersion,
+  checkCrossVersionBreakingChange,
+  createBreakingChangeDetectionContext,
+} from "./detect-breaking-change.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
 import { LOG_PREFIX, logMessage } from "./log.js";
+import { Context } from "./types/breaking-change.js";
+import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import { createOadTrace, generateOadMarkdown, setOadBaseBranch } from "./types/oad-types.js";
+import { checkPrTargetsProductionBranch } from "./utils/common-utils.js";
 import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
-import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * The function validateBreakingChange() is executed with type SameVersion or CrossVersion
@@ -170,15 +171,21 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
         await checkCrossVersionBreakingChange(detectionContext));
     }
-    const comparedSpecsTableContent = generateOadMarkdown(detectionContext.oadTracer);
+    const comparedSpecsTableContent = await generateOadMarkdown(detectionContext.oadTracer);
 
     // Log the markdown content to the pipeline log file
     if (comparedSpecsTableContent) {
       appendMarkdownToLog(context.oadMessageProcessorContext, comparedSpecsTableContent);
     }
 
-    // process breaking change labels
-    outputBreakingChangeLabelVariables();
+    // output breaking change label variables only when the PR targets a production branch
+    logMessage(
+      `Evaluate breaking change labels: targetRepo: ${context.targetRepo}, ` +
+        `targetBranch: ${context.prInfo!.targetBranch}`,
+    );
+    if (checkPrTargetsProductionBranch(context.targetRepo, context.prInfo!.targetBranch)) {
+      outputBreakingChangeLabelVariables();
+    }
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
     if (process.exitCode === undefined || process.exitCode === 0) {
@@ -195,17 +202,14 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       // - If there are messages from OAD (openapi-diff) denoting violations, but none
       //   of them resulted in adding any breaking changes labels.
       //   This is why we do not include 'oadViolationsCnt' in this formula at all.
-      //   Instead, we rely on 'labelsAddedCount'.
-      //   See https://github.com/Azure/azure-sdk-tools/issues/6396
       // - If there are errors, but they are only warning-level. This happens when comparing
       //   to previous preview version. In such cases, these errors are not included in the 'errorCnt' at all.
-      //process.exitCode = labelsAddedCount > 0 || errorCnt > 0 ? 1 : 0;
       process.exitCode = errorCnt > 0 ? 1 : 0;
     }
 
     logMessage(
       `${LOG_PREFIX}validateBreakingChange: prUrl: ${context.prUrl}, ` +
-        `comparisonType: ${context.runType}, labelsAddedCount: , ` +
+        `comparisonType: ${context.runType},` +
         `errorCnt: ${errorCnt}, oadViolationsCnt: ${oadViolationsCnt}, ` +
         `process.exitCode: ${process.exitCode}`,
     );

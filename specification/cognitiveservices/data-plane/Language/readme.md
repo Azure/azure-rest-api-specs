@@ -119,24 +119,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2023-04-15-preview
-
-These settings apply only when `--tag=release_2023_04_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023-04-15-preview'
-input-file:
-  - preview/2023-04-15-preview/analyzetext.json
-  - preview/2023-04-15-preview/analyzetext-authoring.json
-  - preview/2023-04-15-preview/analyzeconversations.json
-  - preview/2023-04-15-preview/analyzeconversations-authoring.json
-  - preview/2023-04-15-preview/questionanswering.json
-  - preview/2023-04-15-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Release 2023-04-01
 
 These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
@@ -149,61 +131,6 @@ input-file:
   - stable/2023-04-01/analyzeconversations-authoring.json
   - stable/2023-04-01/questionanswering.json
   - stable/2023-04-01/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-10-01-preview
-
-These settings apply only when `--tag=release_2022_10_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_10_01_preview'
-input-file:
-  - preview/2022-10-01-preview/analyzetext.json
-  - preview/2022-10-01-preview/analyzetext-authoring.json
-  - preview/2022-10-01-preview/analyzeconversations.json
-  - preview/2022-10-01-preview/analyzeconversations-authoring.json
-  - preview/2022-10-01-preview/questionanswering.json
-  - preview/2022-10-01-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-07-01-preview
-
-These settings apply only when `--tag=release_2022_07_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_07_01_preview'
-input-file:
-  - preview/2022-07-01-preview/analyzetext.json
-  - preview/2022-07-01-preview/analyzeconversations.json
-  - preview/2022-07-01-preview/analyzetext-authoring.json
-  - preview/2022-07-01-preview/analyzeconversations-authoring.json
-  - preview/2022-07-01-preview/questionanswering.json
-  - preview/2022-07-01-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-
-```
-
-### Release 2022-05-15-preview
-
-These settings apply only when `--tag=release_2022_05_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_05_15_preview'
-input-file:
-  - preview/2022-05-15-preview/analyzetext.json
-  - preview/2022-05-15-preview/analyzeconversations.json
-  - preview/2022-05-15-preview/analyzetext-authoring.json
-  - preview/2022-05-15-preview/analyzeconversations-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
@@ -227,47 +154,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2022-03-01-preview
-
-These settings apply only when `--tag=release_2022_03_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_03_01_preview'
-input-file:
-  - preview/2022-03-01-preview/analyzetext.json
-  - preview/2022-03-01-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2022-02-01-preview
-
-These settings apply only when `--tag=release_2022_02_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2022_02_01_preview'
-input-file:
-- preview/2022-02-01-preview/analyzetext.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-11-01-preview
-
-These settings apply only when `--tag=release_2021_11_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_11_01_preview'
-input-file:
-- preview/2021-11-01-preview/analyzetext.json
-- preview/2021-11-01-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Release 2021-10-01
 
 These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
@@ -277,34 +163,6 @@ input-file:
   - stable/2021-10-01/questionanswering.json
   - stable/2021-10-01/questionanswering-authoring.json
 title: 
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-07-15-preview
-
-These settings apply only when `--tag=release_2021_07_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_07_15_preview'
-input-file:
-- preview/2021-07-15-preview/questionanswering.json
-- preview/2021-07-15-preview/questionanswering-authoring.json
-title:
-  Microsoft Cognitive Language Service
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2021-05-01-preview
-
-These settings apply only when `--tag=release_2021_05_01_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2021_05_01_preview'
-input-file:
-- preview/2021-05-01-preview/questionanswering.json
-- preview/2021-05-01-preview/questionanswering-authoring.json
-title:
   Microsoft Cognitive Language Service
 modelerfour:
   lenient-model-deduplication: true

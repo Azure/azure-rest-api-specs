@@ -1,12 +1,12 @@
-import { describe, it, expect } from "vitest";
-import {
-  createBreakingChangeMdRows,
-  getMdTableHeader,
-  getDeficitRow,
-  rowToString,
-  BreakingChangeMdRow,
-} from "../../src/utils/markdown-report-row.js";
+import { describe, expect, it } from "vitest";
 import { BrChMsgRecord, ResultMessageRecord } from "../../src/types/message.js";
+import {
+  BreakingChangeMdRow,
+  createBreakingChangeMdRows,
+  getDeficitRow,
+  getMdTableHeader,
+  rowToString,
+} from "../../src/utils/markdown-report-row.js";
 
 describe("markdown-report-row", () => {
   // Test constants

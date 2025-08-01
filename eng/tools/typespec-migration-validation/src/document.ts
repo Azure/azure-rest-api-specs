@@ -57,7 +57,13 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
     if (configuration.ignorePathCase) {
       const normalizedRoute = route
         .replace(/\/resourcegroups\//i, "/resourceGroups/")
-        .replace(/\/subscriptions\//i, "/subscriptions/");
+        .replace(/\/subscriptions\//i, "/subscriptions/")
+        .split('/')
+        .map(segment => {
+          if (segment.length === 0) return segment;
+          return segment.charAt(0).toLowerCase() + segment.slice(1);
+        })
+        .join('/');
       delete newDocument.paths[route];
       newDocument.paths[normalizedRoute] = processedPath;
     } else {

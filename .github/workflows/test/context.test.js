@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "../src/context.js";
-import { PER_PAGE_MAX } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
@@ -34,7 +34,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
+    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -44,6 +44,8 @@ describe("extractInputs", () => {
   });
 
   it("pull_request_target", async () => {
+    const github = createMockGithub();
+
     const context = {
       eventName: "pull_request_target",
       payload: {
@@ -71,23 +73,23 @@ describe("extractInputs", () => {
       run_id: NaN,
     };
 
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "unlabeled";
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "opened";
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "synchronize";
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "reopened";
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual(expected);
 
     // Action not yet supported
     context.payload.action = "assigned";
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow();
   });
 
   it("issue_comment:edited", async () => {
@@ -140,7 +142,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
+    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "",
@@ -157,7 +159,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(extractInputs(createMockGithub(), context, createMockCore())).rejects.toThrow();
   });
 
   it("workflow_run:completed:pull_request (same repo)", async () => {
@@ -180,7 +182,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
+    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -295,6 +297,10 @@ describe("extractInputs", () => {
         commit_sha: "abc123",
         per_page: PER_PAGE_MAX,
       });
+
+      // For pull_request, do NOT attempt to extract the issue number from an artifact, since this could be modified
+      // in a fork PR.
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(0);
     },
   );
 
@@ -333,9 +339,24 @@ describe("extractInputs", () => {
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [{ name: "issue-number=not-a-number" }] },
     });
-    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
-      /invalid issue-number/i,
-    );
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: NaN,
+      run_id: 456,
+    });
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "issue-number=null" }] },
+    });
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: NaN,
+      run_id: 456,
+    });
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },

@@ -85,7 +85,8 @@
             "in": "path",
             "description": "The identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "query",
@@ -133,7 +134,8 @@
             "in": "path",
             "description": "The identifier of the resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "Prefer",
@@ -404,7 +406,7 @@
         },
         "body": {
           "$ref": "#/definitions/QueryBody",
-          "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)"
+          "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)"
         },
         "path": {
           "type": "string",
@@ -1532,7 +1534,7 @@
     },
     "QueryBody": {
       "type": "object",
-      "description": "The Analytics query. Learn more about the [Analytics query\nsyntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+      "description": "The Analytics query. Learn more about the\n[Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
       "properties": {
         "query": {
           "type": "string",

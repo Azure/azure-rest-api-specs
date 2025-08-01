@@ -1,0 +1,650 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "CapabilitiesByLocation"
+        ],
+        "operationId": "CapabilitiesByLocation_List",
+        "x-ms-examples": {
+          "List the capabilities available in a given location for a specific subscription.": {
+            "$ref": "./examples/CapabilitiesByLocationList.json"
+          }
+        },
+        "description": "Lists the capabilities available in a given location for a specific subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities": {
+      "get": {
+        "tags": [
+          "CapabilitiesByServer"
+        ],
+        "operationId": "CapabilitiesByServer_List",
+        "x-ms-examples": {
+          "List the capabilities available for a given server.": {
+            "$ref": "./examples/CapabilitiesByServerList.json"
+          }
+        },
+        "description": "Lists the capabilities available for a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageTierCapability": {
+      "type": "object",
+      "description": "Capability of a storage tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage tier.",
+          "readOnly": true
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Supported IOPS for the storage tier.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ]
+    },
+    "StorageMbCapability": {
+      "type": "object",
+      "properties": {
+        "supportedIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum IOPS supported by the storage size.",
+          "readOnly": true
+        },
+        "supportedMaximumIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum IOPS supported by the storage size.",
+          "readOnly": true
+        },
+        "storageSizeMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum supported size (in MB) of storage.",
+          "readOnly": true
+        },
+        "maximumStorageSizeMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum supported size (in MB) of storage.",
+          "readOnly": true
+        },
+        "supportedThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum supported throughput (in MB/s) of storage.",
+          "readOnly": true
+        },
+        "supportedMaximumThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum supported throughput (in MB/s) of storage.",
+          "readOnly": true
+        },
+        "defaultIopsTier": {
+          "type": "string",
+          "description": "Default IOPS for this tier and storage size.",
+          "readOnly": true
+        },
+        "supportedIopsTiers": {
+          "type": "array",
+          "description": "List of all supported storage tiers for this tier and storage size.",
+          "items": {
+            "$ref": "#/definitions/StorageTierCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "description": "Storage size (in MB) capability."
+    },
+    "ServerSkuCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the compute (SKU).",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCores available for this compute.",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum IOPS supported by this compute.",
+          "readOnly": true
+        },
+        "supportedMemoryPerVcoreMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Supported memory (in MB) per virtual core assigned to this compute.",
+          "readOnly": true
+        },
+        "supportedZones": {
+          "type": "array",
+          "description": "List of supported availability zones. E.g. '1', '2', '3'",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "supportedHaMode": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Modes of high availability supported for this compute.",
+            "enum": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "x-ms-enum": {
+              "name": "HighAvailabilityMode",
+              "modelAsString": true
+            }
+          },
+          "description": "Modes of high availability supported for this compute.",
+          "readOnly": true
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Features supported.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "securityProfile": {
+          "type": "string",
+          "description": "Security profile of the compute. Indicates if it's a Confidential Compute virtual machine.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "description": "Capabilities in terms of compute."
+    },
+    "ServerVersion": {
+      "type": "string",
+      "description": "Major version of PostgreSQL database engine.",
+      "enum": [
+        "17",
+        "16",
+        "15",
+        "14",
+        "13",
+        "12",
+        "11"
+      ],
+      "x-ms-enum": {
+        "name": "PostgresMajorVersion",
+        "modelAsString": true
+      }
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Major version of PostgreSQL database engine.",
+          "readOnly": true
+        },
+        "supportedVersionsToUpgrade": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Major versions of PostgreSQL database engine to which this version can be automatically upgraded.",
+          "readOnly": true
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Features supported.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "description": "Capabilities in terms of major versions of PostgreSQL database engine."
+    },
+    "StorageEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of storage tier.",
+          "readOnly": true
+        },
+        "defaultStorageSizeMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Default storage size (in MB) for this storage tier.",
+          "readOnly": true
+        },
+        "supportedStorageMb": {
+          "type": "array",
+          "description": "Configurations of storage supported for this storage tier.",
+          "items": {
+            "$ref": "#/definitions/StorageMbCapability"
+          },
+          "x-ms-identifiers": [
+            "storageSizeMb"
+          ],
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "description": "Capabilities in terms of storage tier."
+    },
+    "SupportedFeature": {
+      "type": "object",
+      "description": "Features supported.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the feature.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the feature. Indicates if the feature is enabled or not.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FastProvisioningEditionCapability": {
+      "type": "object",
+      "description": "Capability of a fast provisioning compute tier.",
+      "properties": {
+        "supportedTier": {
+          "type": "string",
+          "description": "Compute tier supporting fast provisioning.",
+          "readOnly": true
+        },
+        "supportedSku": {
+          "type": "string",
+          "description": "Compute name (SKU) supporting fast provisioning.",
+          "readOnly": true
+        },
+        "supportedStorageGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage size (in GB) supporting fast provisioning.",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "string",
+          "description": "Major version of PostgreSQL database engine supporting fast provisioning.",
+          "readOnly": true
+        },
+        "serverCount": {
+          "type": "integer",
+          "description": "Count of servers in cache matching this specification.",
+          "format": "int32",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ]
+    },
+    "ServerEditionCapability": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of compute tier.",
+          "readOnly": true
+        },
+        "defaultSkuName": {
+          "type": "string",
+          "description": "Default compute name (SKU) for this computer tier.",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "description": "List of storage editions supported by this compute tier and compute name.",
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedServerSkus": {
+          "type": "array",
+          "description": "List of supported compute names (SKUs).",
+          "items": {
+            "$ref": "#/definitions/ServerSkuCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        }
+      },
+      "description": "Capabilities in terms of compute tier."
+    },
+    "Capability": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of flexible servers capabilities."
+        },
+        "supportedServerEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true,
+          "description": "List of supported compute tiers."
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of supported major versions of PostgreSQL database engine.",
+          "readOnly": true
+        },
+        "supportedFeatures": {
+          "type": "array",
+          "description": "Features supported.",
+          "items": {
+            "$ref": "#/definitions/SupportedFeature"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "fastProvisioningSupported": {
+          "type": "string",
+          "description": "Indicates if fast provisioning is supported. 'Enabled' means fast provisioning is supported. 'Disabled' stands for fast provisioning is not supported. Will be deprecated in the future. Look to Supported Features for 'FastProvisioning'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "FastProvisioningSupport",
+            "modelAsString": true
+          }
+        },
+        "supportedFastProvisioningEditions": {
+          "type": "array",
+          "description": "List of compute tiers supporting fast provisioning.",
+          "items": {
+            "$ref": "#/definitions/FastProvisioningEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "supportedSku"
+          ],
+          "readOnly": true
+        },
+        "geoBackupSupported": {
+          "type": "string",
+          "description": "Indicates if geographically redundant backups are supported in this location. 'Enabled' means geographically redundant backups are supported. 'Disabled' stands for geographically redundant backup is not supported. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "GeographicallyRedundantBackupSupport",
+            "modelAsString": true
+          }
+        },
+        "zoneRedundantHaSupported": {
+          "type": "string",
+          "description": "Indicates if high availability with zone redundancy is supported in this location. 'Enabled' means high availability with zone redundancy is supported. 'Disabled' stands for high availability with zone redundancy is not supported. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundantHighAvailabilitySupport",
+            "modelAsString": true
+          }
+        },
+        "zoneRedundantHaAndGeoBackupSupported": {
+          "type": "string",
+          "description": "Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. 'Enabled' means high availability with zone redundancy is supported in conjunction with geographically redundant backups is supported. 'Disabled' stands for high availability with zone redundancy is supported in conjunction with geographically redundant backups is not supported. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport",
+            "modelAsString": true
+          }
+        },
+        "storageAutoGrowthSupported": {
+          "type": "string",
+          "description": "Indicates if storage autogrow is supported in this location. 'Enabled' means storage autogrow is supported. 'Disabled' stands for storage autogrow is not supported. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutoGrowthSupport",
+            "modelAsString": true
+          }
+        },
+        "onlineResizeSupported": {
+          "type": "string",
+          "description": "Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. 'Enabled' means resizing the storage without interrupting the operation of the database engine is supported. 'Disabled' means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OnlineStorageResizeSupport",
+            "modelAsString": true
+          }
+        },
+        "restricted": {
+          "type": "string",
+          "description": "Indicates if this location is restricted. 'Enabled' means location is restricted. 'Disabled' stands for location is not restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LocationRestricted",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Capability for the Azure Database for PostgreSQL flexible server."
+    },
+    "CapabilityList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "description": "List of capabilities for the Azure Database for PostgreSQL flexible server."
+    }
+  },
+  "parameters": {}
+}

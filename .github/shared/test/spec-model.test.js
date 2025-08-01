@@ -117,7 +117,7 @@ describe("SpecModel", () => {
 
     const tag = globalConfig["tag"];
 
-    // @ts-ignore
+    // @ts-expect-error testing runtime behavior of invalid types
     expect(tag).not.toBeTypeOf(Date);
 
     expect(tag).toBeTypeOf("string");
@@ -232,7 +232,7 @@ describe("SpecModel", () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
       await expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
-        /no affected swaggers/i,
+        /not found in specModel/i,
       );
     });
 
@@ -441,22 +441,27 @@ describe("getSwaggers", () => {
   });
 
   it("should work with swagger fixtures", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/swagger/specification/servicelinker/resource-manager",
-    );
+    const folder = resolve(__dirname, "fixtures/swagger");
 
     const specModel = new SpecModel(folder, options);
     const swaggers = await specModel.getSwaggers();
-    // Should return an array (may be empty if no valid readmes in this fixture)
-    expect(swaggers.length).toBe(5);
 
-    // If swaggers are found, they should have the expected structure
-    for (const swagger of swaggers) {
-      expect(swagger.path).toBeDefined();
-      expect(swagger.versionKind).toBeDefined();
-    }
-    expect(swaggers[0].path).contains(folder);
-    expect(swaggers[0].versionKind).toBe("stable");
+    // Expected paths as complete normalized paths
+    const expectedSwaggerPaths = [
+      "specification/common-types/resource-management/v2/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/common-types/resource-management/v3/types.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+      "specification/servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/test.json",
+    ];
+
+    // Sort swaggers by path to ensure consistent order
+    expect(swaggers.sort((a, b) => a.path.localeCompare(b.path)).map((s) => s.path)).toEqual(
+      expectedSwaggerPaths.map((p) => resolve(folder, p)),
+    );
   });
 });

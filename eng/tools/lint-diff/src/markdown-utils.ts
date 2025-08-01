@@ -1,7 +1,7 @@
-import { marked } from "marked";
-import { kebabCase } from "change-case";
-import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import axios from "axios";
+import { kebabCase } from "change-case";
+import { marked } from "marked";
 
 export enum MarkdownType {
   Arm = "arm",

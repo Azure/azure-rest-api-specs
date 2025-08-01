@@ -122,8 +122,8 @@ model ErrorResponse {
 }
 
 /**
- * The Analytics query. Learn more about the [Analytics query
- * syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
+ * The Analytics query. Learn more about the
+ * [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
  */
 model QueryBody {
   /** The query to execute. */
@@ -617,8 +617,8 @@ model BatchQueryRequest {
   headers?: Record<string>;
 
   /**
-   * The Analytics query. Learn more about the [Analytics query
-   * syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
+   * The Analytics query. Learn more about the
+   * [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)
    */
   body: QueryBody;
 
