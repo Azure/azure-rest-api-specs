@@ -1,6 +1,7 @@
 // @ts-check
 
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
+import { rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
@@ -28,6 +29,8 @@ export async function extractInputs(github, context, core) {
   if (core.isDebug()) {
     core.debug(`context: ${JSON.stringify(context)}`);
   }
+
+  github.hook.after("request", rateLimitHook);
 
   /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
