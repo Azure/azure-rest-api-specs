@@ -3,6 +3,8 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(Microsoft.DevCenter, "DevCenterMgmtClient", "python");
+
 @@clientName(Microsoft.DevCenter.DevCenterProjectCatalogSettings,
   "ProjectCatalogSettingsInfo",
   "go"

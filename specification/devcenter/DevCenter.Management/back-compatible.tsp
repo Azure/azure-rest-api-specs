@@ -232,3 +232,8 @@ using Microsoft.DevCenter;
 @@clientName(CheckScopedNameAvailabilityOperationGroup.execute::parameters.body,
   "nameAvailabilityRequest"
 );
+
+@@clientName(KeyEncryptionKeyIdentity,
+  "CustomizedKeyEncryptionKeyIdentity",
+  "python"
+);
