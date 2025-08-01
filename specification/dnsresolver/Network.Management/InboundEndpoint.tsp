@@ -23,7 +23,13 @@ model InboundEndpoint
     SegmentName = "inboundEndpoints",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the inbound endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -112,7 +118,6 @@ interface InboundEndpoints {
 @@doc(InboundEndpoint.name,
   "The name of the inbound endpoint for the DNS resolver."
 );
-@@encodedName(InboundEndpoint.eTag, "application/json", "etag");
 @@doc(InboundEndpoint.properties, "Properties of the inbound endpoint.");
 @@doc(InboundEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
