@@ -3202,6 +3202,40 @@
       ],
       "x-ms-discriminator-value": "label_model"
     },
+    "FineTuningJobRFTResponseFormat": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Response format request - Currently only JSON schema is supported"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FineTuningJobRFTResponseJsonSchema": {
+      "type": "object",
+      "description": "Gets the response format for the Reinforcement fine-tuning method.",
+      "properties": {
+        "json_schema": {
+          "type": "object",
+          "description": "JSON schema response for RFT",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobRFTResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
+    },
     "FineTuningJobRFTScoreModelGrader": {
       "type": "object",
       "description": "TextSimilarityGrader grades text based on similarity metrics.",
@@ -3313,7 +3347,7 @@
       "description": "Configuration for the Reinforcement fine-tuning method.",
       "properties": {
         "reinforcement": {
-          "$ref": "#/definitions/FineTuningJobRFTHyperParameters",
+          "$ref": "#/definitions/FineTuningJobRFTTrainingMethodConfiguration",
           "description": "Configuration for the reinforcement fine-tuning method."
         }
       },
@@ -3338,6 +3372,10 @@
         "hyperparameters": {
           "$ref": "#/definitions/FineTuningJobRFTHyperParameters",
           "description": "The hyperparameters used for the reinforcement fine-tuning job."
+        },
+        "response_format": {
+          "$ref": "#/definitions/FineTuningJobRFTResponseFormat",
+          "description": "Gets the response format for the Reinforcement fine-tuning job."
         }
       },
       "required": [

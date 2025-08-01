@@ -225,6 +225,25 @@ model FineTuningJobRFTHyperParameters {
   reasoning_effort?: string;
 }
 
+@doc("Gets the response format for the Reinforcement fine-tuning method.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTResponseFormat {
+  @doc("Response format request - Currently only JSON schema is supported")
+  type: string;
+}
+
+@doc("Gets the response format for the Reinforcement fine-tuning method.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTResponseJsonSchema extends FineTuningJobRFTResponseFormat {
+  type: "json_schema";
+
+  @doc("JSON schema response for RFT")
+  json_schema: Record<unknown>
+}
+
 @doc("Configuration for the reinforcement fine-tuning method.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -234,6 +253,9 @@ model FineTuningJobRFTTrainingMethodConfiguration {
 
   @doc("The hyperparameters used for the reinforcement fine-tuning job.")
   hyperparameters?: FineTuningJobRFTHyperParameters;
+
+  @doc("Gets the response format for the Reinforcement fine-tuning job.")
+  response_format?: FineTuningJobRFTResponseFormat;
 }
 
 @doc("Configuration for the Reinforcement fine-tuning method.")
@@ -243,7 +265,7 @@ model FineTuningJobRFTTrainingMethod extends FineTuningJobTrainingMethod {
   type: "reinforcement";
 
   @doc("Configuration for the reinforcement fine-tuning method.")
-  reinforcement: FineTuningJobRFTHyperParameters;
+  reinforcement: FineTuningJobRFTTrainingMethodConfiguration;
 }
 
 //////////////////
