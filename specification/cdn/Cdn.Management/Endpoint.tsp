@@ -103,7 +103,6 @@ interface Endpoints {
   /**
    * Removes a content from CDN.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("purge")
   purgeContent is ArmResourceActionAsyncBase<
     Endpoint,
@@ -115,7 +114,6 @@ interface Endpoints {
   /**
    * Pre-loads a content to CDN. Available for Verizon Profiles.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("load")
   loadContent is ArmResourceActionAsyncBase<
     Endpoint,
