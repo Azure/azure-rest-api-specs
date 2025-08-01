@@ -93,8 +93,6 @@ interface Profiles {
   /**
    * Check the availability of an afdx endpoint name, and return the globally unique endpoint host name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDProfiles_CheckEndpointNameAvailability")
   checkEndpointNameAvailability is ArmResourceActionSync<
     Profile,
     CheckEndpointNameAvailabilityInput,
@@ -104,9 +102,7 @@ interface Profiles {
   /**
    * Checks the quota and actual usage of endpoints under the given Azure Front Door profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("usages")
-  @operationId("AFDProfiles_ListResourceUsage")
   listResourceUsage is ArmResourceActionSync<
     Profile,
     void,
@@ -116,8 +112,6 @@ interface Profiles {
   /**
    * Validates the custom domain mapping to ensure it maps to the correct Azure Front Door endpoint in DNS.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDProfiles_CheckHostNameAvailability")
   checkHostNameAvailability is ArmResourceActionSync<
     Profile,
     CheckHostNameAvailabilityInput,
@@ -127,8 +121,6 @@ interface Profiles {
   /**
    * Validate a Secret in the profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDProfiles_ValidateSecret")
   validateSecret is ArmResourceActionSync<
     Profile,
     ValidateSecretInput,
@@ -138,9 +130,7 @@ interface Profiles {
   /**
    * Upgrade a profile from Standard_AzureFrontDoor to Premium_AzureFrontDoor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDProfiles_Upgrade")
   upgrade is ArmResourceActionAsyncBase<
     Profile,
     ProfileUpgradeParameters,
@@ -154,9 +144,7 @@ interface Profiles {
   /**
    * Get log report for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetLogAnalyticsMetrics")
   getLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
     void,
@@ -209,9 +197,7 @@ interface Profiles {
   /**
    * Get log analytics ranking report for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetLogAnalyticsRankings")
   getLogAnalyticsRankings is ArmResourceActionSync<
     Profile,
     void,
@@ -249,9 +235,7 @@ interface Profiles {
   /**
    * Get all available location names for AFD log analytics report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetLogAnalyticsLocations")
   getLogAnalyticsLocations is ArmResourceActionSync<
     Profile,
     void,
@@ -261,9 +245,7 @@ interface Profiles {
   /**
    * Get all endpoints and custom domains available for AFD log report
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetLogAnalyticsResources")
   getLogAnalyticsResources is ArmResourceActionSync<
     Profile,
     void,
@@ -273,9 +255,7 @@ interface Profiles {
   /**
    * Get Waf related log analytics report for AFD profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetWafLogAnalyticsMetrics")
   getWafLogAnalyticsMetrics is ArmResourceActionSync<
     Profile,
     void,
@@ -318,9 +298,7 @@ interface Profiles {
   /**
    * Get WAF log analytics charts for AFD profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("LogAnalytics_GetWafLogAnalyticsRankings")
   getWafLogAnalyticsRankings is ArmResourceActionSync<
     Profile,
     void,
@@ -391,9 +369,7 @@ interface Profiles {
   /**
    * Checks the quota and actual usage of endpoints under the given Azure Front Door Standard or Azure Front Door Premium or CDN profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("checkResourceUsage")
-  @operationId("Profiles_ListResourceUsage")
   profilesListResourceUsage is ArmResourceActionSync<
     Profile,
     void,

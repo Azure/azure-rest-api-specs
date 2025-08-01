@@ -30,18 +30,14 @@ interface AFDOrigins {
   /**
    * Gets an existing origin within an origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDOrigins_Get")
   get is ArmResourceRead<AFDOrigin>;
 
   /**
    * Creates a new origin within the specified origin group.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDOrigins_Create")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDOrigin,
@@ -54,10 +50,8 @@ interface AFDOrigins {
   /**
    * Updates an existing origin within an origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("AFDOrigins_Update")
   update is ArmCustomPatchAsync<
     AFDOrigin,
     PatchModel = AFDOriginUpdateParameters,
@@ -71,9 +65,7 @@ interface AFDOrigins {
   /**
    * Deletes an existing origin within an origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDOrigins_Delete")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOrigin,
@@ -85,8 +77,6 @@ interface AFDOrigins {
   /**
    * Lists all of the existing origins within an origin group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDOrigins_ListByOriginGroup")
   listByOriginGroup is ArmResourceListByParent<AFDOrigin>;
 }
 

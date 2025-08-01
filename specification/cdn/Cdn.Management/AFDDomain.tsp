@@ -31,17 +31,13 @@ interface AFDDomains {
   /**
    * Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDCustomDomains_Get")
   get is ArmResourceRead<AFDDomain>;
 
   /**
    * Creates a new domain within the specified profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDCustomDomains_Create")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDDomain,
@@ -58,10 +54,8 @@ interface AFDDomains {
   /**
    * Updates an existing domain within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("AFDCustomDomains_Update")
   update is ArmCustomPatchAsync<
     AFDDomain,
     PatchModel = AFDDomainUpdateParameters,
@@ -76,9 +70,7 @@ interface AFDDomains {
   /**
    * Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDCustomDomains_Delete")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDDomain,
@@ -90,15 +82,11 @@ interface AFDDomains {
   /**
    * Lists existing AzureFrontDoor domains.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDCustomDomains_ListByProfile")
   listByProfile is ArmResourceListByParent<AFDDomain>;
 
   /**
    * Updates the domain validation token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AFDCustomDomains_RefreshValidationToken")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   refreshValidationToken is ArmResourceActionAsync<
     AFDDomain,

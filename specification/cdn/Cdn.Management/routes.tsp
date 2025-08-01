@@ -69,8 +69,6 @@ interface ProfilesOperationGroup {
   /**
    * Checks if CDN profile can be migrated to Azure Frontdoor(Standard/Premium) profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Profiles_CanMigrate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/canMigrate")
   @post
   canMigrate(
@@ -90,8 +88,6 @@ interface ProfilesOperationGroup {
    * Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Profiles_Migrate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/migrate")
   @post
   migrate(
@@ -114,8 +110,6 @@ interface ResourceUsageOperationGroup {
   /**
    * Check the quota and actual usage of the CDN profiles under the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ResourceUsage_List")
   @autoRoute
   @action("checkResourceUsage")
   list is ArmProviderActionSync<
@@ -130,8 +124,6 @@ interface EdgeNodesOperationGroup {
   /**
    * Edgenodes are the global Point of Presence (POP) locations used to deliver CDN content to end users.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("EdgeNodes_List")
   @autoRoute
   @get
   @action("edgenodes")
@@ -143,8 +135,6 @@ interface ManagedRuleSetsOperationGroup {
   /**
    * Lists all available managed rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedRuleSets_List")
   @autoRoute
   @get
   @action("cdnWebApplicationFirewallManagedRuleSets")

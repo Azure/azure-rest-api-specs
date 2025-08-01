@@ -40,17 +40,13 @@ interface CdnWebApplicationFirewallPolicies {
   /**
    * Retrieve protection policy with specified name within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Policies_Get")
   get is ArmResourceRead<CdnWebApplicationFirewallPolicy>;
 
   /**
    * Create or update policy with specified rule set name within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Policies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CdnWebApplicationFirewallPolicy,
     Response = ArmResourceUpdatedResponse<CdnWebApplicationFirewallPolicy> | ArmResourceCreatedResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
@@ -62,10 +58,8 @@ interface CdnWebApplicationFirewallPolicies {
   /**
    * Update an existing CdnWebApplicationFirewallPolicy with the specified policy name under the specified subscription and resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Policies_Update")
   update is ArmCustomPatchAsync<
     CdnWebApplicationFirewallPolicy,
     PatchModel = CdnWebApplicationFirewallPolicyPatchParameters,
@@ -78,15 +72,11 @@ interface CdnWebApplicationFirewallPolicies {
   /**
    * Deletes Policy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Policies_Delete")
   delete is ArmResourceDeleteSync<CdnWebApplicationFirewallPolicy>;
 
   /**
    * Lists all of the protection policies within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Policies_List")
   list is ArmResourceListByParent<
     CdnWebApplicationFirewallPolicy,
     Response = ArmResponse<CdnWebApplicationFirewallPolicyList>
