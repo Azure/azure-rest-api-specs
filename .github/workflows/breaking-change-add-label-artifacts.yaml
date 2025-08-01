@@ -8,14 +8,12 @@ on:
     types: [completed]
 
 permissions:
+  # Required for github.rest.actions.listWorkflowRunsForRepo()
   actions: read
-  checks: read
   contents: read
-  issues: read
-  pull-requests: read
 
 jobs:
-  breaking-change-add-labels:
+  breaking-change-add-label-artifacts:
     name: "[TEST-IGNORE] Breaking Change - Add Label Artifacts"
 
     runs-on: ubuntu-24.04

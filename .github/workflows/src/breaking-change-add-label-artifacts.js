@@ -5,7 +5,6 @@ import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 
-/* v8 ignore start */
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
