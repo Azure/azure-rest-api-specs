@@ -2669,8 +2669,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FlowProfile"
+            }
+          },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2696,7 +2702,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FlowProfile"
         },
         "x-ms-long-running-operation": true
       },

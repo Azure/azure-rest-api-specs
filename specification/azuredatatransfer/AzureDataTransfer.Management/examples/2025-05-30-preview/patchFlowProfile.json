@@ -17,7 +17,7 @@
         "mimeFilters": {
           "type": "Allow",
           "filters": {
-            "mime": "application/json",
+            "media": "application/json",
             "extensions": [".json", ".app", ".js"]
           }
         },
@@ -56,22 +56,48 @@
     "200": {
       "body": {
         "type": "Microsoft.AzureDataTransfer/pipelines/flowprofiles",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline/flowProfiles/testFlowProfile",
         "location": "East US",
         "properties": {
-          "connection": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
-          },
-          "flowProfile": {
-            "pipeline": "testPipeline",
-            "name": "flowProfileName",
-            "flowProfileId": "25f2c41a-6e29-4c40-a033-b4de81d4a681",
-            "replicationScenario": "Files",
-            "status": "Enabled",
-            "description": "Testing 123"
-          },
-          "storageAccountName": "testsa",
-          "storageContainerName": "testcontainer"
+          "replicationScenario": "Files",
+          "status": "Enabled",
+          "description": "Hello world description",
+          "rulesets": {
+            "mimeFilters": {
+              "type": "Allow",
+              "filters": {
+                "media": "application/json",
+                "extensions": [".json", ".app", ".js"]
+              }
+            },
+            "textMatching": {
+              "deny": [
+                {
+                  "text": "hello world",
+                  "matchType": "Partial",
+                  "caseSensitivity": "Insensitive"
+                },
+                {
+                  "text": "hello",
+                  "matchType": "Complete",
+                  "caseSensitivity": "Sensitive"
+                }
+              ]
+            },
+            "antivirus": {
+              "defender": "Disabled"
+            },
+            "archives": {
+              "minimumSizeForExpansion": 1,
+              "maximumExpansionSizeLimit": 123456,
+              "maximumDepthLimit": 12,
+              "maximumCompressionRatioLimit": 123
+            },
+            "dataSize": {
+              "maximum": 123456789,
+              "minimum": 1
+            }
+          }
         },
         "tags": {
           "tag": "value"
