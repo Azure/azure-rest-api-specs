@@ -201,7 +201,7 @@ model ArchiveRuleset {
   maximumDepthLimit?: int64;
 
   /**
-   * Optional. The highest acceptable compression ratio (root object size * compression ratio) for an archive. Used to detect and block archives with suspiciously high compression (e.g., zip bombs).
+   * Optional. The highest acceptable compression ratio (root object size * (uncompressed size / compressed size)) for an archive. Used to detect and block archives with suspiciously high compression (e.g., zip bombs).
    */
   @minValue(0)
   maximumCompressionRatioLimit?: float64;

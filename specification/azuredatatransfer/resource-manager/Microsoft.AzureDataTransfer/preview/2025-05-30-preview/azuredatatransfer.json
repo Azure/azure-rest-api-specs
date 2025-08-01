@@ -3071,7 +3071,7 @@
         "maximumCompressionRatioLimit": {
           "type": "number",
           "format": "double",
-          "description": "Optional. The highest acceptable compression ratio (root object size * compression ratio) for an archive. Used to detect and block archives with suspiciously high compression (e.g., zip bombs).",
+          "description": "Optional. The highest acceptable compression ratio (root object size * (uncompressed size / compressed size)) for an archive. Used to detect and block archives with suspiciously high compression (e.g., zip bombs).",
           "minimum": 0
         }
       }
