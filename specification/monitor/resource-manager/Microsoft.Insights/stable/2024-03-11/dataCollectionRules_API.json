@@ -389,34 +389,6 @@
         }
       }
     },
-    "AgentTransform": {
-      "description": "The settings that defines the transformation to be applied to the data collected by the agent.",
-      "type": "object",
-      "properties": {
-        "maxBatchTimeoutInSeconds": {
-          "format": "int32",
-          "description": "The maximum time in seconds to wait for a batch to be filled before sending it.",
-          "type": "integer"
-        },
-        "maxBatchCount": {
-          "format": "int32",
-          "description": "The maximum number of records to wait for before sending a batch.",
-          "type": "integer"
-        },
-        "transform": {
-          "description": "The object that defines the transformation in json format to be applied to the data collected by the agent.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Transform"
-            }
-          ]
-        },
-        "transformKql": {
-          "description": "The KQL query to transform the data source.",
-          "type": "string"
-        }
-      }
-    },
     "Aggregate": {
       "type": "object",
       "properties": {
@@ -1335,14 +1307,6 @@
           "type": "string",
           "example": "source"
         },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
-        },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
@@ -1484,14 +1448,6 @@
           "description": "The KQL query to transform the data source.",
           "type": "string",
           "example": "source"
-        },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
         },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
@@ -1964,14 +1920,6 @@
           "type": "string",
           "example": "source"
         },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
-        },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
@@ -2313,41 +2261,10 @@
           "type": "string",
           "example": "source"
         },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
-        },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
-        }
-      }
-    },
-    "Transform": {
-      "type": "object",
-      "properties": {
-        "aggregate": {
-          "description": "The object that defines the aggregation to be applied to the data collected by the agent.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Aggregate"
-            }
-          ]
-        },
-        "filters": {
-          "description": "The object that defines the filters to be applied to the data collected by the agent.\r\nConditions within the same list of filters are combined with AND\r\nInner lists are combined with OR",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Filter"
-            }
-          }
         }
       }
     },
@@ -2390,14 +2307,6 @@
           "type": "string",
           "example": "source"
         },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
-        },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
@@ -2437,14 +2346,6 @@
               "modelAsString": true
             }
           }
-        },
-        "agentTransform": {
-          "description": "The agent transform to apply to the data source.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentTransform"
-            }
-          ]
         },
         "name": {
           "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
