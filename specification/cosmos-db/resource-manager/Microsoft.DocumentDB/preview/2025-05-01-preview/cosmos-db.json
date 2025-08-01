@@ -10159,6 +10159,11 @@
             "$ref": "#/definitions/MaterializedViewDetails"
           }
         },
+        "materializedViewProperties" : {
+          "type": "object",
+          "description": "Properties of the Materialized View.",
+          "$ref": "#/definitions/MaterializedViewProperties"
+        },
         "computedProperties": {
           "description": "List of computed properties",
           "type": "array",
@@ -10680,6 +10685,17 @@
         "_rid": {
           "type": "string",
           "description": "_rid field of Materialized container."
+        }
+      }
+    },
+    "MaterializedViewProperties": {
+      "type": "object",
+      "description": "Materialized View properties for the container.",
+      "properties": {
+        "throughputBucket": {
+          "description": "The throughput bucket for the Materialized View container.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
