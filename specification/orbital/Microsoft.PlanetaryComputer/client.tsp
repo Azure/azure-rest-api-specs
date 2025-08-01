@@ -109,9 +109,13 @@ namespace Customizations;
 @@clientName(Tilematrixsetid, "TileMatrixSetId", "csharp");
 
 // === Ingestion Management ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("IngestionManagementClientImpl", "csharp")
 interface IngestionManagementClient {
   // Ingestion operations
@@ -134,9 +138,13 @@ interface IngestionManagementClient {
 }
 
 // === Ingestion Sources ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("IngestionSourcesClientImpl", "csharp")
 interface IngestionSourcesClient {
   getIngestionSources is IngestionSources.listAll;
@@ -148,9 +156,13 @@ interface IngestionSourcesClient {
 }
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("StacApiClientImpl", "csharp")
 interface StacApiClient {
   // STAC Landing Pages
@@ -185,9 +197,13 @@ interface StacApiClient {
 }
 
 // === STAC Collection Configuration ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("StacCollectionConfigurationClientImpl", "csharp")
 interface StacCollectionConfigurationClient {
   // Collection Assets
@@ -231,9 +247,13 @@ interface StacCollectionConfigurationClient {
 }
 
 // === GeoCatalog Instance Configuration ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("GeocatalogClientImpl", "csharp")
 interface GeocatalogClient {
   getAuthConfig is GeoCatalogAuthConfigOperations.get;
@@ -242,9 +262,13 @@ interface GeocatalogClient {
 }
 
 // === Image Exports for STAC Collections ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("ImageExportsClientImpl", "csharp")
 interface ImageExportsClient {
   createStaticImage is TilerStaticImages.create;
@@ -252,9 +276,13 @@ interface ImageExportsClient {
 }
 
 // === Tiles for STAC Items ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("StacItemTilerClientImpl", "csharp")
 interface StacItemTilerClient {
   // Basic Info and Assets
@@ -295,9 +323,13 @@ interface StacItemTilerClient {
 }
 
 // === Map Legends ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("MapLegendsClientImpl", "csharp")
 interface MapLegendsClient {
   getClassmapLegend is MapsClassmapLegends.get;
@@ -306,9 +338,13 @@ interface MapLegendsClient {
 }
 
 // === Tiles for STAC Collections Mosaics ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("MosaicTilerClientImpl", "csharp")
 interface MosaicTilerClient {
   // Tiles
@@ -334,9 +370,13 @@ interface MosaicTilerClient {
 }
 
 // === Tile Matrix Sets ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("TileMatrixSetsClientImpl", "csharp")
 interface TileMatrixSetsClient {
   getTileMatrixList is TileMatrixList.get;
@@ -344,9 +384,13 @@ interface TileMatrixSetsClient {
 }
 
 // === Shared Access Signature (SAS) ===
-#suppress "@azure-tools/typespec-client-generator-core/client-service" "Operation groups are used for logical grouping"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-@operationGroup
+@client(
+  {
+    service: Microsoft.PlanetaryComputer,
+  },
+  "csharp,java"
+)
 @clientName("SharedAccessSignatureClientImpl", "csharp")
 interface SharedAccessSignatureClient {
   // SAS Tokens
