@@ -9,3 +9,5 @@ using Microsoft.Cdn;
   "go"
 );
 @@clientName(CdnEndpoint, "LinkedEndpoint", "go");
+
+@@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
