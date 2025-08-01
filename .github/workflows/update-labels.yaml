@@ -7,14 +7,7 @@ on:
   # If an upstream workflow if completed, get only the artifacts from that workflow, and update labels
   workflow_run:
     workflows:
-      [
-        "ARM Auto SignOff",
-        "SDK Breaking Change Labels",
-        "SDK Suppressions",
-        "TypeSpec Requirement",
-        "Swagger BreakingChange - Analyze Code",
-        "Breaking Change(Cross-Version) - Analyze Code",
-      ]
+      ["ARM Auto SignOff", "SDK Breaking Change Labels", "SDK Suppressions", "TypeSpec Requirement"]
     types: [completed]
 
 permissions:
