@@ -3,9 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -115,28 +112,6 @@ union VMAvailabilitySet {
 
   string,
 }
-
-@lroStatus
-@doc("The provisioning state.")
-union ProvisioningState {
-  ResourceProvisioningState,
-
-  /** The resource is being provisioned. */
-  Provisioning: "Provisioning",
-
-  /** The resource is being updated. */
-  Updating: "Updating",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource provisioning request has been accepted. */
-  Accepted: "Accepted",
-
-  string,
-}
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface UpdateRules {
