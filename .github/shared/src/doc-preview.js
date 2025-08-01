@@ -44,7 +44,7 @@ const SPEC_FILE_REGEX =
 /**
  * Extract swagger file metadata from path.
  * @param {string} specPath
- * @returns {SwaggerFileMetadata}
+ * @returns {SwaggerFileMetadata | null}
  */
 export function parseSwaggerFilePath(specPath) {
   const m = specPath.match(SPEC_FILE_REGEX);
@@ -136,7 +136,9 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  const swaggerFileObjs = swaggerFiles.map(parseSwaggerFilePath).filter(Boolean);
+  const swaggerFileObjs = swaggerFiles
+    .map(parseSwaggerFilePath)
+    .filter((metadata) => metadata !== null);
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   if (versions.length === 0) {
@@ -161,7 +163,7 @@ export function getSwaggersToProcess(swaggerFiles) {
   }
 
   const swaggersToProcess = swaggerFileObjs
-    .filter((obj) => obj.apiVersion === selectedVersion)
+    .filter((obj) => obj?.apiVersion === selectedVersion)
     .map((obj) => obj.path);
 
   return { selectedVersion, swaggersToProcess };
