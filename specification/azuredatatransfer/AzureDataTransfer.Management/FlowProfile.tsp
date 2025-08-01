@@ -54,10 +54,7 @@ interface FlowProfiles {
    * Applies partial updates to an existing FlowProfile resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    FlowProfile,
-    PatchModel = FlowProfilePatch
-  >;
+  update is ArmCustomPatchAsync<FlowProfile, PatchModel = FlowProfilePatch>;
 
   /**
    * Deletes the specified FlowProfile resource.
