@@ -126,6 +126,33 @@ input-file:
   - Microsoft.Insights/stable/2023-03-11/dataCollectionRules_API.json
 ```
 
+### Tag: package-python-sdk-stable
+
+These settings apply only when `--tag=package-python-sdk-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-python-sdk-stable'
+input-file:
+  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
+  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+  - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
+  - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
+  - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
+  - Microsoft.Insights/stable/2023-03-11/dataCollectionEndpoints_API.json
+  - Microsoft.Insights/stable/2023-03-11/dataCollectionRuleAssociations_API.json
+  - Microsoft.Insights/stable/2023-03-11/dataCollectionRules_API.json
+  - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
+  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+  - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
+  - Microsoft.Insights/stable/2024-02-01/metrics_API.json
+  - Microsoft.Insights/stable/2015-04-01/operations_API.json
+  - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
+  - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+  - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
+  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
+```
 
 ### Tag: package-python-sdk-for-cli-only
 
