@@ -4871,6 +4871,7 @@ model ManagedRuleSet {
    * Verizon only : If the rule set supports anomaly detection mode, this describes the threshold for blocking requests.
    */
   @maxValue(20)
+  @minValue(0)
   anomalyScore?: int32;
 
   /**
