@@ -112,7 +112,12 @@ interface Endpoints {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("load")
-  loadContent is ArmResourceActionAsync<Endpoint, LoadParameters, {}>;
+  loadContent is ArmResourceActionAsyncBase<
+    Endpoint,
+    LoadParameters,
+    ArmAcceptedLroResponse | OkResponse,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
+  >;
 
   /**
    * Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.
