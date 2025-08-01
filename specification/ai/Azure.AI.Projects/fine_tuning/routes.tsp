@@ -30,7 +30,7 @@ interface FineTuningJobs {
     {
       @doc("fine-tuning job")
       @body
-      fineTuningJob: FineTuningJobCreate;
+      fineTuningJob: FineTuningJobCreation;
     },
     ResourceCreatedResponse<FineTuningJob>
   >;

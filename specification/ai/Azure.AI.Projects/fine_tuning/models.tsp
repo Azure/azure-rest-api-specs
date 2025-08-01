@@ -345,6 +345,58 @@ model FineTuningJob {
   error?: FineTuningJobError
 }
 
+@doc("SKU available for training")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union TrainingType {
+  string,
+
+  @doc("Standard training job uses dedicated training capacity in a region")
+  Standard: "Standard",
+
+  @doc("GlobalStandard training job uses dedicated capacity from a different region")
+  GlobalStandard: "GlobalStandard",
+
+  @doc("DeveloperTier training job uses inference capacity when available")
+  DeveloperTier: "DeveloperTier"
+}
+
+@doc("SKU available for training")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union InferenceSku {
+  string,
+
+  @doc("DeveloperTier refers to a cross-region developer inference sku.")
+  DeveloperTier: "DeveloperTier",
+
+  @doc("Standard refers to regional pay-go inference sku.")
+  Standard: "Standard",
+
+  @doc("Global Standard refers to a cross-region pay-go inference sku.")
+  GlobalStandard: "GlobalStandard"
+}
+
+@doc("Inference configurations")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InferenceConfigs {
+  @doc("Is model deployed after tuning completes")
+  auto_inference_enabled?: boolean,
+
+  @doc("SKU used for inference")
+  inference_sku?: InferenceSku,
+
+  @doc("Deployment identifier")
+  auto_deployment_id?: string,
+
+  @doc("Deployment status")
+  auto_deployment_status?: string,
+
+  @doc("Deployment error information")
+  auto_deployment_error_message?: string
+}
+
 //
 // Fine-Tuning job definition for create
 //
@@ -352,7 +404,7 @@ model FineTuningJob {
 @doc("Fine-Tuning Job")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobCreate {
+model FineTuningJobCreation {
   @doc("The file ID used for training. You can retrieve the training data with the Files API.")
   training_file: string;
 
@@ -373,4 +425,17 @@ model FineTuningJobCreate {
 
   @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
   suffix?: string;
+
+  /**
+  * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
+  *
+  * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+  */
+  metadata?: Record<string>;
+
+  @doc("The SKU used for training. This is Azure AI specific parameter")
+  TrainingType? : TrainingType;
+
+  @doc("Inference configurations. This is Azure AI specific parameter")
+  inference_configs? : InferenceConfigs;
 }

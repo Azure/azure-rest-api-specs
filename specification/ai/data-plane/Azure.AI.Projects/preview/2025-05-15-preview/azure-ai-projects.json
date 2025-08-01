@@ -1106,7 +1106,7 @@
             "description": "fine-tuning job",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FineTuningJobCreate"
+              "$ref": "#/definitions/FineTuningJobCreation"
             }
           }
         ],
@@ -2942,7 +2942,7 @@
         "method"
       ]
     },
-    "FineTuningJobCreate": {
+    "FineTuningJobCreation": {
       "type": "object",
       "description": "Fine-Tuning Job",
       "properties": {
@@ -2977,6 +2977,21 @@
         "suffix": {
           "type": "string",
           "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "TrainingType": {
+          "$ref": "#/definitions/TrainingType",
+          "description": "The SKU used for training. This is Azure AI specific parameter"
+        },
+        "inference_configs": {
+          "$ref": "#/definitions/InferenceConfigs",
+          "description": "Inference configurations. This is Azure AI specific parameter"
         }
       },
       "required": [
@@ -3456,6 +3471,62 @@
             "name": "managedAzureSearch",
             "value": "ManagedAzureSearch",
             "description": "Managed Azure Search"
+          }
+        ]
+      }
+    },
+    "InferenceConfigs": {
+      "type": "object",
+      "description": "Inference configurations",
+      "properties": {
+        "auto_inference_enabled": {
+          "type": "boolean",
+          "description": "Is model deployed after tuning completes"
+        },
+        "inference_sku": {
+          "$ref": "#/definitions/InferenceSku",
+          "description": "SKU used for inference"
+        },
+        "auto_deployment_id": {
+          "type": "string",
+          "description": "Deployment identifier"
+        },
+        "auto_deployment_status": {
+          "type": "string",
+          "description": "Deployment status"
+        },
+        "auto_deployment_error_message": {
+          "type": "string",
+          "description": "Deployment error information"
+        }
+      }
+    },
+    "InferenceSku": {
+      "type": "string",
+      "description": "SKU available for training",
+      "enum": [
+        "DeveloperTier",
+        "Standard",
+        "GlobalStandard"
+      ],
+      "x-ms-enum": {
+        "name": "InferenceSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeveloperTier",
+            "value": "DeveloperTier",
+            "description": "DeveloperTier refers to a cross-region developer inference sku."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard refers to regional pay-go inference sku."
+          },
+          {
+            "name": "GlobalStandard",
+            "value": "GlobalStandard",
+            "description": "Global Standard refers to a cross-region pay-go inference sku."
           }
         ]
       }
@@ -4045,6 +4116,36 @@
       "required": [
         "type"
       ]
+    },
+    "TrainingType": {
+      "type": "string",
+      "description": "SKU available for training",
+      "enum": [
+        "Standard",
+        "GlobalStandard",
+        "DeveloperTier"
+      ],
+      "x-ms-enum": {
+        "name": "TrainingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard training job uses dedicated training capacity in a region"
+          },
+          {
+            "name": "GlobalStandard",
+            "value": "GlobalStandard",
+            "description": "GlobalStandard training job uses dedicated capacity from a different region"
+          },
+          {
+            "name": "DeveloperTier",
+            "value": "DeveloperTier",
+            "description": "DeveloperTier training job uses inference capacity when available"
+          }
+        ]
+      }
     },
     "UserMessage": {
       "type": "object",
