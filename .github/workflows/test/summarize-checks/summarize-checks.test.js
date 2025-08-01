@@ -402,37 +402,19 @@ describe("Summarize Checks Unit Tests", () => {
           name: "TypeSpec Validation",
           status: "IN_PROGRESS",
           conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "TypeSpec Validation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
         {
           name: "Swagger Avocado",
           status: "COMPLETED",
           conclusion: "SUCCESS",
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Avocado"),
         },
         {
           name: "license/cla",
           status: "IN_PROGRESS",
           conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("license/cla"),
         },
       ];
 
@@ -468,37 +450,19 @@ describe("Summarize Checks Unit Tests", () => {
           name: "TypeSpec Validation",
           status: "IN_PROGRESS",
           conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "TypeSpec Validation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
         {
           name: "Swagger Avocado",
           status: "QUEUED",
           conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("Swagger Avocado"),
         },
         {
           name: "license/cla",
           status: "IN_PROGRESS",
           conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
+          checkInfo: getCheckInfo("license/cla"),
         },
       ];
 
