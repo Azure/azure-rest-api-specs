@@ -1,4 +1,4 @@
-import { beforeEach, test, describe, expect, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   compareLintDiffViolations,
   generateAutoRestErrorReport,
@@ -12,11 +12,11 @@ import {
   iconFor,
 } from "../src/generateReport.js";
 import {
-  Source,
-  LintDiffViolation,
-  BeforeAfter,
-  AutorestRunResult,
   AutoRestMessage,
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+  Source,
 } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
 
@@ -29,8 +29,8 @@ vi.mock("node:fs/promises", async () => {
   };
 });
 
-import { readFile } from "fs/promises";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { readFile } from "fs/promises";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");

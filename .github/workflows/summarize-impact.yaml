@@ -29,15 +29,6 @@ jobs:
         with:
           working-directory: after
 
-      - name: Get PR labels
-        id: get-labels
-        working-directory: after
-        run: |
-          labels=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '[.labels[].name] | join(",")')
-          echo "labels=$labels" >> "$GITHUB_OUTPUT"
-        env:
-          GH_TOKEN: ${{ github.token }}
-
       - name: Run Summarize Impact
         id: summarize-impact
         working-directory: after
@@ -47,14 +38,14 @@ jobs:
             --sourceBranch "$HEAD_REF" \
             --targetBranch "${{ github.event.pull_request.base.ref }}" \
             --sha "${{ github.event.pull_request.head.sha }}" \
-            --repo "${{ github.repository }}" \
+            --repo "${{ github.event.repository.name }}" \
             --owner "${{ github.repository_owner }}" \
-            --labels "${{ steps.get-labels.outputs.labels }}" \
             --isDraft ${{ github.event.pull_request.draft }}
         env:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
           NODE_OPTIONS: "--max-old-space-size=8192"
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}
@@ -64,12 +55,3 @@ jobs:
           path: ${{ steps.summarize-impact.outputs.summary }}
           # If the file doesn't exist, just don't add the artifact
           if-no-files-found: ignore
-
-      - if: |
-          always() &&
-          github.event.pull_request.number > 0
-        name: Upload artifact with issue number
-        uses: ./after/.github/actions/add-empty-artifact
-        with:
-          name: "issue-number"
-          value: "${{ github.event.pull_request.number }}"
