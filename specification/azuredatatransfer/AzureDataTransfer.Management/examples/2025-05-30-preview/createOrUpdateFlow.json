@@ -9,7 +9,15 @@
         "connection": {
           "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection"
         },
-        "flowType": "Standard",
+        "flowProfile": {
+          "pipeline": "testPipeline",
+          "name": "flowProfileName",
+          "flowProfileId": "25f2c41a-6e29-4c40-a033-b4de81d4a681",
+          "replicationScenario": "Files",
+          "status": "Enabled",
+          "description": "Testing 123"
+        },
+        "dataClass": "Blob",
         "storageAccountName": "testsa",
         "storageContainerName": "testcontainer"
       }
@@ -22,14 +30,14 @@
   "responses": {
     "200": {
       "body": {
-        "type": "Microsoft.AzureDataTransfer/flows",
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
         "location": "East US"
       }
     },
     "201": {
       "body": {
-        "type": "Microsoft.AzureDataTransfer/flows",
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
         "location": "East US"
       }

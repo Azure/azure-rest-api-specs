@@ -1,21 +1,61 @@
 {
-  "operationId": "Flows_Update",
+  "operationId": "FlowProfiles_Update",
   "parameters": {
     "api-version": "2025-05-30-preview",
-    "connectionName": "testConnection",
-    "flow": {},
-    "flowName": "testFlow",
+    "pipelineName": "testPipeline",
+    "flowProfileName": "testFlowProfile",
     "resourceGroupName": "testRG",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "tags": {
       "tag": "value"
+    },
+    "properties": {
+      "replicationScenario": "Mission",
+      "status": "Enabled",
+      "description": "Hello world description",
+      "rulesets": {
+        "mimeFilters": {
+          "type": "Allow",
+          "filters": {
+            "mime": "application/json",
+            "extensions": [".json", ".app", ".js"]
+          }
+        },
+        "textMatching": {
+          "deny": [
+            {
+              "text": "hello world",
+              "matchType": "Partial",
+              "caseSensitivity": "Insensitive"
+            },
+            {
+              "text": "hello",
+              "matchType": "Complete",
+              "caseSensitivity": "Sensitive"
+            }
+          ]
+        },
+        "antivirus": {
+          "defender": "Disabled"
+        },
+        "archives": {
+          "minimumSizeForExpansion": 1,
+          "maximumExpansionSizeLimit": 123456,
+          "maximumDepthLimit": 12,
+          "maximumCompressionRatioLimit": 123
+        },
+        "dataSize": {
+          "maximum": 123456789,
+          "minimum": 1
+        }
+      }
     }
   },
-  "title": "Updates the flow resource",
+  "title": "Updates the flowprofile resource",
   "responses": {
     "200": {
       "body": {
-        "type": "Microsoft.AzureDataTransfer/connections/flows",
+        "type": "Microsoft.AzureDataTransfer/pipelines/flowprofiles",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
         "location": "East US",
         "properties": {
@@ -39,29 +79,6 @@
       }
     },
     "202": {
-      "body": {
-        "type": "Microsoft.AzureDataTransfer/connections/flows",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
-        "location": "East US",
-        "properties": {
-          "connection": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testFlow"
-          },
-          "flowProfile": {
-            "pipeline": "testPipeline",
-            "name": "flowProfileName",
-            "flowProfileId": "25f2c41a-6e29-4c40-a033-b4de81d4a681",
-            "replicationScenario": "Files",
-            "status": "Enabled",
-            "description": "Testing 123"
-          },
-          "storageAccountName": "testsa",
-          "storageContainerName": "testcontainer"
-        },
-        "tags": {
-          "tag": "value"
-        }
-      },
       "headers": {
         "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-30-preview"
       }
