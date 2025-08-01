@@ -68,3 +68,4 @@ using Microsoft.Cdn;
 @@clientName(DeepCreatedOriginProperties.hostName, "hostname", "java");
 @@clientName(OriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(EndpointProperties.hostName, "hostname", "java");
+@@clientName(ValidateCustomDomainInput.hostName, "hostname", "java");
