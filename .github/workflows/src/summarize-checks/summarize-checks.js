@@ -607,8 +607,7 @@ async function getAllCheckSuites(github, core, owner, repo, sha, prNumber) {
     throw new Error(
       `Too many check suites (${totalCheckSuites}) for ${owner}/${repo}#${prNumber}@${sha}. Summarize-Checks ending with error to avoid exhausting graphQL resources.`,
     );
-  }
-  else {
+  } else {
     core.info(`Found ${totalCheckSuites} total check suites`);
   }
 
