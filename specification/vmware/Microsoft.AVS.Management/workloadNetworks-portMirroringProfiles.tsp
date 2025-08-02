@@ -11,28 +11,20 @@ using TypeSpec.Rest;
 // @armResourceOperations
 @doc("Workload Network Port Mirroring Profiles")
 interface WorkloadNetworkPortMirroringProfiles {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListPortMirroring")
   list is ArmResourceListByParent<
     WorkloadNetworkPortMirroring,
     Response = ArmResponse<ResourceList<WorkloadNetworkPortMirroring>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetPortMirroring")
   get is ArmResourceRead<WorkloadNetworkPortMirroring>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @operationId("WorkloadNetworks_CreatePortMirroring")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkPortMirroring,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_UpdatePortMirroring")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
@@ -41,8 +33,6 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Can not change existing response codes."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_DeletePortMirroring")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}")
   @doc("Delete a {name}", WorkloadNetworkPortMirroring)
   @armResourceDelete(WorkloadNetworkPortMirroring)

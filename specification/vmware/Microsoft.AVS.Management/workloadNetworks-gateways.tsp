@@ -7,15 +7,11 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface WorkloadNetworkGateways {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListGateways")
   list is ArmResourceListByParent<
     WorkloadNetworkGateway,
     Response = ArmResponse<ResourceList<WorkloadNetworkGateway>>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetGateway")
   get is ArmResourceRead<WorkloadNetworkGateway>;
 }
 

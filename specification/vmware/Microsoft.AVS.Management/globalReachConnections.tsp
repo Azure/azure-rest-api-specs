@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface GlobalReachConnections {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("GlobalReachConnections_List")
   list is ArmResourceListByParent<
     GlobalReachConnection,
     Response = ArmResponse<ResourceList<GlobalReachConnection>>

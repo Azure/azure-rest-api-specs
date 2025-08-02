@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface CloudLinks {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("CloudLinks_List")
   list is ArmResourceListByParent<
     CloudLink,
     Response = ArmResponse<ResourceList<CloudLink>>

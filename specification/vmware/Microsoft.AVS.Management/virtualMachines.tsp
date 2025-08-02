@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface VirtualMachines {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
     Response = ArmResponse<ResourceList<VirtualMachine, "{name}sList">>

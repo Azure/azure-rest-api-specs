@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface PlacementPolicies {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("PlacementPolicies_List")
   list is ArmResourceListByParent<
     PlacementPolicy,
     Response = ArmResponse<ResourceList<

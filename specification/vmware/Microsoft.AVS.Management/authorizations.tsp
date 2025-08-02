@@ -8,8 +8,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface Authorizations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("Authorizations_List")
   list is ArmResourceListByParent<
     ExpressRouteAuthorization,
     Response = ArmResponse<ResourceList<ExpressRouteAuthorization>>

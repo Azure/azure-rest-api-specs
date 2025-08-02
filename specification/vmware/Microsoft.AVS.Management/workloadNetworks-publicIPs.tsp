@@ -10,20 +10,14 @@ using TypeSpec.Rest;
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 // @armResourceOperations
 interface WorkloadNetworkPublicIps {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListPublicIPs")
   list is ArmResourceListByParent<
     WorkloadNetworkPublicIP,
     Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetPublicIP")
   get is ArmResourceRead<WorkloadNetworkPublicIP>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @operationId("WorkloadNetworks_CreatePublicIP")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkPublicIP,
@@ -32,8 +26,6 @@ interface WorkloadNetworkPublicIps {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Can not change existing response codes."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_DeletePublicIP")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}")
   @doc("Delete a {name}", WorkloadNetworkPublicIP)
   @armResourceDelete(WorkloadNetworkPublicIP)

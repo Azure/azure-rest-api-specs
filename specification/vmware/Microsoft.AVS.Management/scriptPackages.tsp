@@ -7,8 +7,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface ScriptPackages {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("ScriptPackages_List")
   list is ArmResourceListByParent<
     ScriptPackage,
     Response = ArmResponse<ResourceList<ScriptPackage, "{name}sList">>

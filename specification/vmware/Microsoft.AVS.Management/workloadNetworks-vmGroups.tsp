@@ -11,35 +11,25 @@ using TypeSpec.Rest;
 // @armResourceOperations
 @doc("Workload Network VM Groups")
 interface WorkloadNetworkVmGroups {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListVMGroups")
   list is ArmResourceListByParent<
     WorkloadNetworkVMGroup,
     Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup, "{name}sList">>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetVMGroup")
   get is ArmResourceRead<WorkloadNetworkVMGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @operationId("WorkloadNetworks_CreateVMGroup")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkVMGroup,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_UpdateVMGroup")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Can not change existing response codes."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_DeleteVMGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}")
   @doc("Delete a {name}", WorkloadNetworkVMGroup)
   @armResourceDelete(WorkloadNetworkVMGroup)

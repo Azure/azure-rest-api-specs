@@ -9,8 +9,6 @@ using TypeSpec.Versioning;
 
 @armResourceOperations
 interface Datastores {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("Datastores_List")
   list is ArmResourceListByParent<
     Datastore,
     Response = ArmResponse<ResourceList<Datastore>>
