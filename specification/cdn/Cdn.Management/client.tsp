@@ -1,0 +1,71 @@
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.Cdn;
+
+@@clientName(CertificateSourceParameters,
+  "CertificateSourceParametersBase",
+  "go"
+);
+@@clientName(CdnEndpoint, "LinkedEndpoint", "go");
+@@clientName(CdnEndpoint, "EndpointResource", "java");
+
+@@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
+
+@@clientName(AFDDomain, "AfdDomain", "java");
+@@clientName(AFDDomainProperties, "AfdDomainProperties", "java");
+@@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,
+  "AfdDomainHttpsCustomizedCipherSuiteSet",
+  "java"
+);
+@@clientName(AFDDomainHttpsParameters, "AfdDomainHttpsParameters", "java");
+@@clientName(AFDDomains, "AfdDomains", "java");
+@@clientName(AFDDomainUpdateParameters, "AfdDomainUpdateParameters", "java");
+@@clientName(AFDDomainUpdatePropertiesParameters,
+  "AfdDomainUpdatePropertiesParameters",
+  "java"
+);
+
+@@clientName(AFDEndpoint, "AfdEndpoint", "java");
+@@clientName(AFDEndpointProperties, "AfdEndpointProperties", "java");
+@@clientName(AFDEndpoints, "AfdEndpoints", "java");
+@@clientName(AFDEndpointUpdateParameters,
+  "AfdEndpointUpdateParameters",
+  "java"
+);
+@@clientName(AFDEndpointPropertiesUpdateParameters,
+  "AfdEndpointPropertiesUpdateParameters",
+  "java"
+);
+
+@@clientName(AFDOrigin, "AfdOrigin", "java");
+@@clientName(AFDOriginProperties, "AfdOriginProperties", "java");
+@@clientName(AFDOrigins, "AfdOrigins", "java");
+@@clientName(AFDOriginGroupUpdateParameters,
+  "AfdOriginGroupUpdateParameters",
+  "java"
+);
+@@clientName(AFDOriginGroupUpdatePropertiesParameters,
+  "AfdOriginGroupUpdatePropertiesParameters",
+  "java"
+);
+
+@@clientName(AFDOriginGroup, "AfdOriginGroup", "java");
+@@clientName(AFDOriginGroupProperties, "AfdOriginGroupProperties", "java");
+@@clientName(AFDOriginGroups, "AfdOriginGroups", "java");
+@@clientName(AFDOriginGroupUpdateParameters,
+  "AfdOriginGroupUpdateParameters",
+  "java"
+);
+@@clientName(AFDOriginGroupUpdatePropertiesParameters,
+  "AfdOriginGroupUpdatePropertiesParameters",
+  "java"
+);
+
+@@clientName(CustomDomainProperties.hostName, "hostname", "java");
+@@clientName(CustomDomainPropertiesParameters.hostName, "hostname", "java");
+@@clientName(DeepCreatedOriginProperties.hostName, "hostname", "java");
+@@clientName(OriginUpdatePropertiesParameters.hostName, "hostname", "java");
+@@clientName(EndpointProperties.hostName, "hostname", "java");
+@@clientName(ValidateCustomDomainInput.hostName, "hostname", "java");
