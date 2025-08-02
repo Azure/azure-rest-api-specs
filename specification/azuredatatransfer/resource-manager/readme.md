@@ -121,9 +121,9 @@ input-file:
 
 ### Tag: package-preview-2024-01-25
 
-These settings apply only when `--tag=package-preview-2024-01-25` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-25` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01-25'
+```yaml $(tag) == 'package-2024-01-25'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-01-25/azuredatatransfer.json
 ```
