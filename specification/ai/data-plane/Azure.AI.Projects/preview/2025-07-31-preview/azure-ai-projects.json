@@ -852,7 +852,7 @@
         }
       }
     },
-    "/evaluations/runs/{name}": {
+    "/evaluations/runs/{id}": {
       "get": {
         "operationId": "Evaluations_Get",
         "description": "Get an evaluation run by name.",
@@ -861,7 +861,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
@@ -919,7 +919,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
@@ -979,7 +979,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
@@ -1020,7 +1020,7 @@
         }
       }
     },
-    "/evaluations/runs/{name}:cancel": {
+    "/evaluations/runs/{id}:cancel": {
       "post": {
         "operationId": "Evaluations_Cancel",
         "description": "Cancel an evaluation run by name",
@@ -1029,7 +1029,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
@@ -2862,8 +2862,7 @@
         "id": {
           "type": "string",
           "description": "Identifier of the evaluation.",
-          "readOnly": true,
-          "x-ms-client-name": "name"
+          "readOnly": true
         },
         "dataSource": {
           "$ref": "#/definitions/EvaluationDataSource",
