@@ -164,6 +164,7 @@ using Azure.AI.Agents;
 @@clientName(Agent, "PersistentAgent", "csharp,java");
 
 @@access(AgentsResponseFormat, Access.internal, "csharp");
+@@access(AgentsResponseFormatOption, Access.public);
 @@clientName(AgentsResponseFormat,
   "InternalPersistentAgentsResponseFormat",
   "csharp,java"
