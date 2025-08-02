@@ -55,10 +55,10 @@ using NGINX.NGINXPLUS;
   "NginxDeploymentPropertiesNginxAppProtect",
   "!csharp"
 );
-// @@clientName(AutoScaleSettings,
-//   "NginxDeploymentScalingPropertiesAutoScaleSettings",
-//   "!csharp"
-// );
+@@clientName(AutoScaleSettings,
+  "NginxDeploymentScalingPropertiesAutoScaleSettings",
+  "!csharp"
+);
 
 // Client location overrides for NginxDeployments operations
 @@clientLocation(NginxDeployments.get, "Deployments", "!csharp");
@@ -74,6 +74,12 @@ using NGINX.NGINXPLUS;
   "Deployments",
   "!csharp"
 );
+
+// Client name for list operations
+@@clientName(NginxDeployments.listBySubscription, "list", "!csharp");
+@@clientName(ApiKeys.listByDeployment, "list", "!csharp");
+@@clientName(Certificates.listByDeployment, "list", "!csharp");
+@@clientName(Configurations.listByDeployment, "list", "!csharp");
 
 // Java client name overrides to maintain consistent casing
 @@clientName(NginxPublicIPAddress, "NginxPublicIpAddress", "java");
