@@ -1,0 +1,41 @@
+{
+  "title": "Gets the specific Pool resource",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "TestNetworkManager",
+    "poolName": "TestPool"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestPool",
+        "type": "Microsoft.Network/networkManagers/ipamPools",
+        "properties": {
+          "description": "Test description.",
+          "ipAddressType": [
+            "IPv4"
+          ],
+          "parentPoolName": "",
+          "addressPrefixes": [
+            "10.0.0.0/24"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/TestNetworkManager/ipamPools/TestPool",
+        "tags": {},
+        "location": "eastus",
+        "etag": "\"00000000-0000-0000-0000-000000000000\"",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        }
+      }
+    }
+  }
+}
