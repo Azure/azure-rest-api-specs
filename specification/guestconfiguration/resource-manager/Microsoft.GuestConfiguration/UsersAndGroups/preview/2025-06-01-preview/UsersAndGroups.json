@@ -1,0 +1,466 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.GuestConfiguration Users and Groups APIs",
+    "description": "Manage operating system users and groups.",
+    "version": "2025-06-01-preview",
+    "x-typespec-generated": true
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerName}/{parentResourceType}/{parentResourceName}/providers/Microsoft.GuestConfiguration/users": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroup"
+        },
+        {
+          "$ref": "#/parameters/providerName"
+        },
+        {
+          "$ref": "#/parameters/parentResourceType"
+        },
+        {
+          "$ref": "#/parameters/parentResourceName"
+        }
+      ],
+      "get": {
+        "summary": "List the users on this compute instance.",
+        "operationId": "GuestConfigurationUsers_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/usersList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Users_List": {
+            "$ref": "./examples/Users_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerName}/{parentResourceType}/{parentResourceName}/providers/Microsoft.GuestConfiguration/users/{userName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroup"
+        },
+        {
+          "$ref": "#/parameters/providerName"
+        },
+        {
+          "$ref": "#/parameters/parentResourceType"
+        },
+        {
+          "$ref": "#/parameters/parentResourceName"
+        },
+        {
+          "$ref": "#/parameters/userName"
+        }
+      ],
+      "get": {
+        "summary": "Gets a user on this compute instance.",
+        "operationId": "GuestConfigurationUsers_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Users_Get": {
+            "$ref": "./examples/Users_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerName}/{parentResourceType}/{parentResourceName}/providers/Microsoft.GuestConfiguration/groups": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroup"
+        },
+        {
+          "$ref": "#/parameters/providerName"
+        },
+        {
+          "$ref": "#/parameters/parentResourceType"
+        },
+        {
+          "$ref": "#/parameters/parentResourceName"
+        }
+      ],
+      "get": {
+        "summary": "List the groups on this compute instance.",
+        "operationId": "GuestConfigurationGroups_List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/groupsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Groups_List": {
+            "$ref": "./examples/Groups_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerName}/{parentResourceType}/{parentResourceName}/providers/Microsoft.GuestConfiguration/groups/{groupName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroup"
+        },
+        {
+          "$ref": "#/parameters/providerName"
+        },
+        {
+          "$ref": "#/parameters/parentResourceType"
+        },
+        {
+          "$ref": "#/parameters/parentResourceName"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        }
+      ],
+      "get": {
+        "summary": "Gets the group on this compute instance.",
+        "operationId": "GuestConfigurationGroups_Get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Groups_Get": {
+            "$ref": "./examples/Groups_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "usersList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/user"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "groupsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/group"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "user": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "description": "A user on the compute instance.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "description": "The type of user account."
+        },
+        "properties": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/commonUserProperties"
+            },
+            {
+              "$ref": "#/definitions/windowsUserProperties"
+            },
+            {
+              "$ref": "#/definitions/linuxUserProperties"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "commonUserProperties": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "description": "Specifies the full name of the user"
+        },
+        "description": {
+          "type": "string",
+          "description": "Specifies the description of the user"
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specifies whether the user is enabled."
+        },
+        "homeDirectory": {
+          "type": "string",
+          "description": "Specifies the homeDirectory path"
+        },
+        "passwordLastSetInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time when password was last changed in UTC"
+        },
+        "passwordChangeableDateInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time in UTC when user is required to change the account password"
+        },
+        "passwordExpiresInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time when the current password expires in UTC"
+        },
+        "accountExpiresInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time when the account expires in UTC"
+        }
+      }
+    },
+    "windowsUserProperties": {
+      "type": "object",
+      "description": "Properties specific to Windows users.",
+      "properties": {
+        "passwordRequired": {
+          "type": "boolean"
+        },
+        "sid": {
+          "type": "string",
+          "description": "Security Identifier"
+        },
+        "userPasswordChangePermission": {
+          "type": "boolean",
+          "default": "Disabled",
+          "description": "Specifies whether the user is allowed to change their password."
+        }
+      }
+    },
+    "linuxUserProperties": {
+      "type": "object",
+      "properties": {
+        "passwordChangeRequired": {
+          "type": "boolean",
+          "description": "Specifies whether the user is required to change their password on next login."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The local identifier of the user. On Windows, this is the Security Identifier (SID) of the user. On Linux, this is the user ID (UID)."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The local identifier of the group. On Windows, this is the Security Identifier (SID) of the group. On Linux, this is the group ID (GID)."
+        }
+      }
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "groupId": {
+              "type": "string",
+              "description": "The local identifier of the group. On Windows, this is the Security Identifier (SID) of the group. On Linux, this is the group ID (GID)."
+            },
+            "comment": {
+              "type": "string",
+              "description": "A comment or description of the group. Only valid for Windows groups."
+            },
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of members in the group."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID of the resource."
+    },
+    "resourceGroup": {
+      "name": "resourceGroup",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group that the resource resides in."
+    },
+    "providerName": {
+      "name": "providerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The provider name of the resource (i.e. Microsoft.Compute or Microsoft.HybridCompute)."
+    },
+    "parentResourceType": {
+      "name": "parentResourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The type of the resource (i.e. virtualMachines or machines)."
+    },
+    "parentResourceName": {
+      "name": "parentResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource."
+    },
+    "resourceUri": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The full Azure Resource Manager ID of the parent resource."
+    },
+    "userName": {
+      "name": "userName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the user."
+    },
+    "groupName": {
+      "name": "groupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the group."
+    }
+  }
+}
