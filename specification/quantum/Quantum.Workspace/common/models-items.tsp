@@ -75,5 +75,5 @@ model ItemDetails {
 
   /** Tags associated with the item. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: DictionaryObject;
+  tags?: Record<string>;
 }

@@ -68,7 +68,13 @@ model SessionDetails extends ItemDetails {
 }
 
 /** Session update options */
+@resource("sessionUpdateOptions")
 model SessionUpdateOptions {
+  /** Id of the session. */
+  @key("sessionId")
+  @visibility(Lifecycle.Read)
+  id: WorkspaceItemId;
+
   /** The name of the session. */
   @visibility(Lifecycle.Update)
   name?: string;
@@ -77,5 +83,5 @@ model SessionUpdateOptions {
    * Tags associated with the session.
    */
   @visibility(Lifecycle.Update)
-  tags?:  DictionaryObject;
+  tags?:  Record<string>;
 }

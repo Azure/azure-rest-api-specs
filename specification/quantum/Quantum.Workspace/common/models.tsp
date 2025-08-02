@@ -62,10 +62,3 @@ model CustomOrderByQueryParameter {
   @query("orderby")
   orderby?: string;
 }
-
-/**
- * Custom dictionary object which represents a Dictionary<string, T> type.
- */
-model DictionaryObject {
-  [key: string]: string;
-}
