@@ -29,17 +29,6 @@ These are the global settings for the azuredatatransfer.
 ```yaml $(tag) == 'default'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
-
-suppressions:
-  - code: ParametersSchemaAsTypeObject
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
-  - code: PatchBodyParametersSchema
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
 ```
 
 ``` yaml
