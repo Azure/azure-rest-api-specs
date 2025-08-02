@@ -13,5 +13,4 @@ import "./auth.tsp";
 import "./base-operations.tsp";
 import "./common-params.tsp";
 import "./errors.tsp";
-import "./json-patch.tsp";
 import "./versions.tsp";

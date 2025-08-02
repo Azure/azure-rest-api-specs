@@ -9,20 +9,19 @@
     "workspaceName": "my-workspace",
     "resource": [
       {
-        "op": "add",
-        "path": "/tags/-",
-        "value": "new_tag"
-      },
-      {
-        "op": "remove",
-        "path": "/tags/0"
+        "jobPriority": "High",
+        "name": "my-job-newname",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
       }
     ]
   },
   "responses": {
     "200": {
       "body": {
-        "name": "my-job",
+        "name": "my-job-newname",
         "id": "00000000-0000-0000-0000-000000000002",
         "itemType": "Job",
         "jobType": "QuantumComputing",
@@ -41,10 +40,11 @@
         "providerId": "microsoft-qc",
         "status": "Waiting",
         "target": "microsoft.estimator",
-        "tags": [
-          "tag1",
-          "new_tag"
-        ]
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "jobPriority": "High"
       }
     },
     "204": {}

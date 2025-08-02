@@ -72,4 +72,8 @@ model ItemDetails {
   /** Error information. */
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
+
+  /** Tags associated with the item. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: DictionaryObject;
 }

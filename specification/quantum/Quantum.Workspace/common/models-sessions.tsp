@@ -66,3 +66,16 @@ model SessionDetails extends ItemDetails {
   @visibility(Lifecycle.Read)
   status?: SessionStatus;
 }
+
+/** Session update options */
+model SessionUpdateOptions {
+  /** The name of the session. */
+  @visibility(Lifecycle.Update)
+  name?: string;
+
+  /**
+   * Tags associated with the session.
+   */
+  @visibility(Lifecycle.Update)
+  tags?:  DictionaryObject;
+}

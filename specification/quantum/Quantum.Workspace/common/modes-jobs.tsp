@@ -99,9 +99,9 @@ model JobDetails extends ItemDetails {
   @visibility(Lifecycle.Read)
   cancellationTime?: utcDateTime;
 
-  /** List of user-supplied tags associated with the job. */
+  /** The priority of the job. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
+  jobPriority?: JobPriority;
 
   /** Quantum computing data. */
   @visibility(Lifecycle.Read)
@@ -118,4 +118,26 @@ model JobDetails extends ItemDetails {
   /** The format of the output data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   outputDataFormat?: string;
+}
+
+/** Options for updating a job. */
+model JobUpdateOptions{
+  /** Priority of job. */
+  @visibility(Lifecycle.Update)
+  jobPriority?: JobPriority;
+    /** The name of the workspace item. */
+  @visibility(Lifecycle.Update)
+  name?: string;
+
+  /**
+   * Tags associated with the workspace item.
+   */
+  @visibility( Lifecycle.Update)
+  tags?:  DictionaryObject;
+}
+
+union JobPriority{
+  string,
+  "Basic": "Basic",
+  "High": "High"
 }

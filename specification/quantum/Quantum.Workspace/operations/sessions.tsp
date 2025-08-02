@@ -29,6 +29,9 @@ namespace Quantum.Workspace.Services {
     /** Get Session by its id. */
     get is GetOperation<SessionDetails>;
 
+    /** Update session properties. */
+    update is MergePatchOperation<SessionUpdateOptions>;
+
     /** List all Sessions. */
     @sharedRoute
     @added(QuantumWorkspaceAPIVersion.v2024_03_01_preview)
