@@ -143,8 +143,11 @@ model JobUpdateOptions{
   tags?: Record<string>;
 }
 
-union JobPriority{
+/** Job priority levels. */
+union JobPriority {
   string,
+  /** The job's base priority. */
   "Basic": "Basic",
+  /** The job's priority is elevated. */
   "High": "High"
 }

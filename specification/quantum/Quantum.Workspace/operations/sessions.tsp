@@ -30,7 +30,7 @@ namespace Quantum.Workspace.Services {
     get is GetOperation<SessionDetails>;
 
     /** Update session properties. */
-    update is MergePatchOperation<SessionUpdateOptions>;
+    update is PatchOperation<SessionUpdateOptions>;
 
     /** List all Sessions. */
     @sharedRoute

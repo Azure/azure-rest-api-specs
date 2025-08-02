@@ -19,7 +19,7 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
-    update is MergePatchOperation<JobUpdateOptions>;
+    update is PatchOperation<JobUpdateOptions>;
 
     /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
