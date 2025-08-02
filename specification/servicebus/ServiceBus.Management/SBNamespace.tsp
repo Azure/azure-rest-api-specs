@@ -1,0 +1,145 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ServiceBus;
+/**
+ * Description of a namespace resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SBNamespace
+  is Azure.ResourceManager.TrackedResource<SBNamespaceProperties> {
+  ...ResourceNameParameter<
+    Resource = SBNamespace,
+    KeyName = "namespaceName",
+    SegmentName = "namespaces",
+    NamePattern = ""
+  >;
+
+  /**
+   * Properties of SKU
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: SBSku;
+
+  /**
+   * Properties of BYOK Identity description
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  identity?: Identity;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
+interface SBNamespaces {
+  /**
+   * Gets a description for the specified namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Namespaces_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
+  get is ArmResourceRead<SBNamespace>;
+
+  /**
+   * Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Namespaces_CreateOrUpdate")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    SBNamespace,
+    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
+      SBNamespace,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @patch(#{ implicitOptionality: false })
+  @operationId("Namespaces_Update")
+  update is ArmCustomPatchSync<
+    SBNamespace,
+    PatchModel = SBNamespaceUpdateParameters,
+    Response = ArmResponse<SBNamespace> | ArmResourceCreatedSyncResponse<SBNamespace> | AcceptedResponse
+  >;
+
+  /**
+   * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Namespaces_Delete")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SBNamespace,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets the available namespaces within a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Namespaces_ListByResourceGroup")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
+  listByResourceGroup is ArmResourceListByParent<SBNamespace>;
+
+  /**
+   * Gets all the available namespaces within the subscription, irrespective of the resource groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Namespaces_List")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
+  list is ArmListBySubscription<SBNamespace>;
+
+  /**
+   * Gets lists of resources that supports Privatelinks.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @get
+  @action("privateLinkResources")
+  @operationId("PrivateLinkResources_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
+  privateLinkResourcesGet is ArmResourceActionSync<
+    SBNamespace,
+    void,
+    ArmResponse<PrivateLinkResourcesListResult>
+  >;
+
+  /**
+   * Check the give namespace name availability.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @action("disasterRecoveryConfigs/CheckNameAvailability")
+  @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
+  checkNameAvailability is ArmResourceActionSync<
+    SBNamespace,
+    CheckNameAvailability,
+    ArmResponse<CheckNameAvailabilityResult>
+  >;
+}
+
+@@maxLength(SBNamespace.name, 50);
+@@minLength(SBNamespace.name, 6);
+@@doc(SBNamespace.name, "The namespace name");
+@@doc(SBNamespace.properties, "Properties of the namespace.");
+@@doc(SBNamespaces.createOrUpdate::parameters.resource,
+  "Parameters supplied to create a namespace resource."
+);
+@@doc(SBNamespaces.update::parameters.properties,
+  "Parameters supplied to update a namespace resource."
+);
+@@doc(SBNamespaces.checkNameAvailability::parameters.body,
+  "Parameters to check availability of the given namespace name"
+);
