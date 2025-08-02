@@ -103,6 +103,10 @@ model FleetProperties {
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
   @visibility(Lifecycle.Read)
   uniqueId?: string;
+
+  @doc("Specifies the display name a Compute Fleet.")
+  @added(Versions.v2025_05_01)
+  displayName?: string;
 }
 
 @doc("Compute Profile to use for running user's workloads.")
