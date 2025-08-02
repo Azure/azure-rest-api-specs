@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 /**
@@ -28,7 +27,7 @@ model Flow is Azure.ResourceManager.TrackedResource<FlowProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmFlowResponse is ArmResponse<Flow>;
+model ArmFlowResponse is Flow;
 
 @armResourceOperations
 interface Flows {
