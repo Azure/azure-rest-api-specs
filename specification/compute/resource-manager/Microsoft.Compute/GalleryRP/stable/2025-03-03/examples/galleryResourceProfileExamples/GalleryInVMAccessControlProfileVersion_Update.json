@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-03-03",
+    "galleryName": "myGalleryName",
+    "inVMAccessControlProfileName": "myInVMAccessControlProfileName",
+    "inVMAccessControlProfileVersionName": "1.0.0",
+    "galleryInVMAccessControlProfileVersion": {
+      "properties": {
+        "mode": "Audit",
+        "defaultAccess": "Allow",
+        "targetLocations": [
+          {
+            "name": "West US"
+          },
+          {
+            "name": "South Central US"
+          },
+          {
+            "name": "East US"
+          }
+        ],
+        "excludeFromLatest": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/inVMAccessControlProfiles/myInVMAccessControlProfileName/versions/1.0.0",
+        "properties": {
+          "mode": "Audit",
+          "defaultAccess": "Allow",
+          "rules": {
+            "privileges": [
+              {
+                "name": "GoalState",
+                "path": "/machine",
+                "queryParameters": {
+                  "comp": "goalstate"
+                }
+              }
+            ],
+            "roles": [
+              {
+                "name": "Provisioning",
+                "privileges": [
+                  "GoalState"
+                ]
+              }
+            ],
+            "identities": [
+              {
+                "name": "WinPA",
+                "userName": "SYSTEM",
+                "groupName": "Administrators",
+                "exePath": "C:\\Windows\\System32\\cscript.exe",
+                "processName": "cscript"
+              }
+            ],
+            "roleAssignments": [
+              {
+                "role": "Provisioning",
+                "identities": [
+                  "WinPA"
+                ]
+              }
+            ]
+          },
+          "targetLocations": [
+            {
+              "name": "West US"
+            },
+            {
+              "name": "South Central US"
+            },
+            {
+              "name": "East US"
+            }
+          ],
+          "excludeFromLatest": false,
+          "publishedDate": "2024-01-01T00:00:00Z",
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  },
+  "operationId": "GalleryInVMAccessControlProfileVersions_Update",
+  "title": "Update a Gallery InVMAccessControlProfile Version."
+}
