@@ -5,91 +5,120 @@ using Microsoft.Confluent;
 
 // @@clientLocation decorators for @operationId operations
 // Operations interface
-@@clientLocation(Operations.list, "OrganizationOperations");
+@@clientLocation(Operations.list, "OrganizationOperations", "!csharp");
 
 // OrganizationResourceAPIKeyActions interface
 @@clientLocation(OrganizationResourceAPIKeyActions.getClusterAPIKey,
-  "Organization"
+  "Organization",
+  "!csharp"
 );
 @@clientName(OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "GetClusterAPIKey"
 );
 @@clientLocation(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
-  "Organization"
+  "Organization",
+  "!csharp"
 );
 @@clientName(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "DeleteClusterAPIKey"
 );
 // OrganizationResourceRoleBindingIdActions interface
 @@clientLocation(OrganizationResourceRoleBindingIdActions.deleteRoleBinding,
-  "Access"
+  "Access",
+  "!csharp"
 );
 
 // OrganizationResources interface
-@@clientLocation(OrganizationResources.get, "Organization");
-@@clientLocation(OrganizationResources.create, "Organization");
-@@clientLocation(OrganizationResources.update, "Organization");
-@@clientLocation(OrganizationResources.delete, "Organization");
-@@clientLocation(OrganizationResources.listByResourceGroup, "Organization");
-@@clientLocation(OrganizationResources.listBySubscription, "Organization");
-@@clientLocation(OrganizationResources.listRegions, "Organization");
-@@clientLocation(OrganizationResources.listUsers, "Access");
-@@clientLocation(OrganizationResources.listServiceAccounts, "Access");
-@@clientLocation(OrganizationResources.listInvitations, "Access");
-@@clientLocation(OrganizationResources.inviteUser, "Access");
-@@clientLocation(OrganizationResources.listEnvironments, "Access");
-@@clientLocation(OrganizationResources.listClusters, "Access");
-@@clientLocation(OrganizationResources.listRoleBindings, "Access");
-@@clientLocation(OrganizationResources.createRoleBinding, "Access");
-@@clientLocation(OrganizationResources.listRoleBindingNameList, "Access");
+@@clientLocation(OrganizationResources.get, "Organization", "!csharp");
+@@clientLocation(OrganizationResources.create, "Organization", "!csharp");
+@@clientLocation(OrganizationResources.update, "Organization", "!csharp");
+@@clientLocation(OrganizationResources.delete, "Organization", "!csharp");
+@@clientLocation(OrganizationResources.listByResourceGroup,
+  "Organization",
+  "!csharp"
+);
+@@clientLocation(OrganizationResources.listBySubscription,
+  "Organization",
+  "!csharp"
+);
+@@clientLocation(OrganizationResources.listRegions, "Organization", "!csharp");
+@@clientLocation(OrganizationResources.listUsers, "Access", "!csharp");
+@@clientLocation(OrganizationResources.listServiceAccounts,
+  "Access",
+  "!csharp"
+);
+@@clientLocation(OrganizationResources.listInvitations, "Access", "!csharp");
+@@clientLocation(OrganizationResources.inviteUser, "Access", "!csharp");
+@@clientLocation(OrganizationResources.listEnvironments, "Access", "!csharp");
+@@clientLocation(OrganizationResources.listClusters, "Access", "!csharp");
+@@clientLocation(OrganizationResources.listRoleBindings, "Access", "!csharp");
+@@clientLocation(OrganizationResources.createRoleBinding, "Access", "!csharp");
+@@clientLocation(OrganizationResources.listRoleBindingNameList,
+  "Access",
+  "!csharp"
+);
 
 // ConnectorResources interface
-@@clientLocation(ConnectorResources.get, "Connector");
-@@clientLocation(ConnectorResources.createOrUpdate, "Connector");
-@@clientLocation(ConnectorResources.delete, "Connector");
-@@clientLocation(ConnectorResources.list, "Connector");
+@@clientLocation(ConnectorResources.get, "Connector", "!csharp");
+@@clientLocation(ConnectorResources.createOrUpdate, "Connector", "!csharp");
+@@clientLocation(ConnectorResources.delete, "Connector", "!csharp");
+@@clientLocation(ConnectorResources.list, "Connector", "!csharp");
 
 // MarketplaceAgreementsOperationGroup interface
 @@clientLocation(MarketplaceAgreementsOperationGroup.list,
-  "MarketplaceAgreements"
+  "MarketplaceAgreements",
+  "!csharp"
 );
 @@clientLocation(MarketplaceAgreementsOperationGroup.create,
-  "MarketplaceAgreements"
+  "MarketplaceAgreements",
+  "!csharp"
 );
 
 // ValidationsOperationGroup interface
-@@clientLocation(ValidationsOperationGroup.validateOrganization, "Validations");
+@@clientLocation(ValidationsOperationGroup.validateOrganization,
+  "Validations",
+  "!csharp"
+);
 @@clientLocation(ValidationsOperationGroup.validateOrganizationV2,
-  "Validations"
+  "Validations",
+  "!csharp"
 );
 
 // SCClusterRecords interface
-@@clientLocation(SCClusterRecords.getClusterById, "Organization");
-@@clientLocation(SCClusterRecords.createOrUpdate, "Cluster");
-@@clientLocation(SCClusterRecords.delete, "Cluster");
-@@clientLocation(SCClusterRecords.listClusters, "Organization");
-@@clientLocation(SCClusterRecords.createAPIKey, "Organization");
+@@clientLocation(SCClusterRecords.getClusterById, "Organization", "!csharp");
+@@clientLocation(SCClusterRecords.createOrUpdate, "Cluster", "!csharp");
+@@clientLocation(SCClusterRecords.delete, "Cluster", "!csharp");
+@@clientLocation(SCClusterRecords.listClusters, "Organization", "!csharp");
+@@clientLocation(SCClusterRecords.createAPIKey, "Organization", "!csharp");
 @@clientName(SCClusterRecords.createAPIKey, "CreateApiKey");
 
 // SCEnvironmentRecords interface
-@@clientLocation(SCEnvironmentRecords.getEnvironmentById, "Organization");
-@@clientLocation(SCEnvironmentRecords.createOrUpdate, "Environment");
-@@clientLocation(SCEnvironmentRecords.delete, "Environment");
-@@clientLocation(SCEnvironmentRecords.listEnvironments, "Organization");
+@@clientLocation(SCEnvironmentRecords.getEnvironmentById,
+  "Organization",
+  "!csharp"
+);
+@@clientLocation(SCEnvironmentRecords.createOrUpdate, "Environment", "!csharp");
+@@clientLocation(SCEnvironmentRecords.delete, "Environment", "!csharp");
+@@clientLocation(SCEnvironmentRecords.listEnvironments,
+  "Organization",
+  "!csharp"
+);
 @@clientLocation(SCEnvironmentRecords.listSchemaRegistryClusters,
-  "Organization"
+  "Organization",
+  "!csharp"
 );
 
 // SCEnvironmentRecordCluster interface
 @@clientLocation(SCEnvironmentRecordCluster.getSchemaRegistryClusterById,
-  "Organization"
+  "Organization",
+  "!csharp"
 );
 
 // TopicRecords interface
-@@clientLocation(TopicRecords.get, "Topics");
-@@clientLocation(TopicRecords.create, "Topics");
-@@clientLocation(TopicRecords.delete, "Topics");
-@@clientLocation(TopicRecords.list, "Topics");
+@@clientLocation(TopicRecords.get, "Topics", "!csharp");
+@@clientLocation(TopicRecords.create, "Topics", "!csharp");
+@@clientLocation(TopicRecords.delete, "Topics", "!csharp");
+@@clientLocation(TopicRecords.list, "Topics", "!csharp");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConfluentAgreementResource.properties);
