@@ -48,9 +48,9 @@ export default async function getLabelActions({ github, context, core }) {
     return;
   }
 
-  core.info(`breaking change workflow run: ${latestBreakingChangesRun.url}`);
+  core.info(`breaking change workflow run: ${latestBreakingChangesRun.html_url}`);
   core.info(
-    `cross-version breaking change workflow run: ${latestCrossVersionBreakingChangesRun.url}`,
+    `cross-version breaking change workflow run: ${latestCrossVersionBreakingChangesRun.html_url}`,
   );
   const breakingChangesArtifactNames = (
     await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
@@ -94,7 +94,8 @@ export default async function getLabelActions({ github, context, core }) {
   // Apply precedence rule: breaking change takes precedence over versioning, only one label should be added
   const breakingChangeReviewLabelValue = hasBreakingChangeReviewLabel;
   const versioningReviewLabelValue = hasVersioningReviewLabel && !hasBreakingChangeReviewLabel;
-
+  core.info(`${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}: ${breakingChangeReviewLabelValue}`);
+  core.info(`${REVIEW_REQUIRED_LABELS.VERSIONING}: ${versioningReviewLabelValue}`);
   core.setOutput("breakingChangeReviewLabelName", REVIEW_REQUIRED_LABELS.BREAKING_CHANGE);
   core.setOutput("breakingChangeReviewLabelValue", breakingChangeReviewLabelValue);
   core.setOutput("versioningReviewLabelName", REVIEW_REQUIRED_LABELS.VERSIONING);
