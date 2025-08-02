@@ -89,51 +89,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerStorage/pools": {
-      "get": {
-        "operationId": "Pools_ListBySubscription",
-        "tags": [
-          "Pools"
-        ],
-        "description": "List Pool resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PoolListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Pools_ListBySubscription_AzureDisk": {
-            "$ref": "./examples/Pools_ListBySubscription_AzureDisk.json"
-          },
-          "Pools_ListBySubscription_ElasticSan": {
-            "$ref": "./examples/Pools_ListBySubscription_ElasticSan.json"
-          },
-          "Pools_ListBySubscription_Ephemeral": {
-            "$ref": "./examples/Pools_ListBySubscription_Ephemeral.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools": {
       "get": {
         "operationId": "Pools_ListByResourceGroup",
