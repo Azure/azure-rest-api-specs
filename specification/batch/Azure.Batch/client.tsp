@@ -178,7 +178,7 @@ interface BatchClient {
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchApplicationListResult.`odata.nextLink`,
+@@clientName(Azure.Batch.BatchApplicationListResultMakeThisNameWayTooLongForPylint.`odata.nextLink`,
   "NextLink",
   "go"
 );
