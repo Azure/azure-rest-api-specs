@@ -1,14 +1,14 @@
-# Azure Elevation
+# Azure Data
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Elevation Client
+This is the AutoRest configuration file for the Data Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Elevation, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Data, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,19 +22,27 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Elevation Client.
+These are the global settings for Data Client.
 
 ``` yaml
-# The Azure Maps Elevation service is retired as of 2023
-title: ElevationClient
+# The Azure Maps Data service is retired as of 2023
+title: DataClient
 openapi-type: data-plane
-tag: package-retired-1.0-preview
+tag: package-retired-2.0-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
+### Tag: package-retired-2.0-preview
+
+These settings apply only when `--tag=package-retired-2.0-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-retired-2.0-preview'
+input-file:
+  - preview/2.0/data.json
+```
 
 ### Tag: package-retired-1.0-preview
 
@@ -42,7 +50,7 @@ These settings apply only when `--tag=package-retired-1.0-preview` is specified 
 
 ``` yaml $(tag) == 'package-retired-1.0-preview'
 input-file:
-  - preview/1.0/elevation.json
+  - preview/1.0/data.json
 ```
 
 # Code Generation
