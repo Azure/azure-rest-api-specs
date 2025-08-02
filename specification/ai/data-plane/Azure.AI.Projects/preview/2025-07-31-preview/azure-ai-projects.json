@@ -1129,6 +1129,88 @@
         }
       }
     },
+    "/evaluations/runs:run": {
+      "post": {
+        "operationId": "Evaluations_CreateDeprecated",
+        "description": "Creates an evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Evaluation to be run",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/evaluations/runs:runAgent": {
+      "post": {
+        "operationId": "Evaluations_CreateAgentEvaluationDeprecated",
+        "description": "Creates an agent evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Agent evaluation to be run",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AgentEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
     "/evaluations/runs:runBatch": {
       "post": {
         "operationId": "Evaluations_CreateBatchEvaluation",
@@ -1210,8 +1292,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EvaluationResult"
             }

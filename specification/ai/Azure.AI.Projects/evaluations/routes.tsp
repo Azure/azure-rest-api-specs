@@ -50,7 +50,24 @@ interface Evaluations {
   @route("runs:run")
   @removed(Versions.v2025_07_31_preview)
   @post
+  @sharedRoute
   create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation to be run")
+      @body
+      evaluation: Evaluation;
+    },
+    ResourceCreatedResponse<Evaluation>
+  >;
+
+  #deprecated "Use createBatchEvaluation or createOneEvaluation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation run.")
+  @route("runs:run")
+  @added(Versions.v2025_07_31_preview)
+  @post
+  @sharedRoute
+  createDeprecated is Azure.Core.Foundations.Operation<
     {
       @doc("Evaluation to be run")
       @body
@@ -62,9 +79,26 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an agent evaluation run.")
   @route("runs:runAgent")
-  @removed(Versions.v2025_07_31_preview) // Use createOrReplace instead
+  @removed(Versions.v2025_07_31_preview)
   @post
+  @sharedRoute
   createAgentEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent evaluation to be run")
+      @body
+      evaluation: AgentEvaluationRequest;
+    },
+    ResourceCreatedResponse<AgentEvaluation>
+  >;
+
+  #deprecated "Use createBatchEvaluation or createOneEvaluation"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an agent evaluation run.")
+  @route("runs:runAgent")
+  @added(Versions.v2025_07_31_preview) // Use createOrReplace instead
+  @post
+  @sharedRoute
+  createAgentEvaluationDeprecated is Azure.Core.Foundations.Operation<
     {
       @doc("Agent evaluation to be run")
       @body
@@ -106,7 +140,7 @@ interface Evaluations {
       @body
       oneEvaluation: OneEvaluation;
     },
-    ResourceCreatedResponse<EvaluationResult>
+    OkResponse<EvaluationResult>
   >;
 
   @doc("Updates specific properties of an existing evaluation. Supports modification of metadata fields including description, display name, and tags. Note: Core evaluation configuration such as data sources and evaluators cannot be modified after creation.")
