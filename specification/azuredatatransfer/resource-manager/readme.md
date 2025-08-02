@@ -26,11 +26,6 @@ These are the global settings for the azuredatatransfer.
 
 ### Tag: default
 
-```yaml $(tag) == 'default'
-input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
-```
-
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
