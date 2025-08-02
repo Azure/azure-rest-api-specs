@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 /**
@@ -27,8 +26,6 @@ model Flow is Azure.ResourceManager.TrackedResource<FlowProperties> {
   ...Azure.ResourceManager.ResourcePlanProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
-
-model ArmFlowResponse is ArmResponse<Flow>;
 
 @armResourceOperations
 interface Flows {
@@ -69,17 +66,17 @@ interface Flows {
   /**
    * Disables the specified flow
    */
-  disable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  disable is ArmResourceActionAsync<Flow, void, ArmResponse<Flow>>;
 
   /**
    * Enables the specified flow.
    */
-  enable is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  enable is ArmResourceActionAsync<Flow, void, ArmResponse<Flow>>;
 
   /**
    * Generate a compliant passphrase for the specified flow.
    */
-  generatePassphrase is ArmResourceActionAsync<Flow, void, ArmFlowResponse>;
+  generatePassphrase is ArmResourceActionAsync<Flow, void, ArmResponse<Flow>>;
 
   /**
    * Get the destination endpoint ports for the specified flow.
@@ -120,7 +117,7 @@ interface Flows {
   /**
    * Links the specified flow.
    */
-  link is ArmResourceActionAsync<Flow, ResourceBody, ArmFlowResponse>;
+  link is ArmResourceActionAsync<Flow, ResourceBody, ArmResponse<Flow>>;
 
   /**
    * Set the destination endpoint ports for the specified flow.
@@ -128,7 +125,7 @@ interface Flows {
   setDestinationEndpointPorts is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpointPorts,
-    ArmFlowResponse
+    ArmResponse<Flow>
   >;
 
   /**
@@ -137,7 +134,7 @@ interface Flows {
   setDestinationEndpoints is ArmResourceActionAsync<
     Flow,
     SetDestinationEndpoints,
-    ArmFlowResponse
+    ArmResponse<Flow>
   >;
 
   /**
@@ -146,7 +143,7 @@ interface Flows {
   setPassphrase is ArmResourceActionAsync<
     Flow,
     SetStreamPassphrase,
-    ArmFlowResponse
+    ArmResponse<Flow>
   >;
 
   /**
@@ -155,7 +152,7 @@ interface Flows {
   setSourceAddresses is ArmResourceActionAsync<
     Flow,
     SetSourceAddresses,
-    ArmFlowResponse
+    ArmResponse<Flow>
   >;
 }
 
