@@ -80,12 +80,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-01'
 input-file:
-- Microsoft.Relay/stable/2024-01-01/authorizationRules.json
-- Microsoft.Relay/stable/2024-01-01/hybridConnections.json
-- Microsoft.Relay/stable/2024-01-01/Namespaces.json
-- Microsoft.Relay/stable/2024-01-01/NetworkRuleSets.json
-- Microsoft.Relay/stable/2024-01-01/operations.json
-- Microsoft.Relay/stable/2024-01-01/wcfRelays.json
+- Microsoft.Relay/stable/2024-01-01/relay.json
 ```
 
 ---
