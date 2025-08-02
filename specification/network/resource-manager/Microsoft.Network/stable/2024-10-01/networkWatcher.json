@@ -2213,8 +2213,310 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers/{connectionAnalyzerName}": {
+      "put": {
+        "tags": [
+          "ConnectionAnalyzers"
+        ],
+        "operationId": "ConnectionAnalyzers_Create",
+        "description": "Creates a connection analyzer resource, which checks connectivity between two endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher resource.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "connectionAnalyzerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of connection analyzer.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzer"
+            },
+            "description": "Properties needed to create a connection analyzer resource."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the connection analyzer result.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzer"
+            }
+          },
+          "201": {
+            "description": "Request successful. The operation returns the connection analyzer result.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connection Analyzer": {
+            "$ref": "./examples/NetworkWatcherConnectionAnalyzerCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ConnectionAnalyzers"
+        ],
+        "operationId": "ConnectionAnalyzers_Get",
+        "description": "Gets a connection analyzer by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "connectionAnalyzerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of connection analyzer.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the connection analyzer result.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get connection analyzer": {
+            "$ref": "./examples/NetworkWatcherConnectionAnalyzerGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConnectionAnalyzers"
+        ],
+        "operationId": "ConnectionAnalyzers_Delete",
+        "description": "Deletes the connection analyzer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "connectionAnalyzerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of connection analyzer.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deletion successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete connection analyzer": {
+            "$ref": "./examples/NetworkWatcherConnectionAnalyzerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectionAnalyzers"
+        ],
+        "operationId": "ConnectionAnalyzers_UpdateTags",
+        "description": "Update tags of the specified connection analyzer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network watcher.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "connectionAnalyzerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection analyzer.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update connection analyzer tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns updated connection monitor.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update connection analyzer tags": {
+            "$ref": "./examples/NetworkWatcherConnectionAnalyzerUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionAnalyzers": {
+      "get": {
+        "tags": [
+          "ConnectionAnalyzers"
+        ],
+        "operationId": "ConnectionAnalyzers_List",
+        "description": "Gets all the connection analyzers for the specified network watcher resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkWatcherName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Watcher resource.",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful connection analyzer enumeration request.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionAnalyzerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List connection analyzer": {
+            "$ref": "./examples/NetworkWatcherConnectionAnalyzerList.json"
+          }
+        }
+      }
     }
-  },
+},
   "definitions": {
     "ErrorResponse": {
       "description": "The error object.",
@@ -4729,6 +5031,289 @@
         }
       },
       "description": "Connection monitor endpoint location details only being used for 'AzureArcNetwork' type endpoints, which contains the region details."
+    },
+    "ConnectionAnalyzerListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionAnalyzer"
+          },
+          "description": "Information about connection analyzer resource."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "List of connection analyzers."
+    },
+    "ConnectionAnalyzer": {
+      "description": "The resource model definition for connection analyzer resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectionAnalyzerProperties",
+          "description": "Properties of the connection analyzer."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ]
+    },
+    "ConnectionAnalyzerProperties": {
+      "type": "object",
+      "description": "Input request to create connection analyzer resource.",
+      "required": [
+        "source",
+        "destination",
+        "diagnosticOperations"
+      ],
+      "properties": {
+        "diagnosticOperations": {
+          "type": "array",
+          "description": "Type of diagnostic operations to perform like NextHop, NSG, PortScan, ConnectivityCheck, ExpressRouteDiagnostic.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "NextHop",
+              "NSG",
+              "PortScan",
+              "ConnectivityCheck",
+              "ExpressRouteDiagnostic"
+            ],
+            "x-ms-enum": {
+              "name": "DiagnosticOperation",
+              "modelAsString": true
+            }
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/ConnectionAnalyzerEndpoint",
+          "description": "The source of the Connection Analyzer resource to test connectivity to a destination."
+        },
+        "destination": {
+          "$ref": "#/definitions/ConnectionAnalyzerEndpoint",
+          "description": "The destination of Connection Analyzer resource to which connectivity check to be performed."
+        },
+        "protocolSettings": {
+          "$ref": "#/definitions/ProtocolSettings",
+          "description": "Protocol and its settings to perform connectivity check."
+        },
+        "diagnosticOperationsSettings": {
+          "$ref": "#/definitions/DiagnosticOperationsSettings",
+          "description": "To provide different settings required for running different diagnostic operations."
+        },
+        "expiryInDays": {
+          "description": "To delete the connection analyzer resource post expiryInDays, default value is 30 days.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "outputSettings": {
+          "$ref": "#/definitions/OutputSettings",
+          "description": "Output settings needed to ingest connection analyzer result."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the connection analyzer diagnostic operation in UTC format."
+        },
+        "error": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Error message indicates the failure reason of connection analyzer"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Connection Analyzer resource."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of connection analyzer resource.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionAnalyzerStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ConnectionAnalyzerEndpoint": {
+      "type": "object",
+      "description": "Endpoint of connection analyzer resource to perform connectivity test.",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The resourceId of the azure resource i.e. connection analyzer endpoint.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "address": {
+          "description": "IP address of the endpoint.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port of the endpoint.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of connection analyzer endpoint.",
+          "enum": [
+            "VM",
+            "VMSS",
+            "ExternalAddress",
+            "BastionHost",
+            "ApplicationGateway"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionAnalyzerEndpointType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DiagnosticOperationsSettings": {
+      "type": "object",
+      "description": "Settings required for running different diagnostic operations.",
+      "properties": {
+        "connectivityCheckSettings": {
+          "$ref": "#/definitions/ConnectivityCheckSettings",
+          "description": "Setting needed to run ConnectivityCheck operation."
+        },
+        "expressRouteDiagnosticsSettings": {
+          "$ref": "#/definitions/ExpressRouteDiagnosticsSettings",
+          "description": "Setting needed to run ExpressRouteDiagnostics."
+        }
+      }
+    },
+    "ProtocolSettings": {
+      "type": "object",
+      "description": "Protocol settings needed in connection analyzer resource to perform connectivity test.",
+      "properties": {
+        "httpConfiguration": {
+          "$ref": "#/definitions/HTTPConfiguration",
+          "description": "HTTP configuration required for running tests with HTTP protocol."
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Http",
+            "Https",
+            "Icmp"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          },
+          "description": "Protocol for running connectivity test."
+        }
+      }
+    },
+    "ConnectivityCheckSettings": {
+      "type": "object",
+      "description": "Setting needed to run ConnectivityCheck operation",
+      "properties": {
+        "preferredIPVersion": {
+          "type": "string",
+          "description": "Preferred IP version for running connectivity check.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredIPVersion",
+            "modelAsString": true
+          }
+        },
+        "generatePath": {
+          "type": "boolean",
+          "description": "True if topology should be generated along with connectivity check. Default value is true."
+        }
+      }
+    },
+    "ExpressRouteDiagnosticsSettings": {
+      "type": "object",
+      "description": "Setting needed to run ExpressRouteDiagnostic operation.",
+      "properties": {
+        "erCircuitResourceId": {
+          "type": "string",
+          "description": "ResourceId of express route circuit.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/expressRouteCircuits"
+              }
+            ]
+          }
+        },
+        "bandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bandwidth for running express route diagnostics."
+        }
+      }
+    },
+    "OutputSettings": {
+      "type": "object",
+      "description": "Output settings needed to ingest connection analyzer result.",
+      "properties": {
+        "storageAccountSettings": {
+          "$ref": "#/definitions/StorageAccountSettings",
+          "description": "Storage account details to push connection analyzer result."
+        }
+      }
+    },
+    "StorageAccountSettings": {
+      "type": "object",
+      "description": "Storage account details to push connection analyzer result.",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "ResourceId of the storage account.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "Path in storage account where connection analyzer result will be pushed, no need to provide this path."
+        }
+      }
     }
   }
 }
