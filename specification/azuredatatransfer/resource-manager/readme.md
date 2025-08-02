@@ -48,11 +48,11 @@ input-file:
   - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
 ```
 
-### Tag: package-2025-03-01-preview
+### Tag: package-preview-2025-03-01-preview
 
 These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-01-preview'
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-03-01-preview/azuredatatransfer.json
 ```
@@ -68,36 +68,36 @@ input-file:
 
 ### Tag: package-2024-09
 
-These settings apply only when `--tag=package-2024-09` is specified on the command line.
+These settings apply only when `--tag=package-2024-09-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-09'
+```yaml $(tag) == 'package-2024-09-11'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-05
 
-These settings apply only when `--tag=package-2024-05` is specified on the command line.
+These settings apply only when `--tag=package-2024-05-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05'
+```yaml $(tag) == 'package-2024-05-07'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-05-07/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-01
 
-These settings apply only when `--tag=package-2024-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-01-25` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+```yaml $(tag) == 'package-2024-01-25'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-01-25/azuredatatransfer.json
 ```
 
-### Tag: package-2023-10-11-preview
+### Tag: package-preview-2023-10-11-preview
 
-These settings apply only when `--tag=package-2023-10-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-10-11-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10-11-preview'
+``` yaml $(tag) == 'package-preview-2023-10-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
 ```
