@@ -2,7 +2,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 /**
