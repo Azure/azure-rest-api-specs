@@ -6538,20 +6538,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -6613,20 +6600,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -6702,20 +6676,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -6778,20 +6739,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -6855,11 +6803,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -6921,11 +6865,7 @@
             "type": "string"
           },
           {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ParentTypeParameter"
           },
           {
             "name": "parentName",
@@ -10930,6 +10870,22 @@
       "description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "required": true,
       "type": "string"
+    },
+    "ParentTypeParameter": {
+      "name": "parentType",
+      "in": "path",
+      "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\'.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "topics",
+        "domains",
+        "partnerNamespaces"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionsParentType",
+        "modelAsString": true
+      }
     },
     "ApiVersionParameter": {
       "name": "api-version",
