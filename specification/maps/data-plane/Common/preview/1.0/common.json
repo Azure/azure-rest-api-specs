@@ -64,6 +64,61 @@
         }
       }
     },
+    "LongRunningOperationResult2": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "The Id for this long-running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "LroStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail2"
+        },
+        "warning": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail2"
+        }
+      }
+    },
     "BatchRequest": {
       "description": "This type represents the request body for the Batch service.",
       "type": "object",
@@ -963,6 +1018,13 @@
       "description": "An unexpected error occurred.",
       "schema": {
         "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "default2": {
+      "description": "An unexpected error occurred.",
+      "schema": {
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse2"
       },
       "x-ms-error-response": true
     }
