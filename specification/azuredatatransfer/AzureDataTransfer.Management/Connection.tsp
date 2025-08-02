@@ -25,7 +25,7 @@ model Connection
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmConnectionResponse is ArmResponse<Connection>;
+model ArmConnectionResponse is Connection;
 
 @armResourceOperations
 interface Connections {
