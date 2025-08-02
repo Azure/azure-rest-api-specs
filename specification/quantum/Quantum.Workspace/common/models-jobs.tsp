@@ -135,13 +135,13 @@ model JobUpdateOptions {
   jobPriority?: JobPriority;
 
   /** The name of the workspace item. */
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   name?: string;
 
   /**
    * Tags associated with the workspace item.
    */
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 }
 

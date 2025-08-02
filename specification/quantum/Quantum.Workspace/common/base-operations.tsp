@@ -34,18 +34,20 @@ namespace Quantum.Workspace.Services {
   /** Operation to create a resource. */
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
-  /** Operation to patch a resource. */
+  /** Operation to update a resource. */
   @patch(#{ implicitOptionality: true })
   @updatesResource(Resource)
-  op PatchOperation<Resource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceUpdate<
-    Resource = Resource,
-    Traits = {
-      ...Azure.Core.Traits.Private.TraitProperties<
-        DefaultServiceTraits,
-        TraitLocation.Parameters,
-        TraitContext.Update
-      >;
-      ...CommonParams;
+  op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
+    Resource,
+    {
+      /** This request uses a JSON Merge Patch body. */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
+      @body
+      update: Resource;
+
+      ...Azure.Core.Traits.Private.TraitProperties<DefaultServiceTraits, TraitLocation.Parameters, TraitContext.Update>;
     }
   >;
 

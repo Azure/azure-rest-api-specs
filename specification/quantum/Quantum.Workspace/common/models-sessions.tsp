@@ -77,12 +77,12 @@ model SessionUpdateOptions {
   id: WorkspaceItemId;
 
   /** The name of the session. */
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   name?: string;
 
   /**
    * Tags associated with the session.
    */
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Update, Lifecycle.Read)
   tags?: Record<string>;
 }

@@ -5,7 +5,7 @@
 
 import "./operations.tsp";
 import "../common/models.tsp";
-import "../common/modes-jobs.tsp";
+import "../common/models-jobs.tsp";
 
 using Quantum.Workspace;
 
