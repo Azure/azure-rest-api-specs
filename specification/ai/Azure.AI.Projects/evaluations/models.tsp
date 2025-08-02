@@ -161,7 +161,7 @@ model InlineJson extends InlineData {
   messages: string[];
 }
 
-@doc("Data source using inline data provided directly in the request.")
+@doc("Data source using inline data provided directly in the request. Size limit is 2 MB")
 @added(Versions.v2025_07_31_preview)
 model InlineDataSource extends EvaluationDataSource {
   @doc("Specifies inline JSON data source")
