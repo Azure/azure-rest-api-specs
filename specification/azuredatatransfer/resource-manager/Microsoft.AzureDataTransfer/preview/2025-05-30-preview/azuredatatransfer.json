@@ -3046,7 +3046,7 @@
         },
         "authentication": {
           "type": "array",
-          "description": "Optional properties to specify the type of authentication for the Azure Data Transfer API Flow.",
+          "description": "Optional and for advanced used only. A list of authentication methods to use when accessing the Azure Data Transfer API Flow. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.",
           "items": {
             "$ref": "#/definitions/Authentication"
           },
@@ -4980,7 +4980,7 @@
         },
         "authentication": {
           "type": "array",
-          "description": "Optional. A list of authentication methods to use against the remote endpoint.",
+          "description": "Optional and for advanced used only. A list of authentication methods to use when accessing the remote endpoint. If not provided, the default S2S authentication using Entra (API Flow Managed Identity) and RBAC will be applied.",
           "items": {
             "$ref": "#/definitions/Authentication"
           },
