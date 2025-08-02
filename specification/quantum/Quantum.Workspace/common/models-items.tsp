@@ -22,10 +22,39 @@ union ItemType {
   Session: "Session",
 }
 
+
 /** Id of the workspace item. */
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 @maxLength(36)
 scalar WorkspaceItemId extends string;
+
+/** Options for updating a item, session or job. */
+@discriminator("itemType")
+model UpdateableProps {
+  @key("itemId")
+  /** Id of the item to update. */
+  @visibility(Lifecycle.Update)
+  itemId: WorkspaceItemId;
+
+  /** Type of the item to update. */
+  @visibility(Lifecycle.Update)
+  itemType: ItemType;
+
+  /** The tags of the item to be updated. */
+  tags?: Record<string>;
+}
+
+/** Common parameters for operations that update a workspace item. */
+@resource("jobUpdateResource")
+model UpdateResource {
+   /** Id of the item to update. */
+  @key("itemId")
+  @visibility(Lifecycle.Update)
+  itemId: WorkspaceItemId;
+  
+  /** The data to be updated. */
+  updatedProps: Quantum.Workspace.UpdateableProps;
+}
 
 /** A workspace item. */
 @discriminator("itemType")
@@ -72,4 +101,9 @@ model ItemDetails {
   /** Error information. */
   @visibility(Lifecycle.Read)
   errorData?: Errors.WorkspaceItemError;
+
+  /** Tags associated with the item. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
 }

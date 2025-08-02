@@ -12,6 +12,7 @@ using TypeSpec.Rest;
 
 namespace Quantum.Workspace;
 
+
 /** The type of the job. */
 union JobType {
   string,
@@ -46,7 +47,43 @@ union JobStatus {
   Cancelled: "Cancelled",
 }
 
-/** Quantum computing data. */
+/** The priority of the job. */
+union JobPriority {
+  string,
+
+  /** The job has the lowest priority. */
+  Low: "Low",
+
+  /** The job has the normal priority. */
+  Normal: "Normal",
+
+  /** The job has the highest priority. */
+  High: "High",
+}
+
+/** Options for updating a job. */
+model JobUpdateOptions extends UpdateableProps {
+  @key("jobId")
+  /** Id of the job to update. */
+  @visibility(Lifecycle.Update)
+  jobId: WorkspaceItemId;
+  /** The priority of job to be updated. */
+  @visibility(Lifecycle.Update)
+  jobPriority?: JobPriority;
+  /** The type of the job. */
+  itemType: JobType;
+}
+
+/** Resource for updating a job.  */
+@resource("jobUpdateResource")
+model JobUpdateResource is UpdateResource {
+  /** The data to be updated. */
+  @visibility(Lifecycle.Update)
+  updatedJobFields: Quantum.Workspace.JobUpdateOptions;
+}
+
+/** Quantum 
+ * computing data. */
 model QuantumComputingData {
   /** The number of quantum computing items in the job. */
   @visibility(Lifecycle.Read)
@@ -62,6 +99,10 @@ model JobDetails extends ItemDetails {
   @key("jobId")
   @visibility(Lifecycle.Read)
   id: WorkspaceItemId;
+
+  /** The priority of the job. */ 
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  jobPriority: JobPriority;
 
   /** Type of the Quantum Workspace item is Job. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -98,10 +139,6 @@ model JobDetails extends ItemDetails {
   /** The time when a job was successfully cancelled. */
   @visibility(Lifecycle.Read)
   cancellationTime?: utcDateTime;
-
-  /** List of user-supplied tags associated with the job. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: string[];
 
   /** Quantum computing data. */
   @visibility(Lifecycle.Read)

@@ -1,6 +1,6 @@
 {
-  "operationId": "Sessions_Open",
-  "title": "Open a session.",
+  "operationId": "Sessions_Update",
+  "title": "Update a session.",
   "parameters": {
     "api-version": "2024-10-01-preview",
     "resourceGroupName": "my-resource-group",
@@ -8,16 +8,14 @@
     "workspaceName": "my-workspace",
     "sessionId": "60ba7795-6a13-4630-aec0-260b3904378c",
     "resource": {
-      "name": "VQE Session",
-      "id": "60ba7795-6a13-4630-aec0-260b3904378c",
-      "itemType": "Session",
-      "jobFailurePolicy": "Abort",
-      "providerId": "ionq",
-      "target": "ionq.qpu",
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
-      }
+      "itemId": "60ba7795-6a13-4630-aec0-260b3904378c",
+      "updatedProps": {
+        "itemType": "Session",
+        "itemId": "60ba7795-6a13-4630-aec0-260b3904378c",
+        "tags": {
+          "tag1key": "tag1value",
+          "new_tag": "new_value"
+        }
     }
   },
   "responses": {
@@ -33,7 +31,11 @@
         "jobFailurePolicy": "Abort",
         "providerId": "ionq",
         "status": "Waiting",
-        "target": "ionq.qpu"
+        "target": "ionq.qpu",
+        "tags": {
+          "tag1key": "tag1value",
+          "new_tag": "new_value"
+        }
       }
     },
     "201": {
