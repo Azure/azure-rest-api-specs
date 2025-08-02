@@ -34,14 +34,14 @@ input-file:
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-30-preview
+tag: package-preview-2025-05-30-preview
 ```
 
-### Tag: package-2025-05-30-preview
+### Tag: package-preview-2025-05-30-preview
 
-These settings apply only when `--tag=package-2025-05-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-05-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-05-30-preview'
+```yaml $(tag) == 'package-preview-2025-05-30-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
 
@@ -74,56 +74,29 @@ suppressions:
     reason: Newest version using TypeSpec
 ```
 
-### Tag: package-2025-04-11-preview
+### Tag: package-preview-2025-04-11-preview
 
-These settings apply only when `--tag=package-2025-04-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-04-11-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-04-11-preview'
+```yaml $(tag) == 'package-preview-2025-04-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
 ```
 
-### Tag: package-2025-03-01-preview
+### Tag: package-2024-05
 
-These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-01-preview'
+```yaml $(tag) == 'package-2024-05'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-03-01-preview/azuredatatransfer.json
+  - Microsoft.AzureDataTransfer/stable/2024-05/azuredatatransfer.json
 ```
 
-### Tag: package-2024-09-11
+### Tag: package-preview-2024-01
 
-These settings apply only when `--tag=package-2024-09-11` is specified on the command line.
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-09-11'
-input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
-```
-
-### Tag: package-2024-09-27
-
-These settings apply only when `--tag=package-2024-09-27` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-09-27'
-input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-09-27/azuredatatransfer.json
-```
-
-### Tag: package-2024-05-07
-
-These settings apply only when `--tag=package-2024-05-07` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-05-07'
-input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-05-07/azuredatatransfer.json
-```
-
-### Tag: package-preview-2024-01-25
-
-These settings apply only when `--tag=package-2024-01-25` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-25'
+```yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2024-01-25/azuredatatransfer.json
 ```
