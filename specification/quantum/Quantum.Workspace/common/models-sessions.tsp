@@ -69,6 +69,7 @@ model SessionDetails extends ItemDetails {
 
 /** Session update options */
 @resource("sessionUpdateOptions")
+@parentResource(Quantum.Workspace.QuantumWorkspace)
 model SessionUpdateOptions {
   /** Id of the session. */
   @key("sessionId")
@@ -83,5 +84,5 @@ model SessionUpdateOptions {
    * Tags associated with the session.
    */
   @visibility(Lifecycle.Update)
-  tags?:  Record<string>;
+  tags?: Record<string>;
 }

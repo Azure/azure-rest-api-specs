@@ -121,33 +121,33 @@ model JobDetails extends ItemDetails {
 }
 
 /** Options for updating a job. */
-@resource("jobUpdateOptions")
-model JobUpdateOptions{
+model JobUpdateOptions {
   /** Id of the job. */
-  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
-  @key("jobId")
   @visibility(Lifecycle.Read)
   id: WorkspaceItemId;
 
   /** Priority of job. */
   @visibility(Lifecycle.Update)
   jobPriority?: JobPriority;
-    /** The name of the workspace item. */
+
+  /** The name of the workspace item. */
   @visibility(Lifecycle.Update)
   name?: string;
 
   /**
    * Tags associated with the workspace item.
    */
-  @visibility( Lifecycle.Update)
+  @visibility(Lifecycle.Update)
   tags?: Record<string>;
 }
 
 /** Job priority levels. */
 union JobPriority {
   string,
+
   /** The job's base priority. */
-  "Basic": "Basic",
+  Basic: "Basic",
+
   /** The job's priority is elevated. */
-  "High": "High"
+  High: "High",
 }

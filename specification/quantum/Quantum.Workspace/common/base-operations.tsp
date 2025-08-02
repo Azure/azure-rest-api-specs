@@ -37,9 +37,17 @@ namespace Quantum.Workspace.Services {
   /** Operation to patch a resource. */
   @patch(#{ implicitOptionality: true })
   @updatesResource(Resource)
-  op PatchOperation<
-    Resource extends Reflection.Model
-  > is AzureCoreOperations.ResourceUpdate<Resource>;
+  op PatchOperation<Resource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceUpdate<
+    Resource = Resource,
+    Traits = {
+      ...Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Parameters,
+        TraitContext.Update
+      >;
+      ...CommonParams;
+    }
+  >;
 
   /** Operation to cancel a resource. */
   alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
