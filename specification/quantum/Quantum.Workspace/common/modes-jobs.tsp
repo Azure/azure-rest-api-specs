@@ -122,6 +122,7 @@ model JobDetails extends ItemDetails {
 
 /** Options for updating a job. */
 @parentResource(Quantum.Workspace.QuantumWorkspace)
+@resource("jobUpdateOptions")
 model JobUpdateOptions {
   /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
