@@ -154,113 +154,21 @@ model ConversationAuthoringProjectClientOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 namespace ConversationAuthoringClient {
 
-  op conversationAuthoringListDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
+  op listProjects is Language.Conversations.Authoring.conversationAuthoringListProjects;
 
-  op conversationAuthoringListProjects is Language.Conversations.Authoring.conversationAuthoringListProjects;
+  op listSupportedLanguages is Language.Conversations.Authoring.conversationAuthoringListSupportedLanguages;
 
-  op conversationAuthoringListSupportedLanguages is Language.Conversations.Authoring.conversationAuthoringListSupportedLanguages;
+  op listAssignedResourceDeployments is Language.Conversations.Authoring.conversationAuthoringListAssignedResourceDeployments;
 
-  op conversationAuthoringListAssignedResourceDeployments is Language.Conversations.Authoring.conversationAuthoringListAssignedResourceDeployments;
+  op listSupportedPrebuiltEntities is Language.Conversations.Authoring.conversationAuthoringListSupportedPrebuiltEntities;
 
-  op conversationAuthoringListDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListDeploymentResources;
+  op listTrainingConfigVersions is Language.Conversations.Authoring.conversationAuthoringListTrainingConfigVersions;
 
-  op conversationAuthoringListSupportedPrebuiltEntities is Language.Conversations.Authoring.conversationAuthoringListSupportedPrebuiltEntities;
+  op createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
 
-  op conversationAuthoringListTrainingConfigVersions is Language.Conversations.Authoring.conversationAuthoringListTrainingConfigVersions;
+  op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
-  op conversationAuthoringListTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
-
-  op conversationAuthoringListTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
-
-  op conversationAuthoringListExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
-
-  @operationGroup
-  interface DeploymentOperations {
-    getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
-
-    deployProject is Language.Conversations.Authoring.ConversationAuthoringDeployment.deployProject;
-
-    deleteDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeployment;
-
-    deleteDeploymentFromResources is Language.Conversations.Authoring.ConversationAuthoringDeployment.deleteDeploymentFromResources;
-
-    getDeploymentDeleteFromResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
-
-    getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
-  }
-
-  @operationGroup
-  interface ProjectOperations {
-    assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignDeploymentResources;
-
-    unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignDeploymentResources;
-
-    getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignDeploymentResourcesStatus;
-
-    getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignDeploymentResourcesStatus;
-
-    swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
-
-    getSwapDeploymentsStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getSwapDeploymentsStatus;
-
-    getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
-
-    createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
-
-    deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
-
-    getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
-
-    `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
-
-    `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
-
-    getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
-
-    getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
-
-    copyProjectAuthorization is Language.Conversations.Authoring.ConversationAuthoringProject.copyProjectAuthorization;
-
-    copyProject is Language.Conversations.Authoring.ConversationAuthoringProject.copyProject;
-
-    getCopyProjectStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getCopyProjectStatus;
-
-    train is Language.Conversations.Authoring.ConversationAuthoringProject.train;
-
-    getTrainingStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getTrainingStatus;
-
-    cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
-  }
-
-  @operationGroup
-  interface ExportedModel {
-    getExportedModel is  Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModel;
-
-    deleteExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.deleteExportedModel;
-
-    createOrUpdateExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.createOrUpdateExportedModel;
-
-    getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
-  }
-
-  @operationGroup
-  interface TrainedModel {
-    getTrainedModel is  Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getTrainedModel;
-
-    deleteTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.deleteTrainedModel;
-
-    evaluateModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.evaluateModel;
-
-    loadSnapshot is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.loadSnapshot;
-
-    getEvaluationStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getEvaluationStatus;
-
-    getModelEvaluationResults is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationResults;
-
-    getModelEvaluationSummary is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getModelEvaluationSummary;
-
-    getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
-  }
+  op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
 }
 
 
@@ -288,6 +196,16 @@ namespace ConversationAuthoringProjectClient {
 
   @operationGroup
   interface ProjectOperations {
+    listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
+
+    listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
+
+    listDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListDeploymentResources;
+
+    listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
+
+    listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
+
     assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignDeploymentResources;
 
     unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignDeploymentResources;
@@ -301,10 +219,6 @@ namespace ConversationAuthoringProjectClient {
     getSwapDeploymentsStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getSwapDeploymentsStatus;
 
     getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
-
-    createProject is Language.Conversations.Authoring.ConversationAuthoringProject.createProject;
-
-    deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
 
     getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
 
