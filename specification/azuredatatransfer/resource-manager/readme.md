@@ -34,14 +34,14 @@ input-file:
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-05-30-preview
+tag: package-2025-05-30-preview
 ```
 
-### Tag: package-preview-2025-05-30-preview
+### Tag: package-025-05-30-preview
 
-These settings apply only when `--tag=package-preview-2025-05-30-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-05-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-05-30-preview'
+```yaml $(tag) == 'package-2025-05-30-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
 
@@ -74,11 +74,11 @@ suppressions:
     reason: Newest version using TypeSpec
 ```
 
-### Tag: package-preview-2025-04-11-preview
+### Tag: package-2025-04-11-preview
 
-These settings apply only when `--tag=package-preview-2025-04-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-11-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-04-11-preview'
+```yaml $(tag) == 'package-2025-04-11-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
 ```
