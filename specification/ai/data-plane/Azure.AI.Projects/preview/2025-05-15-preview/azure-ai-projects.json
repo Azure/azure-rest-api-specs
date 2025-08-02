@@ -3287,7 +3287,7 @@
           "description": "The name of the grader."
         },
         "operation": {
-          "type": "string",
+          "$ref": "#/definitions/FineTuningJobRFTStringCheckGraderOperation",
           "description": "The string check operation to perform. One of eq, ne, like, or ilike."
         },
         "reference": {
@@ -3308,31 +3308,72 @@
       ],
       "x-ms-discriminator-value": "string_check"
     },
+    "FineTuningJobRFTStringCheckGraderOperation": {
+      "type": "string",
+      "description": "String operations used in RFT string check grader",
+      "enum": [
+        "eq",
+        "ne",
+        "like",
+        "ilike"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobRFTStringCheckGraderOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "eq",
+            "value": "eq",
+            "description": "Equal operator"
+          },
+          {
+            "name": "ne",
+            "value": "ne",
+            "description": "Not equal operator"
+          },
+          {
+            "name": "like",
+            "value": "like",
+            "description": "Like operator"
+          },
+          {
+            "name": "ilike",
+            "value": "ilike",
+            "description": "Not like operator"
+          }
+        ]
+      }
+    },
     "FineTuningJobRFTTextSimilarityGrader": {
       "type": "object",
       "description": "ScoreModelGrader uses a model to assign a score to the input.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
+        "evaluation_metric": {
+          "$ref": "#/definitions/FineTuningJobRFTTextSimilarityGraderEvaluationMetric",
+          "description": "The evaluation metric to use"
         },
         "input": {
           "type": "string",
           "description": "The text being graded."
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
         "reference": {
           "type": "string",
           "description": "The text being graded against."
         },
-        "passThreshold": {
+        "pass_threshold": {
           "type": "number",
           "format": "double",
           "description": "TBD"
         }
       },
       "required": [
-        "name",
+        "evaluation_metric",
         "input",
+        "name",
         "reference"
       ],
       "allOf": [
@@ -3341,6 +3382,84 @@
         }
       ],
       "x-ms-discriminator-value": "text_similarity"
+    },
+    "FineTuningJobRFTTextSimilarityGraderEvaluationMetric": {
+      "type": "string",
+      "description": "The evaluation metric to use in RFT text similarity grader",
+      "enum": [
+        "bleu",
+        "fuzzy_match",
+        "gleu",
+        "meteor",
+        "rouge_1",
+        "rouge_2",
+        "rouge_3",
+        "rouge_4",
+        "rouge_5",
+        "rouge_l",
+        "cosine"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobRFTTextSimilarityGraderEvaluationMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bleu",
+            "value": "bleu",
+            "description": "bleu"
+          },
+          {
+            "name": "fuzzy_match",
+            "value": "fuzzy_match",
+            "description": "fuzzy_match"
+          },
+          {
+            "name": "gleu",
+            "value": "gleu",
+            "description": "gleu"
+          },
+          {
+            "name": "meteor",
+            "value": "meteor",
+            "description": "meteor"
+          },
+          {
+            "name": "rouge_1",
+            "value": "rouge_1",
+            "description": "rouge_1"
+          },
+          {
+            "name": "rouge_2",
+            "value": "rouge_2",
+            "description": "rouge_2"
+          },
+          {
+            "name": "rouge_3",
+            "value": "rouge_3",
+            "description": "rouge_3"
+          },
+          {
+            "name": "rouge_4",
+            "value": "rouge_4",
+            "description": "rouge_4"
+          },
+          {
+            "name": "rouge_5",
+            "value": "rouge_5",
+            "description": "rouge_5"
+          },
+          {
+            "name": "rouge_l",
+            "value": "rouge_l",
+            "description": "rouge_l"
+          },
+          {
+            "name": "cosine",
+            "value": "cosine",
+            "description": "cosine"
+          }
+        ]
+      }
     },
     "FineTuningJobRFTTrainingMethod": {
       "type": "object",

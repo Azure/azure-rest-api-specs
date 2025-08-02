@@ -114,6 +114,25 @@ model FineTuningJobRFTGrader {
   type: string;
 }
 
+@doc("String operations used in RFT string check grader")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union FineTuningJobRFTStringCheckGraderOperation {
+  string,
+
+  @doc("Equal operator")
+  eq: "eq",
+
+  @doc("Not equal operator")
+  ne: "ne",
+
+  @doc("Like operator")
+  like: "like",
+
+  @doc("Not like operator")
+  ilike: "ilike"
+}
+
 @doc("A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -127,10 +146,50 @@ model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
   name: string;
 
   @doc("The string check operation to perform. One of eq, ne, like, or ilike.")
-  operation: string;
+  operation: FineTuningJobRFTStringCheckGraderOperation;
 
   @doc("The reference text. This may include template strings.")
   reference: string;
+}
+
+@doc("The evaluation metric to use in RFT text similarity grader")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union FineTuningJobRFTTextSimilarityGraderEvaluationMetric {
+  string,
+
+    @doc("bleu")
+    bleu: "bleu",
+
+    @doc("fuzzy_match")
+    fuzzy_match: "fuzzy_match",
+
+    @doc("gleu")
+    gleu: "gleu",
+
+    @doc("meteor")
+    meteor: "meteor",
+
+    @doc("rouge_1")
+    rouge_1: "rouge_1",
+
+    @doc("rouge_2")
+    rouge_2: "rouge_2",
+
+    @doc("rouge_3")
+    rouge_3: "rouge_3",
+
+    @doc("rouge_4")
+    rouge_4: "rouge_4",
+
+    @doc("rouge_5")
+    rouge_5: "rouge_5",
+
+    @doc("rouge_l")
+    rouge_l: "rouge_l",
+
+    @doc("cosine")
+    cosine: "cosine"
 }
 
 @doc("ScoreModelGrader uses a model to assign a score to the input.")
@@ -139,17 +198,20 @@ model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
 model FineTuningJobRFTTextSimilarityGrader extends FineTuningJobRFTGrader {
   type: "text_similarity";
 
-  @doc("The name of the grader.")
-  name: string;
+  @doc("The evaluation metric to use")
+  evaluation_metric: FineTuningJobRFTTextSimilarityGraderEvaluationMetric;
 
   @doc("The text being graded.")
   input: string;
+
+  @doc("The name of the grader.")
+  name: string;
 
   @doc("The text being graded against.")
   reference: string;
 
   @doc("TBD")
-  passThreshold?: float64;
+  pass_threshold?: float64;
 }
 
 @doc("TextSimilarityGrader grades text based on similarity metrics.")
