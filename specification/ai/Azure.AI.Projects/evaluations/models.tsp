@@ -376,10 +376,10 @@ model EvaluationSummaryResult {
 @added(Versions.v2025_05_15_preview)
 model Evaluation {
   @doc("Identifier of the evaluation.")
-  @key("name")
+  @key("id")
   @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
-  name: string;
+  id: string;
 
   @doc("Data for evaluation.")
   @removed(Versions.v2025_07_31_preview) // Replaced by `dataSource`
