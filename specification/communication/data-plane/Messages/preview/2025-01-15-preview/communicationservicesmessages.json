@@ -363,7 +363,8 @@
           "description": "Set or group of actions.",
           "items": {
             "$ref": "#/definitions/ActionGroup"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -441,7 +442,8 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -468,7 +470,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -934,7 +936,8 @@
           "description": "The template values.",
           "items": {
             "$ref": "#/definitions/MessageTemplateValue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "bindings": {
           "$ref": "#/definitions/MessageTemplateBindings",
@@ -1304,7 +1307,8 @@
           "description": "The MessageTemplateItem items on this page",
           "items": {
             "$ref": "#/definitions/MessageTemplateItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1349,7 +1353,8 @@
           "description": "Receipts of the send message operation.",
           "items": {
             "$ref": "#/definitions/MessageReceipt"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1548,28 +1553,32 @@
           "description": "The header template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "body": {
           "type": "array",
           "description": "The body template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "footer": {
           "type": "array",
           "description": "The footer template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "buttons": {
           "type": "array",
           "description": "The button template bindings",
           "items": {
             "$ref": "#/definitions/WhatsAppMessageTemplateBindingsButton"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "allOf": [
