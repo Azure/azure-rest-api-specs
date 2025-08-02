@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
-@armCommonTypesVersion("v3")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 @service(#{ title: "TrafficController" })
 @versioned(Versions)
 namespace Microsoft.ServiceNetworking;
@@ -26,6 +26,10 @@ enum Versions {
   /** 2025-03-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /** 2025-09-01 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 using TypeSpec.Http;
@@ -38,13 +42,12 @@ using Azure.ResourceManager;
 /** Frontend Sub Resource of Traffic Controller. */
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties> {
-  /** Frontends */
-  @key("frontendName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("frontends")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Frontend,
+    KeyName = "frontendName",
+    SegmentName = "frontends",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Frontend Properties. */
@@ -60,19 +63,33 @@ model FrontendProperties {
   /** Provisioning State of Traffic Controller Frontend Resource */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** Frontend Mode */
+  @added(Versions.v2025_09_01_preview)
+  mode?: Mode;
+}
+
+/** Mode of the Frontend indicating if this Frontend is accessible via public internet or privately within Azure virtual network */
+union Mode {
+  string,
+
+  /** Mode of Type Public */
+  Public: "Public",
+
+  /** Mode of Type Private */
+  Private: "Private",
 }
 
 //----------------------- Associations -----------------------
 /** Association Subresource of Traffic Controller */
 @parentResource(TrafficController)
 model Association is TrackedResource<AssociationProperties> {
-  /** Name of Association */
-  @key("associationName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("associations")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Association,
+    KeyName = "associationName",
+    SegmentName = "associations",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** The type used for update operations of the Association. */
@@ -131,13 +148,12 @@ model AssociationSubnet {
 /** SecurityPolicy Subresource of Traffic Controller. */
 @parentResource(TrafficController)
 model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
-  /** SecurityPolicy */
-  @key("securityPolicyName")
-  @visibility(Lifecycle.Read)
-  @path
-  @segment("securityPolicies")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Association,
+    KeyName = "securityPolicyName",
+    SegmentName = "securityPolicies",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** SecurityPolicy Properties. */
@@ -237,15 +253,186 @@ model IpAccessRulesSecurityPolicy {
   id: string;
 }
 
+//----------------------- PrivateEndpointConnection -----------------------
+/** PrivateEndpointConnection Subresource of Traffic Controller. */
+@added(Versions.v2025_09_01_preview)
+@parentResource(TrafficController)
+model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
+  ...PrivateEndpointConnectionParameter;
+}
+
+//----------------------- PrivateEndpointConnectionProxy -----------------------
+/** PrivateEndpointConnectionProxy Subresource of Traffic Controller. */
+@added(Versions.v2025_09_01_preview)
+@parentResource(TrafficController)
+model PrivateEndpointConnectionProxy
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProxyProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnectionProxy,
+    KeyName = "PrivateEndpointConnectionProxyName",
+    SegmentName = "privateEndpointConnectionProxies",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
+  etag?: string;
+  location?: string;
+  remotePrivateEndpoint: RemotePrivateEndpoint;
+}
+
+/** Properties of the private endpoint connection proxy */
+@added(Versions.v2025_09_01_preview)
+model PrivateEndpointConnectionProxyProperties {}
+
+/** Represent remote private endpoint information for the private endpoint connection proxy. */
+@added(Versions.v2025_09_01_preview)
+model RemotePrivateEndpoint {
+  /** Gets or sets private link service proxy id. */
+  @minLength(1)
+  id: string;
+
+  /** Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow. */
+  @identifiers(#[])
+  privateLinkServiceConnections?: PrivateLinkServiceConnection[];
+
+  /** Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow. */
+  @identifiers(#[])
+  manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
+
+  /** Gets or sets the list of private link service proxies. */
+  @identifiers(#[])
+  privateLinkServiceProxies?: PrivateLinkServiceProxy[];
+
+  /** Gets or sets the list of Connection Details. This is the connection details for private endpoint. */
+  @identifiers(#[])
+  connectionDetails?: ConnectionDetails[];
+}
+
+/** Represents of an NRP private link service connection. */
+@added(Versions.v2025_09_01_preview)
+model PrivateLinkServiceConnection {
+  /** Gets or sets private link service connection name. */
+  name?: string;
+
+  /** Gets or sets group ids. */
+  groupIds?: string[];
+
+  /** Gets or sets the request message for the private link service connection. */
+  requestMessage?: string;
+}
+
+/** Represents NRP private link service proxy. */
+@added(Versions.v2025_09_01_preview)
+model PrivateLinkServiceProxy {
+  /** Gets or sets private link service proxy id. */
+  id?: string;
+
+  /** Represents Private link service connection state. */
+  remotePrivateLinkServiceConnectionState?: RemotePrivateLinkServiceConnectionState;
+
+  /** Represent remote private endpoint connection. */
+  remotePrivateEndpointConnection?: RemotePrivateEndpointConnection;
+
+  /** Gets or sets group connectivity information. */
+  @identifiers(#[])
+  groupConnectivityInformation?: GroupConnectivityInformation[];
+}
+
+/** A collection of information about the state of the connection between service consumer and provider. */
+@added(Versions.v2025_09_01_preview)
+model RemotePrivateLinkServiceConnectionState {
+  /** Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
+  status?: PrivateLinkServiceConnectionStatus;
+
+  /** The reason for approval/rejection of the connection. */
+  description?: string;
+
+  /** A message indicating if changes on the service provider require any updates on the consumer. */
+  actionsRequired?: string;
+}
+
+/** The private endpoint connection status. */
+union PrivateLinkServiceConnectionStatus {
+  /** Connectionaiting for approval or rejection */
+  Pending: "Pending",
+
+  /** Connection approved */
+  Approved: "Approved",
+
+  /** Connection Rejected */
+  Rejected: "Rejected",
+
+  /** Connection Rejected */
+  Disconnected: "Disconnected",
+
+  string,
+}
+
+/** Represent remote private endpoint connection. */
+@added(Versions.v2025_09_01_preview)
+model RemotePrivateEndpointConnection {
+  /** Gets or sets the remote private endpoint connection id. */
+  id?: string;
+}
+
+/** Represents of a connection's group information. */
+@added(Versions.v2025_09_01_preview)
+model GroupConnectivityInformation {
+  /** Gets or sets group id. */
+  groupId?: string;
+
+  /** Gets or sets member name. */
+  memberName?: string;
+
+  /** Gets or sets customer visible FQDNs. */
+  customerVisibleFqdns?: string[];
+
+  /** Gets or sets Internal Fqdn. */
+  internalFqdn?: string;
+
+  /** Gets or sets the redirect map id. */
+  redirectMapId?: string;
+
+  /** Gets or sets the private link service arm region. */
+  privateLinkServiceArmRegion?: string;
+}
+
+/** Private endpoint connection details at member level. */
+@added(Versions.v2025_09_01_preview)
+model ConnectionDetails {
+  /** Gets or sets id. */
+  id?: string;
+
+  /** Gets or sets private IP address. */
+  privateIpAddress?: string;
+
+  /** Gets or sets link identifier. */
+  linkIdentifier?: string;
+
+  /** Gets or sets group id. */
+  groupId?: string;
+
+  /** Gets or sets member name. */
+  memberName?: string;
+}
+
+//----------------------- PrivateLinkResource -----------------------
+/** PrivateLinkResource Subresource of Traffic Controller */
+@added(Versions.v2025_09_01_preview)
+@parentResource(TrafficController)
+model PrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...PrivateLinkResourceParameter;
+}
+
 //----------------------- Traffic Controller -----------------------
 @resource("trafficControllers")
 model TrafficController is TrackedResource<TrafficControllerProperties> {
-  /** traffic controller name for path */
-  @key("trafficControllerName")
-  @path
-  @segment("trafficControllers")
-  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = TrafficController,
+    KeyName = "trafficControllerName",
+    SegmentName = "trafficControllers",
+    NamePattern = "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+  >;
 }
 
 /** Traffic Controller Properties. */
@@ -266,6 +453,21 @@ model TrafficControllerProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_05_01_preview)
   securityPolicies?: ResourceId[];
+
+  /** Private Endpoint Connections References List */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  privateEndpointConnections?: ResourceId[];
+
+  /** Private Endpoint Connection Proxies References List */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  privateEndpointConnectionProxies?: ResourceId[];
+
+  /** Private Link Resources References List */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  privateLinkResources?: ResourceId[];
 
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
@@ -384,6 +586,49 @@ interface TrafficControllerInterface {
   delete is ArmResourceDeleteWithoutOkAsync<TrafficController>;
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
   listBySubscription is ArmListBySubscription<TrafficController>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@armResourceOperations
+interface PrivateEndpointConnectionInterface {
+  get is ArmResourceRead<PrivateEndpointConnection>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnection,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  listByTrafficController is ArmResourceListByParent<PrivateEndpointConnection>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@armResourceOperations
+interface PrivateEndpointConnectionProxyInterface {
+  get is ArmResourceRead<PrivateEndpointConnectionProxy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnectionProxy,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  update is ArmCustomPatchSync<
+    PrivateEndpointConnectionProxy,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PrivateEndpointConnectionProxy,
+      PrivateEndpointConnectionProxyProperties
+    >
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionProxy>;
+  listByTrafficController is ArmResourceListByParent<PrivateEndpointConnectionProxy>;
+  validate is ArmResourceActionSync<
+    PrivateEndpointConnectionProxy,
+    PrivateEndpointConnectionProxy,
+    PrivateEndpointConnectionProxy
+  >;
+}
+
+@added(Versions.v2025_09_01_preview)
+@armResourceOperations
+interface PrivateLinkResourceInterface {
+  get is ArmResourceRead<PrivateLinkResource>;
+  listByTrafficController is ArmResourceListByParent<PrivateLinkResource>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
