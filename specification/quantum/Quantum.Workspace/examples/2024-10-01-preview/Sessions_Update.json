@@ -1,0 +1,30 @@
+{
+  "operationId": "Sessions_Update",
+  "title": "Update a session.",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace",
+    "sessionId": "60ba7795-6a13-4630-aec0-260b3904378c",
+    "resource": {
+      "name": "VQE Session-new-name",
+      "tags": {
+        "sessionTag1": "value1",
+        "sessionTag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "VQE Session-new-name",
+        "id": "60ba7795-6a13-4630-aec0-260b3904378c",
+        "tags": {
+          "sessionTag1": "value1",
+          "sessionTag2": "value2"
+        }
+      }
+    }
+  }
+}
