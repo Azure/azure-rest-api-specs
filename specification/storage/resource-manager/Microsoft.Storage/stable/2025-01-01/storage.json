@@ -165,9 +165,6 @@
           "StorageAccountCreateDnsEndpointTypeToStandard": {
             "$ref": "./examples/StorageAccountCreateDnsEndpointTypeToStandard.json"
           },
-          "DeletedStorageAccountRestore": {
-            "$ref": "./examples/DeletedStorageAccountRestore.json"
-          },
           "StorageAccountCreate_placement": {
             "$ref": "./examples/StorageAccountCreate_placement.json"
           },
@@ -206,7 +203,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Create, update or restore storage account request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Create or update storage account request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true
@@ -348,6 +345,9 @@
           },
           "StorageAccountUpdate_zones": {
             "$ref": "./examples/StorageAccountUpdate_zones.json"
+          },
+          "StorageAccountUpdateEnableIpv6Features": {
+            "$ref": "./examples/StorageAccountLeverageIPv6Ability.json"
           }
         },
         "parameters": [
@@ -3016,7 +3016,7 @@
         "value": {
           "type": "string",
           "x-ms-client-name": "IPAddressOrRange",
-          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed."
+          "description": "Specifies the IP or IP range in CIDR format."
         },
         "action": {
           "type": "string",
@@ -3077,6 +3077,14 @@
             "$ref": "#/definitions/IPRule"
           },
           "description": "Sets the IP ACL rules"
+        },
+        "ipv6Rules": {
+          "type": "array",
+          "items": {
+            "description": "IPv6 rule with specific IP or IP range in CIDR format.",
+            "$ref": "#/definitions/IPRule"
+          },
+          "description": "Sets the IPv6 ACL rules."
         },
         "defaultAction": {
           "type": "string",
@@ -3295,6 +3303,11 @@
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
         },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
+        },
         "allowBlobPublicAccess": {
           "type": "boolean",
           "x-ms-client-name": "AllowBlobPublicAccess",
@@ -3347,11 +3360,6 @@
             "modelAsString": true
           },
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
-        },
-        "deletedAccountCreationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the deleted account. This property should only be provided while requesting deleted storage account recovery."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -3542,6 +3550,11 @@
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountInternetEndpoints",
           "description": "Gets the internet routing storage endpoints"
+        },
+        "ipv6Endpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountIpv6Endpoints",
+          "description": "Gets the IPv6 storage endpoints."
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
@@ -3605,6 +3618,52 @@
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint."
+    },
+    "StorageAccountIpv6Endpoints": {
+      "type": "object",
+      "properties": {
+        "blob": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the blob endpoint."
+        },
+        "queue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the queue endpoint."
+        },
+        "table": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the table endpoint."
+        },
+        "file": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
+        },
+        "microsoftEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
+          "description": "Gets the microsoft routing storage endpoints."
+        },
+        "internetEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountInternetEndpoints",
+          "description": "Gets the internet routing storage endpoints"
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv6 endpoint."
     },
     "GeoReplicationStats": {
       "properties": {
@@ -3693,6 +3752,16 @@
         }
       },
       "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
+    },
+    "DualStackEndpointPreference": {
+      "type": "object",
+      "properties": {
+        "publishIpv6Endpoint": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether IPv6 storage endpoints are to be published."
+        }
+      },
+      "description": "Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published."
     },
     "ImmutableStorageAccount": {
       "type": "object",
@@ -4022,6 +4091,11 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
         },
         "blobRestoreStatus": {
           "$ref": "#/definitions/BlobRestoreStatus",
@@ -4360,6 +4434,11 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
         },
         "allowBlobPublicAccess": {
           "type": "boolean",
@@ -5791,7 +5870,7 @@
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "StorageAccountMigrationDetails",
-          "description": "The properties of a storage account’s ongoing or enqueued migration.",
+          "description": "The properties of a storage account's ongoing or enqueued migration.",
           "required": [
             "targetSkuName"
           ]
