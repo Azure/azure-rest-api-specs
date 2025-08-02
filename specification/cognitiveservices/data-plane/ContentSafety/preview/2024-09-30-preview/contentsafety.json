@@ -1,0 +1,4725 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContentSafety Service",
+    "version": "2024-09-30-preview",
+    "description": "Analyze harmful content",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/contentsafety",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://<resource-name>.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "application",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/image/incidents": {
+      "get": {
+        "operationId": "ImageIncidentOperations_ListIncidents",
+        "summary": "Image Incident - List",
+        "description": "List all image safety incidents and their details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/image/incidents/{incidentName}:deploy": {
+      "post": {
+        "operationId": "ImageIncidentOperations_Deploy",
+        "summary": "Image Incident - Deploy",
+        "description": "Deploy the given image safety incident. After the deployment completed, the incident can be used to detect content. This will submit a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/IncidentLongRunningOperationParameters"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/IncidentLongRunningOperationStatusResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
+                "maxLength": 64,
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/image/incidents/{incidentName}": {
+      "get": {
+        "operationId": "ImageIncidentOperations_GetIncidents",
+        "summary": "Image Incident - Get",
+        "description": "Return details of the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ImageIncidentOperations_CreateOrUpdateIncident",
+        "summary": "Image Incident - Upsert",
+        "description": "Update the given image safety incident. If the incident does not exist, a new one will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageIncidentCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ImageIncidentOperations_DeleteIncident",
+        "summary": "Image Incident - Delete",
+        "description": "Deletes the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incidents/{incidentName}:addIncidentSamples": {
+      "post": {
+        "operationId": "ImageIncidentOperations_AddIncidentSamples",
+        "summary": "Image Incident - Add Samples",
+        "description": "Add samples to the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddImageIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddImageIncidentSamplesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incidents/{incidentName}:removeIncidentSamples": {
+      "post": {
+        "operationId": "ImageIncidentOperations_RemoveIncidentSamples",
+        "summary": "Image Incident - Remove Samples",
+        "description": "Remove samples from the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveImageIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incidents/{incidentName}/incidentSamples": {
+      "get": {
+        "operationId": "ImageIncidentOperations_ListIncidentSamples",
+        "summary": "Image Incident - List Samples",
+        "description": "List all samples added into the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedListImageIncidentSampleResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/image/incidents/{incidentName}/incidentSamples/{incidentSampleId}": {
+      "get": {
+        "operationId": "ImageIncidentOperations_GetIncidentSample",
+        "summary": "Image Incident - Get Sample",
+        "description": "Get details of a sample with the sample id from the given image safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "incidentSampleId",
+            "in": "path",
+            "description": "The name of this incident sample.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncidentSampleResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image/incidents/operations/{operationId}": {
+      "get": {
+        "operationId": "ImageIncidentOperations_GetLongRunningOperation",
+        "summary": "Image Incident - Get Long Running Operation",
+        "description": "Get details of an image safety incident operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageIncidentOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image:analyze": {
+      "post": {
+        "operationId": "ImageOperations_AnalyzeImage",
+        "summary": "Analyze Image",
+        "description": "A synchronous API for the analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image:detectIncidents": {
+      "post": {
+        "operationId": "ImageOperations_DetectImageIncidents",
+        "summary": "Analyze Image with Image Incidents",
+        "description": "A synchronous API to analyze image content with the custom content safety Image Incidents defined.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageDetectIncidentsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectIncidentsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/image:detectWatermark": {
+      "post": {
+        "operationId": "ImageOperations_DetectWatermark",
+        "summary": "Decode the content credentials from assets.",
+        "description": "A synchronous API for decoding the content credentials from assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image to be decoded, which is in base64 string format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DecodeImageCredentialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DecodeImageCredentialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imageWithText:analyze": {
+      "post": {
+        "operationId": "ImageWithTextOperations_AnalyzeImageWithText",
+        "summary": "Analyze Image with Text",
+        "description": "A synchronous API to analyze image content with embedded or custom text content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body of image-with-text analysis.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/autoReviewers": {
+      "get": {
+        "operationId": "AutoReviewerOperations_ListAutoReviewers",
+        "summary": "Auto Reviewer - List",
+        "description": "List Auto Reviewers with their latest versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAutoReviewerVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/autoReviewers/{autoReviewerName}": {
+      "get": {
+        "operationId": "AutoReviewerOperations_GetAutoReviewer",
+        "summary": "Auto Reviewer - Get",
+        "description": "Get the specified or latest version of the given Auto Reviewer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoReviewerName",
+            "in": "path",
+            "description": "Name of the Auto Reviewer.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will return the latest version.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AutoReviewerVersionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AutoReviewerOperations_CreateOrReplaceAutoReviewer",
+        "summary": "Auto Reviewer - Create",
+        "description": "Create a new Auto Reviewer or a new version of an existing Auto Reviewer. This will submit a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoReviewerName",
+            "in": "path",
+            "description": "The name of the Auto Reviewer.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+            "required": false,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$",
+            "x-ms-client-name": "operationId"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoReviewerVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AutoReviewerVersion"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
+                "pattern": "^[0-9A-Za-z._~-]+$"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AutoReviewerVersion"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
+                "pattern": "^[0-9A-Za-z._~-]+$"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AutoReviewerOperations_DeleteAutoReviewer",
+        "summary": "Auto Reviewer - Delete",
+        "description": "Delete the specified or ALL versions of the given Auto Reviewer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "autoReviewerName",
+            "in": "path",
+            "description": "The name of the Auto Reviewer.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will delete ALL versions.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/autoReviewers/operations/{operationId}": {
+      "get": {
+        "operationId": "AutoReviewerOperations_GetLongRunningOperation",
+        "summary": "Auto Reviewer - Get Long Running Operation",
+        "description": "Get details of an Auto Reviewer operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AutoReviewerOperationDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/blocklists": {
+      "get": {
+        "operationId": "TextBlocklists_ListTextBlocklists",
+        "summary": "Get All Text Blocklists",
+        "description": "Get all text blocklists details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}": {
+      "get": {
+        "operationId": "TextBlocklists_GetTextBlocklist",
+        "summary": "Get Text Blocklist By blocklistName",
+        "description": "Returns text blocklist details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TextBlocklists_CreateOrUpdateTextBlocklist",
+        "summary": "Create Or Update Text Blocklist",
+        "description": "Updates a text blocklist. If the blocklistName does not exist, a new blocklist will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextBlocklistCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextBlocklists_DeleteTextBlocklist",
+        "summary": "Delete Text Blocklist By blocklistName",
+        "description": "Deletes a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems": {
+      "post": {
+        "operationId": "TextBlocklists_AddOrUpdateBlocklistItems",
+        "summary": "Add or update BlocklistItems To Text Blocklist",
+        "description": "Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Options for adding or updating blocklist items.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOrUpdateTextBlocklistItemsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddOrUpdateTextBlocklistItemsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}:removeBlocklistItems": {
+      "post": {
+        "operationId": "TextBlocklists_RemoveBlocklistItems",
+        "summary": "Remove BlocklistItems From Text Blocklist",
+        "description": "Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Options for removing blocklist items.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveTextBlocklistItemsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}/blocklistItems": {
+      "get": {
+        "operationId": "TextBlocklists_ListTextBlocklistItems",
+        "summary": "Get All BlocklistItems By blocklistName",
+        "description": "Get all blocklistItems in a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextBlocklistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}/blocklistItems/{blocklistItemId}": {
+      "get": {
+        "operationId": "TextBlocklists_GetTextBlocklistItem",
+        "summary": "Get BlocklistItem By blocklistName And blocklistItemId",
+        "description": "Get blocklistItem by blocklistName and blocklistItemId from a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "blocklistItemId",
+            "in": "path",
+            "description": "The service will generate a BlocklistItemId, which will be a UUID.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_ListCustomizedCategory",
+        "summary": "Custom Category - List",
+        "description": "List Custom Categories with their latest versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextCustomCategoryVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/categories/{categoryName}:build": {
+      "post": {
+        "operationId": "TextCustomizedCategoryOperations_Build",
+        "summary": "Custom Category - Build",
+        "description": "Trigger the build process for the given Custom Category. After the build completed, the category can be used to analyze content. This will submit a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "The name of this Custom Category",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/CustomCategoryLongRunningOperationParameters.version"
+          },
+          {
+            "$ref": "#/parameters/CustomCategoryLongRunningOperationParameters.operationId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/CustomCategoryLongRunningOperationStatusResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
+                "maxLength": 64,
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/text/categories/{categoryName}": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_GetCustomizedCategory",
+        "summary": "Custom Category - Get",
+        "description": "Get the specified or latest version of the given Custom Category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Name of the Custom Category.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will return the latest version.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "TextCustomizedCategoryOperations_CreateTextCustomCategoryVersion",
+        "summary": "Custom Category - Create",
+        "description": "Create a new Custom Category or a new version of an existing Custom Category. This will submit a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "The name of this Custom Category",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextCustomizedCategoryOperations_DeleteCustomizedCategory",
+        "summary": "Custom Category - Delete",
+        "description": "Delete the specified or ALL versions of the given Custom Category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "The name of this Custom Category",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will delete ALL versions.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories/operations/{operationId}": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_GetLongRunningOperation",
+        "summary": "Custom Category - Get Long Running Operation",
+        "description": "Get details of the given Custom Category operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of this operation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomCategoryOperationDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incidents": {
+      "get": {
+        "operationId": "TextIncidentOperations_ListIncidents",
+        "summary": "Text Incident - List",
+        "description": "List all text safety incidents and their details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/incidents/{incidentName}:deploy": {
+      "post": {
+        "operationId": "TextIncidentOperations_Deploy",
+        "summary": "Text Incident - Deploy",
+        "description": "Deploy the given text safety incident. After the deployment completed, the incident can be used to detect content. This will submit a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/IncidentLongRunningOperationParameters"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/IncidentLongRunningOperationStatusResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
+                "maxLength": 64,
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/text/incidents/{incidentName}": {
+      "get": {
+        "operationId": "TextIncidentOperations_GetIncidents",
+        "summary": "Text Incident - Get",
+        "description": "Return details of the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TextIncidentOperations_CreateOrUpdateIncident",
+        "summary": "Text Incident - Upsert",
+        "description": "Update the given text safety incident. If the incident does not exist, a new one will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextIncidentCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextIncidentOperations_DeleteIncident",
+        "summary": "Text Incident - Delete",
+        "description": "Deletes the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incidents/{incidentName}:addIncidentSamples": {
+      "post": {
+        "operationId": "TextIncidentOperations_AddIncidentSamples",
+        "summary": "Text Incident - Add Samples",
+        "description": "Add samples to the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddTextIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddTextIncidentSamplesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incidents/{incidentName}:removeIncidentSamples": {
+      "post": {
+        "operationId": "TextIncidentOperations_RemoveIncidentSamples",
+        "summary": "Text Incident - Remove Samples",
+        "description": "Remove samples from the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveTextIncidentSamplesOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incidents/{incidentName}/incidentSamples": {
+      "get": {
+        "operationId": "TextIncidentOperations_ListIncidentSamples",
+        "summary": "Text Incident - List Samples",
+        "description": "List all samples added into the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextIncidentSample"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/incidents/{incidentName}/incidentSamples/{incidentSampleId}": {
+      "get": {
+        "operationId": "TextIncidentOperations_GetIncidentSample",
+        "summary": "Text Incident - Get Sample",
+        "description": "Get details of a sample with the sample id from the given text safety incident.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "incidentName",
+            "in": "path",
+            "description": "The name of the incident.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "incidentSampleId",
+            "in": "path",
+            "description": "The name of this incident sample.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncidentSample"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/incidents/operations/{operationId}": {
+      "get": {
+        "operationId": "TextIncidentOperations_GetLongRunningOperation",
+        "summary": "Text Incident - Get Long Running Operation",
+        "description": "Get details of the given text safety incident operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextIncidentOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:analyze": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeText",
+        "summary": "Analyze Text",
+        "description": "A synchronous API for the analysis of potentially harmful text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:analyzeCustomCategory": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextCustomCategory",
+        "summary": "Analyze Text with Custom Category",
+        "description": "A synchronous API to analyze content with Custom Category defined.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be analyzed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:autoReview": {
+      "post": {
+        "operationId": "TextOperations_AutoReview",
+        "summary": "Analyze Text with Auto Reviewer",
+        "description": "A synchronous API to analyze text with the Auto Reviewer defined.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be analyzed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoReviewTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AutoReviewTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:detectGroundedness": {
+      "post": {
+        "operationId": "TextOperations_DetectGroundednessOptions",
+        "summary": "Analyze Text Groundedness",
+        "description": "A synchronous API to analyze the language model outputs to evaluate alignment with user-provided information or to identify fictional content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextGroundednessOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextGroundednessResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:detectIncidents": {
+      "post": {
+        "operationId": "TextOperations_DetectTextIncidents",
+        "summary": "Analyze Text with Text Incidents",
+        "description": "A synchronous API to analyze text content with the custom content safety Text Incidents defined.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextDetectIncidentsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectIncidentsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:detectProtectedMaterial": {
+      "post": {
+        "operationId": "TextOperations_DetectTextProtectedMaterial",
+        "summary": "Detect Protected Material for Text",
+        "description": "A synchronous API for detecting protected material in the given text.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:detectProtectedMaterialForCode": {
+      "post": {
+        "operationId": "TextOperations_DetectCodeProtectedMaterial",
+        "summary": "Detect Protected Material for Code",
+        "description": "A synchronous API for detecting protected material in the given code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectCodeProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectCodeProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:shieldPrompt": {
+      "post": {
+        "operationId": "TextOperations_ShieldPrompt",
+        "summary": "Shield Prompt",
+        "description": "A synchronous API for shielding prompt from direct and indirect injection attacks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain direct or indirect injection attacks.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddImageIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to add incident samples to an Image Incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Incident samples to be added.",
+          "items": {
+            "$ref": "#/definitions/ImageIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AddImageIncidentSamplesResult": {
+      "type": "object",
+      "description": "The response of adding incident samples to an Image Incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Array of incidentSamples have been added.",
+          "items": {
+            "$ref": "#/definitions/ListImageIncidentSampleResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AddOrUpdateTextBlocklistItemsOptions": {
+      "type": "object",
+      "description": "The request to add blocklistItems to a text blocklist.",
+      "properties": {
+        "blocklistItems": {
+          "type": "array",
+          "description": "Array of blocklistItems to add.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "blocklistItems"
+      ]
+    },
+    "AddOrUpdateTextBlocklistItemsResult": {
+      "type": "object",
+      "description": "The response of adding blocklistItems to the text blocklist.",
+      "properties": {
+        "blocklistItems": {
+          "type": "array",
+          "description": "Array of blocklistItems have been added.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "blocklistItems"
+      ]
+    },
+    "AddTextIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to add incident samples to a Text Incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Incident samples to be added.",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AddTextIncidentSamplesResult": {
+      "type": "object",
+      "description": "The response of adding incident samples to a Text Incident.",
+      "properties": {
+        "incidentSamples": {
+          "type": "array",
+          "description": "Incident samples have been added.",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentSamples"
+      ]
+    },
+    "AnalyzeImageDetectIncidentsOptions": {
+      "type": "object",
+      "description": "The request to analyze given image with content safety Image Incidents defined.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image to be analyzed."
+        },
+        "incidentNames": {
+          "type": "array",
+          "description": "The incidents defined.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "image",
+        "incidentNames"
+      ]
+    },
+    "AnalyzeImageOptions": {
+      "type": "object",
+      "description": "The image analysis request.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image to be analyzed."
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        },
+        "outputType": {
+          "type": "string",
+          "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeImageOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "AnalyzeImageResult": {
+      "type": "object",
+      "description": "The image analysis response.",
+      "properties": {
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for categories.",
+          "items": {
+            "$ref": "#/definitions/ImageCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeImageWithTextOptions": {
+      "type": "object",
+      "description": "The request to analyze an image with embedded or custom text.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image content to be analyzed."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text related to the given image."
+        },
+        "categories": {
+          "type": "array",
+          "description": "The harm categories to be detected. A default set of harm categories will be applied if omitted.",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategory"
+          }
+        },
+        "enableOcr": {
+          "type": "boolean",
+          "description": "When set to true, the embedded text in given image will be recognized and concatenated with the given text for analysis."
+        }
+      },
+      "required": [
+        "image",
+        "enableOcr"
+      ]
+    },
+    "AnalyzeImageWithTextResult": {
+      "type": "object",
+      "description": "The response of analyzing an image with embedded or custom text.",
+      "properties": {
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "The individual analysis result for each harm category.",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextCustomCategoryOption": {
+      "type": "object",
+      "description": "The request to analyze given text content with the Custom Category version defined.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be analyzed."
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Custom category name."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom category version, if not assigned use the latest version."
+        }
+      },
+      "required": [
+        "text",
+        "categoryName"
+      ]
+    },
+    "AnalyzeTextCustomCategoryResult": {
+      "type": "object",
+      "description": "The response of analyzing text with Custom Category.",
+      "properties": {
+        "customCategoryAnalysis": {
+          "$ref": "#/definitions/TextCustomCategoryAnalysis",
+          "description": "The analysis result with Custom Category."
+        }
+      },
+      "required": [
+        "customCategoryAnalysis"
+      ]
+    },
+    "AnalyzeTextDetectIncidentsOptions": {
+      "type": "object",
+      "description": "The request to analyze given text content with content safety Text Incidents defined.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed."
+        },
+        "incidentNames": {
+          "type": "array",
+          "description": "The incidents defined.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "incidentNames"
+      ]
+    },
+    "AnalyzeTextGroundednessOptions": {
+      "type": "object",
+      "description": "The request of text groundedness analysis.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
+          "default": "Generic",
+          "enum": [
+            "Generic",
+            "Medical"
+          ],
+          "x-ms-enum": {
+            "name": "GroundednessDomain",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Generic",
+                "value": "Generic",
+                "description": "The domain for Groundedness analysis - Generic."
+              },
+              {
+                "name": "Medical",
+                "value": "Medical",
+                "description": "The domain for Groundedness analysis - Medical."
+              }
+            ]
+          }
+        },
+        "task": {
+          "type": "string",
+          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
+          "default": "Summarization",
+          "enum": [
+            "Summarization",
+            "QnA"
+          ],
+          "x-ms-enum": {
+            "name": "GroundednessTask",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Summarization",
+                "value": "Summarization",
+                "description": "The task type for Groundedness analysis - Summarization."
+              },
+              {
+                "name": "QnA",
+                "value": "QnA",
+                "description": "The task type for Groundedness analysis - QnA."
+              }
+            ]
+          }
+        },
+        "qna": {
+          "$ref": "#/definitions/QnAOptions",
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but cannot be omitted when task type is QnA."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content."
+        },
+        "groundingSources": {
+          "type": "array",
+          "description": "The grounding sources to be used for validating the groundedness.\nLimit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correction": {
+          "type": "boolean",
+          "description": "A value indicating if to generate mitigated content for the ungrounded content and included in the response.\nThis field is optional, with a default value of false."
+        },
+        "reasoning": {
+          "type": "boolean",
+          "description": "A value indicating if to generate an explanation for the groundedness analysis result and included in the response.\nThis field is optional, with a default value of false."
+        },
+        "llmResource": {
+          "$ref": "#/definitions/LLMResource",
+          "description": "Connection details for the LLM resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
+        }
+      },
+      "required": [
+        "text",
+        "groundingSources"
+      ]
+    },
+    "AnalyzeTextGroundednessResult": {
+      "type": "object",
+      "description": "The response of text groundedness analysis.",
+      "properties": {
+        "ungroundedDetected": {
+          "type": "boolean",
+          "description": "Indicates whether ungrounded content is detected."
+        },
+        "ungroundedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded."
+        },
+        "ungroundedDetails": {
+          "type": "array",
+          "description": "Provides insights into ungrounded content with specific examples and percentages.",
+          "items": {
+            "$ref": "#/definitions/UngroundednessDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "correctedText": {
+          "type": "string",
+          "description": "The correction for detected ungroundedness.\nIt's available only when the 'correction' field in the input is set to true."
+        }
+      },
+      "required": [
+        "ungroundedDetected",
+        "ungroundedPercentage",
+        "ungroundedDetails"
+      ]
+    },
+    "AnalyzeTextOptions": {
+      "type": "object",
+      "description": "The text analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 10000
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
+        },
+        "blocklistNames": {
+          "type": "array",
+          "description": "The names of blocklists.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "haltOnBlocklistHit": {
+          "type": "boolean",
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
+        },
+        "outputType": {
+          "type": "string",
+          "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels",
+            "EightSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeTextOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              },
+              {
+                "name": "EightSeverityLevels",
+                "value": "EightSeverityLevels",
+                "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextResult": {
+      "type": "object",
+      "description": "The text analysis response.",
+      "properties": {
+        "blocklistsMatch": {
+          "type": "array",
+          "description": "The blocklist match details.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistMatch"
+          },
+          "x-ms-identifiers": []
+        },
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for categories.",
+          "items": {
+            "$ref": "#/definitions/TextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
+    "AutoReviewTextOptions": {
+      "type": "object",
+      "description": "The request to analyze the given text with the Auto Reviewer version defined.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed."
+        },
+        "autoReviewerName": {
+          "type": "string",
+          "description": "The name of the Auto Reviewer."
+        },
+        "autoReviewerVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of the Auto Reviewer. The latest version will be used if omitted."
+        }
+      },
+      "required": [
+        "text",
+        "autoReviewerName"
+      ]
+    },
+    "AutoReviewTextResult": {
+      "type": "object",
+      "description": "The response of analyzing text with Auto Reviewer.",
+      "properties": {
+        "labelName": {
+          "type": "string",
+          "description": "The label classified by the given Auto Reviewer."
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "To provide more details of the analysis result."
+        }
+      },
+      "required": [
+        "labelName",
+        "reasoning"
+      ]
+    },
+    "AutoReviewerLabelDetails": {
+      "type": "object",
+      "description": "The label details of an Auto Reviewer version.",
+      "properties": {
+        "labelName": {
+          "type": "string",
+          "description": "The name of the label."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the label."
+        }
+      },
+      "required": [
+        "labelName",
+        "description"
+      ]
+    },
+    "AutoReviewerOperationDetail": {
+      "type": "object",
+      "description": "The details of a long running operation of Auto Reviewer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of this operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/AutoReviewerOperationStatus",
+          "description": "The status of this operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error details when this operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "AutoReviewerOperationStatus": {
+      "type": "string",
+      "description": "The possible status of an Auto Reviewer operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AutoReviewerOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Auto Reviewer operation status - NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Auto Reviewer operation status - Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Auto Reviewer operation status - Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Auto Reviewer operation status - Failed"
+          }
+        ]
+      }
+    },
+    "AutoReviewerVersion": {
+      "type": "object",
+      "description": "Definition of an Auto Reviewer version.",
+      "properties": {
+        "autoReviewerName": {
+          "type": "string",
+          "description": "The name of the Auto Reviewer.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "description": "The labels defined in the Auto Reviewer. There should be a label named 'Other' in the list. The 'Other' label is the default one to represent the content that does not classified as any other labels.",
+          "items": {
+            "$ref": "#/definitions/AutoReviewerLabelDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "exampleBlobUrl": {
+          "type": "string",
+          "description": "The blob URL which should be a jsonl that contains the examples of an Auto Reviewer. Read & write access to the upper layer virtual directory is required. This is optional.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "blobDelimiter": {
+          "type": "string",
+          "description": "Delimiter of the given blob URL. If omitted, '/' will be used as the delimiter to parse the exampleBlobUrl.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "exampleBlobCopyUrl": {
+          "type": "string",
+          "description": "The blob URL that contains a snapshot of exampleBlobUrl. It's available in the response only when exampleBlobUrl is provided in the request.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of Auto Reviewer.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of this Auto Reviewer version. The time is in UTC.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/AutoReviewerOperationStatus",
+          "description": "The status of this Auto Reviewer version.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "The error details of this Auto Reviewer version.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "autoReviewerName",
+        "labels",
+        "version",
+        "createdTime",
+        "status"
+      ]
+    },
+    "AutoReviewerVersionList": {
+      "type": "object",
+      "description": "All versions of an Auto Reviewer.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of auto reviewer versions.",
+          "items": {
+            "$ref": "#/definitions/AutoReviewerVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "CodeCitation": {
+      "type": "object",
+      "description": "The code citation of potential protected material for code.",
+      "properties": {
+        "license": {
+          "type": "string",
+          "description": "The license type fetched from source repository."
+        },
+        "sourceUrls": {
+          "type": "array",
+          "description": "The repository URLs of the source code detected.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "license",
+        "sourceUrls"
+      ]
+    },
+    "CodeProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material for code.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        },
+        "codeCitations": {
+          "type": "array",
+          "description": "The code citation of potential protected material for code.",
+          "items": {
+            "$ref": "#/definitions/CodeCitation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "detected",
+        "codeCitations"
+      ]
+    },
+    "CredentialImageData": {
+      "type": "object",
+      "description": "The image to be analyzed.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "The Base64 encoding of the image."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "CustomCategoryLongRunningOperationStatusResult": {
+      "type": "object",
+      "description": "Custom Category long running operation status result."
+    },
+    "CustomCategoryOperationDetail": {
+      "type": "object",
+      "description": "The details of a long running operation of Custom Category.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of this operation.",
+          "maxLength": 64,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/CustomCategoryOperationStatus",
+          "description": "The status of this operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error details when this operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "CustomCategoryOperationStatus": {
+      "type": "string",
+      "description": "The possible status of a Custom Category operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomCategoryOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Custom Category operation status - NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Custom Category operation status - Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Custom Category operation status - Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Custom Category operation status - Failed"
+          }
+        ]
+      }
+    },
+    "CustomCategoryStatus": {
+      "type": "string",
+      "description": "The possible status of building a Custom Category.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomCategoryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Custom Category building status - NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Custom Category building status - Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Custom Category building status - Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Custom Category building status - Failed"
+          }
+        ]
+      }
+    },
+    "DecodeImageCredentialOptions": {
+      "type": "object",
+      "description": "The request of detect watermark in the given image.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/CredentialImageData",
+          "description": "The image to be analyzed."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "DecodeImageCredentialResult": {
+      "type": "object",
+      "description": "The decoding results of content credential.",
+      "properties": {
+        "imageCredentialAnalysis": {
+          "$ref": "#/definitions/ImageCredentialAnalysisResult",
+          "description": "Analysis result for the given image."
+        }
+      },
+      "required": [
+        "imageCredentialAnalysis"
+      ]
+    },
+    "DetectCodeProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given code.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points."
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "DetectCodeProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material for code.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/CodeProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given text."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
+    },
+    "DetectIncidentsResult": {
+      "type": "object",
+      "description": "The response of analyzing given content with content safety incidents defined.",
+      "properties": {
+        "incidentMatches": {
+          "type": "array",
+          "description": "The details of matched incidents.",
+          "items": {
+            "$ref": "#/definitions/IncidentMatch"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "incidentMatches"
+      ]
+    },
+    "DetectTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points."
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "DetectTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/TextProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given text."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
+    },
+    "DocumentInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given documents.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    },
+    "ImageCategoriesAnalysis": {
+      "type": "object",
+      "description": "Image analysis result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory",
+          "description": "The image analysis category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ImageCategory": {
+      "type": "string",
+      "description": "The harm category supported in Image content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image - Violence."
+          }
+        ]
+      }
+    },
+    "ImageCredentialAnalysisResult": {
+      "type": "object",
+      "description": "The decoding result of content credential.",
+      "properties": {
+        "imageManifest": {
+          "type": "string",
+          "description": "The C2PA Manifest information that baked in the image."
+        },
+        "watermarkStickyManifest": {
+          "type": "string",
+          "description": "Image Manifest added by Encode Model."
+        }
+      },
+      "required": [
+        "imageManifest",
+        "watermarkStickyManifest"
+      ]
+    },
+    "ImageData": {
+      "type": "object",
+      "description": "The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "The Base64 encoding of the image."
+        },
+        "blobUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob url of the image."
+        }
+      }
+    },
+    "ImageDataResult": {
+      "type": "object",
+      "description": "Definition of an image in a response.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded image."
+        }
+      }
+    },
+    "ImageIncident": {
+      "type": "object",
+      "description": "Definition of a content safety Image Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the incident.",
+          "maxLength": 64,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of this incident.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The latest updated time of this incident.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "incidentName",
+        "created",
+        "lastUpdated"
+      ]
+    },
+    "ImageIncidentCreateOrUpdate": {
+      "type": "object",
+      "description": "Definition of a content safety Image Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the incident.",
+          "maxLength": 64,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ImageIncidentOperationResult": {
+      "type": "object",
+      "description": "The details of a long running operation of Image Incident.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of this operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/IncidentOperationStatus",
+          "description": "The status of this operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error details when this operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ImageIncidentSample": {
+      "type": "object",
+      "description": "Definition of an Image Incident sample in a request.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "The name of this incident sample.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image content of this incident sample."
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "ImageIncidentSampleResult": {
+      "type": "object",
+      "description": "Definition of an Image Incident sample in a response.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "The name of this incident sample.",
+          "readOnly": true
+        },
+        "image": {
+          "$ref": "#/definitions/ImageDataResult",
+          "description": "The image content of this incident sample."
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "ImageWithTextCategoriesAnalysis": {
+      "type": "object",
+      "description": "The definition of individual result for analyzing an image with embedded or custom text.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageWithTextCategory",
+          "description": "The harm category detected."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It indicates the severity of the harm. 0 means the content is considered as safe in this harm category."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ImageWithTextCategory": {
+      "type": "string",
+      "description": "The harm category supported in Image-with-Text content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageWithTextCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image-with-Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image-with-Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image-with-Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image-with-Text - Violence."
+          }
+        ]
+      }
+    },
+    "IncidentLongRunningOperationStatusResult": {
+      "type": "object",
+      "description": "Incident long running operation status result."
+    },
+    "IncidentMatch": {
+      "type": "object",
+      "description": "The definition of a matched content safety incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the matched incident."
+        }
+      },
+      "required": [
+        "incidentName"
+      ]
+    },
+    "IncidentOperationStatus": {
+      "type": "string",
+      "description": "The possible status of a content safety incident operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "IncidentOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Content Safety Incident operation status - NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Content Safety Incident operation status - Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Content Safety Incident operation status - Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Content Safety Incident operation status - Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Content Safety Incident operation status - Canceled"
+          }
+        ]
+      }
+    },
+    "IndexDetails": {
+      "type": "object",
+      "description": "To describe the string index in different representations.",
+      "properties": {
+        "utf8": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-8."
+        },
+        "utf16": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-16."
+        },
+        "codePoint": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index with code point format."
+        }
+      },
+      "required": [
+        "utf8",
+        "utf16",
+        "codePoint"
+      ]
+    },
+    "LLMResource": {
+      "type": "object",
+      "description": "Details of the given LLM resource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "LLM resource type.",
+          "default": "AzureOpenAI",
+          "enum": [
+            "AzureOpenAI"
+          ],
+          "x-ms-enum": {
+            "name": "LLMResourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureOpenAI",
+                "value": "AzureOpenAI",
+                "description": "The LLM resource type for Groundedness analysis - Azure OpenAI."
+              }
+            ]
+          }
+        },
+        "azureOpenAIEndpoint": {
+          "type": "string",
+          "description": "Endpoint for Azure OpenAI resource."
+        },
+        "azureOpenAIDeploymentName": {
+          "type": "string",
+          "description": "Deployment name."
+        }
+      },
+      "required": [
+        "azureOpenAIEndpoint",
+        "azureOpenAIDeploymentName"
+      ]
+    },
+    "ListImageIncidentSampleResult": {
+      "type": "object",
+      "description": "A single sample in an Image Incident sample list.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "The name of this incident sample.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "PagedAutoReviewerVersion": {
+      "type": "object",
+      "description": "Paged collection of AutoReviewerVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AutoReviewerVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/AutoReviewerVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedImageIncident": {
+      "type": "object",
+      "description": "Paged collection of ImageIncident items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImageIncident items on this page",
+          "items": {
+            "$ref": "#/definitions/ImageIncident"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedListImageIncidentSampleResult": {
+      "type": "object",
+      "description": "Paged collection of ListImageIncidentSampleResult items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ListImageIncidentSampleResult items on this page",
+          "items": {
+            "$ref": "#/definitions/ListImageIncidentSampleResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklist": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklist items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklist items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklist"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklistItem": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklistItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklistItem items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextCustomCategoryVersion": {
+      "type": "object",
+      "description": "Paged collection of TextCustomCategoryVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextCustomCategoryVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/TextCustomCategoryVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextIncident": {
+      "type": "object",
+      "description": "Paged collection of TextIncident items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextIncident items on this page",
+          "items": {
+            "$ref": "#/definitions/TextIncident"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextIncidentSample": {
+      "type": "object",
+      "description": "Paged collection of TextIncidentSample items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextIncidentSample items on this page",
+          "items": {
+            "$ref": "#/definitions/TextIncidentSample"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QnAOptions": {
+      "type": "object",
+      "description": "The options for QnA task.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The user's question input in a QnA task."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "RemoveImageIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to remove incident samples from an Image Incident.",
+      "properties": {
+        "incidentSampleIds": {
+          "type": "array",
+          "description": "Incident samples to be removed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "incidentSampleIds"
+      ]
+    },
+    "RemoveTextBlocklistItemsOptions": {
+      "type": "object",
+      "description": "The request to remove blocklistItems from a text blocklist.",
+      "properties": {
+        "blocklistItemIds": {
+          "type": "array",
+          "description": "Array of blocklistItemIds to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "blocklistItemIds"
+      ]
+    },
+    "RemoveTextIncidentSamplesOptions": {
+      "type": "object",
+      "description": "The request to remove incident samples from a Text Incident.",
+      "properties": {
+        "incidentSampleIds": {
+          "type": "array",
+          "description": "Incident samples to be removed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "incidentSampleIds"
+      ]
+    },
+    "ShieldPromptOptions": {
+      "type": "object",
+      "description": "The request of analyzing potential direct or indirect injection attacks.",
+      "properties": {
+        "userPrompt": {
+          "type": "string",
+          "description": "The user prompt to be analyzed, which may contain direct injection attacks."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents to be analyzed, which may contain direct or indirect injection attacks.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ShieldPromptResult": {
+      "type": "object",
+      "description": "The combined analysis results of potential direct or indirect injection attacks.",
+      "properties": {
+        "userPromptAnalysis": {
+          "$ref": "#/definitions/UserPromptInjectionAnalysisResult",
+          "description": "Direct injection attacks analysis result for the given user prompt."
+        },
+        "documentsAnalysis": {
+          "type": "array",
+          "description": "Direct and indirect injection attacks analysis result for the given documents.",
+          "items": {
+            "$ref": "#/definitions/DocumentInjectionAnalysisResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TextBlocklist": {
+      "type": "object",
+      "description": "Text Blocklist.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "blocklistName"
+      ]
+    },
+    "TextBlocklistCreateOrUpdate": {
+      "type": "object",
+      "description": "Text Blocklist.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "TextBlocklistItem": {
+      "type": "object",
+      "description": "Item in a TextBlocklist.",
+      "properties": {
+        "blocklistItemId": {
+          "type": "string",
+          "description": "The service will generate a BlocklistItemId, which will be a UUID.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "BlocklistItem description.",
+          "maxLength": 1024
+        },
+        "text": {
+          "type": "string",
+          "description": "BlocklistItem content. The length is counted using Unicode code point.",
+          "maxLength": 128
+        },
+        "isRegex": {
+          "type": "boolean",
+          "description": "An optional properties indicating whether this item is to be matched as a regular expression."
+        }
+      },
+      "required": [
+        "blocklistItemId",
+        "text"
+      ]
+    },
+    "TextBlocklistMatch": {
+      "type": "object",
+      "description": "The result of blocklist match.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "The name of the matched blocklist.",
+          "maxLength": 64
+        },
+        "blocklistItemId": {
+          "type": "string",
+          "description": "The ID of the matched item.",
+          "maxLength": 64
+        },
+        "blocklistItemText": {
+          "type": "string",
+          "description": "The content of the matched item.",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "blocklistName",
+        "blocklistItemId",
+        "blocklistItemText"
+      ]
+    },
+    "TextCategoriesAnalysis": {
+      "type": "object",
+      "description": "Text analysis result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/TextCategory",
+          "description": "The text analysis category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "TextCategory": {
+      "type": "string",
+      "description": "The harm category supported in Text content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Text - Violence."
+          }
+        ]
+      }
+    },
+    "TextCustomCategoryAnalysis": {
+      "type": "object",
+      "description": "The analysis result of Custom Category.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether the Custom Category is detected."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "TextCustomCategoryVersion": {
+      "type": "object",
+      "description": "Definition of a Customer Category version.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The name of this Custom Category",
+          "maxLength": 64,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "definition": {
+          "type": "string",
+          "description": "The definition or description of this Custom Category version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobUrl": {
+          "type": "string",
+          "description": "The blob URL which should be a jsonl that contains the samples. Read & write access to the upper layer virtual directory is required.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobSnapshotUrl": {
+          "type": "string",
+          "description": "The blob URL that contains a snapshot of sampleBlobUrl.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version of Custom Category.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of this Custom Category version. The time is in UTC.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CustomCategoryStatus",
+          "description": "The status of this Custom Category version",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error details of this Custom Category version.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "categoryName",
+        "definition",
+        "sampleBlobUrl",
+        "sampleBlobSnapshotUrl",
+        "version",
+        "createdTime",
+        "status"
+      ]
+    },
+    "TextCustomCategoryVersionList": {
+      "type": "object",
+      "description": "All versions of a Custom Category.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of custom category versions.",
+          "items": {
+            "$ref": "#/definitions/TextCustomCategoryVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TextIncident": {
+      "type": "object",
+      "description": "Definition of a content safety Text Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the incident.",
+          "maxLength": 64,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "incidentDefinition": {
+          "type": "string",
+          "description": "The guideline to define this incident."
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of this incident.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The latest updated time of this incident.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "incidentName",
+        "created",
+        "lastUpdated"
+      ]
+    },
+    "TextIncidentCreateOrUpdate": {
+      "type": "object",
+      "description": "Definition of a content safety Text Incident.",
+      "properties": {
+        "incidentName": {
+          "type": "string",
+          "description": "The name of the incident.",
+          "maxLength": 64,
+          "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "incidentDefinition": {
+          "type": "string",
+          "description": "The guideline to define this incident."
+        }
+      }
+    },
+    "TextIncidentOperationResult": {
+      "type": "object",
+      "description": "The details of a long running operation of Text Incident.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of this operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/IncidentOperationStatus",
+          "description": "The status of this operation.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error details when this operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "TextIncidentSample": {
+      "type": "object",
+      "description": "Definition of a sample in a Text Incident.",
+      "properties": {
+        "incidentSampleId": {
+          "type": "string",
+          "description": "The name of this incident sample.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of this incident sample."
+        }
+      },
+      "required": [
+        "incidentSampleId"
+      ]
+    },
+    "TextProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "UngroundednessDetails": {
+      "type": "object",
+      "description": "Details of the content that identified as ungroundedness.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The original text which is considered as ungrounded."
+        },
+        "offset": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The offset that the ungrounded content starts in the original text."
+        },
+        "length": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The length of the ungrounded content."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation for detected ungroundedness.\nIt's available only when the 'reasoning' field in the input is set to true."
+        }
+      },
+      "required": [
+        "text",
+        "offset",
+        "length"
+      ]
+    },
+    "UserPromptInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given user prompt.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomCategoryLongRunningOperationParameters.operationId": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+      "required": false,
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
+    },
+    "CustomCategoryLongRunningOperationParameters.version": {
+      "name": "version",
+      "in": "query",
+      "description": "The build will target on the given version.",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentLongRunningOperationParameters": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+      "required": false,
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
+    }
+  }
+}
