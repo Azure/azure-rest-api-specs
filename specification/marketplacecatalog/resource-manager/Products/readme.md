@@ -51,5 +51,3 @@ suppressions:
   from: openapi.json
   reason: false positive on paging 
 ```
-
-
