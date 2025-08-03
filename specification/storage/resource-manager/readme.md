@@ -28,14 +28,14 @@ These are the global settings for the Storage API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-01-preview
+tag: package-2025-01
 ```
 
-### Tag: package-2025-07-01-preview
+### Tag: package-2025-07-preview
 
-These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-07-01-preview'
+```yaml $(tag) == 'package-2025-07-preview'
 input-file:
   - Microsoft.Storage/stable/2025-01-01/blob.json
   - Microsoft.Storage/stable/2025-01-01/common.json
@@ -82,12 +82,6 @@ directive:
     - $.definitions.StorageAccount
     suppress: BodyTopLevelProperties
     reason: The 'placement' property is already a top-level property in Microsoft.Compute/virtualMachines, so the schema should stay consistent here.
-```
-
-``` yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2025-01
 ```
 
 ### Tag: package-2025-01
