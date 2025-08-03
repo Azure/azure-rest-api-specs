@@ -2846,6 +2846,98 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FineTuningEvaluationMetric": {
+      "type": "string",
+      "description": "The evaluation metric to use in RFT text similarity grader",
+      "enum": [
+        "bleu",
+        "fuzzy_match",
+        "gleu",
+        "meteor",
+        "rouge_1",
+        "rouge_2",
+        "rouge_3",
+        "rouge_4",
+        "rouge_5",
+        "rouge_l",
+        "cosine"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningEvaluationMetric",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bleu",
+            "value": "bleu",
+            "description": "bleu"
+          },
+          {
+            "name": "fuzzy_match",
+            "value": "fuzzy_match",
+            "description": "fuzzy_match"
+          },
+          {
+            "name": "gleu",
+            "value": "gleu",
+            "description": "gleu"
+          },
+          {
+            "name": "meteor",
+            "value": "meteor",
+            "description": "meteor"
+          },
+          {
+            "name": "rouge_1",
+            "value": "rouge_1",
+            "description": "rouge_1"
+          },
+          {
+            "name": "rouge_2",
+            "value": "rouge_2",
+            "description": "rouge_2"
+          },
+          {
+            "name": "rouge_3",
+            "value": "rouge_3",
+            "description": "rouge_3"
+          },
+          {
+            "name": "rouge_4",
+            "value": "rouge_4",
+            "description": "rouge_4"
+          },
+          {
+            "name": "rouge_5",
+            "value": "rouge_5",
+            "description": "rouge_5"
+          },
+          {
+            "name": "rouge_l",
+            "value": "rouge_l",
+            "description": "rouge_l"
+          },
+          {
+            "name": "cosine",
+            "value": "cosine",
+            "description": "cosine"
+          }
+        ]
+      }
+    },
+    "FineTuningGrader": {
+      "type": "object",
+      "description": "The grader used for RFT fine-tuning. Abstract base class",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The grader type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "FineTuningJob": {
       "type": "object",
       "description": "Fine-Tuning Job",
@@ -3300,20 +3392,6 @@
         "project"
       ]
     },
-    "FineTuningJobRFTGrader": {
-      "type": "object",
-      "description": "The grader used for RFT fine-tuning. Abstract base class",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The grader type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
     "FineTuningJobRFTHyperParameters": {
       "type": "object",
       "description": "Configuration for the Reinforcement fine-tuning method.",
@@ -3354,118 +3432,6 @@
         }
       }
     },
-    "FineTuningJobRFTLabelModelGrader": {
-      "type": "object",
-      "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
-      "properties": {
-        "input": {
-          "type": "array",
-          "description": "input labels",
-          "items": {
-            "$ref": "#/definitions/FineTuningJobGraderMessage"
-          }
-        },
-        "labels": {
-          "type": "array",
-          "description": "The labels to assign to each item in the evaluation.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use for the evaluation. Must support structured outputs."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "passing_labels": {
-          "type": "array",
-          "description": "The labels that indicate a passing result. Must be a subset of labels.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
-          "description": "The sampling parameters for the model. Specific to AOAI API"
-        }
-      },
-      "required": [
-        "input",
-        "labels",
-        "model",
-        "name",
-        "passing_labels"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "label_model"
-    },
-    "FineTuningJobRFTMultiGrader": {
-      "type": "object",
-      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
-      "properties": {
-        "calculate_output": {
-          "type": "string",
-          "description": "A formula to calculate the output based on grader results."
-        },
-        "graders": {
-          "type": "object",
-          "description": "Graders to be combined",
-          "additionalProperties": {
-            "$ref": "#/definitions/FineTuningJobRFTGrader"
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        }
-      },
-      "required": [
-        "calculate_output",
-        "graders",
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "multi"
-    },
-    "FineTuningJobRFTPythonGrader": {
-      "type": "object",
-      "description": "A PythonGrader object that runs a python script on the input.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "source": {
-          "type": "string",
-          "description": "The source code of the python script."
-        },
-        "image_tag": {
-          "type": "string",
-          "description": "The image tag to use for the python script."
-        }
-      },
-      "required": [
-        "name",
-        "source"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "python"
-    },
     "FineTuningJobRFTResponseFormat": {
       "type": "object",
       "description": "Gets the response format for the Reinforcement fine-tuning method.",
@@ -3500,241 +3466,6 @@
       ],
       "x-ms-discriminator-value": "json_schema"
     },
-    "FineTuningJobRFTScoreModelGrader": {
-      "type": "object",
-      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
-      "properties": {
-        "input": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FineTuningJobGraderMessage"
-          }
-        },
-        "model": {
-          "type": "string",
-          "description": "The model to use for the evaluation."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "range": {
-          "type": "array",
-          "description": "The model to use for the evaluation.",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "sampling_params": {
-          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
-          "description": "The sampling parameters for the model."
-        },
-        "passThreshold": {
-          "type": "number",
-          "format": "double",
-          "description": "TBD"
-        }
-      },
-      "required": [
-        "input",
-        "model",
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "score_model"
-    },
-    "FineTuningJobRFTStringCheckGrader": {
-      "type": "object",
-      "description": "A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.",
-      "properties": {
-        "input": {
-          "type": "string",
-          "description": "The input text. This may include template strings."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "operation": {
-          "$ref": "#/definitions/FineTuningJobRFTStringCheckGraderOperation",
-          "description": "The string check operation to perform. One of eq, ne, like, or ilike."
-        },
-        "reference": {
-          "type": "string",
-          "description": "The reference text. This may include template strings."
-        }
-      },
-      "required": [
-        "input",
-        "name",
-        "operation",
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "string_check"
-    },
-    "FineTuningJobRFTStringCheckGraderOperation": {
-      "type": "string",
-      "description": "String operations used in RFT string check grader",
-      "enum": [
-        "eq",
-        "ne",
-        "like",
-        "ilike"
-      ],
-      "x-ms-enum": {
-        "name": "FineTuningJobRFTStringCheckGraderOperation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "eq",
-            "value": "eq",
-            "description": "Equal operator"
-          },
-          {
-            "name": "ne",
-            "value": "ne",
-            "description": "Not equal operator"
-          },
-          {
-            "name": "like",
-            "value": "like",
-            "description": "Like operator"
-          },
-          {
-            "name": "ilike",
-            "value": "ilike",
-            "description": "Not like operator"
-          }
-        ]
-      }
-    },
-    "FineTuningJobRFTTextSimilarityGrader": {
-      "type": "object",
-      "description": "ScoreModelGrader uses a model to assign a score to the input.",
-      "properties": {
-        "evaluation_metric": {
-          "$ref": "#/definitions/FineTuningJobRFTTextSimilarityGraderEvaluationMetric",
-          "description": "The evaluation metric to use"
-        },
-        "input": {
-          "type": "string",
-          "description": "The text being graded."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
-        },
-        "reference": {
-          "type": "string",
-          "description": "The text being graded against."
-        },
-        "pass_threshold": {
-          "type": "number",
-          "format": "double",
-          "description": "TBD"
-        }
-      },
-      "required": [
-        "evaluation_metric",
-        "input",
-        "name",
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningJobRFTGrader"
-        }
-      ],
-      "x-ms-discriminator-value": "text_similarity"
-    },
-    "FineTuningJobRFTTextSimilarityGraderEvaluationMetric": {
-      "type": "string",
-      "description": "The evaluation metric to use in RFT text similarity grader",
-      "enum": [
-        "bleu",
-        "fuzzy_match",
-        "gleu",
-        "meteor",
-        "rouge_1",
-        "rouge_2",
-        "rouge_3",
-        "rouge_4",
-        "rouge_5",
-        "rouge_l",
-        "cosine"
-      ],
-      "x-ms-enum": {
-        "name": "FineTuningJobRFTTextSimilarityGraderEvaluationMetric",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "bleu",
-            "value": "bleu",
-            "description": "bleu"
-          },
-          {
-            "name": "fuzzy_match",
-            "value": "fuzzy_match",
-            "description": "fuzzy_match"
-          },
-          {
-            "name": "gleu",
-            "value": "gleu",
-            "description": "gleu"
-          },
-          {
-            "name": "meteor",
-            "value": "meteor",
-            "description": "meteor"
-          },
-          {
-            "name": "rouge_1",
-            "value": "rouge_1",
-            "description": "rouge_1"
-          },
-          {
-            "name": "rouge_2",
-            "value": "rouge_2",
-            "description": "rouge_2"
-          },
-          {
-            "name": "rouge_3",
-            "value": "rouge_3",
-            "description": "rouge_3"
-          },
-          {
-            "name": "rouge_4",
-            "value": "rouge_4",
-            "description": "rouge_4"
-          },
-          {
-            "name": "rouge_5",
-            "value": "rouge_5",
-            "description": "rouge_5"
-          },
-          {
-            "name": "rouge_l",
-            "value": "rouge_l",
-            "description": "rouge_l"
-          },
-          {
-            "name": "cosine",
-            "value": "cosine",
-            "description": "cosine"
-          }
-        ]
-      }
-    },
     "FineTuningJobRFTTrainingMethod": {
       "type": "object",
       "description": "Configuration for the Reinforcement fine-tuning method.",
@@ -3759,7 +3490,7 @@
       "description": "Configuration for the reinforcement fine-tuning method.",
       "properties": {
         "grader": {
-          "$ref": "#/definitions/FineTuningJobRFTGrader",
+          "$ref": "#/definitions/FineTuningGrader",
           "description": "The grader used for the fine-tuning job."
         },
         "hyperparameters": {
@@ -3838,6 +3569,275 @@
       "required": [
         "type"
       ]
+    },
+    "FineTuningLabelModelGrader": {
+      "type": "object",
+      "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "input labels",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobGraderMessage"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "The labels to assign to each item in the evaluation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation. Must support structured outputs."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "passing_labels": {
+          "type": "array",
+          "description": "The labels that indicate a passing result. Must be a subset of labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model. Specific to AOAI API"
+        }
+      },
+      "required": [
+        "input",
+        "labels",
+        "model",
+        "name",
+        "passing_labels"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "label_model"
+    },
+    "FineTuningMultiGrader": {
+      "type": "object",
+      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
+      "properties": {
+        "calculate_output": {
+          "type": "string",
+          "description": "A formula to calculate the output based on grader results."
+        },
+        "graders": {
+          "type": "object",
+          "description": "Graders to be combined",
+          "additionalProperties": {
+            "$ref": "#/definitions/FineTuningGrader"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        }
+      },
+      "required": [
+        "calculate_output",
+        "graders",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "multi"
+    },
+    "FineTuningPythonGrader": {
+      "type": "object",
+      "description": "A PythonGrader object that runs a python script on the input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source code of the python script."
+        },
+        "image_tag": {
+          "type": "string",
+          "description": "The image tag to use for the python script."
+        }
+      },
+      "required": [
+        "name",
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "python"
+    },
+    "FineTuningScoreModelGrader": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobGraderMessage"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "range": {
+          "type": "array",
+          "description": "The model to use for the evaluation.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model."
+        },
+        "passThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "input",
+        "model",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "score_model"
+    },
+    "FineTuningStringCheckGrader": {
+      "type": "object",
+      "description": "A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input text. This may include template strings."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "operation": {
+          "$ref": "#/definitions/FineTuningStringOperation",
+          "description": "The string check operation to perform. One of eq, ne, like, or ilike."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The reference text. This may include template strings."
+        }
+      },
+      "required": [
+        "input",
+        "name",
+        "operation",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "string_check"
+    },
+    "FineTuningStringOperation": {
+      "type": "string",
+      "description": "String operations used in RFT string check grader",
+      "enum": [
+        "eq",
+        "ne",
+        "like",
+        "ilike"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningStringOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "eq",
+            "value": "eq",
+            "description": "Equal operator"
+          },
+          {
+            "name": "ne",
+            "value": "ne",
+            "description": "Not equal operator"
+          },
+          {
+            "name": "like",
+            "value": "like",
+            "description": "Like operator"
+          },
+          {
+            "name": "ilike",
+            "value": "ilike",
+            "description": "Not like operator"
+          }
+        ]
+      }
+    },
+    "FineTuningTextSimilarityGrader": {
+      "type": "object",
+      "description": "ScoreModelGrader uses a model to assign a score to the input.",
+      "properties": {
+        "evaluation_metric": {
+          "$ref": "#/definitions/FineTuningEvaluationMetric",
+          "description": "The evaluation metric to use"
+        },
+        "input": {
+          "type": "string",
+          "description": "The text being graded."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The text being graded against."
+        },
+        "pass_threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "TBD"
+        }
+      },
+      "required": [
+        "evaluation_metric",
+        "input",
+        "name",
+        "reference"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "text_similarity"
     },
     "FolderDatasetVersion": {
       "type": "object",

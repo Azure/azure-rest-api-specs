@@ -109,7 +109,7 @@ model FineTuningJobDPOTrainingMethod extends FineTuningJobTrainingMethod {
 @discriminator("type")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTGrader {
+model FineTuningGrader {
   @doc("The grader type.")
   type: string;
 }
@@ -117,7 +117,7 @@ model FineTuningJobRFTGrader {
 @doc("String operations used in RFT string check grader")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-union FineTuningJobRFTStringCheckGraderOperation {
+union FineTuningStringOperation {
   string,
 
   @doc("Equal operator")
@@ -136,7 +136,7 @@ union FineTuningJobRFTStringCheckGraderOperation {
 @doc("A StringCheckGrader object that performs a string comparison between input and reference using a specified operation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
+model FineTuningStringCheckGrader extends FineTuningGrader {
   type: "string_check";
 
   @doc("The input text. This may include template strings.")
@@ -146,7 +146,7 @@ model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
   name: string;
 
   @doc("The string check operation to perform. One of eq, ne, like, or ilike.")
-  operation: FineTuningJobRFTStringCheckGraderOperation;
+  operation: FineTuningStringOperation;
 
   @doc("The reference text. This may include template strings.")
   reference: string;
@@ -155,7 +155,7 @@ model FineTuningJobRFTStringCheckGrader extends FineTuningJobRFTGrader {
 @doc("The evaluation metric to use in RFT text similarity grader")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-union FineTuningJobRFTTextSimilarityGraderEvaluationMetric {
+union FineTuningEvaluationMetric {
   string,
 
     @doc("bleu")
@@ -195,11 +195,11 @@ union FineTuningJobRFTTextSimilarityGraderEvaluationMetric {
 @doc("ScoreModelGrader uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTTextSimilarityGrader extends FineTuningJobRFTGrader {
+model FineTuningTextSimilarityGrader extends FineTuningGrader {
   type: "text_similarity";
 
   @doc("The evaluation metric to use")
-  evaluation_metric: FineTuningJobRFTTextSimilarityGraderEvaluationMetric;
+  evaluation_metric: FineTuningEvaluationMetric;
 
   @doc("The text being graded.")
   input: string;
@@ -217,7 +217,7 @@ model FineTuningJobRFTTextSimilarityGrader extends FineTuningJobRFTGrader {
 @doc("A PythonGrader object that runs a python script on the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTPythonGrader extends FineTuningJobRFTGrader {
+model FineTuningPythonGrader extends FineTuningGrader {
   type: "python";
 
   @doc("The name of the grader.")
@@ -335,7 +335,7 @@ model FineTuningJobGraderModelSamplingParam
 @doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTScoreModelGrader extends FineTuningJobRFTGrader {
+model FineTuningScoreModelGrader extends FineTuningGrader {
   type: "score_model";
   
   //@doc("The input text. This may include template strings.")
@@ -360,7 +360,7 @@ model FineTuningJobRFTScoreModelGrader extends FineTuningJobRFTGrader {
 @doc("A MultiGrader object combines the output of multiple graders to produce a single score.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTMultiGrader extends FineTuningJobRFTGrader
+model FineTuningMultiGrader extends FineTuningGrader
 {
    type : "multi";
 
@@ -368,7 +368,7 @@ model FineTuningJobRFTMultiGrader extends FineTuningJobRFTGrader
    calculate_output : string;
 
    @doc("Graders to be combined")
-   graders : Record<FineTuningJobRFTGrader>;
+   graders : Record<FineTuningGrader>;
 
    @doc("The name of the grader.")
    name : string;
@@ -377,7 +377,7 @@ model FineTuningJobRFTMultiGrader extends FineTuningJobRFTGrader
 @doc("A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTLabelModelGrader extends FineTuningJobRFTGrader
+model FineTuningLabelModelGrader extends FineTuningGrader
 {
    type : "label_model";
 
@@ -452,7 +452,7 @@ model FineTuningJobRFTResponseJsonSchema extends FineTuningJobRFTResponseFormat 
 @removed(Versions.v1)
 model FineTuningJobRFTTrainingMethodConfiguration { 
   @doc("The grader used for the fine-tuning job.")
-  grader: FineTuningJobRFTGrader;
+  grader: FineTuningGrader;
 
   @doc("The hyperparameters used for the reinforcement fine-tuning job.")
   hyperparameters?: FineTuningJobRFTHyperParameters;
