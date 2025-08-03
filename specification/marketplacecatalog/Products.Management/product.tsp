@@ -646,6 +646,7 @@ model ProductDetails {
   marketingMaterial?: MarketingMaterial;
 
   @doc("List of artifacts")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   artifacts?: Artifact[];
 
   // Override properties that differ from base class
@@ -662,8 +663,9 @@ model PlanMetadata {
   altStackReference?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
-model PlanDetails {
+model PlanDetails extends PlanSummary {
   @doc("The id")
   id?: string;
 
@@ -674,6 +676,7 @@ model PlanDetails {
   uiDefinitionUri?: string;
 
   @doc("Files related to the marketplace item")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   artifacts?: Artifact[];
 
   @doc("Version of the marketplace item")
