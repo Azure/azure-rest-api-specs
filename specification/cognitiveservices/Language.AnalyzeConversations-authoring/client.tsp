@@ -173,6 +173,10 @@ namespace ConversationAuthoringClient {
   op `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
 
   op `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
+
+  op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
+
+  op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
 }
 
 
@@ -229,8 +233,6 @@ namespace ConversationAuthoringProjectClient {
     `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
 
     getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
-
-    getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
 
     copyProjectAuthorization is Language.Conversations.Authoring.ConversationAuthoringProject.copyProjectAuthorization;
 
