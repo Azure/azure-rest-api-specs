@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/openapi.json
+  - stable/2022-07-31/marketplacecatalog.json
 
 suppressions:
 - code: BodyTopLevelProperties

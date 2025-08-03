@@ -49,7 +49,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations(Products)
 interface ProductList {
   /** Lists products for tenant. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @route("/providers/Microsoft.Marketplace/products")
   @get
   @armResourceList(ProductSummary)
@@ -66,7 +65,6 @@ interface ProductList {
   ): ArmResponse<ResourceListCustomResult<ProductSummary>> | ErrorResponse;
 
   /** Lists products for subscription. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listBySubscription is ArmListBySubscriptionCustom<
     Products,
     Parameters = {
@@ -82,7 +80,6 @@ interface ProductList {
   >;
 
   /** Lists products for billing account. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByBillingAccount is ArmListByBillingAccount<
     Products,
     Parameters = {
@@ -98,7 +95,6 @@ interface ProductList {
   >;
 
   /** Lists products for billing profile. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByBillingProfile is ArmListByBillingProfile<
     Products,
     Parameters = {
@@ -117,7 +113,6 @@ interface ProductList {
 @armResourceOperations(ProductSingle)
 interface ProductGet {
   /** Gets a product single by tenant. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -147,7 +142,6 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by subscription. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -178,7 +172,6 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing account. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -209,7 +202,6 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | ErrorResponse;
 
   /** Gets a product single by billing profile. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -242,7 +234,6 @@ interface ProductGet {
 }
 
 /** The operation to list products by subscription. */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -259,7 +250,6 @@ op ArmListBySubscriptionCustom<
 >;
 
 /** The operation to list products by billing account. */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
@@ -276,7 +266,6 @@ op ArmListByBillingAccount<
 >;
 
 /** The operation to list products by billing account. */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @listsResource(Resource)
 @segmentOf(Resource)
 @armResourceList(Resource)
