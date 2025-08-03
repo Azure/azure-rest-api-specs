@@ -8,40 +8,40 @@ using Azure.ResourceManager;
 
 namespace Microsoft.SupercomputerInfrastructure;
 
-@doc("A supercomputer composed of multiple backing resources.")
+/** A supercomputer composed of topological entities. */
 model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
 }
 
-@doc("The properties of a supercomputer resource.")
+/** The properties of a supercomputer. */
 model SupercomputerProperties {
-  @doc("The identifier of the physical site where the supercomputer hardware is located.")
+  /** The identifier of the physical site where the supercomputer hardware is located. */
   @visibility(Lifecycle.Read)
   siteId: string;
 
-  @doc("The status of the last operation on this resource.")
+  /** The status of the last operation on the supercomputer. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: SupercomputerProvisioningState;
 }
 
-@doc("The resource provisioning state.")
+/** The resource provisioning state. */
 @lroStatus
-union ProvisioningState {
+union SupercomputerProvisioningState {
   ResourceProvisioningState,
 
-  @doc("The resource operation has been accepted.")
+  /** The resource operation has been accepted. */
   Accepted: "Accepted",
 
-  @doc("The resource is currently being provisioned.")
+  /** The resource is currently being provisioned. */
   Provisioning: "Provisioning",
 
-  @doc("The resource is currently being validated.")
+  /** The resource is currently being validated. */
   Validating: "Validating",
 
-  @doc("The resource is currently being updated.")
+  /** The resource is currently being updated. */
   Updating: "Updating",
 
-  @doc("The resource is currently being deleted.")
+  /** The resource is currently being deleted. */
   Deleting: "Deleting",
 
   string,

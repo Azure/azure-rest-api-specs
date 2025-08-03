@@ -1,28 +1,23 @@
 {
-  "title": "Supercomputers_Update",
-  "operationId": "Supercomputers_Update",
+  "title": "Nodes_Get",
+  "operationId": "Nodes_Get",
   "parameters": {
     "api-version": "2025-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup",
     "supercomputerName": "MySupercomputer",
-    "properties": {
-      "properties": {},
-      "tags": {}
-    }
+    "rackName": "ABC01-R01R01",
+    "nodeName": "012345678"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "siteId": "southeastus5",
           "provisioningState": "Succeeded"
         },
-        "tags": {},
-        "location": "southeastus5",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer",
-        "name": "MySupercomputer",
-        "type": "Microsoft.SupercomputerInfrastructure/supercomputers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/racks/ABC01-R01R01/nodes/012345678",
+        "name": "012345678",
+        "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes",
         "systemData": {
           "createdBy": "Supercomputer User",
           "createdByType": "User",
@@ -31,11 +26,6 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-01-01T00:00:00.000Z"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://contoso.com/operationstatus"
       }
     }
   }

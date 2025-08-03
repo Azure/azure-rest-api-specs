@@ -1,9 +1,11 @@
 {
-  "title": "Supercomputers_ListBySubscription",
-  "operationId": "Supercomputers_ListBySubscription",
+  "title": "Clusters_ListBySupercomputer",
+  "operationId": "Clusters_ListBySupercomputer",
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "supercomputerName": "MySupercomputer"
   },
   "responses": {
     "200": {
@@ -11,14 +13,11 @@
         "value": [
           {
             "properties": {
-              "siteId": "southeastus5",
               "provisioningState": "Succeeded"
             },
-            "tags": {},
-            "location": "southeastus5",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer",
-            "name": "MySupercomputer",
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySuperComputer/clusters/ABC0000000",
+            "name": "ABC0000000",
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters",
             "systemData": {
               "createdBy": "Supercomputer User",
               "createdByType": "User",
@@ -29,7 +28,7 @@
             }
           }
         ],
-        "nextLink": "https://microsoft.com/aoahdtw"
+        "nextLink": "https://microsoft.com/a"
       }
     }
   }
