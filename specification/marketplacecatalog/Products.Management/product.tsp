@@ -675,7 +675,7 @@ model PlanDetails extends PlanSummary {
   uiDefinitionUri?: string;
 
   @doc("Files related to the marketplace item")
-  artifacts?: Artifact[];
+  planArtifacts?: Artifact[];
 
   @doc("Version of the marketplace item")
   version?: string;
