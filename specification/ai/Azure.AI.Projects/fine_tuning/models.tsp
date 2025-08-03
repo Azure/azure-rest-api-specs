@@ -363,28 +363,41 @@ model FineTuningJobRFTScoreModelGrader extends FineTuningJobRFTGrader {
 model FineTuningJobRFTMultiGrader extends FineTuningJobRFTGrader
 {
    type : "multi";
-/**
-    [Required]
-    [Display(Name = FineTuningGraderTypePropertyName)]
-    [JsonPropertyName(FineTuningGraderTypePropertyName)]
-    [YamlMember(Alias = FineTuningGraderTypePropertyName)]
-    public override string GraderType => TypeName;
 
-    [Display(Name = "name")]
-    [JsonPropertyName("name")]
-    [YamlMember(Alias = "name", ApplyNamingConventions = false)]
-    public required string Name { get; set; }
+   @doc("A formula to calculate the output based on grader results.")
+   calculate_output : string;
 
-    [Display(Name = "graders")]
-    [JsonPropertyName("graders")]
-    [YamlMember(Alias = "graders", ApplyNamingConventions = false)]
-    public required Dictionary<string, FineTuningGraderConfig> Graders { get; init; }
+   @doc("Graders to be combined")
+   graders : Record<FineTuningJobRFTGrader>;
 
-    [Display(Name = "calculate_output")]
-    [JsonPropertyName("calculate_output")]
-    [YamlMember(Alias = "calculate_output", ApplyNamingConventions = false)]
-    public required string CalculateOutput { get; set; }
-    */
+   @doc("The name of the grader.")
+   name : string;
+}
+
+@doc("A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTLabelModelGrader extends FineTuningJobRFTGrader
+{
+   type : "label_model";
+
+   @doc("input labels")
+   input : Array<FineTuningJobGraderMessage>;
+
+   @doc("The labels to assign to each item in the evaluation.")
+   labels : Array<string>;
+
+   @doc("The model to use for the evaluation. Must support structured outputs.")
+  `model`: string;
+
+   @doc("The name of the grader.")
+   name : string;
+
+   @doc("The labels that indicate a passing result. Must be a subset of labels.")
+   passing_labels : Array<string>;
+
+   @doc("The sampling parameters for the model. Specific to AOAI API")
+   sampling_params? : FineTuningJobGraderModelSamplingParam;
 }
 
 // RFT graders end 

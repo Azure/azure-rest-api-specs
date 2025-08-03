@@ -3354,9 +3354,83 @@
         }
       }
     },
+    "FineTuningJobRFTLabelModelGrader": {
+      "type": "object",
+      "description": "A LabelModelGrader object which uses a model to assign labels to each item in the evaluation.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "input labels",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobGraderMessage"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "The labels to assign to each item in the evaluation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The model to use for the evaluation. Must support structured outputs."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "passing_labels": {
+          "type": "array",
+          "description": "The labels that indicate a passing result. Must be a subset of labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model. Specific to AOAI API"
+        }
+      },
+      "required": [
+        "input",
+        "labels",
+        "model",
+        "name",
+        "passing_labels"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobRFTGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "label_model"
+    },
     "FineTuningJobRFTMultiGrader": {
       "type": "object",
       "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
+      "properties": {
+        "calculate_output": {
+          "type": "string",
+          "description": "A formula to calculate the output based on grader results."
+        },
+        "graders": {
+          "type": "object",
+          "description": "Graders to be combined",
+          "additionalProperties": {
+            "$ref": "#/definitions/FineTuningJobRFTGrader"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        }
+      },
+      "required": [
+        "calculate_output",
+        "graders",
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/FineTuningJobRFTGrader"
