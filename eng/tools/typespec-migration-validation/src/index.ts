@@ -18,6 +18,7 @@ import {
   formatDifferenceReport,
   formatModifiedValuesReport,
 } from "./summary.js";
+import { compareDocuments, printPathDiff } from "./compare.js";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -193,6 +194,20 @@ export async function main() {
     );
   }
 
+  const compareResult = compareDocuments(
+    sortedOldFile,
+    sortedNewFile,
+  );
+
+  logHeader("Comparing finished. Generating report...");
+  let outputMarkdown = "";
+  outputMarkdown += "| Type | Message |\n";
+  outputMarkdown += "| ---- | ------- |\n";
+  for (const diff of compareResult) {
+    outputMarkdown += printPathDiff(diff);
+  }
+  console.log(outputMarkdown);
+
   let report: string = "";
   const diffForFile = diff(sortedOldFile, sortedNewFile);
 
@@ -205,18 +220,18 @@ export async function main() {
       `Found ${changedPaths.length} changed paths in the diff.`,
     );
     const changedPathsReport = formatChangedPathsReport(changedPaths);
-    console.log(changedPathsReport);
+    // console.log(changedPathsReport);
     report += changedPathsReport;
   }
 
   const differences = findDifferences(diffForFile);
   const differencesReport = formatDifferenceReport(differences);
-  console.log(differencesReport);
+  // console.log(differencesReport);
   report += differencesReport;
 
   const modifiedValues = findModifiedValues(diffForFile);
   const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
-  console.log(modifiedValuesReport);
+  // console.log(modifiedValuesReport);
   report += modifiedValuesReport;
 
   if (outputFolder) {
