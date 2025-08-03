@@ -2679,7 +2679,7 @@
       }
     },
     "RedactionType": {
-      "description": "Gets or sets the type of PII redaction to be used.",
+      "description": "Value indicating the PII redaction type to be used.",
       "enum": [
         "maskWithCharacter"
       ],
@@ -2694,7 +2694,7 @@
       "type": "object",
       "properties": {
         "enable": {
-          "description": "Gets or sets a value indicating whether PII redaction is enabled.",
+          "description": "Value indicating if PII redaction is enabled.",
           "type": "boolean"
         },
         "redactionType": {
@@ -2858,14 +2858,14 @@
           "type": "string"
         },
         "speechLanguages": {
-          "description": "Gets or sets a list of languages for Language Identification.",
+          "description": "List of locales for Language Identification.\r\nSupports upto 4 locales in the format: [\"en-us\", \"fr-fr\", \"hi-in\"] etc.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "enableSentimentAnalysis": {
-          "description": "Gets or sets a value indicating if sentiment analysis should be used.",
+          "description": "Value indicating if sentiment analysis should be used.",
           "type": "boolean"
         },
         "speechRecognitionModelEndpointId": {
@@ -3606,9 +3606,11 @@
       "properties": {
         "code": {
           "format": "int32",
+          "description": "Represents the diagnostic code returned by the SIP service, used for identifying specific issues or statuses.",
           "type": "integer"
         },
         "message": {
+          "description": "Message associated with the code for diagnosing.",
           "type": "string"
         }
       }
@@ -4948,11 +4950,11 @@
           "description": "PII redaction configuration options."
         },
         "enableSentimentAnalysis": {
-          "description": "Indicating if sentiment analysis should be used.",
+          "description": "Indicating if sentiment analysis should be enabled.",
           "type": "boolean"
         },
         "locales": {
-          "description": "List of languages for Language Identification.",
+          "description": "List of locales for Language Identification.\r\nSupports upto 4 locales in the format: [\"en-us\", \"fr-fr\", \"hi-in\"] etc.",
           "type": "array",
           "items": {
             "type": "string"
