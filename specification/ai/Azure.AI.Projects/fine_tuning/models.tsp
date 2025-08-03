@@ -214,51 +214,179 @@ model FineTuningJobRFTTextSimilarityGrader extends FineTuningJobRFTGrader {
   pass_threshold?: float64;
 }
 
-@doc("TextSimilarityGrader grades text based on similarity metrics.")
+@doc("A PythonGrader object that runs a python script on the input.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobRFTPythonGrader extends FineTuningJobRFTGrader {
+  type: "python";
+
+  @doc("The name of the grader.")
+  name: string;
+
+  @doc("The source code of the python script.")
+  source: string;
+
+  @doc("The image tag to use for the python script.")
+  image_tag?: string;
+}
+
+@doc("Training RFT message role options.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union FineTuningJobGraderMessageRole {
+   string,
+
+   @doc("doc message role")
+   user : "user",
+
+   @doc("system message role")
+   system : "system",
+
+   @doc("developer message role")
+   developer : "developer",
+
+   @doc("assistant message role")
+   assistant : "assistant"
+}
+
+@doc("Training RFT message content base class.")
+@discriminator("kind")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderMessageContentBase {
+  @doc("Method content base type")
+  kind: string;
+}
+
+@doc("Training RFT message content base class.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderMessageTextContent extends FineTuningJobGraderMessageContentBase {
+   kind : "textContent";
+
+   @doc("type field")
+   type : string;
+
+   @doc("text field")
+   text : string;
+}
+
+@doc("Training RFT message content base class.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderMessageSimpleContent extends FineTuningJobGraderMessageContentBase {
+   kind : "simpleContent";
+
+   @doc("content field")
+   content : string;
+}
+
+@doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderMessage {
+   @doc("Message type")
+   type : string;
+
+   @doc("Message role")
+   role : FineTuningJobGraderMessageRole;
+
+   @doc("Message content")
+   content : FineTuningJobGraderMessageContentBase;
+}
+
+@doc("The sampling parameters for the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union FineTuningJobGraderReasoningEffort {
+  string,
+
+  @doc("Low reasoning effort")
+  low: "low";
+
+  @doc("Medium reasoning effort")
+  medium: "medium";
+
+  @doc("High reasoning effort")
+  high: "high";
+}
+
+@doc("The sampling parameters for the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobGraderModelSamplingParam
+{
+   @doc("Seed parameter")
+   seed?: int32;
+
+   @doc("Temperature parameter")
+   temperature? : float64;
+
+   @doc("Max completions tokens parameter")
+   max_completions_tokens?: int32;
+
+   @doc("Top parameter")
+   top_p? : float64;
+
+   @doc("Reasoning effort parameter")
+   reasoning_effort?: FineTuningJobGraderReasoningEffort;
+}
+
+@doc("A ScoreModelGrader object that uses a model to assign a score to the input.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobRFTScoreModelGrader extends FineTuningJobRFTGrader {
   type: "score_model";
   
   //@doc("The input text. This may include template strings.")
-  //input: Array<FineTuningJobModelGraderMessage>;
+  input: Array<FineTuningJobGraderMessage>;
+
+  @doc("The model to use for the evaluation.")
+  `model`: string;
 
   @doc("The name of the grader.")
   name: string;
 
   @doc("The model to use for the evaluation.")
-  `model`: string;
-
-  @doc("The model to use for the evaluation.")
-  range: Array<float64>;
+  range?: Array<float64>;
   
-  // TBD: sampling_params
+  @doc("The sampling parameters for the model.")
+  sampling_params? : FineTuningJobGraderModelSamplingParam;
 
   @doc("TBD")
   passThreshold?: float64;
 }
 
-@doc("ScoreModelGrader uses a model to assign a score to the input.")
+@doc("A MultiGrader object combines the output of multiple graders to produce a single score.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobRFTLabelModelGraderGrader extends FineTuningJobRFTGrader {
-  type: "label_model";
+model FineTuningJobRFTMultiGrader extends FineTuningJobRFTGrader
+{
+   type : "multi";
+/**
+    [Required]
+    [Display(Name = FineTuningGraderTypePropertyName)]
+    [JsonPropertyName(FineTuningGraderTypePropertyName)]
+    [YamlMember(Alias = FineTuningGraderTypePropertyName)]
+    public override string GraderType => TypeName;
 
-  @doc("The name of the grader.")
-  name: string;
+    [Display(Name = "name")]
+    [JsonPropertyName("name")]
+    [YamlMember(Alias = "name", ApplyNamingConventions = false)]
+    public required string Name { get; set; }
 
-  @doc("The model to use for the evaluation. Must support structured outputs.")
-  `model`: string;
+    [Display(Name = "graders")]
+    [JsonPropertyName("graders")]
+    [YamlMember(Alias = "graders", ApplyNamingConventions = false)]
+    public required Dictionary<string, FineTuningGraderConfig> Graders { get; init; }
 
-  //@doc("The text being graded.")
-  //input: string;
-
-  //@doc("The text being graded against.")
-  //labels: string;
-  
-  //passing_labels
-
+    [Display(Name = "calculate_output")]
+    [JsonPropertyName("calculate_output")]
+    [YamlMember(Alias = "calculate_output", ApplyNamingConventions = false)]
+    public required string CalculateOutput { get; set; }
+    */
 }
+
 // RFT graders end 
 
 @doc("Configuration for the Reinforcement fine-tuning method.")

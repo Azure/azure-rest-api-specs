@@ -3078,6 +3078,182 @@
         }
       }
     },
+    "FineTuningJobGraderMessage": {
+      "type": "object",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Message type"
+        },
+        "role": {
+          "$ref": "#/definitions/FineTuningJobGraderMessageRole",
+          "description": "Message role"
+        },
+        "content": {
+          "$ref": "#/definitions/FineTuningJobGraderMessageContentBase",
+          "description": "Message content"
+        }
+      },
+      "required": [
+        "type",
+        "role",
+        "content"
+      ]
+    },
+    "FineTuningJobGraderMessageContentBase": {
+      "type": "object",
+      "description": "Training RFT message content base class.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Method content base type"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "FineTuningJobGraderMessageRole": {
+      "type": "string",
+      "description": "Training RFT message role options.",
+      "enum": [
+        "user",
+        "system",
+        "developer",
+        "assistant"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobGraderMessageRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user",
+            "description": "doc message role"
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "system message role"
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "developer message role"
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "assistant message role"
+          }
+        ]
+      }
+    },
+    "FineTuningJobGraderMessageSimpleContent": {
+      "type": "object",
+      "description": "Training RFT message content base class.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "content field"
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobGraderMessageContentBase"
+        }
+      ],
+      "x-ms-discriminator-value": "simpleContent"
+    },
+    "FineTuningJobGraderMessageTextContent": {
+      "type": "object",
+      "description": "Training RFT message content base class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type field"
+        },
+        "text": {
+          "type": "string",
+          "description": "text field"
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobGraderMessageContentBase"
+        }
+      ],
+      "x-ms-discriminator-value": "textContent"
+    },
+    "FineTuningJobGraderModelSamplingParam": {
+      "type": "object",
+      "description": "The sampling parameters for the model.",
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seed parameter"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "double",
+          "description": "Temperature parameter"
+        },
+        "max_completions_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max completions tokens parameter"
+        },
+        "top_p": {
+          "type": "number",
+          "format": "double",
+          "description": "Top parameter"
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/FineTuningJobGraderReasoningEffort",
+          "description": "Reasoning effort parameter"
+        }
+      }
+    },
+    "FineTuningJobGraderReasoningEffort": {
+      "type": "string",
+      "description": "The sampling parameters for the model.",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "FineTuningJobGraderReasoningEffort",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low reasoning effort"
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium reasoning effort"
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High reasoning effort"
+          }
+        ]
+      }
+    },
     "FineTuningJobIntegration": {
       "type": "object",
       "description": "Integration to enable for fine-tuning job.",
@@ -3178,29 +3354,43 @@
         }
       }
     },
-    "FineTuningJobRFTLabelModelGraderGrader": {
+    "FineTuningJobRFTMultiGrader": {
       "type": "object",
-      "description": "ScoreModelGrader uses a model to assign a score to the input.",
+      "description": "A MultiGrader object combines the output of multiple graders to produce a single score.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobRFTGrader"
+        }
+      ],
+      "x-ms-discriminator-value": "multi"
+    },
+    "FineTuningJobRFTPythonGrader": {
+      "type": "object",
+      "description": "A PythonGrader object that runs a python script on the input.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The name of the grader."
         },
-        "model": {
+        "source": {
           "type": "string",
-          "description": "The model to use for the evaluation. Must support structured outputs."
+          "description": "The source code of the python script."
+        },
+        "image_tag": {
+          "type": "string",
+          "description": "The image tag to use for the python script."
         }
       },
       "required": [
         "name",
-        "model"
+        "source"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/FineTuningJobRFTGrader"
         }
       ],
-      "x-ms-discriminator-value": "label_model"
+      "x-ms-discriminator-value": "python"
     },
     "FineTuningJobRFTResponseFormat": {
       "type": "object",
@@ -3238,15 +3428,21 @@
     },
     "FineTuningJobRFTScoreModelGrader": {
       "type": "object",
-      "description": "TextSimilarityGrader grades text based on similarity metrics.",
+      "description": "A ScoreModelGrader object that uses a model to assign a score to the input.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the grader."
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobGraderMessage"
+          }
         },
         "model": {
           "type": "string",
           "description": "The model to use for the evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
         },
         "range": {
           "type": "array",
@@ -3256,6 +3452,10 @@
             "format": "double"
           }
         },
+        "sampling_params": {
+          "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
+          "description": "The sampling parameters for the model."
+        },
         "passThreshold": {
           "type": "number",
           "format": "double",
@@ -3263,9 +3463,9 @@
         }
       },
       "required": [
-        "name",
+        "input",
         "model",
-        "range"
+        "name"
       ],
       "allOf": [
         {
