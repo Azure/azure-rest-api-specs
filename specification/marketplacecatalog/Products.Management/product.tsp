@@ -662,9 +662,8 @@ model PlanMetadata {
   altStackReference?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
-model PlanDetails extends PlanSummary {
+model PlanDetails {
   @doc("The id")
   id?: string;
 
@@ -675,7 +674,7 @@ model PlanDetails extends PlanSummary {
   uiDefinitionUri?: string;
 
   @doc("Files related to the marketplace item")
-  planArtifacts?: Artifact[];
+  artifacts?: Artifact[];
 
   @doc("Version of the marketplace item")
   version?: string;
