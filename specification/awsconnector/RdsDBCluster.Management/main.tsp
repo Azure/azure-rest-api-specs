@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-portal-core";
 import "../shared/main.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

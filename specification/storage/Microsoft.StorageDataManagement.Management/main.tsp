@@ -4,7 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./models.tsp";
+import "./Connectors/connectorModels.tsp";
+import "./DataShares/dataShareModels.tsp";
 import "./storageAccount.tsp";
 
 using TypeSpec.Http;
@@ -20,10 +21,13 @@ namespace Microsoft.Storage;
 
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2025-01-01-preview`,
+  v2025_01_01_preview: "2025-01-01-preview",
 
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_05_01_preview: "2025-05-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_07_01_preview: "2025-07-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -62,4 +66,39 @@ interface Connectors {
     TestExistingConnectionRequest,
     TestConnectionResponse
   >;
+}
+
+@doc("A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account")
+@parentResource(StorageAccount)
+@added(Versions.v2025_07_01_preview)
+model DataShare is TrackedResource<DataShareProperties> {
+  @doc("The name of the Storage Data Share")
+  @pattern("^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$")
+  @key("dataShareName")
+  @segment("dataShares")
+  @path
+  name: string;
+}
+
+@armResourceOperations(DataShare)
+interface DataShares {
+  @doc("Get the specified Storage DataShare.")
+  @added(Versions.v2025_07_01_preview)
+  get is ArmResourceRead<DataShare>;
+
+  @doc("Create a Storage DataShare if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource. ")
+  @added(Versions.v2025_07_01_preview)
+  create is ArmResourceCreateOrReplaceAsync<DataShare>;
+
+  @doc("Update a Storage DataShare.")
+  @added(Versions.v2025_07_01_preview)
+  update is ArmResourcePatchAsync<DataShare, DataShareProperties>;
+
+  @doc("Delete a Storage DataShare.")
+  @added(Versions.v2025_07_01_preview)
+  delete is ArmResourceDeleteWithoutOkAsync<DataShare>;
+
+  @doc("List all Storage DataShares in a Storage Account.")
+  @added(Versions.v2025_07_01_preview)
+  listByStorageAccount is ArmResourceListByParent<DataShare>;
 }

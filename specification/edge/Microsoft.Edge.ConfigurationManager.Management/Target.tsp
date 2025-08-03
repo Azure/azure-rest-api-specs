@@ -27,15 +27,20 @@ model ResolvedConfiguration {
 
 @doc("Solution Template Parameter")
 model SolutionTemplateParameter {
+  @removed(Versions.v2025_06_01)
   @doc("Solution Template Name")
   solutionTemplate: string;
 
+  @removed(Versions.v2025_06_01)
   @doc("Solution Template Version Name")
   solutionTemplateVersion: string;
 
+  @added(Versions.v2025_06_01)
+  @doc("Solution Template Version ARM Id")
+  solutionTemplateVersionId: string;
+
   @doc("Solution Instance Name")
-  @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
@@ -45,14 +50,21 @@ model SolutionTemplateParameter {
 
 @doc("Solution Version Parameter")
 model SolutionVersionParameter {
+  @removed(Versions.v2025_06_01)
   @doc("Solution Name")
   solution: string;
 
+  @removed(Versions.v2025_06_01)
   @doc("Solution Version Name")
   solutionVersion: string;
 
+  @removed(Versions.v2025_06_01)
   @doc("Review ID")
   reviewId: string;
+
+  @added(Versions.v2025_06_01)
+  @doc("Solution Version ARM Id")
+  solutionVersionId: string;
 }
 
 @doc("Update External Validation Status Parameter")
@@ -83,7 +95,7 @@ model SolutionDependencyParameter {
 
   @doc("Solution Instance Name")
   @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
 
   @doc("Target Id")
@@ -96,17 +108,28 @@ model SolutionDependencyParameter {
 
 @doc("Install Solution Parameter")
 model InstallSolutionParameter {
+  @removed(Versions.v2025_06_01)
   @doc("Solution Name")
   solution: string;
 
+  @removed(Versions.v2025_06_01)
   @doc("Solution Version Name")
   solutionVersion: string;
+
+  @added(Versions.v2025_06_01)
+  @doc("Solution Version ARM Id")
+  solutionVersionId: string;
 }
 
 @doc("Uninstall Solution Parameter")
 model UninstallSolutionParameter {
+  @removed(Versions.v2025_06_01)
   @doc("Solution Name")
   solutionName: string;
+
+  @added(Versions.v2025_06_01)
+  @doc("Solution Template ARM Id")
+  solutionTemplateId: string;
 
   @doc("Solution Instance Name")
   solutionInstanceName?: string;
@@ -114,8 +137,13 @@ model UninstallSolutionParameter {
 
 @doc("Install Solution Parameter")
 model RemoveRevisionParameter {
+  @removed(Versions.v2025_06_01)
   @doc("Solution Name")
   solution: string;
+
+  @added(Versions.v2025_06_01)
+  @doc("Solution Template ARM Id")
+  solutionTemplateId: string;
 
   @doc("Solution Version Name")
   solutionVersion: string;
@@ -128,6 +156,14 @@ model TargetProperties {
 
   @doc("Display name of target")
   displayName: string;
+
+  @added(Versions.v2025_06_01)
+  @doc("ArmId of Context")
+  contextId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/contexts";
+    }
+  ]>;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"

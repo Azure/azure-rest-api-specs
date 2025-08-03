@@ -4803,25 +4803,13 @@
       "properties": {
         "currentVersion": {
           "type": "string",
-          "description": "Current Version of schema"
+          "description": "Current Version of schema",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
-        }
-      },
-      "required": [
-        "currentVersion"
-      ]
-    },
-    "SchemaPropertiesUpdate": {
-      "type": "object",
-      "description": "Schema Properties",
-      "properties": {
-        "currentVersion": {
-          "type": "string",
-          "description": "Current Version of schema"
         }
       }
     },
@@ -4909,7 +4897,7 @@
       "description": "Schema Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SchemaPropertiesUpdate",
+          "$ref": "#/definitions/SchemaProperties",
           "description": "The resource-specific properties for this resource."
         }
       },

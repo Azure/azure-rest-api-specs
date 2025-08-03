@@ -1,0 +1,490 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Asgard management service",
+    "version": "2025-04-01-preview",
+    "description": "Microsoft.Asgard Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AsgardCluster"
+    },
+    {
+      "name": "AsgardNode"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Asgard/locations/{location}/clusters": {
+      "get": {
+        "operationId": "AsgardCluster_List",
+        "tags": [
+          "AsgardCluster"
+        ],
+        "description": "List AsgardClusterResource resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AsgardClusterResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AsgardCluster_List": {
+            "$ref": "./examples/AsgardClusterList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Asgard/locations/{location}/clusters/{clusterName}": {
+      "get": {
+        "operationId": "AsgardCluster_Get",
+        "tags": [
+          "AsgardCluster"
+        ],
+        "description": "Get a AsgardClusterResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AsgardClusterResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AsgardCluster_Get": {
+            "$ref": "./examples/AsgardClusterGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Asgard/locations/{location}/clusters/{clusterName}/nodes": {
+      "get": {
+        "operationId": "AsgardNode_List",
+        "tags": [
+          "AsgardNode"
+        ],
+        "description": "List AsgardNodeResource resources by AsgardClusterResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AsgardNodeResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AsgardNode_List": {
+            "$ref": "./examples/AsgardNodeListGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Asgard/locations/{location}/clusters/{clusterName}/nodes/{nodeName}": {
+      "get": {
+        "operationId": "AsgardNode_Get",
+        "tags": [
+          "AsgardNode"
+        ],
+        "description": "Get a AsgardNodeResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AsgardNodeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AsgardNode_Get": {
+            "$ref": "./examples/AsgardNodeGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Asgard/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AsgardClusterProperties": {
+      "type": "object",
+      "description": "Asgard Cluster Properties",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "description": "Cluster name"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterName"
+      ]
+    },
+    "AsgardClusterResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AsgardClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AsgardClusterResourceListResult": {
+      "type": "object",
+      "description": "The response of a AsgardClusterResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AsgardClusterResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AsgardClusterResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AsgardNodeProperties": {
+      "type": "object",
+      "description": "Asgard Node Properties",
+      "properties": {
+        "nodeLogicalNameName": {
+          "type": "string",
+          "description": "node logical name"
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "node name"
+        },
+        "nodeType": {
+          "$ref": "#/definitions/NodeType",
+          "description": "Node type",
+          "readOnly": true
+        },
+        "tenantName": {
+          "type": "string",
+          "description": "tenant"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "nodeLogicalNameName",
+        "nodeName",
+        "nodeType",
+        "tenantName"
+      ]
+    },
+    "AsgardNodeResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AsgardNodeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AsgardNodeResourceListResult": {
+      "type": "object",
+      "description": "The response of a AsgardNodeResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AsgardNodeResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AsgardNodeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NodeType": {
+      "type": "string",
+      "description": "Node type doc",
+      "enum": [
+        "WarpNode",
+        "PilotFishNode"
+      ],
+      "x-ms-enum": {
+        "name": "NodeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WarpNode",
+            "value": "WarpNode",
+            "description": "Warp Node"
+          },
+          {
+            "name": "PilotFishNode",
+            "value": "PilotFishNode",
+            "description": "PilotFish node name"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource action is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource action has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource action has been cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource status is unspecified."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

@@ -20,11 +20,11 @@ model FaultProperties {
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Available faults for this resource.")
   @visibility(Lifecycle.Read)
-  availableFaults: FaultDetails[];
+  availableFaults?: FaultDetails[];
 
   @doc("Default fault provided by the system.")
   @visibility(Lifecycle.Read)
-  defaultFault: FaultDetails;
+  defaultFault?: FaultDetails;
 
   @doc("Override fault provided by the user.")
   overriddenDefaultFault?: FaultDetails;

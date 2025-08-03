@@ -1,0 +1,1967 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DeviceOnboarding",
+    "version": "2025-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OnboardingServices"
+    },
+    {
+      "name": "Policies"
+    },
+    {
+      "name": "DeviceStates"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.DeviceOnboarding/deviceStates": {
+      "get": {
+        "operationId": "DeviceStates_ListByParent",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "List DeviceState resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceStateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_ListByParent_MaximumSet": {
+            "$ref": "./examples/DeviceStates_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.DeviceOnboarding/deviceStates/default": {
+      "get": {
+        "operationId": "DeviceStates_Get",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "Get a DeviceState",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_Get_MaximumSet": {
+            "$ref": "./examples/DeviceStates_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceStates_CreateOrUpdate",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "Create a DeviceState",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeviceState' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeviceState' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DeviceStates_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceStates_Update",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "Update a DeviceState",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceStateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_Update_MaximumSet": {
+            "$ref": "./examples/DeviceStates_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceStates_Delete",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "Delete a DeviceState",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_Delete_MaximumSet": {
+            "$ref": "./examples/DeviceStates_Delete_MaximumSet_Gen.json"
+          },
+          "DeviceStates_Delete_MinimumSet": {
+            "$ref": "./examples/DeviceStates_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.DeviceOnboarding/deviceStates/default/prepareForOnboarding": {
+      "post": {
+        "operationId": "DeviceStates_PrepareForOnboarding",
+        "tags": [
+          "DeviceStates"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrepareForOnboardingProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceStates_PrepareForOnboarding_MaximumSet": {
+            "$ref": "./examples/DeviceStates_PrepareForOnboarding_MaximumSet_Gen.json"
+          },
+          "DeviceStates_PrepareForOnboarding_MinimumSet": {
+            "$ref": "./examples/DeviceStates_PrepareForOnboarding_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.DeviceOnboarding/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceOnboarding/onboardingServices": {
+      "get": {
+        "operationId": "OnboardingServices_ListBySubscription",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "List OnboardingService resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnboardingServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices": {
+      "get": {
+        "operationId": "OnboardingServices_ListByResourceGroup",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "List OnboardingService resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnboardingServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}": {
+      "get": {
+        "operationId": "OnboardingServices_Get",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "Get a OnboardingService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnboardingService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_Get_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OnboardingServices_CreateOrUpdate",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "Create a OnboardingService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnboardingService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OnboardingService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OnboardingService"
+            }
+          },
+          "201": {
+            "description": "Resource 'OnboardingService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OnboardingService"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OnboardingServices_Update",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "Update a OnboardingService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnboardingServiceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnboardingService"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_Update_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OnboardingServices_Delete",
+        "tags": [
+          "OnboardingServices"
+        ],
+        "description": "Delete a OnboardingService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OnboardingServices_Delete_MaximumSet": {
+            "$ref": "./examples/OnboardingServices_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies": {
+      "get": {
+        "operationId": "Policies_ListByParent",
+        "tags": [
+          "Policies"
+        ],
+        "description": "List Policy resources by OnboardingService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_ListByParent_MaximumSet": {
+            "$ref": "./examples/Policies_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies/{policyName}": {
+      "get": {
+        "operationId": "Policies_Get",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Get a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get_MaximumSet": {
+            "$ref": "./examples/Policies_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Policies_CreateOrUpdate",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Create a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Policy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "201": {
+            "description": "Resource 'Policy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Policies_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Policies_Update",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Update a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Update_MaximumSet": {
+            "$ref": "./examples/Policies_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Policies_Delete",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Delete a Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "onboardingServiceName",
+            "in": "path",
+            "description": "The name of the Provisioning Resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9-]{3,63}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9-]{3,127}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Delete_MaximumSet": {
+            "$ref": "./examples/Policies_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BootstrapAuthenticationRule": {
+      "type": "object",
+      "description": "The authentication rule for bootstrap.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BootstrapAuthenticationType",
+          "description": "The type of authentication rule."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "BootstrapAuthenticationType": {
+      "type": "string",
+      "description": "The authentication type for bootstrap.",
+      "enum": [
+        "FDO"
+      ],
+      "x-ms-enum": {
+        "name": "BootstrapAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FDO",
+            "value": "FDO",
+            "description": "The FDO authentication type."
+          }
+        ]
+      }
+    },
+    "DeviceEndpoint": {
+      "type": "object",
+      "description": "The device endpoint.",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "Hostname of the Endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceEndpoints": {
+      "type": "object",
+      "description": "Device endpoints.",
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/DeviceEndpoint",
+          "description": "The default endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceState": {
+      "type": "object",
+      "description": "The provisioning state of a device.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceStateListResult": {
+      "type": "object",
+      "description": "The response of a DeviceState list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceState items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceState"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceStateProperties": {
+      "type": "object",
+      "description": "Details of the DeviceState",
+      "properties": {
+        "registrationId": {
+          "type": "string",
+          "description": "Unique identifier for the device. Allow alphanumeric and '-', '.', '_', ':' only. Last character can only be alphanumeric and '-'",
+          "maxLength": 128,
+          "pattern": "^([a-z0-9-._:]{0,127}[a-z0-9-])$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "discoveryEnabled": {
+          "$ref": "#/definitions/DiscoveryOptions",
+          "description": "Indicates if the device is enabled for discovery"
+        },
+        "onboardingStatus": {
+          "$ref": "#/definitions/OnboardingStatus",
+          "description": "Onboarding status of the resource this DeviceState extends",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "policyResourceId": {
+          "$ref": "#/definitions/PolicyResourceId",
+          "description": "The onboarding policy resource id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "onboardUntilDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the maximum date and time by which a device can be onboarded, in utcDateTime format",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "registrationId",
+        "onboardingStatus",
+        "policyResourceId"
+      ]
+    },
+    "DeviceStatePropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the DeviceState",
+      "properties": {
+        "discoveryEnabled": {
+          "$ref": "#/definitions/DiscoveryOptions",
+          "description": "Indicates if the device is enabled for discovery"
+        },
+        "onboardingStatus": {
+          "$ref": "#/definitions/OnboardingStatus",
+          "description": "Onboarding status of the resource this DeviceState extends",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "policyResourceId": {
+          "$ref": "#/definitions/PolicyResourceId",
+          "description": "The onboarding policy resource id"
+        }
+      }
+    },
+    "DeviceStateUpdate": {
+      "type": "object",
+      "description": "The provisioning state of a device.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceStatePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiscoveryOptions": {
+      "type": "string",
+      "description": "Options for enabling or disabling devices for discovery.",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "Value indicating the device is enabled for discovery"
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "Value indicating the device is disabled for discovery"
+          }
+        ]
+      }
+    },
+    "FdoBootstrapAuthenticationRule": {
+      "type": "object",
+      "description": "The FDO-based authentication rule for bootstrapping.",
+      "properties": {
+        "publicKeys": {
+          "$ref": "#/definitions/FdoPublicKeys",
+          "description": "Per policy public key(s) to extend ownership voucher to the customer."
+        },
+        "ownershipVoucherStorage": {
+          "$ref": "#/definitions/OwnershipVoucherStorage",
+          "description": "Ownership Voucher storage"
+        },
+        "rendezvousEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BootstrapAuthenticationRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FDO"
+    },
+    "FdoPublicKey": {
+      "type": "object",
+      "description": "Owner public key model",
+      "properties": {
+        "default": {
+          "type": "array",
+          "description": "x5Chain representation of the public key.",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/PublicKeyStatus",
+          "description": "Status of the public key."
+        }
+      }
+    },
+    "FdoPublicKeys": {
+      "type": "object",
+      "description": "Owner public keys to extend ownership voucher to the customer.",
+      "properties": {
+        "secp256R1": {
+          "$ref": "#/definitions/FdoPublicKey",
+          "description": "Public key as x5C with encryption type SECP256R1."
+        },
+        "secp384R1": {
+          "$ref": "#/definitions/FdoPublicKey",
+          "description": "Public key as x5C with encryption type SECP384R1."
+        }
+      }
+    },
+    "HybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
+    },
+    "OnboardingResourceType": {
+      "type": "string",
+      "description": "Type of resource being provisioned.",
+      "enum": [
+        "Microsoft.HybridCompute/machines"
+      ],
+      "x-ms-enum": {
+        "name": "OnboardingResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HybridComputeMachine",
+            "value": "Microsoft.HybridCompute/machines",
+            "description": "Arc enabled device. Microsoft.HybridCompute/machines"
+          }
+        ]
+      }
+    },
+    "OnboardingService": {
+      "type": "object",
+      "description": "A provisioning resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnboardingServiceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OnboardingServiceListResult": {
+      "type": "object",
+      "description": "The response of a OnboardingService list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OnboardingService items on this page",
+          "items": {
+            "$ref": "#/definitions/OnboardingService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OnboardingServiceProperties": {
+      "type": "object",
+      "description": "Details of the EdgeProvisioning OnboardingService.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "deviceEndpoints": {
+          "$ref": "#/definitions/DeviceEndpoints",
+          "description": "The onboarding service device endpoints.",
+          "readOnly": true
+        },
+        "enableCertificateManagement": {
+          "type": "boolean",
+          "description": "Selecting 'true' will enable a Microsoft managed PKI to issue certificates. Setting up of the CA and policies for certificate management will be while defining the onboarding policy.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "enableCertificateManagement"
+      ]
+    },
+    "OnboardingServicePropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the EdgeProvisioning OnboardingService."
+    },
+    "OnboardingServiceUpdate": {
+      "type": "object",
+      "description": "A provisioning resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnboardingServicePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "OnboardingStatus": {
+      "type": "string",
+      "description": "The current onboarding status.",
+      "enum": [
+        "Pending",
+        "Provisioned",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OnboardingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Onboarding is still pending"
+          },
+          {
+            "name": "Provisioned",
+            "value": "Provisioned",
+            "description": "The resource has been onboarded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Onboarding has failed"
+          }
+        ]
+      }
+    },
+    "OwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Generic Ownership Voucher Storage type.",
+      "properties": {
+        "ownershipVoucherStorageType": {
+          "$ref": "#/definitions/OwnershipVoucherStorageType",
+          "description": "The Ownership Voucher Storage type."
+        }
+      },
+      "discriminator": "ownershipVoucherStorageType",
+      "required": [
+        "ownershipVoucherStorageType"
+      ]
+    },
+    "OwnershipVoucherStorageType": {
+      "type": "string",
+      "description": "The Ownership Voucher Storage Type.",
+      "enum": [
+        "Microsoft.Storage/storageAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "OwnershipVoucherStorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureBlobStorage",
+            "value": "Microsoft.Storage/storageAccounts",
+            "description": "The Storage Account Ownership Voucher Storage type."
+          }
+        ]
+      }
+    },
+    "PatchBootstrapAuthenticationRule": {
+      "type": "object",
+      "description": "The bootstrap authentication rule for patch.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BootstrapAuthenticationType",
+          "description": "The type of authentication rule."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PatchFdoBootstrapAuthenticationRule": {
+      "type": "object",
+      "description": "The FDO-based authentication rule for bootstrapping.",
+      "properties": {
+        "publicKeys": {
+          "$ref": "#/definitions/FdoPublicKeys",
+          "description": "Per policy public keys to represent this policy"
+        },
+        "ownershipVoucherStorage": {
+          "$ref": "#/definitions/OwnershipVoucherStorage",
+          "description": "Ownership Voucher storage link"
+        },
+        "rendezvousEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchBootstrapAuthenticationRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FDO"
+    },
+    "PatchHybridComputePolicyResourceDetails": {
+      "type": "object",
+      "description": "Details of the OnboardingService Hybrid Compute Machines Policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyPatchResourceDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.HybridCompute/machines"
+    },
+    "PatchOwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Generic Ownership Voucher Storage type.",
+      "properties": {
+        "ownershipVoucherStorageType": {
+          "$ref": "#/definitions/OwnershipVoucherStorageType",
+          "description": "The Ownership Voucher Storage type."
+        }
+      },
+      "discriminator": "ownershipVoucherStorageType",
+      "required": [
+        "ownershipVoucherStorageType"
+      ]
+    },
+    "PatchSelectedIdentity": {
+      "type": "object",
+      "description": "Information on the selected identity. Can be SystemAssigned or UserAssigned.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SelectedIdentityType",
+          "description": "The type of identity."
+        },
+        "resourceId": {
+          "$ref": "#/definitions/SelectedIdentityResourceId",
+          "description": "Resource id of the UserAssigned identity."
+        }
+      }
+    },
+    "PatchStorageAccountOwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Storage Account Ownership Voucher Storage. Policy MI is used to access this storage",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "The storage resource id"
+        },
+        "containerUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint URI for the storage account"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchOwnershipVoucherStorage"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.Storage/storageAccounts"
+    },
+    "Policy": {
+      "type": "object",
+      "description": "An onboarding policy resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PolicyListResult": {
+      "type": "object",
+      "description": "The response of a Policy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Policy items on this page",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyPatch": {
+      "type": "object",
+      "description": "Onboarding policy model for patch.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyPatchProperties",
+          "description": "Policy Patch Properties."
+        }
+      }
+    },
+    "PolicyPatchProperties": {
+      "type": "object",
+      "description": "Onboarding policies properties model for patch.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the policy"
+        },
+        "status": {
+          "$ref": "#/definitions/PolicyStatusOptions",
+          "description": "The policy status"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "bootstrapAuthentication": {
+          "$ref": "#/definitions/PatchBootstrapAuthenticationRule",
+          "description": "The bootstrap authentication rule."
+        },
+        "resourceDetails": {
+          "$ref": "#/definitions/PolicyPatchResourceDetails",
+          "description": "Further details about the policy resource"
+        },
+        "selectedIdentity": {
+          "$ref": "#/definitions/PatchSelectedIdentity",
+          "description": "The identity the OnboardingService Policy will use. Must be from the list of enabled managed identities on the resource."
+        }
+      }
+    },
+    "PolicyPatchResourceDetails": {
+      "type": "object",
+      "description": "Common further details about the policy resource for patch",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnboardingResourceType",
+          "description": "Type of the resource being provisioned."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PolicyProperties": {
+      "type": "object",
+      "description": "Details of the OnboardingService Policy.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the policy"
+        },
+        "status": {
+          "$ref": "#/definitions/PolicyStatusOptions",
+          "description": "The policy status"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "bootstrapAuthentication": {
+          "$ref": "#/definitions/BootstrapAuthenticationRule",
+          "description": "The bootstrap authentication rule."
+        },
+        "resourceDetails": {
+          "$ref": "#/definitions/PolicyResourceDetails",
+          "description": "Further details about the policy resource"
+        },
+        "selectedIdentity": {
+          "$ref": "#/definitions/SelectedIdentity",
+          "description": "The identity the OnboardingService Policy will use. Must be from the list of enabled managed identities on the resource."
+        }
+      },
+      "required": [
+        "status",
+        "bootstrapAuthentication",
+        "resourceDetails"
+      ]
+    },
+    "PolicyResourceDetails": {
+      "type": "object",
+      "description": "Common further details about the policy resource",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnboardingResourceType",
+          "description": "Type of the resource being provisioned."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "PolicyResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.DeviceOnboarding/onboardingServices/policies"
+          }
+        ]
+      }
+    },
+    "PolicyStatusOptions": {
+      "type": "string",
+      "description": "Options for policy status.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyStatusOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The value indicating the policy is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The value indicating the policy is disabled."
+          }
+        ]
+      }
+    },
+    "PrepareForOnboardingProperties": {
+      "type": "object",
+      "description": "The properties passed in the prepareForOnboarding POST request.",
+      "properties": {
+        "ttl": {
+          "type": "string",
+          "format": "duration",
+          "description": "Desired maximum duration by which a device can be onboarded"
+        }
+      },
+      "required": [
+        "ttl"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicKeyStatus": {
+      "type": "string",
+      "description": "Status of public key.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicKeyStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Key is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Key is disabled."
+          }
+        ]
+      }
+    },
+    "SelectedIdentity": {
+      "type": "object",
+      "description": "Information on the selected identity. Can be SystemAssigned or UserAssigned.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SelectedIdentityType",
+          "description": "The type of identity."
+        },
+        "resourceId": {
+          "$ref": "#/definitions/SelectedIdentityResourceId",
+          "description": "Resource id of the UserAssigned identity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SelectedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
+    },
+    "SelectedIdentityType": {
+      "type": "string",
+      "description": "Supported identity types.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "SelectedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity."
+          }
+        ]
+      }
+    },
+    "StorageAccountOwnershipVoucherStorage": {
+      "type": "object",
+      "description": "Storage Account Ownership Voucher Storage. Policy MI is used to access this storage",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "The storage resource id"
+        },
+        "containerUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint URL for the storage container. e.g: https://contoso.blob.core.windows.net/mycontainer"
+        }
+      },
+      "required": [
+        "resourceId",
+        "containerUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OwnershipVoucherStorage"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.Storage/storageAccounts"
+    },
+    "StorageAccountResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

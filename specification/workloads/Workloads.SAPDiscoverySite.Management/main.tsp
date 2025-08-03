@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./SAPDiscoverySite.tsp";
 import "./SAPInstance.tsp";
 import "./ServerInstance.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

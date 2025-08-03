@@ -53,6 +53,247 @@
     }
   ],
   "paths": {
+    "/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/stageMaps": {
+      "get": {
+        "operationId": "StageMaps_ListByManagementGroup",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "List StageMap resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_ListByManagementGroup_MaximumSet": {
+            "$ref": "./examples/StageMaps_ListByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/stageMaps/{stageMapName}": {
+      "get": {
+        "operationId": "StageMaps_GetAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Get a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_GetAtManagementGroupLevel_MaximumSet": {
+            "$ref": "./examples/StageMaps_GetAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Create a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StageMap' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "201": {
+            "description": "Resource 'StageMap' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_CreateOrUpdateAtManagementGroupLevel_MaximumSet": {
+            "$ref": "./examples/StageMaps_CreateOrUpdateAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "StageMaps_UpdateAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Update a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StageMapUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StageMap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_UpdateAtManagementGroupLevel_MaximumSet": {
+            "$ref": "./examples/StageMaps_UpdateAtManagementGroupLevel.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StageMaps_DeleteAtManagementGroupLevel",
+        "tags": [
+          "StageMaps"
+        ],
+        "description": "Delete a StageMap",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "stageMapName",
+            "in": "path",
+            "description": "The name of the StageMap",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StageMaps_DeleteAtManagementGroupLevel_MaximumSet": {
+            "$ref": "./examples/StageMaps_DeleteAtManagementGroupLevel.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ChangeSafety/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -3320,6 +3561,16 @@
           "type": "string",
           "format": "arm-id",
           "description": "The stage progression Id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "stageProgressionResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The stage progression resource Id.",
           "x-ms-mutability": [
             "read",
             "update",

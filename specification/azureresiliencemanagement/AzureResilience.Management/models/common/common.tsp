@@ -229,6 +229,9 @@ union ResourceProtectionSolutionType {
   @doc("Resource protected with the Azure solution provided by the native Azure Site Service for Azure VMs.")
   AzureSiteRecovery: "AzureSiteRecovery",
 
+  @doc("Cross zone recovery enabled Azure VMs.")
+  CrossZoneVMRecovery: "CrossZoneVMRecovery",
+
   @doc("Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs.")
   CustomRunbook: "CustomRunbook",
 

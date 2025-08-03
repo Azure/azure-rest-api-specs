@@ -1,17 +1,17 @@
-import { beforeEach, test, describe, vi, Mock, expect } from "vitest";
 import { readFile } from "fs/promises";
 import { join } from "node:path";
+import { Mock, beforeEach, describe, expect, test, vi } from "vitest";
 
 import axios from "axios";
 
+import { Readme } from "@azure-tools/specs-shared/readme";
 import {
   deduplicateTags,
-  getDocRawUrl,
   getDefaultTag,
+  getDocRawUrl,
   getOpenapiType,
   getRelatedArmRpcFromDoc,
 } from "../src/markdown-utils.js";
-import { Readme } from "@azure-tools/specs-shared/readme";
 
 vi.mock("axios");
 
@@ -55,7 +55,7 @@ describe("getDocRawUrl", () => {
 describe("getDefaultTag", () => {
   test("returns default tag when there is a Basic Information header", async () => {
     const defaultTag = await getDefaultTag(
-      new Readme(join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md"))
+      new Readme(join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md")),
     );
 
     expect(defaultTag).toEqual("package-2022-12-01");
@@ -63,7 +63,7 @@ describe("getDefaultTag", () => {
 
   test("returns default tag when there is no Basic Information header", async () => {
     const defaultTag = await getDefaultTag(
-      new Readme(join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md"))
+      new Readme(join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md")),
     );
 
     expect(defaultTag).toEqual("package-2023-07-preview");
@@ -71,7 +71,7 @@ describe("getDefaultTag", () => {
 
   test("returns empty string when there is no default tag", async () => {
     const defaultTag = await getDefaultTag(
-      new Readme(join(__dirname, "fixtures/getDefaultTag/noDefaultTag.md"))
+      new Readme(join(__dirname, "fixtures/getDefaultTag/noDefaultTag.md")),
     );
 
     expect(defaultTag).toEqual("");

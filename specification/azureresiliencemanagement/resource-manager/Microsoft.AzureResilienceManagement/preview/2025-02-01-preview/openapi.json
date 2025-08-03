@@ -96,7 +96,7 @@
       "name": "ChaosJobChildJobs"
     },
     {
-      "name": "UnifiedResiliencyItems"
+      "name": "UnifiedResilienceItems"
     }
   ],
   "paths": {
@@ -625,10 +625,10 @@
           {
             "name": "drillResourceName",
             "in": "path",
-            "description": "The name of the DrillResource",
+            "description": "The name of the DrillResource (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -925,10 +925,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -985,10 +985,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1048,10 +1048,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobChildJobName",
@@ -1116,10 +1116,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -1179,10 +1179,10 @@
           {
             "name": "chaosJobName",
             "in": "path",
-            "description": "The unique name of the chaos job.",
+            "description": "The unique name of the chaos job (GUID).",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "chaosJobResourceName",
@@ -2199,6 +2199,9 @@
         "x-ms-examples": {
           "GoalAssignments_List_MaximumSet": {
             "$ref": "./examples/GoalAssignments_List_MaximumSet_Gen.json"
+          },
+          "GoalAssignments_List_MinimumSet": {
+            "$ref": "./examples/GoalAssignments_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2318,6 +2321,9 @@
         "x-ms-examples": {
           "GoalAssignments_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/GoalAssignments_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "GoalAssignments_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/GoalAssignments_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2561,8 +2567,77 @@
         "x-ms-examples": {
           "GoalResources_Get_MaximumSet": {
             "$ref": "./examples/GoalResources_Get_MaximumSet_Gen.json"
+          },
+          "GoalResources_Get_MinimumSet": {
+            "$ref": "./examples/GoalResources_Get_MinimumSet_Gen.json"
           }
         }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/refreshGoalResources": {
+      "post": {
+        "operationId": "GoalAssignments_RefreshGoalResources",
+        "tags": [
+          "GoalAssignments"
+        ],
+        "description": "Refreshes the goal resources under a goal assignment. This operation scans for new resources under the scope of the assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "goalAssignmentName",
+            "in": "path",
+            "description": "The name of the GoalAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RefreshGoalResourcesResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GoalAssignments_RefreshGoalResources_MaximumSet": {
+            "$ref": "./examples/GoalAssignments_RefreshGoalResources_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/updateGoalResources": {
@@ -2678,6 +2753,9 @@
         "x-ms-examples": {
           "GoalTemplates_List_MaximumSet": {
             "$ref": "./examples/GoalTemplates_List_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_List_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2770,6 +2848,17 @@
             "description": "Resource 'GoalTemplate' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/GoalTemplate"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2782,8 +2871,15 @@
         "x-ms-examples": {
           "GoalTemplates_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/GoalTemplates_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "GoalTemplates_Update",
@@ -2881,8 +2977,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -2897,8 +3004,15 @@
         "x-ms-examples": {
           "GoalTemplates_Delete_MaximumSet": {
             "$ref": "./examples/GoalTemplates_Delete_MaximumSet_Gen.json"
+          },
+          "GoalTemplates_Delete_MinimumSet": {
+            "$ref": "./examples/GoalTemplates_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/recoveryPlans": {
@@ -4790,13 +4904,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResilienceItems": {
       "get": {
-        "operationId": "UnifiedResiliencyItems_List",
+        "operationId": "UnifiedResilienceItems_List",
         "tags": [
-          "UnifiedResiliencyItems"
+          "UnifiedResilienceItems"
         ],
-        "description": "List UnifiedResiliencyItem resources by tenant",
+        "description": "List UnifiedResilienceItem resources by tenant",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -4815,7 +4929,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UnifiedResiliencyItemListResult"
+              "$ref": "#/definitions/UnifiedResilienceItemListResult"
             }
           },
           "default": {
@@ -4826,8 +4940,8 @@
           }
         },
         "x-ms-examples": {
-          "UnifiedResiliencyItems_List_MaximumSet": {
-            "$ref": "./examples/UnifiedResiliencyItems_List_MaximumSet_Gen.json"
+          "UnifiedResilienceItems_List_MaximumSet": {
+            "$ref": "./examples/UnifiedResilienceItems_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -4835,13 +4949,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems/{unifiedResiliencyItemName}": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResilienceItems/{unifiedResilienceItemName}": {
       "get": {
-        "operationId": "UnifiedResiliencyItems_Get",
+        "operationId": "UnifiedResilienceItems_Get",
         "tags": [
-          "UnifiedResiliencyItems"
+          "UnifiedResilienceItems"
         ],
-        "description": "Get a UnifiedResiliencyItem",
+        "description": "Get a UnifiedResilienceItem",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -4850,9 +4964,9 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "unifiedResiliencyItemName",
+            "name": "unifiedResilienceItemName",
             "in": "path",
-            "description": "The name of the unified resiliency item.",
+            "description": "The name of the unified resilience item.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -4862,7 +4976,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UnifiedResiliencyItem"
+              "$ref": "#/definitions/UnifiedResilienceItem"
             }
           },
           "default": {
@@ -4873,8 +4987,8 @@
           }
         },
         "x-ms-examples": {
-          "UnifiedResiliencyItems_Get_MaximumSet": {
-            "$ref": "./examples/UnifiedResiliencyItems_Get_MaximumSet_Gen.json"
+          "UnifiedResilienceItems_Get_MaximumSet": {
+            "$ref": "./examples/UnifiedResilienceItems_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -5186,16 +5300,17 @@
         "jobExtendedInfo": {
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
+        },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation"
-      ]
+      }
     },
     "ChaosExperimentProperties": {
       "type": "object",
@@ -5235,8 +5350,7 @@
         "subscription",
         "region",
         "identity",
-        "chaosExperimentIdentityForFaults",
-        "chaosExperimentId"
+        "chaosExperimentIdentityForFaults"
       ]
     },
     "ChaosExperimentPropertiesUpdate": {
@@ -5474,6 +5588,15 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "parentJobId": {
           "type": "string",
           "format": "arm-id",
@@ -5509,17 +5632,6 @@
       },
       "discriminator": "jobType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "parentJobId",
-        "parentJobTaskId",
-        "parentJobTaskName",
-        "parentJobResourceId",
-        "parentJobRetryAttempt",
         "jobType"
       ]
     },
@@ -5617,10 +5729,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "jobId"
-      ]
+      }
     },
     "DrillAttestation": {
       "type": "string",
@@ -5815,16 +5924,8 @@
       },
       "discriminator": "drillType",
       "required": [
-        "sgId",
         "roPlanProperties",
         "chaosExperimentProperties",
-        "executionState",
-        "readinessState",
-        "rbacSetupMode",
-        "attentionReason",
-        "systemMetadata",
-        "lastRunProperties",
-        "lastSyncTime",
         "drillType"
       ]
     },
@@ -5941,7 +6042,7 @@
     },
     "DrillResourceProperties": {
       "type": "object",
-      "description": "Properties of the Resiliency Drill Resource.",
+      "description": "Properties of the Resiliency Drill Resource",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -6027,12 +6128,7 @@
       "required": [
         "resourceId",
         "resourceType",
-        "inclusionState",
-        "roInclusionState",
-        "readinessState",
-        "faultState",
-        "faultProperties",
-        "haStatus"
+        "inclusionState"
       ]
     },
     "DrillResourceReadinessState": {
@@ -6133,10 +6229,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "jobId"
-      ]
+      }
     },
     "DrillRunAddNotesRequest": {
       "type": "object",
@@ -6157,12 +6250,7 @@
           "description": "System generated Object Id of the notes author.",
           "readOnly": true
         }
-      },
-      "required": [
-        "notes",
-        "timestamp",
-        "author"
-      ]
+      }
     },
     "DrillRunChildJob": {
       "type": "object",
@@ -6337,15 +6425,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "drillUrl",
-        "metricValue",
-        "drillMode",
-        "attestation",
-        "notes",
-        "supportedVerbsForStage",
-        "currentActiveOperationId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
@@ -6768,9 +6847,7 @@
         }
       },
       "required": [
-        "resourceId",
-        "tAndcAssignmentError",
-        "rbacAssignmentError"
+        "resourceId"
       ]
     },
     "FailoverDirectionTypes": {
@@ -6914,11 +6991,7 @@
           "$ref": "#/definitions/CustomFaultDetails",
           "description": "Custom Fault Details selected by user"
         }
-      },
-      "required": [
-        "availableFaults",
-        "defaultFault"
-      ]
+      }
     },
     "GoalAssignment": {
       "type": "object",
@@ -6994,8 +7067,7 @@
       },
       "required": [
         "goalTemplateId",
-        "goalAssignmentType",
-        "serviceLevelResources"
+        "goalAssignmentType"
       ]
     },
     "GoalAssignmentPropertiesUpdate": {
@@ -7103,19 +7175,19 @@
           "format": "arm-id",
           "description": "Arm Id of resource under the SG for which the extension resource is maintained."
         },
-        "excludedFromHighAvailabilityGoals": {
+        "highAvailabilityGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for high availability recommendation."
         },
-        "manuallyAttestedForHighAvailability": {
+        "highAvailabilityAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
-        "excludedFromDisasterRecoveryGoals": {
+        "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
         },
-        "manuallyAttestedForDisasterRecovery": {
+        "disasterRecoveryAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
@@ -7137,10 +7209,8 @@
       },
       "required": [
         "resourceArmId",
-        "excludedFromHighAvailabilityGoals",
-        "manuallyAttestedForHighAvailability",
-        "excludedFromDisasterRecoveryGoals",
-        "manuallyAttestedForDisasterRecovery"
+        "highAvailabilityGoalParticipation",
+        "highAvailabilityAttestationStatus"
       ]
     },
     "GoalTemplate": {
@@ -7219,11 +7289,6 @@
         }
       },
       "required": [
-        "description",
-        "requireHighAvailability",
-        "requireDisasterRecovery",
-        "regionalRecoveryPointObjective",
-        "regionalRecoveryTimeObjective",
         "goalType"
       ]
     },
@@ -7292,7 +7357,7 @@
     },
     "GoalsData": {
       "type": "object",
-      "description": "Definition of goals data in unified resiliency item.",
+      "description": "Definition of goals data in unified resilience item.",
       "properties": {
         "goalTemplateId": {
           "type": "string",
@@ -7306,26 +7371,26 @@
         },
         "regionalRpoInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RPO set in resiliency goal in minutes."
+          "description": "Regional RPO set in resilience goal in minutes."
         },
         "regionalRpaInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RPA for the service group in minutes."
         },
         "regionalRpoStatus": {
-          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         },
         "regionalRtoInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RTO set in resiliency goal in minutes."
+          "description": "Regional RTO set in resilience goal in minutes."
         },
         "regionalRtaInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RTA for the service group in minutes."
         },
         "regionalRtoStatus": {
-          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         }
       },
@@ -7464,10 +7529,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "errorCode"
-      ]
+      }
     },
     "JobExecutionDetails": {
       "type": "object",
@@ -7500,13 +7562,7 @@
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration"
-      ]
+      }
     },
     "JobExtendedInfo": {
       "type": "object",
@@ -7526,11 +7582,7 @@
           "description": "Non localized error message on job execution.",
           "readOnly": true
         }
-      },
-      "required": [
-        "tasksList",
-        "dynamicErrorMessage"
-      ]
+      }
     },
     "JobProperties": {
       "type": "object",
@@ -7586,6 +7638,15 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "jobType": {
           "$ref": "#/definitions/JobType",
           "description": "The type of job.",
@@ -7599,14 +7660,7 @@
       },
       "discriminator": "jobType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "jobType",
-        "triggeredBy"
+        "jobType"
       ]
     },
     "JobResourceProperties": {
@@ -7663,6 +7717,15 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         },
+        "userComments": {
+          "type": "array",
+          "description": "User Comments.",
+          "items": {
+            "$ref": "#/definitions/JobUserComment"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "jobId": {
           "type": "string",
           "description": "Id of the Job under which this job-resource exists.",
@@ -7681,20 +7744,16 @@
         "jobResourceType": {
           "$ref": "#/definitions/JobResourceType",
           "description": "Discriminator for the JobResource object hierarchy."
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected."
         }
       },
       "discriminator": "jobResourceType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "jobId",
-        "taskId",
-        "taskName",
-        "jobResourceType"
+        "jobResourceType",
+        "protectionSolutionType"
       ]
     },
     "JobResourceType": {
@@ -7777,10 +7836,6 @@
         }
       },
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
         "retryAttempt"
       ]
     },
@@ -7792,7 +7847,9 @@
         "Pending",
         "InProgress",
         "Completed",
+        "CompletedWithWarnings",
         "Failed",
+        "Skipped",
         "Cancelling",
         "Cancelled",
         "Paused"
@@ -7822,9 +7879,19 @@
             "description": "The job has been completed successfully."
           },
           {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "The job has been completed with warnings."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The job has failed."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The job skipped for the resource (resource not qualified or not applicable)."
           },
           {
             "name": "Cancelling",
@@ -7898,7 +7965,7 @@
         },
         "userComments": {
           "type": "array",
-          "description": "List of sub-tasks associated with this job.",
+          "description": "User Comments.",
           "items": {
             "$ref": "#/definitions/JobUserComment"
           },
@@ -7914,16 +7981,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "taskId",
-        "taskName",
-        "subTasksList"
-      ]
+      }
     },
     "JobTriggeredBy": {
       "type": "string",
@@ -8018,10 +8076,7 @@
           "description": "User Comment",
           "readOnly": true
         }
-      },
-      "required": [
-        "commentTime"
-      ]
+      }
     },
     "LastRunProperties": {
       "type": "object",
@@ -8049,13 +8104,7 @@
           "description": "Attestation state of the last run of this Drill.",
           "readOnly": true
         }
-      },
-      "required": [
-        "lastRunTime",
-        "lastRunState",
-        "lastRunDuration",
-        "lastRunAttestation"
-      ]
+      }
     },
     "ManagedOnBehalfOfConfiguration": {
       "type": "object",
@@ -8069,10 +8118,7 @@
           },
           "readOnly": true
         }
-      },
-      "required": [
-        "moboBrokerResources"
-      ]
+      }
     },
     "MarkAsCompleteRequest": {
       "type": "object",
@@ -8100,10 +8146,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "supportedVerbsForStage"
-      ]
+      }
     },
     "MetricsProperties": {
       "type": "object",
@@ -8194,10 +8237,7 @@
           "description": "The fully qualified resource ID of the MoboBroker resource.\nExample: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
           "readOnly": true
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "NotQualifiedReasons": {
       "type": "string",
@@ -8427,11 +8467,11 @@
     },
     "RecommendationsData": {
       "type": "object",
-      "description": "Definition of recommendations data in unified resiliency item.",
+      "description": "Definition of recommendations data in unified resilience item.",
       "properties": {
         "highAvailability": {
           "$ref": "#/definitions/RecommendationsHighAvailabilityData",
-          "description": "The high availability section of resiliency recommendation."
+          "description": "The high availability section of resilience recommendation."
         }
       },
       "required": [
@@ -8440,7 +8480,7 @@
     },
     "RecommendationsHighAvailabilityData": {
       "type": "object",
-      "description": "Definition of recommendation data related to high availability in unified resiliency item.",
+      "description": "Definition of recommendation data related to high availability in unified resilience item.",
       "properties": {
         "includedResourceCount": {
           "type": "integer",
@@ -8638,6 +8678,11 @@
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
       "properties": {
+        "groupUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery orchestration group, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "orderId": {
           "type": "integer",
           "format": "int32",
@@ -8671,6 +8716,7 @@
         }
       },
       "required": [
+        "groupUniqueId",
         "orderId",
         "description"
       ]
@@ -8679,6 +8725,11 @@
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
       "properties": {
+        "groupUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery orchestration group, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "orderId": {
           "type": "integer",
           "format": "int32",
@@ -8974,8 +9025,7 @@
       },
       "required": [
         "lastExecutedAt",
-        "operationStatus",
-        "recoveryTimeActual"
+        "operationStatus"
       ]
     },
     "RecoveryPlanListResult": {
@@ -9069,7 +9119,6 @@
       },
       "required": [
         "planType",
-        "planState",
         "planDescription",
         "recoveryGroupsSetting"
       ]
@@ -9203,6 +9252,11 @@
       "type": "object",
       "description": "Definition of recovery orchestration resource property associated with recovery orchestration plan.",
       "properties": {
+        "recoveryResourceUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery resource, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -9275,10 +9329,7 @@
         }
       },
       "required": [
-        "resourceId",
-        "needsAttention",
-        "protectionStatus",
-        "resourceProtectionSolutions",
+        "recoveryResourceUniqueId",
         "selectedProtectionSolutionType"
       ]
     },
@@ -9299,6 +9350,22 @@
         "recoveryResource",
         "operationQualificationDetails"
       ]
+    },
+    "RefreshGoalResourcesResponse": {
+      "type": "object",
+      "description": "Response model for refresh goal resources.",
+      "properties": {
+        "resourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of resources under the goal assignment after refresh."
+        },
+        "lastRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the refresh operation was last performed."
+        }
+      }
     },
     "RegionalDrill": {
       "type": "object",
@@ -9377,16 +9444,16 @@
         ]
       }
     },
-    "ResiliencyHealthStatus": {
+    "ResilienceHealthStatus": {
       "type": "string",
-      "description": "enum for Resiliency health status.",
+      "description": "enum for Resilience health status.",
       "enum": [
         "NotEvaluated",
         "Unhealthy",
         "Healthy"
       ],
       "x-ms-enum": {
-        "name": "ResiliencyHealthStatus",
+        "name": "ResilienceHealthStatus",
         "modelAsString": true,
         "values": [
           {
@@ -9627,9 +9694,6 @@
       },
       "required": [
         "protectionSolutionType",
-        "protectionStatus",
-        "resourceId",
-        "activeLocation",
         "isAutoFailover"
       ]
     },
@@ -9640,6 +9704,7 @@
         "None",
         "AzureNative",
         "AzureSiteRecovery",
+        "CrossZoneVMRecovery",
         "CustomRunbook"
       ],
       "x-ms-enum": {
@@ -9660,6 +9725,11 @@
             "name": "AzureSiteRecovery",
             "value": "AzureSiteRecovery",
             "description": "Resource protected with the Azure solution provided by the native Azure Site Service for Azure VMs."
+          },
+          {
+            "name": "CrossZoneVMRecovery",
+            "value": "CrossZoneVMRecovery",
+            "description": "Cross zone recovery enabled Azure VMs."
           },
           {
             "name": "CustomRunbook",
@@ -9853,9 +9923,7 @@
         }
       },
       "required": [
-        "identity",
-        "roPlanId",
-        "roResourceExcludedCount"
+        "identity"
       ]
     },
     "RoPlanPropertiesUpdate": {
@@ -10029,12 +10097,12 @@
         ]
       }
     },
-    "UnifiedResiliencyItem": {
+    "UnifiedResilienceItem": {
       "type": "object",
-      "description": "A unified resiliency item represents a computed and aggregated resilience information of Azure Applications.",
+      "description": "A unified resilience item represents a computed and aggregated resilience information of Azure Applications.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UnifiedResiliencyItemProperties",
+          "$ref": "#/definitions/UnifiedResilienceItemProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -10044,15 +10112,15 @@
         }
       ]
     },
-    "UnifiedResiliencyItemListResult": {
+    "UnifiedResilienceItemListResult": {
       "type": "object",
-      "description": "The response of a UnifiedResiliencyItem list operation.",
+      "description": "The response of a UnifiedResilienceItem list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UnifiedResiliencyItem items on this page",
+          "description": "The UnifiedResilienceItem items on this page",
           "items": {
-            "$ref": "#/definitions/UnifiedResiliencyItem"
+            "$ref": "#/definitions/UnifiedResilienceItem"
           }
         },
         "nextLink": {
@@ -10065,9 +10133,9 @@
         "value"
       ]
     },
-    "UnifiedResiliencyItemProperties": {
+    "UnifiedResilienceItemProperties": {
       "type": "object",
-      "description": "Definition of unified resiliency item property.",
+      "description": "Definition of unified resilience item property.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -10076,7 +10144,7 @@
         },
         "goals": {
           "$ref": "#/definitions/GoalsData",
-          "description": "Computed and copied data of resiliency goals."
+          "description": "Computed and copied data of resilience goals."
         },
         "recommendations": {
           "$ref": "#/definitions/RecommendationsData",
@@ -10248,9 +10316,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "vmsPresent"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DrillProperties"

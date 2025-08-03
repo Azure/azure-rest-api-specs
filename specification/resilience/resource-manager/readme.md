@@ -65,3 +65,16 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 input-file:
   - Microsoft.Resilience/preview/2025-03-01-preview/resilience.json
 ```
+
+## Suppression
+
+```yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: resilience.json
+    reason: |
+      The extendedMetadata field is designed to accept dynamic key-value pairs for
+      extensibility. Also note that Microsoft.Resilience is an internal and hidden
+      provider with no real customers. (This API Spec is here to satisfy the requirement
+      for Azure Resource Notification publishing/RPLite process).
+```

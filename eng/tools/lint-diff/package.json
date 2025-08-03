@@ -8,25 +8,25 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write"
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
     "node": ">= 20.0.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^13.0.4",
+    "@apidevtools/json-schema-ref-parser": "^14.1.1",
     "@azure-tools/specs-shared": "file:../../../.github/shared",
-    "@microsoft.azure/openapi-validator": "2.2.4",
-    "autorest": "3.6.1",
+    "@microsoft.azure/openapi-validator": "^2.2.4",
+    "autorest": "^3.7.2",
     "axios": "^1.8.3",
     "change-case": "^5.4.4",
     "deep-eql": "^5.0.2",
-    "marked": "^15.0.7"
+    "marked": "^16.1.1"
   },
   "devDependencies": {
     "@types/deep-eql": "^4.0.2",
@@ -35,6 +35,7 @@
     "execa": "^9.5.2",
     "memfs": "^4.17.0",
     "prettier": "~3.5.3",
+    "prettier-plugin-organize-imports": "^4.2.0",
     "typescript": "~5.8.2",
     "vitest": "^3.0.2"
   }

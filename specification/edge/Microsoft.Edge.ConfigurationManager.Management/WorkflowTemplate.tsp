@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Properties")
 model WorkflowTemplateProperties {
   @doc("Description of Workflow template")
@@ -28,12 +29,14 @@ model WorkflowTemplateProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Resource")
 model WorkflowTemplate is TrackedResource<WorkflowTemplateProperties> {
   ...ResourceNameParameter<WorkflowTemplate>;
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface WorkflowTemplates {
   @doc("Get a Workflow Template Resource")

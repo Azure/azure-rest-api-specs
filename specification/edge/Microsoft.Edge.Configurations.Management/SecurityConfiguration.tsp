@@ -15,6 +15,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface SecurityConfigurations {
   get is ArmResourceRead<SecurityConfiguration>;
@@ -27,6 +28,7 @@ interface SecurityConfigurations {
   listByConfiguration is ArmResourceListByParent<SecurityConfiguration>;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("SecurityConfiguration Resource")
 @parentResource(Configuration)
 model SecurityConfiguration is ProxyResource<SecurityConfigurationProperties> {
@@ -36,6 +38,7 @@ model SecurityConfiguration is ProxyResource<SecurityConfigurationProperties> {
   >;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("SecurityConfiguration Properties")
 model SecurityConfigurationProperties {
   @doc("The status of the last operation.")
@@ -50,6 +53,7 @@ model SecurityConfigurationProperties {
   secretReferences: SecretReference[];
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Reference to the secret")
 model SecretReference {
   @doc("resourceId to the keyvault")
@@ -70,6 +74,7 @@ model SecretReference {
   purpose: SecretPurpose;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Various purposes for the secrets")
 union SecretPurpose {
   @doc("LocalAdminCredential Secret")

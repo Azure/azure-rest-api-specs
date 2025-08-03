@@ -1769,7 +1769,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
+            "maxLength": 63,
             "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
           }
         ],
@@ -1829,7 +1829,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
+            "maxLength": 63,
             "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
           },
           {
@@ -1925,7 +1925,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
+            "maxLength": 63,
             "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
           },
           {
@@ -2009,7 +2009,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
+            "maxLength": 63,
             "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
           }
         ],
@@ -4662,7 +4662,7 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
+          "description": "Indicates if the resource is enabled or not.",
           "default": true
         },
         "externalDeviceId": {
@@ -4672,18 +4672,6 @@
             "read",
             "create"
           ]
-        },
-        "deviceTemplateId": {
-          "type": "string",
-          "description": "Device Template Id used to create a device.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "deviceGroupId": {
-          "type": "string",
-          "description": "The Microsoft Entra ID group the device is a member of."
         },
         "manufacturer": {
           "type": "string",
@@ -4708,14 +4696,6 @@
             "create"
           ]
         },
-        "identity": {
-          "$ref": "#/definitions/DeviceIdentity",
-          "description": "Identity for the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "attributes": {
           "type": "object",
           "description": "A set of key-value pairs that contain custom attributes set by the customer.",
@@ -4724,22 +4704,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "DeviceIdentity": {
-      "type": "object",
-      "description": "The backing Microsoft Entra ID for the device used for authentication to other services.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "Principal id for the device resource.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant id for the Microsoft Entra ID tenant.",
           "readOnly": true
         }
       }
@@ -4848,71 +4812,6 @@
         }
       }
     },
-    "DiscoveredDeviceProperties": {
-      "type": "object",
-      "description": "Defines the discovered device properties.",
-      "properties": {
-        "externalDeviceId": {
-          "type": "string",
-          "description": "A device ID that represents the device in a system external to Azure. Unique within scope of an Azure tenant."
-        },
-        "endpoints": {
-          "$ref": "#/definitions/DiscoveredMessagingEndpoints",
-          "description": "Endpoints for discovered devices."
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "Device manufacturer.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "model": {
-          "type": "string",
-          "description": "Device model.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "operatingSystem": {
-          "type": "string",
-          "description": "Device operating system name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
-        },
-        "attributes": {
-          "type": "object",
-          "description": "A set of key-value pairs that contain custom attributes.",
-          "additionalProperties": {}
-        },
-        "discoveryId": {
-          "type": "string",
-          "description": "Identifier used to detect changes in the discovered device."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64",
-          "description": "An integer that is incremented each time the resource is modified."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "discoveryId",
-        "version"
-      ]
-    },
     "DiscoveredInboundEndpoints": {
       "type": "object",
       "description": "An endpoint to connect to the device.",
@@ -4927,7 +4826,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4938,7 +4837,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         },
         "lastUpdatedOn": {
           "type": "string",
@@ -4965,7 +4864,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4976,7 +4875,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         },
         "lastUpdatedOn": {
           "type": "string",
@@ -5410,7 +5309,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "authentication": {
           "$ref": "#/definitions/HostAuthentication",
@@ -5422,7 +5321,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         }
       },
       "required": [
@@ -5444,7 +5343,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "authentication": {
           "$ref": "#/definitions/HostAuthenticationUpdate",
@@ -5456,7 +5355,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         }
       }
     },
@@ -6144,7 +6043,8 @@
         },
         "error": {
           "$ref": "#/definitions/StatusError",
-          "description": "Object to transfer and persist errors that originate from the edge."
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6167,7 +6067,8 @@
         },
         "error": {
           "$ref": "#/definitions/StatusError",
-          "description": "Object to transfer and persist errors that originate from the edge."
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6195,7 +6096,8 @@
         },
         "error": {
           "$ref": "#/definitions/StatusError",
-          "description": "Object to transfer and persist errors that originate from the edge."
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6241,7 +6143,8 @@
         },
         "error": {
           "$ref": "#/definitions/StatusError",
-          "description": "Object to transfer and persist errors that originate from the edge."
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6431,7 +6334,7 @@
         },
         "dataSource": {
           "type": "string",
-          "description": "Name of the data source within a dataset."
+          "description": "Reference to a data source for a given dataset."
         },
         "typeRef": {
           "type": "string",
@@ -6633,10 +6536,6 @@
         "operatingSystemVersion": {
           "type": "string",
           "description": "Device operating system version."
-        },
-        "deviceGroupId": {
-          "type": "string",
-          "description": "The Microsoft Entra ID group the device is a member of."
         },
         "attributes": {
           "type": "object",
@@ -7030,7 +6929,7 @@
         },
         "dataSource": {
           "type": "string",
-          "description": "Name of the data source within a dataset."
+          "description": "Reference to a data source for a given dataset."
         },
         "typeRef": {
           "type": "string",
@@ -7102,7 +7001,7 @@
       "description": "Discovered device definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiscoveredDeviceProperties",
+          "$ref": "#/definitions/NamespaceDiscoveredDeviceProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -7142,6 +7041,71 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "NamespaceDiscoveredDeviceProperties": {
+      "type": "object",
+      "description": "Defines the discovered device properties.",
+      "properties": {
+        "externalDeviceId": {
+          "type": "string",
+          "description": "A device ID that represents the device in a system external to Azure. Unique within scope of an Azure tenant."
+        },
+        "endpoints": {
+          "$ref": "#/definitions/DiscoveredMessagingEndpoints",
+          "description": "Endpoints for discovered devices."
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes.",
+          "additionalProperties": {}
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "Identifier used to detect changes in the discovered device."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "discoveryId",
+        "version"
       ]
     },
     "NamespaceDiscoveredDeviceUpdate": {

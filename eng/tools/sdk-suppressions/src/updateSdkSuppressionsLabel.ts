@@ -1,16 +1,16 @@
-import _ from "lodash";
+import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import debug from "debug";
 import { writeFileSync } from "fs";
+import _ from "lodash";
 import { simpleGit } from "simple-git";
-import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.js";
 import {
-  SdkSuppressionsYml,
-  SdkSuppressionsSection,
-  sdkSuppressionsFileName,
   SdkPackageSuppressionsEntry,
+  sdkSuppressionsFileName,
+  SdkSuppressionsSection,
+  SdkSuppressionsYml,
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
-import { getSDKSuppressionsChangedFiles, parseYamlContent } from "./common.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -54,7 +54,9 @@ export async function getSdkSuppressionsSdkNames(
         validateSdkSuppressionsFile(headSuppressionContent).result;
       // If the head suppression file is not valid or empty, we get _sdkNameList with [].
       if (!validateSdkSuppressionsFileResult) {
-        console.log(`Returned empty SDK name list — head suppression file at ${suppressionFile}/${headCommitHash} is invalid or empty.`);
+        console.log(
+          `Returned empty SDK name list — head suppression file at ${suppressionFile}/${headCommitHash} is invalid or empty.`,
+        );
         continue;
       }
       // if base suppression file does not exist, set it to an empty object but has correct schema
@@ -73,7 +75,9 @@ export async function getSdkSuppressionsSdkNames(
         headSuppressionContent as SdkSuppressionsYml,
         baseSuppressionContent as SdkSuppressionsYml,
       );
-      console.log(`Retrieved SDK names after comparing suppression file ${suppressionFile}: [${_sdkNameList.join(",")}].`);
+      console.log(
+        `Retrieved SDK names after comparing suppression file ${suppressionFile}: [${_sdkNameList.join(",")}].`,
+      );
       sdkNameList = [..._sdkNameList, ...sdkNameList];
     }
   }

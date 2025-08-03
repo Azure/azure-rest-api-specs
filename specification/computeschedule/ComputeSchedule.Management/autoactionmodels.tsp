@@ -285,6 +285,7 @@ model AutoActionProperties {
   provisioningState?: ProvisioningState;
 }
 
+@@identifiers(AutoActionResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;

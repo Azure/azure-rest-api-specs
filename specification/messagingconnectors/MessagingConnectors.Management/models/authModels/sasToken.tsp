@@ -3,16 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./authModel.tsp";
 
-using TypeSpec.Versioning;
-using Azure.Core;
-using TypeSpec.OpenAPI;
+namespace Microsoft.MessagingConnectors.Models.Auth;
 
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
-
-@added(Versions.v2025_05_01_preview)
 @doc("SasToken Model.")
 model SasTokenAuthentication extends Authentication {
   @doc("Type of the Auth Model.")

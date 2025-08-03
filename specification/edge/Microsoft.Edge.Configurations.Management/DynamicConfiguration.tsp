@@ -5,9 +5,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./Configuration.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationModel.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationType.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ProvisioningState.tsp";
+import "./ConfigurationModel.tsp";
+import "./ConfigurationType.tsp";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -39,7 +39,12 @@ model DynamicConfigurationProperties {
 @doc("Dynamic Configuration Resource")
 @parentResource(Configuration)
 model DynamicConfiguration is ProxyResource<DynamicConfigurationProperties> {
-  ...ResourceNameParameter<DynamicConfiguration>;
+  @doc("Name of the dynamic configuration")
+  @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
+  @path
+  @key("dynamicConfigurationName")
+  @segment("dynamicConfigurations")
+  name: string;
 }
 
 @armResourceOperations

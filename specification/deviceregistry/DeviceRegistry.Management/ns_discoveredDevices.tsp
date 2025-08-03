@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/authenticationMethod.tsp";
-import "./common/discoveredDeviceProperties.tsp";
+import "./common/ns_discoveredDeviceProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,7 +18,8 @@ namespace Microsoft.DeviceRegistry;
 @doc("Discovered device definition.")
 @parentResource(Namespace)
 @added(Versions.v2025_07_01_preview)
-model NamespaceDiscoveredDevice is TrackedResource<DiscoveredDeviceProperties> {
+model NamespaceDiscoveredDevice
+  is TrackedResource<NamespaceDiscoveredDeviceProperties> {
   @doc("The name of the discovered device.")
   @key("discoveredDeviceName")
   @segment("discoveredDevices")
@@ -44,7 +45,7 @@ interface NamespaceDiscoveredDevices {
     NamespaceDiscoveredDevice,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceDiscoveredDevice,
-      DiscoveredDeviceProperties
+      NamespaceDiscoveredDeviceProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredDevice>;

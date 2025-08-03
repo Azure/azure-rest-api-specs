@@ -2019,6 +2019,16 @@
         }
       }
     },
+    "GcpCloudProfileUpdate": {
+      "type": "object",
+      "description": "cloud profile for GCP.",
+      "properties": {
+        "organizationProperties": {
+          "$ref": "#/definitions/GcpOrganizationPropertiesUpdate",
+          "description": "The organization properties of the GCP organization."
+        }
+      }
+    },
     "GcpOrganizationProperties": {
       "type": "object",
       "description": "GCP organization properties.",
@@ -2026,6 +2036,14 @@
         "organizationId": {
           "type": "string",
           "description": "The organization id of the GCP organization.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managementProjectNumber": {
+          "type": "string",
+          "description": "The project number of the management project under the GCP organization.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2055,8 +2073,29 @@
         }
       },
       "required": [
-        "organizationId"
+        "organizationId",
+        "managementProjectNumber"
       ]
+    },
+    "GcpOrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "GCP organization properties for update.",
+      "properties": {
+        "excludedProjectNumbers": {
+          "type": "array",
+          "description": "List of GCP projects which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedFolderIds": {
+          "type": "array",
+          "description": "List of GCP folders which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "GcpProjectProperties": {
       "type": "object",
@@ -2429,6 +2468,10 @@
         "awsCloudProfile": {
           "$ref": "#/definitions/AwsCloudProfileUpdate",
           "description": "Cloud profile for AWS."
+        },
+        "gcpCloudProfile": {
+          "$ref": "#/definitions/GcpCloudProfileUpdate",
+          "description": "Cloud profile for GCP."
         }
       }
     },

@@ -1,14 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  findReadmeFiles,
-  getArgumentValue,
-  getAllTypeSpecPaths,
-  objectToMap,
-  SpecConfigs,
-} from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
   APIViewRequestData,
   SdkName,
@@ -17,7 +11,13 @@ import {
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
-import { groupSpecConfigPaths } from "./spec-helpers.js";
+import {
+  findReadmeFiles,
+  getAllTypeSpecPaths,
+  getArgumentValue,
+  objectToMap,
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Load execution-report.json.
@@ -280,6 +280,7 @@ export function getBreakingChangeInfo(executionReport: any): boolean {
  * @param result - The spec-gen-sdk execution result.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param stagedArtifactsFolder - The staged artifacts folder.
  * @param apiViewRequestData - The API view request data.
  * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
@@ -290,6 +291,7 @@ export function generateArtifact(
   result: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
+  hasTypeSpecProjects: boolean,
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
   sdkGenerationExecuted: boolean = true,
@@ -309,6 +311,7 @@ export function generateArtifact(
     if (sdkGenerationExecuted) {
       isSpecGenSdkCheckRequired = getRequiredSettingValue(
         hasManagementPlaneSpecs,
+        hasTypeSpecProjects,
         commandInput.sdkLanguage as SdkName,
       );
     }
@@ -358,13 +361,19 @@ export function getServiceFolderPath(specConfigPath: string): string {
 /**
  * Get the required setting value for the SDK check based on the spec PR types.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
+  hasTypeSpecProjects: boolean,
   sdkName: SdkName,
 ): boolean {
+  // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
+  if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
+    return false;
+  }
   if (hasManagementPlaneSpecs) {
     return SpecGenSdkRequiredSettings[sdkName].managementPlane;
   } else {

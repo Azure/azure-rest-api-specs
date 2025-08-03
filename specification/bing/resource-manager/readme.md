@@ -44,24 +44,6 @@ input-file:
 - Microsoft.Bing/preview/2025-05-01-preview/bing.json
 ```
 
-### Tag: package-2020-06-10
-
-These settings apply only when `--tag=package-2020-06-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-10'
-input-file:
-- Microsoft.Bing/stable/2020-06-10/bing.json
-```
-
-### Tag: package-2020-06-10-preview
-
-These settings apply only when `--tag=package-2020-06-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-10-preview'
-input-file:
-- Microsoft.Bing/preview/2020-06-10-preview/bing.json
-```
-
 ---
 
 # Code Generation
@@ -129,8 +111,6 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Bing/preview/2025-05-01-preview/bing.json
-  - $(this-folder)/Microsoft.Bing/stable/2020-06-10/bing.json
-  - $(this-folder)/Microsoft.Bing/preview/2020-06-10-preview/bing.json
 
 ```
 
@@ -141,4 +121,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

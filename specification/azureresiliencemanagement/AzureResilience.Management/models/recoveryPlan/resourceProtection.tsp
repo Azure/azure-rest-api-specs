@@ -63,15 +63,15 @@ model ResourceProtectionSolutionSettings {
 
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @visibility(Lifecycle.Read)
-  protectionStatus: ResourceProtectionStatus;
+  protectionStatus?: ResourceProtectionStatus;
 
   @doc("Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
-  resourceId: armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
-  activeLocation: string;
+  activeLocation?: string;
 
   @doc("List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)

@@ -1,0 +1,131 @@
+{
+  "title": "ChangeStates_Get",
+  "operationId": "ChangeStates_Get",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "webApplicationChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "InProgress",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Web application deployment to production environment with comprehensive testing and monitoring. This deployment includes frontend updates, API enhancements, and security improvements for the customer-facing web platform.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+          },
+          "parameters": {
+            "applicationVersion": {
+              "type": "Parameter",
+              "metadata": {
+                "description": "Version of the web application to deploy"
+              }
+            }
+          },
+          "state": "InProgress",
+          "comments": "Web application deployment progressing with staged rollout and continuous monitoring enabled.",
+          "changeDefinitions": [
+            {
+              "name": "webApplicationDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "templateUri": "https://templates.contoso.com/webapp-deployment.json",
+                "parameters": {
+                  "version": "2.4.0",
+                  "environment": "production",
+                  "enableBlueGreen": true
+                }
+              }
+            }
+          ],
+          "releaseLabel": "Release-2.4.0-Production",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/MyProject/_workitems/edit/12363",
+              "description": "Work item for web application production deployment with enhanced UI features",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/67908",
+              "description": "Web application deployment approval with product owner and security review",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC001252",
+              "description": "Support incident for web application deployment coordination and user experience monitoring",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/requests/AER-5696",
+              "description": "Access elevation request for web application production deployment",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/cdnChangeState",
+              "description": "Related CDN change state for content delivery optimization",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/TR-9894",
+              "description": "Web application deployment test results with UI and performance validation",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/web-application-platform",
+              "description": "Web application platform service catalog entry with deployment specifications",
+              "lastModifiedBy": "webapp@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "deploymentStrategy": "blue-green",
+            "uiVersion": "v2.4",
+            "featureFlags": [
+              "newDashboard",
+              "enhancedSearch"
+            ],
+            "performanceBaseline": "enabled"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "development",
+              "status": "completed"
+            },
+            {
+              "stageName": "staging",
+              "status": "completed"
+            },
+            {
+              "stageName": "production",
+              "status": "in-progress"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/webApplicationChangeState",
+        "name": "webApplicationChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "webapp@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "webapp@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

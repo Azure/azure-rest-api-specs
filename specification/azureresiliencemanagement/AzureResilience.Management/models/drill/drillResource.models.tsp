@@ -21,15 +21,15 @@ namespace Microsoft.AzureResilienceManagement;
 @parentResource(Drill)
 @doc("Drill Resource")
 model DrillResource is ProxyResource<DrillResourceProperties> {
-  @doc("The name of the DrillResource")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @doc("The name of the DrillResource (GUID).")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @key("drillResourceName")
   @segment("drillResources")
   @path
   name: string;
 }
 
-@doc("Properties of the Resiliency Drill Resource.")
+@doc("Properties of the Resiliency Drill Resource")
 model DrillResourceProperties {
   @doc("Id of the resource.")
   resourceId: string;
@@ -42,7 +42,7 @@ model DrillResourceProperties {
 
   @doc("Inclusion State of the Drill resource in RO")
   @visibility(Lifecycle.Read)
-  roInclusionState: ResourceInclusionState;
+  roInclusionState?: ResourceInclusionState;
 
   @doc("Exclusion reason of the Drill resource in RO")
   @visibility(Lifecycle.Read)
@@ -54,19 +54,19 @@ model DrillResourceProperties {
 
   @doc("Readiness State of the Drill resource")
   @visibility(Lifecycle.Read)
-  readinessState: DrillResourceReadinessState;
+  readinessState?: DrillResourceReadinessState;
 
   @doc("Fault State of the Drill resource")
   @visibility(Lifecycle.Read)
-  faultState: DrillResourceFaultState;
+  faultState?: DrillResourceFaultState;
 
   @doc("Fault Properties")
   @visibility(Lifecycle.Read)
-  faultProperties: FaultProperties;
+  faultProperties?: FaultProperties;
 
   @doc("HA status of the Drill resource")
   @visibility(Lifecycle.Read)
-  haStatus: HAStatus;
+  haStatus?: HAStatus;
 
   @doc("Attention reason if the Status is 'NeedsAttention'.")
   @visibility(Lifecycle.Read)

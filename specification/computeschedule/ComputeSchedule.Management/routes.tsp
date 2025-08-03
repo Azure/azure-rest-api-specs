@@ -104,11 +104,14 @@ interface ScheduledActions {
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   listBySubscription is ArmListBySubscription<ScheduledAction>;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-  listResources is ArmResourceActionSync<
-    ScheduledAction,
-    void,
-    ResourceListResponse
-  >;
+  @autoRoute
+  @listsResource(ScheduledActionResource)
+  @armResourceList(ScheduledActionResource)
+  @get
+  @doc("List resources attached to Scheduled Actions")
+  listResources(
+    ...ResourceInstanceParameters<ScheduledActionResource>,
+  ): ArmResponse<ResourceListResponse> | ErrorResponse;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   attachResources is ArmResourceActionSync<
     ScheduledAction,

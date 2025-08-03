@@ -5,11 +5,16 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "execa": "^9.3.0",
+    "prettier": "~3.5.3",
+    "prettier-plugin-organize-imports": "^4.2.0",
     "typescript": "~5.8.2",
     "vitest": "^3.0.7"
   },
   "scripts": {
     "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },

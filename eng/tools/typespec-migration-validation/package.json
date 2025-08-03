@@ -12,20 +12,23 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.4.0",
     "@types/json-diff": "^1.0.3",
     "@types/node": "^18.19.86",
     "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^9.26.0",
+    "prettier": "~3.5.3",
     "typescript": "^5.8.3"
   },
   "scripts": {
     "build": "tsc --build",
-    "watch": "tsc --build --watch",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "watch": "tsc --build --watch"
   },
   "engines": {
     "node": ">=20.0.0"

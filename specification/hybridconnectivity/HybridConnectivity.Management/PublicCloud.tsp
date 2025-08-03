@@ -24,6 +24,7 @@ model GenerateAwsTemplateRequest {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("The list of solution types and their settings")
+  @identifiers(#[])
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
@@ -37,6 +38,7 @@ model GenerateGcpTemplateRequest {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("The list of solution types and their settings")
+  @identifiers(#[])
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
@@ -129,12 +131,33 @@ model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
 model PublicCloudConnectorPropertiesUpdate {
   @doc("Cloud profile for AWS.")
   awsCloudProfile?: AwsCloudProfileUpdate;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("Cloud profile for GCP.")
+  gcpCloudProfile?: GcpCloudProfileUpdate;
 }
 
 @doc("cloud profile for AWS.")
 model AwsCloudProfileUpdate {
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("cloud profile for GCP.")
+model GcpCloudProfileUpdate {
+  @doc("The organization properties of the GCP organization.")
+  organizationProperties?: GcpOrganizationPropertiesUpdate;
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("GCP organization properties for update.")
+model GcpOrganizationPropertiesUpdate {
+  @doc("List of GCP projects which need to be excluded.")
+  excludedProjectNumbers?: string[];
+
+  @doc("List of GCP folders which need to be excluded.")
+  excludedFolderIds?: string[];
 }
 
 @doc("Properties of public cloud connectors.")
@@ -216,6 +239,10 @@ model GcpOrganizationProperties {
   @doc("The organization id of the GCP organization.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   organizationId: string;
+
+  @doc("The project number of the management project under the GCP organization.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  managementProjectNumber: string;
 
   @doc("List of GCP projects which need to be excluded.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -330,6 +357,7 @@ model SolutionTypeProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Array of solution settings and its description.")
+  @identifiers(#[])
   solutionSettings?: SolutionTypeSettingsProperties[];
 }
 

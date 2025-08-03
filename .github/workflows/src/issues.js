@@ -25,16 +25,12 @@ export async function getIssueNumber({ head_sha, core, github }) {
     const totalCount = searchResponse.data.total_count;
     const itemsCount = searchResponse.data.items.length;
 
-    core.info(
-      `Search results: ${totalCount} total matches, ${itemsCount} items returned`,
-    );
+    core.info(`Search results: ${totalCount} total matches, ${itemsCount} items returned`);
 
     if (itemsCount > 0) {
       const firstItem = searchResponse.data.items[0];
       issueNumber = firstItem.number;
-      core.info(
-        `Found the first matched PR #${issueNumber}: ${firstItem.html_url}`,
-      );
+      core.info(`Found the first matched PR #${issueNumber}: ${firstItem.html_url}`);
 
       if (itemsCount > 1) {
         core.warning(

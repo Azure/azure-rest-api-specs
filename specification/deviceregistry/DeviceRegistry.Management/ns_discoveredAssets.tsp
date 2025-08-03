@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./common/ns_discoveredAssetsProperties.tsp";
+import "./common/ns_discoveredAssetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

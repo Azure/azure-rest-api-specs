@@ -45,6 +45,11 @@ union EnvironmentType {
    * Production system.
    */
   Production: "Production",
+
+  /**
+   * Disaster recovery system.
+   */
+  DisasterRecovery: "DisasterRecovery",
 }
 
 /**
@@ -62,6 +67,23 @@ union WorkloadComplianceState {
    * Compliant as per the workload definition.
    */
   Compliant: "Compliant",
+}
+
+/**
+ * Defines the enrollment state of a Virtual Instance / Component as per the workload definition.
+ */
+union WorkloadEnrollmentState {
+  string,
+
+  /**
+   * Indicates the state where the VI / Component isn't fully following the workload definition and thus, enrollment needing attention.
+   */
+  NeedsAttention: "NeedsAttention",
+
+  /**
+   * Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete.
+   */
+  Completed: "Completed",
 }
 
 /**
@@ -191,6 +213,20 @@ model VirtualInstanceProperties {
   complianceState?: WorkloadComplianceState;
 
   /**
+   * Defines the enrollment state of the virtual instance, as per the corresponding workload definition.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentState?: WorkloadEnrollmentState;
+
+  /**
+   * Indicates any enrollment related errors on the Virtual Instance resource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentErrors?: CommonTypes.ErrorDetail;
+
+  /**
    * Defines the virtual instance provisioning state.
    */
   @visibility(Lifecycle.Read)
@@ -218,6 +254,17 @@ model WorkloadInfo {
    */
   workloadDefinitionName: string;
 
+  /**
+   * The version selected for the corresponding workload definition.
+   */
+  workloadDefinitionVersion?: string;
+}
+
+/**
+ * Defines the workload information object for update scenarios.
+ */
+@added(Versions.v2025_06_01_preview)
+model UpdateWorkloadInfo {
   /**
    * The version selected for the corresponding workload definition.
    */
@@ -269,7 +316,7 @@ model UpdateVirtualInstanceProperties {
    * The workload specific information including the workload type, definition ID and version.
    */
   @added(Versions.v2025_06_01_preview)
-  workloadInfo?: WorkloadInfo;
+  workloadInfo?: UpdateWorkloadInfo;
 
   /**
    * The type of environment in which the workload system is deployed - Production / Non Production.
@@ -337,6 +384,20 @@ model WorkloadComponentProperties {
    */
   @visibility(Lifecycle.Read)
   complianceState?: WorkloadComplianceState;
+
+  /**
+   * Defines the enrollment state of the workload component, as per the corresponding workload definition.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentState?: WorkloadEnrollmentState;
+
+  /**
+   * Indicates any enrollment related errors on the workload component resource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentErrors?: CommonTypes.ErrorDetail;
 
   /**
    * Defines the workload component provisioning state.

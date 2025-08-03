@@ -7,6 +7,7 @@ import "./provisioningState.tsp";
 import "./status.tsp";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -17,7 +18,7 @@ model DeviceBaseProperties {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
-  @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
+  @doc("Indicates if the resource is enabled or not.")
   enabled?: boolean = true;
 
   @doc("The Device ID provided by the customer.")
@@ -25,10 +26,12 @@ model DeviceBaseProperties {
   externalDeviceId?: string;
 
   @doc("Device Template Id used to create a device.")
+  @removed(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deviceTemplateId?: string;
 
   @doc("The Microsoft Entra ID group the device is a member of.")
+  @removed(Versions.v2025_07_01_preview)
   deviceGroupId?: string;
 
   @doc("Device manufacturer.")
@@ -48,6 +51,7 @@ model DeviceBaseProperties {
   operatingSystemVersion?: string;
 
   @doc("Identity for the resource.")
+  @removed(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: DeviceIdentity;
 
@@ -106,8 +110,22 @@ model NamespaceDeviceProperties extends DeviceBaseProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_01_preview)
   lastTransitionTime?: utcDateTime;
+
+  @added(Versions.v2025_08_01_preview)
+  @doc("Policy used to issue device certificates.")
+  policy?: DeviceCredentialPolicy;
 }
 
+@added(Versions.v2025_08_01_preview)
+@doc("Defines the Policy used to issue device certificates if any.")
+model DeviceCredentialPolicy {
+  @doc("Resource Id of the Policy.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/credentials/policies";
+    }
+  ]>;
+}
 @added(Versions.v2024_10_01_preview)
 @doc("Connection endpoint URL a device can use to connect to a service.")
 model MessagingEndpoints {
@@ -152,7 +170,7 @@ model InboundEndpoints {
   @doc("The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com).")
   address: string;
 
-  @doc("Version associated with device endpoint.")
+  @doc("Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc.")
   version?: string;
 
   @doc("Defines the client authentication mechanism to the server.")
@@ -161,7 +179,7 @@ model InboundEndpoints {
   @doc("Defines server trust settings for the endpoint.")
   trustSettings?: TrustSettings;
 
-  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF).")
+  @doc("Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF).")
   additionalConfiguration?: string;
 }
 

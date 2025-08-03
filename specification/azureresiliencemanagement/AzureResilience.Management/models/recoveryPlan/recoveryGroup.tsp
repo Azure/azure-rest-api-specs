@@ -76,6 +76,10 @@ model RecoveryGroupCustomRunbookAction extends RecoveryGroupBaseAction {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't need ProvisioningState"
 @doc("Properties of the recovery orchestration group.")
 model RecoveryGroupProperties {
+  @doc("A unique id for the recovery orchestration group, which is a GUID.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  groupUniqueId: string;
+
   @doc("The order ID of the recovery orchestration group.")
   @minValue(0)
   @maxValue(15)

@@ -4,8 +4,8 @@
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
-import { Ajv } from "ajv";
 import { SdkName, sdkLabels } from "@azure-tools/specs-shared/sdk-types";
+import { Ajv } from "ajv";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
 
@@ -26,11 +26,11 @@ function errorResult(error: string): {
   result: boolean;
   message: string;
 } {
-    console.error("Error:", error);
-    return {
-      result: false,
-      message: error,
-    };
+  console.error("Error:", error);
+  return {
+    result: false,
+    message: error,
+  };
 }
 
 export function validateSdkSuppressionsFile(
@@ -44,7 +44,9 @@ export function validateSdkSuppressionsFile(
   }
 
   if (!suppressionContent) {
-    return errorResult("This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.");
+    return errorResult(
+      "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.",
+    );
   }
 
   const suppressionFileSchema = {
@@ -86,6 +88,9 @@ export function validateSdkSuppressionsFile(
       message: "This suppression file is a valid yaml.",
     };
   } else {
-    return errorResult("This suppression file is a valid yaml but the schema is wrong: " + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" }));
+    return errorResult(
+      "This suppression file is a valid yaml but the schema is wrong: " +
+        suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" }),
+    );
   }
 }

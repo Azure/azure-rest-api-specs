@@ -17,6 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @doc("Configuration of the EventGrid filter")
 model Filter {
   @doc("Filter configuration: Removes all events with a subject that does not start with this string")
@@ -29,6 +30,7 @@ model Filter {
   includedEventTypes?: string[];
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Subscriber Identity Info, for passing client details")
 model SubscriberIdentityInfo {
   @doc("Principal ID of the Client")
@@ -48,6 +50,7 @@ model SubscriberIdentityInfo {
 }
 
 @doc("Event Grid Filter Properties")
+@removed(Versions.v2025_06_01)
 model EventGridFilterProperties {
   @doc("Filter details")
   filter?: Filter;
@@ -60,6 +63,7 @@ model EventGridFilterProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Event Grid Filter Resource")
 @parentResource(Context)
 @resource("eventGridFilters")
@@ -71,6 +75,7 @@ model EventGridFilter
   >;
 }
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface EventGridFilters {
   @doc("Get Event Grid Filter Resource")

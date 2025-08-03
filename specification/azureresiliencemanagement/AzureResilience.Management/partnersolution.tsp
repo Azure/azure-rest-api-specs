@@ -4,7 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./models/partnersolution/unifiedresiliencyitem.tsp";
+import "./models/partnersolution/unifiedresilienceitem.tsp";
 
 using TypeSpec.Http;
 using Azure.ResourceManager;
@@ -13,13 +13,13 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureResilienceManagement;
 
 @armResourceOperations
-interface UnifiedResiliencyItems {
+interface UnifiedResilienceItems {
   @route(ServiceGroupRoute)
-  get is ArmResourceRead<UnifiedResiliencyItem, ServiceGroupParameters>;
+  get is ArmResourceRead<UnifiedResilienceItem, ServiceGroupParameters>;
 
   @route(ServiceGroupRoute)
   list is ArmResourceListByParent<
-    UnifiedResiliencyItem,
+    UnifiedResilienceItem,
     ServiceGroupTenantParameters
   >;
 }

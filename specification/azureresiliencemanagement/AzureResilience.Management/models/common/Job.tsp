@@ -27,8 +27,14 @@ union JobStatus {
   @doc("The job has been completed successfully.")
   Completed: "Completed",
 
+  @doc("The job has been completed with warnings.")
+  CompletedWithWarnings: "CompletedWithWarnings",
+
   @doc("The job has failed.")
   Failed: "Failed",
+
+  @doc("The job skipped for the resource (resource not qualified or not applicable).")
+  Skipped: "Skipped",
 
   @doc("The job is in the process of being cancelled.")
   Cancelling: "Cancelling",
@@ -57,7 +63,7 @@ union JobTriggeredBy {
 model JobUserComment {
   @doc("The time of user comment.")
   @visibility(Lifecycle.Read)
-  commentTime: utcDateTime;
+  commentTime?: utcDateTime;
 
   @doc("User Comment")
   @visibility(Lifecycle.Read)
@@ -70,11 +76,11 @@ model JobTaskDetail {
 
   @doc("Identifier of the task.")
   @visibility(Lifecycle.Read)
-  taskId: string;
+  taskId?: string;
 
   @doc("Friendly name of the task.")
   @visibility(Lifecycle.Read)
-  taskName: string;
+  taskName?: string;
 
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Identifiers of linked jobs to this task.")
@@ -82,14 +88,14 @@ model JobTaskDetail {
   linkedJobIds?: armResourceIdentifier[];
 
   @OpenAPI.extension("x-ms-identifiers", #[])
-  @doc("List of sub-tasks associated with this job.")
+  @doc("User Comments.")
   @visibility(Lifecycle.Read)
   userComments?: JobUserComment[];
 
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of sub-tasks associated with this job.")
   @visibility(Lifecycle.Read)
-  subTasksList: JobTaskDetail[];
+  subTasksList?: JobTaskDetail[];
 }
 
 @doc("Additional information for job.")
@@ -97,18 +103,18 @@ model JobExtendedInfo {
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("List of tasks associated with this job.")
   @visibility(Lifecycle.Read)
-  tasksList: JobTaskDetail[];
+  tasksList?: JobTaskDetail[];
 
   @doc("Non localized error message on job execution.")
   @visibility(Lifecycle.Read)
-  dynamicErrorMessage: string;
+  dynamicErrorMessage?: string;
 }
 
 @doc("Job Error information.")
 model JobErrorInfo {
   @doc("A code representing the error.")
   @visibility(Lifecycle.Read)
-  errorCode: string;
+  errorCode?: string;
 
   @doc("A detailed message explaining the error.")
   @visibility(Lifecycle.Read)
@@ -132,19 +138,19 @@ model JobRetryDetails {
 model JobExecutionDetails {
   @doc("The current status of the job execution.")
   @visibility(Lifecycle.Read)
-  status: JobStatus;
+  status?: JobStatus;
 
   @doc("The start time of the job execution.")
   @visibility(Lifecycle.Read)
-  startTime: utcDateTime;
+  startTime?: utcDateTime;
 
   @doc("The end time of the job execution.")
   @visibility(Lifecycle.Read)
-  endTime: utcDateTime;
+  endTime?: utcDateTime;
 
   @doc("The time elapsed during the execution of this job.")
   @visibility(Lifecycle.Read)
-  duration: duration;
+  duration?: duration;
 
   @doc("Details of any errors that occurred during the execution of this job.")
   errorDetails?: JobErrorInfo;
@@ -157,11 +163,11 @@ model BaseJobProperties {
 
   @doc("The resource for which this job was created. This is typically the resource that the job is intended to manage or operate on.")
   @visibility(Lifecycle.Read)
-  resourceId: armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("The operation that this job is intended to perform.")
   @visibility(Lifecycle.Read)
-  operation: string;
+  operation?: string;
 
   @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Details of any retries that have been attempted for this job.")
@@ -169,6 +175,11 @@ model BaseJobProperties {
 
   @doc("Additional information about the job.")
   jobExtendedInfo?: JobExtendedInfo;
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("User Comments.")
+  @visibility(Lifecycle.Read)
+  userComments?: JobUserComment[];
 }
 
 // Define the main model
@@ -179,9 +190,9 @@ model JobProperties {
 
   @doc("The type of job.")
   @visibility(Lifecycle.Read)
-  jobType: JobType;
+  jobType?: JobType;
 
   @doc("Indicates whether the job was triggered by the system or a user.")
   @visibility(Lifecycle.Read)
-  triggeredBy: JobTriggeredBy;
+  triggeredBy?: JobTriggeredBy;
 }

@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+name: "Swagger LintDiff - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   lintdiff:
-    name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+    name: "Swagger LintDiff - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -42,34 +42,39 @@ jobs:
             const { join } = await import('path');
 
             // TODO: Logger
-            const changedFiles = await getChangedFiles({ cwd: 'after'});
+            const changedFiles = await getChangedFiles({ cwd: 'after', paths: ['specification'] });
             console.log('Changed files:', changedFiles);
-            
+
             const filePath = join(process.cwd(), 'changed-files.txt');
             writeFileSync(filePath, changedFiles.join('\n'), 'utf8');
             console.log(`Changed files written to ${filePath}`);
 
-      - name: Prepend test notice to summary
-        if: always()
-        run: |
-          temp_file=$(mktemp)
-          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger LintDiff'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are are in required check 'Swagger LintDiff'.\n" > $GITHUB_STEP_SUMMARY
-
       # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
+        id: run-lintdiff
         run: |
+          set -x
+
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+
           npm exec --no -- lint-diff \
             --before before \
             --after after \
             --changed-files-path changed-files.txt \
             --base-branch ${{ github.event.pull_request.base.ref }} \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
-            --out-file $GITHUB_STEP_SUMMARY
-
-          echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
-          echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
-          echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
+            --out-file "$GITHUB_STEP_SUMMARY"
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
-          NODE_OPTIONS: '--max-old-space-size=8192'
+          NODE_OPTIONS: "--max-old-space-size=8192"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.run-lintdiff.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.run-lintdiff.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore

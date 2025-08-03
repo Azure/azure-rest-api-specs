@@ -22,16 +22,19 @@ model JobResourceProperties {
 
   @doc("Id of the Job under which this job-resource exists.")
   @visibility(Lifecycle.Read)
-  jobId: string;
+  jobId?: string;
 
   @doc("Id of the job-task to which this job resource is associated.")
   @visibility(Lifecycle.Read)
-  taskId: string;
+  taskId?: string;
 
   @doc("Friendly name of the job-task to which this job resource is associated.")
   @visibility(Lifecycle.Read)
-  taskName: string;
+  taskName?: string;
 
   @doc("Discriminator for the JobResource object hierarchy.")
   jobResourceType: JobResourceType;
+
+  @doc("A setting that indicates the protection solution selected.")
+  protectionSolutionType: ResourceProtectionSolutionType;
 }

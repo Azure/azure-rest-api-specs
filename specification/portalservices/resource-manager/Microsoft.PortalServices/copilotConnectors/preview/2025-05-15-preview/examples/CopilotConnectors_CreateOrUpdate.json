@@ -1,0 +1,54 @@
+{
+  "title": "CopilotConnectors_CreateOrUpdate",
+  "operationId": "CopilotConnectors_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "name": "copilotConnector1",
+    "resource": {
+      "properties": {
+        "connectorType": "MCP",
+        "description": "My Awesome Connector",
+        "enabled": true,
+        "connectionInfo": {
+          "endpoint": "https://contoso.com",
+          "authenticationSettings": {
+            "apiKey": {
+              "value": "myApiKey"
+            }
+          }
+        }
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "connectorType": "MCP",
+          "description": "My Awesome Connector",
+          "enabled": true
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/copilotConnectors/copilotConnector1",
+        "name": "copilotConnector1",
+        "type": "Microsoft.PortalServices/copilotConnectors"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "connectorType": "MCP",
+          "description": "My Awesome Connector",
+          "enabled": true
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/copilotConnectors/copilotConnector1",
+        "name": "copilotConnector1",
+        "type": "Microsoft.PortalServices/copilotConnectors"
+      }
+    }
+  }
+}

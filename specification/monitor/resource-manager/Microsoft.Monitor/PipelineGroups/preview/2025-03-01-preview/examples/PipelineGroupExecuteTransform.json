@@ -1,0 +1,23 @@
+{
+  "title": "Response when executing a transform",
+  "operationId": "PipelineGroups_ExecuteTransform",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "pipelineGroupName": "plGroup1",
+    "api-version": "2025-03-01-preview",
+    "body": {
+      "transformStatement": "source | where severity_text == \"INFO\""
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Transform execution succeeded",
+      "body": {
+        "validation": {
+          "duration": 0.005
+        }
+      }
+    }
+  }
+}

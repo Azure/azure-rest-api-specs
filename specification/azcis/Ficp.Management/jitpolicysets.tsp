@@ -92,6 +92,7 @@ model PolicyAction {
 
 @doc("Provisioning Mode")
 model ProvisioningMode {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Type of the provisioning mode, either \"Create\" or \"Delete\".")
   mode: "Create" | "Delete" | string;
 }

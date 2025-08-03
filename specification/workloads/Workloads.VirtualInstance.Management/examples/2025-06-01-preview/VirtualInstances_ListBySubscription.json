@@ -10,7 +10,7 @@
           {
             "name": "testvi1",
             "type": "Microsoft.Workloads/virtualInstances",
-            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi1",
             "location": "eastus2euap",
             "identity": {
               "type": "UserAssigned",
@@ -29,11 +29,11 @@
               "systemLifecycleStage": "Active",
               "systemPriority": 0,
               "metadata": {
-                "SAPSID": "RS1",
-                "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567890"
+                "SAPSID": "RS1"
               },
               "provisioningState": "Succeeded",
-              "complianceState": "Compliant"
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed"
             },
             "systemData": {
               "createdAt": "2024-12-01T00:00:00.001Z",
@@ -65,21 +65,71 @@
                 "workloadDefinitionName": "HighAvailability",
                 "workloadDefinitionVersion": "1.0"
               },
-              "environmentType": "NonProduction",
+              "environmentType": "Production",
               "systemLifecycleStage": "Active",
               "systemPriority": 3,
               "metadata": {
-                "SAPSID": "RS2",
-                "LandscapeIdentifier": "abcdefgh-1234-5678-ijkl-mn1234567890"
+                "SAPSID": "RS2"
               },
               "linkedResources": [
                 {
-                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi1",
+                  "linkType": "Dependency"
+                },
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi3",
+                  "linkType": "DisasterRecovery"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T01:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T16:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "testvi3",
+            "type": "Microsoft.Workloads/virtualInstances",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi3",
+            "location": "eastus2euap",
+            "tags": {
+              "TestSystem": "true"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+              }
+            },
+            "kind": "sap",
+            "properties": {
+              "workloadInfo": {
+                "workloadType": "sap",
+                "workloadDefinitionName": "HighAvailability",
+                "workloadDefinitionVersion": "1.0"
+              },
+              "environmentType": "DisasterRecovery",
+              "systemLifecycleStage": "Active",
+              "systemPriority": 3,
+              "metadata": {
+                "SAPSID": "RS2"
+              },
+              "linkedResources": [
+                {
+                  "resourceId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi1",
                   "linkType": "Dependency"
                 }
               ],
               "provisioningState": "Succeeded",
-              "complianceState": "Compliant"
+              "complianceState": "Compliant",
+              "enrollmentState": "Completed"
             },
             "systemData": {
               "createdAt": "2024-12-01T01:00:00.001Z",

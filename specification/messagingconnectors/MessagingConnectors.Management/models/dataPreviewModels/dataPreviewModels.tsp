@@ -3,17 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../connectorModels.tsp";
+import "../fileReference.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
-
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
+namespace Microsoft.MessagingConnectors.Models.DataPreview;
 
 @doc("Type of DataRange")
 union DataRangeType {
@@ -45,7 +37,6 @@ model DataPreviewRequest {
   @doc("DataPreview properties")
   dataPreviewProperties: DataPreviewProperties;
 
-  @added(Versions.v2025_05_01_preview)
   @doc("Skip validation or not")
   skipValidation?: boolean;
 }
@@ -53,24 +44,19 @@ model DataPreviewRequest {
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties for the source")
-  dataSourceProperties: DataSourceProperties;
+  dataSourceProperties: Models.DataSource.DataSourceProperties;
 
   @doc("DataRange for DataPreview")
   dataRange: DataRangeBaseConfig;
 
-  @removed(Versions.v2025_03_01_preview)
-  @doc("Type of the Connector.")
-  converterConfig: ConverterConfig;
-
   @doc("Data format of the data source")
-  sourceDataFormat?: SourceDataFormat;
+  sourceDataFormat?: Models.Connector.SourceConnector.SourceDataFormat.SourceDataFormat;
 
   @doc("Cloud events config")
-  cloudEventsConfig?: CloudEventsConfig;
+  cloudEventsConfig?: Models.Connector.SourceConnector.CloudEventsConfig.CloudEventsConfig;
 
-  @added(Versions.v2025_05_01_preview)
   @doc("networkProperties config.")
-  networkProperties?: NetworkProperties;
+  networkProperties?: Models.Network.NetworkProperties;
 }
 
 @doc("Header item")

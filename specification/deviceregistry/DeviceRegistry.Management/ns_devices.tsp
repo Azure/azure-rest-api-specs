@@ -17,14 +17,13 @@ namespace Microsoft.DeviceRegistry;
 @parentResource(Namespace)
 @doc("Device definition.")
 model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api spec"
   @doc("The name of the device.")
   @key("deviceName")
   @segment("devices")
   @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
   @path
   @minLength(3)
-  @maxLength(64)
+  @maxLength(63)
   name: string;
 
   // etag not included in TrackedResource

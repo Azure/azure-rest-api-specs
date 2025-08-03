@@ -978,6 +978,7 @@ model DeploymentProperties {
  * The list of deployment device states.
  */
 model DeploymentDeviceStatesList is Azure.Core.Page<DeploymentDeviceState>;
+@@Azure.ResourceManager.identifiers(DeploymentDeviceStatesList.value, #[]);
 
 /**
  * Deployment device status.

@@ -20,3 +20,13 @@ interface Applications {
   @summary("Lists the specified Application resources.")
   list is ArmResourceListByParent<Application>;
 }
+
+@armResourceOperations
+@added(Versions.v2025_06_10_preview)
+interface Endpoints {
+  @summary("Retrieves the specified Endpoint resource.")
+  get is ArmResourceRead<Endpoint>;
+
+  @summary("Lists the specified Endpoint resources.")
+  list is ArmResourceListByParent<Endpoint>;
+}

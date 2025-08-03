@@ -18,6 +18,7 @@ enum Versions {
     Azure.ResourceManager.Versions.v1_0_Preview_1
   )
   @doc("Version 2025-03-01-preview")
+  @previewVersion
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
@@ -219,5 +220,5 @@ model RuleProperties {
   // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
   //@minValue("?")
   //@maxValue("?")
-  minEnforcementDuration: duration;
+  minEnforcementDuration?: duration;
 }
