@@ -169,6 +169,10 @@ namespace ConversationAuthoringClient {
   op getProject is Language.Conversations.Authoring.ConversationAuthoringProject.getProject;
 
   op deleteProject is Language.Conversations.Authoring.ConversationAuthoringProject.deleteProject;
+
+  op `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
+
+  op `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 }
 
 
@@ -223,8 +227,6 @@ namespace ConversationAuthoringProjectClient {
     getProjectDeletionStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getProjectDeletionStatus;
 
     `export` is Language.Conversations.Authoring.ConversationAuthoringProject.`export`;
-
-    `import` is Language.Conversations.Authoring.ConversationAuthoringProject.`import`;
 
     getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
