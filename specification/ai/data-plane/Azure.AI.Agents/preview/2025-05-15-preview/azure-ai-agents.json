@@ -6728,9 +6728,29 @@
         }
       }
     },
+    "RunStepDeltaOpenAPIObject": {
+      "type": "object",
+      "description": "Represents an invocation of openapi as part of a streaming run step.",
+      "properties": {
+        "tool_calls": {
+          "type": "array",
+          "description": "The collection of tool calls for the tool call detail item.",
+          "items": {
+            "$ref": "#/definitions/RunStepDeltaOpenAPIToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepDeltaDetail"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
+    },
     "RunStepDeltaOpenAPIToolCall": {
       "type": "object",
-      "description": "Represents the openapi tool call in a streaming run step. *",
+      "description": "Represents the openapi tool call in a streaming run step.",
       "properties": {
         "openapi": {
           "type": "object",
@@ -6747,26 +6767,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/RunStepDeltaToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "openapi"
-    },
-    "RunStepDeltaOpenapiObject": {
-      "type": "object",
-      "description": "Represents an invocation of openapi as part of a streaming run step.",
-      "properties": {
-        "tool_calls": {
-          "type": "array",
-          "description": "The collection of tool calls for the tool call detail item.",
-          "items": {
-            "$ref": "#/definitions/RunStepDeltaOpenAPIToolCall"
-          },
-          "x-ms-client-name": "toolCalls"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepDeltaDetail"
         }
       ],
       "x-ms-discriminator-value": "openapi"

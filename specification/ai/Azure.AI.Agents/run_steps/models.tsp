@@ -264,7 +264,7 @@ model RunStepDeltaMCPObject extends RunStepDeltaDetail {
 
 /** Represents an invocation of openapi as part of a streaming run step. */
 @added(Versions.v2025_05_15_preview)
-model RunStepDeltaOpenapiObject extends RunStepDeltaDetail {
+model RunStepDeltaOpenAPIObject extends RunStepDeltaDetail {
   /** The object type, which is always "openapi". */
   type: "openapi";
 
@@ -333,7 +333,7 @@ model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
   arguments: string;
 }
 
-/** Represents the openapi tool call in a streaming run step. * */
+/** Represents the openapi tool call in a streaming run step. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaOpenAPIToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "openapi". */
@@ -369,7 +369,7 @@ model RunStepDeltaDeepResearchToolCall extends RunStepDeltaToolCall {
 /** Represents the Azure AI Search in a streaming run step. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaAzureAISearchToolCall extends RunStepDeltaToolCall {
-  /** The object type, which is always "deep_research". */
+  /** The object type, which is always "azure_ai_search". */
   type: "azure_ai_search";
 
   @doc("Reserved for future use.")
