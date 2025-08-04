@@ -43,41 +43,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/activateSaaS": {
-      "post": {
-        "operationId": "SaaS_ActivateResource",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ActivateSaaSParameterRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/SaaSResourceDetailsResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ActivateSaaS": {
-            "$ref": "./examples/ActivateSaaS.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts": {
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts": {
       "get": {
         "operationId": "Accounts_List",
         "parameters": [
@@ -88,7 +54,10 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -118,25 +87,24 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations": {
-      "get": {
-        "operationId": "Organizations_List",
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/activateSaaS": {
+      "post": {
+        "operationId": "SaaS_ActivateResource",
         "parameters": [
           {
-            "name": "userEmail",
-            "in": "query",
+            "name": "request",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "schema": {
+              "$ref": "#/definitions/ActivateSaaSParameterRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/OrganizationsListResponse"
+              "$ref": "#/definitions/SaaSResourceDetailsResponse"
             }
           },
           "default": {
@@ -147,15 +115,9 @@
           }
         },
         "x-ms-examples": {
-          "Organizations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
-          },
-          "Organizations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
+          "ActivateSaaS": {
+            "$ref": "./examples/ActivateSaaS.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -180,6 +142,50 @@
         "x-ms-examples": {
           "Monitors_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Monitors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations": {
+      "get": {
+        "operationId": "Organizations_List",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsListResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
+          },
+          "Organizations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -433,7 +439,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -551,7 +558,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -586,7 +594,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -682,7 +691,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -770,7 +780,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -843,7 +854,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -878,7 +890,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -921,7 +934,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -979,7 +993,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1033,7 +1048,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1079,7 +1095,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1108,7 +1125,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -1154,7 +1172,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "request",
@@ -1203,7 +1222,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1241,7 +1261,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1280,7 +1301,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1337,7 +1359,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1384,7 +1407,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1432,7 +1456,8 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {

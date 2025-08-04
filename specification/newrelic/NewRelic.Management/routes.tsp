@@ -33,7 +33,11 @@ interface AccountsOperationGroup {
       @query("userEmail")
       userEmail: string;
 
-      ...LocationParameter;
+      /**
+       * Location for NewRelic.
+       */
+      @query("location")
+      location: string;
     }
   >;
 }
@@ -58,7 +62,11 @@ interface OrganizationsOperationGroup {
       @query("userEmail")
       userEmail: string;
 
-      ...LocationParameter;
+      /**
+       * Location for NewRelic.
+       */
+      @query("location")
+      location: string;
     }
   >;
 }

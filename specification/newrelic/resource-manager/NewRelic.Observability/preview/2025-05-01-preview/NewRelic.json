@@ -92,49 +92,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/activateSaaS": {
-      "post": {
-        "operationId": "SaaS_ActivateResource",
-        "description": "Resolve the token to get the SaaS resource ID and activate the SaaS resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ActivateSaaSParameterRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SaaSResourceDetailsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ActivateSaaS": {
-            "$ref": "./examples/ActivateSaaS.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/locations/{location}/accounts": {
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/accounts": {
       "get": {
         "operationId": "Accounts_List",
         "description": "Lists all the New Relic accounts linked to your email address, helping you understand the existing accounts that have been created",
@@ -153,7 +111,11 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "query",
+            "description": "Location for NewRelic.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -183,10 +145,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/locations/{location}/organizations": {
-      "get": {
-        "operationId": "Organizations_List",
-        "description": "Lists all the New Relic organizations linked to your email address, helping you understand the existing organizations that have been created",
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/activateSaaS": {
+      "post": {
+        "operationId": "SaaS_ActivateResource",
+        "description": "Resolve the token to get the SaaS resource ID and activate the SaaS resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -195,21 +157,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "userEmail",
-            "in": "query",
-            "description": "User Email.",
+            "name": "request",
+            "in": "body",
+            "description": "The request body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "schema": {
+              "$ref": "#/definitions/ActivateSaaSParameterRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OrganizationsListResponse"
+              "$ref": "#/definitions/SaaSResourceDetailsResponse"
             }
           },
           "default": {
@@ -220,15 +181,9 @@
           }
         },
         "x-ms-examples": {
-          "Organizations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
-          },
-          "Organizations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
+          "ActivateSaaS": {
+            "$ref": "./examples/ActivateSaaS.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -264,6 +219,59 @@
         "x-ms-examples": {
           "Monitors_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Monitors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/NewRelic.Observability/organizations": {
+      "get": {
+        "operationId": "Organizations_List",
+        "description": "Lists all the New Relic organizations linked to your email address, helping you understand the existing organizations that have been created",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "userEmail",
+            "in": "query",
+            "description": "User Email.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Location for NewRelic.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
+          },
+          "Organizations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -386,7 +394,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           }
@@ -430,7 +438,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -504,14 +512,14 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NewRelicMonitorResourceUpdate"
@@ -575,7 +583,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -651,7 +659,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -695,7 +704,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -753,7 +762,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -813,7 +822,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -862,7 +872,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -933,7 +944,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -999,7 +1010,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -1055,7 +1067,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           },
@@ -1118,7 +1130,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1165,7 +1178,7 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
             "type": "string"
           }
@@ -1219,7 +1232,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1268,7 +1282,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1332,7 +1347,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1426,7 +1442,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1517,7 +1534,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "configurationName",
@@ -1598,7 +1616,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1641,7 +1660,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "body",
@@ -1714,7 +1734,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "request",
@@ -1778,7 +1799,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {
@@ -1830,7 +1852,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1884,7 +1907,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -1968,7 +1992,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -2031,7 +2056,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           },
           {
             "name": "ruleSetName",
@@ -2105,7 +2131,8 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.*$"
           }
         ],
         "responses": {

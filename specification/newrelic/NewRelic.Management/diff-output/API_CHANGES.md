@@ -1,17 +1,3 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations
-Change Type: deleted
-
 ## Swagger Changes
 
 ### Changes for `x-cadl-generated`
@@ -25,50 +11,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `info.description__added` | added | `// FIXME: (missing-service-description) Add service description` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts__deleted']` | deleted | `{"get":{"operationId":"Accounts_List","parameters":[{"name":"userEmail","in":"query","required":true...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations__deleted']` | deleted | `{"get":{"operationId":"Organizations_List","parameters":[{"name":"userEmail","in":"query","required"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts__added']` | added | `{"get":{"operationId":"Accounts_List","parameters":[{"name":"userEmail","in":"query","required":true...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations__added']` | added | `{"get":{"operationId":"Organizations_List","parameters":[{"name":"userEmail","in":"query","required"...` |
-
-### Changes for `pattern`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/getBillingInfo'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/latestLinkedSaaS'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/linkSaaS'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listLinkedResources'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions'].get.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[0].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/resubscribe'].post.parameters[0].pattern__deleted` | deleted | `^.*$` |
 
 ### Changes for `consumes`
 
@@ -88,6 +30,23 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.MonitoredSubscriptionProperties.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.parameters[1].schema.type__added` | added | `string` |
+
+### Changes for `pattern`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/refreshIngestionKey'].post.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/switchBilling'].post.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules'].get.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].delete.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].get.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].patch.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].put.parameters[0].pattern__added` | added | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/vmHostPayloads'].post.parameters[0].pattern__added` | added | `^.*$` |
 
 ### Changes for `required`
 
@@ -236,5 +195,4 @@ Change Type: deleted
 |------|-----------|----------|
 | `definitions.NewRelicMonitorResource.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.NewRelicMonitorResourceUpdate.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
-| `paths['/subscriptions/{subscriptionId}/providers/newRelic.Observability/activateSaaS'].post.parameters[0].name` | `request` | `body` |
 

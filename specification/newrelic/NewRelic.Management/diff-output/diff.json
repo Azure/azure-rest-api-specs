@@ -8,191 +8,6 @@
     "description__added": "// FIXME: (missing-service-description) Add service description"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/accounts__deleted": {
-      "get": {
-        "operationId": "Accounts_List",
-        "parameters": [
-          {
-            "name": "userEmail",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "location",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccountsListResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Accounts_List_MaximumSet_Gen": {
-            "$ref": "./examples/Accounts_List_MaximumSet_Gen.json"
-          },
-          "Accounts_List_MinimumSet_Gen": {
-            "$ref": "./examples/Accounts_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/organizations__deleted": {
-      "get": {
-        "operationId": "Organizations_List",
-        "parameters": [
-          {
-            "name": "userEmail",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "location",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OrganizationsListResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
-          },
-          "Organizations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/accounts__added": {
-      "get": {
-        "operationId": "Accounts_List",
-        "parameters": [
-          {
-            "name": "userEmail",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AccountsListResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Accounts_List_MaximumSet_Gen": {
-            "$ref": "./examples/Accounts_List_MaximumSet_Gen.json"
-          },
-          "Accounts_List_MinimumSet_Gen": {
-            "$ref": "./examples/Accounts_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/locations/{location}/organizations__added": {
-      "get": {
-        "operationId": "Organizations_List",
-        "parameters": [
-          {
-            "name": "userEmail",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OrganizationsListResponse"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Organizations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MaximumSet_Gen.json"
-          },
-          "Organizations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Organizations_List_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/newRelic.Observability/activateSaaS": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "name": {
-                "__old": "request",
-                "__new": "body"
-              }
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}": {
       "delete": {
         "parameters": [
@@ -220,45 +35,6 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/getBillingInfo": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/latestLinkedSaaS": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/linkSaaS": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
       "post": {
         "consumes__added": [
@@ -266,10 +42,7 @@
         ],
         "parameters": [
           [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
+            " "
           ],
           [
             "~",
@@ -283,38 +56,11 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listLinkedResources": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
       "get": {
         "parameters": [
           [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
+            " "
           ],
           [
             "~",
@@ -327,10 +73,7 @@
       "put": {
         "parameters": [
           [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
+            " "
           ],
           [
             "~",
@@ -349,10 +92,7 @@
       "patch": {
         "parameters": [
           [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
+            " "
           ],
           [
             "~",
@@ -368,10 +108,7 @@
       "delete": {
         "parameters": [
           [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
+            " "
           ],
           [
             "~",
@@ -382,17 +119,113 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/resubscribe": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/refreshIngestionKey": {
       "post": {
         "parameters": [
           [
             "~",
             {
-              "pattern__deleted": "^.*$"
+              "pattern__added": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/switchBilling": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
             }
           ],
           [
             " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/vmHostPayloads": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__added": "^.*$"
+            }
           ]
         ]
       }

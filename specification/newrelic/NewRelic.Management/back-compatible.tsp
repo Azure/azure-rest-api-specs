@@ -70,3 +70,4 @@ using NewRelic.Observability;
 @@clientLocation(PlansOperationGroup.list, "Plans");
 
 @@clientLocation(SaaSOperationGroup.activateResource, "SaaS");
+@@clientName(SaaSOperationGroup.activateResource::parameters.body, "request");

@@ -21,7 +21,7 @@ model MonitoredSubscriptionProperties
     Resource = MonitoredSubscriptionProperties,
     KeyName = "configurationName",
     SegmentName = "monitoredSubscriptions",
-    NamePattern = "",
+    NamePattern = "^.*$",
     Type = ConfigurationName
   >;
 }

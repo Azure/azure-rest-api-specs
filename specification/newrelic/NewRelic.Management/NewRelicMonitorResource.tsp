@@ -19,7 +19,7 @@ model NewRelicMonitorResource
     Resource = NewRelicMonitorResource,
     KeyName = "monitorName",
     SegmentName = "monitors",
-    NamePattern = ""
+    NamePattern = "^.*$"
   >;
 
   /**
@@ -30,20 +30,37 @@ model NewRelicMonitorResource
 }
 
 @armResourceOperations
+interface NewRelicMonitorResourceWithoutPatternOperations
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = NewRelicMonitorResource,
+        KeyName = "monitorName",
+        SegmentName = "monitors",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface NewRelicMonitorResources {
   /**
    * Retrieves the properties and configuration details of a specific New Relic monitor resource, providing insight into its setup and status
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_Get")
-  get is ArmResourceRead<NewRelicMonitorResource>;
+  get is NewRelicMonitorResourceWithoutPatternOperations.Read<NewRelicMonitorResource>;
 
   /**
    * Creates a new or updates an existing New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NewRelicMonitorResource>;
+  createOrUpdate is NewRelicMonitorResourceWithoutPatternOperations.CreateOrUpdateAsync<NewRelicMonitorResource>;
 
   /**
    * Updates an existing New Relic monitor resource from your Azure subscription
@@ -51,7 +68,7 @@ interface NewRelicMonitorResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_Update")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is NewRelicMonitorResourceWithoutPatternOperations.CustomPatchAsync<
     NewRelicMonitorResource,
     PatchModel = NewRelicMonitorResourceUpdate
   >;
@@ -63,7 +80,7 @@ interface NewRelicMonitorResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Monitors_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is NewRelicMonitorResourceWithoutPatternOperations.DeleteWithoutOkAsync<
     NewRelicMonitorResource,
     Parameters = {
       /**
@@ -95,7 +112,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_GetMetricRules")
-  getMetricRules is ArmResourceActionSync<
+  getMetricRules is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     MetricsRequest,
     ArmResponse<MetricRules>
@@ -106,7 +123,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_GetMetricStatus")
-  getMetricStatus is ArmResourceActionSync<
+  getMetricStatus is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     MetricsStatusRequest,
     ArmResponse<MetricsStatusResponse>
@@ -117,7 +134,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_ListAppServices")
-  listAppServices is ArmResourceActionSync<
+  listAppServices is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     AppServicesGetRequest,
     ArmResponse<AppServicesListResponse>
@@ -128,7 +145,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_SwitchBilling")
-  switchBilling is ArmResourceActionSync<
+  switchBilling is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
     ArmResponse<NewRelicMonitorResource> | AcceptedResponse | NoContentResponse
@@ -139,7 +156,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_ListHosts")
-  listHosts is ArmResourceActionSync<
+  listHosts is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     HostsGetRequest,
     ArmResponse<VMHostsListResponse>
@@ -150,7 +167,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_RefreshIngestionKey")
-  refreshIngestionKey is ArmResourceActionSync<
+  refreshIngestionKey is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     void,
     NoContentResponse
@@ -162,7 +179,7 @@ interface NewRelicMonitorResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_ListMonitoredResources")
   @action("monitoredResources")
-  listMonitoredResources is ArmResourceActionSync<
+  listMonitoredResources is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     void,
     ArmResponse<MonitoredResourceListResponse>

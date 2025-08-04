@@ -26,6 +26,23 @@ model TagRule
 }
 
 @armResourceOperations
+interface TagRulesOperations
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = NewRelicMonitorResource,
+        KeyName = "monitorName",
+        SegmentName = "monitors",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface TagRules {
   /**
    * Retrieves the details of the tag rules for a specific New Relic monitor resource, providing insight into its setup and status
