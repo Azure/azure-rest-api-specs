@@ -9,7 +9,7 @@ import { generatePrompts } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
 import { addIgnorePath, processIgnoreList } from "./ignore.js";
 import { jsonOutput } from "./jsonOutput.js";
-import { logHeader, logWarning } from "./log.js";
+import { logError, logHeader, logWarning } from "./log.js";
 import {
   findChangedPaths,
   findDifferences,
@@ -18,6 +18,7 @@ import {
   formatDifferenceReport,
   formatModifiedValuesReport,
 } from "./summary.js";
+import { compareDocuments, printPathDiff } from "./compare.js";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -192,45 +193,66 @@ export async function main() {
       JSON.stringify(sortedNewFile, null, 2),
     );
   }
+  logHeader("Comparing finished.");
 
-  let report: string = "";
-  const diffForFile = diff(sortedOldFile, sortedNewFile);
-
-  // // TO-DELETE: Read the diff file from disk
-  // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
-
-  const changedPaths = findChangedPaths(diffForFile);
-  if (changedPaths.length > 0) {
-    logWarning(
-      `Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`,
-    );
-    const changedPathsReport = formatChangedPathsReport(changedPaths);
-    console.log(changedPathsReport);
-    report += changedPathsReport;
+  let outputMarkdown = "";
+  const compareResult = compareDocuments(
+    sortedOldFile,
+    sortedNewFile,
+  );
+  if (compareResult.length === 0) {
+    logHeader("No differences found.");
   }
-
-  const differences = findDifferences(diffForFile);
-  const differencesReport = formatDifferenceReport(differences);
-  console.log(differencesReport);
-  report += differencesReport;
-
-  const modifiedValues = findModifiedValues(diffForFile);
-  const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
-  console.log(modifiedValuesReport);
-  report += modifiedValuesReport;
+  else {
+    outputMarkdown += "| Type | Level | Message |\n";
+    outputMarkdown += "| ---- | ----- | ------- |\n";
+    for (const diff of compareResult) {
+      outputMarkdown += printPathDiff(diff);
+    }
+    console.log(outputMarkdown);
+  }  
 
   if (outputFolder) {
-    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
-    logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+    let report: string = "";
+    const diffForFile = diff(sortedOldFile, sortedNewFile);
+    if (diffForFile === undefined || Object.keys(diffForFile).length === 0) {
+      return;
+    }      
 
-    const suggestedPrompt = generatePrompts(diffForFile);
-    if (suggestedPrompt.length > 0) {
-      logWarning(`Considering these suggested prompts for the diff:`);
-      suggestedPrompt.forEach((prompt) => {
-        console.log(prompt);
-      });
+    // // TO-DELETE: Read the diff file from disk
+    // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
+
+    const changedPaths = findChangedPaths(diffForFile);
+    if (changedPaths.length > 0) {
+      logWarning(
+        `Found ${changedPaths.length} changed paths in the diff.`,
+      );
+      const changedPathsReport = formatChangedPathsReport(changedPaths);
+      report += changedPathsReport;
     }
+
+    const differences = findDifferences(diffForFile);
+    const differencesReport = formatDifferenceReport(differences);
+    report += differencesReport;
+
+    const modifiedValues = findModifiedValues(diffForFile);
+    const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
+    report += modifiedValuesReport;
+
+    if (diffForFile) {
+      fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
+      fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
+      logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+
+      const suggestedPrompt = generatePrompts(diffForFile);
+      if (suggestedPrompt.length > 0) {
+        logWarning(`Considering these suggested prompts for the diff:`);
+        suggestedPrompt.forEach((prompt) => {
+          console.log(prompt);
+        });
+      }
+    }
+    
     if (args.jsonOutput) {
       fs.writeFileSync(`${outputFolder}/tsmv_output.json`, JSON.stringify(jsonOutput, null, 2));
       logHeader(`JSON output written to ${outputFolder}/tsmv_output.json`);
@@ -238,7 +260,11 @@ export async function main() {
         `---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`,
       );
     }
-  } else {
-    console.log(report);
+  }
+  else {
+    if (compareResult.filter((x) => x.level === "error").length > 0) {
+      logError("Differences found. Please fix the issues before proceeding.");
+      process.exit(1);
+    }
   }
 }
