@@ -110,6 +110,12 @@ model CreateEntryCreated {
   @statusCode
   statusCode: 201;
 
+  /**
+   * The title of the content returned in the response.
+   */
+  @header("Content-Title")
+  contentTitle?: string;
+  
   @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature.")
   @header("Content-Type")
   contentType: "application/cose";
