@@ -25,11 +25,6 @@ export default async function setStatus(
 ) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
-  if (!Number.isInteger(issue_number) || issue_number <= 0) {
-    core.warning("issue_number must be a positive integer");
-    return;
-  }
-
   // Default target is this run itself
   let target_url =
     `https://github.com/${context.repo.owner}/${context.repo.repo}` +
@@ -76,6 +71,10 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  if (!Number.isInteger(issue_number) || issue_number <= 0) {
+    throw new Error("issue_number must be a positive integer");
+  }
+
   core.setOutput("issue_number", issue_number);
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call

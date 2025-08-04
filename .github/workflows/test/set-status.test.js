@@ -1,136 +1,10 @@
 // @ts-check
 
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import setStatus, { setStatusImpl } from "../src/set-status.js";
+import { beforeEach, describe, expect, it } from "vitest";
+import { setStatusImpl } from "../src/set-status.js";
 
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
-
-// Mock the extractInputs function
-vi.mock("../src/context.js", () => ({
-  extractInputs: vi.fn(),
-}));
-
-import { extractInputs } from "../src/context.js";
-const mockExtractInputs = vi.mocked(extractInputs);
-
-describe("setStatus", () => {
-  let core;
-  let github;
-  let context;
-
-  beforeEach(() => {
-    core = createMockCore();
-    github = createMockGithub();
-    context = {
-      repo: { owner: "test-owner", repo: "test-repo" },
-      runId: "123456",
-    };
-    vi.clearAllMocks();
-  });
-
-  it("returns early with warning when issue_number is null", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      // @ts-expect-error - Testing invalid input
-      issue_number: null,
-      run_id: 123,
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).toHaveBeenCalledWith("issue_number must be a positive integer");
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("returns early with warning when issue_number is undefined", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      // @ts-expect-error - Testing invalid input
-      issue_number: undefined,
-      run_id: 123,
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).toHaveBeenCalledWith("issue_number must be a positive integer");
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("returns early with warning when issue_number is NaN", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      issue_number: NaN,
-      run_id: 123,
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).toHaveBeenCalledWith("issue_number must be a positive integer");
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("returns early with warning when issue_number is zero", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      issue_number: 0,
-      run_id: 123,
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).toHaveBeenCalledWith("issue_number must be a positive integer");
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("returns early with warning when issue_number is negative", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      issue_number: -1,
-      run_id: 123,
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).toHaveBeenCalledWith("issue_number must be a positive integer");
-    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-  });
-
-  it("proceeds to setStatusImpl when issue_number is valid positive integer", async () => {
-    mockExtractInputs.mockResolvedValue({
-      owner: "test-owner",
-      repo: "test-repo",
-      head_sha: "test-sha",
-      issue_number: 123,
-      run_id: 456,
-    });
-
-    // Mock successful label check to avoid complex setup
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "test-label" }],
-    });
-
-    await setStatus({ github, context, core }, "test-workflow", "test-status", "test-label");
-
-    expect(core.warning).not.toHaveBeenCalled();
-    expect(github.rest.issues.listLabelsOnIssue).toHaveBeenCalledWith({
-      owner: "test-owner",
-      repo: "test-repo",
-      issue_number: 123,
-      per_page: 100,
-    });
-  });
-});
 
 describe("setStatusImpl", () => {
   let core;
@@ -143,6 +17,93 @@ describe("setStatusImpl", () => {
 
   it("throws if inputs null", async () => {
     await expect(setStatusImpl({})).rejects.toThrow();
+  });
+
+  it("throws when issue_number is null", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        // @ts-expect-error - Testing invalid input
+        issue_number: null,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is undefined", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        // @ts-expect-error - Testing invalid input
+        issue_number: undefined,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is NaN", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: NaN,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is zero", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: 0,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
+  });
+
+  it("throws when issue_number is negative", async () => {
+    await expect(
+      setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: "test-head-sha",
+        issue_number: -1,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "test-workflow",
+        requiredStatusName: "test-status",
+        overridingLabel: "test-label",
+      }),
+    ).rejects.toThrow("issue_number must be a positive integer");
   });
 
   it("sets success if approved by label", async () => {
