@@ -262,6 +262,17 @@ model RunStepDeltaMCPObject extends RunStepDeltaDetail {
   toolCalls?: RunStepDeltaMcpToolCall[];
 }
 
+/** Represents an invocation of openapi as part of a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaOpenAPIObject extends RunStepDeltaDetail {
+  /** The object type, which is always "openapi". */
+  type: "openapi";
+
+  /** The collection of tool calls for the tool call detail item. */
+  @encodedName("application/json", "tool_calls")
+  toolCalls?: RunStepDeltaOpenAPIToolCall[];
+}
+
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
@@ -320,6 +331,50 @@ model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
 
   /** The arguments for MCP call. */
   arguments: string;
+}
+
+/** Represents the openapi tool call in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaOpenAPIToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "openapi". */
+  type: "openapi";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "openapi")
+  openAPI: Record<string>;
+}
+
+/** Represents the bing grounding tool call in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaBingGroundingToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "bing_grounding". */
+  type: "bing_grounding";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "bing_grounding")
+  bingGrounding: Record<string>;
+}
+
+/** Represents the Deep research in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaDeepResearchToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "deep_research". */
+  type: "deep_research";
+
+  /** The details of DeepResearch tool call. */
+  @encodedName("application/json", "deep_research")
+  deepResearch: RunStepDeepResearchToolCallDetails;
+}
+
+/** Represents the Azure AI Search in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaAzureAISearchToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "azure_ai_search". */
+  type: "azure_ai_search";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "azure_ai_search")
+  azureAISearch: Record<string>;
 }
 
 /** Represents the function data in a streaming run step delta's function tool call. */
