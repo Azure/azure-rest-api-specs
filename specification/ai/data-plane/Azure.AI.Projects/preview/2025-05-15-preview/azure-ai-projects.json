@@ -1093,6 +1093,43 @@
       }
     },
     "/fine_tuning": {
+      "get": {
+        "operationId": "FineTuningJobs_ListFineTuningJobs",
+        "description": "Returns a list of finetune jobs",
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last job from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of fine-tuning jobs to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "description": "Optional metadata filter. To filter, use the syntax metadata[k]=v. Alternatively, set metadata=null to indicate no metadata.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningPaginatedResponse"
+            }
+          }
+        }
+      },
       "post": {
         "operationId": "FineTuningJobs_Create",
         "description": "Creates a fine-tuning job.",
@@ -2956,9 +2993,74 @@
           "format": "date-time",
           "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created."
         },
+        "error": {
+          "$ref": "#/definitions/FineTuningJobError",
+          "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure."
+        },
+        "estimated_finish": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
+        },
+        "fine_tuned_model": {
+          "type": "string",
+          "description": "The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running."
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
+        },
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobSFTHyperParameters",
+          "description": "The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs"
+        },
+        "integrations": {
+          "type": "array",
+          "description": "A list of integrations to enable for this fine-tuning job.",
+          "items": {
+            "$ref": "#/definitions/FineTuningJobIntegration"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod",
+          "description": "The method used for fine-tuning."
+        },
+        "model": {
+          "type": "string",
+          "description": "The base model that is being fine-tuned."
+        },
+        "organization_id": {
+          "type": "string",
+          "description": "The organization that owns the fine-tuning job."
+        },
+        "result_files": {
+          "type": "array",
+          "description": "The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The seed used for the fine-tuning job."
+        },
         "status": {
           "type": "string",
           "description": "The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled."
+        },
+        "trained_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
         },
         "training_file": {
           "type": "string",
@@ -2968,70 +3070,36 @@
           "type": "string",
           "description": "The file ID used for validation. You can retrieve the validation results with the Files API."
         },
-        "estimated_finish": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running."
-        },
-        "finished_at": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running."
-        },
-        "fine_tuned_model": {
-          "type": "string",
-          "description": "The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running."
-        },
-        "model": {
-          "type": "string",
-          "description": "The base model that is being fine-tuned."
-        },
-        "modelProvider": {
-          "type": "string",
-          "description": "The base model provider."
-        },
-        "seed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The seed used for the fine-tuning job."
-        },
-        "trained_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running."
-        },
-        "method": {
-          "$ref": "#/definitions/FineTuningJobTrainingMethod",
-          "description": "The method used for fine-tuning."
-        },
-        "result_files": {
-          "type": "array",
-          "description": "The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.",
-          "items": {
+        "additional_Parameters": {
+          "type": "object",
+          "description": "The additional 1P parameters used to train the fine-tuned model. This is Azure AI specific parameter.",
+          "additionalProperties": {
             "type": "string"
           }
         },
-        "integrations": {
-          "type": "array",
-          "description": "A list of integrations to enable for this fine-tuning job.",
-          "items": {
-            "$ref": "#/definitions/FineTuningJobIntegration"
-          }
+        "suffix": {
+          "type": "string",
+          "description": "A string of up to 64 characters that will be added to your fine-tuned model name."
         },
-        "error": {
-          "$ref": "#/definitions/FineTuningJobError",
-          "description": "For fine-tuning jobs that have failed, this will contain more information on the cause of the failure."
+        "TrainingType": {
+          "$ref": "#/definitions/TrainingType",
+          "description": "The SKU used for training. This is Azure AI specific parameter"
+        },
+        "inference_configs": {
+          "$ref": "#/definitions/InferenceConfigs",
+          "description": "Inference configurations. This is Azure AI specific parameter"
         }
       },
       "required": [
         "id",
         "object",
         "created_at",
-        "status",
-        "training_file",
+        "method",
         "model",
+        "organization_id",
         "seed",
-        "method"
+        "status",
+        "training_file"
       ]
     },
     "FineTuningJobCreation": {
@@ -3654,6 +3722,31 @@
       ],
       "x-ms-discriminator-value": "multi"
     },
+    "FineTuningPaginatedResponse": {
+      "type": "object",
+      "description": "The response data for a requested list of items.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Items list.",
+          "items": {
+            "$ref": "#/definitions/FineTuningJob"
+          }
+        },
+        "last_id": {
+          "type": "string",
+          "description": "The last ID represented in this list."
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "A value indicating whether there are additional values available."
+        }
+      },
+      "required": [
+        "data",
+        "has_more"
+      ]
+    },
     "FineTuningPythonGrader": {
       "type": "object",
       "description": "A PythonGrader object that runs a python script on the input.",
@@ -3712,7 +3805,7 @@
           "$ref": "#/definitions/FineTuningJobGraderModelSamplingParam",
           "description": "The sampling parameters for the model."
         },
-        "passThreshold": {
+        "pass_threshold": {
           "type": "number",
           "format": "double",
           "description": "TBD"

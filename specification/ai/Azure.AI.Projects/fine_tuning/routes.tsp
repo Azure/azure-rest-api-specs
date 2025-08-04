@@ -3,6 +3,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using Azure.Core.Traits;
@@ -22,6 +23,28 @@ alias FineTuningOperations = Azure.Core.ResourceOperations<FineTuningServiceTrai
 interface FineTuningJobs {
   @doc("Get info about a fine-tuning job.")
   get is FineTuningOperations.ResourceRead<FineTuningJob>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  //#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  @doc("Returns a list of finetune jobs")
+  @get
+  @list
+  listFineTuningJobs(
+    @doc("Identifier for the last job from the previous pagination request.")
+    @query
+    after?: string;
+
+    @doc("Number of fine-tuning jobs to retrieve.")
+    @query
+    limit?: int32 = 20;
+
+    @doc("Optional metadata filter. To filter, use the syntax metadata[k]=v. Alternatively, set metadata=null to indicate no metadata.")
+    @query
+    metadata?: string;
+    ): {
+      ...FineTuningPaginatedResponse;
+    };
+
 
   @doc("Creates a fine-tuning job.")
   @post

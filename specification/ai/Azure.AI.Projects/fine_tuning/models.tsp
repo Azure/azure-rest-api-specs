@@ -354,7 +354,7 @@ model FineTuningScoreModelGrader extends FineTuningGrader {
   sampling_params? : FineTuningJobGraderModelSamplingParam;
 
   @doc("TBD")
-  passThreshold?: float64;
+  pass_threshold?: float64;
 }
 
 @doc("A MultiGrader object combines the output of multiple graders to produce a single score.")
@@ -542,8 +542,51 @@ model FineTuningJob {
   @doc("The Unix timestamp (in seconds) for when the fine-tuning job was created.")
   created_at: utcDateTime;
 
+  @doc("For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.")
+  error?: FineTuningJobError;
+
+  @doc("The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
+  estimated_finish?: utcDateTime;
+
+  @doc("The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.")
+  fine_tuned_model?: string;
+
+  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.")
+  finished_at?: utcDateTime;
+
+  @doc("The hyperparameters used for the fine-tuning job. This value will only be returned when running supervised jobs")
+  hyperparameters? : FineTuningJobSFTHyperParameters;
+
+  @doc("A list of integrations to enable for this fine-tuning job.")
+  integrations?: Array<FineTuningJobIntegration>;
+
+  /**
+  * Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format, and querying for objects via API or the dashboard.
+  *
+  * Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+  */
+  metadata?: Record<string>;
+
+  @doc("The method used for fine-tuning.")
+  method: FineTuningJobTrainingMethod;
+
+  @doc("The base model that is being fine-tuned.")
+  `model`: string;
+
+  @doc("The organization that owns the fine-tuning job.")
+  organization_id : string;
+
+  @doc("The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.")
+  result_files?: Array<string>;
+
+  @doc("The seed used for the fine-tuning job.")
+  seed: int32;
+
   @doc("The current status of the fine-tuning job, which can be either validating_files, queued, running, succeeded, failed, or cancelled.")
   status: string;
+
+  @doc("The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.")
+  trained_tokens?: int32;
 
   @doc("The file ID used for training. You can retrieve the training data with the Files API.")
   training_file: string;
@@ -551,38 +594,17 @@ model FineTuningJob {
   @doc("The file ID used for validation. You can retrieve the validation results with the Files API.")
   validation_file?: string;
 
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job is estimated to finish. The value will be null if the fine-tuning job is not running.")
-  estimated_finish?: utcDateTime;
+  @doc("The additional 1P parameters used to train the fine-tuned model. This is Azure AI specific parameter.")
+  additional_Parameters? : Record<string>;
 
-  @doc("The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.")
-  finished_at?: utcDateTime;
+  @doc("A string of up to 64 characters that will be added to your fine-tuned model name.")
+  suffix? : string;
 
-  @doc("The name of the fine-tuned model that is being created. The value will be null if the fine-tuning job is still running.")
-  fine_tuned_model?: string;
+  @doc("The SKU used for training. This is Azure AI specific parameter")
+  TrainingType? : TrainingType;
 
-  @doc("The base model that is being fine-tuned.")
-  `model`: string;
-
-  @doc("The base model provider.")
-  modelProvider?: string;
-
-  @doc("The seed used for the fine-tuning job.")
-  seed: int32;
-
-  @doc("The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.")
-  trained_tokens?: int32;
-
-  @doc("The method used for fine-tuning.")
-  method: FineTuningJobTrainingMethod;
-
-  @doc("The compiled results file ID(s) for the fine-tuning job. The file is only available for successfully completed fine-tune runs.")
-  result_files?: Array<string>;
-
-  @doc("A list of integrations to enable for this fine-tuning job.")
-  integrations?: Array<FineTuningJobIntegration>;
-
-  @doc("For fine-tuning jobs that have failed, this will contain more information on the cause of the failure.")
-  error?: FineTuningJobError
+  @doc("Inference configurations. This is Azure AI specific parameter")
+  inference_configs? : InferenceConfigs;
 }
 
 @doc("SKU available for training")
@@ -681,4 +703,21 @@ model FineTuningJobCreation {
 
   @doc("Inference configurations. This is Azure AI specific parameter")
   inference_configs? : InferenceConfigs;
+}
+
+@doc("The response data for a requested list of items.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningPaginatedResponse {
+  @doc("Items list.")
+  @pageItems
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v1)
+  data: Array<FineTuningJob>;
+
+  @doc("The last ID represented in this list.")
+  last_id?: string;
+
+  @doc("A value indicating whether there are additional values available.")
+  has_more: boolean;
 }
