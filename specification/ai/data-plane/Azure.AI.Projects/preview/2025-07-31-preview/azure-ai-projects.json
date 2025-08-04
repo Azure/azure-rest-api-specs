@@ -3054,77 +3054,6 @@
         ]
       }
     },
-    "EvaluationMessages": {
-      "type": "object",
-      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
-      "properties": {
-        "query": {
-          "type": "array",
-          "description": "Array of messages representing representing queries",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "response": {
-          "type": "array",
-          "description": "Array of messages representing responses",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "toolDefinitions": {
-          "type": "array",
-          "description": "Array of tool definitions that are used in the conversation",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          }
-        }
-      },
-      "required": [
-        "query",
-        "response",
-        "toolDefinitions"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineData"
-        }
-      ],
-      "x-ms-discriminator-value": "evaluationMessagesFormat"
-    },
-    "EvaluationMessagesUpdate": {
-      "type": "object",
-      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
-      "properties": {
-        "query": {
-          "type": "array",
-          "description": "Array of messages representing representing queries",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "response": {
-          "type": "array",
-          "description": "Array of messages representing responses",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "toolDefinitions": {
-          "type": "array",
-          "description": "Array of tool definitions that are used in the conversation",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/InlineDataUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "evaluationMessagesFormat"
-    },
     "EvaluationMetric": {
       "type": "object",
       "description": "Metric representing the evaluation result for a specific evaluator.",
@@ -3501,6 +3430,77 @@
           }
         ]
       }
+    },
+    "EvaluatorMessages": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "response",
+        "toolDefinitions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineData"
+        }
+      ],
+      "x-ms-discriminator-value": "evaluationMessagesFormat"
+    },
+    "EvaluatorMessagesUpdate": {
+      "type": "object",
+      "description": "Multi-turn conversations for evaluating dialogue systems and context awareness.",
+      "properties": {
+        "query": {
+          "type": "array",
+          "description": "Array of messages representing representing queries",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "response": {
+          "type": "array",
+          "description": "Array of messages representing responses",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "toolDefinitions": {
+          "type": "array",
+          "description": "Array of tool definitions that are used in the conversation",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InlineDataUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "evaluationMessagesFormat"
     },
     "EvaluatorStatusResult": {
       "type": "object",

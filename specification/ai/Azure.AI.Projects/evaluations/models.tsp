@@ -137,7 +137,7 @@ model QueryResponseInlineMessages extends InlineData {
 
 @added(Versions.v2025_07_31_preview)
 @doc("Multi-turn conversations for evaluating dialogue systems and context awareness.")
-model EvaluationMessages extends InlineData {
+model EvaluatorMessages extends InlineData {
   @doc("Specifies evaluation messages format")
   dataFormat: InlineDataFormat.evaluationMessagesFormat;
 
