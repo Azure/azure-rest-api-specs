@@ -1,0 +1,116 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./GlobalRulestackResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace PaloAltoNetworks.Cloudngfw;
+/**
+ * PreRulestack rule list
+ */
+@parentResource(GlobalRulestackResource)
+model PreRulesResource
+  is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
+  ...ResourceNameParameter<
+    Resource = PreRulesResource,
+    KeyName = "priority",
+    SegmentName = "preRules",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface PreRulesResources {
+  /**
+   * Get a PreRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_Get")
+  get is ArmResourceRead<PreRulesResource>;
+
+  /**
+   * Create a PreRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PreRulesResource>;
+
+  /**
+   * Delete a PreRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("PreRules_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PreRulesResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List PreRulesResource resources by Tenant
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_List")
+  list is ArmResourceListByParent<PreRulesResource>;
+
+  /**
+   * Get counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_getCounters")
+  getCounters is ArmResourceActionSync<
+    PreRulesResource,
+    void,
+    ArmResponse<RuleCounter>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+
+  /**
+   * Refresh counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_refreshCounters")
+  refreshCounters is ArmResourceActionSync<
+    PreRulesResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+
+  /**
+   * Reset counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("PreRules_resetCounters")
+  resetCounters is ArmResourceActionSync<
+    PreRulesResource,
+    void,
+    ArmResponse<RuleCounterReset>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+}
+
+@@doc(PreRulesResource.name, "Pre Rule priority");
+@@doc(PreRulesResource.properties,
+  "The resource-specific properties for this resource."
+);

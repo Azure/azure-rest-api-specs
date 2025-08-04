@@ -1,0 +1,116 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./LocalRulestackResource.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace PaloAltoNetworks.Cloudngfw;
+/**
+ * LocalRulestack rule list
+ */
+@parentResource(LocalRulestackResource)
+model LocalRulesResource
+  is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
+  ...ResourceNameParameter<
+    Resource = LocalRulesResource,
+    KeyName = "priority",
+    SegmentName = "localRules",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface LocalRulesResources {
+  /**
+   * Get a LocalRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_Get")
+  get is ArmResourceRead<LocalRulesResource>;
+
+  /**
+   * Create a LocalRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LocalRulesResource>;
+
+  /**
+   * Delete a LocalRulesResource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("LocalRules_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    LocalRulesResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List LocalRulesResource resources by LocalRulestacks
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_ListByLocalRulestacks")
+  listByLocalRulestacks is ArmResourceListByParent<LocalRulesResource>;
+
+  /**
+   * Get counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_getCounters")
+  getCounters is ArmResourceActionSync<
+    LocalRulesResource,
+    void,
+    ArmResponse<RuleCounter>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+
+  /**
+   * Refresh counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_refreshCounters")
+  refreshCounters is ArmResourceActionSync<
+    LocalRulesResource,
+    void,
+    NoContentResponse,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+
+  /**
+   * Reset counters
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LocalRules_resetCounters")
+  resetCounters is ArmResourceActionSync<
+    LocalRulesResource,
+    void,
+    ArmResponse<RuleCounterReset>,
+    Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("firewallName")
+      firewallName?: string;
+    }
+  >;
+}
+
+@@doc(LocalRulesResource.name, "Local Rule priority");
+@@doc(LocalRulesResource.properties,
+  "The resource-specific properties for this resource."
+);
