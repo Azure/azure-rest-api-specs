@@ -157,15 +157,21 @@ suppressions:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
       - $.definitions.ManagedResourceGroupAssignedIdentities.properties.principalId.format
   - code: AvoidAdditionalProperties
-    reason: Existing API behavior in 2025-04-01-preview.
+    reason: These schemas are already in production use.
     where:
       - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: AvoidAdditionalProperties
+    reason: Caused by previously renamed definitions, already in production use.
+    where:
       - $.definitions.EndpointModelProperties.properties.capabilities
       - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+  - code: AvoidAdditionalProperties
+    reason: trying to align with schema here for caller to consume https://github.com/Azure/azure-rest-api-specs/blob/2e5be0e72597c6fc8d438f20e38087d900c16427/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json#L26070
+    where:
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
       - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
-      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
   - code: ParametersSchemaAsTypeObject
     reason: Existing API parameter with type array.
     where:
