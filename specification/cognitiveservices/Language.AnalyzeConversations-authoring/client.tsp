@@ -140,11 +140,6 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(AnalyzeConversationAuthoringModelFile, "ConversationAuthoringModelFile");
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ConversationAuthoringProjectClientOptions {
-  projectName: string;
-}
-
 // Root client definition
 @client({
   name: "ConversationAuthoringClient",
@@ -277,7 +272,3 @@ namespace ConversationAuthoringProjectClient {
     getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
-
-@@clientInitialization(ConversationAuthoringProjectClient, {
-  parameters: ConversationAuthoringProjectClientOptions,
-}, "python");
