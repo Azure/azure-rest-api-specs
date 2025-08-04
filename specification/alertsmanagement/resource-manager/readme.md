@@ -60,8 +60,6 @@ openapi-type: arm
 tag: package-2023-03
 ```
 
-=======
-
 ### Tag: package-preview-2025-05-25-preview
 
 These settings apply only when `--tag=package-preview-2025-05-25-preview` is specified on the command line.
