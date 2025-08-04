@@ -628,7 +628,7 @@ model EvaluationResultMetadata {
   evaluatorId: string;
 
   @doc("Desired direction for the evaluation score.")
-  desiredDirection: EvaluatorDesirableDirection;
+  desiredDirection?: EvaluatorDesirableDirection;
 
   @doc("Threshold value that this score is compared against to determine the evaluation outcome")
   threshold?: float32;
@@ -668,10 +668,10 @@ model EvaluationMetric {
   labels?: string[];
 
   @doc("Outcome of the evaluation")
-  outcome: EvaluationResultOutcome;
+  outcome?: EvaluationResultOutcome;
 
   @doc("Reasoning or explanation provided by the evaluator for the score assigned to this data row")
-  reasoning?: string;
+  reasoning: string;
 
   @doc("Error message describing why the evaluation failed for this data row, if applicable")
   error?: string;
