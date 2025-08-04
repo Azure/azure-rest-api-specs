@@ -1,0 +1,416 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}": {
+      "put": {
+        "tags": [
+          "AdministratorsMicrosoftEntra"
+        ],
+        "operationId": "AdministratorsMicrosoftEntra_CreateOrUpdate",
+        "x-ms-examples": {
+          "Add a server administrator associated to a Microsoft Entra principal.": {
+            "$ref": "./examples/AdministratorsMicrosoftEntraAdd.json"
+          }
+        },
+        "description": "Creates a new server administrator associated to a Microsoft Entra principal.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdministratorMicrosoftEntraAdd"
+            },
+            "description": "Required parameters for adding a server administrator associated to a Microsoft Entra principal."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AdministratorsMicrosoftEntra"
+        ],
+        "operationId": "AdministratorsMicrosoftEntra_Delete",
+        "x-ms-examples": {
+          "Delete a server administrator associated to a Microsoft Entra principal.": {
+            "$ref": "./examples/AdministratorsMicrosoftEntraDelete.json"
+          }
+        },
+        "description": "Deletes an existing server administrator associated to a Microsoft Entra principal.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AdministratorsMicrosoftEntra"
+        ],
+        "operationId": "AdministratorsMicrosoftEntra_Get",
+        "x-ms-examples": {
+          "Get information about a server administrator associated to a Microsoft Entra principal.": {
+            "$ref": "./examples/AdministratorsMicrosoftEntraGet.json"
+          }
+        },
+        "description": "Gets information about a server administrator associated to a Microsoft Entra principal.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ObjectIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AdministratorMicrosoftEntra"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "AdministratorsMicrosoftEntra"
+        ],
+        "operationId": "AdministratorsMicrosoftEntra_ListByServer",
+        "x-ms-examples": {
+          "List information about all server administrators associated to Microsoft Entra principals.": {
+            "$ref": "./examples/AdministratorsMicrosoftEntraListByServer.json"
+          }
+        },
+        "description": "List all server administrators associated to a Microsoft Entra principal.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AdministratorMicrosoftEntraList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdministratorMicrosoftEntraAdd": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorMicrosoftEntraPropertiesForAdd",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server administrator associated to a Microsoft Entra principal."
+        }
+      },
+      "description": "Server administrator associated to a Microsoft Entra principal."
+    },
+    "AdministratorMicrosoftEntraPropertiesForAdd": {
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "type": "string",
+          "description": "Type of Microsoft Entra principal to which the server administrator is associated.",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "The principal type is not known or not specified."
+              },
+              {
+                "value": "User",
+                "description": "A Microsoft Entra user."
+              },
+              {
+                "value": "Group",
+                "description": "A Microsoft Entra group."
+              },
+              {
+                "value": "ServicePrincipal",
+                "description": "A Microsoft Entra service principal, typically representing an application or service identity"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "description": "Name of the Microsoft Entra principal.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "description": "Properties of a server administrator associated to a Microsoft Entra principal."
+    },
+    "AdministratorMicrosoftEntraProperties": {
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "type": "string",
+          "description": "Type of Microsoft Entra principal to which the server administrator is associated.",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "principalName": {
+          "type": "string",
+          "description": "Name of the Microsoft Entra principal.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object identifier of the Microsoft Entra principal.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identifier of the tenant in which the Microsoft Entra principal exists.",
+          "x-ms-mutability": [
+            "create",
+            "update",
+            "read"
+          ]
+        }
+      },
+      "description": "Properties of a server administrator associated to a Microsoft Entra principal."
+    },
+    "AdministratorMicrosoftEntra": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorMicrosoftEntraProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a server administrator associated to a Microsoft Entra principal."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Server administrator associated to a Microsoft Entra principal."
+    },
+    "AdministratorMicrosoftEntraList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdministratorMicrosoftEntra"
+          },
+          "description": "List of server administrators associated to Microsoft Entra principals."
+        },
+        "nextLink": {
+          "description": "Link used to get the next page of results.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "description": "List of server administrators associated to Microsoft Entra principals."
+    }
+  },
+  "parameters": {
+    "ObjectIdParameter": {
+      "name": "objectId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Object identifier of the Microsoft Entra principal.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

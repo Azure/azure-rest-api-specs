@@ -198,4 +198,3 @@ using Microsoft.EventGrid.SystemEvents;
   "callDuration",
   "java"
 );
-
