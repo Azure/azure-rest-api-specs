@@ -226,6 +226,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(AnalyzeConversationAuthoringModelFile, "ModelFile", "python");
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
+@@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult, "UtteranceEvaluationResult", "python");
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model ConversationAuthoringProjectClientOptions {
