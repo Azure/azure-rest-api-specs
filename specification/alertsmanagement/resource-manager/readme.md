@@ -127,6 +127,12 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-05-01-preview'
 input-file:
+  - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
   - Microsoft.AlertsManagement/preview/2025-05-01-preview/PreviewAlertRule.json
 ```
 ### Tag: package-preview-2025-03-01-preview
