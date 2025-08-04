@@ -33,6 +33,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-05-04-preview")
+  v2025_05_04_Preview: "2025-05-04-preview",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -44,6 +50,7 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
     "schedulers",
     "^[a-zA-Z0-9-]{3,64}$"
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Details of the Scheduler")
@@ -62,6 +69,43 @@ model SchedulerProperties {
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
+
+  @added(Versions.v2025_05_04_Preview)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /** The private endpoints exposed by this resource */
+  @added(Versions.v2025_05_04_Preview)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+}
+
+/** Holder for private endpoint connections */
+@added(Versions.v2025_05_04_Preview)
+@parentResource(Scheduler)
+model PrivateEndpointConnectionResource
+  is ProxyResource<PrivateEndpointConnectionProperties> {
+  ...PrivateEndpointConnectionParameter;
+}
+
+/** Private Link Resource for Schedulers */
+// #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private link resources"
+@added(Versions.v2025_05_04_Preview)
+@parentResource(Scheduler)
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  ...PrivateLinkResourceParameter;
+}
+
+@doc("State of the public network access.")
+@added(Versions.v2025_05_04_Preview)
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
@@ -187,6 +231,46 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@doc("The update request model for the Scheduler resource")
+model SchedulerUpdate
+  is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>> {
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@doc("The Scheduler resource properties to be updated")
+model SchedulerPropertiesUpdate {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task scheduler")
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
+  ipAllowlist?: string[];
+
+  @doc("SKU of the durable task scheduler")
+  sku?: SchedulerSkuUpdate;
+
+  @added(Versions.v2025_05_04_Preview)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
+@doc("The SKU (Stock Keeping Unit) properties to be updated")
+model SchedulerSkuUpdate {
+  @doc("The name of the SKU")
+  name?: string;
+
+  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
+  capacity?: int32;
+
+  @doc("Indicates whether the current SKU configuration is zone redundant")
+  @visibility(Lifecycle.Read)
+  redundancyState?: RedundancyState;
+}
+
 @added(Versions.v2024_10_01_Preview)
 @armResourceOperations(Scheduler)
 interface Schedulers {
@@ -198,7 +282,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
+  update is ArmCustomPatchAsync<Scheduler, SchedulerUpdate>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")
@@ -238,6 +322,29 @@ interface RetentionPolicies {
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;
   @doc("List Retention Policies")
   listByScheduler is ArmResourceListByParent<RetentionPolicy>;
+}
+
+/** Private endpoint connections operations */
+@added(Versions.v2025_05_04_Preview)
+@armResourceOperations(PrivateEndpointConnectionResource)
+interface PrivateEndpointConnections {
+  /** List existing private endpoint connections */
+  list is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  /** Get a specific private endpoint connection */
+  get is ArmResourceRead<PrivateEndpointConnectionResource>;
+  /** Create a private endpoint connection */
+  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
+  /** Delete the private endpoint connection */
+  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+}
+
+/** Operations for private link resources on Scheduler */
+@added(Versions.v2025_05_04_Preview)
+@armResourceOperations(PrivateLinkResource)
+interface PrivateLinkResources {
+  /** list private link resources on the given resource */
+  list is ArmResourceListByParent<PrivateLinkResource>;
+  get is ArmResourceRead<PrivateLinkResource>;
 }
 
 // resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
