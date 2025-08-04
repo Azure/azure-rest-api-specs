@@ -300,9 +300,7 @@ export default async function summarizeChecks({ github, context, core }) {
   core.info(`PR target branch: ${targetBranch}`);
 
   // Default target is this run itself
-  const target_url =
-    `https://github.com/${context.repo.owner}/${context.repo.repo}` +
-    `/actions/runs/${context.runId}`;
+  const target_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
   await summarizeChecksImpl(
     github,
