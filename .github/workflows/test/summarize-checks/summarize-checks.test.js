@@ -37,23 +37,60 @@ async function getNextStepsComment(github, owner, repo, prNumber) {
   }
 }
 
+// find and extract the existing "Automated merging requirements met" check run from the PR
+async function getExistingAMR(github, owner, repo, sha) {
+  const { data: checkSuites } = await github.rest.checks.listSuitesForRef({
+    owner: owner,
+    repo: repo,
+    ref: sha,
+  });
+
+  for (const suite of checkSuites.check_suites) {
+    const { data: checkRuns } = await github.rest.checks.listForSuite({
+      owner: owner,
+      repo: repo,
+      check_suite_id: suite.id,
+    });
+
+    for (const run of checkRuns.check_runs) {
+      if (run.name === "Automated merging requirements met") {
+        return {
+          name: run.name,
+          status: run.status,
+          conclusion: run.conclusion,
+        };
+      }
+    }
+  }
+}
+
+async function applicableLabel(input) {
+  const applicableLabels = [
+    "ARMReview",
+    "new-api-version",
+    "resource-manager",
+    "data-plane",
+    "TypeSpec",
+    "RPaaS",
+    "new-rp-namespace",
+    "RPaaSException",
+    "NotReadyForARMReview",
+    "WaitForARMFeedback",
+    "ARMChangesRequested",
+    "ARMSignedOff",
+  ]
+
+  return applicableLabels.includes(input);
+}
+
 describe("Summarize Checks Integration Tests", () => {
   describe("Repro a PR summarize-checks invocation", () => {
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real pr data and check the next steps to merge and final labels against what is actually there.",
       async () => {
-        const issue_number = 36258;
+        const issue_number = 23898;
         const owner = "Azure";
-        const repo = "azure-rest-api-specs";
-
-        const ignorableLabels = [
-          "VersioningReviewRequired",
-          "BreakingChangeReviewRequired",
-          "customer-reported",
-          "dependencies",
-          "javascript",
-          "Monitor",
-        ];
+        const repo = "azure-rest-api-specs-pr";
 
         const github = new Octokit({
           auth: process.env.GITHUB_TOKEN,
@@ -65,17 +102,10 @@ describe("Summarize Checks Integration Tests", () => {
           pull_number: issue_number,
         });
 
-        // Get current PR labels and Next Steps comment
-        const expectedNextStepsComment = await getNextStepsComment(
-          github,
-          owner,
-          repo,
-          issue_number,
-        );
-
         const head_sha = pr.head.sha;
         const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
-
+        const expectedCheckRun = await getExistingAMR(github, owner, repo, head_sha);
+        const expectedNextStepsComment = await getNextStepsComment(github, owner, repo, issue_number);
         const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
           github,
           mockCore,
@@ -86,7 +116,8 @@ describe("Summarize Checks Integration Tests", () => {
           [],
         );
 
-        let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
+        // discard everything from start set that would be possibly set by summarize-checks
+        let adjustedStartLabels = expectedLabels.filter((x) => !applicableLabel(x));
         let labelContext = await updateLabels(adjustedStartLabels, impactAssessment);
 
         adjustedStartLabels = adjustedStartLabels.filter(
@@ -105,12 +136,13 @@ describe("Summarize Checks Integration Tests", () => {
           pr.base.ref,
           requiredCheckRuns,
           fyiCheckRuns,
+          impactAssessment !== undefined
         );
 
         const actualLabels = [...labelContext.toAdd, ...labelContext.present];
         expect(actualLabels.sort()).toEqual(expectedLabels.sort());
         expect(commentBody).toEqual(expectedNextStepsComment);
-        expect(automatedChecksMet).toBeTruthy();
+        expect(automatedChecksMet.result).toEqual(expectedCheckRun.conclusion.toUpperCase());
       },
       600000,
     );
@@ -839,6 +871,12 @@ describe("Summarize Checks Unit Tests", () => {
           status: "COMPLETED",
           conclusion: "FAILURE",
           checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
         },
       ];
 
