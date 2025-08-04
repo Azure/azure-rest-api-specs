@@ -12,51 +12,13 @@
 |------|------------|-------|
 | `info.description__added` | added | `// FIXME: (missing-service-description) Add service description` |
 
-### Changes for `consumes`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.consumes__added` | added | `["text/plain"]` |
-
-### Changes for `$ref`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.parameters[1].schema.$ref__deleted` | deleted | `#/definitions/email` |
-
-### Changes for `type`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MonitoredSubscriptionProperties.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.parameters[1].schema.type__added` | added | `string` |
-
 ### Changes for `pattern`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.email.pattern__deleted` | deleted | `^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[1].pattern__deleted` | deleted | `^.*$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[1].pattern__deleted` | deleted | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/refreshIngestionKey'].post.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/switchBilling'].post.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules'].get.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].delete.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].get.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].patch.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}'].put.parameters[0].pattern__added` | added | `^.*$` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/vmHostPayloads'].post.parameters[0].pattern__added` | added | `^.*$` |
-
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectedPartnerResourcesListResponse.required__added` | added | `["value"]` |
-| `definitions.LinkedResourceListResponse.required__added` | added | `["value"]` |
-| `definitions.MonitoredSubscription.properties.subscriptionId.required__deleted` | deleted | `["subscriptionId"]` |
-| `definitions.MonitoredSubscriptionPropertiesList.required__added` | added | `["value"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[2].required__added` | added | `true` |
 
 ### Changes for `AccountIdParameter`
 
@@ -118,12 +80,6 @@
 |------|------------|-------|
 | `definitions.UserEmailParameter__deleted` | deleted | `{"type":"object","properties":{}}` |
 
-### Changes for `email`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.email__deleted` | deleted | `{"type":"string","pattern":"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,}$"}` |
-
 ### Changes for `x-cadl-name`
 
 | Path | Change Type | Value |
@@ -152,11 +108,15 @@
 | `definitions.VMHostsListResponse.properties.nextLink['x-cadl-name__deleted']` | deleted | `Rest.ResourceLocation` |
 | `definitions.VMHostsListResponse.properties.value['x-cadl-name__deleted']` | deleted | `VMInfo[]` |
 
-### Changes for `x-ms-identifiers`
+### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AppServicesListResponse.properties.value['x-ms-identifiers__deleted']` | deleted | `["azureResourceId"]` |
+| `definitions.ConnectedPartnerResourcesListResponse.required__added` | added | `["value"]` |
+| `definitions.LinkedResourceListResponse.required__added` | added | `["value"]` |
+| `definitions.MonitoredSubscription.properties.subscriptionId.required__deleted` | deleted | `["subscriptionId"]` |
+| `definitions.MonitoredSubscription.required__added` | added | `["subscriptionId"]` |
+| `definitions.MonitoredSubscriptionPropertiesList.required__added` | added | `["value"]` |
 
 ### Changes for `allOf`
 
@@ -176,23 +136,23 @@
 |------|------------|-------|
 | `definitions.MonitoredSubscriptionProperties.properties.id__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
-### Changes for `x-ms-client-flatten`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MonitoredSubscriptionProperties.properties.properties['x-ms-client-flatten__added']` | added | `true` |
+| `definitions.MonitoredSubscriptionProperties.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
-### Changes for `x-ms-mutability`
+### Changes for `properties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NewRelicMonitorResource.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
-| `definitions.TagRule.properties.properties['x-ms-mutability__deleted']` | deleted | `["create","read"]` |
+| `definitions.email.properties__added` | added | `{"type":{"type":"string","pattern":"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,}$"}}` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
+| `definitions.email.type` | `string` | `object` |
 | `definitions.NewRelicMonitorResource.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.NewRelicMonitorResourceUpdate.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
 

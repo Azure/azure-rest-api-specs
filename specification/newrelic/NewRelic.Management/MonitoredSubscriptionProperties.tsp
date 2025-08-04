@@ -27,18 +27,43 @@ model MonitoredSubscriptionProperties
 }
 
 @armResourceOperations
+interface MonitoredSubscriptionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the Monitors resource */
+        @path
+        @segment("monitors")
+        @pattern("^.*$")
+        monitorName: string,
+      },
+      {
+        @path
+        @segment("monitoredSubscriptions")
+        @OpenAPI.extension("pattern", "^.*$")
+        configurationName: ConfigurationName,
+      }
+    > {}
+
+@armResourceOperations
 interface MonitoredSubscriptions {
   /**
    * Lists all the subscriptions currently being monitored by the NewRelic monitor resource.
    */
-  get is ArmResourceRead<MonitoredSubscriptionProperties>;
+  get is MonitoredSubscriptionOps.Read<MonitoredSubscriptionProperties>;
 
   /**
    * Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is MonitoredSubscriptionOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**

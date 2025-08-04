@@ -992,9 +992,6 @@
           "NewRelicMonitorResources"
         ],
         "description": "List of all active deployments that are associated with the marketplace subscription linked to the given monitor.",
-        "consumes": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1019,7 +1016,7 @@
             "description": "Email Id of the user",
             "required": false,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/email"
             }
           }
         ],
@@ -1288,9 +1285,9 @@
           {
             "name": "configurationName",
             "in": "path",
-            "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^.*$",
             "enum": [
               "default"
             ],
@@ -1353,9 +1350,9 @@
           {
             "name": "configurationName",
             "in": "path",
-            "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
+            "pattern": "^.*$",
             "enum": [
               "default"
             ],
@@ -1374,7 +1371,7 @@
             "name": "body",
             "in": "body",
             "description": "",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
@@ -1614,10 +1611,9 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1732,10 +1728,9 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "request",
@@ -1799,8 +1794,7 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1852,13 +1846,12 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
             "in": "path",
-            "description": "Name of the TagRule",
+            "description": "The name of the TagRule",
             "required": true,
             "type": "string"
           }
@@ -1907,13 +1900,12 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
             "in": "path",
-            "description": "Name of the TagRule",
+            "description": "The name of the TagRule",
             "required": true,
             "type": "string"
           },
@@ -1992,20 +1984,19 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
             "in": "path",
-            "description": "Name of the TagRule",
+            "description": "The name of the TagRule",
             "required": true,
             "type": "string"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TagRuleUpdate"
@@ -2056,13 +2047,12 @@
             "in": "path",
             "description": "Name of the Monitors resource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
             "in": "path",
-            "description": "Name of the TagRule",
+            "description": "The name of the TagRule",
             "required": true,
             "type": "string"
           }
@@ -2129,10 +2119,9 @@
           {
             "name": "monitorName",
             "in": "path",
-            "description": "Name of the Monitors resource",
+            "description": "The name of the NewRelicMonitorResource",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2334,7 +2323,10 @@
           "description": "The AppServiceInfo items on this page",
           "items": {
             "$ref": "#/definitions/AppServiceInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "azureResourceId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2833,7 +2825,10 @@
           "$ref": "#/definitions/MonitoringTagRulesProperties",
           "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "required": [
+        "subscriptionId"
+      ]
     },
     "MonitoredSubscriptionProperties": {
       "type": "object",
@@ -2841,8 +2836,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionList",
-          "description": "The request to update subscriptions needed to be monitored by the NewRelic monitor resource.",
-          "x-ms-client-flatten": true
+          "description": "The request to update subscriptions needed to be monitored by the NewRelic monitor resource."
         }
       },
       "allOf": [
@@ -2944,7 +2938,11 @@
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -3684,7 +3682,11 @@
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -3842,6 +3844,15 @@
         "agentStatus": {
           "type": "string",
           "description": "Status of the NewRelic agent installed on the VM."
+        }
+      }
+    },
+    "email": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       }
     }

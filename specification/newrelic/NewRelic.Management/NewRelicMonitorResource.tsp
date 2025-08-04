@@ -202,7 +202,7 @@ interface NewRelicMonitorResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Monitors_VmHostPayload")
   @action("vmHostPayloads")
-  vmHostPayload is ArmResourceActionSync<
+  vmHostPayload is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     void,
     ArmResponse<VMExtensionPayload>
@@ -271,7 +271,7 @@ interface NewRelicMonitorResources {
        * Email Id of the user
        */
       @bodyRoot
-      body?: string;
+      body?: email;
     },
     ArmResponse<ConnectedPartnerResourcesListResponse>
   >;

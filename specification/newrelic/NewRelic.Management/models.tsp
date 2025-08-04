@@ -1252,7 +1252,7 @@ model MonitoredSubscription {
   /**
    * The subscriptionId to be monitored.
    */
-  subscriptionId?: string;
+  subscriptionId: string;
 
   /**
    * The state of monitoring.
@@ -1399,3 +1399,18 @@ model MetricsStatusRequestParameter {
    */
   request: MetricsStatusRequest;
 }
+
+model email {
+  @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+  type?: string;
+}
+
+@@OpenAPI.extension(AppServicesListResponse.value,
+  "x-ms-identifiers",
+  #["azureResourceId"]
+);
+@@visibility(NewRelicMonitorResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(TagRule.properties, Lifecycle.Read, Lifecycle.Create);

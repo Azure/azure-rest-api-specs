@@ -35,60 +35,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
-      "post": {
-        "consumes__added": [
-          "text/plain"
-        ],
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "schema": {
-                "$ref__deleted": "#/definitions/email",
-                "type__added": "string"
-              }
-            }
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
-      "get": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      },
-      "put": {
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^.*$"
-            }
-          ],
-          [
-            "~",
-            {
-              "required__added": true
-            }
-          ]
-        ]
-      },
       "patch": {
         "parameters": [
           [
@@ -114,117 +61,6 @@
             "~",
             {
               "pattern__deleted": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/refreshIngestionKey": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/switchBilling": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/tagRules/{ruleSetName}": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      },
-      "put": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ]
-        ]
-      },
-      "patch": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ]
-        ]
-      },
-      "delete": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
-            }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/vmHostPayloads": {
-      "post": {
-        "parameters": [
-          [
-            "~",
-            {
-              "pattern__added": "^.*$"
             }
           ]
         ]
@@ -308,10 +144,6 @@
       "type": "object",
       "properties": {}
     },
-    "email__deleted": {
-      "type": "string",
-      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
-    },
     "AccountsListResponse": {
       "properties": {
         "value": {
@@ -332,9 +164,6 @@
     "AppServicesListResponse": {
       "properties": {
         "value": {
-          "x-ms-identifiers__deleted": [
-            "azureResourceId"
-          ],
           "x-cadl-name__deleted": "AppServiceInfo[]"
         },
         "nextLink": {
@@ -398,6 +227,9 @@
       }
     },
     "MonitoredSubscription": {
+      "required__added": [
+        "subscriptionId"
+      ],
       "properties": {
         "subscriptionId": {
           "required__deleted": [
@@ -424,9 +256,6 @@
         "type__deleted": {
           "type": "string",
           "readOnly": true
-        },
-        "properties": {
-          "x-ms-client-flatten__added": true
         }
       }
     },
@@ -437,12 +266,6 @@
     },
     "NewRelicMonitorResource": {
       "properties": {
-        "properties": {
-          "x-ms-mutability__deleted": [
-            "create",
-            "read"
-          ]
-        },
         "identity": {
           "$ref": {
             "__old": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -494,16 +317,6 @@
         }
       }
     },
-    "TagRule": {
-      "properties": {
-        "properties": {
-          "x-ms-mutability__deleted": [
-            "create",
-            "read"
-          ]
-        }
-      }
-    },
     "TagRuleListResult": {
       "properties": {
         "value": {
@@ -522,6 +335,19 @@
         "nextLink": {
           "x-cadl-name__deleted": "Rest.ResourceLocation"
         }
+      }
+    },
+    "email": {
+      "pattern__deleted": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+      "properties__added": {
+        "type": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+        }
+      },
+      "type": {
+        "__old": "string",
+        "__new": "object"
       }
     }
   }

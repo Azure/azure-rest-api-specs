@@ -683,9 +683,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
       "post": {
         "operationId": "ConnectedPartnerResources_List",
-        "consumes": [
-          "text/plain"
-        ],
         "parameters": [
           {
             "name": "monitorName",
@@ -698,7 +695,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/email"
             }
           }
         ],
@@ -898,6 +895,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^.*$",
             "enum": [
               "default"
             ],
@@ -942,6 +940,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^.*$",
             "enum": [
               "default"
             ],
@@ -953,7 +952,6 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
@@ -1095,8 +1093,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1172,8 +1169,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "request",
@@ -1222,8 +1218,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1261,8 +1256,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
@@ -1301,8 +1295,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
@@ -1359,8 +1352,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
@@ -1407,8 +1399,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           },
           {
             "name": "ruleSetName",
@@ -1456,8 +1447,7 @@
             "name": "monitorName",
             "in": "path",
             "required": true,
-            "type": "string",
-            "pattern": "^.*$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1614,7 +1604,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/AppServiceInfo"
-          }
+          },
+          "x-ms-identifiers": [
+            "azureResourceId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -2091,14 +2084,16 @@
         "tagRules": {
           "$ref": "#/definitions/MonitoringTagRulesProperties"
         }
-      }
+      },
+      "required": [
+        "subscriptionId"
+      ]
     },
     "MonitoredSubscriptionProperties": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubscriptionList",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SubscriptionList"
         }
       },
       "allOf": [
@@ -2180,7 +2175,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MonitorProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
@@ -2611,7 +2610,11 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MonitoringTagRulesProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "required": [
@@ -2728,6 +2731,15 @@
         },
         "agentStatus": {
           "type": "string"
+        }
+      }
+    },
+    "email": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       }
     }

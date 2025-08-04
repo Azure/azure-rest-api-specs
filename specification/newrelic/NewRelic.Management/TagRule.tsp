@@ -33,11 +33,17 @@ interface TagRulesOperations
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
+
+        /** Name of the Monitors resource */
+        @path
+        @segment("monitors")
+        @pattern("")
+        monitorName: string,
       },
       KeysOf<ResourceNameParameter<
-        Resource = NewRelicMonitorResource,
-        KeyName = "monitorName",
-        SegmentName = "monitors",
+        Resource = TagRule,
+        KeyName = "ruleSetName",
+        SegmentName = "tagRules",
         NamePattern = ""
       >>
     > {}
@@ -47,25 +53,28 @@ interface TagRules {
   /**
    * Retrieves the details of the tag rules for a specific New Relic monitor resource, providing insight into its setup and status
    */
-  get is ArmResourceRead<TagRule>;
+  get is TagRulesOperations.Read<TagRule>;
 
   /**
    * Creates a new set of tag rules for a specific New Relic monitor resource, determining which Azure resources are monitored based on their tags
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<TagRule>;
+  createOrUpdate is TagRulesOperations.CreateOrUpdateAsync<TagRule>;
 
   /**
    * Updates the tag rules for a specific New Relic monitor resource, allowing you to modify the rules that control which Azure resources are monitored
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<TagRule, PatchModel = TagRuleUpdate>;
+  update is TagRulesOperations.CustomPatchSync<
+    TagRule,
+    PatchModel = TagRuleUpdate
+  >;
 
   /**
    * Deletes a tag rule set for a given New Relic monitor resource, removing fine-grained control over observability based on resource tags
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is TagRulesOperations.DeleteWithoutOkAsync<
     TagRule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -74,7 +83,7 @@ interface TagRules {
   /**
    * Lists all tag rules associated with a specific New Relic monitor resource, helping you manage and audit the rules that control resource monitoring
    */
-  listByNewRelicMonitorResource is ArmResourceListByParent<TagRule>;
+  listByNewRelicMonitorResource is TagRulesOperations.List<TagRule>;
 }
 
 @@doc(TagRule.name, "Name of the TagRule");
