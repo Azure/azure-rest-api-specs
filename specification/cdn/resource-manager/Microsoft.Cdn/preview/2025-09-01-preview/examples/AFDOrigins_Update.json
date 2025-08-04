@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "originGroupName": "origingroup1",
+    "originName": "origin1",
+    "originUpdateProperties": {
+      "properties": {
+        "hostName": "host1.blob.core.windows.net",
+        "httpPort": 80,
+        "httpsPort": 443,
+        "enabledState": "Enabled",
+        "originShieldResource": {
+          "enabled": true,
+          "region": "EastUs",
+          "originRequestRateThreshold": 1000,
+          "originIngressRateThreshold": 10
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1/origins/origin1",
+        "type": "Microsoft.Cdn/profiles/origingroups/origins",
+        "name": "origin1",
+        "properties": {
+          "hostName": "host1.blob.core.windows.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "host1.foo.com",
+          "priority": null,
+          "weight": null,
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted",
+          "originGroupName": "origingroup1",
+          "sharedPrivateLinkResource": null,
+          "enforceCertificateNameCheck": true,
+          "originShieldResource": {
+            "enabled": true,
+            "region": "EastUs",
+            "originRequestRateThreshold": 1000,
+            "originIngressRateThreshold": 10
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1/origins/origin1",
+        "type": "Microsoft.Cdn/profiles/origingroups/origins",
+        "name": "origin1",
+        "properties": {
+          "hostName": "host1.blob.core.windows.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "host1.foo.com",
+          "priority": null,
+          "weight": null,
+          "enabledState": "Enabled",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted",
+          "originGroupName": "origingroup1",
+          "sharedPrivateLinkResource": null,
+          "enforceCertificateNameCheck": true,
+          "originShieldResource": {
+            "enabled": true,
+            "region": "EastUs",
+            "originRequestRateThreshold": 1000,
+            "originIngressRateThreshold": 10
+          }
+        }
+      }
+    }
+  }
+}
