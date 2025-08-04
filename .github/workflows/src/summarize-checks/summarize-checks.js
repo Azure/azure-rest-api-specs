@@ -876,16 +876,20 @@ export async function createNextStepsComment(
   assessmentCompleted,
 ) {
   // select just the metadata that we need about the runs.
-  const requiredCheckInfos = requiredRuns
+  const failingCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
 
   // determine if required runs have any in-progress or queued runs
   // if there are any, we consider the requirements not met.
-  const requiredCheckInfosPresent = requiredRuns.some((run) => {
+  // if there are NO required runs, we also consider this to be a "requirements met" situation.
+  // there is a possibility that this will be a false positive, but it is better than
+  // assuming that the requirements are not met when they actually are.
+  const requiredCheckInfosPresent = requiredRuns.every((run) => {
     const status = run.status.toLowerCase();
-    return status !== "queued" && status !== "in_progress";
+    return status === "completed";
   });
+
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
@@ -895,7 +899,7 @@ export async function createNextStepsComment(
     labels,
     `${repo}/${targetBranch}`,
     requiredCheckInfosPresent,
-    requiredCheckInfos,
+    failingCheckInfos,
     fyiCheckInfos,
     assessmentCompleted,
   );
