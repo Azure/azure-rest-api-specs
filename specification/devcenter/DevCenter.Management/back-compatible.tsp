@@ -233,7 +233,18 @@ using Microsoft.DevCenter;
   "nameAvailabilityRequest"
 );
 
+// temporary fix for ci and need update before release for python
 @@clientName(KeyEncryptionKeyIdentity,
   "CustomizedKeyEncryptionKeyIdentity",
   "python"
 );
+@@clientName(CreatorRoleAssignment,
+  "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment",
+  "python"
+);
+@@clientName(UserRoleAssignment,
+  "UserRoleAssignmentValue",
+  "python"
+);
+
+
