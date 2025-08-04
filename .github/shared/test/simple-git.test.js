@@ -1,8 +1,8 @@
-import path from "path";
-import os from "os";
 import { mkdtemp, rm } from "fs/promises";
-import { getRootFolder } from "../src/simple-git.js";
+import os from "os";
+import path from "path";
 import { describe, expect, it } from "vitest";
+import { getRootFolder } from "../src/simple-git.js";
 
 describe("getRootFolder", () => {
   it("resolves to repo root from a nested folder", async () => {

@@ -1,11 +1,12 @@
-import { describe, it, expect } from "vitest"; //vi
+import { describe, expect, it } from "vitest"; //vi
 
 import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { PRContext } from "../src/PRContext.js";
+import { evaluateImpact, getRPaaSFolderList } from "../src/impact.js";
 import { LabelContext } from "../src/labelling-types.js";
-import { evaluateImpact } from "../src/impact.js";
+import { Octokit } from "@octokit/rest";
 
 describe("Check Changes", () => {
   it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
@@ -29,6 +30,11 @@ describe("Check Changes", () => {
           toRemove: new Set(),
         };
 
+        const github = new Octokit({
+          ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
+        });
+        const rpaaSFolderList = await getRPaaSFolderList(github, "Azure", "azure-rest-api-specs");
+
         const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
           sha: "ad7c74cb27d2cf3ba83996aaea36b07caa4d16c8",
           sourceBranch: "dev/nandiniy/DTLTypeSpec",
@@ -40,12 +46,13 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext);
+        const result = await evaluateImpact(prContext, labelContext, rpaaSFolderList);
 
         expect(result).toBeDefined();
         expect(result.typeSpecChanged).toBeTruthy();
-        expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("SuppressionReviewRequired")).toBeTruthy();
+        expect(result.dataPlaneRequired).toBeFalsy();
+        expect(result.resourceManagerRequired).toBeTruthy();
+        expect(result.suppressionReviewRequired).toBeTruthy();
         expect(changedFileDetails).toBeDefined();
         expect(changedFileDetails.total).toEqual(293);
       } finally {
@@ -88,14 +95,12 @@ describe("Check Changes", () => {
           isDraft: false,
         });
 
-        const result = await evaluateImpact(prContext, labelContext);
+        const result = await evaluateImpact(prContext, labelContext, []);
         expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.labelContext.toAdd.has("TypeSpec")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("resource-manager")).toBeTruthy();
+        expect(result.typeSpecChanged).toBeTruthy();
+        expect(result.resourceManagerRequired).toBeTruthy();
         expect(result.isNewApiVersion).toBeTruthy();
-        expect(result.labelContext.toAdd.has("ARMReview")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("RPaaS")).toBeTruthy();
-        expect(result.labelContext.toAdd.has("WaitForARMFeedback")).toBeTruthy();
+        expect(result.rpaasChange).toBeTruthy();
         expect(result).toBeDefined();
       } finally {
         // Restore original directory
