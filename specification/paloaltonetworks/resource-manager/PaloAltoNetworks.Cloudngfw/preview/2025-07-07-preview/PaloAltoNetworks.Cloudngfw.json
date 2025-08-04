@@ -5876,7 +5876,7 @@
         }
       }
     },
-    "AzureResourceManagerManagedIdentityProperties": {
+    "Azure.ResourceManager.ManagedIdentityProperties": {
       "type": "object",
       "description": "The properties of the managed service identities assigned to this resource.",
       "properties": {
@@ -5898,7 +5898,7 @@
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
           "additionalProperties": {
-            "$ref": "#/definitions/AzureResourceManagerUserAssignedIdentity"
+            "$ref": "#/definitions/Azure.ResourceManager.UserAssignedIdentity"
           }
         }
       },
@@ -5906,7 +5906,7 @@
         "type"
       ]
     },
-    "AzureResourceManagerUserAssignedIdentity": {
+    "Azure.ResourceManager.UserAssignedIdentity": {
       "type": "object",
       "description": "A managed identity assigned by the user.",
       "properties": {
@@ -6517,7 +6517,7 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -6556,7 +6556,7 @@
       "description": "The type used for update operations of the FirewallResource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -6890,7 +6890,7 @@
           "description": "Global Location"
         },
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -6934,7 +6934,7 @@
           "description": "Global Location"
         },
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
@@ -7143,7 +7143,7 @@
           ]
         },
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -7182,7 +7182,7 @@
       "description": "The type used for update operations of the LocalRulestackResource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedIdentityProperties",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -7475,7 +7475,8 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-name": "provisioningStateOnly"
         }
       },
       "required": [

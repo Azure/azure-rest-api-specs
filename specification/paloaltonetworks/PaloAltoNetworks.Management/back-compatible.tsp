@@ -274,6 +274,14 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(SecurityServicesTypeList, "securityServicesTypeList");
 @@clientName(AdvSecurityObjectModel, "advSecurityObjectModel");
 
+@@clientName(AzureResourceManagerManagedIdentityProperties,
+  "Azure.ResourceManager.ManagedIdentityProperties"
+);
+@@clientName(AzureResourceManagerUserAssignedIdentity,
+  "Azure.ResourceManager.UserAssignedIdentity"
+);
+@@clientName(MetricsObject.provisioningState, "provisioningStateOnly");
+
 @@visibility(CertificateObjectGlobalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
