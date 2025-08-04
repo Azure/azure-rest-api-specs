@@ -247,18 +247,18 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate pending summary for no matched check suites", async () => {
+    it("should generate completed summary for no matched check suites", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
       const requiredCheckRuns = [];
       const expectedOutput = [
-        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.',
         {
           name: "[TEST-IGNORE] Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+          result: "SUCCESS",
+          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
         },
       ];
 
@@ -667,6 +667,102 @@ describe("Summarize Checks Unit Tests", () => {
             troubleshootingGuide:
               "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
           },
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate pending summary when checks are partially in progress", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "COMPLETED",
+          conclusion: "SUCCESS",
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("license/cla"),
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
+    it("should generate pending summary when checks are in progress", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = [
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛",
+        {
+          name: "[TEST-IGNORE] Automated merging requirements met",
+          result: "pending",
+          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+        {
+          name: "Swagger Avocado",
+          status: "QUEUED",
+          conclusion: null,
+          checkInfo: getCheckInfo("Swagger Avocado"),
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("license/cla"),
         },
       ];
 
