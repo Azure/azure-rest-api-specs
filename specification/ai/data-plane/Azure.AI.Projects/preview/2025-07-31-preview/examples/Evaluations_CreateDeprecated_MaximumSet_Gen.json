@@ -1,55 +1,159 @@
 {
-  "title": "Evaluations_CreateDeprecated_MaximumSet",
+  "title": "Evaluations_CreateDeprecated",
   "operationId": "Evaluations_CreateDeprecated",
   "parameters": {
     "api-version": "2025-07-31-preview",
     "evaluation": {
-      "data": {
-        "type": "InputData"
+      "displayName": "Customer Satisfaction Evaluation",
+      "dataSource": {
+        "type": "inlineData"
       },
-      "displayName": "ymjxkodggqrhjnmusta",
-      "description": "cuviaxytqckkybxwc",
+      "evaluators": [
+        {
+          "id": "azureai://built-in/evaluators/relevance",
+          "initializationParameters": {},
+          "dataMapping": {},
+          "name": "tuqexrguotmvzroscysjlomwanpsd"
+        }
+      ],
+      "resultSettings": {
+        "additionalDestinations": [
+          {
+            "type": "EvaluationDestinationConfiguration",
+            "connectionName": "zcplllhwtsnopjvutbawpxksdkd",
+            "state": "NotStarted"
+          }
+        ]
+      },
+      "description": "psdgsqjr",
+      "state": "Succeeded",
       "tags": {
-        "key30": "nqrdpedyhkjzgrbtqhxbmkdmlpdf"
+        "key2067": "rmligdgmzhycryitns",
+        "key9064": "gerzgbsstbzpewwayymt"
       },
       "properties": {
-        "key9192": "e"
+        "key704": "urj",
+        "key2302": "hoqrucqsjwjgmzramgvtstyvkfck"
       },
-      "evaluators": {
-        "key2735": {
-          "id": "gujwtvhptykq",
-          "initParams": {},
-          "dataMapping": {
-            "key7400": "ijkjfvoswni"
+      "summary": {
+        "evaluatorStatus": [
+          {
+            "name": "relevance",
+            "id": "azureai://built-in/evaluators/relevance",
+            "state": "Succeeded",
+            "usage": {
+              "inputTokens": 102,
+              "outputTokens": 50
+            }
           }
-        }
-      }
+        ],
+        "metrics": [
+          {
+            "name": "Relevance",
+            "evaluatorName": "relevance",
+            "statistics": {
+              "sampleCount": 2,
+              "passRate": 0.5,
+              "min": 2,
+              "max": 4,
+              "average": 3,
+              "standardDeviation": 1,
+              "confidenceInterval95th": {
+                "lowerBound": 2.5,
+                "upperBound": 3.5
+              },
+              "labelFrequency": {}
+            },
+            "metadata": {
+              "evaluatorId": "azureai://built-in/evaluators/relevance",
+              "desiredDirection": "increase",
+              "threshold": 3,
+              "type": "continuous"
+            },
+            "additionalDetails": {}
+          }
+        ]
+      },
+      "resultDatasetId": "iuklrvrubdrb"
     }
   },
   "responses": {
     "201": {
       "body": {
-        "id": "aarhggbojnh",
-        "data": {
-          "type": "InputData"
+        "displayName": "Customer Satisfaction Evaluation",
+        "dataSource": {
+          "type": "inlineData"
         },
-        "displayName": "ymjxkodggqrhjnmusta",
-        "description": "cuviaxytqckkybxwc",
-        "status": "uhejnohmiiogajkx",
+        "evaluators": [
+          {
+            "id": "azureai://built-in/evaluators/relevance",
+            "initializationParameters": {},
+            "dataMapping": {},
+            "name": "tuqexrguotmvzroscysjlomwanpsd"
+          }
+        ],
+        "id": "customer-satisfaction-eval-001",
+        "resultSettings": {
+          "additionalDestinations": [
+            {
+              "type": "EvaluationDestinationConfiguration",
+              "connectionName": "zcplllhwtsnopjvutbawpxksdkd",
+              "state": "NotStarted"
+            }
+          ]
+        },
+        "description": "psdgsqjr",
+        "state": "Succeeded",
         "tags": {
-          "key30": "nqrdpedyhkjzgrbtqhxbmkdmlpdf"
+          "key2067": "rmligdgmzhycryitns",
+          "key9064": "gerzgbsstbzpewwayymt"
         },
         "properties": {
-          "key9192": "e"
+          "key704": "urj",
+          "key2302": "hoqrucqsjwjgmzramgvtstyvkfck"
         },
-        "evaluators": {
-          "key2735": {
-            "id": "gujwtvhptykq",
-            "initParams": {},
-            "dataMapping": {
-              "key7400": "ijkjfvoswni"
+        "summary": {
+          "evaluatorStatus": [
+            {
+              "name": "relevance",
+              "id": "azureai://built-in/evaluators/relevance",
+              "state": "Succeeded",
+              "usage": {
+                "inputTokens": 102,
+                "outputTokens": 50
+              }
             }
-          }
+          ],
+          "metrics": [
+            {
+              "name": "Relevance",
+              "evaluatorName": "relevance",
+              "statistics": {
+                "sampleCount": 2,
+                "passRate": 0.5,
+                "min": 2,
+                "max": 4,
+                "average": 3,
+                "standardDeviation": 1,
+                "confidenceInterval95th": {
+                  "lowerBound": 2.5,
+                  "upperBound": 3.5
+                },
+                "labelFrequency": {}
+              },
+              "metadata": {
+                "evaluatorId": "azureai://built-in/evaluators/relevance",
+                "desiredDirection": "increase",
+                "threshold": 3,
+                "type": "continuous"
+              },
+              "additionalDetails": {}
+            }
+          ]
+        },
+        "resultDatasetId": "iuklrvrubdrb",
+        "systemData": {
+          "key8219": "rwxceksngfwvmsbpkcdap"
         }
       }
     }
