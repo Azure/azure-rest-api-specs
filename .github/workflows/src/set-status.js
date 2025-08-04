@@ -72,7 +72,7 @@ export async function setStatusImpl({
   overridingLabel,
 }) {
   if (!Number.isInteger(issue_number) || issue_number <= 0) {
-    throw new Error("issue_number must be a positive integer");
+    throw new Error(`issue_number must be a positive integer: ${issue_number}`);
   }
 
   core.setOutput("issue_number", issue_number);
