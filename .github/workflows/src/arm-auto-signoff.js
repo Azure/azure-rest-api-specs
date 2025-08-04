@@ -1,29 +1,18 @@
 // @ts-check
 
 import { setEquals } from "../../shared/src/equality.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export default async function getLabelAction({ github, context, core }) {
-  let owner = process.env.OWNER || "";
-  let repo = process.env.REPO || "";
-  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
-  let head_sha = process.env.HEAD_SHA || "";
-
-  if (!owner || !repo || !issue_number || !head_sha) {
-    let inputs = await extractInputs(github, context, core);
-    owner = owner || inputs.owner;
-    repo = repo || inputs.repo;
-    issue_number = issue_number || inputs.issue_number;
-    head_sha = head_sha || inputs.head_sha;
-  }
+  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   return await getLabelActionImpl({
     owner,
@@ -46,14 +35,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
-export async function getLabelActionImpl({
-  owner,
-  repo,
-  issue_number,
-  head_sha,
-  github,
-  core,
-}) {
+export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
   const labelActions = {
     [LabelAction.None]: {
       labelAction: LabelAction.None,
@@ -86,16 +68,13 @@ export async function getLabelActionImpl({
 
   core.info(`Labels: ${labelNames}`);
 
-  const workflowRuns = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
-    {
-      owner,
-      repo,
-      event: "pull_request",
-      head_sha,
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   core.info("Workflow Runs:");
   workflowRuns.forEach((wf) => {
@@ -106,10 +85,7 @@ export async function getLabelActionImpl({
   const incrementalTspRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
-    .sort(
-      (a, b) =>
-        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-    );
+    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 
   if (incrementalTspRuns.length == 0) {
     core.info(
@@ -122,29 +98,22 @@ export async function getLabelActionImpl({
 
     if (run.status == "completed") {
       if (run.conclusion != "success") {
-        core.info(
-          `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
-        );
+        core.info(`Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`);
         return removeAction;
       }
 
-      const artifacts = await github.paginate(
-        github.rest.actions.listWorkflowRunArtifacts,
-        {
-          owner,
-          repo,
-          run_id: run.id,
-          per_page: PER_PAGE_MAX,
-        },
-      );
+      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner,
+        repo,
+        run_id: run.id,
+        per_page: PER_PAGE_MAX,
+      });
       const artifactNames = artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
       if (artifactNames.includes("incremental-typespec=false")) {
-        core.info(
-          "Spec is not an incremental change to an existing TypeSpec RP",
-        );
+        core.info("Spec is not an incremental change to an existing TypeSpec RP");
         return removeAction;
       } else if (artifactNames.includes("incremental-typespec=true")) {
         core.info("Spec is an incremental change to an existing TypeSpec RP");
@@ -154,9 +123,7 @@ export async function getLabelActionImpl({
         throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
       }
     } else {
-      core.info(
-        `Workflow '${wfName}' is still in-progress: status='${run.status}'`,
-      );
+      core.info(`Workflow '${wfName}' is still in-progress: status='${run.status}'`);
       return labelActions[LabelAction.None];
     }
   }
@@ -190,9 +157,7 @@ export async function getLabelActionImpl({
     const matchingRuns = checkRuns.filter((run) => run.name === checkName);
 
     if (matchingRuns.length > 1) {
-      throw new Error(
-        `Unexpected number of checks named '${checkName}': ${matchingRuns.length}`,
-      );
+      throw new Error(`Unexpected number of checks named '${checkName}': ${matchingRuns.length}`);
     }
 
     const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
@@ -201,11 +166,7 @@ export async function getLabelActionImpl({
       `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
     );
 
-    if (
-      matchingRun &&
-      matchingRun.status === "completed" &&
-      matchingRun.conclusion !== "success"
-    ) {
+    if (matchingRun && matchingRun.status === "completed" && matchingRun.conclusion !== "success") {
       core.info(`Check '${checkName}' did not succeed`);
       return removeAction;
     }
@@ -216,13 +177,8 @@ export async function getLabelActionImpl({
   }
 
   if (
-    setEquals(
-      new Set(requiredCheckRuns.map((run) => run.name)),
-      new Set(requiredCheckNames),
-    ) &&
-    requiredCheckRuns.every(
-      (run) => run.status === "completed" && run.conclusion === "success",
-    )
+    setEquals(new Set(requiredCheckRuns.map((run) => run.name)), new Set(requiredCheckNames)) &&
+    requiredCheckRuns.every((run) => run.status === "completed" && run.conclusion === "success")
   ) {
     core.info("All requirements met for auto-signoff");
     return labelActions[LabelAction.Add];

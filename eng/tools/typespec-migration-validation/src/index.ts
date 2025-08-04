@@ -9,66 +9,82 @@ import { generatePrompts } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
 import { addIgnorePath, processIgnoreList } from "./ignore.js";
 import { jsonOutput } from "./jsonOutput.js";
-import { logHeader, logWarning } from "./log.js";
-import { findChangedPaths, findDifferences, findModifiedValues, formatChangedPathsReport, formatDifferenceReport, formatModifiedValuesReport } from "./summary.js";
+import { logError, logHeader, logWarning } from "./log.js";
+import {
+  findChangedPaths,
+  findDifferences,
+  findModifiedValues,
+  formatChangedPathsReport,
+  formatDifferenceReport,
+  formatModifiedValuesReport,
+} from "./summary.js";
+import { compareDocuments, printPathDiff } from "./compare.js";
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
-    .usage('Usage: $0 [options]')
-    .command('add-ignore', 'Add paths to ignore file',
+    .usage("Usage: $0 [options]")
+    .command(
+      "add-ignore",
+      "Add paths to ignore file",
       (yargs) => {
         return yargs
-          .option('path', {
-            alias: 'p',
-            describe: 'JSON path to ignore',
-            type: 'string',
-            demandOption: true
+          .option("path", {
+            alias: "p",
+            describe: "JSON path to ignore",
+            type: "string",
+            demandOption: true,
           })
-          .option('outputFolder', {
-            alias: 'out',
-            describe: 'Output folder containing ignore.json',
-            type: 'string',
-            demandOption: true
+          .option("outputFolder", {
+            alias: "out",
+            describe: "Output folder containing ignore.json",
+            type: "string",
+            demandOption: true,
           });
       },
       (argv) => {
         handleAddIgnore(argv.path as string, argv.outputFolder as string);
-      }
+      },
     )
-    .example('$0 --oldPath ./old-spec-folder --newPath ./new-spec-file', 'Compare two swagger specs')
-    .example('$0 oldSpecPath newSpecPath', 'Compare using positional arguments')
-    .example('$0 add-ignore --path "paths[\'/api/resource\'].put.parameters[0].required__added" --outputFolder ./results', 'Add a path to ignore file')
-    .option('oldPath', {
-      alias: 'o',
-      describe: 'Path to old/original Swagger specification folder',
-      type: 'string',
+    .example(
+      "$0 --oldPath ./old-spec-folder --newPath ./new-spec-file",
+      "Compare two swagger specs",
+    )
+    .example("$0 oldSpecPath newSpecPath", "Compare using positional arguments")
+    .example(
+      "$0 add-ignore --path \"paths['/api/resource'].put.parameters[0].required__added\" --outputFolder ./results",
+      "Add a path to ignore file",
+    )
+    .option("oldPath", {
+      alias: "o",
+      describe: "Path to old/original Swagger specification folder",
+      type: "string",
     })
-    .option('newPath', {
-      alias: 'n',
-      describe: 'Path to new/updated Swagger specification file',
-      type: 'string',
+    .option("newPath", {
+      alias: "n",
+      describe: "Path to new/updated Swagger specification file",
+      type: "string",
     })
-    .option('outputFolder', {
-      alias: 'out',
-      describe: 'Output folder for analysis results',
-      type: 'string',
+    .option("outputFolder", {
+      alias: "out",
+      describe: "Output folder for analysis results",
+      type: "string",
     })
-    .option('ignoreDescription', {
-      description: 'Ignore description differences',
-      type: 'boolean',
+    .option("ignoreDescription", {
+      description: "Ignore description differences",
+      type: "boolean",
       default: true,
     })
-    .option('ignorePathCase', {
-      description: 'Set case insensitive for the segments before provider, e.g. resourceGroups',
-      type: 'boolean'
+    .option("ignorePathCase", {
+      description: "Set case insensitive for the segments before provider, e.g. resourceGroups",
+      type: "boolean",
     })
-    .option('jsonOutput', {
-      description: 'Also output in JSON format',
-      type: 'boolean',
+    .option("jsonOutput", {
+      description: "Also output in JSON format",
+      type: "boolean",
     })
     .check((argv) => {
       // Skip validation for the add-ignore command
-      if (argv._[0] === 'add-ignore') {
+      if (argv._[0] === "add-ignore") {
         return true;
       }
 
@@ -84,7 +100,7 @@ function parseArguments() {
       }
 
       if (!argv.oldPath || !argv.newPath) {
-        throw new Error('Both oldPath and newPath are required');
+        throw new Error("Both oldPath and newPath are required");
       }
 
       // Verify paths exist
@@ -99,7 +115,7 @@ function parseArguments() {
       return true;
     })
     .help()
-    .alias('help', 'h')
+    .alias("help", "h")
     .parseSync();
 }
 
@@ -119,7 +135,7 @@ function handleAddIgnore(path: string, outputFolder: string) {
 
   // Read existing ignore file if present
   if (fs.existsSync(ignoreFilePath)) {
-    ignoreList = JSON.parse(fs.readFileSync(ignoreFilePath, 'utf-8'));
+    ignoreList = JSON.parse(fs.readFileSync(ignoreFilePath, "utf-8"));
   }
 
   // Add new path if not already present
@@ -160,7 +176,7 @@ export async function main() {
     const ignoreFilePath = `${outputFolder}/ignore.json`;
     if (fs.existsSync(ignoreFilePath)) {
       logHeader(`Processing ignore file...`);
-      const ignoreFileContent = JSON.parse(fs.readFileSync(ignoreFilePath, 'utf-8'));
+      const ignoreFileContent = JSON.parse(fs.readFileSync(ignoreFilePath, "utf-8"));
       for (const path of ignoreFileContent) {
         addIgnorePath(path);
       }
@@ -168,53 +184,87 @@ export async function main() {
       processIgnoreList(sortedOldFile, sortedNewFile);
     }
 
-    fs.writeFileSync(`${outputFolder}/oldNormalizedSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/newNormalizedSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
+    fs.writeFileSync(
+      `${outputFolder}/oldNormalizedSwagger.json`,
+      JSON.stringify(sortedOldFile, null, 2),
+    );
+    fs.writeFileSync(
+      `${outputFolder}/newNormalizedSwagger.json`,
+      JSON.stringify(sortedNewFile, null, 2),
+    );
   }
+  logHeader("Comparing finished.");
 
-  let report: string = "";
-  const diffForFile = diff(sortedOldFile, sortedNewFile);
-
-  // // TO-DELETE: Read the diff file from disk
-  // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
-
-  const changedPaths = findChangedPaths(diffForFile);
-  if (changedPaths.length > 0) {
-    logWarning(`Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`);
-    const changedPathsReport = formatChangedPathsReport(changedPaths);
-    console.log(changedPathsReport);
-    report += changedPathsReport;
+  let outputMarkdown = "";
+  const compareResult = compareDocuments(
+    sortedOldFile,
+    sortedNewFile,
+  );
+  if (compareResult.length === 0) {
+    logHeader("No differences found.");
   }
-
-  const differences = findDifferences(diffForFile);
-  const differencesReport = formatDifferenceReport(differences);
-  console.log(differencesReport);
-  report += differencesReport;
-
-  const modifiedValues = findModifiedValues(diffForFile);
-  const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
-  console.log(modifiedValuesReport);
-  report += modifiedValuesReport;
+  else {
+    outputMarkdown += "| Type | Level | Message |\n";
+    outputMarkdown += "| ---- | ----- | ------- |\n";
+    for (const diff of compareResult) {
+      outputMarkdown += printPathDiff(diff);
+    }
+    console.log(outputMarkdown);
+  }  
 
   if (outputFolder) {
-    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
-    fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
-    logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+    let report: string = "";
+    const diffForFile = diff(sortedOldFile, sortedNewFile);
+    if (diffForFile === undefined || Object.keys(diffForFile).length === 0) {
+      return;
+    }      
 
-    const suggestedPrompt = generatePrompts(diffForFile);
-    if (suggestedPrompt.length > 0) {
-      logWarning(`Considering these suggested prompts for the diff:`);
-      suggestedPrompt.forEach(prompt => {
-        console.log(prompt);
-      });
+    // // TO-DELETE: Read the diff file from disk
+    // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
+
+    const changedPaths = findChangedPaths(diffForFile);
+    if (changedPaths.length > 0) {
+      logWarning(
+        `Found ${changedPaths.length} changed paths in the diff.`,
+      );
+      const changedPathsReport = formatChangedPathsReport(changedPaths);
+      report += changedPathsReport;
     }
+
+    const differences = findDifferences(diffForFile);
+    const differencesReport = formatDifferenceReport(differences);
+    report += differencesReport;
+
+    const modifiedValues = findModifiedValues(diffForFile);
+    const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
+    report += modifiedValuesReport;
+
+    if (diffForFile) {
+      fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
+      fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
+      logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
+
+      const suggestedPrompt = generatePrompts(diffForFile);
+      if (suggestedPrompt.length > 0) {
+        logWarning(`Considering these suggested prompts for the diff:`);
+        suggestedPrompt.forEach((prompt) => {
+          console.log(prompt);
+        });
+      }
+    }
+    
     if (args.jsonOutput) {
       fs.writeFileSync(`${outputFolder}/tsmv_output.json`, JSON.stringify(jsonOutput, null, 2));
       logHeader(`JSON output written to ${outputFolder}/tsmv_output.json`);
-      console.log(`---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`);
+      console.log(
+        `---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`,
+      );
     }
   }
   else {
-    console.log(report);
+    if (compareResult.filter((x) => x.level === "error").length > 0) {
+      logError("Differences found. Please fix the issues before proceeding.");
+      process.exit(1);
+    }
   }
 }
