@@ -27,3 +27,9 @@ using Microsoft.StorageActions;
   "PreviewActions",
   "csharp"
 );
+
+namespace Azure.ResourceManager.Models {
+  model SubResource { }
+}
+
+@@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value, Azure.ResourceManager.Models.SubResource[], "csharp");
