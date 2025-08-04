@@ -882,10 +882,12 @@ export async function createNextStepsComment(
 
   // determine if required runs have any in-progress or queued runs
   // if there are any, we consider the requirements not met.
-  const requiredCheckInfosPresent = requiredRuns.some((run) => {
-    const status = run.status.toLowerCase();
-    return status !== "queued" && status !== "in_progress";
-  });
+  const requiredCheckInfosPresent =
+    requiredRuns.some((run) => {
+      const status = run.status.toLowerCase();
+      return status !== "queued" && status !== "in_progress";
+    }) || requiredCheckInfos.length === 0;
+
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
