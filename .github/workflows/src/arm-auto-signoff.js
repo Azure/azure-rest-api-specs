@@ -1,8 +1,8 @@
 // @ts-check
 
 import { setEquals } from "../../shared/src/equality.js";
+import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
 
 // TODO: Add tests
