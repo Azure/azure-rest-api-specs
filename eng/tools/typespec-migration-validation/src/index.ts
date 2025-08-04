@@ -204,8 +204,8 @@ export async function main() {
     logHeader("No differences found.");
   }
   else {
-    outputMarkdown += "| Type | Message |\n";
-    outputMarkdown += "| ---- | ------- |\n";
+    outputMarkdown += "| Type | Level | Message |\n";
+    outputMarkdown += "| ---- | ----- | ------- |\n";
     for (const diff of compareResult) {
       outputMarkdown += printPathDiff(diff);
     }
@@ -262,7 +262,7 @@ export async function main() {
     }
   }
   else {
-    if (outputMarkdown) {
+    if (compareResult.filter((x) => x.level === "error").length > 0) {
       logError("Differences found. Please fix the issues before proceeding.");
       process.exit(1);
     }

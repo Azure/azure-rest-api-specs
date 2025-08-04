@@ -1,8 +1,9 @@
-import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, Ref } from "@azure-tools/typespec-autorest";
+import { HttpMethod, OpenAPI2Document, OpenAPI2Operation, OpenAPI2Response, Ref, Refable } from "@azure-tools/typespec-autorest";
 
 interface Diff {
   before: any;
   after: any;
+  level: "warning" | "error";
 }
 
 /**
@@ -12,14 +13,16 @@ interface Diff {
  * longrunning: whether the operation is long-running or not for the same operationId should be the same
  * finalstate: whether the final state of the long-running operation is the same for the same operationId
  * finalresult: the final result schema of the long-running operation should be the same as the schema of 200 response
+ * responses: the response codes for the same operationId should have the same count and same response code
+ * response: the response schema for the same response code should be the same
  */
 interface PathDiff extends Diff {
   operationId: string;
-  type: "path" | "parameters" | "pageable" | "longrunning" | "finalstate" | "finalresult";
+  type: "path" | "parameters" | "pageable" | "longrunning" | "finalstate" | "finalresult" | "responses" | "response";
 }
 
 export function printPathDiff(diff: PathDiff): string {
-  return `| ${diff.type} | The ${diff.type} of operation "${diff.operationId}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
+  return `| ${diff.type} | ${diff.level} | The ${diff.type} of operation "${diff.operationId}" changed: ${JSON.stringify(diff.before)} -> ${JSON.stringify(diff.after)} |\n`;
 }
 
 export function compareDocuments(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Document) {
@@ -40,9 +43,10 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         after: null,
         operationId,
         type: "path",
+        level: "error"
       });
     }
-    pathDiffs.push(...compareOperations(oldOperations[operationId][1], newOperations[operationId][1], operationId));
+    pathDiffs.push(...compareOperation(oldOperations[operationId][1], newOperations[operationId][1], operationId));
   }
   for (const operationId in newOperations) {
     if (!oldOperations[operationId]) {
@@ -51,13 +55,14 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
         after: newOperations[operationId][0],
         operationId,
         type: "path",
+        level: "error"
       });
     }
   }
   return pathDiffs;
 }
 
-function compareOperations(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
   if (oldOperation.parameters.length !== newOperation.parameters.length) {
@@ -66,30 +71,86 @@ function compareOperations(oldOperation: OpenAPI2Operation, newOperation: OpenAP
       after: newOperation.parameters.length,
       operationId: operationId,
       type: "parameters",
+      level: "error"
     });
   }
 
-  pathDiffs.push(...comparePaginations(oldOperation, newOperation, operationId));
-  pathDiffs.push(...compareLongRunnings(oldOperation, newOperation, operationId));
+  pathDiffs.push(...comparePagination(oldOperation, newOperation, operationId));
+  pathDiffs.push(...compareLongRunning(oldOperation, newOperation, operationId));
+  pathDiffs.push(...compareResponses(oldOperation, newOperation, operationId));
 
   // TO-DO: Compare parameters in detail
   return pathDiffs;
 }
 
-function comparePaginations(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
-  if ((oldOperation["x-ms-pageable"] === undefined && newOperation["x-ms-pageable"] !== undefined) || (oldOperation["x-ms-pageable"] !== undefined && newOperation["x-ms-pageable"] === undefined)) {
-    return [{
-      before: oldOperation["x-ms-pageable"],
-      after: newOperation["x-ms-pageable"],
+function compareResponses(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+  const pathDiffs: PathDiff[] = [];
+
+  const oldResponseCodes = Object.keys(oldOperation.responses ?? {}).filter(code => !code.startsWith("x-"));
+  const newResponseCodes = Object.keys(newOperation.responses ?? {}).filter(code => !code.startsWith("x-"));
+
+  let sameResponseCodes = true;
+  for (const code of oldResponseCodes) {
+    if (!newResponseCodes.includes(code)) {
+      sameResponseCodes = false;
+      break;
+    }
+  }
+  for (const code of newResponseCodes) {
+    if (!oldResponseCodes.includes(code)) {
+      sameResponseCodes = false;
+      break;
+    }
+  }
+
+  if (!sameResponseCodes) {
+    pathDiffs.push({
+      before: oldResponseCodes,
+      after: newResponseCodes,
       operationId: operationId,
-      type: "pageable",
+      type: "responses",
+      level: "error"
+    });
+  }
+
+  for (const code of oldResponseCodes) {
+    pathDiffs.push(...compareResponse(oldOperation.responses?.[code], newOperation.responses?.[code], operationId));
+  }
+
+  return pathDiffs;
+}
+
+function compareResponse(oldResponse: Refable<OpenAPI2Response> | undefined, newResponse: Refable<OpenAPI2Response> | undefined, operationId: string): PathDiff[] {
+  let oldSchema = getResponseSchema(oldResponse);
+  let newSchema = getResponseSchema(newResponse);
+  if (oldSchema !== newSchema) {
+    return [{
+      before: oldResponse,
+      after: newResponse,
+      operationId: operationId,
+      type: "response",
+      level: "error"
     }];
   }
 
   return [];
 }
 
-function compareLongRunnings(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+function comparePagination(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+  if ((oldOperation["x-ms-pageable"] === undefined && newOperation["x-ms-pageable"] !== undefined) || (oldOperation["x-ms-pageable"] !== undefined && newOperation["x-ms-pageable"] === undefined)) {
+    return [{
+      before: oldOperation["x-ms-pageable"],
+      after: newOperation["x-ms-pageable"],
+      operationId: operationId,
+      type: "pageable",
+      level: "error"
+    }];
+  }
+
+  return [];
+}
+
+function compareLongRunning(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
   const oldLongRunning = oldOperation["x-ms-long-running-operation"] === true;
@@ -100,6 +161,7 @@ function compareLongRunnings(oldOperation: OpenAPI2Operation, newOperation: Open
       after: newLongRunning,
       operationId: operationId,
       type: "longrunning",
+      level: "error"
     });
   }
 
@@ -111,29 +173,28 @@ function compareLongRunnings(oldOperation: OpenAPI2Operation, newOperation: Open
       after: newFinalState,
       operationId: operationId,
       type: "finalstate",
+      level: "error"
     });
   }
 
   const newFinalResult = newOperation["x-ms-long-running-operation-options"]?.["final-state-schema"];
-  if (newFinalResult !== get200ResponseSchema(oldOperation)) {
+  if (newFinalResult !== getResponseSchema(oldOperation.responses?.["200"])) {
     pathDiffs.push({
-      before: get200ResponseSchema(oldOperation),
+      before: getResponseSchema(oldOperation.responses?.["200"]),
       after: newFinalResult,
       operationId: operationId,
       type: "finalresult",
+      level: "error"
     });
   }
 
   return pathDiffs;
 }
 
-function get200ResponseSchema(operation: OpenAPI2Operation): string | undefined {
-  const response = operation.responses?.["200"];
+function getResponseSchema(response: Refable<OpenAPI2Response> | undefined): string | undefined {
   if (response && (response as Ref<OpenAPI2Response>).$ref) {
     const refPath = (response as Ref<OpenAPI2Response>).$ref;
-    if (refPath.startsWith("#/definitions/")) {
-      return refPath.substring("#/definitions/".length);
-    }
+    return refPath.split("/").pop();
   }
 
   return undefined;
