@@ -808,7 +808,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [_, automatedCheckOutput] = await createNextStepsComment(
+      const [ , automatedCheckOutput] = await createNextStepsComment(
         mockCore,
         repo,
         labelNames,
@@ -842,7 +842,7 @@ describe("Summarize Checks Unit Tests", () => {
         },
       ];
 
-      const [_, automatedCheckOutput] = await createNextStepsComment(
+      const [ , automatedCheckOutput] = await createNextStepsComment(
         mockCore,
         repo,
         labelNames,
