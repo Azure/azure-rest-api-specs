@@ -140,6 +140,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(AnalyzeConversationAuthoringModelFile, "ConversationAuthoringModelFile");
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ConversationAuthoringProjectClientOptions {
+  projectName: string;
+}
+
 // Root client definition
 @client({
   name: "ConversationAuthoringClient",
@@ -172,8 +177,16 @@ namespace ConversationAuthoringClient {
   op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
   op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
+}
 
-  @operationGroup
+@client({
+  name: "ConversationAuthoringProjectClient",
+  service: Language.Conversations.Authoring,
+}, "python")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+namespace ConversationAuthoringProjectClient {
+@operationGroup
   @clientName("DeploymentOperations", "python")
   interface DeploymentOperations {
     getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
@@ -267,3 +280,7 @@ namespace ConversationAuthoringClient {
     getLoadSnapshotStatus is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getLoadSnapshotStatus;
   }
 }
+
+@@clientInitialization(ConversationAuthoringProjectClient, {
+  parameters: ConversationAuthoringProjectClientOptions,
+}, "python");
