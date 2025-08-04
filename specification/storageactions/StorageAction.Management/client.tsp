@@ -23,6 +23,10 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
+@@clientName(StorageTasks.list,
+  "GetStorageTasksReports",
+  "csharp"
+);
 @@clientName(StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
