@@ -31,7 +31,6 @@ interface ComputeDiagnosticBases {
   /**
    * Gets Spot Placement Scores metadata.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SpotPlacementScores_Get")
   get is ArmResourceRead<
     ComputeDiagnosticBase,
