@@ -730,7 +730,19 @@ model AppId {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ListAppIdResponse is Azure.Core.Page<AppId>;
+model ListAppIdResponse {
+  /*
+   *List of AppIds
+   */
+  @TypeSpec.pageItems
+  value: string[];
+
+  /*
+   *next Link
+   */
+  @TypeSpec.nextLink
+  nextLink?: string;
+}
 
 /**
  * Countries Response Object

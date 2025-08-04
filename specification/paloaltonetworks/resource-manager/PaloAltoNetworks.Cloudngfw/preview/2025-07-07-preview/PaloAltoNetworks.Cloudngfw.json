@@ -1073,9 +1073,6 @@
           "GlobalRulestack_listAppIds_MinimumSet_Gen": {
             "$ref": "./examples/GlobalRulestack_listAppIds_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5786,19 +5783,6 @@
         ]
       }
     },
-    "AppId": {
-      "type": "object",
-      "description": "Application ID item",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Application ID value"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AppSeenData": {
       "type": "object",
       "description": "Data Type for App Seen",
@@ -7049,19 +7033,15 @@
     },
     "ListAppIdResponse": {
       "type": "object",
-      "description": "Paged collection of AppId items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AppId items on this page",
           "items": {
-            "$ref": "#/definitions/AppId"
+            "type": "string"
           }
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
       },
       "required": [
