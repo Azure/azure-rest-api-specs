@@ -40,8 +40,8 @@ jobs:
       - if: |
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
-        name: Upload artifact with BreakingChangeReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with BreakingChangeReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -50,21 +50,8 @@ jobs:
       - if: |
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
-        name: Upload artifact with VersioningReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
-        with:
-          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
-          # Convert "add/remove" to "true/false"
-          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
-
-      # Upload artifact with issue number if labels are present and PR number is valid
-      - if: |
-          always() &&
-          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
-          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
-          github.event.pull_request.number > 0
-        name: Upload artifact with issue number
+        name: Upload artifact with VersioningReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "issue-number"
-          value: "${{ github.event.pull_request.number }}"
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
