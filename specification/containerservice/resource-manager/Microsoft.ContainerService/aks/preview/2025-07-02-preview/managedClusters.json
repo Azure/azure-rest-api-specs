@@ -10358,6 +10358,9 @@
         },
         "security": {
           "$ref": "#/definitions/AdvancedNetworkingSecurity"
+        },
+        "performance": {
+          "$ref": "#/definitions/AdvancedNetworkingPerformance"
         }
       }
     },
@@ -10435,6 +10438,34 @@
           }
         }
       }
+    },
+    "AdvancedNetworkingPerformance": {
+      "type": "object",
+      "description": "Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.",
+      "properties": {
+        "accelerationMode": {
+          "type": "string",
+          "enum": [
+            "BpfVeth",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AccelerationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BpfVeth",
+                "description": "Enable eBPF host routing with veth device mode."
+              },
+              {
+                "value": "None",
+                "description": "Disable acceleration options."
+              }
+            ]
+          },
+          "description": "Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation"
+         }
+       }
     },
     "LoadBalancerSku": {
       "type": "string",
