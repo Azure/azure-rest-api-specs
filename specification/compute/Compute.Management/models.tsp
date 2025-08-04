@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -5081,15 +5083,13 @@ model DataDisk {
   toBeDetached?: boolean;
 
   /**
-   * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
+   * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS.
    */
-  @visibility(Lifecycle.Read)
   diskIOPSReadWrite?: int64;
 
   /**
-   * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
+   * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS.
    */
-  @visibility(Lifecycle.Read)
   diskMBpsReadWrite?: int64;
 
   /**
