@@ -1092,7 +1092,7 @@
         }
       }
     },
-    "/fine_tuning": {
+    "/fine_tuning/jobs": {
       "get": {
         "operationId": "FineTuningJobs_ListFineTuningJobs",
         "description": "Returns a list of finetune jobs",
@@ -1172,7 +1172,53 @@
         }
       }
     },
-    "/fine_tuning/{fine_tuning_job_id}/cancel": {
+    "/fine_tuning/jobs/{fine_tuning_job_id}": {
+      "get": {
+        "operationId": "FineTuningJobs_Get",
+        "description": "Get info about a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FineTuningJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FineTuningJobs_Get_FailedJob": {
+            "$ref": "./examples/FineTuningJobs_Get_FailedJob.json"
+          },
+          "FineTuningJobs_Get_SuccessfulJob": {
+            "$ref": "./examples/FineTuningJobs_Get_SuccessfulJob.json"
+          }
+        }
+      }
+    },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/cancel": {
       "post": {
         "operationId": "FineTuningJobs_Cancel",
         "description": "Cancel a fine-tune job.",
@@ -1210,7 +1256,7 @@
         }
       }
     },
-    "/fine_tuning/{fine_tuning_job_id}/pause": {
+    "/fine_tuning/jobs/{fine_tuning_job_id}/pause": {
       "post": {
         "operationId": "FineTuningJobs_Pause",
         "description": "Pause a fine-tune job.",
@@ -1248,7 +1294,7 @@
         }
       }
     },
-    "/fine_tuning/{fine_tuning_job_id}/resume": {
+    "/fine_tuning/jobs/{fine_tuning_job_id}/resume": {
       "post": {
         "operationId": "FineTuningJobs_Resume",
         "description": "Resume a fine-tune job.",
@@ -1282,62 +1328,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        }
-      }
-    },
-    "/fine_tuning/jobs/{id}": {
-      "get": {
-        "operationId": "FineTuningJobs_Get",
-        "description": "Get info about a fine-tuning job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The job identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/FineTuningJob"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FineTuningJobs_Get_FailedJob": {
-            "$ref": "./examples/FineTuningJobs_Get_FailedJob.json"
-          },
-          "FineTuningJobs_Get_SuccessfulJob": {
-            "$ref": "./examples/FineTuningJobs_Get_SuccessfulJob.json"
           }
         }
       }
@@ -2984,8 +2974,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The job identifier.",
-          "readOnly": true
+          "description": "The job identifier."
         },
         "object": {
           "type": "string",

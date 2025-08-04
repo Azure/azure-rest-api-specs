@@ -519,14 +519,10 @@ model FineTuningJobIntegration {
 //
 
 @doc("Fine-Tuning Job")
-@resource("jobs")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJob {
   @doc("The job identifier.")
-  @key("id")
-  @encodedName("application/json", "id")
-  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")

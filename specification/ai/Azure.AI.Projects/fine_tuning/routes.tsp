@@ -12,23 +12,26 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias FineTuningServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
-
-alias FineTuningOperations = Azure.Core.ResourceOperations<FineTuningServiceTraits>;
-
-@route("fine_tuning")
+@route("fine_tuning/jobs")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 interface FineTuningJobs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get info about a fine-tuning job.")
-  get is FineTuningOperations.ResourceRead<FineTuningJob>;
+  get is Azure.Core.Foundations.Operation<
+      {
+        @doc("The ID of the fine-tuning job.")
+        @path
+        fine_tuning_job_id: string
+      },
+      FineTuningJob
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Returns a list of finetune jobs")
   @get
   @list
+  // ToDo: add the same error response
   listFineTuningJobs(
       ...ApiVersionParameter;
 
@@ -97,4 +100,17 @@ interface FineTuningJobs {
     },
     ResourceCreatedResponse<FineTuningJob>
   >;
+/**
+  @doc("Get status updates for a fine-tuning job.")
+  @get
+  @route("/{fine_tuning_job_id}/cancel")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  cancel is Azure.Core.Foundations.Operation<
+    {
+        @doc("The ID of the fine-tuning job to cancel.")
+        @path
+        fine_tuning_job_id: string;
+    },
+    ResourceCreatedResponse<FineTuningJob>
+  >;*/
 }
