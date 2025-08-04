@@ -931,11 +931,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "The URL where the status of the asynchronous operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -955,11 +955,7 @@
           "GenerateRecommendations": {
             "$ref": "./examples/GenerateRecommendations.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {

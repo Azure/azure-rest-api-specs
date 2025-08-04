@@ -112,8 +112,13 @@ interface RecommendationsOperationGroup {
   generate is ArmProviderActionSync<
     Scope = SubscriptionActionScope,
     Parameters = {},
-    Response = ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmAcceptedResponse & {
+      /**
+       * The URL where the status of the asynchronous operation can be checked.
+       */
+      @header("Location")
+      Location: string;
+    },
     Error = ArmDefaultErrorResponse
   >;
   /**
