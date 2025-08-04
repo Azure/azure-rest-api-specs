@@ -323,13 +323,13 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
 /** Represents the function data in a streaming run step MCP call.* */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
-  /** The object type, which is always "mcp".* */
+  /** The object type, which is always "mcp". */
   type: "mcp";
 
-  /** The index of a response. * */
+  /** The index of a response. */
   index: int32;
 
-  /** The arguments for MCP call. * */
+  /** The arguments for MCP call. */
   arguments: string;
 }
 
