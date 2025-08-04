@@ -1361,6 +1361,7 @@ model VnetConfiguration {
 /**
  * IP Address Space
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model IPAddressSpace {
   /**
    * Resource Id
@@ -1503,6 +1504,7 @@ model RulestackDetails {
 /**
  * DNS Proxy settings for Firewall
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model DNSSettings {
   /**
    * Enable DNS proxy, disabled by default
@@ -1682,16 +1684,19 @@ model SupportInfoModel {
   /**
    * URL for paloaltonetworks live community
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   helpURL?: string;
 
   /**
    * URL for paloaltonetworks Customer Service Portal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   supportURL?: string;
 
   /**
    * URL for registering product in paloaltonetworks Customer Service Portal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   registerURL?: string;
 
   /**
@@ -2019,16 +2024,19 @@ model SupportInfo {
   /**
    * URL for paloaltonetworks live community
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   helpURL?: string;
 
   /**
    * URL for paloaltonetworks Customer Service Portal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   supportURL?: string;
 
   /**
    * URL for registering product in paloaltonetworks Customer Service Portal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   registerURL?: string;
 }
 

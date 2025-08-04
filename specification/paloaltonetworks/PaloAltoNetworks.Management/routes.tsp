@@ -15,6 +15,7 @@ namespace PaloAltoNetworks.Cloudngfw;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PaloAltoNetworksCloudngfwOperations_createProductSerialNumber")
   @autoRoute
@@ -25,6 +26,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @operationId("PaloAltoNetworksCloudngfwOperations_listCloudManagerTenants")
   @autoRoute
   listCloudManagerTenants is ArmProviderActionSync<
@@ -34,6 +36,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @operationId("PaloAltoNetworksCloudngfwOperations_listProductSerialNumberStatus")
   @autoRoute
   listProductSerialNumberStatus is ArmProviderActionSync<
@@ -43,6 +46,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
   @operationId("PaloAltoNetworksCloudngfwOperations_listSupportInfo")
   @autoRoute
   listSupportInfo is ArmProviderActionSync<
