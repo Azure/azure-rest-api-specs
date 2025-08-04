@@ -149,6 +149,108 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/acquirePolicyTokenOperationResults/{operationId}": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_Get",
+        "summary": "Gets an acquire policy token operation result.",
+        "description": "This operation gets an acquire policy token operation result in the given subscription with the given Id.",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is complete. Successfully acquired the policy token.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "202": {
+            "description": "The operation is running.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/acquirePolicyTokenOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_GetAtManagementGroup",
+        "summary": "Gets an acquire policy token operation result at management group level.",
+        "description": "This operation gets an acquire policy token operation result in the given management group with the given Id.",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is complete. Successfully acquired the policy token.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "202": {
+            "description": "The operation is running.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
