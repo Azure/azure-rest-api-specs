@@ -25,7 +25,7 @@ model Pipeline is Azure.ResourceManager.TrackedResource<PipelineProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmPipelineResponse is Pipeline;
+model ArmPipelineResponse is ArmResponse<Pipeline>;
 
 @armResourceOperations
 interface Pipelines {

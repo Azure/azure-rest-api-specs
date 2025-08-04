@@ -27,7 +27,7 @@ model Flow is Azure.ResourceManager.TrackedResource<FlowProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmFlowResponse is Flow;
+model ArmFlowResponse is ArmResponse<Flow>;
 
 @armResourceOperations
 interface Flows {

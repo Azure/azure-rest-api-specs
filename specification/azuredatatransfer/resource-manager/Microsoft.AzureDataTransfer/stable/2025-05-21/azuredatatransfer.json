@@ -953,7 +953,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1031,7 +1031,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1109,7 +1109,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1432,7 +1432,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1519,7 +1519,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1606,7 +1606,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1693,7 +1693,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1780,7 +1780,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmFlowResponse"
+              "$ref": "#/definitions/Flow"
             }
           },
           "202": {
@@ -1857,7 +1857,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmConnectionResponse"
+              "$ref": "#/definitions/Connection"
             }
           },
           "202": {
@@ -2346,7 +2346,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmConnectionResponse"
+              "$ref": "#/definitions/Connection"
             }
           },
           "202": {
@@ -2423,7 +2423,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmPipelineResponse"
+              "$ref": "#/definitions/Pipeline"
             }
           },
           "202": {
@@ -2616,7 +2616,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ArmConnectionResponse"
+              "$ref": "#/definitions/Connection"
             }
           },
           "202": {
@@ -2768,63 +2768,41 @@
     },
     "ArmConnectionResponse": {
       "type": "object",
-      "description": "The connection resource definition.",
+      "description": "Azure operation completed successfully.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionProperties",
-          "description": "Properties of connection"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+        "body": {
+          "$ref": "#/definitions/Connection",
+          "description": "The body type of the operation request or response."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "body"
       ]
     },
     "ArmFlowResponse": {
       "type": "object",
-      "description": "The flow resource definition.",
+      "description": "Azure operation completed successfully.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/FlowProperties",
-          "description": "Properties of flow"
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+        "body": {
+          "$ref": "#/definitions/Flow",
+          "description": "The body type of the operation request or response."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "body"
       ]
     },
     "ArmPipelineResponse": {
       "type": "object",
-      "description": "The pipeline resource definition.",
+      "description": "Azure operation completed successfully.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PipelineProperties",
-          "description": "Properties of pipeline"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+        "body": {
+          "$ref": "#/definitions/Pipeline",
+          "description": "The body type of the operation request or response."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "body"
       ]
     },
     "Azure.Core.armResourceType": {

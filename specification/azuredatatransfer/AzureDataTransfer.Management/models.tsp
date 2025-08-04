@@ -5,7 +5,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Versioning;
 
 namespace Microsoft.AzureDataTransfer;
 
