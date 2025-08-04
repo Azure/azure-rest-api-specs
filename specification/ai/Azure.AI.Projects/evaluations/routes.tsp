@@ -151,13 +151,13 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Retrieves detailed row-by-row evaluation results with pagination support. This endpoint provides access to individual evaluation outcomes, scores, and reasoning for each data row processed.")
-  @route("runs/{name}/results")
+  @route("runs/{id}/results")
   @get
   @added(Versions.v2025_07_31_preview)
   getEvaluationResults(
     @doc("Unique identifier of the evaluation whose results are being retrieved")
     @path
-    name: string,
+    id: string,
 
     @doc("API version specifier for this operation")
     @query("api-version")

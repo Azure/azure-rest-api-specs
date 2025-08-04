@@ -1070,13 +1070,13 @@
         }
       }
     },
-    "/evaluations/runs/{name}/results": {
+    "/evaluations/runs/{id}/results": {
       "get": {
         "operationId": "Evaluations_GetEvaluationResults",
         "description": "Retrieves detailed row-by-row evaluation results with pagination support. This endpoint provides access to individual evaluation outcomes, scores, and reasoning for each data row processed.",
         "parameters": [
           {
-            "name": "name",
+            "name": "id",
             "in": "path",
             "description": "Unique identifier of the evaluation whose results are being retrieved",
             "required": true,
@@ -1167,7 +1167,12 @@
             }
           }
         },
-        "deprecated": true
+        "deprecated": true,
+        "x-ms-examples": {
+          "Evaluations_CreateDeprecated_MaximumSet": {
+            "$ref": "./examples/Evaluations_CreateDeprecated_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/evaluations/runs:runAgent": {
@@ -1208,7 +1213,12 @@
             }
           }
         },
-        "deprecated": true
+        "deprecated": true,
+        "x-ms-examples": {
+          "Evaluations_CreateAgentEvaluationDeprecated_MaximumSet": {
+            "$ref": "./examples/Evaluations_CreateAgentEvaluationDeprecated_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/evaluations/runs:runBatch": {
