@@ -3,7 +3,6 @@
   "info": {
     "title": "PaloAltoNetworks.Cloudngfw",
     "version": "2025-07-07-preview",
-    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -989,7 +988,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AdvSecurityObjectListResponse"
+              "$ref": "#/definitions/advSecurityObjectListResponse"
             }
           },
           "default": {
@@ -1321,7 +1320,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SecurityServicesResponse"
+              "$ref": "#/definitions/securityServicesResponse"
             }
           },
           "default": {
@@ -4610,7 +4609,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AdvSecurityObjectListResponse"
+              "$ref": "#/definitions/advSecurityObjectListResponse"
             }
           },
           "default": {
@@ -4972,7 +4971,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SecurityServicesResponse"
+              "$ref": "#/definitions/securityServicesResponse"
             }
           },
           "default": {
@@ -5784,44 +5783,6 @@
         ]
       }
     },
-    "AdvSecurityObjectListResponse": {
-      "type": "object",
-      "description": "advanced security object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/AdvSecurityObjectModel",
-          "description": "response value"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "next link"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AdvSecurityObjectModel": {
-      "type": "object",
-      "description": "List of custom and predefined url category",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "type of object"
-        },
-        "entry": {
-          "type": "array",
-          "description": "URL entry",
-          "items": {
-            "$ref": "#/definitions/NameDescriptionObject"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entry"
-      ]
-    },
     "AppId": {
       "type": "object",
       "description": "Application ID item",
@@ -6068,7 +6029,11 @@
         "properties": {
           "$ref": "#/definitions/CertificateObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6108,7 +6073,11 @@
         "properties": {
           "$ref": "#/definitions/CertificateObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6541,7 +6510,11 @@
         "properties": {
           "$ref": "#/definitions/FirewallDeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
@@ -6700,7 +6673,11 @@
         "properties": {
           "$ref": "#/definitions/FirewallStatusProperty",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6740,7 +6717,11 @@
         "properties": {
           "$ref": "#/definitions/FqdnObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6780,7 +6761,11 @@
         "properties": {
           "$ref": "#/definitions/FqdnObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -6894,7 +6879,11 @@
         "properties": {
           "$ref": "#/definitions/RulestackProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "location": {
           "type": "string",
@@ -6990,7 +6979,7 @@
           "description": "minimum version"
         },
         "securityServices": {
-          "$ref": "#/definitions/SecurityServices",
+          "$ref": "#/definitions/securityServices",
           "description": "Security Profile"
         }
       }
@@ -7103,7 +7092,11 @@
         "properties": {
           "$ref": "#/definitions/RuleEntry",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -7143,7 +7136,11 @@
         "properties": {
           "$ref": "#/definitions/RulestackProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/AzureResourceManagerManagedIdentityProperties",
@@ -7237,7 +7234,7 @@
           "description": "minimum version"
         },
         "securityServices": {
-          "$ref": "#/definitions/SecurityServices",
+          "$ref": "#/definitions/securityServices",
           "description": "Security Profile"
         }
       }
@@ -7493,7 +7490,11 @@
         "properties": {
           "$ref": "#/definitions/MetricsObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -7748,7 +7749,11 @@
         "properties": {
           "$ref": "#/definitions/RuleEntry",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -7788,7 +7793,11 @@
         "properties": {
           "$ref": "#/definitions/RuleEntry",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -7865,7 +7874,11 @@
         "properties": {
           "$ref": "#/definitions/PrefixObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -7905,7 +7918,11 @@
         "properties": {
           "$ref": "#/definitions/PrefixObject",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -8383,7 +8400,7 @@
           "readOnly": true
         },
         "securityServices": {
-          "$ref": "#/definitions/SecurityServices",
+          "$ref": "#/definitions/securityServices",
           "description": "Security Profile"
         }
       }
@@ -8409,82 +8426,6 @@
           }
         ]
       }
-    },
-    "SecurityServices": {
-      "type": "object",
-      "description": "security services",
-      "properties": {
-        "vulnerabilityProfile": {
-          "type": "string",
-          "description": "IPs Vulnerability Profile Data"
-        },
-        "antiSpywareProfile": {
-          "type": "string",
-          "description": "Anti spyware Profile data"
-        },
-        "antiVirusProfile": {
-          "type": "string",
-          "description": "anti virus profile data"
-        },
-        "urlFilteringProfile": {
-          "type": "string",
-          "description": "URL filtering profile data"
-        },
-        "fileBlockingProfile": {
-          "type": "string",
-          "description": "File blocking profile data"
-        },
-        "dnsSubscription": {
-          "type": "string",
-          "description": "DNS Subscription profile data"
-        },
-        "outboundUnTrustCertificate": {
-          "type": "string",
-          "description": "Untrusted Egress Decryption profile data"
-        },
-        "outboundTrustCertificate": {
-          "type": "string",
-          "description": "Trusted Egress Decryption profile data"
-        }
-      }
-    },
-    "SecurityServicesResponse": {
-      "type": "object",
-      "description": "Security services list response",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/SecurityServicesTypeList",
-          "description": "response value"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "next link"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "SecurityServicesTypeList": {
-      "type": "object",
-      "description": "Security services type list",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "security services type"
-        },
-        "entry": {
-          "type": "array",
-          "description": "list",
-          "items": {
-            "$ref": "#/definitions/NameDescriptionObject"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entry"
-      ]
     },
     "ServerStatus": {
       "type": "string",
@@ -8829,6 +8770,120 @@
       },
       "required": [
         "vHub"
+      ]
+    },
+    "advSecurityObjectListResponse": {
+      "type": "object",
+      "description": "advanced security object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/advSecurityObjectModel",
+          "description": "response value"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "next link"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "advSecurityObjectModel": {
+      "type": "object",
+      "description": "List of custom and predefined url category",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of object"
+        },
+        "entry": {
+          "type": "array",
+          "description": "URL entry",
+          "items": {
+            "$ref": "#/definitions/NameDescriptionObject"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entry"
+      ]
+    },
+    "securityServices": {
+      "type": "object",
+      "description": "security services",
+      "properties": {
+        "vulnerabilityProfile": {
+          "type": "string",
+          "description": "IPs Vulnerability Profile Data"
+        },
+        "antiSpywareProfile": {
+          "type": "string",
+          "description": "Anti spyware Profile data"
+        },
+        "antiVirusProfile": {
+          "type": "string",
+          "description": "anti virus profile data"
+        },
+        "urlFilteringProfile": {
+          "type": "string",
+          "description": "URL filtering profile data"
+        },
+        "fileBlockingProfile": {
+          "type": "string",
+          "description": "File blocking profile data"
+        },
+        "dnsSubscription": {
+          "type": "string",
+          "description": "DNS Subscription profile data"
+        },
+        "outboundUnTrustCertificate": {
+          "type": "string",
+          "description": "Untrusted Egress Decryption profile data"
+        },
+        "outboundTrustCertificate": {
+          "type": "string",
+          "description": "Trusted Egress Decryption profile data"
+        }
+      }
+    },
+    "securityServicesResponse": {
+      "type": "object",
+      "description": "Security services list response",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/securityServicesTypeList",
+          "description": "response value"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "next link"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "securityServicesTypeList": {
+      "type": "object",
+      "description": "Security services type list",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "security services type"
+        },
+        "entry": {
+          "type": "array",
+          "description": "list",
+          "items": {
+            "$ref": "#/definitions/NameDescriptionObject"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entry"
       ]
     }
   },

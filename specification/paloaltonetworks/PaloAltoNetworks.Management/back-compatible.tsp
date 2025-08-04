@@ -267,3 +267,51 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(PaloAltoNetworksCloudngfwOperationsOperationGroup.listSupportInfo,
   "listSupportInfo"
 );
+
+@@clientName(AdvSecurityObjectListResponse, "advSecurityObjectListResponse");
+@@clientName(SecurityServicesResponse, "securityServicesResponse");
+@@clientName(SecurityServices, "securityServices");
+@@clientName(SecurityServicesTypeList, "securityServicesTypeList");
+@@clientName(AdvSecurityObjectModel, "advSecurityObjectModel");
+
+@@visibility(CertificateObjectGlobalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(CertificateObjectLocalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(FirewallResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(FirewallStatusResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(FqdnListGlobalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(FqdnListLocalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(GlobalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(LocalRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(LocalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(MetricsObjectFirewallResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(PostRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(PreRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
+@@visibility(PrefixListGlobalRulestackResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);
+@@visibility(PrefixListResource.properties, Lifecycle.Read, Lifecycle.Create);
