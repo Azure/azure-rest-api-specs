@@ -1,0 +1,222 @@
+{
+  "title": "StageProgressions_CreateOrUpdate_MaximumSet",
+  "operationId": "StageProgressions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "productionDeploymentChangeState",
+    "stageProgressionName": "productionRolloutProgression",
+    "resource": {
+      "properties": {
+        "stageReference": "production-deployment-stage",
+        "state": "InProgress",
+        "sequence": 3,
+        "stageVariables": {
+          "environment": "production",
+          "region": "eastus",
+          "replicas": 5,
+          "deploymentMode": "blue-green",
+          "healthCheckEndpoint": "/health",
+          "rolloutPercentage": 25,
+          "canaryConfig": {
+            "enabled": true,
+            "duration": "PT30M",
+            "successThreshold": 95
+          }
+        },
+        "comments": "Production deployment stage progression for API service v2.1. This stage implements blue-green deployment with canary analysis for safe production rollouts. The deployment will proceed through 25% traffic split initially, with automatic health monitoring and rollback capabilities.",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/ApiService/_workitems/edit/12345",
+            "description": "Production deployment work item for API service v2.1 release. Includes deployment checklist, rollback procedures, and post-deployment verification steps."
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/prod-deploy-456",
+            "description": "Production deployment approval request with stakeholder sign-offs from security, operations, and product teams."
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC-789",
+            "description": "Related support incident tracking production readiness verification and deployment coordination with support team."
+          },
+          "accessElevationRequest": {
+            "uri": "https://pim.contoso.com/requests/elev-321",
+            "description": "Privileged access elevation request for production deployment permissions with time-limited scope."
+          },
+          "relatedChangeState": {
+            "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeploymentChangeState",
+            "description": "Related staging deployment change state that must complete successfully before production deployment."
+          },
+          "testResults": {
+            "uri": "https://testing.contoso.com/results/prod-validation-654",
+            "description": "Production validation test results including load testing, security scanning, and integration testing outcomes."
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/api-service",
+            "description": "Service catalog entry for API service containing deployment procedures, dependencies, and operational runbooks."
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stageReference": "production-deployment-stage",
+          "state": "InProgress",
+          "sequence": 3,
+          "stageVariables": {
+            "environment": "production",
+            "region": "eastus",
+            "replicas": 5,
+            "deploymentMode": "blue-green",
+            "healthCheckEndpoint": "/health",
+            "rolloutPercentage": 25,
+            "canaryConfig": {
+              "enabled": true,
+              "duration": "PT30M",
+              "successThreshold": 95
+            }
+          },
+          "comments": "Production deployment stage progression for API service v2.1. This stage implements blue-green deployment with canary analysis for safe production rollouts. The deployment will proceed through 25% traffic split initially, with automatic health monitoring and rollback capabilities.",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/ApiService/_workitems/edit/12345",
+              "description": "Production deployment work item for API service v2.1 release. Includes deployment checklist, rollback procedures, and post-deployment verification steps.",
+              "lastModifiedBy": "alice.engineer@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:30.442Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/prod-deploy-456",
+              "description": "Production deployment approval request with stakeholder sign-offs from security, operations, and product teams.",
+              "lastModifiedBy": "bob.manager@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:15.225Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-789",
+              "description": "Related support incident tracking production readiness verification and deployment coordination with support team.",
+              "lastModifiedBy": "charlie.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:45.167Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://pim.contoso.com/requests/elev-321",
+              "description": "Privileged access elevation request for production deployment permissions with time-limited scope.",
+              "lastModifiedBy": "diana.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:20.889Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeploymentChangeState",
+              "description": "Related staging deployment change state that must complete successfully before production deployment.",
+              "lastModifiedBy": "eve.devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:10.334Z"
+            },
+            "testResults": {
+              "uri": "https://testing.contoso.com/results/prod-validation-654",
+              "description": "Production validation test results including load testing, security scanning, and integration testing outcomes.",
+              "lastModifiedBy": "frank.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:50:35.556Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/api-service",
+              "description": "Service catalog entry for API service containing deployment procedures, dependencies, and operational runbooks.",
+              "lastModifiedBy": "grace.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:45:25.778Z"
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/productionDeploymentChangeState/stageProgressions/productionRolloutProgression",
+        "name": "productionRolloutProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "alice.engineer@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "alice.engineer@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:15:30.442Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "stageReference": "production-deployment-stage",
+          "state": "Initialized",
+          "sequence": 3,
+          "stageVariables": {
+            "environment": "production",
+            "region": "eastus",
+            "replicas": 5,
+            "deploymentMode": "blue-green",
+            "healthCheckEndpoint": "/health",
+            "rolloutPercentage": 25,
+            "canaryConfig": {
+              "enabled": true,
+              "duration": "PT30M",
+              "successThreshold": 95
+            }
+          },
+          "comments": "Production deployment stage progression for API service v2.1. This stage implements blue-green deployment with canary analysis for safe production rollouts. The deployment will proceed through 25% traffic split initially, with automatic health monitoring and rollback capabilities.",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/ApiService/_workitems/edit/12345",
+              "description": "Production deployment work item for API service v2.1 release. Includes deployment checklist, rollback procedures, and post-deployment verification steps.",
+              "lastModifiedBy": "alice.engineer@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:15:30.442Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/prod-deploy-456",
+              "description": "Production deployment approval request with stakeholder sign-offs from security, operations, and product teams.",
+              "lastModifiedBy": "bob.manager@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:10:15.225Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-789",
+              "description": "Related support incident tracking production readiness verification and deployment coordination with support team.",
+              "lastModifiedBy": "charlie.support@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:05:45.167Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://pim.contoso.com/requests/elev-321",
+              "description": "Privileged access elevation request for production deployment permissions with time-limited scope.",
+              "lastModifiedBy": "diana.ops@contoso.com",
+              "lastModifiedAt": "2025-07-09T08:00:20.889Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/stagingDeploymentChangeState",
+              "description": "Related staging deployment change state that must complete successfully before production deployment.",
+              "lastModifiedBy": "eve.devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:55:10.334Z"
+            },
+            "testResults": {
+              "uri": "https://testing.contoso.com/results/prod-validation-654",
+              "description": "Production validation test results including load testing, security scanning, and integration testing outcomes.",
+              "lastModifiedBy": "frank.qa@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:50:35.556Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/api-service",
+              "description": "Service catalog entry for API service containing deployment procedures, dependencies, and operational runbooks.",
+              "lastModifiedBy": "grace.architect@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:45:25.778Z"
+            }
+          }
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/productionDeploymentChangeState/stageProgressions/productionRolloutProgression",
+        "name": "productionRolloutProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "alice.engineer@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T08:15:30.442Z",
+          "lastModifiedBy": "alice.engineer@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:15:30.442Z"
+        }
+      }
+    }
+  }
+}

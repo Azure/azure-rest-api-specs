@@ -1,0 +1,349 @@
+{
+  "title": "ChangeStates_CreateOrUpdate",
+  "operationId": "ChangeStates_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "testChangeState",
+    "resource": {
+      "properties": {
+        "changeType": "AppDeployment",
+        "rolloutType": "Normal",
+        "description": "Deploy microservices application v2.1.0 to production environment",
+        "stageMap": {
+          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/prod-microservices"
+        },
+        "parameters": {
+          "applicationVersion": {
+            "type": "string",
+            "defaultValue": "2.1.0",
+            "metadata": {
+              "description": "Version of the microservices application to deploy"
+            }
+          },
+          "environmentConfig": {
+            "type": "object",
+            "defaultValue": {
+              "region": "East US",
+              "instances": 3,
+              "enableMonitoring": true
+            },
+            "metadata": {
+              "description": "Environment configuration settings"
+            }
+          },
+          "targetRegions": {
+            "type": "array",
+            "defaultValue": [
+              "East US",
+              "West US 2",
+              "North Europe"
+            ],
+            "metadata": {
+              "description": "Target regions for deployment"
+            }
+          }
+        },
+        "state": "Initialized",
+        "comments": "Initial production deployment for microservices v2.1.0",
+        "changeDefinitions": [
+          {
+            "name": "microservicesDeployment",
+            "type": "ArmOperation",
+            "details": {
+              "operation": "PUT",
+              "resourceType": "Microsoft.ContainerService/managedClusters",
+              "templateUri": "https://templates.contoso.com/microservices/v2.1.0"
+            }
+          }
+        ],
+        "releaseLabel": "v2.1.0-prod",
+        "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+        "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+        "orchestrationTool": "Azure DevOps",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/microservices/_workitems/edit/12345",
+            "description": "Production deployment work item for microservices v2.1.0"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/DEP-789",
+            "description": "Change approval for microservices v2.1.0 production deployment"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC-2024-001234",
+            "description": "Related support incident for performance improvements"
+          },
+          "accessElevationRequest": {
+            "uri": "https://access.contoso.com/elevation/REQ-567",
+            "description": "Production access elevation for deployment"
+          },
+          "relatedChangeState": {
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/staging-v210",
+            "description": "Related staging deployment change state"
+          },
+          "testResults": {
+            "uri": "https://testresults.contoso.com/runs/microservices-v210",
+            "description": "Comprehensive test results for v2.1.0 release"
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/microservices-platform",
+            "description": "Microservices platform service catalog entry"
+          }
+        },
+        "additionalData": {
+          "buildNumber": "20250709.2",
+          "releaseManager": "devops@contoso.com",
+          "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy microservices application v2.1.0 to production environment",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/prod-microservices"
+          },
+          "parameters": {
+            "applicationVersion": {
+              "type": "string",
+              "defaultValue": "2.1.0",
+              "metadata": {
+                "description": "Version of the microservices application to deploy"
+              }
+            },
+            "environmentConfig": {
+              "type": "object",
+              "defaultValue": {
+                "region": "East US",
+                "instances": 3,
+                "enableMonitoring": true
+              },
+              "metadata": {
+                "description": "Environment configuration settings"
+              }
+            },
+            "targetRegions": {
+              "type": "array",
+              "defaultValue": [
+                "East US",
+                "West US 2",
+                "North Europe"
+              ],
+              "metadata": {
+                "description": "Target regions for deployment"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial production deployment for microservices v2.1.0",
+          "changeDefinitions": [
+            {
+              "name": "microservicesDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "operation": "PUT",
+                "resourceType": "Microsoft.ContainerService/managedClusters",
+                "templateUri": "https://templates.contoso.com/microservices/v2.1.0"
+              }
+            }
+          ],
+          "releaseLabel": "v2.1.0-prod",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/microservices/_workitems/edit/12345",
+              "description": "Production deployment work item for microservices v2.1.0",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/DEP-789",
+              "description": "Change approval for microservices v2.1.0 production deployment",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-2024-001234",
+              "description": "Related support incident for performance improvements",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/elevation/REQ-567",
+              "description": "Production access elevation for deployment",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/staging-v210",
+              "description": "Related staging deployment change state",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/microservices-v210",
+              "description": "Comprehensive test results for v2.1.0 release",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/microservices-platform",
+              "description": "Microservices platform service catalog entry",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "buildNumber": "20250709.2",
+            "releaseManager": "devops@contoso.com",
+            "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "devops@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "devops@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy microservices application v2.1.0 to production environment",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/prod-microservices"
+          },
+          "parameters": {
+            "applicationVersion": {
+              "type": "string",
+              "defaultValue": "2.1.0",
+              "metadata": {
+                "description": "Version of the microservices application to deploy"
+              }
+            },
+            "environmentConfig": {
+              "type": "object",
+              "defaultValue": {
+                "region": "East US",
+                "instances": 3,
+                "enableMonitoring": true
+              },
+              "metadata": {
+                "description": "Environment configuration settings"
+              }
+            },
+            "targetRegions": {
+              "type": "array",
+              "defaultValue": [
+                "East US",
+                "West US 2",
+                "North Europe"
+              ],
+              "metadata": {
+                "description": "Target regions for deployment"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial production deployment for microservices v2.1.0",
+          "changeDefinitions": [
+            {
+              "name": "microservicesDeployment",
+              "type": "ArmOperation",
+              "details": {
+                "operation": "PUT",
+                "resourceType": "Microsoft.ContainerService/managedClusters",
+                "templateUri": "https://templates.contoso.com/microservices/v2.1.0"
+              }
+            }
+          ],
+          "releaseLabel": "v2.1.0-prod",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/microservices/_workitems/edit/12345",
+              "description": "Production deployment work item for microservices v2.1.0",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/DEP-789",
+              "description": "Change approval for microservices v2.1.0 production deployment",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-2024-001234",
+              "description": "Related support incident for performance improvements",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/elevation/REQ-567",
+              "description": "Production access elevation for deployment",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/staging-v210",
+              "description": "Related staging deployment change state",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/microservices-v210",
+              "description": "Comprehensive test results for v2.1.0 release",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/microservices-platform",
+              "description": "Microservices platform service catalog entry",
+              "lastModifiedBy": "devops@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "buildNumber": "20250709.2",
+            "releaseManager": "devops@contoso.com",
+            "rollbackPlan": "https://docs.contoso.com/rollback/microservices-v210"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "devops@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "devops@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "title": "ChangeStates_VerifyChangeValidity",
+  "operationId": "ChangeStates_VerifyChangeValidity",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "webApplicationChangeState",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-staging/providers/Microsoft.Web/sites/webapp-staging",
+        "httpMethod": "PATCH",
+        "content": {
+          "name": "webapp-staging",
+          "location": "East US",
+          "properties": {
+            "serverFarmId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rg-staging/providers/Microsoft.Web/serverfarms/asp-staging",
+            "enabled": true,
+            "siteConfig": {
+              "appSettings": [
+                {
+                  "name": "ENVIRONMENT",
+                  "value": "staging"
+                },
+                {
+                  "name": "DEBUG_MODE",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "context": {
+        "applicationId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+      },
+      "stageProgressionResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/webApplicationChangeState/stageProgressions/stagingDeployment"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "Change validation successful. The PATCH operation for webapp-staging has been validated and is safe to execute. Configuration changes are valid and staging environment is ready.",
+        "validUntil": "2025-07-09T08:30:19.442Z"
+      }
+    }
+  }
+}
