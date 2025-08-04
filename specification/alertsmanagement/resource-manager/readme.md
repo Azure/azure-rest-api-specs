@@ -57,18 +57,38 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-preview-2025-07-01-preview
+tag: package-2023-03
 ```
 
-=======
-### Tag: package-preview-2025-07-01-preview
+### Tag: package-preview-2025-05-25-preview
 
-These settings apply only when `--tag=package-preview-2025-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-05-25-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-07-01-preview'
+```yaml $(tag) == 'package-preview-2025-05-25-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
 ```
+
+#### New Features in 2025-05-25-preview
+
+1. Added customProperties field to Alert type
+   - Optional field that can hold user-defined key-value pairs
+   - Can be null, empty object {}, or contain string key-value pairs
+   - Available in both Alerts_GetById and Alerts_List responses
+
+2. Added tenant-level endpoints for tenant alert management:
+   - GET /providers/Microsoft.AlertsManagement/alerts
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}/history
+   - POST /providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate
+
+3. Added event details on alert history modification record:
+   - New object property named "details"
+   - The object contains details relevent to this specific event
+   - Is  null when the event is 'AlertCreated'
+
+   These endpoints enable tenant-level alert operations without requiring a specific scope parameter.
+   The operations are available through new operationIds: Alerts_GetAllTenant, Alerts_GetByIdTenant, Alerts_GetHistoryTenant, Alerts_ChangeStateTenant.
 
 ### Tag: package-preview-2025-05-01-preview
 
