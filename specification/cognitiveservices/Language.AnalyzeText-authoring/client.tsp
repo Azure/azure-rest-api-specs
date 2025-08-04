@@ -1,9 +1,12 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using Language.Text.Authoring;
 using Azure.ClientGenerator.Core;
+using Versioning;
 
+@useDependency(Language.Text.Authoring.Versions.v2025_05_15_preview)
 namespace Language.TextAuthingClientCustomizations;
 
 @@clientName(textAnalysisAuthoringListProjects, "listProjects");
@@ -161,3 +164,149 @@ namespace Language.TextAuthingClientCustomizations;
 @@clientName(TextAnalysisAuthoringExportedDocumentSentimentLabel, "ExportedDocumentSentimentLabel");
 @@clientName(TextAnalysisAuthoringExportedCustomTextSentimentProjectAssets, "CustomTextSentimentProjectAssets");
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model TextAuthoringProjectClientOptions {
+  projectName: string;
+}
+
+// Root client definition
+@client({
+  name: "TextAuthoringClient",
+  service: Language.Text.Authoring,
+}, "python")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+namespace TextAuthoringClient {
+
+  op listProjects is Language.Text.Authoring.textAnalysisAuthoringListProjects;
+
+  op listSupportedLanguages is Language.Text.Authoring.textAnalysisAuthoringGetSupportedLanguages;
+
+  op listAssignedResourceDeployments is Language.Text.Authoring.textAnalysisAuthoringListAssignedResourceDeployments;
+
+  op listSupportedPrebuiltEntities is Language.Text.Authoring.textAnalysisAuthoringGetSupportedPrebuiltEntities;
+
+  op listTrainingConfigVersions is Language.Text.Authoring.textAnalysisAuthoringListTrainingConfigVersions;
+
+  op createProject is Language.Text.Authoring.TextAuthoringProject.createProject;
+
+  op getProject is Language.Text.Authoring.TextAuthoringProject.getProject;
+
+  op deleteProject is Language.Text.Authoring.TextAuthoringProject.deleteProject;
+
+  op `export` is Language.Text.Authoring.TextAuthoringProject.`export`;
+
+  op `import` is Language.Text.Authoring.TextAuthoringProject.`import`;
+
+  op getExportStatus is Language.Text.Authoring.TextAuthoringProject.getExportStatus;
+
+  op getImportStatus is Language.Text.Authoring.TextAuthoringProject.getImportStatus;
+}
+
+@client({
+  name: "TextAuthoringProjectClient",
+  service: Language.Text.Authoring,
+}, "python")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+namespace TextAuthoringProjectClient {
+@operationGroup
+  @clientName("Deployment", "python")
+  interface DeploymentOperations {
+    getDeployment is Language.Text.Authoring.TextAuthoringDeployment.getDeployment;
+
+    deployProject is Language.Text.Authoring.TextAuthoringDeployment.deployProject;
+
+    deleteDeployment is Language.Text.Authoring.TextAuthoringDeployment.deleteDeployment;
+
+    deleteDeploymentFromResources is Language.Text.Authoring.TextAuthoringDeployment.deleteDeploymentFromResources;
+
+    getDeploymentDeleteFromResourcesStatus is Language.Text.Authoring.TextAuthoringDeployment.getDeploymentDeleteFromResourcesStatus;
+
+    getDeploymentStatus is Language.Text.Authoring.TextAuthoringDeployment.getDeploymentStatus;
+  }
+
+  @operationGroup
+  @clientName("Project", "python")
+  interface ProjectOperations {
+    listTrainedModels is Language.Text.Authoring.textAnalysisAuthoringListTrainedModels;
+
+    listTrainingJobs is Language.Text.Authoring.textAnalysisAuthoringListTrainingJobs;
+
+    listDeploymentResources is Language.Text.Authoring.textAnalysisAuthoringListDeploymentResources;
+
+    listDeployments is Language.Text.Authoring.textAnalysisAuthoringListDeployments;
+
+    listExportedModels is Language.Text.Authoring.textAnalysisAuthoringListExportedModels;
+
+    assignDeploymentResources is Language.Text.Authoring.TextAuthoringProject.assignDeploymentResources;
+
+    unassignDeploymentResources is Language.Text.Authoring.TextAuthoringProject.unassignDeploymentResources;
+
+    getAssignDeploymentResourcesStatus is Language.Text.Authoring.TextAuthoringProject.getAssignDeploymentResourcesStatus;
+
+    getUnassignDeploymentResourcesStatus is Language.Text.Authoring.TextAuthoringProject.getUnassignDeploymentResourcesStatus;
+
+    swapDeployments is Language.Text.Authoring.TextAuthoringProject.swapDeployments;
+
+    getSwapDeploymentsStatus is Language.Text.Authoring.TextAuthoringProject.getSwapDeploymentsStatus;
+
+    getProject is Language.Text.Authoring.TextAuthoringProject.getProject;
+
+    getProjectDeletionStatus is Language.Text.Authoring.TextAuthoringProject.getProjectDeletionStatus;
+
+    `export` is Language.Text.Authoring.TextAuthoringProject.`export`;
+
+    getExportStatus is Language.Text.Authoring.TextAuthoringProject.getExportStatus;
+
+    copyProjectAuthorization is Language.Text.Authoring.TextAuthoringProject.copyProjectAuthorization;
+
+    copyProject is Language.Text.Authoring.TextAuthoringProject.copyProject;
+
+    getCopyProjectStatus is Language.Text.Authoring.TextAuthoringProject.getCopyProjectStatus;
+
+    train is Language.Text.Authoring.TextAuthoringProject.train;
+
+    getTrainingStatus is Language.Text.Authoring.TextAuthoringProject.getTrainingStatus;
+
+    cancelTrainingJob is Language.Text.Authoring.TextAuthoringProject.cancelTrainingJob;
+  }
+
+  @operationGroup
+  @clientName("ExportedModel", "python")
+  interface ExportedModelOperations {
+    getExportedModel is  Language.Text.Authoring.TextAuthoringExportedModel.getExportedModel;
+
+    deleteExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.deleteExportedModel;
+
+    createOrUpdateExportedModel is Language.Text.Authoring.TextAuthoringExportedModel.createOrUpdateExportedModel;
+
+    getExportedModelJobStatus is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelJobStatus;
+
+    getExportedModelManifest is Language.Text.Authoring.TextAuthoringExportedModel.getExportedModelManifest;
+  }
+
+  @operationGroup
+  @clientName("TrainedModel", "python")
+  interface TrainedModelOperations {
+    getTrainedModel is  Language.Text.Authoring.TextAuthoringTrainedModel.getTrainedModel;
+
+    deleteTrainedModel is Language.Text.Authoring.TextAuthoringTrainedModel.deleteTrainedModel;
+
+    evaluateModel is Language.Text.Authoring.TextAuthoringTrainedModel.evaluateModel;
+
+    loadSnapshot is Language.Text.Authoring.TextAuthoringTrainedModel.loadSnapshot;
+
+    getEvaluationStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getEvaluationStatus;
+
+    getModelEvaluationResults is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationResults;
+
+    getModelEvaluationSummary is Language.Text.Authoring.TextAuthoringTrainedModel.getModelEvaluationSummary;
+
+    getLoadSnapshotStatus is Language.Text.Authoring.TextAuthoringTrainedModel.getLoadSnapshotStatus;
+  }
+}
+
+@@clientInitialization(TextAuthoringProjectClient, {
+  parameters: TextAuthoringProjectClientOptions,
+}, "python");
