@@ -1,7 +1,12 @@
 // @ts-check
 
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+} from "../../shared/src/github.js";
 import { extractInputs } from "./context.js";
-import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -66,6 +71,8 @@ export async function setStatusImpl({
   requiredStatusName,
   overridingLabel,
 }) {
+  core.setOutput("issue_number", issue_number);
+
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
