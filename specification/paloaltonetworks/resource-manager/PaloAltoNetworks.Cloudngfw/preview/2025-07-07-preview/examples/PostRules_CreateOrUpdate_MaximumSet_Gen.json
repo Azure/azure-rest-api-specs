@@ -5,6 +5,7 @@
     "priority": "1",
     "resource": {
       "properties": {
+        "description": "description of post rule",
         "actionType": "Allow",
         "applications": [
           "app1"
@@ -19,7 +20,6 @@
           ]
         },
         "decryptionRuleType": "SSLOutboundInspection",
-        "description": "description of post rule",
         "destination": {
           "cidrs": [
             "1.0.0.1/10"
@@ -42,7 +42,6 @@
         "inboundInspectionCertificate": "cert1",
         "negateDestination": "TRUE",
         "negateSource": "TRUE",
-        "protocol": "HTTP",
         "protocolPortList": [
           "80"
         ],
@@ -68,16 +67,19 @@
             "key": "keyName",
             "value": "value"
           }
-        ]
+        ],
+        "protocol": "HTTP"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "aaaaaaaaaaaaaaaaaa",
         "name": "aaaaaaaaaa",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaa",
         "properties": {
+          "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "actionType": "Allow",
           "applications": [
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -92,7 +94,6 @@
             ]
           },
           "decryptionRuleType": "SSLOutboundInspection",
-          "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "destination": {
             "cidrs": [
               "aaaaaaa"
@@ -116,7 +117,6 @@
           "negateDestination": "TRUE",
           "negateSource": "TRUE",
           "priority": 24,
-          "protocol": "aaaa",
           "protocolPortList": [
             "aaaaaaaaaaaa"
           ],
@@ -142,7 +142,8 @@
               "key": "keyName",
               "value": "value"
             }
-          ]
+          ],
+          "protocol": "aaaa"
         },
         "systemData": {
           "createdAt": "2022-09-09T05:08:24.229Z",
@@ -151,15 +152,16 @@
           "lastModifiedAt": "2022-09-09T05:08:24.229Z",
           "lastModifiedBy": "praval",
           "lastModifiedByType": "User"
-        },
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
       }
     },
     "201": {
       "body": {
-        "id": "aaaaaaaaaaaaaaaaaa",
         "name": "aaaaaaaaaa",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaa",
         "properties": {
+          "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "actionType": "Allow",
           "applications": [
             "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -174,7 +176,6 @@
             ]
           },
           "decryptionRuleType": "SSLOutboundInspection",
-          "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "destination": {
             "cidrs": [
               "aaaaaaa"
@@ -198,7 +199,6 @@
           "negateDestination": "TRUE",
           "negateSource": "TRUE",
           "priority": 24,
-          "protocol": "aaaa",
           "protocolPortList": [
             "aaaaaaaaaaaa"
           ],
@@ -224,7 +224,8 @@
               "key": "keyName",
               "value": "value"
             }
-          ]
+          ],
+          "protocol": "aaaa"
         },
         "systemData": {
           "createdAt": "2022-09-09T05:08:24.229Z",
@@ -233,12 +234,13 @@
           "lastModifiedAt": "2022-09-09T05:08:24.229Z",
           "lastModifiedBy": "praval",
           "lastModifiedByType": "User"
-        },
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
       },
       "headers": {
         "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "PostRules_CreateOrUpdate",
+  "title": "PostRules_CreateOrUpdate_MaximumSet_Gen"
 }

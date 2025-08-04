@@ -1,37 +1,39 @@
 {
   "parameters": {
     "api-version": "2025-07-07-preview",
-    "subscriptionId": "aaaaaaa",
-    "resourceGroupName": "rgopenapi",
     "firewallName": "aaaaaaaaaaaaaaaaaaaaaaaa",
     "resource": {
       "properties": {
-        "applicationInsightsResourceId": "aaaaaaaaaaaaaaa",
-        "applicationInsightsConnectionString": "aaa"
+        "applicationInsightsConnectionString": "aaa",
+        "applicationInsightsResourceId": "aaaaaaaaaaaaaaa"
       }
-    }
+    },
+    "resourceGroupName": "rgopenapi",
+    "subscriptionId": "aaaaaaa"
   },
   "responses": {
     "200": {
       "body": {
         "id": "aaaaaaaaaaaa",
         "properties": {
-          "applicationInsightsResourceId": "aaaaaaaaaaaaaaa",
-          "applicationInsightsConnectionString": "aaa"
+          "applicationInsightsConnectionString": "aaa",
+          "applicationInsightsResourceId": "aaaaaaaaaaaaaaa"
         }
       }
     },
     "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
       "body": {
         "id": "aaaaaaaaaaaa",
         "properties": {
-          "applicationInsightsResourceId": "aaaaaaaaaaaaaaa",
-          "applicationInsightsConnectionString": "aaa"
+          "applicationInsightsConnectionString": "aaa",
+          "applicationInsightsResourceId": "aaaaaaaaaaaaaaa"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "MetricsObjectFirewall_CreateOrUpdate",
+  "title": "MetricsObjectFirewall_CreateOrUpdate_MinimumSet_Gen"
 }

@@ -5,6 +5,7 @@
     "priority": "1",
     "resource": {
       "properties": {
+        "description": "description of local rule",
         "actionType": "Allow",
         "applications": [
           "app1"
@@ -19,7 +20,6 @@
           ]
         },
         "decryptionRuleType": "SSLOutboundInspection",
-        "description": "description of local rule",
         "destination": {
           "cidrs": [
             "1.0.0.1/10"
@@ -42,7 +42,6 @@
         "inboundInspectionCertificate": "cert1",
         "negateDestination": "TRUE",
         "negateSource": "TRUE",
-        "protocol": "HTTP",
         "protocolPortList": [
           "80"
         ],
@@ -68,7 +67,8 @@
             "key": "keyName",
             "value": "value"
           }
-        ]
+        ],
+        "protocol": "HTTP"
       }
     },
     "resourceGroupName": "firewall-rg",
@@ -77,9 +77,11 @@
   "responses": {
     "200": {
       "body": {
-        "id": "aaaaaaaaaaaaaaaaaaa",
         "name": "aaaaaaaaa",
+        "type": "aaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaaa",
         "properties": {
+          "description": "aaaaaaa",
           "actionType": "Allow",
           "applications": [
             "aaaaaaaaaaaaaaaaaaa"
@@ -94,7 +96,6 @@
             ]
           },
           "decryptionRuleType": "SSLOutboundInspection",
-          "description": "aaaaaaa",
           "destination": {
             "cidrs": [
               "aaaaaaaaaaaa"
@@ -118,7 +119,6 @@
           "negateDestination": "TRUE",
           "negateSource": "TRUE",
           "priority": 13,
-          "protocol": "aaaaaaaaaaaa",
           "protocolPortList": [
             "aaaaaaaaaaaaaaaaaaaaaa"
           ],
@@ -144,7 +144,8 @@
               "key": "keyName",
               "value": "value"
             }
-          ]
+          ],
+          "protocol": "aaaaaaaaaaaa"
         },
         "systemData": {
           "createdAt": "2022-09-09T05:08:24.229Z",
@@ -153,15 +154,16 @@
           "lastModifiedAt": "2022-09-09T05:08:24.229Z",
           "lastModifiedBy": "praval",
           "lastModifiedByType": "User"
-        },
-        "type": "aaaaaaaaa"
+        }
       }
     },
     "201": {
       "body": {
-        "id": "aaaaaaaaaaaaaaaaaaa",
         "name": "aaaaaaaaa",
+        "type": "aaaaaaaaa",
+        "id": "aaaaaaaaaaaaaaaaaaa",
         "properties": {
+          "description": "aaaaaaa",
           "actionType": "Allow",
           "applications": [
             "aaaaaaaaaaaaaaaaaaa"
@@ -176,7 +178,6 @@
             ]
           },
           "decryptionRuleType": "SSLOutboundInspection",
-          "description": "aaaaaaa",
           "destination": {
             "cidrs": [
               "aaaaaaaaaaaa"
@@ -200,7 +201,6 @@
           "negateDestination": "TRUE",
           "negateSource": "TRUE",
           "priority": 13,
-          "protocol": "aaaaaaaaaaaa",
           "protocolPortList": [
             "aaaaaaaaaaaaaaaaaaaaaa"
           ],
@@ -226,7 +226,8 @@
               "key": "keyName",
               "value": "value"
             }
-          ]
+          ],
+          "protocol": "aaaaaaaaaaaa"
         },
         "systemData": {
           "createdAt": "2022-09-09T05:08:24.229Z",
@@ -235,12 +236,13 @@
           "lastModifiedAt": "2022-09-09T05:08:24.229Z",
           "lastModifiedBy": "praval",
           "lastModifiedByType": "User"
-        },
-        "type": "aaaaaaaaa"
+        }
       },
       "headers": {
         "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "LocalRules_CreateOrUpdate",
+  "title": "LocalRules_CreateOrUpdate_MaximumSet_Gen"
 }

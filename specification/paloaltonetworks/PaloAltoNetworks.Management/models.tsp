@@ -719,8 +719,18 @@ model NameDescriptionObject {
   description?: string;
 }
 
+/**
+ * Application ID item
+ */
+model AppId {
+  /**
+   * Application ID value
+   */
+  value: string;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ListAppIdResponse is Azure.Core.Page<string>;
+model ListAppIdResponse is Azure.Core.Page<AppId>;
 
 /**
  * Countries Response Object
