@@ -8,6 +8,7 @@ import "../servicepatterns.tsp";
 using TypeSpec.Http;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
@@ -25,11 +26,12 @@ interface FineTuningJobs {
   get is FineTuningOperations.ResourceRead<FineTuningJob>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  //#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   @doc("Returns a list of finetune jobs")
   @get
   @list
   listFineTuningJobs(
+      ...ApiVersionParameter;
+
     @doc("Identifier for the last job from the previous pagination request.")
     @query
     after?: string;
@@ -44,7 +46,6 @@ interface FineTuningJobs {
     ): {
       ...FineTuningPaginatedResponse;
     };
-
 
   @doc("Creates a fine-tuning job.")
   @post
