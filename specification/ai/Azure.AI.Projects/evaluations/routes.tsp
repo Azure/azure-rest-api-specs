@@ -64,43 +64,12 @@ interface Evaluations {
 
   #deprecated "Use createBatchEvaluation or createOneEvaluation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an evaluation run.")
-  @route("runs:run")
-  @added(Versions.v2025_07_31_preview)
-  @post
-  @sharedRoute
-  createDeprecated is Azure.Core.Foundations.Operation<
-    {
-      @doc("Evaluation to be run")
-      @body
-      evaluation: Evaluation;
-    },
-    ResourceCreatedResponse<Evaluation>
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an agent evaluation run.")
   @route("runs:runAgent")
   @removed(Versions.v2025_07_31_preview)
   @post
   @sharedRoute
   createAgentEvaluation is Azure.Core.Foundations.Operation<
-    {
-      @doc("Agent evaluation to be run")
-      @body
-      evaluation: AgentEvaluationRequest;
-    },
-    ResourceCreatedResponse<AgentEvaluation>
-  >;
-
-  #deprecated "Use createBatchEvaluation or createOneEvaluation"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an agent evaluation run.")
-  @route("runs:runAgent")
-  @added(Versions.v2025_07_31_preview) // Use createOrReplace instead
-  @post
-  @sharedRoute
-  createAgentEvaluationDeprecated is Azure.Core.Foundations.Operation<
     {
       @doc("Agent evaluation to be run")
       @body
