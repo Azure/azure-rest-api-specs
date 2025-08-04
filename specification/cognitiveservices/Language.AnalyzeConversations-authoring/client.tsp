@@ -187,7 +187,7 @@ namespace ConversationAuthoringClient {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 namespace ConversationAuthoringProjectClient {
 @operationGroup
-  @clientName("DeploymentOperations", "python")
+  @clientName("Deployment", "python")
   interface DeploymentOperations {
     getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
 
@@ -203,7 +203,7 @@ namespace ConversationAuthoringProjectClient {
   }
 
   @operationGroup
-  @clientName("ProjectOperations", "python")
+  @clientName("Project", "python")
   interface ProjectOperations {
     listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
 
@@ -249,8 +249,8 @@ namespace ConversationAuthoringProjectClient {
   }
 
   @operationGroup
-  @clientName("ExportedModelOperations", "python")
-  interface ExportedModel {
+  @clientName("ExportedModel", "python")
+  interface ExportedModelOperations {
     getExportedModel is  Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModel;
 
     deleteExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.deleteExportedModel;
@@ -261,8 +261,8 @@ namespace ConversationAuthoringProjectClient {
   }
 
   @operationGroup
-  @clientName("TrainedModelOperations", "python")
-  interface TrainedModel {
+  @clientName("TrainedModel", "python")
+  interface TrainedModelOperations {
     getTrainedModel is  Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getTrainedModel;
 
     deleteTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.deleteTrainedModel;
