@@ -18,7 +18,9 @@
 |------|------------|-------|
 | `definitions.email.pattern__deleted` | deleted | `^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[1].pattern__deleted` | deleted | `^.*$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[1].pattern__deleted` | deleted | `^.*$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].put.parameters[1].pattern__deleted` | deleted | `^.*$` |
 
 ### Changes for `AccountIdParameter`
 

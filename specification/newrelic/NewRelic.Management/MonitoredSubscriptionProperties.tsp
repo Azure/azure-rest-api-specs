@@ -44,7 +44,6 @@ interface MonitoredSubscriptionOps
       {
         @path
         @segment("monitoredSubscriptions")
-        @OpenAPI.extension("pattern", "^.*$")
         configurationName: ConfigurationName,
       }
     > {}
@@ -54,7 +53,7 @@ interface MonitoredSubscriptions {
   /**
    * Lists all the subscriptions currently being monitored by the NewRelic monitor resource.
    */
-  get is MonitoredSubscriptionOps.Read<MonitoredSubscriptionProperties>;
+  get is ArmResourceRead<MonitoredSubscriptionProperties>;
 
   /**
    * Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.
