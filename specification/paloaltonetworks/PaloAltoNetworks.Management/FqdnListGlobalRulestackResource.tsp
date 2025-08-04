@@ -30,24 +30,18 @@ interface FqdnListGlobalRulestackResources {
   /**
    * Get a FqdnListGlobalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FqdnListGlobalRulestack_Get")
   get is ArmResourceRead<FqdnListGlobalRulestackResource>;
 
   /**
    * Create a FqdnListGlobalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FqdnListGlobalRulestack_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FqdnListGlobalRulestackResource>;
 
   /**
    * Delete a FqdnListGlobalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("FqdnListGlobalRulestack_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FqdnListGlobalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -57,8 +51,6 @@ interface FqdnListGlobalRulestackResources {
   /**
    * List FqdnListGlobalRulestackResource resources by Tenant
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FqdnListGlobalRulestack_List")
   list is ArmResourceListByParent<FqdnListGlobalRulestackResource>;
 }
 

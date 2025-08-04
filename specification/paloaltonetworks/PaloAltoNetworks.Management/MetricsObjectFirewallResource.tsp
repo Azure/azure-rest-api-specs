@@ -31,23 +31,17 @@ interface MetricsObjectFirewallResources {
   /**
    * Get a MetricsObjectFirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsObjectFirewall_Get")
   get is ArmResourceRead<MetricsObjectFirewallResource>;
 
   /**
    * Create a MetricsObjectFirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsObjectFirewall_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MetricsObjectFirewallResource>;
 
   /**
    * Delete a MetricsObjectFirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("MetricsObjectFirewall_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MetricsObjectFirewallResource,
     LroHeaders = ArmAsyncOperationHeader &
@@ -57,8 +51,6 @@ interface MetricsObjectFirewallResources {
   /**
    * List MetricsObjectFirewallResource resources by Firewalls
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MetricsObjectFirewall_ListByFirewalls")
   listByFirewalls is ArmResourceListByParent<MetricsObjectFirewallResource>;
 }
 

@@ -30,24 +30,18 @@ interface PreRulesResources {
   /**
    * Get a PreRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PreRules_Get")
   get is ArmResourceRead<PreRulesResource>;
 
   /**
    * Create a PreRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PreRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PreRulesResource>;
 
   /**
    * Delete a PreRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PreRules_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PreRulesResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -57,21 +51,19 @@ interface PreRulesResources {
   /**
    * List PreRulesResource resources by Tenant
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PreRules_List")
   list is ArmResourceListByParent<PreRulesResource>;
 
   /**
    * Get counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PreRules_getCounters")
   getCounters is ArmResourceActionSync<
     PreRulesResource,
     void,
     ArmResponse<RuleCounter>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }
@@ -80,14 +72,14 @@ interface PreRulesResources {
   /**
    * Refresh counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PreRules_refreshCounters")
   refreshCounters is ArmResourceActionSync<
     PreRulesResource,
     void,
     NoContentResponse,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }
@@ -96,14 +88,14 @@ interface PreRulesResources {
   /**
    * Reset counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PreRules_resetCounters")
   resetCounters is ArmResourceActionSync<
     PreRulesResource,
     void,
     ArmResponse<RuleCounterReset>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }

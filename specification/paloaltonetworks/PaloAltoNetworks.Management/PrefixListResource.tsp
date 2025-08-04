@@ -30,24 +30,18 @@ interface PrefixListResources {
   /**
    * Get a PrefixListResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrefixListLocalRulestack_Get")
   get is ArmResourceRead<PrefixListResource>;
 
   /**
    * Create a PrefixListResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrefixListLocalRulestack_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PrefixListResource>;
 
   /**
    * Delete a PrefixListResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrefixListLocalRulestack_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrefixListResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -57,8 +51,6 @@ interface PrefixListResources {
   /**
    * List PrefixListResource resources by LocalRulestacks
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrefixListLocalRulestack_ListByLocalRulestacks")
   listByLocalRulestacks is ArmResourceListByParent<PrefixListResource>;
 }
 

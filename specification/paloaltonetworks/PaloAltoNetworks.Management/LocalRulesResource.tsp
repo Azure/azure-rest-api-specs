@@ -30,24 +30,18 @@ interface LocalRulesResources {
   /**
    * Get a LocalRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRules_Get")
   get is ArmResourceRead<LocalRulesResource>;
 
   /**
    * Create a LocalRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LocalRulesResource>;
 
   /**
    * Delete a LocalRulesResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("LocalRules_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     LocalRulesResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -57,21 +51,19 @@ interface LocalRulesResources {
   /**
    * List LocalRulesResource resources by LocalRulestacks
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRules_ListByLocalRulestacks")
   listByLocalRulestacks is ArmResourceListByParent<LocalRulesResource>;
 
   /**
    * Get counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRules_getCounters")
   getCounters is ArmResourceActionSync<
     LocalRulesResource,
     void,
     ArmResponse<RuleCounter>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }
@@ -80,14 +72,14 @@ interface LocalRulesResources {
   /**
    * Refresh counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRules_refreshCounters")
   refreshCounters is ArmResourceActionSync<
     LocalRulesResource,
     void,
     NoContentResponse,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }
@@ -96,14 +88,14 @@ interface LocalRulesResources {
   /**
    * Reset counters
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRules_resetCounters")
   resetCounters is ArmResourceActionSync<
     LocalRulesResource,
     void,
     ArmResponse<RuleCounterReset>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("firewallName")
       firewallName?: string;
     }

@@ -30,24 +30,18 @@ interface CertificateObjectLocalRulestackResources {
   /**
    * Get a CertificateObjectLocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CertificateObjectLocalRulestack_Get")
   get is ArmResourceRead<CertificateObjectLocalRulestackResource>;
 
   /**
    * Create a CertificateObjectLocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CertificateObjectLocalRulestack_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CertificateObjectLocalRulestackResource>;
 
   /**
    * Delete a CertificateObjectLocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("CertificateObjectLocalRulestack_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CertificateObjectLocalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -57,8 +51,6 @@ interface CertificateObjectLocalRulestackResources {
   /**
    * List CertificateObjectLocalRulestackResource resources by LocalRulestacks
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CertificateObjectLocalRulestack_ListByLocalRulestacks")
   listByLocalRulestacks is ArmResourceListByParent<CertificateObjectLocalRulestackResource>;
 }
 

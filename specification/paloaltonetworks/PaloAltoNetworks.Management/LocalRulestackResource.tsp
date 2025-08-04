@@ -25,7 +25,7 @@ model LocalRulestackResource
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: AzureResourceManagerManagedIdentityProperties;
 }
 
@@ -34,22 +34,16 @@ interface LocalRulestackResources {
   /**
    * Get a LocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRulestacks_Get")
   get is ArmResourceRead<LocalRulestackResource>;
 
   /**
    * Create a LocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRulestacks_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LocalRulestackResource>;
 
   /**
    * Update a LocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRulestacks_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     LocalRulestackResource,
@@ -59,10 +53,8 @@ interface LocalRulestackResources {
   /**
    * Delete a LocalRulestackResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("LocalRulestacks_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     LocalRulestackResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -72,21 +64,17 @@ interface LocalRulestackResources {
   /**
    * List LocalRulestackResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRulestacks_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<LocalRulestackResource>;
 
   /**
    * List LocalRulestackResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LocalRulestacks_ListBySubscription")
   listBySubscription is ArmListBySubscription<LocalRulestackResource>;
 
   /**
    * Commit rulestack configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_commit")
   commit is ArmResourceActionAsyncBase<
     LocalRulestackResource,
@@ -98,7 +86,7 @@ interface LocalRulestackResources {
   /**
    * Get changelog
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_getChangeLog")
   getChangeLog is ArmResourceActionSync<
     LocalRulestackResource,
@@ -109,7 +97,7 @@ interface LocalRulestackResources {
   /**
    * support info for rulestack.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_getSupportInfo")
   getSupportInfo is ArmResourceActionSync<
     LocalRulestackResource,
@@ -127,22 +115,22 @@ interface LocalRulestackResources {
   /**
    * Get the list of advanced security objects
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listAdvancedSecurityObjects")
   listAdvancedSecurityObjects is ArmResourceActionSync<
     LocalRulestackResource,
     void,
     ArmResponse<AdvSecurityObjectListResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("skip")
       skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("top")
       top?: int32;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("type")
       type: AdvSecurityObjectTypeEnum;
     }
@@ -151,7 +139,7 @@ interface LocalRulestackResources {
   /**
    * List of AppIds for LocalRulestack ApiVersion
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listAppIds")
   @TypeSpec.list
   listAppIds is ArmResourceActionSync<
@@ -159,19 +147,19 @@ interface LocalRulestackResources {
     void,
     ArmResponse<ListAppIdResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("appIdVersion")
       appIdVersion?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("appPrefix")
       appPrefix?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("skip")
       skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("top")
       top?: int32;
     }
@@ -180,18 +168,18 @@ interface LocalRulestackResources {
   /**
    * List of countries for Rulestack
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listCountries")
   listCountries is ArmResourceActionSync<
     LocalRulestackResource,
     void,
     ArmResponse<CountriesResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("skip")
       skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("top")
       top?: int32;
     }
@@ -200,7 +188,7 @@ interface LocalRulestackResources {
   /**
    * List of Firewalls associated with Rulestack
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listFirewalls")
   listFirewalls is ArmResourceActionSync<
     LocalRulestackResource,
@@ -211,18 +199,18 @@ interface LocalRulestackResources {
   /**
    * List predefined URL categories for rulestack
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listPredefinedUrlCategories")
   listPredefinedUrlCategories is ArmResourceActionSync<
     LocalRulestackResource,
     void,
     ArmResponse<PredefinedUrlCategoriesResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("skip")
       skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("top")
       top?: int32;
     }
@@ -231,22 +219,22 @@ interface LocalRulestackResources {
   /**
    * List the security services for rulestack
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listSecurityServices")
   listSecurityServices is ArmResourceActionSync<
     LocalRulestackResource,
     void,
     ArmResponse<SecurityServicesResponse>,
     Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("skip")
       skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("top")
       top?: int32;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("type")
       type: SecurityServicesTypeEnum;
     }
@@ -255,7 +243,7 @@ interface LocalRulestackResources {
   /**
    * Revert rulestack configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_revert")
   revert is ArmResourceActionSync<
     LocalRulestackResource,

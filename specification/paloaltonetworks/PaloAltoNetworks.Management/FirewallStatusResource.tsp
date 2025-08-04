@@ -31,15 +31,11 @@ interface FirewallStatusResources {
   /**
    * Get a FirewallStatusResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FirewallStatus_Get")
   get is ArmResourceRead<FirewallStatusResource>;
 
   /**
    * List FirewallStatusResource resources by Firewalls
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FirewallStatus_ListByFirewalls")
   listByFirewalls is ArmResourceListByParent<FirewallStatusResource>;
 }
 

@@ -28,7 +28,7 @@ model FirewallResource
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: AzureResourceManagerManagedIdentityProperties;
 }
 
@@ -37,22 +37,16 @@ interface FirewallResources {
   /**
    * Get a FirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Firewalls_Get")
   get is ArmResourceRead<FirewallResource>;
 
   /**
    * Create a FirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Firewalls_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FirewallResource>;
 
   /**
    * Update a FirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Firewalls_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     FirewallResource,
@@ -62,10 +56,8 @@ interface FirewallResources {
   /**
    * Delete a FirewallResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Firewalls_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -75,21 +67,17 @@ interface FirewallResources {
   /**
    * List FirewallResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Firewalls_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<FirewallResource>;
 
   /**
    * List FirewallResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Firewalls_ListBySubscription")
   listBySubscription is ArmListBySubscription<FirewallResource>;
 
   /**
    * Get Global Rulestack associated with the Firewall
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Firewalls_getGlobalRulestack")
   getGlobalRulestack is ArmResourceActionSync<
     FirewallResource,
@@ -100,7 +88,7 @@ interface FirewallResources {
   /**
    * Log Profile for Firewall
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Firewalls_getLogProfile")
   getLogProfile is ArmResourceActionSync<
     FirewallResource,
@@ -111,7 +99,7 @@ interface FirewallResources {
   /**
    * support info for firewall.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Firewalls_getSupportInfo")
   getSupportInfo is ArmResourceActionSync<
     FirewallResource,
@@ -129,7 +117,7 @@ interface FirewallResources {
   /**
    * Log Profile for Firewall
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Firewalls_saveLogProfile")
   saveLogProfile is ArmResourceActionSync<
     FirewallResource,

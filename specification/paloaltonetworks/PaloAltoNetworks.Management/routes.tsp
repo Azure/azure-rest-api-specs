@@ -13,10 +13,10 @@ using TypeSpec.OpenAPI;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_createProductSerialNumber")
   @autoRoute
   createProductSerialNumber is ArmProviderActionSync<
@@ -24,9 +24,8 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listCloudManagerTenants")
   @autoRoute
   listCloudManagerTenants is ArmProviderActionSync<
@@ -34,9 +33,8 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listProductSerialNumberStatus")
   @autoRoute
   listProductSerialNumberStatus is ArmProviderActionSync<
@@ -44,9 +42,8 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listSupportInfo")
   @autoRoute
   listSupportInfo is ArmProviderActionSync<
