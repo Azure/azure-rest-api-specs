@@ -22,7 +22,9 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 
 @@clientName(ConversationAuthoringProject.copyProjectAuthorization, "AuthorizeProjectCopy");
 @@clientName(ProjectKind, "ConversationAuthoringProjectKind");
+@@clientName(ProjectKind, "ProjectKind","python");
 @@clientName(ErrorCode, "ConversationAuthoringErrorCode");
+@@clientName(ErrorCode, "ErrorCode", "python");
 @@clientName(InnerErrorCode, "ConversationAuthoringInnerErrorCode");
 @@clientName(StringIndexType, "StringIndexType");
 @@clientName(ExportedProjectFormat, "ConversationAuthoringExportedProjectFormat");
