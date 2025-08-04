@@ -47,7 +47,11 @@ namespace Quantum.Workspace.Services {
       @body
       update: Resource;
 
-      ...Azure.Core.Traits.Private.TraitProperties<DefaultServiceTraits, TraitLocation.Parameters, TraitContext.Update>;
+      ...Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Parameters,
+        TraitContext.Update
+      >;
     }
   >;
 
