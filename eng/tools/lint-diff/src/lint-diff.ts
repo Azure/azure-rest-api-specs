@@ -1,5 +1,8 @@
+import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { getSha } from "@azure-tools/specs-shared/simple-git";
 import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 import { writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
@@ -8,13 +11,26 @@ import { getAutorestErrors, runChecks } from "./runChecks.js";
 import { getDependencyVersion, getPathToDependency, pathExists } from "./util.js";
 
 function usage() {
-  console.log("TODO: Write up usage");
+  console.log(`Lint changes between before and after state of repositories
+Usage: npm exec --no -- lint-diff --before <path> --after <path> [--out-file <file>] [--github-repo-path <repo>]
+
+  --before <path>           Path to the git repository before the changes.
+  --after <path>            Path to the git repository after the changes.
+  --out-file <file>         Output file for the lint diff report. Default: lint-diff.md
+  --github-repo-path <repo> Path to the GitHub repository. Default: environment variable GITHUB_REPOSITORY or Azure/azure-rest-api-specs
+  --help                    Show this help message and exit.
+`);
 }
 
 export async function main() {
   let validArgs = true;
   const config: ParseArgsConfig = {
     options: {
+      help: {
+        type: "boolean",
+        short: "h",
+        default: false,
+      },
       before: {
         type: "string",
         short: "b",
@@ -23,25 +39,10 @@ export async function main() {
         type: "string",
         short: "a",
       },
-      "changed-files-path": {
-        type: "string",
-        short: "c",
-      },
       "out-file": {
         type: "string",
         short: "o",
         default: "lint-diff.md",
-      },
-      // TODO: Consider using git commands to determine this information
-      "base-branch": {
-        type: "string",
-        short: "b",
-        default: "main",
-      },
-      "compare-sha": {
-        type: "string",
-        short: "m",
-        default: "main",
       },
       "github-repo-path": {
         type: "string",
@@ -54,31 +55,27 @@ export async function main() {
 
   const {
     values: {
+      help: helpArg,
       before: beforeArg,
       after: afterArg,
-      "changed-files-path": changedFilesPath,
       "out-file": outFile,
-      "base-branch": baseBranch,
-      "compare-sha": compareSha,
       "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
 
-  // TODO: Handle trailing slashes properly
+  if (helpArg) {
+    usage();
+    process.exit(0);
+  }
+
   if (!beforeArg || !(await pathExists(beforeArg as string))) {
     validArgs = false;
     console.log(`--before must be a valid path. Value passed: ${beforeArg || "<empty>"}`);
   }
 
-  // TODO: Handle trailing slashes properly
   if (!afterArg || !(await pathExists(afterArg as string))) {
     validArgs = false;
     console.log(`--after must be a valid path. Value passed: ${afterArg || "<empty>"}`);
-  }
-
-  if (!changedFilesPath || !(await pathExists(changedFilesPath as string))) {
-    validArgs = false;
-    console.log("--changed-files-path missing");
   }
 
   if (!validArgs) {
@@ -91,32 +88,32 @@ export async function main() {
   );
   console.log(`Using @microsoft.azure/openapi-validator version: ${validatorVersion}\n`);
 
-  await runLintDiff(
-    beforeArg as string,
-    afterArg as string,
-    changedFilesPath as string,
-    outFile as string,
-    baseBranch as string,
-    compareSha as string,
-    githubRepoPath as string,
-  );
+  const beforePath = beforeArg as string;
+  const afterPath = afterArg as string;
+
+  await runLintDiff(beforePath, afterPath, outFile as string, githubRepoPath as string);
 }
 
 async function runLintDiff(
   beforePath: string,
   afterPath: string,
-  changedFilesPath: string,
   outFile: string,
-  baseBranch: string,
-  compareSha: string,
   githubRepoPath: string,
 ) {
+  const baseRef = await getSha(resolve(beforePath));
+  const changedFiles = await getChangedFiles({
+    cwd: resolve(afterPath),
+    baseCommitish: baseRef,
+    headCommitish: "",
+    paths: ["specification"],
+  });
+
   let beforeList, afterList, affectedSwaggers;
   try {
     [beforeList, afterList, affectedSwaggers] = await getRunList(
       beforePath,
       afterPath,
-      changedFilesPath,
+      changedFiles,
     );
   } catch (error) {
     if (error instanceof SpecModelError) {
@@ -166,12 +163,13 @@ async function runLintDiff(
   }
 
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
+  const compareSha = await getSha(resolve(afterPath));
 
   const pass = await generateLintDiffReport(
     runCorrelations,
     affectedSwaggers,
     outFile,
-    baseBranch,
+    baseRef,
     compareSha,
     githubRepoPath,
   );
