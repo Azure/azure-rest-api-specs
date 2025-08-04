@@ -25,8 +25,8 @@ To see additional help and options, run:
 These are the global settings for Render Client.
 
 ``` yaml
-# Azure Maps Render 1.0 has been deprecated and will be retired on 17 September 2026.
-# Azure Maps Render 2.0 & 2.1 - The endpoint might be used by WebSDK V2.2x or older. Neither should appear in the TOC.
+## Azure Maps Render 1.0 has been deprecated and will be retired on 17 September 2026.
+## Azure Maps Render 2.0 & 2.1 - The endpoint might be used by WebSDK V2.2x or older. Neither should appear in the TOC.
 title: RenderClient
 openapi-type: data-plane
 tag: package-2024-04-01
