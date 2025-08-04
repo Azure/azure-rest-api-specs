@@ -885,11 +885,10 @@ export async function createNextStepsComment(
   // if there are NO required runs, we also consider this to be a "requirements met" situation.
   // there is a possibility that this will be a false positive, but it is better than
   // assuming that the requirements are not met when they actually are.
-  const requiredCheckInfosPresent =
-    !requiredRuns.some((run) => {
-      const status = run.status.toLowerCase();
-      return status !== "completed";
-    }) || requiredRuns.length === 0;
+  const requiredCheckInfosPresent = requiredRuns.every((run) => {
+    const status = run.status.toLowerCase();
+    return status === "completed";
+  });
 
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
