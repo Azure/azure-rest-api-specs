@@ -172,16 +172,7 @@ namespace ConversationAuthoringClient {
   op getExportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getExportStatus;
 
   op getImportStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getImportStatus;
-}
 
-
-@client({
-  name: "ConversationAuthoringProjectClient",
-  service: Language.Conversations.Authoring,
-}, "python")
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-namespace ConversationAuthoringProjectClient {
   @operationGroup
   interface DeploymentOperations {
     getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
