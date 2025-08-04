@@ -85,7 +85,7 @@ using Microsoft.Cdn;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDDomain.properties);
 
-@@clientName(AFDEndpoints.create::parameters.resource, "endpoint");
+@@clientName(AFDEndpoints.create::parameters.resource, "endpoint", "!csharp");
 @@clientName(AFDEndpoints.update::parameters.properties,
   "endpointUpdateProperties"
 );
@@ -134,7 +134,7 @@ using Microsoft.Cdn;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Secret.properties);
 
-@@clientName(Endpoints.create::parameters.resource, "endpoint");
+@@clientName(Endpoints.create::parameters.resource, "endpoint", "!csharp");
 @@clientName(Endpoints.update::parameters.properties,
   "endpointUpdateProperties"
 );
