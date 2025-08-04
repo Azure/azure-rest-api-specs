@@ -3262,7 +3262,9 @@
         "pass",
         "fail",
         "notEvaluated",
-        "notApplicable"
+        "notApplicable",
+        "skipped",
+        "error"
       ],
       "x-ms-enum": {
         "name": "EvaluationResultOutcome",
@@ -3287,6 +3289,16 @@
             "name": "notApplicable",
             "value": "notApplicable",
             "description": "The evaluation criteria do not apply to this particular data row or context"
+          },
+          {
+            "name": "skipped",
+            "value": "skipped",
+            "description": "The evaluation is skipped for this particular data row"
+          },
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The evaluation resulted in an error for this particular data row"
           }
         ]
       }

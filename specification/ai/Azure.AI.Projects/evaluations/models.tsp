@@ -587,6 +587,12 @@ union EvaluationResultOutcome {
   @doc("The evaluation criteria do not apply to this particular data row or context")
   notApplicable: "notApplicable",
 
+  @doc("The evaluation is skipped for this particular data row")
+  skipped: "skipped",
+
+  @doc("The evaluation resulted in an error for this particular data row")
+  error: "error",
+
   string,
 }
 
