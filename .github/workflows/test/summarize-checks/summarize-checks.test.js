@@ -779,6 +779,82 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
+    it("should generate error summary with a failed required check, and in-progress FYI checks", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const expectedCheckOutput = {
+        name: "[TEST-IGNORE] Automated merging requirements met",
+        result: "FAILURE",
+        summary:
+          "❌ This PR cannot be merged because some requirements are not met. See the details.",
+      };
+
+      const fyiCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: getCheckInfo("TypeSpec Validation"),
+        },
+      ];
+
+      const requiredCheckRuns = [
+        {
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+      ];
+
+      const [_, automatedCheckOutput] = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+    });
+
+    it("should generate error summary when checks are in error state", async () => {
+      const repo = "azure-rest-api-specs";
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedCheckOutput = {
+        name: "[TEST-IGNORE] Automated merging requirements met",
+        result: "FAILURE",
+        summary:
+          "❌ This PR cannot be merged because some requirements are not met. See the details.",
+      };
+
+      const requiredCheckRuns = [
+        {
+          name: "Swagger BreakingChange",
+          status: "COMPLETED",
+          conclusion: "FAILURE",
+          checkInfo: getCheckInfo("Swagger BreakingChange"),
+        },
+      ];
+
+      const [_, automatedCheckOutput] = await createNextStepsComment(
+        mockCore,
+        repo,
+        labelNames,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+        true, // assessmentCompleted
+      );
+
+      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+    });
+
     it("should extract check info from raw check response data", async () => {
       const expectedCheckRunId = 16582733356;
       const response = await import("./fixtures/RawGraphQLResponse.json", {
