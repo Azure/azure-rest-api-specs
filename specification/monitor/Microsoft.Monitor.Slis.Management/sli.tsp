@@ -57,9 +57,11 @@ model SliResource {
   @doc("Defines the SLI properties associated with the SLI.")
   sliProperties: SliProperties;
 
+  @visibility(Lifecycle.Read)
   @doc("The streaming rule Id associated with the Sli resource.")
   streamingRuleId: string;
 
+  @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
   streamingRuleLastUpdatedTimestamp: string;
 }
