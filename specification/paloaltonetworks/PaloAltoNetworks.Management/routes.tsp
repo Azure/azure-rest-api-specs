@@ -37,7 +37,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
   @operationId("PaloAltoNetworksCloudngfwOperations_listProductSerialNumberStatus")
   @autoRoute
   listProductSerialNumberStatus is ArmProviderActionSync<
-    Response = ProductSerialNumberStatus,
+    Response = ProductSerialNumberStatus | NotFoundResponse,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
