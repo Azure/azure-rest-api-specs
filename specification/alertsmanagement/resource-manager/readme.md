@@ -72,6 +72,9 @@ directive:
     from: AlertsManagement.json
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
+  - suppress: OperationsAPIImplementation
+    reason: Operations API is available in Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json and not needed in preview version
+    from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
 ```
 
 ``` yaml
