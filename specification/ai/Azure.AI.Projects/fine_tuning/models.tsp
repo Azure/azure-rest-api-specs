@@ -250,20 +250,15 @@ union FineTuningJobGraderMessageRole {
 }
 
 @doc("Training RFT message content base class.")
-@discriminator("kind")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model FineTuningJobGraderMessageContentBase {
-  @doc("Method content base type")
-  kind: string;
 }
 
 @doc("Training RFT message content base class.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageTextContent extends FineTuningJobGraderMessageContentBase {
-   kind : "textContent";
-
+model FineTuningJobGraderMessageTextContent is FineTuningJobGraderMessageContentBase {
    @doc("type field")
    type : string;
 
@@ -274,9 +269,7 @@ model FineTuningJobGraderMessageTextContent extends FineTuningJobGraderMessageCo
 @doc("Training RFT message content base class.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model FineTuningJobGraderMessageSimpleContent extends FineTuningJobGraderMessageContentBase {
-   kind : "simpleContent";
-
+model FineTuningJobGraderMessageSimpleContent is FineTuningJobGraderMessageContentBase {
    @doc("content field")
    content : string;
 }
