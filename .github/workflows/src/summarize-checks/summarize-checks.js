@@ -882,6 +882,9 @@ export async function createNextStepsComment(
 
   // determine if required runs have any in-progress or queued runs
   // if there are any, we consider the requirements not met.
+  // if there are NO required runs, we also consider this to be a "requirements met" situation.
+  // there is a possibility that this will be a false positive, but it is better than
+  // assuming that the requirements are not met when they actually are.
   const requiredCheckInfosPresent =
     requiredRuns.some((run) => {
       const status = run.status.toLowerCase();

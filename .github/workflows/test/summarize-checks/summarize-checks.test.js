@@ -44,7 +44,7 @@ describe("Summarize Checks Integration Tests", () => {
       async () => {
         const issue_number = 36258;
         const owner = "Azure";
-        const repo = "azure-rest-api-specs-pr";
+        const repo = "azure-rest-api-specs";
 
         const ignorableLabels = [
           "VersioningReviewRequired",
@@ -625,6 +625,9 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
+    // this case should NEVER occur in practice, due to Summarize PR Impact being made a "required" check, but in cases
+    // where the user is targeting a branch that is not the main branch, we may have no required checks
+    // but still have FYI checks in progress. This is a regression test to ensure we handle this case correctly.
     it("should generate completed summary with 0 required checks but in-progress FYI", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
