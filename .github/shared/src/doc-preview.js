@@ -136,12 +136,12 @@ us in the [Docs Support Teams Channel](https://aka.ms/ci-fix/api-docs-help)`;
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
-  const swaggerFileObjs = []; 
+  const swaggerFileObjs = [];
   for (const file of swaggerFiles) {
-    try { 
+    try {
       const parsed = parseSwaggerFilePath(file);
       swaggerFileObjs.push(parsed);
-    } catch (error) { 
+    } catch (error) {
       console.log(`Skipping file "${file}" due to parsing error: ${error}`);
       continue;
     }
