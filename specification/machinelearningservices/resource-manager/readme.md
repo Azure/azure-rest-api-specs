@@ -88,13 +88,37 @@ suppressions:
     where:
       - $.definitions["CapabilityHostResource"]
   - code: AvoidAdditionalProperties
-    reason: Existing API behavior in 2025-04-01-preview.
+    reason: These are hyperparameters which can vary by model and the finetuning task type,
+    so cannot have strictly typed properties.
     where:
       - $.definitions.CustomModelFineTuning.properties.hyperParameters
+  - code: AvoidAdditionalProperties
+    reason: ModelID is a string representing the asset id for the model. The list of modelIds is dynamic since it based
+    on which models the user previously attempted to add to the InferenceGroup
+    where:
       - $.definitions.DeltaModelStatusResponse.properties.deltaModels
+  - code: AvoidAdditionalProperties
+    reason: JobOutputs is a common-type predefined reference, which is allowed under scenario 2 of
+    AvoidAdditionalProperties
+    where:
       - $.definitions.FineTuningJob.properties.outputs
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary 
+      and passed by user as per there requirements depending on runtime version. 
+      This passed to downstream and we have multiple validation on all required 
+      configuration before passing it downstream, All optional property passed as 
+      user wants and any failure due to that considered as user error.
+    where:
       - $.definitions.SparkJob.properties.conf
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc.
+       We have one interface for all type of job and other job take environment variable like this to match with them 
+       we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
       - $.definitions.SparkJob.properties.environmentVariables
+  - code: AvoidAdditionalProperties
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
       - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
