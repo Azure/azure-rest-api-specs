@@ -66,6 +66,33 @@ using Microsoft.Cdn;
 @@clientName(CustomDomainProperties.hostName, "hostname", "java");
 @@clientName(CustomDomainPropertiesParameters.hostName, "hostname", "java");
 @@clientName(DeepCreatedOriginProperties.hostName, "hostname", "java");
+@@clientName(DeepCreatedCustomDomainProperties.hostName, "hostname", "java");
 @@clientName(OriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(EndpointProperties.hostName, "hostname", "java");
 @@clientName(ValidateCustomDomainInput.hostName, "hostname", "java");
+
+@@clientName(DeliveryRuleHostNameCondition,
+  "DeliveryRuleHostnameCondition",
+  "java"
+);
+@@clientName(AFDOriginUpdateParameters, "AfdOriginUpdateParameters", "java");
+@@clientName(HostNameMatchConditionParameters,
+  "HostnameMatchConditionParameters",
+  "java"
+);
+@@clientName(AFDEndpointProtocols, "AfdEndpointProtocols", "java");
+@@clientName(CheckHostNameAvailabilityInput,
+  "CheckHostnameAvailabilityInput",
+  "java"
+);
+@@clientName(RequestSchemeMatchValue,
+  "RequestSchemeMatchConditionParametersMatchValuesItem",
+  "java"
+);
+@@clientName(IsDeviceMatchValue,
+  "IsDeviceMatchConditionParametersMatchValuesItem",
+  "java"
+);
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
+@@clientName(AFDStateProperties, "AfdStateProperties", "java");
+@@clientName(HostNameOperator, "HostnameOperator", "java");

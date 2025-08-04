@@ -25,9 +25,12 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-cdn-generated"
-    namespace: "com.azure.resourcemanager.cdn.generated"
+    package-dir: "azure-resourcemanager-cdn"
+    namespace: "com.azure.resourcemanager.cdn"
     service-name: "Cdn" # human-readable service name, whitespace allowed
+    premium: true
+    service-dir: "sdk/resourcemanager"
+    enable-sync-stack: false
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/cdn
