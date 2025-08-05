@@ -24,3 +24,7 @@ jobs:
       - name: Run TypeSpec Migration Validation
         run: |
           echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "Summary file location: $GITHUB_STEP_SUMMARY"
+          echo "Summary file contents:"
+          cat $GITHUB_STEP_SUMMARY
+          echo "Summary file size: $(wc -c < $GITHUB_STEP_SUMMARY) bytes"
