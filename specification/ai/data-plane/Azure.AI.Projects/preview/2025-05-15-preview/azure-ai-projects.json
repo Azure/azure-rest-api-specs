@@ -3806,6 +3806,147 @@
         "project"
       ]
     },
+    "FineTuningJobMistralClassifierHyperParameters": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Classifier Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        }
+      }
+    },
+    "FineTuningJobMistralClassifierTrainingMethod": {
+      "type": "object",
+      "description": "Mistral Classifier Fine-Tuning method.",
+      "properties": {
+        "mistralClassifier": {
+          "$ref": "#/definitions/FineTuningJobMistralClassifierTrainingMethodConfiguration",
+          "description": "Configuration for Mistral Classifier fine-tuning method."
+        }
+      },
+      "required": [
+        "mistralClassifier"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "MistralClassifier"
+    },
+    "FineTuningJobMistralClassifierTrainingMethodConfiguration": {
+      "type": "object",
+      "description": "Configuration for Mistral Classifier fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobMistralClassifierHyperParameters",
+          "description": "The hyperparameters used for the Mistral Classifier fine-tuning job."
+        }
+      }
+    },
+    "FineTuningJobMistralCompletionHyperParameters": {
+      "type": "object",
+      "description": "The hyper parameter settings used in Mistral Completion Fine-Tuning job.",
+      "properties": {
+        "training_steps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of training steps to perform. A training step refers to a single update of the model weights during the fine-tuning process. This update is typically calculated using a batch of samples from the training dataset."
+        },
+        "learning_rate": {
+          "type": "number",
+          "format": "double",
+          "description": "A parameter describing how much to adjust the pre-trained model's weights in response to the estimated error each time the weights are updated during the fine-tuning process.",
+          "default": 0.0001
+        },
+        "weight_decay": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) Weight decay adds a term to the loss function that is proportional to the sum of the squared weights. This term reduces the magnitude of the weights and prevents them from growing too large.",
+          "default": 0.1
+        },
+        "warmup_fraction": {
+          "type": "number",
+          "format": "double",
+          "description": "(Advanced Usage) A parameter that specifies the percentage of the total training steps at which the learning rate warm-up phase ends. During this phase, the learning rate gradually increases from a small value to the initial learning rate, helping to stabilize the training process and improve convergence. Similar to pct_start in mistral-finetune",
+          "default": 0.05
+        },
+        "epochs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+        },
+        "seq_len": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seq len parameter"
+        },
+        "fim_ratio": {
+          "type": "number",
+          "format": "double",
+          "description": "Fim ratio parameter"
+        }
+      }
+    },
+    "FineTuningJobMistralCompletionTrainingMethod": {
+      "type": "object",
+      "description": "Mistral Completion Fine-Tuning method.",
+      "properties": {
+        "mistralCompletion": {
+          "$ref": "#/definitions/FineTuningJobMistralCompletionTrainingMethodConfiguration",
+          "description": "Configuration for Mistral Completion fine-tuning method."
+        }
+      },
+      "required": [
+        "mistralCompletion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuningJobTrainingMethod"
+        }
+      ],
+      "x-ms-discriminator-value": "MistralCompletion"
+    },
+    "FineTuningJobMistralCompletionTrainingMethodConfiguration": {
+      "type": "object",
+      "description": "Configuration for Mistral Completion fine-tuning method.",
+      "properties": {
+        "hyperparameters": {
+          "$ref": "#/definitions/FineTuningJobMistralCompletionHyperParameters",
+          "description": "The hyperparameters used for the Mistral Completion fine-tuning job."
+        }
+      }
+    },
     "FineTuningJobRFTHyperParameters": {
       "type": "object",
       "description": "Configuration for the Reinforcement fine-tuning method.",
