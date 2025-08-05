@@ -35,6 +35,13 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
+      "post": {
+        "consumes__added": [
+          "text/plain"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
       "get": {
         "parameters": [
@@ -364,19 +371,6 @@
         "nextLink": {
           "x-cadl-name__deleted": "Rest.ResourceLocation"
         }
-      }
-    },
-    "email": {
-      "pattern__deleted": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
-      "properties__added": {
-        "type": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
-        }
-      },
-      "type": {
-        "__old": "string",
-        "__new": "object"
       }
     }
   }

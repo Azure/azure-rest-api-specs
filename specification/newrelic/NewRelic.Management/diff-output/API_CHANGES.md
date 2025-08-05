@@ -12,11 +12,16 @@
 |------|------------|-------|
 | `info.description__added` | added | `// FIXME: (missing-service-description) Add service description` |
 
+### Changes for `consumes`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources'].post.consumes__added` | added | `["text/plain"]` |
+
 ### Changes for `pattern`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.email.pattern__deleted` | deleted | `^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].delete.parameters[1].pattern__deleted` | deleted | `^.*$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].get.parameters[1].pattern__deleted` | deleted | `^.*$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}'].patch.parameters[1].pattern__deleted` | deleted | `^.*$` |
@@ -144,17 +149,10 @@
 |------|------------|-------|
 | `definitions.MonitoredSubscriptionProperties.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 
-### Changes for `properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.email.properties__added` | added | `{"type":{"type":"string","pattern":"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,}$"}}` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.email.type` | `string` | `object` |
 | `definitions.NewRelicMonitorResource.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
 | `definitions.NewRelicMonitorResourceUpdate.properties.identity.$ref` | `../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity` | `../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity` |
 

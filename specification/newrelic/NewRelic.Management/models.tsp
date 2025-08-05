@@ -1413,16 +1413,10 @@ model MetricsStatusRequestParameter {
 }
 
 /**
- * Email model
+ * Reusable representation of an email address
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model email {
-  /**
-   * Email type
-   */
-  @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
-  type?: string;
-}
+@pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+scalar email extends string;
 
 @@OpenAPI.extension(AppServicesListResponse.value,
   "x-ms-identifiers",

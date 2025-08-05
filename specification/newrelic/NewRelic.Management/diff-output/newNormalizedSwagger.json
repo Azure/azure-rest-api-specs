@@ -683,6 +683,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/newRelic.Observability/monitors/{monitorName}/listConnectedPartnerResources": {
       "post": {
         "operationId": "ConnectedPartnerResources_List",
+        "consumes": [
+          "text/plain"
+        ],
         "parameters": [
           {
             "name": "monitorName",
@@ -2733,13 +2736,8 @@
       }
     },
     "email": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
-        }
-      }
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
     }
   },
   "parameters": {}
