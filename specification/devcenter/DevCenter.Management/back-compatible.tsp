@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.DevCenter;
@@ -233,9 +234,12 @@ using Microsoft.DevCenter;
   "nameAvailabilityRequest"
 );
 
-// temporary fix for ci and need update before release for python
-@@clientName(KeyEncryptionKeyIdentity,
-  "CustomizedKeyEncryptionKeyIdentity",
+@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "CustomerManagedKeyEncryptionKeyIdentity",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "IdentityType",
   "python"
 );
 @@clientName(CreatorRoleAssignment,
