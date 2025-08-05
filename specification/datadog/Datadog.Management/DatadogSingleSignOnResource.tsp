@@ -63,6 +63,8 @@ interface DatadogSingleSignOnResources {
    */
   createOrUpdate is DatadogSingleSignOnResourcesOps.CreateOrUpdateAsync<
     DatadogSingleSignOnResource,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = DatadogSingleSignOnResource> &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
