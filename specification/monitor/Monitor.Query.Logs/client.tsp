@@ -18,10 +18,13 @@ namespace ClientCustomizations;
 );
 @@alternateType(BatchQueryRequest.method, "POST");
 
-@client({
-  name: "MonitorQueryLogsClient",
-  service: MonitorQueryLogs,
-})
+@client(
+  {
+    name: "MonitorQueryLogsClient",
+    service: MonitorQueryLogs,
+  },
+  "!go"
+)
 interface MonitorQueryLogsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   execute is MonitorQueryLogs.Query.execute;
@@ -40,4 +43,49 @@ interface MonitorQueryLogsClient {
 @@clientNamespace(ClientCustomizations,
   "com.azure.monitor.query.logs.implementation",
   "java"
+);
+
+// go configuration
+@client(
+  {
+    name: "Client",
+    service: MonitorQueryLogs,
+  },
+  "go"
+)
+interface Client {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  queryWorkspace is MonitorQueryLogs.Query.execute;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  queryResource is MonitorQueryLogs.Query.executeWithResourceId;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  queryBatch is MonitorQueryLogs.Query.batch;
+}
+
+@@access(Versions, Access.internal, "go,python");
+
+@@clientName(BatchQueryRequest.workspace, "WorkspaceID", "go");
+
+@@clientName(BatchQueryResults.render, "Visualization", "go");
+@@alternateType(BatchQueryResults.render, unknown, "go");
+@@alternateType(BatchQueryResults.statistics, unknown, "go");
+
+@@clientName(QueryResults.render, "Visualization", "go");
+@@alternateType(QueryResults.render, unknown, "go");
+@@alternateType(QueryResults.statistics, unknown, "go");
+
+@@clientName(ColumnDataType, "ColumnType", "go");
+
+@@clientName(QueryBody.workspaces, "AdditionalWorkspaces", "go");
+
+@@alternateType(Table.rows, bytes[][], "go");
+
+@@clientName(ColumnDataType, "_ColumnType", "python");
+@@access(MonitorQueryLogsClient.batch, Access.internal, "python");
+@@access(MonitorQueryLogsClient.execute, Access.internal, "python");
+@@access(MonitorQueryLogsClient.executeWithResourceId,
+  Access.internal,
+  "python"
 );
