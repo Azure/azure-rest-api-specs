@@ -503,7 +503,6 @@ model ResourceReferenceExtended {
 /**
  * Deployment Stacks error response.
  */
-@error
 model DeploymentStacksError {
   /**
    * The error detail.
