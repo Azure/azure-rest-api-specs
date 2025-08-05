@@ -99,7 +99,7 @@ These settings apply only when `--tag=package-retired-2022-02-01-preview` is spe
 
 ``` yaml $(tag) == 'package-retired-2022-02-01-preview'
 input-file:
-  - preview/2022-02-01-preview/search.json
+  - preview/2022-02-01-preview/geocoding.json
 ```
 
 ### Tag: package-retired-2021-11-01-preview
