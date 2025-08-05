@@ -1406,6 +1406,6 @@ model CreateCriticalDataElementResponse {
   status: 201;
 
   @doc("The request body containing query criteria.")
-  @visibility(Lifecycle.Read)
+  @bodyRoot
   body: CriticalDataElement;
 }
