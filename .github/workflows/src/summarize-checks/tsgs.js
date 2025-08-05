@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * tsgs.ts defines TroubleShooting Guides. These typically end up being presented to the PR reader
  * inside the 'Next Steps to Merge' comment.
