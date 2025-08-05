@@ -65,8 +65,6 @@ interface MonitoredSubscriptions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createorUpdate is MonitoredSubscriptionsOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
-      Azure.Core.Foundations.RetryAfterHeader,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
       MonitoredSubscriptionProperties,
       ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
@@ -82,8 +80,6 @@ interface MonitoredSubscriptions {
   update is MonitoredSubscriptionsOps.CustomPatchAsync<
     MonitoredSubscriptionProperties,
     PatchModel = MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
-      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
