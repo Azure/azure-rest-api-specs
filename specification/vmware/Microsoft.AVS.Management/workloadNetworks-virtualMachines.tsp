@@ -7,8 +7,6 @@ using TypeSpec.Rest;
 
 @armResourceOperations
 interface WorkloadNetworkVirtualMachines {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_ListVirtualMachines")
   list is ArmResourceListByParent<
     WorkloadNetworkVirtualMachine,
     Response = ArmResponse<ResourceList<
@@ -17,8 +15,6 @@ interface WorkloadNetworkVirtualMachines {
     >>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
-  @operationId("WorkloadNetworks_GetVirtualMachine")
   get is ArmResourceRead<WorkloadNetworkVirtualMachine>;
 }
 
