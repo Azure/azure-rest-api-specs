@@ -2647,7 +2647,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
+          "final-state-schema": "#/definitions/ArmConnectionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2808,19 +2808,6 @@
     "Azure.Core.armResourceType": {
       "type": "string",
       "description": "Represents an Azure Resource Type."
-    },
-    "Azure.ResourceManager.ArmResponse<Connection>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Connection",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "Connection": {
       "type": "object",

@@ -128,7 +128,7 @@ interface Pipelines {
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmResponse<Connection>
+    ArmConnectionResponse
   >;
 }
 
