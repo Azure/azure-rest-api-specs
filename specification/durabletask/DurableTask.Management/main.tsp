@@ -53,6 +53,8 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+@@added(Scheduler.identity, Versions.v2025_05_04_Preview);
+
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerProperties {
