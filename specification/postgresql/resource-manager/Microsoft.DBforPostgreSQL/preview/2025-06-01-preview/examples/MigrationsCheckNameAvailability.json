@@ -1,23 +1,25 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "serverName": "exampleserver",
     "parameters": {
       "name": "examplemigration",
       "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
-    }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
         "name": "naexamplemigration",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "message": null,
         "nameAvailable": true,
-        "reason": null,
-        "message": null
+        "reason": null
       }
     }
-  }
+  },
+  "operationId": "Migrations_CheckNameAvailability",
+  "title": "Check the validity and availability of the given name, to assign it to a new migration."
 }

@@ -1,47 +1,47 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "serverName": "exampleserver",
     "parameters": {
       "location": "eastus",
-      "sku": {
-        "tier": "GeneralPurpose",
-        "name": "Standard_D4ds_v5"
-      },
       "properties": {
         "administratorLogin": "exampleadministratorlogin",
         "administratorLoginPassword": "examplepassword",
-        "version": "17",
-        "availabilityZone": "1",
-        "createMode": "Create",
         "authConfig": {
           "activeDirectoryAuth": "Enabled",
           "passwordAuth": "Enabled",
           "tenantId": "tttttt-tttt-tttt-tttt-tttttttttttt"
         },
-        "dataEncryption": {
-          "type": "SystemManaged"
-        },
-        "storage": {
-          "storageSizeGB": 512,
-          "autoGrow": "Disabled",
-          "tier": "P20"
-        },
+        "availabilityZone": "1",
         "backup": {
           "backupRetentionDays": 7,
           "geoRedundantBackup": "Disabled"
+        },
+        "createMode": "Create",
+        "dataEncryption": {
+          "type": "SystemManaged"
+        },
+        "highAvailability": {
+          "mode": "Disabled"
         },
         "network": {
           "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
           "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourcegroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.postgres.database.azure.com"
         },
-        "highAvailability": {
-          "mode": "Disabled"
-        }
+        "storage": {
+          "autoGrow": "Disabled",
+          "storageSizeGB": 512,
+          "tier": "P20"
+        },
+        "version": "17"
+      },
+      "sku": {
+        "name": "Standard_D4ds_v5",
+        "tier": "GeneralPurpose"
       }
-    }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "202": {
@@ -50,5 +50,7 @@
         "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
       }
     }
-  }
+  },
+  "operationId": "Servers_CreateOrUpdate",
+  "title": "Create a new server with Microsoft Entra authentication enabled in your own virtual network and without high availability."
 }

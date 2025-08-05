@@ -54,12 +54,7 @@ interface Servers {
    * Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    Server,
-    PatchModel = ServerForPatch,
-    Response = ArmAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  >;
+  update is ArmCustomPatchAsync<Server, PatchModel = ServerForPatch>;
 
   /**
    * Deletes or drops an existing server.

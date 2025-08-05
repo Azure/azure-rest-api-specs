@@ -1,22 +1,24 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "firewallRuleName": "examplefirewallrule",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "firewallRuleName": "examplefirewallrule"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/servers/exampleserver/firewallRules/examplefirewallrule",
         "name": "examplefirewallrule",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/servers/exampleserver/firewallRules/examplefirewallrule",
         "properties": {
-          "startIpAddress": "0.0.0.0",
-          "endIpAddress": "255.255.255.255"
+          "endIpAddress": "255.255.255.255",
+          "startIpAddress": "0.0.0.0"
         }
       }
     }
-  }
+  },
+  "operationId": "FirewallRules_Get",
+  "title": "Get information about a firewall rule in a server."
 }

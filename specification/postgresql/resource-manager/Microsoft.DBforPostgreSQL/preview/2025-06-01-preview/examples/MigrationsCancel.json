@@ -1,57 +1,59 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "migrationMode": "Offline",
+    "migrationName": "examplemigration",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "migrationName": "examplemigration",
-    "migrationMode": "Offline"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "East US",
         "properties": {
-          "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "currentStatus": {
-            "state": "InProgress",
             "currentSubStateDetails": {
               "currentSubState": "PerformingPreRequisiteSteps",
               "dbDetails": {}
-            }
+            },
+            "state": "InProgress"
           },
-          "migrationMode": "Offline",
-          "sourceDbServerResourceId": "examplesource:5432@exampleadministratorlogin",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
           "dbsToMigrate": [
             "exampledatabase1",
             "exampledatabase2",
             "exampledatabase3",
             "exampledatabase4"
           ],
-          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
-          "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.12345Z",
-          "triggerCutover": "True",
           "migrateRoles": "False",
+          "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "migrationMode": "Offline",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.12345Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerResourceId": "examplesource:5432@exampleadministratorlogin",
+          "sourceType": "OnPremises",
+          "sslMode": "Prefer",
           "targetDbServerMetadata": {
             "location": "East US",
-            "version": "17",
-            "storageMb": 131072,
             "sku": {
               "name": "Standard_D4ds_v4",
               "tier": "GeneralPurpose"
-            }
+            },
+            "storageMb": 131072,
+            "version": "17"
           },
-          "migrationOption": "ValidateAndMigrate",
-          "sourceType": "OnPremises",
-          "sslMode": "Prefer"
-        },
-        "location": "East US",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
-        "name": "examplemigration",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations"
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "True"
+        }
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "Migrations_Cancel",
+  "title": "Cancel an active migration."
 }

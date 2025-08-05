@@ -1,43 +1,43 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "exampleresourcegroup",
-    "serverName": "exampleserver",
     "parameters": {
       "location": "eastus",
-      "sku": {
-        "tier": "GeneralPurpose",
-        "name": "Standard_D4ds_v5"
-      },
       "properties": {
         "administratorLogin": "exampleadministratorlogin",
         "administratorLoginPassword": "examplepassword",
-        "version": "17",
         "availabilityZone": "1",
-        "createMode": "Create",
-        "storage": {
-          "storageSizeGB": 512,
-          "autoGrow": "Disabled",
-          "tier": "P20"
-        },
         "backup": {
           "backupRetentionDays": 7,
           "geoRedundantBackup": "Enabled"
+        },
+        "createMode": "Create",
+        "highAvailability": {
+          "mode": "SameZone"
         },
         "network": {
           "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork/subnets/examplesubnet",
           "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateDnsZones/exampleprivatednszone.private.postgres.database"
         },
-        "highAvailability": {
-          "mode": "SameZone"
-        }
+        "storage": {
+          "autoGrow": "Disabled",
+          "storageSizeGB": 512,
+          "tier": "P20"
+        },
+        "version": "17"
+      },
+      "sku": {
+        "name": "Standard_D4ds_v5",
+        "tier": "GeneralPurpose"
       },
       "tags": {
         "InCustomerVnet": "true",
         "InMicrosoftVnet": "false"
       }
-    }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "202": {
@@ -46,5 +46,7 @@
         "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
       }
     }
-  }
+  },
+  "operationId": "Servers_CreateOrUpdate",
+  "title": "Create a new server in your own virtual network with same zone high availability."
 }

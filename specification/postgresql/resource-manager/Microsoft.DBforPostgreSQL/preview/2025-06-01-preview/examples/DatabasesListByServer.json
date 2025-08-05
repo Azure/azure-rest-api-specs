@@ -1,27 +1,27 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
-    "serverName": "exampleserver"
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/databases/exampledatabase1",
             "name": "exampledatabase1",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers/databases",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/databases/exampledatabase1",
             "properties": {
               "charset": "utf8",
               "collation": "en_US.utf8"
             }
           },
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/databases/exampledatabase2",
             "name": "exampledatabase2",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers/databases",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/databases/exampledatabase2",
             "properties": {
               "charset": "utf8",
               "collation": "en_US.utf8"
@@ -30,5 +30,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Databases_ListByServer",
+  "title": "List all databases in a server."
 }

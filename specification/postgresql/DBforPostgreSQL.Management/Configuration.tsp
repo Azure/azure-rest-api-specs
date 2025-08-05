@@ -47,9 +47,7 @@ interface Configurations {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Configuration,
-    PatchModel = ConfigurationForUpdate,
-    Response = ArmAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    PatchModel = ConfigurationForUpdate
   >;
 
   /**

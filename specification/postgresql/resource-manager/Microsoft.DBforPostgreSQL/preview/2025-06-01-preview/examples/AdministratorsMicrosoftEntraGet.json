@@ -1,24 +1,26 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "objectId": "oooooooo-oooo-oooo-oooo-oooooooooooo",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "objectId": "oooooooo-oooo-oooo-oooo-oooooooooooo"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "principalType": "User",
-          "principalName": "exampleuser@contoso.com",
-          "objectId": "oooooooo-oooo-oooo-oooo-oooooooooooo",
-          "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/administrators/oooooooo-oooo-oooo-oooo-oooooooooooo",
         "name": "exampleuser@contoso.com",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/administrators"
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/administrators",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/administrators/oooooooo-oooo-oooo-oooo-oooooooooooo",
+        "properties": {
+          "objectId": "oooooooo-oooo-oooo-oooo-oooooooooooo",
+          "principalName": "exampleuser@contoso.com",
+          "principalType": "User",
+          "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+        }
       }
     }
-  }
+  },
+  "operationId": "AdministratorsMicrosoftEntra_Get",
+  "title": "Get information about a server administrator associated to a Microsoft Entra principal."
 }

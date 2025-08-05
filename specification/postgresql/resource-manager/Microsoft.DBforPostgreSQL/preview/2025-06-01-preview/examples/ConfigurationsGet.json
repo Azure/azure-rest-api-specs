@@ -1,30 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "configurationName": "array_nulls",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "configurationName": "array_nulls"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "array_nulls",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/configurations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/configurations/array_nulls",
         "properties": {
-          "value": "on",
           "description": "Enables input of NULL (case insensitive) to be considered as NULL value rather than the literal String 'NULL'.",
-          "defaultValue": "on",
-          "dataType": "Boolean",
           "allowedValues": "on,off",
-          "source": "system-default",
+          "dataType": "Boolean",
+          "defaultValue": "on",
+          "documentationLink": "https://www.postgresql.org/docs/13/runtime-config-compatible.html#GUC-ARRAY-NULLS",
+          "isConfigPendingRestart": false,
           "isDynamicConfig": true,
           "isReadOnly": false,
-          "isConfigPendingRestart": false,
-          "documentationLink": "https://www.postgresql.org/docs/13/runtime-config-compatible.html#GUC-ARRAY-NULLS"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/configurations/array_nulls",
-        "name": "array_nulls",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/configurations"
+          "source": "system-default",
+          "value": "on"
+        }
       }
     }
-  }
+  },
+  "operationId": "Configurations_Get",
+  "title": "Get information about a specific configuration (also known as server parameter) of a server."
 }

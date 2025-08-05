@@ -1,14 +1,17 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "virtualEndpointName": "examplebasename"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "examplebasename",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/virtualEndpoints/examplebasename",
         "properties": {
           "endpointType": "ReadWrite",
           "members": [
@@ -18,11 +21,10 @@
             "examplebasename.reader.postgres.database.azure.com",
             "examplebasename.writer.postgres.database.azure.com"
           ]
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/virtualEndpoints/examplebasename",
-        "name": "examplebasename",
-        "type": "Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints"
+        }
       }
     }
-  }
+  },
+  "operationId": "VirtualEndpoints_Get",
+  "title": "Get information about a pair of virtual endpoints."
 }

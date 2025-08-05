@@ -3455,3 +3455,14 @@ model DelegatedSubnetUsage {
   @visibility(Lifecycle.Read)
   usage?: int64;
 }
+
+/**
+ * Represents the private DNS zone suffix information
+ */
+model PrivateDnsZoneSuffix {
+  /**
+   * Private DNS zone suffix value
+   */
+  @visibility(Lifecycle.Read)
+  value?: string;
+}

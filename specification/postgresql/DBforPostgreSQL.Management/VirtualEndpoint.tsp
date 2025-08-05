@@ -48,7 +48,7 @@ interface VirtualEndpoints {
   update is ArmCustomPatchAsync<
     VirtualEndpoint,
     PatchModel = VirtualEndpointResourceForPatch,
-    Response = ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 

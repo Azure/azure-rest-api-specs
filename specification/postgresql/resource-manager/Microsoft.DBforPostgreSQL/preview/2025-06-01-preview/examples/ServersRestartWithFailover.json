@@ -1,13 +1,13 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "failoverMode": "ForcedFailover",
+      "restartWithFailover": true
+    },
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "parameters": {
-      "restartWithFailover": true,
-      "failoverMode": "ForcedFailover"
-    }
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "202": {
@@ -16,5 +16,7 @@
         "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
       }
     }
-  }
+  },
+  "operationId": "Servers_Restart",
+  "title": "Restart PostgreSQL database engine in a server with a forced failover to standby server."
 }

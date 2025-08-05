@@ -1,11 +1,11 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "locationName": "eastus",
     "parameters": {
       "virtualNetworkArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/virtualNetworks/examplevirtualnetwork"
-    }
+    },
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
@@ -20,9 +20,11 @@
             "usage": 3
           }
         ],
-        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "location": "eastus"
+        "location": "eastus",
+        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
       }
     }
-  }
+  },
+  "operationId": "VirtualNetworkSubnetUsage_List",
+  "title": "List the virtual network subnet usage for a given virtual network."
 }

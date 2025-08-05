@@ -1,18 +1,18 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
-    "serverName": "exampleserver"
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateLinkResources/exampleprivatelink",
             "name": "exampleprivatelink",
             "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateLinkResources",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateLinkResources/exampleprivatelink",
             "properties": {
               "groupId": "postgresqlServer",
               "requiredMembers": [
@@ -26,5 +26,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkResources_ListByServer",
+  "title": "Gets private link resources for PostgreSQL."
 }
