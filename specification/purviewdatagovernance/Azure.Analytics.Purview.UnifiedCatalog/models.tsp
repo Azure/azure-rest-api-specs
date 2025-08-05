@@ -1368,6 +1368,7 @@ model CatalogModelKeyResultResponse {
 
 alias CriticalDataElementBody = {
   @doc("The input documents to analyze.")
+  @visibility(Lifecycle.Read)
   body: CriticalDataElement;
 };
 

@@ -134,7 +134,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The critical data element to create.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CriticalDataElement"
@@ -145,7 +144,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CriticalDataElement"
+              "$ref": "#/definitions/CreateCriticalDataElementResponse"
             }
           },
           "default": {
@@ -231,23 +230,6 @@
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "body": {
-                  "$ref": "#/definitions/CriticalDataElement",
-                  "description": "The input documents to analyze."
-                }
-              },
-              "required": [
-                "body"
-              ]
-            }
           }
         ],
         "responses": {
@@ -1104,6 +1086,20 @@
       },
       "required": [
         "entityId"
+      ]
+    },
+    "CreateCriticalDataElementResponse": {
+      "type": "object",
+      "description": "The number of duplicate checks to perform.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/CriticalDataElement",
+          "description": "The request body containing query criteria.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "CriticalDataElement": {
