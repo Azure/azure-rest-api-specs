@@ -237,6 +237,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult, "UtteranceEntitiesEvaluationResult", "python");
 @@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult, "UtteranceEntityEvaluationResult", "python");
 @@clientName(AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult, "UtteranceIntentsEvaluationResult", "python");
+@@clientName(AnalyzeConversationAuthoringExportedEntityListSynonym.values, "synonyms", "python");
 
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
