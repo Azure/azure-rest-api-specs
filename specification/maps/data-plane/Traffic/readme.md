@@ -25,6 +25,7 @@ To see additional help and options, run:
 These are the global settings for Traffic Client.
 
 ``` yaml
+# The Azure Maps Traffic service v1.0 will be retired on March 31, 2028
 title: TrafficClient
 openapi-type: data-plane
 tag: package-stable-2025-01-01
@@ -35,11 +36,11 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: package-1.0-preview
+### Tag: package-deprecated-1.0
 
-These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-deprecated-1.0` is specified on the command line.
 
-``` yaml $(tag) == 'package-1.0-preview'
+``` yaml $(tag) == 'package-deprecated-1.0'
 input-file:
   - preview/1.0/traffic.json
 ```
