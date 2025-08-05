@@ -340,6 +340,14 @@ model OneEvaluation {
 
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
+
+  @doc("Usage statistics for the evaluation")
+  @visibility(Lifecycle.Read)
+  usage?: Usage;
+
+  @doc("Evaluation results from all the configured evaluators for this data row.")
+  @visibility(Lifecycle.Read)
+  metrics?: EvaluationMetric[];
 }
 
 @doc("Aggregated metric that summarizes evaluation results across multiple data rows.")

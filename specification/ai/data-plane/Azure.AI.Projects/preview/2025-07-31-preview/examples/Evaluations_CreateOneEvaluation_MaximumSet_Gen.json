@@ -39,9 +39,36 @@
   "responses": {
     "200": {
       "body": {
-        "id": "eval_12345",
-        "state": "Succeeded",
-        "inputDataJson": "{\"query\":\"What is the capital of France?\",\"response\":\"The capital of France is Paris.\",\"context\":\"France is a country in Western Europe with several major cities including Paris, Lyon, and Marseille.\"}",
+        "dataSource": {
+          "type": "inlineData",
+          "data": {
+            "dataFormat": "queryResponseMessageFormat",
+            "messages": [
+              {
+                "query": "Hi",
+                "response": "hi"
+              },
+              {
+                "query": "tell me a joke",
+                "response": "no"
+              }
+            ]
+          }
+        },
+        "evaluators": [
+          {
+            "id": "azureai://built-in/evaluators/relevance",
+            "initializationParameters": {
+              "threshold": 0.8,
+              "model": "gpt-4o"
+            },
+            "dataMapping": {
+              "query": "${data.query}",
+              "response": "${data.response}",
+              "context": "${data.context}"
+            }
+          }
+        ],
         "usage": {
           "inputTokens": 45,
           "outputTokens": 12

@@ -1213,7 +1213,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResult"
+              "$ref": "#/definitions/OneEvaluation"
             }
           },
           "default": {
@@ -4116,6 +4116,19 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Usage statistics for the evaluation",
+          "readOnly": true
+        },
+        "metrics": {
+          "type": "array",
+          "description": "Evaluation results from all the configured evaluators for this data row.",
+          "items": {
+            "$ref": "#/definitions/EvaluationMetric"
+          },
+          "readOnly": true
         }
       },
       "required": [
