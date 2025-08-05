@@ -12,14 +12,15 @@ alias ProductsListingTraits = NoClientRequestId &
   SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<LanguageParameter &
-    LocationsParameter &
+    LocationsListingParameter &
     ListingMarketParameter &
     HideKeysParameter &
     OdataSelectParameter &
     OdataFilterParameter &
     OdataExpandParameter &
     OdataOrderByParameter &
-    SearchParameter>;
+    SearchParameter &
+    PricingAudienceListingParameter>;
 
 // Product get traits
 alias ProductsGetTraits = NoClientRequestId &
@@ -27,13 +28,13 @@ alias ProductsGetTraits = NoClientRequestId &
   NoConditionalRequests &
   QueryParametersTrait<SingleMarketParameter &
     LanguageParameter &
-    LocationsParameter &
+    LocationsSingleParameter &
     IncludeStopSoldPlansParameter &
     HideKeysParameter &
     ExcludeSkuDetailsParameter &
     IncludeFutureAvailabilitiesParameter &
     SkuIdParameter &
-    PricingAudienceParameter>;
+    PricingAudienceSingleParameter>;
 
 // Operation definitions
 alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
@@ -54,12 +55,12 @@ alias SkusListingTraits = NoClientRequestId &
   QueryParametersTrait<ServiceParameter &
     ServiceFamilyParameter &
     LanguageParameter &
-    LocationsParameter &
+    LocationsListingParameter &
     ListingMarketParameter &
     OdataSelectParameter &
     OdataFilterParameter &
     OdataOrderByParameter &
-    PricingAudienceParameter>;
+    PricingAudienceListingParameter>;
 
 // Operation definitions for Skus
 alias SkusListingOperation = ResourceOperations<SkusListingTraits>;

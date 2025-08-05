@@ -32,7 +32,7 @@ model SkuSummary {
   @doc("Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance")
   publisherType?: string;
 
-  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product.\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   productType?: string;
 
   @doc("Product sub type")
@@ -114,7 +114,7 @@ model SkuSummary {
   offeringProperties?: OfferingProperties[];
 }
 
-@doc("The SKU properties, contains some of the attributes for faster OData filter")
+@doc("Sku object properties")
 model SkuProperties {
   @doc("The sku category")
   category?: string;
@@ -183,7 +183,7 @@ model ProductSummary {
   @doc("Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs")
   azureBenefit?: string;
 
-  @doc("Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality\n- `MAICPP` - Microsoft AI Cloud Partner Program designation recognizing ISV solutions that meet quality differentiation criteria for marketplace and co-sell acceleration\n- `MACCEligible` - Product purchases qualify toward customer's Microsoft Azure Consumption Commitment (MACC) benefit calculations")
+  @doc("Displays certification and qualification badges earned by the product for marketplace visibility.\n- `PreferredSolution` - Microsoft-recognized solution meeting specific quality and partnership criteria\n- `PowerBICertified` - Certified compatibility and integration with Microsoft Power BI platform\n- `AdditionalPurchaseRequirement` - Product requires additional purchases or subscriptions for full functionality")
   badges?: string[];
 
   @doc("Identifies the publisher relationship to Microsoft for support and partnership classification.\n- `Microsoft` - First-party Microsoft product with direct Microsoft support and development\n- `ThirdParty` - Independent software vendor product with publisher-provided support and maintenance")
@@ -282,7 +282,7 @@ model ProductSummary {
   attributes?: Attribute[];
 }
 
-@doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.")
+@doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services")
 model Attribute {
   @doc("The attribute key")
   key?: string;
@@ -322,7 +322,7 @@ model ProductDetails extends ProductSummary {
   @doc("List of Images")
   images?: ImageGroup[];
 
-  @doc("List of linked Add Ins provided for the item")
+  @doc("List of linked add ins provided for the item")
   linkedAddIns?: string[];
 
   @doc("List of Links provided for the item")
@@ -346,10 +346,10 @@ model ProductDetails extends ProductSummary {
   @doc("The universal amendment link for an enterprise contract")
   universalAmendmentUrl?: string;
 
-  @doc("A value indicating whether the item is private")
+  @doc("Indicates if a product is private")
   isPrivate: boolean;
 
-  @doc("A value indicating whether sale of this item is stopped")
+  @doc("Indicates if a product is no longer available for sale")
   isStopSell: boolean;
 
   @doc("Legal terms URI")
@@ -388,7 +388,7 @@ model ProductDetails extends ProductSummary {
   @doc("Indication to disable sending email on purchase")
   disableSendEmailOnPurchase?: boolean;
 
-  @doc("Indicates if VM was originally CoreVirtualMachine")
+  @doc("Indicates if VM was originally a Core Virtual Machine")
   isCoreVm?: boolean;
 
   @doc("A StopSellInfo object providing stop sell related data")
@@ -408,21 +408,21 @@ model ProductDetails extends ProductSummary {
   productId: string;
 }
 
-@doc("The sku")
+@doc("Sku object related to given plan")
 model RelatedSku {
-  @doc("The name")
+  @doc("The Sku name")
   name?: string;
 
-  @doc("The generation")
+  @doc("The Sku generation")
   generation?: string;
 
-  @doc("The identity")
+  @doc("The Sku identity")
   identity?: string;
 }
 
 @doc("Pointing to a related SKU object")
 model PlanSkuRelation {
-  @doc("The Sku")
+  @doc("The related Sku")
   sku?: RelatedSku;
 
   @doc("Relation Type")
@@ -459,10 +459,10 @@ model PlanDetails extends PlanSummary {
   @doc("Version of the marketplace item")
   version?: string;
 
-  @doc("A value indicating whether the plan is hidden")
+  @doc("Indicates if a product is hidden")
   isHidden: boolean;
 
-  @doc("A value indicating whether plan has been stopped from selling")
+  @doc("Indicates if a plan is no longer available for sale")
   isStopSell: boolean;
 
   @doc("A StopSellInfo object providing stop sell related data")
@@ -477,7 +477,7 @@ model PlanDetails extends PlanSummary {
   @doc("A value indicating whether the plan is quantifiable")
   isQuantifiable: boolean;
 
-  @doc("Billing components")
+  @doc("Pan billing components")
   billingComponents?: BillingComponent[];
 
   @doc("List of purchase duration discounts")
@@ -495,13 +495,13 @@ model PlanDetails extends PlanSummary {
   @doc("Plan labels")
   planLabels?: string[];
 
-  @doc("SKU type")
+  @doc("Sku type")
   skuType?: string;
 
   @doc("Sku title localized")
   skuTitle?: string;
 
-  @doc("SKU location")
+  @doc("Sku location")
   location?: string;
 
   @doc("The Arm region name")
@@ -534,13 +534,13 @@ model PlanDetails extends PlanSummary {
   @doc("The sku properties")
   skuProperties?: SkuProperties;
 
-  @doc("SKU price related properties.")
+  @doc("SKU price related properties")
   offeringProperties?: OfferingProperties[];
 }
 
 @doc("Returns a subset of Plan attributes")
 model PlanSummary {
-  @doc("Plan id")
+  @doc("Plan identifier")
   planId?: string;
 
   @doc("Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between")
@@ -555,7 +555,7 @@ model PlanSummary {
   @doc("Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment")
   cspState?: string;
 
-  @doc("Expanded plan/SKU metadata.")
+  @doc("Expanded plan/SKU metadata")
   metadata?: PlanMetadata;
 
   @doc("Alternative stack reference")
@@ -588,7 +588,7 @@ model PlanSummary {
   @doc("The SKU id")
   skuId?: string;
 
-  @doc("Defines the deployment model for Azure Applications marketplace products. This property applies exclusively to Azure Applications product types.\n- `SolutionTemplate` - Azure Resource Manager template-based deployment that provisions and configures multiple Azure resources as an integrated solution. Customers deploy resources directly into their own Azure subscriptions with full control and management responsibility\n- `ManagedApplication` - Azure-managed deployment model where the publisher maintains administrative control over deployed resources while customers retain usage access. Azure handles resource lifecycle, access policies, and cross-resource management within the customer's subscription")
+  @doc("Specifies the primary deployment model and hosting architecture for the marketplace product. Currently supported values are:\n- `None` - Unspecified product type, typically used for products without a defined deployment model\n- `DevService` - Development-focused services and tools for software creation workflows\n- `ManagedApplication` - Azure Managed Applications that deploy and manage resources in customer subscriptions\n- `VirtualMachine` - Pre-configured virtual machine images deployable to Azure compute infrastructure\n- `AzureApplication` - Native Azure applications leveraging platform services and APIs\n- `Container` - Containerized applications deployed through Azure Container Instances or similar services\n- `SaaS` - Software as a Service solutions hosted and managed by the publisher\n- `SolutionTemplate` - Azure Resource Manager templates that provision multiple Azure resources\n- `IotEdgeModules` - Modules designed for deployment to Azure IoT Edge runtime environments\n- `ManagedServices` - Fully managed services where the publisher handles infrastructure and operations\n- `ContainerApps` - Applications built for Azure Container Apps serverless container platform\n- `VisualStudioExtension` - Extensions that integrate with Visual Studio IDE functionality\n- `DynamicsOps` - Microsoft Dynamics 365 Finance and Operations applications and extensions\n- `DynamicsCE` - Microsoft Dynamics 365 Customer Engagement applications and customizations\n- `DynamicsBC` - Microsoft Dynamics 365 Business Central applications and add-ons\n- `PowerBI` - Microsoft Power BI reports, dashboards, and data visualization components\n- `ConsultingServices` - Professional services offerings including implementation and advisory services\n- `CosellOnly` - Products available exclusively through Microsoft co-sell partner programs\n- `CoreVirtualMachine` - Core virtual machine offerings with baseline Azure compute capabilities\n- `PowerBIVisuals` - Custom visualizations for Microsoft Power BI reporting platform\n- `Office365` - Microsoft 365 and Office 365 applications, add-ins, and integrations\n- `AADApps` - Azure Active Directory integrated applications supporting organizational identity\n- `AzureServices` - Native Azure platform services and resource providers\n- `AppService` - Web applications hosted on Azure App Service platform\n- `LogAnalytics` - Azure Monitor Log Analytics solutions and workspace configurations\n- `MicrosoftProduct` - First-party Microsoft products available through marketplace channels")
   planType: string;
 
   @doc("The order the plan is displayed in the 'Plans' table")
@@ -774,7 +774,7 @@ model Availability {
   @doc("Applicable billing meter information")
   meter?: Meter;
 
-  @doc("Specifies the distribution channel and customer segment for product pricing and availability.\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
+  @doc("Specifies the distribution channel and customer segment for product pricing and availability. Possible values:\n- `DirectCommercial` - Available through direct Azure Marketplace purchases for commercial customers without intermediaries like partners or resellers\n- `PartnerCommercial` - Available through Cloud Solution Provider partner channel for reseller distribution")
   pricingAudience: string;
 
   @doc("List of applicable terms")
@@ -816,25 +816,25 @@ model ProductVideo {
   @doc("Video purpose")
   videoPurpose?: string;
 
-  @doc("Preview image")
+  @doc("Video preview image")
   previewImage?: PreviewImage;
 }
 
 @doc("Video preview image")
 model PreviewImage {
-  @doc("caption")
+  @doc("Preview image caption")
   caption?: string;
 
-  @doc("uri")
+  @doc("Preview image uri")
   uri?: string;
 
-  @doc("imagePurpose")
+  @doc("Preview image purpose")
   imagePurpose?: string;
 }
 
 @doc("List of image objects")
 model ImageGroup {
-  @doc("context")
+  @doc("Image group context")
   context?: string;
 
   @doc("List of images")
@@ -878,7 +878,14 @@ model LanguageParameter {
 }
 
 @doc("Parameters for location filtering")
-model LocationsParameter {
+model LocationsSingleParameter {
+  @query
+  @doc("Return plans/availabilities for selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
+  locations?: string[];
+}
+
+@doc("Parameters for location filtering")
+model LocationsListingParameter {
   @query
   @doc("Return products available in selected location. Enumeration of the Azure datacenter regions. See https://azure.microsoft.com/regions/")
   locations?: string[];
@@ -887,42 +894,49 @@ model LocationsParameter {
 @doc("Parameters for preview product keys")
 model HideKeysParameter {
   @query
-  @doc("This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.")
+  @doc("This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process")
   hideKeys?: string[];
 }
 
-@doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
+@doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE")
 model IncludeStopSoldPlansParameter {
   @query
-  @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
+  @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE")
   includeStopSoldPlans?: boolean = false;
 }
 
-@doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE.")
+@doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE")
 model ExcludeSkuDetailsParameter {
   @query
-  @doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE.")
+  @doc("Indicates whether to exclude SKU details in the response. By default, excludeSkuDetails is set to FALSE")
   excludeSkuDetails?: boolean = false;
 }
 
 @doc("Include future availabilities parameter")
 model IncludeFutureAvailabilitiesParameter {
   @query
-  @doc("Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.")
+  @doc("Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE")
   includeFutureAvailabilities?: boolean = false;
 }
 
 @doc("SKU ID filter parameter")
 model SkuIdParameter {
   @query
-  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.")
+  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID")
   skuId?: string;
 }
 
-@doc("Pricing audience query parameter")
-model PricingAudienceParameter {
+@doc("Pricing audience single query parameter")
+model PricingAudienceSingleParameter {
   @query
-  @doc("Can be 'DirectCommercial' or 'PartnerCommercial', 'DirectCommercial' is the default")
+  @doc("Specifies the channel for which product plan availabilities will be returned. Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'")
+  pricingAudience?: string;
+}
+
+@doc("Pricing audience listing query parameter")
+model PricingAudienceListingParameter {
+  @query
+  @doc("Optional filter for product channel availability (see description of pricingAudience field). Can be 'Direct-Commercial' or 'Partner-Commercial'. By default pricingAudience is set to 'Direct-Commercial'")
   pricingAudience?: string;
 }
 
@@ -944,7 +958,7 @@ model ServiceFamilyParameter {
 @doc("OData Filter parameter")
 model OdataFilterParameter {
   @query
-  @doc("Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`")
+  @doc("Filters the results, based on a Boolean condition. Example: $filter=productType eq 'VirtualMachine'. Note that not all fields support filtering. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`")
   $filter?: string;
 }
 
