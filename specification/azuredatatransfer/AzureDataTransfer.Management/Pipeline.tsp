@@ -79,7 +79,7 @@ interface Pipelines {
   approveConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmResponse<Connection>
+    ArmConnectionResponse
   >;
 
   /**

@@ -13,9 +13,11 @@ using TypeSpec.Versioning;
 
 @versioned(Versions)
 namespace Microsoft.AzureDataTransfer;
+
 /**
  * Represents a FlowProfile Azure resource, which defines a data replication scenario with a specific data classification and a set of configurable policy rules.
  */
+@added(Versions.v2025_05_30_preview)
 @parentResource(Pipeline)
 model FlowProfile
   is Azure.ResourceManager.TrackedResource<FlowProfileProperties> {
@@ -27,12 +29,6 @@ model FlowProfile
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
-
-/**
- * Response wrapper for a FlowProfile resource.
- */
-@added(Versions.v2025_05_30_preview)
-model ArmFlowProfileResponse is ArmResponse<FlowProfile>;
 
 /**
  * Defines the set of operations available for managing FlowProfile resources.
