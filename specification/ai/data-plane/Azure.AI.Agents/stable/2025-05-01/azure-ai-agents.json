@@ -3570,52 +3570,6 @@
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
-    "BrowserAutomationToolConnectionParameters": {
-      "type": "object",
-      "description": "Defintion of input parameters used to define the connection used by a Browser Automation Tool.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the connection to your Azure Playwright resource."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "BrowserAutomationToolDefinition": {
-      "type": "object",
-      "description": "The input defintion information for a Browser Automation Tool, as used to configure an Agent.",
-      "properties": {
-        "browser_automation": {
-          "$ref": "#/definitions/BrowserAutomationToolParameters",
-          "description": "The Browser Automation Tool parameters.",
-          "x-ms-client-name": "browserAutomation"
-        }
-      },
-      "required": [
-        "browser_automation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "browser_automation"
-    },
-    "BrowserAutomationToolParameters": {
-      "type": "object",
-      "description": "Defintion of input parameters used to define the Browser Automation Tool.",
-      "properties": {
-        "connection": {
-          "$ref": "#/definitions/BrowserAutomationToolConnectionParameters",
-          "description": "The connection parameters associated with the Browser Automation Tool."
-        }
-      },
-      "required": [
-        "connection"
-      ]
-    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",

@@ -209,7 +209,7 @@ model AzureFunctionToolDefinition extends ToolDefinition {
 }
 
 @doc("The input defintion information for a Browser Automation Tool, as used to configure an Agent.")
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
 model BrowserAutomationToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'browser_automation'.")
   type: "browser_automation";
@@ -220,14 +220,14 @@ model BrowserAutomationToolDefinition extends ToolDefinition {
 }
 
 @doc("Defintion of input parameters used to define the Browser Automation Tool.")
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
 model BrowserAutomationToolParameters {
   @doc("The connection parameters associated with the Browser Automation Tool.")
   connection: BrowserAutomationToolConnectionParameters;
 }
 
 @doc("Defintion of input parameters used to define the connection used by a Browser Automation Tool.")
-@added(Versions.v2025_05_01)
+@added(Versions.v2025_05_15_preview)
 model BrowserAutomationToolConnectionParameters {
   @doc("The ID of the connection to your Azure Playwright resource.")
   id: string;
