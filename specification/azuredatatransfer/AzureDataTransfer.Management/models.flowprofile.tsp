@@ -167,14 +167,27 @@ model FlowProfileRulesets {
 @added(Versions.v2025_05_30_preview)
 model AntivirusRuleset {
   /**
-   * Optional. Default is disabled. If enabled, uses Microsoft Defender antivirus scanning software as the scanning solution.
+   * Optional. The list of antiviruses to be used as a scanning solution for replicating data.
    */
-  defender?: EnablementStatus = EnablementStatus.Disabled;
+  avSolutions?: AntivirusSolutions[];
+}
+
+/**
+ * The list of Antivirus solutions currently provided.
+ */
+@added(Versions.v2025_05_30_preview)
+union AntivirusSolutions {
+  string,
 
   /**
-   * Optional. Default is disabled. If enabled, uses the external ClamAV open-source software as an antivirus scanning solution.
+   * Option to use Microsoft Defender antivirus scanning software as the scanning solution.
    */
-  clamAv?: EnablementStatus = EnablementStatus.Disabled;
+  Defender: "Defender",
+
+  /**
+   * Option to use the external ClamAV open-source software as an antivirus scanning solution.
+   */
+  ClamAv: "ClamAv",
 }
 
 /**
@@ -295,9 +308,9 @@ model XmlFilterRuleset {
   reference: XmlReferenceType = XmlReferenceType.Inline;
 
   /**
-   * The Base64 string representation of the XSD schema(s) bytes used for validation. The type is of string but will be fortmatted as a byte array for consumption.
+   * The inline XSD schema to be used for validation.
    */
-  schema: bytes;
+  schema: string;
 }
 
 /**

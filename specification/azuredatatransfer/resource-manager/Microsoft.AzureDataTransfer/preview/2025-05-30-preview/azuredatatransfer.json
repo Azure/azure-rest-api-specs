@@ -2980,56 +2980,37 @@
       "type": "object",
       "description": "Antivirus scanning rules for replicating data. By default, all antivirus scanning solutions are disabled.",
       "properties": {
-        "defender": {
-          "type": "string",
-          "description": "Optional. Default is disabled. If enabled, uses Microsoft Defender antivirus scanning software as the scanning solution.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Represents an enabled status."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Represents a disabled status."
-              }
-            ]
-          }
-        },
-        "clamAv": {
-          "type": "string",
-          "description": "Optional. Default is disabled. If enabled, uses the external ClamAV open-source software as an antivirus scanning solution.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Represents an enabled status."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Represents a disabled status."
-              }
-            ]
+        "avSolutions": {
+          "type": "array",
+          "description": "Optional. The list of antiviruses to be used as a scanning solution for replicating data.",
+          "items": {
+            "$ref": "#/definitions/AntivirusSolutions"
           }
         }
+      }
+    },
+    "AntivirusSolutions": {
+      "type": "string",
+      "description": "The list of Antivirus solutions currently provided.",
+      "enum": [
+        "Defender",
+        "ClamAv"
+      ],
+      "x-ms-enum": {
+        "name": "AntivirusSolutions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Defender",
+            "value": "Defender",
+            "description": "Option to use Microsoft Defender antivirus scanning software as the scanning solution."
+          },
+          {
+            "name": "ClamAv",
+            "value": "ClamAv",
+            "description": "Option to use the external ClamAV open-source software as an antivirus scanning solution."
+          }
+        ]
       }
     },
     "ApiFlowOptions": {
@@ -3958,7 +3939,7 @@
           "description": "Type of FlowProfile to use for transfer via the flow.",
           "readOnly": true
         },
-        "dataClass": {
+        "flowDataType": {
           "$ref": "#/definitions/DataClass",
           "description": "The Flow's data class.",
           "readOnly": true
@@ -4613,7 +4594,7 @@
           "description": "Type of FlowProfile to use for transfer via the flow.",
           "readOnly": true
         },
-        "dataClass": {
+        "flowDataType": {
           "$ref": "#/definitions/DataClass",
           "description": "The Flow's data class.",
           "readOnly": true
@@ -5290,8 +5271,7 @@
         },
         "schema": {
           "type": "string",
-          "format": "byte",
-          "description": "The Base64 string representation of the XSD schema(s) bytes used for validation. The type is of string but will be fortmatted as a byte array for consumption."
+          "description": "The inline XSD schema to be used for validation."
         }
       },
       "required": [

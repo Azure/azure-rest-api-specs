@@ -1049,7 +1049,7 @@ model FlowProperties {
    */
   @added(Versions.v2025_05_30_preview)
   @visibility(Lifecycle.Read)
-  dataClass?: DataClass;
+  flowDataType?: DataClass;
 
   /**
    * The flow type for this flow
