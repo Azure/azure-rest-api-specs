@@ -99,6 +99,7 @@ model CatalogModelManagedAttribute {
 @resource("criticalDataElements")
 model CriticalDataElement {
   @doc("The current status of the critical data element.")
+  @visibility(Lifecycle.Read)
   status?: CatalogModelStatus;
 
   @doc("The data type of the critical data element.")
@@ -113,6 +114,7 @@ model CriticalDataElement {
   name?: string;
 
   @doc("System metadata including creation and modification information.")
+  @visibility(Lifecycle.Read)
   systemData?: CatalogModelSystemDataWithExpired;
 
   @doc("The unique identifier of the domain this element belongs to.")
@@ -1403,5 +1405,6 @@ model CreateCriticalDataElementResponse {
   status: 201;
 
   @doc("The request body containing query criteria.")
+  @visibility(Lifecycle.Read)
   body: CriticalDataElement;
 }
