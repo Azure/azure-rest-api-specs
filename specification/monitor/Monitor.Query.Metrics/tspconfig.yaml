@@ -20,8 +20,9 @@ options:
     package-dir: "azure-monitor-querymetrics"
     package-name: "{package-dir}"
     package-mode: dataplane
+    package-version: 1.0.0
     flavor: azure
-    namespace: azure.monitor.querymetrics._generated
+    namespace: azure.monitor.querymetrics
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Monitor.Query.Metrics"
     namespace: "{package-dir}"
@@ -40,6 +41,12 @@ options:
     package-dir: "azure-monitor-query-metrics"
     namespace: com.azure.monitor.query.metrics
     flavor: azure
+    use-object-for-unknown: true
+    generate-tests: false
+    generate-samples: false
+    partial-update: true
+    service-name: Metrics
+    customization-class: "customization/src/main/java/MetricsQueryCustomization.java"
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
     package-dir: "azmetrics"
