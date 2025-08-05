@@ -239,6 +239,8 @@ model SchedulerUpdate
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+@@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
+
 @doc("The Scheduler resource properties to be updated")
 model SchedulerPropertiesUpdate {
   @visibility(Lifecycle.Read)
