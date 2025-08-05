@@ -75,11 +75,11 @@ input-file:
   - stable/2023-06-01/search.json
 ```
 
-### Tag: package-1.0-preview
+### Tag: package-stable-1.0
 
-These settings apply only when `--tag=package-1.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-stable-1.0` is specified on the command line.
 
-``` yaml $(tag) == 'package-1.0-preview'
+``` yaml $(tag) == 'package-stable-1.0'
 input-file:
   - preview/1.0/search.json
 ```
@@ -93,15 +93,6 @@ input-file:
   - preview/2021-11-01-preview/geocoding.json
 ```
 
-### Tag: package-retired-2.1-preview
-
-These settings apply only when `--tag=package-retired-2.1-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-retired-2.1-preview'
-input-file:
-  - preview/2022-02-01-preview/geocoding.json
-```
-
 ### Tag: package-retired-2022-09-01-preview
 
 These settings apply only when `--tag=package-retired-2022-09-01-preview` is specified on the command line.
@@ -111,11 +102,11 @@ input-file:
   - preview/2022-09-01-preview/search.json
 ```
 
-### Tag: package-retired-preview-2022-12
+### Tag: package-retired-2022-12-01-preview
 
-These settings apply only when `--tag=package-retired-preview-2022-12` is specified on the command line.
+These settings apply only when `--tag=package-retired-2022-12-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-preview-2022-12'
+``` yaml $(tag) == 'package-retired-2022-12-01-preview'
 input-file:
   - preview/2022-12-01-preview/search.json
 ```
