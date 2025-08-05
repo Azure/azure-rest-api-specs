@@ -14,11 +14,7 @@
             "type": "Allow",
             "filters": {
               "media": "application/json",
-              "extensions": [
-                ".json",
-                ".app",
-                ".js"
-              ]
+              "extensions": [".json", ".app", ".js"]
             }
           },
           "textMatching": {
@@ -36,7 +32,7 @@
             ]
           },
           "antivirus": {
-            "defender": "Disabled"
+            "avSolutions": ["Defender", "ClamAv"]				
           },
           "archives": {
             "minimumSizeForExpansion": 1,
@@ -47,6 +43,11 @@
           "dataSize": {
             "maximum": 123456789,
             "minimum": 1
+          },
+          "xmlFilters": {
+            "defaultNamespace": "testnamespace",
+            "reference": "Inline",
+            "schema": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"></xs:schema>"
           }
         }
       }
