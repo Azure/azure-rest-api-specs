@@ -28,7 +28,7 @@ These are the global settings for Data Registry Client.
 # Azure Maps Data Registry APIs V 06-01-2023 will be retired on September 30th, 2025.
 title: DataRegistryClient
 openapi-type: data-plane
-tag: 2023-06-01
+tag: package-stable-2023-06-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
