@@ -27,7 +27,7 @@ These are the global settings for Route Client.
 ``` yaml
 title: RouteClient
 openapi-type: data-plane
-tag: package-2025-01
+tag: package-stable-2025-01-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -100,11 +100,11 @@ input-file:
   - preview/2024-04-01-preview/route.json
 ```
 
-### Tag: package-deprecated-2023-10-01-preview
+### Tag: package-retired-2023-10-01-preview
 
-These settings apply only when `--tag=package-deprecated-2023-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-2023-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-deprecated-2023-10-01-preview'
+``` yaml $(tag) == 'package-retired-2023-10-01-preview'
 input-file:
   - preview/2023-10-01-preview/route.json
 ```
