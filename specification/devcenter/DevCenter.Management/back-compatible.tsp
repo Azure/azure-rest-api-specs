@@ -242,13 +242,3 @@ using Microsoft.DevCenter;
   "IdentityType",
   "python"
 );
-@@clientName(CreatorRoleAssignment,
-  "ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment",
-  "python"
-);
-@@clientName(UserRoleAssignment,
-  "UserRoleAssignmentValue",
-  "python"
-);
-
-

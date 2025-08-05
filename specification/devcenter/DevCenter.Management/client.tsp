@@ -11,3 +11,5 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Microsoft.DevCenter.DevCenterSku, "SkuInfo", "go");
+
+@@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue");

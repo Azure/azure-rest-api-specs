@@ -1805,7 +1805,7 @@ model ProjectEnvironmentTypeUpdateProperties {
   /**
    * The role definition assigned to the environment creator on backing resources.
    */
-  creatorRoleAssignment?: CreatorRoleAssignment;
+  creatorRoleAssignment?: ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment;
 
   /**
    * Role Assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.
@@ -1817,7 +1817,7 @@ model ProjectEnvironmentTypeUpdateProperties {
 /**
  * The role definition assigned to the environment creator on backing resources.
  */
-model CreatorRoleAssignment {
+model ProjectEnvironmentTypeUpdatePropertiesCreatorRoleAssignment {
   /**
    * A map of roles to assign to the environment creator.
    */
