@@ -26,7 +26,24 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-03-preview
+tag: package-2025-07
+```
+### Tag: package-2025-07
+
+These settings apply only when `--tag=package-2025-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-07'
+input-file:
+- Microsoft.DataBox/stable/2025-07-01/databox.json
+```
+
+### Tag: package-2025-02
+
+These settings apply only when `--tag=package-2025-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-02'
+input-file:
+- Microsoft.DataBox/stable/2025-02-01/databox.json
 ```
 
 ### Tag: package-2024-03-preview
@@ -185,7 +202,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -197,27 +214,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DataBox
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
-  clear-output-folder: true
-  
-directive:
-- from: swagger-document
-  where: $.definitions.ShippingAddress
-  transform: >
-    $.required = [ "streetAddress1", "country", "postalCode" ];
 ```
 
 ## Python

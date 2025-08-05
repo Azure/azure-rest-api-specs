@@ -288,7 +288,7 @@ model UnivariateChangePointDetectionResult {
     Frequency extracted from the series. Zero means no recurrent pattern has been
     found.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   period?: int32;
 
   @doc("""

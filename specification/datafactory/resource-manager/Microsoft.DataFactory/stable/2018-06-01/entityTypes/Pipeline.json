@@ -1093,7 +1093,7 @@
       }
     },
     "LakeHouseReadSettings": {
-      "description": "Microsoft Fabric LakeHouse Files read settings.",
+      "description": "Microsoft Fabric Lakehouse Files read settings.",
       "type": "object",
       "allOf": [
         {
@@ -1109,12 +1109,12 @@
         "wildcardFolderPath": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string)."
+          "description": "Microsoft Fabric Lakehouse Files wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
@@ -1257,7 +1257,7 @@
       ]
     },
     "LakeHouseWriteSettings": {
-      "description": "Microsoft Fabric LakeHouse Files write settings.",
+      "description": "Microsoft Fabric Lakehouse Files write settings.",
       "type": "object",
       "allOf": [
         {
@@ -3154,6 +3154,16 @@
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
+        "numberPrecision": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The decimal precision used to represent Oracle NUMBER type without precision and scale. The range is 1 to 256 and default value is 256 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
+        },
+        "numberScale": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The decimal scale used to represent Oracle NUMBER type without precision and scale. The range is 0 to 130 and default value is 130 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
         }
       }
     },
@@ -3218,6 +3228,16 @@
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        },
+        "numberPrecision": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The decimal precision used to represent Oracle NUMBER type without precision and scale. The range is 1 to 256 and default value is 256 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
+        },
+        "numberScale": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The decimal scale used to represent Oracle NUMBER type without precision and scale. The range is 0 to 130 and default value is 130 if not specified. Type: integer (or Expression with resultType integer). Only used for Version 2.0."
         }
       }
     },
@@ -3285,6 +3305,37 @@
         "partitionSettings": {
           "description": "The settings that will be leveraged for teradata source partitioning.",
           "$ref": "#/definitions/TeradataPartitionSettings"
+        }
+      }
+    },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
         }
       }
     },
@@ -3638,7 +3689,7 @@
       }
     },
     "AzurePostgreSqlSource": {
-      "description": "A copy activity Azure PostgreSQL source.",
+      "description": "A copy activity Azure Database for PostgreSQL source.",
       "type": "object",
       "allOf": [
         {
@@ -3654,7 +3705,7 @@
       }
     },
     "AzurePostgreSqlSink": {
-      "description": "A copy activity Azure PostgreSQL sink.",
+      "description": "A copy activity Azure Database for PostgreSQL sink.",
       "type": "object",
       "allOf": [
         {
@@ -3666,6 +3717,30 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        },
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
+            "BulkInsert",
+            "CopyCommand",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "AzurePostgreSqlWriteMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "x-ms-format": "dfe-list-string",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
+          }
         }
       }
     },
@@ -4269,7 +4344,7 @@
       }
     },
     "LakeHouseTableSource": {
-      "description": "A copy activity source for Microsoft Fabric LakeHouse Table.",
+      "description": "A copy activity source for Microsoft Fabric Lakehouse Table.",
       "type": "object",
       "allOf": [
         {
@@ -5725,6 +5800,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5753,6 +5838,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5781,6 +5876,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5928,7 +6033,7 @@
       }
     },
     "LakeHouseTableSink": {
-      "description": "A copy activity for Microsoft Fabric LakeHouse Table sink.",
+      "description": "A copy activity for Microsoft Fabric Lakehouse Table sink.",
       "type": "object",
       "allOf": [
         {
@@ -5939,7 +6044,7 @@
         "tableActionOption": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The type of table action for LakeHouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
+          "description": "The type of table action for Lakehouse Table sink. Possible values include: \"None\", \"Append\", \"Overwrite\"."
         },
         "partitionOption": {
           "type": "object",
@@ -6039,6 +6144,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "timeFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Time values. Type: string (or Expression with resultType string)."
+        },
+        "dateFormat": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The format for Date values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",
@@ -8107,6 +8222,47 @@
         "pythonFile"
       ]
     },
+    "DatabricksJobActivity": {
+      "description": "Databricks Job activity.",
+      "x-ms-discriminator-value": "DatabricksJob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks Job activity properties.",
+          "$ref": "#/definitions/DatabricksJobActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksJobActivityTypeProperties": {
+      "description": "Databricks Job activity properties.",
+      "properties": {
+        "jobId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Id of the Databricks Job to be executed. Type: string (or Expression with resultType string)."
+        },
+        "jobParameters": {
+          "description": "Job parameters to be used for each run of this job. If the job takes a parameter that is not specified, the default value from the job will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
     "SetVariableActivity": {
       "x-ms-discriminator-value": "SetVariable",
       "description": "Set value for a Variable.",
@@ -8574,6 +8730,11 @@
           "required": [
             "logDestination"
           ]
+        },
+        "returnMultistatementResult": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -9320,8 +9481,9 @@
           "description": "Type of expressions supported by the system. Type: string."
         },
         "value": {
-          "description": "Value for Constant/Field Type: string.",
-          "type": "string"
+          "description": "Value for Constant/Field Type: object.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
         },
         "operators": {
           "description": "Expression operator value Type: list of strings.",

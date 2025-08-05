@@ -63,6 +63,7 @@ op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOpera
   FaceErrorResponse
 >;
 
+@patch(#{ implicitOptionality: true })
 @updatesResource(TResource)
 op FaceResourceUpdateOperation<
   TResource extends TypeSpec.Reflection.Model,

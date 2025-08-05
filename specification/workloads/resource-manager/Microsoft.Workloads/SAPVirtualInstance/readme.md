@@ -38,12 +38,15 @@ These settings apply only when `--tag=package-2024-09` is specified on the comma
 ``` yaml $(tag) == 'package-2024-09'
 input-file:
   - stable/2024-09-01/SAPVirtualInstance.json
-  - ../common-types/v1/commonTypes.json
-  - ../operations/stable/2024-09-01/operations.json
+
 suppressions:
   - code: BodyTopLevelProperties
     from: SAPVirtualInstance.json
     reason: This is an incorrect failure due to a bug in the tool
+  - code: AvoidAnonymousTypes
+    from: SAPVirtualInstance.json
+    where: $.definitions.SAPVirtualInstanceIdentity.properties.userAssignedIdentities.additionalProperties
+    reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
 ### Tag: package-preview-2023-10
@@ -71,8 +74,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
@@ -88,10 +89,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

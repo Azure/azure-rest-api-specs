@@ -55,6 +55,7 @@ interface LoadTests {
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "OperationID already published."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")
@@ -129,4 +130,19 @@ interface LoadTestProfileMappings {
 
   @added(APIVersions.v2023_12_01_preview)
   list is ArmResourceListByParent<LoadTestProfileMappingResource>;
+}
+
+@armResourceOperations
+interface LoadTestsMaxMonthlyVirtualUserHoursLimitsResource {
+  @added(APIVersions.v2024_12_01_preview)
+  @doc("Get the limit of max monthly virtual user hours for the load testing resource.")
+  get is ArmResourceRead<MaxMonthlyVirtualUserHoursResource>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  @doc("Set the limit of max monthly virtual user hours for the load testing resource.")
+  set is ArmResourceActionSync<
+    MaxMonthlyVirtualUserHoursResource,
+    MaxMonthlyVirtualUserHoursLimitRequest,
+    MaxMonthlyVirtualUserHoursResource
+  >;
 }

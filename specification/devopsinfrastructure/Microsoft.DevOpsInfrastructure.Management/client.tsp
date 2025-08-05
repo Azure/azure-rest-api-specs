@@ -8,8 +8,10 @@ using Microsoft.DevOpsInfrastructure;
   "DevOpsInfrastructureMgmt",
   "python"
 );
-
-@@access(Operations.list, Access.internal);
+@@clientName(Microsoft.DevOpsInfrastructure,
+  "DevOpsInfrastructureManagementClient",
+  "java"
+);
 
 /* Rename models */
 @@clientName(ImageVersion, "DevOpsImageVersion", "csharp");

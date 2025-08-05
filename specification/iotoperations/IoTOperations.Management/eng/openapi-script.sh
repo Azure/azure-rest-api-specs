@@ -13,13 +13,11 @@ pushd "$script_dir/../.." || {
 
 # echo "Deleting the examples in the resource-manager directory and the management directory..."
 # rm -r resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples
-# rm -r IoTOperations.Management/examples/2024-08-15-preview
 
 echo "Generating the specs and the examples!"
 
 # Compile all the typespecs the iotoperations directory
 echo "Compiling the typespecs in the iotoperations directory..."
-npx tsp compile IoTOperations.Management/.
 
 # Generate examples for all the openapi specs
 # echo "Generating examples for all the openapi specs..."
@@ -88,8 +86,8 @@ npx tsp compile IoTOperations.Management/.
 npx tsv IoTOperations.Management/.
 
 # Prettier
-echo "Running prettier..."
-npx prettier --write **/*.json
+# echo "Running prettier..."
+# npx prettier --write **/*.json
 
 echo "Completed generating the specs and the examples!"
 echo "Done!"

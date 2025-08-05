@@ -1,0 +1,49 @@
+# Prefix with "~" to sort last in Actions list
+name: ~Templates - Verify Run Status
+
+on:
+  workflow_call:
+    inputs:
+      check_run_name:
+        description: Name of the check run to verify
+        required: true
+        type: string
+      commit_status_name:
+        description: Name of the commit status to verify
+        type: string
+      workflow_name:
+        description: Name of the workflow to verify
+        type: string
+
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  statuses: read
+
+jobs:
+  check-run-status:
+    # Skip the workflow_run conclusion of 'action_required'. This conclusion
+    # happens when a workflow is triggered by a PR submitted by a user who does
+    # not have correct permissions.
+    if: |
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'action_required') || 
+      (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') || 
+      (github.event_name == 'check_run' && github.event.check_run.name == inputs.check_run_name)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+
+      - name: Verify matching status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
+            return await verifyRunStatus({ github, context, core });
+        env:
+          CHECK_RUN_NAME: ${{ inputs.check_run_name }}
+          COMMIT_STATUS_NAME: ${{ inputs.commit_status_name }}
+          WORKFLOW_NAME: ${{ inputs.workflow_name }}

@@ -26,6 +26,7 @@ alias GetOperations = Azure.Core.ResourceOperations<GetOperationTraits>;
 alias PatchOperations = Azure.Core.ResourceOperations<PatchOperationTraits>;
 
 interface JobRouterAdministrationOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a classification policy.")
   @doc("Creates or updates a classification policy.")
   upsertClassificationPolicy is PatchOperations.ResourceCreateOrUpdate<ClassificationPolicy>;
@@ -45,6 +46,7 @@ interface JobRouterAdministrationOperations {
     ListClassificationPoliciesQueryParams
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a distribution policy.")
   @doc("Creates or updates a distribution policy.")
   upsertDistributionPolicy is PatchOperations.ResourceCreateOrUpdate<DistributionPolicy>;
@@ -64,6 +66,7 @@ interface JobRouterAdministrationOperations {
     ListDistributionPoliciesQueryParams
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a exception policy.")
   @doc("Creates or updates a exception policy.")
   upsertExceptionPolicy is PatchOperations.ResourceCreateOrUpdate<ExceptionPolicy>;
@@ -82,7 +85,7 @@ interface JobRouterAdministrationOperations {
     ExceptionPolicy,
     ListExceptionPoliciesQueryParams
   >;
-
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a queue.")
   @doc("Creates or updates a queue.")
   upsertQueue is PatchOperations.ResourceCreateOrUpdate<RouterQueue>;
@@ -101,6 +104,7 @@ interface JobRouterAdministrationOperations {
 }
 
 interface JobRouterOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a router job.")
   @doc("Creates or updates a router job.")
   upsertJob is PatchOperations.ResourceCreateOrUpdate<RouterJob>;
@@ -228,6 +232,7 @@ interface JobRouterOperations {
     RouterQueueStatistics
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Creates or updates a worker.")
   @doc("Creates or updates a worker.")
   upsertWorker is PatchOperations.ResourceCreateOrUpdate<RouterWorker>;

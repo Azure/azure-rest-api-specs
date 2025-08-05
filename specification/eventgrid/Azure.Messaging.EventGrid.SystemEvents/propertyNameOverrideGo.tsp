@@ -2,11 +2,11 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
@@ -15,11 +15,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] misc renames
-
-@@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
-  "ChannelLatencyMS",
-  "go"
-);
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "RecordingDurationMS",
@@ -385,10 +380,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSMessageDeliveryStatusUpdatedEventData",
   "go"
 );
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
-  "ChannelKind",
-  "go"
-);
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
   "ReceivedTimestamp",
   "go"
@@ -419,7 +410,6 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageMediaContent.id, "MediaID", "go");
 
 @@clientName(AcsMessageReceivedEventData, "ACSMessageReceivedEventData", "go");
-@@clientName(AcsMessageReceivedEventData.channelType, "ChannelKind", "go");
 @@clientName(AcsMessageReceivedEventData.interactive,
   "InteractiveContent",
   "go"
@@ -440,12 +430,29 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 
-@@clientName(recordingChannelType, "recordingChannelKind", "go");
-
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
-  "go"
-);
+@@clientName(recordingChannelType, "ACSRecordingChannelType", "go");
+@@clientName(recordingContentType, "ACSRecordingContentType", "go");
+@@clientName(recordingFormatType, "ACSRecordingFormatType", "go");
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "EXP", "go");
 
 @@clientName(AcsRecordingStorageInfoProperties,
   "ACSRecordingStorageInfoProperties",
@@ -566,19 +573,54 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 @@clientName(AcsSmsDeliveryAttemptProperties,
-  "ACSSmsDeliveryAttemptProperties",
+  "ACSSMSDeliveryAttemptProperties",
   "go"
 );
 @@clientName(AcsSmsDeliveryReportReceivedEventData,
-  "ACSSmsDeliveryReportReceivedEventData",
+  "ACSSMSDeliveryReportReceivedEventData",
   "go"
 );
-@@clientName(AcsSmsEventBaseProperties, "ACSSmsEventBaseProperties", "go");
-@@clientName(AcsSmsReceivedEventData, "ACSSmsReceivedEventData", "go");
+@@clientName(AcsSmsEventBaseProperties, "ACSSMSEventBaseProperties", "go");
+@@clientName(AcsSmsReceivedEventData, "ACSSMSReceivedEventData", "go");
 @@clientName(AcsUserDisconnectedEventData,
   "ACSUserDisconnectedEventData",
   "go"
 );
+
 @@clientName(AcsUserEngagement, "ACSUserEngagement", "go");
+@@clientName(AcsMessageReactionContent, "ACSMessageReactionContent", "go");
+
+@@clientName(AcsCallEndReasonProperties, "ACSCallEndReasonProperties", "go");
+@@clientName(AcsCallEndedByProperties, "ACSCallEndedByProperties", "go");
+@@clientName(AcsCallEndedByKind, "ACSCallEndedByKind", "go");
+@@clientName(AcsCallEndedEventData, "ACSCallEndedEventData", "go");
+@@clientName(AcsCallGroupProperties, "ACSCallGroupProperties", "go");
+@@clientName(AcsCallParticipantAddedEventData,
+  "ACSCallParticipantAddedEventData",
+  "go"
+);
+@@clientName(AcsCallParticipantEventData, "ACSCallParticipantEventData", "go");
+@@clientName(AcsCallParticipantProperties,
+  "ACSCallParticipantProperties",
+  "go"
+);
+@@clientName(AcsCallParticipantRemovedEventData,
+  "ACSCallParticipantRemovedEventData",
+  "go"
+);
+@@clientName(AcsCallRoomProperties, "ACSCallRoomProperties", "go");
+@@clientName(AcsCallStartedEventData, "ACSCallStartedEventData", "go");
+@@clientName(AcsCallingEventProperties, "ACSCallingEventProperties", "go");
+@@clientName(AcsChatAzureBotCommandReceivedInThreadEventData,
+  "ACSChatAzureBotCommandReceivedInThreadEventData",
+  "go"
+);
+@@clientName(AcsChatTypingIndicatorReceivedInThreadEventData,
+  "ACSChatTypingIndicatorReceivedInThreadEventData",
+  "go"
+);
+@@clientName(AcsCallParticipantKind, "ACSCallParticipantRoleKind", "go");
+@@clientName(recordingFormatType.Mp3, "MP3", "go");
+@@clientName(recordingFormatType.Mp4, "MP4", "go");
 
 // [END] ACS renames (and acronym casing)

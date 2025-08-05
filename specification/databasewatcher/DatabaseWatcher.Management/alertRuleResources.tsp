@@ -45,7 +45,7 @@ model AlertRuleResourceProperties {
   @doc("The creation time of the alert rule resource.")
   creationTime: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the alert rule resource.")
   provisioningState?: ResourceProvisioningState;
 

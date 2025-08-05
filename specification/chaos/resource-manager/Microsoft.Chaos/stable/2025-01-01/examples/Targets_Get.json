@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "parentProviderNamespace": "Microsoft.Compute",
+    "parentResourceName": "exampleVM",
+    "parentResourceType": "virtualMachines",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "targetName": "Microsoft-Agent"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Microsoft-Agent",
+        "type": "Microsoft.Chaos/targets",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-Agent",
+        "location": "centraluseuap",
+        "properties": {
+          "agentProfileId": "ac4e8251-fdc9-4277-8e87-dc57fe5794cf",
+          "identities": [
+            {
+              "type": "CertificateSubjectIssuer",
+              "subject": "CN=example.subject"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-07-01T00:00:00.0Z",
+          "lastModifiedAt": "2021-07-01T00:00:00.0Z"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Targets_Get",
+  "title": "Get a Target that extends a virtual machine resource."
+}

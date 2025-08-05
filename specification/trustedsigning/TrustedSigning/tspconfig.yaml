@@ -15,7 +15,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Azure.Developer.TrustedSigning/{version-status}/{version}/azure.developer.trustedsigning.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-trustedsigning"
-    package-name: "{package-dir}"
+    namespace: "azure.developer.trustedsigning"
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -25,15 +25,17 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Developer.TrustedSigning
+    model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-developer-trustedsigning-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
-      name: "@azure-rest/developer-trusted signing"
+    package-dir: "developer-trustedsigning-rest"
+    generate-metadata: true
+    package-details:
+      name: "@azure-rest/developer-trustedsigning"
       description: "Azure trusted signing service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-trusedsigning"
+    package-dir: "azure-developer-trustedsigning"
     namespace: "com.azure.developer.trustedsigning"
     flavor: azure

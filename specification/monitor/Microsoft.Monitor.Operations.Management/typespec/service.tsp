@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.Monitor")
-@service({
-  title: "Azure Monitor Operations Control Plane API",
-})
+@service(#{ title: "Azure Monitor Operations Control Plane API" })
 @doc("Provides operations for working with Azure Monitor")
 @versioned(Microsoft.Monitor.Versions)
 namespace Microsoft.Monitor;
@@ -25,6 +23,11 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("API Version 2024-10-01")
   v2024_10_01_preview: "2024-10-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("API Version 2025-05-03")
+  v2025_05_03_preview: "2025-05-03-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

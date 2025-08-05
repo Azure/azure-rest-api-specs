@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 namespace AzureHealthInsights;
 
 @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_08_01_preview)
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_10_01)
 interface TrialMatcher {
   @summary("Get Trial Matcher job details")
   @tag("TrialMatcher")
@@ -19,6 +20,7 @@ interface TrialMatcher {
   @get
   getJob is HealthInsightsOperations.ResourceRead<TrialMatcherJob>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   @summary("Create Trial Matcher job")
   @tag("TrialMatcher")
   @doc("Creates a Trial Matcher job with the given request body.")

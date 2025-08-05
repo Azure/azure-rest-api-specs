@@ -1,0 +1,31 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - byok
+  - ipfilterrules
+  - sbeh
+  - unpartitioned
+overrides:
+  - filename: >-
+      **/specification/servicebus/resource-manager/Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+    words:
+      - ruleproperties
+  - filename: >-
+      **/specification/servicebus/resource-manager/Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
+    words:
+      - ruleproperties
+  - filename: >-
+      **/specification/servicebus/resource-manager/Microsoft.ServiceBus/preview/2021-01-01-preview/Rules.json
+    words:
+      - ruleproperties
+  - filename: >-
+      **/specification/servicebus/resource-manager/Microsoft.ServiceBus/stable/2014-09-01/servicebus.json
+    words:
+      - planproperties
+

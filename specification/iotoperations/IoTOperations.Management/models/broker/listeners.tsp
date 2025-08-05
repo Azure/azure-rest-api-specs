@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -26,8 +27,9 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
@@ -36,13 +38,13 @@ model BrokerListenerProperties {
   serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
-  @OpenAPI.extension("x-ms-identifiers", ["port"])
+  @identifiers(#["port"])
   ports: ListenerPort[];
 
   @doc("Kubernetes Service type of this listener.")
   serviceType?: ServiceType = ServiceType.ClusterIp;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

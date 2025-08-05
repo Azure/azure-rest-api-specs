@@ -28,7 +28,7 @@ model EmployeeProperties {
   profile?: bytes;
 
   /** The status of the last operation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -56,13 +56,7 @@ union ProvisioningState {
 interface Employees {
   get is ArmResourceRead<Employee>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
-  update is ArmCustomPatchSync<
-    Employee,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Employee,
-      EmployeeProperties
-    >
-  >;
+  update is ArmResourcePatchSync<Employee, EmployeeProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;

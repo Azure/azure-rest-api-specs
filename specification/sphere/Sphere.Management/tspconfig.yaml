@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/sphere"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -18,6 +21,18 @@ options:
     clear-output-folder: true
     namespace: Azure.Sphere
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-sphere"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-sphere"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-sphere"
+    namespace: "azure.mgmt.sphere"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

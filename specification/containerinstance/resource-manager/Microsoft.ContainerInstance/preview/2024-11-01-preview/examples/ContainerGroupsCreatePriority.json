@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "demo",
+    "containerGroupName": "demo1",
+    "containerGroup": {
+      "properties": {
+        "sku": "Standard",
+        "containers": [
+          {
+            "name": "test-container-001",
+            "properties": {
+              "image": "alpine:latest",
+              "command": [
+                "/bin/sh",
+                "-c",
+                "sleep 10"
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
+                }
+              }
+            }
+          }
+        ],
+        "restartPolicy": "Never",
+        "osType": "Linux",
+        "priority": "Spot"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "provisioningState": "Succeeded",
+          "containers": [
+            {
+              "name": "test-container-001",
+              "properties": {
+                "image": "alpine:latest",
+                "command": [
+                  "/bin/sh",
+                  "-c",
+                  "sleep 10"
+                ],
+                "ports": [],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "restartPolicy": "Never",
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Succeeded"
+          },
+          "priority": "Spot"
+        },
+        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sku": "Standard",
+          "provisioningState": "Created",
+          "containers": [
+            {
+              "name": "test-container-001",
+              "properties": {
+                "image": "alpine:latest",
+                "command": [
+                  "/bin/sh",
+                  "-c",
+                  "sleep 10"
+                ],
+                "ports": [],
+                "environmentVariables": [],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                }
+              }
+            }
+          ],
+          "initContainers": [],
+          "restartPolicy": "Never",
+          "osType": "Linux",
+          "instanceView": {
+            "events": [],
+            "state": "Created"
+          },
+          "priority": "Spot"
+        },
+        "id": "/subscriptions/subId/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
+        "name": "demo1",
+        "type": "Microsoft.ContainerInstance/containerGroups",
+        "location": "eastus"
+      }
+    }
+  }
+}

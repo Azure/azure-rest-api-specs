@@ -26,7 +26,16 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2024-11
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.ContainerInstance/preview/2024-11-01-preview/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-10
@@ -238,6 +247,13 @@ suppressions:
       - containerInstance.json
     where:
       - $.definitions.SecretReferenceVolume
+  - code: GetCollectionResponseSchema
+    reason: We do not return the instanceView property in our List operation, we just return this 
+            property for our Get operations. This change has been part of our stable api versions for a couple of years
+    from:
+      - containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"]
 ```
 
 ---
@@ -251,7 +267,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

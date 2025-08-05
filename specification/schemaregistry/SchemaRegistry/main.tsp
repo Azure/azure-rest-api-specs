@@ -18,9 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
-  title: "Azure Schema Registry",
-})
+@service(#{ title: "Azure Schema Registry" })
 
 // Supported operations.
 //  GET https://{namespaceName}.servicebus.windows.net/$schemaGroups?api-version={apiVersion}
@@ -34,7 +32,7 @@ using Azure.Core;
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    fullyQualifiedNamespace: url,
+    fullyQualifiedNamespace: string,
   }
 )
 @versioned(ServiceVersion)
@@ -249,8 +247,8 @@ model SchemaGroups {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 /**
@@ -265,8 +263,8 @@ model SchemaVersions {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
-  NextLink?: string;
+  @nextLink
+  NextLink?: url;
 }
 
 // Resource Models
@@ -275,7 +273,7 @@ model SchemaVersions {
 model SchemaGroup {
   @key("groupName")
   @doc("Name of schema group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupName: string;
 }
 
@@ -285,7 +283,7 @@ model SchemaGroup {
 model SchemasName {
   @key("schemaName")
   @doc("Name of schema.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @pattern("^[A-Za-z0-9][^\\\\/$:]*$")
   schemaName: string;

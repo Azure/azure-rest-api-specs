@@ -117,7 +117,7 @@ model FaceUserData {
 @resource("persistedfaces")
 model BaseFace {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Face ID of the face.")
   persistedFaceId: uuid;
 

@@ -560,7 +560,7 @@
     },
     "/app/ledgerUsers/{userId}": {
       "delete": {
-        "operationId": "DeleteLedgerUsers",
+        "operationId": "DeleteLedgerUser",
         "x-ms-examples": {
           "DeleteUser": {
             "$ref": "./examples/ledger/DeleteUser.json"
@@ -588,10 +588,10 @@
         }
       },
       "get": {
-        "operationId": "GetLedgerUsers",
+        "operationId": "GetLedgerUser",
         "x-ms-examples": {
-          "GetLedgerUsers": {
-            "$ref": "./examples/ledger/GetLedgerUsers.json"
+          "GetLedgerUser": {
+            "$ref": "./examples/ledger/GetLedgerUser.json"
           }
         },
         "summary": "Gets a user with multiple roles.",
@@ -619,10 +619,10 @@
         }
       },
       "patch": {
-        "operationId": "CreateOrUpdateLedgerUsers",
+        "operationId": "CreateOrUpdateLedgerUser",
         "x-ms-examples": {
-          "CreateOrUpdateLedgerUsers": {
-            "$ref": "./examples/ledger/CreateOrUpdateLedgerUsers.json"
+          "CreateOrUpdateLedgerUser": {
+            "$ref": "./examples/ledger/CreateOrUpdateLedgerUser.json"
           }
         },
         "summary": "Adds a user or updates a user's fields.",
@@ -717,7 +717,7 @@
         }
       }
     },
-    "/app/userDefinedEndpoints/runTimeOptions": {
+    "/app/userDefinedEndpoints/runtimeOptions": {
       "get": {
         "operationId": "GetRuntimeOptions",
         "x-ms-examples": {
@@ -748,10 +748,10 @@
         }
       },
       "patch": {
-        "operationId": "PatchRuntimeOptions",
+        "operationId": "UpdateRuntimeOptions",
         "x-ms-examples": {
-          "PatchRuntimeOptions": {
-            "$ref": "./examples/ledger/PatchRuntimeOptions.json"
+          "UpdateRuntimeOptions": {
+            "$ref": "./examples/ledger/UpdateRuntimeOptions.json"
           }
         },
         "summary": "Runtime options for user defined endpoints.",
@@ -836,7 +836,7 @@
           "200": {
             "description": "Gets role actions for user defined roles",
             "schema": {
-              "$ref": "#/definitions/Role"
+              "$ref": "#/definitions/Roles"
             }
           },
           "default": {
@@ -848,10 +848,10 @@
         }
       },
       "put": {
-        "operationId": "PutUserDefinedRole",
+        "operationId": "CreateUserDefinedRole",
         "x-ms-examples": {
-          "PutUserDefinedRole": {
-            "$ref": "./examples/ledger/PutUserDefinedRole.json"
+          "CreateUserDefinedRole": {
+            "$ref": "./examples/ledger/CreateUserDefinedRole.json"
           }
         },
         "summary": "Creates new roles and their actions",
@@ -877,13 +877,13 @@
         }
       },
       "patch": {
-        "operationId": "PatchUserDefinedRole",
+        "operationId": "UpdateUserDefinedRole",
         "x-ms-examples": {
-          "PatchUserDefinedRole": {
-            "$ref": "./examples/ledger/PatchUserDefinedRole.json"
+          "UpdateUserDefinedRole": {
+            "$ref": "./examples/ledger/UpdateUserDefinedRole.json"
           }
         },
-        "summary": "Patch replaces the allowed action on existing roles",
+        "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove an existing action, the role must be deleted and recreated.",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
         "parameters": [
           {
@@ -1712,6 +1712,13 @@
     "boolean": {
       "type": "boolean"
     },
+    "Roles": {
+      "description": "Definition for roles",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Role"
+      }
+    },
     "Role": {
       "description": "Definition for roles",
       "type": "object",
@@ -1724,7 +1731,7 @@
           "items": {
             "$ref": "#/definitions/RoleActionDef"
           },
-          "type": "object"
+          "type": "array"
         }
       }
     },
@@ -1823,7 +1830,7 @@
       }
     },
     "ModuleNameParameter": {
-      "name": "module",
+      "name": "module_name",
       "required": true,
       "description": "module name of the user defined endpoint",
       "in": "query",
@@ -1842,13 +1849,13 @@
       }
     },
     "RoleParameter": {
-      "name": "role",
+      "name": "roles",
       "description": "user defined role",
       "in": "body",
       "required": true,
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/Role"
+        "$ref": "#/definitions/Roles"
       }
     },
     "RoleNameParameter": {

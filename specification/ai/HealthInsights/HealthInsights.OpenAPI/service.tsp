@@ -3,9 +3,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@service({
-  title: "Azure AI Health Insights",
-})
+@service(#{ title: "Azure AI Health Insights" })
 @versioned(ApiVersion)
 @doc("Azure AI Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.")
 @server(
@@ -34,4 +32,7 @@ enum ApiVersion {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_08_01_preview: "2024-08-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_10_01: "2024-10-01",
 }

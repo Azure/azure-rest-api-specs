@@ -27,12 +27,20 @@ These are the global settings for the scvmm.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-06
+tag: package-2025-03
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03'
+input-file:
+  - Microsoft.ScVmm/stable/2025-03-13/scvmm.json
 ```
 ### Tag: package-2024-06
 
@@ -101,10 +109,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js scvmm/resource-manager
@@ -117,10 +121,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

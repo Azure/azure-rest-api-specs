@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2025-05-preview
 ```
 
 ### Tag: package-2017-04
@@ -248,6 +248,27 @@ input-file:
 - Microsoft.EventHub/preview/2024-05-01-preview/ApplicationGroups.json
 ```
 
+### Tag: package-2025-05-preview
+
+These settings apply only when `--tag=package-2025-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-preview'
+input-file:
+- Microsoft.EventHub/preview/2025-05-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2025-05-01-preview/Clusters-preview.json
+- Microsoft.EventHub/preview/2025-05-01-preview/namespaces.json
+- Microsoft.EventHub/preview/2025-05-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2025-05-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2025-05-01-preview/AuthorizationRules.json
+- Microsoft.EventHub/preview/2025-05-01-preview/CheckNameAvailability.json
+- Microsoft.EventHub/preview/2025-05-01-preview/consumergroups.json
+- Microsoft.EventHub/preview/2025-05-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2025-05-01-preview/operations.json
+- Microsoft.EventHub/preview/2025-05-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2025-05-01-preview/SchemaRegistry.json
+- Microsoft.EventHub/preview/2025-05-01-preview/ApplicationGroups.json
+```
+
 ## Suppression
 
 ``` yaml
@@ -313,6 +334,9 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: namespaces.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
@@ -344,6 +368,22 @@ directive:
   - suppress: ResourceNameRestriction
     from: Clusters-preview.json
     reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: namespaces.json
+    reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: namespaces.json
+    reason: Breaking Change.
+  - suppress: TrackedResourcePatchOperation
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: TrackedResourcesMustHavePut
+    from: namespaces.json
+    reason: Breaking change.
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
@@ -482,7 +522,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -495,20 +535,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.EventHub
-  output-folder: $(csharp-sdks-folder)/eventhub/Microsoft.Azure.Management.EventHub/src/Generated
-  clear-output-folder: true
-```
 
 ## Python
 

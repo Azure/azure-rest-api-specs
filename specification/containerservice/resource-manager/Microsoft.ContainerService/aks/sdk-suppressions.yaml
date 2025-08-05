@@ -6,6 +6,7 @@ suppressions:
         - Struct `OSOptionProfile` has been removed
         - Struct `OSOptionPropertyList` has been removed
         - Struct `OSOptionProperty` has been removed
+        - Field `EnablePodSecurityPolicy` of struct `ManagedClusterProperties` has been removed
   azure-sdk-for-python:
     - package: azure-mgmt-containerservice
       breaking-changes:
@@ -13,7 +14,18 @@ suppressions:
         - Model ManagedClusterAzureMonitorProfileAppMonitoring no longer has parameter enabled
         - Model ManagedClusterAzureMonitorProfileContainerInsights no longer has parameter windows_host_logs
         - Model AgentPoolSecurityProfile no longer has parameter ssh_access
+        - Model AdvancedNetworkingObservability no longer has parameter tls_management
+        - Model AdvancedNetworkingSecurity no longer has parameter fqdn_policy
+        - Model IstioEgressGateway has a new required parameter name
+        - Model AutoScaleProfile no longer has parameter os_disk_size_gb
+        - Model AutoScaleProfile no longer has parameter os_disk_type
+        - Model AutoScaleProfile no longer has parameter sizes
+        - Model ManagedCluster no longer has parameter enable_pod_security_policy
+        - Model ManualScaleProfile no longer has parameter os_disk_size_gb
+        - Model ManualScaleProfile no longer has parameter os_disk_type
+        - Model ManualScaleProfile no longer has parameter sizes
   azure-sdk-for-js:
     - package: '@azure/arm-containerservice'
       breaking-changes:
         - Removed operation ManagedClusters.getOSOptions
+        - Interface ManagedCluster no longer has parameter enablePodSecurityPolicy

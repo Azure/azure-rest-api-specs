@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLServerManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2024-08-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,11 +41,11 @@
         ],
         "operationId": "LogFiles_ListByServer",
         "x-ms-examples": {
-          "List all server log files for a server": {
+          "List all captured logs for download in a flexible server.": {
             "$ref": "./examples/LogFilesListByServer.json"
           }
         },
-        "description": "List all the server log files in a given server.",
+        "description": "Lists all captured logs for download in a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -97,18 +97,18 @@
         "sizeInKb": {
           "type": "integer",
           "format": "int64",
-          "description": "The size in kb of the logFile."
+          "description": "Size (in KB) of the log file."
         },
         "type": {
           "type": "string",
-          "description": "Type of the log file."
+          "description": "Type of log file. Can be 'ServerLogs' or 'UpgradeLogs'."
         },
         "url": {
           "type": "string",
-          "description": "The url to download the log file from."
+          "description": "URL to download the log file from."
         }
       },
-      "description": "The properties of a logFile."
+      "description": "Properties of a log file."
     },
     "LogFile": {
       "type": "object",
@@ -116,7 +116,7 @@
         "properties": {
           "$ref": "#/definitions/LogFileProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a logFile."
+          "description": "Properties of a log file."
         }
       },
       "allOf": [
@@ -124,7 +124,7 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a logFile."
+      "description": "Log file."
     },
     "LogFileListResult": {
       "type": "object",
@@ -134,14 +134,14 @@
           "items": {
             "$ref": "#/definitions/LogFile"
           },
-          "description": "The list of logFiles in a server"
+          "description": "List of log files in a flexible server."
         },
         "nextLink": {
-          "description": "The link used to get the next page of operations.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       },
-      "description": "A List of logFiles."
+      "description": "List of log files."
     }
   },
   "parameters": {}

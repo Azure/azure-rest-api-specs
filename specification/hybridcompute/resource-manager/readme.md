@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-07
+tag: package-preview-2025-02-19
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -76,6 +76,46 @@ directive:
   # we don't want enable PATCH for run command
   - remove-operation: MachineRunCommands_Update
 
+```
+
+### Tag: package-preview-2025-02-19
+
+These settings apply only when `--tag=package-preview-2025-02-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-19'
+input-file:
+  - Microsoft.HybridCompute/preview/2025-02-19-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2025-02-19-preview/privateLinkScopes.json
+```
+
+### Tag: package-2025-01-13
+
+These settings apply only when `--tag=package-2025-01-13` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-13'
+input-file:
+  - Microsoft.HybridCompute/stable/2025-01-13/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2025-01-13/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/privateLinkScopes.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-09-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-09-10-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2024-07
@@ -343,7 +383,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -400,4 +440,8 @@ suppressions:
     from: HybridCompute.json
     where: $.definitions.AgentVersion
     reason: Previously approved and released, would require potentially breaking changes
+  - code: GetCollectionResponseSchema
+    from: HybridCompute.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
+    reason: False positive. See https://github.com/Azure/azure-openapi-validator/issues/750
 ```

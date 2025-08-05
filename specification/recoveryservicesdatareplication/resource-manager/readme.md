@@ -26,7 +26,7 @@ These are the global settings for the recoveryservicesdatareplication.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-02-16-preview
+tag: package-2024-09-01
 ```
 
 ### Tag: package-2021-02-16-preview
@@ -36,6 +36,51 @@ These settings apply only when `--tag=package-2021-02-16-preview` is specified o
 ```yaml $(tag) == 'package-2021-02-16-preview'
 input-file:
   - Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
+```
+
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01'
+input-file:
+  - Microsoft.DataReplication/stable/2024-09-01/recoveryservicesdatareplication.json
+```
+
+---
+
+## Suppression
+
+``` yaml
+suppressions:
+  - code: GuidUsage
+    reason: These parameters have already shipped as type GUID in the previous API version.  
+    where:
+      - $.definitions.HyperVToAzStackHCIDiskInput.properties.diskIdentifier.format
+      - $.definitions.VMwareToAzStackHCIDiskInput.properties.diskIdentifier.format
+  
+  - code: AllTrackedResourcesMustHaveDelete
+    reason: PrivateEndpointConnectionProxy has a delete operation defined.
+    where:
+      - $.definitions.PrivateEndpointConnectionProxy
+
+  - code: TrackedResourcePatchOperation
+    reason: PrivateEndpointConnectionProxy does not support an update operation.
+    where:
+      - $.definitions.PrivateEndpointConnectionProxy
+
+  - code: PatchBodyParametersSchema
+    reason: False positive since these properties are either discriminator or identity that are required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}"].patch.parameters[4].schema.properties.identity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}"].patch.parameters[5].schema.properties.properties
+  
+  - code: BodyTopLevelProperties
+    reason: These properties have already shipped in the previous API version.
+    where:
+      - $.definitions.OperationStatus
+
 ```
 
 ---
@@ -52,10 +97,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 ## Az
 
@@ -68,10 +112,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyAssignmentName": "CostManagement",
+    "api-version": "2025-03-01",
+    "parameters": {
+      "properties": {
+        "overrides": [
+          {
+            "kind": "policyEffect",
+            "value": "Audit",
+            "selectors": [
+              {
+                "kind": "policyDefinitionReferenceId",
+                "in": [
+                  "Limit_Skus",
+                  "Limit_Locations"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "displayName": "Limit the resource location and resource SKU",
+          "description": "Limit the resource location and resource SKU",
+          "metadata": {
+            "assignedBy": "Special Someone"
+          },
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+          "definitionVersion": "1.*.*",
+          "notScopes": [],
+          "enforcementMode": "Default",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+          "overrides": [
+            {
+              "kind": "policyEffect",
+              "value": "Audit",
+              "selectors": [
+                {
+                  "kind": "policyDefinitionReferenceId",
+                  "in": [
+                    "Limit_Skus",
+                    "Limit_Locations"
+                  ]
+                }
+              ]
+            }
+          ],
+          "instanceId": "a3c4d5e6-f7a8-9b0c-1d2e-3f4a5b6c7d8e"
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "name": "CostManagement"
+      }
+    }
+  }
+}

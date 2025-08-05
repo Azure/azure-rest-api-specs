@@ -264,15 +264,15 @@ model ModelInfo {
   alignPolicy?: AlignPolicy;
 
   @doc("Model status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ModelStatus;
 
   @doc("Error messages after failure to create a model.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: ErrorResponse[];
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diagnosticsInfo?: DiagnosticsInfo;
 }
 

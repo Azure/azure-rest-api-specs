@@ -27,8 +27,26 @@ These are the global settings for the Kubernetes Connect RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-07-15-preview
+tag: package-2025-08-01-preview
 ```
+### Tag: package-2025-08-01-preview
+
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-01-preview'
+input-file:
+  - Microsoft.Kubernetes/preview/2025-08-01-preview/connectedClusters.json
+```
+
+### Tag: package-2024-12-01-preview
+
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01-preview'
+input-file:
+  - Microsoft.Kubernetes/preview/2024-12-01-preview/connectedClusters.json
+```
+
 ### Tag: package-2024-07-15-preview
 
 These settings apply only when `--tag=package-2024-07-15-preview` is specified on the command line.
@@ -151,7 +169,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridkubernetes']
   - repo: azure-resource-manager-schemas

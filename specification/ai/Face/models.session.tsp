@@ -25,6 +25,7 @@ model CreateLivenessSessionContent {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
+  @removed(Versions.v1_2)
   @doc("Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented.")
   sendResultsToClient?: boolean;
 
@@ -36,8 +37,9 @@ model CreateLivenessSessionContent {
   enableSessionImage?: boolean;
 
   @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  @renamedFrom(Versions.v1_2, "livenessSingleModalModel")
   @added(Versions.v1_2_preview_1)
-  livenessSingleModalModel?: LivenessModel;
+  livenessModelVersion?: LivenessModel;
 
   ...LivenessSessionData;
 }
@@ -50,7 +52,7 @@ model CreateLivenessWithVerifySessionJsonContent
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
 
-  @doc("Threshold for confidence of the face verification.")
+  @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
   @added(Versions.v1_2_preview_1)
   @minValue(0)
   @maxValue(1)
@@ -66,13 +68,29 @@ model LivenessSessionData {
   @minValue(60)
   @maxValue(86400)
   authTokenTimeToLiveInSeconds?: int32 = 600;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
+  numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Unique Guid per each end-user. This is to provide rate limiting and anti-hammering. If 'userCorrelationIdSetInClient' is true in this request, this 'userCorrelationId' must be null.")
+  userCorrelationId?: string;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
+  userCorrelationIdSetInClient?: boolean;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Specify the expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
 }
 
 @doc("Session data returned for enumeration.")
 model LivenessSessionItem {
   @doc("The unique ID to reference this session.")
   @key("sessionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("DateTime when this session was created.")
@@ -96,15 +114,21 @@ model LivenessSessionDetails {
   result?: LivenessSessionAuditEntry;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "LivenessSession")
 @doc("Session result of detect liveness.")
 @resource("detectLiveness/singleModal/sessions")
-model LivenessSession is LivenessSessionItem {
+model LivenessSessionBeforeV1_2 is LivenessSessionItem {
   ...LivenessSessionDetails;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "LivenessWithVerifySession")
 @doc("Session result of detect liveness with verify.")
 @resource("detectLivenessWithVerify/singleModal/sessions")
-model LivenessWithVerifySession is LivenessSessionItem {
+model LivenessWithVerifySessionBeforeV1_2 is LivenessSessionItem {
   ...LivenessSessionDetails;
 }
 
@@ -184,8 +208,15 @@ model LivenessOutputsTarget {
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
+
+  @removed(Versions.v1_2)
   v2022_10_15_preview_04: "2022-10-15-preview.04",
+
+  @removed(Versions.v1_2)
   v2023_12_20_preview_06: "2023-12-20-preview.06",
+
+  @added(Versions.v1_2)
+  v2024_11_15: "2024-11-15",
 }
 
 @doc("The detail of face for verification.")
@@ -199,6 +230,7 @@ model LivenessWithVerifyImage {
 
 @doc("The face verification output.")
 model LivenessWithVerifyOutputs {
+  @removed(Versions.v1_2)
   @doc("The detail of face for verification.")
   verifyImage: LivenessWithVerifyImage;
 
@@ -297,21 +329,23 @@ model LivenessSessionAuditEntry {
 model CreateLivenessWithVerifySessionMultipartContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessWithVerifySessionJsonContent;
+  Parameters: HttpPart<CreateLivenessWithVerifySessionJsonContent>;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  VerifyImage: bytes;
+  VerifyImage: HttpPart<bytes>;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for update model in new version."
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "CreateLivenessWithVerifySessionRequest")
 @doc("Request wrapper of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionRequest {
+model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
   contentType: "multipart/form-data";
 
   @doc("Request content of liveness with verify session creation.")
-  @body
+  @multipartBody
   body: CreateLivenessWithVerifySessionMultipartContent;
 }
 
@@ -326,3 +360,295 @@ model SessionImageStream {
   @body
   imageContent: bytes;
 }
+
+@added(Versions.v1_2)
+@doc("Common liveness session data.")
+model LivenessSessionCommonData {
+  @doc("The unique ID to reference this session.")
+  @key
+  @visibility(Lifecycle.Read)
+  sessionId: string;
+
+  @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
+  authToken: string;
+
+  @doc("The current status of the session.")
+  status: Foundations.OperationState;
+
+  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  modelVersion?: LivenessModel;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Denotes if the abuse monitoring feature was enabled during this session.")
+  isAbuseMonitoringEnabled?: HttpPart<boolean>;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
+}
+
+@added(Versions.v1_2)
+@doc("Session result of detect liveness.")
+@resource("detectLiveness-sessions")
+model LivenessSession is LivenessSessionCommonData {
+  @doc("The results of the liveness session.")
+  results: LivenessSessionResults;
+}
+
+@added(Versions.v1_2)
+@doc("Session result of detect liveness with verify.")
+@resource("detectLivenessWithVerify-sessions")
+model LivenessWithVerifySession is LivenessSessionCommonData {
+  @doc("The results of the liveness with verify session.")
+  results: LivenessWithVerifySessionResults;
+}
+
+@added(Versions.v1_2)
+@doc("The results of the liveness session.")
+model LivenessSessionResults {
+  @doc("The attempts data of underlying liveness call with the session.")
+  attempts: LivenessSessionAttempt[];
+}
+
+@added(Versions.v1_2)
+@doc("The results of the liveness with verify session.")
+model LivenessWithVerifySessionResults {
+  @doc("The references used for face verification.")
+  verifyReferences: LivenessWithVerifyReference[];
+
+  @doc("The attempts data of underlying liveness with verify call with the session.")
+  attempts: LivenessWithVerifySessionAttempt[];
+}
+
+@added(Versions.v1_2)
+@doc("The liveness session attempt.")
+model LivenessSessionAttempt {
+  @doc("The attempt ID, start from 1.")
+  attemptId: int32;
+
+  @doc("The status of the attempt.")
+  attemptStatus: Foundations.OperationState;
+
+  @doc("The result of the liveness call, will be null if there is error.")
+  result?: LivenessResult;
+
+  @doc("The error of the liveness call, will be null if there is result.")
+  error?: LivenessError;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The client information gathered during the liveness attempt.")
+  clientInformation?: ClientInformation[];
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The abuse monitoring result for the liveness attempt.")
+  abuseMonitoringResult?: AbuseMonitoringResult;
+}
+
+@added(Versions.v1_2)
+@doc("The liveness with verify session attempt.")
+model LivenessWithVerifySessionAttempt {
+  @doc("The attempt ID, start from 1.")
+  attemptId: int32;
+
+  @doc("The status of the attempt.")
+  attemptStatus: Foundations.OperationState;
+
+  @doc("The result of the liveness with verify call, will be null if there is error.")
+  result?: LivenessWithVerifyResult;
+
+  @doc("The error of the liveness with verify call, will be null if there is result.")
+  error?: LivenessError;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The client information gathered during the liveness attempt.")
+  clientInformation?: ClientInformation[];
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The abuse monitoring result for the liveness attempt.")
+  abuseMonitoringResult?: AbuseMonitoringResult;
+}
+
+@added(Versions.v1_2)
+@doc("The detail of face for verification.")
+model LivenessWithVerifyReference {
+  @doc("The image type which contains the face rectangle where the liveness classification was made on.")
+  referenceType: ImageType;
+
+  @doc("The face region where the comparison image's classification was made.")
+  faceRectangle: FaceRectangle;
+
+  @doc("Quality of face image for recognition.")
+  qualityForRecognition: QualityForRecognition;
+}
+
+@added(Versions.v1_2)
+@doc("The results of the liveness classification.")
+model LivenessResult {
+  @doc("The liveness classification for the target face.")
+  livenessDecision?: LivenessDecision;
+
+  @doc("Targets used for liveness classification.")
+  targets: LivenessDecisionTargets;
+
+  @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
+  digest: string;
+
+  @doc("The image ID of the session request.")
+  sessionImageId?: string;
+}
+
+@added(Versions.v1_2)
+@doc("The results of the liveness with verify call.")
+model LivenessWithVerifyResult {
+  ...LivenessResult;
+
+  @doc("The face verification output. Only available when the request is liveness with verify.")
+  verifyResult?: LivenessWithVerifyOutputs;
+
+  @doc("The sha256 hash of the verify-image in the request.")
+  verifyImageHash?: string;
+}
+
+@added(Versions.v1_2)
+@doc("The error of the liveness classification.")
+model LivenessError {
+  @doc("The error code.")
+  code: string;
+
+  @doc("The error message.")
+  message: string;
+
+  @doc("Targets used for liveness classification.")
+  targets: LivenessDecisionTargets;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The client information gathered during the liveness attempt.")
+model ClientInformation {
+  @doc("The client ip address seen during the liveness attempt.")
+  ip: string;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The abuse monitoring result for the liveness attempt.")
+model AbuseMonitoringResult {
+  @doc("Denotes if abuse detection triggered during this liveness attempt.")
+  isAbuseDetected: HttpPart<boolean>;
+
+  @doc("Denotes if abuse detection triggered during this liveness attempt.")
+  otherFlaggedSessions: OtherFlaggedSessions[];
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("The other sessions flagged as abuse based on the information gathered during this attempt.")
+model OtherFlaggedSessions {
+  @doc("The attempt ID, start from 1.")
+  attemptId: int32;
+
+  @doc("The unique session ID of the flagged session.")
+  sessionId: string;
+
+  @doc("The image ID from the flagged session.")
+  sessionImageId?: string;
+}
+
+@added(Versions.v1_2)
+@doc("The targets used for liveness classification.")
+model LivenessDecisionTargets {
+  @doc("The target from color image used for liveness classification.")
+  color: LivenessColorDecisionTarget;
+}
+
+@added(Versions.v1_2)
+@doc("The target from color image used for liveness classification.")
+model LivenessColorDecisionTarget {
+  @doc("The face region where the liveness classification was made on.")
+  faceRectangle: FaceRectangle;
+}
+
+@added(Versions.v1_2)
+@doc("Request wrapper of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionRequest {
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+
+  @doc("Request content of liveness with verify session creation.")
+  @multipartBody
+  body: CreateLivenessWithVerifySessionContent;
+}
+
+@added(Versions.v1_2)
+@doc("Request of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionContent {
+  @doc("Type of liveness mode the client should follow.")
+  livenessOperationMode: HttpPart<LivenessOperationMode>;
+
+  @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
+  deviceCorrelationIdSetInClient?: HttpPart<boolean>;
+
+  @doc("Whether or not store the session image.")
+  enableSessionImage?: HttpPart<boolean>;
+
+  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  livenessModelVersion?: HttpPart<LivenessModel>;
+
+  @doc("Whether or not return the verify image hash.")
+  returnVerifyImageHash?: HttpPart<boolean>;
+
+  @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
+  verifyConfidenceThreshold?: HttpPart<confidenceScore>;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
+  verifyImage: HttpPart<bytes>;
+
+  @doc("Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.")
+  deviceCorrelationId?: HttpPart<string>;
+
+  @doc("Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.")
+  authTokenTimeToLiveInSeconds?: HttpPart<authTokenLifetimeInSeconds>; // = 600;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("The number of times a client can attempt a liveness check using the same authToken. Default value is 1. Maximum value is 3.")
+  numberOfClientAttemptsAllowed?: HttpPart<numberOfClientAttemptsAllowed>; // = 1;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Settings for liveness abuse monitoring.")
+model LivenessAbuseMonitoringSetting {
+  /** Whether liveness abuse monitoring is enabled */
+  enabled: HttpPart<boolean>;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Response model for client assets access token.")
+model ClientAssetsAccessTokenResponse {
+  @doc("The expiry time of the access token.")
+  expiry: utcDateTime;
+
+  @doc("The access token for client assets.")
+  accessToken: string;
+
+  @doc("The base64 encoded access token.")
+  base64AccessToken: string;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Response model for settings.")
+model Settings {
+  /** Liveness abuse monitoring settings */
+  livenessAbuseMonitoring: LivenessAbuseMonitoringSetting;
+}
+
+@minValue(60)
+@maxValue(86400)
+scalar authTokenLifetimeInSeconds extends int32;
+
+@minValue(0)
+@maxValue(1)
+scalar confidenceScore extends float32;
+
+@minValue(1)
+@maxValue(3)
+scalar numberOfClientAttemptsAllowed extends int32;

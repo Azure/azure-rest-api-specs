@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/appcomplianceautomation"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -16,10 +15,17 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/appcomplianceautomation.json"
   "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
     flavor: azure
     package-dir: "arm-appcomplianceautomation"
-    packageDetails:
+    package-details:
       name: "@azure/arm-appcomplianceautomation"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-appcomplianceautomation"
+    namespace: "azure.mgmt.appcomplianceautomation"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
   # "@azure-tools/typespec-java":
   #   flavor: azure
   #   package-dir: "azure-resourcemanager-appcomplianceautomation"

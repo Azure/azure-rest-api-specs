@@ -1,8 +1,11 @@
 import { RuleResult } from "./rule-result.js";
-import { TsvHost } from "./tsv-host.js";
 
 export interface Rule {
   readonly name: string;
   readonly description: string;
-  execute(host?: TsvHost, folder?: string): Promise<RuleResult>;
+  // TODO: required when all rules apply it
+  readonly action?: string;
+  // TODO: required when all rules apply it
+  readonly link?: string;
+  execute(folder: string): Promise<RuleResult>;
 }

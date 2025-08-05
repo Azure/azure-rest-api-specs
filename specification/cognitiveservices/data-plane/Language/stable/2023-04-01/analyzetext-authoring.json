@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
     "version": "2023-04-01",
-    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms. The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -20,7 +20,7 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "description": "Supported Cognitive Services endpoint (e.g.,\nhttps://<resource-name>.api.cognitiveservices.azure.com).",
+        "description": "Supported Cognitive Services endpoint e.g., https://<resource-name>.api.cognitiveservices.azure.com.",
         "required": true,
         "type": "string",
         "format": "url"
@@ -63,7 +63,7 @@
   "paths": {
     "/authoring/analyze-text/projects": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListProjects",
+        "operationId": "TextAnalysisAuthoringListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -89,7 +89,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -105,7 +111,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetProject",
+        "operationId": "TextAuthoringProject_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -129,7 +135,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -140,7 +152,7 @@
         }
       },
       "patch": {
-        "operationId": "TextAnalysisAuthoring_CreateProject",
+        "operationId": "TextAuthoringProject_CreateProject",
         "description": "The most basic operation that applies to a resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -162,7 +174,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions"
             }
           }
         ],
@@ -182,7 +194,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -193,7 +211,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteProject",
+        "operationId": "TextAuthoringProject_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -221,7 +239,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -235,7 +259,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:export": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Export",
+        "operationId": "TextAuthoringProject_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -251,7 +275,7 @@
           {
             "name": "stringIndexType",
             "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
             "required": true,
             "type": "string",
             "enum": [
@@ -264,7 +288,7 @@
                 {
                   "name": "Utf16CodeUnit",
                   "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
                 }
               ]
             }
@@ -279,7 +303,7 @@
           {
             "name": "trainedModelLabel",
             "in": "query",
-            "description": "Trained model label to export. If the trainedModelLabel is null, the default\nbehavior is to export the current working copy.",
+            "description": "Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.",
             "required": false,
             "type": "string"
           }
@@ -298,7 +322,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -312,8 +342,8 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:import": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Import",
-        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+        "operationId": "TextAuthoringProject_Import",
+        "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -331,7 +361,7 @@
             "description": "The project data to import.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportedProject"
+              "$ref": "#/definitions/TextAnalysisAuthoringExportedProject"
             }
           }
         ],
@@ -349,7 +379,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -363,7 +399,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:train": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Train",
+        "operationId": "TextAuthoringProject_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -382,7 +418,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -400,7 +436,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -414,7 +456,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListDeployments",
+        "operationId": "TextAnalysisAuthoringListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -447,7 +489,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -463,7 +511,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetDeployment",
+        "operationId": "TextAuthoringDeployment_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -494,7 +542,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -505,7 +559,7 @@
         }
       },
       "put": {
-        "operationId": "TextAnalysisAuthoring_DeployProject",
+        "operationId": "TextAuthoringDeployment_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -549,7 +603,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -561,7 +621,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteDeployment",
+        "operationId": "TextAuthoringDeployment_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -596,7 +656,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -610,7 +676,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetDeploymentStatus",
+        "operationId": "TextAuthoringDeployment_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -648,7 +714,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -661,7 +733,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_SwapDeployments",
+        "operationId": "TextAuthoringProject_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -680,7 +752,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -698,7 +770,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -712,7 +790,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetSwapDeploymentsStatus",
+        "operationId": "TextAuthoringProject_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -743,7 +821,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -756,8 +840,8 @@
     },
     "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetExportStatus",
-        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+        "operationId": "TextAuthoringProject_GetExportStatus",
+        "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -787,7 +871,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -800,7 +890,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetImportStatus",
+        "operationId": "TextAuthoringProject_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -831,7 +921,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -844,7 +940,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainedModels",
+        "operationId": "TextAnalysisAuthoringListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -877,7 +973,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -893,7 +995,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetTrainedModel",
+        "operationId": "TextAuthoringTrainedModel_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -924,7 +1026,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -935,7 +1043,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteTrainedModel",
+        "operationId": "TextAuthoringTrainedModel_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -963,7 +1071,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -976,7 +1090,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_LoadSnapshot",
+        "operationId": "TextAuthoringTrainedModel_LoadSnapshot",
         "description": "Long-running operation.",
         "parameters": [
           {
@@ -1011,7 +1125,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1025,8 +1145,8 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetModelEvaluationResults",
-        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+        "operationId": "TextAuthoringTrainedModel_GetModelEvaluationResults",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1068,7 +1188,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1084,8 +1210,8 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetModelEvaluationSummary",
-        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+        "operationId": "TextAuthoringTrainedModel_GetModelEvaluationSummary",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1115,7 +1241,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1128,7 +1260,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetLoadSnapshotStatus",
+        "operationId": "TextAuthoringTrainedModel_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -1166,7 +1298,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1179,7 +1317,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainingJobs",
+        "operationId": "TextAnalysisAuthoringListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -1212,7 +1350,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1228,7 +1372,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetTrainingStatus",
+        "operationId": "TextAuthoringProject_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -1259,7 +1403,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1272,7 +1422,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_CancelTrainingJob",
+        "operationId": "TextAuthoringProject_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -1307,7 +1457,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1321,7 +1477,7 @@
     },
     "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetProjectDeletionStatus",
+        "operationId": "TextAuthoringProject_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {
@@ -1345,7 +1501,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1358,7 +1520,7 @@
     },
     "/authoring/analyze-text/projects/global/languages": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetSupportedLanguages",
+        "operationId": "TextAnalysisAuthoringGetSupportedLanguages",
         "description": "Lists the supported languages.",
         "parameters": [
           {
@@ -1387,7 +1549,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1403,7 +1571,7 @@
     },
     "/authoring/analyze-text/projects/global/training-config-versions": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainingConfigVersions",
+        "operationId": "TextAnalysisAuthoringListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -1432,7 +1600,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1448,52 +1622,12 @@
     }
   },
   "definitions": {
-    "CreateProjectOptions": {
-      "type": "object",
-      "description": "Represents the options used to create or update a project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "The project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name."
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "projectKind",
-        "storageInputContainerName",
-        "projectName",
-        "language"
-      ]
-    },
-    "Error": {
+    "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/ErrorCode",
+          "type": "string",
           "description": "One of a server-defined set of error codes."
         },
         "message": {
@@ -1508,13 +1642,12 @@
           "type": "array",
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
         }
       },
       "required": [
@@ -1522,120 +1655,32 @@
         "message"
       ]
     },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "ProjectNotFound",
-        "OperationNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchIndexNotFound",
-        "TooManyRequests",
-        "AzureCognitiveSearchThrottling",
-        "AzureCognitiveSearchIndexLimitReached",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidArgument",
-            "value": "InvalidArgument"
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized"
-          },
-          {
-            "name": "Forbidden",
-            "value": "Forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "NotFound"
-          },
-          {
-            "name": "ProjectNotFound",
-            "value": "ProjectNotFound"
-          },
-          {
-            "name": "OperationNotFound",
-            "value": "OperationNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexNotFound",
-            "value": "AzureCognitiveSearchIndexNotFound"
-          },
-          {
-            "name": "TooManyRequests",
-            "value": "TooManyRequests"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexLimitReached",
-            "value": "AzureCognitiveSearchIndexLimitReached"
-          },
-          {
-            "name": "InternalServerError",
-            "value": "InternalServerError"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
-          },
-          {
-            "name": "Timeout",
-            "value": "Timeout"
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "QuotaExceeded"
-          },
-          {
-            "name": "Conflict",
-            "value": "Conflict"
-          },
-          {
-            "name": "Warning",
-            "value": "Warning"
-          }
-        ]
-      }
-    },
-    "ErrorResponse": {
+    "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
-      "description": "Error response.",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
       "required": [
         "error"
       ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
     },
     "EvaluationKind": {
       "type": "string",
@@ -1650,7 +1695,7 @@
           {
             "name": "percentage",
             "value": "percentage",
-            "description": "Split the data into training and test sets according to user-defined\npercentages."
+            "description": "Split the data into training and test sets according to user-defined percentages."
           },
           {
             "name": "manual",
@@ -1659,181 +1704,6 @@
           }
         ]
       }
-    },
-    "EvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
-    },
-    "ExportedProject": {
-      "type": "object",
-      "description": "Represents an exported project.",
-      "properties": {
-        "projectFileVersion": {
-          "type": "string",
-          "description": "The version of the exported file."
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
-        },
-        "metadata": {
-          "$ref": "#/definitions/CreateProjectOptions",
-          "description": "Represents the project metadata."
-        },
-        "assets": {
-          "$ref": "#/definitions/ExportedProjectAssets",
-          "description": "Represents the project assets."
-        }
-      },
-      "required": [
-        "projectFileVersion",
-        "stringIndexType",
-        "metadata"
-      ]
-    },
-    "ExportedProjectAssets": {
-      "type": "object",
-      "description": "Represents the assets of an exported project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind"
-        }
-      },
-      "discriminator": "projectKind",
-      "required": [
-        "projectKind"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidParameterValue",
-            "value": "InvalidParameterValue"
-          },
-          {
-            "name": "KnowledgeBaseNotFound",
-            "value": "KnowledgeBaseNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "ExtractionFailure",
-            "value": "ExtractionFailure"
-          },
-          {
-            "name": "InvalidRequestBodyFormat",
-            "value": "InvalidRequestBodyFormat"
-          },
-          {
-            "name": "EmptyRequest",
-            "value": "EmptyRequest"
-          },
-          {
-            "name": "MissingInputDocuments",
-            "value": "MissingInputDocuments"
-          },
-          {
-            "name": "InvalidDocument",
-            "value": "InvalidDocument"
-          },
-          {
-            "name": "ModelVersionIncorrect",
-            "value": "ModelVersionIncorrect"
-          },
-          {
-            "name": "InvalidDocumentBatch",
-            "value": "InvalidDocumentBatch"
-          },
-          {
-            "name": "UnsupportedLanguageCode",
-            "value": "UnsupportedLanguageCode"
-          },
-          {
-            "name": "InvalidCountryHint",
-            "value": "InvalidCountryHint"
-          }
-        ]
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "JobStatus": {
       "type": "string",
@@ -1890,8 +1760,7 @@
           "description": "The TextAnalysisAuthoringDocumentEvaluationResult items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1912,8 +1781,7 @@
           "description": "The TextAnalysisAuthoringProjectDeployment items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1934,8 +1802,7 @@
           "description": "The TextAnalysisAuthoringProjectMetadata items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1956,8 +1823,7 @@
           "description": "The TextAnalysisAuthoringProjectTrainedModel items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1978,8 +1844,7 @@
           "description": "The TextAnalysisAuthoringSupportedLanguage items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2000,8 +1865,7 @@
           "description": "The TextAnalysisAuthoringTrainingConfigVersion items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2022,8 +1886,7 @@
           "description": "The TextAnalysisAuthoringTrainingJobState items on this page",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2049,30 +1912,19 @@
           {
             "name": "CustomSingleLabelClassification",
             "value": "CustomSingleLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
+            "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
             "name": "CustomMultiLabelClassification",
             "value": "CustomMultiLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
+            "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
             "name": "CustomEntityRecognition",
             "value": "CustomEntityRecognition",
-            "description": "For building an extraction model to identify your domain categories using your\nown data."
+            "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]
-      }
-    },
-    "ProjectSettings": {
-      "type": "object",
-      "description": "Represents the settings used to define the project behavior.",
-      "properties": {
-        "confidenceThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The threshold of the class with the highest confidence, at which the prediction\nwill automatically be changed to \"None\". The value of the threshold should be\nbetween 0 and 1 inclusive."
-        }
       }
     },
     "StringIndexType": {
@@ -2087,33 +1939,9 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
-      }
-    },
-    "SwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
-    },
-    "TextAnalysisAuthoringConfusionMatrix": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
       }
     },
     "TextAnalysisAuthoringConfusionMatrixCell": {
@@ -2155,9 +1983,49 @@
         "trainedModelLabel"
       ]
     },
+    "TextAnalysisAuthoringCreateProjectOptions": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name."
+        },
+        "settings": {
+          "$ref": "#/definitions/TextAuthoringProjectSettings",
+          "description": "The project settings."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "projectKind",
+        "storageInputContainerName",
+        "projectName",
+        "language"
+      ]
+    },
     "TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
+      "description": "Represents the document evaluation result for a custom entity recognition project.",
       "properties": {
         "customEntityRecognitionResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult",
@@ -2195,7 +2063,7 @@
     },
     "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
+      "description": "Represents the document evaluation result for a custom multi-label classification project.",
       "properties": {
         "customMultiLabelClassificationResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult",
@@ -2214,7 +2082,7 @@
     },
     "TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom multi-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom multi-label classification project.",
       "properties": {
         "customMultiLabelClassificationEvaluation": {
           "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary",
@@ -2233,7 +2101,7 @@
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom single-label\nclassification project.",
+      "description": "Represents the document evaluation result for a custom single-label classification project.",
       "properties": {
         "customSingleLabelClassificationResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult",
@@ -2252,7 +2120,7 @@
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom single-label classification project.",
       "properties": {
         "customSingleLabelClassificationEvaluation": {
           "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary",
@@ -2275,7 +2143,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2300,17 +2169,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         }
       },
       "required": [
@@ -2354,8 +2221,7 @@
           "description": "Represents the document labelled entities.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2364,23 +2230,21 @@
     },
     "TextAnalysisAuthoringDocumentEntityRegionEvaluationResult": {
       "type": "object",
-      "description": "Represents the evaluation comparison between the expected and predicted\nentities of a document region.",
+      "description": "Represents the evaluation comparison between the expected and predicted entities of a document region.",
       "properties": {
         "expectedEntities": {
           "type": "array",
           "description": "Represents the region's expected entity labels.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "predictedEntities": {
           "type": "array",
           "description": "Represents the region's predicted entity labels.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "regionOffset": {
           "type": "integer",
@@ -2406,7 +2270,8 @@
       "properties": {
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
+          "description": "Represents the project kind.",
+          "readOnly": true
         },
         "location": {
           "type": "string",
@@ -2414,7 +2279,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "discriminator": "projectKind",
@@ -2426,7 +2291,7 @@
     },
     "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
+      "description": "Represents the comparison between the expected and predicted classes that are result from the evaluation operation.",
       "properties": {
         "expectedClasses": {
           "type": "array",
@@ -2450,7 +2315,7 @@
     },
     "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
+      "description": "Represents the comparison between the expected and predicted class that result from an evaluation operation.",
       "properties": {
         "expectedClass": {
           "type": "string",
@@ -2521,8 +2386,11 @@
       "description": "Represents the evaluation summary for a custom entity recognition project.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+          "type": "object",
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
+          }
         },
         "entities": {
           "type": "object",
@@ -2539,12 +2407,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -2554,12 +2422,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -2573,6 +2441,26 @@
         "macroRecall"
       ]
     },
+    "TextAnalysisAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage."
+        }
+      }
+    },
     "TextAnalysisAuthoringEvaluationSummary": {
       "type": "object",
       "description": "Represents the summary for an evaluation operation.",
@@ -2582,7 +2470,7 @@
           "description": "Represents the project type that the evaluation ran on."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         }
       },
@@ -2598,7 +2486,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2623,17 +2512,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "resultUrl": {
           "type": "string",
@@ -2666,8 +2553,7 @@
           "description": "The list of entity labels belonging to the document.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityRegion"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "location": {
           "type": "string",
@@ -2675,7 +2561,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2692,21 +2578,19 @@
           "description": "The list of entities belonging to the project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedEntity"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "documents": {
           "type": "array",
           "description": "The list of documents belonging to the project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomEntityRecognitionDocument"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
@@ -2720,8 +2604,7 @@
           "description": "The document classes.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "location": {
           "type": "string",
@@ -2729,7 +2612,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2746,28 +2629,26 @@
           "description": "The list of classes in the project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "documents": {
           "type": "array",
           "description": "The list of documents in the project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "x-ms-discriminator-value": "CustomMultiLabelClassification"
     },
     "TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument": {
       "type": "object",
-      "description": "Represents an exported document for a custom single-label classification\nproject.",
+      "description": "Represents an exported document for a custom single-label classification project.",
       "properties": {
         "class": {
           "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass",
@@ -2779,7 +2660,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2796,21 +2677,19 @@
           "description": "The list of classes belonging to this project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "documents": {
           "type": "array",
           "description": "The list of documents belonging to this project.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ExportedProjectAssets"
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
         }
       ],
       "x-ms-discriminator-value": "CustomSingleLabelClassification"
@@ -2863,8 +2742,7 @@
           "description": "The list of entity labels belonging to this region.",
           "items": {
             "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityLabel"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2878,13 +2756,54 @@
         }
       }
     },
+    "TextAnalysisAuthoringExportedProject": {
+      "type": "object",
+      "description": "Represents an exported project.",
+      "properties": {
+        "projectFileVersion": {
+          "type": "string",
+          "description": "The version of the exported file."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets."
+        },
+        "metadata": {
+          "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions",
+          "description": "Represents the project metadata."
+        },
+        "assets": {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets",
+          "description": "Represents the project assets."
+        }
+      },
+      "required": [
+        "projectFileVersion",
+        "stringIndexType",
+        "metadata"
+      ]
+    },
+    "TextAnalysisAuthoringExportedProjectAssets": {
+      "type": "object",
+      "description": "Represents the assets of an exported project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind"
+        }
+      },
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind"
+      ]
+    },
     "TextAnalysisAuthoringImportProjectJobState": {
       "type": "object",
       "description": "Represents the state of an import job.",
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2909,17 +2828,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         }
       },
       "required": [
@@ -2935,7 +2852,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2960,17 +2878,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         }
       },
       "required": [
@@ -2982,7 +2898,7 @@
     },
     "TextAnalysisAuthoringMultiLabelClassEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary of a class in a multi-label classification\nproject.",
+      "description": "Represents the evaluation summary of a class in a multi-label classification project.",
       "properties": {
         "f1": {
           "type": "number",
@@ -3049,12 +2965,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -3064,12 +2980,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -3088,7 +3004,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3113,17 +3030,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         }
       },
       "required": [
@@ -3139,7 +3054,8 @@
       "properties": {
         "deploymentName": {
           "type": "string",
-          "description": "Represents deployment name."
+          "description": "Represents deployment name.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -3207,12 +3123,13 @@
           "description": "The storage container name."
         },
         "settings": {
-          "$ref": "#/definitions/ProjectSettings",
+          "$ref": "#/definitions/TextAuthoringProjectSettings",
           "description": "The project settings."
         },
         "projectName": {
           "type": "string",
-          "description": "The new project name."
+          "description": "The new project name.",
+          "readOnly": true
         },
         "multilingual": {
           "type": "boolean",
@@ -3224,7 +3141,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -3242,7 +3159,8 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "The trained model label."
+          "description": "The trained model label.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -3284,7 +3202,7 @@
     },
     "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a class in a single-label classification project.",
       "properties": {
         "f1": {
           "type": "number",
@@ -3334,11 +3252,14 @@
     },
     "TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom single-label classification project.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
+          "type": "object",
+          "description": "Represents the confusion matrix between two classes (the two classes can be the same). The matrix is between the class that was labelled and the class that was predicted.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
+          }
         },
         "classes": {
           "type": "object",
@@ -3355,12 +3276,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -3370,12 +3291,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -3424,11 +3345,12 @@
       "properties": {
         "languageName": {
           "type": "string",
-          "description": "The language name."
+          "description": "The language name.",
+          "readOnly": true
         },
         "languageCode": {
           "type": "string",
-          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -3442,7 +3364,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3467,17 +3390,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         }
       },
       "required": [
@@ -3487,13 +3408,32 @@
         "status"
       ]
     },
+    "TextAnalysisAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
     "TextAnalysisAuthoringTrainingConfigVersion": {
       "type": "object",
       "description": "Represents a training config version.",
       "properties": {
         "trainingConfigVersion": {
           "type": "string",
-          "description": "Represents the version of the config."
+          "description": "Represents the version of the config.",
+          "readOnly": true
         },
         "modelExpirationDate": {
           "type": "string",
@@ -3504,6 +3444,28 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
+      ]
+    },
+    "TextAnalysisAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringTrainingJobResult": {
@@ -3544,7 +3506,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3569,17 +3532,15 @@
           "type": "array",
           "description": "The warnings that were encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "errors": {
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
         },
         "result": {
           "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobResult",
@@ -3594,45 +3555,16 @@
         "result"
       ]
     },
-    "TextAnalysisAuthoringWarning": {
+    "TextAuthoringProjectSettings": {
       "type": "object",
-      "description": "Represents a warning that was encountered while executing the request.",
+      "description": "Represents the settings used to define the project behavior.",
       "properties": {
-        "code": {
-          "type": "string",
-          "description": "The warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The warning message."
+        "confidenceThreshold": {
+          "type": "number",
+          "format": "float",
+          "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive."
         }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "TrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion"
-      ]
+      }
     }
   },
   "parameters": {
@@ -3692,17 +3624,17 @@
           {
             "name": "CustomSingleLabelClassification",
             "value": "CustomSingleLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
+            "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
             "name": "CustomMultiLabelClassification",
             "value": "CustomMultiLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
+            "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
             "name": "CustomEntityRecognition",
             "value": "CustomEntityRecognition",
-            "description": "For building an extraction model to identify your domain categories using your\nown data."
+            "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]
       },
@@ -3712,7 +3644,7 @@
     "StringIndexTypeQueryParameter": {
       "name": "stringIndexType",
       "in": "query",
-      "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+      "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
       "required": true,
       "type": "string",
       "enum": [
@@ -3725,7 +3657,7 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
       },

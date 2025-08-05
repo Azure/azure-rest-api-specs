@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 using LiftrBase.Data;
 
 @armProviderNamespace
-@service({
-  title: "Astronomer.Astro",
-})
+@service(#{ title: "Astronomer.Astro" })
 @versioned(Astronomer.Astro.Versions)
 namespace Astronomer.Astro;
 
@@ -59,7 +57,8 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  ...Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations

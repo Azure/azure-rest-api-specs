@@ -104,7 +104,7 @@ model Datastore is ProxyResource<DatastoreProperties> {
 @doc("The properties of a datastore")
 model DatastoreProperties {
   @doc("The state of the datastore provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DatastoreProvisioningState;
 
   @doc("An Azure NetApp Files volume")
@@ -116,8 +116,12 @@ model DatastoreProperties {
   @doc("An Elastic SAN volume")
   elasticSanVolume?: ElasticSanVolume;
 
+  @added(Versions.v2024_09_01)
+  @doc("A Pure Storage volume")
+  pureStorageVolume?: PureStorageVolume;
+
   @doc("The operational status of the datastore")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DatastoreStatus;
 }
 
@@ -142,7 +146,7 @@ model DiskPoolVolume {
   mountOption?: MountOptionEnum = MountOptionEnum.MOUNT;
 
   @doc("Device path")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   path?: string;
 }
 
@@ -154,4 +158,17 @@ model ElasticSanVolume {
       type: "Microsoft.ElasticSan/elasticSans/volumeGroups/volumes";
     }
   ]>;
+}
+
+@doc("A Pure Storage volume from PureStorage.Block provider")
+model PureStorageVolume {
+  @doc("Azure resource ID of the Pure Storage Pool")
+  storagePoolId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "PureStorage.Block/storagePools";
+    }
+  ]>;
+
+  @doc("Volume size to be used to create a Virtual Volumes (vVols) datastore")
+  sizeGb: int32;
 }

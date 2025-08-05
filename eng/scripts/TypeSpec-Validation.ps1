@@ -1,24 +1,45 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
+  [int]$Shard = 0,
+  [int]$TotalShards = 1,
   [switch]$GitClean = $false,
   [switch]$DryRun = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [string]$HeadCommitish = "HEAD"
 )
 
-. $PSScriptRoot/Logging-Functions.ps1
-. $PSScriptRoot/Suppressions-Functions.ps1
+if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) { 
+  throw "Shard ($Shard) must be less than TotalShards ($TotalShards)"
+}
 
-$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" -BaseCommitish:$BaseCommitish -TargetCommitish:$TargetCommitish -CheckAll:$CheckAll
+. $PSScriptRoot/../common/scripts/logging.ps1
+. $PSScriptRoot/Suppressions-Functions.ps1
+. $PSScriptRoot/Array-Functions.ps1
+
+$typespecFolders, $checkingAllSpecs = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+  -BaseCommitish:$BaseCommitish `
+  -HeadCommitish:$HeadCommitish `
+  -CheckAll:$CheckAll `
+  -IgnoreCoreFiles:$IgnoreCoreFiles
+
+if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
+  $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
+}
+
+Write-Host "Checking $($typespecFolders.Count) TypeSpec folders:"
+foreach ($typespecFolder in $typespecFolders) {
+  Write-Host "  $typespecFolder"
+}
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
-  $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
+  $typespecFolders = $typespecFolders.Split('', [System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
 
-    if ($checkedAll) {
+    if ($checkingAllSpecs) {
       $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"
@@ -28,14 +49,17 @@ if ($typespecFolders) {
       }
     }
 
-    LogInfo "npm exec --no -- tsv $typespecFolder"
+    # Example: '{"checkingAllSpecs"=true}'
+    $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
+
+    LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
+    npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
@@ -50,7 +74,8 @@ if ($typespecFolders) {
     }
     LogGroupEnd
   }
-} else {
+}
+else {
   if ($CheckAll) {
     LogError "TypeSpec Validation - All did not validate any specs"
     LogJobFailure
