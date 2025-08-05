@@ -192,7 +192,7 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return includesFolder(this.#path, "/preview/")
+    return includesFolder(this.#path, "preview")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
