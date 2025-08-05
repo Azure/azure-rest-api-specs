@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Elastic;
 
-@@clientLocation(ElasticMonitorResources.get, "Monitors");
+@@clientLocation(ElasticMonitorResources.get, "Monitors", "!csharp");
 @@clientLocation(ElasticMonitorResources.create, "Monitors");
 @@clientName(ElasticMonitorResources.create::parameters.resource, "body");
 @@clientLocation(ElasticMonitorResources.update, "Monitors");
