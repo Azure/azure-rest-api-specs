@@ -6,9 +6,27 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.force_models, Access.internal, "python");
 @@access(VoiceLive.force_models, Access.internal, "csharp");
 
+@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioTurnStart, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioTurnAppend, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "python");
+@@access(VoiceLive.ClientEventInputAudioClear, Access.public, "python");
+@@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "python");
+@@access(VoiceLive.ClientEventConversationItemRetrieve, Access.public, "python");
+@@access(VoiceLive.ClientEventConversationItemTruncate, Access.public, "python");
+@@access(VoiceLive.ClientEventConversationItemDelete, Access.public, "python");
+@@access(VoiceLive.ClientEventResponseCreate, Access.public, "python");
+@@access(VoiceLive.ClientEventResponseCancel, Access.public, "python");
+@@access(VoiceLive.ClientEventSessionAvatarConnect, Access.public, "python");
+
+
+@@access(VoiceLive.ServerEventSessionAvatarConnecting, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseAudioDelta, Access.public, "python");
-@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
 @@access(VoiceLive.ConversationResponseItem, Access.public, "python");
 @@access(VoiceLive.Response, Access.public, "python");
 @@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "python");
