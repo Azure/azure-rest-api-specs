@@ -17,13 +17,13 @@ using Microsoft.DurableTask;
 @@clientName(TaskHub, "DurableTaskHub", "csharp");
 @@clientName(TaskHubProperties, "DurableTaskHubProperties", "csharp");
 @@clientName(ProvisioningState, "DurableTaskProvisioningState", "csharp");
-@@clientName(SchedulerUpdate, "DurableTaskSchedulerPatch", "csharp");
-@@clientName(SchedulerPropertiesUpdate,
-  "DurableTaskSchedulerPatchProperties",
-  "csharp"
-);
+//@@clientName(SchedulerUpdate, "DurableTaskSchedulerPatch", "csharp");
+//@@clientName(SchedulerPropertiesUpdate,
+//   "DurableTaskSchedulerPatchProperties",
+//   "csharp"
+// );
 @@clientName(SchedulerSku, "DurableTaskSchedulerSku", "csharp");
-@@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
+// @@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
 @@clientName(PurgeableOrchestrationState,
   "DurableTaskPurgeableOrchestrationState",
