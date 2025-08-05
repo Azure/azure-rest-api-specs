@@ -69,8 +69,11 @@ interface DatadogMonitorResources {
   update is DatadogMonitorResourcesOps.CustomPatchAsync<
     DatadogMonitorResource,
     PatchModel = DatadogMonitorResourceUpdateParameters,
-    Response = ArmResponse<DatadogMonitorResource> | (ArmResourceCreatedResponse<DatadogMonitorResource> &
-      ArmLroLocationHeader<FinalResult = DatadogMonitorResource>),
+    Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
+      DatadogMonitorResource,
+      LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     OptionalRequestBody = true
   >;
 
