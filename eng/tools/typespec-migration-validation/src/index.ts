@@ -273,8 +273,10 @@ export async function main() {
     }
   }
   else if (reportFile) {
-    if (compareResult.filter((x) => x.level === "error").length > 0) {
+    if (compareResult.length > 0) {
       await writeFile(reportFile, outputMarkdown);
+    }
+    if (compareResult.filter((x) => x.level === "error").length > 0) {
       logError("Differences found. Please fix the issues before proceeding.");
       process.exit(1);
     }
