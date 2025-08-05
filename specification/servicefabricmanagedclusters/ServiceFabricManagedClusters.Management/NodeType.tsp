@@ -904,14 +904,14 @@ model VMSSExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  settings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Day 0 property"
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Day 0 property"
-  protectedSettings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Day 0 property"
+  protectedSettings?: unknown;
 
   /**
    * If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed.
@@ -1273,3 +1273,5 @@ union NodeTypeSkuScaleType {
    */
   Automatic: "Automatic",
 }
+
+@@identifiers(NodeTypeListSkuResult.value, #[]);

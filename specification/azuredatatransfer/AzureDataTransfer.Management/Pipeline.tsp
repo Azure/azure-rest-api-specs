@@ -25,6 +25,8 @@ model Pipeline is Azure.ResourceManager.TrackedResource<PipelineProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+model ArmPipelineResponse is ArmResponse<Pipeline>;
+
 @armResourceOperations
 interface Pipelines {
   /**
@@ -72,7 +74,7 @@ interface Pipelines {
   approveConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmResponse<Connection>
+    ArmConnectionResponse
   >;
 
   /**
@@ -81,13 +83,14 @@ interface Pipelines {
   executeAction is ArmResourceActionAsync<
     Pipeline,
     Action,
-    ArmResponse<Pipeline>
+    ArmPipelineResponse
   >;
 
   /**
    * Lists the flows in a pipeline.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("listFlows")
   @operationId("ListFlowsByPipeline_List")
   list is ArmResourceActionSync<
@@ -120,7 +123,7 @@ interface Pipelines {
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmResponse<Connection>
+    ArmConnectionResponse
   >;
 }
 

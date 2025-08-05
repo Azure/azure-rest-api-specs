@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -377,7 +377,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get the specific version of the DatasetVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -446,14 +446,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the DatasetVersion to create or replace.",
+            "description": "The specific version id of the DatasetVersion to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "datasetVersion",
             "in": "body",
-            "description": "The definition of the DatasetVersion to create or update",
+            "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
@@ -497,7 +497,7 @@
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete the specific version of the DatasetVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -620,9 +620,9 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "pendingUploadRequest",
             "in": "body",
-            "description": "Parameters for the action",
+            "description": "The pending upload request parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PendingUploadRequest"
@@ -890,7 +890,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_GetVersion",
-        "description": "Get the specific version of the Index",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -959,14 +959,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the Index to create or replace.",
+            "description": "The specific version id of the Index to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "index",
             "in": "body",
-            "description": "The definition of the Index to create or update",
+            "description": "The Index to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Index"
@@ -1010,7 +1010,7 @@
       },
       "delete": {
         "operationId": "Indexes_DeleteVersion",
-        "description": "Delete the specific version of the Index",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1111,8 +1111,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1139,7 +1138,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1927,8 +1926,7 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

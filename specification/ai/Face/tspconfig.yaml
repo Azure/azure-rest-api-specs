@@ -26,6 +26,9 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Vision.Face
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-face-rest"
     generate-metadata: true
@@ -37,7 +40,8 @@ options:
     package-dir: "azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
-    customization-class: customization/src/main/java/FaceCustomizations.java
+    use-eclipse-language-server: false
+    enable-subclient: true
     generate-samples: false
     generate-tests: false
     flavor: azure

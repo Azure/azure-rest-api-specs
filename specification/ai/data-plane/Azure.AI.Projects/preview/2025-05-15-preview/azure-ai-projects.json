@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -377,7 +377,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_GetVersion",
-        "description": "Get the specific version of the DatasetVersion",
+        "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -446,14 +446,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the DatasetVersion to create or replace.",
+            "description": "The specific version id of the DatasetVersion to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "datasetVersion",
             "in": "body",
-            "description": "The definition of the DatasetVersion to create or update",
+            "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
@@ -497,7 +497,7 @@
       },
       "delete": {
         "operationId": "Datasets_DeleteVersion",
-        "description": "Delete the specific version of the DatasetVersion",
+        "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -620,9 +620,9 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "pendingUploadRequest",
             "in": "body",
-            "description": "Parameters for the action",
+            "description": "The pending upload request parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PendingUploadRequest"
@@ -896,6 +896,104 @@
             "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Evaluations_Delete",
+        "description": "Delete an evaluation run by name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Delete_MaximumSet": {
+            "$ref": "./examples/Evaluations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluations/runs/{name}:cancel": {
+      "post": {
+        "operationId": "Evaluations_Cancel",
+        "description": "Cancel an evaluation run by name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Identifier of the evaluation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluations_Cancel_MaximumSet": {
+            "$ref": "./examples/Evaluations_Cancel_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/evaluations/runs:run": {
@@ -1088,7 +1186,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_GetVersion",
-        "description": "Get the specific version of the Index",
+        "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1157,14 +1255,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the Index to create or replace.",
+            "description": "The specific version id of the Index to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "index",
             "in": "body",
-            "description": "The definition of the Index to create or update",
+            "description": "The Index to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Index"
@@ -1208,7 +1306,7 @@
       },
       "delete": {
         "operationId": "Indexes_DeleteVersion",
-        "description": "Delete the specific version of the Index",
+        "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1428,8 +1526,7 @@
           "description": "The agent evaluation result.",
           "items": {
             "$ref": "#/definitions/AgentEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1597,6 +1694,25 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AssistantMessage": {
+      "type": "object",
+      "description": "A message generated by the assistant in response to previous messages.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Response content generated by the assistant."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Message"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
     },
     "AttackStrategy": {
       "type": "string",
@@ -1775,8 +1891,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1803,7 +1918,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1858,7 +1973,7 @@
       "properties": {
         "modelDeploymentName": {
           "type": "string",
-          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`)."
         }
       },
       "required": [
@@ -2282,6 +2397,25 @@
         ]
       }
     },
+    "DeveloperMessage": {
+      "type": "object",
+      "description": "A message authored by a developer to guide the model during evaluation.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content provided by a developer to guide model behavior in an evaluation context."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Message"
+        }
+      ],
+      "x-ms-discriminator-value": "developer"
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -2363,6 +2497,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Specifies the type and configuration of the entity used for this evaluation."
         }
       },
       "required": [
@@ -2370,6 +2508,38 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Abstract base model for defining evaluation targets.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationTargetType",
+          "description": "Discriminator that defines the type of the evaluation target."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationTargetType": {
+      "type": "string",
+      "description": "Allowed types of evaluation targets.",
+      "enum": [
+        "modelResponseGeneration"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "modelResponseGeneration",
+            "value": "modelResponseGeneration",
+            "description": "Evaluation target that uses a model for response generation."
+          }
+        ]
+      }
     },
     "EvaluatorConfiguration": {
       "type": "object",
@@ -2610,6 +2780,29 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "Message": {
+      "type": "object",
+      "description": "Abstract base model representing a single message in a conversation.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.",
+          "enum": [
+            "system",
+            "assistant",
+            "developer",
+            "user"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "role"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2723,8 +2916,7 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2745,8 +2937,7 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2788,8 +2979,7 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3088,6 +3278,25 @@
         "tier"
       ]
     },
+    "SystemMessage": {
+      "type": "object",
+      "description": "A message authored by the system to guide model behavior.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Plain text instructions provided by the system to steer model behavior."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Message"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
     "TargetConfig": {
       "type": "object",
       "description": "Abstract class for target configuration.",
@@ -3101,6 +3310,58 @@
       "required": [
         "type"
       ]
+    },
+    "UserMessage": {
+      "type": "object",
+      "description": "A message authored by the end user as input to the model.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Input content or question provided by the end user."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Message"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "modelResponseGenerationTarget": {
+      "type": "object",
+      "description": "Evaluation target for generating responses using a given model and dataset.",
+      "properties": {
+        "baseMessages": {
+          "type": "array",
+          "description": "A list of messages comprising the conversation so far.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+        },
+        "modelParams": {
+          "type": "object",
+          "description": "Optional parameters passed to the model for evaluation.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "baseMessages",
+        "modelDeploymentName",
+        "modelParams"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "modelResponseGeneration"
     }
   },
   "parameters": {

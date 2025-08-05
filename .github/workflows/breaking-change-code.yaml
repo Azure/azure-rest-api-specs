@@ -1,0 +1,57 @@
+name: "Swagger BreakingChange - Analyze Code"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  validateBreakingChange:
+    name: "Swagger BreakingChange - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Setup .NET 6 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Swagger Breaking Change - Analyze Code
+        id: swagger-breaking-change-analyze-code
+        run: |
+          npm exec --no -- openapi-diff-runner \
+            --spec-repo-path "$GITHUB_WORKSPACE" \
+            --pr-source-branch "$GITHUB_HEAD_REF" \
+            --pr-target-branch "$GITHUB_BASE_REF" \
+            --head-commit "${{ github.event.pull_request.head.sha }}" \
+            --pr-number "${{ github.event.pull_request.number }}" \
+            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --target-repo "$GITHUB_REPOSITORY"
+
+      # Upload artifact for 'BreakingChangeReviewRequired' label
+      - if: |
+          always() && 
+          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
+        name: Upload artifact with BreakingChangeReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
+
+      # Upload artifact for 'VersioningReviewRequired' label
+      - if: |
+          always() && 
+          (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
+        name: Upload artifact with VersioningReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"

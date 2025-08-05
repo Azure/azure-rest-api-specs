@@ -9,4 +9,14 @@ typescript:
   package-name: "@azure/arm-securityinsight"
   output-folder: "$(typescript-sdks-folder)/sdk/securityinsight/arm-securityinsight"
   generate-metadata: true
+
+directive: 
+  - from: DataConnectors.json
+    where: $.definitions.CcpResponseConfig.properties.csvEscape
+    transform: >
+      $["default"] = "\\\""
+  - from: dataConnectors.json
+    where: $.definitions.CcpResponseConfig.properties.csvEscape
+    transform: >
+      $["default"] = "\\\""
 ```

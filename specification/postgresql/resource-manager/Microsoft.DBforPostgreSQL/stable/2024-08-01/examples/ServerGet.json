@@ -1,41 +1,53 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc1",
-    "resourceGroupName": "testrg",
     "api-version": "2024-08-01",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
   },
   "responses": {
     "200": {
       "body": {
         "sku": {
-          "name": "Standard_D4s_v3",
+          "name": "Standard_D4ds_v5",
           "tier": "GeneralPurpose"
         },
+        "systemData": {
+          "createdAt": "2024-08-01T18:30:22.123456Z"
+        },
         "properties": {
-          "fullyQualifiedDomainName": "pgtestsvc1.postgres.database.azure.com",
-          "version": "12",
-          "minorVersion": "6",
-          "administratorLogin": "cloudsa",
-          "state": "Ready",
-          "availabilityZone": "1",
+          "replica": {
+            "role": "Primary",
+            "capacity": 5
+          },
           "storage": {
-            "storageSizeGB": 512,
-            "autoGrow": "Disabled",
-            "tier": "P20",
-            "iops": 2300
+            "type": "",
+            "iops": 500,
+            "tier": "P10",
+            "storageSizeGB": 128,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
           },
           "authConfig": {
             "activeDirectoryAuth": "Disabled",
             "passwordAuth": "Enabled"
           },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+          "version": "16",
+          "minorVersion": "8",
+          "administratorLogin": "administratorlogin",
+          "state": "Ready",
+          "availabilityZone": "1",
           "backup": {
             "backupRetentionDays": 7,
-            "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2021-05-26T23:07:25.8166567+00:00"
-          },
-          "network": {
-            "publicNetworkAccess": "Enabled"
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2024-08-01T18:35:22.123456Z"
           },
           "highAvailability": {
             "mode": "Disabled",
@@ -46,14 +58,13 @@
             "dayOfWeek": 0,
             "startHour": 0,
             "startMinute": 0
-          }
+          },
+          "replicationRole": "Primary",
+          "replicaCapacity": 5
         },
         "location": "westus",
-        "tags": {
-          "ElasticServer": "1"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc1",
-        "name": "pgtestsvc1",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     }

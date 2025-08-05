@@ -2,9 +2,9 @@
   "parameters": {
     "api-version": "2025-01-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "resourceGroupName": "testrg",
-    "targetDbServerName": "testtarget",
-    "migrationName": "testmigrationwithsuccessfulvalidationonly"
+    "resourceGroupName": "exampleresourcegroup",
+    "targetDbServerName": "exampletarget",
+    "migrationName": "examplemigration"
   },
   "responses": {
     "200": {
@@ -18,8 +18,8 @@
               "dbDetails": {},
               "validationDetails": {
                 "status": "Succeeded",
-                "validationStartTimeInUtc": "2023-10-16T05:29:35.634943Z",
-                "validationEndTimeInUtc": "2023-10-16T05:29:39.6663198Z",
+                "validationStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
+                "validationEndTimeInUtc": "2025-01-01T20:30:22.123456Z",
                 "serverLevelValidationDetails": [
                   {
                     "type": "AuthenticationAndConnectivityValidation",
@@ -37,8 +37,8 @@
                 "dbLevelValidationDetails": [
                   {
                     "databaseName": "UnknownCollationTest",
-                    "startedOn": "2023-10-16T05:29:38.904366Z",
-                    "endedOn": "2023-10-16T05:29:39.2488086Z",
+                    "startedOn": "2025-01-01T18:30:22.123456Z",
+                    "endedOn": "2025-01-01T20:30:22.123456Z",
                     "summary": [
                       {
                         "type": "SchemaValidation",
@@ -59,22 +59,22 @@
             }
           },
           "migrationMode": "Offline",
-          "migrationWindowEndTimeInUtc": "2023-10-16T05:30:05.8854373Z",
+          "migrationWindowEndTimeInUtc": "2025-01-01T20:30:22.123456Z",
           "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
-          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
           "dbsToMigrate": [
             "UnknownCollationTest"
           ],
           "setupLogicalReplicationOnSourceDbIfNeeded": "True",
           "overwriteDbsInTarget": "True",
-          "migrationWindowStartTimeInUtc": "2023-10-16T05:28:58.7751329Z",
+          "migrationWindowStartTimeInUtc": "2025-01-01T18:30:22.123456Z",
           "triggerCutover": "True",
           "migrateRoles": "False",
           "migrationOption": "Validate"
         },
         "location": "westus",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationonly",
-        "name": "testmigrationwithsuccessfulvalidationonly",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "name": "examplemigration",
         "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
       }
     }
