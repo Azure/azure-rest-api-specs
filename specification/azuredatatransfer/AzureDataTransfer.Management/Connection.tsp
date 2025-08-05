@@ -25,6 +25,8 @@ model Connection
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+model ArmConnectionResponse is ArmResponse<Connection>;
+
 @armResourceOperations
 interface Connections {
   /**
@@ -72,7 +74,7 @@ interface Connections {
   link is ArmResourceActionAsync<
     Connection,
     ResourceBody,
-    ArmResponse<Connection>
+    ArmConnectionResponse
   >;
 
   /**

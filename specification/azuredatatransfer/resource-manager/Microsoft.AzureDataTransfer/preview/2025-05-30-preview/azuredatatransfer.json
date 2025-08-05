@@ -954,7 +954,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1032,7 +1032,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1110,7 +1110,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1433,7 +1433,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1520,7 +1520,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1607,7 +1607,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1694,7 +1694,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1781,7 +1781,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1858,7 +1858,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
+          "final-state-schema": "#/definitions/ArmConnectionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2424,7 +2424,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPipeline%3E"
+          "final-state-schema": "#/definitions/ArmPipelineResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -3094,6 +3094,45 @@
         }
       }
     },
+    "ArmConnectionResponse": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Connection",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ArmFlowResponse": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Flow",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ArmPipelineResponse": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Pipeline",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "Authentication": {
       "type": "object",
       "description": "Configures the authentication method and parameters for an Azure Data Transfer API Flow.",
@@ -3166,32 +3205,6 @@
       "properties": {
         "body": {
           "$ref": "#/definitions/Connection",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Flow>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Flow",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<Pipeline>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Pipeline",
           "description": "The body type of the operation request or response."
         }
       },
@@ -4915,7 +4928,7 @@
     },
     "ReadPipelineConnection": {
       "type": "object",
-      "description": "",
+      "description": "The ReadPipelineconnection.",
       "properties": {
         "id": {
           "type": "string",

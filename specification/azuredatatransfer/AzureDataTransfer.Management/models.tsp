@@ -781,10 +781,9 @@ model PipelineProperties {
   /**
    * Connections associated with pipeline
    */
-  @typeChangedFrom(Versions.v2025_05_30_preview, ReadPipelineConnection[])
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["id"])
-  connections?: Read<PipelineConnection>[];
+  connections?: ReadPipelineConnection[];
 
   /**
    * Subscribers of this resource
@@ -873,27 +872,6 @@ model PipelineConnection {
    */
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
-
-  /**
-   * Connection properties inside pipeline
-   */
-  @added(Versions.v2025_05_30_preview)
-  @visibility(Lifecycle.Read)
-  properties?: PipelineConnectionProperties;
-}
-
-/**
- * Connection properties inside pipeline
- */
-@added(Versions.v2025_05_30_preview)
-model PipelineConnectionProperties {
-  ...Record<unknown>;
-
-  /**
-   * Internal metadata of the connection inside pipeline.
-   */
-  @visibility(Lifecycle.Read)
-  internalMetadata?: InternalMetadataProperties;
 }
 
 /**
@@ -1649,54 +1627,18 @@ model ReadPipelineConnection {
   /**
    * Connection properties inside pipeline
    */
-  properties?: ReadReadPipelineConnectionProperties;
+  properties?: PipelineConnectionProperties;
 }
 
 /**
  * Connection properties inside pipeline
  */
-model ReadReadPipelineConnectionProperties {
+model PipelineConnectionProperties {
   ...Record<unknown>;
 
   /**
    * Internal metadata of the connection inside pipeline.
    */
-  internalMetadata?: ReadReadInternalMetadataProperties;
-}
-
-/**
- * Internal metadata of the connection inside pipeline.
- */
-model ReadReadInternalMetadataProperties {
-  ...Record<unknown>;
-
-  /**
-   * Operation status associated with the last patch request
-   */
-  operationStatus?: ReadReadOperationStatusProperties;
-
-  /**
-   * User that last set the approved status for this connection
-   */
-  statusSetBy?: string;
-}
-
-/**
- * Operation status associated with the last patch request
- */
-model ReadReadOperationStatusProperties {
-  /**
-   * Operation status for the last patch request for this connection.
-   */
-  status?: OperationStatusEnum;
-
-  /**
-   * Operation status ID of the last patch request for this connection.
-   */
-  id?: string;
-
-  /**
-   * Message for the operation for the last patch request for this connection.
-   */
-  message?: string;
+  @visibility(Lifecycle.Read)
+  internalMetadata?: InternalMetadataProperties;
 }
