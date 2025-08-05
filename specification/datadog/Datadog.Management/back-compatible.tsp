@@ -6,7 +6,7 @@ using Microsoft.Datadog;
 // Client decorators for operations (migrated from @operationId)
 
 // DatadogMonitorResources operations
-@@clientLocation(DatadogMonitorResources.get, "Monitors");
+@@clientLocation(DatadogMonitorResources.get, "Monitors", "!csharp");
 @@clientName(DatadogMonitorResources.get, "Get");
 
 @@clientLocation(DatadogMonitorResources.create, "Monitors");
@@ -23,8 +23,8 @@ using Microsoft.Datadog;
   "ListByResourceGroup"
 );
 
-@@clientLocation(DatadogMonitorResources.list, "Monitors");
-@@clientName(DatadogMonitorResources.list, "List");
+@@clientLocation(DatadogMonitorResources.list, "Monitors", "!csharp");
+@@clientName(DatadogMonitorResources.list, "List", "!csharp");
 
 @@clientLocation(DatadogMonitorResources.listApiKeys, "Monitors");
 @@clientName(DatadogMonitorResources.listApiKeys, "ListApiKeys");
@@ -106,9 +106,3 @@ using Microsoft.Datadog;
   "body"
 );
 @@clientName(MonitoredSubscriptions.update::parameters.properties, "body");
-
-@@clientName(BillingInfoResponse, "BillingInfoResult", "csharp");
-@@clientName(CreateResourceSupportedResponse,
-  "CreateResourceSupportedResult",
-  "csharp"
-);

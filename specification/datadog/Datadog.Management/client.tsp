@@ -3,3 +3,8 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript");
+@@clientName(BillingInfoResponse, "BillingInfoResult", "csharp");
+@@clientName(CreateResourceSupportedResponse,
+  "CreateResourceSupportedResult",
+  "csharp"
+);
