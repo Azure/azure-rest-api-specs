@@ -1,13 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace NewRelic.Observability;
 /**
@@ -25,7 +23,7 @@ model NewRelicMonitorResource
   /**
    * The managed service identities assigned to this resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
@@ -51,22 +49,16 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves the properties and configuration details of a specific New Relic monitor resource, providing insight into its setup and status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_Get")
   get is NewRelicMonitorResourceWithoutPatternOperations.Read<NewRelicMonitorResource>;
 
   /**
    * Creates a new or updates an existing New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_CreateOrUpdate")
   createOrUpdate is NewRelicMonitorResourceWithoutPatternOperations.CreateOrUpdateAsync<NewRelicMonitorResource>;
 
   /**
    * Updates an existing New Relic monitor resource from your Azure subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_Update")
   @patch(#{ implicitOptionality: false })
   update is NewRelicMonitorResourceWithoutPatternOperations.CustomPatchAsync<
     NewRelicMonitorResource,
@@ -76,10 +68,8 @@ interface NewRelicMonitorResources {
   /**
    * Deletes an existing New Relic monitor resource from your Azure subscription, removing the integration and stopping the observability of your Azure resources through New Relic
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Monitors_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is NewRelicMonitorResourceWithoutPatternOperations.DeleteWithoutOkAsync<
     NewRelicMonitorResource,
     Parameters = {
@@ -96,22 +86,16 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves a list of all New Relic monitor resources either a specific resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<NewRelicMonitorResource>;
 
   /**
    * Lists all New Relic monitor resources either within a specific subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListBySubscription")
   listBySubscription is ArmListBySubscription<NewRelicMonitorResource>;
 
   /**
    * Retrieves the metric rules that are configured in the New Relic monitor resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_GetMetricRules")
   getMetricRules is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     MetricsRequest,
@@ -121,8 +105,6 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves the metric status that are configured in the New Relic monitor resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_GetMetricStatus")
   getMetricStatus is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     MetricsStatusRequest,
@@ -132,8 +114,6 @@ interface NewRelicMonitorResources {
   /**
    * Lists the app service resources currently being monitored by the New Relic resource, helping you understand which app services are under monitoring
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListAppServices")
   listAppServices is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     AppServicesGetRequest,
@@ -143,8 +123,8 @@ interface NewRelicMonitorResources {
   /**
    * Switches the billing for the New Relic Monitor resource to be billed by Azure Marketplace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_SwitchBilling")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   switchBilling is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
@@ -154,8 +134,6 @@ interface NewRelicMonitorResources {
   /**
    * Lists all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListHosts")
   listHosts is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     HostsGetRequest,
@@ -165,8 +143,6 @@ interface NewRelicMonitorResources {
   /**
    * Refreshes the ingestion key for all monitors linked to the same account associated to the underlying monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_RefreshIngestionKey")
   refreshIngestionKey is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
     void,
@@ -176,8 +152,6 @@ interface NewRelicMonitorResources {
   /**
    * Lists all Azure resources that are currently being monitored by the specified New Relic monitor resource, providing insight into the coverage of your observability setup
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListMonitoredResources")
   @action("monitoredResources")
   listMonitoredResources is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
@@ -188,8 +162,6 @@ interface NewRelicMonitorResources {
   /**
    * Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_ListLinkedResources")
   listLinkedResources is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
@@ -199,8 +171,6 @@ interface NewRelicMonitorResources {
   /**
    * Returns the payload that needs to be passed in the request body for installing the New Relic agent on a VM, providing the necessary configuration details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_VmHostPayload")
   @action("vmHostPayloads")
   vmHostPayload is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
     NewRelicMonitorResource,
@@ -211,8 +181,6 @@ interface NewRelicMonitorResources {
   /**
    * Returns the latest SaaS linked to the newrelic organization of the underlying monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_LatestLinkedSaaS")
   latestLinkedSaaS is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
@@ -222,8 +190,7 @@ interface NewRelicMonitorResources {
   /**
    * Links a new SaaS to the newrelic organization of the underlying monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_LinkSaaS")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   linkSaaS is ArmResourceActionAsync<
     NewRelicMonitorResource,
     SaaSData,
@@ -235,8 +202,7 @@ interface NewRelicMonitorResources {
   /**
    * Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Monitors_Resubscribe")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resubscribe is ArmResourceActionAsync<
     NewRelicMonitorResource,
     ResubscribeProperties,
@@ -249,8 +215,6 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves marketplace and organization information mapped to the given New Relic monitor resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BillingInfo_Get")
   @action("getBillingInfo")
   billingInfoGet is ArmResourceActionSync<
     NewRelicMonitorResource,
@@ -261,8 +225,6 @@ interface NewRelicMonitorResources {
   /**
    * List of all active deployments that are associated with the marketplace subscription linked to the given monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedPartnerResources_List")
   @action("listConnectedPartnerResources")
   list is ArmResourceActionSync<
     NewRelicMonitorResource,

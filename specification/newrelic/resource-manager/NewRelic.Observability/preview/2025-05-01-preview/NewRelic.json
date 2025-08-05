@@ -1350,6 +1350,7 @@
           {
             "name": "configurationName",
             "in": "path",
+            "description": "The configuration name. Only 'default' value is supported.",
             "required": true,
             "type": "string",
             "enum": [
@@ -3848,9 +3849,11 @@
     },
     "email": {
       "type": "object",
+      "description": "Email model",
       "properties": {
         "type": {
           "type": "string",
+          "description": "Email type",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       }

@@ -42,6 +42,9 @@ interface MonitoredSubscriptionOps
         monitorName: string,
       },
       {
+        /**
+         * The configuration name. Only 'default' value is supported.
+         */
         @path
         @segment("monitoredSubscriptions")
         configurationName: ConfigurationName,
