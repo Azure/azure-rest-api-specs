@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+name: "Swagger BreakingChange - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   validateBreakingChange:
-    name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+    name: "Swagger BreakingChange - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -40,8 +40,8 @@ jobs:
       - if: |
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
-        name: Upload artifact with BreakingChangeReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with BreakingChangeReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -50,9 +50,8 @@ jobs:
       - if: |
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
-        name: Upload artifact with VersioningReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with VersioningReviewRequired status
+        uses: ./.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
-          # Convert "add/remove" to "true/false"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"

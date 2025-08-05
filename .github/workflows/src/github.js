@@ -100,3 +100,19 @@ export async function getWorkflowRuns(github, context, workflowName, ref) {
     .filter((run) => run.name === workflowName)
     .sort(invert(byDate((run) => run.updated_at)));
 }
+
+/**
+ * @param {import("@octokit/types").OctokitResponse<any>} response
+ * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
+ */
+export function rateLimitHook(response, options) {
+  const limits = {
+    method: options.method.toUpperCase(),
+    url: options.url,
+    limit: response.headers["x-ratelimit-limit"],
+    remaining: response.headers["x-ratelimit-remaining"],
+    reset: new Date(parseInt(response.headers["x-ratelimit-reset"] || "") * 1000),
+  };
+
+  console.log(`rate-limits: ${JSON.stringify(limits)}`);
+}
