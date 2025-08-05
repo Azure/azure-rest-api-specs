@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Compute;
 
-interface Operations extends Azure.ResourceManager.Operations
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The available API versions.
