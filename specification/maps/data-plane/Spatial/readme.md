@@ -28,7 +28,7 @@ These are the global settings for Spatial Client.
 # Azure Maps Spatial v2022-08-01 has been deprecated and will be retired on September 30th, 2025.
 title: SpatialClient
 openapi-type: data-plane
-tag: 2022-08-01
+tag: package-stable-deprecated-2022-08-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
