@@ -29,7 +29,7 @@ These are the global settings for Render Client.
 ## Azure Maps Render 2.0 & 2.1 - The endpoint might be used by WebSDK V2.2x or older. Neither should appear in the TOC.
 title: RenderClient
 openapi-type: data-plane
-tag: package-2024-04-01
+tag: package-stable-2024-04-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
