@@ -3002,6 +3002,10 @@
           "$ref": "#/definitions/EvaluationResultMetadata",
           "description": "Metadata about the evaluation result"
         },
+        "usage": {
+          "$ref": "#/definitions/Usage",
+          "description": "Token consumption for this metric evaluation"
+        },
         "additionalDetails": {
           "type": "object",
           "description": "Additional metadata about the evaluation result, such as processing details or custom fields",
@@ -3045,10 +3049,6 @@
           "description": "Unique identifier for this evaluation result row",
           "readOnly": true
         },
-        "state": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Current processing state of this data row. Tracks progress from initial processing through completion or failure."
-        },
         "error": {
           "type": "string",
           "description": "Error message describing why the evaluation failed for this data row, if applicable"
@@ -3056,10 +3056,6 @@
         "inputDataJson": {
           "type": "string",
           "description": "Original input data for this row in JSON string format. This preserves the exact data that was evaluated for reference and debugging."
-        },
-        "usage": {
-          "$ref": "#/definitions/Usage",
-          "description": "Usage statistics for the evaluation"
         },
         "metrics": {
           "type": "array",
@@ -3070,8 +3066,7 @@
         }
       },
       "required": [
-        "id",
-        "state"
+        "id"
       ]
     },
     "EvaluationResultMetadata": {
@@ -4116,11 +4111,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "usage": {
-          "$ref": "#/definitions/Usage",
-          "description": "Usage statistics for the evaluation",
-          "readOnly": true
         },
         "metrics": {
           "type": "array",

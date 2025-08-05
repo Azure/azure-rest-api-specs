@@ -341,10 +341,6 @@ model OneEvaluation {
   @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
 
-  @doc("Usage statistics for the evaluation")
-  @visibility(Lifecycle.Read)
-  usage?: Usage;
-
   @doc("Evaluation results from all the configured evaluators for this data row.")
   @visibility(Lifecycle.Read)
   metrics?: EvaluationMetric[];
@@ -687,6 +683,9 @@ model EvaluationMetric {
   @doc("Metadata about the evaluation result")
   metadata: EvaluationResultMetadata;
 
+  @doc("Token consumption for this metric evaluation")
+  usage?: Usage;
+
   @doc("Additional metadata about the evaluation result, such as processing details or custom fields")
   additionalDetails?: Record<unknown>;
 }
@@ -700,18 +699,12 @@ model EvaluationResult {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Current processing state of this data row. Tracks progress from initial processing through completion or failure.")
-  state: OperationState;
-
   @doc("Error message describing why the evaluation failed for this data row, if applicable")
   error?: string;
 
   @doc("Original input data for this row in JSON string format. This preserves the exact data that was evaluated for reference and debugging.")
   @added(Versions.v2025_07_31_preview)
   inputDataJson?: string;
-
-  @doc("Usage statistics for the evaluation")
-  usage?: Usage;
 
   @doc("Evaluation results from all the configured evaluators for this data row.")
   metrics?: EvaluationMetric[];
