@@ -61,6 +61,7 @@ export async function main() {
       isDraft: {
         type: "boolean",
         multiple: false,
+        default: false,
       },
     },
     allowPositionals: true,
