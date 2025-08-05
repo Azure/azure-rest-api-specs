@@ -59,14 +59,6 @@ These settings apply only when `--tag=package-2025-05-21` is specified on the co
 ```yaml $(tag) == 'package-2025-05-21'
 input-file:
   - Microsoft.AzureDataTransfer/stable/2025-05-21/azuredatatransfer.json
-
-suppressions:
-  - code: AvoidAdditionalProperties
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
-  - code: PatchResponseCodes
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
 ```
 
 ### Tag: package-2025-04-11-preview
