@@ -53,9 +53,15 @@ interface OperationStatusesOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<OperationStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> & {
-    @bodyRoot
+  ): ArmResponse<OperationStatus> | (AcceptedResponse & {
+    @body
     _: OperationStatus;
+
+    /**
+     * The Location header contains the URL where the status of the long running operation can be checked.
+     */
+    @header
+    location?: string;
   }) | ErrorResponse;
 }
 
