@@ -234,6 +234,7 @@ union ProvisioningState {
 }
 
 @doc("The update request model for the Scheduler resource")
+@added(Versions.v2024_10_01_Preview)
 model SchedulerUpdate
   is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -242,6 +243,7 @@ model SchedulerUpdate
 @@added(SchedulerUpdate.identity, Versions.v2025_05_04_Preview);
 
 @doc("The Scheduler resource properties to be updated")
+@added(Versions.v2024_10_01_Preview)
 model SchedulerPropertiesUpdate {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
@@ -263,6 +265,7 @@ model SchedulerPropertiesUpdate {
 }
 
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
+@added(Versions.v2024_10_01_Preview)
 model SchedulerSkuUpdate {
   @doc("The name of the SKU")
   name?: string;
