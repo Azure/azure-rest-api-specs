@@ -113,7 +113,7 @@ interface ElasticMonitorResources {
   update is ElasticMonitorUpdateResourceOps.CustomPatchAsync<
     ElasticMonitorResource,
     PatchModel = ElasticMonitorResourceUpdateParameters,
-    Response = ArmResponse<ElasticMonitorResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<ElasticMonitorResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ElasticMonitorResource>> & {
       @bodyRoot
       _: ElasticMonitorResource;
     }),
@@ -299,7 +299,9 @@ interface ElasticMonitorResources {
   createAndAssociateIPFilterCreate is ArmResourceActionAsync<
     ElasticMonitorResource,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * List of ips
@@ -326,7 +328,9 @@ interface ElasticMonitorResources {
   createAndAssociatePLFilterCreate is ArmResourceActionAsync<
     ElasticMonitorResource,
     void,
-    OkResponse,
+    {
+      @body body: void;
+    },
     Parameters = {
       /**
        * Name of the traffic filter

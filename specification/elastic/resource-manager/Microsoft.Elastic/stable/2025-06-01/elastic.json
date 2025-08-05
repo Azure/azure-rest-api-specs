@@ -463,11 +463,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -484,7 +479,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ElasticMonitorResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -660,7 +656,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -689,8 +685,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -744,7 +739,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -773,8 +768,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1569,7 +1563,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MonitoredSubscriptionProperties"
         },
         "x-ms-long-running-operation": true
       },
@@ -4011,10 +4006,6 @@
           }
         ]
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UpgradableVersionsList": {
       "type": "object",

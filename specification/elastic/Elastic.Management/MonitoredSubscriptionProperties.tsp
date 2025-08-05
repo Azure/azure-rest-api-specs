@@ -61,7 +61,7 @@ interface MonitoredSubscriptions {
    */
   createorUpdate is MonitoredCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
