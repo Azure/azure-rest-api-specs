@@ -1,6 +1,5 @@
 // @ts-check
 
-import { inspect } from "util";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { rateLimitHook } from "./github.js";
 import { getIssueNumber } from "./issues.js";
@@ -175,7 +174,8 @@ export async function extractInputs(github, context, core) {
         } else {
           throw new Error(
             `Unexpected number of pull requests associated with commit '${head_sha}'. ` +
-              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n${inspect(pullRequests)}`,
+              `Expected: '1'. Actual: '${pullRequests.length}'. PRs:\n` +
+              pullRequests.map((pr) => pr.html_url).join("\n"),
           );
         }
         if (!issue_number) {
