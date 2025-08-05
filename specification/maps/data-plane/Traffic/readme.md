@@ -27,7 +27,7 @@ These are the global settings for Traffic Client.
 ``` yaml
 title: TrafficClient
 openapi-type: data-plane
-tag: package-2025-01-01
+tag: package-stable-2025-01-01
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
