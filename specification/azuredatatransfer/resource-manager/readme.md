@@ -39,17 +39,6 @@ These settings apply only when `--tag=package-2025-05-30-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-30-preview'
 input-file:
   - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
-
-suppressions:
-  - code: ParametersSchemaAsTypeObject
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
-  - code: PatchBodyParametersSchema
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: azuredatatransfer.json
-    reason: Newest version using TypeSpec
 ```
 
 ### Tag: package-2025-05-21
