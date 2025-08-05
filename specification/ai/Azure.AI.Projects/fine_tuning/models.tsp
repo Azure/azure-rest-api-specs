@@ -522,8 +522,8 @@ model FineTuningJob {
   @doc("The job identifier.")
   id: string;
 
-  @doc("The object type, which is always 'fine_tuning.job'. Parity with OAI SDK")
-  object: string;
+  @doc("The object type, which is always 'fine_tuning.job'.")
+  object: string = "fine_tuning.job";
 
   @doc("The time when the fine-tuning job was created.")
   created_at: utcDateTime;
@@ -731,4 +731,56 @@ model FineTuningJobEvent {
 
   @doc("The type of event.")
   type : string;
+}
+
+@doc("Metrics at the step number during the fine-tuning job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobCheckpointMetric {
+  @doc("metric full validation loss")
+  full_valid_loss : float64;
+
+  @doc("metric full valid mean token accuracy")
+  full_valid_mean_token_accuracy : float64;
+
+  @doc("metric step")
+  step : float64;
+
+  @doc("metric train loss")
+  train_loss : float64;
+
+  @doc("metric train mean token accuracy")
+  train_mean_token_accuracy : float64;
+
+  @doc("metric valid loss")
+  valid_loss : float64;
+
+  @doc("metric valid mean token accuracy")
+  valid_mean_token_accuracy : float64;
+}
+
+@doc("The fine_tuning.job.checkpoint object represents a model checkpoint for a fine-tuning job that is ready to use.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model FineTuningJobCheckpoint {
+  @doc("The object type, which is always fine_tuning.job.checkpoint")
+  object : string = "fine_tuning.job.checkpoint";
+
+  @doc("The time when the fine-tuning checkpoint was created.")
+  created_at: utcDateTime;
+
+  @doc("The name of the fine-tuned checkpoint model that is created.")
+  fine_tuned_model_checkpoint : string;
+
+  @doc("The name of the fine-tuning job that this checkpoint was created from.")
+  fine_tuning_job_id : string;
+
+  @doc("The checkpoint identifier, which can be referenced in the API endpoints.")
+  id : string;
+
+  @doc("Metrics at the step number during the fine-tuning job.")
+  metrics : FineTuningJobCheckpointMetric;
+
+  @doc("The step number that the checkpoint was created at.")
+  step_number : int32;
 }

@@ -103,7 +103,7 @@ interface FineTuningJobs {
   @get
   @route("/{fine_tuning_job_id}/events")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  listFineTuningEvents is Azure.Core.Foundations.Operation<
+  listFineTuningJobEvents is Azure.Core.Foundations.Operation<
     {
         @doc("The ID of the fine-tuning job to get events for.")
         @path
@@ -118,5 +118,26 @@ interface FineTuningJobs {
         limit?: int32 = 20;
     },
     FineTuningPaginatedResponse<FineTuningJobEvent>
+  >;
+
+  @doc("List checkpoints for a fine-tuning job.")
+  @get
+  @route("/{fine_tuning_job_id}/checkpoints")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  listFineTuningJobCheckpoints is Azure.Core.Foundations.Operation<
+    {
+        @doc("The ID of the fine-tuning job to get events for.")
+        @path
+        fine_tuning_job_id: string;
+
+        @doc("Identifier for the last checkpoint from the previous pagination request.")
+        @query
+        after?: string;
+
+        @doc("Number of checkpoints to retrieve.")
+        @query
+        limit?: int32 = 10;
+    },
+    FineTuningPaginatedResponse<FineTuningJobCheckpoint>
   >;
 }

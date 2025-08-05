@@ -1292,9 +1292,87 @@
         }
       }
     },
+    "/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints": {
+      "get": {
+        "operationId": "FineTuningJobs_ListFineTuningJobCheckpoints",
+        "description": "List checkpoints for a fine-tuning job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fine_tuning_job_id",
+            "in": "path",
+            "description": "The ID of the fine-tuning job to get events for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last checkpoint from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of checkpoints to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "Response type",
+                  "default": "list"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Items list.",
+                  "items": {
+                    "$ref": "#/definitions/FineTuningJobCheckpoint"
+                  }
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available."
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/fine_tuning/jobs/{fine_tuning_job_id}/events": {
       "get": {
-        "operationId": "FineTuningJobs_ListFineTuningEvents",
+        "operationId": "FineTuningJobs_ListFineTuningJobEvents",
         "description": "Get status updates for a fine-tuning job.",
         "parameters": [
           {
@@ -3092,7 +3170,8 @@
         },
         "object": {
           "type": "string",
-          "description": "The object type, which is always 'fine_tuning.job'. Parity with OAI SDK"
+          "description": "The object type, which is always 'fine_tuning.job'.",
+          "default": "fine_tuning.job"
         },
         "created_at": {
           "type": "string",
@@ -3206,6 +3285,102 @@
         "seed",
         "status",
         "training_file"
+      ]
+    },
+    "FineTuningJobCheckpoint": {
+      "type": "object",
+      "description": "The fine_tuning.job.checkpoint object represents a model checkpoint for a fine-tuning job that is ready to use.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always fine_tuning.job.checkpoint",
+          "default": "fine_tuning.job.checkpoint"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the fine-tuning checkpoint was created."
+        },
+        "fine_tuned_model_checkpoint": {
+          "type": "string",
+          "description": "The name of the fine-tuned checkpoint model that is created."
+        },
+        "fine_tuning_job_id": {
+          "type": "string",
+          "description": "The name of the fine-tuning job that this checkpoint was created from."
+        },
+        "id": {
+          "type": "string",
+          "description": "The checkpoint identifier, which can be referenced in the API endpoints."
+        },
+        "metrics": {
+          "$ref": "#/definitions/FineTuningJobCheckpointMetric",
+          "description": "Metrics at the step number during the fine-tuning job."
+        },
+        "step_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The step number that the checkpoint was created at."
+        }
+      },
+      "required": [
+        "object",
+        "created_at",
+        "fine_tuned_model_checkpoint",
+        "fine_tuning_job_id",
+        "id",
+        "metrics",
+        "step_number"
+      ]
+    },
+    "FineTuningJobCheckpointMetric": {
+      "type": "object",
+      "description": "Metrics at the step number during the fine-tuning job.",
+      "properties": {
+        "full_valid_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric full validation loss"
+        },
+        "full_valid_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric full valid mean token accuracy"
+        },
+        "step": {
+          "type": "number",
+          "format": "double",
+          "description": "metric step"
+        },
+        "train_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric train loss"
+        },
+        "train_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric train mean token accuracy"
+        },
+        "valid_loss": {
+          "type": "number",
+          "format": "double",
+          "description": "metric valid loss"
+        },
+        "valid_mean_token_accuracy": {
+          "type": "number",
+          "format": "double",
+          "description": "metric valid mean token accuracy"
+        }
+      },
+      "required": [
+        "full_valid_loss",
+        "full_valid_mean_token_accuracy",
+        "step",
+        "train_loss",
+        "train_mean_token_accuracy",
+        "valid_loss",
+        "valid_mean_token_accuracy"
       ]
     },
     "FineTuningJobCreation": {
