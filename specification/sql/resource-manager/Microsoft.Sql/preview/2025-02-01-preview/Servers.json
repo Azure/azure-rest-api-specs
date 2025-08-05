@@ -457,6 +457,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a list of server import export operation results.",
+        "operationId": "Servers_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of server import export operation results.",
+            "schema": {
+              "$ref": "#/definitions/ServerImportExportOperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of server level import export operation results.": {
+            "$ref": "./examples/GetImportExportOperationResultsByServer.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/refreshExternalGovernanceStatus": {
       "post": {
         "tags": [
@@ -1004,6 +1049,101 @@
         }
       }
     },
+    "ServerImportExportOperationListResult": {
+      "description": "A list of server import export operation results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerImportExportOperationResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerImportExportOperationResult": {
+      "description": "A Server ImportExport operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerImportExportOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerImportExportOperationResultProperties": {
+      "description": "Contains the operation result properties for import/export operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "Last modified time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "Database name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ServerListResult": {
       "description": "A list of servers.",
       "type": "object",
@@ -1180,27 +1320,6 @@
             "name": "ExternalGovernanceStatus",
             "modelAsString": true
           }
-        },
-        "retentionDays": {
-          "format": "int32",
-          "description": "Number of days this server will stay soft-deleted.",
-          "type": "integer"
-        },
-        "createMode": {
-          "description": "Create mode for server, only valid values for this are Normal and Restore.",
-          "enum": [
-            "Normal",
-            "Restore"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServerCreateMode",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       }
     },
