@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger ModelValidation"
+name: "[TEST-IGNORE] Swagger ModelValidation - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Swagger ModelValidation"
+    name: "[TEST-IGNORE] Swagger ModelValidation - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -22,4 +22,3 @@ jobs:
       - name: Swagger Model Validation
         run: |
           npm exec --no -- oav-runner examples
-

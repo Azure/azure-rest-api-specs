@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger SemanticValidation"
+name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Swagger SemanticValidation"
+    name: "[TEST-IGNORE] Swagger SemanticValidation - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -22,4 +22,3 @@ jobs:
       - name: Swagger Semantic Validation
         run: |
           npm exec --no -- oav-runner specs
-
