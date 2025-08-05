@@ -1,11 +1,11 @@
 import "./main.tsp";
+import "./csharp-client.tsp";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.AVS;
-using TypeSpec.Versioning;
 
 @@clientName(Microsoft.AVS, "AvsClient", "csharp,java,go");
 @@clientName(Microsoft.AVS, "AzureVMwareSolutionAPI", "javascript");
