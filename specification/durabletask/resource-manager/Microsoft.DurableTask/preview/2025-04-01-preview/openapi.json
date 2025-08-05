@@ -985,6 +985,25 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation",
@@ -1260,18 +1279,8 @@
     },
     "SchedulerPropertiesUpdate": {
       "type": "object",
-      "description": "The Scheduler resource properties to be updated",
+      "description": "Details of the Scheduler",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation",
-          "readOnly": true
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "URL of the durable task scheduler",
-          "readOnly": true
-        },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
@@ -1311,7 +1320,7 @@
     },
     "SchedulerSkuUpdate": {
       "type": "object",
-      "description": "The SKU (Stock Keeping Unit) properties to be updated",
+      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
       "properties": {
         "name": {
           "type": "string",
@@ -1321,30 +1330,23 @@
           "type": "integer",
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
-        },
-        "redundancyState": {
-          "$ref": "#/definitions/RedundancyState",
-          "description": "Indicates whether the current SKU configuration is zone redundant",
-          "readOnly": true
         }
       }
     },
     "SchedulerUpdate": {
       "type": "object",
-      "description": "The update request model for the Scheduler resource",
+      "description": "A Durable Task Scheduler resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchedulerPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "TaskHub": {
       "type": "object",
